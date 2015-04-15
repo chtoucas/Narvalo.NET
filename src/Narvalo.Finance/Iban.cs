@@ -11,7 +11,6 @@ namespace Narvalo.Finance
     /// <summary>
     /// Represents an International Bank Account Number.
     /// </summary>
-    [Serializable]
     public partial struct Iban : IEquatable<Iban>
     {
         private readonly string _bban;
@@ -124,7 +123,7 @@ namespace Narvalo.Finance
                     return null;
                 }
             }
-            if (!value.All(c => { var pos = (int)c; return (pos >= 48 && pos <= 57) || (pos >= 65 && pos <= 90); }))
+            if (!value.ToCharArray().All(c => { var pos = (int)c; return (pos >= 48 && pos <= 57) || (pos >= 65 && pos <= 90); }))
             {
                 if (throwOnError)
                 {

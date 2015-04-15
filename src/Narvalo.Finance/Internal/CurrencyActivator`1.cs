@@ -34,34 +34,36 @@ namespace Narvalo.Finance.Internal
 
         internal static TCurrency GetUniqueInstance(Type type)
         {
-            var fieldInfo = type.GetField(INSTANCE_CURRENCY_FIELD, BindingFlags.NonPublic | BindingFlags.Static);
-            var fieldValue = fieldInfo.GetValue(null);
+            throw new NotImplementedException();
+            //var fieldInfo = type.GetField(INSTANCE_CURRENCY_FIELD, BindingFlags.NonPublic | BindingFlags.Static);
+            //var fieldValue = fieldInfo.GetValue(null);
 
-            return (TCurrency)fieldValue;
+            //return (TCurrency)fieldValue;
         }
 
         internal static TCurrency CreateInstance(Type type)
         {
-            var ctorInfo = type.GetConstructor(
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                null,
-                Type.EmptyTypes,
-                null);
+            throw new NotImplementedException();
+            //var ctorInfo = type.GetConstructor(
+            //    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+            //    null,
+            //    Type.EmptyTypes,
+            //    null);
 
-            if (ctorInfo == null)
-            {
-                return null;
-            }
+            //if (ctorInfo == null)
+            //{
+            //    return null;
+            //}
 
-            var method = new DynamicMethod("NewTCurrency", type, Type.EmptyTypes, type, skipVisibility: true);
+            //var method = new DynamicMethod("NewTCurrency", type, Type.EmptyTypes, type, skipVisibility: true);
 
-            var il = method.GetILGenerator();
-            il.Emit(OpCodes.Newobj, ctorInfo);
-            il.Emit(OpCodes.Ret);
+            //var il = method.GetILGenerator();
+            //il.Emit(OpCodes.Newobj, ctorInfo);
+            //il.Emit(OpCodes.Ret);
 
-            var ctor = (Func<TCurrency>)method.CreateDelegate(typeof(Func<TCurrency>));
+            //var ctor = (Func<TCurrency>)method.CreateDelegate(typeof(Func<TCurrency>));
 
-            return ctor.Invoke();
+            //return ctor.Invoke();
         }
     }
 }

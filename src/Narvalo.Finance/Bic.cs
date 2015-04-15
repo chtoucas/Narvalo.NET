@@ -15,7 +15,6 @@ namespace Narvalo.Finance
     /// <remarks>
     /// The standard format for a Business Identifier Code is defined in ISO 9362.
     /// </remarks>
-    [Serializable]
     public partial struct Bic : IEquatable<Bic>
     {
         public const string PrimaryOfficeBranchCode = "XXX";
@@ -100,7 +99,7 @@ namespace Narvalo.Finance
 
             // The first four letters define the institution or bank code.
             string institutionCode = value.Substring(0, 4);
-            if (!institutionCode.All(c => { var pos = (int)c; return pos >= 65 && pos <= 90; }))
+            if (!institutionCode.ToCharArray().All(c => { var pos = (int)c; return pos >= 65 && pos <= 90; }))
             {
                 if (throwOnError)
                 {

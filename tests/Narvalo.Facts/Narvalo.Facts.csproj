@@ -156,7 +156,7 @@
       <Name>Narvalo.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Finance\Narvalo.Finance.csproj">
-      <Project>{ed75e8bf-aca1-4b53-88f1-c3bd2ca16d54}</Project>
+      <Project>{38055176-243b-4090-8148-efb8fe18ff23}</Project>
       <Name>Narvalo.Finance</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Fx\Narvalo.Fx.csproj">

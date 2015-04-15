@@ -3,13 +3,11 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Runtime.Serialization;
 
     /// <summary>
     /// The exception thrown when a method is invoked which attempts to construct
     /// a currency that is not available.
     /// </summary>
-    [Serializable]
     public class CurrencyNotFoundException : Exception
     {
         /// <summary>
@@ -37,8 +35,5 @@ namespace Narvalo.Finance
         /// in a catch block that handles the inner exception.</param>
         public CurrencyNotFoundException(string message, Exception innerException) :
             base(message, innerException) { }
-
-        protected CurrencyNotFoundException(SerializationInfo info, StreamingContext context)
-            : base(info, context) { }
     }
 }

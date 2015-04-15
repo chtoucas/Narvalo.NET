@@ -4,6 +4,8 @@
        C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\
        http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview -->
   <PropertyGroup>
+    <!-- .NET Portable Subset (.NET Framework 4.5, Windows 8, Windows Phone 8.1) -->
+    <Profile111>portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1</Profile111>
     <!-- .NET Portable Subset (.NET Framework 4.5.1, Windows 8.1, Windows Phone 8.1) -->
     <Profile151>portable-net451+netcore451+wpa81</Profile151>
     <!-- .NET Portable Subset (.NET Framework 4.5, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8) -->

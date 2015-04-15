@@ -8,7 +8,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Properties;
 
     // FIXME: Overflow operations.
-    [Serializable]
     [DebuggerDisplay("{{ToString()}}")]
     public partial struct Money
         : IEquatable<Money>, IComparable, IComparable<Money>, IFormattable

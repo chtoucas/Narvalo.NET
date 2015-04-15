@@ -24,7 +24,6 @@ namespace Narvalo.Finance
     /// <para>This class does not offer extended information about the currency.
     /// If you needed so, you should use to the <see cref="CurrencyInfo"/> class instead.</para>
     /// </remarks>
-    [Serializable]
     public partial class Currency : IEquatable<Currency>
     {
         // We cache all requested currencies.
@@ -85,10 +84,11 @@ namespace Narvalo.Finance
         /// <returns>The currency for the specified culture info.</returns>
         public static Currency OfCulture(CultureInfo cultureInfo)
         {
-            Require.NotNull(cultureInfo, "cultureInfo");
-            Contract.Ensures(Contract.Result<Currency>() != null);
+            throw new NotImplementedException();
+            //Require.NotNull(cultureInfo, "cultureInfo");
+            //Contract.Ensures(Contract.Result<Currency>() != null);
 
-            return OfRegion(new RegionInfo(cultureInfo.LCID));
+            //return OfRegion(new RegionInfo(cultureInfo.LCID));
         }
 
         /// <summary>
@@ -99,9 +99,10 @@ namespace Narvalo.Finance
         /// <returns>The currency for the culture used by the current thread.</returns>
         public static Currency OfCurrentCulture()
         {
-            Contract.Ensures(Contract.Result<Currency>() != null);
+            throw new NotImplementedException();
+            //Contract.Ensures(Contract.Result<Currency>() != null);
 
-            return OfRegion(new RegionInfo(CultureInfo.CurrentCulture.LCID));
+            //return OfRegion(new RegionInfo(CultureInfo.CurrentCulture.LCID));
         }
 
         /// <summary>

@@ -10,6 +10,7 @@
 
 namespace Narvalo.Finance.Properties {
     using System;
+    using System.Reflection;
     
     
     /// <summary>
@@ -39,7 +40,7 @@ namespace Narvalo.Finance.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Finance.Properties.Strings_Finance", typeof(Strings_Finance).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Finance.Properties.Strings_Finance", typeof(Strings_Finance).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
