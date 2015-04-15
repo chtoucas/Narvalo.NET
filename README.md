@@ -22,13 +22,17 @@ Narvalo.NET
   this library features implementations of some of the usual suspects from functional
   programming: Option (`Maybe<T>`) and Error (`Output<T>`) monads, simple pattern matching
   (`Either<T1, T2>`, `Switch<T1, T2>`), generators and delegate extensions.
+- **Narvalo.Finance**
+  (_alpha_,
+  [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance)),
+  this package provides various financial utilities: Currency (ISO 4217), Money types, 
+  BIC (ISO 9362), IBAN & BBAN.
 - **Narvalo.Common**
   (_alpha_,
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
   [package](https://www.nuget.org/packages/Narvalo.Common/)),
-  this library provides various utilities and extension methods: Currency (ISO 4217) and Range
-  types, directory walker, Int64 encoders,  benchmark helpers, extensions for Collections,
-  Configuration, SQL client and XDom.
+  this library provides various utilities and extension methods: Range types, directory walker, 
+  Int64 encoders,  benchmark helpers, extensions for Collections, Configuration, SQL client and XDom.
 - **Narvalo.Web**
   (_experimental_,
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web),
