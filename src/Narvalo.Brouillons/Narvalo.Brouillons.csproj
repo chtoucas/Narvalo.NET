@@ -131,9 +131,13 @@
     <Compile Include="Edu\Monads\Stubs`1.cs" />
     <Compile Include="Edu\Web\WebApplication.cs" />
     <Compile Include="Expando.cs" />
+    <Compile Include="Finance\Bban.cs" />
+    <Compile Include="Finance\Bic.cs" />
+    <Compile Include="Finance\Currency%24.cs" />
     <Compile Include="Finance\CurrencyInfo%24.cs" />
     <Compile Include="Finance\CurrencyTypes.cs" />
     <Compile Include="Finance\FinanceException.cs" />
+    <Compile Include="Finance\Iban.cs" />
     <Compile Include="Finance\Legacy\CurrencyInfo.cs" />
     <Compile Include="Finance\Legacy\CurrencyInfoCollection.cs" />
     <Compile Include="Finance\Legacy\CurrencyInfoProvider.cs" />

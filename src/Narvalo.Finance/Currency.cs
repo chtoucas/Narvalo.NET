@@ -75,37 +75,6 @@ namespace Narvalo.Finance
         }
 
         /// <summary>
-        /// Obtains an instance of the <see cref="Currency" /> class associated 
-        /// with the specified culture.
-        /// </summary>
-        /// <param name="cultureInfo">A culture info.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="cultureInfo"/> is <see langword="null"/>.</exception>
-        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the specified culture.</exception>
-        /// <returns>The currency for the specified culture info.</returns>
-        public static Currency OfCulture(CultureInfo cultureInfo)
-        {
-            throw new NotImplementedException();
-            //Require.NotNull(cultureInfo, "cultureInfo");
-            //Contract.Ensures(Contract.Result<Currency>() != null);
-
-            //return OfRegion(new RegionInfo(cultureInfo.LCID));
-        }
-
-        /// <summary>
-        /// Obtains an instance of the <see cref="Currency" /> class for the culture
-        /// used by the current thread.
-        /// </summary>
-        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the current culture.</exception>
-        /// <returns>The currency for the culture used by the current thread.</returns>
-        public static Currency OfCurrentCulture()
-        {
-            throw new NotImplementedException();
-            //Contract.Ensures(Contract.Result<Currency>() != null);
-
-            //return OfRegion(new RegionInfo(CultureInfo.CurrentCulture.LCID));
-        }
-
-        /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class associated with the specified region.
         /// </summary>
         /// <param name="regionInfo">A region info.</param>

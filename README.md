@@ -23,7 +23,7 @@ Narvalo.NET
   programming: Option (`Maybe<T>`) and Error (`Output<T>`) monads, simple pattern matching
   (`Either<T1, T2>`, `Switch<T1, T2>`), generators and delegate extensions.
 - **Narvalo.Finance**
-  (_alpha_,
+  (_experimental_,
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance)),
   this package provides various financial utilities: Currency (ISO 4217), Money types, 
   BIC (ISO 9362), IBAN & BBAN.

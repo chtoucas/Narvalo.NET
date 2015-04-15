@@ -51,8 +51,6 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bban.cs" />
-    <Compile Include="Bic.cs" />
     <Compile Include="Currencies\Currencies.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -63,7 +61,6 @@
     <Compile Include="CurrencyNotFoundException.cs" />
     <Compile Include="CurrencyProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Iban.cs" />
     <Compile Include="ICurrencyProvider.cs" />
     <Compile Include="InMemoryCurrencyProvider.cs" />
     <Compile Include="InMemoryCurrencyProvider.g.cs">

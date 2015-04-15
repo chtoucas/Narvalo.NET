@@ -3,6 +3,7 @@
 namespace Narvalo.Finance.Internal
 {
     using System;
+    using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
 
@@ -34,36 +35,42 @@ namespace Narvalo.Finance.Internal
 
         internal static TCurrency GetUniqueInstance(Type type)
         {
-            throw new NotImplementedException();
-            //var fieldInfo = type.GetField(INSTANCE_CURRENCY_FIELD, BindingFlags.NonPublic | BindingFlags.Static);
-            //var fieldValue = fieldInfo.GetValue(null);
+            // var fieldInfo = type.GetField(INSTANCE_CURRENCY_FIELD, BindingFlags.NonPublic | BindingFlags.Static);
+            var typeInfo = type.GetTypeInfo();
+            var fieldInfo = (from _ in typeInfo.DeclaredFields
+                             where _.Name == INSTANCE_CURRENCY_FIELD
+                             select _).Single();
 
-            //return (TCurrency)fieldValue;
+            var fieldValue = fieldInfo.GetValue(null);
+
+            return (TCurrency)fieldValue;
         }
 
         internal static TCurrency CreateInstance(Type type)
         {
+            // var ctorInfo = type.GetConstructor(
+            //     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+            //     null,
+            //     Type.EmptyTypes,
+            //     null);
+            var ctorInfo = type.GetTypeInfo().DeclaredConstructors.FirstOrDefault(_ => !_.GetParameters().Any());
+
+            if (ctorInfo == null)
+            {
+                return null;
+            }
+
             throw new NotImplementedException();
-            //var ctorInfo = type.GetConstructor(
-            //    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-            //    null,
-            //    Type.EmptyTypes,
-            //    null);
 
-            //if (ctorInfo == null)
-            //{
-            //    return null;
-            //}
+            ////var method = new DynamicMethod("NewTCurrency", type, Type.EmptyTypes, type, skipVisibility: true);
 
-            //var method = new DynamicMethod("NewTCurrency", type, Type.EmptyTypes, type, skipVisibility: true);
+            ////var il = method.GetILGenerator();
+            ////il.Emit(OpCodes.Newobj, ctorInfo);
+            ////il.Emit(OpCodes.Ret);
 
-            //var il = method.GetILGenerator();
-            //il.Emit(OpCodes.Newobj, ctorInfo);
-            //il.Emit(OpCodes.Ret);
+            ////var ctor = (Func<TCurrency>)method.CreateDelegate(typeof(Func<TCurrency>));
 
-            //var ctor = (Func<TCurrency>)method.CreateDelegate(typeof(Func<TCurrency>));
-
-            //return ctor.Invoke();
+            ////return ctor.Invoke();
         }
     }
 }
