@@ -8,8 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Properties {
+namespace Narvalo.Finance.Properties {
     using System;
+    using System.Reflection;
     
     
     /// <summary>
@@ -22,14 +23,14 @@ namespace Narvalo.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings_Meta {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings_Meta() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -39,7 +40,7 @@ namespace Narvalo.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Properties.Strings_Meta", typeof(Strings_Meta).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Finance.Properties.Strings", typeof(Strings).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +62,11 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified value &apos;{0}&apos; is not a well-formed absolute URI..
+        ///   Looks up a localized string similar to The specified argument must be of Money type..
         /// </summary>
-        internal static string AbsoluteUriValidator_UriIsNotAbsolute_Format {
+        internal static string Money_ArgIsNotMoney {
             get {
-                return ResourceManager.GetString("AbsoluteUriValidator_UriIsNotAbsolute_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The &lt;{0}&gt; section is not defined in your config file!.
-        /// </summary>
-        internal static string Configuration_MissingSection_Format {
-            get {
-                return ResourceManager.GetString("Configuration_MissingSection_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This method only accepts flags enum..
-        /// </summary>
-        internal static string ConvertTo_TypeIsNotFlagsEnum {
-            get {
-                return ResourceManager.GetString("ConvertTo_TypeIsNotFlagsEnum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Illegal character &apos;{0}&apos; found at position &apos;{1}&apos;..
-        /// </summary>
-        internal static string Int64Encoder_IllegalCharacter_Format {
-            get {
-                return ResourceManager.GetString("Int64Encoder_IllegalCharacter_Format", resourceCulture);
+                return ResourceManager.GetString("Money_ArgIsNotMoney", resourceCulture);
             }
         }
     }

@@ -30,60 +30,49 @@
 # Global suppressions.
 # ==============================================================================
 
-# Narvalo.Core assembly
-# ---------------------
+# PCL Assemblies
+# --------------
 
 R: Gendarme.Rules.Serialization.MissingSerializableAttributeOnISerializableTypeRule
 # Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
-A: Narvalo.Core
+A: Narvalo.Guards
+A: Narvalo.Fx
 
 R: Gendarme.Rules.Serialization.MissingSerializationConstructorRule
 # Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
-A: Narvalo.Core
+A: Narvalo.Guards
+A: Narvalo.Fx
+
+# Narvalo.Fx
+# ----------
 
 R: Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule
 # Justification = [Intentionally] Exposing nested generics is a price to pay for monads.
 N: Narvalo.Fx
 N: Narvalo.Fx.Advanced
-N: Narvalo.Fx.Linq
-N: Narvalo.Fx.Linq.Internal
+N: Narvalo.Fx.Internal
 
 R: Gendarme.Rules.Naming.UseCorrectCasingRule
 # Justification = [Intentionally] Acceptable for namespaces. Narvalo.FX would appear plain ugly to me.
 N: Narvalo.Fx
 N: Narvalo.Fx.Advanced
-N: Narvalo.Fx.Linq
-N: Narvalo.Fx.Linq.Internal
+N: Narvalo.Fx.Internal
 
-R: Gendarme.Rules.Design.AvoidSmallNamespaceRule
-# Justification = [Intentionally] Hopefully more will be added.
-N: Narvalo.Fx.Linq
-
-# Narvalo.Common assembly
-# -----------------------
+# Narvalo.Common
+# --------------
 
 R: Gendarme.Rules.Design.AvoidSmallNamespaceRule
 # Justification = [Intentionally] Hopefully more will be added.
 N: Narvalo.Collections
+
+# Narvalo.Classic
+# ---------------
+
+R: Gendarme.Rules.Design.AvoidSmallNamespaceRule
+# Justification = [Intentionally] Hopefully more will be added.
 N: Narvalo.Configuration
 
 # ==============================================================================
-# Narvalo.Core (Defects to be reviewed or fixed)
+# Defects to be reviewed or fixed
 # ==============================================================================
 
-# ==============================================================================
-# Narvalo.Common (Defects to be reviewed or fixed)
-# ==============================================================================
-
-R: Gendarme.Rules.Maintainability.AvoidLackOfCohesionOfMethodsRule
-#  ---------------------------------------------------------------
-T: Narvalo.IO.ConcurrentFileFinder
-T: Narvalo.IO.FileFinder
-
-# ==============================================================================
-# Narvalo.Finance (Defects to be reviewed or fixed)
-# ==============================================================================
-
-# ==============================================================================
-# Narvalo.Web (Defects to be reviewed or fixed)
-# ==============================================================================

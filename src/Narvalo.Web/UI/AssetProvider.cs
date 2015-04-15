@@ -36,7 +36,7 @@ namespace Narvalo.Web.UI
                 Contract.Ensures(Contract.Result<string>() != null);
 
                 return String.IsNullOrWhiteSpace(_defaultDescription)
-                    ? Strings_Web.AssetProvider_Description
+                    ? Strings.AssetProvider_Description
                     : _defaultDescription;
             }
 
@@ -108,7 +108,7 @@ namespace Narvalo.Web.UI
                 if (!String.IsNullOrEmpty(key))
                 {
                     throw new ProviderException(
-                        Format.Resource(Strings_Web.AssetProvider_UnknownConfigurationKey_Format, key));
+                        Format.Resource(Strings.AssetProvider_UnknownConfigurationKey_Format, key));
                 }
             }
 

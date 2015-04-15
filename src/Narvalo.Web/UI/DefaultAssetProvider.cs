@@ -20,7 +20,7 @@ namespace Narvalo.Web.UI
         public DefaultAssetProvider()
         {
             DefaultName = CustomDefaultName;
-            DefaultDescription = Strings_Web.DefaultAssetProvider_Description;
+            DefaultDescription = Strings.DefaultAssetProvider_Description;
         }
 
         public override Uri GetFontUri(string relativePath)

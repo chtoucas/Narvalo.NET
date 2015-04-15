@@ -137,7 +137,7 @@ namespace Narvalo.Web.UI
             // Initialize the default provider.
             if (section.DefaultProvider == null)
             {
-                throw new ProviderException(Strings_Web.AssetManager_DefaultProviderNotConfigured);
+                throw new ProviderException(Strings.AssetManager_DefaultProviderNotConfigured);
             }
 
             var tmpProvider = s_Providers[section.DefaultProvider];
@@ -150,7 +150,7 @@ namespace Narvalo.Web.UI
                         .AssumeNotNull();
 
                 throw new ConfigurationErrorsException(
-                    Strings_Web.AssetManager_DefaultProviderNotFound,
+                    Strings.AssetManager_DefaultProviderNotFound,
                     propertyInfo.Source,
                     propertyInfo.LineNumber);
             }

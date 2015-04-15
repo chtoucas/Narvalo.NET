@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AbsoluteUriValidator_UriIsNotAbsolute_Format" xml:space="preserve">
-    <value>The specified value '{0}' is not a well-formed absolute URI.</value>
-  </data>
-  <data name="Configuration_MissingSection_Format" xml:space="preserve">
-    <value>The &lt;{0}&gt; section is not defined in your config file!</value>
-  </data>
   <data name="Int64Encoder_IllegalCharacter_Format" xml:space="preserve">
     <value>Illegal character '{0}' found at position '{1}'.</value>
   </data>
   <data name="ConvertTo_TypeIsNotFlagsEnum" xml:space="preserve">
     <value>This method only accepts flags enum.</value>
+  </data>
+  <data name="AbsoluteUriValidator_UriIsNotAbsolute_Format" xml:space="preserve">
+    <value>The specified value '{0}' is not a well-formed absolute URI.</value>
+  </data>
+  <data name="Configuration_MissingSection_Format" xml:space="preserve">
+    <value>The &lt;{0}&gt; section is not defined in your config file!</value>
   </data>
 </root>

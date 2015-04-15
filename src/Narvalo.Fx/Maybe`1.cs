@@ -243,7 +243,7 @@ namespace Narvalo.Fx
 
             if (!value.IsSome)
             {
-                throw new InvalidCastException(Strings_Fx.Maybe_CannotCastNoneToValue);
+                throw new InvalidCastException(Strings.Maybe_CannotCastNoneToValue);
             }
 
             return value.Value;

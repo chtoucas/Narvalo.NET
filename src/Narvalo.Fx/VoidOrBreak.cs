@@ -44,7 +44,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                throw new InvalidOperationException(Strings_Fx.VoidOrBreak_BreakHasNoReason);
+                throw new InvalidOperationException(Strings.VoidOrBreak_BreakHasNoReason);
             }
         }
 

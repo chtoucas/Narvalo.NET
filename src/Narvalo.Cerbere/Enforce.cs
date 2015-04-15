@@ -46,7 +46,7 @@ namespace Narvalo
             {
                 throw new ArgumentException(
                     Format.Resource(
-                        Strings_Core.Require_InvalidRange_Format,
+                        Strings_Guards.Require_InvalidRange_Format,
                         minInclusive,
                         maxInclusive),
                     "minInclusive");
@@ -57,7 +57,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Core.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
+                    Format.Resource(Strings_Guards.Require_NotInRange_Format, parameterName, minInclusive, maxInclusive));
             }
         }
 
@@ -81,7 +81,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Core.Require_NotGreaterThan_Format, parameterName, minValue));
+                    Format.Resource(Strings_Guards.Require_NotGreaterThan_Format, parameterName, minValue));
             }
         }
 
@@ -105,7 +105,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Core.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
+                    Format.Resource(Strings_Guards.Require_NotGreaterThanOrEqualTo_Format, parameterName, minValue));
             }
         }
 
@@ -129,7 +129,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Core.Require_NotLessThan_Format, parameterName, maxValue));
+                    Format.Resource(Strings_Guards.Require_NotLessThan_Format, parameterName, maxValue));
             }
         }
 
@@ -154,7 +154,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Strings_Core.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
+                    Format.Resource(Strings_Guards.Require_NotLessThanOrEqualTo_Format, parameterName, maxValue));
             }
         }
     }

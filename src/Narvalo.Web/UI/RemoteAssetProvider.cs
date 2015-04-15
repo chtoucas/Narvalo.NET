@@ -26,7 +26,7 @@ namespace Narvalo.Web.UI
         public RemoteAssetProvider()
         {
             DefaultName = "RemoteAssetProvider";
-            DefaultDescription = Strings_Web.RemoteAssetProvider_Description;
+            DefaultDescription = Strings.RemoteAssetProvider_Description;
         }
 
         public override Uri GetFontUri(string relativePath)
@@ -55,7 +55,7 @@ namespace Narvalo.Web.UI
 
             _baseUri = config.MayGetSingle(BASE_URI_KEY)
                 .Bind(_ => ParseTo.Uri(_, UriKind.Absolute))
-                .ValueOrThrow(() => new ProviderException(Strings_Web.RemoteAssetProvider_MissingOrInvalidBaseUri));
+                .ValueOrThrow(() => new ProviderException(Strings.RemoteAssetProvider_MissingOrInvalidBaseUri));
 
             config.Remove(BASE_URI_KEY);
         }

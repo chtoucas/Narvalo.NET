@@ -16,7 +16,7 @@ namespace Narvalo
         {
             var type = typeof(TEnum);
 
-            if (type.GetCustomAttribute<FlagsAttribute>(inherit: false) != null)
+            if (type.GetTypeInfo().GetCustomAttribute<FlagsAttribute>(inherit: false) != null)
             {
                 // Does not work consistently for Flags enums:
                 // http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx

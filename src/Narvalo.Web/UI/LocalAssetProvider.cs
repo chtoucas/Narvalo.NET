@@ -26,7 +26,7 @@ namespace Narvalo.Web.UI
         public LocalAssetProvider()
         {
             DefaultName = "LocalAssetProvider";
-            DefaultDescription = Strings_Web.LocalAssetProvider_Description;
+            DefaultDescription = Strings.LocalAssetProvider_Description;
         }
 
         public override Uri GetFontUri(string relativePath)

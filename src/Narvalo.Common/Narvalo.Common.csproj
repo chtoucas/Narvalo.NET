@@ -2,117 +2,69 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <ProjectGuid>{7B564B3C-CCCC-43CA-94B6-D375AA40F085}</ProjectGuid>
+    <ProjectGuid>{85E2C826-BF5C-4CDD-A90A-56D3D7F9CE25}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Common</AssemblyName>
-    <TargetFrameworkProfile />
-    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CodeContracts|AnyCPU'">
-    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
-    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
-    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
-    <CodeContractsRuntimeCallSiteRequires>True</CodeContractsRuntimeCallSiteRequires>
-    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
-    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
-    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
-    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
-    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
-    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
-    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
-    <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
-    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
-    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
-    <CodeContractsMissingPublicEnsuresAsWarnings>True</CodeContractsMissingPublicEnsuresAsWarnings>
-    <CodeContractsInferRequires>True</CodeContractsInferRequires>
-    <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
-    <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
-    <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
-    <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
-    <CodeContractsSuggestAssumptionsForCallees>True</CodeContractsSuggestAssumptionsForCallees>
-    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
-    <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
-    <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
-    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
-    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
-    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
-    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
-    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
-    <CodeContractsCustomRewriterAssembly />
-    <CodeContractsCustomRewriterClass />
-    <CodeContractsLibPaths />
-    <CodeContractsExtraRewriteOptions />
-    <CodeContractsExtraAnalysisOptions>-outputwarnmasks</CodeContractsExtraAnalysisOptions>
-    <CodeContractsSQLServerOption />
-    <CodeContractsBaseLineFile />
-    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
-    <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
-    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
-    <CodeContractsBeingOptimisticOnExternal>False</CodeContractsBeingOptimisticOnExternal>
-    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
-    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary`2%24.cs" />
+    <Compile Include="Collections\Enumerator`1%24.cs" />
+    <Compile Include="Collections\NameValueCollection%24.cs" />
+    <Compile Include="Configuration\AbsoluteUriValidator.cs" />
+    <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
+    <Compile Include="Configuration\Configuration%24.cs" />
+    <Compile Include="Configuration\SectionManager.cs" />
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Data\DataRecord%24.cs" />
+    <Compile Include="Data\NonQueryStoredProcedure`1.cs" />
+    <Compile Include="Data\SqlCommand%24.cs" />
+    <Compile Include="Data\SqlDataReader%24.cs" />
     <Compile Include="Data\SqlParameterCollection%24.cs" />
+    <Compile Include="Data\SqlTypes%24.cs" />
+    <Compile Include="Data\StoredProcedure`1.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
-    <Compile Include="IO\PathUtility.cs" />
     <Compile Include="IO\DirectoryWalker.cs" />
     <Compile Include="IO\FileFinder.cs" />
+    <Compile Include="IO\PathUtility.cs" />
     <Compile Include="IO\RelativeDirectory.cs" />
-    <Compile Include="IO\RelativeFile.cs" />
     <Compile Include="IO\RelativeDirectoryEventArgs.cs" />
-    <Compile Include="Collections\NameValueCollection%24.cs" />
-    <Compile Include="Configuration\Configuration%24.cs" />
-    <Compile Include="Configuration\SectionManager.cs" />
-    <Compile Include="Data\NonQueryStoredProcedure`1.cs" />
-    <Compile Include="Data\SqlCommand%24.cs" />
-    <Compile Include="Data\SqlDataReader%24.cs" />
-    <Compile Include="Data\SqlTypes%24.cs" />
-    <Compile Include="Data\StoredProcedure`1.cs" />
-    <Compile Include="Configuration\AbsoluteUriValidator.cs" />
-    <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
+    <Compile Include="IO\RelativeFile.cs" />
     <Compile Include="ParseTo.cs" />
-    <Compile Include="Range.cs" />
-    <Compile Include="Range`1.cs" />
-    <Compile Include="StringManip.cs" />
+    <Compile Include="Predicates.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Strings_Common.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Common.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Predicates.cs" />
+    <Compile Include="Range.cs" />
+    <Compile Include="Range`1.cs" />
+    <Compile Include="StringManip.cs" />
     <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
     <Compile Include="Xml\Maybe[XElement]%24.cs" />
-    <Compile Include="Xml\XAttribute%24.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Xml\XElement%24.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Xml\XAttribute%24.cs" />
+    <Compile Include="Xml\XElement%24.cs" />
     <Compile Include="Xml\XmlReader%24.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Strings_Common.fr.resx" />
@@ -122,29 +74,20 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <None Include="Narvalo.Common.props" />
+    <None Include="Narvalo.Common.Version.props" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
+    <ProjectReference Include="..\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Core</Name>
+      <Name>Narvalo.Cerbere</Name>
     </ProjectReference>
     <ProjectReference Include="..\Narvalo.Fx\Narvalo.Fx.csproj">
       <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
       <Name>Narvalo.Fx</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Narvalo.Common.Version.props" />
-    <None Include="Narvalo.Common.props">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Settings.StyleCop" />
-  </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

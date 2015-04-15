@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Finance.Properties {
+namespace Narvalo.Fx.Properties {
     using System;
     using System.Reflection;
     
@@ -23,14 +23,14 @@ namespace Narvalo.Finance.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings_Finance {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings_Finance() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -40,7 +40,7 @@ namespace Narvalo.Finance.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Finance.Properties.Strings_Finance", typeof(Strings_Finance).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Fx.Properties.Strings", typeof(Strings).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,11 +62,38 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified argument must be of Money type..
+        ///   Looks up a localized string similar to Can not explicitly cast a Maybe&lt;T&gt;.None to a value of type T..
         /// </summary>
-        internal static string Money_ArgIsNotMoney {
+        internal static string Maybe_CannotCastNoneToValue {
             get {
-                return ResourceManager.GetString("Money_ArgIsNotMoney", resourceCulture);
+                return ResourceManager.GetString("Maybe_CannotCastNoneToValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not explicitly cast an output failure of type Output&lt;T&gt; to a value of type T..
+        /// </summary>
+        internal static string Output_CannotCastFailureToValue {
+            get {
+                return ResourceManager.GetString("Output_CannotCastFailureToValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not explicitly cast an output success of type Output&lt;T&gt; to an exception state..
+        /// </summary>
+        internal static string Output_CannotCastSuccessToException {
+            get {
+                return ResourceManager.GetString("Output_CannotCastSuccessToException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A successful outcome can not provide an error message. You must check the IsBreak value before accesssing this property..
+        /// </summary>
+        internal static string VoidOrBreak_BreakHasNoReason {
+            get {
+                return ResourceManager.GetString("VoidOrBreak_BreakHasNoReason", resourceCulture);
             }
         }
     }

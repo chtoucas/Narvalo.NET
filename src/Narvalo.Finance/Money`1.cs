@@ -232,7 +232,7 @@ namespace Narvalo.Finance
         {
             if (!CheckCurrency_(other))
             {
-                throw new ArgumentException(Strings_Finance.Money_ArgIsNotMoney);
+                throw new ArgumentException(Strings.Money_ArgIsNotMoney);
             }
 
             return Amount.CompareTo(other.Amount);
@@ -255,7 +255,7 @@ namespace Narvalo.Finance
                 return CompareTo((Money)obj);
             }
 
-            throw new ArgumentException(Strings_Finance.Money_ArgIsNotMoney);
+            throw new ArgumentException(Strings.Money_ArgIsNotMoney);
         }
     }
 
@@ -298,7 +298,7 @@ namespace Narvalo.Finance
         {
             if (!CheckCurrency_(other))
             {
-                throw new ArgumentException(Strings_Finance.Money_ArgIsNotMoney);
+                throw new ArgumentException(Strings.Money_ArgIsNotMoney);
             }
 
             return new Money<TCurrency>(Amount + other.Amount);
@@ -349,7 +349,7 @@ namespace Narvalo.Finance
         {
             if (!CheckCurrency_(other))
             {
-                throw new ArgumentException(Strings_Finance.Money_ArgIsNotMoney);
+                throw new ArgumentException(Strings.Money_ArgIsNotMoney);
             }
 
             return new Money<TCurrency>(Amount - other.Amount);

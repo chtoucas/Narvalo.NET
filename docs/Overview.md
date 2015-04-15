@@ -55,9 +55,36 @@ There are four solutions.
 
 ### Narvalo.sln
 
-This solution contains all projects. This is not used for daily work but rather
-for deep refactoring and proceeding NuGet packages updates and restores.
-It also contains one project not included elsewhere: Narvalo.Externs.
+This solution contains all projects. 
+
+Portable Libraries:
+- Narvalo.Cerbere
+- Narvalo.Fx, focus on functional programming patterns.
+- Narvalo.Finance
+- Narvalo.Reliability
+
+Libraries:
+- Narvalo.Common, collection of utilities and extension methods.
+- Narvalo.Web, focus on web development.
+- Narvalo.Mvp
+- Narvalo.Mvp.Web
+- Narvalo.Mvp.Windows.Forms
+- Narvalo.Ghostscript, a .NET wrapper for GhostScript.
+- Narvalo.Externs
+- Narvalo.Brouillons, a "fourre-tout" of unfinished or severely broken codes.
+
+Developer tools:
+- Narvalo.Build, collection of MSBuild tasks.
+- Narvalo.PowerShell, collection of PowerShell modules.
+- Narvalo.StyleCop.CSharp, custom C# rules for StyleCop.
+
+Test projects:
+- Narvalo.Benchmarks, the benchmarking project.
+- Narvalo.Facts, the main test project.
+- Narvalo.Mvp.Facts, the test project for MVP libraries.
+
+Sample projects:
+- Sample MVP projects.
 
 ### Narvalo Maintenance.sln
 
@@ -66,33 +93,6 @@ Contains documentation, settings, maintenance scripts and projects:
 - NuGetAgent, a NuGet publishing tool.
 - Prose, a literal programming tool.
 
-### Narvalo (Core).sln
-
-This solution contains the core library projects:
-- Narvalo.Core, focus on functional programming patterns.
-- Narvalo.Common, collection of utilities and extension methods.
-- Narvalo.Web, focus on web development.
-- Narvalo.Ghostscript, a .NET wrapper for GhostScript.
-- Narvalo.Brouillons, a "fourre-tout" of unfinished or severely broken codes.
-
-developer tools:
-- Narvalo.Build, collection of MSBuild tasks.
-- Narvalo.PowerShell, collection of PowerShell modules.
-- Narvalo.StyleCop.CSharp, custom C# rules for StyleCop.
-
-and the test projects:
-- Narvalo.Benchmarks, the benchmarking project.
-- Narvalo.Facts, the test project.
-
-### Narvalo (Mvp).sln
-
-This solution contains all MVP related projects:
-- Narvalo.Mvp
-- Narvalo.Mvp.Web
-- Narvalo.Mvp.Windows.Forms
-- Narvalo.Mvp.Facts, the test project.
-- Sample MVP projects.
-
 How to initialize a new project
 -------------------------------
 
@@ -100,8 +100,7 @@ The following procedure enables us to centralize all settings into a single plac
 Except for Code Contracts, there should be no need to edit the project properties anymore.
 For more the details about this shared configuration, see the section "Global settings" below.
 
-Create a project and add it to `Narvalo (Core).sln` or `Narvalo (Mvp).sln`, and also
-to the `Narvalo.sln solution`.
+Create a project and add it to the solution `Narvalo.sln`.
 
 Edit the project file:
 - Add the following line at the bottom of the project file, just BEFORE the Microsoft targets:
@@ -173,9 +172,9 @@ Test and sample projects do not need a version property file.
 ### Configure StyleCop for Visual Studio
 
 Edit the local StyleCop settings `Settings.StyleCop` and link it to `etc\Strict.SourceAnalysis`
-or just copy the settings from another project (but not Narvalo.Core).
+or just copy the settings from another project (but not Narvalo.Guards).
 
-Narvalo.Core is the only project including a StyleCop configuration with actual rules.
+Narvalo.Guards is the only project including a StyleCop configuration with actual rules.
 If you need to update the settings, do it there. When you are finished, copy the
 content of the new configuration to the shared one `etc\Strict.SourceAnalysis`.
 

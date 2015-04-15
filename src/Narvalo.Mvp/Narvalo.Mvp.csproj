@@ -14,9 +14,6 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\Require.cs">
-      <Link>Internal\Require.cs</Link>
-    </Compile>
     <Compile Include="CommandLine\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="CommandLine\ICommand.cs" />
     <Compile Include="CommandLine\Internal\PresenterBinderFactory.cs" />
@@ -87,6 +84,12 @@
   <ItemGroup>
     <None Include="Narvalo.Mvp.Version.props" />
     <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Cerbere</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

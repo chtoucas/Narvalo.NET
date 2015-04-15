@@ -79,7 +79,7 @@ namespace Narvalo.Fx
             // like "Unable to cast a Failure_ type to a Success_ type".
             if (!value.IsSuccess)
             {
-                throw new InvalidCastException(Strings_Fx.Output_CannotCastFailureToValue);
+                throw new InvalidCastException(Strings.Output_CannotCastFailureToValue);
             }
 
             var success = value as Success_;
@@ -103,7 +103,7 @@ namespace Narvalo.Fx
             // like "Unable to cast a Success_ type to a Failure_ type".
             if (value.IsSuccess)
             {
-                throw new InvalidCastException(Strings_Fx.Output_CannotCastSuccessToException);
+                throw new InvalidCastException(Strings.Output_CannotCastSuccessToException);
             }
 
             var failure = value as Failure_;

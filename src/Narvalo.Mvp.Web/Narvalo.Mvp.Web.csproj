@@ -15,9 +15,6 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\Require.cs">
-      <Link>Internal\Require.cs</Link>
-    </Compile>
     <Compile Include="Core\AspNetBuildManager.cs" />
     <Compile Include="Core\AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="Core\AspNetMessageCoordinator.cs" />
@@ -53,6 +50,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
+      <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
+      <Name>Narvalo.Cerbere</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Mvp\Narvalo.Mvp.csproj">
       <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
       <Name>Narvalo.Mvp</Name>

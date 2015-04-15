@@ -77,9 +77,9 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
+    <ProjectReference Include="..\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Core</Name>
+      <Name>Narvalo.Cerbere</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />

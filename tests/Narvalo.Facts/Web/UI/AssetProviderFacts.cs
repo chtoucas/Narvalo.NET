@@ -252,7 +252,7 @@ namespace Narvalo.Web.UI
             provider.Initialize(null, null);
 
             // Assert
-            Assert.Equal(Strings_Web.AssetProvider_Description, provider.Description);
+            Assert.Equal(Strings.AssetProvider_Description, provider.Description);
         }
 
         #endregion

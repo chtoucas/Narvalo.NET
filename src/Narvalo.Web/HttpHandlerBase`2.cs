@@ -49,7 +49,7 @@ namespace Narvalo.Web
             if (errorsCount > 1)
             {
                 exception = new HttpQueryBinderException(
-                    Strings_Web.HttpHandlerBase_BindingFailure,
+                    Strings.HttpHandlerBase_BindingFailure,
                     new AggregateException(errors));
             }
             else if (errorsCount == 1)
@@ -58,7 +58,7 @@ namespace Narvalo.Web
             }
             else
             {
-                exception = new HttpQueryBinderException(Strings_Web.HttpHandlerBase_UnknownBindingFailure);
+                exception = new HttpQueryBinderException(Strings.HttpHandlerBase_UnknownBindingFailure);
             }
 
             OnBindingFailure(context, exception);

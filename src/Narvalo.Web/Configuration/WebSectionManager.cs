@@ -20,7 +20,7 @@ namespace Narvalo.Web.Configuration
             if (section == null)
             {
                 throw new ConfigurationErrorsException(
-                    Format.Resource(Strings_Web.WebConfigurationManager_SectionNotFound_Format, sectionName));
+                    Format.Resource(Strings.WebConfigurationManager_SectionNotFound_Format, sectionName));
             }
 
             return section;
@@ -36,7 +36,7 @@ namespace Narvalo.Web.Configuration
             {
                 throw new ConfigurationErrorsException(
                     Format.Resource(
-                        Strings_Web.WebConfigurationManager_SectionNotFoundInPath_Format,
+                        Strings.WebConfigurationManager_SectionNotFoundInPath_Format,
                         sectionName,
                         virtualPath));
             }

@@ -82,7 +82,7 @@ namespace Narvalo.Web
             response.SetStatusCode(HttpStatusCode.MethodNotAllowed);
             response.Write(
                 Format.Resource(
-                    Strings_Web.HttpHandlerBase_InvalidHttpMethod_Format,
+                    Strings.HttpHandlerBase_InvalidHttpMethod_Format,
                     context.Request.HttpMethod,
                     AcceptedVerbs.ToString()));
         }

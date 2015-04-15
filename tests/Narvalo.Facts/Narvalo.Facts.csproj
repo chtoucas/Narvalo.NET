@@ -147,13 +147,13 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Common\Narvalo.Common.csproj">
-      <Project>{7b564b3c-cccc-43ca-94b6-d375aa40f085}</Project>
-      <Name>Narvalo.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Core\Narvalo.Core.csproj">
+    <ProjectReference Include="..\..\src\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
-      <Name>Narvalo.Core</Name>
+      <Name>Narvalo.Cerbere</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Common\Narvalo.Common.csproj">
+      <Project>{85e2c826-bf5c-4cdd-a90a-56d3d7f9ce25}</Project>
+      <Name>Narvalo.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Finance\Narvalo.Finance.csproj">
       <Project>{38055176-243b-4090-8148-efb8fe18ff23}</Project>
