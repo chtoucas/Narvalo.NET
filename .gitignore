@@ -1,4 +1,3 @@
-# WARNING: Do not forget !src/Narvalo.Meta/ below.
 
 work/
 ApiPortabilityAnalysis*
@@ -38,7 +37,6 @@ build/
 *_p.c
 *.ilk
 *.meta
-!src/Narvalo.Meta/
 *.obj
 *.pch
 *.pdb

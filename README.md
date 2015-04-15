@@ -12,17 +12,20 @@ Narvalo.NET
 - [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)
 
 #### General Purpose Libraries
-- **Narvalo.Core**
+- **Narvalo.Cerbere**
+  (_beta_,
+  [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Cerbere),
+  soon [package](https://www.nuget.org/packages/Narvalo.Cerbere/)),
+  this library provides argument validation methods and Code Contracts helpers.
+  This is a portable class library targeting _Profile259_.
+- **Narvalo.Fx**
   (_alpha_,
-  [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core),
-  [package](https://www.nuget.org/packages/Narvalo.Core/)),
+  [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Fx),
+  soon [package](https://www.nuget.org/packages/Narvalo.Fx/)),
   this library features implementations of some of the usual suspects from functional
   programming: Option (`Maybe<T>`) and Error (`Output<T>`) monads, simple pattern matching
-  (`Either<T1, T2>`, `Switch<T1, T2>`), generators and delegate extensions. It also provides
-  a few Code Contracts helpers. This is a portable class library targeting _Profile259_.
-  The behaviour is 100% identical across all supported platforms; this is achieved without
-  making use of the [bait and switch PCL trick](http://log.paulbetts.org/the-bait-and-switch-pcl-trick/).
-  This library fully passes the FxCop, Gendarme and Code Contracts static analysis.
+  (`Either<T1, T2>`, `Switch<T1, T2>`), generators and delegate extensions.
+  This is a portable class library targeting _Profile259_.
 - **Narvalo.Common**
   (_alpha_,
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),

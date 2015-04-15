@@ -71,6 +71,11 @@ Design Recommendations
 - Consider putting localized resources in the `Properties` folder.
 - Consider putting other resources in a `Resources` folder.
 
+### Portable Class Libraries
+
+The behaviour should be 100% identical across all supported platforms; this is achieved without
+making use of the [bait and switch PCL trick](http://log.paulbetts.org/the-bait-and-switch-pcl-trick/).
+
 Code Analysis
 -------------
 

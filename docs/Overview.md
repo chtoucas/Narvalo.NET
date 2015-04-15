@@ -43,7 +43,6 @@ Project Layout
 - `samples`, sample projects.
 - `src`, source directory.
 - `src\NuGet`, NuGet projects.
-- `src\Common`, shared source files.
 - `tests`, test projects.
 - `tools`, build and maintenance scripts.
 - `work`, temporary directory created during builds.
@@ -51,7 +50,7 @@ Project Layout
 Solutions
 ---------
 
-There are four solutions.
+There are two solutions.
 
 ### Narvalo.sln
 
