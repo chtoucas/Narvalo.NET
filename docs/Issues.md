@@ -98,7 +98,7 @@ Infrastructure
 --------------
 
 Update necessary following the new organization:
-- MSBuild
+- MSBuild -> See also SecAnnotate
 - PSake
 - NuGet
 - Retire Narvalo.Core

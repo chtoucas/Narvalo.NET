@@ -31,7 +31,7 @@ Narvalo.NET
   (_alpha_,
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
   [package](https://www.nuget.org/packages/Narvalo.Common/)),
-  this library provides various utilities and extension methods: Range types, directory walker, 
+  this library provides various utilities and extension methods: range types, directory walker, 
   Int64 encoders,  benchmark helpers, extensions for Collections, Configuration, SQL client and XDom.
 - **Narvalo.Web**
   (_experimental_,
@@ -44,7 +44,7 @@ Narvalo.NET
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Externs)),
   this project contains sample codes for Autofac, Serilog, Castle Windsor...
 - **Narvalo.Facts** ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/tests/Narvalo.Facts))
-  is the test project (still in early development).
+  is the test project.
 
 #### MVP Framework
 - **Narvalo.Mvp**
@@ -61,7 +61,7 @@ Narvalo.NET
   enhances Narvalo.Mvp to provide support for ASP.NET WebForms similar to WebFormsMvp.
 - [WebForms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWebForms)
 - **Narvalo.Mvp.Facts** ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/tests/Narvalo.Mvp.Facts))
-  is the test project (still in early development).
+  is the test project.
 
 #### Developer Tools
 - **Narvalo.Build**

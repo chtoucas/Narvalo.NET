@@ -57,10 +57,10 @@ There are two solutions.
 This solution contains all projects. 
 
 Portable Libraries:
-- Narvalo.Cerbere
-- Narvalo.Fx, focus on functional programming patterns.
-- Narvalo.Finance
-- Narvalo.Reliability
+- Narvalo.Cerbere (Profile259).
+- Narvalo.Fx (Profile259), focus on functional programming patterns.
+- Narvalo.Finance (Profile111).
+- Narvalo.Reliability (Profile151).
 
 Libraries:
 - Narvalo.Common, collection of utilities and extension methods.
@@ -230,6 +230,25 @@ Here we do two things:
   To make this change visible from Visual Studio, you must also update the `Settings.StyleCop`.
 
 ### Special Cases
+
+#### Portable Class Libraries
+
+We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
+- **Profile111** (.NET Framework 4.5, Windows 8, Windows Phone 8.1):
+  * For MSBuild: `TargetFrameworkVersion=v4.5`.
+  * Use this profile if you need `System.Collections.Concurrent.ConcurrentDictionary`.
+- **Profile151** (.NET Framework 4.5.1, Windows 8.1, Windows Phone 8.1): 
+  * For MSBuild: `TargetFrameworkVersion=v4.6`.
+  * Use this profile if you need `System.Threading.Timer`.
+- **Profile259** (.NET Framework 4.5, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8): 
+  * For MSBuild: `TargetFrameworkVersion=v4.5`.
+
+See
+- Profiles used by the project: `etc/FrameworkProfiles.props`. 
+- Locally available profiles: `C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\`.
+- Stephen Cleary's [blog post](http://blog.stephencleary.com/2012/05/framework-profiles-in-net.html),
+  the list of [Portable Class Library profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview),
+  the [tool](https://github.com/StephenCleary/PortableLibraryProfiles).
 
 #### Desktop applications
 Desktop applications should include a .ini containing:
