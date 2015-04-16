@@ -46,6 +46,8 @@
     <Compile Include="Either.cs" />
     <Compile Include="Either`2.cs" />
     <Compile Include="Enumerable`1%24.cs" />
+    <Compile Include="Enumerable[Maybe]%24.cs" />
+    <Compile Include="Enumerable[Output]%24.cs" />
     <Compile Include="Func.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Maybe.g.cs">

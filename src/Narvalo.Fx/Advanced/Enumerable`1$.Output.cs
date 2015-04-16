@@ -4,7 +4,7 @@ namespace Narvalo.Fx.Advanced
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using Narvalo.Fx;
@@ -12,6 +12,8 @@ namespace Narvalo.Fx.Advanced
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Output{T}"/> class.
     /// </summary>>
+    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
+        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class EnumerableOutputExtensions
     {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(
@@ -31,39 +33,6 @@ namespace Narvalo.Fx.Advanced
                 .Select(_ => funM.Invoke(_)).AssumeNotNull()
                 .Where(_ => _.IsSuccess)
                 .Select(_ => _.ToValue()).AssumeNotNull();
-        }
-    }
-
-    /// <content>
-    /// Provides overrides for a bunch of auto-generated (extension) methods (see Output.g.cs).
-    /// </content>
-    public static partial class EnumerableOutputExtensions
-    {
-        // Custom version of CollectCore.
-        internal static Output<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Output<TSource>> @this)
-        {
-            Require.Object(@this);
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
-
-            var list = new List<TSource>();
-
-            foreach (var m in @this)
-            {
-                // REVIEW: Is this the correct behaviour when m is null?
-                if (m == null)
-                {
-                    continue;
-                }
-
-                if (!m.IsSuccess)
-                {
-                    return Output.Failure<IEnumerable<TSource>>(m.ToExceptionDispatchInfo());
-                }
-
-                list.Add(m.ToValue());
-            }
-
-            return Output.Success(list.AsEnumerable());
         }
     }
 }

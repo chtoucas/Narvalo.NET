@@ -4,6 +4,7 @@ namespace Narvalo.Fx.Advanced
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -12,6 +13,8 @@ namespace Narvalo.Fx.Advanced
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
+    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
+        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class EnumerableMaybeExtensions
     {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(
@@ -40,28 +43,6 @@ namespace Narvalo.Fx.Advanced
     /// </content>
     public static partial class EnumerableMaybeExtensions
     {
-        // Custom version of CollectCore.
-        internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
-        {
-            Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
-
-            var list = new List<TSource>();
-
-            foreach (var m in @this)
-            {
-                // REVIEW: Is this the expected behaviour when m is null?
-                if (m == null || !m.IsSome)
-                {
-                    return Maybe<IEnumerable<TSource>>.None;
-                }
-
-                list.Add(m.Value);
-            }
-
-            return Maybe.Of(list.AsEnumerable());
-        }
-
         // Custom version of FilterCore with Maybe<T>.
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
