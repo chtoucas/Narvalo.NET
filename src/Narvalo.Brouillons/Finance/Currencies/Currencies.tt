@@ -1,7 +1,7 @@
-﻿<#@ include file="..\CodeTemplates\Iso4217.tt" #>
+﻿<#@ include file="..\..\..\Narvalo.Finance\CodeTemplates\Iso4217.tt" #>
 <#
 
-var currencies = ParseCurrent(@"..\Resources\ISO4217\20150101\A1.xml");
+var currencies = ParseCurrent(@"..\..\..\Narvalo.Finance\Resources\ISO4217\20150101\A1.xml");
 
 var codeSet = new HashSet<string>();
 
@@ -41,7 +41,6 @@ namespace <#= InferNamespace() #>
         // WARNING: If you change the name of the property "s_Currency",
         // you MUST also change the value of INSTANCE_CURRENCY_FIELD in 
         // Internal.CurrencyActivator<TCurrency>.
-        // Idem for the namespace, update the CURRENCIES_NAMESPACE value.
 #>
     /// <summary>
     /// Represents the currency unit for the "<#= currency.EnglishName #>".
@@ -51,6 +50,16 @@ namespace <#= InferNamespace() #>
     public sealed class <#= currency.Code #> : Currency
     {
         private static readonly <#= currency.Code #> s_Currency = new <#= currency.Code #>();
+
+        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("<#= currency.Code #>", <#= currency.NumericCode #>) {
+            EnglishName = @"<#= currency.EnglishName #>",
+<# if (currency.IsFund) { #>
+            IsFund = true,
+<# } #>
+<# if (currency.MinorUnits.HasValue) { #>
+            MinorUnits = <#= currency.MinorUnits.Value.ToString() #>
+<# } #>
+        };
 
         private <#= currency.Code #>() : base("<#= currency.Code #>") { }
         
@@ -64,6 +73,19 @@ namespace <#= InferNamespace() #>
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
                 return s_Currency;
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "<#= currency.EnglishName #>".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "<#= currency.EnglishName #>".</value>
+        public static CurrencyInfo CurrencyInfo
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
+                return s_CurrencyInfo;
             }
         }
     }

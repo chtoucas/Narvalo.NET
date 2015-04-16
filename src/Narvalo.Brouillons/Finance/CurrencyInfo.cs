@@ -32,7 +32,7 @@ namespace Narvalo.Finance
         public CurrencyInfo(string code, short numericCode)
         {
             Require.NotNullOrWhiteSpace(code, "code");
-            ContractFor.CurrencyCode(code);
+            //ContractFor.CurrencyCode(code);
             Contract.Requires(
                 numericCode >= 0 && numericCode < 1000,
                 "The numeric code MUST be strictly greater than 0 and less than 1000.");

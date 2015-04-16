@@ -29,11 +29,6 @@ namespace Narvalo.Finance.Currencies
     {
         private static readonly AED s_Currency = new AED();
 
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AED", 784) {
-            EnglishName = @"UAE Dirham",
-            MinorUnits = 2
-        };
-
         private AED() : base("AED") { }
         
         /// <summary>
@@ -48,19 +43,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "UAE Dirham".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "UAE Dirham".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -71,11 +53,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AFN : Currency
     {
         private static readonly AFN s_Currency = new AFN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AFN", 971) {
-            EnglishName = @"Afghani",
-            MinorUnits = 2
-        };
 
         private AFN() : base("AFN") { }
         
@@ -91,19 +68,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Afghani".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Afghani".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -114,11 +78,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ALL : Currency
     {
         private static readonly ALL s_Currency = new ALL();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ALL", 8) {
-            EnglishName = @"Lek",
-            MinorUnits = 2
-        };
 
         private ALL() : base("ALL") { }
         
@@ -134,19 +93,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Lek".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Lek".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -157,11 +103,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AMD : Currency
     {
         private static readonly AMD s_Currency = new AMD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AMD", 51) {
-            EnglishName = @"Armenian Dram",
-            MinorUnits = 2
-        };
 
         private AMD() : base("AMD") { }
         
@@ -177,19 +118,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Armenian Dram".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Armenian Dram".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -200,11 +128,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ANG : Currency
     {
         private static readonly ANG s_Currency = new ANG();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ANG", 532) {
-            EnglishName = @"Netherlands Antillean Guilder",
-            MinorUnits = 2
-        };
 
         private ANG() : base("ANG") { }
         
@@ -220,19 +143,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Netherlands Antillean Guilder".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Netherlands Antillean Guilder".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -243,11 +153,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AOA : Currency
     {
         private static readonly AOA s_Currency = new AOA();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AOA", 973) {
-            EnglishName = @"Kwanza",
-            MinorUnits = 2
-        };
 
         private AOA() : base("AOA") { }
         
@@ -263,19 +168,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Kwanza".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Kwanza".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -286,11 +178,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ARS : Currency
     {
         private static readonly ARS s_Currency = new ARS();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ARS", 32) {
-            EnglishName = @"Argentine Peso",
-            MinorUnits = 2
-        };
 
         private ARS() : base("ARS") { }
         
@@ -306,19 +193,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Argentine Peso".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Argentine Peso".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -329,11 +203,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AUD : Currency
     {
         private static readonly AUD s_Currency = new AUD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AUD", 36) {
-            EnglishName = @"Australian Dollar",
-            MinorUnits = 2
-        };
 
         private AUD() : base("AUD") { }
         
@@ -349,19 +218,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Australian Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Australian Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -372,11 +228,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AWG : Currency
     {
         private static readonly AWG s_Currency = new AWG();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AWG", 533) {
-            EnglishName = @"Aruban Florin",
-            MinorUnits = 2
-        };
 
         private AWG() : base("AWG") { }
         
@@ -392,19 +243,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Aruban Florin".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Aruban Florin".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -415,11 +253,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AZN : Currency
     {
         private static readonly AZN s_Currency = new AZN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("AZN", 944) {
-            EnglishName = @"Azerbaijanian Manat",
-            MinorUnits = 2
-        };
 
         private AZN() : base("AZN") { }
         
@@ -435,19 +268,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Azerbaijanian Manat".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Azerbaijanian Manat".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -458,11 +278,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BAM : Currency
     {
         private static readonly BAM s_Currency = new BAM();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BAM", 977) {
-            EnglishName = @"Convertible Mark",
-            MinorUnits = 2
-        };
 
         private BAM() : base("BAM") { }
         
@@ -478,19 +293,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Convertible Mark".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Convertible Mark".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -501,11 +303,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BBD : Currency
     {
         private static readonly BBD s_Currency = new BBD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BBD", 52) {
-            EnglishName = @"Barbados Dollar",
-            MinorUnits = 2
-        };
 
         private BBD() : base("BBD") { }
         
@@ -521,19 +318,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Barbados Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Barbados Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -544,11 +328,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BDT : Currency
     {
         private static readonly BDT s_Currency = new BDT();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BDT", 50) {
-            EnglishName = @"Taka",
-            MinorUnits = 2
-        };
 
         private BDT() : base("BDT") { }
         
@@ -564,19 +343,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Taka".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Taka".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -587,11 +353,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BGN : Currency
     {
         private static readonly BGN s_Currency = new BGN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BGN", 975) {
-            EnglishName = @"Bulgarian Lev",
-            MinorUnits = 2
-        };
 
         private BGN() : base("BGN") { }
         
@@ -607,19 +368,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Bulgarian Lev".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Bulgarian Lev".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -630,11 +378,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BHD : Currency
     {
         private static readonly BHD s_Currency = new BHD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BHD", 48) {
-            EnglishName = @"Bahraini Dinar",
-            MinorUnits = 3
-        };
 
         private BHD() : base("BHD") { }
         
@@ -650,19 +393,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Bahraini Dinar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Bahraini Dinar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -673,11 +403,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BIF : Currency
     {
         private static readonly BIF s_Currency = new BIF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BIF", 108) {
-            EnglishName = @"Burundi Franc",
-            MinorUnits = 0
-        };
 
         private BIF() : base("BIF") { }
         
@@ -693,19 +418,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Burundi Franc".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Burundi Franc".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -716,11 +428,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BMD : Currency
     {
         private static readonly BMD s_Currency = new BMD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BMD", 60) {
-            EnglishName = @"Bermudian Dollar",
-            MinorUnits = 2
-        };
 
         private BMD() : base("BMD") { }
         
@@ -736,19 +443,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Bermudian Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Bermudian Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -759,11 +453,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BND : Currency
     {
         private static readonly BND s_Currency = new BND();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BND", 96) {
-            EnglishName = @"Brunei Dollar",
-            MinorUnits = 2
-        };
 
         private BND() : base("BND") { }
         
@@ -779,19 +468,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Brunei Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Brunei Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -802,11 +478,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BOB : Currency
     {
         private static readonly BOB s_Currency = new BOB();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BOB", 68) {
-            EnglishName = @"Boliviano",
-            MinorUnits = 2
-        };
 
         private BOB() : base("BOB") { }
         
@@ -822,19 +493,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Boliviano".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Boliviano".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -845,12 +503,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BOV : Currency
     {
         private static readonly BOV s_Currency = new BOV();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BOV", 984) {
-            EnglishName = @"Mvdol",
-            IsFund = true,
-            MinorUnits = 2
-        };
 
         private BOV() : base("BOV") { }
         
@@ -866,19 +518,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Mvdol".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Mvdol".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -889,11 +528,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BRL : Currency
     {
         private static readonly BRL s_Currency = new BRL();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BRL", 986) {
-            EnglishName = @"Brazilian Real",
-            MinorUnits = 2
-        };
 
         private BRL() : base("BRL") { }
         
@@ -909,19 +543,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Brazilian Real".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Brazilian Real".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -932,11 +553,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BSD : Currency
     {
         private static readonly BSD s_Currency = new BSD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BSD", 44) {
-            EnglishName = @"Bahamian Dollar",
-            MinorUnits = 2
-        };
 
         private BSD() : base("BSD") { }
         
@@ -952,19 +568,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Bahamian Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Bahamian Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -975,11 +578,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BTN : Currency
     {
         private static readonly BTN s_Currency = new BTN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BTN", 64) {
-            EnglishName = @"Ngultrum",
-            MinorUnits = 2
-        };
 
         private BTN() : base("BTN") { }
         
@@ -995,19 +593,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Ngultrum".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Ngultrum".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1018,11 +603,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BWP : Currency
     {
         private static readonly BWP s_Currency = new BWP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BWP", 72) {
-            EnglishName = @"Pula",
-            MinorUnits = 2
-        };
 
         private BWP() : base("BWP") { }
         
@@ -1038,19 +618,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Pula".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Pula".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1061,11 +628,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BYR : Currency
     {
         private static readonly BYR s_Currency = new BYR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BYR", 974) {
-            EnglishName = @"Belarussian Ruble",
-            MinorUnits = 0
-        };
 
         private BYR() : base("BYR") { }
         
@@ -1081,19 +643,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Belarussian Ruble".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Belarussian Ruble".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1104,11 +653,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BZD : Currency
     {
         private static readonly BZD s_Currency = new BZD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("BZD", 84) {
-            EnglishName = @"Belize Dollar",
-            MinorUnits = 2
-        };
 
         private BZD() : base("BZD") { }
         
@@ -1124,19 +668,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Belize Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Belize Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1147,11 +678,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CAD : Currency
     {
         private static readonly CAD s_Currency = new CAD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CAD", 124) {
-            EnglishName = @"Canadian Dollar",
-            MinorUnits = 2
-        };
 
         private CAD() : base("CAD") { }
         
@@ -1167,19 +693,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Canadian Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Canadian Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1190,11 +703,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CDF : Currency
     {
         private static readonly CDF s_Currency = new CDF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CDF", 976) {
-            EnglishName = @"Congolese Franc",
-            MinorUnits = 2
-        };
 
         private CDF() : base("CDF") { }
         
@@ -1210,19 +718,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Congolese Franc".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Congolese Franc".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1233,12 +728,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CHE : Currency
     {
         private static readonly CHE s_Currency = new CHE();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CHE", 947) {
-            EnglishName = @"WIR Euro",
-            IsFund = true,
-            MinorUnits = 2
-        };
 
         private CHE() : base("CHE") { }
         
@@ -1254,19 +743,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "WIR Euro".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "WIR Euro".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1277,11 +753,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CHF : Currency
     {
         private static readonly CHF s_Currency = new CHF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CHF", 756) {
-            EnglishName = @"Swiss Franc",
-            MinorUnits = 2
-        };
 
         private CHF() : base("CHF") { }
         
@@ -1297,19 +768,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Swiss Franc".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Swiss Franc".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1320,12 +778,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CHW : Currency
     {
         private static readonly CHW s_Currency = new CHW();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CHW", 948) {
-            EnglishName = @"WIR Franc",
-            IsFund = true,
-            MinorUnits = 2
-        };
 
         private CHW() : base("CHW") { }
         
@@ -1341,19 +793,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "WIR Franc".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "WIR Franc".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1364,12 +803,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CLF : Currency
     {
         private static readonly CLF s_Currency = new CLF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CLF", 990) {
-            EnglishName = @"Unidad de Fomento",
-            IsFund = true,
-            MinorUnits = 4
-        };
 
         private CLF() : base("CLF") { }
         
@@ -1385,19 +818,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Unidad de Fomento".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Unidad de Fomento".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1408,11 +828,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CLP : Currency
     {
         private static readonly CLP s_Currency = new CLP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CLP", 152) {
-            EnglishName = @"Chilean Peso",
-            MinorUnits = 0
-        };
 
         private CLP() : base("CLP") { }
         
@@ -1428,19 +843,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Chilean Peso".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Chilean Peso".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1451,11 +853,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CNY : Currency
     {
         private static readonly CNY s_Currency = new CNY();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CNY", 156) {
-            EnglishName = @"Yuan Renminbi",
-            MinorUnits = 2
-        };
 
         private CNY() : base("CNY") { }
         
@@ -1471,19 +868,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Yuan Renminbi".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Yuan Renminbi".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1494,11 +878,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class COP : Currency
     {
         private static readonly COP s_Currency = new COP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("COP", 170) {
-            EnglishName = @"Colombian Peso",
-            MinorUnits = 2
-        };
 
         private COP() : base("COP") { }
         
@@ -1514,19 +893,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Colombian Peso".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Colombian Peso".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1537,12 +903,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class COU : Currency
     {
         private static readonly COU s_Currency = new COU();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("COU", 970) {
-            EnglishName = @"Unidad de Valor Real",
-            IsFund = true,
-            MinorUnits = 2
-        };
 
         private COU() : base("COU") { }
         
@@ -1558,19 +918,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Unidad de Valor Real".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Unidad de Valor Real".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1581,11 +928,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CRC : Currency
     {
         private static readonly CRC s_Currency = new CRC();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CRC", 188) {
-            EnglishName = @"Costa Rican Colon",
-            MinorUnits = 2
-        };
 
         private CRC() : base("CRC") { }
         
@@ -1601,19 +943,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Costa Rican Colon".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Costa Rican Colon".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1624,11 +953,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CUC : Currency
     {
         private static readonly CUC s_Currency = new CUC();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CUC", 931) {
-            EnglishName = @"Peso Convertible",
-            MinorUnits = 2
-        };
 
         private CUC() : base("CUC") { }
         
@@ -1644,19 +968,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Peso Convertible".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Peso Convertible".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1667,11 +978,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CUP : Currency
     {
         private static readonly CUP s_Currency = new CUP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CUP", 192) {
-            EnglishName = @"Cuban Peso",
-            MinorUnits = 2
-        };
 
         private CUP() : base("CUP") { }
         
@@ -1687,19 +993,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Cuban Peso".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Cuban Peso".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1710,11 +1003,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CVE : Currency
     {
         private static readonly CVE s_Currency = new CVE();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CVE", 132) {
-            EnglishName = @"Cabo Verde Escudo",
-            MinorUnits = 2
-        };
 
         private CVE() : base("CVE") { }
         
@@ -1730,19 +1018,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Cabo Verde Escudo".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Cabo Verde Escudo".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1753,11 +1028,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CZK : Currency
     {
         private static readonly CZK s_Currency = new CZK();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("CZK", 203) {
-            EnglishName = @"Czech Koruna",
-            MinorUnits = 2
-        };
 
         private CZK() : base("CZK") { }
         
@@ -1773,19 +1043,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Czech Koruna".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Czech Koruna".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1796,11 +1053,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class DJF : Currency
     {
         private static readonly DJF s_Currency = new DJF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("DJF", 262) {
-            EnglishName = @"Djibouti Franc",
-            MinorUnits = 0
-        };
 
         private DJF() : base("DJF") { }
         
@@ -1816,19 +1068,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Djibouti Franc".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Djibouti Franc".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1839,11 +1078,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class DKK : Currency
     {
         private static readonly DKK s_Currency = new DKK();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("DKK", 208) {
-            EnglishName = @"Danish Krone",
-            MinorUnits = 2
-        };
 
         private DKK() : base("DKK") { }
         
@@ -1859,19 +1093,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Danish Krone".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Danish Krone".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1882,11 +1103,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class DOP : Currency
     {
         private static readonly DOP s_Currency = new DOP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("DOP", 214) {
-            EnglishName = @"Dominican Peso",
-            MinorUnits = 2
-        };
 
         private DOP() : base("DOP") { }
         
@@ -1902,19 +1118,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Dominican Peso".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Dominican Peso".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1925,11 +1128,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class DZD : Currency
     {
         private static readonly DZD s_Currency = new DZD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("DZD", 12) {
-            EnglishName = @"Algerian Dinar",
-            MinorUnits = 2
-        };
 
         private DZD() : base("DZD") { }
         
@@ -1945,19 +1143,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Algerian Dinar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Algerian Dinar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -1968,11 +1153,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class EGP : Currency
     {
         private static readonly EGP s_Currency = new EGP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("EGP", 818) {
-            EnglishName = @"Egyptian Pound",
-            MinorUnits = 2
-        };
 
         private EGP() : base("EGP") { }
         
@@ -1988,19 +1168,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Egyptian Pound".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Egyptian Pound".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2011,11 +1178,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ERN : Currency
     {
         private static readonly ERN s_Currency = new ERN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ERN", 232) {
-            EnglishName = @"Nakfa",
-            MinorUnits = 2
-        };
 
         private ERN() : base("ERN") { }
         
@@ -2031,19 +1193,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Nakfa".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Nakfa".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2054,11 +1203,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ETB : Currency
     {
         private static readonly ETB s_Currency = new ETB();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ETB", 230) {
-            EnglishName = @"Ethiopian Birr",
-            MinorUnits = 2
-        };
 
         private ETB() : base("ETB") { }
         
@@ -2074,19 +1218,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Ethiopian Birr".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Ethiopian Birr".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2097,11 +1228,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class EUR : Currency
     {
         private static readonly EUR s_Currency = new EUR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("EUR", 978) {
-            EnglishName = @"Euro",
-            MinorUnits = 2
-        };
 
         private EUR() : base("EUR") { }
         
@@ -2117,19 +1243,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Euro".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Euro".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2140,11 +1253,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class FJD : Currency
     {
         private static readonly FJD s_Currency = new FJD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("FJD", 242) {
-            EnglishName = @"Fiji Dollar",
-            MinorUnits = 2
-        };
 
         private FJD() : base("FJD") { }
         
@@ -2160,19 +1268,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Fiji Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Fiji Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2183,11 +1278,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class FKP : Currency
     {
         private static readonly FKP s_Currency = new FKP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("FKP", 238) {
-            EnglishName = @"Falkland Islands Pound",
-            MinorUnits = 2
-        };
 
         private FKP() : base("FKP") { }
         
@@ -2203,19 +1293,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Falkland Islands Pound".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Falkland Islands Pound".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2226,11 +1303,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GBP : Currency
     {
         private static readonly GBP s_Currency = new GBP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GBP", 826) {
-            EnglishName = @"Pound Sterling",
-            MinorUnits = 2
-        };
 
         private GBP() : base("GBP") { }
         
@@ -2246,19 +1318,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Pound Sterling".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Pound Sterling".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2269,11 +1328,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GEL : Currency
     {
         private static readonly GEL s_Currency = new GEL();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GEL", 981) {
-            EnglishName = @"Lari",
-            MinorUnits = 2
-        };
 
         private GEL() : base("GEL") { }
         
@@ -2289,19 +1343,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Lari".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Lari".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2312,11 +1353,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GHS : Currency
     {
         private static readonly GHS s_Currency = new GHS();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GHS", 936) {
-            EnglishName = @"Ghana Cedi",
-            MinorUnits = 2
-        };
 
         private GHS() : base("GHS") { }
         
@@ -2332,19 +1368,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Ghana Cedi".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Ghana Cedi".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2355,11 +1378,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GIP : Currency
     {
         private static readonly GIP s_Currency = new GIP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GIP", 292) {
-            EnglishName = @"Gibraltar Pound",
-            MinorUnits = 2
-        };
 
         private GIP() : base("GIP") { }
         
@@ -2375,19 +1393,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Gibraltar Pound".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Gibraltar Pound".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2398,11 +1403,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GMD : Currency
     {
         private static readonly GMD s_Currency = new GMD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GMD", 270) {
-            EnglishName = @"Dalasi",
-            MinorUnits = 2
-        };
 
         private GMD() : base("GMD") { }
         
@@ -2418,19 +1418,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Dalasi".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Dalasi".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2441,11 +1428,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GNF : Currency
     {
         private static readonly GNF s_Currency = new GNF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GNF", 324) {
-            EnglishName = @"Guinea Franc",
-            MinorUnits = 0
-        };
 
         private GNF() : base("GNF") { }
         
@@ -2461,19 +1443,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Guinea Franc".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Guinea Franc".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2484,11 +1453,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GTQ : Currency
     {
         private static readonly GTQ s_Currency = new GTQ();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GTQ", 320) {
-            EnglishName = @"Quetzal",
-            MinorUnits = 2
-        };
 
         private GTQ() : base("GTQ") { }
         
@@ -2504,19 +1468,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Quetzal".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Quetzal".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2527,11 +1478,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GYD : Currency
     {
         private static readonly GYD s_Currency = new GYD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("GYD", 328) {
-            EnglishName = @"Guyana Dollar",
-            MinorUnits = 2
-        };
 
         private GYD() : base("GYD") { }
         
@@ -2547,19 +1493,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Guyana Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Guyana Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2570,11 +1503,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HKD : Currency
     {
         private static readonly HKD s_Currency = new HKD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("HKD", 344) {
-            EnglishName = @"Hong Kong Dollar",
-            MinorUnits = 2
-        };
 
         private HKD() : base("HKD") { }
         
@@ -2590,19 +1518,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Hong Kong Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Hong Kong Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2613,11 +1528,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HNL : Currency
     {
         private static readonly HNL s_Currency = new HNL();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("HNL", 340) {
-            EnglishName = @"Lempira",
-            MinorUnits = 2
-        };
 
         private HNL() : base("HNL") { }
         
@@ -2633,19 +1543,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Lempira".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Lempira".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2656,11 +1553,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HRK : Currency
     {
         private static readonly HRK s_Currency = new HRK();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("HRK", 191) {
-            EnglishName = @"Croatian Kuna",
-            MinorUnits = 2
-        };
 
         private HRK() : base("HRK") { }
         
@@ -2676,19 +1568,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Croatian Kuna".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Croatian Kuna".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2699,11 +1578,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HTG : Currency
     {
         private static readonly HTG s_Currency = new HTG();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("HTG", 332) {
-            EnglishName = @"Gourde",
-            MinorUnits = 2
-        };
 
         private HTG() : base("HTG") { }
         
@@ -2719,19 +1593,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Gourde".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Gourde".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2742,11 +1603,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HUF : Currency
     {
         private static readonly HUF s_Currency = new HUF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("HUF", 348) {
-            EnglishName = @"Forint",
-            MinorUnits = 2
-        };
 
         private HUF() : base("HUF") { }
         
@@ -2762,19 +1618,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Forint".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Forint".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2785,11 +1628,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class IDR : Currency
     {
         private static readonly IDR s_Currency = new IDR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("IDR", 360) {
-            EnglishName = @"Rupiah",
-            MinorUnits = 2
-        };
 
         private IDR() : base("IDR") { }
         
@@ -2805,19 +1643,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Rupiah".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Rupiah".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2828,11 +1653,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ILS : Currency
     {
         private static readonly ILS s_Currency = new ILS();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ILS", 376) {
-            EnglishName = @"New Israeli Sheqel",
-            MinorUnits = 2
-        };
 
         private ILS() : base("ILS") { }
         
@@ -2848,19 +1668,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "New Israeli Sheqel".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "New Israeli Sheqel".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2871,11 +1678,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class INR : Currency
     {
         private static readonly INR s_Currency = new INR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("INR", 356) {
-            EnglishName = @"Indian Rupee",
-            MinorUnits = 2
-        };
 
         private INR() : base("INR") { }
         
@@ -2891,19 +1693,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Indian Rupee".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Indian Rupee".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2914,11 +1703,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class IQD : Currency
     {
         private static readonly IQD s_Currency = new IQD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("IQD", 368) {
-            EnglishName = @"Iraqi Dinar",
-            MinorUnits = 3
-        };
 
         private IQD() : base("IQD") { }
         
@@ -2934,19 +1718,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Iraqi Dinar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Iraqi Dinar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -2957,11 +1728,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class IRR : Currency
     {
         private static readonly IRR s_Currency = new IRR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("IRR", 364) {
-            EnglishName = @"Iranian Rial",
-            MinorUnits = 2
-        };
 
         private IRR() : base("IRR") { }
         
@@ -2977,19 +1743,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Iranian Rial".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Iranian Rial".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3000,11 +1753,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ISK : Currency
     {
         private static readonly ISK s_Currency = new ISK();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ISK", 352) {
-            EnglishName = @"Iceland Krona",
-            MinorUnits = 0
-        };
 
         private ISK() : base("ISK") { }
         
@@ -3020,19 +1768,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Iceland Krona".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Iceland Krona".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3043,11 +1778,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class JMD : Currency
     {
         private static readonly JMD s_Currency = new JMD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("JMD", 388) {
-            EnglishName = @"Jamaican Dollar",
-            MinorUnits = 2
-        };
 
         private JMD() : base("JMD") { }
         
@@ -3063,19 +1793,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Jamaican Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Jamaican Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3086,11 +1803,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class JOD : Currency
     {
         private static readonly JOD s_Currency = new JOD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("JOD", 400) {
-            EnglishName = @"Jordanian Dinar",
-            MinorUnits = 3
-        };
 
         private JOD() : base("JOD") { }
         
@@ -3106,19 +1818,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Jordanian Dinar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Jordanian Dinar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3129,11 +1828,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class JPY : Currency
     {
         private static readonly JPY s_Currency = new JPY();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("JPY", 392) {
-            EnglishName = @"Yen",
-            MinorUnits = 0
-        };
 
         private JPY() : base("JPY") { }
         
@@ -3149,19 +1843,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Yen".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Yen".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3172,11 +1853,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KES : Currency
     {
         private static readonly KES s_Currency = new KES();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KES", 404) {
-            EnglishName = @"Kenyan Shilling",
-            MinorUnits = 2
-        };
 
         private KES() : base("KES") { }
         
@@ -3192,19 +1868,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Kenyan Shilling".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Kenyan Shilling".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3215,11 +1878,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KGS : Currency
     {
         private static readonly KGS s_Currency = new KGS();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KGS", 417) {
-            EnglishName = @"Som",
-            MinorUnits = 2
-        };
 
         private KGS() : base("KGS") { }
         
@@ -3235,19 +1893,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Som".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Som".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3258,11 +1903,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KHR : Currency
     {
         private static readonly KHR s_Currency = new KHR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KHR", 116) {
-            EnglishName = @"Riel",
-            MinorUnits = 2
-        };
 
         private KHR() : base("KHR") { }
         
@@ -3278,19 +1918,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Riel".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Riel".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3301,11 +1928,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KMF : Currency
     {
         private static readonly KMF s_Currency = new KMF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KMF", 174) {
-            EnglishName = @"Comoro Franc",
-            MinorUnits = 0
-        };
 
         private KMF() : base("KMF") { }
         
@@ -3321,19 +1943,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Comoro Franc".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Comoro Franc".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3344,11 +1953,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KPW : Currency
     {
         private static readonly KPW s_Currency = new KPW();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KPW", 408) {
-            EnglishName = @"North Korean Won",
-            MinorUnits = 2
-        };
 
         private KPW() : base("KPW") { }
         
@@ -3364,19 +1968,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "North Korean Won".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "North Korean Won".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3387,11 +1978,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KRW : Currency
     {
         private static readonly KRW s_Currency = new KRW();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KRW", 410) {
-            EnglishName = @"Won",
-            MinorUnits = 0
-        };
 
         private KRW() : base("KRW") { }
         
@@ -3407,19 +1993,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Won".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Won".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3430,11 +2003,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KWD : Currency
     {
         private static readonly KWD s_Currency = new KWD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KWD", 414) {
-            EnglishName = @"Kuwaiti Dinar",
-            MinorUnits = 3
-        };
 
         private KWD() : base("KWD") { }
         
@@ -3450,19 +2018,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Kuwaiti Dinar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Kuwaiti Dinar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3473,11 +2028,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KYD : Currency
     {
         private static readonly KYD s_Currency = new KYD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KYD", 136) {
-            EnglishName = @"Cayman Islands Dollar",
-            MinorUnits = 2
-        };
 
         private KYD() : base("KYD") { }
         
@@ -3493,19 +2043,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Cayman Islands Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Cayman Islands Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3516,11 +2053,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KZT : Currency
     {
         private static readonly KZT s_Currency = new KZT();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("KZT", 398) {
-            EnglishName = @"Tenge",
-            MinorUnits = 2
-        };
 
         private KZT() : base("KZT") { }
         
@@ -3536,19 +2068,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Tenge".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Tenge".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3559,11 +2078,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LAK : Currency
     {
         private static readonly LAK s_Currency = new LAK();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LAK", 418) {
-            EnglishName = @"Kip",
-            MinorUnits = 2
-        };
 
         private LAK() : base("LAK") { }
         
@@ -3579,19 +2093,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Kip".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Kip".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3602,11 +2103,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LBP : Currency
     {
         private static readonly LBP s_Currency = new LBP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LBP", 422) {
-            EnglishName = @"Lebanese Pound",
-            MinorUnits = 2
-        };
 
         private LBP() : base("LBP") { }
         
@@ -3622,19 +2118,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Lebanese Pound".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Lebanese Pound".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3645,11 +2128,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LKR : Currency
     {
         private static readonly LKR s_Currency = new LKR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LKR", 144) {
-            EnglishName = @"Sri Lanka Rupee",
-            MinorUnits = 2
-        };
 
         private LKR() : base("LKR") { }
         
@@ -3665,19 +2143,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Sri Lanka Rupee".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Sri Lanka Rupee".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3688,11 +2153,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LRD : Currency
     {
         private static readonly LRD s_Currency = new LRD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LRD", 430) {
-            EnglishName = @"Liberian Dollar",
-            MinorUnits = 2
-        };
 
         private LRD() : base("LRD") { }
         
@@ -3708,19 +2168,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Liberian Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Liberian Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3731,11 +2178,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LSL : Currency
     {
         private static readonly LSL s_Currency = new LSL();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LSL", 426) {
-            EnglishName = @"Loti",
-            MinorUnits = 2
-        };
 
         private LSL() : base("LSL") { }
         
@@ -3751,19 +2193,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Loti".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Loti".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3774,11 +2203,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LYD : Currency
     {
         private static readonly LYD s_Currency = new LYD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("LYD", 434) {
-            EnglishName = @"Libyan Dinar",
-            MinorUnits = 3
-        };
 
         private LYD() : base("LYD") { }
         
@@ -3794,19 +2218,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Libyan Dinar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Libyan Dinar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3817,11 +2228,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MAD : Currency
     {
         private static readonly MAD s_Currency = new MAD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MAD", 504) {
-            EnglishName = @"Moroccan Dirham",
-            MinorUnits = 2
-        };
 
         private MAD() : base("MAD") { }
         
@@ -3837,19 +2243,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Moroccan Dirham".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Moroccan Dirham".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3860,11 +2253,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MDL : Currency
     {
         private static readonly MDL s_Currency = new MDL();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MDL", 498) {
-            EnglishName = @"Moldovan Leu",
-            MinorUnits = 2
-        };
 
         private MDL() : base("MDL") { }
         
@@ -3880,19 +2268,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Moldovan Leu".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Moldovan Leu".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3903,11 +2278,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MGA : Currency
     {
         private static readonly MGA s_Currency = new MGA();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MGA", 969) {
-            EnglishName = @"Malagasy Ariary",
-            MinorUnits = 2
-        };
 
         private MGA() : base("MGA") { }
         
@@ -3923,19 +2293,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Malagasy Ariary".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Malagasy Ariary".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3946,11 +2303,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MKD : Currency
     {
         private static readonly MKD s_Currency = new MKD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MKD", 807) {
-            EnglishName = @"Denar",
-            MinorUnits = 2
-        };
 
         private MKD() : base("MKD") { }
         
@@ -3966,19 +2318,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Denar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Denar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -3989,11 +2328,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MMK : Currency
     {
         private static readonly MMK s_Currency = new MMK();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MMK", 104) {
-            EnglishName = @"Kyat",
-            MinorUnits = 2
-        };
 
         private MMK() : base("MMK") { }
         
@@ -4009,19 +2343,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Kyat".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Kyat".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4032,11 +2353,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MNT : Currency
     {
         private static readonly MNT s_Currency = new MNT();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MNT", 496) {
-            EnglishName = @"Tugrik",
-            MinorUnits = 2
-        };
 
         private MNT() : base("MNT") { }
         
@@ -4052,19 +2368,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Tugrik".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Tugrik".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4075,11 +2378,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MOP : Currency
     {
         private static readonly MOP s_Currency = new MOP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MOP", 446) {
-            EnglishName = @"Pataca",
-            MinorUnits = 2
-        };
 
         private MOP() : base("MOP") { }
         
@@ -4095,19 +2393,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Pataca".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Pataca".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4118,11 +2403,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MRO : Currency
     {
         private static readonly MRO s_Currency = new MRO();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MRO", 478) {
-            EnglishName = @"Ouguiya",
-            MinorUnits = 2
-        };
 
         private MRO() : base("MRO") { }
         
@@ -4138,19 +2418,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Ouguiya".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Ouguiya".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4161,11 +2428,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MUR : Currency
     {
         private static readonly MUR s_Currency = new MUR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MUR", 480) {
-            EnglishName = @"Mauritius Rupee",
-            MinorUnits = 2
-        };
 
         private MUR() : base("MUR") { }
         
@@ -4181,19 +2443,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Mauritius Rupee".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Mauritius Rupee".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4204,11 +2453,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MVR : Currency
     {
         private static readonly MVR s_Currency = new MVR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MVR", 462) {
-            EnglishName = @"Rufiyaa",
-            MinorUnits = 2
-        };
 
         private MVR() : base("MVR") { }
         
@@ -4224,19 +2468,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Rufiyaa".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Rufiyaa".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4247,11 +2478,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MWK : Currency
     {
         private static readonly MWK s_Currency = new MWK();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MWK", 454) {
-            EnglishName = @"Kwacha",
-            MinorUnits = 2
-        };
 
         private MWK() : base("MWK") { }
         
@@ -4267,19 +2493,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Kwacha".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Kwacha".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4290,11 +2503,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MXN : Currency
     {
         private static readonly MXN s_Currency = new MXN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MXN", 484) {
-            EnglishName = @"Mexican Peso",
-            MinorUnits = 2
-        };
 
         private MXN() : base("MXN") { }
         
@@ -4310,19 +2518,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Mexican Peso".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Mexican Peso".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4333,12 +2528,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MXV : Currency
     {
         private static readonly MXV s_Currency = new MXV();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MXV", 979) {
-            EnglishName = @"Mexican Unidad de Inversion (UDI)",
-            IsFund = true,
-            MinorUnits = 2
-        };
 
         private MXV() : base("MXV") { }
         
@@ -4354,19 +2543,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Mexican Unidad de Inversion (UDI)".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Mexican Unidad de Inversion (UDI)".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4377,11 +2553,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MYR : Currency
     {
         private static readonly MYR s_Currency = new MYR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MYR", 458) {
-            EnglishName = @"Malaysian Ringgit",
-            MinorUnits = 2
-        };
 
         private MYR() : base("MYR") { }
         
@@ -4397,19 +2568,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Malaysian Ringgit".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Malaysian Ringgit".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4420,11 +2578,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MZN : Currency
     {
         private static readonly MZN s_Currency = new MZN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("MZN", 943) {
-            EnglishName = @"Mozambique Metical",
-            MinorUnits = 2
-        };
 
         private MZN() : base("MZN") { }
         
@@ -4440,19 +2593,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Mozambique Metical".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Mozambique Metical".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4463,11 +2603,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NAD : Currency
     {
         private static readonly NAD s_Currency = new NAD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NAD", 516) {
-            EnglishName = @"Namibia Dollar",
-            MinorUnits = 2
-        };
 
         private NAD() : base("NAD") { }
         
@@ -4483,19 +2618,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Namibia Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Namibia Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4506,11 +2628,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NGN : Currency
     {
         private static readonly NGN s_Currency = new NGN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NGN", 566) {
-            EnglishName = @"Naira",
-            MinorUnits = 2
-        };
 
         private NGN() : base("NGN") { }
         
@@ -4526,19 +2643,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Naira".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Naira".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4549,11 +2653,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NIO : Currency
     {
         private static readonly NIO s_Currency = new NIO();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NIO", 558) {
-            EnglishName = @"Cordoba Oro",
-            MinorUnits = 2
-        };
 
         private NIO() : base("NIO") { }
         
@@ -4569,19 +2668,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Cordoba Oro".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Cordoba Oro".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4592,11 +2678,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NOK : Currency
     {
         private static readonly NOK s_Currency = new NOK();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NOK", 578) {
-            EnglishName = @"Norwegian Krone",
-            MinorUnits = 2
-        };
 
         private NOK() : base("NOK") { }
         
@@ -4612,19 +2693,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Norwegian Krone".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Norwegian Krone".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4635,11 +2703,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NPR : Currency
     {
         private static readonly NPR s_Currency = new NPR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NPR", 524) {
-            EnglishName = @"Nepalese Rupee",
-            MinorUnits = 2
-        };
 
         private NPR() : base("NPR") { }
         
@@ -4655,19 +2718,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Nepalese Rupee".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Nepalese Rupee".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4678,11 +2728,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NZD : Currency
     {
         private static readonly NZD s_Currency = new NZD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("NZD", 554) {
-            EnglishName = @"New Zealand Dollar",
-            MinorUnits = 2
-        };
 
         private NZD() : base("NZD") { }
         
@@ -4698,19 +2743,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "New Zealand Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "New Zealand Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4721,11 +2753,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class OMR : Currency
     {
         private static readonly OMR s_Currency = new OMR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("OMR", 512) {
-            EnglishName = @"Rial Omani",
-            MinorUnits = 3
-        };
 
         private OMR() : base("OMR") { }
         
@@ -4741,19 +2768,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Rial Omani".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Rial Omani".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4764,11 +2778,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PAB : Currency
     {
         private static readonly PAB s_Currency = new PAB();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PAB", 590) {
-            EnglishName = @"Balboa",
-            MinorUnits = 2
-        };
 
         private PAB() : base("PAB") { }
         
@@ -4784,19 +2793,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Balboa".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Balboa".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4807,11 +2803,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PEN : Currency
     {
         private static readonly PEN s_Currency = new PEN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PEN", 604) {
-            EnglishName = @"Nuevo Sol",
-            MinorUnits = 2
-        };
 
         private PEN() : base("PEN") { }
         
@@ -4827,19 +2818,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Nuevo Sol".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Nuevo Sol".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4850,11 +2828,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PGK : Currency
     {
         private static readonly PGK s_Currency = new PGK();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PGK", 598) {
-            EnglishName = @"Kina",
-            MinorUnits = 2
-        };
 
         private PGK() : base("PGK") { }
         
@@ -4870,19 +2843,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Kina".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Kina".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4893,11 +2853,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PHP : Currency
     {
         private static readonly PHP s_Currency = new PHP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PHP", 608) {
-            EnglishName = @"Philippine Peso",
-            MinorUnits = 2
-        };
 
         private PHP() : base("PHP") { }
         
@@ -4913,19 +2868,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Philippine Peso".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Philippine Peso".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4936,11 +2878,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PKR : Currency
     {
         private static readonly PKR s_Currency = new PKR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PKR", 586) {
-            EnglishName = @"Pakistan Rupee",
-            MinorUnits = 2
-        };
 
         private PKR() : base("PKR") { }
         
@@ -4956,19 +2893,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Pakistan Rupee".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Pakistan Rupee".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -4979,11 +2903,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PLN : Currency
     {
         private static readonly PLN s_Currency = new PLN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PLN", 985) {
-            EnglishName = @"Zloty",
-            MinorUnits = 2
-        };
 
         private PLN() : base("PLN") { }
         
@@ -4999,19 +2918,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Zloty".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Zloty".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5022,11 +2928,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PYG : Currency
     {
         private static readonly PYG s_Currency = new PYG();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("PYG", 600) {
-            EnglishName = @"Guarani",
-            MinorUnits = 0
-        };
 
         private PYG() : base("PYG") { }
         
@@ -5042,19 +2943,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Guarani".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Guarani".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5065,11 +2953,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class QAR : Currency
     {
         private static readonly QAR s_Currency = new QAR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("QAR", 634) {
-            EnglishName = @"Qatari Rial",
-            MinorUnits = 2
-        };
 
         private QAR() : base("QAR") { }
         
@@ -5085,19 +2968,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Qatari Rial".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Qatari Rial".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5108,11 +2978,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class RON : Currency
     {
         private static readonly RON s_Currency = new RON();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("RON", 946) {
-            EnglishName = @"New Romanian Leu",
-            MinorUnits = 2
-        };
 
         private RON() : base("RON") { }
         
@@ -5128,19 +2993,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "New Romanian Leu".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "New Romanian Leu".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5151,11 +3003,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class RSD : Currency
     {
         private static readonly RSD s_Currency = new RSD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("RSD", 941) {
-            EnglishName = @"Serbian Dinar",
-            MinorUnits = 2
-        };
 
         private RSD() : base("RSD") { }
         
@@ -5171,19 +3018,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Serbian Dinar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Serbian Dinar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5194,11 +3028,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class RUB : Currency
     {
         private static readonly RUB s_Currency = new RUB();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("RUB", 643) {
-            EnglishName = @"Russian Ruble",
-            MinorUnits = 2
-        };
 
         private RUB() : base("RUB") { }
         
@@ -5214,19 +3043,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Russian Ruble".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Russian Ruble".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5237,11 +3053,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class RWF : Currency
     {
         private static readonly RWF s_Currency = new RWF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("RWF", 646) {
-            EnglishName = @"Rwanda Franc",
-            MinorUnits = 0
-        };
 
         private RWF() : base("RWF") { }
         
@@ -5257,19 +3068,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Rwanda Franc".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Rwanda Franc".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5280,11 +3078,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SAR : Currency
     {
         private static readonly SAR s_Currency = new SAR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SAR", 682) {
-            EnglishName = @"Saudi Riyal",
-            MinorUnits = 2
-        };
 
         private SAR() : base("SAR") { }
         
@@ -5300,19 +3093,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Saudi Riyal".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Saudi Riyal".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5323,11 +3103,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SBD : Currency
     {
         private static readonly SBD s_Currency = new SBD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SBD", 90) {
-            EnglishName = @"Solomon Islands Dollar",
-            MinorUnits = 2
-        };
 
         private SBD() : base("SBD") { }
         
@@ -5343,19 +3118,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Solomon Islands Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Solomon Islands Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5366,11 +3128,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SCR : Currency
     {
         private static readonly SCR s_Currency = new SCR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SCR", 690) {
-            EnglishName = @"Seychelles Rupee",
-            MinorUnits = 2
-        };
 
         private SCR() : base("SCR") { }
         
@@ -5386,19 +3143,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Seychelles Rupee".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Seychelles Rupee".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5409,11 +3153,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SDG : Currency
     {
         private static readonly SDG s_Currency = new SDG();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SDG", 938) {
-            EnglishName = @"Sudanese Pound",
-            MinorUnits = 2
-        };
 
         private SDG() : base("SDG") { }
         
@@ -5429,19 +3168,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Sudanese Pound".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Sudanese Pound".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5452,11 +3178,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SEK : Currency
     {
         private static readonly SEK s_Currency = new SEK();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SEK", 752) {
-            EnglishName = @"Swedish Krona",
-            MinorUnits = 2
-        };
 
         private SEK() : base("SEK") { }
         
@@ -5472,19 +3193,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Swedish Krona".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Swedish Krona".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5495,11 +3203,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SGD : Currency
     {
         private static readonly SGD s_Currency = new SGD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SGD", 702) {
-            EnglishName = @"Singapore Dollar",
-            MinorUnits = 2
-        };
 
         private SGD() : base("SGD") { }
         
@@ -5515,19 +3218,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Singapore Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Singapore Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5538,11 +3228,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SHP : Currency
     {
         private static readonly SHP s_Currency = new SHP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SHP", 654) {
-            EnglishName = @"Saint Helena Pound",
-            MinorUnits = 2
-        };
 
         private SHP() : base("SHP") { }
         
@@ -5558,19 +3243,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Saint Helena Pound".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Saint Helena Pound".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5581,11 +3253,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SLL : Currency
     {
         private static readonly SLL s_Currency = new SLL();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SLL", 694) {
-            EnglishName = @"Leone",
-            MinorUnits = 2
-        };
 
         private SLL() : base("SLL") { }
         
@@ -5601,19 +3268,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Leone".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Leone".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5624,11 +3278,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SOS : Currency
     {
         private static readonly SOS s_Currency = new SOS();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SOS", 706) {
-            EnglishName = @"Somali Shilling",
-            MinorUnits = 2
-        };
 
         private SOS() : base("SOS") { }
         
@@ -5644,19 +3293,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Somali Shilling".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Somali Shilling".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5667,11 +3303,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SRD : Currency
     {
         private static readonly SRD s_Currency = new SRD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SRD", 968) {
-            EnglishName = @"Surinam Dollar",
-            MinorUnits = 2
-        };
 
         private SRD() : base("SRD") { }
         
@@ -5687,19 +3318,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Surinam Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Surinam Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5710,11 +3328,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SSP : Currency
     {
         private static readonly SSP s_Currency = new SSP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SSP", 728) {
-            EnglishName = @"South Sudanese Pound",
-            MinorUnits = 2
-        };
 
         private SSP() : base("SSP") { }
         
@@ -5730,19 +3343,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "South Sudanese Pound".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "South Sudanese Pound".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5753,11 +3353,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class STD : Currency
     {
         private static readonly STD s_Currency = new STD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("STD", 678) {
-            EnglishName = @"Dobra",
-            MinorUnits = 2
-        };
 
         private STD() : base("STD") { }
         
@@ -5773,19 +3368,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Dobra".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Dobra".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5796,11 +3378,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SVC : Currency
     {
         private static readonly SVC s_Currency = new SVC();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SVC", 222) {
-            EnglishName = @"El Salvador Colon",
-            MinorUnits = 2
-        };
 
         private SVC() : base("SVC") { }
         
@@ -5816,19 +3393,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "El Salvador Colon".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "El Salvador Colon".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5839,11 +3403,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SYP : Currency
     {
         private static readonly SYP s_Currency = new SYP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SYP", 760) {
-            EnglishName = @"Syrian Pound",
-            MinorUnits = 2
-        };
 
         private SYP() : base("SYP") { }
         
@@ -5859,19 +3418,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Syrian Pound".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Syrian Pound".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5882,11 +3428,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SZL : Currency
     {
         private static readonly SZL s_Currency = new SZL();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("SZL", 748) {
-            EnglishName = @"Lilangeni",
-            MinorUnits = 2
-        };
 
         private SZL() : base("SZL") { }
         
@@ -5902,19 +3443,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Lilangeni".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Lilangeni".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5925,11 +3453,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class THB : Currency
     {
         private static readonly THB s_Currency = new THB();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("THB", 764) {
-            EnglishName = @"Baht",
-            MinorUnits = 2
-        };
 
         private THB() : base("THB") { }
         
@@ -5945,19 +3468,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Baht".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Baht".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -5968,11 +3478,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TJS : Currency
     {
         private static readonly TJS s_Currency = new TJS();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TJS", 972) {
-            EnglishName = @"Somoni",
-            MinorUnits = 2
-        };
 
         private TJS() : base("TJS") { }
         
@@ -5988,19 +3493,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Somoni".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Somoni".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6011,11 +3503,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TMT : Currency
     {
         private static readonly TMT s_Currency = new TMT();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TMT", 934) {
-            EnglishName = @"Turkmenistan New Manat",
-            MinorUnits = 2
-        };
 
         private TMT() : base("TMT") { }
         
@@ -6031,19 +3518,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Turkmenistan New Manat".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Turkmenistan New Manat".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6054,11 +3528,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TND : Currency
     {
         private static readonly TND s_Currency = new TND();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TND", 788) {
-            EnglishName = @"Tunisian Dinar",
-            MinorUnits = 3
-        };
 
         private TND() : base("TND") { }
         
@@ -6074,19 +3543,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Tunisian Dinar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Tunisian Dinar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6097,11 +3553,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TOP : Currency
     {
         private static readonly TOP s_Currency = new TOP();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TOP", 776) {
-            EnglishName = @"Pa’anga",
-            MinorUnits = 2
-        };
 
         private TOP() : base("TOP") { }
         
@@ -6117,19 +3568,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Pa’anga".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Pa’anga".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6140,11 +3578,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TRY : Currency
     {
         private static readonly TRY s_Currency = new TRY();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TRY", 949) {
-            EnglishName = @"Turkish Lira",
-            MinorUnits = 2
-        };
 
         private TRY() : base("TRY") { }
         
@@ -6160,19 +3593,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Turkish Lira".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Turkish Lira".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6183,11 +3603,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TTD : Currency
     {
         private static readonly TTD s_Currency = new TTD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TTD", 780) {
-            EnglishName = @"Trinidad and Tobago Dollar",
-            MinorUnits = 2
-        };
 
         private TTD() : base("TTD") { }
         
@@ -6203,19 +3618,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Trinidad and Tobago Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Trinidad and Tobago Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6226,11 +3628,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TWD : Currency
     {
         private static readonly TWD s_Currency = new TWD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TWD", 901) {
-            EnglishName = @"New Taiwan Dollar",
-            MinorUnits = 2
-        };
 
         private TWD() : base("TWD") { }
         
@@ -6246,19 +3643,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "New Taiwan Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "New Taiwan Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6269,11 +3653,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TZS : Currency
     {
         private static readonly TZS s_Currency = new TZS();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("TZS", 834) {
-            EnglishName = @"Tanzanian Shilling",
-            MinorUnits = 2
-        };
 
         private TZS() : base("TZS") { }
         
@@ -6289,19 +3668,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Tanzanian Shilling".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Tanzanian Shilling".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6312,11 +3678,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UAH : Currency
     {
         private static readonly UAH s_Currency = new UAH();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("UAH", 980) {
-            EnglishName = @"Hryvnia",
-            MinorUnits = 2
-        };
 
         private UAH() : base("UAH") { }
         
@@ -6332,19 +3693,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Hryvnia".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Hryvnia".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6355,11 +3703,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UGX : Currency
     {
         private static readonly UGX s_Currency = new UGX();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("UGX", 800) {
-            EnglishName = @"Uganda Shilling",
-            MinorUnits = 0
-        };
 
         private UGX() : base("UGX") { }
         
@@ -6375,19 +3718,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Uganda Shilling".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Uganda Shilling".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6398,11 +3728,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class USD : Currency
     {
         private static readonly USD s_Currency = new USD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("USD", 840) {
-            EnglishName = @"US Dollar",
-            MinorUnits = 2
-        };
 
         private USD() : base("USD") { }
         
@@ -6418,19 +3743,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "US Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "US Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6441,12 +3753,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class USN : Currency
     {
         private static readonly USN s_Currency = new USN();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("USN", 997) {
-            EnglishName = @"US Dollar (Next day)",
-            IsFund = true,
-            MinorUnits = 2
-        };
 
         private USN() : base("USN") { }
         
@@ -6462,19 +3768,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "US Dollar (Next day)".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "US Dollar (Next day)".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6485,12 +3778,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UYI : Currency
     {
         private static readonly UYI s_Currency = new UYI();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("UYI", 940) {
-            EnglishName = @"Uruguay Peso en Unidades Indexadas (URUIURUI)",
-            IsFund = true,
-            MinorUnits = 0
-        };
 
         private UYI() : base("UYI") { }
         
@@ -6506,19 +3793,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6529,11 +3803,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UYU : Currency
     {
         private static readonly UYU s_Currency = new UYU();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("UYU", 858) {
-            EnglishName = @"Peso Uruguayo",
-            MinorUnits = 2
-        };
 
         private UYU() : base("UYU") { }
         
@@ -6549,19 +3818,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Peso Uruguayo".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Peso Uruguayo".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6572,11 +3828,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UZS : Currency
     {
         private static readonly UZS s_Currency = new UZS();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("UZS", 860) {
-            EnglishName = @"Uzbekistan Sum",
-            MinorUnits = 2
-        };
 
         private UZS() : base("UZS") { }
         
@@ -6592,19 +3843,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Uzbekistan Sum".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Uzbekistan Sum".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6615,11 +3853,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class VEF : Currency
     {
         private static readonly VEF s_Currency = new VEF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("VEF", 937) {
-            EnglishName = @"Bolivar",
-            MinorUnits = 2
-        };
 
         private VEF() : base("VEF") { }
         
@@ -6635,19 +3868,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Bolivar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Bolivar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6658,11 +3878,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class VND : Currency
     {
         private static readonly VND s_Currency = new VND();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("VND", 704) {
-            EnglishName = @"Dong",
-            MinorUnits = 0
-        };
 
         private VND() : base("VND") { }
         
@@ -6678,19 +3893,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Dong".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Dong".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6701,11 +3903,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class VUV : Currency
     {
         private static readonly VUV s_Currency = new VUV();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("VUV", 548) {
-            EnglishName = @"Vatu",
-            MinorUnits = 0
-        };
 
         private VUV() : base("VUV") { }
         
@@ -6721,19 +3918,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Vatu".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Vatu".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6744,11 +3928,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class WST : Currency
     {
         private static readonly WST s_Currency = new WST();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("WST", 882) {
-            EnglishName = @"Tala",
-            MinorUnits = 2
-        };
 
         private WST() : base("WST") { }
         
@@ -6764,19 +3943,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Tala".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Tala".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6787,11 +3953,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XAF : Currency
     {
         private static readonly XAF s_Currency = new XAF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XAF", 950) {
-            EnglishName = @"CFA Franc BEAC",
-            MinorUnits = 0
-        };
 
         private XAF() : base("XAF") { }
         
@@ -6807,19 +3968,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "CFA Franc BEAC".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "CFA Franc BEAC".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6830,10 +3978,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XAG : Currency
     {
         private static readonly XAG s_Currency = new XAG();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XAG", 961) {
-            EnglishName = @"Silver",
-        };
 
         private XAG() : base("XAG") { }
         
@@ -6849,19 +3993,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Silver".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Silver".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6872,10 +4003,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XAU : Currency
     {
         private static readonly XAU s_Currency = new XAU();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XAU", 959) {
-            EnglishName = @"Gold",
-        };
 
         private XAU() : base("XAU") { }
         
@@ -6891,19 +4018,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Gold".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Gold".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6914,10 +4028,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XBA : Currency
     {
         private static readonly XBA s_Currency = new XBA();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XBA", 955) {
-            EnglishName = @"Bond Markets Unit European Composite Unit (EURCO)",
-        };
 
         private XBA() : base("XBA") { }
         
@@ -6933,19 +4043,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6956,10 +4053,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XBB : Currency
     {
         private static readonly XBB s_Currency = new XBB();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XBB", 956) {
-            EnglishName = @"Bond Markets Unit European Monetary Unit (E.M.U.-6)",
-        };
 
         private XBB() : base("XBB") { }
         
@@ -6975,19 +4068,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -6998,10 +4078,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XBC : Currency
     {
         private static readonly XBC s_Currency = new XBC();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XBC", 957) {
-            EnglishName = @"Bond Markets Unit European Unit of Account 9 (E.U.A.-9)",
-        };
 
         private XBC() : base("XBC") { }
         
@@ -7017,19 +4093,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7040,10 +4103,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XBD : Currency
     {
         private static readonly XBD s_Currency = new XBD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XBD", 958) {
-            EnglishName = @"Bond Markets Unit European Unit of Account 17 (E.U.A.-17)",
-        };
 
         private XBD() : base("XBD") { }
         
@@ -7059,19 +4118,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7082,11 +4128,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XCD : Currency
     {
         private static readonly XCD s_Currency = new XCD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XCD", 951) {
-            EnglishName = @"East Caribbean Dollar",
-            MinorUnits = 2
-        };
 
         private XCD() : base("XCD") { }
         
@@ -7102,19 +4143,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "East Caribbean Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "East Caribbean Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7125,10 +4153,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XDR : Currency
     {
         private static readonly XDR s_Currency = new XDR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XDR", 960) {
-            EnglishName = @"SDR (Special Drawing Right)",
-        };
 
         private XDR() : base("XDR") { }
         
@@ -7144,19 +4168,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "SDR (Special Drawing Right)".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "SDR (Special Drawing Right)".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7167,11 +4178,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XOF : Currency
     {
         private static readonly XOF s_Currency = new XOF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XOF", 952) {
-            EnglishName = @"CFA Franc BCEAO",
-            MinorUnits = 0
-        };
 
         private XOF() : base("XOF") { }
         
@@ -7187,19 +4193,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "CFA Franc BCEAO".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "CFA Franc BCEAO".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7210,10 +4203,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XPD : Currency
     {
         private static readonly XPD s_Currency = new XPD();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XPD", 964) {
-            EnglishName = @"Palladium",
-        };
 
         private XPD() : base("XPD") { }
         
@@ -7229,19 +4218,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Palladium".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Palladium".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7252,11 +4228,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XPF : Currency
     {
         private static readonly XPF s_Currency = new XPF();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XPF", 953) {
-            EnglishName = @"CFP Franc",
-            MinorUnits = 0
-        };
 
         private XPF() : base("XPF") { }
         
@@ -7272,19 +4243,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "CFP Franc".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "CFP Franc".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7295,10 +4253,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XPT : Currency
     {
         private static readonly XPT s_Currency = new XPT();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XPT", 962) {
-            EnglishName = @"Platinum",
-        };
 
         private XPT() : base("XPT") { }
         
@@ -7314,19 +4268,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Platinum".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Platinum".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7337,10 +4278,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XSU : Currency
     {
         private static readonly XSU s_Currency = new XSU();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XSU", 994) {
-            EnglishName = @"Sucre",
-        };
 
         private XSU() : base("XSU") { }
         
@@ -7356,19 +4293,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Sucre".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Sucre".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7379,10 +4303,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XTS : Currency
     {
         private static readonly XTS s_Currency = new XTS();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XTS", 963) {
-            EnglishName = @"Codes specifically reserved for testing purposes",
-        };
 
         private XTS() : base("XTS") { }
         
@@ -7398,19 +4318,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Codes specifically reserved for testing purposes".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Codes specifically reserved for testing purposes".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7421,10 +4328,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XUA : Currency
     {
         private static readonly XUA s_Currency = new XUA();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XUA", 965) {
-            EnglishName = @"ADB Unit of Account",
-        };
 
         private XUA() : base("XUA") { }
         
@@ -7440,19 +4343,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "ADB Unit of Account".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "ADB Unit of Account".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7463,10 +4353,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XXX : Currency
     {
         private static readonly XXX s_Currency = new XXX();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("XXX", 999) {
-            EnglishName = @"The codes assigned for transactions where no currency is involved",
-        };
 
         private XXX() : base("XXX") { }
         
@@ -7482,19 +4368,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "The codes assigned for transactions where no currency is involved".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "The codes assigned for transactions where no currency is involved".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7505,11 +4378,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class YER : Currency
     {
         private static readonly YER s_Currency = new YER();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("YER", 886) {
-            EnglishName = @"Yemeni Rial",
-            MinorUnits = 2
-        };
 
         private YER() : base("YER") { }
         
@@ -7525,19 +4393,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Yemeni Rial".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Yemeni Rial".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7548,11 +4403,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZAR : Currency
     {
         private static readonly ZAR s_Currency = new ZAR();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ZAR", 710) {
-            EnglishName = @"Rand",
-            MinorUnits = 2
-        };
 
         private ZAR() : base("ZAR") { }
         
@@ -7568,19 +4418,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Rand".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Rand".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7591,11 +4428,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZMW : Currency
     {
         private static readonly ZMW s_Currency = new ZMW();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ZMW", 967) {
-            EnglishName = @"Zambian Kwacha",
-            MinorUnits = 2
-        };
 
         private ZMW() : base("ZMW") { }
         
@@ -7611,19 +4443,6 @@ namespace Narvalo.Finance.Currencies
                 return s_Currency;
             }
         }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Zambian Kwacha".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Zambian Kwacha".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
-            }
-        }
     }
 
     /// <summary>
@@ -7634,11 +4453,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZWL : Currency
     {
         private static readonly ZWL s_Currency = new ZWL();
-
-        private static readonly CurrencyInfo s_CurrencyInfo = new CurrencyInfo("ZWL", 932) {
-            EnglishName = @"Zimbabwe Dollar",
-            MinorUnits = 2
-        };
 
         private ZWL() : base("ZWL") { }
         
@@ -7652,19 +4466,6 @@ namespace Narvalo.Finance.Currencies
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
                 return s_Currency;
-            }
-        }
-        
-        /// <summary>
-        /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "Zimbabwe Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "Zimbabwe Dollar".</value>
-        public static CurrencyInfo CurrencyInfo
-        { 
-            get 
-            {
-                Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
-                return s_CurrencyInfo;
             }
         }
     }

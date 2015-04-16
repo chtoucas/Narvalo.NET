@@ -135,6 +135,7 @@
     <Compile Include="Finance\Bic.cs" />
     <Compile Include="Finance\Currency%24.cs" />
     <Compile Include="Finance\CurrencyInfo%24.cs" />
+    <Compile Include="Finance\CurrencyInfo.cs" />
     <Compile Include="Finance\CurrencyTypes.cs" />
     <Compile Include="Finance\FinanceException.cs" />
     <Compile Include="Finance\Iban.cs" />
@@ -303,6 +304,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>
     </None>
+    <None Include="Finance\Currencies\Currencies.tt" />
     <None Include="Finance\Legacy\InMemoryCurrencyInfoProvider.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>InMemoryCurrencyInfoProvider.g.cs</LastGenOutput>

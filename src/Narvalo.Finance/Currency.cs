@@ -17,12 +17,10 @@ namespace Narvalo.Finance
     /// <remarks>
     /// <para>Recognized currencies are defined in ISO 4217.</para>
     /// <para>There's never more than one <see cref="Currency"/> instance for any given currency.
-    /// You can not directly construct a currency. You must instead use one of the
-    /// static factories: <see cref="Currency.Of"/>, <see cref="Currency.OfCulture"/> 
-    /// or <see cref="Currency.OfCurrentCulture"/>.</para>
+    /// You can not directly construct a currency. You must instead use the
+    /// static factories: <see cref="Currency.Of"/>.</para>
     /// <para>This class follows value type semantics when it comes to equality.</para>
-    /// <para>This class does not offer extended information about the currency.
-    /// If you needed so, you should use to the <see cref="CurrencyInfo"/> class instead.</para>
+    /// <para>This class does not offer extended information about the currency.</para>
     /// </remarks>
     public partial class Currency : IEquatable<Currency>
     {
