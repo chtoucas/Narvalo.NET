@@ -1,4 +1,4 @@
-# Gendarme ignore file
+﻿# Gendarme ignore file
 # ====================
 #
 # R: Full name of a rule to be filtered.
@@ -33,15 +33,26 @@
 # PCL Assemblies
 # --------------
 
+R: Gendarme.Rules.Exceptions.MissingExceptionConstructorsRule
+# Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
+A: Narvalo.Cerbere
+A: Narvalo.Finance
+A: Narvalo.Fx
+A: Narvalo.Reliability
+
 R: Gendarme.Rules.Serialization.MissingSerializableAttributeOnISerializableTypeRule
 # Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
 A: Narvalo.Cerbere
+A: Narvalo.Finance
 A: Narvalo.Fx
+A: Narvalo.Reliability
 
 R: Gendarme.Rules.Serialization.MissingSerializationConstructorRule
 # Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
 A: Narvalo.Cerbere
+A: Narvalo.Finance
 A: Narvalo.Fx
+A: Narvalo.Reliability
 
 # Narvalo.Fx
 # ----------
@@ -53,10 +64,11 @@ N: Narvalo.Fx.Advanced
 N: Narvalo.Fx.Internal
 
 R: Gendarme.Rules.Naming.UseCorrectCasingRule
-# Justification = [Intentionally] Acceptable for namespaces. Narvalo.FX would appear plain ugly to me.
+# Justification = [Intentionally] Acceptable for namespaces and internal members (η, μ). Narvalo.FX would appear plain ugly to me.
 N: Narvalo.Fx
 N: Narvalo.Fx.Advanced
 N: Narvalo.Fx.Internal
+N: Narvalo.Fx.Properties
 
 # Narvalo.Common
 # --------------
@@ -70,3 +82,24 @@ N: Narvalo.Configuration
 # Defects to be reviewed or fixed
 # ==============================================================================
 
+R: Gendarme.Rules.Design.Generic.DoNotDeclareStaticMembersOnGenericTypesRule
+T: Narvalo.Finance.Money`1
+
+R: Gendarme.Rules.Design.EnsureSymmetryForOverloadedOperatorsRule
+T: Narvalo.Finance.Money
+T: Narvalo.Finance.Money`1
+
+R: Gendarme.Rules.Maintainability.AvoidLackOfCohesionOfMethodsRule
+T: Narvalo.IO.ConcurrentFileFinder
+T: Narvalo.IO.FileFinder
+
+R: Gendarme.Rules.Performance.AvoidLargeStructureRule
+T: Narvalo.Finance.Money
+
+#R: Gendarme.Rules.Performance.AvoidUnneededUnboxingRule
+#M: System.Boolean Narvalo.Finance.Money`1::Equals(System.Object)
+#M: System.Int32 Narvalo.Finance.Money`1::CompareTo(System.Object)
+
+R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
+T: Narvalo.Finance.CurrencyProvider
+T: Narvalo.Fx.VoidOrBreak/Break_/DebugView
