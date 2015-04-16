@@ -4,11 +4,14 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Properties;
 
     // FIXME: Overflow operations.
     [DebuggerDisplay("{{ToString()}}")]
+    [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
+        Justification = "[Intentionally] We do provide the alternate but we called it CompareTo.")]
     public partial struct Money
         : IEquatable<Money>, IComparable, IComparable<Money>, IFormattable
     {
@@ -122,11 +125,6 @@ namespace Narvalo.Finance
             return left.CompareTo(right) >= 0;
         }
 
-        public static int Compare(Money left, Money right)
-        {
-            return left.CompareTo(right);
-        }
-
         public int CompareTo(Money other)
         {
             ThrowIfCurrencyMismatch_(this, other);
@@ -170,16 +168,6 @@ namespace Narvalo.Finance
             return right.Add(left);
         }
 
-        public static Money Add(Money left, Money right)
-        {
-            return left.Add(right);
-        }
-
-        public static Money Add(Money left, decimal right)
-        {
-            return left.Add(right);
-        }
-
         public Money Add(Money other)
         {
             ThrowIfCurrencyMismatch_(this, other);
@@ -213,16 +201,6 @@ namespace Narvalo.Finance
             return right.Subtract(left);
         }
 
-        public static Money Subtract(Money left, Money right)
-        {
-            return left.Subtract(right);
-        }
-
-        public static Money Subtract(Money left, decimal right)
-        {
-            return left.Subtract(right);
-        }
-
         public Money Subtract(Money other)
         {
             ThrowIfCurrencyMismatch_(this, other);
@@ -241,19 +219,40 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
-        public static Money operator *(decimal scaleFactor, Money right)
+        public static Money operator *(decimal multiplier, Money right)
         {
-            return Multiply(scaleFactor, right);
+            return right.Multiply(multiplier);
         }
 
-        public static Money operator *(Money left, decimal scaleFactor)
+        public static Money operator *(Money left, decimal multiplier)
         {
-            return Multiply(scaleFactor, left);
+            return left.Multiply(multiplier);
         }
 
-        public static Money Multiply(decimal scaleFactor, Money right)
+        public Money Multiply(decimal multiplier)
         {
-            return new Money(scaleFactor * right.Amount, right.Currency);
+            return new Money(multiplier * Amount, Currency);
+        }
+    }
+
+    /// <content>
+    /// Implements the <c>op_Division</c> operator.
+    /// </content>
+    public partial struct Money
+    {
+        public static Money operator /(decimal divisor, Money right)
+        {
+            return right.Divide(divisor);
+        }
+
+        public static Money operator /(Money left, decimal divisor)
+        {
+            return left.Divide(divisor);
+        }
+
+        public Money Divide(decimal divisor)
+        {
+            return new Money(Amount / divisor, Currency);
         }
     }
 
@@ -264,12 +263,12 @@ namespace Narvalo.Finance
     {
         public static Money operator -(Money money)
         {
-            return Negate(money);
+            return money.Negate();
         }
 
-        public static Money Negate(Money money)
+        public Money Negate()
         {
-            return new Money(-money.Amount, money.Currency);
+            return new Money(-Amount, Currency);
         }
     }
 
@@ -283,9 +282,9 @@ namespace Narvalo.Finance
             return money;
         }
 
-        public static Money Plus(Money money)
+        public Money Plus()
         {
-            return money;
+            return this;
         }
     }
 }

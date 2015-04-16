@@ -97,6 +97,7 @@
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="Finance\CurrencyFacts.cs" />
+    <Compile Include="Finance\Internal\CurrencyActivatorFacts.cs" />
     <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="Fx\StubsFacts.cs" />
     <Compile Include="Fx\UnitFacts.cs" />

@@ -11,7 +11,12 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Properties;
 
     // FIXME: Overflow operations.
+    // FIXME: What if s_Currency throw an exception?
+    // FIXME: Replace implicit by explicit
+    // FIXME: Replace _amount by a private instance of Money.
     [DebuggerDisplay("{{ToString()}}")]
+    [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
+        Justification = "[Intentionally] We do provide the alternate but we called it CompareTo.")]
     public partial struct Money<TCurrency>
         : IEquatable<Money<TCurrency>>, IEquatable<Money>,
         IComparable, IComparable<Money<TCurrency>>, IComparable<Money>,
@@ -25,10 +30,12 @@ namespace Narvalo.Finance
         private static readonly TCurrency s_Currency = CurrencyActivator<TCurrency>.CreateInstance();
 
         private readonly decimal _amount;
+        //private readonly Money _value;
 
         public Money(decimal amount)
         {
             _amount = amount;
+            //_value = new Money(amount, s_Currency);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
@@ -55,8 +62,6 @@ namespace Narvalo.Finance
             return new Money<TCurrency>(value.Amount);
         }
 
-        // REVIEW: Prefer explicit to implicit?
-        // REVIEW: What if s_Currency throw an exception?
         public static implicit operator Money(Money<TCurrency> value)
         {
             return new Money(value.Amount, s_Currency);
@@ -105,7 +110,7 @@ namespace Narvalo.Finance
 
         public bool Equals(Money<TCurrency> other)
         {
-            return Amount.Equals(other.Amount);
+            return Amount == other.Amount;
         }
 
         public bool Equals(Money other)
@@ -115,6 +120,7 @@ namespace Narvalo.Finance
 
         public override bool Equals(object obj)
         {
+            // FIXME: Boxing.
             if (obj is Money<TCurrency>)
             {
                 return Equals((Money<TCurrency>)obj);
@@ -240,6 +246,7 @@ namespace Narvalo.Finance
 
         public int CompareTo(object obj)
         {
+            // FIXME: Boxing.
             if (obj == null)
             {
                 return 1;
@@ -366,19 +373,40 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        public static Money<TCurrency> operator *(decimal scaleFactor, Money<TCurrency> right)
+        public static Money<TCurrency> operator *(decimal multiplier, Money<TCurrency> right)
         {
-            return right.Multiply(scaleFactor);
+            return right.Multiply(multiplier);
         }
 
-        public static Money<TCurrency> operator *(Money<TCurrency> left, decimal scaleFactor)
+        public static Money<TCurrency> operator *(Money<TCurrency> left, decimal multiplier)
         {
-            return left.Multiply(scaleFactor);
+            return left.Multiply(multiplier);
         }
 
-        public Money<TCurrency> Multiply(decimal scaleFactor)
+        public Money<TCurrency> Multiply(decimal multiplier)
         {
-            return new Money<TCurrency>(scaleFactor * Amount);
+            return new Money<TCurrency>(multiplier * Amount);
+        }
+    }
+
+    /// <content>
+    /// Implements the <c>op_Division</c> operator.
+    /// </content>
+    public partial struct Money<TCurrency>
+    {
+        public static Money<TCurrency> operator /(decimal divisor, Money<TCurrency> right)
+        {
+            return right.Divide(divisor);
+        }
+
+        public static Money<TCurrency> operator /(Money<TCurrency> left, decimal divisor)
+        {
+            return left.Divide(divisor);
+        }
+
+        public Money<TCurrency> Divide(decimal divisor)
+        {
+            return new Money<TCurrency>(Amount / divisor);
         }
     }
 

@@ -5,7 +5,6 @@ namespace Narvalo.Finance.Internal
     using System;
     using System.Linq;
     using System.Reflection;
-    using System.Reflection.Emit;
 
     internal static class CurrencyActivator<TCurrency> where TCurrency : Currency
     {
@@ -16,61 +15,50 @@ namespace Narvalo.Finance.Internal
         {
             var type = typeof(TCurrency);
 
+            object inst = null;
+
             // Fast-track for currencies in the Narvalo.Finance.Currencies namespace.
             if (type.Namespace == CURRENCIES_NAMESPACE)
             {
-                return GetUniqueInstance(type);
+                inst = GetUniqueInstance_(type);
             }
-
-            var inst = CreateInstance(type);
-
-            if (inst == null)
+            else
             {
-                // TODO: Throw a more meaningful exception.
-                throw new Exception();
+                inst = CreateInstance_(type);
             }
 
-            return inst;
+            // Might throw an InvalidCastException.
+            return (TCurrency)inst;
         }
 
-        internal static TCurrency GetUniqueInstance(Type type)
+        private static object GetUniqueInstance_(Type type)
         {
-            // var fieldInfo = type.GetField(INSTANCE_CURRENCY_FIELD, BindingFlags.NonPublic | BindingFlags.Static);
-            var typeInfo = type.GetTypeInfo();
-            var fieldInfo = (from _ in typeInfo.DeclaredFields
-                             where _.Name == INSTANCE_CURRENCY_FIELD
-                             select _).Single();
+            FieldInfo fieldInfo = type.GetTypeInfo().DeclaredFields
+                .Where(_ => _.Name == INSTANCE_CURRENCY_FIELD)
+                .SingleOrDefault();
 
-            var fieldValue = fieldInfo.GetValue(null);
+            if (fieldInfo == null)
+            {
+                // NB: This should never happen.
+                throw new MissingMemberException();
+            }
 
-            return (TCurrency)fieldValue;
+            return fieldInfo.GetValue(null);
         }
 
-        internal static TCurrency CreateInstance(Type type)
+        // NB: Slow but only called once during the lifetime of an AppDomain.
+        private static object CreateInstance_(Type type)
         {
-            // var ctorInfo = type.GetConstructor(
-            //     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-            //     null,
-            //     Type.EmptyTypes,
-            //     null);
-            var ctorInfo = type.GetTypeInfo().DeclaredConstructors.FirstOrDefault(_ => !_.GetParameters().Any());
+            ConstructorInfo ctorInfo = type.GetTypeInfo()
+                .DeclaredConstructors
+                .FirstOrDefault(_ => !_.GetParameters().Any());
 
             if (ctorInfo == null)
             {
-                return null;
+                throw new MissingMemberException();
             }
 
-            throw new NotImplementedException();
-
-            ////var method = new DynamicMethod("NewTCurrency", type, Type.EmptyTypes, type, skipVisibility: true);
-
-            ////var il = method.GetILGenerator();
-            ////il.Emit(OpCodes.Newobj, ctorInfo);
-            ////il.Emit(OpCodes.Ret);
-
-            ////var ctor = (Func<TCurrency>)method.CreateDelegate(typeof(Func<TCurrency>));
-
-            ////return ctor.Invoke();
+            return ctorInfo.Invoke(new Object[] { });
         }
     }
 }
