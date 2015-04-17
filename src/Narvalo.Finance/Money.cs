@@ -5,10 +5,12 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Properties;
 
     // FIXME: Overflow operations.
+    // REVIEW: IConvertible?
     [DebuggerDisplay("{{ToString()}}")]
     [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
         Justification = "[Intentionally] We do provide the alternate but we called it CompareTo.")]
@@ -30,12 +32,6 @@ namespace Narvalo.Finance
 
         public Currency Currency { get { return _currency; } }
 
-        /// <inheritdoc cref="Object.ToString" />
-        public override string ToString()
-        {
-            return Format.CurrentCulture("{0} {1:F2}", Currency.Code, Amount);
-        }
-
         private static void ThrowIfCurrencyMismatch_(Money left, Money right)
         {
             if (left.Currency != right.Currency)
@@ -54,17 +50,34 @@ namespace Narvalo.Finance
     {
         public static bool operator ==(Money left, Money right)
         {
-            return left.Equals(right);
+            return IsEqual(left, right);
         }
 
         public static bool operator !=(Money left, Money right)
         {
-            return !left.Equals(right);
+            return !IsEqual(left, right);
+        }
+
+        public static bool IsEqual<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
+            where TCurrency : Currency
+        {
+            return money1.Amount == money2.Amount;
+        }
+
+        public static bool IsEqual<TCurrency>(Money<TCurrency> money1, Money money2)
+            where TCurrency : Currency
+        {
+            return IsEqual(money1.Inner, money2);
+        }
+
+        public static bool IsEqual(Money money1, Money money2)
+        {
+            return money1.Amount == money2.Amount && money1.Currency.Equals(money2.Currency);
         }
 
         public bool Equals(Money other)
         {
-            return Amount == other.Amount && Currency.Equals(other.Currency);
+            return IsEqual(this, other);
         }
 
         public override bool Equals(object obj)
@@ -74,7 +87,7 @@ namespace Narvalo.Finance
                 return false;
             }
 
-            return Equals((Money)obj);
+            return IsEqual(this, (Money)obj);
         }
 
         public override int GetHashCode()
@@ -94,6 +107,12 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
+        /// <inheritdoc cref="Object.ToString" />
+        public override string ToString()
+        {
+            return Format.CurrentCulture("{0} {1:F2}", Currency.Code, Amount);
+        }
+
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return Amount.ToString(format, formatProvider);
@@ -107,32 +126,55 @@ namespace Narvalo.Finance
     {
         public static bool operator <(Money left, Money right)
         {
-            return left.CompareTo(right) < 0;
+            return Compare(left, right) < 0;
         }
 
         public static bool operator <=(Money left, Money right)
         {
-            return left.CompareTo(right) <= 0;
+            return Compare(left, right) <= 0;
         }
 
         public static bool operator >(Money left, Money right)
         {
-            return left.CompareTo(right) > 0;
+            return Compare(left, right) > 0;
         }
 
         public static bool operator >=(Money left, Money right)
         {
-            return left.CompareTo(right) >= 0;
+            return Compare(left, right) >= 0;
+        }
+
+        public static int Compare<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
+            where TCurrency : Currency
+        {
+            return money1.Amount.CompareTo(money2.Amount);
+        }
+
+        public static int Compare<TCurrency>(Money<TCurrency> money1, Money money2)
+            where TCurrency : Currency
+        {
+            return Compare(money1.Inner, money2);
+        }
+
+        public static int Compare<TCurrency>(Money money1, Money<TCurrency> money2)
+            where TCurrency : Currency
+        {
+            return Compare(money1, money2.Inner);
+        }
+
+        public static int Compare(Money money1, Money money2)
+        {
+            ThrowIfCurrencyMismatch_(money1, money2);
+
+            return money1.Amount.CompareTo(money2.Amount);
         }
 
         public int CompareTo(Money other)
         {
-            ThrowIfCurrencyMismatch_(this, other);
-
-            return Amount.CompareTo(other.Amount);
+            return Compare(this, other);
         }
 
-        public int CompareTo(object obj)
+        int IComparable.CompareTo(object obj)
         {
             if (obj == null)
             {
@@ -144,147 +186,259 @@ namespace Narvalo.Finance
                 throw new ArgumentException(Strings.Money_ArgIsNotMoney);
             }
 
-            return CompareTo((Money)obj);
+            return Compare(this, (Money)obj);
         }
     }
 
     /// <content>
-    /// Implements the <c>op_Addition</c> operator.
+    /// Overrides the <c>op_Addition</c> operator.
     /// </content>
     public partial struct Money
     {
         public static Money operator +(Money left, Money right)
         {
-            return left.Add(right);
+            return Add(left, right);
         }
 
-        public static Money operator +(Money left, decimal right)
+        public static Money<TCurrency> Add<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
+            where TCurrency : Currency
         {
-            return left.Add(right);
+            var amount = checked(money1.Amount + money2.Amount);
+
+            return new Money<TCurrency>(amount);
         }
 
-        public static Money operator +(decimal left, Money right)
+        public static Money<TCurrency> Add<TCurrency>(Money<TCurrency> money1, Money money2)
+            where TCurrency : Currency
         {
-            return right.Add(left);
+            return new Money<TCurrency>(Add(money1.Inner, money2));
         }
 
-        public Money Add(Money other)
+        public static Money Add(Money money1, Money money2)
         {
-            ThrowIfCurrencyMismatch_(this, other);
+            ThrowIfCurrencyMismatch_(money1, money2);
 
-            return new Money(Amount + other.Amount, Currency);
+            var amount = checked(money1.Amount + money2.Amount);
+
+            return new Money(amount, money1.Currency);
         }
 
-        public Money Add(decimal other)
+        public Money Add(Money money)
         {
-            return new Money(Amount + other, Currency);
+            return Add(this, money);
+        }
+
+        public Money Add(decimal amount)
+        {
+            var result = checked(Amount + amount);
+
+            return new Money(result, Currency);
         }
     }
 
     /// <content>
-    /// Implements the <c>op_Subtraction</c> operator.
+    /// Overrides the <c>op_Subtraction</c> operator.
     /// </content>
     public partial struct Money
     {
         public static Money operator -(Money left, Money right)
         {
-            return left.Subtract(right);
+            return Subtract(left, right);
         }
 
-        public static Money operator -(Money left, decimal right)
+        public static Money<TCurrency> Subtract<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
+            where TCurrency : Currency
         {
-            return left.Subtract(right);
+            return new Money<TCurrency>(money1.Amount - money2.Amount);
         }
 
-        public static Money operator -(decimal left, Money right)
+        public static Money<TCurrency> Subtract<TCurrency>(Money<TCurrency> money1, Money money2)
+            where TCurrency : Currency
         {
-            return right.Subtract(left);
+            return new Money<TCurrency>(Subtract(money1.Inner, money2));
         }
 
-        public Money Subtract(Money other)
+        public static Money<TCurrency> Subtract<TCurrency>(Money money1, Money<TCurrency> money2)
+            where TCurrency : Currency
         {
-            ThrowIfCurrencyMismatch_(this, other);
-
-            return new Money(Amount - other.Amount, Currency);
+            return new Money<TCurrency>(Subtract(money1, money2.Inner));
         }
 
-        public Money Subtract(decimal other)
+        public static Money Subtract(Money money1, Money money2)
         {
-            return new Money(Amount - other, Currency);
+            ThrowIfCurrencyMismatch_(money1, money2);
+
+            return new Money(money1.Amount - money2.Amount, money1.Currency);
+        }
+
+        public Money Subtract(Money money)
+        {
+            return Subtract(this, money);
+        }
+
+        public Money Subtract(decimal amount)
+        {
+            return new Money(Amount - amount, Currency);
         }
     }
 
     /// <content>
-    /// Implements the <c>op_Multiply</c> operator.
+    /// Overrides the <c>op_Multiply</c> operator.
     /// </content>
     public partial struct Money
     {
-        public static Money operator *(decimal multiplier, Money right)
+        public static Money operator *(decimal multiplier, Money money)
         {
-            return right.Multiply(multiplier);
+            return Multiply(multiplier, money);
         }
 
-        public static Money operator *(Money left, decimal multiplier)
+        public static Money operator *(Money money, decimal multiplier)
         {
-            return left.Multiply(multiplier);
+            return Multiply(multiplier, money);
+        }
+
+        public static Money<TCurrency> Multiply<TCurrency>(decimal multiplier, Money<TCurrency> money)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(Multiply(multiplier, money.Inner));
+        }
+
+        public static Money Multiply(decimal multiplier, Money money)
+        {
+            var amount = checked(multiplier * money.Amount);
+
+            return new Money(amount, money.Currency);
         }
 
         public Money Multiply(decimal multiplier)
         {
-            return new Money(multiplier * Amount, Currency);
+            return Multiply(multiplier, this);
         }
     }
 
     /// <content>
-    /// Implements the <c>op_Division</c> operator.
+    /// Overrides the <c>op_Division</c> operator.
     /// </content>
     public partial struct Money
     {
-        public static Money operator /(decimal divisor, Money right)
+        public static Money operator /(Money money, decimal divisor)
         {
-            return right.Divide(divisor);
+            Contract.Requires(divisor != 0m);
+
+            return Divide(money, divisor);
         }
 
-        public static Money operator /(Money left, decimal divisor)
+        public static Money<TCurrency> Divide<TCurrency>(Money<TCurrency> money, decimal divisor)
+            where TCurrency : Currency
         {
-            return left.Divide(divisor);
+            return new Money<TCurrency>(Divide(money.Inner, divisor));
+        }
+
+        public static Money Divide(Money money, decimal divisor)
+        {
+            if (divisor == 0m)
+            {
+                throw new DivideByZeroException();
+            }
+
+            return new Money(money.Amount / divisor, money.Currency);
         }
 
         public Money Divide(decimal divisor)
         {
-            return new Money(Amount / divisor, Currency);
+            Contract.Requires(divisor != 0m);
+
+            return Divide(this, divisor);
         }
     }
 
     /// <content>
-    /// Implements the <c>op_UnaryNegation</c> operator.
+    /// Overrides the <c>op_Modulus</c> operator.
+    /// </content>
+    public partial struct Money
+    {
+        public static Money operator %(Money money, decimal divisor)
+        {
+            Contract.Requires(divisor != 0m);
+
+            return Remainder(money, divisor);
+        }
+
+        public static Money<TCurrency> Remainder<TCurrency>(Money<TCurrency> money, decimal divisor)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(Remainder(money.Inner, divisor));
+        }
+
+        public static Money Remainder(Money money, decimal divisor)
+        {
+            if (divisor == 0m)
+            {
+                throw new DivideByZeroException();
+            }
+
+            return new Money(money.Amount % divisor, money.Currency);
+        }
+
+        public Money Remainder(decimal divisor)
+        {
+            Contract.Requires(divisor != 0m);
+
+            return Remainder(this, divisor);
+        }
+    }
+
+    /// <content>
+    /// Overrides the <c>op_UnaryNegation</c> operator.
     /// </content>
     public partial struct Money
     {
         public static Money operator -(Money money)
         {
-            return money.Negate();
+            return Negate(money);
+        }
+
+        public static Money<TCurrency> Negate<TCurrency>(Money<TCurrency> money)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(-money.Amount);
+        }
+
+        public static Money Negate(Money money)
+        {
+            return new Money(-money.Amount, money.Currency);
         }
 
         public Money Negate()
         {
-            return new Money(-Amount, Currency);
+            return Negate(this);
         }
     }
 
     /// <content>
-    /// Implements the <c>op_UnaryPlus</c> operator.
+    /// Overrides the <c>op_UnaryPlus</c> operator.
     /// </content>
     public partial struct Money
     {
         public static Money operator +(Money money)
+        {
+            return Plus(money);
+        }
+
+        public static Money<TCurrency> Plus<TCurrency>(Money<TCurrency> money)
+            where TCurrency : Currency
+        {
+            return money;
+        }
+
+        public static Money Plus(Money money)
         {
             return money;
         }
 
         public Money Plus()
         {
-            return this;
+            return Plus(this);
         }
     }
 }
