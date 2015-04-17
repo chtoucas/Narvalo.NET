@@ -32,7 +32,7 @@ namespace Narvalo
             double min,
             double max)
         {
-            int[] results = new int[buckets];
+            int[] retval = new int[buckets];
             double multiplier = buckets / (max - min);
 
             foreach (double datum in data)
@@ -41,11 +41,11 @@ namespace Narvalo
 
                 if (0.0 <= index && index < buckets)
                 {
-                    results[(int)index] += 1;
+                    retval[(int)index] += 1;
                 }
             }
 
-            return results;
+            return retval;
         }
     }
 }

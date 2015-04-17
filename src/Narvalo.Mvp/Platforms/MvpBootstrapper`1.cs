@@ -65,17 +65,17 @@ namespace Narvalo.Mvp.Platforms
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IPlatformServices CreatePlatformServices()
         {
-            var result = new PlatformServices_();
+            var retval = new PlatformServices_();
 
-            result.CompositeViewFactory = _compositeViewFactory != null
+            retval.CompositeViewFactory = _compositeViewFactory != null
                 ? _compositeViewFactory
                 : _defaultServices.CompositeViewFactory;
 
-            result.MessageCoordinatorFactory = _messageCoordinatorFactory != null
+            retval.MessageCoordinatorFactory = _messageCoordinatorFactory != null
                 ? _messageCoordinatorFactory
                 : _defaultServices.MessageCoordinatorFactory;
 
-            result.PresenterFactory = _presenterFactory != null
+            retval.PresenterFactory = _presenterFactory != null
                 ? _presenterFactory
                 : _defaultServices.PresenterFactory;
 
@@ -84,19 +84,19 @@ namespace Narvalo.Mvp.Platforms
 
             if (count == 0)
             {
-                result.PresenterDiscoveryStrategy = _defaultServices.PresenterDiscoveryStrategy;
+                retval.PresenterDiscoveryStrategy = _defaultServices.PresenterDiscoveryStrategy;
             }
             else if (count == 1)
             {
-                result.PresenterDiscoveryStrategy = strategies.First();
+                retval.PresenterDiscoveryStrategy = strategies.First();
             }
             else if (count > 1)
             {
-                result.PresenterDiscoveryStrategy
+                retval.PresenterDiscoveryStrategy
                     = new CompositePresenterDiscoveryStrategy(strategies);
             }
 
-            return result;
+            return retval;
         }
 
         private sealed class PlatformServices_ : IPlatformServices

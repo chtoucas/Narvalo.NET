@@ -17,11 +17,11 @@ namespace Narvalo.Edu.Fx
 
             while (true)
             {
-                int result = i + j;
+                int retval = i + j;
                 i = j;
-                j = result;
+                j = retval;
 
-                yield return result;
+                yield return retval;
             }
         }
 

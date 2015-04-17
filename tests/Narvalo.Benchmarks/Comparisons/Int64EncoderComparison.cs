@@ -76,8 +76,8 @@ namespace Narvalo.Comparisons
 
         private static long Decode_OrderedArray(string value)
         {
-            long result = 0;
-            long multi = 1;
+            long retval = 0L;
+            long multi = 1L;
 
             for (int i = value.Length - 1; i >= 0; i--)
             {
@@ -88,17 +88,17 @@ namespace Narvalo.Comparisons
                     throw new ArgumentException("Invalid string", "value");
                 }
 
-                result += multi * index;
+                retval += multi * index;
                 multi *= ALPHABET_LENGTH;
             }
 
-            return result;
+            return retval;
         }
 
         private static long Decode_String(string value)
         {
-            long result = 0;
-            long multi = 1;
+            long retval = 0L;
+            long multi = 1L;
 
             while (value.Length > 0)
             {
@@ -110,18 +110,18 @@ namespace Narvalo.Comparisons
                     throw new ArgumentException("Invalid string", "value");
                 }
 
-                result += multi * index;
+                retval += multi * index;
                 multi *= ALPHABET_LENGTH;
                 value = value.Substring(0, value.Length - 1);
             }
 
-            return result;
+            return retval;
         }
 
         private static long Decode_UnorderedArray(string value)
         {
-            long result = 0;
-            long multi = 1;
+            long retval = 0L;
+            long multi = 1L;
 
             for (int i = value.Length - 1; i >= 0; i--)
             {
@@ -132,26 +132,26 @@ namespace Narvalo.Comparisons
                     throw new ArgumentException("Invalid string", "value");
                 }
 
-                result += multi * index;
+                retval += multi * index;
                 multi *= ALPHABET_LENGTH;
             }
 
-            return result;
+            return retval;
         }
 
         private static string Encode_String(long value)
         {
-            if (value == 0)
+            if (value == 0L)
             {
                 return String.Empty;
             }
 
-            string result = String.Empty;
+            string retval = String.Empty;
 
             while (value >= ALPHABET_LENGTH)
             {
                 int r = (int)(value % ALPHABET_LENGTH);
-                result = ALPHABET[r] + result;
+                retval = ALPHABET[r] + retval;
                 value /= ALPHABET_LENGTH;
             }
 
@@ -159,24 +159,24 @@ namespace Narvalo.Comparisons
 
             if (index > 0)
             {
-                result = ALPHABET[index] + result;
+                retval = ALPHABET[index] + retval;
             }
 
-            return result;
+            return retval;
         }
 
         private static string Encode_Array(long value)
         {
-            string result = String.Empty;
+            string retval = String.Empty;
 
             while (value > 0)
             {
                 long r = value % ALPHABET_LENGTH;
-                result = s_AlphabetOrderedArray[r] + result;
+                retval = s_AlphabetOrderedArray[r] + retval;
                 value /= ALPHABET_LENGTH;
             }
 
-            return result;
+            return retval;
         }
     }
 }

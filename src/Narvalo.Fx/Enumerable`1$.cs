@@ -118,14 +118,14 @@ namespace Narvalo.Fx
             Require.Object(@this);
             Contract.Ensures(Contract.Result<ICollection<TSource>>() != null);
 
-            var result = new Collection<TSource>();
+            var retval = new Collection<TSource>();
 
             foreach (TSource item in @this)
             {
-                result.Add(item);
+                retval.Add(item);
             }
 
-            return result;
+            return retval;
         }
 
         #endregion
@@ -167,17 +167,17 @@ namespace Narvalo.Fx
             Require.NotNull(accumulator, "accumulator");
             Require.NotNull(predicate, "predicate");
 
-            TAccumulate result = seed;
+            TAccumulate retval = seed;
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    result = accumulator.Invoke(result, iter.Current);
+                    retval = accumulator.Invoke(retval, iter.Current);
                 }
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Gendarme.Rules.Performance", "AvoidRepetitiveCallsToPropertiesRule",
@@ -198,14 +198,14 @@ namespace Narvalo.Fx
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                TSource result = iter.Current;
+                TSource retval = iter.Current;
 
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    result = accumulator.Invoke(result, iter.Current);
+                    retval = accumulator.Invoke(retval, iter.Current);
                 }
 
-                return result;
+                return retval;
             }
         }
 

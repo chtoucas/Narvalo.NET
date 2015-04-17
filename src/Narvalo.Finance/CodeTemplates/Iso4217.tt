@@ -41,7 +41,7 @@
     {
         var source = Host.ResolvePath(path);
 
-        var result = new List<Currency>();
+        var retval = new List<Currency>();
 
         using (var reader = XmlReader.Create(source, _settings)) {
             var root = XElement.Load(reader, LoadOptions.None);
@@ -89,7 +89,7 @@
                     minorUnits = Int16.Parse(minorUnitsValue);
                 }
 
-                result.Add(new Currency {
+                retval.Add(new Currency {
                     Code = code,
                     EnglishName = englishName,
                     EnglishRegionName = englishRegionName,
@@ -100,14 +100,14 @@
             }
         }
 
-        return result;
+        return retval;
     }
     
     protected List<Currency> ParseLegacy(string path)
     {
         var source = Host.ResolvePath(path);
         
-        var result = new List<Currency>();
+        var retval = new List<Currency>();
 
         using (var reader = XmlReader.Create(source, _settings)) {
             var root = XElement.Load(reader, LoadOptions.None);
@@ -150,7 +150,7 @@
                     .Replace("\"", "\"\"")
                     .Replace("\n", "");
 
-                result.Add(new Currency {
+                retval.Add(new Currency {
                     Code = code,
                     EnglishName = englishName,
                     EnglishRegionName = englishRegionName,
@@ -161,7 +161,7 @@
             }
         }
 
-        return result;
+        return retval;
     }
     
     protected string InferName() 

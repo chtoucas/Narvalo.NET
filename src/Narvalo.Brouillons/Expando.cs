@@ -285,9 +285,9 @@ namespace Alien
                 }
                 catch (KeyNotFoundException) {
                     // try reflection on instanceType
-                    object result = null;
-                    if (GetProperty(_instance, key, out result))
-                        return result;
+                    object retval = null;
+                    if (GetProperty(_instance, key, out retval))
+                        return retval;
 
                     // nope doesn't exist
                     throw;

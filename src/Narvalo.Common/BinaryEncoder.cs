@@ -30,14 +30,14 @@ namespace Narvalo
             Contract.Ensures(Contract.Result<byte[]>() != null);
 
             // FIXME: FormatException quand value.Length est impair ?
-            byte[] result = new byte[value.Length / 2];
+            byte[] retval = new byte[value.Length / 2];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < retval.Length; i++)
             {
-                result[i] = Convert.ToByte(value.Substring(2 * i, 2), 16);
+                retval[i] = Convert.ToByte(value.Substring(2 * i, 2), 16);
             }
 
-            return result;
+            return retval;
         }
 
         #endregion
@@ -105,7 +105,7 @@ namespace Narvalo
             {
                 int length = value.Length;
                 int resultLength = length * 5 / 8;
-                byte[] result = new byte[resultLength];
+                byte[] retval = new byte[resultLength];
 
                 int index = 0;
                 int digit = 0;
@@ -120,7 +120,7 @@ namespace Narvalo
                         index = (index + 5) % 8;
                         if (index == 0)
                         {
-                            result[offset] |= (byte)digit;
+                            retval[offset] |= (byte)digit;
                             offset++;
                             if (offset >= resultLength)
                             {
@@ -129,24 +129,24 @@ namespace Narvalo
                         }
                         else
                         {
-                            result[offset] |= (byte)(digit << (8 - index));
+                            retval[offset] |= (byte)(digit << (8 - index));
                         }
                     }
                     else
                     {
                         index = (index + 5) % 8;
-                        result[offset] |= (byte)(digit >> index);
+                        retval[offset] |= (byte)(digit >> index);
                         offset++;
                         if (offset >= resultLength)
                         {
                             break;
                         }
 
-                        result[offset] |= (byte)(digit << (8 - index));
+                        retval[offset] |= (byte)(digit << (8 - index));
                     }
                 }
 
-                return result;
+                return retval;
             }
         }
 

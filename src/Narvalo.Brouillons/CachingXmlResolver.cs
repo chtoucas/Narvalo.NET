@@ -111,9 +111,9 @@ namespace Narvalo
             }
 
             // Buffer is now too big. Shrink it.
-            byte[] result = new byte[read];
-            Array.Copy(buffer, result, read);
-            return result;
+            byte[] retval = new byte[read];
+            Array.Copy(buffer, retval, read);
+            return retval;
         }
     }
 }

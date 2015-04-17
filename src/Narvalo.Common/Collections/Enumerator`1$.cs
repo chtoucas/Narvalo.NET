@@ -16,13 +16,13 @@ namespace Narvalo.Collections
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Collection<T>>() != null);
 
-            var result = new Collection<T>();
+            var retval = new Collection<T>();
 
             while (@this.MoveNext()) {
-                result.Add(@this.Current);
+                retval.Add(@this.Current);
             }
 
-            return result;
+            return retval;
         }
     }
 }

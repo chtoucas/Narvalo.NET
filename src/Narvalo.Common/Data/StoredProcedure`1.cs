@@ -52,7 +52,7 @@ namespace Narvalo.Data
 
         public TResult Execute()
         {
-            TResult result;
+            TResult retval;
 
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -64,12 +64,12 @@ namespace Narvalo.Data
 
                     using (var reader = command.ExecuteReader(CommandBehavior))
                     {
-                        result = Execute(reader);
+                        retval = Execute(reader);
                     }
                 }
             }
 
-            return result;
+            return retval;
         }
 
         protected abstract TResult Execute(SqlDataReader reader);

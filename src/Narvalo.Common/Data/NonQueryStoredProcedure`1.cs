@@ -45,7 +45,7 @@ namespace Narvalo.Data
         {
             Contract.Requires(values != null);
 
-            int result;
+            int retval;
 
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -54,11 +54,11 @@ namespace Narvalo.Data
                     AddParameters(command.Parameters.AssumeNotNull(), values);
 
                     connection.Open();
-                    result = command.ExecuteNonQuery();
+                    retval = command.ExecuteNonQuery();
                 }
             }
 
-            return result;
+            return retval;
         }
 
         protected abstract void AddParameters(SqlParameterCollection parameters, TParameters values);

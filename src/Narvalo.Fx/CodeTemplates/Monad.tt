@@ -1797,21 +1797,21 @@ namespace <#= Namespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
-            <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
+            <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
 
             foreach (TSource item in @this)
             {
 <#+ if (IsNullable && !HasZero) { #>
-                if (result == null) 
+                if (retval == null) 
                 {
                     return null;
                 }
 
 <#+ } #>
-                result = result.Bind(_ => accumulatorM.Invoke(_, item));
+                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1852,21 +1852,21 @@ namespace <#= Namespace #>.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                <#= Name #><TSource> result = <#= Name #>.<#= ReturnName #>(iter.Current);
+                <#= Name #><TSource> retval = <#= Name #>.<#= ReturnName #>(iter.Current);
 
                 while (iter.MoveNext())
                 {
 <#+ if (IsNullable && !HasZero) { #>
-                    if (result == null) 
+                    if (retval == null) 
                     {
                         return null;
                     }
 
 <#+ } #>
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
 
@@ -1902,24 +1902,24 @@ namespace <#= Namespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
-            <#= Name #><TAccumulate> result = <#= Name #>.<#= ReturnName #>(seed);
+            <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
 <#+ if (IsNullable && !HasZero) { #>
-                    if (result == null)
+                    if (retval == null)
                     {
                         return null;
                     }
 
 <#+ } #>
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1944,21 +1944,21 @@ namespace <#= Namespace #>.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                <#= Name #><TSource> result = <#= Name #>.<#= ReturnName #>(iter.Current);
+                <#= Name #><TSource> retval = <#= Name #>.<#= ReturnName #>(iter.Current);
 
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
 <#+ if (IsNullable && !HasZero) { #>
-                    if (result == null)
+                    if (retval == null)
                     {
                         return null;
                     }
 
 <#+ } #>
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
     } // End of the class Enumerable<#= Name #>Extensions.

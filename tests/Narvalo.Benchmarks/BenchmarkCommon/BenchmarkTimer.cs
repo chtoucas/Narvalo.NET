@@ -14,11 +14,11 @@ namespace Narvalo.BenchmarkCommon
         {
             get
             {
-                var result = TimeSpan.FromTicks(_stopwatch.Elapsed.Ticks);
+                var retval = TimeSpan.FromTicks(_stopwatch.Elapsed.Ticks);
 
-                Contract.Assume(result.Ticks > 0L, "'result.Ticks' is negative.");
+                Contract.Assume(retval.Ticks > 0L, "'result.Ticks' is negative.");
 
-                return result;
+                return retval;
             }
         }
 

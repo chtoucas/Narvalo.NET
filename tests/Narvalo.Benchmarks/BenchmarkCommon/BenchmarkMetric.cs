@@ -144,11 +144,11 @@ namespace Narvalo.BenchmarkCommon
                 var formatter = formatProvider.GetFormat(GetType()) as ICustomFormatter;
                 if (formatter != null)
                 {
-                    var result = formatter.Format(format, this, formatProvider);
+                    var retval = formatter.Format(format, this, formatProvider);
 
-                    Contract.Assume(result != null, "ICustomFormatter.Format() returned a null string.");
+                    Contract.Assume(retval != null, "ICustomFormatter.Format() returned a null string.");
 
-                    return result;
+                    return retval;
                 }
             }
 

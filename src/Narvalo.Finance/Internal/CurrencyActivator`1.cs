@@ -11,6 +11,10 @@ namespace Narvalo.Finance.Internal
         private const string CURRENCIES_NAMESPACE = "Narvalo.Finance.Currencies";
         private const string INSTANCE_CURRENCY_FIELD = "s_Currency";
 
+        /// <summary>
+        /// Obtains an instance of the <see cref="Currency" /> class for the specified type parameter.
+        /// </summary>
+        /// <returns></returns>
         public static TCurrency CreateInstance()
         {
             var type = typeof(TCurrency);
@@ -27,7 +31,7 @@ namespace Narvalo.Finance.Internal
                 inst = CreateInstance_(type);
             }
 
-            // Might throw an InvalidCastException.
+            // Might throw an InvalidCastException?
             return (TCurrency)inst;
         }
 

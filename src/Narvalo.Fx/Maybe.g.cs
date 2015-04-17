@@ -1111,14 +1111,14 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(accumulatorM, "accumulatorM");
             Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
-            Maybe<TAccumulate> result = Maybe.Of(seed);
+            Maybe<TAccumulate> retval = Maybe.Of(seed);
 
             foreach (TSource item in @this)
             {
-                result = result.Bind(_ => accumulatorM.Invoke(_, item));
+                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1152,14 +1152,14 @@ namespace Narvalo.Fx.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Maybe<TSource> result = Maybe.Of(iter.Current);
+                Maybe<TSource> retval = Maybe.Of(iter.Current);
 
                 while (iter.MoveNext())
                 {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
 
@@ -1189,17 +1189,17 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(predicate, "predicate");
             Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
-            Maybe<TAccumulate> result = Maybe.Of(seed);
+            Maybe<TAccumulate> retval = Maybe.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1221,14 +1221,14 @@ namespace Narvalo.Fx.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Maybe<TSource> result = Maybe.Of(iter.Current);
+                Maybe<TSource> retval = Maybe.Of(iter.Current);
 
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
     } // End of the class EnumerableMaybeExtensions.

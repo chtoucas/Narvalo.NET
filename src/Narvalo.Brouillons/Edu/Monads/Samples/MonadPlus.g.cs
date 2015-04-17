@@ -1087,14 +1087,14 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Require.NotNull(accumulatorM, "accumulatorM");
             Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
-            MonadPlus<TAccumulate> result = MonadPlus.Return(seed);
+            MonadPlus<TAccumulate> retval = MonadPlus.Return(seed);
 
             foreach (TSource item in @this)
             {
-                result = result.Bind(_ => accumulatorM.Invoke(_, item));
+                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1128,14 +1128,14 @@ namespace Narvalo.Edu.Monads.Samples.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadPlus<TSource> result = MonadPlus.Return(iter.Current);
+                MonadPlus<TSource> retval = MonadPlus.Return(iter.Current);
 
                 while (iter.MoveNext())
                 {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
 
@@ -1165,17 +1165,17 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Require.NotNull(predicate, "predicate");
             Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
-            MonadPlus<TAccumulate> result = MonadPlus.Return(seed);
+            MonadPlus<TAccumulate> retval = MonadPlus.Return(seed);
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1197,14 +1197,14 @@ namespace Narvalo.Edu.Monads.Samples.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadPlus<TSource> result = MonadPlus.Return(iter.Current);
+                MonadPlus<TSource> retval = MonadPlus.Return(iter.Current);
 
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
     } // End of the class EnumerableMonadPlusExtensions.

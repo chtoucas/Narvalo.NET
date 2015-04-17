@@ -19,7 +19,7 @@ namespace Narvalo.GhostScript
                 throw new FileNotFoundException();
             }
 
-            Bitmap result;
+            Bitmap retval;
             string tmpFile = String.Empty;
 
             try
@@ -35,7 +35,7 @@ namespace Narvalo.GhostScript
 
                 using (var stream = new FileStream(tmpFile, FileMode.Open, FileAccess.Read))
                 {
-                    result = new Bitmap(stream);
+                    retval = new Bitmap(stream);
                 }
             }
             finally
@@ -46,7 +46,7 @@ namespace Narvalo.GhostScript
                 }
             }
 
-            return result;
+            return retval;
         }
 
         public static string ExtractText(string inputFile)
@@ -58,7 +58,7 @@ namespace Narvalo.GhostScript
                 throw new FileNotFoundException();
             }
 
-            string result;
+            string retval;
             string tmpFile = String.Empty;
 
             try
@@ -73,7 +73,7 @@ namespace Narvalo.GhostScript
 
                 using (var reader = new StreamReader(tmpFile))
                 {
-                    result = reader.ReadToEnd();
+                    retval = reader.ReadToEnd();
                 }
             }
             finally
@@ -84,7 +84,7 @@ namespace Narvalo.GhostScript
                 }
             }
 
-            return result;
+            return retval;
         }
     }
 }

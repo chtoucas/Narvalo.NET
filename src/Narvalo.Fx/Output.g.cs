@@ -827,19 +827,19 @@ namespace Narvalo.Fx.Internal
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
-            Output<TAccumulate> result = Output.Success(seed);
+            Output<TAccumulate> retval = Output.Success(seed);
 
             foreach (TSource item in @this)
             {
-                if (result == null) 
+                if (retval == null) 
                 {
                     return null;
                 }
 
-                result = result.Bind(_ => accumulatorM.Invoke(_, item));
+                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -871,19 +871,19 @@ namespace Narvalo.Fx.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Output<TSource> result = Output.Success(iter.Current);
+                Output<TSource> retval = Output.Success(iter.Current);
 
                 while (iter.MoveNext())
                 {
-                    if (result == null) 
+                    if (retval == null) 
                     {
                         return null;
                     }
 
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
 
@@ -911,22 +911,22 @@ namespace Narvalo.Fx.Internal
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
 
-            Output<TAccumulate> result = Output.Success(seed);
+            Output<TAccumulate> retval = Output.Success(seed);
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    if (result == null)
+                    if (retval == null)
                     {
                         return null;
                     }
 
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -947,19 +947,19 @@ namespace Narvalo.Fx.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Output<TSource> result = Output.Success(iter.Current);
+                Output<TSource> retval = Output.Success(iter.Current);
 
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    if (result == null)
+                    if (retval == null)
                     {
                         return null;
                     }
 
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
     } // End of the class EnumerableOutputExtensions.

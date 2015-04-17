@@ -36,12 +36,12 @@ namespace Narvalo
 
             if (style.Contains(BooleanStyles.Literal))
             {
-                bool result;
+                bool retval;
 
                 // NB: Cette méthode n'est pas sensible à la casse de "value".
-                if (System.Boolean.TryParse(val, out result))
+                if (System.Boolean.TryParse(val, out retval))
                 {
-                    return result;
+                    return retval;
                 }
             }
 

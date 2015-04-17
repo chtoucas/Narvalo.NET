@@ -1001,14 +1001,14 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
-            MonadValue<TAccumulate> result = MonadValue.Return(seed);
+            MonadValue<TAccumulate> retval = MonadValue.Return(seed);
 
             foreach (TSource item in @this)
             {
-                result = result.Bind(_ => accumulatorM.Invoke(_, item));
+                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1043,14 +1043,14 @@ namespace Narvalo.Edu.Monads.Samples.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadValue<TSource> result = MonadValue.Return(iter.Current);
+                MonadValue<TSource> retval = MonadValue.Return(iter.Current);
 
                 while (iter.MoveNext())
                 {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
 
@@ -1081,17 +1081,17 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
 
-            MonadValue<TAccumulate> result = MonadValue.Return(seed);
+            MonadValue<TAccumulate> retval = MonadValue.Return(seed);
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1113,14 +1113,14 @@ namespace Narvalo.Edu.Monads.Samples.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadValue<TSource> result = MonadValue.Return(iter.Current);
+                MonadValue<TSource> retval = MonadValue.Return(iter.Current);
 
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
     } // End of the class EnumerableMonadValueExtensions.

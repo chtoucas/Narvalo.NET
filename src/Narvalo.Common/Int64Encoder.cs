@@ -90,7 +90,7 @@ namespace Narvalo
             Require.GreaterThanOrEqualTo(value, 0L, "value");
             Contract.Ensures(Contract.Result<string>() != null);
 
-            string result = String.Empty;
+            string retval = String.Empty;
 
             while (value > 0L)
             {
@@ -98,11 +98,11 @@ namespace Narvalo
 
                 Contract.Assume(r < (long)s_FlickrBase58Alphabet.Length, "The index is out of range.");
 
-                result = s_FlickrBase58Alphabet[r].ToString() + result;
+                retval = s_FlickrBase58Alphabet[r].ToString() + retval;
                 value /= FLICKR_BASE58_ALPHABET_LENGTH;
             }
 
-            return result;
+            return retval;
         }
 
         public static long FromBase25String(string value)
@@ -137,7 +137,7 @@ namespace Narvalo
             Require.LessThanOrEqualTo(value.Length, FLICKR_BASE58_MAX_LENGTH, "value.Length");
             Contract.Ensures(Contract.Result<long>() >= 0L);
 
-            long result = 0L;
+            long retval = 0L;
             long multiplier = 1L;
 
             for (int i = value.Length - 1; i >= 0; i--)
@@ -154,7 +154,7 @@ namespace Narvalo
 
                 checked
                 {
-                    result += multiplier * index;
+                    retval += multiplier * index;
                     if (i != 0)
                     {
                         multiplier *= FLICKR_BASE58_ALPHABET_LENGTH;
@@ -162,7 +162,7 @@ namespace Narvalo
                 }
             }
 
-            return result;
+            return retval;
         }
 
         internal static long Decode(string value, char[] alphabet, int alphabetLength)
@@ -173,7 +173,7 @@ namespace Narvalo
             Contract.Requires(alphabetLength > 0);
             Contract.Ensures(Contract.Result<long>() >= 0L);
 
-            long result = 0L;
+            long retval = 0L;
             long multiplier = 1L;
 
             for (int i = value.Length - 1; i >= 0; i--)
@@ -190,7 +190,7 @@ namespace Narvalo
 
                 checked
                 {
-                    result += multiplier * index;
+                    retval += multiplier * index;
                     if (i != 0)
                     {
                         multiplier *= alphabetLength;
@@ -198,7 +198,7 @@ namespace Narvalo
                 }
             }
 
-            return result;
+            return retval;
         }
 
         internal static string Encode(long value, char[] alphabet, int alphabetLength)
@@ -208,7 +208,7 @@ namespace Narvalo
             Contract.Requires(alphabetLength > 0);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            string result = String.Empty;
+            string retval = String.Empty;
 
             while (value > 0L)
             {
@@ -216,11 +216,11 @@ namespace Narvalo
 
                 Contract.Assume(r < (long)alphabet.Length, "The index is out of range.");
 
-                result = alphabet[r].ToString() + result;
+                retval = alphabet[r].ToString() + retval;
                 value /= alphabetLength;
             }
 
-            return result;
+            return retval;
         }
     }
 }

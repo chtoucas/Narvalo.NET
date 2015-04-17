@@ -128,14 +128,14 @@ namespace Narvalo.Xml
                 nextElement = nextElement.NextNode;
             }
 
-            var result = nextElement as XElement;
+            var retval = nextElement as XElement;
 
-            if (result == null)
+            if (retval == null)
             {
                 throw exceptionFactory.Invoke();
             }
 
-            return result;
+            return retval;
         }
     }
 }

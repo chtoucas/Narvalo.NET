@@ -66,7 +66,7 @@ namespace Narvalo.Web.UI
         {
             Require.Object(@this);
 
-            ControlBuilder result = null;
+            ControlBuilder retval = null;
 
             while (true)
             {
@@ -75,10 +75,10 @@ namespace Narvalo.Web.UI
                 {
                     break;
                 }
-                result = parentBuilder;
+                retval = parentBuilder;
             }
 
-            return result;
+            return retval;
         }
 
         public static ICollection GetSimplePropertyEntries(this ControlBuilder @this)

@@ -851,19 +851,19 @@ namespace Narvalo.Edu.Monads.Internal
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
-            Identity<TAccumulate> result = Identity.Return(seed);
+            Identity<TAccumulate> retval = Identity.Return(seed);
 
             foreach (TSource item in @this)
             {
-                if (result == null) 
+                if (retval == null) 
                 {
                     return null;
                 }
 
-                result = result.Bind(_ => accumulatorM.Invoke(_, item));
+                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -895,19 +895,19 @@ namespace Narvalo.Edu.Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Identity<TSource> result = Identity.Return(iter.Current);
+                Identity<TSource> retval = Identity.Return(iter.Current);
 
                 while (iter.MoveNext())
                 {
-                    if (result == null) 
+                    if (retval == null) 
                     {
                         return null;
                     }
 
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
 
@@ -935,22 +935,22 @@ namespace Narvalo.Edu.Monads.Internal
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
 
-            Identity<TAccumulate> result = Identity.Return(seed);
+            Identity<TAccumulate> retval = Identity.Return(seed);
 
             using (var iter = @this.GetEnumerator())
             {
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    if (result == null)
+                    if (retval == null)
                     {
                         return null;
                     }
 
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
 
-            return result;
+            return retval;
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -971,19 +971,19 @@ namespace Narvalo.Edu.Monads.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Identity<TSource> result = Identity.Return(iter.Current);
+                Identity<TSource> retval = Identity.Return(iter.Current);
 
-                while (predicate.Invoke(result) && iter.MoveNext())
+                while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    if (result == null)
+                    if (retval == null)
                     {
                         return null;
                     }
 
-                    result = result.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
-                return result;
+                return retval;
             }
         }
     } // End of the class EnumerableIdentityExtensions.

@@ -105,16 +105,16 @@ namespace Narvalo.Web.Optimization
             //  C:\Users\[User]\AppData\Local\Temp\Temporary ASP.NET Files\vs
             // WARNING: Dans la suite, l'ordre est important.
             // 1. On remplace tous les espaces blancs (éventuellement consécutifs) par un seul espace.
-            string result = s_WhiteSpacesRegex.Replace(value, "\x20");
+            string retval = s_WhiteSpacesRegex.Replace(value, "\x20");
 
             // 2. On supprime les espaces après certains crochets fermants : "XXX>   " -> "XXX>".
-            result = s_SpaceAfterRightAngleBracketRegex.Replace(result, "$1>");
+            retval = s_SpaceAfterRightAngleBracketRegex.Replace(retval, "$1>");
 
             // 3. On supprime les espaces avant certains crochets ouvrants : 
             // "   <XXX" -> "<XXX" ou "   </XXX" -> "</XXX".
-            result = s_SpaceBeforeLeftAngleBracketRegex.Replace(result, "<$1");
+            retval = s_SpaceBeforeLeftAngleBracketRegex.Replace(retval, "<$1");
 
-            return result.Trim();
+            return retval.Trim();
         }
     }
 }

@@ -44,9 +44,9 @@ namespace Narvalo.Reliability
         {
             return () =>
             {
-                var result = default(TResult);
-                _guard.Execute(() => { result = func(); });
-                return result;
+                var retval = default(TResult);
+                _guard.Execute(() => { retval = func(); });
+                return retval;
             };
         }
 
@@ -54,9 +54,9 @@ namespace Narvalo.Reliability
         {
             return (arg) =>
             {
-                var result = default(TResult);
-                _guard.Execute(() => { result = func(arg); });
-                return result;
+                var retval = default(TResult);
+                _guard.Execute(() => { retval = func(arg); });
+                return retval;
             };
         }
 
@@ -64,9 +64,9 @@ namespace Narvalo.Reliability
         {
             return (arg1, arg2) =>
             {
-                var result = default(TResult);
-                _guard.Execute(() => { result = func(arg1, arg2); });
-                return result;
+                var retval = default(TResult);
+                _guard.Execute(() => { retval = func(arg1, arg2); });
+                return retval;
             };
         }
 
@@ -74,9 +74,9 @@ namespace Narvalo.Reliability
         {
             return (arg1, arg2, arg3) =>
             {
-                var result = default(TResult);
-                _guard.Execute(() => { result = func(arg1, arg2, arg3); });
-                return result;
+                var retval = default(TResult);
+                _guard.Execute(() => { retval = func(arg1, arg2, arg3); });
+                return retval;
             };
         }
 
@@ -84,9 +84,9 @@ namespace Narvalo.Reliability
         {
             return (arg1, arg2, arg3, arg4) =>
             {
-                var result = default(TResult);
-                _guard.Execute(() => { result = func(arg1, arg2, arg3, arg4); });
-                return result;
+                var retval = default(TResult);
+                _guard.Execute(() => { retval = func(arg1, arg2, arg3, arg4); });
+                return retval;
             };
         }
     }

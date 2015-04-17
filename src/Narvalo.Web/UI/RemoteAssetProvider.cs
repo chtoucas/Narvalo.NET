@@ -67,11 +67,11 @@ namespace Narvalo.Web.UI
             Contract.Requires(relativePath != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            string result;
+            string retval;
 
             if (relativePath.Length == 0)
             {
-                result = basePath;
+                retval = basePath;
             }
             else if (relativePath[0] == '/')
             {
@@ -80,14 +80,14 @@ namespace Narvalo.Web.UI
             }
             else if (HasTrailingSlash(basePath))
             {
-                result = basePath + relativePath;
+                retval = basePath + relativePath;
             }
             else
             {
-                result = basePath + "/" + relativePath;
+                retval = basePath + "/" + relativePath;
             }
 
-            return result;
+            return retval;
         }
 
         private static bool HasTrailingSlash(string path)
