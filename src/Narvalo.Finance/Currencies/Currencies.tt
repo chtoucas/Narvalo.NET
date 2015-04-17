@@ -1,7 +1,10 @@
 ﻿<#@ include file="..\CodeTemplates\Iso4217.tt" #>
 <#
 
-var currencies = ParseCurrent(@"..\Resources\ISO4217\20150101\A1.xml");
+var currentCurrencies = ParseCurrent(@"..\Resources\ISO4217\20150101\A1.xml");
+var legacyCurrencies = ParseLegacy(@"..\Resources\ISO4217\20150101\A3.xml");
+var currencies = currentCurrencies.Concat(legacyCurrencies);
+
 
 var codeSet = new HashSet<string>();
 
@@ -26,6 +29,7 @@ using global::System.Diagnostics.CodeAnalysis;
 
 namespace <#= InferNamespace() #>
 {
+    using System;
     using System.Diagnostics.Contracts;
 
 <#
@@ -41,7 +45,7 @@ namespace <#= InferNamespace() #>
         // WARNING: If you change the name of the property "s_Currency",
         // you MUST also change the value of INSTANCE_CURRENCY_FIELD in 
         // Internal.CurrencyActivator<TCurrency>.
-        // Idem for the namespace, update the CURRENCIES_NAMESPACE value.
+        // The same applies to CURRENCIES_NAMESPACE.
 #>
     /// <summary>
     /// Represents the currency unit for the "<#= currency.EnglishName #>".
@@ -50,9 +54,16 @@ namespace <#= InferNamespace() #>
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class <#= currency.Code #> : Currency
     {
-        private static readonly <#= currency.Code #> s_Currency = new <#= currency.Code #>();
+        private static readonly <#= currency.Code #> s_Currency = new <#= currency.Code #>(true);
 
-        private <#= currency.Code #>() : base("<#= currency.Code #>") { }
+        public <#= currency.Code #>() : this(false) { }
+        
+        private <#= currency.Code #>(bool builtin) : base("<#= currency.Code #>") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".

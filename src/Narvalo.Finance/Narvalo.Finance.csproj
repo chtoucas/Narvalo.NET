@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Internal\ContractFor.cs" />
     <Compile Include="Internal\CurrencyActivator`1.cs" />
+    <Compile Include="Internal\MoneyFormatter.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

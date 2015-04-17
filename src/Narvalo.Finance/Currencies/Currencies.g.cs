@@ -18,7 +18,40 @@ using global::System.Diagnostics.CodeAnalysis;
 
 namespace Narvalo.Finance.Currencies
 {
+    using System;
     using System.Diagnostics.Contracts;
+
+    /// <summary>
+    /// Represents the currency unit for the "Andorran Peseta".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ADP : Currency
+    {
+        private static readonly ADP s_Currency = new ADP(true);
+
+        public ADP() : this(false) { }
+        
+        private ADP(bool builtin) : base("ADP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Andorran Peseta".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Andorran Peseta".</value>
+        public static ADP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
 
     /// <summary>
     /// Represents the currency unit for the "UAE Dirham".
@@ -27,9 +60,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AED : Currency
     {
-        private static readonly AED s_Currency = new AED();
+        private static readonly AED s_Currency = new AED(true);
 
-        private AED() : base("AED") { }
+        public AED() : this(false) { }
+        
+        private AED(bool builtin) : base("AED") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "UAE Dirham".
@@ -50,11 +90,50 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class AFA : Currency
+    {
+        private static readonly AFA s_Currency = new AFA(true);
+
+        public AFA() : this(false) { }
+        
+        private AFA(bool builtin) : base("AFA") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Afghani".</value>
+        public static AFA Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Afghani".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFN : Currency
     {
-        private static readonly AFN s_Currency = new AFN();
+        private static readonly AFN s_Currency = new AFN(true);
 
-        private AFN() : base("AFN") { }
+        public AFN() : this(false) { }
+        
+        private AFN(bool builtin) : base("AFN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
@@ -71,15 +150,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Old Lek".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ALK : Currency
+    {
+        private static readonly ALK s_Currency = new ALK(true);
+
+        public ALK() : this(false) { }
+        
+        private ALK(bool builtin) : base("ALK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Lek".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Lek".</value>
+        public static ALK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Lek".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALL : Currency
     {
-        private static readonly ALL s_Currency = new ALL();
+        private static readonly ALL s_Currency = new ALL(true);
 
-        private ALL() : base("ALL") { }
+        public ALL() : this(false) { }
+        
+        private ALL(bool builtin) : base("ALL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lek".
@@ -102,9 +220,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AMD : Currency
     {
-        private static readonly AMD s_Currency = new AMD();
+        private static readonly AMD s_Currency = new AMD(true);
 
-        private AMD() : base("AMD") { }
+        public AMD() : this(false) { }
+        
+        private AMD(bool builtin) : base("AMD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Armenian Dram".
@@ -127,9 +252,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ANG : Currency
     {
-        private static readonly ANG s_Currency = new ANG();
+        private static readonly ANG s_Currency = new ANG(true);
 
-        private ANG() : base("ANG") { }
+        public ANG() : this(false) { }
+        
+        private ANG(bool builtin) : base("ANG") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Antillean Guilder".
@@ -152,9 +284,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOA : Currency
     {
-        private static readonly AOA s_Currency = new AOA();
+        private static readonly AOA s_Currency = new AOA(true);
 
-        private AOA() : base("AOA") { }
+        public AOA() : this(false) { }
+        
+        private AOA(bool builtin) : base("AOA") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
@@ -171,15 +310,182 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Kwanza".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class AOK : Currency
+    {
+        private static readonly AOK s_Currency = new AOK(true);
+
+        public AOK() : this(false) { }
+        
+        private AOK(bool builtin) : base("AOK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza".</value>
+        public static AOK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "New Kwanza".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class AON : Currency
+    {
+        private static readonly AON s_Currency = new AON(true);
+
+        public AON() : this(false) { }
+        
+        private AON(bool builtin) : base("AON") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Kwanza".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Kwanza".</value>
+        public static AON Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Kwanza Reajustado".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class AOR : Currency
+    {
+        private static readonly AOR s_Currency = new AOR(true);
+
+        public AOR() : this(false) { }
+        
+        private AOR(bool builtin) : base("AOR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza Reajustado".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza Reajustado".</value>
+        public static AOR Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Austral".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ARA : Currency
+    {
+        private static readonly ARA s_Currency = new ARA(true);
+
+        public ARA() : this(false) { }
+        
+        private ARA(bool builtin) : base("ARA") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Austral".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Austral".</value>
+        public static ARA Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Peso Argentino".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ARP : Currency
+    {
+        private static readonly ARP s_Currency = new ARP(true);
+
+        public ARP() : this(false) { }
+        
+        private ARP(bool builtin) : base("ARP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Argentino".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Argentino".</value>
+        public static ARP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Argentine Peso".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARS : Currency
     {
-        private static readonly ARS s_Currency = new ARS();
+        private static readonly ARS s_Currency = new ARS(true);
 
-        private ARS() : base("ARS") { }
+        public ARS() : this(false) { }
+        
+        private ARS(bool builtin) : base("ARS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Argentine Peso".
@@ -196,15 +502,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Peso".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ARY : Currency
+    {
+        private static readonly ARY s_Currency = new ARY(true);
+
+        public ARY() : this(false) { }
+        
+        private ARY(bool builtin) : base("ARY") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso".</value>
+        public static ARY Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Schilling".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ATS : Currency
+    {
+        private static readonly ATS s_Currency = new ATS(true);
+
+        public ATS() : this(false) { }
+        
+        private ATS(bool builtin) : base("ATS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Schilling".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Schilling".</value>
+        public static ATS Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Australian Dollar".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AUD : Currency
     {
-        private static readonly AUD s_Currency = new AUD();
+        private static readonly AUD s_Currency = new AUD(true);
 
-        private AUD() : base("AUD") { }
+        public AUD() : this(false) { }
+        
+        private AUD(bool builtin) : base("AUD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Australian Dollar".
@@ -227,9 +604,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AWG : Currency
     {
-        private static readonly AWG s_Currency = new AWG();
+        private static readonly AWG s_Currency = new AWG(true);
 
-        private AWG() : base("AWG") { }
+        public AWG() : this(false) { }
+        
+        private AWG(bool builtin) : base("AWG") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Aruban Florin".
@@ -246,15 +630,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Azerbaijan Manat".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class AYM : Currency
+    {
+        private static readonly AYM s_Currency = new AYM(true);
+
+        public AYM() : this(false) { }
+        
+        private AYM(bool builtin) : base("AYM") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijan Manat".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijan Manat".</value>
+        public static AYM Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Azerbaijanian Manat".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class AZM : Currency
+    {
+        private static readonly AZM s_Currency = new AZM(true);
+
+        public AZM() : this(false) { }
+        
+        private AZM(bool builtin) : base("AZM") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".</value>
+        public static AZM Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Azerbaijanian Manat".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZN : Currency
     {
-        private static readonly AZN s_Currency = new AZN();
+        private static readonly AZN s_Currency = new AZN(true);
 
-        private AZN() : base("AZN") { }
+        public AZN() : this(false) { }
+        
+        private AZN(bool builtin) : base("AZN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
@@ -271,15 +726,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Dinar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BAD : Currency
+    {
+        private static readonly BAD s_Currency = new BAD(true);
+
+        public BAD() : this(false) { }
+        
+        private BAD(bool builtin) : base("BAD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Dinar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Dinar".</value>
+        public static BAD Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Convertible Mark".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAM : Currency
     {
-        private static readonly BAM s_Currency = new BAM();
+        private static readonly BAM s_Currency = new BAM(true);
 
-        private BAM() : base("BAM") { }
+        public BAM() : this(false) { }
+        
+        private BAM(bool builtin) : base("BAM") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Mark".
@@ -302,9 +796,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BBD : Currency
     {
-        private static readonly BBD s_Currency = new BBD();
+        private static readonly BBD s_Currency = new BBD(true);
 
-        private BBD() : base("BBD") { }
+        public BBD() : this(false) { }
+        
+        private BBD(bool builtin) : base("BBD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Barbados Dollar".
@@ -327,9 +828,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BDT : Currency
     {
-        private static readonly BDT s_Currency = new BDT();
+        private static readonly BDT s_Currency = new BDT(true);
 
-        private BDT() : base("BDT") { }
+        public BDT() : this(false) { }
+        
+        private BDT(bool builtin) : base("BDT") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Taka".
@@ -346,15 +854,214 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Convertible Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BEC : Currency
+    {
+        private static readonly BEC s_Currency = new BEC(true);
+
+        public BEC() : this(false) { }
+        
+        private BEC(bool builtin) : base("BEC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Convertible Franc".</value>
+        public static BEC Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Belgian Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BEF : Currency
+    {
+        private static readonly BEF s_Currency = new BEF(true);
+
+        public BEF() : this(false) { }
+        
+        private BEF(bool builtin) : base("BEF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Belgian Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Belgian Franc".</value>
+        public static BEF Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Financial Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BEL : Currency
+    {
+        private static readonly BEL s_Currency = new BEL(true);
+
+        public BEL() : this(false) { }
+        
+        private BEL(bool builtin) : base("BEL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Financial Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Financial Franc".</value>
+        public static BEL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Lev A/52".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BGJ : Currency
+    {
+        private static readonly BGJ s_Currency = new BGJ(true);
+
+        public BGJ() : this(false) { }
+        
+        private BGJ(bool builtin) : base("BGJ") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev A/52".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev A/52".</value>
+        public static BGJ Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Lev A/62".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BGK : Currency
+    {
+        private static readonly BGK s_Currency = new BGK(true);
+
+        public BGK() : this(false) { }
+        
+        private BGK(bool builtin) : base("BGK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev A/62".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev A/62".</value>
+        public static BGK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Lev".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BGL : Currency
+    {
+        private static readonly BGL s_Currency = new BGL(true);
+
+        public BGL() : this(false) { }
+        
+        private BGL(bool builtin) : base("BGL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev".</value>
+        public static BGL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Bulgarian Lev".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGN : Currency
     {
-        private static readonly BGN s_Currency = new BGN();
+        private static readonly BGN s_Currency = new BGN(true);
 
-        private BGN() : base("BGN") { }
+        public BGN() : this(false) { }
+        
+        private BGN(bool builtin) : base("BGN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bulgarian Lev".
@@ -377,9 +1084,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BHD : Currency
     {
-        private static readonly BHD s_Currency = new BHD();
+        private static readonly BHD s_Currency = new BHD(true);
 
-        private BHD() : base("BHD") { }
+        public BHD() : this(false) { }
+        
+        private BHD(bool builtin) : base("BHD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahraini Dinar".
@@ -402,9 +1116,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BIF : Currency
     {
-        private static readonly BIF s_Currency = new BIF();
+        private static readonly BIF s_Currency = new BIF(true);
 
-        private BIF() : base("BIF") { }
+        public BIF() : this(false) { }
+        
+        private BIF(bool builtin) : base("BIF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Burundi Franc".
@@ -427,9 +1148,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BMD : Currency
     {
-        private static readonly BMD s_Currency = new BMD();
+        private static readonly BMD s_Currency = new BMD(true);
 
-        private BMD() : base("BMD") { }
+        public BMD() : this(false) { }
+        
+        private BMD(bool builtin) : base("BMD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bermudian Dollar".
@@ -452,9 +1180,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BND : Currency
     {
-        private static readonly BND s_Currency = new BND();
+        private static readonly BND s_Currency = new BND(true);
 
-        private BND() : base("BND") { }
+        public BND() : this(false) { }
+        
+        private BND(bool builtin) : base("BND") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Brunei Dollar".
@@ -477,9 +1212,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOB : Currency
     {
-        private static readonly BOB s_Currency = new BOB();
+        private static readonly BOB s_Currency = new BOB(true);
 
-        private BOB() : base("BOB") { }
+        public BOB() : this(false) { }
+        
+        private BOB(bool builtin) : base("BOB") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Boliviano".
@@ -496,15 +1238,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Peso boliviano".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BOP : Currency
+    {
+        private static readonly BOP s_Currency = new BOP(true);
+
+        public BOP() : this(false) { }
+        
+        private BOP(bool builtin) : base("BOP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso boliviano".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso boliviano".</value>
+        public static BOP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Mvdol".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOV : Currency
     {
-        private static readonly BOV s_Currency = new BOV();
+        private static readonly BOV s_Currency = new BOV(true);
 
-        private BOV() : base("BOV") { }
+        public BOV() : this(false) { }
+        
+        private BOV(bool builtin) : base("BOV") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mvdol".
@@ -521,15 +1302,118 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Cruzeiro".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BRB : Currency
+    {
+        private static readonly BRB s_Currency = new BRB(true);
+
+        public BRB() : this(false) { }
+        
+        private BRB(bool builtin) : base("BRB") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro".</value>
+        public static BRB Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Cruzado".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BRC : Currency
+    {
+        private static readonly BRC s_Currency = new BRC(true);
+
+        public BRC() : this(false) { }
+        
+        private BRC(bool builtin) : base("BRC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzado".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzado".</value>
+        public static BRC Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Cruzeiro".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BRE : Currency
+    {
+        private static readonly BRE s_Currency = new BRE(true);
+
+        public BRE() : this(false) { }
+        
+        private BRE(bool builtin) : base("BRE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro".</value>
+        public static BRE Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Brazilian Real".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRL : Currency
     {
-        private static readonly BRL s_Currency = new BRL();
+        private static readonly BRL s_Currency = new BRL(true);
 
-        private BRL() : base("BRL") { }
+        public BRL() : this(false) { }
+        
+        private BRL(bool builtin) : base("BRL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Brazilian Real".
@@ -546,15 +1430,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "New Cruzado".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BRN : Currency
+    {
+        private static readonly BRN s_Currency = new BRN(true);
+
+        public BRN() : this(false) { }
+        
+        private BRN(bool builtin) : base("BRN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Cruzado".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Cruzado".</value>
+        public static BRN Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Cruzeiro Real".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BRR : Currency
+    {
+        private static readonly BRR s_Currency = new BRR(true);
+
+        public BRR() : this(false) { }
+        
+        private BRR(bool builtin) : base("BRR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro Real".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro Real".</value>
+        public static BRR Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Bahamian Dollar".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BSD : Currency
     {
-        private static readonly BSD s_Currency = new BSD();
+        private static readonly BSD s_Currency = new BSD(true);
 
-        private BSD() : base("BSD") { }
+        public BSD() : this(false) { }
+        
+        private BSD(bool builtin) : base("BSD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahamian Dollar".
@@ -577,9 +1532,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BTN : Currency
     {
-        private static readonly BTN s_Currency = new BTN();
+        private static readonly BTN s_Currency = new BTN(true);
 
-        private BTN() : base("BTN") { }
+        public BTN() : this(false) { }
+        
+        private BTN(bool builtin) : base("BTN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ngultrum".
@@ -596,15 +1558,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "N.A.".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BUK : Currency
+    {
+        private static readonly BUK s_Currency = new BUK(true);
+
+        public BUK() : this(false) { }
+        
+        private BUK(bool builtin) : base("BUK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "N.A.".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "N.A.".</value>
+        public static BUK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Pula".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BWP : Currency
     {
-        private static readonly BWP s_Currency = new BWP();
+        private static readonly BWP s_Currency = new BWP(true);
 
-        private BWP() : base("BWP") { }
+        public BWP() : this(false) { }
+        
+        private BWP(bool builtin) : base("BWP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pula".
@@ -625,11 +1626,50 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BYB : Currency
+    {
+        private static readonly BYB s_Currency = new BYB(true);
+
+        public BYB() : this(false) { }
+        
+        private BYB(bool builtin) : base("BYB") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".</value>
+        public static BYB Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Belarussian Ruble".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYR : Currency
     {
-        private static readonly BYR s_Currency = new BYR();
+        private static readonly BYR s_Currency = new BYR(true);
 
-        private BYR() : base("BYR") { }
+        public BYR() : this(false) { }
+        
+        private BYR(bool builtin) : base("BYR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".
@@ -652,9 +1692,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BZD : Currency
     {
-        private static readonly BZD s_Currency = new BZD();
+        private static readonly BZD s_Currency = new BZD(true);
 
-        private BZD() : base("BZD") { }
+        public BZD() : this(false) { }
+        
+        private BZD(bool builtin) : base("BZD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belize Dollar".
@@ -677,9 +1724,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CAD : Currency
     {
-        private static readonly CAD s_Currency = new CAD();
+        private static readonly CAD s_Currency = new CAD(true);
 
-        private CAD() : base("CAD") { }
+        public CAD() : this(false) { }
+        
+        private CAD(bool builtin) : base("CAD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Canadian Dollar".
@@ -702,9 +1756,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CDF : Currency
     {
-        private static readonly CDF s_Currency = new CDF();
+        private static readonly CDF s_Currency = new CDF(true);
 
-        private CDF() : base("CDF") { }
+        public CDF() : this(false) { }
+        
+        private CDF(bool builtin) : base("CDF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Congolese Franc".
@@ -721,15 +1782,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "WIR Franc (for electronic)".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class CHC : Currency
+    {
+        private static readonly CHC s_Currency = new CHC(true);
+
+        public CHC() : this(false) { }
+        
+        private CHC(bool builtin) : base("CHC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc (for electronic)".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Franc (for electronic)".</value>
+        public static CHC Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "WIR Euro".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHE : Currency
     {
-        private static readonly CHE s_Currency = new CHE();
+        private static readonly CHE s_Currency = new CHE(true);
 
-        private CHE() : base("CHE") { }
+        public CHE() : this(false) { }
+        
+        private CHE(bool builtin) : base("CHE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Euro".
@@ -752,9 +1852,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHF : Currency
     {
-        private static readonly CHF s_Currency = new CHF();
+        private static readonly CHF s_Currency = new CHF(true);
 
-        private CHF() : base("CHF") { }
+        public CHF() : this(false) { }
+        
+        private CHF(bool builtin) : base("CHF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Swiss Franc".
@@ -777,9 +1884,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHW : Currency
     {
-        private static readonly CHW s_Currency = new CHW();
+        private static readonly CHW s_Currency = new CHW(true);
 
-        private CHW() : base("CHW") { }
+        public CHW() : this(false) { }
+        
+        private CHW(bool builtin) : base("CHW") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc".
@@ -802,9 +1916,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLF : Currency
     {
-        private static readonly CLF s_Currency = new CLF();
+        private static readonly CLF s_Currency = new CLF(true);
 
-        private CLF() : base("CLF") { }
+        public CLF() : this(false) { }
+        
+        private CLF(bool builtin) : base("CLF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Fomento".
@@ -827,9 +1948,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLP : Currency
     {
-        private static readonly CLP s_Currency = new CLP();
+        private static readonly CLP s_Currency = new CLP(true);
 
-        private CLP() : base("CLP") { }
+        public CLP() : this(false) { }
+        
+        private CLP(bool builtin) : base("CLP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Chilean Peso".
@@ -846,15 +1974,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Peoples Bank Dollar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class CNX : Currency
+    {
+        private static readonly CNX s_Currency = new CNX(true);
+
+        public CNX() : this(false) { }
+        
+        private CNX(bool builtin) : base("CNX") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Peoples Bank Dollar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Peoples Bank Dollar".</value>
+        public static CNX Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Yuan Renminbi".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNY : Currency
     {
-        private static readonly CNY s_Currency = new CNY();
+        private static readonly CNY s_Currency = new CNY(true);
 
-        private CNY() : base("CNY") { }
+        public CNY() : this(false) { }
+        
+        private CNY(bool builtin) : base("CNY") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yuan Renminbi".
@@ -877,9 +2044,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COP : Currency
     {
-        private static readonly COP s_Currency = new COP();
+        private static readonly COP s_Currency = new COP(true);
 
-        private COP() : base("COP") { }
+        public COP() : this(false) { }
+        
+        private COP(bool builtin) : base("COP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Colombian Peso".
@@ -902,9 +2076,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COU : Currency
     {
-        private static readonly COU s_Currency = new COU();
+        private static readonly COU s_Currency = new COU(true);
 
-        private COU() : base("COU") { }
+        public COU() : this(false) { }
+        
+        private COU(bool builtin) : base("COU") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Real".
@@ -927,9 +2108,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CRC : Currency
     {
-        private static readonly CRC s_Currency = new CRC();
+        private static readonly CRC s_Currency = new CRC(true);
 
-        private CRC() : base("CRC") { }
+        public CRC() : this(false) { }
+        
+        private CRC(bool builtin) : base("CRC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Costa Rican Colon".
@@ -946,15 +2134,118 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Serbian Dinar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class CSD : Currency
+    {
+        private static readonly CSD s_Currency = new CSD(true);
+
+        public CSD() : this(false) { }
+        
+        private CSD(bool builtin) : base("CSD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".</value>
+        public static CSD Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Krona A/53".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class CSJ : Currency
+    {
+        private static readonly CSJ s_Currency = new CSJ(true);
+
+        public CSJ() : this(false) { }
+        
+        private CSJ(bool builtin) : base("CSJ") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Krona A/53".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Krona A/53".</value>
+        public static CSJ Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Koruna".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class CSK : Currency
+    {
+        private static readonly CSK s_Currency = new CSK(true);
+
+        public CSK() : this(false) { }
+        
+        private CSK(bool builtin) : base("CSK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Koruna".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Koruna".</value>
+        public static CSK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Peso Convertible".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUC : Currency
     {
-        private static readonly CUC s_Currency = new CUC();
+        private static readonly CUC s_Currency = new CUC(true);
 
-        private CUC() : base("CUC") { }
+        public CUC() : this(false) { }
+        
+        private CUC(bool builtin) : base("CUC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Convertible".
@@ -977,9 +2268,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUP : Currency
     {
-        private static readonly CUP s_Currency = new CUP();
+        private static readonly CUP s_Currency = new CUP(true);
 
-        private CUP() : base("CUP") { }
+        public CUP() : this(false) { }
+        
+        private CUP(bool builtin) : base("CUP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cuban Peso".
@@ -1002,9 +2300,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CVE : Currency
     {
-        private static readonly CVE s_Currency = new CVE();
+        private static readonly CVE s_Currency = new CVE(true);
 
-        private CVE() : base("CVE") { }
+        public CVE() : this(false) { }
+        
+        private CVE(bool builtin) : base("CVE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cabo Verde Escudo".
@@ -1021,15 +2326,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Cyprus Pound".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class CYP : Currency
+    {
+        private static readonly CYP s_Currency = new CYP(true);
+
+        public CYP() : this(false) { }
+        
+        private CYP(bool builtin) : base("CYP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cyprus Pound".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cyprus Pound".</value>
+        public static CYP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Czech Koruna".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CZK : Currency
     {
-        private static readonly CZK s_Currency = new CZK();
+        private static readonly CZK s_Currency = new CZK(true);
 
-        private CZK() : base("CZK") { }
+        public CZK() : this(false) { }
+        
+        private CZK(bool builtin) : base("CZK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Czech Koruna".
@@ -1046,15 +2390,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Mark der DDR".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class DDM : Currency
+    {
+        private static readonly DDM s_Currency = new DDM(true);
+
+        public DDM() : this(false) { }
+        
+        private DDM(bool builtin) : base("DDM") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mark der DDR".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mark der DDR".</value>
+        public static DDM Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Deutsche Mark".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class DEM : Currency
+    {
+        private static readonly DEM s_Currency = new DEM(true);
+
+        public DEM() : this(false) { }
+        
+        private DEM(bool builtin) : base("DEM") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Deutsche Mark".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Deutsche Mark".</value>
+        public static DEM Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Djibouti Franc".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DJF : Currency
     {
-        private static readonly DJF s_Currency = new DJF();
+        private static readonly DJF s_Currency = new DJF(true);
 
-        private DJF() : base("DJF") { }
+        public DJF() : this(false) { }
+        
+        private DJF(bool builtin) : base("DJF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Djibouti Franc".
@@ -1077,9 +2492,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DKK : Currency
     {
-        private static readonly DKK s_Currency = new DKK();
+        private static readonly DKK s_Currency = new DKK(true);
 
-        private DKK() : base("DKK") { }
+        public DKK() : this(false) { }
+        
+        private DKK(bool builtin) : base("DKK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Danish Krone".
@@ -1102,9 +2524,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DOP : Currency
     {
-        private static readonly DOP s_Currency = new DOP();
+        private static readonly DOP s_Currency = new DOP(true);
 
-        private DOP() : base("DOP") { }
+        public DOP() : this(false) { }
+        
+        private DOP(bool builtin) : base("DOP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dominican Peso".
@@ -1127,9 +2556,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DZD : Currency
     {
-        private static readonly DZD s_Currency = new DZD();
+        private static readonly DZD s_Currency = new DZD(true);
 
-        private DZD() : base("DZD") { }
+        public DZD() : this(false) { }
+        
+        private DZD(bool builtin) : base("DZD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Algerian Dinar".
@@ -1146,15 +2582,118 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Sucre".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ECS : Currency
+    {
+        private static readonly ECS s_Currency = new ECS(true);
+
+        public ECS() : this(false) { }
+        
+        private ECS(bool builtin) : base("ECS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sucre".</value>
+        public static ECS Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Unidad de Valor Constante (UVC)".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ECV : Currency
+    {
+        private static readonly ECV s_Currency = new ECV(true);
+
+        public ECV() : this(false) { }
+        
+        private ECV(bool builtin) : base("ECV") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Constante (UVC)".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Constante (UVC)".</value>
+        public static ECV Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Kroon".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class EEK : Currency
+    {
+        private static readonly EEK s_Currency = new EEK(true);
+
+        public EEK() : this(false) { }
+        
+        private EEK(bool builtin) : base("EEK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kroon".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kroon".</value>
+        public static EEK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Egyptian Pound".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EGP : Currency
     {
-        private static readonly EGP s_Currency = new EGP();
+        private static readonly EGP s_Currency = new EGP(true);
 
-        private EGP() : base("EGP") { }
+        public EGP() : this(false) { }
+        
+        private EGP(bool builtin) : base("EGP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Egyptian Pound".
@@ -1171,15 +2710,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Ekwele".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class EQE : Currency
+    {
+        private static readonly EQE s_Currency = new EQE(true);
+
+        public EQE() : this(false) { }
+        
+        private EQE(bool builtin) : base("EQE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Ekwele".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Ekwele".</value>
+        public static EQE Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Nakfa".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ERN : Currency
     {
-        private static readonly ERN s_Currency = new ERN();
+        private static readonly ERN s_Currency = new ERN(true);
 
-        private ERN() : base("ERN") { }
+        public ERN() : this(false) { }
+        
+        private ERN(bool builtin) : base("ERN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nakfa".
@@ -1196,15 +2774,118 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Spanish Peseta".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ESA : Currency
+    {
+        private static readonly ESA s_Currency = new ESA(true);
+
+        public ESA() : this(false) { }
+        
+        private ESA(bool builtin) : base("ESA") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".</value>
+        public static ESA Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the """A"" Account (convertible Peseta Account)".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ESB : Currency
+    {
+        private static readonly ESB s_Currency = new ESB(true);
+
+        public ESB() : this(false) { }
+        
+        private ESB(bool builtin) : base("ESB") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the """A"" Account (convertible Peseta Account)".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the """A"" Account (convertible Peseta Account)".</value>
+        public static ESB Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Spanish Peseta".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ESP : Currency
+    {
+        private static readonly ESP s_Currency = new ESP(true);
+
+        public ESP() : this(false) { }
+        
+        private ESP(bool builtin) : base("ESP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".</value>
+        public static ESP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Ethiopian Birr".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ETB : Currency
     {
-        private static readonly ETB s_Currency = new ETB();
+        private static readonly ETB s_Currency = new ETB(true);
 
-        private ETB() : base("ETB") { }
+        public ETB() : this(false) { }
+        
+        private ETB(bool builtin) : base("ETB") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ethiopian Birr".
@@ -1227,9 +2908,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EUR : Currency
     {
-        private static readonly EUR s_Currency = new EUR();
+        private static readonly EUR s_Currency = new EUR(true);
 
-        private EUR() : base("EUR") { }
+        public EUR() : this(false) { }
+        
+        private EUR(bool builtin) : base("EUR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Euro".
@@ -1246,15 +2934,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Markka".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class FIM : Currency
+    {
+        private static readonly FIM s_Currency = new FIM(true);
+
+        public FIM() : this(false) { }
+        
+        private FIM(bool builtin) : base("FIM") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Markka".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Markka".</value>
+        public static FIM Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Fiji Dollar".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FJD : Currency
     {
-        private static readonly FJD s_Currency = new FJD();
+        private static readonly FJD s_Currency = new FJD(true);
 
-        private FJD() : base("FJD") { }
+        public FJD() : this(false) { }
+        
+        private FJD(bool builtin) : base("FJD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Fiji Dollar".
@@ -1277,9 +3004,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FKP : Currency
     {
-        private static readonly FKP s_Currency = new FKP();
+        private static readonly FKP s_Currency = new FKP(true);
 
-        private FKP() : base("FKP") { }
+        public FKP() : this(false) { }
+        
+        private FKP(bool builtin) : base("FKP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Falkland Islands Pound".
@@ -1296,15 +3030,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "French Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class FRF : Currency
+    {
+        private static readonly FRF s_Currency = new FRF(true);
+
+        public FRF() : this(false) { }
+        
+        private FRF(bool builtin) : base("FRF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "French Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "French Franc".</value>
+        public static FRF Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Pound Sterling".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GBP : Currency
     {
-        private static readonly GBP s_Currency = new GBP();
+        private static readonly GBP s_Currency = new GBP(true);
 
-        private GBP() : base("GBP") { }
+        public GBP() : this(false) { }
+        
+        private GBP(bool builtin) : base("GBP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound Sterling".
@@ -1321,15 +3094,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Georgian Coupon".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class GEK : Currency
+    {
+        private static readonly GEK s_Currency = new GEK(true);
+
+        public GEK() : this(false) { }
+        
+        private GEK(bool builtin) : base("GEK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Georgian Coupon".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Georgian Coupon".</value>
+        public static GEK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Lari".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEL : Currency
     {
-        private static readonly GEL s_Currency = new GEL();
+        private static readonly GEL s_Currency = new GEL(true);
 
-        private GEL() : base("GEL") { }
+        public GEL() : this(false) { }
+        
+        private GEL(bool builtin) : base("GEL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lari".
@@ -1346,15 +3158,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Cedi".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class GHC : Currency
+    {
+        private static readonly GHC s_Currency = new GHC(true);
+
+        public GHC() : this(false) { }
+        
+        private GHC(bool builtin) : base("GHC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cedi".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cedi".</value>
+        public static GHC Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Ghana Cedi".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class GHP : Currency
+    {
+        private static readonly GHP s_Currency = new GHP(true);
+
+        public GHP() : this(false) { }
+        
+        private GHP(bool builtin) : base("GHP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".</value>
+        public static GHP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Ghana Cedi".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHS : Currency
     {
-        private static readonly GHS s_Currency = new GHS();
+        private static readonly GHS s_Currency = new GHS(true);
 
-        private GHS() : base("GHS") { }
+        public GHS() : this(false) { }
+        
+        private GHS(bool builtin) : base("GHS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
@@ -1377,9 +3260,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GIP : Currency
     {
-        private static readonly GIP s_Currency = new GIP();
+        private static readonly GIP s_Currency = new GIP(true);
 
-        private GIP() : base("GIP") { }
+        public GIP() : this(false) { }
+        
+        private GIP(bool builtin) : base("GIP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gibraltar Pound".
@@ -1402,9 +3292,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GMD : Currency
     {
-        private static readonly GMD s_Currency = new GMD();
+        private static readonly GMD s_Currency = new GMD(true);
 
-        private GMD() : base("GMD") { }
+        public GMD() : this(false) { }
+        
+        private GMD(bool builtin) : base("GMD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dalasi".
@@ -1421,15 +3318,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Syli".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class GNE : Currency
+    {
+        private static readonly GNE s_Currency = new GNE(true);
+
+        public GNE() : this(false) { }
+        
+        private GNE(bool builtin) : base("GNE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Syli".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Syli".</value>
+        public static GNE Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Guinea Franc".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNF : Currency
     {
-        private static readonly GNF s_Currency = new GNF();
+        private static readonly GNF s_Currency = new GNF(true);
 
-        private GNF() : base("GNF") { }
+        public GNF() : this(false) { }
+        
+        private GNF(bool builtin) : base("GNF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Franc".
@@ -1446,15 +3382,118 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Syli".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class GNS : Currency
+    {
+        private static readonly GNS s_Currency = new GNS(true);
+
+        public GNS() : this(false) { }
+        
+        private GNS(bool builtin) : base("GNS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Syli".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Syli".</value>
+        public static GNS Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Ekwele".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class GQE : Currency
+    {
+        private static readonly GQE s_Currency = new GQE(true);
+
+        public GQE() : this(false) { }
+        
+        private GQE(bool builtin) : base("GQE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Ekwele".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Ekwele".</value>
+        public static GQE Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Drachma".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class GRD : Currency
+    {
+        private static readonly GRD s_Currency = new GRD(true);
+
+        public GRD() : this(false) { }
+        
+        private GRD(bool builtin) : base("GRD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Drachma".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Drachma".</value>
+        public static GRD Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Quetzal".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GTQ : Currency
     {
-        private static readonly GTQ s_Currency = new GTQ();
+        private static readonly GTQ s_Currency = new GTQ(true);
 
-        private GTQ() : base("GTQ") { }
+        public GTQ() : this(false) { }
+        
+        private GTQ(bool builtin) : base("GTQ") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Quetzal".
@@ -1471,15 +3510,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Guinea Escudo".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class GWE : Currency
+    {
+        private static readonly GWE s_Currency = new GWE(true);
+
+        public GWE() : this(false) { }
+        
+        private GWE(bool builtin) : base("GWE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Escudo".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea Escudo".</value>
+        public static GWE Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Guinea-Bissau Peso".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class GWP : Currency
+    {
+        private static readonly GWP s_Currency = new GWP(true);
+
+        public GWP() : this(false) { }
+        
+        private GWP(bool builtin) : base("GWP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea-Bissau Peso".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea-Bissau Peso".</value>
+        public static GWP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Guyana Dollar".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GYD : Currency
     {
-        private static readonly GYD s_Currency = new GYD();
+        private static readonly GYD s_Currency = new GYD(true);
 
-        private GYD() : base("GYD") { }
+        public GYD() : this(false) { }
+        
+        private GYD(bool builtin) : base("GYD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guyana Dollar".
@@ -1502,9 +3612,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HKD : Currency
     {
-        private static readonly HKD s_Currency = new HKD();
+        private static readonly HKD s_Currency = new HKD(true);
 
-        private HKD() : base("HKD") { }
+        public HKD() : this(false) { }
+        
+        private HKD(bool builtin) : base("HKD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Hong Kong Dollar".
@@ -1527,9 +3644,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HNL : Currency
     {
-        private static readonly HNL s_Currency = new HNL();
+        private static readonly HNL s_Currency = new HNL(true);
 
-        private HNL() : base("HNL") { }
+        public HNL() : this(false) { }
+        
+        private HNL(bool builtin) : base("HNL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lempira".
@@ -1546,15 +3670,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Croatian Dinar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class HRD : Currency
+    {
+        private static readonly HRD s_Currency = new HRD(true);
+
+        public HRD() : this(false) { }
+        
+        private HRD(bool builtin) : base("HRD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Croatian Dinar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Croatian Dinar".</value>
+        public static HRD Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Croatian Kuna".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRK : Currency
     {
-        private static readonly HRK s_Currency = new HRK();
+        private static readonly HRK s_Currency = new HRK(true);
 
-        private HRK() : base("HRK") { }
+        public HRK() : this(false) { }
+        
+        private HRK(bool builtin) : base("HRK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Croatian Kuna".
@@ -1577,9 +3740,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HTG : Currency
     {
-        private static readonly HTG s_Currency = new HTG();
+        private static readonly HTG s_Currency = new HTG(true);
 
-        private HTG() : base("HTG") { }
+        public HTG() : this(false) { }
+        
+        private HTG(bool builtin) : base("HTG") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gourde".
@@ -1602,9 +3772,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HUF : Currency
     {
-        private static readonly HUF s_Currency = new HUF();
+        private static readonly HUF s_Currency = new HUF(true);
 
-        private HUF() : base("HUF") { }
+        public HUF() : this(false) { }
+        
+        private HUF(bool builtin) : base("HUF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Forint".
@@ -1627,9 +3804,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IDR : Currency
     {
-        private static readonly IDR s_Currency = new IDR();
+        private static readonly IDR s_Currency = new IDR(true);
 
-        private IDR() : base("IDR") { }
+        public IDR() : this(false) { }
+        
+        private IDR(bool builtin) : base("IDR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rupiah".
@@ -1646,15 +3830,118 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Irish Pound".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class IEP : Currency
+    {
+        private static readonly IEP s_Currency = new IEP(true);
+
+        public IEP() : this(false) { }
+        
+        private IEP(bool builtin) : base("IEP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Irish Pound".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Irish Pound".</value>
+        public static IEP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Pound".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ILP : Currency
+    {
+        private static readonly ILP s_Currency = new ILP(true);
+
+        public ILP() : this(false) { }
+        
+        private ILP(bool builtin) : base("ILP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Pound".</value>
+        public static ILP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Old Shekel".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ILR : Currency
+    {
+        private static readonly ILR s_Currency = new ILR(true);
+
+        public ILR() : this(false) { }
+        
+        private ILR(bool builtin) : base("ILR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Shekel".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Shekel".</value>
+        public static ILR Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "New Israeli Sheqel".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILS : Currency
     {
-        private static readonly ILS s_Currency = new ILS();
+        private static readonly ILS s_Currency = new ILS(true);
 
-        private ILS() : base("ILS") { }
+        public ILS() : this(false) { }
+        
+        private ILS(bool builtin) : base("ILS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Israeli Sheqel".
@@ -1677,9 +3964,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class INR : Currency
     {
-        private static readonly INR s_Currency = new INR();
+        private static readonly INR s_Currency = new INR(true);
 
-        private INR() : base("INR") { }
+        public INR() : this(false) { }
+        
+        private INR(bool builtin) : base("INR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Indian Rupee".
@@ -1702,9 +3996,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IQD : Currency
     {
-        private static readonly IQD s_Currency = new IQD();
+        private static readonly IQD s_Currency = new IQD(true);
 
-        private IQD() : base("IQD") { }
+        public IQD() : this(false) { }
+        
+        private IQD(bool builtin) : base("IQD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iraqi Dinar".
@@ -1727,9 +4028,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IRR : Currency
     {
-        private static readonly IRR s_Currency = new IRR();
+        private static readonly IRR s_Currency = new IRR(true);
 
-        private IRR() : base("IRR") { }
+        public IRR() : this(false) { }
+        
+        private IRR(bool builtin) : base("IRR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iranian Rial".
@@ -1746,15 +4054,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Old Krona".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ISJ : Currency
+    {
+        private static readonly ISJ s_Currency = new ISJ(true);
+
+        public ISJ() : this(false) { }
+        
+        private ISJ(bool builtin) : base("ISJ") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Krona".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Krona".</value>
+        public static ISJ Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Iceland Krona".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISK : Currency
     {
-        private static readonly ISK s_Currency = new ISK();
+        private static readonly ISK s_Currency = new ISK(true);
 
-        private ISK() : base("ISK") { }
+        public ISK() : this(false) { }
+        
+        private ISK(bool builtin) : base("ISK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iceland Krona".
@@ -1771,15 +4118,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Italian Lira".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ITL : Currency
+    {
+        private static readonly ITL s_Currency = new ITL(true);
+
+        public ITL() : this(false) { }
+        
+        private ITL(bool builtin) : base("ITL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Italian Lira".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Italian Lira".</value>
+        public static ITL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Jamaican Dollar".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JMD : Currency
     {
-        private static readonly JMD s_Currency = new JMD();
+        private static readonly JMD s_Currency = new JMD(true);
 
-        private JMD() : base("JMD") { }
+        public JMD() : this(false) { }
+        
+        private JMD(bool builtin) : base("JMD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Jamaican Dollar".
@@ -1802,9 +4188,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JOD : Currency
     {
-        private static readonly JOD s_Currency = new JOD();
+        private static readonly JOD s_Currency = new JOD(true);
 
-        private JOD() : base("JOD") { }
+        public JOD() : this(false) { }
+        
+        private JOD(bool builtin) : base("JOD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Jordanian Dinar".
@@ -1827,9 +4220,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JPY : Currency
     {
-        private static readonly JPY s_Currency = new JPY();
+        private static readonly JPY s_Currency = new JPY(true);
 
-        private JPY() : base("JPY") { }
+        public JPY() : this(false) { }
+        
+        private JPY(bool builtin) : base("JPY") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yen".
@@ -1852,9 +4252,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KES : Currency
     {
-        private static readonly KES s_Currency = new KES();
+        private static readonly KES s_Currency = new KES(true);
 
-        private KES() : base("KES") { }
+        public KES() : this(false) { }
+        
+        private KES(bool builtin) : base("KES") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kenyan Shilling".
@@ -1877,9 +4284,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KGS : Currency
     {
-        private static readonly KGS s_Currency = new KGS();
+        private static readonly KGS s_Currency = new KGS(true);
 
-        private KGS() : base("KGS") { }
+        public KGS() : this(false) { }
+        
+        private KGS(bool builtin) : base("KGS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Som".
@@ -1902,9 +4316,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KHR : Currency
     {
-        private static readonly KHR s_Currency = new KHR();
+        private static readonly KHR s_Currency = new KHR(true);
 
-        private KHR() : base("KHR") { }
+        public KHR() : this(false) { }
+        
+        private KHR(bool builtin) : base("KHR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Riel".
@@ -1927,9 +4348,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KMF : Currency
     {
-        private static readonly KMF s_Currency = new KMF();
+        private static readonly KMF s_Currency = new KMF(true);
 
-        private KMF() : base("KMF") { }
+        public KMF() : this(false) { }
+        
+        private KMF(bool builtin) : base("KMF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Comoro Franc".
@@ -1952,9 +4380,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KPW : Currency
     {
-        private static readonly KPW s_Currency = new KPW();
+        private static readonly KPW s_Currency = new KPW(true);
 
-        private KPW() : base("KPW") { }
+        public KPW() : this(false) { }
+        
+        private KPW(bool builtin) : base("KPW") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "North Korean Won".
@@ -1977,9 +4412,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KRW : Currency
     {
-        private static readonly KRW s_Currency = new KRW();
+        private static readonly KRW s_Currency = new KRW(true);
 
-        private KRW() : base("KRW") { }
+        public KRW() : this(false) { }
+        
+        private KRW(bool builtin) : base("KRW") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Won".
@@ -2002,9 +4444,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KWD : Currency
     {
-        private static readonly KWD s_Currency = new KWD();
+        private static readonly KWD s_Currency = new KWD(true);
 
-        private KWD() : base("KWD") { }
+        public KWD() : this(false) { }
+        
+        private KWD(bool builtin) : base("KWD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kuwaiti Dinar".
@@ -2027,9 +4476,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KYD : Currency
     {
-        private static readonly KYD s_Currency = new KYD();
+        private static readonly KYD s_Currency = new KYD(true);
 
-        private KYD() : base("KYD") { }
+        public KYD() : this(false) { }
+        
+        private KYD(bool builtin) : base("KYD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cayman Islands Dollar".
@@ -2052,9 +4508,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KZT : Currency
     {
-        private static readonly KZT s_Currency = new KZT();
+        private static readonly KZT s_Currency = new KZT(true);
 
-        private KZT() : base("KZT") { }
+        public KZT() : this(false) { }
+        
+        private KZT(bool builtin) : base("KZT") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tenge".
@@ -2071,15 +4534,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Kip Pot Pol".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class LAJ : Currency
+    {
+        private static readonly LAJ s_Currency = new LAJ(true);
+
+        public LAJ() : this(false) { }
+        
+        private LAJ(bool builtin) : base("LAJ") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip Pot Pol".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kip Pot Pol".</value>
+        public static LAJ Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Kip".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAK : Currency
     {
-        private static readonly LAK s_Currency = new LAK();
+        private static readonly LAK s_Currency = new LAK(true);
 
-        private LAK() : base("LAK") { }
+        public LAK() : this(false) { }
+        
+        private LAK(bool builtin) : base("LAK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip".
@@ -2102,9 +4604,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LBP : Currency
     {
-        private static readonly LBP s_Currency = new LBP();
+        private static readonly LBP s_Currency = new LBP(true);
 
-        private LBP() : base("LBP") { }
+        public LBP() : this(false) { }
+        
+        private LBP(bool builtin) : base("LBP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lebanese Pound".
@@ -2127,9 +4636,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LKR : Currency
     {
-        private static readonly LKR s_Currency = new LKR();
+        private static readonly LKR s_Currency = new LKR(true);
 
-        private LKR() : base("LKR") { }
+        public LKR() : this(false) { }
+        
+        private LKR(bool builtin) : base("LKR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sri Lanka Rupee".
@@ -2152,9 +4668,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LRD : Currency
     {
-        private static readonly LRD s_Currency = new LRD();
+        private static readonly LRD s_Currency = new LRD(true);
 
-        private LRD() : base("LRD") { }
+        public LRD() : this(false) { }
+        
+        private LRD(bool builtin) : base("LRD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Liberian Dollar".
@@ -2177,9 +4700,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSL : Currency
     {
-        private static readonly LSL s_Currency = new LSL();
+        private static readonly LSL s_Currency = new LSL(true);
 
-        private LSL() : base("LSL") { }
+        public LSL() : this(false) { }
+        
+        private LSL(bool builtin) : base("LSL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Loti".
@@ -2196,15 +4726,278 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Maloti".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class LSM : Currency
+    {
+        private static readonly LSM s_Currency = new LSM(true);
+
+        public LSM() : this(false) { }
+        
+        private LSM(bool builtin) : base("LSM") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Maloti".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Maloti".</value>
+        public static LSM Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Lithuanian Litas".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class LTL : Currency
+    {
+        private static readonly LTL s_Currency = new LTL(true);
+
+        public LTL() : this(false) { }
+        
+        private LTL(bool builtin) : base("LTL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lithuanian Litas".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lithuanian Litas".</value>
+        public static LTL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Talonas".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class LTT : Currency
+    {
+        private static readonly LTT s_Currency = new LTT(true);
+
+        public LTT() : this(false) { }
+        
+        private LTT(bool builtin) : base("LTT") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Talonas".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Talonas".</value>
+        public static LTT Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Luxembourg Convertible Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class LUC : Currency
+    {
+        private static readonly LUC s_Currency = new LUC(true);
+
+        public LUC() : this(false) { }
+        
+        private LUC(bool builtin) : base("LUC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Convertible Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Convertible Franc".</value>
+        public static LUC Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Luxembourg Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class LUF : Currency
+    {
+        private static readonly LUF s_Currency = new LUF(true);
+
+        public LUF() : this(false) { }
+        
+        private LUF(bool builtin) : base("LUF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Franc".</value>
+        public static LUF Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Luxembourg Financial Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class LUL : Currency
+    {
+        private static readonly LUL s_Currency = new LUL(true);
+
+        public LUL() : this(false) { }
+        
+        private LUL(bool builtin) : base("LUL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Financial Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Financial Franc".</value>
+        public static LUL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Latvian Lats".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class LVL : Currency
+    {
+        private static readonly LVL s_Currency = new LVL(true);
+
+        public LVL() : this(false) { }
+        
+        private LVL(bool builtin) : base("LVL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Latvian Lats".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Latvian Lats".</value>
+        public static LVL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Latvian Ruble".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class LVR : Currency
+    {
+        private static readonly LVR s_Currency = new LVR(true);
+
+        public LVR() : this(false) { }
+        
+        private LVR(bool builtin) : base("LVR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Latvian Ruble".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Latvian Ruble".</value>
+        public static LVR Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Libyan Dinar".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LYD : Currency
     {
-        private static readonly LYD s_Currency = new LYD();
+        private static readonly LYD s_Currency = new LYD(true);
 
-        private LYD() : base("LYD") { }
+        public LYD() : this(false) { }
+        
+        private LYD(bool builtin) : base("LYD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Libyan Dinar".
@@ -2227,9 +5020,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAD : Currency
     {
-        private static readonly MAD s_Currency = new MAD();
+        private static readonly MAD s_Currency = new MAD(true);
 
-        private MAD() : base("MAD") { }
+        public MAD() : this(false) { }
+        
+        private MAD(bool builtin) : base("MAD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Moroccan Dirham".
@@ -2246,15 +5046,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Mali Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class MAF : Currency
+    {
+        private static readonly MAF s_Currency = new MAF(true);
+
+        public MAF() : this(false) { }
+        
+        private MAF(bool builtin) : base("MAF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mali Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mali Franc".</value>
+        public static MAF Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Moldovan Leu".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MDL : Currency
     {
-        private static readonly MDL s_Currency = new MDL();
+        private static readonly MDL s_Currency = new MDL(true);
 
-        private MDL() : base("MDL") { }
+        public MDL() : this(false) { }
+        
+        private MDL(bool builtin) : base("MDL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Moldovan Leu".
@@ -2277,9 +5116,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGA : Currency
     {
-        private static readonly MGA s_Currency = new MGA();
+        private static readonly MGA s_Currency = new MGA(true);
 
-        private MGA() : base("MGA") { }
+        public MGA() : this(false) { }
+        
+        private MGA(bool builtin) : base("MGA") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Ariary".
@@ -2296,15 +5142,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Malagasy Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class MGF : Currency
+    {
+        private static readonly MGF s_Currency = new MGF(true);
+
+        public MGF() : this(false) { }
+        
+        private MGF(bool builtin) : base("MGF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Malagasy Franc".</value>
+        public static MGF Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Denar".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MKD : Currency
     {
-        private static readonly MKD s_Currency = new MKD();
+        private static readonly MKD s_Currency = new MKD(true);
 
-        private MKD() : base("MKD") { }
+        public MKD() : this(false) { }
+        
+        private MKD(bool builtin) : base("MKD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Denar".
@@ -2321,15 +5206,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Mali Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class MLF : Currency
+    {
+        private static readonly MLF s_Currency = new MLF(true);
+
+        public MLF() : this(false) { }
+        
+        private MLF(bool builtin) : base("MLF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mali Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mali Franc".</value>
+        public static MLF Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Kyat".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MMK : Currency
     {
-        private static readonly MMK s_Currency = new MMK();
+        private static readonly MMK s_Currency = new MMK(true);
 
-        private MMK() : base("MMK") { }
+        public MMK() : this(false) { }
+        
+        private MMK(bool builtin) : base("MMK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kyat".
@@ -2352,9 +5276,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MNT : Currency
     {
-        private static readonly MNT s_Currency = new MNT();
+        private static readonly MNT s_Currency = new MNT(true);
 
-        private MNT() : base("MNT") { }
+        public MNT() : this(false) { }
+        
+        private MNT(bool builtin) : base("MNT") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tugrik".
@@ -2377,9 +5308,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MOP : Currency
     {
-        private static readonly MOP s_Currency = new MOP();
+        private static readonly MOP s_Currency = new MOP(true);
 
-        private MOP() : base("MOP") { }
+        public MOP() : this(false) { }
+        
+        private MOP(bool builtin) : base("MOP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pataca".
@@ -2402,9 +5340,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MRO : Currency
     {
-        private static readonly MRO s_Currency = new MRO();
+        private static readonly MRO s_Currency = new MRO(true);
 
-        private MRO() : base("MRO") { }
+        public MRO() : this(false) { }
+        
+        private MRO(bool builtin) : base("MRO") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ouguiya".
@@ -2421,15 +5366,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Maltese Lira".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class MTL : Currency
+    {
+        private static readonly MTL s_Currency = new MTL(true);
+
+        public MTL() : this(false) { }
+        
+        private MTL(bool builtin) : base("MTL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Maltese Lira".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Maltese Lira".</value>
+        public static MTL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Maltese Pound".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class MTP : Currency
+    {
+        private static readonly MTP s_Currency = new MTP(true);
+
+        public MTP() : this(false) { }
+        
+        private MTP(bool builtin) : base("MTP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Maltese Pound".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Maltese Pound".</value>
+        public static MTP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Mauritius Rupee".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MUR : Currency
     {
-        private static readonly MUR s_Currency = new MUR();
+        private static readonly MUR s_Currency = new MUR(true);
 
-        private MUR() : base("MUR") { }
+        public MUR() : this(false) { }
+        
+        private MUR(bool builtin) : base("MUR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mauritius Rupee".
@@ -2446,15 +5462,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Maldive Rupee".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class MVQ : Currency
+    {
+        private static readonly MVQ s_Currency = new MVQ(true);
+
+        public MVQ() : this(false) { }
+        
+        private MVQ(bool builtin) : base("MVQ") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Maldive Rupee".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Maldive Rupee".</value>
+        public static MVQ Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Rufiyaa".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVR : Currency
     {
-        private static readonly MVR s_Currency = new MVR();
+        private static readonly MVR s_Currency = new MVR(true);
 
-        private MVR() : base("MVR") { }
+        public MVR() : this(false) { }
+        
+        private MVR(bool builtin) : base("MVR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rufiyaa".
@@ -2477,9 +5532,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MWK : Currency
     {
-        private static readonly MWK s_Currency = new MWK();
+        private static readonly MWK s_Currency = new MWK(true);
 
-        private MWK() : base("MWK") { }
+        public MWK() : this(false) { }
+        
+        private MWK(bool builtin) : base("MWK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwacha".
@@ -2502,9 +5564,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXN : Currency
     {
-        private static readonly MXN s_Currency = new MXN();
+        private static readonly MXN s_Currency = new MXN(true);
 
-        private MXN() : base("MXN") { }
+        public MXN() : this(false) { }
+        
+        private MXN(bool builtin) : base("MXN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
@@ -2521,15 +5590,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Mexican Peso".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class MXP : Currency
+    {
+        private static readonly MXP s_Currency = new MXP(true);
+
+        public MXP() : this(false) { }
+        
+        private MXP(bool builtin) : base("MXP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Peso".</value>
+        public static MXP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Mexican Unidad de Inversion (UDI)".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXV : Currency
     {
-        private static readonly MXV s_Currency = new MXV();
+        private static readonly MXV s_Currency = new MXV(true);
 
-        private MXV() : base("MXV") { }
+        public MXV() : this(false) { }
+        
+        private MXV(bool builtin) : base("MXV") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Unidad de Inversion (UDI)".
@@ -2552,9 +5660,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MYR : Currency
     {
-        private static readonly MYR s_Currency = new MYR();
+        private static readonly MYR s_Currency = new MYR(true);
 
-        private MYR() : base("MYR") { }
+        public MYR() : this(false) { }
+        
+        private MYR(bool builtin) : base("MYR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malaysian Ringgit".
@@ -2571,15 +5686,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Mozambique Escudo".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class MZE : Currency
+    {
+        private static readonly MZE s_Currency = new MZE(true);
+
+        public MZE() : this(false) { }
+        
+        private MZE(bool builtin) : base("MZE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Escudo".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Escudo".</value>
+        public static MZE Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Mozambique Metical".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class MZM : Currency
+    {
+        private static readonly MZM s_Currency = new MZM(true);
+
+        public MZM() : this(false) { }
+        
+        private MZM(bool builtin) : base("MZM") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".</value>
+        public static MZM Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Mozambique Metical".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZN : Currency
     {
-        private static readonly MZN s_Currency = new MZN();
+        private static readonly MZN s_Currency = new MZN(true);
 
-        private MZN() : base("MZN") { }
+        public MZN() : this(false) { }
+        
+        private MZN(bool builtin) : base("MZN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
@@ -2602,9 +5788,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NAD : Currency
     {
-        private static readonly NAD s_Currency = new NAD();
+        private static readonly NAD s_Currency = new NAD(true);
 
-        private NAD() : base("NAD") { }
+        public NAD() : this(false) { }
+        
+        private NAD(bool builtin) : base("NAD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Namibia Dollar".
@@ -2627,9 +5820,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NGN : Currency
     {
-        private static readonly NGN s_Currency = new NGN();
+        private static readonly NGN s_Currency = new NGN(true);
 
-        private NGN() : base("NGN") { }
+        public NGN() : this(false) { }
+        
+        private NGN(bool builtin) : base("NGN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Naira".
@@ -2646,15 +5846,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Cordoba".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class NIC : Currency
+    {
+        private static readonly NIC s_Currency = new NIC(true);
+
+        public NIC() : this(false) { }
+        
+        private NIC(bool builtin) : base("NIC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cordoba".</value>
+        public static NIC Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Cordoba Oro".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIO : Currency
     {
-        private static readonly NIO s_Currency = new NIO();
+        private static readonly NIO s_Currency = new NIO(true);
 
-        private NIO() : base("NIO") { }
+        public NIO() : this(false) { }
+        
+        private NIO(bool builtin) : base("NIO") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba Oro".
@@ -2671,15 +5910,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Netherlands Guilder".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class NLG : Currency
+    {
+        private static readonly NLG s_Currency = new NLG(true);
+
+        public NLG() : this(false) { }
+        
+        private NLG(bool builtin) : base("NLG") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Guilder".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Netherlands Guilder".</value>
+        public static NLG Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Norwegian Krone".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NOK : Currency
     {
-        private static readonly NOK s_Currency = new NOK();
+        private static readonly NOK s_Currency = new NOK(true);
 
-        private NOK() : base("NOK") { }
+        public NOK() : this(false) { }
+        
+        private NOK(bool builtin) : base("NOK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Norwegian Krone".
@@ -2702,9 +5980,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NPR : Currency
     {
-        private static readonly NPR s_Currency = new NPR();
+        private static readonly NPR s_Currency = new NPR(true);
 
-        private NPR() : base("NPR") { }
+        public NPR() : this(false) { }
+        
+        private NPR(bool builtin) : base("NPR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nepalese Rupee".
@@ -2727,9 +6012,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NZD : Currency
     {
-        private static readonly NZD s_Currency = new NZD();
+        private static readonly NZD s_Currency = new NZD(true);
 
-        private NZD() : base("NZD") { }
+        public NZD() : this(false) { }
+        
+        private NZD(bool builtin) : base("NZD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zealand Dollar".
@@ -2752,9 +6044,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class OMR : Currency
     {
-        private static readonly OMR s_Currency = new OMR();
+        private static readonly OMR s_Currency = new OMR(true);
 
-        private OMR() : base("OMR") { }
+        public OMR() : this(false) { }
+        
+        private OMR(bool builtin) : base("OMR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rial Omani".
@@ -2777,9 +6076,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PAB : Currency
     {
-        private static readonly PAB s_Currency = new PAB();
+        private static readonly PAB s_Currency = new PAB(true);
 
-        private PAB() : base("PAB") { }
+        public PAB() : this(false) { }
+        
+        private PAB(bool builtin) : base("PAB") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Balboa".
@@ -2796,15 +6102,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Sol".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class PEH : Currency
+    {
+        private static readonly PEH s_Currency = new PEH(true);
+
+        public PEH() : this(false) { }
+        
+        private PEH(bool builtin) : base("PEH") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
+        public static PEH Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Inti".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class PEI : Currency
+    {
+        private static readonly PEI s_Currency = new PEI(true);
+
+        public PEI() : this(false) { }
+        
+        private PEI(bool builtin) : base("PEI") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Inti".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Inti".</value>
+        public static PEI Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Nuevo Sol".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEN : Currency
     {
-        private static readonly PEN s_Currency = new PEN();
+        private static readonly PEN s_Currency = new PEN(true);
 
-        private PEN() : base("PEN") { }
+        public PEN() : this(false) { }
+        
+        private PEN(bool builtin) : base("PEN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nuevo Sol".
@@ -2821,15 +6198,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Sol".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class PES : Currency
+    {
+        private static readonly PES s_Currency = new PES(true);
+
+        public PES() : this(false) { }
+        
+        private PES(bool builtin) : base("PES") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
+        public static PES Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Kina".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PGK : Currency
     {
-        private static readonly PGK s_Currency = new PGK();
+        private static readonly PGK s_Currency = new PGK(true);
 
-        private PGK() : base("PGK") { }
+        public PGK() : this(false) { }
+        
+        private PGK(bool builtin) : base("PGK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kina".
@@ -2852,9 +6268,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PHP : Currency
     {
-        private static readonly PHP s_Currency = new PHP();
+        private static readonly PHP s_Currency = new PHP(true);
 
-        private PHP() : base("PHP") { }
+        public PHP() : this(false) { }
+        
+        private PHP(bool builtin) : base("PHP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Philippine Peso".
@@ -2877,9 +6300,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PKR : Currency
     {
-        private static readonly PKR s_Currency = new PKR();
+        private static readonly PKR s_Currency = new PKR(true);
 
-        private PKR() : base("PKR") { }
+        public PKR() : this(false) { }
+        
+        private PKR(bool builtin) : base("PKR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pakistan Rupee".
@@ -2902,9 +6332,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLN : Currency
     {
-        private static readonly PLN s_Currency = new PLN();
+        private static readonly PLN s_Currency = new PLN(true);
 
-        private PLN() : base("PLN") { }
+        public PLN() : this(false) { }
+        
+        private PLN(bool builtin) : base("PLN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
@@ -2921,15 +6358,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Zloty".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class PLZ : Currency
+    {
+        private static readonly PLZ s_Currency = new PLZ(true);
+
+        public PLZ() : this(false) { }
+        
+        private PLZ(bool builtin) : base("PLZ") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zloty".</value>
+        public static PLZ Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Portuguese Escudo".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class PTE : Currency
+    {
+        private static readonly PTE s_Currency = new PTE(true);
+
+        public PTE() : this(false) { }
+        
+        private PTE(bool builtin) : base("PTE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Portuguese Escudo".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Portuguese Escudo".</value>
+        public static PTE Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Guarani".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PYG : Currency
     {
-        private static readonly PYG s_Currency = new PYG();
+        private static readonly PYG s_Currency = new PYG(true);
 
-        private PYG() : base("PYG") { }
+        public PYG() : this(false) { }
+        
+        private PYG(bool builtin) : base("PYG") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guarani".
@@ -2952,9 +6460,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class QAR : Currency
     {
-        private static readonly QAR s_Currency = new QAR();
+        private static readonly QAR s_Currency = new QAR(true);
 
-        private QAR() : base("QAR") { }
+        public QAR() : this(false) { }
+        
+        private QAR(bool builtin) : base("QAR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Qatari Rial".
@@ -2971,15 +6486,118 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Rhodesian Dollar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class RHD : Currency
+    {
+        private static readonly RHD s_Currency = new RHD(true);
+
+        public RHD() : this(false) { }
+        
+        private RHD(bool builtin) : base("RHD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".</value>
+        public static RHD Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Leu A/52".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ROK : Currency
+    {
+        private static readonly ROK s_Currency = new ROK(true);
+
+        public ROK() : this(false) { }
+        
+        private ROK(bool builtin) : base("ROK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Leu A/52".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Leu A/52".</value>
+        public static ROK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Old Leu".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ROL : Currency
+    {
+        private static readonly ROL s_Currency = new ROL(true);
+
+        public ROL() : this(false) { }
+        
+        private ROL(bool builtin) : base("ROL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Leu".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Leu".</value>
+        public static ROL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "New Romanian Leu".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RON : Currency
     {
-        private static readonly RON s_Currency = new RON();
+        private static readonly RON s_Currency = new RON(true);
 
-        private RON() : base("RON") { }
+        public RON() : this(false) { }
+        
+        private RON(bool builtin) : base("RON") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Romanian Leu".
@@ -3002,9 +6620,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RSD : Currency
     {
-        private static readonly RSD s_Currency = new RSD();
+        private static readonly RSD s_Currency = new RSD(true);
 
-        private RSD() : base("RSD") { }
+        public RSD() : this(false) { }
+        
+        private RSD(bool builtin) : base("RSD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
@@ -3027,9 +6652,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUB : Currency
     {
-        private static readonly RUB s_Currency = new RUB();
+        private static readonly RUB s_Currency = new RUB(true);
 
-        private RUB() : base("RUB") { }
+        public RUB() : this(false) { }
+        
+        private RUB(bool builtin) : base("RUB") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
@@ -3046,15 +6678,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Russian Ruble".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class RUR : Currency
+    {
+        private static readonly RUR s_Currency = new RUR(true);
+
+        public RUR() : this(false) { }
+        
+        private RUR(bool builtin) : base("RUR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Russian Ruble".</value>
+        public static RUR Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Rwanda Franc".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RWF : Currency
     {
-        private static readonly RWF s_Currency = new RWF();
+        private static readonly RWF s_Currency = new RWF(true);
 
-        private RWF() : base("RWF") { }
+        public RWF() : this(false) { }
+        
+        private RWF(bool builtin) : base("RWF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rwanda Franc".
@@ -3077,9 +6748,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SAR : Currency
     {
-        private static readonly SAR s_Currency = new SAR();
+        private static readonly SAR s_Currency = new SAR(true);
 
-        private SAR() : base("SAR") { }
+        public SAR() : this(false) { }
+        
+        private SAR(bool builtin) : base("SAR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Saudi Riyal".
@@ -3102,9 +6780,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SBD : Currency
     {
-        private static readonly SBD s_Currency = new SBD();
+        private static readonly SBD s_Currency = new SBD(true);
 
-        private SBD() : base("SBD") { }
+        public SBD() : this(false) { }
+        
+        private SBD(bool builtin) : base("SBD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Solomon Islands Dollar".
@@ -3127,9 +6812,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SCR : Currency
     {
-        private static readonly SCR s_Currency = new SCR();
+        private static readonly SCR s_Currency = new SCR(true);
 
-        private SCR() : base("SCR") { }
+        public SCR() : this(false) { }
+        
+        private SCR(bool builtin) : base("SCR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Seychelles Rupee".
@@ -3146,15 +6838,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Sudanese Dinar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class SDD : Currency
+    {
+        private static readonly SDD s_Currency = new SDD(true);
+
+        public SDD() : this(false) { }
+        
+        private SDD(bool builtin) : base("SDD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Dinar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Dinar".</value>
+        public static SDD Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Sudanese Pound".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDG : Currency
     {
-        private static readonly SDG s_Currency = new SDG();
+        private static readonly SDG s_Currency = new SDG(true);
 
-        private SDG() : base("SDG") { }
+        public SDG() : this(false) { }
+        
+        private SDG(bool builtin) : base("SDG") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
@@ -3171,15 +6902,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Sudanese Pound".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class SDP : Currency
+    {
+        private static readonly SDP s_Currency = new SDP(true);
+
+        public SDP() : this(false) { }
+        
+        private SDP(bool builtin) : base("SDP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".</value>
+        public static SDP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Swedish Krona".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SEK : Currency
     {
-        private static readonly SEK s_Currency = new SEK();
+        private static readonly SEK s_Currency = new SEK(true);
 
-        private SEK() : base("SEK") { }
+        public SEK() : this(false) { }
+        
+        private SEK(bool builtin) : base("SEK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Swedish Krona".
@@ -3202,9 +6972,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SGD : Currency
     {
-        private static readonly SGD s_Currency = new SGD();
+        private static readonly SGD s_Currency = new SGD(true);
 
-        private SGD() : base("SGD") { }
+        public SGD() : this(false) { }
+        
+        private SGD(bool builtin) : base("SGD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Singapore Dollar".
@@ -3227,9 +7004,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SHP : Currency
     {
-        private static readonly SHP s_Currency = new SHP();
+        private static readonly SHP s_Currency = new SHP(true);
 
-        private SHP() : base("SHP") { }
+        public SHP() : this(false) { }
+        
+        private SHP(bool builtin) : base("SHP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Saint Helena Pound".
@@ -3246,15 +7030,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Tolar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class SIT : Currency
+    {
+        private static readonly SIT s_Currency = new SIT(true);
+
+        public SIT() : this(false) { }
+        
+        private SIT(bool builtin) : base("SIT") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Tolar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Tolar".</value>
+        public static SIT Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Slovak Koruna".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class SKK : Currency
+    {
+        private static readonly SKK s_Currency = new SKK(true);
+
+        public SKK() : this(false) { }
+        
+        private SKK(bool builtin) : base("SKK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Slovak Koruna".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Slovak Koruna".</value>
+        public static SKK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Leone".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SLL : Currency
     {
-        private static readonly SLL s_Currency = new SLL();
+        private static readonly SLL s_Currency = new SLL(true);
 
-        private SLL() : base("SLL") { }
+        public SLL() : this(false) { }
+        
+        private SLL(bool builtin) : base("SLL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Leone".
@@ -3277,9 +7132,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SOS : Currency
     {
-        private static readonly SOS s_Currency = new SOS();
+        private static readonly SOS s_Currency = new SOS(true);
 
-        private SOS() : base("SOS") { }
+        public SOS() : this(false) { }
+        
+        private SOS(bool builtin) : base("SOS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Somali Shilling".
@@ -3302,9 +7164,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRD : Currency
     {
-        private static readonly SRD s_Currency = new SRD();
+        private static readonly SRD s_Currency = new SRD(true);
 
-        private SRD() : base("SRD") { }
+        public SRD() : this(false) { }
+        
+        private SRD(bool builtin) : base("SRD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Dollar".
@@ -3321,15 +7190,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Surinam Guilder".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class SRG : Currency
+    {
+        private static readonly SRG s_Currency = new SRG(true);
+
+        public SRG() : this(false) { }
+        
+        private SRG(bool builtin) : base("SRG") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Guilder".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Surinam Guilder".</value>
+        public static SRG Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "South Sudanese Pound".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SSP : Currency
     {
-        private static readonly SSP s_Currency = new SSP();
+        private static readonly SSP s_Currency = new SSP(true);
 
-        private SSP() : base("SSP") { }
+        public SSP() : this(false) { }
+        
+        private SSP(bool builtin) : base("SSP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "South Sudanese Pound".
@@ -3352,9 +7260,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class STD : Currency
     {
-        private static readonly STD s_Currency = new STD();
+        private static readonly STD s_Currency = new STD(true);
 
-        private STD() : base("STD") { }
+        public STD() : this(false) { }
+        
+        private STD(bool builtin) : base("STD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dobra".
@@ -3371,15 +7286,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Rouble".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class SUR : Currency
+    {
+        private static readonly SUR s_Currency = new SUR(true);
+
+        public SUR() : this(false) { }
+        
+        private SUR(bool builtin) : base("SUR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rouble".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rouble".</value>
+        public static SUR Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "El Salvador Colon".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SVC : Currency
     {
-        private static readonly SVC s_Currency = new SVC();
+        private static readonly SVC s_Currency = new SVC(true);
 
-        private SVC() : base("SVC") { }
+        public SVC() : this(false) { }
+        
+        private SVC(bool builtin) : base("SVC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "El Salvador Colon".
@@ -3402,9 +7356,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SYP : Currency
     {
-        private static readonly SYP s_Currency = new SYP();
+        private static readonly SYP s_Currency = new SYP(true);
 
-        private SYP() : base("SYP") { }
+        public SYP() : this(false) { }
+        
+        private SYP(bool builtin) : base("SYP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syrian Pound".
@@ -3427,9 +7388,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SZL : Currency
     {
-        private static readonly SZL s_Currency = new SZL();
+        private static readonly SZL s_Currency = new SZL(true);
 
-        private SZL() : base("SZL") { }
+        public SZL() : this(false) { }
+        
+        private SZL(bool builtin) : base("SZL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lilangeni".
@@ -3452,9 +7420,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class THB : Currency
     {
-        private static readonly THB s_Currency = new THB();
+        private static readonly THB s_Currency = new THB(true);
 
-        private THB() : base("THB") { }
+        public THB() : this(false) { }
+        
+        private THB(bool builtin) : base("THB") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Baht".
@@ -3471,15 +7446,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Tajik Ruble".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class TJR : Currency
+    {
+        private static readonly TJR s_Currency = new TJR(true);
+
+        public TJR() : this(false) { }
+        
+        private TJR(bool builtin) : base("TJR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Tajik Ruble".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Tajik Ruble".</value>
+        public static TJR Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Somoni".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJS : Currency
     {
-        private static readonly TJS s_Currency = new TJS();
+        private static readonly TJS s_Currency = new TJS(true);
 
-        private TJS() : base("TJS") { }
+        public TJS() : this(false) { }
+        
+        private TJS(bool builtin) : base("TJS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Somoni".
@@ -3496,15 +7510,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Turkmenistan Manat".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class TMM : Currency
+    {
+        private static readonly TMM s_Currency = new TMM(true);
+
+        public TMM() : this(false) { }
+        
+        private TMM(bool builtin) : base("TMM") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan Manat".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkmenistan Manat".</value>
+        public static TMM Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Turkmenistan New Manat".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMT : Currency
     {
-        private static readonly TMT s_Currency = new TMT();
+        private static readonly TMT s_Currency = new TMT(true);
 
-        private TMT() : base("TMT") { }
+        public TMT() : this(false) { }
+        
+        private TMT(bool builtin) : base("TMT") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan New Manat".
@@ -3527,9 +7580,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TND : Currency
     {
-        private static readonly TND s_Currency = new TND();
+        private static readonly TND s_Currency = new TND(true);
 
-        private TND() : base("TND") { }
+        public TND() : this(false) { }
+        
+        private TND(bool builtin) : base("TND") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tunisian Dinar".
@@ -3552,9 +7612,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TOP : Currency
     {
-        private static readonly TOP s_Currency = new TOP();
+        private static readonly TOP s_Currency = new TOP(true);
 
-        private TOP() : base("TOP") { }
+        public TOP() : this(false) { }
+        
+        private TOP(bool builtin) : base("TOP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pa’anga".
@@ -3571,15 +7638,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Timor Escudo".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class TPE : Currency
+    {
+        private static readonly TPE s_Currency = new TPE(true);
+
+        public TPE() : this(false) { }
+        
+        private TPE(bool builtin) : base("TPE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Timor Escudo".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Timor Escudo".</value>
+        public static TPE Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Old Turkish Lira".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class TRL : Currency
+    {
+        private static readonly TRL s_Currency = new TRL(true);
+
+        public TRL() : this(false) { }
+        
+        private TRL(bool builtin) : base("TRL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Turkish Lira".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Turkish Lira".</value>
+        public static TRL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Turkish Lira".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRY : Currency
     {
-        private static readonly TRY s_Currency = new TRY();
+        private static readonly TRY s_Currency = new TRY(true);
 
-        private TRY() : base("TRY") { }
+        public TRY() : this(false) { }
+        
+        private TRY(bool builtin) : base("TRY") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkish Lira".
@@ -3602,9 +7740,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TTD : Currency
     {
-        private static readonly TTD s_Currency = new TTD();
+        private static readonly TTD s_Currency = new TTD(true);
 
-        private TTD() : base("TTD") { }
+        public TTD() : this(false) { }
+        
+        private TTD(bool builtin) : base("TTD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Trinidad and Tobago Dollar".
@@ -3627,9 +7772,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TWD : Currency
     {
-        private static readonly TWD s_Currency = new TWD();
+        private static readonly TWD s_Currency = new TWD(true);
 
-        private TWD() : base("TWD") { }
+        public TWD() : this(false) { }
+        
+        private TWD(bool builtin) : base("TWD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Taiwan Dollar".
@@ -3652,9 +7804,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TZS : Currency
     {
-        private static readonly TZS s_Currency = new TZS();
+        private static readonly TZS s_Currency = new TZS(true);
 
-        private TZS() : base("TZS") { }
+        public TZS() : this(false) { }
+        
+        private TZS(bool builtin) : base("TZS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tanzanian Shilling".
@@ -3677,9 +7836,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAH : Currency
     {
-        private static readonly UAH s_Currency = new UAH();
+        private static readonly UAH s_Currency = new UAH(true);
 
-        private UAH() : base("UAH") { }
+        public UAH() : this(false) { }
+        
+        private UAH(bool builtin) : base("UAH") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Hryvnia".
@@ -3696,15 +7862,118 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Karbovanet".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class UAK : Currency
+    {
+        private static readonly UAK s_Currency = new UAK(true);
+
+        public UAK() : this(false) { }
+        
+        private UAK(bool builtin) : base("UAK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Karbovanet".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Karbovanet".</value>
+        public static UAK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Uganda Shilling".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class UGS : Currency
+    {
+        private static readonly UGS s_Currency = new UGS(true);
+
+        public UGS() : this(false) { }
+        
+        private UGS(bool builtin) : base("UGS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".</value>
+        public static UGS Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Old Shilling".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class UGW : Currency
+    {
+        private static readonly UGW s_Currency = new UGW(true);
+
+        public UGW() : this(false) { }
+        
+        private UGW(bool builtin) : base("UGW") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Shilling".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Shilling".</value>
+        public static UGW Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Uganda Shilling".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGX : Currency
     {
-        private static readonly UGX s_Currency = new UGX();
+        private static readonly UGX s_Currency = new UGX(true);
 
-        private UGX() : base("UGX") { }
+        public UGX() : this(false) { }
+        
+        private UGX(bool builtin) : base("UGX") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
@@ -3727,9 +7996,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USD : Currency
     {
-        private static readonly USD s_Currency = new USD();
+        private static readonly USD s_Currency = new USD(true);
 
-        private USD() : base("USD") { }
+        public USD() : this(false) { }
+        
+        private USD(bool builtin) : base("USD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar".
@@ -3752,9 +8028,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USN : Currency
     {
-        private static readonly USN s_Currency = new USN();
+        private static readonly USN s_Currency = new USN(true);
 
-        private USN() : base("USN") { }
+        public USN() : this(false) { }
+        
+        private USN(bool builtin) : base("USN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Next day)".
@@ -3771,15 +8054,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "US Dollar (Same day)".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class USS : Currency
+    {
+        private static readonly USS s_Currency = new USS(true);
+
+        public USS() : this(false) { }
+        
+        private USS(bool builtin) : base("USS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Same day)".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar (Same day)".</value>
+        public static USS Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYI : Currency
     {
-        private static readonly UYI s_Currency = new UYI();
+        private static readonly UYI s_Currency = new UYI(true);
 
-        private UYI() : base("UYI") { }
+        public UYI() : this(false) { }
+        
+        private UYI(bool builtin) : base("UYI") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".
@@ -3796,15 +8118,86 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Old Uruguay Peso".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class UYN : Currency
+    {
+        private static readonly UYN s_Currency = new UYN(true);
+
+        public UYN() : this(false) { }
+        
+        private UYN(bool builtin) : base("UYN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Uruguay Peso".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Uruguay Peso".</value>
+        public static UYN Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Uruguayan Peso".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class UYP : Currency
+    {
+        private static readonly UYP s_Currency = new UYP(true);
+
+        public UYP() : this(false) { }
+        
+        private UYP(bool builtin) : base("UYP") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguayan Peso".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Uruguayan Peso".</value>
+        public static UYP Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Peso Uruguayo".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYU : Currency
     {
-        private static readonly UYU s_Currency = new UYU();
+        private static readonly UYU s_Currency = new UYU(true);
 
-        private UYU() : base("UYU") { }
+        public UYU() : this(false) { }
+        
+        private UYU(bool builtin) : base("UYU") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Uruguayo".
@@ -3827,9 +8220,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UZS : Currency
     {
-        private static readonly UZS s_Currency = new UZS();
+        private static readonly UZS s_Currency = new UZS(true);
 
-        private UZS() : base("UZS") { }
+        public UZS() : this(false) { }
+        
+        private UZS(bool builtin) : base("UZS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uzbekistan Sum".
@@ -3850,11 +8250,50 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class VEB : Currency
+    {
+        private static readonly VEB s_Currency = new VEB(true);
+
+        public VEB() : this(false) { }
+        
+        private VEB(bool builtin) : base("VEB") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolivar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bolivar".</value>
+        public static VEB Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Bolivar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEF : Currency
     {
-        private static readonly VEF s_Currency = new VEF();
+        private static readonly VEF s_Currency = new VEF(true);
 
-        private VEF() : base("VEF") { }
+        public VEF() : this(false) { }
+        
+        private VEF(bool builtin) : base("VEF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolivar".
@@ -3871,15 +8310,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Old Dong".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class VNC : Currency
+    {
+        private static readonly VNC s_Currency = new VNC(true);
+
+        public VNC() : this(false) { }
+        
+        private VNC(bool builtin) : base("VNC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Dong".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Dong".</value>
+        public static VNC Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Dong".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VND : Currency
     {
-        private static readonly VND s_Currency = new VND();
+        private static readonly VND s_Currency = new VND(true);
 
-        private VND() : base("VND") { }
+        public VND() : this(false) { }
+        
+        private VND(bool builtin) : base("VND") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dong".
@@ -3902,9 +8380,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VUV : Currency
     {
-        private static readonly VUV s_Currency = new VUV();
+        private static readonly VUV s_Currency = new VUV(true);
 
-        private VUV() : base("VUV") { }
+        public VUV() : this(false) { }
+        
+        private VUV(bool builtin) : base("VUV") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Vatu".
@@ -3927,9 +8412,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class WST : Currency
     {
-        private static readonly WST s_Currency = new WST();
+        private static readonly WST s_Currency = new WST(true);
 
-        private WST() : base("WST") { }
+        public WST() : this(false) { }
+        
+        private WST(bool builtin) : base("WST") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tala".
@@ -3952,9 +8444,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAF : Currency
     {
-        private static readonly XAF s_Currency = new XAF();
+        private static readonly XAF s_Currency = new XAF(true);
 
-        private XAF() : base("XAF") { }
+        public XAF() : this(false) { }
+        
+        private XAF(bool builtin) : base("XAF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BEAC".
@@ -3977,9 +8476,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAG : Currency
     {
-        private static readonly XAG s_Currency = new XAG();
+        private static readonly XAG s_Currency = new XAG(true);
 
-        private XAG() : base("XAG") { }
+        public XAG() : this(false) { }
+        
+        private XAG(bool builtin) : base("XAG") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Silver".
@@ -4002,9 +8508,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAU : Currency
     {
-        private static readonly XAU s_Currency = new XAU();
+        private static readonly XAU s_Currency = new XAU(true);
 
-        private XAU() : base("XAU") { }
+        public XAU() : this(false) { }
+        
+        private XAU(bool builtin) : base("XAU") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold".
@@ -4027,9 +8540,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBA : Currency
     {
-        private static readonly XBA s_Currency = new XBA();
+        private static readonly XBA s_Currency = new XBA(true);
 
-        private XBA() : base("XBA") { }
+        public XBA() : this(false) { }
+        
+        private XBA(bool builtin) : base("XBA") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".
@@ -4052,9 +8572,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBB : Currency
     {
-        private static readonly XBB s_Currency = new XBB();
+        private static readonly XBB s_Currency = new XBB(true);
 
-        private XBB() : base("XBB") { }
+        public XBB() : this(false) { }
+        
+        private XBB(bool builtin) : base("XBB") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".
@@ -4077,9 +8604,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBC : Currency
     {
-        private static readonly XBC s_Currency = new XBC();
+        private static readonly XBC s_Currency = new XBC(true);
 
-        private XBC() : base("XBC") { }
+        public XBC() : this(false) { }
+        
+        private XBC(bool builtin) : base("XBC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".
@@ -4102,9 +8636,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBD : Currency
     {
-        private static readonly XBD s_Currency = new XBD();
+        private static readonly XBD s_Currency = new XBD(true);
 
-        private XBD() : base("XBD") { }
+        public XBD() : this(false) { }
+        
+        private XBD(bool builtin) : base("XBD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".
@@ -4127,9 +8668,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XCD : Currency
     {
-        private static readonly XCD s_Currency = new XCD();
+        private static readonly XCD s_Currency = new XCD(true);
 
-        private XCD() : base("XCD") { }
+        public XCD() : this(false) { }
+        
+        private XCD(bool builtin) : base("XCD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "East Caribbean Dollar".
@@ -4152,9 +8700,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XDR : Currency
     {
-        private static readonly XDR s_Currency = new XDR();
+        private static readonly XDR s_Currency = new XDR(true);
 
-        private XDR() : base("XDR") { }
+        public XDR() : this(false) { }
+        
+        private XDR(bool builtin) : base("XDR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "SDR (Special Drawing Right)".
@@ -4171,15 +8726,118 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "European Currency Unit (E.C.U)".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class XEU : Currency
+    {
+        private static readonly XEU s_Currency = new XEU(true);
+
+        public XEU() : this(false) { }
+        
+        private XEU(bool builtin) : base("XEU") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "European Currency Unit (E.C.U)".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "European Currency Unit (E.C.U)".</value>
+        public static XEU Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Gold-Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class XFO : Currency
+    {
+        private static readonly XFO s_Currency = new XFO(true);
+
+        public XFO() : this(false) { }
+        
+        private XFO(bool builtin) : base("XFO") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold-Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Gold-Franc".</value>
+        public static XFO Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "UIC-Franc".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class XFU : Currency
+    {
+        private static readonly XFU s_Currency = new XFU(true);
+
+        public XFU() : this(false) { }
+        
+        private XFU(bool builtin) : base("XFU") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "UIC-Franc".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "UIC-Franc".</value>
+        public static XFU Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "CFA Franc BCEAO".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XOF : Currency
     {
-        private static readonly XOF s_Currency = new XOF();
+        private static readonly XOF s_Currency = new XOF(true);
 
-        private XOF() : base("XOF") { }
+        public XOF() : this(false) { }
+        
+        private XOF(bool builtin) : base("XOF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BCEAO".
@@ -4202,9 +8860,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPD : Currency
     {
-        private static readonly XPD s_Currency = new XPD();
+        private static readonly XPD s_Currency = new XPD(true);
 
-        private XPD() : base("XPD") { }
+        public XPD() : this(false) { }
+        
+        private XPD(bool builtin) : base("XPD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Palladium".
@@ -4227,9 +8892,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPF : Currency
     {
-        private static readonly XPF s_Currency = new XPF();
+        private static readonly XPF s_Currency = new XPF(true);
 
-        private XPF() : base("XPF") { }
+        public XPF() : this(false) { }
+        
+        private XPF(bool builtin) : base("XPF") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFP Franc".
@@ -4252,9 +8924,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPT : Currency
     {
-        private static readonly XPT s_Currency = new XPT();
+        private static readonly XPT s_Currency = new XPT(true);
 
-        private XPT() : base("XPT") { }
+        public XPT() : this(false) { }
+        
+        private XPT(bool builtin) : base("XPT") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Platinum".
@@ -4271,15 +8950,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "RINET Funds Code".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class XRE : Currency
+    {
+        private static readonly XRE s_Currency = new XRE(true);
+
+        public XRE() : this(false) { }
+        
+        private XRE(bool builtin) : base("XRE") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "RINET Funds Code".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "RINET Funds Code".</value>
+        public static XRE Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Sucre".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XSU : Currency
     {
-        private static readonly XSU s_Currency = new XSU();
+        private static readonly XSU s_Currency = new XSU(true);
 
-        private XSU() : base("XSU") { }
+        public XSU() : this(false) { }
+        
+        private XSU(bool builtin) : base("XSU") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
@@ -4302,9 +9020,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XTS : Currency
     {
-        private static readonly XTS s_Currency = new XTS();
+        private static readonly XTS s_Currency = new XTS(true);
 
-        private XTS() : base("XTS") { }
+        public XTS() : this(false) { }
+        
+        private XTS(bool builtin) : base("XTS") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Codes specifically reserved for testing purposes".
@@ -4327,9 +9052,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XUA : Currency
     {
-        private static readonly XUA s_Currency = new XUA();
+        private static readonly XUA s_Currency = new XUA(true);
 
-        private XUA() : base("XUA") { }
+        public XUA() : this(false) { }
+        
+        private XUA(bool builtin) : base("XUA") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "ADB Unit of Account".
@@ -4352,9 +9084,16 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XXX : Currency
     {
-        private static readonly XXX s_Currency = new XXX();
+        private static readonly XXX s_Currency = new XXX(true);
 
-        private XXX() : base("XXX") { }
+        public XXX() : this(false) { }
+        
+        private XXX(bool builtin) : base("XXX") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "The codes assigned for transactions where no currency is involved".
@@ -4371,15 +9110,54 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "Yemeni Dinar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class YDD : Currency
+    {
+        private static readonly YDD s_Currency = new YDD(true);
+
+        public YDD() : this(false) { }
+        
+        private YDD(bool builtin) : base("YDD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Dinar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Yemeni Dinar".</value>
+        public static YDD Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Yemeni Rial".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YER : Currency
     {
-        private static readonly YER s_Currency = new YER();
+        private static readonly YER s_Currency = new YER(true);
 
-        private YER() : base("YER") { }
+        public YER() : this(false) { }
+        
+        private YER(bool builtin) : base("YER") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Rial".
@@ -4396,15 +9174,150 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "New Yugoslavian Dinar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class YUD : Currency
+    {
+        private static readonly YUD s_Currency = new YUD(true);
+
+        public YUD() : this(false) { }
+        
+        private YUD(bool builtin) : base("YUD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Yugoslavian Dinar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Yugoslavian Dinar".</value>
+        public static YUD Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "New Dinar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class YUM : Currency
+    {
+        private static readonly YUM s_Currency = new YUM(true);
+
+        public YUM() : this(false) { }
+        
+        private YUM(bool builtin) : base("YUM") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Dinar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Dinar".</value>
+        public static YUM Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Yugoslavian Dinar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class YUN : Currency
+    {
+        private static readonly YUN s_Currency = new YUN(true);
+
+        public YUN() : this(false) { }
+        
+        private YUN(bool builtin) : base("YUN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Yugoslavian Dinar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Yugoslavian Dinar".</value>
+        public static YUN Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Financial Rand".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ZAL : Currency
+    {
+        private static readonly ZAL s_Currency = new ZAL(true);
+
+        public ZAL() : this(false) { }
+        
+        private ZAL(bool builtin) : base("ZAL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Financial Rand".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Financial Rand".</value>
+        public static ZAL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Rand".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAR : Currency
     {
-        private static readonly ZAR s_Currency = new ZAR();
+        private static readonly ZAR s_Currency = new ZAR(true);
 
-        private ZAR() : base("ZAR") { }
+        public ZAR() : this(false) { }
+        
+        private ZAR(bool builtin) : base("ZAR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rand".
@@ -4425,11 +9338,50 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ZMK : Currency
+    {
+        private static readonly ZMK s_Currency = new ZMK(true);
+
+        public ZMK() : this(false) { }
+        
+        private ZMK(bool builtin) : base("ZMK") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".</value>
+        public static ZMK Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Zambian Kwacha".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMW : Currency
     {
-        private static readonly ZMW s_Currency = new ZMW();
+        private static readonly ZMW s_Currency = new ZMW(true);
 
-        private ZMW() : base("ZMW") { }
+        public ZMW() : this(false) { }
+        
+        private ZMW(bool builtin) : base("ZMW") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
@@ -4446,21 +9398,220 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
+    /// Represents the currency unit for the "New Zaire".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ZRN : Currency
+    {
+        private static readonly ZRN s_Currency = new ZRN(true);
+
+        public ZRN() : this(false) { }
+        
+        private ZRN(bool builtin) : base("ZRN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zaire".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Zaire".</value>
+        public static ZRN Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Zaire".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ZRZ : Currency
+    {
+        private static readonly ZRZ s_Currency = new ZRZ(true);
+
+        public ZRZ() : this(false) { }
+        
+        private ZRZ(bool builtin) : base("ZRZ") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zaire".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zaire".</value>
+        public static ZRZ Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Rhodesian Dollar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ZWC : Currency
+    {
+        private static readonly ZWC s_Currency = new ZWC(true);
+
+        public ZWC() : this(false) { }
+        
+        private ZWC(bool builtin) : base("ZWC") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".</value>
+        public static ZWC Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Zimbabwe Dollar (old)".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ZWD : Currency
+    {
+        private static readonly ZWD s_Currency = new ZWD(true);
+
+        public ZWD() : this(false) { }
+        
+        private ZWD(bool builtin) : base("ZWD") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (old)".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (old)".</value>
+        public static ZWD Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
     /// Represents the currency unit for the "Zimbabwe Dollar".
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWL : Currency
     {
-        private static readonly ZWL s_Currency = new ZWL();
+        private static readonly ZWL s_Currency = new ZWL(true);
 
-        private ZWL() : base("ZWL") { }
+        public ZWL() : this(false) { }
+        
+        private ZWL(bool builtin) : base("ZWL") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".</value>
         public static ZWL Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Zimbabwe Dollar (new)".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ZWN : Currency
+    {
+        private static readonly ZWN s_Currency = new ZWN(true);
+
+        public ZWN() : this(false) { }
+        
+        private ZWN(bool builtin) : base("ZWN") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (new)".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (new)".</value>
+        public static ZWN Currency
+        { 
+            get 
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Currency;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Zimbabwe Dollar".
+    /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class ZWR : Currency
+    {
+        private static readonly ZWR s_Currency = new ZWR(true);
+
+        public ZWR() : this(false) { }
+        
+        private ZWR(bool builtin) : base("ZWR") 
+        { 
+            if (!builtin) {
+                throw new NotSupportedException();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".</value>
+        public static ZWR Currency
         { 
             get 
             {

@@ -65,7 +65,10 @@ namespace Narvalo.Build
 
         protected void LogJavaFailure(Process process)
         {
-            Require.NotNull(process, "process");
+            if (process == null)
+            {
+                throw new ArgumentNullException();
+            }
 
             string[] errors = process.StandardError.ReadToEnd()
                 .Replace("\r", String.Empty)

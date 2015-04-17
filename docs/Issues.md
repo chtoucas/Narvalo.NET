@@ -14,6 +14,7 @@ Design
 Narvalo.Core
 ------------
 
+- `Maybe<T>`, overload true?
 - Confirm that Maybe methods never returns null.
 - Monad.tt, review true argument check for extension methods.
 
@@ -37,6 +38,7 @@ Narvalo.Finance
 ---------------
 
 - Money<T> -> whet if s_Currency throw a type initialization exception.
+- decimal overloads.
 - Handle overflows.
 - IConvertible?
 - BigMoney and BigMoney<TCurrency>.

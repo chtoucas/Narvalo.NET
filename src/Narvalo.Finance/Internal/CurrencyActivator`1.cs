@@ -6,7 +6,8 @@ namespace Narvalo.Finance.Internal
     using System.Linq;
     using System.Reflection;
 
-    internal static class CurrencyActivator<TCurrency> where TCurrency : Currency
+    internal static class CurrencyActivator<TCurrency>
+        where TCurrency : Currency, new()
     {
         private const string CURRENCIES_NAMESPACE = "Narvalo.Finance.Currencies";
         private const string INSTANCE_CURRENCY_FIELD = "s_Currency";
@@ -19,23 +20,18 @@ namespace Narvalo.Finance.Internal
         {
             var type = typeof(TCurrency);
 
-            object inst = null;
-
-            // Fast-track for currencies in the Narvalo.Finance.Currencies namespace.
+            // Handle the special case of currencies in the Narvalo.Finance.Currencies namespace.
             if (type.Namespace == CURRENCIES_NAMESPACE)
             {
-                inst = GetUniqueInstance_(type);
+                return GetUniqueInstance_(type);
             }
             else
             {
-                inst = CreateInstance_(type);
+                return new TCurrency();
             }
-
-            // Might throw an InvalidCastException?
-            return (TCurrency)inst;
         }
 
-        private static object GetUniqueInstance_(Type type)
+        private static TCurrency GetUniqueInstance_(Type type)
         {
             FieldInfo fieldInfo = type.GetTypeInfo().DeclaredFields
                 .Where(_ => _.Name == INSTANCE_CURRENCY_FIELD)
@@ -47,22 +43,10 @@ namespace Narvalo.Finance.Internal
                 throw new MissingMemberException();
             }
 
-            return fieldInfo.GetValue(null);
-        }
+            var inst = fieldInfo.GetValue(null);
 
-        // NB: Slow but only called once during the lifetime of an AppDomain.
-        private static object CreateInstance_(Type type)
-        {
-            ConstructorInfo ctorInfo = type.GetTypeInfo()
-                .DeclaredConstructors
-                .FirstOrDefault(_ => !_.GetParameters().Any());
-
-            if (ctorInfo == null)
-            {
-                throw new MissingMemberException();
-            }
-
-            return ctorInfo.Invoke(new Object[] { });
+            // Could throw an InvalidCastException but should never happen.
+            return (TCurrency)inst;
         }
     }
 }

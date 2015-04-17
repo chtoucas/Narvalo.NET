@@ -104,7 +104,15 @@ namespace Narvalo.Build
 
         protected string GenerateCompressedFilePath(string fileName)
         {
-            Require.NotNullOrEmpty(fileName, "fileName");
+            if (fileName == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (String.IsNullOrWhiteSpace(fileName))
+            {
+                throw new ArgumentException();
+            }
 
             string name = fileName.Replace("." + FileExtension, ".min." + FileExtension);
             return String.IsNullOrEmpty(OutputDirectory) ? name : Path.Combine(OutputDirectory, new FileInfo(name).Name);

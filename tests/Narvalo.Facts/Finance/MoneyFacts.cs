@@ -29,7 +29,7 @@ namespace Narvalo.Finance
             var amount2 = new Money(1m, Currency.Euro);
 
             // Act & Assert
-            Assert.True(amount1.Equals(amount2));
+            Assert.False(amount1.Equals(amount2));
             //Assert.True(amount1 == amount2);
         }
 
