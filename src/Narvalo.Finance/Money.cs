@@ -9,8 +9,6 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Properties;
 
-    // FIXME: Overflow operations.
-    // REVIEW: IConvertible?
     [DebuggerDisplay("{{ToString()}}")]
     [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
         Justification = "[Intentionally] We do provide the alternate but we called it CompareTo.")]
@@ -44,20 +42,10 @@ namespace Narvalo.Finance
     }
 
     /// <content>
-    /// Implements the <see cref="IEquatable{Money}"/> interface.
+    /// Provides helpers for <see cref="Money"/> and <see cref="Money{TCurrency}"/>.
     /// </content>
     public partial struct Money
     {
-        public static bool operator ==(Money left, Money right)
-        {
-            return IsEqual(left, right);
-        }
-
-        public static bool operator !=(Money left, Money right)
-        {
-            return !IsEqual(left, right);
-        }
-
         public static bool IsEqual<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
             where TCurrency : Currency
         {
@@ -73,6 +61,162 @@ namespace Narvalo.Finance
         public static bool IsEqual(Money money1, Money money2)
         {
             return money1.Amount == money2.Amount && money1.Currency.Equals(money2.Currency);
+        }
+
+        public static int Compare<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
+            where TCurrency : Currency
+        {
+            return money1.Amount.CompareTo(money2.Amount);
+        }
+
+        public static int Compare<TCurrency>(Money<TCurrency> money1, Money money2)
+            where TCurrency : Currency
+        {
+            return Compare(money1.Inner, money2);
+        }
+
+        public static int Compare<TCurrency>(Money money1, Money<TCurrency> money2)
+            where TCurrency : Currency
+        {
+            return Compare(money1, money2.Inner);
+        }
+
+        public static int Compare(Money money1, Money money2)
+        {
+            ThrowIfCurrencyMismatch_(money1, money2);
+
+            return money1.Amount.CompareTo(money2.Amount);
+        }
+
+        public static Money<TCurrency> Add<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
+            where TCurrency : Currency
+        {
+            var amount = checked(money1.Amount + money2.Amount);
+
+            return new Money<TCurrency>(amount);
+        }
+
+        public static Money<TCurrency> Add<TCurrency>(Money<TCurrency> money1, Money money2)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(Add(money1.Inner, money2));
+        }
+
+        public static Money Add(Money money1, Money money2)
+        {
+            ThrowIfCurrencyMismatch_(money1, money2);
+
+            var amount = checked(money1.Amount + money2.Amount);
+
+            return new Money(amount, money1.Currency);
+        }
+
+        public static Money<TCurrency> Subtract<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(money1.Amount - money2.Amount);
+        }
+
+        public static Money<TCurrency> Subtract<TCurrency>(Money<TCurrency> money1, Money money2)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(Subtract(money1.Inner, money2));
+        }
+
+        public static Money<TCurrency> Subtract<TCurrency>(Money money1, Money<TCurrency> money2)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(Subtract(money1, money2.Inner));
+        }
+
+        public static Money Subtract(Money money1, Money money2)
+        {
+            ThrowIfCurrencyMismatch_(money1, money2);
+
+            return new Money(money1.Amount - money2.Amount, money1.Currency);
+        }
+
+        public static Money<TCurrency> Multiply<TCurrency>(decimal multiplier, Money<TCurrency> money)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(Multiply(multiplier, money.Inner));
+        }
+
+        public static Money Multiply(decimal multiplier, Money money)
+        {
+            var amount = checked(multiplier * money.Amount);
+
+            return new Money(amount, money.Currency);
+        }
+
+        public static Money<TCurrency> Divide<TCurrency>(Money<TCurrency> money, decimal divisor)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(Divide(money.Inner, divisor));
+        }
+
+        public static Money Divide(Money money, decimal divisor)
+        {
+            if (divisor == 0m)
+            {
+                throw new DivideByZeroException();
+            }
+
+            return new Money(money.Amount / divisor, money.Currency);
+        }
+
+        public static Money<TCurrency> Remainder<TCurrency>(Money<TCurrency> money, decimal divisor)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(Remainder(money.Inner, divisor));
+        }
+
+        public static Money Remainder(Money money, decimal divisor)
+        {
+            if (divisor == 0m)
+            {
+                throw new DivideByZeroException();
+            }
+
+            return new Money(money.Amount % divisor, money.Currency);
+        }
+
+        public static Money<TCurrency> Negate<TCurrency>(Money<TCurrency> money)
+            where TCurrency : Currency
+        {
+            return new Money<TCurrency>(-money.Amount);
+        }
+
+        public static Money Negate(Money money)
+        {
+            return new Money(-money.Amount, money.Currency);
+        }
+
+        public static Money<TCurrency> Plus<TCurrency>(Money<TCurrency> money)
+            where TCurrency : Currency
+        {
+            return money;
+        }
+
+        public static Money Plus(Money money)
+        {
+            return money;
+        }
+    }
+
+    /// <content>
+    /// Implements the <see cref="IEquatable{Money}"/> interface.
+    /// </content>
+    public partial struct Money
+    {
+        public static bool operator ==(Money left, Money right)
+        {
+            return IsEqual(left, right);
+        }
+
+        public static bool operator !=(Money left, Money right)
+        {
+            return !IsEqual(left, right);
         }
 
         public bool Equals(Money other)
@@ -95,8 +239,8 @@ namespace Narvalo.Finance
             unchecked
             {
                 int hash = 17;
-                hash = (23 * hash) + Amount.GetHashCode();
-                hash = (23 * hash) + Currency.GetHashCode();
+                hash = (31 * hash) + ((long)Amount).GetHashCode();
+                hash = (31 * hash) + Currency.GetHashCode();
                 return hash;
             }
         }
@@ -144,31 +288,6 @@ namespace Narvalo.Finance
             return Compare(left, right) >= 0;
         }
 
-        public static int Compare<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
-            where TCurrency : Currency
-        {
-            return money1.Amount.CompareTo(money2.Amount);
-        }
-
-        public static int Compare<TCurrency>(Money<TCurrency> money1, Money money2)
-            where TCurrency : Currency
-        {
-            return Compare(money1.Inner, money2);
-        }
-
-        public static int Compare<TCurrency>(Money money1, Money<TCurrency> money2)
-            where TCurrency : Currency
-        {
-            return Compare(money1, money2.Inner);
-        }
-
-        public static int Compare(Money money1, Money money2)
-        {
-            ThrowIfCurrencyMismatch_(money1, money2);
-
-            return money1.Amount.CompareTo(money2.Amount);
-        }
-
         public int CompareTo(Money other)
         {
             return Compare(this, other);
@@ -200,29 +319,6 @@ namespace Narvalo.Finance
             return Add(left, right);
         }
 
-        public static Money<TCurrency> Add<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
-            where TCurrency : Currency
-        {
-            var amount = checked(money1.Amount + money2.Amount);
-
-            return new Money<TCurrency>(amount);
-        }
-
-        public static Money<TCurrency> Add<TCurrency>(Money<TCurrency> money1, Money money2)
-            where TCurrency : Currency
-        {
-            return new Money<TCurrency>(Add(money1.Inner, money2));
-        }
-
-        public static Money Add(Money money1, Money money2)
-        {
-            ThrowIfCurrencyMismatch_(money1, money2);
-
-            var amount = checked(money1.Amount + money2.Amount);
-
-            return new Money(amount, money1.Currency);
-        }
-
         public Money Add(Money money)
         {
             return Add(this, money);
@@ -244,31 +340,6 @@ namespace Narvalo.Finance
         public static Money operator -(Money left, Money right)
         {
             return Subtract(left, right);
-        }
-
-        public static Money<TCurrency> Subtract<TCurrency>(Money<TCurrency> money1, Money<TCurrency> money2)
-            where TCurrency : Currency
-        {
-            return new Money<TCurrency>(money1.Amount - money2.Amount);
-        }
-
-        public static Money<TCurrency> Subtract<TCurrency>(Money<TCurrency> money1, Money money2)
-            where TCurrency : Currency
-        {
-            return new Money<TCurrency>(Subtract(money1.Inner, money2));
-        }
-
-        public static Money<TCurrency> Subtract<TCurrency>(Money money1, Money<TCurrency> money2)
-            where TCurrency : Currency
-        {
-            return new Money<TCurrency>(Subtract(money1, money2.Inner));
-        }
-
-        public static Money Subtract(Money money1, Money money2)
-        {
-            ThrowIfCurrencyMismatch_(money1, money2);
-
-            return new Money(money1.Amount - money2.Amount, money1.Currency);
         }
 
         public Money Subtract(Money money)
@@ -297,19 +368,6 @@ namespace Narvalo.Finance
             return Multiply(multiplier, money);
         }
 
-        public static Money<TCurrency> Multiply<TCurrency>(decimal multiplier, Money<TCurrency> money)
-            where TCurrency : Currency
-        {
-            return new Money<TCurrency>(Multiply(multiplier, money.Inner));
-        }
-
-        public static Money Multiply(decimal multiplier, Money money)
-        {
-            var amount = checked(multiplier * money.Amount);
-
-            return new Money(amount, money.Currency);
-        }
-
         public Money Multiply(decimal multiplier)
         {
             return Multiply(multiplier, this);
@@ -326,22 +384,6 @@ namespace Narvalo.Finance
             Contract.Requires(divisor != 0m);
 
             return Divide(money, divisor);
-        }
-
-        public static Money<TCurrency> Divide<TCurrency>(Money<TCurrency> money, decimal divisor)
-            where TCurrency : Currency
-        {
-            return new Money<TCurrency>(Divide(money.Inner, divisor));
-        }
-
-        public static Money Divide(Money money, decimal divisor)
-        {
-            if (divisor == 0m)
-            {
-                throw new DivideByZeroException();
-            }
-
-            return new Money(money.Amount / divisor, money.Currency);
         }
 
         public Money Divide(decimal divisor)
@@ -364,22 +406,6 @@ namespace Narvalo.Finance
             return Remainder(money, divisor);
         }
 
-        public static Money<TCurrency> Remainder<TCurrency>(Money<TCurrency> money, decimal divisor)
-            where TCurrency : Currency
-        {
-            return new Money<TCurrency>(Remainder(money.Inner, divisor));
-        }
-
-        public static Money Remainder(Money money, decimal divisor)
-        {
-            if (divisor == 0m)
-            {
-                throw new DivideByZeroException();
-            }
-
-            return new Money(money.Amount % divisor, money.Currency);
-        }
-
         public Money Remainder(decimal divisor)
         {
             Contract.Requires(divisor != 0m);
@@ -398,17 +424,6 @@ namespace Narvalo.Finance
             return Negate(money);
         }
 
-        public static Money<TCurrency> Negate<TCurrency>(Money<TCurrency> money)
-            where TCurrency : Currency
-        {
-            return new Money<TCurrency>(-money.Amount);
-        }
-
-        public static Money Negate(Money money)
-        {
-            return new Money(-money.Amount, money.Currency);
-        }
-
         public Money Negate()
         {
             return Negate(this);
@@ -423,17 +438,6 @@ namespace Narvalo.Finance
         public static Money operator +(Money money)
         {
             return Plus(money);
-        }
-
-        public static Money<TCurrency> Plus<TCurrency>(Money<TCurrency> money)
-            where TCurrency : Currency
-        {
-            return money;
-        }
-
-        public static Money Plus(Money money)
-        {
-            return money;
         }
 
         public Money Plus()

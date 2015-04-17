@@ -10,9 +10,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
-    // FIXME: Overflow operations.
-    // FIXME: What if s_Currency throw an exception?
-    // REVIEW: IConvertible?
     [DebuggerDisplay("{{ToString()}}")]
     [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
         Justification = "[Intentionally] We do provide the alternate but we called it CompareTo.")]

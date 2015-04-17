@@ -36,7 +36,9 @@ Narvalo.Reliability
 Narvalo.Finance
 ---------------
 
+- Money<T> -> whet if s_Currency throw a type initialization exception.
 - Handle overflows.
+- IConvertible?
 - BigMoney and BigMoney<TCurrency>.
 
 Narvalo.Web

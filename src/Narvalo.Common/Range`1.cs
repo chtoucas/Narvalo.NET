@@ -103,6 +103,7 @@ namespace Narvalo
 
         public override int GetHashCode()
         {
+            // FIXME: Use EqualityComparer.
             int hash = 17;
             hash = (23 * hash) + LowerEnd.GetHashCode();
             hash = (23 * hash) + UpperEnd.GetHashCode();

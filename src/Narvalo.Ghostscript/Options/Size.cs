@@ -56,8 +56,8 @@ namespace Narvalo.GhostScript.Options
         public override int GetHashCode()
         {
             int hash = 17;
-            hash = (23 * hash) + Width.GetHashCode();
-            hash = (23 * hash) + Height.GetHashCode();
+            hash = (31 * hash) + Width.GetHashCode();
+            hash = (31 * hash) + Height.GetHashCode();
             return hash;
         }
     }
