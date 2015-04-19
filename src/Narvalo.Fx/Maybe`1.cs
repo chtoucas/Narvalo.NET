@@ -186,7 +186,8 @@ namespace Narvalo.Fx
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
         /// <value><see langword="true"/> if the object does hold a value; otherwise <see langword="false"/>.</value>
-        public bool IsSome { get { return _isSome; } }
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        internal bool IsSome { get { return _isSome; } }
 
         /// <summary>
         /// Gets the enclosed value.
@@ -490,6 +491,26 @@ namespace Narvalo.Fx
         ////}
 
         #endregion
+    }
+
+    /// <content>
+    /// Provides boolean operators.
+    /// </content>
+    public partial class Maybe<T>
+    {
+        public static bool operator true(Maybe<T> value)
+        {
+            Require.NotNull(value, "value");
+
+            return value.IsSome;
+        }
+
+        public static bool operator false(Maybe<T> value)
+        {
+            Require.NotNull(value, "value");
+
+            return !value.IsSome;
+        }
     }
 
     /// <content>

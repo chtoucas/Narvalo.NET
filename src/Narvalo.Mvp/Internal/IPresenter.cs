@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Internal
     using Narvalo.Mvp;
 
     // REVIEW: Hummm, creating this interface was most certainly a bad idea.
-    // The idea behind it is that no one except the PresenterBinder class 
+    // The idea behind it is that no one except that the PresenterBinder class 
     // can set the message coordinator. This in turn mandates that your
     // presenter inherits one of the three presenter base classes.
     internal interface IPresenter

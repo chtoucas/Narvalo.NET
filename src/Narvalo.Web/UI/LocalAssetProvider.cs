@@ -8,7 +8,6 @@ namespace Narvalo.Web.UI
     using System.Web;
 
     using Narvalo.Collections;
-    using Narvalo.Fx;
     using Narvalo.Web.Properties;
 
     public sealed class LocalAssetProvider : AssetProvider
@@ -93,10 +92,10 @@ namespace Narvalo.Web.UI
             _scriptsPath = scriptsPath.Select(NormalizeAppRelativePath).ValueOrElse("~/assets/js/");
             _stylesPath = stylesPath.Select(NormalizeAppRelativePath).ValueOrElse("~/assets/css/");
 
-            if (fontsPath.IsSome) { config.Remove(FONTS_PATH_KEY); }
-            if (imagesPath.IsSome) { config.Remove(IMAGES_PATH_KEY); }
-            if (scriptsPath.IsSome) { config.Remove(SCRIPTS_PATH_KEY); }
-            if (stylesPath.IsSome) { config.Remove(STYLES_PATH_KEY); }
+            if (fontsPath) { config.Remove(FONTS_PATH_KEY); }
+            if (imagesPath) { config.Remove(IMAGES_PATH_KEY); }
+            if (scriptsPath) { config.Remove(SCRIPTS_PATH_KEY); }
+            if (stylesPath) { config.Remove(STYLES_PATH_KEY); }
         }
 
         private static Uri MakeUri_(string baseIntermediatePath, string relativePath)
