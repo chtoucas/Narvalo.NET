@@ -7,7 +7,7 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Currencies;
     using Xunit;
 
-    public static class MoneyFacts
+    public static partial class MoneyFacts
     {
         [Fact]
         public static void Test1()

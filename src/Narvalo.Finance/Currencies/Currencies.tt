@@ -24,12 +24,13 @@ using global::System.Diagnostics.CodeAnalysis;
 
 [module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
     Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
+[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1409:RemoveUnnecessaryCode",
+    Justification = "[GeneratedCode] The empty static constructor is used to implement the lazy singleton pattern.")]
 [module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1508:ClosingCurlyBracketsMustNotBePrecededByBlankLine",
     Justification = "[GeneratedCode] Newline rule disabled for T4 templates.")]
-
+    
 namespace <#= InferNamespace() #>
 {
-    using System;
     using System.Diagnostics.Contracts;
 
 <#
@@ -41,11 +42,6 @@ namespace <#= InferNamespace() #>
         }
 
         codeSet.Add(currency.Code);
-
-        // WARNING: If you change the name of the property "s_Currency",
-        // you MUST also change the value of INSTANCE_CURRENCY_FIELD in 
-        // Internal.CurrencyActivator<TCurrency>.
-        // The same applies to CURRENCIES_NAMESPACE.
 #>
     /// <summary>
     /// Represents the currency unit for the "<#= currency.EnglishName #>".
@@ -54,27 +50,20 @@ namespace <#= InferNamespace() #>
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class <#= currency.Code #> : Currency
     {
-        private static readonly <#= currency.Code #> s_Currency = new <#= currency.Code #>(true);
+        private static readonly <#= currency.Code #> s_Instance = new <#= currency.Code #>();
 
-        public <#= currency.Code #>() : this(false) { }
-        
-        private <#= currency.Code #>(bool builtin) : base("<#= currency.Code #>") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal <#= currency.Code #>() : base("<#= currency.Code #>") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".</value>
         public static <#= currency.Code #> Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }

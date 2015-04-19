@@ -2,55 +2,53 @@
 
 namespace Narvalo.Finance
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    [SuppressMessage("Gendarme.Rules.Naming", "AvoidTypeInterfaceInconsistencyRule")]
     public sealed class CurrencyProvider
     {
         private static readonly CurrencyProvider s_Instance = new CurrencyProvider();
 
-        private ICurrencyProvider _current;
+        private CurrencyFactory _factory;
 
         public CurrencyProvider() : this(null) { }
 
-        public CurrencyProvider(ICurrencyProvider provider)
+        public CurrencyProvider(CurrencyFactory factory)
         {
-            InnerSetProvider(provider ?? new InMemoryCurrencyProvider());
+            InnerSetFactory(factory ?? new DefaultCurrencyFactory());
         }
 
-        public static ICurrencyProvider Current
+        public static CurrencyFactory Current
         {
             get
             {
-                Contract.Ensures(Contract.Result<ICurrencyProvider>() != null);
+                Contract.Ensures(Contract.Result<CurrencyFactory>() != null);
 
                 return s_Instance.InnerCurrent;
             }
         }
 
-        public ICurrencyProvider InnerCurrent
+        public CurrencyFactory InnerCurrent
         {
             get
             {
-                Contract.Ensures(Contract.Result<ICurrencyProvider>() != null);
+                Contract.Ensures(Contract.Result<CurrencyFactory>() != null);
 
-                return _current;
+                return _factory;
             }
         }
 
-        public static void SetProvider(ICurrencyProvider provider)
+        public static void SetFactory(CurrencyFactory factory)
         {
-            Contract.Requires(provider != null);
+            Contract.Requires(factory != null);
 
-            s_Instance.InnerSetProvider(provider);
+            s_Instance.InnerSetFactory(factory);
         }
 
-        public void InnerSetProvider(ICurrencyProvider provider)
+        public void InnerSetFactory(CurrencyFactory factory)
         {
-            Require.NotNull(provider, "provider");
+            Require.NotNull(factory, "factory");
 
-            _current = provider;
+            _factory = factory;
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
@@ -58,7 +56,7 @@ namespace Narvalo.Finance
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
-            Contract.Invariant(_current != null);
+            Contract.Invariant(_factory != null);
         }
 
 #endif

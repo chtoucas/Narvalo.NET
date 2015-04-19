@@ -69,7 +69,7 @@ namespace Narvalo.Finance
             ContractFor.CurrencyCode(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
 
-            return s_Cache.GetOrAdd(code, CreateCurrency_).AssumeNotNull();
+            return s_Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency).AssumeNotNull();
         }
 
         /// <summary>
@@ -100,30 +100,6 @@ namespace Narvalo.Finance
             Contract.Ensures(Contract.Result<string>() != null);
 
             return Code;
-        }
-
-        /// <summary>
-        /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
-        /// </summary>
-        /// <remarks>
-        /// Contrary to the <see cref="Currency.Of"/> method, this method always return a fresh object.
-        /// </remarks>
-        /// <param name="code">The three letter ISO-4217 code of the currency.</param>
-        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
-        /// specified code.</exception>
-        /// <returns>The currency for the specified code.</returns>
-        private static Currency CreateCurrency_(string code)
-        {
-            Contract.Requires(code != null);
-            Contract.Requires(code.Length == 3);
-            Contract.Ensures(Contract.Result<Currency>() != null);
-
-            if (!CurrencyProvider.Current.CurrencyCodes.Contains(code))
-            {
-                throw new CurrencyNotFoundException("Unknown currency: " + code + ".");
-            }
-
-            return new Currency(code);
         }
     }
 

@@ -13,9 +13,10 @@ namespace Narvalo.Finance
 {
     using System.Collections.Generic;
 
-    public sealed partial class InMemoryCurrencyProvider
+    public sealed partial class DefaultCurrencyFactory
     {
-        private static readonly HashSet<string> s_CurrencyCodeSet = new HashSet<string>() {
+        // The set of available currency codes.
+        private static readonly HashSet<string> s_CodeSet = new HashSet<string>() {
             "ADP",
             "AED",
             "AFA",

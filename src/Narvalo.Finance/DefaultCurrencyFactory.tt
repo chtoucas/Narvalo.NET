@@ -30,7 +30,8 @@ namespace <#= InferNamespace() #>
 
     public sealed partial class <#= InferName() #>
     {
-        private static readonly HashSet<string> s_CurrencyCodeSet = new HashSet<string>() {
+        // The set of available currency codes.
+        private static readonly HashSet<string> s_CodeSet = new HashSet<string>() {
 <# foreach (var code in codeSet.OrderBy(_ => _)) { #>
             "<#= code #>",
 <# } #>

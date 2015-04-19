@@ -37,9 +37,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Currencies.g.cs</LastGenOutput>
     </None>
-    <None Include="InMemoryCurrencyProvider.tt">
+    <None Include="DefaultCurrencyFactory.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>InMemoryCurrencyProvider.g.cs</LastGenOutput>
+      <LastGenOutput>DefaultCurrencyFactory.g.cs</LastGenOutput>
     </None>
     <None Include="Narvalo.Finance.props">
       <SubType>Designer</SubType>
@@ -58,13 +58,13 @@
     <Compile Include="Currency.cs" />
     <Compile Include="CurrencyNotFoundException.cs" />
     <Compile Include="CurrencyProvider.cs" />
+    <Compile Include="DefaultCurrencyFactory.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="ICurrencyProvider.cs" />
-    <Compile Include="InMemoryCurrencyProvider.cs" />
-    <Compile Include="InMemoryCurrencyProvider.g.cs">
+    <Compile Include="CurrencyFactory.cs" />
+    <Compile Include="DefaultCurrencyFactory.g.cs">
+      <DependentUpon>DefaultCurrencyFactory.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InMemoryCurrencyProvider.tt</DependentUpon>
     </Compile>
     <Compile Include="Internal\ContractFor.cs" />
     <Compile Include="Internal\CurrencyActivator`1.cs" />

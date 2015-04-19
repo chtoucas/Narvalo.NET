@@ -16,7 +16,7 @@ namespace Narvalo.Finance
     [SuppressMessage("Gendarme.Rules.Performance", "AvoidLargeStructureRule",
         Justification = "[Intentionally] The struct size is 4 bytes above the recommended size (16 bytes) but I think this is fine. TODO: test this anyway.")]
     public partial struct Money
-        : IEquatable<Money>, IComparable, IComparable<Money>, IFormattable
+        : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
     {
         private readonly Currency _currency;
         private readonly decimal _amount;

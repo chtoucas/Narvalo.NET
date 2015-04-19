@@ -16,10 +16,10 @@ namespace Narvalo.Finance
     [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
         Justification = "[Intentionally] Operator's overloads must be static.")]
     public partial struct Money<TCurrency>
-        : IEquatable<Money<TCurrency>>, IComparable, IComparable<Money<TCurrency>>, IFormattable
-        where TCurrency : Currency, new()
+        : IEquatable<Money<TCurrency>>, IComparable<Money<TCurrency>>, IComparable, IFormattable
+        where TCurrency : Currency
     {
-        // IMPORTANT: This static field MUST remain the first to be initialized before the others.
+        // IMPORTANT: This static field MUST remain first to be initialized before the others.
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly TCurrency s_Currency = CurrencyActivator<TCurrency>.CreateInstance();
 

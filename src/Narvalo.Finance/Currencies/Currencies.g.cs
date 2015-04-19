@@ -13,12 +13,13 @@ using global::System.Diagnostics.CodeAnalysis;
 
 [module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
     Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
+[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1409:RemoveUnnecessaryCode",
+    Justification = "[GeneratedCode] The empty static constructor is used to implement the lazy singleton pattern.")]
 [module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1508:ClosingCurlyBracketsMustNotBePrecededByBlankLine",
     Justification = "[GeneratedCode] Newline rule disabled for T4 templates.")]
-
+    
 namespace Narvalo.Finance.Currencies
 {
-    using System;
     using System.Diagnostics.Contracts;
 
     /// <summary>
@@ -28,27 +29,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ADP : Currency
     {
-        private static readonly ADP s_Currency = new ADP(true);
+        private static readonly ADP s_Instance = new ADP();
 
-        public ADP() : this(false) { }
-        
-        private ADP(bool builtin) : base("ADP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ADP() : base("ADP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Andorran Peseta".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Andorran Peseta".</value>
         public static ADP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -60,27 +54,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AED : Currency
     {
-        private static readonly AED s_Currency = new AED(true);
+        private static readonly AED s_Instance = new AED();
 
-        public AED() : this(false) { }
-        
-        private AED(bool builtin) : base("AED") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AED() : base("AED") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "UAE Dirham".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "UAE Dirham".</value>
         public static AED Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -92,27 +79,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFA : Currency
     {
-        private static readonly AFA s_Currency = new AFA(true);
+        private static readonly AFA s_Instance = new AFA();
 
-        public AFA() : this(false) { }
-        
-        private AFA(bool builtin) : base("AFA") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AFA() : base("AFA") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Afghani".</value>
         public static AFA Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -124,27 +104,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFN : Currency
     {
-        private static readonly AFN s_Currency = new AFN(true);
+        private static readonly AFN s_Instance = new AFN();
 
-        public AFN() : this(false) { }
-        
-        private AFN(bool builtin) : base("AFN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AFN() : base("AFN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Afghani".</value>
         public static AFN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -156,27 +129,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALK : Currency
     {
-        private static readonly ALK s_Currency = new ALK(true);
+        private static readonly ALK s_Instance = new ALK();
 
-        public ALK() : this(false) { }
-        
-        private ALK(bool builtin) : base("ALK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ALK() : base("ALK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Lek".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Lek".</value>
         public static ALK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -188,27 +154,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALL : Currency
     {
-        private static readonly ALL s_Currency = new ALL(true);
+        private static readonly ALL s_Instance = new ALL();
 
-        public ALL() : this(false) { }
-        
-        private ALL(bool builtin) : base("ALL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ALL() : base("ALL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lek".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lek".</value>
         public static ALL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -220,27 +179,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AMD : Currency
     {
-        private static readonly AMD s_Currency = new AMD(true);
+        private static readonly AMD s_Instance = new AMD();
 
-        public AMD() : this(false) { }
-        
-        private AMD(bool builtin) : base("AMD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AMD() : base("AMD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Armenian Dram".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Armenian Dram".</value>
         public static AMD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -252,27 +204,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ANG : Currency
     {
-        private static readonly ANG s_Currency = new ANG(true);
+        private static readonly ANG s_Instance = new ANG();
 
-        public ANG() : this(false) { }
-        
-        private ANG(bool builtin) : base("ANG") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ANG() : base("ANG") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Antillean Guilder".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Netherlands Antillean Guilder".</value>
         public static ANG Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -284,27 +229,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOA : Currency
     {
-        private static readonly AOA s_Currency = new AOA(true);
+        private static readonly AOA s_Instance = new AOA();
 
-        public AOA() : this(false) { }
-        
-        private AOA(bool builtin) : base("AOA") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AOA() : base("AOA") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza".</value>
         public static AOA Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -316,27 +254,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOK : Currency
     {
-        private static readonly AOK s_Currency = new AOK(true);
+        private static readonly AOK s_Instance = new AOK();
 
-        public AOK() : this(false) { }
-        
-        private AOK(bool builtin) : base("AOK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AOK() : base("AOK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza".</value>
         public static AOK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -348,27 +279,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AON : Currency
     {
-        private static readonly AON s_Currency = new AON(true);
+        private static readonly AON s_Instance = new AON();
 
-        public AON() : this(false) { }
-        
-        private AON(bool builtin) : base("AON") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AON() : base("AON") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Kwanza".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Kwanza".</value>
         public static AON Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -380,27 +304,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOR : Currency
     {
-        private static readonly AOR s_Currency = new AOR(true);
+        private static readonly AOR s_Instance = new AOR();
 
-        public AOR() : this(false) { }
-        
-        private AOR(bool builtin) : base("AOR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AOR() : base("AOR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza Reajustado".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza Reajustado".</value>
         public static AOR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -412,27 +329,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARA : Currency
     {
-        private static readonly ARA s_Currency = new ARA(true);
+        private static readonly ARA s_Instance = new ARA();
 
-        public ARA() : this(false) { }
-        
-        private ARA(bool builtin) : base("ARA") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ARA() : base("ARA") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Austral".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Austral".</value>
         public static ARA Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -444,27 +354,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARP : Currency
     {
-        private static readonly ARP s_Currency = new ARP(true);
+        private static readonly ARP s_Instance = new ARP();
 
-        public ARP() : this(false) { }
-        
-        private ARP(bool builtin) : base("ARP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ARP() : base("ARP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Argentino".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Argentino".</value>
         public static ARP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -476,27 +379,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARS : Currency
     {
-        private static readonly ARS s_Currency = new ARS(true);
+        private static readonly ARS s_Instance = new ARS();
 
-        public ARS() : this(false) { }
-        
-        private ARS(bool builtin) : base("ARS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ARS() : base("ARS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Argentine Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Argentine Peso".</value>
         public static ARS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -508,27 +404,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARY : Currency
     {
-        private static readonly ARY s_Currency = new ARY(true);
+        private static readonly ARY s_Instance = new ARY();
 
-        public ARY() : this(false) { }
-        
-        private ARY(bool builtin) : base("ARY") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ARY() : base("ARY") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso".</value>
         public static ARY Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -540,27 +429,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ATS : Currency
     {
-        private static readonly ATS s_Currency = new ATS(true);
+        private static readonly ATS s_Instance = new ATS();
 
-        public ATS() : this(false) { }
-        
-        private ATS(bool builtin) : base("ATS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ATS() : base("ATS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Schilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Schilling".</value>
         public static ATS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -572,27 +454,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AUD : Currency
     {
-        private static readonly AUD s_Currency = new AUD(true);
+        private static readonly AUD s_Instance = new AUD();
 
-        public AUD() : this(false) { }
-        
-        private AUD(bool builtin) : base("AUD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AUD() : base("AUD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Australian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Australian Dollar".</value>
         public static AUD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -604,27 +479,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AWG : Currency
     {
-        private static readonly AWG s_Currency = new AWG(true);
+        private static readonly AWG s_Instance = new AWG();
 
-        public AWG() : this(false) { }
-        
-        private AWG(bool builtin) : base("AWG") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AWG() : base("AWG") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Aruban Florin".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Aruban Florin".</value>
         public static AWG Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -636,27 +504,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AYM : Currency
     {
-        private static readonly AYM s_Currency = new AYM(true);
+        private static readonly AYM s_Instance = new AYM();
 
-        public AYM() : this(false) { }
-        
-        private AYM(bool builtin) : base("AYM") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AYM() : base("AYM") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijan Manat".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijan Manat".</value>
         public static AYM Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -668,27 +529,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZM : Currency
     {
-        private static readonly AZM s_Currency = new AZM(true);
+        private static readonly AZM s_Instance = new AZM();
 
-        public AZM() : this(false) { }
-        
-        private AZM(bool builtin) : base("AZM") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AZM() : base("AZM") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".</value>
         public static AZM Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -700,27 +554,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZN : Currency
     {
-        private static readonly AZN s_Currency = new AZN(true);
+        private static readonly AZN s_Instance = new AZN();
 
-        public AZN() : this(false) { }
-        
-        private AZN(bool builtin) : base("AZN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal AZN() : base("AZN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".</value>
         public static AZN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -732,27 +579,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAD : Currency
     {
-        private static readonly BAD s_Currency = new BAD(true);
+        private static readonly BAD s_Instance = new BAD();
 
-        public BAD() : this(false) { }
-        
-        private BAD(bool builtin) : base("BAD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BAD() : base("BAD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dinar".</value>
         public static BAD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -764,27 +604,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAM : Currency
     {
-        private static readonly BAM s_Currency = new BAM(true);
+        private static readonly BAM s_Instance = new BAM();
 
-        public BAM() : this(false) { }
-        
-        private BAM(bool builtin) : base("BAM") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BAM() : base("BAM") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Mark".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Convertible Mark".</value>
         public static BAM Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -796,27 +629,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BBD : Currency
     {
-        private static readonly BBD s_Currency = new BBD(true);
+        private static readonly BBD s_Instance = new BBD();
 
-        public BBD() : this(false) { }
-        
-        private BBD(bool builtin) : base("BBD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BBD() : base("BBD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Barbados Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Barbados Dollar".</value>
         public static BBD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -828,27 +654,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BDT : Currency
     {
-        private static readonly BDT s_Currency = new BDT(true);
+        private static readonly BDT s_Instance = new BDT();
 
-        public BDT() : this(false) { }
-        
-        private BDT(bool builtin) : base("BDT") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BDT() : base("BDT") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Taka".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Taka".</value>
         public static BDT Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -860,27 +679,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEC : Currency
     {
-        private static readonly BEC s_Currency = new BEC(true);
+        private static readonly BEC s_Instance = new BEC();
 
-        public BEC() : this(false) { }
-        
-        private BEC(bool builtin) : base("BEC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BEC() : base("BEC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Convertible Franc".</value>
         public static BEC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -892,27 +704,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEF : Currency
     {
-        private static readonly BEF s_Currency = new BEF(true);
+        private static readonly BEF s_Instance = new BEF();
 
-        public BEF() : this(false) { }
-        
-        private BEF(bool builtin) : base("BEF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BEF() : base("BEF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belgian Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belgian Franc".</value>
         public static BEF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -924,27 +729,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEL : Currency
     {
-        private static readonly BEL s_Currency = new BEL(true);
+        private static readonly BEL s_Instance = new BEL();
 
-        public BEL() : this(false) { }
-        
-        private BEL(bool builtin) : base("BEL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BEL() : base("BEL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Financial Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Financial Franc".</value>
         public static BEL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -956,27 +754,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGJ : Currency
     {
-        private static readonly BGJ s_Currency = new BGJ(true);
+        private static readonly BGJ s_Instance = new BGJ();
 
-        public BGJ() : this(false) { }
-        
-        private BGJ(bool builtin) : base("BGJ") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BGJ() : base("BGJ") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev A/52".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev A/52".</value>
         public static BGJ Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -988,27 +779,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGK : Currency
     {
-        private static readonly BGK s_Currency = new BGK(true);
+        private static readonly BGK s_Instance = new BGK();
 
-        public BGK() : this(false) { }
-        
-        private BGK(bool builtin) : base("BGK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BGK() : base("BGK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev A/62".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev A/62".</value>
         public static BGK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1020,27 +804,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGL : Currency
     {
-        private static readonly BGL s_Currency = new BGL(true);
+        private static readonly BGL s_Instance = new BGL();
 
-        public BGL() : this(false) { }
-        
-        private BGL(bool builtin) : base("BGL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BGL() : base("BGL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev".</value>
         public static BGL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1052,27 +829,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGN : Currency
     {
-        private static readonly BGN s_Currency = new BGN(true);
+        private static readonly BGN s_Instance = new BGN();
 
-        public BGN() : this(false) { }
-        
-        private BGN(bool builtin) : base("BGN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BGN() : base("BGN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bulgarian Lev".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bulgarian Lev".</value>
         public static BGN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1084,27 +854,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BHD : Currency
     {
-        private static readonly BHD s_Currency = new BHD(true);
+        private static readonly BHD s_Instance = new BHD();
 
-        public BHD() : this(false) { }
-        
-        private BHD(bool builtin) : base("BHD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BHD() : base("BHD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahraini Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bahraini Dinar".</value>
         public static BHD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1116,27 +879,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BIF : Currency
     {
-        private static readonly BIF s_Currency = new BIF(true);
+        private static readonly BIF s_Instance = new BIF();
 
-        public BIF() : this(false) { }
-        
-        private BIF(bool builtin) : base("BIF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BIF() : base("BIF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Burundi Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Burundi Franc".</value>
         public static BIF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1148,27 +904,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BMD : Currency
     {
-        private static readonly BMD s_Currency = new BMD(true);
+        private static readonly BMD s_Instance = new BMD();
 
-        public BMD() : this(false) { }
-        
-        private BMD(bool builtin) : base("BMD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BMD() : base("BMD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bermudian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bermudian Dollar".</value>
         public static BMD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1180,27 +929,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BND : Currency
     {
-        private static readonly BND s_Currency = new BND(true);
+        private static readonly BND s_Instance = new BND();
 
-        public BND() : this(false) { }
-        
-        private BND(bool builtin) : base("BND") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BND() : base("BND") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Brunei Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Brunei Dollar".</value>
         public static BND Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1212,27 +954,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOB : Currency
     {
-        private static readonly BOB s_Currency = new BOB(true);
+        private static readonly BOB s_Instance = new BOB();
 
-        public BOB() : this(false) { }
-        
-        private BOB(bool builtin) : base("BOB") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BOB() : base("BOB") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Boliviano".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Boliviano".</value>
         public static BOB Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1244,27 +979,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOP : Currency
     {
-        private static readonly BOP s_Currency = new BOP(true);
+        private static readonly BOP s_Instance = new BOP();
 
-        public BOP() : this(false) { }
-        
-        private BOP(bool builtin) : base("BOP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BOP() : base("BOP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso boliviano".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso boliviano".</value>
         public static BOP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1276,27 +1004,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOV : Currency
     {
-        private static readonly BOV s_Currency = new BOV(true);
+        private static readonly BOV s_Instance = new BOV();
 
-        public BOV() : this(false) { }
-        
-        private BOV(bool builtin) : base("BOV") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BOV() : base("BOV") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mvdol".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mvdol".</value>
         public static BOV Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1308,27 +1029,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRB : Currency
     {
-        private static readonly BRB s_Currency = new BRB(true);
+        private static readonly BRB s_Instance = new BRB();
 
-        public BRB() : this(false) { }
-        
-        private BRB(bool builtin) : base("BRB") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BRB() : base("BRB") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro".</value>
         public static BRB Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1340,27 +1054,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRC : Currency
     {
-        private static readonly BRC s_Currency = new BRC(true);
+        private static readonly BRC s_Instance = new BRC();
 
-        public BRC() : this(false) { }
-        
-        private BRC(bool builtin) : base("BRC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BRC() : base("BRC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzado".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzado".</value>
         public static BRC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1372,27 +1079,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRE : Currency
     {
-        private static readonly BRE s_Currency = new BRE(true);
+        private static readonly BRE s_Instance = new BRE();
 
-        public BRE() : this(false) { }
-        
-        private BRE(bool builtin) : base("BRE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BRE() : base("BRE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro".</value>
         public static BRE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1404,27 +1104,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRL : Currency
     {
-        private static readonly BRL s_Currency = new BRL(true);
+        private static readonly BRL s_Instance = new BRL();
 
-        public BRL() : this(false) { }
-        
-        private BRL(bool builtin) : base("BRL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BRL() : base("BRL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Brazilian Real".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Brazilian Real".</value>
         public static BRL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1436,27 +1129,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRN : Currency
     {
-        private static readonly BRN s_Currency = new BRN(true);
+        private static readonly BRN s_Instance = new BRN();
 
-        public BRN() : this(false) { }
-        
-        private BRN(bool builtin) : base("BRN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BRN() : base("BRN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Cruzado".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Cruzado".</value>
         public static BRN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1468,27 +1154,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRR : Currency
     {
-        private static readonly BRR s_Currency = new BRR(true);
+        private static readonly BRR s_Instance = new BRR();
 
-        public BRR() : this(false) { }
-        
-        private BRR(bool builtin) : base("BRR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BRR() : base("BRR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro Real".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro Real".</value>
         public static BRR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1500,27 +1179,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BSD : Currency
     {
-        private static readonly BSD s_Currency = new BSD(true);
+        private static readonly BSD s_Instance = new BSD();
 
-        public BSD() : this(false) { }
-        
-        private BSD(bool builtin) : base("BSD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BSD() : base("BSD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahamian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bahamian Dollar".</value>
         public static BSD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1532,27 +1204,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BTN : Currency
     {
-        private static readonly BTN s_Currency = new BTN(true);
+        private static readonly BTN s_Instance = new BTN();
 
-        public BTN() : this(false) { }
-        
-        private BTN(bool builtin) : base("BTN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BTN() : base("BTN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ngultrum".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ngultrum".</value>
         public static BTN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1564,27 +1229,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BUK : Currency
     {
-        private static readonly BUK s_Currency = new BUK(true);
+        private static readonly BUK s_Instance = new BUK();
 
-        public BUK() : this(false) { }
-        
-        private BUK(bool builtin) : base("BUK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BUK() : base("BUK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "N.A.".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "N.A.".</value>
         public static BUK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1596,27 +1254,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BWP : Currency
     {
-        private static readonly BWP s_Currency = new BWP(true);
+        private static readonly BWP s_Instance = new BWP();
 
-        public BWP() : this(false) { }
-        
-        private BWP(bool builtin) : base("BWP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BWP() : base("BWP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pula".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pula".</value>
         public static BWP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1628,27 +1279,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYB : Currency
     {
-        private static readonly BYB s_Currency = new BYB(true);
+        private static readonly BYB s_Instance = new BYB();
 
-        public BYB() : this(false) { }
-        
-        private BYB(bool builtin) : base("BYB") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BYB() : base("BYB") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".</value>
         public static BYB Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1660,27 +1304,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYR : Currency
     {
-        private static readonly BYR s_Currency = new BYR(true);
+        private static readonly BYR s_Instance = new BYR();
 
-        public BYR() : this(false) { }
-        
-        private BYR(bool builtin) : base("BYR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BYR() : base("BYR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".</value>
         public static BYR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1692,27 +1329,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BZD : Currency
     {
-        private static readonly BZD s_Currency = new BZD(true);
+        private static readonly BZD s_Instance = new BZD();
 
-        public BZD() : this(false) { }
-        
-        private BZD(bool builtin) : base("BZD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal BZD() : base("BZD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belize Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belize Dollar".</value>
         public static BZD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1724,27 +1354,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CAD : Currency
     {
-        private static readonly CAD s_Currency = new CAD(true);
+        private static readonly CAD s_Instance = new CAD();
 
-        public CAD() : this(false) { }
-        
-        private CAD(bool builtin) : base("CAD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CAD() : base("CAD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Canadian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Canadian Dollar".</value>
         public static CAD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1756,27 +1379,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CDF : Currency
     {
-        private static readonly CDF s_Currency = new CDF(true);
+        private static readonly CDF s_Instance = new CDF();
 
-        public CDF() : this(false) { }
-        
-        private CDF(bool builtin) : base("CDF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CDF() : base("CDF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Congolese Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Congolese Franc".</value>
         public static CDF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1788,27 +1404,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHC : Currency
     {
-        private static readonly CHC s_Currency = new CHC(true);
+        private static readonly CHC s_Instance = new CHC();
 
-        public CHC() : this(false) { }
-        
-        private CHC(bool builtin) : base("CHC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CHC() : base("CHC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc (for electronic)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Franc (for electronic)".</value>
         public static CHC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1820,27 +1429,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHE : Currency
     {
-        private static readonly CHE s_Currency = new CHE(true);
+        private static readonly CHE s_Instance = new CHE();
 
-        public CHE() : this(false) { }
-        
-        private CHE(bool builtin) : base("CHE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CHE() : base("CHE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Euro".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Euro".</value>
         public static CHE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1852,27 +1454,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHF : Currency
     {
-        private static readonly CHF s_Currency = new CHF(true);
+        private static readonly CHF s_Instance = new CHF();
 
-        public CHF() : this(false) { }
-        
-        private CHF(bool builtin) : base("CHF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CHF() : base("CHF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Swiss Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Swiss Franc".</value>
         public static CHF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1884,27 +1479,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHW : Currency
     {
-        private static readonly CHW s_Currency = new CHW(true);
+        private static readonly CHW s_Instance = new CHW();
 
-        public CHW() : this(false) { }
-        
-        private CHW(bool builtin) : base("CHW") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CHW() : base("CHW") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Franc".</value>
         public static CHW Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1916,27 +1504,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLF : Currency
     {
-        private static readonly CLF s_Currency = new CLF(true);
+        private static readonly CLF s_Instance = new CLF();
 
-        public CLF() : this(false) { }
-        
-        private CLF(bool builtin) : base("CLF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CLF() : base("CLF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Fomento".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Fomento".</value>
         public static CLF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1948,27 +1529,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLP : Currency
     {
-        private static readonly CLP s_Currency = new CLP(true);
+        private static readonly CLP s_Instance = new CLP();
 
-        public CLP() : this(false) { }
-        
-        private CLP(bool builtin) : base("CLP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CLP() : base("CLP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Chilean Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Chilean Peso".</value>
         public static CLP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -1980,27 +1554,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNX : Currency
     {
-        private static readonly CNX s_Currency = new CNX(true);
+        private static readonly CNX s_Instance = new CNX();
 
-        public CNX() : this(false) { }
-        
-        private CNX(bool builtin) : base("CNX") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CNX() : base("CNX") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peoples Bank Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peoples Bank Dollar".</value>
         public static CNX Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2012,27 +1579,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNY : Currency
     {
-        private static readonly CNY s_Currency = new CNY(true);
+        private static readonly CNY s_Instance = new CNY();
 
-        public CNY() : this(false) { }
-        
-        private CNY(bool builtin) : base("CNY") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CNY() : base("CNY") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yuan Renminbi".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yuan Renminbi".</value>
         public static CNY Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2044,27 +1604,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COP : Currency
     {
-        private static readonly COP s_Currency = new COP(true);
+        private static readonly COP s_Instance = new COP();
 
-        public COP() : this(false) { }
-        
-        private COP(bool builtin) : base("COP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal COP() : base("COP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Colombian Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Colombian Peso".</value>
         public static COP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2076,27 +1629,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COU : Currency
     {
-        private static readonly COU s_Currency = new COU(true);
+        private static readonly COU s_Instance = new COU();
 
-        public COU() : this(false) { }
-        
-        private COU(bool builtin) : base("COU") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal COU() : base("COU") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Real".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Real".</value>
         public static COU Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2108,27 +1654,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CRC : Currency
     {
-        private static readonly CRC s_Currency = new CRC(true);
+        private static readonly CRC s_Instance = new CRC();
 
-        public CRC() : this(false) { }
-        
-        private CRC(bool builtin) : base("CRC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CRC() : base("CRC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Costa Rican Colon".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Costa Rican Colon".</value>
         public static CRC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2140,27 +1679,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSD : Currency
     {
-        private static readonly CSD s_Currency = new CSD(true);
+        private static readonly CSD s_Instance = new CSD();
 
-        public CSD() : this(false) { }
-        
-        private CSD(bool builtin) : base("CSD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CSD() : base("CSD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".</value>
         public static CSD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2172,27 +1704,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSJ : Currency
     {
-        private static readonly CSJ s_Currency = new CSJ(true);
+        private static readonly CSJ s_Instance = new CSJ();
 
-        public CSJ() : this(false) { }
-        
-        private CSJ(bool builtin) : base("CSJ") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CSJ() : base("CSJ") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Krona A/53".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Krona A/53".</value>
         public static CSJ Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2204,27 +1729,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSK : Currency
     {
-        private static readonly CSK s_Currency = new CSK(true);
+        private static readonly CSK s_Instance = new CSK();
 
-        public CSK() : this(false) { }
-        
-        private CSK(bool builtin) : base("CSK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CSK() : base("CSK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Koruna".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Koruna".</value>
         public static CSK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2236,27 +1754,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUC : Currency
     {
-        private static readonly CUC s_Currency = new CUC(true);
+        private static readonly CUC s_Instance = new CUC();
 
-        public CUC() : this(false) { }
-        
-        private CUC(bool builtin) : base("CUC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CUC() : base("CUC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Convertible".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Convertible".</value>
         public static CUC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2268,27 +1779,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUP : Currency
     {
-        private static readonly CUP s_Currency = new CUP(true);
+        private static readonly CUP s_Instance = new CUP();
 
-        public CUP() : this(false) { }
-        
-        private CUP(bool builtin) : base("CUP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CUP() : base("CUP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cuban Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cuban Peso".</value>
         public static CUP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2300,27 +1804,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CVE : Currency
     {
-        private static readonly CVE s_Currency = new CVE(true);
+        private static readonly CVE s_Instance = new CVE();
 
-        public CVE() : this(false) { }
-        
-        private CVE(bool builtin) : base("CVE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CVE() : base("CVE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cabo Verde Escudo".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cabo Verde Escudo".</value>
         public static CVE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2332,27 +1829,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CYP : Currency
     {
-        private static readonly CYP s_Currency = new CYP(true);
+        private static readonly CYP s_Instance = new CYP();
 
-        public CYP() : this(false) { }
-        
-        private CYP(bool builtin) : base("CYP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CYP() : base("CYP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cyprus Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cyprus Pound".</value>
         public static CYP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2364,27 +1854,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CZK : Currency
     {
-        private static readonly CZK s_Currency = new CZK(true);
+        private static readonly CZK s_Instance = new CZK();
 
-        public CZK() : this(false) { }
-        
-        private CZK(bool builtin) : base("CZK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal CZK() : base("CZK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Czech Koruna".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Czech Koruna".</value>
         public static CZK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2396,27 +1879,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DDM : Currency
     {
-        private static readonly DDM s_Currency = new DDM(true);
+        private static readonly DDM s_Instance = new DDM();
 
-        public DDM() : this(false) { }
-        
-        private DDM(bool builtin) : base("DDM") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal DDM() : base("DDM") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mark der DDR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mark der DDR".</value>
         public static DDM Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2428,27 +1904,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DEM : Currency
     {
-        private static readonly DEM s_Currency = new DEM(true);
+        private static readonly DEM s_Instance = new DEM();
 
-        public DEM() : this(false) { }
-        
-        private DEM(bool builtin) : base("DEM") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal DEM() : base("DEM") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Deutsche Mark".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Deutsche Mark".</value>
         public static DEM Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2460,27 +1929,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DJF : Currency
     {
-        private static readonly DJF s_Currency = new DJF(true);
+        private static readonly DJF s_Instance = new DJF();
 
-        public DJF() : this(false) { }
-        
-        private DJF(bool builtin) : base("DJF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal DJF() : base("DJF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Djibouti Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Djibouti Franc".</value>
         public static DJF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2492,27 +1954,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DKK : Currency
     {
-        private static readonly DKK s_Currency = new DKK(true);
+        private static readonly DKK s_Instance = new DKK();
 
-        public DKK() : this(false) { }
-        
-        private DKK(bool builtin) : base("DKK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal DKK() : base("DKK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Danish Krone".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Danish Krone".</value>
         public static DKK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2524,27 +1979,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DOP : Currency
     {
-        private static readonly DOP s_Currency = new DOP(true);
+        private static readonly DOP s_Instance = new DOP();
 
-        public DOP() : this(false) { }
-        
-        private DOP(bool builtin) : base("DOP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal DOP() : base("DOP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dominican Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dominican Peso".</value>
         public static DOP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2556,27 +2004,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DZD : Currency
     {
-        private static readonly DZD s_Currency = new DZD(true);
+        private static readonly DZD s_Instance = new DZD();
 
-        public DZD() : this(false) { }
-        
-        private DZD(bool builtin) : base("DZD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal DZD() : base("DZD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Algerian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Algerian Dinar".</value>
         public static DZD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2588,27 +2029,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ECS : Currency
     {
-        private static readonly ECS s_Currency = new ECS(true);
+        private static readonly ECS s_Instance = new ECS();
 
-        public ECS() : this(false) { }
-        
-        private ECS(bool builtin) : base("ECS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ECS() : base("ECS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sucre".</value>
         public static ECS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2620,27 +2054,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ECV : Currency
     {
-        private static readonly ECV s_Currency = new ECV(true);
+        private static readonly ECV s_Instance = new ECV();
 
-        public ECV() : this(false) { }
-        
-        private ECV(bool builtin) : base("ECV") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ECV() : base("ECV") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Constante (UVC)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Constante (UVC)".</value>
         public static ECV Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2652,27 +2079,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EEK : Currency
     {
-        private static readonly EEK s_Currency = new EEK(true);
+        private static readonly EEK s_Instance = new EEK();
 
-        public EEK() : this(false) { }
-        
-        private EEK(bool builtin) : base("EEK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal EEK() : base("EEK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kroon".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kroon".</value>
         public static EEK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2684,27 +2104,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EGP : Currency
     {
-        private static readonly EGP s_Currency = new EGP(true);
+        private static readonly EGP s_Instance = new EGP();
 
-        public EGP() : this(false) { }
-        
-        private EGP(bool builtin) : base("EGP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal EGP() : base("EGP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Egyptian Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Egyptian Pound".</value>
         public static EGP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2716,27 +2129,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EQE : Currency
     {
-        private static readonly EQE s_Currency = new EQE(true);
+        private static readonly EQE s_Instance = new EQE();
 
-        public EQE() : this(false) { }
-        
-        private EQE(bool builtin) : base("EQE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal EQE() : base("EQE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ekwele".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ekwele".</value>
         public static EQE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2748,27 +2154,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ERN : Currency
     {
-        private static readonly ERN s_Currency = new ERN(true);
+        private static readonly ERN s_Instance = new ERN();
 
-        public ERN() : this(false) { }
-        
-        private ERN(bool builtin) : base("ERN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ERN() : base("ERN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nakfa".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Nakfa".</value>
         public static ERN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2780,27 +2179,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESA : Currency
     {
-        private static readonly ESA s_Currency = new ESA(true);
+        private static readonly ESA s_Instance = new ESA();
 
-        public ESA() : this(false) { }
-        
-        private ESA(bool builtin) : base("ESA") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ESA() : base("ESA") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".</value>
         public static ESA Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2812,27 +2204,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESB : Currency
     {
-        private static readonly ESB s_Currency = new ESB(true);
+        private static readonly ESB s_Instance = new ESB();
 
-        public ESB() : this(false) { }
-        
-        private ESB(bool builtin) : base("ESB") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ESB() : base("ESB") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the """A"" Account (convertible Peseta Account)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the """A"" Account (convertible Peseta Account)".</value>
         public static ESB Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2844,27 +2229,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESP : Currency
     {
-        private static readonly ESP s_Currency = new ESP(true);
+        private static readonly ESP s_Instance = new ESP();
 
-        public ESP() : this(false) { }
-        
-        private ESP(bool builtin) : base("ESP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ESP() : base("ESP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".</value>
         public static ESP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2876,27 +2254,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ETB : Currency
     {
-        private static readonly ETB s_Currency = new ETB(true);
+        private static readonly ETB s_Instance = new ETB();
 
-        public ETB() : this(false) { }
-        
-        private ETB(bool builtin) : base("ETB") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ETB() : base("ETB") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ethiopian Birr".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ethiopian Birr".</value>
         public static ETB Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2908,27 +2279,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EUR : Currency
     {
-        private static readonly EUR s_Currency = new EUR(true);
+        private static readonly EUR s_Instance = new EUR();
 
-        public EUR() : this(false) { }
-        
-        private EUR(bool builtin) : base("EUR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal EUR() : base("EUR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Euro".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Euro".</value>
         public static EUR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2940,27 +2304,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FIM : Currency
     {
-        private static readonly FIM s_Currency = new FIM(true);
+        private static readonly FIM s_Instance = new FIM();
 
-        public FIM() : this(false) { }
-        
-        private FIM(bool builtin) : base("FIM") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal FIM() : base("FIM") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Markka".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Markka".</value>
         public static FIM Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -2972,27 +2329,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FJD : Currency
     {
-        private static readonly FJD s_Currency = new FJD(true);
+        private static readonly FJD s_Instance = new FJD();
 
-        public FJD() : this(false) { }
-        
-        private FJD(bool builtin) : base("FJD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal FJD() : base("FJD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Fiji Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Fiji Dollar".</value>
         public static FJD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3004,27 +2354,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FKP : Currency
     {
-        private static readonly FKP s_Currency = new FKP(true);
+        private static readonly FKP s_Instance = new FKP();
 
-        public FKP() : this(false) { }
-        
-        private FKP(bool builtin) : base("FKP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal FKP() : base("FKP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Falkland Islands Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Falkland Islands Pound".</value>
         public static FKP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3036,27 +2379,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FRF : Currency
     {
-        private static readonly FRF s_Currency = new FRF(true);
+        private static readonly FRF s_Instance = new FRF();
 
-        public FRF() : this(false) { }
-        
-        private FRF(bool builtin) : base("FRF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal FRF() : base("FRF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "French Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "French Franc".</value>
         public static FRF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3068,27 +2404,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GBP : Currency
     {
-        private static readonly GBP s_Currency = new GBP(true);
+        private static readonly GBP s_Instance = new GBP();
 
-        public GBP() : this(false) { }
-        
-        private GBP(bool builtin) : base("GBP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GBP() : base("GBP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound Sterling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pound Sterling".</value>
         public static GBP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3100,27 +2429,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEK : Currency
     {
-        private static readonly GEK s_Currency = new GEK(true);
+        private static readonly GEK s_Instance = new GEK();
 
-        public GEK() : this(false) { }
-        
-        private GEK(bool builtin) : base("GEK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GEK() : base("GEK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Georgian Coupon".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Georgian Coupon".</value>
         public static GEK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3132,27 +2454,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEL : Currency
     {
-        private static readonly GEL s_Currency = new GEL(true);
+        private static readonly GEL s_Instance = new GEL();
 
-        public GEL() : this(false) { }
-        
-        private GEL(bool builtin) : base("GEL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GEL() : base("GEL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lari".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lari".</value>
         public static GEL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3164,27 +2479,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHC : Currency
     {
-        private static readonly GHC s_Currency = new GHC(true);
+        private static readonly GHC s_Instance = new GHC();
 
-        public GHC() : this(false) { }
-        
-        private GHC(bool builtin) : base("GHC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GHC() : base("GHC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cedi".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cedi".</value>
         public static GHC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3196,27 +2504,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHP : Currency
     {
-        private static readonly GHP s_Currency = new GHP(true);
+        private static readonly GHP s_Instance = new GHP();
 
-        public GHP() : this(false) { }
-        
-        private GHP(bool builtin) : base("GHP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GHP() : base("GHP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".</value>
         public static GHP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3228,27 +2529,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHS : Currency
     {
-        private static readonly GHS s_Currency = new GHS(true);
+        private static readonly GHS s_Instance = new GHS();
 
-        public GHS() : this(false) { }
-        
-        private GHS(bool builtin) : base("GHS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GHS() : base("GHS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".</value>
         public static GHS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3260,27 +2554,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GIP : Currency
     {
-        private static readonly GIP s_Currency = new GIP(true);
+        private static readonly GIP s_Instance = new GIP();
 
-        public GIP() : this(false) { }
-        
-        private GIP(bool builtin) : base("GIP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GIP() : base("GIP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gibraltar Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gibraltar Pound".</value>
         public static GIP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3292,27 +2579,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GMD : Currency
     {
-        private static readonly GMD s_Currency = new GMD(true);
+        private static readonly GMD s_Instance = new GMD();
 
-        public GMD() : this(false) { }
-        
-        private GMD(bool builtin) : base("GMD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GMD() : base("GMD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dalasi".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dalasi".</value>
         public static GMD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3324,27 +2604,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNE : Currency
     {
-        private static readonly GNE s_Currency = new GNE(true);
+        private static readonly GNE s_Instance = new GNE();
 
-        public GNE() : this(false) { }
-        
-        private GNE(bool builtin) : base("GNE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GNE() : base("GNE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syli".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Syli".</value>
         public static GNE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3356,27 +2629,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNF : Currency
     {
-        private static readonly GNF s_Currency = new GNF(true);
+        private static readonly GNF s_Instance = new GNF();
 
-        public GNF() : this(false) { }
-        
-        private GNF(bool builtin) : base("GNF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GNF() : base("GNF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea Franc".</value>
         public static GNF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3388,27 +2654,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNS : Currency
     {
-        private static readonly GNS s_Currency = new GNS(true);
+        private static readonly GNS s_Instance = new GNS();
 
-        public GNS() : this(false) { }
-        
-        private GNS(bool builtin) : base("GNS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GNS() : base("GNS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syli".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Syli".</value>
         public static GNS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3420,27 +2679,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GQE : Currency
     {
-        private static readonly GQE s_Currency = new GQE(true);
+        private static readonly GQE s_Instance = new GQE();
 
-        public GQE() : this(false) { }
-        
-        private GQE(bool builtin) : base("GQE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GQE() : base("GQE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ekwele".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ekwele".</value>
         public static GQE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3452,27 +2704,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GRD : Currency
     {
-        private static readonly GRD s_Currency = new GRD(true);
+        private static readonly GRD s_Instance = new GRD();
 
-        public GRD() : this(false) { }
-        
-        private GRD(bool builtin) : base("GRD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GRD() : base("GRD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Drachma".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Drachma".</value>
         public static GRD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3484,27 +2729,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GTQ : Currency
     {
-        private static readonly GTQ s_Currency = new GTQ(true);
+        private static readonly GTQ s_Instance = new GTQ();
 
-        public GTQ() : this(false) { }
-        
-        private GTQ(bool builtin) : base("GTQ") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GTQ() : base("GTQ") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Quetzal".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Quetzal".</value>
         public static GTQ Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3516,27 +2754,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GWE : Currency
     {
-        private static readonly GWE s_Currency = new GWE(true);
+        private static readonly GWE s_Instance = new GWE();
 
-        public GWE() : this(false) { }
-        
-        private GWE(bool builtin) : base("GWE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GWE() : base("GWE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Escudo".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea Escudo".</value>
         public static GWE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3548,27 +2779,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GWP : Currency
     {
-        private static readonly GWP s_Currency = new GWP(true);
+        private static readonly GWP s_Instance = new GWP();
 
-        public GWP() : this(false) { }
-        
-        private GWP(bool builtin) : base("GWP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GWP() : base("GWP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea-Bissau Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea-Bissau Peso".</value>
         public static GWP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3580,27 +2804,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GYD : Currency
     {
-        private static readonly GYD s_Currency = new GYD(true);
+        private static readonly GYD s_Instance = new GYD();
 
-        public GYD() : this(false) { }
-        
-        private GYD(bool builtin) : base("GYD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal GYD() : base("GYD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guyana Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guyana Dollar".</value>
         public static GYD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3612,27 +2829,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HKD : Currency
     {
-        private static readonly HKD s_Currency = new HKD(true);
+        private static readonly HKD s_Instance = new HKD();
 
-        public HKD() : this(false) { }
-        
-        private HKD(bool builtin) : base("HKD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal HKD() : base("HKD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Hong Kong Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Hong Kong Dollar".</value>
         public static HKD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3644,27 +2854,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HNL : Currency
     {
-        private static readonly HNL s_Currency = new HNL(true);
+        private static readonly HNL s_Instance = new HNL();
 
-        public HNL() : this(false) { }
-        
-        private HNL(bool builtin) : base("HNL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal HNL() : base("HNL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lempira".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lempira".</value>
         public static HNL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3676,27 +2879,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRD : Currency
     {
-        private static readonly HRD s_Currency = new HRD(true);
+        private static readonly HRD s_Instance = new HRD();
 
-        public HRD() : this(false) { }
-        
-        private HRD(bool builtin) : base("HRD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal HRD() : base("HRD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Croatian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Croatian Dinar".</value>
         public static HRD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3708,27 +2904,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRK : Currency
     {
-        private static readonly HRK s_Currency = new HRK(true);
+        private static readonly HRK s_Instance = new HRK();
 
-        public HRK() : this(false) { }
-        
-        private HRK(bool builtin) : base("HRK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal HRK() : base("HRK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Croatian Kuna".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Croatian Kuna".</value>
         public static HRK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3740,27 +2929,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HTG : Currency
     {
-        private static readonly HTG s_Currency = new HTG(true);
+        private static readonly HTG s_Instance = new HTG();
 
-        public HTG() : this(false) { }
-        
-        private HTG(bool builtin) : base("HTG") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal HTG() : base("HTG") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gourde".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gourde".</value>
         public static HTG Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3772,27 +2954,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HUF : Currency
     {
-        private static readonly HUF s_Currency = new HUF(true);
+        private static readonly HUF s_Instance = new HUF();
 
-        public HUF() : this(false) { }
-        
-        private HUF(bool builtin) : base("HUF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal HUF() : base("HUF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Forint".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Forint".</value>
         public static HUF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3804,27 +2979,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IDR : Currency
     {
-        private static readonly IDR s_Currency = new IDR(true);
+        private static readonly IDR s_Instance = new IDR();
 
-        public IDR() : this(false) { }
-        
-        private IDR(bool builtin) : base("IDR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal IDR() : base("IDR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rupiah".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rupiah".</value>
         public static IDR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3836,27 +3004,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IEP : Currency
     {
-        private static readonly IEP s_Currency = new IEP(true);
+        private static readonly IEP s_Instance = new IEP();
 
-        public IEP() : this(false) { }
-        
-        private IEP(bool builtin) : base("IEP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal IEP() : base("IEP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Irish Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Irish Pound".</value>
         public static IEP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3868,27 +3029,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILP : Currency
     {
-        private static readonly ILP s_Currency = new ILP(true);
+        private static readonly ILP s_Instance = new ILP();
 
-        public ILP() : this(false) { }
-        
-        private ILP(bool builtin) : base("ILP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ILP() : base("ILP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pound".</value>
         public static ILP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3900,27 +3054,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILR : Currency
     {
-        private static readonly ILR s_Currency = new ILR(true);
+        private static readonly ILR s_Instance = new ILR();
 
-        public ILR() : this(false) { }
-        
-        private ILR(bool builtin) : base("ILR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ILR() : base("ILR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Shekel".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Shekel".</value>
         public static ILR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3932,27 +3079,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILS : Currency
     {
-        private static readonly ILS s_Currency = new ILS(true);
+        private static readonly ILS s_Instance = new ILS();
 
-        public ILS() : this(false) { }
-        
-        private ILS(bool builtin) : base("ILS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ILS() : base("ILS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Israeli Sheqel".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Israeli Sheqel".</value>
         public static ILS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3964,27 +3104,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class INR : Currency
     {
-        private static readonly INR s_Currency = new INR(true);
+        private static readonly INR s_Instance = new INR();
 
-        public INR() : this(false) { }
-        
-        private INR(bool builtin) : base("INR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal INR() : base("INR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Indian Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Indian Rupee".</value>
         public static INR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -3996,27 +3129,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IQD : Currency
     {
-        private static readonly IQD s_Currency = new IQD(true);
+        private static readonly IQD s_Instance = new IQD();
 
-        public IQD() : this(false) { }
-        
-        private IQD(bool builtin) : base("IQD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal IQD() : base("IQD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iraqi Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Iraqi Dinar".</value>
         public static IQD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4028,27 +3154,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IRR : Currency
     {
-        private static readonly IRR s_Currency = new IRR(true);
+        private static readonly IRR s_Instance = new IRR();
 
-        public IRR() : this(false) { }
-        
-        private IRR(bool builtin) : base("IRR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal IRR() : base("IRR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iranian Rial".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Iranian Rial".</value>
         public static IRR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4060,27 +3179,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISJ : Currency
     {
-        private static readonly ISJ s_Currency = new ISJ(true);
+        private static readonly ISJ s_Instance = new ISJ();
 
-        public ISJ() : this(false) { }
-        
-        private ISJ(bool builtin) : base("ISJ") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ISJ() : base("ISJ") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Krona".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Krona".</value>
         public static ISJ Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4092,27 +3204,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISK : Currency
     {
-        private static readonly ISK s_Currency = new ISK(true);
+        private static readonly ISK s_Instance = new ISK();
 
-        public ISK() : this(false) { }
-        
-        private ISK(bool builtin) : base("ISK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ISK() : base("ISK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iceland Krona".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Iceland Krona".</value>
         public static ISK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4124,27 +3229,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ITL : Currency
     {
-        private static readonly ITL s_Currency = new ITL(true);
+        private static readonly ITL s_Instance = new ITL();
 
-        public ITL() : this(false) { }
-        
-        private ITL(bool builtin) : base("ITL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ITL() : base("ITL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Italian Lira".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Italian Lira".</value>
         public static ITL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4156,27 +3254,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JMD : Currency
     {
-        private static readonly JMD s_Currency = new JMD(true);
+        private static readonly JMD s_Instance = new JMD();
 
-        public JMD() : this(false) { }
-        
-        private JMD(bool builtin) : base("JMD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal JMD() : base("JMD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Jamaican Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Jamaican Dollar".</value>
         public static JMD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4188,27 +3279,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JOD : Currency
     {
-        private static readonly JOD s_Currency = new JOD(true);
+        private static readonly JOD s_Instance = new JOD();
 
-        public JOD() : this(false) { }
-        
-        private JOD(bool builtin) : base("JOD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal JOD() : base("JOD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Jordanian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Jordanian Dinar".</value>
         public static JOD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4220,27 +3304,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JPY : Currency
     {
-        private static readonly JPY s_Currency = new JPY(true);
+        private static readonly JPY s_Instance = new JPY();
 
-        public JPY() : this(false) { }
-        
-        private JPY(bool builtin) : base("JPY") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal JPY() : base("JPY") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yen".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yen".</value>
         public static JPY Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4252,27 +3329,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KES : Currency
     {
-        private static readonly KES s_Currency = new KES(true);
+        private static readonly KES s_Instance = new KES();
 
-        public KES() : this(false) { }
-        
-        private KES(bool builtin) : base("KES") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal KES() : base("KES") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kenyan Shilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kenyan Shilling".</value>
         public static KES Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4284,27 +3354,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KGS : Currency
     {
-        private static readonly KGS s_Currency = new KGS(true);
+        private static readonly KGS s_Instance = new KGS();
 
-        public KGS() : this(false) { }
-        
-        private KGS(bool builtin) : base("KGS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal KGS() : base("KGS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Som".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Som".</value>
         public static KGS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4316,27 +3379,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KHR : Currency
     {
-        private static readonly KHR s_Currency = new KHR(true);
+        private static readonly KHR s_Instance = new KHR();
 
-        public KHR() : this(false) { }
-        
-        private KHR(bool builtin) : base("KHR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal KHR() : base("KHR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Riel".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Riel".</value>
         public static KHR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4348,27 +3404,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KMF : Currency
     {
-        private static readonly KMF s_Currency = new KMF(true);
+        private static readonly KMF s_Instance = new KMF();
 
-        public KMF() : this(false) { }
-        
-        private KMF(bool builtin) : base("KMF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal KMF() : base("KMF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Comoro Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Comoro Franc".</value>
         public static KMF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4380,27 +3429,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KPW : Currency
     {
-        private static readonly KPW s_Currency = new KPW(true);
+        private static readonly KPW s_Instance = new KPW();
 
-        public KPW() : this(false) { }
-        
-        private KPW(bool builtin) : base("KPW") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal KPW() : base("KPW") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "North Korean Won".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "North Korean Won".</value>
         public static KPW Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4412,27 +3454,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KRW : Currency
     {
-        private static readonly KRW s_Currency = new KRW(true);
+        private static readonly KRW s_Instance = new KRW();
 
-        public KRW() : this(false) { }
-        
-        private KRW(bool builtin) : base("KRW") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal KRW() : base("KRW") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Won".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Won".</value>
         public static KRW Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4444,27 +3479,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KWD : Currency
     {
-        private static readonly KWD s_Currency = new KWD(true);
+        private static readonly KWD s_Instance = new KWD();
 
-        public KWD() : this(false) { }
-        
-        private KWD(bool builtin) : base("KWD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal KWD() : base("KWD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kuwaiti Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kuwaiti Dinar".</value>
         public static KWD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4476,27 +3504,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KYD : Currency
     {
-        private static readonly KYD s_Currency = new KYD(true);
+        private static readonly KYD s_Instance = new KYD();
 
-        public KYD() : this(false) { }
-        
-        private KYD(bool builtin) : base("KYD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal KYD() : base("KYD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cayman Islands Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cayman Islands Dollar".</value>
         public static KYD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4508,27 +3529,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KZT : Currency
     {
-        private static readonly KZT s_Currency = new KZT(true);
+        private static readonly KZT s_Instance = new KZT();
 
-        public KZT() : this(false) { }
-        
-        private KZT(bool builtin) : base("KZT") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal KZT() : base("KZT") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tenge".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tenge".</value>
         public static KZT Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4540,27 +3554,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAJ : Currency
     {
-        private static readonly LAJ s_Currency = new LAJ(true);
+        private static readonly LAJ s_Instance = new LAJ();
 
-        public LAJ() : this(false) { }
-        
-        private LAJ(bool builtin) : base("LAJ") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LAJ() : base("LAJ") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip Pot Pol".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kip Pot Pol".</value>
         public static LAJ Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4572,27 +3579,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAK : Currency
     {
-        private static readonly LAK s_Currency = new LAK(true);
+        private static readonly LAK s_Instance = new LAK();
 
-        public LAK() : this(false) { }
-        
-        private LAK(bool builtin) : base("LAK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LAK() : base("LAK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kip".</value>
         public static LAK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4604,27 +3604,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LBP : Currency
     {
-        private static readonly LBP s_Currency = new LBP(true);
+        private static readonly LBP s_Instance = new LBP();
 
-        public LBP() : this(false) { }
-        
-        private LBP(bool builtin) : base("LBP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LBP() : base("LBP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lebanese Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lebanese Pound".</value>
         public static LBP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4636,27 +3629,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LKR : Currency
     {
-        private static readonly LKR s_Currency = new LKR(true);
+        private static readonly LKR s_Instance = new LKR();
 
-        public LKR() : this(false) { }
-        
-        private LKR(bool builtin) : base("LKR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LKR() : base("LKR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sri Lanka Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sri Lanka Rupee".</value>
         public static LKR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4668,27 +3654,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LRD : Currency
     {
-        private static readonly LRD s_Currency = new LRD(true);
+        private static readonly LRD s_Instance = new LRD();
 
-        public LRD() : this(false) { }
-        
-        private LRD(bool builtin) : base("LRD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LRD() : base("LRD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Liberian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Liberian Dollar".</value>
         public static LRD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4700,27 +3679,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSL : Currency
     {
-        private static readonly LSL s_Currency = new LSL(true);
+        private static readonly LSL s_Instance = new LSL();
 
-        public LSL() : this(false) { }
-        
-        private LSL(bool builtin) : base("LSL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LSL() : base("LSL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Loti".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Loti".</value>
         public static LSL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4732,27 +3704,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSM : Currency
     {
-        private static readonly LSM s_Currency = new LSM(true);
+        private static readonly LSM s_Instance = new LSM();
 
-        public LSM() : this(false) { }
-        
-        private LSM(bool builtin) : base("LSM") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LSM() : base("LSM") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maloti".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Maloti".</value>
         public static LSM Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4764,27 +3729,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LTL : Currency
     {
-        private static readonly LTL s_Currency = new LTL(true);
+        private static readonly LTL s_Instance = new LTL();
 
-        public LTL() : this(false) { }
-        
-        private LTL(bool builtin) : base("LTL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LTL() : base("LTL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lithuanian Litas".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lithuanian Litas".</value>
         public static LTL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4796,27 +3754,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LTT : Currency
     {
-        private static readonly LTT s_Currency = new LTT(true);
+        private static readonly LTT s_Instance = new LTT();
 
-        public LTT() : this(false) { }
-        
-        private LTT(bool builtin) : base("LTT") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LTT() : base("LTT") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Talonas".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Talonas".</value>
         public static LTT Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4828,27 +3779,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUC : Currency
     {
-        private static readonly LUC s_Currency = new LUC(true);
+        private static readonly LUC s_Instance = new LUC();
 
-        public LUC() : this(false) { }
-        
-        private LUC(bool builtin) : base("LUC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LUC() : base("LUC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Convertible Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Convertible Franc".</value>
         public static LUC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4860,27 +3804,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUF : Currency
     {
-        private static readonly LUF s_Currency = new LUF(true);
+        private static readonly LUF s_Instance = new LUF();
 
-        public LUF() : this(false) { }
-        
-        private LUF(bool builtin) : base("LUF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LUF() : base("LUF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Franc".</value>
         public static LUF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4892,27 +3829,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUL : Currency
     {
-        private static readonly LUL s_Currency = new LUL(true);
+        private static readonly LUL s_Instance = new LUL();
 
-        public LUL() : this(false) { }
-        
-        private LUL(bool builtin) : base("LUL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LUL() : base("LUL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Financial Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Financial Franc".</value>
         public static LUL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4924,27 +3854,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LVL : Currency
     {
-        private static readonly LVL s_Currency = new LVL(true);
+        private static readonly LVL s_Instance = new LVL();
 
-        public LVL() : this(false) { }
-        
-        private LVL(bool builtin) : base("LVL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LVL() : base("LVL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Latvian Lats".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Latvian Lats".</value>
         public static LVL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4956,27 +3879,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LVR : Currency
     {
-        private static readonly LVR s_Currency = new LVR(true);
+        private static readonly LVR s_Instance = new LVR();
 
-        public LVR() : this(false) { }
-        
-        private LVR(bool builtin) : base("LVR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LVR() : base("LVR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Latvian Ruble".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Latvian Ruble".</value>
         public static LVR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -4988,27 +3904,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LYD : Currency
     {
-        private static readonly LYD s_Currency = new LYD(true);
+        private static readonly LYD s_Instance = new LYD();
 
-        public LYD() : this(false) { }
-        
-        private LYD(bool builtin) : base("LYD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal LYD() : base("LYD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Libyan Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Libyan Dinar".</value>
         public static LYD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5020,27 +3929,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAD : Currency
     {
-        private static readonly MAD s_Currency = new MAD(true);
+        private static readonly MAD s_Instance = new MAD();
 
-        public MAD() : this(false) { }
-        
-        private MAD(bool builtin) : base("MAD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MAD() : base("MAD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Moroccan Dirham".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Moroccan Dirham".</value>
         public static MAD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5052,27 +3954,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAF : Currency
     {
-        private static readonly MAF s_Currency = new MAF(true);
+        private static readonly MAF s_Instance = new MAF();
 
-        public MAF() : this(false) { }
-        
-        private MAF(bool builtin) : base("MAF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MAF() : base("MAF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mali Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mali Franc".</value>
         public static MAF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5084,27 +3979,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MDL : Currency
     {
-        private static readonly MDL s_Currency = new MDL(true);
+        private static readonly MDL s_Instance = new MDL();
 
-        public MDL() : this(false) { }
-        
-        private MDL(bool builtin) : base("MDL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MDL() : base("MDL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Moldovan Leu".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Moldovan Leu".</value>
         public static MDL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5116,27 +4004,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGA : Currency
     {
-        private static readonly MGA s_Currency = new MGA(true);
+        private static readonly MGA s_Instance = new MGA();
 
-        public MGA() : this(false) { }
-        
-        private MGA(bool builtin) : base("MGA") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MGA() : base("MGA") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Ariary".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Malagasy Ariary".</value>
         public static MGA Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5148,27 +4029,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGF : Currency
     {
-        private static readonly MGF s_Currency = new MGF(true);
+        private static readonly MGF s_Instance = new MGF();
 
-        public MGF() : this(false) { }
-        
-        private MGF(bool builtin) : base("MGF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MGF() : base("MGF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Malagasy Franc".</value>
         public static MGF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5180,27 +4054,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MKD : Currency
     {
-        private static readonly MKD s_Currency = new MKD(true);
+        private static readonly MKD s_Instance = new MKD();
 
-        public MKD() : this(false) { }
-        
-        private MKD(bool builtin) : base("MKD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MKD() : base("MKD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Denar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Denar".</value>
         public static MKD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5212,27 +4079,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MLF : Currency
     {
-        private static readonly MLF s_Currency = new MLF(true);
+        private static readonly MLF s_Instance = new MLF();
 
-        public MLF() : this(false) { }
-        
-        private MLF(bool builtin) : base("MLF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MLF() : base("MLF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mali Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mali Franc".</value>
         public static MLF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5244,27 +4104,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MMK : Currency
     {
-        private static readonly MMK s_Currency = new MMK(true);
+        private static readonly MMK s_Instance = new MMK();
 
-        public MMK() : this(false) { }
-        
-        private MMK(bool builtin) : base("MMK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MMK() : base("MMK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kyat".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kyat".</value>
         public static MMK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5276,27 +4129,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MNT : Currency
     {
-        private static readonly MNT s_Currency = new MNT(true);
+        private static readonly MNT s_Instance = new MNT();
 
-        public MNT() : this(false) { }
-        
-        private MNT(bool builtin) : base("MNT") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MNT() : base("MNT") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tugrik".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tugrik".</value>
         public static MNT Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5308,27 +4154,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MOP : Currency
     {
-        private static readonly MOP s_Currency = new MOP(true);
+        private static readonly MOP s_Instance = new MOP();
 
-        public MOP() : this(false) { }
-        
-        private MOP(bool builtin) : base("MOP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MOP() : base("MOP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pataca".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pataca".</value>
         public static MOP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5340,27 +4179,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MRO : Currency
     {
-        private static readonly MRO s_Currency = new MRO(true);
+        private static readonly MRO s_Instance = new MRO();
 
-        public MRO() : this(false) { }
-        
-        private MRO(bool builtin) : base("MRO") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MRO() : base("MRO") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ouguiya".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ouguiya".</value>
         public static MRO Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5372,27 +4204,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MTL : Currency
     {
-        private static readonly MTL s_Currency = new MTL(true);
+        private static readonly MTL s_Instance = new MTL();
 
-        public MTL() : this(false) { }
-        
-        private MTL(bool builtin) : base("MTL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MTL() : base("MTL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maltese Lira".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Maltese Lira".</value>
         public static MTL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5404,27 +4229,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MTP : Currency
     {
-        private static readonly MTP s_Currency = new MTP(true);
+        private static readonly MTP s_Instance = new MTP();
 
-        public MTP() : this(false) { }
-        
-        private MTP(bool builtin) : base("MTP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MTP() : base("MTP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maltese Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Maltese Pound".</value>
         public static MTP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5436,27 +4254,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MUR : Currency
     {
-        private static readonly MUR s_Currency = new MUR(true);
+        private static readonly MUR s_Instance = new MUR();
 
-        public MUR() : this(false) { }
-        
-        private MUR(bool builtin) : base("MUR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MUR() : base("MUR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mauritius Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mauritius Rupee".</value>
         public static MUR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5468,27 +4279,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVQ : Currency
     {
-        private static readonly MVQ s_Currency = new MVQ(true);
+        private static readonly MVQ s_Instance = new MVQ();
 
-        public MVQ() : this(false) { }
-        
-        private MVQ(bool builtin) : base("MVQ") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MVQ() : base("MVQ") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maldive Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Maldive Rupee".</value>
         public static MVQ Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5500,27 +4304,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVR : Currency
     {
-        private static readonly MVR s_Currency = new MVR(true);
+        private static readonly MVR s_Instance = new MVR();
 
-        public MVR() : this(false) { }
-        
-        private MVR(bool builtin) : base("MVR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MVR() : base("MVR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rufiyaa".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rufiyaa".</value>
         public static MVR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5532,27 +4329,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MWK : Currency
     {
-        private static readonly MWK s_Currency = new MWK(true);
+        private static readonly MWK s_Instance = new MWK();
 
-        public MWK() : this(false) { }
-        
-        private MWK(bool builtin) : base("MWK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MWK() : base("MWK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwacha".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwacha".</value>
         public static MWK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5564,27 +4354,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXN : Currency
     {
-        private static readonly MXN s_Currency = new MXN(true);
+        private static readonly MXN s_Instance = new MXN();
 
-        public MXN() : this(false) { }
-        
-        private MXN(bool builtin) : base("MXN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MXN() : base("MXN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Peso".</value>
         public static MXN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5596,27 +4379,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXP : Currency
     {
-        private static readonly MXP s_Currency = new MXP(true);
+        private static readonly MXP s_Instance = new MXP();
 
-        public MXP() : this(false) { }
-        
-        private MXP(bool builtin) : base("MXP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MXP() : base("MXP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Peso".</value>
         public static MXP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5628,27 +4404,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXV : Currency
     {
-        private static readonly MXV s_Currency = new MXV(true);
+        private static readonly MXV s_Instance = new MXV();
 
-        public MXV() : this(false) { }
-        
-        private MXV(bool builtin) : base("MXV") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MXV() : base("MXV") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Unidad de Inversion (UDI)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Unidad de Inversion (UDI)".</value>
         public static MXV Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5660,27 +4429,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MYR : Currency
     {
-        private static readonly MYR s_Currency = new MYR(true);
+        private static readonly MYR s_Instance = new MYR();
 
-        public MYR() : this(false) { }
-        
-        private MYR(bool builtin) : base("MYR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MYR() : base("MYR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malaysian Ringgit".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Malaysian Ringgit".</value>
         public static MYR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5692,27 +4454,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZE : Currency
     {
-        private static readonly MZE s_Currency = new MZE(true);
+        private static readonly MZE s_Instance = new MZE();
 
-        public MZE() : this(false) { }
-        
-        private MZE(bool builtin) : base("MZE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MZE() : base("MZE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Escudo".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Escudo".</value>
         public static MZE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5724,27 +4479,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZM : Currency
     {
-        private static readonly MZM s_Currency = new MZM(true);
+        private static readonly MZM s_Instance = new MZM();
 
-        public MZM() : this(false) { }
-        
-        private MZM(bool builtin) : base("MZM") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MZM() : base("MZM") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".</value>
         public static MZM Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5756,27 +4504,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZN : Currency
     {
-        private static readonly MZN s_Currency = new MZN(true);
+        private static readonly MZN s_Instance = new MZN();
 
-        public MZN() : this(false) { }
-        
-        private MZN(bool builtin) : base("MZN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal MZN() : base("MZN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".</value>
         public static MZN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5788,27 +4529,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NAD : Currency
     {
-        private static readonly NAD s_Currency = new NAD(true);
+        private static readonly NAD s_Instance = new NAD();
 
-        public NAD() : this(false) { }
-        
-        private NAD(bool builtin) : base("NAD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal NAD() : base("NAD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Namibia Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Namibia Dollar".</value>
         public static NAD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5820,27 +4554,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NGN : Currency
     {
-        private static readonly NGN s_Currency = new NGN(true);
+        private static readonly NGN s_Instance = new NGN();
 
-        public NGN() : this(false) { }
-        
-        private NGN(bool builtin) : base("NGN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal NGN() : base("NGN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Naira".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Naira".</value>
         public static NGN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5852,27 +4579,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIC : Currency
     {
-        private static readonly NIC s_Currency = new NIC(true);
+        private static readonly NIC s_Instance = new NIC();
 
-        public NIC() : this(false) { }
-        
-        private NIC(bool builtin) : base("NIC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal NIC() : base("NIC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cordoba".</value>
         public static NIC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5884,27 +4604,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIO : Currency
     {
-        private static readonly NIO s_Currency = new NIO(true);
+        private static readonly NIO s_Instance = new NIO();
 
-        public NIO() : this(false) { }
-        
-        private NIO(bool builtin) : base("NIO") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal NIO() : base("NIO") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba Oro".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cordoba Oro".</value>
         public static NIO Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5916,27 +4629,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NLG : Currency
     {
-        private static readonly NLG s_Currency = new NLG(true);
+        private static readonly NLG s_Instance = new NLG();
 
-        public NLG() : this(false) { }
-        
-        private NLG(bool builtin) : base("NLG") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal NLG() : base("NLG") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Guilder".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Netherlands Guilder".</value>
         public static NLG Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5948,27 +4654,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NOK : Currency
     {
-        private static readonly NOK s_Currency = new NOK(true);
+        private static readonly NOK s_Instance = new NOK();
 
-        public NOK() : this(false) { }
-        
-        private NOK(bool builtin) : base("NOK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal NOK() : base("NOK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Norwegian Krone".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Norwegian Krone".</value>
         public static NOK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -5980,27 +4679,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NPR : Currency
     {
-        private static readonly NPR s_Currency = new NPR(true);
+        private static readonly NPR s_Instance = new NPR();
 
-        public NPR() : this(false) { }
-        
-        private NPR(bool builtin) : base("NPR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal NPR() : base("NPR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nepalese Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Nepalese Rupee".</value>
         public static NPR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6012,27 +4704,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NZD : Currency
     {
-        private static readonly NZD s_Currency = new NZD(true);
+        private static readonly NZD s_Instance = new NZD();
 
-        public NZD() : this(false) { }
-        
-        private NZD(bool builtin) : base("NZD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal NZD() : base("NZD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zealand Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Zealand Dollar".</value>
         public static NZD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6044,27 +4729,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class OMR : Currency
     {
-        private static readonly OMR s_Currency = new OMR(true);
+        private static readonly OMR s_Instance = new OMR();
 
-        public OMR() : this(false) { }
-        
-        private OMR(bool builtin) : base("OMR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal OMR() : base("OMR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rial Omani".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rial Omani".</value>
         public static OMR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6076,27 +4754,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PAB : Currency
     {
-        private static readonly PAB s_Currency = new PAB(true);
+        private static readonly PAB s_Instance = new PAB();
 
-        public PAB() : this(false) { }
-        
-        private PAB(bool builtin) : base("PAB") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PAB() : base("PAB") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Balboa".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Balboa".</value>
         public static PAB Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6108,27 +4779,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEH : Currency
     {
-        private static readonly PEH s_Currency = new PEH(true);
+        private static readonly PEH s_Instance = new PEH();
 
-        public PEH() : this(false) { }
-        
-        private PEH(bool builtin) : base("PEH") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PEH() : base("PEH") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
         public static PEH Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6140,27 +4804,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEI : Currency
     {
-        private static readonly PEI s_Currency = new PEI(true);
+        private static readonly PEI s_Instance = new PEI();
 
-        public PEI() : this(false) { }
-        
-        private PEI(bool builtin) : base("PEI") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PEI() : base("PEI") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Inti".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Inti".</value>
         public static PEI Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6172,27 +4829,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEN : Currency
     {
-        private static readonly PEN s_Currency = new PEN(true);
+        private static readonly PEN s_Instance = new PEN();
 
-        public PEN() : this(false) { }
-        
-        private PEN(bool builtin) : base("PEN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PEN() : base("PEN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nuevo Sol".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Nuevo Sol".</value>
         public static PEN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6204,27 +4854,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PES : Currency
     {
-        private static readonly PES s_Currency = new PES(true);
+        private static readonly PES s_Instance = new PES();
 
-        public PES() : this(false) { }
-        
-        private PES(bool builtin) : base("PES") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PES() : base("PES") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
         public static PES Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6236,27 +4879,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PGK : Currency
     {
-        private static readonly PGK s_Currency = new PGK(true);
+        private static readonly PGK s_Instance = new PGK();
 
-        public PGK() : this(false) { }
-        
-        private PGK(bool builtin) : base("PGK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PGK() : base("PGK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kina".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kina".</value>
         public static PGK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6268,27 +4904,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PHP : Currency
     {
-        private static readonly PHP s_Currency = new PHP(true);
+        private static readonly PHP s_Instance = new PHP();
 
-        public PHP() : this(false) { }
-        
-        private PHP(bool builtin) : base("PHP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PHP() : base("PHP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Philippine Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Philippine Peso".</value>
         public static PHP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6300,27 +4929,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PKR : Currency
     {
-        private static readonly PKR s_Currency = new PKR(true);
+        private static readonly PKR s_Instance = new PKR();
 
-        public PKR() : this(false) { }
-        
-        private PKR(bool builtin) : base("PKR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PKR() : base("PKR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pakistan Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pakistan Rupee".</value>
         public static PKR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6332,27 +4954,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLN : Currency
     {
-        private static readonly PLN s_Currency = new PLN(true);
+        private static readonly PLN s_Instance = new PLN();
 
-        public PLN() : this(false) { }
-        
-        private PLN(bool builtin) : base("PLN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PLN() : base("PLN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zloty".</value>
         public static PLN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6364,27 +4979,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLZ : Currency
     {
-        private static readonly PLZ s_Currency = new PLZ(true);
+        private static readonly PLZ s_Instance = new PLZ();
 
-        public PLZ() : this(false) { }
-        
-        private PLZ(bool builtin) : base("PLZ") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PLZ() : base("PLZ") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zloty".</value>
         public static PLZ Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6396,27 +5004,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PTE : Currency
     {
-        private static readonly PTE s_Currency = new PTE(true);
+        private static readonly PTE s_Instance = new PTE();
 
-        public PTE() : this(false) { }
-        
-        private PTE(bool builtin) : base("PTE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PTE() : base("PTE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Portuguese Escudo".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Portuguese Escudo".</value>
         public static PTE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6428,27 +5029,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PYG : Currency
     {
-        private static readonly PYG s_Currency = new PYG(true);
+        private static readonly PYG s_Instance = new PYG();
 
-        public PYG() : this(false) { }
-        
-        private PYG(bool builtin) : base("PYG") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal PYG() : base("PYG") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guarani".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guarani".</value>
         public static PYG Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6460,27 +5054,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class QAR : Currency
     {
-        private static readonly QAR s_Currency = new QAR(true);
+        private static readonly QAR s_Instance = new QAR();
 
-        public QAR() : this(false) { }
-        
-        private QAR(bool builtin) : base("QAR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal QAR() : base("QAR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Qatari Rial".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Qatari Rial".</value>
         public static QAR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6492,27 +5079,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RHD : Currency
     {
-        private static readonly RHD s_Currency = new RHD(true);
+        private static readonly RHD s_Instance = new RHD();
 
-        public RHD() : this(false) { }
-        
-        private RHD(bool builtin) : base("RHD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal RHD() : base("RHD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".</value>
         public static RHD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6524,27 +5104,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ROK : Currency
     {
-        private static readonly ROK s_Currency = new ROK(true);
+        private static readonly ROK s_Instance = new ROK();
 
-        public ROK() : this(false) { }
-        
-        private ROK(bool builtin) : base("ROK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ROK() : base("ROK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Leu A/52".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Leu A/52".</value>
         public static ROK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6556,27 +5129,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ROL : Currency
     {
-        private static readonly ROL s_Currency = new ROL(true);
+        private static readonly ROL s_Instance = new ROL();
 
-        public ROL() : this(false) { }
-        
-        private ROL(bool builtin) : base("ROL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ROL() : base("ROL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Leu".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Leu".</value>
         public static ROL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6588,27 +5154,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RON : Currency
     {
-        private static readonly RON s_Currency = new RON(true);
+        private static readonly RON s_Instance = new RON();
 
-        public RON() : this(false) { }
-        
-        private RON(bool builtin) : base("RON") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal RON() : base("RON") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Romanian Leu".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Romanian Leu".</value>
         public static RON Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6620,27 +5179,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RSD : Currency
     {
-        private static readonly RSD s_Currency = new RSD(true);
+        private static readonly RSD s_Instance = new RSD();
 
-        public RSD() : this(false) { }
-        
-        private RSD(bool builtin) : base("RSD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal RSD() : base("RSD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".</value>
         public static RSD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6652,27 +5204,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUB : Currency
     {
-        private static readonly RUB s_Currency = new RUB(true);
+        private static readonly RUB s_Instance = new RUB();
 
-        public RUB() : this(false) { }
-        
-        private RUB(bool builtin) : base("RUB") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal RUB() : base("RUB") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Russian Ruble".</value>
         public static RUB Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6684,27 +5229,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUR : Currency
     {
-        private static readonly RUR s_Currency = new RUR(true);
+        private static readonly RUR s_Instance = new RUR();
 
-        public RUR() : this(false) { }
-        
-        private RUR(bool builtin) : base("RUR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal RUR() : base("RUR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Russian Ruble".</value>
         public static RUR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6716,27 +5254,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RWF : Currency
     {
-        private static readonly RWF s_Currency = new RWF(true);
+        private static readonly RWF s_Instance = new RWF();
 
-        public RWF() : this(false) { }
-        
-        private RWF(bool builtin) : base("RWF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal RWF() : base("RWF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rwanda Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rwanda Franc".</value>
         public static RWF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6748,27 +5279,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SAR : Currency
     {
-        private static readonly SAR s_Currency = new SAR(true);
+        private static readonly SAR s_Instance = new SAR();
 
-        public SAR() : this(false) { }
-        
-        private SAR(bool builtin) : base("SAR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SAR() : base("SAR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Saudi Riyal".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Saudi Riyal".</value>
         public static SAR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6780,27 +5304,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SBD : Currency
     {
-        private static readonly SBD s_Currency = new SBD(true);
+        private static readonly SBD s_Instance = new SBD();
 
-        public SBD() : this(false) { }
-        
-        private SBD(bool builtin) : base("SBD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SBD() : base("SBD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Solomon Islands Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Solomon Islands Dollar".</value>
         public static SBD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6812,27 +5329,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SCR : Currency
     {
-        private static readonly SCR s_Currency = new SCR(true);
+        private static readonly SCR s_Instance = new SCR();
 
-        public SCR() : this(false) { }
-        
-        private SCR(bool builtin) : base("SCR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SCR() : base("SCR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Seychelles Rupee".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Seychelles Rupee".</value>
         public static SCR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6844,27 +5354,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDD : Currency
     {
-        private static readonly SDD s_Currency = new SDD(true);
+        private static readonly SDD s_Instance = new SDD();
 
-        public SDD() : this(false) { }
-        
-        private SDD(bool builtin) : base("SDD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SDD() : base("SDD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Dinar".</value>
         public static SDD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6876,27 +5379,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDG : Currency
     {
-        private static readonly SDG s_Currency = new SDG(true);
+        private static readonly SDG s_Instance = new SDG();
 
-        public SDG() : this(false) { }
-        
-        private SDG(bool builtin) : base("SDG") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SDG() : base("SDG") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".</value>
         public static SDG Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6908,27 +5404,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDP : Currency
     {
-        private static readonly SDP s_Currency = new SDP(true);
+        private static readonly SDP s_Instance = new SDP();
 
-        public SDP() : this(false) { }
-        
-        private SDP(bool builtin) : base("SDP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SDP() : base("SDP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".</value>
         public static SDP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6940,27 +5429,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SEK : Currency
     {
-        private static readonly SEK s_Currency = new SEK(true);
+        private static readonly SEK s_Instance = new SEK();
 
-        public SEK() : this(false) { }
-        
-        private SEK(bool builtin) : base("SEK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SEK() : base("SEK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Swedish Krona".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Swedish Krona".</value>
         public static SEK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -6972,27 +5454,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SGD : Currency
     {
-        private static readonly SGD s_Currency = new SGD(true);
+        private static readonly SGD s_Instance = new SGD();
 
-        public SGD() : this(false) { }
-        
-        private SGD(bool builtin) : base("SGD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SGD() : base("SGD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Singapore Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Singapore Dollar".</value>
         public static SGD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7004,27 +5479,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SHP : Currency
     {
-        private static readonly SHP s_Currency = new SHP(true);
+        private static readonly SHP s_Instance = new SHP();
 
-        public SHP() : this(false) { }
-        
-        private SHP(bool builtin) : base("SHP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SHP() : base("SHP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Saint Helena Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Saint Helena Pound".</value>
         public static SHP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7036,27 +5504,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SIT : Currency
     {
-        private static readonly SIT s_Currency = new SIT(true);
+        private static readonly SIT s_Instance = new SIT();
 
-        public SIT() : this(false) { }
-        
-        private SIT(bool builtin) : base("SIT") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SIT() : base("SIT") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tolar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tolar".</value>
         public static SIT Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7068,27 +5529,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SKK : Currency
     {
-        private static readonly SKK s_Currency = new SKK(true);
+        private static readonly SKK s_Instance = new SKK();
 
-        public SKK() : this(false) { }
-        
-        private SKK(bool builtin) : base("SKK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SKK() : base("SKK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Slovak Koruna".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Slovak Koruna".</value>
         public static SKK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7100,27 +5554,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SLL : Currency
     {
-        private static readonly SLL s_Currency = new SLL(true);
+        private static readonly SLL s_Instance = new SLL();
 
-        public SLL() : this(false) { }
-        
-        private SLL(bool builtin) : base("SLL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SLL() : base("SLL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Leone".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Leone".</value>
         public static SLL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7132,27 +5579,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SOS : Currency
     {
-        private static readonly SOS s_Currency = new SOS(true);
+        private static readonly SOS s_Instance = new SOS();
 
-        public SOS() : this(false) { }
-        
-        private SOS(bool builtin) : base("SOS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SOS() : base("SOS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Somali Shilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Somali Shilling".</value>
         public static SOS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7164,27 +5604,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRD : Currency
     {
-        private static readonly SRD s_Currency = new SRD(true);
+        private static readonly SRD s_Instance = new SRD();
 
-        public SRD() : this(false) { }
-        
-        private SRD(bool builtin) : base("SRD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SRD() : base("SRD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Surinam Dollar".</value>
         public static SRD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7196,27 +5629,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRG : Currency
     {
-        private static readonly SRG s_Currency = new SRG(true);
+        private static readonly SRG s_Instance = new SRG();
 
-        public SRG() : this(false) { }
-        
-        private SRG(bool builtin) : base("SRG") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SRG() : base("SRG") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Guilder".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Surinam Guilder".</value>
         public static SRG Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7228,27 +5654,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SSP : Currency
     {
-        private static readonly SSP s_Currency = new SSP(true);
+        private static readonly SSP s_Instance = new SSP();
 
-        public SSP() : this(false) { }
-        
-        private SSP(bool builtin) : base("SSP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SSP() : base("SSP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "South Sudanese Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "South Sudanese Pound".</value>
         public static SSP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7260,27 +5679,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class STD : Currency
     {
-        private static readonly STD s_Currency = new STD(true);
+        private static readonly STD s_Instance = new STD();
 
-        public STD() : this(false) { }
-        
-        private STD(bool builtin) : base("STD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal STD() : base("STD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dobra".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dobra".</value>
         public static STD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7292,27 +5704,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SUR : Currency
     {
-        private static readonly SUR s_Currency = new SUR(true);
+        private static readonly SUR s_Instance = new SUR();
 
-        public SUR() : this(false) { }
-        
-        private SUR(bool builtin) : base("SUR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SUR() : base("SUR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rouble".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rouble".</value>
         public static SUR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7324,27 +5729,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SVC : Currency
     {
-        private static readonly SVC s_Currency = new SVC(true);
+        private static readonly SVC s_Instance = new SVC();
 
-        public SVC() : this(false) { }
-        
-        private SVC(bool builtin) : base("SVC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SVC() : base("SVC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "El Salvador Colon".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "El Salvador Colon".</value>
         public static SVC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7356,27 +5754,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SYP : Currency
     {
-        private static readonly SYP s_Currency = new SYP(true);
+        private static readonly SYP s_Instance = new SYP();
 
-        public SYP() : this(false) { }
-        
-        private SYP(bool builtin) : base("SYP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SYP() : base("SYP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syrian Pound".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Syrian Pound".</value>
         public static SYP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7388,27 +5779,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SZL : Currency
     {
-        private static readonly SZL s_Currency = new SZL(true);
+        private static readonly SZL s_Instance = new SZL();
 
-        public SZL() : this(false) { }
-        
-        private SZL(bool builtin) : base("SZL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal SZL() : base("SZL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lilangeni".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lilangeni".</value>
         public static SZL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7420,27 +5804,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class THB : Currency
     {
-        private static readonly THB s_Currency = new THB(true);
+        private static readonly THB s_Instance = new THB();
 
-        public THB() : this(false) { }
-        
-        private THB(bool builtin) : base("THB") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal THB() : base("THB") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Baht".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Baht".</value>
         public static THB Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7452,27 +5829,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJR : Currency
     {
-        private static readonly TJR s_Currency = new TJR(true);
+        private static readonly TJR s_Instance = new TJR();
 
-        public TJR() : this(false) { }
-        
-        private TJR(bool builtin) : base("TJR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TJR() : base("TJR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tajik Ruble".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tajik Ruble".</value>
         public static TJR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7484,27 +5854,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJS : Currency
     {
-        private static readonly TJS s_Currency = new TJS(true);
+        private static readonly TJS s_Instance = new TJS();
 
-        public TJS() : this(false) { }
-        
-        private TJS(bool builtin) : base("TJS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TJS() : base("TJS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Somoni".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Somoni".</value>
         public static TJS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7516,27 +5879,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMM : Currency
     {
-        private static readonly TMM s_Currency = new TMM(true);
+        private static readonly TMM s_Instance = new TMM();
 
-        public TMM() : this(false) { }
-        
-        private TMM(bool builtin) : base("TMM") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TMM() : base("TMM") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan Manat".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkmenistan Manat".</value>
         public static TMM Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7548,27 +5904,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMT : Currency
     {
-        private static readonly TMT s_Currency = new TMT(true);
+        private static readonly TMT s_Instance = new TMT();
 
-        public TMT() : this(false) { }
-        
-        private TMT(bool builtin) : base("TMT") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TMT() : base("TMT") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan New Manat".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkmenistan New Manat".</value>
         public static TMT Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7580,27 +5929,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TND : Currency
     {
-        private static readonly TND s_Currency = new TND(true);
+        private static readonly TND s_Instance = new TND();
 
-        public TND() : this(false) { }
-        
-        private TND(bool builtin) : base("TND") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TND() : base("TND") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tunisian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tunisian Dinar".</value>
         public static TND Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7612,27 +5954,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TOP : Currency
     {
-        private static readonly TOP s_Currency = new TOP(true);
+        private static readonly TOP s_Instance = new TOP();
 
-        public TOP() : this(false) { }
-        
-        private TOP(bool builtin) : base("TOP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TOP() : base("TOP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pa’anga".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pa’anga".</value>
         public static TOP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7644,27 +5979,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TPE : Currency
     {
-        private static readonly TPE s_Currency = new TPE(true);
+        private static readonly TPE s_Instance = new TPE();
 
-        public TPE() : this(false) { }
-        
-        private TPE(bool builtin) : base("TPE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TPE() : base("TPE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Timor Escudo".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Timor Escudo".</value>
         public static TPE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7676,27 +6004,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRL : Currency
     {
-        private static readonly TRL s_Currency = new TRL(true);
+        private static readonly TRL s_Instance = new TRL();
 
-        public TRL() : this(false) { }
-        
-        private TRL(bool builtin) : base("TRL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TRL() : base("TRL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Turkish Lira".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Turkish Lira".</value>
         public static TRL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7708,27 +6029,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRY : Currency
     {
-        private static readonly TRY s_Currency = new TRY(true);
+        private static readonly TRY s_Instance = new TRY();
 
-        public TRY() : this(false) { }
-        
-        private TRY(bool builtin) : base("TRY") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TRY() : base("TRY") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkish Lira".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkish Lira".</value>
         public static TRY Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7740,27 +6054,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TTD : Currency
     {
-        private static readonly TTD s_Currency = new TTD(true);
+        private static readonly TTD s_Instance = new TTD();
 
-        public TTD() : this(false) { }
-        
-        private TTD(bool builtin) : base("TTD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TTD() : base("TTD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Trinidad and Tobago Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Trinidad and Tobago Dollar".</value>
         public static TTD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7772,27 +6079,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TWD : Currency
     {
-        private static readonly TWD s_Currency = new TWD(true);
+        private static readonly TWD s_Instance = new TWD();
 
-        public TWD() : this(false) { }
-        
-        private TWD(bool builtin) : base("TWD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TWD() : base("TWD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Taiwan Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Taiwan Dollar".</value>
         public static TWD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7804,27 +6104,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TZS : Currency
     {
-        private static readonly TZS s_Currency = new TZS(true);
+        private static readonly TZS s_Instance = new TZS();
 
-        public TZS() : this(false) { }
-        
-        private TZS(bool builtin) : base("TZS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal TZS() : base("TZS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tanzanian Shilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tanzanian Shilling".</value>
         public static TZS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7836,27 +6129,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAH : Currency
     {
-        private static readonly UAH s_Currency = new UAH(true);
+        private static readonly UAH s_Instance = new UAH();
 
-        public UAH() : this(false) { }
-        
-        private UAH(bool builtin) : base("UAH") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal UAH() : base("UAH") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Hryvnia".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Hryvnia".</value>
         public static UAH Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7868,27 +6154,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAK : Currency
     {
-        private static readonly UAK s_Currency = new UAK(true);
+        private static readonly UAK s_Instance = new UAK();
 
-        public UAK() : this(false) { }
-        
-        private UAK(bool builtin) : base("UAK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal UAK() : base("UAK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Karbovanet".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Karbovanet".</value>
         public static UAK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7900,27 +6179,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGS : Currency
     {
-        private static readonly UGS s_Currency = new UGS(true);
+        private static readonly UGS s_Instance = new UGS();
 
-        public UGS() : this(false) { }
-        
-        private UGS(bool builtin) : base("UGS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal UGS() : base("UGS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".</value>
         public static UGS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7932,27 +6204,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGW : Currency
     {
-        private static readonly UGW s_Currency = new UGW(true);
+        private static readonly UGW s_Instance = new UGW();
 
-        public UGW() : this(false) { }
-        
-        private UGW(bool builtin) : base("UGW") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal UGW() : base("UGW") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Shilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Shilling".</value>
         public static UGW Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7964,27 +6229,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGX : Currency
     {
-        private static readonly UGX s_Currency = new UGX(true);
+        private static readonly UGX s_Instance = new UGX();
 
-        public UGX() : this(false) { }
-        
-        private UGX(bool builtin) : base("UGX") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal UGX() : base("UGX") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".</value>
         public static UGX Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -7996,27 +6254,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USD : Currency
     {
-        private static readonly USD s_Currency = new USD(true);
+        private static readonly USD s_Instance = new USD();
 
-        public USD() : this(false) { }
-        
-        private USD(bool builtin) : base("USD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal USD() : base("USD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar".</value>
         public static USD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8028,27 +6279,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USN : Currency
     {
-        private static readonly USN s_Currency = new USN(true);
+        private static readonly USN s_Instance = new USN();
 
-        public USN() : this(false) { }
-        
-        private USN(bool builtin) : base("USN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal USN() : base("USN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Next day)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar (Next day)".</value>
         public static USN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8060,27 +6304,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USS : Currency
     {
-        private static readonly USS s_Currency = new USS(true);
+        private static readonly USS s_Instance = new USS();
 
-        public USS() : this(false) { }
-        
-        private USS(bool builtin) : base("USS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal USS() : base("USS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Same day)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar (Same day)".</value>
         public static USS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8092,27 +6329,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYI : Currency
     {
-        private static readonly UYI s_Currency = new UYI(true);
+        private static readonly UYI s_Instance = new UYI();
 
-        public UYI() : this(false) { }
-        
-        private UYI(bool builtin) : base("UYI") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal UYI() : base("UYI") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".</value>
         public static UYI Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8124,27 +6354,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYN : Currency
     {
-        private static readonly UYN s_Currency = new UYN(true);
+        private static readonly UYN s_Instance = new UYN();
 
-        public UYN() : this(false) { }
-        
-        private UYN(bool builtin) : base("UYN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal UYN() : base("UYN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Uruguay Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Uruguay Peso".</value>
         public static UYN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8156,27 +6379,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYP : Currency
     {
-        private static readonly UYP s_Currency = new UYP(true);
+        private static readonly UYP s_Instance = new UYP();
 
-        public UYP() : this(false) { }
-        
-        private UYP(bool builtin) : base("UYP") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal UYP() : base("UYP") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguayan Peso".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uruguayan Peso".</value>
         public static UYP Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8188,27 +6404,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYU : Currency
     {
-        private static readonly UYU s_Currency = new UYU(true);
+        private static readonly UYU s_Instance = new UYU();
 
-        public UYU() : this(false) { }
-        
-        private UYU(bool builtin) : base("UYU") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal UYU() : base("UYU") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Uruguayo".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Uruguayo".</value>
         public static UYU Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8220,27 +6429,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UZS : Currency
     {
-        private static readonly UZS s_Currency = new UZS(true);
+        private static readonly UZS s_Instance = new UZS();
 
-        public UZS() : this(false) { }
-        
-        private UZS(bool builtin) : base("UZS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal UZS() : base("UZS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uzbekistan Sum".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uzbekistan Sum".</value>
         public static UZS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8252,27 +6454,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEB : Currency
     {
-        private static readonly VEB s_Currency = new VEB(true);
+        private static readonly VEB s_Instance = new VEB();
 
-        public VEB() : this(false) { }
-        
-        private VEB(bool builtin) : base("VEB") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal VEB() : base("VEB") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolivar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bolivar".</value>
         public static VEB Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8284,27 +6479,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEF : Currency
     {
-        private static readonly VEF s_Currency = new VEF(true);
+        private static readonly VEF s_Instance = new VEF();
 
-        public VEF() : this(false) { }
-        
-        private VEF(bool builtin) : base("VEF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal VEF() : base("VEF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolivar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bolivar".</value>
         public static VEF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8316,27 +6504,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VNC : Currency
     {
-        private static readonly VNC s_Currency = new VNC(true);
+        private static readonly VNC s_Instance = new VNC();
 
-        public VNC() : this(false) { }
-        
-        private VNC(bool builtin) : base("VNC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal VNC() : base("VNC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Dong".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Dong".</value>
         public static VNC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8348,27 +6529,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VND : Currency
     {
-        private static readonly VND s_Currency = new VND(true);
+        private static readonly VND s_Instance = new VND();
 
-        public VND() : this(false) { }
-        
-        private VND(bool builtin) : base("VND") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal VND() : base("VND") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dong".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dong".</value>
         public static VND Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8380,27 +6554,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VUV : Currency
     {
-        private static readonly VUV s_Currency = new VUV(true);
+        private static readonly VUV s_Instance = new VUV();
 
-        public VUV() : this(false) { }
-        
-        private VUV(bool builtin) : base("VUV") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal VUV() : base("VUV") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Vatu".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Vatu".</value>
         public static VUV Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8412,27 +6579,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class WST : Currency
     {
-        private static readonly WST s_Currency = new WST(true);
+        private static readonly WST s_Instance = new WST();
 
-        public WST() : this(false) { }
-        
-        private WST(bool builtin) : base("WST") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal WST() : base("WST") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tala".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tala".</value>
         public static WST Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8444,27 +6604,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAF : Currency
     {
-        private static readonly XAF s_Currency = new XAF(true);
+        private static readonly XAF s_Instance = new XAF();
 
-        public XAF() : this(false) { }
-        
-        private XAF(bool builtin) : base("XAF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XAF() : base("XAF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BEAC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "CFA Franc BEAC".</value>
         public static XAF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8476,27 +6629,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAG : Currency
     {
-        private static readonly XAG s_Currency = new XAG(true);
+        private static readonly XAG s_Instance = new XAG();
 
-        public XAG() : this(false) { }
-        
-        private XAG(bool builtin) : base("XAG") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XAG() : base("XAG") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Silver".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Silver".</value>
         public static XAG Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8508,27 +6654,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAU : Currency
     {
-        private static readonly XAU s_Currency = new XAU(true);
+        private static readonly XAU s_Instance = new XAU();
 
-        public XAU() : this(false) { }
-        
-        private XAU(bool builtin) : base("XAU") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XAU() : base("XAU") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gold".</value>
         public static XAU Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8540,27 +6679,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBA : Currency
     {
-        private static readonly XBA s_Currency = new XBA(true);
+        private static readonly XBA s_Instance = new XBA();
 
-        public XBA() : this(false) { }
-        
-        private XBA(bool builtin) : base("XBA") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XBA() : base("XBA") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".</value>
         public static XBA Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8572,27 +6704,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBB : Currency
     {
-        private static readonly XBB s_Currency = new XBB(true);
+        private static readonly XBB s_Instance = new XBB();
 
-        public XBB() : this(false) { }
-        
-        private XBB(bool builtin) : base("XBB") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XBB() : base("XBB") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".</value>
         public static XBB Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8604,27 +6729,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBC : Currency
     {
-        private static readonly XBC s_Currency = new XBC(true);
+        private static readonly XBC s_Instance = new XBC();
 
-        public XBC() : this(false) { }
-        
-        private XBC(bool builtin) : base("XBC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XBC() : base("XBC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".</value>
         public static XBC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8636,27 +6754,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBD : Currency
     {
-        private static readonly XBD s_Currency = new XBD(true);
+        private static readonly XBD s_Instance = new XBD();
 
-        public XBD() : this(false) { }
-        
-        private XBD(bool builtin) : base("XBD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XBD() : base("XBD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".</value>
         public static XBD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8668,27 +6779,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XCD : Currency
     {
-        private static readonly XCD s_Currency = new XCD(true);
+        private static readonly XCD s_Instance = new XCD();
 
-        public XCD() : this(false) { }
-        
-        private XCD(bool builtin) : base("XCD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XCD() : base("XCD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "East Caribbean Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "East Caribbean Dollar".</value>
         public static XCD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8700,27 +6804,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XDR : Currency
     {
-        private static readonly XDR s_Currency = new XDR(true);
+        private static readonly XDR s_Instance = new XDR();
 
-        public XDR() : this(false) { }
-        
-        private XDR(bool builtin) : base("XDR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XDR() : base("XDR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "SDR (Special Drawing Right)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "SDR (Special Drawing Right)".</value>
         public static XDR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8732,27 +6829,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XEU : Currency
     {
-        private static readonly XEU s_Currency = new XEU(true);
+        private static readonly XEU s_Instance = new XEU();
 
-        public XEU() : this(false) { }
-        
-        private XEU(bool builtin) : base("XEU") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XEU() : base("XEU") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "European Currency Unit (E.C.U)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "European Currency Unit (E.C.U)".</value>
         public static XEU Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8764,27 +6854,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XFO : Currency
     {
-        private static readonly XFO s_Currency = new XFO(true);
+        private static readonly XFO s_Instance = new XFO();
 
-        public XFO() : this(false) { }
-        
-        private XFO(bool builtin) : base("XFO") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XFO() : base("XFO") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold-Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gold-Franc".</value>
         public static XFO Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8796,27 +6879,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XFU : Currency
     {
-        private static readonly XFU s_Currency = new XFU(true);
+        private static readonly XFU s_Instance = new XFU();
 
-        public XFU() : this(false) { }
-        
-        private XFU(bool builtin) : base("XFU") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XFU() : base("XFU") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "UIC-Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "UIC-Franc".</value>
         public static XFU Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8828,27 +6904,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XOF : Currency
     {
-        private static readonly XOF s_Currency = new XOF(true);
+        private static readonly XOF s_Instance = new XOF();
 
-        public XOF() : this(false) { }
-        
-        private XOF(bool builtin) : base("XOF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XOF() : base("XOF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BCEAO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "CFA Franc BCEAO".</value>
         public static XOF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8860,27 +6929,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPD : Currency
     {
-        private static readonly XPD s_Currency = new XPD(true);
+        private static readonly XPD s_Instance = new XPD();
 
-        public XPD() : this(false) { }
-        
-        private XPD(bool builtin) : base("XPD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XPD() : base("XPD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Palladium".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Palladium".</value>
         public static XPD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8892,27 +6954,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPF : Currency
     {
-        private static readonly XPF s_Currency = new XPF(true);
+        private static readonly XPF s_Instance = new XPF();
 
-        public XPF() : this(false) { }
-        
-        private XPF(bool builtin) : base("XPF") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XPF() : base("XPF") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFP Franc".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "CFP Franc".</value>
         public static XPF Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8924,27 +6979,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPT : Currency
     {
-        private static readonly XPT s_Currency = new XPT(true);
+        private static readonly XPT s_Instance = new XPT();
 
-        public XPT() : this(false) { }
-        
-        private XPT(bool builtin) : base("XPT") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XPT() : base("XPT") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Platinum".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Platinum".</value>
         public static XPT Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8956,27 +7004,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XRE : Currency
     {
-        private static readonly XRE s_Currency = new XRE(true);
+        private static readonly XRE s_Instance = new XRE();
 
-        public XRE() : this(false) { }
-        
-        private XRE(bool builtin) : base("XRE") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XRE() : base("XRE") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "RINET Funds Code".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "RINET Funds Code".</value>
         public static XRE Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -8988,27 +7029,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XSU : Currency
     {
-        private static readonly XSU s_Currency = new XSU(true);
+        private static readonly XSU s_Instance = new XSU();
 
-        public XSU() : this(false) { }
-        
-        private XSU(bool builtin) : base("XSU") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XSU() : base("XSU") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sucre".</value>
         public static XSU Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9020,27 +7054,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XTS : Currency
     {
-        private static readonly XTS s_Currency = new XTS(true);
+        private static readonly XTS s_Instance = new XTS();
 
-        public XTS() : this(false) { }
-        
-        private XTS(bool builtin) : base("XTS") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XTS() : base("XTS") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Codes specifically reserved for testing purposes".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Codes specifically reserved for testing purposes".</value>
         public static XTS Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9052,27 +7079,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XUA : Currency
     {
-        private static readonly XUA s_Currency = new XUA(true);
+        private static readonly XUA s_Instance = new XUA();
 
-        public XUA() : this(false) { }
-        
-        private XUA(bool builtin) : base("XUA") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XUA() : base("XUA") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "ADB Unit of Account".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "ADB Unit of Account".</value>
         public static XUA Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9084,27 +7104,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XXX : Currency
     {
-        private static readonly XXX s_Currency = new XXX(true);
+        private static readonly XXX s_Instance = new XXX();
 
-        public XXX() : this(false) { }
-        
-        private XXX(bool builtin) : base("XXX") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal XXX() : base("XXX") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "The codes assigned for transactions where no currency is involved".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "The codes assigned for transactions where no currency is involved".</value>
         public static XXX Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9116,27 +7129,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YDD : Currency
     {
-        private static readonly YDD s_Currency = new YDD(true);
+        private static readonly YDD s_Instance = new YDD();
 
-        public YDD() : this(false) { }
-        
-        private YDD(bool builtin) : base("YDD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal YDD() : base("YDD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yemeni Dinar".</value>
         public static YDD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9148,27 +7154,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YER : Currency
     {
-        private static readonly YER s_Currency = new YER(true);
+        private static readonly YER s_Instance = new YER();
 
-        public YER() : this(false) { }
-        
-        private YER(bool builtin) : base("YER") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal YER() : base("YER") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Rial".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yemeni Rial".</value>
         public static YER Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9180,27 +7179,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUD : Currency
     {
-        private static readonly YUD s_Currency = new YUD(true);
+        private static readonly YUD s_Instance = new YUD();
 
-        public YUD() : this(false) { }
-        
-        private YUD(bool builtin) : base("YUD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal YUD() : base("YUD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Yugoslavian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Yugoslavian Dinar".</value>
         public static YUD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9212,27 +7204,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUM : Currency
     {
-        private static readonly YUM s_Currency = new YUM(true);
+        private static readonly YUM s_Instance = new YUM();
 
-        public YUM() : this(false) { }
-        
-        private YUM(bool builtin) : base("YUM") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal YUM() : base("YUM") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Dinar".</value>
         public static YUM Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9244,27 +7229,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUN : Currency
     {
-        private static readonly YUN s_Currency = new YUN(true);
+        private static readonly YUN s_Instance = new YUN();
 
-        public YUN() : this(false) { }
-        
-        private YUN(bool builtin) : base("YUN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal YUN() : base("YUN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yugoslavian Dinar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yugoslavian Dinar".</value>
         public static YUN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9276,27 +7254,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAL : Currency
     {
-        private static readonly ZAL s_Currency = new ZAL(true);
+        private static readonly ZAL s_Instance = new ZAL();
 
-        public ZAL() : this(false) { }
-        
-        private ZAL(bool builtin) : base("ZAL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZAL() : base("ZAL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Financial Rand".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Financial Rand".</value>
         public static ZAL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9308,27 +7279,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAR : Currency
     {
-        private static readonly ZAR s_Currency = new ZAR(true);
+        private static readonly ZAR s_Instance = new ZAR();
 
-        public ZAR() : this(false) { }
-        
-        private ZAR(bool builtin) : base("ZAR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZAR() : base("ZAR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rand".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rand".</value>
         public static ZAR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9340,27 +7304,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMK : Currency
     {
-        private static readonly ZMK s_Currency = new ZMK(true);
+        private static readonly ZMK s_Instance = new ZMK();
 
-        public ZMK() : this(false) { }
-        
-        private ZMK(bool builtin) : base("ZMK") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZMK() : base("ZMK") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".</value>
         public static ZMK Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9372,27 +7329,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMW : Currency
     {
-        private static readonly ZMW s_Currency = new ZMW(true);
+        private static readonly ZMW s_Instance = new ZMW();
 
-        public ZMW() : this(false) { }
-        
-        private ZMW(bool builtin) : base("ZMW") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZMW() : base("ZMW") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".</value>
         public static ZMW Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9404,27 +7354,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZRN : Currency
     {
-        private static readonly ZRN s_Currency = new ZRN(true);
+        private static readonly ZRN s_Instance = new ZRN();
 
-        public ZRN() : this(false) { }
-        
-        private ZRN(bool builtin) : base("ZRN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZRN() : base("ZRN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zaire".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Zaire".</value>
         public static ZRN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9436,27 +7379,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZRZ : Currency
     {
-        private static readonly ZRZ s_Currency = new ZRZ(true);
+        private static readonly ZRZ s_Instance = new ZRZ();
 
-        public ZRZ() : this(false) { }
-        
-        private ZRZ(bool builtin) : base("ZRZ") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZRZ() : base("ZRZ") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zaire".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zaire".</value>
         public static ZRZ Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9468,27 +7404,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWC : Currency
     {
-        private static readonly ZWC s_Currency = new ZWC(true);
+        private static readonly ZWC s_Instance = new ZWC();
 
-        public ZWC() : this(false) { }
-        
-        private ZWC(bool builtin) : base("ZWC") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZWC() : base("ZWC") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".</value>
         public static ZWC Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9500,27 +7429,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWD : Currency
     {
-        private static readonly ZWD s_Currency = new ZWD(true);
+        private static readonly ZWD s_Instance = new ZWD();
 
-        public ZWD() : this(false) { }
-        
-        private ZWD(bool builtin) : base("ZWD") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZWD() : base("ZWD") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (old)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (old)".</value>
         public static ZWD Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9532,27 +7454,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWL : Currency
     {
-        private static readonly ZWL s_Currency = new ZWL(true);
+        private static readonly ZWL s_Instance = new ZWL();
 
-        public ZWL() : this(false) { }
-        
-        private ZWL(bool builtin) : base("ZWL") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZWL() : base("ZWL") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".</value>
         public static ZWL Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9564,27 +7479,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWN : Currency
     {
-        private static readonly ZWN s_Currency = new ZWN(true);
+        private static readonly ZWN s_Instance = new ZWN();
 
-        public ZWN() : this(false) { }
-        
-        private ZWN(bool builtin) : base("ZWN") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZWN() : base("ZWN") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (new)".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (new)".</value>
         public static ZWN Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }
@@ -9596,27 +7504,20 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWR : Currency
     {
-        private static readonly ZWR s_Currency = new ZWR(true);
+        private static readonly ZWR s_Instance = new ZWR();
 
-        public ZWR() : this(false) { }
-        
-        private ZWR(bool builtin) : base("ZWR") 
-        { 
-            if (!builtin) {
-                throw new NotSupportedException();
-            }
-        }
+        internal ZWR() : base("ZWR") { }
         
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".</value>
         public static ZWR Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
-                return s_Currency;
+                return s_Instance;
             }
         }
     }

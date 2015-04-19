@@ -11,10 +11,9 @@ Design
 - Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
 - Review all `IEnumerable` extensions for null-checking and deferred execution.
 
-Narvalo.Core
+Narvalo.Fx
 ------------
 
-- `Maybe<T>`, overload true?
 - Confirm that Maybe methods never returns null.
 - Monad.tt, review true argument check for extension methods.
 
@@ -22,26 +21,22 @@ Narvalo.Common
 --------------
 
 - Complete unchecked alternates for SqlDataReader.
-- Refactore:
-  * `Range<T>`. Why force struct constraint? Require for "T?" where T is a struct?
-  * Currencies (Serialization & providers)
-  * Benchmarks
-- Fix Gendarme errors (after refactoring).
-- Fix all ContractVerification(false).
+- `Range<T>`. Why force struct constraint? Require for "T?" where T is a struct?
+
+Narvalo.Finance
+---------------
+
+- Decimal overloads.
+- Handle overflows.
+- Comparisons between `Money` and `Money<T>`. Or simply remove `Money`?
+- Messages for exceptions!
+- IConvertible?
+- BigMoney and BigMoney<TCurrency>.
 
 Narvalo.Reliability
 -------------------
 
 - Very much a work in progress.
-
-Narvalo.Finance
----------------
-
-- Money<T> -> whet if s_Currency throw a type initialization exception.
-- decimal overloads.
-- Handle overflows.
-- IConvertible?
-- BigMoney and BigMoney<TCurrency>.
 
 Narvalo.Web
 -----------
@@ -53,7 +48,6 @@ Narvalo.Web
 - Make `AssetSection` and `Optimization` sections optional.
 - Use static readonly fields instead of const for some fields in Narvalo.Web.Semantic?
 - Add an XML schema for the Narvalo.Web config.
-- Fix all ContractVerification(false).
 
 Narvalo.Facts
 -------------
@@ -102,10 +96,14 @@ Infrastructure
 --------------
 
 Update necessary following the new organization:
-- MSBuild -> See also SecAnnotate
+- MSBuild -> Fix SecAnnotate & PCL.
 - PSake
 - NuGet
 - Retire Narvalo.Core
+
+### Code Contracts
+
+- Fix all ContractVerification(false).
 
 ### Continuous Integration
 

@@ -10,7 +10,7 @@ namespace Narvalo.Finance
     /// Provides information about a localized currency.
     /// </summary>
     /// <remarks>
-    /// <para>You can define your own set of currencies by using a custom <see cref="ICurrencyProvider"/>.</para>
+    /// <para>You can define your own set of currencies by using a custom <see cref="CurrencyFactory"/>.</para>
     /// <para>Different currencies may have the same <see cref="CurrencyInfo.Code"/>
     /// and <see cref="CurrencyInfo.NumericCode"/> but be associated to different 
     /// regions/countries. There is no 1-1 correspondance between currencies
