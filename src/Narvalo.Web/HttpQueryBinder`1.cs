@@ -50,25 +50,22 @@ namespace Narvalo.Web
         {
             _errors.Add(exception);
         }
+    }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+    [ContractClass(typeof(HttpQueryBinderContract<>))]
+    public abstract partial class HttpQueryBinder<TQuery> 
+    {
         [ContractInvariantMethod]
         private void ObjectInvariants()
         {
             Contract.Invariant(_errors != null);
         }
-
-#endif
     }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-    [ContractClass(typeof(HttpQueryBinderBaseContract<>))]
-    public abstract partial class HttpQueryBinderBase<TQuery> { }
-
-    [ContractClassFor(typeof(HttpQueryBinderBase<>))]
-    internal abstract class HttpQueryBinderBaseContract<TQuery> : HttpQueryBinderBase<TQuery>
+    [ContractClassFor(typeof(HttpQueryBinder<>))]
+    internal abstract class HttpQueryBinderContract<TQuery> : HttpQueryBinder<TQuery>
     {
         protected override Maybe<TQuery> BindCore(HttpRequest request)
         {

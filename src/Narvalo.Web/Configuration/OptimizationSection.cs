@@ -70,22 +70,3 @@ namespace Narvalo.Web.Configuration
         }
     }
 }
-
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-namespace Narvalo.Web.Configuration
-{
-    using System.Configuration;
-    using System.Diagnostics.Contracts;
-
-    public sealed partial class OptimizationSection : ConfigurationSection
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariants()
-        {
-            Contract.Invariant(_properties != null);
-        }
-    }
-}
-
-#endif

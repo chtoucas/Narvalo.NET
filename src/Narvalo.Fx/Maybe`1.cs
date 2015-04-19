@@ -187,7 +187,7 @@ namespace Narvalo.Fx
         /// You are better off using the rich vocabulary that this class offers.</remarks>
         /// <value><see langword="true"/> if the object does hold a value; otherwise <see langword="false"/>.</value>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        internal bool IsSome { get { return _isSome; } }
+        public bool IsSome { get { return _isSome; } }
 
         /// <summary>
         /// Gets the enclosed value.
