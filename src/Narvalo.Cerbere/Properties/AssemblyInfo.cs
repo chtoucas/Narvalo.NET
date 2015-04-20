@@ -4,8 +4,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Security;
 
-[assembly: AssemblyTitle("Narvalo.Core")]
-[assembly: AssemblyDescription("Narvalo Core Library containing implementations of functional patterns.")]
+[assembly: AssemblyTitle("Narvalo.Cerbere")]
+[assembly: AssemblyDescription("")]
 
 [assembly: SecurityTransparent]
 
