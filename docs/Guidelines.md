@@ -64,7 +64,7 @@ Design Recommendations
 ### Optional Rules
 
 - Consider putting optional extensions in a subdirectory named "Extensions".
-- Projects should use a minimal set of references.   
+- Projects should use a minimal set of references.
 
 ### Localization & Resources
 
@@ -93,34 +93,34 @@ Consider putting the justification on its own line. This helps to quickly see th
 In addition, defects that need to be fixed are tagged with `[FIXME]`
 in the global suppression file. This helps tracking things.
 
-For Gendarme, we use a global suppression file `etc\gendarme.ignore` shared across 
+For Gendarme, we use a global suppression file `etc\gendarme.ignore` shared across
 all projects. This file is used exclusively for defects that can not be masked
 with a `SuppressMessage` attribute and for defects that need a fix.
-    
+
 ### StyleCop
 
 For a detailed description of each rule, check out the official
 [documentation](http://www.stylecop.com/docs/).
 
 ### FxCop
-         
-Except for test projects we use a strict ruleset; 
+
+Except for test projects we use a strict ruleset;
 only one rule is disabled: _[CA1006] Do not nest generic types in member signatures_.
 Nevertheless, we will test the equivalent rule with Gendarme which has the ability
 to disable a rule at assembly level.
 
 Test projects use a relaxed ruleset. Roughly, you don't have to create C# documentation.
-                                                      
+
 #### Dictionary
 Every project already load the dictionary `etc\CodeAnalysisDictionary.xml`.
-If needed, consider adding a local dictionary `CustomDictionary.xml` in the 
+If needed, consider adding a local dictionary `CustomDictionary.xml` in the
 directory `Properties` rather than modifying the global one.
 
 ### Gendarme
 
 ### Code Contracts
 
-The target is full CC coverage: we enable all options of the static contract checker 
+The target is full CC coverage: we enable all options of the static contract checker
 except "Check redundant assume".
 ```
 -outputwarnmasks -show unreached
@@ -138,7 +138,7 @@ or might not work depending on the build configuration.
 **Always** prefer conditional attributes to `#ifdef`. We only accept three exceptions:
 object invariants, exposing internals to test projects and white-box tests (see below).
 
-If you use an `#ifdef` directive you must justify it with a comment placed on 
+If you use an `#ifdef` directive you must justify it with a comment placed on
 the same line as the `#if`. This helps to quickly spot the justification in search results.
 
 Standard compilation symbols:
@@ -218,19 +218,19 @@ Non-standard tags:
  * </content>
  */
 ```
-     
-Tests
------     
 
-Test projects are first-class citizens; translate: they must pass successfully 
-all static analysis.             
+Tests
+-----
+
+Test projects are first-class citizens; translate: they must pass successfully
+all static analysis.
 
 ### Mandatory Rules
 - Use the same directory hierarchy that the one used by the libraries.
 - Name [TypeUnderTest]Facts a test class.
 - Name [UnitOfWork]_[ExpectedOutcomeOrBehaviour]_[Context] a unit test.
 - When testing for exceptions use: `_Throws[ExpectedException]` or `_DoesNotThrow`.
-- After a bugfix, create a unit test, decorate it with the `Issue` attribute 
+- After a bugfix, create a unit test, decorate it with the `Issue` attribute
   and add a detailed summary of the bug.
 - Always justify a skipped test.
 - Do not run a different set of tests depending on the build configuration.
@@ -249,7 +249,7 @@ public static class MyTypeFacts
 - Consider adding a suffix _For{WhichArgument} to describe the arguments used.
 - Consider adding a suffix _{Context} to describe the context.
 - Consider using the same ordering for tests than the one used inside classes.
-- Consider wrapping each set of tests with `#region ... #endregion`. 
+- Consider wrapping each set of tests with `#region ... #endregion`.
 - Consider using traits:
   * "Slow" for slow tests.
 
@@ -270,7 +270,7 @@ If a test suite contains white-box tests, add also a fake test as follows:
     // Here goes the white-box tests.
 
 #endif
-``` 
+```
 
 ### White-Box Tests
 
@@ -314,15 +314,5 @@ References:
 Security
 --------
 
-Consider applying the `SecurityTransparent` attribute to the assembly.
-If you do so, verify the assembly with the `SecAnnotate` tool.
-
-Right now, this is only done for Narvalo.Core, because of unsolved problems 
-with `SecAnnotate` and libraries depending on a PCL project (see `tools\Make.CustomAfter.targets`).
-
-References:
-- [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
-- [APTCA](https://msdn.microsoft.com/en-us/magazine/ee336023.aspx)
-- [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)
-- [SecAnnotate and PCL](http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab)
-- [Tutorial](http://www.codeproject.com/Articles/329666/Things-I-learned-while-implementing-my-first-Level)
+Consider applying the `SecurityTransparent` attribute or the `AllowPartiallyTrustedCallers`
+attribute to the assembly. If you do so, verify the assembly with the `SecAnnotate` tool.

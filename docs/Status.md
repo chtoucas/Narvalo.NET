@@ -6,13 +6,11 @@ Does not necessary reflects the current status.
 Remarks:
 - Code Contracts, StyleCop & Documentation: OK does not mean finished, more to be added.
 
-As of 2015-04-20:
-
 Narvalo.Cerbere
 ---------------
 
 API should be stable.
-- OpenCover: Line=97.1%, Branch=100%
+- OpenCover: _Line=_97.1%, _Branch=_100%
 - FxCop: OK
 - Gendarme: OK
 - Code Contracts: OK
@@ -24,7 +22,7 @@ Narvalo.Fx
 ------------
 
 API should be stable.
-- OpenCover: Line=19.3%, Branch=15.4%
+- OpenCover: _Line=_19.3%, _Branch=_15.4%
 - FxCop: OK
 - Gendarme: OK
 - Code Contracts: OK
@@ -36,9 +34,9 @@ Narvalo.Finance
 ---------------
 
 API not yet stabilized.
-- OpenCover: Lne=10.9%, Branch=18.1%
+- OpenCover: _Line=_10.9%, _Branch=_18.1%
 - FxCop: OK
-- Gendarme: **KO** (see gendarme.ignore) 
+- Gendarme: **KO** (see gendarme.ignore)
 - Code Contracts: OK
 - StyleCop: **KO**
 - Documentation: **KO**
@@ -48,13 +46,13 @@ Narvalo.Common
 --------------
 
 API not yet stabilized.
-- OpenCover: Line=11.2%, Branch=18.3%
+- OpenCover: _Line=_11.2%, _Branch=_18.3%
 - FxCop: **KO** (see GlobalSuppression.cs)
 - Gendarme: **KO** (see gendarme.ignore)
 - Code Contracts: **KO** (see ContractVerification(false))
 - StyleCop: **KO**
 - Documentation: **KO**
-- SecAnnotate: **KO**
+- SecAnnotate: OK
 
 Narvalo.Web
 -----------

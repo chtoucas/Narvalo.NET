@@ -77,13 +77,13 @@ Narvalo.Mvp
 -----------
 
 - Review `ThrowIfNoPresenterBound`, `Load` event, `PresenterBinder.Release`.
-- Review the use of custom presenter types per platform prevents the reuse of 
+- Review the use of custom presenter types per platform prevents the reuse of
   presenters across different platforms. Maybe is it a necessary evil?
-- Add support for Application Controller, Navigator, EventAggregator (not the same 
+- Add support for Application Controller, Navigator, EventAggregator (not the same
   as cross-presenter communication).
 - Incorporate ideas from MVCSharp (Task) and maybe GWT, Caliburn.Micro, ReactiveUI or MVVM Light?
 - Add support for WPF.
-- For Narvalo.Mvp.Windows.Forms, cross-presenter communication is not functional. 
+- For Narvalo.Mvp.Windows.Forms, cross-presenter communication is not functional.
   Things to work on before it might prove to be useful:
   * Right now, only controls contained in a MvpForm share the same presenter binder.
     We need something similar to what is done with ASP.NET (`PageHost`) but the situation
@@ -106,7 +106,7 @@ Update necessary following the new organization:
 
 ### Continuous Integration
 
-- Enable Continuous Integration with AppVeyor. 
+- Enable Continuous Integration with AppVeyor.
 - Analyze logs and reports across builds.
 - Build C# documentation.
 - Build and test all possible configurations.
@@ -131,7 +131,7 @@ Update necessary following the new organization:
 - https://msdn.microsoft.com/en-us/magazine/ee336023.aspx
 - http://stackoverflow.com/questions/5055632/net-4-allowpartiallytrustedcallers-attribute-and-security-markings-like-secur
 - Bug: In MSBuild, we force security transparency for our PCL libraries in MSBuild.
-- Do not run SecAnnotate on test libraries? 
+- Do not run SecAnnotate on test libraries?
 - See permcalc & PEVerify /transparent  https://msdn.microsoft.com/en-us/library/62bwd2yd.aspx
 - Narvalo.Web
     * Review added SecuritySafeCritical & SecurityCritical attributes.
@@ -142,6 +142,13 @@ Update necessary following the new organization:
 [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
 [assembly: SecurityRules(SecurityRuleSet.Level2, SkipVerificationInFullTrust = true)]
 ```
+
+References:
+- [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
+- [APTCA](https://msdn.microsoft.com/en-us/magazine/ee336023.aspx)
+- [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)
+- [SecAnnotate and PCL](http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab)
+- [Tutorial](http://www.codeproject.com/Articles/329666/Things-I-learned-while-implementing-my-first-Level)
 
 ### Scripts
 
