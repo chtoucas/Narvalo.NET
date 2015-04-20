@@ -37,7 +37,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IMainView.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

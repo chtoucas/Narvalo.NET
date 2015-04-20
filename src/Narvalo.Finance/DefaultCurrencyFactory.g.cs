@@ -12,7 +12,7 @@
 namespace Narvalo.Finance
 {
     using System.Collections.Generic;
-
+    
     public sealed partial class DefaultCurrencyFactory
     {
         // The set of available currency codes.

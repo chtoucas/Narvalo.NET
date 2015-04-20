@@ -105,7 +105,6 @@
     <Compile Include="CurrencyNotFoundException.cs" />
     <Compile Include="CurrencyProvider.cs" />
     <Compile Include="DefaultCurrencyFactory.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="CurrencyFactory.cs" />
     <Compile Include="DefaultCurrencyFactory.g.cs">
       <DependentUpon>DefaultCurrencyFactory.tt</DependentUpon>

@@ -97,7 +97,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Html\Asset.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Html\Markup.cs" />
     <Compile Include="HttpQueryBinder`1.cs" />
     <Compile Include="Configuration\AssetSection.cs" />

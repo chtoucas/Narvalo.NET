@@ -44,7 +44,7 @@ namespace Narvalo.Edu.Monads
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
     public static partial class Identity
     {
@@ -516,7 +516,7 @@ namespace Narvalo.Edu.Monads
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating.12.0", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
     [global::System.Diagnostics.DebuggerNonUserCode]
     public static partial class EnumerableIdentityExtensions
     {

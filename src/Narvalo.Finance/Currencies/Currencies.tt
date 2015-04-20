@@ -5,6 +5,7 @@ var currentCurrencies = ParseCurrent(@"..\Resources\ISO4217\20150101\A1.xml");
 var legacyCurrencies = ParseLegacy(@"..\Resources\ISO4217\20150101\A3.xml");
 var currencies = currentCurrencies.Concat(legacyCurrencies);
 
+var dteVersion = GetHostVersion();
 
 var codeSet = new HashSet<string>();
 
@@ -29,6 +30,9 @@ using global::System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1508:ClosingCurlyBracketsMustNotBePrecededByBlankLine",
     Justification = "[GeneratedCode] Newline rule disabled for T4 templates.")]
     
+[assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY",
+    Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
+
 namespace <#= InferNamespace() #>
 {
     using System.Diagnostics.Contracts;
@@ -46,6 +50,8 @@ namespace <#= InferNamespace() #>
     /// <summary>
     /// Represents the currency unit for the "<#= currency.EnglishName #>".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "<#= dteVersion #>")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class <#= currency.Code #> : Currency

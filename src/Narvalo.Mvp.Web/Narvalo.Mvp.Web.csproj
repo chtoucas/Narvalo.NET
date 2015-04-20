@@ -24,7 +24,6 @@
     <Compile Include="Core\PageAsyncTaskManager.cs" />
     <Compile Include="Core\PageHost.cs" />
     <Compile Include="Core\PlatformServices.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpPresenterOf`1.cs" />
     <Compile Include="HttpPresenter`1.cs" />
     <Compile Include="HttpPresenter`2.cs" />

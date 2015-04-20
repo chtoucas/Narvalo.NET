@@ -8,7 +8,7 @@ namespace Narvalo.Web.Optimization
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;
 
-    [ContractVerification(false)]
+    [ContractVerification(false)] // TODO: Enable ContractVerification for WhiteSpaceBusterHtmlMarkupParser.
     public sealed class WhiteSpaceBusterHtmlMarkupParser : ParserBase
     {
         private readonly RazorOptimizer _optimizer;

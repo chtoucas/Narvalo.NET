@@ -3,13 +3,15 @@
 <#@ assembly name="System.Core" #>
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="EnvDTE" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Xml" #>
 <#@ import namespace="System.Xml.Linq" #>
-<#@ import namespace="System.Xml.Schema" #><#+
+<#@ import namespace="System.Xml.Schema" #>
+<#@ import namespace="EnvDTE" #><#+
 
     private static readonly XmlReaderSettings _settings = new XmlReaderSettings {
         CheckCharacters = false,
@@ -36,6 +38,14 @@
     }
 
     protected bool Debug { get; set; }
+
+    protected string GetHostVersion() 
+    {
+        var serviceProvider = (IServiceProvider)this.Host;
+        var dte = serviceProvider.GetService(typeof(DTE)) as DTE;  
+
+        return dte.Version;
+    }
 
     protected List<Currency> ParseCurrent(string path)
     {

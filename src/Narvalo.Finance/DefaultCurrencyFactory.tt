@@ -27,7 +27,7 @@ foreach (var currency in currencies)
 namespace <#= InferNamespace() #>
 {
     using System.Collections.Generic;
-
+    
     public sealed partial class <#= InferName() #>
     {
         // The set of available currency codes.

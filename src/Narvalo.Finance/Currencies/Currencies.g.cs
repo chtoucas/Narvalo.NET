@@ -18,6 +18,9 @@ using global::System.Diagnostics.CodeAnalysis;
 [module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1508:ClosingCurlyBracketsMustNotBePrecededByBlankLine",
     Justification = "[GeneratedCode] Newline rule disabled for T4 templates.")]
     
+[assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY",
+    Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
+
 namespace Narvalo.Finance.Currencies
 {
     using System.Diagnostics.Contracts;
@@ -25,6 +28,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Andorran Peseta".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ADP : Currency
@@ -50,6 +55,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "UAE Dirham".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AED : Currency
@@ -75,6 +82,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Afghani".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFA : Currency
@@ -100,6 +109,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Afghani".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFN : Currency
@@ -125,6 +136,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Old Lek".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALK : Currency
@@ -150,6 +163,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Lek".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALL : Currency
@@ -175,6 +190,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Armenian Dram".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AMD : Currency
@@ -200,6 +217,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Netherlands Antillean Guilder".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ANG : Currency
@@ -225,6 +244,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kwanza".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOA : Currency
@@ -250,6 +271,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kwanza".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOK : Currency
@@ -275,6 +298,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "New Kwanza".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AON : Currency
@@ -300,6 +325,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kwanza Reajustado".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOR : Currency
@@ -325,6 +352,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Austral".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARA : Currency
@@ -350,6 +379,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Peso Argentino".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARP : Currency
@@ -375,6 +406,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Argentine Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARS : Currency
@@ -400,6 +433,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARY : Currency
@@ -425,6 +460,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Schilling".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ATS : Currency
@@ -450,6 +487,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Australian Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AUD : Currency
@@ -475,6 +514,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Aruban Florin".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AWG : Currency
@@ -500,6 +541,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Azerbaijan Manat".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AYM : Currency
@@ -525,6 +568,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Azerbaijanian Manat".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZM : Currency
@@ -550,6 +595,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Azerbaijanian Manat".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZN : Currency
@@ -575,6 +622,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAD : Currency
@@ -600,6 +649,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Convertible Mark".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAM : Currency
@@ -625,6 +676,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Barbados Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BBD : Currency
@@ -650,6 +703,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Taka".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BDT : Currency
@@ -675,6 +730,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Convertible Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEC : Currency
@@ -700,6 +757,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Belgian Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEF : Currency
@@ -725,6 +784,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Financial Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEL : Currency
@@ -750,6 +811,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Lev A/52".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGJ : Currency
@@ -775,6 +838,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Lev A/62".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGK : Currency
@@ -800,6 +865,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Lev".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGL : Currency
@@ -825,6 +892,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Bulgarian Lev".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGN : Currency
@@ -850,6 +919,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Bahraini Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BHD : Currency
@@ -875,6 +946,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Burundi Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BIF : Currency
@@ -900,6 +973,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Bermudian Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BMD : Currency
@@ -925,6 +1000,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Brunei Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BND : Currency
@@ -950,6 +1027,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Boliviano".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOB : Currency
@@ -975,6 +1054,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Peso boliviano".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOP : Currency
@@ -1000,6 +1081,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mvdol".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOV : Currency
@@ -1025,6 +1108,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cruzeiro".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRB : Currency
@@ -1050,6 +1135,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cruzado".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRC : Currency
@@ -1075,6 +1162,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cruzeiro".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRE : Currency
@@ -1100,6 +1189,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Brazilian Real".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRL : Currency
@@ -1125,6 +1216,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "New Cruzado".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRN : Currency
@@ -1150,6 +1243,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cruzeiro Real".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRR : Currency
@@ -1175,6 +1270,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Bahamian Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BSD : Currency
@@ -1200,6 +1297,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Ngultrum".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BTN : Currency
@@ -1225,6 +1324,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "N.A.".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BUK : Currency
@@ -1250,6 +1351,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Pula".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BWP : Currency
@@ -1275,6 +1378,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Belarussian Ruble".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYB : Currency
@@ -1300,6 +1405,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Belarussian Ruble".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYR : Currency
@@ -1325,6 +1432,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Belize Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BZD : Currency
@@ -1350,6 +1459,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Canadian Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CAD : Currency
@@ -1375,6 +1486,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Congolese Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CDF : Currency
@@ -1400,6 +1513,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "WIR Franc (for electronic)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHC : Currency
@@ -1425,6 +1540,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "WIR Euro".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHE : Currency
@@ -1450,6 +1567,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Swiss Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHF : Currency
@@ -1475,6 +1594,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "WIR Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHW : Currency
@@ -1500,6 +1621,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Unidad de Fomento".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLF : Currency
@@ -1525,6 +1648,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Chilean Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLP : Currency
@@ -1550,6 +1675,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Peoples Bank Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNX : Currency
@@ -1575,6 +1702,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Yuan Renminbi".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNY : Currency
@@ -1600,6 +1729,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Colombian Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COP : Currency
@@ -1625,6 +1756,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Unidad de Valor Real".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COU : Currency
@@ -1650,6 +1783,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Costa Rican Colon".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CRC : Currency
@@ -1675,6 +1810,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Serbian Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSD : Currency
@@ -1700,6 +1837,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Krona A/53".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSJ : Currency
@@ -1725,6 +1864,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Koruna".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSK : Currency
@@ -1750,6 +1891,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Peso Convertible".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUC : Currency
@@ -1775,6 +1918,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cuban Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUP : Currency
@@ -1800,6 +1945,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cabo Verde Escudo".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CVE : Currency
@@ -1825,6 +1972,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cyprus Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CYP : Currency
@@ -1850,6 +1999,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Czech Koruna".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CZK : Currency
@@ -1875,6 +2026,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mark der DDR".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DDM : Currency
@@ -1900,6 +2053,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Deutsche Mark".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DEM : Currency
@@ -1925,6 +2080,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Djibouti Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DJF : Currency
@@ -1950,6 +2107,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Danish Krone".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DKK : Currency
@@ -1975,6 +2134,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Dominican Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DOP : Currency
@@ -2000,6 +2161,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Algerian Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DZD : Currency
@@ -2025,6 +2188,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Sucre".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ECS : Currency
@@ -2050,6 +2215,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Unidad de Valor Constante (UVC)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ECV : Currency
@@ -2075,6 +2242,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kroon".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EEK : Currency
@@ -2100,6 +2269,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Egyptian Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EGP : Currency
@@ -2125,6 +2296,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Ekwele".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EQE : Currency
@@ -2150,6 +2323,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Nakfa".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ERN : Currency
@@ -2175,6 +2350,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Spanish Peseta".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESA : Currency
@@ -2200,6 +2377,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the """A"" Account (convertible Peseta Account)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESB : Currency
@@ -2225,6 +2404,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Spanish Peseta".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESP : Currency
@@ -2250,6 +2431,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Ethiopian Birr".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ETB : Currency
@@ -2275,6 +2458,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Euro".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EUR : Currency
@@ -2300,6 +2485,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Markka".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FIM : Currency
@@ -2325,6 +2512,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Fiji Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FJD : Currency
@@ -2350,6 +2539,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Falkland Islands Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FKP : Currency
@@ -2375,6 +2566,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "French Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FRF : Currency
@@ -2400,6 +2593,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Pound Sterling".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GBP : Currency
@@ -2425,6 +2620,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Georgian Coupon".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEK : Currency
@@ -2450,6 +2647,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Lari".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEL : Currency
@@ -2475,6 +2674,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cedi".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHC : Currency
@@ -2500,6 +2701,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Ghana Cedi".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHP : Currency
@@ -2525,6 +2728,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Ghana Cedi".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHS : Currency
@@ -2550,6 +2755,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Gibraltar Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GIP : Currency
@@ -2575,6 +2782,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Dalasi".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GMD : Currency
@@ -2600,6 +2809,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Syli".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNE : Currency
@@ -2625,6 +2836,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Guinea Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNF : Currency
@@ -2650,6 +2863,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Syli".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNS : Currency
@@ -2675,6 +2890,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Ekwele".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GQE : Currency
@@ -2700,6 +2917,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Drachma".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GRD : Currency
@@ -2725,6 +2944,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Quetzal".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GTQ : Currency
@@ -2750,6 +2971,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Guinea Escudo".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GWE : Currency
@@ -2775,6 +2998,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Guinea-Bissau Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GWP : Currency
@@ -2800,6 +3025,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Guyana Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GYD : Currency
@@ -2825,6 +3052,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Hong Kong Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HKD : Currency
@@ -2850,6 +3079,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Lempira".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HNL : Currency
@@ -2875,6 +3106,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Croatian Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRD : Currency
@@ -2900,6 +3133,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Croatian Kuna".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRK : Currency
@@ -2925,6 +3160,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Gourde".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HTG : Currency
@@ -2950,6 +3187,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Forint".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HUF : Currency
@@ -2975,6 +3214,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Rupiah".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IDR : Currency
@@ -3000,6 +3241,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Irish Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IEP : Currency
@@ -3025,6 +3268,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILP : Currency
@@ -3050,6 +3295,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Old Shekel".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILR : Currency
@@ -3075,6 +3322,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "New Israeli Sheqel".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILS : Currency
@@ -3100,6 +3349,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Indian Rupee".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class INR : Currency
@@ -3125,6 +3376,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Iraqi Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IQD : Currency
@@ -3150,6 +3403,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Iranian Rial".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IRR : Currency
@@ -3175,6 +3430,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Old Krona".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISJ : Currency
@@ -3200,6 +3457,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Iceland Krona".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISK : Currency
@@ -3225,6 +3484,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Italian Lira".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ITL : Currency
@@ -3250,6 +3511,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Jamaican Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JMD : Currency
@@ -3275,6 +3538,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Jordanian Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JOD : Currency
@@ -3300,6 +3565,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Yen".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JPY : Currency
@@ -3325,6 +3592,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kenyan Shilling".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KES : Currency
@@ -3350,6 +3619,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Som".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KGS : Currency
@@ -3375,6 +3646,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Riel".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KHR : Currency
@@ -3400,6 +3673,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Comoro Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KMF : Currency
@@ -3425,6 +3700,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "North Korean Won".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KPW : Currency
@@ -3450,6 +3727,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Won".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KRW : Currency
@@ -3475,6 +3754,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kuwaiti Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KWD : Currency
@@ -3500,6 +3781,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cayman Islands Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KYD : Currency
@@ -3525,6 +3808,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Tenge".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KZT : Currency
@@ -3550,6 +3835,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kip Pot Pol".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAJ : Currency
@@ -3575,6 +3862,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kip".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAK : Currency
@@ -3600,6 +3889,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Lebanese Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LBP : Currency
@@ -3625,6 +3916,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Sri Lanka Rupee".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LKR : Currency
@@ -3650,6 +3943,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Liberian Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LRD : Currency
@@ -3675,6 +3970,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Loti".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSL : Currency
@@ -3700,6 +3997,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Maloti".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSM : Currency
@@ -3725,6 +4024,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Lithuanian Litas".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LTL : Currency
@@ -3750,6 +4051,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Talonas".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LTT : Currency
@@ -3775,6 +4078,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Luxembourg Convertible Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUC : Currency
@@ -3800,6 +4105,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Luxembourg Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUF : Currency
@@ -3825,6 +4132,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Luxembourg Financial Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUL : Currency
@@ -3850,6 +4159,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Latvian Lats".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LVL : Currency
@@ -3875,6 +4186,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Latvian Ruble".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LVR : Currency
@@ -3900,6 +4213,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Libyan Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LYD : Currency
@@ -3925,6 +4240,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Moroccan Dirham".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAD : Currency
@@ -3950,6 +4267,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mali Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAF : Currency
@@ -3975,6 +4294,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Moldovan Leu".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MDL : Currency
@@ -4000,6 +4321,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Malagasy Ariary".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGA : Currency
@@ -4025,6 +4348,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Malagasy Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGF : Currency
@@ -4050,6 +4375,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Denar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MKD : Currency
@@ -4075,6 +4402,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mali Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MLF : Currency
@@ -4100,6 +4429,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kyat".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MMK : Currency
@@ -4125,6 +4456,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Tugrik".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MNT : Currency
@@ -4150,6 +4483,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Pataca".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MOP : Currency
@@ -4175,6 +4510,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Ouguiya".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MRO : Currency
@@ -4200,6 +4537,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Maltese Lira".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MTL : Currency
@@ -4225,6 +4564,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Maltese Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MTP : Currency
@@ -4250,6 +4591,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mauritius Rupee".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MUR : Currency
@@ -4275,6 +4618,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Maldive Rupee".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVQ : Currency
@@ -4300,6 +4645,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Rufiyaa".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVR : Currency
@@ -4325,6 +4672,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kwacha".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MWK : Currency
@@ -4350,6 +4699,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mexican Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXN : Currency
@@ -4375,6 +4726,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mexican Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXP : Currency
@@ -4400,6 +4753,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mexican Unidad de Inversion (UDI)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXV : Currency
@@ -4425,6 +4780,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Malaysian Ringgit".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MYR : Currency
@@ -4450,6 +4807,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mozambique Escudo".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZE : Currency
@@ -4475,6 +4834,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mozambique Metical".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZM : Currency
@@ -4500,6 +4861,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Mozambique Metical".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZN : Currency
@@ -4525,6 +4888,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Namibia Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NAD : Currency
@@ -4550,6 +4915,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Naira".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NGN : Currency
@@ -4575,6 +4942,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cordoba".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIC : Currency
@@ -4600,6 +4969,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Cordoba Oro".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIO : Currency
@@ -4625,6 +4996,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Netherlands Guilder".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NLG : Currency
@@ -4650,6 +5023,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Norwegian Krone".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NOK : Currency
@@ -4675,6 +5050,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Nepalese Rupee".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NPR : Currency
@@ -4700,6 +5077,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "New Zealand Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NZD : Currency
@@ -4725,6 +5104,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Rial Omani".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class OMR : Currency
@@ -4750,6 +5131,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Balboa".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PAB : Currency
@@ -4775,6 +5158,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Sol".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEH : Currency
@@ -4800,6 +5185,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Inti".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEI : Currency
@@ -4825,6 +5212,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Nuevo Sol".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEN : Currency
@@ -4850,6 +5239,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Sol".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PES : Currency
@@ -4875,6 +5266,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Kina".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PGK : Currency
@@ -4900,6 +5293,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Philippine Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PHP : Currency
@@ -4925,6 +5320,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Pakistan Rupee".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PKR : Currency
@@ -4950,6 +5347,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Zloty".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLN : Currency
@@ -4975,6 +5374,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Zloty".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLZ : Currency
@@ -5000,6 +5401,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Portuguese Escudo".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PTE : Currency
@@ -5025,6 +5428,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Guarani".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PYG : Currency
@@ -5050,6 +5455,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Qatari Rial".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class QAR : Currency
@@ -5075,6 +5482,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Rhodesian Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RHD : Currency
@@ -5100,6 +5509,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Leu A/52".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ROK : Currency
@@ -5125,6 +5536,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Old Leu".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ROL : Currency
@@ -5150,6 +5563,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "New Romanian Leu".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RON : Currency
@@ -5175,6 +5590,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Serbian Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RSD : Currency
@@ -5200,6 +5617,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Russian Ruble".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUB : Currency
@@ -5225,6 +5644,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Russian Ruble".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUR : Currency
@@ -5250,6 +5671,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Rwanda Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RWF : Currency
@@ -5275,6 +5698,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Saudi Riyal".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SAR : Currency
@@ -5300,6 +5725,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Solomon Islands Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SBD : Currency
@@ -5325,6 +5752,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Seychelles Rupee".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SCR : Currency
@@ -5350,6 +5779,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Sudanese Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDD : Currency
@@ -5375,6 +5806,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Sudanese Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDG : Currency
@@ -5400,6 +5833,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Sudanese Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDP : Currency
@@ -5425,6 +5860,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Swedish Krona".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SEK : Currency
@@ -5450,6 +5887,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Singapore Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SGD : Currency
@@ -5475,6 +5914,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Saint Helena Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SHP : Currency
@@ -5500,6 +5941,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Tolar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SIT : Currency
@@ -5525,6 +5968,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Slovak Koruna".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SKK : Currency
@@ -5550,6 +5995,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Leone".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SLL : Currency
@@ -5575,6 +6022,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Somali Shilling".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SOS : Currency
@@ -5600,6 +6049,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Surinam Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRD : Currency
@@ -5625,6 +6076,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Surinam Guilder".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRG : Currency
@@ -5650,6 +6103,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "South Sudanese Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SSP : Currency
@@ -5675,6 +6130,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Dobra".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class STD : Currency
@@ -5700,6 +6157,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Rouble".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SUR : Currency
@@ -5725,6 +6184,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "El Salvador Colon".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SVC : Currency
@@ -5750,6 +6211,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Syrian Pound".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SYP : Currency
@@ -5775,6 +6238,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Lilangeni".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SZL : Currency
@@ -5800,6 +6265,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Baht".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class THB : Currency
@@ -5825,6 +6292,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Tajik Ruble".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJR : Currency
@@ -5850,6 +6319,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Somoni".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJS : Currency
@@ -5875,6 +6346,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Turkmenistan Manat".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMM : Currency
@@ -5900,6 +6373,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Turkmenistan New Manat".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMT : Currency
@@ -5925,6 +6400,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Tunisian Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TND : Currency
@@ -5950,6 +6427,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Pa’anga".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TOP : Currency
@@ -5975,6 +6454,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Timor Escudo".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TPE : Currency
@@ -6000,6 +6481,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Old Turkish Lira".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRL : Currency
@@ -6025,6 +6508,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Turkish Lira".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRY : Currency
@@ -6050,6 +6535,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Trinidad and Tobago Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TTD : Currency
@@ -6075,6 +6562,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "New Taiwan Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TWD : Currency
@@ -6100,6 +6589,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Tanzanian Shilling".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TZS : Currency
@@ -6125,6 +6616,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Hryvnia".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAH : Currency
@@ -6150,6 +6643,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Karbovanet".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAK : Currency
@@ -6175,6 +6670,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Uganda Shilling".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGS : Currency
@@ -6200,6 +6697,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Old Shilling".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGW : Currency
@@ -6225,6 +6724,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Uganda Shilling".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGX : Currency
@@ -6250,6 +6751,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "US Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USD : Currency
@@ -6275,6 +6778,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "US Dollar (Next day)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USN : Currency
@@ -6300,6 +6805,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "US Dollar (Same day)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USS : Currency
@@ -6325,6 +6832,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYI : Currency
@@ -6350,6 +6859,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Old Uruguay Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYN : Currency
@@ -6375,6 +6886,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Uruguayan Peso".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYP : Currency
@@ -6400,6 +6913,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Peso Uruguayo".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYU : Currency
@@ -6425,6 +6940,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Uzbekistan Sum".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UZS : Currency
@@ -6450,6 +6967,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Bolivar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEB : Currency
@@ -6475,6 +6994,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Bolivar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEF : Currency
@@ -6500,6 +7021,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Old Dong".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VNC : Currency
@@ -6525,6 +7048,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Dong".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VND : Currency
@@ -6550,6 +7075,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Vatu".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VUV : Currency
@@ -6575,6 +7102,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Tala".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class WST : Currency
@@ -6600,6 +7129,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "CFA Franc BEAC".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAF : Currency
@@ -6625,6 +7156,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Silver".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAG : Currency
@@ -6650,6 +7183,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Gold".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAU : Currency
@@ -6675,6 +7210,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Bond Markets Unit European Composite Unit (EURCO)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBA : Currency
@@ -6700,6 +7237,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBB : Currency
@@ -6725,6 +7264,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBC : Currency
@@ -6750,6 +7291,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBD : Currency
@@ -6775,6 +7318,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "East Caribbean Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XCD : Currency
@@ -6800,6 +7345,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "SDR (Special Drawing Right)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XDR : Currency
@@ -6825,6 +7372,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "European Currency Unit (E.C.U)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XEU : Currency
@@ -6850,6 +7399,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Gold-Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XFO : Currency
@@ -6875,6 +7426,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "UIC-Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XFU : Currency
@@ -6900,6 +7453,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "CFA Franc BCEAO".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XOF : Currency
@@ -6925,6 +7480,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Palladium".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPD : Currency
@@ -6950,6 +7507,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "CFP Franc".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPF : Currency
@@ -6975,6 +7534,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Platinum".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPT : Currency
@@ -7000,6 +7561,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "RINET Funds Code".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XRE : Currency
@@ -7025,6 +7588,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Sucre".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XSU : Currency
@@ -7050,6 +7615,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Codes specifically reserved for testing purposes".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XTS : Currency
@@ -7075,6 +7642,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "ADB Unit of Account".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XUA : Currency
@@ -7100,6 +7669,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "The codes assigned for transactions where no currency is involved".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XXX : Currency
@@ -7125,6 +7696,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Yemeni Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YDD : Currency
@@ -7150,6 +7723,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Yemeni Rial".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YER : Currency
@@ -7175,6 +7750,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "New Yugoslavian Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUD : Currency
@@ -7200,6 +7777,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "New Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUM : Currency
@@ -7225,6 +7804,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Yugoslavian Dinar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUN : Currency
@@ -7250,6 +7831,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Financial Rand".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAL : Currency
@@ -7275,6 +7858,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Rand".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAR : Currency
@@ -7300,6 +7885,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Zambian Kwacha".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMK : Currency
@@ -7325,6 +7912,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Zambian Kwacha".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMW : Currency
@@ -7350,6 +7939,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "New Zaire".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZRN : Currency
@@ -7375,6 +7966,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Zaire".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZRZ : Currency
@@ -7400,6 +7993,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Rhodesian Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWC : Currency
@@ -7425,6 +8020,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Zimbabwe Dollar (old)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWD : Currency
@@ -7450,6 +8047,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Zimbabwe Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWL : Currency
@@ -7475,6 +8074,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Zimbabwe Dollar (new)".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWN : Currency
@@ -7500,6 +8101,8 @@ namespace Narvalo.Finance.Currencies
     /// <summary>
     /// Represents the currency unit for the "Zimbabwe Dollar".
     /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
+    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWR : Currency

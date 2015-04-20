@@ -31,7 +31,7 @@ namespace Narvalo.Web.UI
      * ]]>
      * </content>
      */
-    [ContractVerification(false)]
+    [ContractVerification(false)] // TODO: Enable ContractVerification for ControlBuilderExtensions.
     public static class ControlBuilderExtensions
     {
         private const BindingFlags BINDING_ATTR

@@ -75,7 +75,6 @@
     <Compile Include="Autofac\PrincipalModelBinder.cs" />
     <Compile Include="Castle\SqlExceptionInterceptor.cs" />
     <Compile Include="Castle\XmlExceptionInterceptor.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Log4Net\Log4NetHttpModule.cs" />
     <Compile Include="LumenWorks\CsvSlurp.cs" />
     <Compile Include="NHibernate\GuidComb.cs" />

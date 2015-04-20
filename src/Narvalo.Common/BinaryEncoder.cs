@@ -7,7 +7,7 @@ namespace Narvalo
     using System.Text;
 
     // TODO: Créer la version Hexavigesimal.
-    [ContractVerification(false)]
+    [ContractVerification(false)] // TODO: Enable ContractVerification for BinaryEncoder.
     public static class BinaryEncoder
     {
         // Alternative alphabet: "abcdefghijklmnopqrstuvwxyz234567";

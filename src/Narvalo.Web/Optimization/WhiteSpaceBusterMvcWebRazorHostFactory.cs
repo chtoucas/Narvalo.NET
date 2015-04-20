@@ -11,7 +11,7 @@ namespace Narvalo.Web.Optimization
     /// <remarks>
     /// Malheureusement, en utilisant cette classe, on perd l'intellisense.
     /// </remarks>
-    [ContractVerification(false)]
+    [ContractVerification(false)] // TODO: Enable ContractVerification for WhiteSpaceBusterMvcWebRazorHostFactory.
     public sealed class WhiteSpaceBusterMvcWebRazorHostFactory : MvcWebRazorHostFactory
     {
         /// <summary>

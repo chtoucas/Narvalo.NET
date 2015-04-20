@@ -260,7 +260,7 @@ using System.Reflection;
          /includesignatures for detail signatures. 
          /showstatistics 
          /verbose -->
-    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /maximumpasses:1 $(_ForceTransparency) /verbose /showstatistics $(_SecAnnotateReferenceDirectory) /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
+    <Exec Command="&quot;$(SecAnnotateCommand)&quot; $(_ForceTransparency) /verbose /showstatistics $(_SecAnnotateReferenceDirectory) /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
           WorkingDirectory="$(OutDir)"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />
