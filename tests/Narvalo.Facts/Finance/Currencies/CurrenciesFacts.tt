@@ -10,7 +10,7 @@ var codeSet = new HashSet<string>();
 #>
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Currencies
+namespace <#= InferNamespace() #>
 {
     using System;
 
@@ -39,9 +39,11 @@ namespace Narvalo.Finance.Currencies
     }
 #>
         }
+
+        #endregion
         
         [Fact]
-        public static void Currency_Equalities()
+        public static void Currencies_SatisfyStructuralEqualityRules()
         {
             // Act & Assert
 <#
@@ -57,7 +59,5 @@ namespace Narvalo.Finance.Currencies
     }
 #>
         }
-
-        #endregion
     }
 }

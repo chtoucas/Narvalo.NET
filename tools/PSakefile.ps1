@@ -775,10 +775,6 @@ function Invoke-OpenCover {
           -filters:$reportSummaryFilters `
           -reports:$coverageFile `
           -targetdir:$summaryDirectory
-
-        $summaryFile = Get-LocalPath 'docs\coverage.html'
-        Remove-Item $summaryFile
-        Move-Item (Get-LocalPath 'work\log\index.htm') $summaryFile
     }
     else {
         $reportDirectory = Get-LocalPath 'work\log\opencover'

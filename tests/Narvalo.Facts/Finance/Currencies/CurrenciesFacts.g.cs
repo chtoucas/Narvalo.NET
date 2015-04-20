@@ -315,9 +315,11 @@ namespace Narvalo.Finance.Currencies
             Assert.True(ZWN.Currency != null);
             Assert.True(ZWR.Currency != null);
         }
+
+        #endregion
         
         [Fact]
-        public static void Currency_Equalities()
+        public static void Currencies_SatisfyStructuralEqualityRules()
         {
             // Act & Assert
             Assert.True(ADP.Currency.Equals(Currency.Of("ADP")));
@@ -1821,7 +1823,5 @@ namespace Narvalo.Finance.Currencies
             Assert.False(Object.ReferenceEquals(ZWR.Currency, Currency.Of("ZWR")));
 
         }
-
-        #endregion
     }
 }
