@@ -236,22 +236,20 @@ using System.Reflection;
     <Message Text="Analyzing $(AssemblyName) with SecAnnotate..." Importance="high" />
 
     <PropertyGroup>
-      <!-- We must add manually the PCL reference assemblies otherwise for a PCL
-           project, SecAnnotate will see all types and members as SecurityCritical 
-           even if the assembly is declared SecurityTransparent.
-           Weird, adding the PCL references for a non PCL project makes the assembly 
-           SecurityCritical for SecAnnotate.
-           FIXME: This is really dirty, use an ItemGroup and a response file like Autofac does.
-           FIXME: Clean up the mess with PCL. We should add the PCL references only when we depend on a PCL class.
-                  These references depend also on the PCL profile.
-           FIXME: A non PCL project does not recognize the SecurityTransparent attribute applied to a PCL assembly.
-           WARNING: The directory path must not end with a slash.
+      <!-- WARNING: The directory path must not end with a slash.
            http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab
            https://github.com/autofac/Autofac/blob/v3.5.2/default.proj 
       -->
       <_PortableReferenceDirectory>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETPortable\$(TargetFrameworkVersion)</_PortableReferenceDirectory>
-      <_SecAnnotateReferenceDirectory Condition=" $(TargetFrameworkProfile) == 'Profile259' ">/referencedir:"$(_PortableReferenceDirectory)"</_SecAnnotateReferenceDirectory>
-      <_SecAnnotateReferenceDirectory Condition=" $(TargetFrameworkProfile) != 'Profile259' ">$(_SecAnnotateReferenceDirectory) /referencedir:"$(OutputPath.TrimEnd('\'))"</_SecAnnotateReferenceDirectory>
+      <_SecAnnotateReferenceDirectory Condition=" $(TargetFrameworkProfile) != '' ">/referencedir:"$(_PortableReferenceDirectory)"</_SecAnnotateReferenceDirectory>
+      <_SecAnnotateReferenceDirectory>$(_SecAnnotateReferenceDirectory) /referencedir:"$(OutputPath.TrimEnd('\'))"</_SecAnnotateReferenceDirectory>
+    </PropertyGroup>
+
+    <PropertyGroup>
+    <!-- We force transparency for PCL libraries, otherwise SecAnnotate does not recognize it. -->
+      <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Cerbere' " >/t:Narvalo.Cerbere.dll</_ForceTransparency>
+      <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Fx' " >$(_ForceTransparency) /t:Narvalo.Fx.dll</_ForceTransparency>
+      <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Finance' " >$(_ForceTransparency) /t:Narvalo.Finance.dll</_ForceTransparency>
     </PropertyGroup>
 
     <!-- WARNING: The /verify switch disable output and other things. From the documentation:
@@ -262,7 +260,7 @@ using System.Reflection;
          /includesignatures for detail signatures. 
          /showstatistics 
          /verbose -->
-    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /showstatistics $(_SecAnnotateReferenceDirectory) /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
+    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /maximumpasses:1 $(_ForceTransparency) /verbose /showstatistics $(_SecAnnotateReferenceDirectory) /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
           WorkingDirectory="$(OutDir)"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />
