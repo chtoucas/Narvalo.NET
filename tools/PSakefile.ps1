@@ -103,17 +103,17 @@ Task OpenCover `
     -Alias Cover `
 {
     # Use debug build to also cover debug-only tests.
+    # For static analysis, we hide internals, otherwise we might not truly
+    # analyze the public API.
     MSBuild $Foundations $Opts $CI_Props `
         '/p:Configuration=Debug',
         '/t:Build',
-        # For static analysis, we hide internals, otherwise we might not truly
-        # analyze the public API.
         '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:Filter=_Core_'
 
-    Invoke-OpenCover 'Debug+Closed'
+    Invoke-OpenCover 'Debug+Closed' -Summary
 }
 
 Task CodeAnalysis `
@@ -121,10 +121,10 @@ Task CodeAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias CA `
 {
+    # For static analysis, we hide internals, otherwise we might not truly
+    # analyze the public API.
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Build',
-        # For static analysis, we hide internals, otherwise we might not truly
-        # analyze the public API.
         '/p:VisibleInternals=false',
         '/p:RunCodeAnalysis=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
@@ -137,10 +137,10 @@ Task GendarmeAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias Keuf `
 {
+    # For static analysis, we hide internals, otherwise we might not truly
+    # analyze the public API.
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Build',
-        # For static analysis, we hide internals, otherwise we might not truly
-        # analyze the public API.
         '/p:EnableGendarme=true',
         '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
@@ -155,10 +155,10 @@ Task CodeContractsAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias CC `
 {
+    # For static analysis, we hide internals, otherwise we might not truly
+    # analyze the public API.
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Build',
-        # For static analysis, we hide internals, otherwise we might not truly
-        # analyze the public API.
         '/p:VisibleInternals=false',
         '/p:Configuration=CodeContracts',
         '/p:Filter=_Core_'
@@ -737,7 +737,8 @@ function Invoke-OpenCover {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0)]
-        [string] $Configuration
+        [string] $Configuration,
+        [switch] $Summary
     )
 
     # TODO: Make it survive NuGet updates.
@@ -753,10 +754,6 @@ function Invoke-OpenCover {
     $coverageFilter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
     $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
 
-    $reportDirectory = Get-LocalPath 'work\log\opencover'
-    #$reportFilters = '+Narvalo.Cerbere;+Narvalo.Fx;+Narvalo.Common;+Narvalo.Web'
-    $reportFilters = '+*'
-
     $testAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
 
     # Be careful with arguments containing spaces.
@@ -768,12 +765,33 @@ function Invoke-OpenCover {
       "-target:$xunit"  `
       "-targetargs:$testAssembly -nologo -noshadow"
 
-    . $reportGenerator `
-      -verbosity:Info `
-      -reporttypes:Html `
-      -filters:$reportFilters `
-      -reports:$coverageFile `
-      -targetdir:$reportDirectory
+    if ($summary.IsPresent) {
+        $summaryDirectory = Get-LocalPath 'work\log'
+        $reportSummaryFilters = '+*'
+
+        . $reportGenerator `
+          -verbosity:Info `
+          -reporttypes:HtmlSummary `
+          -filters:$reportSummaryFilters `
+          -reports:$coverageFile `
+          -targetdir:$summaryDirectory
+
+        $summaryFile = Get-LocalPath 'docs\coverage.html'
+        Remove-Item $summaryFile
+        Move-Item (Get-LocalPath 'work\log\index.htm') $summaryFile
+    }
+    else {
+        $reportDirectory = Get-LocalPath 'work\log\opencover'
+        # We filter out Narvalo.Finance which includes too many classes.
+        $reportFilters = '-Narvalo.Finance'
+
+        . $reportGenerator `
+          -verbosity:Info `
+          -reporttypes:Html `
+          -filters:$reportFilters `
+          -reports:$coverageFile `
+          -targetdir:$reportDirectory
+    }
 }
 
 # ------------------------------------------------------------------------------
