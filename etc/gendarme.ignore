@@ -70,21 +70,19 @@ N: Narvalo.Fx.Advanced
 N: Narvalo.Fx.Internal
 N: Narvalo.Fx.Properties
 
-# Narvalo.Common
-# --------------
+# ==============================================================================
+# Defects to be reviewed or fixed
+# ==============================================================================
 
 R: Gendarme.Rules.Design.AvoidSmallNamespaceRule
 # Justification = [Intentionally] Hopefully more will be added.
 N: Narvalo.Collections
 N: Narvalo.Configuration
 
-# ==============================================================================
-# Defects to be reviewed or fixed
-# ==============================================================================
-
 R: Gendarme.Rules.Maintainability.AvoidLackOfCohesionOfMethodsRule
 T: Narvalo.IO.ConcurrentFileFinder
 T: Narvalo.IO.FileFinder
 
 R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
-T: Narvalo.Fx.VoidOrBreak/Break_/DebugView
+T: Narvalo.Finance.CurrencyProvider
+T: Narvalo.Finance.CurrencyFactory

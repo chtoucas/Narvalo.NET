@@ -96,7 +96,6 @@ Infrastructure
 --------------
 
 Update necessary following the new organization:
-- MSBuild -> Fix SecAnnotate & PCL.
 - PSake
 - NuGet
 - Retire Narvalo.Core
@@ -128,9 +127,21 @@ Update necessary following the new organization:
 
 ### Security
 
-- **Bug:** `SecurityTransparent` attribute and non PCL libraries depending 
-  on a PCL library do not play well together.
-- Check libraries with SecAnnotate. Do not run SecAnnotate on test libraries? See permcalc.
+- https://msdn.microsoft.com/en-us/library/dd233102.aspx
+- https://msdn.microsoft.com/en-us/magazine/ee336023.aspx
+- http://stackoverflow.com/questions/5055632/net-4-allowpartiallytrustedcallers-attribute-and-security-markings-like-secur
+- Bug: In MSBuild, we force security transparency for our PCL libraries in MSBuild.
+- Do not run SecAnnotate on test libraries? 
+- See permcalc & PEVerify /transparent  https://msdn.microsoft.com/en-us/library/62bwd2yd.aspx
+- Narvalo.Web
+    * Review added SecuritySafeCritical & SecurityCritical attributes.
+    * Security attributes and ASP.NET MVC do not work together:
+      See https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307
+- AllowPartiallyTrusted & SecurityRules options:
+```
+[assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
+[assembly: SecurityRules(SecurityRuleSet.Level2, SkipVerificationInFullTrust = true)]
+```
 
 ### Scripts
 
