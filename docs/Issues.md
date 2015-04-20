@@ -41,6 +41,7 @@ Narvalo.Reliability
 Narvalo.Web
 -----------
 
+- Finish refactoring.
 - Strengthen handling of paths
   * http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
   * http://weblog.west-wind.com/posts/2009/Dec/21/Making-Sense-of-ASPNET-Paths
@@ -99,10 +100,6 @@ Update necessary following the new organization:
 - PSake
 - NuGet
 - Retire Narvalo.Core
-
-### Code Contracts
-
-- Fix all ContractVerification(false).
 
 ### Continuous Integration
 

@@ -73,8 +73,8 @@ Design Recommendations
 
 ### Portable Class Libraries
 
-The behaviour should be 100% identical across all supported platforms; this is achieved without
-making use of the [bait and switch PCL trick](http://log.paulbetts.org/the-bait-and-switch-pcl-trick/).
+The behaviour should be 100% identical across all supported platforms without
+using the [bait and switch PCL trick](http://log.paulbetts.org/the-bait-and-switch-pcl-trick/).
 
 Code Analysis
 -------------
@@ -90,12 +90,9 @@ All suppressions must be justified and tagged:
 
 Consider putting the justification on its own line. This helps to quickly see them in search results.
 
-In addition, defects that need to be fixed are tagged with `[FIXME]`
-in the global suppression file. This helps tracking things.
-
 For Gendarme, we use a global suppression file `etc\gendarme.ignore` shared across
 all projects. This file is used exclusively for defects that can not be masked
-with a `SuppressMessage` attribute and for defects that need a fix.
+with a `SuppressMessage` attribute and for suppressions at assembly-level or at namespace-level.
 
 ### StyleCop
 
