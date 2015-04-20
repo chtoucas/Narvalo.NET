@@ -51,7 +51,6 @@ namespace <#= InferNamespace() #>
     /// Represents the currency unit for the "<#= currency.EnglishName #>".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "<#= dteVersion #>")]
-    [global::System.Diagnostics.DebuggerNonUserCode]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class <#= currency.Code #> : Currency

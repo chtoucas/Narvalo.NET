@@ -14,10 +14,10 @@ namespace Narvalo.Web.UI
     public sealed class RemoteAssetProvider : AssetProvider
     {
         // WARNING: Ne pas utiliser "/font/", car si _baseUri contient déjà un chemin relatif, il sera ignoré.
-        internal static readonly string DefaultFontsPath = "fonts/";
-        internal static readonly string DefaultImagesPath = "img/";
-        internal static readonly string DefaultScriptsPath = "js/";
-        internal static readonly string DefaultStylesPath = "css/";
+        internal const string DefaultFontsPath = "fonts/";
+        internal const string DefaultImagesPath = "img/";
+        internal const string DefaultScriptsPath = "js/";
+        internal const string DefaultStylesPath = "css/";
 
         private const string BASE_URI_KEY = "baseUri";
 

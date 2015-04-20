@@ -96,6 +96,11 @@
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
+    <Compile Include="Finance\Currencies\CurrenciesFacts.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrenciesFacts.tt</DependentUpon>
+    </Compile>
     <Compile Include="Finance\CurrencyFacts.cs" />
     <Compile Include="Finance\Internal\CurrencyActivatorFacts.cs" />
     <Compile Include="Finance\MoneyFacts.cs" />
@@ -144,6 +149,10 @@
     <Content Include="Narvalo.Facts.props">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Finance\Currencies\CurrenciesFacts.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CurrenciesFacts.g.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
@@ -169,7 +178,9 @@
       <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

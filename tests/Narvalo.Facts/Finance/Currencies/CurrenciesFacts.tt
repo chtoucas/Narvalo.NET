@@ -1,0 +1,63 @@
+﻿<#@ include file="..\..\..\..\src\Narvalo.Finance\CodeTemplates\Iso4217.tt" #>
+<#
+
+var currentCurrencies = ParseCurrent(@"..\..\..\..\src\Narvalo.Finance\Resources\ISO4217\20150101\A1.xml");
+var legacyCurrencies = ParseLegacy(@"..\..\..\..\src\Narvalo.Finance\Resources\ISO4217\20150101\A3.xml");
+var currencies = currentCurrencies.Concat(legacyCurrencies);
+
+var codeSet = new HashSet<string>();
+
+#>
+// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Finance.Currencies
+{
+    using System;
+
+    using Xunit;
+    
+    public static class CurrencyFacts
+    {
+        #region Currency
+
+        [Fact]
+        public static void Currency_IsNotNull()
+        {
+            // Act & Assert
+<#
+    foreach (var currency in currencies.OrderBy(_ => _.Code))
+    {
+        if (codeSet.Contains(currency.Code))
+        {
+            continue;
+        }
+
+        codeSet.Add(currency.Code);
+#>
+            Assert.True(<#= currency.Code #>.Currency != null);
+<#
+    }
+#>
+        }
+        
+        [Fact]
+        public static void Currency_Equalities()
+        {
+            // Act & Assert
+<#
+    foreach (var code in codeSet)
+    {
+#>
+            Assert.True(<#= code #>.Currency.Equals(Currency.Of("<#= code #>")));
+            Assert.True(<#= code #>.Currency == Currency.Of("<#= code #>"));
+            Assert.True(Object.ReferenceEquals(Currency.Of("<#= code #>"), Currency.Of("<#= code #>")));
+            Assert.False(Object.ReferenceEquals(<#= code #>.Currency, Currency.Of("<#= code #>")));
+
+<#
+    }
+#>
+        }
+
+        #endregion
+    }
+}

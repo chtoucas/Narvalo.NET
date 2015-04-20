@@ -9,25 +9,21 @@ namespace Narvalo.Finance
 
     public static class CurrencyFacts
     {
-        #region op_Equality()
+        #region Euro
 
         [Fact]
         public static void Equality_ReturnsTrue_WhenComparingAllEuroInstances()
         {
             // Act & Assert
-            Assert.True(EUR.Currency.Equals(Currency.Of("EUR")));
             Assert.True(EUR.Currency.Equals(Currency.Euro));
 
             Assert.True(Currency.Euro.Equals(Currency.Of("EUR")));
             Assert.True(Currency.Euro.Equals(EUR.Currency));
 
-            Assert.True(EUR.Currency == Currency.Of("EUR"));
             Assert.True(EUR.Currency == Currency.Euro);
             Assert.True(Currency.Euro == Currency.Of("EUR"));
 
             Assert.True(Object.ReferenceEquals(EUR.Currency, Currency.Euro));
-            Assert.True(Object.ReferenceEquals(Currency.Of("EUR"), Currency.Of("EUR")));
-            Assert.False(Object.ReferenceEquals(EUR.Currency, Currency.Of("EUR")));
             Assert.False(Object.ReferenceEquals(Currency.Euro, Currency.Of("EUR")));
         }
 
