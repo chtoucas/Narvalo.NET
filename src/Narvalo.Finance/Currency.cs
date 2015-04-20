@@ -65,7 +65,7 @@ namespace Narvalo.Finance
         /// <returns>The currency for the specified code.</returns>
         public static Currency Of(string code)
         {
-            //Require.NotNullOrWhiteSpace(code, "code");
+            Require.NotNull(code, "code");
             ContractFor.CurrencyCode(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
 

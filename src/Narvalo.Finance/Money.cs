@@ -31,7 +31,15 @@ namespace Narvalo.Finance
 
         public decimal Amount { get { return _amount; } }
 
-        public Currency Currency { get { return _currency; } }
+        public Currency Currency
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+
+                return _currency;
+            }
+        }
 
         // Check that currencies match.
         private void ThrowIfCurrencyMismatch_(Money other)
@@ -42,6 +50,16 @@ namespace Narvalo.Finance
                 throw new ArithmeticException();
             }
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariants()
+        {
+            Contract.Invariant(_currency != null);
+        }
+
+#endif
     }
 
     /// <content>
@@ -169,6 +187,13 @@ namespace Narvalo.Finance
 
             return new Money(amount, Currency);
         }
+
+        public Money Add(decimal amount)
+        {
+            var value = checked(Amount + amount);
+
+            return new Money(value, Currency);
+        }
     }
 
     /// <content>
@@ -186,6 +211,11 @@ namespace Narvalo.Finance
             ThrowIfCurrencyMismatch_(money);
 
             return new Money(Amount - money.Amount, Currency);
+        }
+
+        public Money Subtract(decimal amount)
+        {
+            return new Money(Amount - amount, Currency);
         }
     }
 

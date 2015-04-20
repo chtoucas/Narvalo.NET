@@ -39,7 +39,7 @@ namespace Narvalo.Configuration
         public static Maybe<T> MayGetSection<T>(this Configuration @this, string sectionName) where T : ConfigurationSection
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<T>() != null);
+            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             T section = @this.GetSection(sectionName) as T;
 

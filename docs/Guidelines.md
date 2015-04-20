@@ -54,7 +54,7 @@ Design Recommendations
 ### Mandatory Rules
 
 - Do not write extension methods on core types.
-- Do not use reserved words unless if they are used in their intended sense:
+- Do not use reserved words unless they are used in their intended sense:
   * `Current`
   * `Select` (LINQ operator)
   * `Add`, collection initializer

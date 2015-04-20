@@ -15,7 +15,7 @@ namespace Narvalo.Finance.Internal
         /// <returns></returns>
         public static TCurrency CreateInstance()
         {
-            ConstructorInfo ctorInfo = typeof(TCurrency).GetTypeInfo()
+            ConstructorInfo ctorInfo = typeof(TCurrency).GetTypeInfo().AssumeNotNull()
                 .DeclaredConstructors
                 .FirstOrDefault(_ => !_.GetParameters().Any());
 

@@ -498,6 +498,8 @@ namespace Narvalo.Fx
     /// </content>
     public partial class Maybe<T>
     {
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
+            Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
         public static bool operator true(Maybe<T> value)
         {
             Require.NotNull(value, "value");
@@ -505,6 +507,8 @@ namespace Narvalo.Fx
             return value.IsSome;
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
+            Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
         public static bool operator false(Maybe<T> value)
         {
             Require.NotNull(value, "value");
@@ -741,6 +745,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.
         /// </summary>
+        [ContractVerification(false)]
         private sealed class DebugView
         {
             private readonly Maybe<T> _inner;

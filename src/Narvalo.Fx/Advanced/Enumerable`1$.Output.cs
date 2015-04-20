@@ -32,7 +32,7 @@ namespace Narvalo.Fx.Advanced
             return @this
                 .Select(_ => funM.Invoke(_)).AssumeNotNull()
                 .Where(_ => _.IsSuccess)
-                .Select(_ => _.ToValue()).AssumeNotNull();
+                .Select(_ => _.ToValue());
         }
     }
 }

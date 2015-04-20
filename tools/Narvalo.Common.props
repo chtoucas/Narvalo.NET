@@ -177,6 +177,8 @@
     <!-- Only meaningful inside VS, anyway I find the result confusing. -->
     <CodeContractsShowSquigglies>false</CodeContractsShowSquigglies>
     <CodeContractsFailBuildOnWarnings>false</CodeContractsFailBuildOnWarnings>
+    <!-- Extra CCChecker options. -->
+    <CodeContractsExtraAnalysisOptions>-outputwarnmasks -show unreached</CodeContractsExtraAnalysisOptions>
   </PropertyGroup>
 
   <!-- If any, import custom project properties. -->

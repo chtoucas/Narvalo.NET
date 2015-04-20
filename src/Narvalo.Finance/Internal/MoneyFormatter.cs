@@ -3,11 +3,14 @@
 namespace Narvalo.Finance.Internal
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     internal static class MoneyFormatter
     {
         public static string Format(decimal amount, Currency currency)
         {
+            Contract.Requires(currency != null);
+
             return Narvalo.Format.CurrentCulture("{0} {1:F2}", currency.Code, amount);
         }
 

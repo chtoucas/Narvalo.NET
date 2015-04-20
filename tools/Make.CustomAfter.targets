@@ -85,7 +85,8 @@
            Condition=" '$(VersionExists)' != 'true' " />
     <!-- To get last commit hash we could use https://github.com/loresoft/msbuildtasks. 
          NB: MSBuild makes it way too hard to get the console output from an executable. -->
-    <Warning Text="Won't be able to add the git commit hash to the assembly version information."
+    <Message Text="Won't be able to add the git commit hash to the assembly version information."
+             Importance="low"
              Condition=" '$(GitCommitHash)' == '' " />
 
     <PropertyGroup>
@@ -248,7 +249,8 @@ using System.Reflection;
            http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab
            https://github.com/autofac/Autofac/blob/v3.5.2/default.proj 
       -->
-      <_SecAnnotateReferenceDirectory Condition=" $(TargetFrameworkProfile) == 'Profile259' ">/referencedir:"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.5"</_SecAnnotateReferenceDirectory>
+      <_PortableReferenceDirectory>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETPortable\$(TargetFrameworkVersion)</_PortableReferenceDirectory>
+      <_SecAnnotateReferenceDirectory Condition=" $(TargetFrameworkProfile) == 'Profile259' ">/referencedir:"$(_PortableReferenceDirectory)"</_SecAnnotateReferenceDirectory>
       <_SecAnnotateReferenceDirectory Condition=" $(TargetFrameworkProfile) != 'Profile259' ">$(_SecAnnotateReferenceDirectory) /referencedir:"$(OutputPath.TrimEnd('\'))"</_SecAnnotateReferenceDirectory>
     </PropertyGroup>
 

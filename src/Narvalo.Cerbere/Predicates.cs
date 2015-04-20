@@ -27,9 +27,9 @@ namespace Narvalo
                 return false;
             }
 
-            var typeInfo = type.GetTypeInfo();
+            var typeInfo = type.GetTypeInfo().AssumeNotNull();
 
-            return type != null && typeInfo.IsEnum && typeInfo.GetCustomAttribute<FlagsAttribute>(inherit: false) != null;
+            return typeInfo.IsEnum && typeInfo.GetCustomAttribute<FlagsAttribute>(inherit: false) != null;
         }
 
         /// <summary>

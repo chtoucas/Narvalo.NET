@@ -35,15 +35,7 @@ namespace Narvalo.Finance
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Money<TCurrency> Zero
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<TCurrency>() != null);
-
-                return s_Zero;
-            }
-        }
+        public static Money<TCurrency> Zero { get { return s_Zero; } }
 
         public decimal Amount { get { return _amount; } }
 
@@ -57,7 +49,7 @@ namespace Narvalo.Finance
             return new Money<TCurrency>(value.Amount);
         }
 
-        public static implicit operator Money(Money<TCurrency> value)
+        public static explicit operator Money(Money<TCurrency> value)
         {
             return new Money(value.Amount, s_Currency);
         }
@@ -185,6 +177,13 @@ namespace Narvalo.Finance
 
             return new Money<TCurrency>(amount);
         }
+
+        public Money<TCurrency> Add(decimal amount)
+        {
+            var value = checked(Amount + amount);
+
+            return new Money<TCurrency>(value);
+        }
     }
 
     /// <content>
@@ -200,6 +199,11 @@ namespace Narvalo.Finance
         public Money<TCurrency> Subtract(Money<TCurrency> money)
         {
             return new Money<TCurrency>(Amount - money.Amount);
+        }
+
+        public Money<TCurrency> Subtract(decimal amount)
+        {
+            return new Money<TCurrency>(Amount - amount);
         }
     }
 

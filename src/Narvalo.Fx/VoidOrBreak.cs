@@ -108,6 +108,7 @@ namespace Narvalo.Fx
             /// <summary>
             /// Represents a debugger type proxy for <see cref="VoidOrBreak.Break_"/>.
             /// </summary>
+            [ContractVerification(false)]
             private sealed class DebugView
             {
                 private readonly Break_ _inner;

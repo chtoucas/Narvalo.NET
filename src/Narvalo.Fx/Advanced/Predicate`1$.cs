@@ -16,7 +16,7 @@ namespace Narvalo.Fx.Advanced
         public static Predicate<TSource> Negate<TSource>(this Predicate<TSource> @this)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Func<TSource, bool>>() != null);
+            Contract.Ensures(Contract.Result<Predicate<TSource>>() != null);
 
             return _ => !@this.Invoke(_);
         }
