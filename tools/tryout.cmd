@@ -14,7 +14,7 @@
 ::    /p:SignAssembly=false
 ::    /p:SkipCodeContractsReferenceAssembly=true
 ::    /p:VisibleInternals=true
-::    /p:CustomProject=src\Narvalo.Core\Narvalo.Core.csproj
+::    /p:CustomProject=src\Narvalo.Cerbere\Narvalo.Cerbere.csproj
 ::  # Console parameters
 ::    /verbosity:minimal
 ::    /maxcpucount
@@ -27,7 +27,7 @@
 ::  # MSBuild project
 ::    %RepositoryRoot%\tools\Make.Common.targets
 ::  # Properties
-::    /p:ProjectsToBuild=%RepositoryRoot%\src\Narvalo.Core\Narvalo.Core.csproj
+::    /p:ProjectsToBuild=%RepositoryRoot%\src\Narvalo.Cerbere\Narvalo.Cerbere.csproj
 
 :: Do not turn off command-echoing. This script is mainly used for debugging
 :: the build system.
