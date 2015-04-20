@@ -170,10 +170,11 @@ Task SecurityAnalysis `
     -Alias SA `
 {
     MSBuild $Foundations $Opts $CI_Props `
-        '/t:Clean;SecAnnotate',
+        '/t:Clean;SecAnnotate;PEVerify',
         # For static analysis, we hide internals, otherwise we might not truly
         # analyze the public API.
         '/p:VisibleInternals=false',
+        '/p:SignAssembly=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:Filter=_Core_'
