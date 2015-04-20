@@ -10,7 +10,6 @@ namespace Narvalo.Web.Optimization
     using System.Web.Razor.Text;
     using System.Web.Razor.Tokenizer.Symbols;
 
-    [ContractVerification(false)] // TODO: Enable ContractVerification for RazorOptimizer.
     public sealed class RazorOptimizer
     {
         private readonly IWhiteSpaceBuster _buster;

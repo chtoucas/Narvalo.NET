@@ -11,7 +11,6 @@ namespace Narvalo.Web.Internal
     using Narvalo.Web.Optimization;
     using Narvalo.Web.UI;
 
-    [ContractVerification(false)] // TODO: Enable ContractVerification for WhiteSpaceControlTransformer.
     internal sealed class WhiteSpaceControlTransformer
     {
         private readonly IWhiteSpaceBuster _buster;

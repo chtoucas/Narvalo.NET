@@ -7,7 +7,6 @@ namespace Narvalo
     using System.Text;
 
     // TODO: Créer la version Hexavigesimal.
-    [ContractVerification(false)] // TODO: Enable ContractVerification for BinaryEncoder.
     public static class BinaryEncoder
     {
         // Alternative alphabet: "abcdefghijklmnopqrstuvwxyz234567";
@@ -16,6 +15,7 @@ namespace Narvalo
         #region Hexadecimal
 
         // Cf. http://stackoverflow.com/questions/623104/c-sharp-byte-to-hex-string/623184
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]
         public static string ToHexString(byte[] value)
         {
             Require.NotNull<byte[]>(value, "value");

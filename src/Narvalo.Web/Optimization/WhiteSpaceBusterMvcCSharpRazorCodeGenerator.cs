@@ -12,7 +12,6 @@ namespace Narvalo.Web.Optimization
     using System.Web.Razor.Generator;
     using System.Web.Razor.Parser.SyntaxTree;
 
-    [ContractVerification(false)] // TODO: Enable ContractVerification for WhiteSpaceBusterMvcCSharpRazorCodeGenerator.
     public sealed class WhiteSpaceBusterMvcCSharpRazorCodeGenerator : CSharpRazorCodeGenerator
     {
         private readonly RazorOptimizer _optimizer;
