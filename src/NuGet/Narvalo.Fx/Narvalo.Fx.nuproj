@@ -9,9 +9,7 @@
       <![CDATA[
       This package features implementations of some of the usual suspects from functional programming: Option (Maybe&lt;T&gt;) and Error (Output&lt;T&gt;) monads, simple pattern matching (Either&lt;T1, T2&gt;, Switch&lt;T1, T2&gt;), generators and delegate extensions.
 
-      This is a portable class library targeting Profile259. The behaviour is 100% identical across all supported platforms; this is achieved without making use of the bait and switch PCL trick.
-
-      This library fully passes FxCop, Gendarme and Code Contracts static analysis.
+      This is a portable class library targeting Profile259.
 
       A code contracts reference assembly is also included if you need it.
       ]]>

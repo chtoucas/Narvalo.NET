@@ -9,9 +9,7 @@
       <![CDATA[
       This package provides various financial utilities: Currency (ISO 4217), Money types, BIC (ISO 9362), IBAN &amp; BBAN.
 
-      This is a portable class library targeting Profile111. The behaviour is 100% identical across all supported platforms; this is achieved without making use of the bait and switch PCL trick.
-
-      This library fully passes FxCop, Gendarme and Code Contracts static analysis.
+      This is a portable class library targeting Profile111.
 
       A code contracts reference assembly is also included if you need it.
       ]]>

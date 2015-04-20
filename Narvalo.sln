@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Brouillons", "src\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Benchmarks", "tests\Narvalo.Benchmarks\Narvalo.Benchmarks.csproj", "{4F37224C-58CC-4C55-80E6-14FD54A57EBE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. PCL", "1. PCL", "{E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Main Libraries", "1. Main Libraries", "{E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Tests", "3. Tests", "{7C09B3E7-756C-4ED3-A1F1-A789BA6AE3CA}"
 EndProject
