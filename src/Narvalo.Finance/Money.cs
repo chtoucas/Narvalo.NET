@@ -11,8 +11,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Properties;
 
     [DebuggerDisplay("{{ToString()}}")]
-    [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
-        Justification = "[Intentionally] We do provide an alternate method but we call it CompareTo.")]
     [SuppressMessage("Gendarme.Rules.Performance", "AvoidLargeStructureRule",
         Justification = "[Intentionally] The struct size is 4 bytes above the recommended size (16 bytes) but I think this is fine. TODO: test this anyway.")]
     public partial struct Money
@@ -126,21 +124,29 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
+        [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
+            Justification = "[Intentionally] We do provide an alternate method but we call it CompareTo.")]
         public static bool operator <(Money left, Money right)
         {
             return left.CompareTo(right) < 0;
         }
 
+        [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
+            Justification = "[Intentionally] We do provide an alternate method but we call it CompareTo.")]
         public static bool operator <=(Money left, Money right)
         {
             return left.CompareTo(right) <= 0;
         }
 
+        [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
+            Justification = "[Intentionally] We do provide an alternate method but we call it CompareTo.")]
         public static bool operator >(Money left, Money right)
         {
             return left.CompareTo(right) > 0;
         }
 
+        [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
+            Justification = "[Intentionally] We do provide an alternate method but we call it CompareTo.")]
         public static bool operator >=(Money left, Money right)
         {
             return left.CompareTo(right) >= 0;
@@ -270,6 +276,8 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
+        [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
+            Justification = "[Intentionally] We do provide an alternate method but we call it Remainder.")]
         public static Money operator %(Money money, decimal divisor)
         {
             Contract.Requires(divisor != 0m);

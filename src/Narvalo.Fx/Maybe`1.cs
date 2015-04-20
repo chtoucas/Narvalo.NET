@@ -500,6 +500,8 @@ namespace Narvalo.Fx
     {
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
             Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
+            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static bool operator true(Maybe<T> value)
         {
             Require.NotNull(value, "value");
@@ -509,6 +511,8 @@ namespace Narvalo.Fx
 
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
             Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
+        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
+            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static bool operator false(Maybe<T> value)
         {
             Require.NotNull(value, "value");
@@ -745,7 +749,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.
         /// </summary>
-        [ContractVerification(false)]
+        [ContractVerification(false)] // Debugger-only code.
         private sealed class DebugView
         {
             private readonly Maybe<T> _inner;
