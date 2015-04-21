@@ -64,13 +64,13 @@ Narvalo.NET
 
 #### Other projects
 
-- Narvalo.Mvp.Windows.Forms
-- Narvalo.Ghostscript, a .NET wrapper for GhostScript.
-- Narvalo.Reliability
-- Narvalo.Brouillons, a "fourre-tout" of unfinished or severely broken codes.
-- Narvalo.PowerShell, collection of PowerShell modules.
-- Narvalo.StyleCop.CSharp, custom C# rules for StyleCop.
-- Narvalo.Benchmarks, the benchmarking project.
+- **Narvalo.Mvp.Windows.Forms**
+- **Narvalo.Ghostscript**, a .NET wrapper for GhostScript.
+- **Narvalo.Reliability**
+- **Narvalo.Brouillons**, a "fourre-tout" of unfinished or severely broken codes.
+- **Narvalo.PowerShell**, collection of PowerShell modules.
+- **Narvalo.StyleCop.CSharp**, custom C# rules for StyleCop.
+- **Narvalo.Benchmarks**, the benchmarking project.
 - Sample MVP projects.
 
 #### Status for the NuGet packages
@@ -82,8 +82,7 @@ Library             | Status | PCL        | Security    | CA | GA | CC | SA | Do
 Narvalo.Cerbere     | Beta   | Profile259 | Transparent | OK | OK | OK | OK | OK  | OK  |
 Narvalo.Fx          | Alpha  | Profile259 | Transparent | OK | OK | OK | OK | OK  | OK  |
 Narvalo.Finance     |        | Profile111 | Transparent | OK | !  | OK | !  | !   | OK  |
-[Narvalo.Common](https://www.nuget.org/packages/Narvalo.Common/) 
-                    | Alpha  |            | APTCA       | !  | !  | !  | !  | !   | OK  |
+Narvalo.Common      | Alpha  |            | APTCA       | !  | !  | !  | !  | !   | OK  |
 Narvalo.Web         |        |            |             |    |    |    |    |     |     |
 Narvalo.Mvp         | Beta   |            |             |    |    |    |    |     |     |
 Narvalo.Mvp.Web     | Beta   |            |             |    |    |    |    |     |     |
