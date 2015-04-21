@@ -77,23 +77,21 @@ Narvalo.NET
 
 For Code Contracts, StyleCop & Documentation, OK does not mean finished.
 
-Library             | Status | PCL        | Security    | CA | GA | CC | SA | Doc | Sec |
---------------------|--------|------------|-------------|----|----|----|----|-----|-----|
-Narvalo.Cerbere     | Beta   | Profile259 | Transparent | OK | OK | OK | OK | OK  | OK  |
-Narvalo.Fx          | Alpha  | Profile259 | Transparent | OK | OK | OK | OK | OK  | OK  |
-Narvalo.Finance     |        | Profile111 | Transparent | OK | !  | OK | !  | !   | OK  |
-Narvalo.Common      | Alpha  |            | APTCA       | !  | !  | !  | !  | !   | OK  |
-Narvalo.Web         |        |            |             |    |    |    |    |     |     |
-Narvalo.Mvp         | Beta   |            |             |    |    |    |    |     |     |
-Narvalo.Mvp.Web     | Beta   |            |             |    |    |    |    |     |     |
-Narvalo.Build       |        |            |             |    |    |    |    |     |     |
+Library             | Status | PCL        | Security    | CA | GA | CC | SA |
+--------------------|--------|------------|-------------|----|----|----|----|
+Narvalo.Cerbere     | Beta   | Profile259 | Transparent | OK | OK | OK | OK |
+Narvalo.Fx          | Alpha  | Profile259 | Transparent | OK | OK | OK | OK |
+Narvalo.Finance     |        | Profile111 | Transparent | OK | !  | OK | !  |
+Narvalo.Common      | Alpha  |            | APTCA       | !  | !  | !  | !  |
+Narvalo.Web         |        |            |             |    |    |    |    |
+Narvalo.Mvp         | Beta   |            |             |    |    |    |    |
+Narvalo.Mvp.Web     | Beta   |            |             |    |    |    |    |
+Narvalo.Build       |        |            |             |    |    |    |    |
 
 - CA: Code Analysis with FxCop
 - GA: Code Analysis with Gendarme
 - CC: Code Contracts
-- SA: StyleCop Analysis
-- Doc: Documentation
-- Sec: SecAnnotate
+- SA: Source Analysis with StyleCop
 
 #### Dead NuGet packages
 
