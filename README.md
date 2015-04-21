@@ -11,26 +11,6 @@ Narvalo.NET
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 - [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)
 
-#### Status
-
-For Code Contracts, StyleCop & Documentation, OK does not mean finished.
-
-Library             | Status       | Profile    | Security    | CA | GA | CC | SA |
---------------------|--------------|------------|-------------|----|----|----|----|
-Narvalo.Cerbere     | Beta         | Profile259 | Transparent | OK | OK | OK | OK |
-Narvalo.Fx          | Alpha        | Profile259 | Transparent | OK | OK | OK | OK |
-Narvalo.Finance     | Experimental | Profile111 | Transparent | OK | !  | OK | !  |
-Narvalo.Reliability | Experimental | Profile151 |             |    |    |    |    |
-Narvalo.Common      | Alpha        |            | APTCA       | !  | !  | !  | !  |
-Narvalo.Web         | Experimental |            |             |    |    |    |    |
-Narvalo.Mvp         | Beta         |            |             |    |    |    |    |
-Narvalo.Mvp.Web     | Beta         |            |             |    |    |    |    |
-
-- CA: Code Analysis with FxCop
-- GA: Code Analysis with Gendarme
-- CC: Code Contracts
-- SA: StyleCop Analysis
-
 #### General Purpose Libraries
 - **Narvalo.Cerbere**
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Cerbere)),
@@ -81,3 +61,42 @@ Narvalo.Mvp.Web     | Beta         |            |             |    |    |    |  
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build),
   [package](https://www.nuget.org/packages/Narvalo.Build/)),
   custom MSBuild tasks.
+
+#### Other projects
+
+- Narvalo.Mvp.Windows.Forms
+- Narvalo.Ghostscript, a .NET wrapper for GhostScript.
+- Narvalo.Reliability
+- Narvalo.Brouillons, a "fourre-tout" of unfinished or severely broken codes.
+- Narvalo.PowerShell, collection of PowerShell modules.
+- Narvalo.StyleCop.CSharp, custom C# rules for StyleCop.
+- Narvalo.Benchmarks, the benchmarking project.
+- Sample MVP projects.
+
+#### Status for the NuGet packages
+
+For Code Contracts, StyleCop & Documentation, OK does not mean finished.
+
+Library             | Status | PCL        | Security    | CA | GA | CC | SA | Doc | Sec |
+--------------------|--------|------------|-------------|----|----|----|----|-----|-----|
+Narvalo.Cerbere     | Beta   | Profile259 | Transparent | OK | OK | OK | OK | OK  | OK  |
+Narvalo.Fx          | Alpha  | Profile259 | Transparent | OK | OK | OK | OK | OK  | OK  |
+Narvalo.Finance     |        | Profile111 | Transparent | OK | !  | OK | !  | !   | OK  |
+[Narvalo.Common](https://www.nuget.org/packages/Narvalo.Common/) 
+                    | Alpha  |            | APTCA       | !  | !  | !  | !  | !   | OK  |
+Narvalo.Web         |        |            |             |    |    |    |    |     |     |
+Narvalo.Mvp         | Beta   |            |             |    |    |    |    |     |     |
+Narvalo.Mvp.Web     | Beta   |            |             |    |    |    |    |     |     |
+Narvalo.Build       |        |            |             |    |    |    |    |     |     |
+
+- CA: Code Analysis with FxCop
+- GA: Code Analysis with Gendarme
+- CC: Code Contracts
+- SA: StyleCop Analysis
+- Doc: Documentation
+- Sec: SecAnnotate
+
+#### Dead NuGet packages
+
+- Narvalo.Core, replaced by Narvalo.Cerbere and Narvalo.Fx.
+- Narvalo.Web.Extras, replaced by Narvalo.Web.

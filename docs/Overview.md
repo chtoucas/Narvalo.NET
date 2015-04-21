@@ -56,35 +56,6 @@ There are two solutions.
 
 This solution contains all projects. 
 
-Portable Libraries:
-- Narvalo.Cerbere (Profile259, SecurityTransparent).
-- Narvalo.Fx (Profile259, SecurityTransparent), focus on functional programming patterns.
-- Narvalo.Finance (Profile111, SecurityTransparent).
-- Narvalo.Reliability (Profile151).
-
-Libraries:
-- Narvalo.Common (AllowPartiallyTrustedCallers), collection of utilities and extension methods.
-- Narvalo.Web, focus on web development.
-- Narvalo.Mvp
-- Narvalo.Mvp.Web
-- Narvalo.Mvp.Windows.Forms
-- Narvalo.Ghostscript, a .NET wrapper for GhostScript.
-- Narvalo.Externs
-- Narvalo.Brouillons, a "fourre-tout" of unfinished or severely broken codes.
-
-Developer tools:
-- Narvalo.Build, collection of MSBuild tasks.
-- Narvalo.PowerShell, collection of PowerShell modules.
-- Narvalo.StyleCop.CSharp, custom C# rules for StyleCop.
-
-Test projects:
-- Narvalo.Benchmarks, the benchmarking project.
-- Narvalo.Facts, the main test project.
-- Narvalo.Mvp.Facts, the test project for MVP libraries.
-
-Sample projects:
-- Sample MVP projects.
-
 ### Narvalo Maintenance.sln
 
 Contains documentation, settings, maintenance scripts and projects:
