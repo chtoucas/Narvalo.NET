@@ -1,0 +1,7 @@
+﻿<#@ include file="..\CodeTemplates\MonadFacts.tt" #>
+<#
+    HasZero = false;
+    ReturnName = "Success";
+
+    EmitFacts();
+#>

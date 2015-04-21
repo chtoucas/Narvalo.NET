@@ -1,6 +1,344 @@
 ﻿<#@ template debug="true" hostspecific="true" #>
-<#@ assembly name="System.Core" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Text" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ output extension=".g.cs" #>
+<#@ output extension=".g.cs" #><#+
+
+    private string _name;
+    private string _plusName = "Plus";
+    private string _returnName = "Return";
+    private string _zeroName = "Zero";
+    
+    // Gets or sets a value indicating whether the monad is a MonadPlus. Default to false.
+    protected bool HasPlus { get; set; }
+
+    // Gets or sets a value indicating whether the monad is a MonadZero. Default to false.
+    protected bool HasZero { get; set; }
+
+    // Gets a value indicating whether the monad has a Filter method. Default to true.
+    protected bool HasFilter { get { return HasZero; } }
+
+    // Gets or sets the name of the monad.
+    // If no name was given, it will be infered from the template name.
+    protected string Name
+    {
+        get
+        {
+            if (_name == null) {
+                _name = InferName().Replace("Facts", String.Empty);
+            }
+
+            return _name;
+        }
+
+        set
+        {
+            if (_name != null) {
+                throw new InvalidOperationException("You can set the name of the monad only once.");
+            }
+
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The name can not be null or blank.");
+            }
+
+            _name = value;
+        }
+    }
+    
+    // Gets or sets the name of the Plus method. Default to "Plus".
+    protected string PlusName
+    {
+        get
+        { 
+            if (!HasPlus) {
+                throw new InvalidOperationException("The monad is not a MonadPlus.");
+            }
+
+            return _plusName; 
+        }
+
+        set
+        {
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The name of the Plus method can not be null or blank.");
+            }
+
+            _plusName = value;
+        } 
+    }
+
+    // Gets or sets the name of the Return method. Default to "Return".
+    protected string ReturnName
+    {
+        get { return _returnName; }
+
+        set 
+        {
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The name of the Return method can not be null or blank.");
+            }
+
+            _returnName = value; 
+        }
+    }
+    
+    // Gets or sets the name of the Zero property. Default to "Zero".
+    protected string ZeroName 
+    { 
+        get 
+        { 
+            if (!HasZero) {
+                throw new InvalidOperationException("The monad is not a MonadZero.");
+            }
+
+            return _zeroName; 
+        }  
+
+        set
+        {
+            if (String.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentException("The name of the Zero property can not be null or blank.");
+            }
+
+            _zeroName = value;
+        } 
+    }
+    
+    protected string InferName() 
+    {
+        return System.IO.Path.GetFileNameWithoutExtension(Host.TemplateFile);
+    }
+    
+    protected string InferNamespace() 
+    {
+        return System.Runtime.Remoting.Messaging.CallContext
+            .LogicalGetData("NamespaceHint")
+            .ToString();
+    }
+
+    public void EmitFacts()
+    {
+#>
+// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace <#= InferNamespace() #>
+{
+    using System;
+
+    using Xunit;
+
+    public static partial class <#= InferName() #>
+    {
+        #region Linq Operators
+
+        [Fact]
+        public static void Select_ThrowsArgumentNullException_ForNullSelector()
+        {
+            // Arrange
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            Func<int, int> selector = null;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.Select(selector));
+        }
+
+<#+ if (HasFilter) { #>
+        [Fact]
+        public static void Where_ThrowsArgumentNullException_ForNullPredicate()
+        {
+            // Arrange
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            Func<int, bool> predicate = null;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
+        }
+<#+ } #>
+
+        [Fact]
+        public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
+        {
+            // Arrange
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            Func<int, <#= Name #><int>> valueSelector = null;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+        }
+
+        [Fact]
+        public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
+        {
+            // Arrange
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            var middle = <#= Name #>.<#= ReturnName #>(2);
+            Func<int, <#= Name #><int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = null;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+        }
+
+        #endregion
+        
+        #region Monad Laws
+        
+<#+ if (HasZero && HasPlus) { #>
+        [Fact]
+        public static void <#= Name #>_SatisfiesFirstMonoidLaw()
+        {
+            // Arrange
+            var monad = <#= Name #>.<#= ReturnName #>(1);
+
+            // Act
+            var left = <#= Name #><int>.<#= ZeroName #>.<#= PlusName #>(monad);
+            var right = monad;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+        
+        [Fact]
+        public static void <#= Name #>_SatisfiesSecondMonoidLaw()
+        {
+            // Arrange
+            var monad = <#= Name #>.<#= ReturnName #>(1);
+
+            // Act
+            var left = monad.<#= PlusName #>(<#= Name #><int>.<#= ZeroName #>);
+            var right = monad;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void <#= Name #>_SatisfiesThirdMonoidLaw()
+        {
+            // Arrange
+            var monadA = <#= Name #>.<#= ReturnName #>(1);
+            var monadB = <#= Name #>.<#= ReturnName #>(2);
+            var monadC = <#= Name #>.<#= ReturnName #>(3);
+
+            // Act
+            var left = monadA.<#= PlusName #>(monadB.<#= PlusName #>(monadC));
+            var right = monadA.<#= PlusName #>(monadB).<#= PlusName #>(monadC);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+<#+ } #>
+
+        [Fact]
+        public static void <#= Name #>_SatisfiesFirstMonadLaw()
+        {
+            // Arrange
+            int value = 1;
+            Func<int, <#= Name #><long>> kun = _ => <#= Name #>.<#= ReturnName #>((long)2 * _);
+
+            // Act
+            var left = <#= Name #>.<#= ReturnName #>(value).Bind(kun);
+            var right = kun(value);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void <#= Name #>_SatisfiesSecondMonadLaw()
+        {
+            // Arrange
+            Func<int, <#= Name #><int>> create = _ => <#= Name #>.<#= ReturnName #>(_);
+            var monad = <#= Name #>.<#= ReturnName #>(1);
+
+            // Act
+            var left = monad.Bind(create);
+            var right = monad;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void <#= Name #>_SatisfiesThirdMonadLaw()
+        {
+            // Arrange
+            <#= Name #><short> m = <#= Name #>.<#= ReturnName #>((short)1);
+            Func<short, <#= Name #><int>> f = _ => <#= Name #>.<#= ReturnName #>((int)3 * _);
+            Func<int, <#= Name #><long>> g = _ => <#= Name #>.<#= ReturnName #>((long)2 * _);
+
+            // Act
+            var left = m.Bind(f).Bind(g);
+            var right = m.Bind(_ => f(_).Bind(g));
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+        
+<#+ if (HasZero) { #>
+        [Fact]
+        public static void <#= Name #>_SatisfiesMonadZeroRule()
+        {
+            // Arrange
+            Func<int, <#= Name #><long>> kun = _ => <#= Name #>.<#= ReturnName #>((long)2 * _);
+
+            // Act
+            var left = <#= Name #><int>.<#= ZeroName #>.Bind(kun);
+            var right = <#= Name #><long>.<#= ZeroName #>;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+        
+        [Fact]
+        public static void <#= Name #>_SatisfiesMonadMoreRule()
+        {
+            // Act
+            var leftSome = <#= Name #>.<#= ReturnName #>(1).Bind(_ => <#= Name #><int>.<#= ZeroName #>);
+            var leftNone = <#= Name #><int>.<#= ZeroName #>.Bind(_ => <#= Name #><int>.<#= ZeroName #>);
+            var right = <#= Name #><int>.<#= ZeroName #>;
+
+            // Assert
+            Assert.True(leftSome.Equals(right));
+            Assert.True(leftNone.Equals(right));
+        }
+<#+ } #>
+
+<#+ if (HasZero && HasPlus) { #>
+        [Fact]
+        public static void <#= Name #>_SatisfiesMonadOrRule()
+        {
+            // Arrange
+            var monad = <#= Name #>.<#= ReturnName #>(2);
+
+            // Act
+            var leftSome = monad.<#= PlusName #>(<#= Name #>.<#= ReturnName #>(1));
+            var leftNone = monad.<#= PlusName #>(<#= Name #><int>.<#= ZeroName #>);
+            var right = monad;
+
+            // Assert
+            Assert.True(leftSome.Equals(right));
+            Assert.True(leftNone.Equals(right));
+        }
+
+        [Fact]
+        public static void <#= Name #>_DoesNotSatisfyRightZeroForPlus()
+        {
+            // Arrange
+            var monad = <#= Name #>.<#= ReturnName #>(2);
+
+            // Act
+            var leftSome = <#= Name #>.<#= ReturnName #>(1).<#= PlusName #>(monad);
+            var leftNone = <#= Name #><int>.<#= ZeroName #>.<#= PlusName #>(monad);
+            var right = monad;
+
+            // Assert
+            Assert.False(leftSome.Equals(right));   // NB: Fails here the "Unit is a right zero for Plus".
+            Assert.True(leftNone.Equals(right));
+        }
+<#+ } #>
+
+        #endregion
+    }
+}
+<#+
+    }
+#>

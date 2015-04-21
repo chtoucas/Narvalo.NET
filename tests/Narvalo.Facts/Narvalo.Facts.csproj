@@ -105,6 +105,16 @@
     <Compile Include="Finance\Internal\CurrencyActivatorFacts.cs" />
     <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="FormatFacts.cs" />
+    <Compile Include="Fx\OutputFacts.g.cs">
+      <DependentUpon>OutputFacts.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\MaybeFacts.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaybeFacts.tt</DependentUpon>
+    </Compile>
     <Compile Include="Fx\StubsFacts.cs" />
     <Compile Include="Fx\UnitFacts.cs" />
     <Compile Include="TestCommon\AppDomainUtility.cs" />
@@ -153,6 +163,14 @@
     <None Include="Finance\CurrenciesFacts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CurrenciesFacts.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\OutputFacts.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OutputFacts.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\MaybeFacts.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MaybeFacts.g.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />

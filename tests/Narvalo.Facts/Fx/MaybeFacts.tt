@@ -1,0 +1,11 @@
+﻿<#@ include file="..\CodeTemplates\MonadFacts.tt" #>
+<#
+    ReturnName = "Of";
+    PlusName = "OrElse";
+    ZeroName = "None";
+
+    HasPlus = true;
+    HasZero = true;
+
+    EmitFacts();
+#>

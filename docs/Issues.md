@@ -11,6 +11,11 @@ Design
 - Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
 - Review all `IEnumerable` extensions for null-checking and deferred execution.
 
+Narvalo.Cerbere
+---------------
+
+- Is there a better alternative to AssumeNotNull()?
+
 Narvalo.Fx
 ------------
 
@@ -59,7 +64,7 @@ Narvalo.Facts
 Narvalo.Build
 -------------
 
-- Add Gendarme and Versioning tasks to Narvalo.Build.
+- Create Gendarme and Versioning tasks to Narvalo.Build.
 
 Narvalo.StyleCop.CSharp
 -----------------------
@@ -97,8 +102,6 @@ Infrastructure
 --------------
 
 Update necessary following the new organization:
-- PSake
-- NuGet
 - Retire Narvalo.Core
 
 ### Continuous Integration
