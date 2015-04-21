@@ -750,6 +750,7 @@ namespace Narvalo.Fx
         /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.
         /// </summary>
         [ContractVerification(false)] // Debugger-only code.
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         private sealed class DebugView
         {
             private readonly Maybe<T> _inner;

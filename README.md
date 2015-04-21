@@ -86,9 +86,9 @@ Narvalo.Mvp         | Beta   |            |             |    |    |    |    |
 Narvalo.Mvp.Web     | Beta   |            |             |    |    |    |    |
 Narvalo.Build       |        |            |             |    |    |    |    |
 
-- CA: Code Analysis with FxCop
-- GA: Code Analysis with Gendarme
-- CC: Code Contracts
+- CA: Static Analysis with FxCop
+- GA: Static Analysis with Gendarme
+- CC: Static Analysis with Code Contracts
 - SA: Source Analysis with StyleCop
 
 #### Dead NuGet packages

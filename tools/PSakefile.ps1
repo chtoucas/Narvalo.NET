@@ -113,7 +113,8 @@ Task OpenCover `
         '/p:SkipDocumentation=true',
         '/p:Filter=_Core_'
 
-    Invoke-OpenCover 'Debug+Closed' -Summary
+    Invoke-OpenCover 'Debug+Closed'
+    #Invoke-OpenCover 'Debug+Closed' -Summary
 }
 
 Task CodeAnalysis `
@@ -752,7 +753,7 @@ function Invoke-OpenCover {
 
     $coverageFile = Get-LocalPath 'work\log\opencover.xml'
     $coverageFilter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
-    $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
+    $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;Narvalo.ExcludeFromCodeCoverageAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
 
     $testAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
 
@@ -779,12 +780,12 @@ function Invoke-OpenCover {
     else {
         $reportDirectory = Get-LocalPath 'work\log\opencover'
         # We filter out Narvalo.Finance which includes too many classes.
-        $reportFilters = '-Narvalo.Finance'
+        $reportFilters = '-Narvalo.Common;-Narvalo.Web;-Narvalo.Finance'
 
         . $reportGenerator `
           -verbosity:Info `
           -reporttypes:Html `
-          -filters:$reportFilters `
+          "-filters:$reportFilters" `
           -reports:$coverageFile `
           -targetdir:$reportDirectory
     }

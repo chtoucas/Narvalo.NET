@@ -109,6 +109,7 @@ namespace Narvalo.Fx
             /// Represents a debugger type proxy for <see cref="VoidOrBreak.Break_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
+            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
                 Justification = "[Intentionally] Debugger-only code.")]
             private sealed class DebugView

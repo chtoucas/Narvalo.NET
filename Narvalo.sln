@@ -40,7 +40,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Documentation", "0. Docu
 		docs\Issues.md = docs\Issues.md
 		docs\Overview.md = docs\Overview.md
 		README.md = README.md
-		docs\Status.md = docs\Status.md
 		docs\Tips.md = docs\Tips.md
 	EndProjectSection
 EndProject

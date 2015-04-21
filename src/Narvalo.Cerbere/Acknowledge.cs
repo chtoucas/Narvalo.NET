@@ -19,6 +19,7 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void Object<T>(T @this)
         {
             Contract.Requires(@this != null);
@@ -27,6 +28,7 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void NotNullOrEmpty(string value)
         {
             Contract.Requires(value != null);

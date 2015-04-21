@@ -95,6 +95,7 @@ namespace Narvalo.Fx
             /// Represents a debugger type proxy for <see cref="VoidOrError.Error_"/>.
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
+            [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
             private sealed class DebugView
             {
                 private readonly Error_ _inner;

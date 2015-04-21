@@ -47,6 +47,7 @@ namespace Narvalo
         /// <param name="obj">The invariant object.</param>
         [DebuggerHidden]
         [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void Invariant<T>(T obj) where T : class { }
     }
 }
