@@ -16,7 +16,7 @@ namespace Narvalo.Fx
         public static void Void_IsNotNull()
         {
             // Act & Assert
-            Assert.True(VoidOrError.Void != null);
+            Assert.NotNull(VoidOrError.Void);
         }
 
         #endregion
@@ -60,7 +60,7 @@ namespace Narvalo.Fx
             var voe = VoidOrError.Error(edi); 
 
             // Assert
-            Assert.True(voe != null);
+            Assert.NotNull(voe);
         }
 
         #endregion
@@ -104,7 +104,7 @@ namespace Narvalo.Fx
             var voe = VoidOrError.Error(edi); 
 
             // Act a Assert
-            Assert.True(voe.ToString() != null);
+            Assert.NotNull(voe.ToString());
         }
 
         [Fact]

@@ -37,7 +37,7 @@ namespace Narvalo.Fx
         public static void Noop_IsNotNull()
         {
             // Act
-            Assert.True(Stubs.Noop != null);
+            Assert.NotNull(Stubs.Noop);
         }
 
         #endregion
@@ -48,18 +48,18 @@ namespace Narvalo.Fx
         public static void AlwaysDefault_IsNotNull()
         {
             // Act
-            Assert.True(Stubs<string>.AlwaysDefault != null);
-            Assert.True(Stubs<int>.AlwaysDefault != null);
-            Assert.True(Stubs<long>.AlwaysDefault != null);
-            Assert.True(Stubs<object>.AlwaysDefault != null);
+            Assert.NotNull(Stubs<string>.AlwaysDefault);
+            Assert.NotNull(Stubs<int>.AlwaysDefault);
+            Assert.NotNull(Stubs<long>.AlwaysDefault);
+            Assert.NotNull(Stubs<object>.AlwaysDefault);
 
-            Assert.True(Stubs<string, int>.AlwaysDefault != null);
-            Assert.True(Stubs<int, int>.AlwaysDefault != null);
-            Assert.True(Stubs<long, int>.AlwaysDefault != null);
-            Assert.True(Stubs<object, int>.AlwaysDefault != null);
-            Assert.True(Stubs<string, string>.AlwaysDefault != null);
-            Assert.True(Stubs<int, long>.AlwaysDefault != null);
-            Assert.True(Stubs<long, object>.AlwaysDefault != null);
+            Assert.NotNull(Stubs<string, int>.AlwaysDefault);
+            Assert.NotNull(Stubs<int, int>.AlwaysDefault);
+            Assert.NotNull(Stubs<long, int>.AlwaysDefault);
+            Assert.NotNull(Stubs<object, int>.AlwaysDefault);
+            Assert.NotNull(Stubs<string, string>.AlwaysDefault);
+            Assert.NotNull(Stubs<int, long>.AlwaysDefault);
+            Assert.NotNull(Stubs<long, object>.AlwaysDefault);
         }
 
         [Fact]
@@ -88,10 +88,10 @@ namespace Narvalo.Fx
         public static void AlwaysFalse_IsNotNull()
         {
             // Act
-            Assert.True(Stubs<string>.AlwaysFalse != null);
-            Assert.True(Stubs<int>.AlwaysFalse != null);
-            Assert.True(Stubs<long>.AlwaysFalse != null);
-            Assert.True(Stubs<object>.AlwaysFalse != null);
+            Assert.NotNull(Stubs<string>.AlwaysFalse);
+            Assert.NotNull(Stubs<int>.AlwaysFalse);
+            Assert.NotNull(Stubs<long>.AlwaysFalse);
+            Assert.NotNull(Stubs<object>.AlwaysFalse);
         }
 
         [Theory]
@@ -120,10 +120,10 @@ namespace Narvalo.Fx
         public static void AlwaysTrue_IsNotNull()
         {
             // Act
-            Assert.True(Stubs<string>.AlwaysTrue != null);
-            Assert.True(Stubs<int>.AlwaysTrue != null);
-            Assert.True(Stubs<long>.AlwaysTrue != null);
-            Assert.True(Stubs<object>.AlwaysTrue != null);
+            Assert.NotNull(Stubs<string>.AlwaysTrue);
+            Assert.NotNull(Stubs<int>.AlwaysTrue);
+            Assert.NotNull(Stubs<long>.AlwaysTrue);
+            Assert.NotNull(Stubs<object>.AlwaysTrue);
         }
 
         [Theory]
@@ -152,10 +152,10 @@ namespace Narvalo.Fx
         public static void Identity_IsNotNull()
         {
             // Act
-            Assert.True(Stubs<string>.Identity != null);
-            Assert.True(Stubs<int>.Identity != null);
-            Assert.True(Stubs<long>.Identity != null);
-            Assert.True(Stubs<object>.Identity != null);
+            Assert.NotNull(Stubs<string>.Identity);
+            Assert.NotNull(Stubs<int>.Identity);
+            Assert.NotNull(Stubs<long>.Identity);
+            Assert.NotNull(Stubs<object>.Identity);
         }
 
         [Theory]
@@ -184,10 +184,10 @@ namespace Narvalo.Fx
         public static void Ignore_IsNotNull()
         {
             // Act
-            Assert.True(Stubs<string>.Ignore != null);
-            Assert.True(Stubs<int>.Ignore != null);
-            Assert.True(Stubs<long>.Ignore != null);
-            Assert.True(Stubs<object>.Ignore != null);
+            Assert.NotNull(Stubs<string>.Ignore);
+            Assert.NotNull(Stubs<int>.Ignore);
+            Assert.NotNull(Stubs<long>.Ignore);
+            Assert.NotNull(Stubs<object>.Ignore);
         }
 
         #endregion

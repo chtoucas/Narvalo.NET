@@ -18,7 +18,7 @@ namespace Narvalo.Web.Configuration
             var section = new AssetSection();
 
             // Assert
-            Assert.True(section.DefaultProvider != null);
+            Assert.NotNull(section.DefaultProvider);
         }
 
         [Fact]
@@ -62,7 +62,7 @@ namespace Narvalo.Web.Configuration
             var section = new AssetSection();
 
             // Assert
-            Assert.True(section.Providers != null);
+            Assert.NotNull(section.Providers);
         }
 
         [Fact]

@@ -104,6 +104,7 @@
     <Compile Include="Finance\CurrencyFacts.cs" />
     <Compile Include="Finance\Internal\CurrencyActivatorFacts.cs" />
     <Compile Include="Finance\MoneyFacts.cs" />
+    <Compile Include="FormatFacts.cs" />
     <Compile Include="Fx\StubsFacts.cs" />
     <Compile Include="Fx\UnitFacts.cs" />
     <Compile Include="TestCommon\AppDomainUtility.cs" />
