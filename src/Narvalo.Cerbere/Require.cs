@@ -425,10 +425,17 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        // This method was created to silent a CC1025 error:
-        //  "After contract block, found use of local variable defined in contract block"
-        // We don't use Require.LessThanOrEqualTo because we want to throw an ArgumentException
-        // instead of an ArgumentOutOfRangeException.
+        /// <summary>
+        /// Checks that the minimum value is lower or equal to the maximum value of the range.
+        /// </summary>
+        /// <remarks>
+        /// This method was created to silent a CC1025 error:
+        ///  "After contract block, found use of local variable defined in contract block"
+        /// We don't use Require.LessThanOrEqualTo because we want to throw an ArgumentException
+        /// instead of an ArgumentOutOfRangeException.
+        /// </remarks>
+        /// <param name="minInclusive">The minimum integer value.</param>
+        /// <param name="maxInclusive">The maximum integer value.</param>
         [ContractArgumentValidator]
         private static void ValidateRange_(int minInclusive, int maxInclusive)
         {
@@ -445,10 +452,17 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        // This method was created to silent a CC1025 error:
-        //  "After contract block, found use of local variable defined in contract block"
-        // We don't use Require.LessThanOrEqualTo because we want to throw an ArgumentException
-        // instead of an ArgumentOutOfRangeException.
+        /// <summary>
+        /// Checks that the minimum value is lower or equal to the maximum value of the range.
+        /// </summary>
+        /// <remarks>
+        /// This method was created to silent a CC1025 error:
+        ///  "After contract block, found use of local variable defined in contract block"
+        /// We don't use Require.LessThanOrEqualTo because we want to throw an ArgumentException
+        /// instead of an ArgumentOutOfRangeException.
+        /// </remarks>
+        /// <param name="minInclusive">The minimum long value.</param>
+        /// <param name="maxInclusive">The maximum long value.</param>
         [ContractArgumentValidator]
         private static void ValidateRange_(long minInclusive, long maxInclusive)
         {

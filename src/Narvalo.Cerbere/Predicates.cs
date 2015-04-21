@@ -7,6 +7,9 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
     using System.Reflection;
 
+    /// <summary>
+    /// Provides predicate methods.
+    /// </summary>
     public static class Predicates
     {
         /// <summary>

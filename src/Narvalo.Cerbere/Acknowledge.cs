@@ -25,6 +25,10 @@ namespace Narvalo
             Contract.Requires(@this != null);
         }
 
+        /// <summary>
+        /// Checks that the specified object parameter is not <see langword="null"/> or empty.
+        /// </summary>
+        /// <param name="value">The value to check.</param>
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
@@ -40,6 +44,7 @@ namespace Narvalo
         /// </summary>
         /// <remarks>Adapted from <seealso cref="!:http://blogs.msdn.com/b/francesco/archive/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten.aspx"/>.</remarks>
         /// <example>
+        /// <code>
         /// switch (myEnum)
         /// {
         ///     case MyEnum.DefinedValue:
@@ -47,6 +52,7 @@ namespace Narvalo
         ///     default:
         ///         throw Acknowledge.Unreachable("Found a missing case in the switch.");
         /// }
+        /// </code>
         /// </example>
         /// <param name="reason">The error message to use if the point of execution is reached.</param>
         /// <returns>A new instance of the <see cref="NotSupportedException"/> class with the specified error message.</returns>
@@ -64,6 +70,7 @@ namespace Narvalo
         /// </summary>
         /// <remarks>Adapted from <seealso cref="!:http://blogs.msdn.com/b/francesco/archive/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten.aspx"/>.</remarks>
         /// <example>
+        /// <code>
         /// switch (myEnum)
         /// {
         ///     case MyEnum.DefinedValue:
@@ -71,6 +78,7 @@ namespace Narvalo
         ///     default:
         ///         throw Acknowledge.Unreachable(new MyException("Found a missing case in the switch."));
         /// }
+        /// </code>
         /// </example>
         /// <typeparam name="TException">The type of <paramref name="exception"/>.</typeparam>
         /// <param name="exception">The exception the caller wish to throw back from here.</param>
