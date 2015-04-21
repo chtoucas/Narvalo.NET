@@ -4,29 +4,47 @@ namespace Narvalo.Finance
 {
     using System;
 
-    using Narvalo.Finance.Currencies;
     using Xunit;
 
-    public static class CurrencyFacts
+    public static partial class CurrencyFacts
     {
-        #region Euro
+        #region Of()
 
         [Fact]
-        public static void Equality_ReturnsTrue_WhenComparingAllEuroInstances()
+        public static void Of_ThrowsArgumentNullException_ForNullCode()
         {
             // Act & Assert
-            Assert.True(EUR.Currency.Equals(Currency.Euro));
+            Assert.Throws<ArgumentNullException>(() => Currency.Of(null));
+        }
 
-            Assert.True(Currency.Euro.Equals(Currency.Of("EUR")));
-            Assert.True(Currency.Euro.Equals(EUR.Currency));
-
-            Assert.True(EUR.Currency == Currency.Euro);
-            Assert.True(Currency.Euro == Currency.Of("EUR"));
-
-            Assert.True(Object.ReferenceEquals(EUR.Currency, Currency.Euro));
-            Assert.False(Object.ReferenceEquals(Currency.Euro, Currency.Of("EUR")));
+        [Fact]
+        public static void Of_ThrowsCurrencyNotFoundException_ForUnknownCode()
+        {
+            // Act & Assert
+            Assert.Throws<CurrencyNotFoundException>(() => Currency.Of(String.Empty));
+            Assert.Throws<CurrencyNotFoundException>(() => Currency.Of("A"));
+            Assert.Throws<CurrencyNotFoundException>(() => Currency.Of("AA"));
+            Assert.Throws<CurrencyNotFoundException>(() => Currency.Of("AAA"));
+            Assert.Throws<CurrencyNotFoundException>(() => Currency.Of("AAAA"));
         }
 
         #endregion
+
+        [Fact]
+        public static void Aliases_AreNotNull()
+        {
+            // Act & Assert
+            Assert.True(Currency.None != null);
+            Assert.True(Currency.Test != null);
+            Assert.True(Currency.Euro != null);
+            Assert.True(Currency.PoundSterling != null);
+            Assert.True(Currency.SwissFranc != null);
+            Assert.True(Currency.UnitedStatesDollar != null);
+            Assert.True(Currency.Yen != null);
+            Assert.True(Currency.Gold != null);
+            Assert.True(Currency.Palladium != null);
+            Assert.True(Currency.Platinum != null);
+            Assert.True(Currency.Silver != null);
+        }
     }
 }

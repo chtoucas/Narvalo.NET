@@ -96,7 +96,7 @@
     <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
-    <Compile Include="Finance\Currencies\CurrenciesFacts.g.cs">
+    <Compile Include="Finance\CurrenciesFacts.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CurrenciesFacts.tt</DependentUpon>
@@ -149,7 +149,7 @@
     <Content Include="Narvalo.Facts.props">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Finance\Currencies\CurrenciesFacts.tt">
+    <None Include="Finance\CurrenciesFacts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CurrenciesFacts.g.cs</LastGenOutput>
     </None>

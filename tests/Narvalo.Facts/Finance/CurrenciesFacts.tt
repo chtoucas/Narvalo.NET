@@ -1,8 +1,8 @@
-﻿<#@ include file="..\..\..\..\src\Narvalo.Finance\CodeTemplates\Iso4217.tt" #>
+﻿<#@ include file="..\..\..\src\Narvalo.Finance\CodeTemplates\Iso4217.tt" #>
 <#
 
-var currentCurrencies = ParseCurrent(@"..\..\..\..\src\Narvalo.Finance\Resources\ISO4217\20150101\A1.xml");
-var legacyCurrencies = ParseLegacy(@"..\..\..\..\src\Narvalo.Finance\Resources\ISO4217\20150101\A3.xml");
+var currentCurrencies = ParseCurrent(@"..\..\..\src\Narvalo.Finance\Resources\ISO4217\20150101\A1.xml");
+var legacyCurrencies = ParseLegacy(@"..\..\..\src\Narvalo.Finance\Resources\ISO4217\20150101\A3.xml");
 var currencies = currentCurrencies.Concat(legacyCurrencies);
 
 var codeSet = new HashSet<string>();
@@ -14,14 +14,15 @@ namespace <#= InferNamespace() #>
 {
     using System;
 
+    using Narvalo.Finance.Currencies;
     using Xunit;
     
-    public static class CurrencyFacts
+    public static partial class CurrencyFacts
     {
-        #region Currency
+        #region Built-In Currencies
 
         [Fact]
-        public static void Currency_IsNotNull()
+        public static void BuiltInCurrencies_AreNotNull()
         {
             // Act & Assert
 <#
@@ -39,11 +40,9 @@ namespace <#= InferNamespace() #>
     }
 #>
         }
-
-        #endregion
         
         [Fact]
-        public static void Currencies_SatisfyStructuralEqualityRules()
+        public static void BuiltInCurrencies_SatisfyStructuralEqualityRules()
         {
             // Act & Assert
 <#
@@ -59,5 +58,25 @@ namespace <#= InferNamespace() #>
     }
 #>
         }
+
+        #endregion
+
+        #region ToString()
+        
+        [Fact]
+        public static void ToString_ReturnsNotNull()
+        {
+            // Act & Assert
+<#
+    foreach (var code in codeSet)
+    {
+#>
+            Assert.True(<#= code #>.Currency.ToString() != null);
+<#
+    }
+#>
+        }
+
+        #endregion
     }
 }

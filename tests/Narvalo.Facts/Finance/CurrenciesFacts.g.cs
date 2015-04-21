@@ -1,17 +1,18 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Currencies
+namespace Narvalo.Finance
 {
     using System;
 
+    using Narvalo.Finance.Currencies;
     using Xunit;
     
-    public static class CurrencyFacts
+    public static partial class CurrencyFacts
     {
-        #region Currency
+        #region Built-In Currencies
 
         [Fact]
-        public static void Currency_IsNotNull()
+        public static void BuiltInCurrencies_AreNotNull()
         {
             // Act & Assert
             Assert.True(ADP.Currency != null);
@@ -315,11 +316,9 @@ namespace Narvalo.Finance.Currencies
             Assert.True(ZWN.Currency != null);
             Assert.True(ZWR.Currency != null);
         }
-
-        #endregion
         
         [Fact]
-        public static void Currencies_SatisfyStructuralEqualityRules()
+        public static void BuiltInCurrencies_SatisfyStructuralEqualityRules()
         {
             // Act & Assert
             Assert.True(ADP.Currency.Equals(Currency.Of("ADP")));
@@ -1823,5 +1822,317 @@ namespace Narvalo.Finance.Currencies
             Assert.False(Object.ReferenceEquals(ZWR.Currency, Currency.Of("ZWR")));
 
         }
+
+        #endregion
+
+        #region ToString()
+        
+        [Fact]
+        public static void ToString_ReturnsNotNull()
+        {
+            // Act & Assert
+            Assert.True(ADP.Currency.ToString() != null);
+            Assert.True(AED.Currency.ToString() != null);
+            Assert.True(AFA.Currency.ToString() != null);
+            Assert.True(AFN.Currency.ToString() != null);
+            Assert.True(ALK.Currency.ToString() != null);
+            Assert.True(ALL.Currency.ToString() != null);
+            Assert.True(AMD.Currency.ToString() != null);
+            Assert.True(ANG.Currency.ToString() != null);
+            Assert.True(AOA.Currency.ToString() != null);
+            Assert.True(AOK.Currency.ToString() != null);
+            Assert.True(AON.Currency.ToString() != null);
+            Assert.True(AOR.Currency.ToString() != null);
+            Assert.True(ARA.Currency.ToString() != null);
+            Assert.True(ARP.Currency.ToString() != null);
+            Assert.True(ARS.Currency.ToString() != null);
+            Assert.True(ARY.Currency.ToString() != null);
+            Assert.True(ATS.Currency.ToString() != null);
+            Assert.True(AUD.Currency.ToString() != null);
+            Assert.True(AWG.Currency.ToString() != null);
+            Assert.True(AYM.Currency.ToString() != null);
+            Assert.True(AZM.Currency.ToString() != null);
+            Assert.True(AZN.Currency.ToString() != null);
+            Assert.True(BAD.Currency.ToString() != null);
+            Assert.True(BAM.Currency.ToString() != null);
+            Assert.True(BBD.Currency.ToString() != null);
+            Assert.True(BDT.Currency.ToString() != null);
+            Assert.True(BEC.Currency.ToString() != null);
+            Assert.True(BEF.Currency.ToString() != null);
+            Assert.True(BEL.Currency.ToString() != null);
+            Assert.True(BGJ.Currency.ToString() != null);
+            Assert.True(BGK.Currency.ToString() != null);
+            Assert.True(BGL.Currency.ToString() != null);
+            Assert.True(BGN.Currency.ToString() != null);
+            Assert.True(BHD.Currency.ToString() != null);
+            Assert.True(BIF.Currency.ToString() != null);
+            Assert.True(BMD.Currency.ToString() != null);
+            Assert.True(BND.Currency.ToString() != null);
+            Assert.True(BOB.Currency.ToString() != null);
+            Assert.True(BOP.Currency.ToString() != null);
+            Assert.True(BOV.Currency.ToString() != null);
+            Assert.True(BRB.Currency.ToString() != null);
+            Assert.True(BRC.Currency.ToString() != null);
+            Assert.True(BRE.Currency.ToString() != null);
+            Assert.True(BRL.Currency.ToString() != null);
+            Assert.True(BRN.Currency.ToString() != null);
+            Assert.True(BRR.Currency.ToString() != null);
+            Assert.True(BSD.Currency.ToString() != null);
+            Assert.True(BTN.Currency.ToString() != null);
+            Assert.True(BUK.Currency.ToString() != null);
+            Assert.True(BWP.Currency.ToString() != null);
+            Assert.True(BYB.Currency.ToString() != null);
+            Assert.True(BYR.Currency.ToString() != null);
+            Assert.True(BZD.Currency.ToString() != null);
+            Assert.True(CAD.Currency.ToString() != null);
+            Assert.True(CDF.Currency.ToString() != null);
+            Assert.True(CHC.Currency.ToString() != null);
+            Assert.True(CHE.Currency.ToString() != null);
+            Assert.True(CHF.Currency.ToString() != null);
+            Assert.True(CHW.Currency.ToString() != null);
+            Assert.True(CLF.Currency.ToString() != null);
+            Assert.True(CLP.Currency.ToString() != null);
+            Assert.True(CNX.Currency.ToString() != null);
+            Assert.True(CNY.Currency.ToString() != null);
+            Assert.True(COP.Currency.ToString() != null);
+            Assert.True(COU.Currency.ToString() != null);
+            Assert.True(CRC.Currency.ToString() != null);
+            Assert.True(CSD.Currency.ToString() != null);
+            Assert.True(CSJ.Currency.ToString() != null);
+            Assert.True(CSK.Currency.ToString() != null);
+            Assert.True(CUC.Currency.ToString() != null);
+            Assert.True(CUP.Currency.ToString() != null);
+            Assert.True(CVE.Currency.ToString() != null);
+            Assert.True(CYP.Currency.ToString() != null);
+            Assert.True(CZK.Currency.ToString() != null);
+            Assert.True(DDM.Currency.ToString() != null);
+            Assert.True(DEM.Currency.ToString() != null);
+            Assert.True(DJF.Currency.ToString() != null);
+            Assert.True(DKK.Currency.ToString() != null);
+            Assert.True(DOP.Currency.ToString() != null);
+            Assert.True(DZD.Currency.ToString() != null);
+            Assert.True(ECS.Currency.ToString() != null);
+            Assert.True(ECV.Currency.ToString() != null);
+            Assert.True(EEK.Currency.ToString() != null);
+            Assert.True(EGP.Currency.ToString() != null);
+            Assert.True(EQE.Currency.ToString() != null);
+            Assert.True(ERN.Currency.ToString() != null);
+            Assert.True(ESA.Currency.ToString() != null);
+            Assert.True(ESB.Currency.ToString() != null);
+            Assert.True(ESP.Currency.ToString() != null);
+            Assert.True(ETB.Currency.ToString() != null);
+            Assert.True(EUR.Currency.ToString() != null);
+            Assert.True(FIM.Currency.ToString() != null);
+            Assert.True(FJD.Currency.ToString() != null);
+            Assert.True(FKP.Currency.ToString() != null);
+            Assert.True(FRF.Currency.ToString() != null);
+            Assert.True(GBP.Currency.ToString() != null);
+            Assert.True(GEK.Currency.ToString() != null);
+            Assert.True(GEL.Currency.ToString() != null);
+            Assert.True(GHC.Currency.ToString() != null);
+            Assert.True(GHP.Currency.ToString() != null);
+            Assert.True(GHS.Currency.ToString() != null);
+            Assert.True(GIP.Currency.ToString() != null);
+            Assert.True(GMD.Currency.ToString() != null);
+            Assert.True(GNE.Currency.ToString() != null);
+            Assert.True(GNF.Currency.ToString() != null);
+            Assert.True(GNS.Currency.ToString() != null);
+            Assert.True(GQE.Currency.ToString() != null);
+            Assert.True(GRD.Currency.ToString() != null);
+            Assert.True(GTQ.Currency.ToString() != null);
+            Assert.True(GWE.Currency.ToString() != null);
+            Assert.True(GWP.Currency.ToString() != null);
+            Assert.True(GYD.Currency.ToString() != null);
+            Assert.True(HKD.Currency.ToString() != null);
+            Assert.True(HNL.Currency.ToString() != null);
+            Assert.True(HRD.Currency.ToString() != null);
+            Assert.True(HRK.Currency.ToString() != null);
+            Assert.True(HTG.Currency.ToString() != null);
+            Assert.True(HUF.Currency.ToString() != null);
+            Assert.True(IDR.Currency.ToString() != null);
+            Assert.True(IEP.Currency.ToString() != null);
+            Assert.True(ILP.Currency.ToString() != null);
+            Assert.True(ILR.Currency.ToString() != null);
+            Assert.True(ILS.Currency.ToString() != null);
+            Assert.True(INR.Currency.ToString() != null);
+            Assert.True(IQD.Currency.ToString() != null);
+            Assert.True(IRR.Currency.ToString() != null);
+            Assert.True(ISJ.Currency.ToString() != null);
+            Assert.True(ISK.Currency.ToString() != null);
+            Assert.True(ITL.Currency.ToString() != null);
+            Assert.True(JMD.Currency.ToString() != null);
+            Assert.True(JOD.Currency.ToString() != null);
+            Assert.True(JPY.Currency.ToString() != null);
+            Assert.True(KES.Currency.ToString() != null);
+            Assert.True(KGS.Currency.ToString() != null);
+            Assert.True(KHR.Currency.ToString() != null);
+            Assert.True(KMF.Currency.ToString() != null);
+            Assert.True(KPW.Currency.ToString() != null);
+            Assert.True(KRW.Currency.ToString() != null);
+            Assert.True(KWD.Currency.ToString() != null);
+            Assert.True(KYD.Currency.ToString() != null);
+            Assert.True(KZT.Currency.ToString() != null);
+            Assert.True(LAJ.Currency.ToString() != null);
+            Assert.True(LAK.Currency.ToString() != null);
+            Assert.True(LBP.Currency.ToString() != null);
+            Assert.True(LKR.Currency.ToString() != null);
+            Assert.True(LRD.Currency.ToString() != null);
+            Assert.True(LSL.Currency.ToString() != null);
+            Assert.True(LSM.Currency.ToString() != null);
+            Assert.True(LTL.Currency.ToString() != null);
+            Assert.True(LTT.Currency.ToString() != null);
+            Assert.True(LUC.Currency.ToString() != null);
+            Assert.True(LUF.Currency.ToString() != null);
+            Assert.True(LUL.Currency.ToString() != null);
+            Assert.True(LVL.Currency.ToString() != null);
+            Assert.True(LVR.Currency.ToString() != null);
+            Assert.True(LYD.Currency.ToString() != null);
+            Assert.True(MAD.Currency.ToString() != null);
+            Assert.True(MAF.Currency.ToString() != null);
+            Assert.True(MDL.Currency.ToString() != null);
+            Assert.True(MGA.Currency.ToString() != null);
+            Assert.True(MGF.Currency.ToString() != null);
+            Assert.True(MKD.Currency.ToString() != null);
+            Assert.True(MLF.Currency.ToString() != null);
+            Assert.True(MMK.Currency.ToString() != null);
+            Assert.True(MNT.Currency.ToString() != null);
+            Assert.True(MOP.Currency.ToString() != null);
+            Assert.True(MRO.Currency.ToString() != null);
+            Assert.True(MTL.Currency.ToString() != null);
+            Assert.True(MTP.Currency.ToString() != null);
+            Assert.True(MUR.Currency.ToString() != null);
+            Assert.True(MVQ.Currency.ToString() != null);
+            Assert.True(MVR.Currency.ToString() != null);
+            Assert.True(MWK.Currency.ToString() != null);
+            Assert.True(MXN.Currency.ToString() != null);
+            Assert.True(MXP.Currency.ToString() != null);
+            Assert.True(MXV.Currency.ToString() != null);
+            Assert.True(MYR.Currency.ToString() != null);
+            Assert.True(MZE.Currency.ToString() != null);
+            Assert.True(MZM.Currency.ToString() != null);
+            Assert.True(MZN.Currency.ToString() != null);
+            Assert.True(NAD.Currency.ToString() != null);
+            Assert.True(NGN.Currency.ToString() != null);
+            Assert.True(NIC.Currency.ToString() != null);
+            Assert.True(NIO.Currency.ToString() != null);
+            Assert.True(NLG.Currency.ToString() != null);
+            Assert.True(NOK.Currency.ToString() != null);
+            Assert.True(NPR.Currency.ToString() != null);
+            Assert.True(NZD.Currency.ToString() != null);
+            Assert.True(OMR.Currency.ToString() != null);
+            Assert.True(PAB.Currency.ToString() != null);
+            Assert.True(PEH.Currency.ToString() != null);
+            Assert.True(PEI.Currency.ToString() != null);
+            Assert.True(PEN.Currency.ToString() != null);
+            Assert.True(PES.Currency.ToString() != null);
+            Assert.True(PGK.Currency.ToString() != null);
+            Assert.True(PHP.Currency.ToString() != null);
+            Assert.True(PKR.Currency.ToString() != null);
+            Assert.True(PLN.Currency.ToString() != null);
+            Assert.True(PLZ.Currency.ToString() != null);
+            Assert.True(PTE.Currency.ToString() != null);
+            Assert.True(PYG.Currency.ToString() != null);
+            Assert.True(QAR.Currency.ToString() != null);
+            Assert.True(RHD.Currency.ToString() != null);
+            Assert.True(ROK.Currency.ToString() != null);
+            Assert.True(ROL.Currency.ToString() != null);
+            Assert.True(RON.Currency.ToString() != null);
+            Assert.True(RSD.Currency.ToString() != null);
+            Assert.True(RUB.Currency.ToString() != null);
+            Assert.True(RUR.Currency.ToString() != null);
+            Assert.True(RWF.Currency.ToString() != null);
+            Assert.True(SAR.Currency.ToString() != null);
+            Assert.True(SBD.Currency.ToString() != null);
+            Assert.True(SCR.Currency.ToString() != null);
+            Assert.True(SDD.Currency.ToString() != null);
+            Assert.True(SDG.Currency.ToString() != null);
+            Assert.True(SDP.Currency.ToString() != null);
+            Assert.True(SEK.Currency.ToString() != null);
+            Assert.True(SGD.Currency.ToString() != null);
+            Assert.True(SHP.Currency.ToString() != null);
+            Assert.True(SIT.Currency.ToString() != null);
+            Assert.True(SKK.Currency.ToString() != null);
+            Assert.True(SLL.Currency.ToString() != null);
+            Assert.True(SOS.Currency.ToString() != null);
+            Assert.True(SRD.Currency.ToString() != null);
+            Assert.True(SRG.Currency.ToString() != null);
+            Assert.True(SSP.Currency.ToString() != null);
+            Assert.True(STD.Currency.ToString() != null);
+            Assert.True(SUR.Currency.ToString() != null);
+            Assert.True(SVC.Currency.ToString() != null);
+            Assert.True(SYP.Currency.ToString() != null);
+            Assert.True(SZL.Currency.ToString() != null);
+            Assert.True(THB.Currency.ToString() != null);
+            Assert.True(TJR.Currency.ToString() != null);
+            Assert.True(TJS.Currency.ToString() != null);
+            Assert.True(TMM.Currency.ToString() != null);
+            Assert.True(TMT.Currency.ToString() != null);
+            Assert.True(TND.Currency.ToString() != null);
+            Assert.True(TOP.Currency.ToString() != null);
+            Assert.True(TPE.Currency.ToString() != null);
+            Assert.True(TRL.Currency.ToString() != null);
+            Assert.True(TRY.Currency.ToString() != null);
+            Assert.True(TTD.Currency.ToString() != null);
+            Assert.True(TWD.Currency.ToString() != null);
+            Assert.True(TZS.Currency.ToString() != null);
+            Assert.True(UAH.Currency.ToString() != null);
+            Assert.True(UAK.Currency.ToString() != null);
+            Assert.True(UGS.Currency.ToString() != null);
+            Assert.True(UGW.Currency.ToString() != null);
+            Assert.True(UGX.Currency.ToString() != null);
+            Assert.True(USD.Currency.ToString() != null);
+            Assert.True(USN.Currency.ToString() != null);
+            Assert.True(USS.Currency.ToString() != null);
+            Assert.True(UYI.Currency.ToString() != null);
+            Assert.True(UYN.Currency.ToString() != null);
+            Assert.True(UYP.Currency.ToString() != null);
+            Assert.True(UYU.Currency.ToString() != null);
+            Assert.True(UZS.Currency.ToString() != null);
+            Assert.True(VEB.Currency.ToString() != null);
+            Assert.True(VEF.Currency.ToString() != null);
+            Assert.True(VNC.Currency.ToString() != null);
+            Assert.True(VND.Currency.ToString() != null);
+            Assert.True(VUV.Currency.ToString() != null);
+            Assert.True(WST.Currency.ToString() != null);
+            Assert.True(XAF.Currency.ToString() != null);
+            Assert.True(XAG.Currency.ToString() != null);
+            Assert.True(XAU.Currency.ToString() != null);
+            Assert.True(XBA.Currency.ToString() != null);
+            Assert.True(XBB.Currency.ToString() != null);
+            Assert.True(XBC.Currency.ToString() != null);
+            Assert.True(XBD.Currency.ToString() != null);
+            Assert.True(XCD.Currency.ToString() != null);
+            Assert.True(XDR.Currency.ToString() != null);
+            Assert.True(XEU.Currency.ToString() != null);
+            Assert.True(XFO.Currency.ToString() != null);
+            Assert.True(XFU.Currency.ToString() != null);
+            Assert.True(XOF.Currency.ToString() != null);
+            Assert.True(XPD.Currency.ToString() != null);
+            Assert.True(XPF.Currency.ToString() != null);
+            Assert.True(XPT.Currency.ToString() != null);
+            Assert.True(XRE.Currency.ToString() != null);
+            Assert.True(XSU.Currency.ToString() != null);
+            Assert.True(XTS.Currency.ToString() != null);
+            Assert.True(XUA.Currency.ToString() != null);
+            Assert.True(XXX.Currency.ToString() != null);
+            Assert.True(YDD.Currency.ToString() != null);
+            Assert.True(YER.Currency.ToString() != null);
+            Assert.True(YUD.Currency.ToString() != null);
+            Assert.True(YUM.Currency.ToString() != null);
+            Assert.True(YUN.Currency.ToString() != null);
+            Assert.True(ZAL.Currency.ToString() != null);
+            Assert.True(ZAR.Currency.ToString() != null);
+            Assert.True(ZMK.Currency.ToString() != null);
+            Assert.True(ZMW.Currency.ToString() != null);
+            Assert.True(ZRN.Currency.ToString() != null);
+            Assert.True(ZRZ.Currency.ToString() != null);
+            Assert.True(ZWC.Currency.ToString() != null);
+            Assert.True(ZWD.Currency.ToString() != null);
+            Assert.True(ZWL.Currency.ToString() != null);
+            Assert.True(ZWN.Currency.ToString() != null);
+            Assert.True(ZWR.Currency.ToString() != null);
+        }
+
+        #endregion
     }
 }
