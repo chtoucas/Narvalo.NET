@@ -57,13 +57,13 @@ There are two solutions.
 This solution contains all projects. 
 
 Portable Libraries:
-- Narvalo.Cerbere (Profile259).
-- Narvalo.Fx (Profile259), focus on functional programming patterns.
-- Narvalo.Finance (Profile111).
+- Narvalo.Cerbere (Profile259, SecurityTransparent).
+- Narvalo.Fx (Profile259, SecurityTransparent), focus on functional programming patterns.
+- Narvalo.Finance (Profile111, SecurityTransparent).
 - Narvalo.Reliability (Profile151).
 
 Libraries:
-- Narvalo.Common, collection of utilities and extension methods.
+- Narvalo.Common (AllowPartiallyTrustedCallers), collection of utilities and extension methods.
 - Narvalo.Web, focus on web development.
 - Narvalo.Mvp
 - Narvalo.Mvp.Web

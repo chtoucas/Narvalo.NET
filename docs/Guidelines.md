@@ -204,7 +204,7 @@ Non-standard tags:
 - `<content></content>` used for documenting partial classes.
 - `<internalonly/>` for internal members or types.
 
-### Literate Programming
+### Literate Programming (Kind Of)
 
 ```csharp
 /**
