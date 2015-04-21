@@ -63,15 +63,13 @@ Narvalo.NET
   custom MSBuild tasks.
 
 #### Other projects
-
 - **Narvalo.Mvp.Windows.Forms**
 - **Narvalo.Ghostscript**, a .NET wrapper for GhostScript.
-- **Narvalo.Reliability**
-- **Narvalo.Brouillons**, a "fourre-tout" of unfinished or severely broken codes.
+- **Narvalo.Reliability** features reliability patterns.
 - **Narvalo.PowerShell**, collection of PowerShell modules.
 - **Narvalo.StyleCop.CSharp**, custom C# rules for StyleCop.
+- **Narvalo.Brouillons**, a "fourre-tout" of unfinished or severely broken codes.
 - **Narvalo.Benchmarks**, the benchmarking project.
-- Sample MVP projects.
 
 #### Status for the NuGet packages
 

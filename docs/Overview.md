@@ -51,17 +51,11 @@ Solutions
 ---------
 
 There are two solutions.
-
-### Narvalo.sln
-
-This solution contains all projects. 
-
-### Narvalo Maintenance.sln
-
-Contains documentation, settings, maintenance scripts and projects:
-- MyGet, private NuGet server.
-- NuGetAgent, a NuGet publishing tool.
-- Prose, a literal programming tool.
+- `Narvalo.sln` contains all projects. 
+- `tools\Narvalo Maintenance.sln` contains documentation, settings, maintenance scripts and projects:
+  * MyGet, private NuGet server.
+  * NuGetAgent, a NuGet publishing tool.
+  * Prose, a literal programming tool.
 
 How to initialize a new project
 -------------------------------
