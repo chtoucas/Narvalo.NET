@@ -28,9 +28,6 @@
     <None Include="Narvalo.PowerShell.psd1" />
     <None Include="Narvalo.PowerShell.SqlServer.psm1" />
     <None Include="Narvalo.PowerShell.Utility.psm1" />
-    <None Include="Narvalo.PowerShell.Version.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Narvalo.PowerShell.Web.psm1" />
     <None Include="PowerShell.md" />
     <None Include="Settings.StyleCop" />

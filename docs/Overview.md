@@ -100,25 +100,15 @@ A typical project file should then look like this:
 
 ### Add Versioning
 
-Create a version property file: `{ProjectName}.Version.props`.
-
-For core libraries:
+Create a version property file: `{ProjectName}.Version.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(RepositorySettingsDir)Narvalo.Core.CurrentVersion.props" />
+  <Import Project="$(RepositorySettingsDir)Narvalo.CurrentVersion.props" />
 </Project>
 ```
 
-for MVP libraries:
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(RepositorySettingsDir)Narvalo.Mvp.CurrentVersion.props" />
-</Project>
-```
-
-For other libraries or when you want to override the version properties:
+When you want to override the default version properties:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">

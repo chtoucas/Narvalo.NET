@@ -10,7 +10,7 @@ Releasing a NuGet package
 
 To release a new version of all core packages:
 
-1. Review shared version: `Narvalo.Core.CurrentVersion.props`.
+1. Review shared version: `Narvalo.CurrentVersion.props` or local version props file.
 2. Review individual versions in `src\NuGet`, if they differ from the shared one.
 3. Review individual package descriptions in `src\NuGet`.
 4. Build and publish the packages: `make.ps1 -r pushcore`.
