@@ -26,14 +26,14 @@ Narvalo.NET
 - **Narvalo.Finance**
   (_experimental_,
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance)),
-  this package provides various financial utilities: Currency (ISO 4217), Money types, 
+  this package provides various financial utilities: Currency (ISO 4217), Money types,
   BIC (ISO 9362), IBAN & BBAN.
 - **Narvalo.Common**
   (_alpha_,
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
   [package](https://www.nuget.org/packages/Narvalo.Common/)),
-  this library provides various utilities and extension methods: range types, directory walker, 
-  Int64 encoders,  benchmark helpers, extensions for Collections, Configuration, SQL client and XDom.
+  this library provides various utilities and extension methods: Range type, directory walker,
+  Int64 encoders,  benchmark helpers, extension methods for Collections, Configuration, SQL client and XDom.
 - **Narvalo.Web**
   (_experimental_,
   [sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web),

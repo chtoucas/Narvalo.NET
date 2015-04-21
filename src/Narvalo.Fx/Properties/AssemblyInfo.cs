@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Security;
 
 [assembly: AssemblyTitle("Narvalo.Fx")]
-[assembly: AssemblyDescription("Narvalo FX Library containing implementations of functional patterns.")]
+[assembly: AssemblyDescription("Narvalo FX Library featuring implementations of functional patterns.")]
 
 [assembly: SecurityTransparent]
 

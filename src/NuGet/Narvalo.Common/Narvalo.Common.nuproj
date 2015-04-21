@@ -4,9 +4,9 @@
     <NuId>Narvalo.Common</NuId>
     <NuTitle>Narvalo.Common</NuTitle>
     <NuDescription>
-      This package provides various utilities and extension methods: Range types, directory walker, Int64 encoders, benchmark helpers, extensions for Collections, Configuration, SQL client and XDom.
+      This package provides various utilities and extension methods: Range type, directory walker, Int64 encoders, extension methods for Collections, Configuration, SQL client and XDom.
 
-      A code contracts reference assembly is also included if you need it.
+      A code contracts reference assembly is included if you ever need it.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Range, Utilities, Extensions</NuTags>

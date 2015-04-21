@@ -10,7 +10,7 @@
 
       This is a portable class library targeting Profile259.
 
-      A code contracts reference assembly is also included if you need it.
+      A code contracts reference assembly is included if you ever need it.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Require, Assert, Guard, Check, Validate, CodeContracts, Contracts</NuTags>

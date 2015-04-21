@@ -4,7 +4,7 @@
     <NuId>Narvalo.Build</NuId>
     <NuTitle>Narvalo.Build</NuTitle>
     <NuDescription>
-      This package contains the Narvalo.Org MSBuild tasks.
+      This package contains MSBuild tasks.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>MSBuild</NuTags>

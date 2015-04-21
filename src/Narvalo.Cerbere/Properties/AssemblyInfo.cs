@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Security;
 
 [assembly: AssemblyTitle("Narvalo.Cerbere")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Narvalo Cerbere Library providing argument validation methods and Code Contracts helpers.")]
 
 [assembly: SecurityTransparent]
 
