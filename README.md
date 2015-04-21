@@ -15,16 +15,16 @@ Narvalo.NET
 
 For Code Contracts, StyleCop & Documentation, OK does not mean finished.
 
-Library             | Status       | Profile    | Security    | CA | GA | CC | SA |
-------------------- | ------------ | ---------- | ----------- | -- | -- | -- | -- |
-Narvalo.Cerbere     | Beta         | Profile259 | Transparent | OK | OK | OK | OK |
-Narvalo.Fx          | Alpha        | Profile259 | Transparent | OK | OK | OK | OK |
-Narvalo.Finance     | Experimental | Profile111 | Transparent | OK | !  | OK | !  |
-Narvalo.Reliability | Experimental | Profile151 |             |    |    |    |    |
-Narvalo.Common      | Alpha        |            | APTCA       | !  | !  | !  | !  |
-Narvalo.Web         | Experimental |            |             |    |    |    |    |
-Narvalo.Mvp         | Beta         |            |             |    |    |    |    |
-Narvalo.Mvp.Web     | Beta         |            |             |    |    |    |    |
+Library             | Status       | Profile    | Security    | CA | GA | CC | SA 
+------------------- | ------------ | ---------- | ----------- | -- | -- | -- | -- 
+Narvalo.Cerbere     | Beta         | Profile259 | Transparent | OK | OK | OK | OK 
+Narvalo.Fx          | Alpha        | Profile259 | Transparent | OK | OK | OK | OK 
+Narvalo.Finance     | Experimental | Profile111 | Transparent | OK | !  | OK | !  
+Narvalo.Reliability | Experimental | Profile151 |             |    |    |    |    
+Narvalo.Common      | Alpha        |            | APTCA       | !  | !  | !  | !  
+Narvalo.Web         | Experimental |            |             |    |    |    |    
+Narvalo.Mvp         | Beta         |            |             |    |    |    |    
+Narvalo.Mvp.Web     | Beta         |            |             |    |    |    |    
 
 - CA: Code Analysis with FxCop
 - GA: Code Analysis with Gendarme
