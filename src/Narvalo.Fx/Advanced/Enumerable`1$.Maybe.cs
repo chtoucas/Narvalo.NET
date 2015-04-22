@@ -25,16 +25,10 @@ namespace Narvalo.Fx.Advanced
             Require.NotNull(funM, "funM");
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
-            // We could use a LINQ query expression but it then won't be possible 
-            // to add the Code Contracts workarounds.
-            //  return from _ in @this
-            //      let m = funM.Invoke(_)
-            //      where m.IsSome
-            //      select m.Value;
-            return @this
-                .Select(_ => funM.Invoke(_)).AssumeNotNull()
-                .Where(_ => _.IsSome)
-                .Select(_ => _.Value).AssumeNotNull();
+            return (from _ in @this
+                    let m = funM.Invoke(_)
+                    where m.IsSome
+                    select m.Value).EmptyIfNull();
         }
     }
 
@@ -54,7 +48,7 @@ namespace Narvalo.Fx.Advanced
 
             return @this
                 .Where(_ => predicateM.Invoke(_).ValueOrElse(false))
-                .AssumeNotNull();
+                .EmptyIfNull();
         }
     }
 }

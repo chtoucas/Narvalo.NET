@@ -14,6 +14,8 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class EnumerableExtensions
     {
+        // Useful when using built-in LINQ operators. Even if it is not publicly visible,
+        // I think that all LINQ operators never return a null but rather an empty sequence if needed.
         public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
         {
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
@@ -52,9 +54,14 @@ namespace Narvalo.Fx
             IEnumerable<Maybe<TSource>> seq
                 = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
 
-            using (var iter = seq.AssumeNotNull().GetEnumerator())
+            using (var iter = seq.EmptyIfNull().GetEnumerator())
             {
-                return iter.MoveNext() ? iter.Current.AssumeNotNull() : Maybe<TSource>.None;
+                var current = iter.Current;
+
+                // Each value is created via Maybe.Of() which guarantees that the value is not null.
+                Contract.Assume(current != null);
+
+                return iter.MoveNext() ? current : Maybe<TSource>.None;
             }
         }
 
@@ -72,7 +79,7 @@ namespace Narvalo.Fx
             Require.NotNull(predicate, "predicate");
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            return @this.Reverse().AssumeNotNull().FirstOrNone();
+            return @this.Reverse().EmptyIfNull().FirstOrNone();
         }
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
@@ -92,9 +99,14 @@ namespace Narvalo.Fx
             IEnumerable<Maybe<TSource>> seq
                 = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
 
-            using (var iter = seq.AssumeNotNull().GetEnumerator())
+            using (var iter = seq.EmptyIfNull().GetEnumerator())
             {
-                var result = iter.MoveNext() ? iter.Current.AssumeNotNull() : Maybe<TSource>.None;
+                var current = iter.Current;
+
+                // Each value is created via Maybe.Of() which guarantees that the value is not null.
+                Contract.Assume(current != null);
+
+                var result = iter.MoveNext() ? current : Maybe<TSource>.None;
 
                 // Return Maybe.None if there is one more element.
                 return iter.MoveNext() ? Maybe<TSource>.None : result;
@@ -110,7 +122,7 @@ namespace Narvalo.Fx
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
-            return @this.Concat(Sequence.Single(element)).AssumeNotNull();
+            return @this.Concat(Sequence.Single(element)).EmptyIfNull();
         }
 
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
@@ -118,7 +130,7 @@ namespace Narvalo.Fx
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
-            return Sequence.Single(element).Concat(@this).AssumeNotNull();
+            return Sequence.Single(element).Concat(@this).EmptyIfNull();
         }
 
         #endregion

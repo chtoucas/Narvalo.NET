@@ -14,11 +14,12 @@ Design
 Narvalo.Cerbere
 ---------------
 
-- Is there a better alternative to AssumeNotNull()?
+- Is there a better alternative to AssumeNotNull()? Should I remove it?
 
 Narvalo.Fx
 ------------
 
+- Equals for Maybe<T>.
 - SumCore() and CollectCore() assert that they never return null but this is not always true.
 - Confirm that Maybe methods never returns null.
 - Monad.tt, review true argument check for extension methods.

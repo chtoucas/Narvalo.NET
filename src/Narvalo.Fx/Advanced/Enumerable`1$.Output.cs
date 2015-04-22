@@ -5,6 +5,7 @@ namespace Narvalo.Fx.Advanced
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using Narvalo.Fx;
@@ -22,17 +23,12 @@ namespace Narvalo.Fx.Advanced
         {
             Require.Object(@this);
             Require.NotNull(funM, "funM");
+            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
-            // We could use a LINQ query expression but it then won't be possible 
-            // to add the Code Contracts workarounds.
-            //  return from _ in @this
-            //      let m = funM.Invoke(_)
-            //      where m.IsSuccess
-            //      select m.Value;
-            return @this
-                .Select(_ => funM.Invoke(_)).AssumeNotNull()
-                .Where(_ => _.IsSuccess)
-                .Select(_ => _.ToValue());
+            return (from _ in @this
+                    let m = funM.Invoke(_)
+                    where m.IsSuccess
+                    select m.AsValue()).EmptyIfNull();
         }
     }
 }
