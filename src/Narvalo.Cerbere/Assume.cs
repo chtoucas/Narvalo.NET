@@ -2,6 +2,7 @@
 
 namespace Narvalo
 {
+    using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
@@ -27,6 +28,7 @@ namespace Narvalo
         /// <typeparam name="T">The underlying type of the object.</typeparam>
         /// <param name="this">The input object.</param>
         /// <returns>The untouched input.</returns>
+        [Obsolete]
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T AssumeNotNull<T>(this T @this) where T : class
@@ -45,6 +47,7 @@ namespace Narvalo
         /// </summary>
         /// <typeparam name="T">The underlying type of the object.</typeparam>
         /// <param name="obj">The invariant object.</param>
+        [Obsolete]
         [DebuggerHidden]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
