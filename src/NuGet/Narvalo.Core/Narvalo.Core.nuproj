@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(RepositorySettingsDir)FrameworkProfiles.props" />
+  
+  <PropertyGroup>
+    <NuId>Narvalo.Core</NuId>
+    <NuTitle>Narvalo.Core</NuTitle>
+    <NuDescription>
+      This package provides various utilities and extension methods: Range type, Int64 encoders, extension methods for Collections and XDom.
+
+      This is a portable class library targeting Profile259.
+
+      A code contracts reference assembly is included if you ever need it.
+    </NuDescription>
+    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
+    <NuTags>Range, Utilities, Extensions</NuTags>
+    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
+
+    <NuReferences>
+      <![CDATA[
+      <references>
+        <reference file="Narvalo.Fx.dll" />
+      </references>
+      ]]>
+    </NuReferences>
+
+    <NuFiles>
+      <![CDATA[
+<file src="Narvalo.Core.dll" target="lib\$(Profile259)\" />
+<file src="Narvalo.Core.pdb" target="lib\$(Profile259)\" />
+<file src="Narvalo.Core.xml" target="lib\$(Profile259)\" />
+<file src="CodeContracts\Narvalo.Core.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Core.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
+<file src="fr\Narvalo.Core.resources.dll" target="lib\$(Profile259)\fr\" />
+      ]]>
+    </NuFiles>
+  </PropertyGroup>
+</Project>

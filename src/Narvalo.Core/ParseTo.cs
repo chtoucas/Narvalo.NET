@@ -273,13 +273,13 @@ namespace Narvalo
             return parser.MayInvoke(value);
         }
 
-        public static Maybe<IPAddress> IPAddress(string value)
-        {
-            Contract.Ensures(Contract.Result<Maybe<IPAddress>>() != null);
+        //public static Maybe<IPAddress> IPAddress(string value)
+        //{
+        //    Contract.Ensures(Contract.Result<Maybe<IPAddress>>() != null);
 
-            TryParser<IPAddress> parser = (string _, out IPAddress result) => System.Net.IPAddress.TryParse(_, out result);
+        //    TryParser<IPAddress> parser = (string _, out IPAddress result) => System.Net.IPAddress.TryParse(_, out result);
 
-            return parser.MayInvoke(value);
-        }
+        //    return parser.MayInvoke(value);
+        //}
     }
 }

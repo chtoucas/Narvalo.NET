@@ -20,7 +20,7 @@ namespace Narvalo
             {
                 // Does not work consistently for Flags enums:
                 // http://msdn.microsoft.com/en-us/library/system.enum.isdefined.aspx
-                throw new ArgumentException(Strings_Common.ConvertTo_TypeIsNotFlagsEnum);
+                throw new ArgumentException(Strings_Core.ConvertTo_TypeIsNotFlagsEnum);
             }
 
             if (System.Enum.IsDefined(type, value))

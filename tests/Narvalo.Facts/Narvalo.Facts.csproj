@@ -184,6 +184,10 @@
       <Project>{85e2c826-bf5c-4cdd-a90a-56d3d7f9ce25}</Project>
       <Name>Narvalo.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\Narvalo.Core\Narvalo.Core.csproj">
+      <Project>{66b62ba5-e26e-4899-85ac-4c52d3a427e9}</Project>
+      <Name>Narvalo.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Finance\Narvalo.Finance.csproj">
       <Project>{38055176-243b-4090-8148-efb8fe18ff23}</Project>
       <Name>Narvalo.Finance</Name>

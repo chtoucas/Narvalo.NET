@@ -146,7 +146,7 @@ namespace Narvalo
                 if (index < 0)
                 {
                     throw new ArgumentException(
-                        Format.Resource(Strings_Common.Int64Encoder_IllegalCharacter_Format, value[i], i),
+                        Format.Resource(Strings_Core.Int64Encoder_IllegalCharacter_Format, value[i], i),
                         "value");
                 }
 
@@ -182,7 +182,7 @@ namespace Narvalo
                 if (index < 0)
                 {
                     throw new ArgumentException(
-                        Format.Resource(Strings_Common.Int64Encoder_IllegalCharacter_Format, value[i], i),
+                        Format.Resource(Strings_Core.Int64Encoder_IllegalCharacter_Format, value[i], i),
                         "value");
                 }
 

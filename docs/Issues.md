@@ -4,7 +4,8 @@ Issues & Roadmap
 Design
 ------
 
-- Comment `Contract.Assume` and `AssumeNotNull`.
+- Review `Contract.Assume` and `AssumeNotNull`.
+  Is there a better alternative to AssumeNotNull()? Should I remove it?
 - Statics and thread-safety.
 - Review all `Format` and boxing
 - Where it makes sense, add `EditorBrowsableState`, `DebuggerDisplay` and `DebuggerTypeProxy` attributes.
@@ -14,21 +15,29 @@ Design
 Narvalo.Cerbere
 ---------------
 
-- Is there a better alternative to AssumeNotNull()? Should I remove it?
+- Retire Assume.
 
 Narvalo.Fx
 ------------
 
+- Split Monad.tt.
 - Equals for Maybe<T>.
 - SumCore() and CollectCore() assert that they never return null but this is not always true.
 - Confirm that Maybe methods never returns null.
 - Monad.tt, review true argument check for extension methods.
 
+Narvalo.Core
+------------
+
+- XmlReader
+- ParseTo 
+- StringHelper
+- `Range<T>`. Why force struct constraint? Require for "T?" where T is a struct?
+
 Narvalo.Common
 --------------
 
 - Complete unchecked alternates for SqlDataReader.
-- `Range<T>`. Why force struct constraint? Require for "T?" where T is a struct?
 
 Narvalo.Finance
 ---------------
@@ -102,9 +111,6 @@ Narvalo.Mvp
 
 Infrastructure
 --------------
-
-Update necessary following the new organization:
-- Retire Narvalo.Core
 
 ### Continuous Integration
 

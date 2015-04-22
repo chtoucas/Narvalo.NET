@@ -186,6 +186,10 @@
       <Project>{85e2c826-bf5c-4cdd-a90a-56d3d7f9ce25}</Project>
       <Name>Narvalo.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Narvalo.Core\Narvalo.Core.csproj">
+      <Project>{66b62ba5-e26e-4899-85ac-4c52d3a427e9}</Project>
+      <Name>Narvalo.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Narvalo.Fx\Narvalo.Fx.csproj">
       <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
       <Name>Narvalo.Fx</Name>
