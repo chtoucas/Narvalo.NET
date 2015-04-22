@@ -30,9 +30,11 @@ namespace Narvalo
                 return false;
             }
 
-            var typeInfo = type.GetTypeInfo().AssumeNotNull();
+            var typeInfo = type.GetTypeInfo();
 
-            return typeInfo.IsEnum && typeInfo.GetCustomAttribute<FlagsAttribute>(inherit: false) != null;
+            return typeInfo != null 
+                && typeInfo.IsEnum 
+                && typeInfo.GetCustomAttribute<FlagsAttribute>(inherit: false) != null;
         }
 
         /// <summary>
