@@ -345,7 +345,7 @@ namespace Narvalo.Fx
     {
         [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public IEnumerable<T> AsEnumerable()
+        public IEnumerable<T> ToEnumerable()
         {
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 
@@ -357,7 +357,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<IEnumerator<T>>() != null);
 
-            return AsEnumerable().GetEnumerator();
+            return ToEnumerable().GetEnumerator();
         }
 
         /// <inheritdoc cref="IEnumerable.GetEnumerator" />
@@ -365,7 +365,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<IEnumerator>() != null);
 
-            return AsEnumerable().GetEnumerator();
+            return ToEnumerable().GetEnumerator();
         }
     }
 
@@ -406,12 +406,12 @@ namespace Narvalo.Fx
 
         public bool Equals(T other, IEqualityComparer<T> comparer)
         {
-            Contract.Requires(comparer != null);
+            Require.NotNull(comparer, "comparer");
 
             // REVIEW: Use return Equals(η(other), comparer)?
-            if (Object.ReferenceEquals(other, null))
+            if (!IsSome)
             {
-                return !IsSome;
+                return Object.ReferenceEquals(other, null);
             }
 
             return comparer.Equals(Value, other);

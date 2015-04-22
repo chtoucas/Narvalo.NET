@@ -135,11 +135,11 @@ namespace Narvalo.Fx
 
             if (IsSuccess)
             {
-                caseSuccess.Invoke(ToValue());
+                caseSuccess.Invoke(AsValue());
             }
             else
             {
-                caseFailure.Invoke(ToExceptionDispatchInfo());
+                caseFailure.Invoke(AsExceptionDispatchInfo());
             }
         }
 
@@ -149,7 +149,7 @@ namespace Narvalo.Fx
             Require.NotNull(caseFailure, "caseFailure");
 
             return IsSuccess
-                ? caseSuccess.Invoke(ToValue())
+                ? caseSuccess.Invoke(AsValue())
                 : caseFailure.Invoke();
         }
 
@@ -169,7 +169,7 @@ namespace Narvalo.Fx
 
             if (!IsSuccess)
             {
-                action.Invoke(ToExceptionDispatchInfo());
+                action.Invoke(AsExceptionDispatchInfo());
             }
         }
 
@@ -179,7 +179,7 @@ namespace Narvalo.Fx
         /// <returns>The underlying value if any; otherwise the default value of the type T.</returns>
         public T ValueOrDefault()
         {
-            return IsSuccess ? ToValue() : default(T);
+            return IsSuccess ? AsValue() : default(T);
         }
 
         /// <summary>
@@ -189,14 +189,14 @@ namespace Narvalo.Fx
         /// <returns>The underlying value if any; otherwise <paramref name="other"/>.</returns>
         public T ValueOrElse(T other)
         {
-            return IsSuccess ? ToValue() : other;
+            return IsSuccess ? AsValue() : other;
         }
 
         public T ValueOrElse(Func<T> valueFactory)
         {
             Require.NotNull(valueFactory, "valueFactory");
 
-            return IsSuccess ? ToValue() : valueFactory.Invoke();
+            return IsSuccess ? AsValue() : valueFactory.Invoke();
         }
 
         public Maybe<T> ValueOrNone()
@@ -205,7 +205,7 @@ namespace Narvalo.Fx
 
             if (IsSuccess)
             {
-                return Maybe.Of(ToValue());
+                return Maybe.Of(AsValue());
             }
             else
             {
@@ -217,11 +217,11 @@ namespace Narvalo.Fx
         {
             if (IsSuccess)
             {
-                return ToValue();
+                return AsValue();
             }
             else
             {
-                ToExceptionDispatchInfo().Throw();
+                AsExceptionDispatchInfo().Throw();
 
                 return default(T);
             }
@@ -235,7 +235,7 @@ namespace Narvalo.Fx
 
             if (IsSuccess)
             {
-                action.Invoke(ToValue());
+                action.Invoke(AsValue());
             }
         }
 
@@ -243,7 +243,7 @@ namespace Narvalo.Fx
         {
             return IsSuccess
                 ? other
-                : Output<TResult>.η(ToExceptionDispatchInfo());
+                : Output<TResult>.η(AsExceptionDispatchInfo());
         }
 
         #endregion
@@ -285,11 +285,11 @@ namespace Narvalo.Fx
 
             if (square.IsSuccess)
             {
-                return square.ToValue();
+                return square.AsValue();
             }
             else
             {
-                return η(square.ToExceptionDispatchInfo());
+                return η(square.AsExceptionDispatchInfo());
             }
         }
 
@@ -302,7 +302,7 @@ namespace Narvalo.Fx
         /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/> 
         /// is <see langword="true"/>.
         /// </remarks>
-        internal T ToValue()
+        internal T AsValue()
         {
             Contract.Requires(IsSuccess);
 
@@ -319,7 +319,7 @@ namespace Narvalo.Fx
         /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/> 
         /// is <see langword="false"/>.
         /// </remarks>
-        internal ExceptionDispatchInfo ToExceptionDispatchInfo()
+        internal ExceptionDispatchInfo AsExceptionDispatchInfo()
         {
             Contract.Requires(!IsSuccess);
 
