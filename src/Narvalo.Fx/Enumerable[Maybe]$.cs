@@ -6,9 +6,9 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Linq;
 
-    /// <summary>
-    /// Provides overrides for a bunch of auto-generated (extension) methods (see Maybe.g.cs).
-    /// </summary>
+    /// <content>
+    /// Provides overrides for a bunch of auto-generated (extension) methods.
+    /// </content>
     public static partial class EnumerableMaybeExtensions
     {
         // Custom version of CollectCore.

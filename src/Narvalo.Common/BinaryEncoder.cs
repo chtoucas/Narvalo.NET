@@ -15,7 +15,6 @@ namespace Narvalo
         #region Hexadecimal
 
         // Cf. http://stackoverflow.com/questions/623104/c-sharp-byte-to-hex-string/623184
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute]
         public static string ToHexString(byte[] value)
         {
             Require.NotNull<byte[]>(value, "value");

@@ -83,8 +83,7 @@ namespace Narvalo.Fx
         /// Returns an empty sequence that has the specified type argument.
         /// </summary>
         /// <remarks>
-        /// <para>Workaround for the fact that <see cref="Enumerable.Empty{T}"/> does not have any contract attached.</para>
-        /// <para>The result is immutable.</para>
+        /// Workaround for the fact that <see cref="Enumerable.Empty{T}"/> does not have any contract attached.
         /// </remarks>
         /// <typeparam name="TSource">The type to assign to the type parameter of the returned 
         /// generic <see cref="IEnumerable{T}"/>.</typeparam>

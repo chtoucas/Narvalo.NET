@@ -687,7 +687,8 @@ namespace Narvalo.Fx.Internal
     using System.Linq;
 
     using global::Narvalo;
-    using Narvalo.Fx;
+    using Narvalo.Fx; // Necessary for EmptyIfNull().
+   
    
     using Narvalo.Fx.Advanced;
    
@@ -738,7 +739,7 @@ namespace Narvalo.Fx.Internal
             Contract.Requires(funM != null);
             Contract.Ensures(Contract.Result<Output<IEnumerable<TResult>>>() != null);
 
-            return @this.Select(funM).AssumeNotNull().Collect();
+            return @this.Select(funM).EmptyIfNull().Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -784,7 +785,7 @@ namespace Narvalo.Fx.Internal
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
 
-            var m = @this.Select(funM).AssumeNotNull().Collect();
+            var m = @this.Select(funM).EmptyIfNull().Collect();
 
             return m.Select(
                 tuples =>
@@ -814,7 +815,7 @@ namespace Narvalo.Fx.Internal
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
             // instead of using the Zip from LINQ.
-            return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull().Collect();
+            return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -852,7 +853,7 @@ namespace Narvalo.Fx.Internal
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
+            return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -896,7 +897,7 @@ namespace Narvalo.Fx.Internal
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
+            return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",

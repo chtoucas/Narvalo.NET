@@ -14,6 +14,18 @@ namespace Narvalo.Fx
     /// </summary>
     public static partial class EnumerableExtensions
     {
+        public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
+        {
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+
+            if (@this == null)
+            {
+                return Sequence.EmptyInternal<TSource>();
+            }
+
+            return @this;
+        }
+
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
         {
             Acknowledge.Object(@this);

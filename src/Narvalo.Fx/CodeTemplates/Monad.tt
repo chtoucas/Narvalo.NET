@@ -440,7 +440,10 @@ namespace <#= Namespace #>.Internal
     using System.Linq;
 
     using global::Narvalo;
+    using Narvalo.Fx; // Necessary for EmptyIfNull().
+<#+ if (Namespace != "Narvalo.Fx") { #>   
     using <#= Namespace #>;
+<#+ } #>   
 <#+ if (Namespace != AdvancedNamespace) { #>   
     using <#= AdvancedNamespace #>;
 <#+ } #>   
@@ -1694,7 +1697,7 @@ namespace <#= Namespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
 <#+ } #>
 
-            return @this.Select(funM).AssumeNotNull().Collect();
+            return @this.Select(funM).EmptyIfNull().Collect();
         }
 <#+ } // End of !HasUnderlyingTypeConstraint. #>
 
@@ -1748,7 +1751,7 @@ namespace <#= Namespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 <#+ } #>
 
-            var m = @this.Select(funM).AssumeNotNull().Collect();
+            var m = @this.Select(funM).EmptyIfNull().Collect();
 
             return m.<#= MapName #>(
                 tuples =>
@@ -1781,7 +1784,7 @@ namespace <#= Namespace #>.Internal
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
             // instead of using the Zip from LINQ.
-            return @this.Zip(second, resultSelector: resultSelector).AssumeNotNull().Collect();
+            return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
         }
 <#+ } // End of !HasUnderlyingTypeConstraint. #>
 
@@ -1831,7 +1834,7 @@ namespace <#= Namespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
-            return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
+            return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1885,7 +1888,7 @@ namespace <#= Namespace #>.Internal
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
-            return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
+            return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",

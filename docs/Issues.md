@@ -19,6 +19,7 @@ Narvalo.Cerbere
 Narvalo.Fx
 ------------
 
+- SumCore() and CollectCore() assert that they never return null but this is not always true.
 - Confirm that Maybe methods never returns null.
 - Monad.tt, review true argument check for extension methods.
 

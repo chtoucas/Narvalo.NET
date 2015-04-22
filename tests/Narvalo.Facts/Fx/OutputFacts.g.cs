@@ -72,11 +72,11 @@ namespace Narvalo.Fx
         {
             // Arrange
             Func<int, Output<int>> create = _ => Output.Success(_);
-            var option = Output.Success(1);
+            var monad = Output.Success(1);
 
             // Act
-            var left = option.Bind(create);
-            var right = option;
+            var left = monad.Bind(create);
+            var right = monad;
 
             // Assert
             Assert.True(left.Equals(right));

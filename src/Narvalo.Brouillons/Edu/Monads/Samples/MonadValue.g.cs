@@ -927,7 +927,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal
     using System.Linq;
 
     using global::Narvalo;
+    using Narvalo.Fx; // Necessary for EmptyIfNull().
+   
     using Narvalo.Edu.Monads.Samples;
+   
    
 
     /// <summary>
@@ -1023,7 +1026,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().AssumeNotNull().Fold(seed, accumulatorM);
+            return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -1064,7 +1067,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
 
-            return @this.Reverse().AssumeNotNull().Reduce(accumulatorM);
+            return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
