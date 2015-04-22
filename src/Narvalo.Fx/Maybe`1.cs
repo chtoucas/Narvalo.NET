@@ -391,7 +391,7 @@ namespace Narvalo.Fx
 
             if (!IsSome || !other.IsSome)
             {
-                // If one is none, they must be both none to be equal.
+                // If one is none, both must be none to be equal.
                 return !IsSome && !other.IsSome;
             }
 
@@ -408,7 +408,13 @@ namespace Narvalo.Fx
         {
             Contract.Requires(comparer != null);
 
-            return Equals(η(other), comparer);
+            // REVIEW: Use return Equals(η(other), comparer)?
+            if (Object.ReferenceEquals(other, null))
+            {
+                return !IsSome;
+            }
+
+            return comparer.Equals(Value, other);
         }
 
         /// <inheritdoc cref="Object.Equals(Object)" />
