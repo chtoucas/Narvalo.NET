@@ -241,7 +241,7 @@ using System.Reflection;
            https://github.com/autofac/Autofac/blob/v3.5.2/default.proj 
       -->
       <_PortableReferenceDirectory>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETPortable\$(TargetFrameworkVersion)</_PortableReferenceDirectory>
-      <_SecAnnotateReferenceDirectory Condition=" $(TargetFrameworkProfile) != '' ">/referencedir:"$(_PortableReferenceDirectory)"</_SecAnnotateReferenceDirectory>
+      <_SecAnnotateReferenceDirectory Condition=" '$(TargetFrameworkProfile.StartsWith(Profile))' == 'true' ">/referencedir:"$(_PortableReferenceDirectory)"</_SecAnnotateReferenceDirectory>
       <_SecAnnotateReferenceDirectory>$(_SecAnnotateReferenceDirectory) /referencedir:"$(OutputPath.TrimEnd('\'))"</_SecAnnotateReferenceDirectory>
     </PropertyGroup>
 
