@@ -173,7 +173,7 @@ Create a property file `{ProjectName}.props` with the following content (this is
 
   <Target Name="_WarnOnTemporaryOverriddenSettings" BeforeTargets="Build">
     <Warning Text="We temporarily override the Source Analysis settings for $(AssemblyName)."
-             Condition=" '$(SourceAnalysisEnabled)' == 'true' "/>
+             Condition=" '$(BuildingInsideVisualStudio)' == 'true' Or '$(SourceAnalysisEnabled)' == 'true' "/>
     <Warning Text="We temporarily override the Code Analysis settings for $(AssemblyName)."
              Condition=" '$(BuildingInsideVisualStudio)' == 'true' Or '$(RunCodeAnalysis)' == 'true' " />
   </Target>

@@ -93,7 +93,6 @@
       <Link>TestCommon\IssueAttribute.cs</Link>
     </Compile>
     <Compile Include="AcknowledgeFacts.cs" />
-    <Compile Include="AssumeFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="Finance\CurrenciesFacts.g.cs">
