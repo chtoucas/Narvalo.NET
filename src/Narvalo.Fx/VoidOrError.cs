@@ -78,7 +78,11 @@ namespace Narvalo.Fx
             {
                 Contract.Ensures(Contract.Result<string>() != null);
 
-                return Format.CurrentCulture("Error({0})", _exceptionInfo.SourceException.AssumeNotNull().Message);
+                var exception = _exceptionInfo.SourceException;
+
+                Contract.Assume(exception != null);
+
+                return Format.CurrentCulture("Error({0})", exception.Message);
             }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
