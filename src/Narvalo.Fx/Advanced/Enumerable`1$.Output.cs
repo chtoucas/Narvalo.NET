@@ -8,8 +8,6 @@ namespace Narvalo.Fx.Advanced
     using System.Diagnostics.Contracts;
     using System.Linq;
 
-    using Narvalo.Fx;
-
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Output{T}"/> class.
     /// </summary>>

@@ -8,8 +8,8 @@ namespace Narvalo.Finance
     using System.Linq;
     using System.Xml.Linq;
 
+    using Narvalo.Fx;
     using Narvalo.Xml;
-    using Narvalo.Finance.Legacy;
 
     public sealed class SnvCurrencyXmlReader : SnvCurrencyXmlReaderBase
     {
