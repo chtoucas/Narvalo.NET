@@ -208,12 +208,11 @@ namespace Narvalo.Fx
 
                 if (_value == null)
                 {
-                    // I'm pretty sure this can never happen. Even if the caller "nullify" the referenced 
-                    // value, we still hold a reference to it so that it can not be null after all.
-                    // Whatever, keep this around to make the Code Contracts static checker happy.
-                    // If I am right about this, without Code Contracts, we are better off disabling this;
-                    // the property will be inlined for sure. Furthermore, not throwing the exception means
-                    // that we can use this property safely, for instance inside the GetHashCode() method.
+                    // If IsSome is true, this can never happen but we keep this around because we want 
+                    // that the Code Contracts static checker proves that we never call this property
+                    // when IsSome is false. Without Code Contracts, we are better off disabling this. 
+                    // Furthermore, not throwing the exception means that we can use this property safely, 
+                    // for instance inside the GetHashCode() method.
                     // Remember that in our particular setup the Code Contracts symbol does not exist in any 
                     // build except when we do run the Code Contracts tools, which implies that this particular
                     // piece of code will never execute at runtime.
