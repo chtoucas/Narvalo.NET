@@ -47,12 +47,13 @@ namespace Narvalo
         /// object invariants for the "this" object. This method allows
         /// to state explicitly the object invariance.
         /// </summary>
+        /// <remarks>To be recongized by CCCheck this method must be named exactly "AssumeInvariant".</remarks>
         /// <typeparam name="T">The underlying type of the object.</typeparam>
         /// <param name="obj">The invariant object.</param>
-        [Obsolete]
+        //[Obsolete]
         [DebuggerHidden]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Invariant<T>(T obj) where T : class { }
+        public static void AssumeInvariant<T>(T obj) where T : class { }
     }
 }
