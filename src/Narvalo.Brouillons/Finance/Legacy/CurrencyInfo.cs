@@ -181,7 +181,7 @@ namespace Narvalo.Finance.Legacy
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             Contract.Invariant(_code != null);
             Contract.Invariant(_code.Length == 3);

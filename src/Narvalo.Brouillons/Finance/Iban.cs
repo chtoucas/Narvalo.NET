@@ -147,10 +147,10 @@ namespace Narvalo.Finance
             return new Iban(countryCode, checkDigit, bban);
         }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             Contract.Invariant(_bban != null);
             Contract.Invariant(_checkDigit != null);

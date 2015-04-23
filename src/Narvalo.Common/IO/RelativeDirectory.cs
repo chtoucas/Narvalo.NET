@@ -43,7 +43,7 @@ namespace Narvalo.IO
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             Contract.Invariant(_directory != null);
             Contract.Invariant(_relativeName != null);

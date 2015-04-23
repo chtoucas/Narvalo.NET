@@ -76,7 +76,7 @@ namespace Narvalo.IO
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [System.Diagnostics.Contracts.ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             System.Diagnostics.Contracts.Contract.Invariant(_directoryFilter != null);
             System.Diagnostics.Contracts.Contract.Invariant(_fileFilter != null);

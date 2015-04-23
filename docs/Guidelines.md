@@ -166,7 +166,7 @@ Wrap any object invariants method and contract class with a compiler conditional
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [System.Diagnostics.Contracts.ContractInvariantMethod]
-        void ObjectInvariants()
+        void ObjectInvariant()
         {
             // Contract invariants directives.
         }
@@ -180,7 +180,7 @@ Wrap any object invariants method and contract class with a compiler conditional
     public partial interface IMyType
     {
         [ContractInvariantMethod]
-        void ObjectInvariants()
+        void ObjectInvariant()
         {
             // Contract invariants directives.
         }

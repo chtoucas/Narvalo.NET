@@ -24,11 +24,16 @@ Narvalo.NET
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance)),
   this package provides various financial utilities: Currency (ISO 4217), Money types,
   BIC (ISO 9362), IBAN & BBAN.
+- **Narvalo.Core**
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core),
+  [package](https://www.nuget.org/packages/Narvalo.Core/)),
+  this library provides various utilities and extension methods: Range type, 
+  Int64 encoders, extension methods for Collections and XDom.
 - **Narvalo.Common**
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
   [package](https://www.nuget.org/packages/Narvalo.Common/)),
-  this library provides various utilities and extension methods: Range type, directory walker,
-  Int64 encoders,  benchmark helpers, extension methods for Collections, Configuration, SQL client and XDom.
+  this library provides various utilities and extension methods: directory walker,
+  extension methods for Configuration and SQL client.
 - **Narvalo.Web**
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web),
   [package](https://www.nuget.org/packages/Narvalo.Common/)),
@@ -80,6 +85,7 @@ Library             | Status | PCL        | Security    | CA | GA | CC | SA |
 Narvalo.Cerbere     | Beta   | Profile259 | Transparent | OK | OK | OK | OK |
 Narvalo.Fx          | Alpha  | Profile259 | Transparent | OK | OK | OK | !  |
 Narvalo.Finance     |        | Profile111 | Transparent | OK | !  | OK | !  |
+Narvalo.Core        | Alpha  | Profile259 | Transparent |    |    |    |    |
 Narvalo.Common      | Alpha  |            | APTCA       | !  | !  | !  | !  |
 Narvalo.Web         |        |            |             |    |    |    |    |
 Narvalo.Mvp         | Beta   |            |             |    |    |    |    |

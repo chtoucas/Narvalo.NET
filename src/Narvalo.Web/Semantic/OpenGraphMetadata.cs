@@ -99,7 +99,7 @@ namespace Narvalo.Web.Semantic
     public sealed partial class OpenGraphMetadata : IOpenGraphMetadata
     {
         [ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             Contract.Invariant(_alternativeLocales != null);
             Contract.Invariant(_locale != null);

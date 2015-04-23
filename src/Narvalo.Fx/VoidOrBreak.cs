@@ -97,7 +97,7 @@ namespace Narvalo.Fx
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
             [ContractInvariantMethod]
-            private void ObjectInvariants()
+            private void ObjectInvariant()
             {
                 Contract.Invariant(_reason != null);
                 Contract.Invariant(_isBreak);

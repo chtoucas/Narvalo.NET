@@ -410,7 +410,7 @@ namespace Narvalo.Fx
         private partial class Left_
         {
             [ContractInvariantMethod]
-            private void ObjectInvariants()
+            private void ObjectInvariant()
             {
                 Contract.Invariant(_value != null);
             }
@@ -419,7 +419,7 @@ namespace Narvalo.Fx
         private partial class Right_
         {
             [ContractInvariantMethod]
-            private void ObjectInvariants()
+            private void ObjectInvariant()
             {
                 Contract.Invariant(_value != null);
             }

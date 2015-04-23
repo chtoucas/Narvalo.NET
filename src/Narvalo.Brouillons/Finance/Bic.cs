@@ -125,10 +125,10 @@ namespace Narvalo.Finance
             return new Bic(institutionCode, countryCode, locationCode, branchCode);
         }
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             Contract.Invariant(_branchCode != null);
             Contract.Invariant(_countryCode != null);

@@ -99,7 +99,7 @@ namespace Narvalo.Data
     public abstract partial class NonQueryStoredProcedure<TParameters>
     {
         [ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             Contract.Invariant(_connectionString != null);
             Contract.Invariant(_connectionString.Length != 0);

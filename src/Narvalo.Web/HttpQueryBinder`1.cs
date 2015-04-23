@@ -58,7 +58,7 @@ namespace Narvalo.Web
     public abstract partial class HttpQueryBinder<TQuery> 
     {
         [ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             Contract.Invariant(_errors != null);
         }

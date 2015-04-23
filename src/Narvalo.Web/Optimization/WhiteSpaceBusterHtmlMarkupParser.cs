@@ -54,7 +54,7 @@ namespace Narvalo.Web.Optimization
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [System.Diagnostics.Contracts.ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             System.Diagnostics.Contracts.Contract.Invariant(_inner != null);
             System.Diagnostics.Contracts.Contract.Invariant(_optimizer != null);
