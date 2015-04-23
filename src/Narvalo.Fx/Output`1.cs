@@ -107,6 +107,8 @@ namespace Narvalo.Fx
             }
 
             var failure = value as Failure_;
+
+            // If it was not the case, we would have thrown an exception just above.
             Contract.Assume(failure != null, "'value' is not of Failure_ type");
 
             return failure.ExceptionInfo;
@@ -135,11 +137,11 @@ namespace Narvalo.Fx
 
             if (IsSuccess)
             {
-                caseSuccess.Invoke(AsValue());
+                caseSuccess.Invoke(ToValue());
             }
             else
             {
-                caseFailure.Invoke(AsExceptionDispatchInfo());
+                caseFailure.Invoke(ToExceptionDispatchInfo());
             }
         }
 
@@ -149,7 +151,7 @@ namespace Narvalo.Fx
             Require.NotNull(caseFailure, "caseFailure");
 
             return IsSuccess
-                ? caseSuccess.Invoke(AsValue())
+                ? caseSuccess.Invoke(ToValue())
                 : caseFailure.Invoke();
         }
 
@@ -169,7 +171,7 @@ namespace Narvalo.Fx
 
             if (!IsSuccess)
             {
-                action.Invoke(AsExceptionDispatchInfo());
+                action.Invoke(ToExceptionDispatchInfo());
             }
         }
 
@@ -179,7 +181,7 @@ namespace Narvalo.Fx
         /// <returns>The underlying value if any; otherwise the default value of the type T.</returns>
         public T ValueOrDefault()
         {
-            return IsSuccess ? AsValue() : default(T);
+            return IsSuccess ? ToValue() : default(T);
         }
 
         /// <summary>
@@ -189,14 +191,14 @@ namespace Narvalo.Fx
         /// <returns>The underlying value if any; otherwise <paramref name="other"/>.</returns>
         public T ValueOrElse(T other)
         {
-            return IsSuccess ? AsValue() : other;
+            return IsSuccess ? ToValue() : other;
         }
 
         public T ValueOrElse(Func<T> valueFactory)
         {
             Require.NotNull(valueFactory, "valueFactory");
 
-            return IsSuccess ? AsValue() : valueFactory.Invoke();
+            return IsSuccess ? ToValue() : valueFactory.Invoke();
         }
 
         public Maybe<T> ValueOrNone()
@@ -205,7 +207,7 @@ namespace Narvalo.Fx
 
             if (IsSuccess)
             {
-                return Maybe.Of(AsValue());
+                return Maybe.Of(ToValue());
             }
             else
             {
@@ -217,11 +219,11 @@ namespace Narvalo.Fx
         {
             if (IsSuccess)
             {
-                return AsValue();
+                return ToValue();
             }
             else
             {
-                AsExceptionDispatchInfo().Throw();
+                ToExceptionDispatchInfo().Throw();
 
                 return default(T);
             }
@@ -235,7 +237,7 @@ namespace Narvalo.Fx
 
             if (IsSuccess)
             {
-                action.Invoke(AsValue());
+                action.Invoke(ToValue());
             }
         }
 
@@ -243,7 +245,7 @@ namespace Narvalo.Fx
         {
             return IsSuccess
                 ? other
-                : Output<TResult>.η(AsExceptionDispatchInfo());
+                : Output<TResult>.η(ToExceptionDispatchInfo());
         }
 
         #endregion
@@ -285,11 +287,11 @@ namespace Narvalo.Fx
 
             if (square.IsSuccess)
             {
-                return square.AsValue();
+                return square.ToValue();
             }
             else
             {
-                return η(square.AsExceptionDispatchInfo());
+                return η(square.ToExceptionDispatchInfo());
             }
         }
 
@@ -302,7 +304,7 @@ namespace Narvalo.Fx
         /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/> 
         /// is <see langword="true"/>.
         /// </remarks>
-        internal T AsValue()
+        internal T ToValue()
         {
             Contract.Requires(IsSuccess);
 
@@ -319,7 +321,7 @@ namespace Narvalo.Fx
         /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/> 
         /// is <see langword="false"/>.
         /// </remarks>
-        internal ExceptionDispatchInfo AsExceptionDispatchInfo()
+        internal ExceptionDispatchInfo ToExceptionDispatchInfo()
         {
             Contract.Requires(!IsSuccess);
 
@@ -438,7 +440,7 @@ namespace Narvalo.Fx
                     return false;
                 }
 
-                return EqualityComparer<ExceptionDispatchInfo>.Default.Equals(_exceptionInfo, other._exceptionInfo);
+                return EqualityComparer<ExceptionDispatchInfo>.Default.Equals(ExceptionInfo, other.ExceptionInfo);
             }
 
             public override bool Equals(object obj)
@@ -448,14 +450,14 @@ namespace Narvalo.Fx
 
             public override int GetHashCode()
             {
-                return EqualityComparer<ExceptionDispatchInfo>.Default.GetHashCode(_exceptionInfo);
+                return EqualityComparer<ExceptionDispatchInfo>.Default.GetHashCode(ExceptionInfo);
             }
 
             public override string ToString()
             {
                 Contract.Ensures(Contract.Result<string>() != null);
 
-                return Format.CurrentCulture("Failure({0})", _exceptionInfo);
+                return Format.CurrentCulture("Failure({0})", ExceptionInfo);
             }
         }
     }
@@ -469,10 +471,17 @@ namespace Narvalo.Fx
     [ContractClass(typeof(OutputContract<>))]
     public partial class Output<T>
     {
+        //[ContractInvariantMethod]
+        //private void ObjectInvariant()
+        //{
+        //    //Contract.Invariant(IsSuccess || this as Failure_ != null);
+        //    Contract.Invariant(this as Failure_ != null || this as Success_ != null);
+        //}
+
         private partial class Success_
         {
             [ContractInvariantMethod]
-            private void ObjectInvariants()
+            private void ObjectInvariantForSuccess()
             {
                 Contract.Invariant(IsSuccess);
             }
@@ -481,10 +490,10 @@ namespace Narvalo.Fx
         private partial class Failure_
         {
             [ContractInvariantMethod]
-            private void ObjectInvariants()
+            private void ObjectInvariantForFailure()
             {
                 Contract.Invariant(!IsSuccess);
-                Contract.Invariant(_exceptionInfo != null);
+                Contract.Invariant(ExceptionInfo != null);
             }
         }
     }
