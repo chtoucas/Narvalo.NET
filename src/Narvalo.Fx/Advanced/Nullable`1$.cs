@@ -138,6 +138,22 @@ namespace Narvalo.Fx.Advanced
             return Coalesce(@this, predicate, null, other);
         }
 
+        public static void Invoke<TSource>(this TSource? @this, Action<TSource> action, Action caseNull)
+            where TSource : struct
+        {
+            Require.NotNull(action, "action");
+            Require.NotNull(caseNull, "caseNull");
+
+            if (@this.HasValue)
+            {
+                action.Invoke(@this.Value);
+            }
+            else
+            {
+                caseNull.Invoke();
+            }
+        }
+
         public static void Invoke<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct
         {
@@ -157,22 +173,6 @@ namespace Narvalo.Fx.Advanced
             if (!@this.HasValue)
             {
                 action.Invoke();
-            }
-        }
-
-        public static void Apply<TSource>(this TSource? @this, Action<TSource> action, Action caseNull)
-            where TSource : struct
-        {
-            Require.NotNull(action, "action");
-            Require.NotNull(caseNull, "caseNull");
-
-            if (@this.HasValue)
-            {
-                action.Invoke(@this.Value);
-            }
-            else
-            {
-                caseNull.Invoke();
             }
         }
 
