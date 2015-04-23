@@ -28,14 +28,16 @@ namespace Narvalo
         /// <typeparam name="T">The underlying type of the object.</typeparam>
         /// <param name="this">The input object.</param>
         /// <returns>The untouched input.</returns>
+#if DEBUG
         [Obsolete]
+#endif
         [DebuggerHidden]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T AssumeNotNull<T>(this T @this) where T : class
         {
             Contract.Ensures(Contract.Result<T>() == @this);
             Contract.Ensures(Contract.Result<T>() != null);
-            Contract.Assume(@this != null, "'this' is null.");
+            Contract.Assume(@this != null);
 
             return @this;
         }

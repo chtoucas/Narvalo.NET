@@ -28,7 +28,7 @@ namespace Narvalo.Fx.Advanced
             return (from _ in @this
                     let m = funM.Invoke(_)
                     where m.IsSuccess
-                    select m.AsValue()).EmptyIfNull();
+                    select m.ToValue()).EmptyIfNull();
         }
     }
 }

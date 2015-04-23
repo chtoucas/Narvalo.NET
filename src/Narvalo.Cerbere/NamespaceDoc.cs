@@ -30,10 +30,9 @@ namespace Narvalo
     /// when you know for certain that *ALL* callers satisfy the condition
     /// and when you own all base classes, use <see cref="Promise"/>.
     /// When the base method declares a contract use <see cref="Check"/> instead.</para>
-    /// <para>We also provide two static classes to help with Code Contracts:
+    /// <para>We also provide one static class to help with Code Contracts:
     /// <list type="bullet">
     /// <item><see cref="Acknowledge"/> provides Code Contracts abbreviators and helpers.</item>
-    /// <item><see cref="Assume"/> focuses on assumptions.</item>
     /// </list>
     /// </para>
     /// </remarks>
