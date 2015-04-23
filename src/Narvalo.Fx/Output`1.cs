@@ -30,11 +30,10 @@ namespace Narvalo.Fx
         private readonly bool _isSuccess;
 
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
-        protected Output(bool isSuccess)
+        protected Output(bool isSuccess) { _isSuccess = isSuccess; }
 #else
-        private Output(bool isSuccess)
+        private Output(bool isSuccess) { _isSuccess = isSuccess; }
 #endif
-        { _isSuccess = isSuccess; }
 
         /// <summary>
         /// Gets a value indicating whether the output is successful. 
@@ -107,8 +106,6 @@ namespace Narvalo.Fx
             }
 
             var failure = value as Failure_;
-
-            // If it was not the case, we would have thrown an exception just above.
             Contract.Assume(failure != null, "'value' is not of Failure_ type");
 
             return failure.ExceptionInfo;
@@ -471,17 +468,10 @@ namespace Narvalo.Fx
     [ContractClass(typeof(OutputContract<>))]
     public partial class Output<T>
     {
-        //[ContractInvariantMethod]
-        //private void ObjectInvariant()
-        //{
-        //    //Contract.Invariant(IsSuccess || this as Failure_ != null);
-        //    Contract.Invariant(this as Failure_ != null || this as Success_ != null);
-        //}
-
         private partial class Success_
         {
             [ContractInvariantMethod]
-            private void ObjectInvariantForSuccess()
+            private void ObjectInvariant()
             {
                 Contract.Invariant(IsSuccess);
             }
@@ -490,10 +480,10 @@ namespace Narvalo.Fx
         private partial class Failure_
         {
             [ContractInvariantMethod]
-            private void ObjectInvariantForFailure()
+            private void ObjectInvariant()
             {
                 Contract.Invariant(!IsSuccess);
-                Contract.Invariant(ExceptionInfo != null);
+                Contract.Invariant(_exceptionInfo != null);
             }
         }
     }
@@ -501,7 +491,7 @@ namespace Narvalo.Fx
     [ContractClassFor(typeof(Output<>))]
     internal abstract class OutputContract<T> : Output<T>
     {
-        protected OutputContract() : base(true) { }
+        protected OutputContract(bool isSuccess) : base(isSuccess) { }
 
         public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
         {

@@ -71,12 +71,16 @@ namespace Narvalo.Fx
         public static T UnpackOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
         {
             Require.Object(@this);
+            Require.NotNull(exceptionFactory, "exceptionFactory");
 
             T? m = @this.ValueOrDefault();
 
-            m.OnNull(() => { throw exceptionFactory.Invoke(); });
+            if (!m.HasValue)
+            {
+                throw exceptionFactory.Invoke();
+            }
 
-            Contract.Assume(m.HasValue, "'m' is null; we should have throw an exception.");
+            Contract.Assert(m.HasValue);
 
             return m.Value;
         }
