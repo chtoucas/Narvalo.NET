@@ -960,7 +960,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Func<MonadPlus<IEnumerable<TSource>>, MonadPlus<TSource>, MonadPlus<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(list => CollectCore_(n, list));
 
-            return @this.Aggregate(seed, fun).AssumeNotNull();
+            var retval = @this.Aggregate(seed, fun);
+            Contract.Assume(retval != null);
+
+            return retval;
         }
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
@@ -981,7 +984,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
-            return @this.Aggregate(MonadPlus<TSource>.Zero, (m, n) => m.Plus(n)).AssumeNotNull();
+            var retval = @this.Aggregate(MonadPlus<TSource>.Zero, (m, n) => m.Plus(n));
+            Contract.Assume(retval != null);
+
+            return retval;
         }
     } // End of the class EnumerableMonadPlusExtensions.
 

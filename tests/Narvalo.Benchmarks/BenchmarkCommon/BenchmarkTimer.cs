@@ -16,7 +16,7 @@ namespace Narvalo.BenchmarkCommon
             {
                 var retval = TimeSpan.FromTicks(_stopwatch.Elapsed.Ticks);
 
-                Contract.Assume(retval.Ticks > 0L, "'result.Ticks' is negative.");
+                Contract.Assume(retval.Ticks > 0L);
 
                 return retval;
             }

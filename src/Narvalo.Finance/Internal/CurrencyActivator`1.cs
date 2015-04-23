@@ -3,6 +3,7 @@
 namespace Narvalo.Finance.Internal
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
 
@@ -15,7 +16,10 @@ namespace Narvalo.Finance.Internal
         /// <returns></returns>
         public static TCurrency CreateInstance()
         {
-            ConstructorInfo ctorInfo = typeof(TCurrency).GetTypeInfo().AssumeNotNull()
+            TypeInfo typeInfo = typeof(TCurrency).GetTypeInfo();
+            Contract.Assume(typeInfo != null);
+
+            ConstructorInfo ctorInfo = typeInfo
                 .DeclaredConstructors
                 .FirstOrDefault(_ => !_.GetParameters().Any());
 

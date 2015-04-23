@@ -145,8 +145,7 @@ namespace Narvalo.BenchmarkCommon
                 if (formatter != null)
                 {
                     var retval = formatter.Format(format, this, formatProvider);
-
-                    Contract.Assume(retval != null, "ICustomFormatter.Format() returned a null string.");
+                    Contract.Assume(retval != null);
 
                     return retval;
                 }

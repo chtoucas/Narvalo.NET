@@ -96,7 +96,7 @@ namespace Narvalo
             {
                 long r = value % FLICKR_BASE58_ALPHABET_LENGTH;
 
-                Contract.Assume(r < (long)s_FlickrBase58Alphabet.Length, "The index is out of range.");
+                Contract.Assume(r < (long)s_FlickrBase58Alphabet.Length);
 
                 retval = s_FlickrBase58Alphabet[r].ToString() + retval;
                 value /= FLICKR_BASE58_ALPHABET_LENGTH;
@@ -214,7 +214,7 @@ namespace Narvalo
             {
                 long r = value % alphabetLength;
 
-                Contract.Assume(r < (long)alphabet.Length, "The index is out of range.");
+                Contract.Assume(r < (long)alphabet.Length);
 
                 retval = alphabet[r].ToString() + retval;
                 value /= alphabetLength;

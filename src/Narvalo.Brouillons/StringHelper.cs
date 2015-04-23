@@ -20,7 +20,8 @@ namespace Narvalo
                 return String.Empty;
             }
 
-            var formD = value.Normalize(NormalizationForm.FormD).AssumeNotNull();
+            var formD = value.Normalize(NormalizationForm.FormD);
+            Contract.Assume(formD != null);
 
             var sb = new StringBuilder();
 
@@ -32,7 +33,10 @@ namespace Narvalo
                 }
             }
 
-            return sb.ToString().Normalize(NormalizationForm.FormC).AssumeNotNull();
+            var retval = sb.ToString().Normalize(NormalizationForm.FormC);
+            Contract.Assume(retval != null);
+
+            return retval;
         }
 
         public static string ToTitleCase(string value)

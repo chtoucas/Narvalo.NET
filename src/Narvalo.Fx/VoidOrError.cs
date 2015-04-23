@@ -79,7 +79,6 @@ namespace Narvalo.Fx
                 Contract.Ensures(Contract.Result<string>() != null);
 
                 var exception = _exceptionInfo.SourceException;
-
                 Contract.Assume(exception != null);
 
                 return Format.CurrentCulture("Error({0})", exception.Message);

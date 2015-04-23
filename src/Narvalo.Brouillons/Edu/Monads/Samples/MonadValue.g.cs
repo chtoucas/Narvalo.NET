@@ -947,7 +947,9 @@ namespace Narvalo.Edu.Monads.Samples.Internal
         {
             Acknowledge.Object(@this);
 
-            return @this.Aggregate(MonadValue<TSource>.None, (m, n) => m.OrElse(n));
+            var retval = @this.Aggregate(MonadValue<TSource>.None, (m, n) => m.OrElse(n));
+
+            return retval;
         }
     } // End of the class EnumerableMonadValueExtensions.
 

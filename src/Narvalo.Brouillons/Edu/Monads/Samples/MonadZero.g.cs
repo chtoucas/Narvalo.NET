@@ -944,7 +944,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Func<MonadZero<IEnumerable<TSource>>, MonadZero<TSource>, MonadZero<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(list => CollectCore_(n, list));
 
-            return @this.Aggregate(seed, fun).AssumeNotNull();
+            var retval = @this.Aggregate(seed, fun);
+            Contract.Assume(retval != null);
+
+            return retval;
         }
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).

@@ -82,7 +82,7 @@ namespace Narvalo.Fx
             }
 
             var success = value as Success_;
-            Contract.Assume(success != null, "'value' is not of Success_ type");
+            Contract.Assume(success != null);
 
             return success.Value;
         }
@@ -106,7 +106,7 @@ namespace Narvalo.Fx
             }
 
             var failure = value as Failure_;
-            Contract.Assume(failure != null, "'value' is not of Failure_ type");
+            Contract.Assume(failure != null);
 
             return failure.ExceptionInfo;
         }
@@ -306,7 +306,7 @@ namespace Narvalo.Fx
             Contract.Requires(IsSuccess);
 
             var success = this as Success_;
-            Contract.Assume(success != null, "'this' is not of Success_ type");
+            Contract.Assume(success != null);
 
             return success.Value;
         }
@@ -323,7 +323,7 @@ namespace Narvalo.Fx
             Contract.Requires(!IsSuccess);
 
             var failure = this as Failure_;
-            Contract.Assume(failure != null, "'this' is not of Failure_ type");
+            Contract.Assume(failure != null);
 
             return failure.ExceptionInfo;
         }
@@ -463,7 +463,7 @@ namespace Narvalo.Fx
 
     // In real world, only Success_ and Failure_ can inherit from Output.
     // Adding the following object invariants on Output<T>:
-    //  (IsSuccess && (this as Success_) != null) || (this as Failure_) != null
+    //  (IsSuccess && this is Success_) || (this is Failure_)
     // should make unecessary any call to Contract.Assume but I have not been able to make this work.
     [ContractClass(typeof(OutputContract<>))]
     public partial class Output<T>

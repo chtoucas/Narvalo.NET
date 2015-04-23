@@ -6,6 +6,7 @@ namespace Narvalo.Data
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Provides extension methods for <see cref="SqlParameterCollection"/>.
@@ -33,7 +34,10 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
-            @this.Add(parameterName, parameterType).AssumeNotNull().Value = value;
+            var parameter = @this.Add(parameterName, parameterType);
+            Contract.Assume(parameter != null);
+
+            parameter.Value = value;
         }
 
         public static void AddParameterOrNull<T>(
@@ -59,13 +63,16 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
+            var parameter = @this.Add(parameterName, parameterType);
+            Contract.Assume(parameter != null);
+
             if (value.HasValue)
             {
-                @this.Add(parameterName, parameterType).AssumeNotNull().Value = value.Value;
+                parameter.Value = value.Value;
             }
             else
             {
-                @this.Add(parameterName, parameterType).AssumeNotNull().Value = DBNull.Value;
+                parameter.Value = DBNull.Value;
             }
         }
 
@@ -118,13 +125,16 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
+            var parameter = @this.Add(parameterName, parameterType);
+            Contract.Assume(parameter != null);
+
             if (condition)
             {
-                @this.Add(parameterName, parameterType).AssumeNotNull().Value = value;
+                parameter.Value = value;
             }
             else
             {
-                @this.Add(parameterName, parameterType).AssumeNotNull().Value = DBNull.Value;
+                parameter.Value = DBNull.Value;
             }
         }
     }

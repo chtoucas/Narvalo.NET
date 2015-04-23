@@ -5,6 +5,7 @@ namespace Narvalo.Data
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Provides extension methods for <see cref="SqlCommand"/>.
@@ -19,7 +20,10 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterUnchecked(parameterName, parameterType, value);
+            var parameters = @this.Parameters;
+            Contract.Assume(parameters != null);
+
+            parameters.AddParameterUnchecked(parameterName, parameterType, value);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
@@ -32,7 +36,10 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterUnchecked(parameterName, parameterType, value);
+            var parameters = @this.Parameters;
+            Contract.Assume(parameters != null);
+
+            parameters.AddParameterUnchecked(parameterName, parameterType, value);
         }
 
         public static void AddParameterOrNull<T>(
@@ -44,7 +51,10 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value);
+            var parameters = @this.Parameters;
+            Contract.Assume(parameters != null);
+
+            parameters.AddParameterOrNullUnchecked(parameterName, parameterType, value);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
@@ -58,7 +68,10 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value);
+            var parameters = @this.Parameters;
+            Contract.Assume(parameters != null);
+
+            parameters.AddParameterOrNullUnchecked(parameterName, parameterType, value);
         }
 
         public static void AddParameterOrNull<T>(
@@ -69,7 +82,10 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value, value != null);
+            var parameters = @this.Parameters;
+            Contract.Assume(parameters != null);
+
+            parameters.AddParameterOrNullUnchecked(parameterName, parameterType, value, value != null);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
@@ -82,7 +98,10 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value, value != null);
+            var parameters = @this.Parameters;
+            Contract.Assume(parameters != null);
+
+            parameters.AddParameterOrNullUnchecked(parameterName, parameterType, value, value != null);
         }
 
         public static void AddParameterOrNull<T>(
@@ -94,7 +113,10 @@ namespace Narvalo.Data
         {
             Require.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value, condition);
+            var parameters = @this.Parameters;
+            Contract.Assume(parameters != null);
+
+            parameters.AddParameterOrNullUnchecked(parameterName, parameterType, value, condition);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
@@ -108,7 +130,10 @@ namespace Narvalo.Data
         {
             Acknowledge.Object(@this);
 
-            @this.Parameters.AssumeNotNull().AddParameterOrNullUnchecked(parameterName, parameterType, value, condition);
+            var parameters = @this.Parameters;
+            Contract.Assume(parameters != null);
+
+            parameters.AddParameterOrNullUnchecked(parameterName, parameterType, value, condition);
         }
     }
 }

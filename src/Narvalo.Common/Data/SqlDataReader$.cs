@@ -626,7 +626,9 @@ namespace Narvalo.Data
             Acknowledge.Object(@this);
             Contract.Requires(ordinal >= 0);
 
-            var value = @this.GetSqlXml(ordinal).AssumeNotNull();
+            var value = @this.GetSqlXml(ordinal);
+            Contract.Assume(value != null);
+
             return value.IsNull ? defaultValue : value.Value;
         }
 

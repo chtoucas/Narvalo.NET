@@ -146,8 +146,8 @@ namespace Narvalo.Web.UI
                 // section.DefaultProvider is not null => propertyInfo != null.
                 var propertyInfo
                     = section.ElementInformation
-                        .Properties[AssetSection.DefaultProviderPropertyName]
-                        .AssumeNotNull();
+                        .Properties[AssetSection.DefaultProviderPropertyName];
+                Contract.Assume(propertyInfo != null);
 
                 throw new ConfigurationErrorsException(
                     Strings.AssetManager_DefaultProviderNotFound,

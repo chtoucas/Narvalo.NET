@@ -17,8 +17,10 @@ namespace Narvalo.Web
         {
             Require.Object(@this);
 
-            return @this
-                .RequestContext.AssumeNotNull()
+            var requestContext = @this.RequestContext;
+            Contract.Assume(requestContext != null);
+
+            return requestContext
                 .HttpContext
                 .Request
                 .RawUrl;
@@ -28,30 +30,28 @@ namespace Narvalo.Web
         {
             Require.Object(@this);
 
-            // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
-            var scheme = @this
-                .RequestContext.AssumeNotNull()
-                .HttpContext
-                .Request
-                .Url.AssumeNotNull()
-                .Scheme;
+            var requestContext = @this.RequestContext;
+            Contract.Assume(requestContext != null);
 
-            return @this.Action(actionName, controllerName, routeValues, scheme);
+            // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
+            var requestUrl = requestContext.HttpContext.Request.Url;
+            Contract.Assume(requestUrl != null);
+
+            return @this.Action(actionName, controllerName, routeValues, requestUrl.Scheme);
         }
 
         public static string AbsoluteAction(this UrlHelper @this, string actionName, string controllerName, RouteValueDictionary routeValues)
         {
             Require.Object(@this);
 
-            // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
-            var scheme = @this
-                .RequestContext.AssumeNotNull()
-                .HttpContext
-                .Request
-                .Url.AssumeNotNull()
-                .Scheme;
+            var requestContext = @this.RequestContext;
+            Contract.Assume(requestContext != null);
 
-            return @this.Action(actionName, controllerName, routeValues, scheme);
+            // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
+            var requestUrl = requestContext.HttpContext.Request.Url;
+            Contract.Assume(requestUrl != null);
+
+            return @this.Action(actionName, controllerName, routeValues, requestUrl.Scheme);
         }
 
         // Cf. http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
@@ -64,12 +64,12 @@ namespace Narvalo.Web
 
             if (!uri.IsAbsoluteUri)
             {
-                Uri requestUrl = @this
-                    .RequestContext.AssumeNotNull()
-                    .HttpContext
-                    .Request
-                    .Url.AssumeNotNull();
+                var requestContext = @this.RequestContext;
+                Contract.Assume(requestContext != null);
 
+                // NB: En ajoutant le paramètre scheme, on obtient une URL absolue.
+                var requestUrl = requestContext.HttpContext.Request.Url;
+                Contract.Assume(requestUrl != null);
                 Contract.Assume(requestUrl.Port >= -1);
 
                 var builder = new UriBuilder(requestUrl.Scheme, requestUrl.Host, requestUrl.Port);

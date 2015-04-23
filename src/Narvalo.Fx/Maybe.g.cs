@@ -981,7 +981,10 @@ namespace Narvalo.Fx.Internal
             Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(list => CollectCore_(n, list));
 
-            return @this.Aggregate(seed, fun).AssumeNotNull();
+            var retval = @this.Aggregate(seed, fun);
+            Contract.Assume(retval != null);
+
+            return retval;
         }
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
@@ -1002,7 +1005,10 @@ namespace Narvalo.Fx.Internal
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
-            return @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n)).AssumeNotNull();
+            var retval = @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
+            Contract.Assume(retval != null);
+
+            return retval;
         }
     } // End of the class EnumerableMaybeExtensions.
 

@@ -4,8 +4,6 @@ Issues & Roadmap
 Design
 ------
 
-- Review `Contract.Assume` and `AssumeNotNull`.
-  Is there a better alternative to AssumeNotNull()? Should I remove it?
 - Statics and thread-safety.
 - Review all `Format` and boxing
 - Where it makes sense, add `EditorBrowsableState`, `DebuggerDisplay` and `DebuggerTypeProxy` attributes.
@@ -14,8 +12,6 @@ Design
 
 Narvalo.Cerbere
 ---------------
-
-- Retire Assume.
 
 Narvalo.Fx
 ------------

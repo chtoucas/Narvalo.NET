@@ -16,8 +16,8 @@ namespace Narvalo.BenchmarkCommon
         public BenchmarkRunner(IBenchmarkTimer timer)
         {
             Require.NotNull(timer, "timer");
-            Contract.Assume(_testDuration.Ticks > 0L, "'_testDuration.Ticks' is negative.");
-            Contract.Assume(_warmUpDuration.Ticks > 0L, "'_warmUpDuration.Ticks' is negative.");
+            Contract.Assume(_testDuration.Ticks > 0L);
+            Contract.Assume(_warmUpDuration.Ticks > 0L);
 
             _timer = timer;
         }
@@ -118,7 +118,7 @@ namespace Narvalo.BenchmarkCommon
                     double scale = testTicks / duration.Ticks;
                     double scaledIterations = scale * iterations;
                     iterations = (int)Math.Min(scaledIterations, maxIterations);
-                    Contract.Assume(iterations > 0, "'scaledIterations' or 'maxIterations' is negative.");
+                    Contract.Assume(iterations > 0);
                     break;
                 }
 

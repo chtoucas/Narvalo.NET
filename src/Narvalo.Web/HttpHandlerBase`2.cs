@@ -54,7 +54,8 @@ namespace Narvalo.Web
             }
             else if (errorsCount == 1)
             {
-                exception = errors.First().AssumeNotNull();
+                // FIXME: Handle null.
+                exception = errors.First();
             }
             else
             {

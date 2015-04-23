@@ -51,7 +51,10 @@ namespace Narvalo.Data
             {
                 using (var command = CreateCommand_(connection))
                 {
-                    AddParameters(command.Parameters.AssumeNotNull(), values);
+                    var parameters = command.Parameters;
+                    Contract.Assume(parameters != null);
+
+                    AddParameters(parameters, values);
 
                     connection.Open();
                     retval = command.ExecuteNonQuery();

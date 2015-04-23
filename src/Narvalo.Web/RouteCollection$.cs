@@ -3,7 +3,6 @@
 namespace Narvalo.Web
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
     using System.Web.Mvc;
@@ -24,6 +23,15 @@ namespace Narvalo.Web
 
             foreach (Type t in controllerTypes)
             {
+                string controllerName = t.Name;
+                // Le nom du controleur Mvc finit toujours en "Controller".
+                if (controllerName.Length < 10)
+                {
+                    continue;
+                }
+
+                controllerName = controllerName.Substring(0, controllerName.Length - 10);
+
                 bool childOnlyController = t.GetCustomAttributes(typeof(ChildActionOnlyAttribute), inherit: true).Any();
 
                 foreach (MethodInfo m in t.GetMethods())
@@ -34,17 +42,13 @@ namespace Narvalo.Web
                         {
                             bool childOnlyAction = m.GetCustomAttributes(typeof(ChildActionOnlyAttribute), inherit: true).Any();
 
-                            if (!childOnlyAction) { continue; }
+                            if (!childOnlyAction)
+                            {
+                                continue;
+                            }
                         }
 
-                        string controllerName = t.Name;
                         string actionName = m.Name;
-
-                        Contract.Assume(controllerName.Length >= 10);
-
-                        // Le nom du controleur Mvc finit toujours en "Controller".
-                        controllerName = controllerName.Substring(0, controllerName.Length - 10);
-
                         string name = "ChildAction/" + controllerName + "/" + actionName;
                         var constraints = new { controller = controllerName, action = actionName };
 

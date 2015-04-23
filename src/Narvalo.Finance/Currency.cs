@@ -69,7 +69,10 @@ namespace Narvalo.Finance
             ContractFor.CurrencyCode(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
 
-            return s_Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency).AssumeNotNull();
+            var retval = s_Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency);
+            Contract.Assume(retval != null);
+
+            return retval;
         }
 
         /// <summary>
@@ -84,8 +87,8 @@ namespace Narvalo.Finance
             Require.NotNull(regionInfo, "regionInfo");
             Contract.Ensures(Contract.Result<Currency>() != null);
 
-            var code = regionInfo.ISOCurrencySymbol.AssumeNotNull();
-
+            var code = regionInfo.ISOCurrencySymbol;
+            Contract.Assume(code != null);
             Contract.Assume(code.Length == 3);
 
             return Of(code);

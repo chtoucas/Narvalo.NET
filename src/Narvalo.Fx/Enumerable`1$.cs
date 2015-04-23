@@ -57,8 +57,6 @@ namespace Narvalo.Fx
             using (var iter = seq.EmptyIfNull().GetEnumerator())
             {
                 var current = iter.Current;
-
-                // Each value is created via Maybe.Of() which guarantees that the value is not null.
                 Contract.Assume(current != null);
 
                 return iter.MoveNext() ? current : Maybe<TSource>.None;
@@ -102,8 +100,6 @@ namespace Narvalo.Fx
             using (var iter = seq.EmptyIfNull().GetEnumerator())
             {
                 var current = iter.Current;
-
-                // Each value is created via Maybe.Of() which guarantees that the value is not null.
                 Contract.Assume(current != null);
 
                 var result = iter.MoveNext() ? current : Maybe<TSource>.None;

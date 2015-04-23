@@ -168,13 +168,15 @@ namespace Narvalo.Web.Html
             tag.MergeAttributes(attributes, replaceExisting: true);
 
             Contract.Assume(tag.Attributes != null);
-
             if (tag.Attributes.ContainsKey("alt") && !tag.Attributes.ContainsKey("title"))
             {
                 tag.MergeAttribute("title", (tag.Attributes["alt"] ?? String.Empty).ToString());
             }
 
-            return tag.ToString(TagRenderMode.SelfClosing).AssumeNotNull();
+            var retval = tag.ToString(TagRenderMode.SelfClosing);
+            Contract.Assume(retval != null);
+
+            return retval;
         }
 
         internal static string LinkInternal(
@@ -201,7 +203,10 @@ namespace Narvalo.Web.Html
 
             tag.MergeAttributes(attributes, replaceExisting: true);
 
-            return tag.ToString(TagRenderMode.SelfClosing).AssumeNotNull();
+            var retval = tag.ToString(TagRenderMode.SelfClosing);
+            Contract.Assume(retval != null);
+
+            return retval;
         }
 
         internal static string ScriptInternal(string path, string scriptType, IDictionary<string, object> attributes)

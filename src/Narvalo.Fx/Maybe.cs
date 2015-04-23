@@ -5,8 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Fx.Advanced;
-
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Maybe{T}"/>.
     /// </summary>
@@ -79,8 +77,6 @@ namespace Narvalo.Fx
             {
                 throw exceptionFactory.Invoke();
             }
-
-            Contract.Assert(m.HasValue);
 
             return m.Value;
         }

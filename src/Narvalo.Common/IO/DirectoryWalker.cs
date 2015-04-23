@@ -4,6 +4,7 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Linq;
 
@@ -38,17 +39,16 @@ namespace Narvalo.IO
                 if (directory == null)
                 {
                     // XXX: Fix the message 
-                    throw new InvalidOperationException("XXX");
+                    throw new InvalidOperationException();
                 }
 
                 OnDirectoryStart(directory);
 
                 var files = directory
-                    .EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly)
-                    .AssumeNotNull()
-                    .Where(_fileFilter);
+                    .EnumerateFiles(searchPattern, SearchOption.TopDirectoryOnly);
+                Contract.Assume(files != null);
 
-                foreach (var file in files)
+                foreach (var file in files.Where(_fileFilter))
                 {
                     OnFile(file);
                 }
@@ -56,11 +56,10 @@ namespace Narvalo.IO
                 OnDirectoryEnd(directory);
 
                 var subdirs = directory
-                    .EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
-                    .AssumeNotNull()
-                    .Where(_directoryFilter);
+                    .EnumerateDirectories("*", SearchOption.TopDirectoryOnly);
+                Contract.Assume(subdirs != null);
 
-                foreach (var dir in subdirs)
+                foreach (var dir in subdirs.Where(_directoryFilter))
                 {
                     stack.Push(dir);
                 }

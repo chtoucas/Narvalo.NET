@@ -51,6 +51,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assume.cs" />
     <Compile Include="Edu\Monads\Identity.g.cs">
       <DependentUpon>Identity.tt</DependentUpon>
       <AutoGen>True</AutoGen>

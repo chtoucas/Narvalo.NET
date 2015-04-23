@@ -97,7 +97,6 @@ namespace Narvalo.Fx
             // We could use "yield break", but Enumerable.Empty<T> is more readable 
             // with the additional benefit of returning a singleton.
             var retval = Enumerable.Empty<TSource>();
-
             Contract.Assume(retval != null);
 
             return retval;
