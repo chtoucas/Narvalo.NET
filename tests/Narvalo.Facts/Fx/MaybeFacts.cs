@@ -685,7 +685,7 @@ namespace Narvalo.Fx
     public static partial class MaybeFacts
     {
         [Fact]
-        public static void Maybe_IsApparentlyImmutable()
+        public static void Maybe_IsImmutable()
         {
             // Arrange
             var value = new MyValue_(1);

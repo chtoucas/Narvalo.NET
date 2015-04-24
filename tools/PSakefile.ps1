@@ -729,8 +729,9 @@ function Invoke-Gendarme {
       --log "$logFile" `
       (Get-LocalPath "work\bin\$Configuration\Narvalo.Cerbere.dll") `
       (Get-LocalPath "work\bin\$Configuration\Narvalo.Fx.dll") `
-      (Get-LocalPath "work\bin\$Configuration\Narvalo.Finance.dll") `
-      (Get-LocalPath "work\bin\$Configuration\Narvalo.Common.dll")
+      (Get-LocalPath "work\bin\$Configuration\Narvalo.Core.dll") `
+      (Get-LocalPath "work\bin\$Configuration\Narvalo.Common.dll") `
+      (Get-LocalPath "work\bin\$Configuration\Narvalo.Finance.dll")
 }
 
 # TODO: Quick and dirty function!

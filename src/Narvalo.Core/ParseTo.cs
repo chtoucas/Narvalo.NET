@@ -6,7 +6,6 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Net;
 
     using Narvalo.Fx;
     using Narvalo.Internal;
