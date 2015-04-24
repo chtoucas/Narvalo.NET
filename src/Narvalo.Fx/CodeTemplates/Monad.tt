@@ -472,7 +472,6 @@ namespace <#= Namespace #>.Internal
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
-<#+ WriteCompilerAttributes_(); #>
     public static partial class <#= Name #>
     {
         private static readonly <#= Name #><global::<#= UnitFullName #>> s_Unit = <#= ReturnName #>(global::<#= UnitFullName #>.Single);
@@ -1290,7 +1289,7 @@ namespace <#= Namespace #>.Internal
     /// </summary>
     [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
         Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
-    public static partial class Func<#= Name #>Extensions
+    public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -1342,7 +1341,7 @@ namespace <#= Namespace #>.Internal
         }
 
         #endregion
-    } // End of the class Func<#= Name #>Extensions.
+    } // End of the class FuncExtensions.
 <#+
     } // End of EmitKleisliExtensions().
 
@@ -1354,8 +1353,7 @@ namespace <#= Namespace #>.Internal
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
     /// </summary>
-<#+ WriteCompilerAttributes_(); #>
-    public static partial class Enumerable<#= Name #>Extensions
+    public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -1399,7 +1397,7 @@ namespace <#= Namespace #>.Internal
 
         #endregion
 <#+ } // End of HasSum. #>
-    } // End of the class Enumerable<#= Name #>Extensions.
+    } // End of the class EnumerableExtensions.
 <#+
     } // End of EmitEnumerableMonadExtensions().
 
@@ -1411,7 +1409,7 @@ namespace <#= Namespace #>.Internal
     /// <summary>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
     /// </summary>
-    internal static partial class Enumerable<#= Name #>Extensions
+    internal static partial class EnumerableExtensions
     {
 <#+ if (!HasUnderlyingTypeConstraint) { #>
 <#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
@@ -1470,7 +1468,7 @@ namespace <#= Namespace #>.Internal
             return retval;
         }
 <#+ } // End of HasSum. #>
-    } // End of the class Enumerable<#= Name #>Extensions.
+    } // End of the class EnumerableExtensions.
 <#+
     } // End of EmitEnumerableMonadInternalExtensions().
 
@@ -1482,7 +1480,7 @@ namespace <#= Namespace #>.Internal
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
-    public static partial class Enumerable<#= Name #>Extensions
+    public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -1675,7 +1673,7 @@ namespace <#= Namespace #>.Internal
         }
 
         #endregion
-    } // End of the class Enumerable<#= Name #>Extensions.
+    } // End of the class EnumerableExtensions.
 <#+
     } // End of EmitEnumerableExtensions().
     
@@ -1691,7 +1689,7 @@ namespace <#= Namespace #>.Internal
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
-    internal static partial class Enumerable<#= Name #>Extensions
+    internal static partial class EnumerableExtensions
     {
 <#+ if (!HasUnderlyingTypeConstraint) { #>
 <#+ // Not available when we enforce a generic type constraint on the underlying type of the monadic return value. #>
@@ -1977,7 +1975,7 @@ namespace <#= Namespace #>.Internal
                 return retval;
             }
         }
-    } // End of the class Enumerable<#= Name #>Extensions.
+    } // End of the class EnumerableExtensions.
 <#+
     } // End of EmitEnumerableInternalExtensions().
 

@@ -12,6 +12,19 @@ namespace Narvalo
     public static class Acknowledge
     {
         /// <summary>
+        /// According to its documentation, CCCheck only assumes and asserts
+        /// object invariants for the "this" object. This method allows
+        /// to state explicitly the object invariance.
+        /// </summary>
+        /// <remarks>To be recongized by CCCheck this method must be named exactly "AssumeInvariant".</remarks>
+        /// <typeparam name="T">The underlying type of the object.</typeparam>
+        /// <param name="obj">The invariant object.</param>
+        [DebuggerHidden]
+        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        public static void AssumeInvariant<T>(T obj) where T : class { }
+
+        /// <summary>
         /// Checks that the specified object parameter is not <see langword="null"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="this"/>.</typeparam>

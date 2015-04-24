@@ -80,20 +80,15 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Advanced\Action`%24.cs" />
-    <Compile Include="Advanced\Enumerable`1%24.Maybe.cs" />
-    <Compile Include="Advanced\Enumerable`1%24.Output.cs" />
-    <Compile Include="Advanced\Func`%24.cs" />
-    <Compile Include="Advanced\Func`%24.Nullable.cs" />
-    <Compile Include="Advanced\Func`1%24.Output.cs" />
+    <Compile Include="Advanced\Action%24.cs" />
+    <Compile Include="Advanced\Enumerable%24.cs" />
+    <Compile Include="Advanced\Func%24.cs" />
     <Compile Include="Advanced\NamespaceDoc.cs" />
-    <Compile Include="Advanced\Nullable`1%24.cs" />
-    <Compile Include="Advanced\Predicate`1%24.cs" />
+    <Compile Include="Advanced\Nullable%24.cs" />
+    <Compile Include="Advanced\Predicate%24.cs" />
     <Compile Include="Either.cs" />
     <Compile Include="Either`2.cs" />
-    <Compile Include="Enumerable`1%24.cs" />
-    <Compile Include="Enumerable[Maybe]%24.cs" />
-    <Compile Include="Enumerable[Output]%24.cs" />
+    <Compile Include="Enumerable%24.cs" />
     <Compile Include="Func.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Maybe.g.cs">
@@ -127,7 +122,7 @@
     <Compile Include="Stubs`1.cs" />
     <Compile Include="Stubs`2.cs" />
     <Compile Include="Switch.cs" />
-    <Compile Include="Switch`2%24.cs" />
+    <Compile Include="Switch%24.cs" />
     <Compile Include="Switch`2.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="VoidOrBreak.cs" />

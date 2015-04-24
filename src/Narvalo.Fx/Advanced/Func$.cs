@@ -8,9 +8,82 @@ namespace Narvalo.Fx.Advanced
     using System.Runtime.ExceptionServices;
 
     /// <summary>
-    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Output{T}"/> class.
+    /// Provides extension methods for <see cref="Func{T}"/>.
     /// </summary>
-    public static partial class FuncOutputExtensions
+    public static partial class FuncExtensions
+    {
+        public static Func<TResult> Bind<TSource, TResult>(this Func<TSource> @this, Func<TSource, Func<TResult>> selector)
+        {
+            Require.Object(@this);
+            Require.NotNull(selector, "selector");
+
+            return selector.Invoke(@this.Invoke());
+        }
+
+        public static Func<TResult> Select<TSource, TResult>(this Func<TSource> @this, Func<TSource, TResult> selector)
+        {
+            Require.Object(@this);
+            Require.NotNull(selector, "selector");
+            Contract.Ensures(Contract.Result<Func<TResult>>() != null);
+
+            return () => selector.Invoke(@this.Invoke());
+        }
+    }
+
+    /// <content>
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Nullable{T}"/> class.
+    /// </content>
+    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
+        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
+    public static partial class FuncExtensions
+    {
+        #region Basic Monad functions (Prelude)
+
+        public static TResult? Invoke<TSource, TResult>(
+            this Func<TSource, TResult?> @this,
+            TSource? value)
+            where TSource : struct
+            where TResult : struct
+        {
+            Acknowledge.Object(@this);
+
+            return value.Bind(@this);
+        }
+
+        public static Func<TSource, TResult?> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, TMiddle?> @this,
+            Func<TMiddle, TResult?> funM)
+            where TSource : struct
+            where TMiddle : struct
+            where TResult : struct
+        {
+            Require.Object(@this);
+            Contract.Ensures(Contract.Result<Func<TSource, TResult?>>() != null);
+
+            return _ => @this.Invoke(_).Bind(funM);
+        }
+
+        public static Func<TSource, TResult?> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, TResult?> @this,
+            Func<TSource, TMiddle?> funM)
+            where TSource : struct
+            where TMiddle : struct
+            where TResult : struct
+        {
+            Require.Object(@this);
+            Require.NotNull(funM, "funM");
+            Contract.Ensures(Contract.Result<Func<TSource, TResult?>>() != null);
+
+            return _ => funM.Invoke(_).Bind(@this);
+        }
+
+        #endregion
+    }
+
+    /// <content>
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Output{T}"/> class.
+    /// </content>
+    public static partial class FuncExtensions
     {
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
@@ -19,12 +92,14 @@ namespace Narvalo.Fx.Advanced
             Require.Object(@this);
             Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
-            try {
+            try
+            {
                 TSource value = @this.Invoke();
 
                 return Output.Success(value);
             }
-            catch (TException ex) {
+            catch (TException ex)
+            {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
                 return Output.Failure<TSource>(edi);
@@ -44,7 +119,8 @@ namespace Narvalo.Fx.Advanced
 
             ExceptionDispatchInfo edi;
 
-            try {
+            try
+            {
                 TSource value = @this.Invoke();
 
                 return Output.Success(value);
@@ -69,7 +145,8 @@ namespace Narvalo.Fx.Advanced
 
             ExceptionDispatchInfo edi;
 
-            try {
+            try
+            {
                 TSource value = @this.Invoke();
 
                 return Output.Success(value);
@@ -96,7 +173,8 @@ namespace Narvalo.Fx.Advanced
 
             ExceptionDispatchInfo edi;
 
-            try {
+            try
+            {
                 TSource value = @this.Invoke();
 
                 return Output.Success(value);

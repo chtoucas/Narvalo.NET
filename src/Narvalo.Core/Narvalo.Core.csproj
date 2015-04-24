@@ -64,8 +64,8 @@
   <ItemGroup>
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
-    <Compile Include="Collections\Dictionary`2%24.cs" />
-    <Compile Include="Collections\Enumerator`1%24.cs" />
+    <Compile Include="Collections\Dictionary%24.cs" />
+    <Compile Include="Collections\Enumerator%24.cs" />
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
@@ -84,8 +84,7 @@
     <Compile Include="Range.cs" />
     <Compile Include="Range`1.cs" />
     <Compile Include="StringManip.cs" />
-    <Compile Include="Xml\Maybe[XAttribute]%24.cs" />
-    <Compile Include="Xml\Maybe[XElement]%24.cs" />
+    <Compile Include="Xml\Maybe%24.cs" />
     <Compile Include="Xml\XAttribute%24.cs" />
     <Compile Include="Xml\XElement%24.cs" />
     <Compile Include="Xml\XmlReader%24.cs" />

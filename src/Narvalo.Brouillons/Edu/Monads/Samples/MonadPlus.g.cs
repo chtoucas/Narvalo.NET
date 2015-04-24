@@ -44,8 +44,6 @@ namespace Narvalo.Edu.Monads.Samples
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
-    [global::System.Diagnostics.DebuggerNonUserCode]
     public static partial class MonadPlus
     {
         private static readonly MonadPlus<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
@@ -658,7 +656,7 @@ namespace Narvalo.Edu.Monads.Samples
     /// </summary>
     [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
         Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
-    public static partial class FuncMonadPlusExtensions
+    public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -704,7 +702,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    } // End of the class FuncMonadPlusExtensions.
+    } // End of the class FuncExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Samples
@@ -717,9 +715,7 @@ namespace Narvalo.Edu.Monads.Samples
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadPlus{T}"/> class.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
-    [global::System.Diagnostics.DebuggerNonUserCode]
-    public static partial class EnumerableMonadPlusExtensions
+    public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -752,7 +748,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    } // End of the class EnumerableMonadPlusExtensions.
+    } // End of the class EnumerableExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Samples
@@ -767,7 +763,7 @@ namespace Narvalo.Edu.Monads.Samples
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
-    public static partial class EnumerableMonadPlusExtensions
+    public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -926,7 +922,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    } // End of the class EnumerableMonadPlusExtensions.
+    } // End of the class EnumerableExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Samples.Internal
@@ -946,7 +942,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
     /// <summary>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadPlus{T}"/> class.
     /// </summary>
-    internal static partial class EnumerableMonadPlusExtensions
+    internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -989,12 +985,12 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
             return retval;
         }
-    } // End of the class EnumerableMonadPlusExtensions.
+    } // End of the class EnumerableExtensions.
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
-    internal static partial class EnumerableMonadPlusExtensions
+    internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -1216,5 +1212,5 @@ namespace Narvalo.Edu.Monads.Samples.Internal
                 return retval;
             }
         }
-    } // End of the class EnumerableMonadPlusExtensions.
+    } // End of the class EnumerableExtensions.
 }

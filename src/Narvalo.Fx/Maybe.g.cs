@@ -44,8 +44,6 @@ namespace Narvalo.Fx
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
-    [global::System.Diagnostics.DebuggerNonUserCode]
     public static partial class Maybe
     {
         private static readonly Maybe<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
@@ -678,7 +676,7 @@ namespace Narvalo.Fx
     /// </summary>
     [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
         Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
-    public static partial class FuncMaybeExtensions
+    public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -725,7 +723,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of the class FuncMaybeExtensions.
+    } // End of the class FuncExtensions.
 }
 
 namespace Narvalo.Fx
@@ -738,9 +736,7 @@ namespace Narvalo.Fx
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "12.0")]
-    [global::System.Diagnostics.DebuggerNonUserCode]
-    public static partial class EnumerableMaybeExtensions
+    public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -773,7 +769,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of the class EnumerableMaybeExtensions.
+    } // End of the class EnumerableExtensions.
 }
 
 namespace Narvalo.Fx.Advanced
@@ -788,7 +784,7 @@ namespace Narvalo.Fx.Advanced
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
-    public static partial class EnumerableMaybeExtensions
+    public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
 
@@ -947,7 +943,7 @@ namespace Narvalo.Fx.Advanced
         }
 
         #endregion
-    } // End of the class EnumerableMaybeExtensions.
+    } // End of the class EnumerableExtensions.
 }
 
 namespace Narvalo.Fx.Internal
@@ -967,7 +963,7 @@ namespace Narvalo.Fx.Internal
     /// <summary>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
-    internal static partial class EnumerableMaybeExtensions
+    internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -1010,12 +1006,12 @@ namespace Narvalo.Fx.Internal
 
             return retval;
         }
-    } // End of the class EnumerableMaybeExtensions.
+    } // End of the class EnumerableExtensions.
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
-    internal static partial class EnumerableMaybeExtensions
+    internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -1238,5 +1234,5 @@ namespace Narvalo.Fx.Internal
                 return retval;
             }
         }
-    } // End of the class EnumerableMaybeExtensions.
+    } // End of the class EnumerableExtensions.
 }
