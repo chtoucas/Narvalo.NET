@@ -135,25 +135,25 @@
   <data name="Enforce_NotLessThan_Format" xml:space="preserve">
     <value>La valeur de '{0}' n'est pas inférieure à '{1}'.</value>
   </data>
-  <data name="Require_ArgumentNullOrEmpty_Format" xml:space="preserve">
-    <value>La valeur de '{0}' est null ou vide.</value>
-  </data>
-  <data name="Require_ArgumentNullOrWhiteSpace_Format" xml:space="preserve">
-    <value>La valeur de '{0}' est null, vide ou ne contient que des espaces blancs.</value>
+  <data name="Require_ArgumentEmpty_Format" xml:space="preserve">
+    <value>La valeur de '{0}' est vide.</value>
   </data>
   <data name="Require_ArgumentNull_Format" xml:space="preserve">
     <value>La valeur de '{0}' est null.</value>
   </data>
+  <data name="Require_ArgumentWhiteSpace_Format" xml:space="preserve">
+    <value>La valeur de '{0}' est vide ou ne contient que des espaces blancs.</value>
+  </data>
   <data name="Require_ObjectNull" xml:space="preserve">
     <value>L'objet passé en paramètre est null.</value>
+  </data>
+  <data name="Require_PropertyEmpty" xml:space="preserve">
+    <value>La valeur de la propriété est vide.</value>
   </data>
   <data name="Require_PropertyNull" xml:space="preserve">
     <value>La valeur de la propriété est null.</value>
   </data>
-  <data name="Require_PropertyNullOrEmpty" xml:space="preserve">
-    <value>La valeur de la propriété est null ou vide.</value>
-  </data>
-  <data name="Require_PropertyNullOrWhiteSpace" xml:space="preserve">
-    <value>La valeur de la propriété est null, vide ou ne contient que des espaces blancs.</value>
+  <data name="Require_PropertyWhiteSpace" xml:space="preserve">
+    <value>La valeur de la propriété est vide ou ne contient que des espaces blancs.</value>
   </data>
 </root>

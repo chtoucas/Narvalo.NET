@@ -75,7 +75,7 @@ namespace Narvalo
 
             if (value.Length == 0)
             {
-                throw new ArgumentException(Strings_Cerbere.Require_PropertyNullOrEmpty, "value");
+                throw new ArgumentException(Strings_Cerbere.Require_PropertyEmpty, "value");
             }
 
             Contract.EndContractBlock();
@@ -97,7 +97,7 @@ namespace Narvalo
 
             if (String.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException(Strings_Cerbere.Require_PropertyNullOrWhiteSpace, "value");
+                throw new ArgumentException(Strings_Cerbere.Require_PropertyWhiteSpace, "value");
             }
 
             Contract.EndContractBlock();
@@ -142,7 +142,7 @@ namespace Narvalo
             if (value.Length == 0)
             {
                 throw new ArgumentException(
-                    Format.Resource(Strings_Cerbere.Require_ArgumentNullOrEmpty_Format, parameterName),
+                    Format.Resource(Strings_Cerbere.Require_ArgumentEmpty_Format, parameterName),
                     parameterName);
             }
 
@@ -168,7 +168,7 @@ namespace Narvalo
             if (String.IsNullOrWhiteSpace(value))
             {
                 throw new ArgumentException(
-                    Format.Resource(Strings_Cerbere.Require_ArgumentNullOrWhiteSpace_Format, parameterName),
+                    Format.Resource(Strings_Cerbere.Require_ArgumentWhiteSpace_Format, parameterName),
                     parameterName);
             }
 

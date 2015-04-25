@@ -116,6 +116,15 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is empty..
+        /// </summary>
+        internal static string Require_ArgumentEmpty_Format {
+            get {
+                return ResourceManager.GetString("Require_ArgumentEmpty_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null..
         /// </summary>
         internal static string Require_ArgumentNull_Format {
@@ -125,20 +134,11 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null or empty..
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is empty or contains only white-space characters..
         /// </summary>
-        internal static string Require_ArgumentNullOrEmpty_Format {
+        internal static string Require_ArgumentWhiteSpace_Format {
             get {
-                return ResourceManager.GetString("Require_ArgumentNullOrEmpty_Format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null or empty, or contains only white-space characters..
-        /// </summary>
-        internal static string Require_ArgumentNullOrWhiteSpace_Format {
-            get {
-                return ResourceManager.GetString("Require_ArgumentNullOrWhiteSpace_Format", resourceCulture);
+                return ResourceManager.GetString("Require_ArgumentWhiteSpace_Format", resourceCulture);
             }
         }
         
@@ -152,6 +152,15 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The property value is empty..
+        /// </summary>
+        internal static string Require_PropertyEmpty {
+            get {
+                return ResourceManager.GetString("Require_PropertyEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The property value is null..
         /// </summary>
         internal static string Require_PropertyNull {
@@ -161,20 +170,11 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The property value is null or empty..
+        ///   Looks up a localized string similar to The property value is empty or contains only white-space characters..
         /// </summary>
-        internal static string Require_PropertyNullOrEmpty {
+        internal static string Require_PropertyWhiteSpace {
             get {
-                return ResourceManager.GetString("Require_PropertyNullOrEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The property value is null or empty, or contains only white-space characters..
-        /// </summary>
-        internal static string Require_PropertyNullOrWhiteSpace {
-            get {
-                return ResourceManager.GetString("Require_PropertyNullOrWhiteSpace", resourceCulture);
+                return ResourceManager.GetString("Require_PropertyWhiteSpace", resourceCulture);
             }
         }
     }

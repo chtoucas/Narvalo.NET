@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Require_ArgumentNullOrEmpty_Format" xml:space="preserve">
-    <value>The value of '{0}' is null or empty.</value>
+  <data name="Require_ArgumentEmpty_Format" xml:space="preserve">
+    <value>The value of '{0}' is empty.</value>
   </data>
   <data name="Enforce_NotGreaterThanOrEqualTo_Format" xml:space="preserve">
     <value>The value of '{0}' is not greater than or equal to '{1}'.</value>
@@ -135,8 +135,8 @@
   <data name="Require_PropertyNull" xml:space="preserve">
     <value>The property value is null.</value>
   </data>
-  <data name="Require_PropertyNullOrEmpty" xml:space="preserve">
-    <value>The property value is null or empty.</value>
+  <data name="Require_PropertyEmpty" xml:space="preserve">
+    <value>The property value is empty.</value>
   </data>
   <data name="Require_ArgumentNull_Format" xml:space="preserve">
     <value>The value of '{0}' is null.</value>
@@ -147,11 +147,11 @@
   <data name="Enforce_NotLessThan_Format" xml:space="preserve">
     <value>The value of '{0}' is not less than '{1}'.</value>
   </data>
-  <data name="Require_ArgumentNullOrWhiteSpace_Format" xml:space="preserve">
-    <value>The value of '{0}' is null or empty, or contains only white-space characters.</value>
+  <data name="Require_ArgumentWhiteSpace_Format" xml:space="preserve">
+    <value>The value of '{0}' is empty or contains only white-space characters.</value>
   </data>
-  <data name="Require_PropertyNullOrWhiteSpace" xml:space="preserve">
-    <value>The property value is null or empty, or contains only white-space characters.</value>
+  <data name="Require_PropertyWhiteSpace" xml:space="preserve">
+    <value>The property value is empty or contains only white-space characters.</value>
   </data>
   <data name="Enforce_InvalidRange_Format" xml:space="preserve">
     <value>The value of the parameter 'minInclusive' ({0}) must be greater than or equal to value of the parameter 'maxInclusive' ({1}).</value>
