@@ -53,17 +53,14 @@ namespace Narvalo.Build
             catch (ArgumentNullException ex)
             {
                 Log.LogErrorFromException(ex);
-                return false;
             }
             catch (NotSupportedException ex)
             {
                 Log.LogErrorFromException(ex);
-                return false;
             }
             catch (WebException ex)
             {
                 Log.LogErrorFromException(ex);
-                return false;
             }
 
             return !Log.HasLoggedErrors;

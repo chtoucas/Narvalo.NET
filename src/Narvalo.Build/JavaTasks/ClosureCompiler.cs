@@ -131,7 +131,7 @@ namespace Narvalo.Build.JavaTasks
                     if (process.ExitCode != 0)
                     {
                         LogJavaFailure(process);
-                        return false;
+                        break;
                     }
 
                     compressedFiles.Add(new TaskItem(outFile));
