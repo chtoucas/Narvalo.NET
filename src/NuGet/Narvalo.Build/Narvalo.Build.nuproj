@@ -4,10 +4,10 @@
     <NuId>Narvalo.Build</NuId>
     <NuTitle>Narvalo.Build</NuTitle>
     <NuDescription>
-      This package contains MSBuild tasks.
+      This package provides custom MSBuild tasks: download a file from internet, merge files, helpers to generate and verify assembly versions, tasks for Google Closure Compiler and YUICompressor.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
-    <NuTags>MSBuild</NuTags>
+    <NuTags>MSBuild, Closure, YUI, Versioning</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuGetCommandAdditionalArgs>-Tool</NuGetCommandAdditionalArgs>

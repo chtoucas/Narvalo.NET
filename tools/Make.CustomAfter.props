@@ -198,7 +198,7 @@
     <ValidateVersionNumber Value="$(MajorVersion)" Name="MajorVersion" />
     <ValidateVersionNumber Value="$(MinorVersion)" Name="MinorVersion" />
     <ValidateVersionNumber Value="$(PatchVersion)" Name="PatchVersion" />
-    <ValidatePreReleaseLabel Value="$(PreReleaseLabel)" Condition=" '$(PreReleaseLabel)' != '' " />
+    <ValidatePrereleaseLabel Value="$(PreReleaseLabel)" Condition=" '$(PreReleaseLabel)' != '' " />
 
     <!-- If the version is less than 1, there is really no reason to also use a pre-release label. -->
     <Warning Text="Are you sure that you want to use at the same time both a pre-release label ($(PreReleaseLabel)) and a MajorVersion ($(MajorVersion)) less than 1?"
