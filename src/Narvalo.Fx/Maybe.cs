@@ -19,7 +19,7 @@ namespace Narvalo.Fx
     }
 
     /// <content>
-    /// Provides extension methods for <see cref="Maybe{T}"/> where <c>T</c> is a struct.
+    /// Provides extension methods for <see cref="Maybe{T}"/> when <c>T</c> is a struct.
     /// </content>
     public static partial class Maybe
     {

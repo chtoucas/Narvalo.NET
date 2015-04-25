@@ -16,7 +16,7 @@ namespace Narvalo
         /// object invariants for the "this" object. This method allows
         /// to state explicitly the object invariance.
         /// </summary>
-        /// <remarks>To be recongized by CCCheck this method must be named exactly "AssumeInvariant".</remarks>
+        /// <remarks>To be recognized by CCCheck this method must be named exactly "AssumeInvariant".</remarks>
         /// <typeparam name="T">The underlying type of the object.</typeparam>
         /// <param name="obj">The invariant object.</param>
         [DebuggerHidden]
