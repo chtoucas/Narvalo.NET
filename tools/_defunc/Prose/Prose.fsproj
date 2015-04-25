@@ -11,7 +11,7 @@
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
     <Name>Prose</Name>
   </PropertyGroup>
-  <Import Project="..\FSharp.Common.props" />
+  <Import Project="..\..\FSharp.Common.props" />
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
   </PropertyGroup>
@@ -39,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CommonMark">
-      <HintPath>..\packages\CommonMark.NET.0.8.5\lib\net45\CommonMark.dll</HintPath>
+      <HintPath>..\..\packages\CommonMark.NET.0.8.5\lib\net45\CommonMark.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />
@@ -50,7 +50,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
     <Reference Include="UnionArgParser">
-      <HintPath>..\packages\UnionArgParser.0.8.6\lib\net40\UnionArgParser.dll</HintPath>
+      <HintPath>..\..\packages\UnionArgParser.0.8.6\lib\net40\UnionArgParser.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

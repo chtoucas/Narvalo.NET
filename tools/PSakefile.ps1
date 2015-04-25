@@ -433,8 +433,8 @@ Task _MyGet-Zip `
 Task _MyGet-InitializeVariables `
     -Description 'Initialize variables only used by the MyGet-* tasks.' `
 {
-    $script:MyGet_Project          = Get-LocalPath 'tools\MyGet\MyGet.csproj'
-    $script:MyGet_PackagesConfig   = Get-LocalPath 'tools\MyGet\packages.config'
+    $script:MyGet_Project          = Get-LocalPath 'tools\src\MyGet\MyGet.csproj'
+    $script:MyGet_PackagesConfig   = Get-LocalPath 'tools\src\MyGet\packages.config'
     $script:MyGet_StagingDirectory = Get-LocalPath 'work\myget'
     $script:MyGet_ZipFile          = Get-LocalPath 'work\myget.7z'
 }
@@ -682,7 +682,7 @@ function Invoke-NuGetAgent {
     )
 
     try {
-        $cmd = Get-LocalPath "tools\NuGetAgent\bin\$Configuration\nuget-agent.exe" -Resolve
+        $cmd = Get-LocalPath "tools\src\NuGetAgent\bin\$Configuration\nuget-agent.exe" -Resolve
 
         if ($Retail) {
             . $cmd --path $path --retail 2>&1

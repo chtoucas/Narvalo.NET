@@ -80,7 +80,7 @@ function Confirm-Continue {
 # ------------------------------------------------------------------------------
 
 if (!(Get-Module Narvalo.Local)) {
-    Import-Module (Join-Path $PSScriptRoot 'Narvalo.Local.psm1')
+    Import-Module (Join-Path $PSScriptRoot 'src\Narvalo.Local.psm1')
 }
 $module = Import-LocalModule 'Narvalo.ProjectAutomation' $pristine.IsPresent -Args (Get-Item $PSScriptRoot).Parent.FullName
 
@@ -137,7 +137,7 @@ Ready to proceed to the cleanup tasks. You will be offered the following options
 - Remove the 'packages' directory used by NuGet.
 - Remove the 'work' directory created by the build script.
 - Remove files untracked by git.
-- Remove the locally installed tools: 'tools\nuget.exe' and 'tools\7za.exe'.
+- Remove the locally installed tools: 'tools\libexec\nuget.exe' and 'tools\libexec\7za.exe'.
 
 "@
 

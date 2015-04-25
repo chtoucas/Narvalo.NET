@@ -124,7 +124,7 @@ function Get-7Zip {
     [CmdletBinding()]
     param([switch] $Install)
 
-    $sevenZip = Get-LocalPath 'tools\7za.exe'
+    $sevenZip = Get-LocalPath 'tools\libexec\7za.exe'
 
     if ($install.IsPresent -and !(Test-Path $sevenZip)) {
         Install-7Zip $sevenZip
@@ -303,7 +303,7 @@ function Get-NuGet {
     [CmdletBinding()]
     param([switch] $Install)
 
-    $nuget = Get-LocalPath 'tools\nuget.exe'
+    $nuget = Get-LocalPath 'tools\libexec\nuget.exe'
 
     if ($install.IsPresent -and !(Test-Path $nuget)) {
         Install-NuGet $nuget

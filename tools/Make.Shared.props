@@ -36,6 +36,6 @@
     <WorkPackagesDir>$(WorkRoot)packages\</WorkPackagesDir>
 
     <!-- Define the NuGetCommand property. -->
-    <NuGetCommand>$(MSBuildThisFileDirectory)nuget.exe</NuGetCommand>
+    <NuGetCommand>$(MSBuildThisFileDirectory)libexec\nuget.exe</NuGetCommand>
   </PropertyGroup>
 </Project>

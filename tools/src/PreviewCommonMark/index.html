@@ -41,14 +41,14 @@
  <script src="./jquery-2.1.3.min.js"></script>
  <script src="./commonmark.js"></script>
  <script>
-  $(function () {
+  $(function() {
    var $source = $("#source");
    var $preview = $("#preview");
 
    var parser = new commonmark.Parser();
    var renderer = new commonmark.HtmlRenderer();
 
-   var parseAndRender = function () {
+   var parseAndRender = function() {
     var ast = parser.parse($source.val());
 
     if (undefined === ast) { return; }
@@ -57,7 +57,7 @@
    };
 
    // Make tab insert a tab in the text box
-   $source.keydown(function (e) {
+   $source.keydown(function(e) {
     if (e.which == 9) {
      e.preventDefault();
      this.value += "\t";

@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 New-Variable -Name LocalModulesPath `
-    -Value (Join-Path (Get-Item $PSScriptRoot).Parent.FullName 'tools\PowerShellModules') `
+    -Value (Join-Path (Get-Item $PSScriptRoot).Parent.FullName 'tools\src') `
     -Scope Script `
     -Option ReadOnly `
     -Description 'Path to the local modules.'
@@ -22,7 +22,7 @@ New-Variable -Name LocalModulesPath `
 .INPUTS
     None.
 .OUTPUTS
-    System.Management.Automation.PSModuleInfo. Import-LocalModule returns 
+    System.Management.Automation.PSModuleInfo. Import-LocalModule returns
     the System.Management.Automation.PSModuleInfo object that represents the imported module.
 .EXAMPLE
     $module = Import-LocalModule 'Narvalo.ProjectAutomation' -Args $PSScriptRoot
@@ -35,7 +35,7 @@ function Import-LocalModule {
         [Parameter(Mandatory = $false, Position = 1)] [bool] $Pristine = $false,
         [Parameter(Mandatory = $false, Position = 2)] [Alias('Args')] [PSObject[]] $ArgumentList
     )
-    
+
     Write-Verbose "Importing local module '$name'."
 
     if ($pristine) {

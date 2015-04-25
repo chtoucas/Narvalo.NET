@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{A775A79D-8E8F-4FE2-8236-070D60DE9A64}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Narvalo.FxCop</RootNamespace>
+    <AssemblyName>Narvalo.FxCop</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- Define the CodeAnalysisPath property if it does not yet exists. -->
+    <CodeAnalysisPath Condition=" '$(CodeAnalysisPath)' == '' ">$(MSBuildProgramFiles32)\Microsoft Visual Studio $(VisualStudioVersion)\Team Tools\Static Analysis Tools\FxCop</CodeAnalysisPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FxCopSdk">
+      <HintPath>$(CodeAnalysisPath)\FxCopSdk.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Cci">
+      <HintPath>$(CodeAnalysisPath)\Microsoft.Cci.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AvoidDeclaringMaybeOnStruct.cs" />
+    <Compile Include="IntrospectionRule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="..\..\Narvalo.Common.props" />
+  <PropertyGroup>
+    <!-- In order to reference FxCopSdk, we must force target the x86 architecture. -->
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

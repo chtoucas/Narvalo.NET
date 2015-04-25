@@ -10,8 +10,10 @@ Design
 - Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
 - Review all `IEnumerable` extensions for null-checking and deferred execution.
 
-Narvalo.Cerbere
----------------
+Narvalo.Cerber
+--------------
+
+- Overloads for Require.Greater...
 
 Narvalo.Fx
 ------------
@@ -67,19 +69,6 @@ Narvalo.Facts
 
 - Explore SpecFlow.
 - Write a T4 template for Monad tests.
-
-Narvalo.StyleCop.CSharp
------------------------
-
-- `private readonly static` must start with `s_`.
-- `private const` must be uppercase.
-- `private` fields must start with an underscore.
-- `private` methods must end with an underscore.
-
-Narvalo.FxCop
--------------
-
-- Do not create a `Maybe<T>` where `T` is struct.
 
 Narvalo.Mvp
 -----------
