@@ -117,22 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ArgumentNull_Format" xml:space="preserve">
+    <value>The value of '{0}' is null.</value>
+  </data>
+  <data name="ArgumentWhiteSpace_Format" xml:space="preserve">
+    <value>The value of '{0}' is empty or contains only white-space characters.</value>
+  </data>
   <data name="ClosureCompiler_Processing_Format" xml:space="preserve">
     <value>Closure Compiler processing {0}.</value>
   </data>
-  <data name="FileNotFound_Fomat" xml:space="preserve">
+  <data name="FileNotFound_Format" xml:space="preserve">
     <value>The file {0} does not exist.</value>
   </data>
-  <data name="JavaTask_Error_Format" xml:space="preserve">
+  <data name="JavaTaskBase_Error_Format" xml:space="preserve">
     <value>java.exe exited with error code {0}.</value>
   </data>
-  <data name="JavaTask_JavaPath_Format" xml:space="preserve">
+  <data name="JavaTaskBase_JavaNotFound" xml:space="preserve">
+    <value>Could not find java.exe. Looked in Registry, PATH locations and various common folders inside Program Files.</value>
+  </data>
+  <data name="JavaTaskBase_JavaPath_Format" xml:space="preserve">
     <value>Using java.exe from: {0}.</value>
   </data>
   <data name="MergeFiles_EmptyListOfFiles" xml:space="preserve">
     <value>The list of files to merge can not be empty.</value>
   </data>
-  <data name="YuiCompressor_Processing_Format" xml:space="preserve">
+  <data name="ValidatePrereleaseLabel_ValueIsNotValid_Format" xml:space="preserve">
+    <value>A prerelease label ({0}) MUST comprise only ASCII alpha-numerics and hyphen. It MUST also start with an ASCII letter.</value>
+  </data>
+  <data name="ValidateVersionNumber_ValueIsNotValid_Format" xml:space="preserve">
+    <value>{0} ({1}) MUST be a 16-bit unsigned integers.</value>
+  </data>
+  <data name="ValidateVersionNumber_ValueMustNotStartWithZero_Format" xml:space="preserve">
+    <value>{0} ({1}) MUST NOT contain leading zeroes.</value>
+  </data>
+  <data name="YuiCompressorBase_Processing_Format" xml:space="preserve">
     <value>YUI Compressor processing {0}.</value>
   </data>
 </root>

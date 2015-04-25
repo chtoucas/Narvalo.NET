@@ -6,23 +6,40 @@ namespace Narvalo.Build.JavaTasks
     using System.Diagnostics;
     ////using System.Runtime.CompilerServices;
     ////using System.Runtime.InteropServices;
-    using System.Globalization;
     using System.IO;
 
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
     using Microsoft.Win32;
+    using Narvalo.Build.Internal;
     using Narvalo.Build.Properties;
 
+    /// <summary>
+    /// Provides a base class for all java tasks.
+    /// </summary>
     public abstract class JavaTaskBase : ToolTask
     {
+        /// <summary>
+        /// The default registry key for the Java Runtime Environment.
+        /// </summary>
         private const string JRE_KEY = @"SOFTWARE\JavaSoft\Java Runtime Environment";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JavaTaskBase"/> class.
+        /// </summary>
         protected JavaTaskBase() : base() { }
 
+        /// <summary>
+        /// Gets or sets the path to the jar file.
+        /// </summary>
+        /// <value>The path to the jar file.</value>
         [Required]
         public string JarPath { get; set; }
 
+        /// <summary>
+        /// Gets the path to the java executable.
+        /// </summary>
+        /// <value>The path to the java executable.</value>
         protected override string ToolName
         {
             get
@@ -31,43 +48,50 @@ namespace Narvalo.Build.JavaTasks
             }
         }
 
+        /// <summary>
+        /// Find the path to the installed java executable.
+        /// </summary>
+        /// <returns>The path to the java executable; <see langword="null"/> if none found.</returns>
         public string FindJavaPath()
         {
             string javaPath = null;
 
             // On commence par chercher dans la base de registre Windows 32bit.
-            javaPath = FindJavaPathInRegistry_(JRE_KEY, ToolName);
+            javaPath = FindJavaPathInRegistry_();
 
             // On cherche ensuite dans l'environnement local.
             if (javaPath == null)
             {
-                javaPath = FindJavaPathInPathLocations_(ToolName);
+                javaPath = FindJavaPathInPathLocations_();
             }
 
             // En désespoir de cause, voyons voir dans les endroits communs.
             if (javaPath == null)
             {
-                javaPath = FindJavaPathInCommonLocations_(ToolName);
+                javaPath = FindJavaPathInCommonLocations_();
             }
 
             if (javaPath == null)
             {
-                throw new PlatformNotSupportedException(
-                    "Could not find java.exe. Looked in Registry, PATH locations and various common folders inside Program Files.");
+                throw new PlatformNotSupportedException(Format.Resource(Strings.JavaTaskBase_JavaNotFound));
             }
 
             Log.LogMessage(
                 MessageImportance.Low,
-                String.Format(CultureInfo.CurrentCulture, Strings.JavaTask_JavaPath_Format, javaPath));
+                Format.Resource(Strings.JavaTaskBase_JavaPath_Format, javaPath));
 
             return javaPath;
         }
 
+        /// <summary>
+        /// Log a java error.
+        /// </summary>
+        /// <param name="process">The java process.</param>
         protected void LogJavaFailure(Process process)
         {
             if (process == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("process", Format.Resource(Strings.ArgumentNull_Format, "process"));
             }
 
             string[] errors = process.StandardError.ReadToEnd()
@@ -81,9 +105,13 @@ namespace Narvalo.Build.JavaTasks
                     error.Trim().Replace("[WARNING] ", String.Empty));
             }
 
-            Log.LogError(Strings.JavaTask_Error_Format, process.ExitCode);
+            Log.LogError(Format.Resource(Strings.JavaTaskBase_Error_Format, process.ExitCode));
         }
 
+        /// <summary>
+        /// Returns the path to the java executable.
+        /// </summary>
+        /// <returns>The path to the java executable.</returns>
         protected override string GenerateFullPathToTool()
         {
             if (String.IsNullOrEmpty(ToolPath))
@@ -94,12 +122,16 @@ namespace Narvalo.Build.JavaTasks
             return Path.Combine(ToolPath, ToolName);
         }
 
-        private static string FindJavaPathInRegistry_(string keyName, string toolName)
+        /// <summary>
+        /// Find the path to the java executable in the Windows registry.
+        /// </summary>
+        /// <returns>The path to the java executable; <see langword="null"/> if none found.</returns>
+        private string FindJavaPathInRegistry_()
         {
             // FIXME: ne marche pas de manière consistante en cas de virtualisation de la base de registre.
             string javaHome = null;
 
-            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(keyName))
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(JRE_KEY))
             {
                 if (key != null)
                 {
@@ -118,7 +150,7 @@ namespace Narvalo.Build.JavaTasks
             if (!String.IsNullOrEmpty(javaHome))
             {
                 string toolPath = Path.Combine(javaHome, "bin");
-                return File.Exists(Path.Combine(toolPath, toolName)) ? toolPath : null;
+                return File.Exists(Path.Combine(toolPath, ToolName)) ? toolPath : null;
             }
             else
             {
@@ -126,14 +158,22 @@ namespace Narvalo.Build.JavaTasks
             }
         }
 
-        private static string FindJavaPathInPathLocations_(string toolName)
+        /// <summary>
+        /// Find the path to the java executable using the PATH environment variable.
+        /// </summary>
+        /// <returns>The path to the java executable; <see langword="null"/> if none found.</returns>
+        private string FindJavaPathInPathLocations_()
         {
             string pathEnv = Environment.GetEnvironmentVariable("PATH") ?? String.Empty;
             string[] paths = pathEnv.Split(new[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
-            return FindJavaPathInDirectories(paths, toolName);
+            return FindJavaPathInDirectories(paths);
         }
 
-        private static string FindJavaPathInCommonLocations_(string toolName)
+        /// <summary>
+        /// Find the path to the java executable in common locations.
+        /// </summary>
+        /// <returns>The path to the java executable; <see langword="null"/> if none found.</returns>
+        private string FindJavaPathInCommonLocations_()
         {
             // FIXME: programFilesPath dépend du type de compilation (AnyCPU, x64, x32),
             // de la plate-forme, du processus courant :
@@ -152,16 +192,21 @@ namespace Narvalo.Build.JavaTasks
                 @"C:\Program Files\Java\jre7\bin",
             };
 
-            return FindJavaPathInDirectories(commonLocations, toolName);
+            return FindJavaPathInDirectories(commonLocations);
         }
 
-        private static string FindJavaPathInDirectories(string[] paths, string toolName)
+        /// <summary>
+        /// Find the path to the java executable in the specified directories.
+        /// </summary>
+        /// <param name="paths">Directories where to look for the java executable.</param>
+        /// <returns>The path to the java executable; <see langword="null"/> if none found.</returns>
+        private string FindJavaPathInDirectories(string[] paths)
         {
             string javaPath = null;
 
             foreach (string path in paths)
             {
-                string fullPath = Path.Combine(path, toolName);
+                string fullPath = Path.Combine(path, ToolName);
                 if (File.Exists(fullPath))
                 {
                     javaPath = path;

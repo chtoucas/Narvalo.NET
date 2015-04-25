@@ -3,6 +3,7 @@
 namespace Narvalo.Build.Versioning
 {
     using System;
+    using System.Globalization;
 
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
@@ -38,11 +39,11 @@ namespace Narvalo.Build.Versioning
         public ushort RevisionNumber { get; set; }
 
         /// <summary>
-        /// Gets or sets the unique stamp.
+        /// Gets the unique stamp.
         /// </summary>
         /// <value>The unique stamp.</value>
         [Output]
-        public string BuildStamp { get; set; }
+        public string BuildStamp { get; private set; }
 
         /// <summary>
         /// Executes the task.
@@ -52,9 +53,9 @@ namespace Narvalo.Build.Versioning
         public override bool Execute()
         {
             // BuildNumber + "0...0" + RevisionNumber.
-            var stamp = BuildNumber.ToString();
+            var stamp = BuildNumber.ToString(CultureInfo.InvariantCulture);
 
-            var revisionString = RevisionNumber.ToString();
+            var revisionString = RevisionNumber.ToString(CultureInfo.InvariantCulture);
 
             for (int i = 0; i < 5 - revisionString.Length; i++) { stamp += "0"; }
 

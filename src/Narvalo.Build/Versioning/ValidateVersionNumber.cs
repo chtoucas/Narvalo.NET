@@ -3,9 +3,12 @@
 namespace Narvalo.Build.Versioning
 {
     using System;
+    using System.Globalization;
 
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
+    using Narvalo.Build.Internal;
+    using Narvalo.Build.Properties;
 
     /// <summary>
     /// MSBuild task to validate individual parts of an assembly version.
@@ -42,26 +45,38 @@ namespace Narvalo.Build.Versioning
         /// <see langword="false"/>.</returns>
         public override bool Execute()
         {
-            if (Value.Length > 1 && Value.StartsWith("0"))
+            if (Value.Length > 1 && Value.StartsWith("0", StringComparison.OrdinalIgnoreCase))
             {
                 // Semantic versioning requirement.
-                Log.LogError(Name + " (" + Value + ") MUST NOT contain leading zeroes.");
+                Log.LogError(
+                    Format.Resource(
+                        Strings.ValidateVersionNumber_ValueMustNotStartWithZero_Format,
+                        Name,
+                        Value));
                 return false;
             }
 
             try
             {
                 // Assembly versioning requirement.
-                ushort version = Convert.ToUInt16(Value);
+                ushort version = Convert.ToUInt16(Value, CultureInfo.InvariantCulture);
             }
             catch (FormatException ex)
             {
-                Log.LogWarning(Name + " (" + Value + ") MUST be a 16-bit unsigned integers.");
+                Log.LogWarning(
+                    Format.Resource(
+                        Strings.ValidateVersionNumber_ValueIsNotValid_Format,
+                        Name,
+                        Value));
                 Log.LogErrorFromException(ex);
             }
             catch (OverflowException ex)
             {
-                Log.LogWarning(Name + " (" + Value + ") MUST be a 16-bit unsigned integers.");
+                Log.LogWarning(
+                    Format.Resource(
+                        Strings.ValidateVersionNumber_ValueIsNotValid_Format,
+                        Name,
+                        Value));
                 Log.LogErrorFromException(ex);
             }
 

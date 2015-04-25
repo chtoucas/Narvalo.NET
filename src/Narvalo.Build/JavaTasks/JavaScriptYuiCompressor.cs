@@ -21,17 +21,40 @@ namespace Narvalo.Build.JavaTasks
     /// </example>
     public sealed class JavaScriptYuiCompressor : YuiCompressorBase
     {
+        /// <summary>
+        /// Gets or sets a value indicating whether optimizations are enabled. Default to false.
+        /// </summary>
+        /// <value><see langword="true"/> if optimizations are enabled; otherwise, <see langword="false"/></value>
         public bool DisableOptimizations { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether obfuscation is enabled. Default to false.
+        /// </summary>
+        /// <value><see langword="true"/> if obfuscation is enabled; otherwise, <see langword="false"/></value>
         public bool NoMunge { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether semicolons are preserved. Default to false.
+        /// </summary>
+        /// <value><see langword="true"/> if semicolons are preserved; otherwise, <see langword="false"/></value>
         public bool PreserveSemi { get; set; }
 
+        /// <summary>
+        /// Gets the filename extension.
+        /// </summary>
+        /// <value>The filename extension.</value>
         protected override string FileExtension
         {
             get { return "js"; }
         }
 
+        /// <summary>
+        /// Generates the command-line arguments for the YUI executable
+        /// for the specified input and output files.
+        /// </summary>
+        /// <param name="inFile">The input file.</param>
+        /// <param name="outFile">The output file.</param>
+        /// <returns>The set of command-line arguments to use when starting the YUI executable.</returns>
         protected override string GenerateCommandLineArguments(string inFile, string outFile)
         {
             var sb = new StringBuilder();

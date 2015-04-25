@@ -61,6 +61,24 @@ namespace Narvalo.Build.Properties
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is null..
+        /// </summary>
+        internal static string ArgumentNull_Format {
+            get {
+                return ResourceManager.GetString("ArgumentNull_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is empty or contains only white-space characters..
+        /// </summary>
+        internal static string ArgumentWhiteSpace_Format {
+            get {
+                return ResourceManager.GetString("ArgumentWhiteSpace_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Closure Compiler processing {0}..
         /// </summary>
         internal static string ClosureCompiler_Processing_Format {
@@ -72,27 +90,36 @@ namespace Narvalo.Build.Properties
         /// <summary>
         ///   Looks up a localized string similar to The file {0} does not exist..
         /// </summary>
-        internal static string FileNotFound_Fomat {
+        internal static string FileNotFound_Format {
             get {
-                return ResourceManager.GetString("FileNotFound_Fomat", resourceCulture);
+                return ResourceManager.GetString("FileNotFound_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to java.exe exited with error code {0}..
         /// </summary>
-        internal static string JavaTask_Error_Format {
+        internal static string JavaTaskBase_Error_Format {
             get {
-                return ResourceManager.GetString("JavaTask_Error_Format", resourceCulture);
+                return ResourceManager.GetString("JavaTaskBase_Error_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find java.exe. Looked in Registry, PATH locations and various common folders inside Program Files..
+        /// </summary>
+        internal static string JavaTaskBase_JavaNotFound {
+            get {
+                return ResourceManager.GetString("JavaTaskBase_JavaNotFound", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Using java.exe from: {0}..
         /// </summary>
-        internal static string JavaTask_JavaPath_Format {
+        internal static string JavaTaskBase_JavaPath_Format {
             get {
-                return ResourceManager.GetString("JavaTask_JavaPath_Format", resourceCulture);
+                return ResourceManager.GetString("JavaTaskBase_JavaPath_Format", resourceCulture);
             }
         }
         
@@ -106,11 +133,38 @@ namespace Narvalo.Build.Properties
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A prerelease label ({0}) MUST comprise only ASCII alpha-numerics and hyphen. It MUST also start with an ASCII letter..
+        /// </summary>
+        internal static string ValidatePrereleaseLabel_ValueIsNotValid_Format {
+            get {
+                return ResourceManager.GetString("ValidatePrereleaseLabel_ValueIsNotValid_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ({1}) MUST be a 16-bit unsigned integers..
+        /// </summary>
+        internal static string ValidateVersionNumber_ValueIsNotValid_Format {
+            get {
+                return ResourceManager.GetString("ValidateVersionNumber_ValueIsNotValid_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ({1}) MUST NOT contain leading zeroes..
+        /// </summary>
+        internal static string ValidateVersionNumber_ValueMustNotStartWithZero_Format {
+            get {
+                return ResourceManager.GetString("ValidateVersionNumber_ValueMustNotStartWithZero_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to YUI Compressor processing {0}..
         /// </summary>
-        internal static string YuiCompressor_Processing_Format {
+        internal static string YuiCompressorBase_Processing_Format {
             get {
-                return ResourceManager.GetString("YuiCompressor_Processing_Format", resourceCulture);
+                return ResourceManager.GetString("YuiCompressorBase_Processing_Format", resourceCulture);
             }
         }
     }

@@ -45,6 +45,18 @@ _Better test coverage for Narvalo.Core & Narvalo.Web_
 - Use traits to mark slow or unsafe tests.
 - Integration of OpenCover.
 
+2015-04-25 - Version 1.1.0 of Narvalo.Build
+-------------------------------------------
+
+_New tasks_
+
+#### Breaking changes
+- All Java tasks are put into the Narvalo.Build.JavaTasks namespace.
+
+### Enhancements
+- New tasks related to semantic versioning.
+- New task to download a file from internet.
+
 2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
 

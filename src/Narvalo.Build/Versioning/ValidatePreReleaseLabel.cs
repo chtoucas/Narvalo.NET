@@ -6,6 +6,8 @@ namespace Narvalo.Build.Versioning
 
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
+    using Narvalo.Build.Internal;
+    using Narvalo.Build.Properties;
 
     /// <summary>
     /// MSBuild task to validate the pre-release label for an assembly informational version.
@@ -17,7 +19,7 @@ namespace Narvalo.Build.Versioning
     /// ]]>
     /// </code>
     /// </example>
-    public sealed class ValidatePreReleaseLabel : Task
+    public sealed class ValidatePrereleaseLabel : Task
     {
         /// <summary>
         /// Gets or sets the pre-release label.
@@ -25,7 +27,7 @@ namespace Narvalo.Build.Versioning
         /// <value>The pre-release label.</value>
         [Required]
         public string Value { get; set; }
-        
+
         /// <summary>
         /// Executes the task.
         /// </summary>
@@ -35,7 +37,10 @@ namespace Narvalo.Build.Versioning
         {
             if (!Regex.IsMatch(Value, @"^[a-z][\-0-9a-z]*$", RegexOptions.IgnoreCase))
             {
-                Log.LogError("PreReleaseLabel (" + Value + ") MUST comprise only ASCII alphanumerics and hyphen. It MUST also start with an ASCII letter.");
+                Log.LogError(
+                    Format.Resource(
+                        Strings.ValidatePrereleaseLabel_ValueIsNotValid_Format,
+                        Value));
             }
 
             return !Log.HasLoggedErrors;

@@ -54,20 +54,20 @@ namespace Narvalo.Build.Versioning
     public sealed class GenerateBuildAndRevisionNumbers : Task
     {
         /// <summary>
-        /// Gets or sets the build number.
+        /// Gets the build number.
         /// </summary>
         /// <value>The build number.</value>
         [Output]
         [CLSCompliant(false)]
-        public ushort BuildNumber { get; set; }
+        public ushort BuildNumber { get; private set; }
 
         /// <summary>
-        /// Gets or sets the revision number.
+        /// Gets the revision number.
         /// </summary>
         /// <value>The revision number.</value>
         [Output]
         [CLSCompliant(false)]
-        public ushort RevisionNumber { get; set; }
+        public ushort RevisionNumber { get; private set; }
 
         /// <summary>
         /// Executes the task.

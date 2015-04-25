@@ -5,12 +5,12 @@ namespace Narvalo.Build.JavaTasks
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Globalization;
     using System.IO;
     using System.Text;
 
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
+    using Narvalo.Build.Internal;
     using Narvalo.Build.Properties;
 
     /// <summary>
@@ -18,26 +18,52 @@ namespace Narvalo.Build.JavaTasks
     /// </summary>
     public sealed class ClosureCompiler : JavaTaskBase
     {
+        /// <summary>
+        /// The amount of time, in milliseconds, to wait for the associated process to exit.
+        /// </summary>
         private int _processTimeout = 5000;
 
+        /// <summary>
+        /// Gets or sets the list of files to be compressed.
+        /// </summary>
+        /// <value>The list of files to be compressed.</value>
         [Required]
         public ITaskItem[] Files { get; set; }
 
+        /// <summary>
+        /// Gets the list of compressed files.
+        /// </summary>
+        /// <value>The list of compressed files.</value>
         [Output]
         public ITaskItem[] CompressedFiles { get; private set; }
 
-        ////public ITaskItem[] Externs { get; set; }
-
+        /// <summary>
+        /// Gets or sets the compilation level.
+        /// </summary>
+        /// <value>The compilation level.</value>
         public string CompilationLevel { get; set; }
 
+        /// <summary>
+        /// Gets or sets the output directory.
+        /// </summary>
+        /// <value>The output directory.</value>
         public string OutputDirectory { get; set; }
 
+        /// <summary>
+        /// Gets or sets the amount of time, in milliseconds, to wait for the associated process to exit.
+        /// The maximum is the largest possible value of a 32-bit integer, which represents infinity to the operating system.
+        /// </summary>
+        /// <value>The process timeout.</value>
         public int ProcessTimeout
         {
             get { return _processTimeout; }
             set { _processTimeout = value; }
         }
 
+        /// <summary>
+        /// Gets the compilation level string.
+        /// </summary>
+        /// <value>The compilation level string.</value>
         private string CompilationLevelString_
         {
             get
@@ -56,6 +82,11 @@ namespace Narvalo.Build.JavaTasks
             }
         }
 
+        /// <summary>
+        /// Executes the task.
+        /// </summary>
+        /// <returns><see langword="true"/> if the task successfully executed; otherwise, 
+        /// <see langword="false"/>.</returns>
         public override bool Execute()
         {
             var compressedFiles = new List<ITaskItem>(Files.Length);
@@ -68,7 +99,7 @@ namespace Narvalo.Build.JavaTasks
 
                 if (!File.Exists(inFile))
                 {
-                    Log.LogError(String.Format(CultureInfo.CurrentCulture, Strings.FileNotFound_Fomat, inFile));
+                    Log.LogError(Format.Resource(Strings.FileNotFound_Format, inFile));
                     break;
                 }
 
@@ -76,7 +107,7 @@ namespace Narvalo.Build.JavaTasks
 
                 Log.LogMessage(
                     MessageImportance.Normal,
-                    String.Format(CultureInfo.CurrentCulture, Strings.ClosureCompiler_Processing_Format, new FileInfo(inFile).Name));
+                    Format.Resource(Strings.ClosureCompiler_Processing_Format, new FileInfo(inFile).Name));
 
                 if (File.Exists(outFile))
                 {
@@ -112,6 +143,13 @@ namespace Narvalo.Build.JavaTasks
             return !Log.HasLoggedErrors;
         }
 
+        /// <summary>
+        /// Generates the command-line arguments for the Closure executable
+        /// for the specified input and output files.
+        /// </summary>
+        /// <param name="inFile">The input file.</param>
+        /// <param name="outFile">The output file.</param>
+        /// <returns>The set of command-line arguments to use when starting the Closure executable.</returns>
         private string GetCommandLineArguments_(string inFile, string outFile)
         {
             var sb = new StringBuilder();
@@ -126,6 +164,11 @@ namespace Narvalo.Build.JavaTasks
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Returns the filename for the compressed file.
+        /// </summary>
+        /// <param name="fileName">The name of the input file.</param>
+        /// <returns>The filename for the compressed file.</returns>
         private string GetCompressedFilePath_(string fileName)
         {
             string name = fileName.Replace(".js", ".min.js");
