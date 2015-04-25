@@ -38,9 +38,9 @@ namespace Narvalo.Fx
 
     using global::Narvalo;
 
-    /// <summary>
-    /// Provides a set of static and extension methods for <see cref="Maybe{T}" />.
-    /// </summary>
+    /// <content>
+    /// Provides a set of static methods for <see cref="Maybe{T}" />.
+    /// </content>
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
@@ -200,7 +200,7 @@ namespace Narvalo.Fx
     } // End of the class Maybe.
 
     /// <content>
-    /// Provides core Monad extension methods.
+    /// Provides the core monadic extension methods for <see cref="Maybe{T}" />.
     /// </content>
     public static partial class Maybe
     {
@@ -671,9 +671,9 @@ namespace Narvalo.Fx
         #endregion
     } // End of the class Maybe.
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Maybe{T}"/> class.
-    /// </summary>
+    /// </content>
     [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
         Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class FuncExtensions
@@ -733,9 +733,9 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Internal;
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
-    /// </summary>
+    /// </content>
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -960,9 +960,9 @@ namespace Narvalo.Fx.Internal
     using Narvalo.Fx.Advanced;
    
 
-    /// <summary>
+    /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
-    /// </summary>
+    /// </content>
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",

@@ -466,9 +466,9 @@ namespace <#= Namespace #>.Internal
     protected void EmitCoreClass() 
     {
 #>
-    /// <summary>
-    /// Provides a set of static and extension methods for <see cref="<#= Name #>{T}" />.
-    /// </summary>
+    /// <content>
+    /// Provides a set of static methods for <see cref="<#= Name #>{T}" />.
+    /// </content>
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
@@ -683,7 +683,7 @@ namespace <#= Namespace #>.Internal
     {
 #>
     /// <content>
-    /// Provides core Monad extension methods.
+    /// Provides the core monadic extension methods for <see cref="<#= Name #>{T}" />.
     /// </content>
     public static partial class <#= Name #>
     {
@@ -1284,9 +1284,9 @@ namespace <#= Namespace #>.Internal
     public void EmitKleisliExtensions()
     {
 #>
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
-    /// </summary>
+    /// </content>
     [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
         Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class FuncExtensions
@@ -1350,9 +1350,9 @@ namespace <#= Namespace #>.Internal
     protected void EmitEnumerableMonadExtensions()
     {
 #>
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
-    /// </summary>
+    /// </content>
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -1406,9 +1406,9 @@ namespace <#= Namespace #>.Internal
     protected void EmitEnumerableMonadInternalExtensions()
     {
 #>
-    /// <summary>
+    /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
-    /// </summary>
+    /// </content>
     internal static partial class EnumerableExtensions
     {
 <#+ if (!HasUnderlyingTypeConstraint) { #>

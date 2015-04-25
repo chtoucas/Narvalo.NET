@@ -7,10 +7,15 @@ namespace Narvalo.Fx.Advanced
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
-
+    
     /// <summary>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
+    public static partial class EnumerableExtensions { }
+
+    /// <content>
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
+    /// </content>
     [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
         Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class EnumerableExtensions
@@ -28,13 +33,7 @@ namespace Narvalo.Fx.Advanced
                     where m.IsSome
                     select m.Value).EmptyIfNull();
         }
-    }
 
-    /// <content>
-    /// Provides overrides for a bunch of auto-generated (extension) methods (see Maybe.g.cs).
-    /// </content>
-    public static partial class EnumerableExtensions
-    {
         // Custom version of FilterCore with Maybe<T>.
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
@@ -50,9 +49,9 @@ namespace Narvalo.Fx.Advanced
         }
     }
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Output{T}"/> class.
-    /// </summary>>
+    /// </content>
     [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
         Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class EnumerableExtensions
