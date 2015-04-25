@@ -38,11 +38,7 @@ namespace Narvalo.Build.Versioning
         [Required]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Executes the task.
-        /// </summary>
-        /// <returns><see langword="true"/> if the task successfully executed; otherwise, 
-        /// <see langword="false"/>.</returns>
+        /// <inheritdoc />
         public override bool Execute()
         {
             if (Value.Length > 1 && Value.StartsWith("0", StringComparison.OrdinalIgnoreCase))

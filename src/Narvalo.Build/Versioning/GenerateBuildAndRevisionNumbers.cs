@@ -69,11 +69,7 @@ namespace Narvalo.Build.Versioning
         [CLSCompliant(false)]
         public ushort RevisionNumber { get; private set; }
 
-        /// <summary>
-        /// Executes the task.
-        /// </summary>
-        /// <returns><see langword="true"/> if the task successfully executed; otherwise, 
-        /// <see langword="false"/>.</returns>
+        /// <inheritdoc />
         public override bool Execute()
         {
             var now = DateTime.UtcNow;

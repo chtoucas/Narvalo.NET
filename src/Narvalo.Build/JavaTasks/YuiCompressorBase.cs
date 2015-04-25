@@ -87,11 +87,7 @@ namespace Narvalo.Build.JavaTasks
         /// <value>The filename extension.</value>
         protected abstract string FileExtension { get; }
 
-        /// <summary>
-        /// Executes the task.
-        /// </summary>
-        /// <returns><see langword="true"/> if the task successfully executed; otherwise, 
-        /// <see langword="false"/>.</returns>
+        /// <inheritdoc />
         public override bool Execute()
         {
             var compressedFiles = new List<ITaskItem>(Files.Length);

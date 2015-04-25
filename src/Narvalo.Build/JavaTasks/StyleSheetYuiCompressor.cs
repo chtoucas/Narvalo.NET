@@ -22,22 +22,13 @@ namespace Narvalo.Build.JavaTasks
     /// </example>
     public sealed class StyleSheetYuiCompressor : YuiCompressorBase
     {
-        /// <summary>
-        /// Gets the filename extension.
-        /// </summary>
-        /// <value>The filename extension.</value>
+        /// <inheritdoc />
         protected override string FileExtension
         {
             get { return "css"; }
         }
 
-        /// <summary>
-        /// Generates the command-line arguments for the YUI executable
-        /// for the specified input and output files.
-        /// </summary>
-        /// <param name="inFile">The input file.</param>
-        /// <param name="outFile">The output file.</param>
-        /// <returns>The set of command-line arguments to use when starting the YUI executable.</returns>
+        /// <inheritdoc />
         protected override string GenerateCommandLineArguments(string inFile, string outFile)
         {
             var sb = new StringBuilder();

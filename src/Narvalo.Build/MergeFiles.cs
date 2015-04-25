@@ -70,11 +70,7 @@ namespace Narvalo.Build
         [Required]
         public string OutFile { get; set; }
 
-        /// <summary>
-        /// Executes the task.
-        /// </summary>
-        /// <returns><see langword="true"/> if the task successfully executed; otherwise, 
-        /// <see langword="false"/>.</returns>
+        /// <inheritdoc />
         public override bool Execute()
         {
             if (Files.Length == 0)

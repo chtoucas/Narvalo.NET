@@ -36,11 +36,7 @@ namespace Narvalo.Build
         [Required]
         public string OutputFile { get; set; }
 
-        /// <summary>
-        /// Executes the task.
-        /// </summary>
-        /// <returns><see langword="true"/> if the task successfully executed; otherwise, 
-        /// <see langword="false"/>.</returns>
+        /// <inheritdoc />
         public override bool Execute()
         {
             try

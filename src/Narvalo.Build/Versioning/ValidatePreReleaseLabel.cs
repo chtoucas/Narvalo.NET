@@ -28,11 +28,7 @@ namespace Narvalo.Build.Versioning
         [Required]
         public string Value { get; set; }
 
-        /// <summary>
-        /// Executes the task.
-        /// </summary>
-        /// <returns><see langword="true"/> if the task successfully executed; otherwise, 
-        /// <see langword="false"/>.</returns>
+        /// <inheritdoc />
         public override bool Execute()
         {
             if (!Regex.IsMatch(Value, @"^[a-z][\-0-9a-z]*$", RegexOptions.IgnoreCase))
