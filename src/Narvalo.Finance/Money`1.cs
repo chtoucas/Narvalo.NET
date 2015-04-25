@@ -95,8 +95,8 @@ namespace Narvalo.Finance
             unchecked
             {
                 int hash = 17;
-                hash = (31 * hash) + ((long)Amount).GetHashCode();
-                hash = (31 * hash) + s_Currency.GetHashCode();
+                hash = 31 * hash + ((long)Amount).GetHashCode();
+                hash = 31 * hash + s_Currency.GetHashCode();
                 return hash;
             }
         }
