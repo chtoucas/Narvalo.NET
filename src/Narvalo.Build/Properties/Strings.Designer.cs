@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Build.Properties {
-    using System;
-    
-    
+namespace Narvalo.Build.Properties
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,14 +22,14 @@ namespace Narvalo.Build.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings_Build {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings_Build() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Narvalo.Build.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Build.Properties.Strings_Build", typeof(Strings_Build).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Narvalo.Build.Properties.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,36 +63,36 @@ namespace Narvalo.Build.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Closure Compiler processing {0}..
         /// </summary>
-        internal static string ClosureCompiler_ProcessingFormat {
+        internal static string ClosureCompiler_Processing_Format {
             get {
-                return ResourceManager.GetString("ClosureCompiler_ProcessingFormat", resourceCulture);
+                return ResourceManager.GetString("ClosureCompiler_Processing_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The file {0} does not exist..
         /// </summary>
-        internal static string FileNotFoundFomat {
+        internal static string FileNotFound_Fomat {
             get {
-                return ResourceManager.GetString("FileNotFoundFomat", resourceCulture);
+                return ResourceManager.GetString("FileNotFound_Fomat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to java.exe exited with error code {0}..
         /// </summary>
-        internal static string JavaTask_ErrorFormat {
+        internal static string JavaTask_Error_Format {
             get {
-                return ResourceManager.GetString("JavaTask_ErrorFormat", resourceCulture);
+                return ResourceManager.GetString("JavaTask_Error_Format", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Using java.exe from: {0}..
         /// </summary>
-        internal static string JavaTask_JavaPathFormat {
+        internal static string JavaTask_JavaPath_Format {
             get {
-                return ResourceManager.GetString("JavaTask_JavaPathFormat", resourceCulture);
+                return ResourceManager.GetString("JavaTask_JavaPath_Format", resourceCulture);
             }
         }
         
@@ -108,9 +108,9 @@ namespace Narvalo.Build.Properties {
         /// <summary>
         ///   Looks up a localized string similar to YUI Compressor processing {0}..
         /// </summary>
-        internal static string YuiCompressor_ProcessingFormat {
+        internal static string YuiCompressor_Processing_Format {
             get {
-                return ResourceManager.GetString("YuiCompressor_ProcessingFormat", resourceCulture);
+                return ResourceManager.GetString("YuiCompressor_Processing_Format", resourceCulture);
             }
         }
     }

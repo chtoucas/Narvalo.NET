@@ -117,22 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ClosureCompiler_ProcessingFormat" xml:space="preserve">
+  <data name="ClosureCompiler_Processing_Format" xml:space="preserve">
     <value>Closure Compiler processing {0}.</value>
   </data>
-  <data name="FileNotFoundFomat" xml:space="preserve">
+  <data name="FileNotFound_Fomat" xml:space="preserve">
     <value>The file {0} does not exist.</value>
   </data>
-  <data name="JavaTask_ErrorFormat" xml:space="preserve">
+  <data name="JavaTask_Error_Format" xml:space="preserve">
     <value>java.exe exited with error code {0}.</value>
   </data>
-  <data name="JavaTask_JavaPathFormat" xml:space="preserve">
+  <data name="JavaTask_JavaPath_Format" xml:space="preserve">
     <value>Using java.exe from: {0}.</value>
   </data>
   <data name="MergeFiles_EmptyListOfFiles" xml:space="preserve">
     <value>The list of files to merge can not be empty.</value>
   </data>
-  <data name="YuiCompressor_ProcessingFormat" xml:space="preserve">
+  <data name="YuiCompressor_Processing_Format" xml:space="preserve">
     <value>YUI Compressor processing {0}.</value>
   </data>
 </root>

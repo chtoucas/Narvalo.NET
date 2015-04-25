@@ -118,7 +118,7 @@
   <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
     <Message Text="Downloading latest version of NuGet..." Importance="high" />
 
-    <DownloadNuGet OutputFilePath="$(NuGetCommand)" />
+    <DownloadNuGet OutputFile="$(NuGetCommand)" />
   </Target>
 
   <!-- RestorePackages target. -->

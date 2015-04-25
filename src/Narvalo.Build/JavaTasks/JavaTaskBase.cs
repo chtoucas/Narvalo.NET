@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Build
+namespace Narvalo.Build.JavaTasks
 {
     using System;
     using System.Diagnostics;
@@ -58,7 +58,7 @@ namespace Narvalo.Build
 
             Log.LogMessage(
                 MessageImportance.Low,
-                String.Format(CultureInfo.CurrentCulture, Strings_Build.JavaTask_JavaPathFormat, javaPath));
+                String.Format(CultureInfo.CurrentCulture, Strings.JavaTask_JavaPath_Format, javaPath));
 
             return javaPath;
         }
@@ -81,7 +81,7 @@ namespace Narvalo.Build
                     error.Trim().Replace("[WARNING] ", String.Empty));
             }
 
-            Log.LogError(Strings_Build.JavaTask_ErrorFormat, process.ExitCode);
+            Log.LogError(Strings.JavaTask_Error_Format, process.ExitCode);
         }
 
         protected override string GenerateFullPathToTool()

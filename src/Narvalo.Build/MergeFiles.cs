@@ -11,8 +11,6 @@ namespace Narvalo.Build
     using Narvalo.Build.Properties;
 
     /// <example>
-    /// <UsingTask TaskName="Narvalo.Build.MergeFiles"
-    ///   AssemblyFile="$(ProjectDir)..\Narvalo.Build\bin\$(ConfigurationName)\Narvalo.Build.dll"/>
     /// <ItemGroup>
     ///   <StyleFiles Include="$(SourceWebPhysicalPath)\Styles\*.css" />
     /// </ItemGroup>
@@ -57,8 +55,8 @@ namespace Narvalo.Build
         public override bool Execute()
         {
             if (Files.Length == 0) {
-                Log.LogMessage(MessageImportance.High, Strings_Build.MergeFiles_EmptyListOfFiles);
-                return true;
+                Log.LogMessage(MessageImportance.High, Strings.MergeFiles_EmptyListOfFiles);
+                return false;
             }
 
             try {
@@ -66,7 +64,7 @@ namespace Narvalo.Build
                     foreach (ITaskItem file in Files) {
                         if (!File.Exists(file.ItemSpec)) {
                             Log.LogError(
-                                String.Format(CultureInfo.CurrentCulture, Strings_Build.FileNotFoundFomat, file.ItemSpec));
+                                String.Format(CultureInfo.CurrentCulture, Strings.FileNotFound_Fomat, file.ItemSpec));
                             break;
                         }
 
@@ -78,7 +76,6 @@ namespace Narvalo.Build
             }
             catch (IOException ex) {
                 Log.LogErrorFromException(ex, showStackTrace: false);
-                throw;
             }
 
             return !Log.HasLoggedErrors;

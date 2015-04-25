@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Build
+namespace Narvalo.Build.JavaTasks
 {
     using System;
     using System.Collections.Generic;
@@ -13,6 +13,9 @@ namespace Narvalo.Build
     using Microsoft.Build.Utilities;
     using Narvalo.Build.Properties;
 
+    /// <summary>
+    /// MSBuild task to execute the Closure compiler.
+    /// </summary>
     public sealed class ClosureCompiler : JavaTaskBase
     {
         private int _processTimeout = 5000;
@@ -65,7 +68,7 @@ namespace Narvalo.Build
 
                 if (!File.Exists(inFile))
                 {
-                    Log.LogError(String.Format(CultureInfo.CurrentCulture, Strings_Build.FileNotFoundFomat, inFile));
+                    Log.LogError(String.Format(CultureInfo.CurrentCulture, Strings.FileNotFound_Fomat, inFile));
                     break;
                 }
 
@@ -73,7 +76,7 @@ namespace Narvalo.Build
 
                 Log.LogMessage(
                     MessageImportance.Normal,
-                    String.Format(CultureInfo.CurrentCulture, Strings_Build.ClosureCompiler_ProcessingFormat, new FileInfo(inFile).Name));
+                    String.Format(CultureInfo.CurrentCulture, Strings.ClosureCompiler_Processing_Format, new FileInfo(inFile).Name));
 
                 if (File.Exists(outFile))
                 {

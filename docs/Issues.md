@@ -71,6 +71,7 @@ Narvalo.Facts
 Narvalo.Build
 -------------
 
+- Use a separate AppDomain (AppDomainIsolatedTask) for Java tasks.
 - Create Gendarme and Versioning tasks to Narvalo.Build.
 
 Narvalo.StyleCop.CSharp

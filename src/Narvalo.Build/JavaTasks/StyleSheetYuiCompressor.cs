@@ -1,19 +1,24 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Build
+namespace Narvalo.Build.JavaTasks
 {
     using System.Globalization;
     using System.Text;
 
+    /// <summary>
+    /// MSBuild task to execute the YUI compressor on CSS files.
+    /// </summary>
     /// <example>
-    /// <UsingTask TaskName="Narvalo.Build.CssYuiCompressor" 
-    ///   AssemblyFile="$(ProjectDir)..\Narvalo.Build\bin\$(ConfigurationName)\Narvalo.Build.dll"/>
+    /// <code>
+    /// <![CDATA[
     /// <ItemGroup>
-    ///   <CssFiles Include="$(SourceWebPhysicalPath)\Styles\*.css" />
+    ///     <CssFiles Include="$(SourceWebPhysicalPath)\Styles\*.css" />
     /// </ItemGroup>
     /// <Target Name="AfterBuild">
-    ///   <CssYuiCompressor Files="@(CssFiles)" />
+    ///     <StyleSheetYuiCompressor Files="@(CssFiles)" />
     /// </Target>
+    /// ]]>
+    /// </code>
     /// </example>
     public sealed class StyleSheetYuiCompressor : YuiCompressorBase
     {
@@ -27,11 +32,13 @@ namespace Narvalo.Build
             var sb = new StringBuilder();
             sb.AppendFormat(@"-jar ""{0}"" --type css --charset utf8", JarPath);
 
-            if (LineBreak > 0) {
+            if (LineBreak > 0)
+            {
                 sb.AppendFormat(" --line-break {0}", LineBreak.ToString(CultureInfo.InvariantCulture));
             }
 
-            if (Verbose) {
+            if (Verbose)
+            {
                 sb.Append(" --verbose");
             }
 

@@ -1,47 +1,31 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Build
+namespace Narvalo.Build.JavaTasks
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Text;
 
+    /// <summary>
+    /// MSBuild task to execute the YUI compressor on JavaScript files.
+    /// </summary>
     /// <example>
     /// <code>
     /// <![CDATA[
-    /// <UsingTask TaskName="Narvalo.Build.JsYuiCompressor" 
-    ///     AssemblyFile="$(ProjectDir)..\Narvalo.Build\bin\$(ConfigurationName)\Narvalo.Build.dll"/>
     /// <ItemGroup>
     ///     <JavaScriptFiles Include="$(SourceWebPhysicalPath)\Scripts\*.js" />
     /// </ItemGroup>
     /// <Target Name="AfterBuild">
-    ///     <JsYuiCompressor Files="@(JavaScriptFiles)" />
+    ///     <JavaScriptYuiCompressor Files="@(JavaScriptFiles)" />
     /// </Target>
     /// ]]>
     /// </code>
     /// </example>
     public sealed class JavaScriptYuiCompressor : YuiCompressorBase
     {
-        private bool _disableOptimizations = false;
-        private bool _noMunge = false;
-        private bool _preserveSemi = false;
+        public bool DisableOptimizations { get; set; }
 
-        public bool DisableOptimizations
-        {
-            get { return _disableOptimizations; }
-            set { _disableOptimizations = value; }
-        }
+        public bool NoMunge { get; set; }
 
-        public bool NoMunge
-        {
-            get { return _noMunge; }
-            set { _noMunge = value; }
-        }
-
-        public bool PreserveSemi
-        {
-            get { return _preserveSemi; }
-            set { _preserveSemi = value; }
-        }
+        public bool PreserveSemi { get; set; }
 
         protected override string FileExtension
         {

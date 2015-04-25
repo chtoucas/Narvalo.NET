@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Build
+namespace Narvalo.Build.JavaTasks
 {
     using System;
     using System.Collections.Generic;
@@ -12,12 +12,10 @@ namespace Narvalo.Build
     using Microsoft.Build.Utilities;
     using Narvalo.Build.Properties;
 
-    // Maybe we should use a separate AppDomain: AppDomainIsolatedTask
     public abstract class YuiCompressorBase : JavaTaskBase
     {
         private int _lineBreak = 0;
         private int _processTimeout = 5000;
-        private bool _verbose = false;
 
         protected YuiCompressorBase() : base() { }
 
@@ -41,11 +39,7 @@ namespace Narvalo.Build
             set { _processTimeout = value; }
         }
 
-        public bool Verbose
-        {
-            get { return _verbose; }
-            set { _verbose = value; }
-        }
+        public bool Verbose { get; set; }
 
         protected abstract string FileExtension { get; }
 
@@ -59,7 +53,7 @@ namespace Narvalo.Build
                 string inFile = file.ItemSpec;
 
                 if (!File.Exists(inFile)) {
-                    Log.LogError(String.Format(CultureInfo.CurrentCulture, Strings_Build.FileNotFoundFomat, inFile));
+                    Log.LogError(String.Format(CultureInfo.CurrentCulture, Strings.FileNotFound_Fomat, inFile));
                     break;
                 }
 
@@ -67,7 +61,7 @@ namespace Narvalo.Build
 
                 Log.LogMessage(
                     MessageImportance.Normal,
-                    String.Format(CultureInfo.CurrentCulture, Strings_Build.YuiCompressor_ProcessingFormat, new FileInfo(inFile).Name));
+                    String.Format(CultureInfo.CurrentCulture, Strings.YuiCompressor_Processing_Format, new FileInfo(inFile).Name));
 
                 if (File.Exists(outFile)) {
                     File.Delete(outFile);

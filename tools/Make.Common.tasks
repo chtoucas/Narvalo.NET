@@ -7,7 +7,7 @@
 
   <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>
-      <OutputFilePath ParameterType="System.String" Required="true" />
+      <OutputFile ParameterType="System.String" Required="true" />
     </ParameterGroup>
     <Task>
       <Reference Include="System.Core" />
@@ -19,7 +19,7 @@
       <Code Type="Fragment" Language="cs">
         <![CDATA[
 try {
-    new WebClient().DownloadFile("https://nuget.org/nuget.exe", OutputFilePath);
+    new WebClient().DownloadFile("https://nuget.org/nuget.exe", OutputFile);
 
     return true;
 }
