@@ -3,13 +3,16 @@
          DefaultTargets="Build"
          InitialTargets="__InitializeMakeCommonTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  
+
   <!-- Import common properties, if not already done. -->
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props"
           Condition=" '$(MakeCommonPropsImported)' != 'true' "/>
 
   <!-- Import common tasks. -->
-  <Import Project="$(MSBuildThisFileDirectory)Make.Common.tasks" />
+  <!--<Import Project="$(MSBuildThisFileDirectory)Make.Common.tasks" />-->
+  
+  <!-- Import Narvalo tasks. -->
+  <Import Project="$(MSBuildThisFileDirectory)Package.Narvalo.targets" />
 
   <!-- Import Xunit tasks. -->
   <Import Project="$(MSBuildThisFileDirectory)Package.Xunit.tasks" />
@@ -75,7 +78,7 @@
              Targets="Package"
              StopOnFirstFailure="true" />
   </Target>
-  
+
   <!-- PEVerify target. -->
   <Target Name="PEVerify">
     <!-- WARNING: Child PEVerify target is a non-standard MSBuild target. 
@@ -118,7 +121,7 @@
   <Target Name="InstallNuGet" Condition=" !Exists('$(NuGetCommand)') ">
     <Message Text="Downloading latest version of NuGet..." Importance="high" />
 
-    <DownloadNuGet OutputFile="$(NuGetCommand)" />
+    <DownloadFile Address="https://nuget.org/nuget.exe" OutputFile="$(NuGetCommand)" />
   </Target>
 
   <!-- RestorePackages target. -->

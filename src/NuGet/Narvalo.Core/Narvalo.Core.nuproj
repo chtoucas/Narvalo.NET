@@ -19,7 +19,7 @@
     <NuReferences>
       <![CDATA[
       <references>
-        <reference file="Narvalo.Fx.dll" />
+        <reference file="Narvalo.Core.dll" />
       </references>
       ]]>
     </NuReferences>

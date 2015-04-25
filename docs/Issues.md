@@ -68,12 +68,6 @@ Narvalo.Facts
 - Explore SpecFlow.
 - Write a T4 template for Monad tests.
 
-Narvalo.Build
--------------
-
-- Use a separate AppDomain (AppDomainIsolatedTask) for Java tasks.
-- Create Gendarme and Versioning tasks to Narvalo.Build.
-
 Narvalo.StyleCop.CSharp
 -----------------------
 
