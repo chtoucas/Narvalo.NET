@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SourceAnalyzer Name="Narvalo Custom Rules">
+  <Description>
+    Custom rules used by the Narvalo projects.
+  </Description>
+  <Rules>
+    <RuleGroup Name="Naming Rules">
+      <Rule Name="PrivateFieldsMustBeginWithUnderscore" CheckId="NA1001">
+        <Context>Private instance fields must start with an underscore: {1}.</Context>
+        <Description>Validates that the name of a private instance field starts with an underscore.</Description>
+      </Rule>
+      <Rule Name="PrivateStaticFieldsMustBeCorrectlyPrefixed" CheckId="NA1002">
+        <Context>Private static fields must start with "s_": {1}.</Context>
+        <Description>Validates that the name of a private static field starts with "s_".</Description>
+      </Rule>
+      <!--<Rule Name="ThreadStaticFieldsMustBeCorrectlyPrefixed" CheckId="NA1003">
+        <Context>Thread static fields must start with "t_": {1}.</Context>
+        <Description>Validates that the name of a thread static field starts with "t_".</Description>
+      </Rule>-->
+      <Rule Name="PrivateConstsMustOnlyContainUppercaseLettersDigitsAndUnderscores" CheckId="NA1004">
+        <Context>Private constants must only contain uppercase letters, digits and underscore: {1}.</Context>
+        <Description>Validates that the name of a private constant contain only uppercase letters and underscores.</Description>
+      </Rule>
+      <Rule Name="PrivateMethodsMustEndWithUnderscore" CheckId="NA1005">
+        <Context>Private methods must end with an underscore: {1}.</Context>
+        <Description>Validates that the name of a private method ends with an underscore.</Description>
+      </Rule>
+      <Rule Name="InternalMethodsMustNotEndWithInternal" CheckId="NA1006">
+        <Context>Internal methods must not end with "Internal": {1}.</Context>
+        <Description>Validates that the name of an internal method does not end with "Internal".</Description>
+      </Rule>
+      <Rule Name="PrivateNestedClassesMustEndWithUnderscore" CheckId="NA1007">
+        <Context>Private classes must end with an underscore: {1}.</Context>
+        <Description>Validates that the name of a private nested class ends with an underscore.</Description>
+      </Rule>
+    </RuleGroup>
+    <!--<RuleGroup Name="Layout Rules">
+      <Rule Name="FileMustStartWithCopyrightText" CheckId="NA1101">
+        <Context>The file must start with the Narvalo copyright header.</Context>
+        <Description>Verifies that a file starts with the Narvalo copyright header.</Description>
+      </Rule>
+      <Rule Name="AvoidLinesExceeding120Characters" CheckId="NA1102">
+        <Context>Source lines should not exceed 120 characters.</Context>
+        <Description>Verifies that source lines are not longer than 120 characters.</Description>
+      </Rule>
+    </RuleGroup>-->
+  </Rules>
+</SourceAnalyzer>

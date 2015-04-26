@@ -122,10 +122,18 @@
   <PropertyGroup>
     <SourceAnalysisEnabled Condition=" '$(SourceAnalysisEnabled)' != 'true' ">false</SourceAnalysisEnabled>
 
-    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Strict.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Loosy.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
 
     <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- WARNING: This setting only affects CI builds. It won't be visible from VS. 
+         For VS, you must copy the dll to the install directory of StyleCop. -->
+    <!-- The project Narvalo.StyleCop.CSharp is automatically built from PSakefile.ps1. -->
+    <!--<StyleCopAdditionalAddinPaths Include="$(MSBuildThisFileDirectory)libexec\StyleCopAddins" />-->
+    <StyleCopAdditionalAddinPaths Include="$(MSBuildThisFileDirectory)src\Narvalo.StyleCop.CSharp\bin\Release" />
+  </ItemGroup>
 
   <!-- Code Analysis -->
   <!--

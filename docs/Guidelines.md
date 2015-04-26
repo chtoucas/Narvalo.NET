@@ -18,7 +18,7 @@ We also enforce the following rules:
 - Add a suffix to all private methods and classes with `_`.
 - Directories must mirror namespaces.
 - Do not put more than one public class per file. The only exception is for Code Contracts classes.
-- All files must contain a copyright header:
+- All files must start with a copyright header:
 ```csharp
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 ```
@@ -32,7 +32,7 @@ We also enforce the following rules:
 
 Naming:
 
-- Consider adding the "Base" suffix to all abstract classes.
+- Consider adding the "Base" suffix to abstract classes.
 - Consider not adding an internal access modifier to members of an internal class.
 - Consider adding an "Internal" suffix to the names of internal methods in a non-internal class with "Internal".
 - For concrete helper classes try to find a more useful suffix than "Helper" or "Utility"
@@ -59,11 +59,11 @@ Design Recommendations
   * `Select` (LINQ operator)
   * `Add`, collection initializer
 - All static members should be thread-safe.
-- Internal classes must be in a subdirectory named "Internal".
+- Consider putting internal classes in a separate directory named "Internal".
 
 ### Optional Rules
 
-- Consider putting optional extensions in a subdirectory named "Extensions".
+- Consider putting optional extensions in a separate directory.
 - Projects should use a minimal set of references.
 
 ### Localization & Resources
@@ -74,7 +74,7 @@ Design Recommendations
 ### Portable Class Libraries
 
 The behaviour should be 100% identical across all supported platforms without
-using the [bait and switch PCL trick](http://log.paulbetts.org/the-bait-and-switch-pcl-trick/).
+resorting to the [bait and switch PCL trick](http://log.paulbetts.org/the-bait-and-switch-pcl-trick/).
 
 Code Analysis
 -------------

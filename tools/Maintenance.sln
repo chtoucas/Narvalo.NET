@@ -113,11 +113,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.FxCop", "src\Narval
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.StyleCop.CSharp", "src\Narvalo.StyleCop.CSharp\Narvalo.StyleCop.CSharp.csproj", "{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PreviewCommonMark", "PreviewCommonMark", "{3FFC3740-D625-42D8-AE35-45F789599C34}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommonMark", "CommonMark", "{3FFC3740-D625-42D8-AE35-45F789599C34}"
 	ProjectSection(SolutionItems) = preProject
-		src\PreviewCommonMark\commonmark.js = src\PreviewCommonMark\commonmark.js
-		src\PreviewCommonMark\index.html = src\PreviewCommonMark\index.html
-		src\PreviewCommonMark\jquery-2.1.3.min.js = src\PreviewCommonMark\jquery-2.1.3.min.js
+		src\CommonMark\index.html = src\CommonMark\index.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.ProjectAutomation", "Narvalo.ProjectAutomation", "{9392A417-C4D9-4EDB-B2F0-9E3A09995B2C}"

@@ -5,23 +5,51 @@ namespace Narvalo.StyleCop.CSharp
     internal enum Rules
     {
         /// <summary>
-        /// Names of private instance fields must start with an underscore.
+        /// Private instance fields must start with an underscore.
         /// </summary>
-        PrivateFieldNamesMustBeginWithUnderscore,
+        PrivateFieldsMustBeginWithUnderscore,
 
         /// <summary>
-        /// Names of private methods must end with an underscore.
+        /// Private static fields must start with "s_".
         /// </summary>
-        PrivateMethodNamesMustEndWithUnderscore,
+        PrivateStaticFieldsMustBeCorrectlyPrefixed,
 
         /// <summary>
-        /// Names of private static fields must be start with "s_".
+        /// Thread static fields must start with "t_".
         /// </summary>
-        PrivateStaticFieldMustBePrefixed,
+        ThreadStaticFieldsMustBeCorrectlyPrefixed,
 
         /// <summary>
-        /// Names of private constants must only contain uppercase letters and underscore.
+        /// Private constants must only contain uppercase letters, digits and underscore.
         /// </summary>
-        PrivateConstantNamesMustOnlyContainUppercaseLettersAndUnderscore,
+        PrivateConstsMustOnlyContainUppercaseLettersDigitsAndUnderscores,
+
+        /// <summary>
+        /// Private methods must end with an underscore.
+        /// </summary>
+        PrivateMethodsMustEndWithUnderscore,
+
+        /// <summary>
+        /// Internal methods must not end with "Internal".
+        /// </summary>
+        InternalMethodsMustNotEndWithInternal,
+
+        /// <summary>
+        /// Private nested classes must end with an underscore.
+        /// </summary>
+        PrivateNestedClassesMustEndWithUnderscore,
+
+        /// <summary>
+        /// The file must start with the Narvalo copyright header:
+        /// <code>
+        /// // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+        /// </code>
+        /// </summary>
+        FileMustStartWithCopyrightText,
+
+        /// <summary>
+        /// Source lines should not exceed 120 characters.
+        /// </summary>
+        AvoidLinesExceeding120Characters,
     }
 }

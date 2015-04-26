@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 New-Variable -Name LocalModulesPath `
-    -Value (Join-Path (Get-Item $PSScriptRoot).Parent.FullName 'tools\src') `
+    -Value (Join-Path (Get-Item $PSScriptRoot).Parent.FullName 'src') `
     -Scope Script `
     -Option ReadOnly `
     -Description 'Path to the local modules.'

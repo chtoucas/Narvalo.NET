@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
+// All compilation symbols found below are eventually defined on the fly by the build script.
+
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
-
-//// All compilation symbols found below are eventually defined on the fly by the build script.
 
 [module: SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly",
     Justification = "Informational version uses semantic versioning.")]
@@ -39,8 +39,14 @@ using System.Runtime.InteropServices;
 #if !NO_INTERNALS_VISIBLE_TO
 namespace Narvalo.Properties
 {
+    /// <summary>
+    /// Provides constants used in Assembly's attributes.
+    /// </summary>
     internal static partial class AssemblyInfo
     {
+        /// <summary>
+        /// Gets the public key suffix suitable for use with <c>System.Runtime.CompilerServices.InternalsVisibleTo</c>.
+        /// </summary>
 #if SIGNED_ASSEMBLY
         public const string PublicKeySuffix =
             ",PublicKey=0024000004800000940000000602000000240000525341310004000001000100fb21e2a499fbcf"

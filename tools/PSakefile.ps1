@@ -1,5 +1,8 @@
 # PSakefile script.
 # Requires the module 'Narvalo.ProjectAutomation'.
+#
+# WARNING:
+# - When enabling source analysis, you MUST also build the StyleCop project.
 
 # We force the framework to be sure we use the v12.0 of the build tools.
 # For instance, this is a requirement for the _MyGet-Publish target where
@@ -56,7 +59,7 @@ Task Default -Depends FastBuild
 # or $Foundations; this will be done in MSBuild.
 
 Task FastBuild `
-    -Description 'Fast build ''Foundations'' then run tests.' `
+    -Description '[ALL  ] Build then run tests.' `
     -Depends _CI-InitializeVariables `
 {
     MSBuild $Foundations $Opts $CI_Props `
@@ -67,29 +70,27 @@ Task FastBuild `
 }
 
 Task Build `
-    -Description 'Build all projects.' `
+    -Description '[ALL+ ] Build.' `
     -Depends _CI-InitializeVariables `
 {
     MSBuild $Everything $Opts $CI_Props '/t:Build'
 }
 
 Task FullBuild `
-    -Description 'Build all projects, run source analysis, verify results & run tests.' `
+    -Description '[ALL+ ] Build, verify then run tests.' `
     -Depends _CI-InitializeVariables `
     -Alias CI `
 {
     # Perform the following operations:
-    # - Run Source Analysis
     # - Build all projects
     # - Verify Portable Executable (PE) format
     # - Run Xunit tests, including white-box tests
     MSBuild $Everything $Opts $CI_Props `
-        '/t:Build;PEVerify;Xunit',
-        '/p:SourceAnalysisEnabled=true'
+        '/t:Build;PEVerify;Xunit'
 }
 
 Task FullClean `
-    -Description 'Delete the entire build directory.' `
+    -Description '        Delete the entire build directory.' `
     -Alias Clean `
     -ContinueOnError `
 {
@@ -97,8 +98,22 @@ Task FullClean `
     Remove-LocalItem 'work' -Recurse
 }
 
+Task SourceAnalysis `
+    -Description '[SAFE ] Run source analysis.' `
+    -Depends _CI-InitializeVariables, StyleCop-Build `
+    -Alias SA `
+{
+    MSBuild $Foundations $Opts $CI_Props `
+        '/t:Build',
+        '/p:Configuration=Debug',
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true',
+        '/p:SourceAnalysisEnabled=true',
+        '/p:Filter=_Safe_'
+}
+
 Task OpenCover `
-    -Description 'Run OpenCover against core libraries (EXTREMELY SLOW).' `
+    -Description '[CORE ] Run OpenCover (EXTREMELY SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias Cover `
 {
@@ -118,7 +133,7 @@ Task OpenCover `
 }
 
 Task CodeAnalysis `
-    -Description 'Run Code Analysis on core libraries (SLOW).' `
+    -Description '[SAFE ] Run Code Analysis (SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias CA `
 {
@@ -130,11 +145,11 @@ Task CodeAnalysis `
         '/p:RunCodeAnalysis=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
-        '/p:Filter=_Core_'
+        '/p:Filter=_Safe_'
 }
 
 Task GendarmeAnalysis `
-    -Description 'Run Mono.Gendarme against core libraries (SLOW).' `
+    -Description '[CORE ] Run Mono.Gendarme (SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias Keuf `
 {
@@ -152,7 +167,7 @@ Task GendarmeAnalysis `
 }
 
 Task CodeContractsAnalysis `
-    -Description 'Run Code Contracts Analysis on core libraries (EXTREMELY SLOW).' `
+    -Description '[SAFE ] Run Code Contracts Analysis (EXTREMELY SLOW).' `
     -Depends _CI-InitializeVariables `
     -Alias CC `
 {
@@ -162,13 +177,13 @@ Task CodeContractsAnalysis `
         '/t:Build',
         '/p:VisibleInternals=false',
         '/p:Configuration=CodeContracts',
-        '/p:Filter=_Core_'
+        '/p:Filter=_Safe_'
 }
 
 Task SecurityAnalysis `
-    -Description 'Run SecAnnotate against core libraries (SLOW).' `
+    -Description '[SAFE ] Run SecAnnotate (SLOW).' `
     -Depends _CI-InitializeVariables `
-    -Alias SA `
+    -Alias Sec `
 {
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Clean;SecAnnotate;PEVerify',
@@ -178,7 +193,7 @@ Task SecurityAnalysis `
         '/p:SignAssembly=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
-        '/p:Filter=_Core_'
+        '/p:Filter=_Safe_'
 }
 
 Task _CI-InitializeVariables `
@@ -213,12 +228,12 @@ Task _CI-InitializeVariables `
 # ------------------------------------------------------------------------------
 
 Task Package-All `
-    -Description 'Package ''Foundations''.' `
+    -Description '[ALL  ] Package.' `
     -Depends Package-Core, Package-Mvp, Package-Build `
     -Alias Pack
 
 Task Package-Core `
-    -Description 'Package core projects.' `
+    -Description '[CORE ] Package.' `
     -Depends _Package-InitializeVariables `
     -Alias PackCore `
 {
@@ -227,7 +242,7 @@ Task Package-Core `
 }
 
 Task Package-Mvp `
-    -Description 'Package MVP projects.' `
+    -Description '[MVP  ] Package.' `
     -Depends _Package-InitializeVariables `
     -Alias PackMvp `
 {
@@ -236,7 +251,7 @@ Task Package-Mvp `
 }
 
 Task Package-Build `
-    -Description 'Package the project Narvalo.Build.' `
+    -Description '[BUILD] Package.' `
     -Depends _Package-InitializeVariables `
     -Alias PackBuild `
 {
@@ -288,12 +303,12 @@ Task _Package-CheckVariablesForRetail `
 # ------------------------------------------------------------------------------
 
 Task Publish-All `
-    -Description 'Publish ''Foundations''.' `
+    -Description '[ALL  ] Publish.' `
     -Depends Publish-Core, Publish-Mvp, Publish-Build `
     -Alias Push
 
 Task Publish-Core `
-    -Description 'Publish core projects.' `
+    -Description '[CORE ] Publish.' `
     -Depends _Publish-DependsOn, Package-Core `
     -RequiredVariables Retail `
     -Alias PushCore `
@@ -302,7 +317,7 @@ Task Publish-Core `
 }
 
 Task Publish-Mvp `
-    -Description 'Publish MVP projects.' `
+    -Description '[MVP  ] Publish.' `
     -Depends _Publish-DependsOn, Package-Mvp `
     -RequiredVariables Retail `
     -Alias PushMvp `
@@ -311,7 +326,7 @@ Task Publish-Mvp `
 }
 
 Task Publish-Build `
-    -Description 'Publish the project Narvalo.Build.' `
+    -Description '[BUILD] Publish.' `
     -Depends _Publish-DependsOn, Package-Build `
     -RequiredVariables Retail `
     -Alias PushBuild `
@@ -337,15 +352,33 @@ Task _Publish-InitializeVariables `
 }
 
 # ------------------------------------------------------------------------------
+# StyleCop project
+# ------------------------------------------------------------------------------
+
+Task StyleCop-Build `
+    -Description '        Build the project Narvalo.StyleCop.CSharp.' `
+    -Depends _StyleCop-InitializeVariables `
+    -Alias StyleCop `
+{
+    MSBuild $StyleCop_Project $Opts '/p:Configuration=Release', '/t:Build'
+}
+
+Task _StyleCop-InitializeVariables `
+    -Description 'Initialize variables only used by the StyleCop-* tasks.' `
+{
+    $script:StyleCop_Project = Get-LocalPath 'tools\src\Narvalo.StyleCop.CSharp\Narvalo.StyleCop.CSharp.csproj'
+}
+
+# ------------------------------------------------------------------------------
 # NuGetAgent project
 # ------------------------------------------------------------------------------
 
 Task NuGetAgent-Build `
-    -Description 'Build the project NuGetAgent.' `
+    -Description '        Build the project NuGetAgent.' `
     -Depends _NuGetAgent-InitializeVariables, _NuGetAgent-RestorePackages `
     -Alias NuGetAgent `
 {
-    MSBuild $NuGetAgent_Project  $Opts '/p:Configuration=Release', '/t:Build'
+    MSBuild $NuGetAgent_Project $Opts '/p:Configuration=Release', '/t:Build'
 }
 
 Task _NuGetAgent-RestorePackages `
@@ -361,8 +394,8 @@ Task _NuGetAgent-RestorePackages `
 Task _NuGetAgent-InitializeVariables `
     -Description 'Initialize variables only used by the NuGetAgent-* tasks.' `
 {
-    $script:NuGetAgent_Project        = Get-LocalPath 'tools\NuGetAgent\NuGetAgent.fsproj'
-    $script:NuGetAgent_PackagesConfig = Get-LocalPath 'tools\NuGetAgent\packages.config'
+    $script:NuGetAgent_Project        = Get-LocalPath 'tools\src\NuGetAgent\NuGetAgent.fsproj'
+    $script:NuGetAgent_PackagesConfig = Get-LocalPath 'tools\src\NuGetAgent\packages.config'
 }
 
 # ------------------------------------------------------------------------------
@@ -370,7 +403,7 @@ Task _NuGetAgent-InitializeVariables `
 # ------------------------------------------------------------------------------
 
 Task MyGet-Package `
-    -Description 'Package the project MyGet.' `
+    -Description '        Package the project MyGet.' `
     -Depends _MyGet-InitializeVariables, _MyGet-DeleteStagingDirectory, _MyGet-Publish, _MyGet-Zip `
     -Alias MyGet `
 {
@@ -444,7 +477,7 @@ Task _MyGet-InitializeVariables `
 # ------------------------------------------------------------------------------
 
 Task Edge-FullBuild `
-    -Description 'Update then re-build the solution Edge.' `
+    -Description '        Update then re-build the solution Edge.' `
     -Depends _Edge-Update, _Edge-Rebuild
 
 Task _Edge-Rebuild `
@@ -484,9 +517,9 @@ Task _Edge-Update `
 Task _Edge-InitializeVariables `
     -Description 'Initialize variables only used by the Edge-* tasks.' `
 {
-    $script:Edge_Solution          = Get-LocalPath 'tools\MyPackages\Edge\Edge.sln'
-    $script:Edge_NuGetConfig       = Get-LocalPath 'tools\MyPackages\Edge\.nuget\NuGet.Config'
-    $script:Edge_PackagesDirectory = Get-LocalPath 'tools\MyPackages\Edge\packages'
+    $script:Edge_Solution          = Get-LocalPath 'tools\src\MyPackages\Edge\Edge.sln'
+    $script:Edge_NuGetConfig       = Get-LocalPath 'tools\src\MyPackages\Edge\.nuget\NuGet.Config'
+    $script:Edge_PackagesDirectory = Get-LocalPath 'tools\src\MyPackages\Edge\packages'
 }
 
 # ------------------------------------------------------------------------------
@@ -494,7 +527,7 @@ Task _Edge-InitializeVariables `
 # ------------------------------------------------------------------------------
 
 Task Retail-FullBuild `
-    -Description 'Update then re-build the solution Retail.' `
+    -Description '        Update then re-build the solution Retail.' `
     -Depends _Retail-Update, _Retail-Rebuild
 
 Task _Retail-Rebuild `
@@ -534,9 +567,9 @@ Task _Retail-Update `
 Task _Retail-InitializeVariables `
     -Description 'Initialize variables only used by the Retail-* tasks.' `
 {
-    $script:Retail_Solution          = Get-LocalPath 'tools\MyPackages\Retail\Retail.sln'
-    $script:Retail_NuGetConfig       = Get-LocalPath 'tools\MyPackages\Retail\.nuget\NuGet.Config'
-    $script:Retail_PackagesDirectory = Get-LocalPath 'tools\MyPackages\Retail\packages'
+    $script:Retail_Solution          = Get-LocalPath 'tools\src\MyPackages\Retail\Retail.sln'
+    $script:Retail_NuGetConfig       = Get-LocalPath 'tools\src\MyPackages\Retail\.nuget\NuGet.Config'
+    $script:Retail_PackagesDirectory = Get-LocalPath 'tools\src\MyPackages\Retail\packages'
 }
 
 # ------------------------------------------------------------------------------
@@ -544,7 +577,7 @@ Task _Retail-InitializeVariables `
 # ------------------------------------------------------------------------------
 
 Task Environment `
-    -Description 'Display the build environment.' `
+    -Description '        Display the build environment.' `
     -Alias Env `
 {
     # The output of running "MSBuild /version" looks like:
