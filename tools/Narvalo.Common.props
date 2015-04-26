@@ -119,20 +119,31 @@
     For a complete list of available options, see
       packages\StyleCop.MSBuild.*\build\StyleCop.MSBuild.Targets.
   -->
+  <!-- Inside VS, we automatically run StyleCop in Debug builds. -->
+  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
+    <SourceAnalysisEnabled Condition=" '$(Configuration)' == 'Debug' ">true</SourceAnalysisEnabled>
+  </PropertyGroup>
+  
   <PropertyGroup>
     <SourceAnalysisEnabled Condition=" '$(SourceAnalysisEnabled)' != 'true' ">false</SourceAnalysisEnabled>
-
+    
+    <!-- Right now, we enable all StyleCop rules except the documentation ones. -->
     <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Loosy.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
 
-    <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
+    <!-- Do not treat warnings as errors. -->
+    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
   </PropertyGroup>
 
+  <!-- WARNING: When StyleCop is called from the menu, it only uses the dll in the install directory for StyleCop. -->
   <ItemGroup>
-    <!-- WARNING: This setting only affects CI builds. It won't be visible from VS. 
-         For VS, you must copy the dll to the install directory of StyleCop. -->
-    <!-- The project Narvalo.StyleCop.CSharp is automatically built from PSakefile.ps1. -->
-    <!--<StyleCopAdditionalAddinPaths Include="$(MSBuildThisFileDirectory)libexec\StyleCopAddins" />-->
-    <StyleCopAdditionalAddinPaths Include="$(MSBuildThisFileDirectory)src\Narvalo.StyleCop.CSharp\bin\Release" />
+    <StyleCopAdditionalAddinPaths Include="$(MSBuildThisFileDirectory)lib\StyleCop" />
+  </ItemGroup>
+
+  <!-- Exclude temporary files from StyleCop. -->
+  <ItemGroup>
+    <ExcludeFromStyleCop Include="$(IntermediateOutputPath)\**\*.cs" >
+      <Visible>False</Visible>
+    </ExcludeFromStyleCop>
   </ItemGroup>
 
   <!-- Code Analysis -->

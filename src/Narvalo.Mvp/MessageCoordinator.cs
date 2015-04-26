@@ -72,7 +72,7 @@ namespace Narvalo.Mvp
             // NB: Since we choose a singleton, we disable the ability to close this message bus.
             private BlackHole_() : base(closeable: false) { }
 
-            public static BlackHole_ Instance { get { return Singleton.Instance; } }
+            public static BlackHole_ Instance { get { return Singleton_.Instance; } }
 
             protected override void PublishCore<T>(T message) { }
 
@@ -80,7 +80,7 @@ namespace Narvalo.Mvp
 
             [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
                 Justification = "Implementation of lazy initialized singleton.")]
-            private sealed class Singleton
+            private sealed class Singleton_
             {
                 internal static readonly BlackHole_ Instance = new BlackHole_();
 
@@ -88,7 +88,7 @@ namespace Narvalo.Mvp
                    Justification = "Implementation of lazy initialized singleton.")]
                 [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1409:RemoveUnnecessaryCode",
                     Justification = "Explicit static constructor to tell C# compiler not to mark type as beforefieldinit.")]
-                static Singleton() { }
+                static Singleton_() { }
             }
         }
     }

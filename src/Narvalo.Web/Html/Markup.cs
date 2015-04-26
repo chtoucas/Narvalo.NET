@@ -59,7 +59,7 @@ namespace Narvalo.Web.Html
             Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return new HtmlString(ImageInternal(path, alt, attributes));
+            return new HtmlString(ImageCore(path, alt, attributes));
         }
 
         #endregion
@@ -111,7 +111,7 @@ namespace Narvalo.Web.Html
             Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return new HtmlString(LinkInternal(path, linkType, relation, attributes));
+            return new HtmlString(LinkCore(path, linkType, relation, attributes));
         }
 
         #endregion
@@ -147,12 +147,12 @@ namespace Narvalo.Web.Html
             Acknowledge.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
-            return new HtmlString(ScriptInternal(path, scriptType, attributes));
+            return new HtmlString(ScriptCore(path, scriptType, attributes));
         }
 
         #endregion
 
-        internal static string ImageInternal(string path, string alt, IDictionary<string, object> attributes)
+        internal static string ImageCore(string path, string alt, IDictionary<string, object> attributes)
         {
             Require.NotNullOrEmpty(path, "path");
             Contract.Ensures(Contract.Result<string>() != null);
@@ -179,7 +179,7 @@ namespace Narvalo.Web.Html
             return retval;
         }
 
-        internal static string LinkInternal(
+        internal static string LinkCore(
             string path,
             string linkType,
             string relation,
@@ -209,7 +209,7 @@ namespace Narvalo.Web.Html
             return retval;
         }
 
-        internal static string ScriptInternal(string path, string scriptType, IDictionary<string, object> attributes)
+        internal static string ScriptCore(string path, string scriptType, IDictionary<string, object> attributes)
         {
             Require.NotNullOrEmpty(path, "path");
             Contract.Ensures(Contract.Result<string>() != null);

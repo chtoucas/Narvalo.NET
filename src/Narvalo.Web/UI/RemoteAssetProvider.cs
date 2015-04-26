@@ -51,7 +51,7 @@ namespace Narvalo.Web.UI
 
         protected override void InitializeCustom(NameValueCollection config)
         {
-            InitializeCustomInternal(config);
+            InitializeCustomCore(config);
 
             _baseUri = config.MayGetSingle(BASE_URI_KEY)
                 .Bind(_ => ParseTo.Uri(_, UriKind.Absolute))
@@ -60,7 +60,7 @@ namespace Narvalo.Web.UI
             config.Remove(BASE_URI_KEY);
         }
 
-        private static string Combine(string basePath, string relativePath)
+        private static string Combine_(string basePath, string relativePath)
         {
             Contract.Requires(basePath != null);
             Contract.Requires(basePath.Length != 0);
@@ -78,7 +78,7 @@ namespace Narvalo.Web.UI
                 // FIXME: Message = "relativePath" is not a relative path.
                 throw new ArgumentOutOfRangeException();
             }
-            else if (HasTrailingSlash(basePath))
+            else if (HasTrailingSlash_(basePath))
             {
                 retval = basePath + relativePath;
             }
@@ -90,7 +90,7 @@ namespace Narvalo.Web.UI
             return retval;
         }
 
-        private static bool HasTrailingSlash(string path)
+        private static bool HasTrailingSlash_(string path)
         {
             Contract.Requires(path.Length > 0);
 
@@ -108,7 +108,7 @@ namespace Narvalo.Web.UI
             // would have been thrown in InitializeCustom().
             Contract.Assume(_baseUri != null);
 
-            string relativeUri = Combine(baseIntermediatePath, relativePath);
+            string relativeUri = Combine_(baseIntermediatePath, relativePath);
 
             return new Uri(_baseUri, relativeUri);
         }

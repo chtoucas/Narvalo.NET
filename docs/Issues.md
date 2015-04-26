@@ -92,6 +92,9 @@ Narvalo.Mvp
 Infrastructure
 --------------
 
+- FullBuild target is broken. Add all proj to FullBuild.
+- Add PSakefile target for Safe.
+
 ### Continuous Integration
 
 - Enable Continuous Integration with AppVeyor.
@@ -109,9 +112,7 @@ Infrastructure
 ### CA, SA...
 
 - Remove the local overrides for CA & SA.
-- Make unnecessary to add StyleCop settings to each individual project.
-- Fix the double settings: `StyleCop.SourceAnalysis` and local props file.
-- Review StyleCop settings, StyleCop cache & ability to change settings used.
+- Explain StyleCop settings: StyleCop.Settings, MSBuild, local props file.
 
 ### Security
 

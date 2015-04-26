@@ -99,6 +99,11 @@ with a `SuppressMessage` attribute and for suppressions at assembly-level or at 
 For a detailed description of each rule, check out the official
 [documentation](http://www.stylecop.com/docs/).
 
+To suppress a StyleCop warning for a Narvalo.StyleCop rule, use:
+```csharp
+[SuppressMessage("Narvalo.Rules", "NA1006:InternalMethodsMustNotEndWithInternal", Justification = "...")]
+```
+
 ### FxCop
 
 Except for test projects we use a strict ruleset;

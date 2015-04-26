@@ -58,17 +58,6 @@ Task Default -Depends FastBuild
 # NB: No need to restore packages before building the projects $Everything
 # or $Foundations; this will be done in MSBuild.
 
-Task FastBuild `
-    -Description '[ALL  ] Build then run tests.' `
-    -Depends _CI-InitializeVariables `
-{
-    MSBuild $Foundations $Opts $CI_Props `
-        '/t:Xunit',
-        '/p:Configuration=Debug',
-        '/p:SkipCodeContractsReferenceAssembly=true',
-        '/p:SkipDocumentation=true'
-}
-
 Task Build `
     -Description '[ALL+ ] Build.' `
     -Depends _CI-InitializeVariables `
@@ -77,16 +66,33 @@ Task Build `
 }
 
 Task FullBuild `
-    -Description '[ALL+ ] Build, verify then run tests.' `
+    -Description '[SAFE ] Build, run StyleCop and FxCop, verify (SLOW).' `
     -Depends _CI-InitializeVariables `
-    -Alias CI `
 {
     # Perform the following operations:
     # - Build all projects
+    # - Run Source Analysis
     # - Verify Portable Executable (PE) format
-    # - Run Xunit tests, including white-box tests
-    MSBuild $Everything $Opts $CI_Props `
-        '/t:Build;PEVerify;Xunit'
+    MSBuild $Foundations $Opts $CI_Props `
+        '/t:Build;PEVerify',
+        '/p:Configuration=Debug',
+        '/p:VisibleInternals=false',
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true',
+        '/p:RunCodeAnalysis=true',
+        '/p:SourceAnalysisEnabled=true',
+        '/p:Filter=_Safe_'
+}
+
+Task Test `
+    -Description '[ALL  ] Build then run tests.' `
+    -Depends _CI-InitializeVariables `
+{
+    MSBuild $Foundations $Opts $CI_Props `
+        '/t:Xunit',
+        '/p:Configuration=Debug',
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true'
 }
 
 Task FullClean `
@@ -100,7 +106,7 @@ Task FullClean `
 
 Task SourceAnalysis `
     -Description '[SAFE ] Run source analysis.' `
-    -Depends _CI-InitializeVariables, StyleCop-Build `
+    -Depends _CI-InitializeVariables `
     -Alias SA `
 {
     MSBuild $Foundations $Opts $CI_Props `
@@ -349,24 +355,6 @@ Task _Publish-InitializeVariables `
     -Description 'Initialize variables only used by the Publish-* tasks.' `
 {
     $script:Publish_StagingDirectory = Get-LocalPath 'work\packages'
-}
-
-# ------------------------------------------------------------------------------
-# StyleCop project
-# ------------------------------------------------------------------------------
-
-Task StyleCop-Build `
-    -Description '        Build the project Narvalo.StyleCop.CSharp.' `
-    -Depends _StyleCop-InitializeVariables `
-    -Alias StyleCop `
-{
-    MSBuild $StyleCop_Project $Opts '/p:Configuration=Release', '/t:Build'
-}
-
-Task _StyleCop-InitializeVariables `
-    -Description 'Initialize variables only used by the StyleCop-* tasks.' `
-{
-    $script:StyleCop_Project = Get-LocalPath 'tools\src\Narvalo.StyleCop.CSharp\Narvalo.StyleCop.CSharp.csproj'
 }
 
 # ------------------------------------------------------------------------------

@@ -27,7 +27,7 @@ Narvalo.NET
 - **Narvalo.Core**
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core),
   [package](https://www.nuget.org/packages/Narvalo.Core/)),
-  this library provides various utilities and extension methods: Range type, 
+  this library provides various utilities and extension methods: Range type,
   Int64 encoders, extension methods for Collections and XDom.
 - **Narvalo.Common**
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common),
@@ -72,7 +72,8 @@ Narvalo.NET
 - **Narvalo.Ghostscript**, a .NET wrapper for GhostScript.
 - **Narvalo.Reliability** features reliability patterns.
 - **Narvalo.PowerShell**, collection of PowerShell modules.
-- **Narvalo.StyleCop.CSharp**, custom C# rules for StyleCop.
+- **Narvalo.StyleCop.CSharp**, custom StyleCop rules.
+- **Narvalo.FxCop**, custom FxCop rules.
 - **Narvalo.Brouillons**, a "fourre-tout" of unfinished or severely broken codes.
 - **Narvalo.Benchmarks**, the benchmarking project.
 
@@ -99,5 +100,4 @@ Narvalo.Build       |        |            |             |    |    |    |    |
 
 #### Dead NuGet packages
 
-- Narvalo.Core, replaced by Narvalo.Cerbere and Narvalo.Fx.
 - Narvalo.Web.Extras, replaced by Narvalo.Web.

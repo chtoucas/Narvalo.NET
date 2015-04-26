@@ -42,7 +42,7 @@ namespace Narvalo.Mvp.Web.Core
                 _closed = true;
             }
 
-            __TraceNeverReceivedMessages();
+            TraceNeverReceivedMessages_();
         }
 
         public void Publish<T>(T message)
@@ -114,7 +114,7 @@ namespace Narvalo.Mvp.Web.Core
         }
 
         [Conditional("TRACE")]
-        private void __TraceNeverReceivedMessages()
+        private void TraceNeverReceivedMessages_()
         {
             var neverReceivedMessages = _messages.Keys.Except(_handlers.Keys);
 

@@ -38,7 +38,7 @@
   <!-- Source Analysis. -->
   <PropertyGroup>
     <!-- Treat all warnings as errors. -->
-    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
+    <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
 
     <!-- Reports are saved in a custom location. -->
     <SourceAnalysisOutputFile>$(WorkLogDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>

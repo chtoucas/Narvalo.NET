@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<SourceAnalyzer Name="Narvalo Custom Rules">
+<SourceAnalyzer Name="Narvalo Rules">
   <Description>
-    Custom rules used by the Narvalo projects.
+    Custom C# rules used by the Narvalo projects.
   </Description>
   <Rules>
     <RuleGroup Name="Naming Rules">
@@ -18,7 +18,7 @@
         <Description>Validates that the name of a thread static field starts with "t_".</Description>
       </Rule>-->
       <Rule Name="PrivateConstsMustOnlyContainUppercaseLettersDigitsAndUnderscores" CheckId="NA1004">
-        <Context>Private constants must only contain uppercase letters, digits and underscore: {1}.</Context>
+        <Context>Private constants must only contain uppercase letters, digits and underscores: {1}.</Context>
         <Description>Validates that the name of a private constant contain only uppercase letters and underscores.</Description>
       </Rule>
       <Rule Name="PrivateMethodsMustEndWithUnderscore" CheckId="NA1005">
@@ -29,9 +29,13 @@
         <Context>Internal methods must not end with "Internal": {1}.</Context>
         <Description>Validates that the name of an internal method does not end with "Internal".</Description>
       </Rule>
-      <Rule Name="PrivateNestedClassesMustEndWithUnderscore" CheckId="NA1007">
+      <Rule Name="PrivateClassesMustEndWithUnderscore" CheckId="NA1007">
         <Context>Private classes must end with an underscore: {1}.</Context>
-        <Description>Validates that the name of a private nested class ends with an underscore.</Description>
+        <Description>Validates that the name of a private class ends with an underscore.</Description>
+      </Rule>
+      <Rule Name="AbstractClassesMustNotEndWithBase" CheckId="NA1008">
+        <Context>Abstract classes must not end with "Base": {1}.</Context>
+        <Description>Validates that the name of an abstract class does not end with "Base".</Description>
       </Rule>
     </RuleGroup>
     <!--<RuleGroup Name="Layout Rules">

@@ -119,7 +119,7 @@ namespace Narvalo.Web.UI
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "config",
             Justification = "[Intentionally] Internal parameter validation in debug builds only.")]
-        internal static void InitializeCustomInternal([ValidatedNotNull]NameValueCollection config)
+        internal static void InitializeCustomCore([ValidatedNotNull]NameValueCollection config)
         {
             Check.NotNull(config, "The base class 'AssetProvider' guarantees that 'config' is never null.");
         }

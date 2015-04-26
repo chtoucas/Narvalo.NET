@@ -21,7 +21,7 @@ namespace Narvalo.Web.UI
         public static void Provider_DoesNotThrow_ForMissingAssetSection()
         {
             // Arrange
-            AssetManager.ResetInternal();
+            AssetManager.ResetCore();
 
             // Act
             var provider = AssetManager.Provider;
@@ -31,7 +31,7 @@ namespace Narvalo.Web.UI
         public static void Provider_IsDefaultAssetProvider_ForMissingAssetSection()
         {
             // Arrange
-            AssetManager.ResetInternal();
+            AssetManager.ResetCore();
 
             // Act
             var provider = AssetManager.Provider;
@@ -49,7 +49,7 @@ namespace Narvalo.Web.UI
         public static void Providers_DoesNotThrow_ForMissingAssetSection()
         {
             // Arrange
-            AssetManager.ResetInternal();
+            AssetManager.ResetCore();
 
             // Act
             var providers = AssetManager.Providers;
@@ -59,7 +59,7 @@ namespace Narvalo.Web.UI
         public static void Providers_OnlyContainsDefaultAssetProvider_ForMissingAssetSection()
         {
             // Arrange
-            AssetManager.ResetInternal();
+            AssetManager.ResetCore();
 
             // Act
             var providers = AssetManager.Providers;
@@ -80,7 +80,7 @@ namespace Narvalo.Web.UI
             var section = new AssetSection();
 
             // Act & Assert
-            Assert.Throws<ConfigurationErrorsException>(() => AssetManager.InitializeInternal(section));
+            Assert.Throws<ConfigurationErrorsException>(() => AssetManager.InitializeCore(section));
         }
 
         [Fact]
@@ -91,7 +91,7 @@ namespace Narvalo.Web.UI
             section.DefaultProvider = "InvalidProvider";
 
             // Act & Assert
-            Assert.Throws<ConfigurationErrorsException>(() => AssetManager.InitializeInternal(section));
+            Assert.Throws<ConfigurationErrorsException>(() => AssetManager.InitializeCore(section));
         }
 
         #endregion

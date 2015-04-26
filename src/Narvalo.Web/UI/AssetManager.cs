@@ -120,7 +120,7 @@ namespace Narvalo.Web.UI
 
         // Internal-only method for testing.
         // We use temporary objects to achieve exception-neutral code. 
-        internal static void InitializeInternal(AssetSection section)
+        internal static void InitializeCore(AssetSection section)
         {
             Contract.Requires(section != null);
 
@@ -162,7 +162,7 @@ namespace Narvalo.Web.UI
         }
 
         // Internal-only method for testing.
-        internal static void ResetInternal()
+        internal static void ResetCore()
         {
             s_Initialized = false;
         }
@@ -184,7 +184,7 @@ namespace Narvalo.Web.UI
                             }
                             else
                             {
-                                InitializeInternal(section);
+                                InitializeCore(section);
                             }
                         }
                         catch (Exception ex)

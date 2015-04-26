@@ -5,7 +5,7 @@
     <ProjectGuid>{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Narvalo.StyleCop.CSharp</RootNamespace>
+    <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.StyleCop.CSharp</AssemblyName>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -23,16 +23,17 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomRules.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="README.md" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CustomRules.xml">
+    <EmbeddedResource Include="Rules.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
@@ -41,4 +42,7 @@
   </ItemGroup>
   <Import Project="..\..\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Y "$(TargetDir)$(TargetFileName)" "$(ProjectDir)..\..\lib\StyleCop"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

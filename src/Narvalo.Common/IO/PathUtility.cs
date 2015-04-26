@@ -16,11 +16,11 @@ namespace Narvalo.IO
             Contract.Requires(path != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return MakeRelativePathInternal(new Uri(AppendDirectorySeparator(rootPath)), path);
+            return MakeRelativePathCore(new Uri(AppendDirectorySeparator(rootPath)), path);
         }
 
         // For this method to work correctly, the "rootUri" string must end with a "/".
-        internal static string MakeRelativePathInternal(Uri rootUri, string path)
+        internal static string MakeRelativePathCore(Uri rootUri, string path)
         {
             Require.NotNull(rootUri, "rootUri");
             Contract.Requires(path != null);

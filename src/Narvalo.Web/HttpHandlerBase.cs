@@ -2,6 +2,7 @@
 
 namespace Narvalo.Web
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Net;
     using System.Web;
@@ -13,6 +14,8 @@ namespace Narvalo.Web
     /// <summary>
     /// Represents a custom HTTP handler that synchronously processes HTTP Web requests.
     /// </summary>
+    [SuppressMessage("Narvalo.Rules", "NA1008:AbstractClassesMustNotEndWithBase", 
+        Justification = "[Intentionally] HttpHandler would be too general.")]
     public abstract partial class HttpHandlerBase : IHttpHandler
     {
         private bool _isReusable = false;
