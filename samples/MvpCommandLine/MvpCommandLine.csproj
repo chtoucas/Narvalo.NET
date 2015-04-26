@@ -36,7 +36,6 @@
     <None Include="MvpCommandLine.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">

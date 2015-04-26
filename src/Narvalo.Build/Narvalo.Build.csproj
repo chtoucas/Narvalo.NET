@@ -22,7 +22,7 @@
     <Compile Include="DownloadFile.cs" />
     <Compile Include="Versioning\GenerateBuildAndRevisionNumbers.cs" />
     <Compile Include="Versioning\GenerateBuildStamp.cs" />
-    <Compile Include="JavaTasks\JavaTaskBase.cs" />
+    <Compile Include="JavaTasks\JavaTask.cs" />
     <Compile Include="MergeFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
@@ -32,7 +32,7 @@
     </Compile>
     <Compile Include="Versioning\ValidatePrereleaseLabel.cs" />
     <Compile Include="Versioning\ValidateVersionNumber.cs" />
-    <Compile Include="JavaTasks\YuiCompressorBase.cs" />
+    <Compile Include="JavaTasks\YuiCompressor.cs" />
     <Compile Include="JavaTasks\StyleSheetYuiCompressor.cs" />
     <Compile Include="JavaTasks\JavaScriptYuiCompressor.cs" />
   </ItemGroup>
@@ -41,7 +41,6 @@
       <Link>Narvalo.Build.tasks</Link>
     </None>
     <None Include="Narvalo.Build.Version.props" />
-    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Strings.resx">

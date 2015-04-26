@@ -68,12 +68,6 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Ghostscript.props">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Settings.StyleCop" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Cerbere</Name>

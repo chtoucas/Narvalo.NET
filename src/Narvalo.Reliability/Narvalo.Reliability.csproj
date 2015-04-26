@@ -18,7 +18,6 @@
     <None Include="Narvalo.Reliability.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AggregateGuardException.cs" />

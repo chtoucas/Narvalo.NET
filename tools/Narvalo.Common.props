@@ -128,7 +128,7 @@
     <SourceAnalysisEnabled Condition=" '$(SourceAnalysisEnabled)' != 'true' ">false</SourceAnalysisEnabled>
     
     <!-- Right now, we enable all StyleCop rules except the documentation ones. -->
-    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Loosy.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SourceAnalysisOverrideSettingsFile>$(RepositoryRoot)src\Settings.StyleCop</SourceAnalysisOverrideSettingsFile>
 
     <!-- Do not treat warnings as errors. -->
     <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>

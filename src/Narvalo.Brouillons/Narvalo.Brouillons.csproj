@@ -318,7 +318,6 @@
     <None Include="Narvalo.Brouillons.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Strings_Brouillons.resx">

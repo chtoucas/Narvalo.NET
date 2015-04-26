@@ -93,7 +93,6 @@
     <None Include="Narvalo.Finance.Version.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Currencies\Currencies.g.cs">

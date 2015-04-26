@@ -15,7 +15,7 @@ namespace Narvalo.Build.JavaTasks
     /// <summary>
     /// Provides a base class for YUI tasks.
     /// </summary>
-    public abstract class YuiCompressorBase : JavaTaskBase
+    public abstract class YuiCompressor : JavaTask
     {
         /// <summary>
         /// The max-length of lines in the output files.
@@ -28,9 +28,9 @@ namespace Narvalo.Build.JavaTasks
         private int _processTimeout = 5000;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="YuiCompressorBase"/> class.
+        /// Initializes a new instance of the <see cref="YuiCompressor"/> class.
         /// </summary>
-        protected YuiCompressorBase() : base() { }
+        protected YuiCompressor() : base() { }
 
         /// <summary>
         /// Gets or sets the list of files to be compressed.

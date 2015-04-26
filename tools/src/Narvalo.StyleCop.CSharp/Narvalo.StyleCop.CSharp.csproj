@@ -30,7 +30,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="README.md" />
-    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules.xml">

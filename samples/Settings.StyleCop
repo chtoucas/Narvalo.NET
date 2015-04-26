@@ -1,16 +1,13 @@
 <StyleCopSettings Version="105">
   <GlobalSettings>
     <StringProperty Name="MergeSettingsFiles">NoMerge</StringProperty>
-    <BooleanProperty Name="WriteCache">False</BooleanProperty>
     <BooleanProperty Name="AutoCheckForUpdate">False</BooleanProperty>
-    <BooleanProperty Name="ViolationsAsErrors">True</BooleanProperty>
-    <IntegerProperty Name="MaxViolationCount">100</IntegerProperty>
   </GlobalSettings>
   <Parsers>
     <Parser ParserId="StyleCop.CSharp.CsParser">
       <ParserSettings>
         <BooleanProperty Name="AnalyzeDesignerFiles">False</BooleanProperty>
-        <BooleanProperty Name="AnalyzeGeneratedFiles">True</BooleanProperty>
+        <BooleanProperty Name="AnalyzeGeneratedFiles">False</BooleanProperty>
       </ParserSettings>
     </Parser>
   </Parsers>
@@ -813,6 +810,46 @@
           </RuleSettings>
         </Rule>
         <Rule Name="TabsMustNotBeUsed">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+      </Rules>
+      <AnalyzerSettings />
+    </Analyzer>
+    <Analyzer AnalyzerId="Narvalo.Rules">
+      <Rules>
+        <Rule Name="PrivateFieldsMustBeginWithUnderscore">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="PrivateStaticFieldsMustBeCorrectlyPrefixed">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="PrivateConstsMustOnlyContainUppercaseLettersDigitsAndUnderscores">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="PrivateMethodsMustEndWithUnderscore">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="InternalMethodsMustNotEndWithInternal">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="PrivateClassesMustEndWithUnderscore">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+        <Rule Name="AbstractClassesMustNotEndWithBase">
           <RuleSettings>
             <BooleanProperty Name="Enabled">False</BooleanProperty>
           </RuleSettings>

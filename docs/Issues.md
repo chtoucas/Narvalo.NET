@@ -10,8 +10,8 @@ Design
 - Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
 - Review all `IEnumerable` extensions for null-checking and deferred execution.
 
-Narvalo.Cerber
---------------
+Narvalo.Cerbere
+---------------
 
 - Overloads for Require.Greater...
 
@@ -111,7 +111,6 @@ Infrastructure
 
 ### CA, SA...
 
-- Remove the local overrides for CA & SA.
 - Explain StyleCop settings: StyleCop.Settings, MSBuild, local props file.
 
 ### Security

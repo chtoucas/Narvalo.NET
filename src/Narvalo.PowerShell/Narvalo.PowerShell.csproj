@@ -30,7 +30,6 @@
     <None Include="Narvalo.PowerShell.Utility.psm1" />
     <None Include="Narvalo.PowerShell.Web.psm1" />
     <None Include="PowerShell.md" />
-    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">

@@ -17,7 +17,7 @@ namespace Narvalo.Build.JavaTasks
     /// <summary>
     /// Provides a base class for all java tasks.
     /// </summary>
-    public abstract class JavaTaskBase : ToolTask
+    public abstract class JavaTask : ToolTask
     {
         /// <summary>
         /// The default registry key for the Java Runtime Environment.
@@ -25,9 +25,9 @@ namespace Narvalo.Build.JavaTasks
         private const string JRE_KEY = @"SOFTWARE\JavaSoft\Java Runtime Environment";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JavaTaskBase"/> class.
+        /// Initializes a new instance of the <see cref="JavaTask"/> class.
         /// </summary>
-        protected JavaTaskBase() : base() { }
+        protected JavaTask() : base() { }
 
         /// <summary>
         /// Gets or sets the path to the jar file.
@@ -166,7 +166,7 @@ namespace Narvalo.Build.JavaTasks
         {
             string pathEnv = Environment.GetEnvironmentVariable("PATH") ?? String.Empty;
             string[] paths = pathEnv.Split(new[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
-            return FindJavaPathInDirectories(paths);
+            return FindJavaPathInDirectories_(paths);
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace Narvalo.Build.JavaTasks
                 @"C:\Program Files\Java\jre7\bin",
             };
 
-            return FindJavaPathInDirectories(commonLocations);
+            return FindJavaPathInDirectories_(commonLocations);
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace Narvalo.Build.JavaTasks
         /// </summary>
         /// <param name="paths">Directories where to look for the java executable.</param>
         /// <returns>The path to the java executable; <see langword="null"/> if none found.</returns>
-        private string FindJavaPathInDirectories(string[] paths)
+        private string FindJavaPathInDirectories_(string[] paths)
         {
             string javaPath = null;
 

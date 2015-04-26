@@ -64,7 +64,6 @@
     <Content Include="Layouts\Site.Master" />
     <Content Include="Widgets.aspx" />
     <Content Include="LookupWidget.aspx" />
-    <Content Include="Settings.StyleCop" />
     <Content Include="MvpWebForms.props">
       <SubType>Designer</SubType>
     </Content>

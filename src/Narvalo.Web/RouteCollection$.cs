@@ -24,6 +24,7 @@ namespace Narvalo.Web
             foreach (Type t in controllerTypes)
             {
                 string controllerName = t.Name;
+
                 // Le nom du controleur Mvc finit toujours en "Controller".
                 if (controllerName.Length < 10)
                 {

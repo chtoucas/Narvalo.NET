@@ -19,7 +19,7 @@ namespace Narvalo.Build.JavaTasks
     /// ]]>
     /// </code>
     /// </example>
-    public sealed class JavaScriptYuiCompressor : YuiCompressorBase
+    public sealed class JavaScriptYuiCompressor : YuiCompressor
     {
         /// <summary>
         /// Gets or sets a value indicating whether optimizations are enabled. Default to false.

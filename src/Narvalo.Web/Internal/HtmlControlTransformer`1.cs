@@ -10,8 +10,6 @@ namespace Narvalo.Web.UI
     {
         protected HtmlControlTransformer() : base() { }
 
-        protected abstract string TransformLiteral(string literal);
-
         public void TransformRecursively(ControlBuilder controlBuilder)
         {
             Require.NotNull(controlBuilder, "controlBuilder");
@@ -75,5 +73,7 @@ namespace Narvalo.Web.UI
                 TransformRecursively(defaultPropertyBuilder);
             }
         }
+
+        protected abstract string TransformLiteral(string literal);
     }
 }

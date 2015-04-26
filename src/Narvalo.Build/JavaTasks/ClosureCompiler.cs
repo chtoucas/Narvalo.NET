@@ -16,7 +16,7 @@ namespace Narvalo.Build.JavaTasks
     /// <summary>
     /// MSBuild task to execute the Closure compiler.
     /// </summary>
-    public sealed class ClosureCompiler : JavaTaskBase
+    public sealed class ClosureCompiler : JavaTask
     {
         /// <summary>
         /// The amount of time, in milliseconds, to wait for the associated process to exit.

@@ -51,6 +51,7 @@ namespace Narvalo.Web.UI
 
             return (ControlBuilder)pi.GetValue(@this, index: null);
         }
+
         public static ControlBuilder GetParentBuilder(this ControlBuilder @this)
         {
             Require.Object(@this);
@@ -74,6 +75,7 @@ namespace Narvalo.Web.UI
                 {
                     break;
                 }
+
                 retval = parentBuilder;
             }
 

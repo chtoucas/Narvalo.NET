@@ -20,7 +20,7 @@ namespace Narvalo.Build.JavaTasks
     /// ]]>
     /// </code>
     /// </example>
-    public sealed class StyleSheetYuiCompressor : YuiCompressorBase
+    public sealed class StyleSheetYuiCompressor : YuiCompressor
     {
         /// <inheritdoc />
         protected override string FileExtension

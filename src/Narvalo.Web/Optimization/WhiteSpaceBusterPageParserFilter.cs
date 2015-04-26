@@ -30,7 +30,7 @@ namespace Narvalo.Web.Optimization
         /// <summary>
         /// Retourne <code>true</code> si le filtre est actif pour le contrôle, <code>false</code> sinon.
         /// </summary>
-        // Par défaut, le filtre n'est pas actif.
+        /// <remarks>Par défaut, le filtre n'est pas actif.</remarks>
         public bool Enabled { get; private set; }
 
         public override void PreprocessDirective(string directiveName, IDictionary attributes)

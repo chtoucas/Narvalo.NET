@@ -2,14 +2,19 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Sample projects should import this file in $(AssemblyName).props.
-    
+
     To identify sample projects, we could have used the repository layout:
       <PropertyGroup>
         <_ParentProjectDirectory>$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))</_ParentProjectDirectory>
       </PropertyGroup>
-    
+
       '$(_ParentProjectDirectory.EndsWith(samples))' == 'true'
   -->
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <SourceAnalysisOverrideSettingsFile>$(RepositoryRoot)samples\Settings.StyleCop</SourceAnalysisOverrideSettingsFile>
+  </PropertyGroup>
 
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
     <DummyGeneratedVersion>true</DummyGeneratedVersion>

@@ -11,10 +11,6 @@ namespace Narvalo.Web.UI
     {
         protected LiteralControlTransformer() { }
 
-        protected abstract bool AllowControl(Type controlType);
-
-        protected abstract string TransformLiteral(string literal);
-
         public void TransformRecursively(ControlBuilder controlBuilder)
         {
             Require.NotNull(controlBuilder, "controlBuilder");
@@ -61,5 +57,9 @@ namespace Narvalo.Web.UI
                 TransformRecursively(defaultPropertyBuilder);
             }
         }
+
+        protected abstract bool AllowControl(Type controlType);
+
+        protected abstract string TransformLiteral(string literal);
     }
 }

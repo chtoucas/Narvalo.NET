@@ -123,21 +123,10 @@ When you want to override the default version properties:
 
 Test and sample projects do not need a version property file.
 
-### Configure StyleCop for Visual Studio
+### StyleCop for Visual Studio
 
-Edit the local StyleCop settings `Settings.StyleCop` and link it to `etc\Strict.SourceAnalysis`
-or just copy the settings from another project (but not Narvalo.Guards).
-
-Narvalo.Guards is the only project including a StyleCop configuration with actual rules.
-If you need to update the settings, do it there. When you are finished, copy the
-content of the new configuration to the shared one `etc\Strict.SourceAnalysis`.
-
-These settings only affect StyleCop when run explicitly from within Visual Studio.
-During build, StyleCop is called from `Narvalo.Common.targets`.
-
-**WARNING:**
-- Local settings file `Settings.StyleCop` must not be a linked file.
-- Test projects use different settings (see below).
+Inside Visual Studio, there is no need to edit the StyleCop settings;
+there are inherited from the parent folder.
 
 ### Assembly Information
 
@@ -167,22 +156,21 @@ Create a property file `{ProjectName}.props` with the following content (this is
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Empty.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Custom.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <Target Name="_WarnOnTemporaryOverriddenSettings" BeforeTargets="Build">
     <Warning Text="We temporarily override the Source Analysis settings for $(AssemblyName)."
-             Condition=" '$(BuildingInsideVisualStudio)' == 'true' Or '$(SourceAnalysisEnabled)' == 'true' "/>
+             Condition=" '$(SourceAnalysisEnabled)' == 'true' "/>
     <Warning Text="We temporarily override the Code Analysis settings for $(AssemblyName)."
-             Condition=" '$(BuildingInsideVisualStudio)' == 'true' Or '$(RunCodeAnalysis)' == 'true' " />
+             Condition=" '$(RunCodeAnalysis)' == 'true' " />
   </Target>
 </Project>
 ```
 Here we do two things:
 - We override the FxCop ruleset.
-- We override the StyleCop settings. **WARNING:** This only changes the settings used by the build script.
-  To make this change visible from Visual Studio, you must also update the `Settings.StyleCop`.
+- We override the StyleCop settings. **WARNING:** This only changes the settings used by MSBuild.
 
 ### Special Cases
 
@@ -224,16 +212,8 @@ Add the following content to you local customization property file `{ProjectName
 </Project>
 ```
 This has two consequences:
-- Test projects use a custom FxCop ruleset (same as the strict one but without
-  documentation rules).
+- Test projects use a custom FxCop & StyleCop rules.
 - Test projects use a dummy assembly version.
-
-Edit the local StyleCop settings and link it to `etc\Tests.SourceAnalysis`
-or just copy the settings from another project (but not Narvalo.Facts).
-
-Narvalo.Facts is the only project including a StyleCop configuration with actual rules.
-If you need to update the settings, do it there. When you are finished, copy the
-content of the new configuration to the shared one `etc\Tests.SourceAnalysis`.
 
 #### Sample projects
 Add the following content to you local customization property file `{ProjectName}.props`:
@@ -244,6 +224,7 @@ Add the following content to you local customization property file `{ProjectName
 </Project>
 ```
 This has ony one effect:
+- Sample projects use a custom FxCop & StyleCop rules.
 - Sample projects use a dummy assembly version.
 
 ### Code Contracts
