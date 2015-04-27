@@ -32,8 +32,8 @@ namespace Narvalo
 
             var typeInfo = type.GetTypeInfo();
 
-            return typeInfo != null 
-                && typeInfo.IsEnum 
+            return typeInfo != null
+                && typeInfo.IsEnum
                 && typeInfo.GetCustomAttribute<FlagsAttribute>(inherit: false) != null;
         }
 

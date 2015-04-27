@@ -19,12 +19,4 @@ namespace Narvalo
 
         Any = Literal | ZeroOrOne | EmptyIsFalse | HtmlInput,
     }
-
-    public static class BooleanStylesExtensions
-    {
-        public static bool Contains(this BooleanStyles @this, BooleanStyles value)
-        {
-            return (@this & value) != 0;
-        }
-    }
 }

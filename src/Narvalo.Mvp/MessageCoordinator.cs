@@ -55,7 +55,8 @@ namespace Narvalo.Mvp
 
         protected virtual void SubscribeCore<T>(Action<T> onNext)
         {
-            Trace.TraceWarning("[MessageCoordinator] Even if subscription is allowed, no messages will ever be received.");
+            Trace.TraceWarning(
+                "[MessageCoordinator] Even if subscription is allowed, no messages will ever be received.");
         }
 
         private void ThrowIfClosed_()

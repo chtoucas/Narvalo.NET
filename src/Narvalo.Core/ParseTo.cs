@@ -64,7 +64,8 @@ namespace Narvalo
 
         public static decimal? Decimal(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<decimal> parser = (string _, out decimal result) => decimal.TryParse(_, style, provider, out result);
+            TryParser<decimal> parser =
+                (string _, out decimal result) => decimal.TryParse(_, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -224,7 +225,8 @@ namespace Narvalo
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
-            TryParser<TEnum> parser = (string _, out TEnum result) => System.Enum.TryParse<TEnum>(_, ignoreCase, out result);
+            TryParser<TEnum> parser =
+                (string _, out TEnum result) => System.Enum.TryParse<TEnum>(_, ignoreCase, out result);
 
             return parser.NullInvoke(value);
         }

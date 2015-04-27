@@ -10,7 +10,7 @@ namespace Narvalo.Comparisons
     using Narvalo.BenchmarkCommon;
 
     [BenchmarkComparison(1000, DisplayName = "Appel dynamique du constructeur par défaut.")]
-    public static class EmptyCtorComparison
+    public static partial class EmptyCtorComparison
     {
         public class MyDerived : MyBase
         {
@@ -23,7 +23,10 @@ namespace Narvalo.Comparisons
         {
             internal MyBase() { }
         }
+    }
 
+    public static partial class EmptyCtorComparison
+    {
         [BenchmarkComparative(DisplayName = "Activator")]
         public static void ViaActivator()
         {

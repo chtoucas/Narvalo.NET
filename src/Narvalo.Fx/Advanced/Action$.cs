@@ -18,7 +18,7 @@ namespace Narvalo.Fx.Advanced
         {
             Require.Object(@this);
             Contract.Ensures(Contract.Result<VoidOrError>() != null);
-            
+
             try
             {
                 @this.Invoke();

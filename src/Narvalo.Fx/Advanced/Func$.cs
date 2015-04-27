@@ -12,7 +12,9 @@ namespace Narvalo.Fx.Advanced
     /// </summary>
     public static partial class FuncExtensions
     {
-        public static Func<TResult> Bind<TSource, TResult>(this Func<TSource> @this, Func<TSource, Func<TResult>> selector)
+        public static Func<TResult> Bind<TSource, TResult>(
+            this Func<TSource> @this,
+            Func<TSource, Func<TResult>> selector)
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
@@ -162,7 +164,8 @@ namespace Narvalo.Fx.Advanced
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public static Output<TSource> Catch<TSource, T1Exception, T2Exception, T3Exception, T4Exception>(this Func<TSource> @this)
+        public static Output<TSource> Catch<TSource, T1Exception, T2Exception, T3Exception, T4Exception>(
+            this Func<TSource> @this)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception

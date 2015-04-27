@@ -92,9 +92,6 @@ Narvalo.Mvp
 Infrastructure
 --------------
 
-- FullBuild target is broken. Add all proj to FullBuild.
-- Add PSakefile target for Safe.
-
 ### Continuous Integration
 
 - Enable Continuous Integration with AppVeyor.
@@ -111,6 +108,7 @@ Infrastructure
 
 ### CA, SA...
 
+- Update style guide
 - Explain StyleCop settings: StyleCop.Settings, MSBuild, local props file.
 
 ### Security
@@ -141,6 +139,7 @@ References:
 ### Scripts
 
 MSBuild and `PSakefile`:
+- **Bug:** Build target is broken. Add all proj to FullBuild.
 - **Bug:** If a test project fails, the build does not.
 - **Bug:** Whatever we use for `CodeAnalysisSucceededFile`,
   it does not seem to be understood by MSBuild. Setting `CodeAnalysisLogFile` or

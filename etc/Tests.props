@@ -18,7 +18,7 @@
 
   <PropertyGroup>
     <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(RepositorySettingsDir)Tests.ruleset</CodeAnalysisRuleSet>
-    <SourceAnalysisOverrideSettingsFile>$(RepositoryRoot)tests\Settings.StyleCop</SourceAnalysisOverrideSettingsFile>
+    <!--<SourceAnalysisOverrideSettingsFile>$(RepositoryRoot)tests\Settings.StyleCop</SourceAnalysisOverrideSettingsFile>-->
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">

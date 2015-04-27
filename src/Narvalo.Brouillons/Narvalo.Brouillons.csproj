@@ -311,9 +311,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>InMemoryCurrencyInfoProvider.g.cs</LastGenOutput>
     </None>
-    <None Include="Narvalo.Brouillons.props">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Narvalo.Brouillons.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

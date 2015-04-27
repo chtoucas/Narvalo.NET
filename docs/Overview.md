@@ -100,6 +100,9 @@ A typical project file should then look like this:
 
 ### Add Versioning
 
+This is mandatory only for NuGet projects.
+Test and sample projects do not need a version property file.
+
 Create a version property file: `{ProjectName}.Version.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -120,13 +123,6 @@ When you want to override the default version properties:
   </PropertyGroup>
 </Project>
 ```
-
-Test and sample projects do not need a version property file.
-
-### StyleCop for Visual Studio
-
-Inside Visual Studio, there is no need to edit the StyleCop settings;
-there are inherited from the parent folder.
 
 ### Assembly Information
 
@@ -168,9 +164,6 @@ Create a property file `{ProjectName}.props` with the following content (this is
   </Target>
 </Project>
 ```
-Here we do two things:
-- We override the FxCop ruleset.
-- We override the StyleCop settings. **WARNING:** This only changes the settings used by MSBuild.
 
 ### Special Cases
 
@@ -236,42 +229,6 @@ local property file `{ProjectName}.props`:
   <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
 </PropertyGroup>
 ```
-
-### Global settings
-
-Three build configurations are available:
-- Debug configuration is optimized for development.
-- Release configuration is optimized for safety.
-- CodeContracts is solely for Code Contracts analysis.
-
-Add relevant files as linked files to the "Properties" folder
-- Shared assembly informations: `etc\AssemblyInfo.Common.cs`
-- Code Analysis dictionary: `etc\CodeAnalysisDictionary.xml` with build action _CodeAnalysisDictionary_
-- Strong Name Key: `etc\Narvalo.snk`
-
-In Debug mode:
-- "Build" panel, treat all warnings as errors.
-- "Build" panel, check for arithmetic overflow/underflow.
-- "Code Analysis" panel, use "Narvalo Rules".
-
-In Release mode:
-- "Build" panel, suppress compiler warnings 1591.
-- "Build" panel, treat all warnings as errors.
-- "Build" panel, output XML documentation file.
-- "Code Analysis" panel, use "Narvalo Rules" and enable Code Analysis
-  on Build.
-
-For all modes:
-- "Signing" panel, sign the assembly using the "etc\Narvalo.snk" key.
-- "Build" panel, uncheck "Prefer 32-bit" if checked.
-- "Code Analysis" panel, uncheck "Suppress results from generated code (managed only)".
-
-Build Infrastructure
---------------------
-
-The main build script is `make.ps1` at the root of the repository.
-
-Add the project to Make.Foundations.proj when it is ready for publication.
 
 Update external dependencies
 ----------------------------

@@ -32,7 +32,7 @@ We also enforce the following rules:
 
 Naming:
 
-- Consider adding the "Base" suffix to abstract classes.
+- Consider not adding a "Base" suffix to abstract classes.
 - Consider not adding an internal access modifier to members of an internal class.
 - Consider adding an "Internal" suffix to the names of internal methods in a non-internal class with "Internal".
 - For concrete helper classes try to find a more useful suffix than "Helper" or "Utility"
@@ -101,7 +101,7 @@ For a detailed description of each rule, check out the official
 
 To suppress a StyleCop warning for a Narvalo.StyleCop rule, use:
 ```csharp
-[SuppressMessage("Narvalo.Rules", "NA1006:InternalMethodsMustNotEndWithInternal", Justification = "...")]
+[SuppressMessage("Narvalo.CSharpRules", "NA1006:InternalMethodsMustNotEndWithInternal", Justification = "...")]
 ```
 
 ### FxCop

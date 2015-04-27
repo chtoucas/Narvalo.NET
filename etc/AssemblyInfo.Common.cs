@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2014, Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
 // All compilation symbols found below are eventually defined on the fly by the build script.
 

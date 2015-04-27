@@ -45,7 +45,9 @@ namespace Narvalo.Fx
             return FirstOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
 
-        public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static Maybe<TSource> FirstOrNone<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -88,7 +90,9 @@ namespace Narvalo.Fx
             return SingleOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
 
-        public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
+        public static Maybe<TSource> SingleOrNone<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");

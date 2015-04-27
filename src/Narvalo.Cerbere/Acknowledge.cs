@@ -21,7 +21,8 @@ namespace Narvalo
         /// <param name="obj">The invariant object.</param>
         [DebuggerHidden]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void AssumeInvariant<T>(T obj) where T : class { }
 
         /// <summary>
@@ -32,7 +33,8 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void Object<T>(T @this)
         {
             Contract.Requires(@this != null);
@@ -45,7 +47,8 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void NotNullOrEmpty(string value)
         {
             Contract.Requires(value != null);

@@ -7,7 +7,7 @@ namespace Narvalo.Mvp
     public interface IView
     {
         event EventHandler Load;
-        
+
         bool ThrowIfNoPresenterBound { get; }
     }
 }

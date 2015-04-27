@@ -3,7 +3,6 @@
 namespace Narvalo.Web
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Net;
@@ -11,8 +10,6 @@ namespace Narvalo.Web
 
     using Narvalo.Web.Properties;
 
-    [SuppressMessage("Narvalo.Rules", "NA1008:AbstractClassesMustNotEndWithBase",
-        Justification = "[Intentionally] HttpHandler would be too general.")]
     public abstract partial class HttpHandlerBase<TQuery, TBinder> : HttpHandlerBase
         where TBinder : IHttpQueryBinder<TQuery>, new()
     {

@@ -12,7 +12,7 @@ namespace Narvalo.Mvp.CommandLine
 
     public sealed class DefaultConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        private static readonly string[] s_ViewSuffixes = new[] 
+        private static readonly string[] s_ViewSuffixes = new[]
         {
             "Command",
             "View",

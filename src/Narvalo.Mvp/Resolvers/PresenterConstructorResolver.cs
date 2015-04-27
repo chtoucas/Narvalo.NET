@@ -14,12 +14,16 @@ namespace Narvalo.Mvp.Resolvers
             Require.NotNull(presenterType, "presenterType");
             Require.NotNull(viewType, "viewType");
 
-            Debug.Assert(typeof(IPresenter<IView>).IsAssignableFrom(presenterType), "Asserts 'presenterType' is of type 'IPresenter<IView>'.");
+            Debug.Assert(
+                typeof(IPresenter<IView>).IsAssignableFrom(presenterType),
+                "Asserts 'presenterType' is of type 'IPresenter<IView>'.");
             Debug.Assert(typeof(IView).IsAssignableFrom(viewType), "Asserts 'viewType' is of type 'IView'.");
 
-            Trace.TraceInformation("[PresenterConstructorResolver] Attempting to resolve '{0}'.", presenterType.FullName);
+            Trace.TraceInformation(
+                "[PresenterConstructorResolver] Attempting to resolve '{0}'.", presenterType.FullName);
 
-            if (presenterType.IsNotPublic) {
+            if (presenterType.IsNotPublic)
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.InvariantCulture,
@@ -29,7 +33,8 @@ namespace Narvalo.Mvp.Resolvers
             }
 
             var ctor = presenterType.GetConstructor(new[] { viewType });
-            if (ctor == null) {
+            if (ctor == null)
+            {
                 throw new ArgumentException(
                     String.Format(
                         CultureInfo.InvariantCulture,

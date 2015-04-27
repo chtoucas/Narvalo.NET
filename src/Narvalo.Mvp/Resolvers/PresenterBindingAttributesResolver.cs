@@ -14,7 +14,9 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(viewType, "viewType");
 
-            Trace.TraceInformation("[PresenterBindingAttributesResolver] Attempting to resolve '{0}'.", viewType.FullName);
+            Trace.TraceInformation(
+                "[PresenterBindingAttributesResolver] Attempting to resolve '{0}'.", 
+                viewType.FullName);
 
             var attributes = viewType
                 .GetCustomAttributes(typeof(PresenterBindingAttribute), inherit: true)

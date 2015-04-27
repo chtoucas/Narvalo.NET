@@ -18,7 +18,9 @@ namespace Narvalo.Mvp
         {
             Require.NotNull(presenterType, "presenterType");
 
-            Debug.Assert(typeof(IPresenter<IView>).IsAssignableFrom(presenterType), "Asserts 'presenterType' is of type 'IPresenter<IView>'.");
+            Debug.Assert(
+                typeof(IPresenter<IView>).IsAssignableFrom(presenterType),
+                "Asserts 'presenterType' is of type 'IPresenter<IView>'.");
 
             _presenterType = presenterType;
         }

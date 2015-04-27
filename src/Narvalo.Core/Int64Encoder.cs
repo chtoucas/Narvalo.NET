@@ -24,38 +24,38 @@ namespace Narvalo
 
         // On exclue la lettre "l".
         private static readonly char[] s_Base25Alphabet = new char[] {
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
-            'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 
-            'v', 'w', 'x', 'y', 'z', 
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+            'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+            'v', 'w', 'x', 'y', 'z',
         };
 
         // On exclue le chiffre zéro et la lettre "l".
         private static readonly char[] s_Base34Alphabet = new char[] {
-            '1', '2', '3', '4', '5', '6', '7', '8', '9', 
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
-            'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 
-            'v', 'w', 'x', 'y', 'z', 
+            '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+            'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+            'v', 'w', 'x', 'y', 'z',
         };
 
         // On exclue le chiffre zéro et les lettres "I", "O" et "l".
         private static readonly char[] s_Base58Alphabet = new char[] {
-            '1', '2', '3', '4', '5', '6', '7', '8', '9', 
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 
+            '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K',
             'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
             'W', 'X', 'Y', 'Z',
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
-            'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 
-            'v', 'w', 'x', 'y', 'z', 
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+            'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+            'v', 'w', 'x', 'y', 'z',
         };
 
         // On exclue le chiffre zéro et les lettres "I", "O" et "l".
         private static readonly char[] s_FlickrBase58Alphabet = new char[] {
-            '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+            '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
-            'v', 'w', 'x', 'y', 'z', 
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 
-            'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 
+            'v', 'w', 'x', 'y', 'z',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K',
+            'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
             'W', 'X', 'Y', 'Z',
         };
 

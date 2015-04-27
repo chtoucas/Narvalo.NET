@@ -12,11 +12,14 @@ using System.Security;
 
 [assembly: AllowPartiallyTrustedCallers]
 
-[assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "Narvalo.Properties.Strings_Common",
+[assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
+    Scope = "type", Target = "Narvalo.Properties.Strings_Common",
     Justification = "[GeneratedCode] Default visibility for resources is internal.")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Narvalo.Properties.Strings_Common.#Culture",
+[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+    Scope = "member", Target = "Narvalo.Properties.Strings_Common.#Culture",
     Justification = "[GeneratedCode] Default visibility for resources is internal.")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Narvalo.Properties.Strings_Common.#Culture",
+[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+    Scope = "member", Target = "Narvalo.Properties.Strings_Common.#Culture",
     Justification = "[GeneratedCode] Default visibility for resources is internal.")]
 
 #if !NO_INTERNALS_VISIBLE_TO // Make internals visible to the test projects.

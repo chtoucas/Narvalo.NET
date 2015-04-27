@@ -18,7 +18,7 @@ namespace Narvalo.Mvp.Platforms
         {
             get { return Value.CompositeViewFactory; }
         }
-        
+
         public IMessageCoordinatorFactory MessageCoordinatorFactory
         {
             get { return Value.MessageCoordinatorFactory; }

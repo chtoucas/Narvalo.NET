@@ -48,10 +48,10 @@ namespace Narvalo
                 DiscoveryBindings = BindingFlags.Public | BindingFlags.Static,
             };
 
-            //IEnumerable<BenchmarkMetricCollection> metrics
-            //    = processor.Process(
-            //        typeof(RemoveDiacriticsComparison),
-            //        RemoveDiacriticsComparison.GenerateTestData());
+            ////IEnumerable<BenchmarkMetricCollection> metrics
+            ////    = processor.Process(
+            ////        typeof(RemoveDiacriticsComparison),
+            ////        RemoveDiacriticsComparison.GenerateTestData());
             BenchmarkMetricCollection metrics = processor.Process(typeof(EmptyCtorComparison));
 
             foreach (var item in metrics)

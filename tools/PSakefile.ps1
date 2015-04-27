@@ -65,8 +65,17 @@ Task Build `
     MSBuild $Everything $Opts $CI_Props '/t:Build'
 }
 
-Task FullBuild `
-    -Description '[SAFE ] Build, run StyleCop and FxCop, verify (SLOW).' `
+Task FullClean `
+    -Description '        Delete the entire build directory.' `
+    -Alias Clean `
+    -ContinueOnError `
+{
+    # Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
+    Remove-LocalItem 'work' -Recurse
+}
+
+Task Check `
+    -Description '[SAFE ] Build, run StyleCop, FxCop and PEVerify (SLOW).' `
     -Depends _CI-InitializeVariables `
 {
     # Perform the following operations:
@@ -83,6 +92,32 @@ Task FullBuild `
         '/p:SourceAnalysisEnabled=true',
         '/p:Filter=_Safe_'
 }
+#Task SourceAnalysis `
+#    -Description '[SAFE ] Run source analysis.' `
+#    -Depends _CI-InitializeVariables `
+#{
+#    MSBuild $Foundations $Opts $CI_Props `
+#        '/t:Build',
+#        '/p:Configuration=Debug',
+#        '/p:SkipCodeContractsReferenceAssembly=true',
+#        '/p:SkipDocumentation=true',
+#        '/p:SourceAnalysisEnabled=true',
+#        '/p:Filter=_Safe_'
+#}
+#Task CodeAnalysis `
+#    -Description '[SAFE ] Run Code Analysis (SLOW).' `
+#    -Depends _CI-InitializeVariables `
+#{
+#    # For static analysis, we hide internals, otherwise we might not truly
+#    # analyze the public API.
+#    MSBuild $Foundations $Opts $CI_Props `
+#        '/t:Build',
+#        '/p:VisibleInternals=false',
+#        '/p:RunCodeAnalysis=true',
+#        '/p:SkipCodeContractsReferenceAssembly=true',
+#        '/p:SkipDocumentation=true',
+#        '/p:Filter=_Safe_'
+#}
 
 Task Test `
     -Description '[ALL  ] Build then run tests.' `
@@ -93,29 +128,6 @@ Task Test `
         '/p:Configuration=Debug',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true'
-}
-
-Task FullClean `
-    -Description '        Delete the entire build directory.' `
-    -Alias Clean `
-    -ContinueOnError `
-{
-    # Sometimes this task fails for some obscure reasons. Maybe the directory is locked?
-    Remove-LocalItem 'work' -Recurse
-}
-
-Task SourceAnalysis `
-    -Description '[SAFE ] Run source analysis.' `
-    -Depends _CI-InitializeVariables `
-    -Alias SA `
-{
-    MSBuild $Foundations $Opts $CI_Props `
-        '/t:Build',
-        '/p:Configuration=Debug',
-        '/p:SkipCodeContractsReferenceAssembly=true',
-        '/p:SkipDocumentation=true',
-        '/p:SourceAnalysisEnabled=true',
-        '/p:Filter=_Safe_'
 }
 
 Task OpenCover `
@@ -136,22 +148,6 @@ Task OpenCover `
 
     Invoke-OpenCover 'Debug+Closed'
     #Invoke-OpenCover 'Debug+Closed' -Summary
-}
-
-Task CodeAnalysis `
-    -Description '[SAFE ] Run Code Analysis (SLOW).' `
-    -Depends _CI-InitializeVariables `
-    -Alias CA `
-{
-    # For static analysis, we hide internals, otherwise we might not truly
-    # analyze the public API.
-    MSBuild $Foundations $Opts $CI_Props `
-        '/t:Build',
-        '/p:VisibleInternals=false',
-        '/p:RunCodeAnalysis=true',
-        '/p:SkipCodeContractsReferenceAssembly=true',
-        '/p:SkipDocumentation=true',
-        '/p:Filter=_Safe_'
 }
 
 Task GendarmeAnalysis `
@@ -189,7 +185,7 @@ Task CodeContractsAnalysis `
 Task SecurityAnalysis `
     -Description '[SAFE ] Run SecAnnotate (SLOW).' `
     -Depends _CI-InitializeVariables `
-    -Alias Sec `
+    -Alias SA `
 {
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Clean;SecAnnotate;PEVerify',

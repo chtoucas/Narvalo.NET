@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.Resolvers
            = new ResolverCache<Tuple<Type, Type>, string, DynamicMethod>(
                 _ => String.Join(
                     "__:__",
-                    new[] 
+                    new[]
                     {
                         _.Item1.AssemblyQualifiedName,
                         _.Item2.AssemblyQualifiedName

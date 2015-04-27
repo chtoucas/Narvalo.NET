@@ -63,11 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryEncoder.cs" />
+    <Compile Include="BooleanStyles%24.cs" />
     <Compile Include="BooleanStyles.cs" />
     <Compile Include="Collections\Dictionary%24.cs" />
     <Compile Include="Collections\Enumerator%24.cs" />
     <Compile Include="ConvertTo.cs" />
     <Compile Include="Int64Encoder.cs" />
+    <Compile Include="Internal\TryParser%24.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
     <Compile Include="ParseTo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

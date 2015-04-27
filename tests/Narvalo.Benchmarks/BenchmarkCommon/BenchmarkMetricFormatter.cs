@@ -5,7 +5,6 @@ namespace Narvalo.BenchmarkCommon
     using System;
     using System.Globalization;
 
-
     public class BenchmarkMetricFormatter : BenchmarkMetricFormatterBase
     {
         public BenchmarkMetricFormatter() : base() { }

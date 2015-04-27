@@ -54,10 +54,12 @@ namespace Narvalo
 
             if (value.CompareTo(minInclusive) < 0 || value.CompareTo(maxInclusive) > 0)
             {
-                throw new ArgumentOutOfRangeException(
+                var message = Format.Resource(
+                    Strings_Cerbere.Enforce_NotInRange_Format,
                     parameterName,
-                    value,
-                    Format.Resource(Strings_Cerbere.Enforce_NotInRange_Format, parameterName, minInclusive, maxInclusive));
+                    minInclusive,
+                    maxInclusive);
+                throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
         }
 

@@ -20,3 +20,37 @@ git tag -a core-1.1.0 -m 'Core Version 1.1.0' 33e07eceba5a56cde7b0dc753aed0fa5d0
 git push origin core-1.1.0
 ```
 
+Build Infrastructure
+--------------------
+
+The main build script is `make.ps1` at the root of the repository.
+
+Add the project to Make.Foundations.proj when it is ready for publication.
+
+### Global settings
+
+Three build configurations are available:
+- Debug configuration is optimized for development.
+- Release configuration is optimized for safety.
+- CodeContracts is solely for Code Contracts analysis.
+
+Add relevant files as linked files to the "Properties" folder
+- Shared assembly informations: `etc\AssemblyInfo.Common.cs`
+- Code Analysis dictionary: `etc\CodeAnalysisDictionary.xml` with build action _CodeAnalysisDictionary_
+- Strong Name Key: `etc\Narvalo.snk`
+
+In Debug mode:
+- "Build" panel, treat all warnings as errors.
+- "Build" panel, check for arithmetic overflow/underflow.
+- "Code Analysis" panel, use "Narvalo Rules".
+
+In Release mode:
+- "Build" panel, suppress compiler warnings 1591.
+- "Build" panel, treat all warnings as errors.
+- "Build" panel, output XML documentation file.
+- "Code Analysis" panel, use "Narvalo Rules" and enable Code Analysis on Build.
+
+For all modes:
+- "Signing" panel, sign the assembly using the "etc\Narvalo.snk" key.
+- "Build" panel, uncheck "Prefer 32-bit" if checked.
+- "Code Analysis" panel, uncheck "Suppress results from generated code (managed only)".
