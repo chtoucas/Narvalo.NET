@@ -5,7 +5,7 @@ Often obvious but worth recalling.
 
 ### Use hyperlinks in documentation ###
 
-To use hyperlinks in C# documentation, prefix the reference with "!:":
+To use hyperlinks in C# documentation, prefix the reference with `!:`:
 ```xml
 <see cref="!:http://acme.org"/>
 <seealso cref="!:http://acme.org"/>

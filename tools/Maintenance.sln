@@ -44,7 +44,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Settings", "2. Settings"
 	ProjectSection(SolutionItems) = preProject
 		..\etc\AssemblyInfo.Common.cs = ..\etc\AssemblyInfo.Common.cs
 		..\etc\CodeAnalysisDictionary.xml = ..\etc\CodeAnalysisDictionary.xml
-		..\etc\Empty.SourceAnalysis = ..\etc\Empty.SourceAnalysis
 		..\etc\FrameworkProfiles.props = ..\etc\FrameworkProfiles.props
 		..\etc\gendarme.ignore = ..\etc\gendarme.ignore
 		..\etc\gendarme.xml = ..\etc\gendarme.xml
@@ -108,20 +107,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGet", "src\MyGet\MyGet.cs
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NuGetAgent", "src\NuGetAgent\NuGetAgent.fsproj", "{702370E8-516C-4AE4-8913-CDB198070812}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.FxCop", "src\Narvalo.FxCop\Narvalo.FxCop.csproj", "{A775A79D-8E8F-4FE2-8236-070D60DE9A64}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommonMark", "CommonMark", "{3FFC3740-D625-42D8-AE35-45F789599C34}"
 	ProjectSection(SolutionItems) = preProject
 		src\CommonMark\index.html = src\CommonMark\index.html
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.ProjectAutomation", "Narvalo.ProjectAutomation", "{9392A417-C4D9-4EDB-B2F0-9E3A09995B2C}"
-	ProjectSection(SolutionItems) = preProject
-		src\Narvalo.ProjectAutomation\Narvalo.ProjectAutomation.psd1 = src\Narvalo.ProjectAutomation\Narvalo.ProjectAutomation.psd1
-		src\Narvalo.ProjectAutomation\Narvalo.ProjectAutomation.psm1 = src\Narvalo.ProjectAutomation\Narvalo.ProjectAutomation.psm1
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.StyleCop", "src\Narvalo.StyleCop\Narvalo.StyleCop.csproj", "{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}"
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "Narvalo.ProjectAutomation", "src\Narvalo.ProjectAutomation\Narvalo.ProjectAutomation.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -142,18 +135,18 @@ Global
 		{702370E8-516C-4AE4-8913-CDB198070812}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{702370E8-516C-4AE4-8913-CDB198070812}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{702370E8-516C-4AE4-8913-CDB198070812}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A775A79D-8E8F-4FE2-8236-070D60DE9A64}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
-		{A775A79D-8E8F-4FE2-8236-070D60DE9A64}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
-		{A775A79D-8E8F-4FE2-8236-070D60DE9A64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A775A79D-8E8F-4FE2-8236-070D60DE9A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A775A79D-8E8F-4FE2-8236-070D60DE9A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A775A79D-8E8F-4FE2-8236-070D60DE9A64}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.CodeContracts|Any CPU.ActiveCfg = CodeContracts|Any CPU
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.CodeContracts|Any CPU.Build.0 = CodeContracts|Any CPU
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.CodeContracts|Any CPU.ActiveCfg = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.CodeContracts|Any CPU.Build.0 = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

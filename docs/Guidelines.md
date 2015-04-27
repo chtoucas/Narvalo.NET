@@ -101,7 +101,8 @@ For a detailed description of each rule, check out the official
 
 To suppress a StyleCop warning for a Narvalo.StyleCop rule, use:
 ```csharp
-[SuppressMessage("Narvalo.CSharpRules", "NA1006:InternalMethodsMustNotEndWithInternal", Justification = "...")]
+[SuppressMessage("Narvalo.CSharpRules", "NA1006:InternalMethodsMustNotEndWithInternal", 
+    Justification = "...")]
 ```
 
 ### FxCop
