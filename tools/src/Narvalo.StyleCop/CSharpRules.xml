@@ -49,7 +49,7 @@
     <RuleGroup Name="Readibility Rules">
       <Rule Name="AvoidLinesExceeding120Characters" CheckId="NA1101">
         <Context>Source lines should not exceed 120 characters.</Context>
-        <Description>Verifies that source lines are not longer than 120 characters.</Description>
+        <Description>Verifies that a source line does not exceed 120 characters.</Description>
       </Rule>
     </RuleGroup>
     <RuleGroup Name="Documentation Rules">

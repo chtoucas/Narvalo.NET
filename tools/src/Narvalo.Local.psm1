@@ -47,7 +47,7 @@ function Import-LocalModule {
     $module = (Get-Module -Name $name)
 
     if ($module -eq $null) {
-        $moduleName = Join-Path $LocalModulesPath "$name\$name.psd1"
+        $moduleName = Join-Path $LocalModulesPath "$name\Module.psd1"
 
         Write-Debug "Import the module '$name' into the global scope."
         $module = Import-Module $moduleName -NoClobber -Global -PassThru -Args $ArgumentList
