@@ -41,7 +41,8 @@ namespace Narvalo.Web
                     {
                         if (!childOnlyController)
                         {
-                            bool childOnlyAction = m.GetCustomAttributes(typeof(ChildActionOnlyAttribute), inherit: true).Any();
+                            bool childOnlyAction =
+                                m.GetCustomAttributes(typeof(ChildActionOnlyAttribute), inherit: true).Any();
 
                             if (!childOnlyAction)
                             {

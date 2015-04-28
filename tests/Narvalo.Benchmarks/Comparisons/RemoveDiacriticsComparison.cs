@@ -56,16 +56,16 @@ namespace Narvalo.Comparisons
         [BenchmarkComparative(DisplayName = "Expression rationnelle.")]
         public static void Regex(string value)
         {
-            Regex_(value);
+            RegexCore(value);
         }
 
         [BenchmarkComparative(DisplayName = "Caractères traités pas à pas.")]
         public static void ForLoop(string value)
         {
-            ForLoop_(value);
+            ForLoopCore(value);
         }
 
-        private static string Regex_(string value)
+        private static string RegexCore(string value)
         {
             string formD = value.Normalize(NormalizationForm.FormD);
 
@@ -79,7 +79,7 @@ namespace Narvalo.Comparisons
             }
         }
 
-        private static string ForLoop_(string value)
+        private static string ForLoopCore(string value)
         {
             string formD = value.Normalize(NormalizationForm.FormD);
 

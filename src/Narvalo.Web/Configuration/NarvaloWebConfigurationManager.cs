@@ -10,7 +10,7 @@ namespace Narvalo.Web.Configuration
     public static class NarvaloWebConfigurationManager
     {
         private static readonly Lazy<OptimizationSection> s_OptimizationSection
-            = new Lazy<OptimizationSection>(InitializeOptimizationSection_);
+            = new Lazy<OptimizationSection>(InitializeOptimizationSection);
 
         internal static OptimizationSection OptimizationSection
         {
@@ -43,7 +43,7 @@ namespace Narvalo.Web.Configuration
             return config.SectionGroups[NarvaloWebSectionGroup.GroupName] as NarvaloWebSectionGroup;
         }
 
-        private static OptimizationSection InitializeOptimizationSection_()
+        private static OptimizationSection InitializeOptimizationSection()
         {
             Contract.Ensures(Contract.Result<OptimizationSection>() != null);
 

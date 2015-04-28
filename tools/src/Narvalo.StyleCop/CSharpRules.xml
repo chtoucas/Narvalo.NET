@@ -21,9 +21,9 @@
         <Context>Private constants must only contain uppercase letters, digits and underscores: {1}.</Context>
         <Description>Validates that the name of a private constant contain only uppercase letters and underscores.</Description>
       </Rule>
-      <Rule Name="PrivateMethodNamesMustEndWithUnderscore" CheckId="NA1005">
-        <Context>Private methods must end with an underscore: {1}.</Context>
-        <Description>Validates that the name of a private method ends with an underscore.</Description>
+      <Rule Name="PrivateMethodNamesMustNotEndWithUnderscore" CheckId="NA1005">
+        <Context>Private methods must not end with an underscore: {1}.</Context>
+        <Description>Validates that the name of a private method does not end with an underscore.</Description>
       </Rule>
       <Rule Name="InternalMethodNamesMustNotEndWithInternal" CheckId="NA1006">
         <Context>Internal methods must not end with "Internal": {1}.</Context>

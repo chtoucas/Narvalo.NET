@@ -191,7 +191,7 @@ namespace Narvalo
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void InRange(int value, int minInclusive, int maxInclusive, string parameterName)
         {
-            ValidateRange_(minInclusive, maxInclusive);
+            ValidateRange(minInclusive, maxInclusive);
 
             if (value < minInclusive || value > maxInclusive)
             {
@@ -222,7 +222,7 @@ namespace Narvalo
             Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void InRange(long value, long minInclusive, long maxInclusive, string parameterName)
         {
-            ValidateRange_(minInclusive, maxInclusive);
+            ValidateRange(minInclusive, maxInclusive);
 
             if (value < minInclusive || value > maxInclusive)
             {
@@ -441,7 +441,7 @@ namespace Narvalo
         /// <param name="minInclusive">The minimum integer value.</param>
         /// <param name="maxInclusive">The maximum integer value.</param>
         [ContractArgumentValidator]
-        private static void ValidateRange_(int minInclusive, int maxInclusive)
+        private static void ValidateRange(int minInclusive, int maxInclusive)
         {
             if (minInclusive > maxInclusive)
             {
@@ -468,7 +468,7 @@ namespace Narvalo
         /// <param name="minInclusive">The minimum long value.</param>
         /// <param name="maxInclusive">The maximum long value.</param>
         [ContractArgumentValidator]
-        private static void ValidateRange_(long minInclusive, long maxInclusive)
+        private static void ValidateRange(long minInclusive, long maxInclusive)
         {
             if (minInclusive > maxInclusive)
             {

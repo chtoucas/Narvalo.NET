@@ -42,28 +42,28 @@ namespace Narvalo.Mvp.Web.Core
                 _closed = true;
             }
 
-            TraceNeverReceivedMessages_();
+            TraceNeverReceivedMessages();
         }
 
         public void Publish<T>(T message)
         {
-            ThrowIfClosed_();
+            ThrowIfClosed();
 
-            AddMessage_(message);
-            PushMessage_(message);
+            AddMessage(message);
+            PushMessage(message);
         }
 
         public void Subscribe<T>(Action<T> onNext)
         {
-            ThrowIfClosed_();
+            ThrowIfClosed();
 
             Require.NotNull(onNext, "onNext");
 
-            AddHandler_(onNext);
-            PushPreviousMessages_(onNext);
+            AddHandler(onNext);
+            PushPreviousMessages(onNext);
         }
 
-        private void AddMessage_<T>(T message)
+        private void AddMessage<T>(T message)
         {
             var messagesOfT = _messages.GetOrAdd(typeof(T), _ => new List<T>());
 
@@ -73,7 +73,7 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        private void AddHandler_<T>(Action<T> onNext)
+        private void AddHandler<T>(Action<T> onNext)
         {
             var handlersOfT = _handlers.GetOrAdd(typeof(T), _ => new List<Action<object>>());
 
@@ -83,7 +83,7 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        private void PushMessage_<T>(T message)
+        private void PushMessage<T>(T message)
         {
             var messageType = typeof(T);
 
@@ -98,7 +98,7 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        private void PushPreviousMessages_<T>(Action<T> onNext)
+        private void PushPreviousMessages<T>(Action<T> onNext)
         {
             var messageType = typeof(T);
 
@@ -114,7 +114,7 @@ namespace Narvalo.Mvp.Web.Core
         }
 
         [Conditional("TRACE")]
-        private void TraceNeverReceivedMessages_()
+        private void TraceNeverReceivedMessages()
         {
             var neverReceivedMessages = _messages.Keys.Except(_handlers.Keys);
 
@@ -126,9 +126,10 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PreRenderComplete",
+        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly",
+            MessageId = "PreRenderComplete",
             Justification = "ASP.NET method name.")]
-        private void ThrowIfClosed_()
+        private void ThrowIfClosed()
         {
             if (_closed)
             {

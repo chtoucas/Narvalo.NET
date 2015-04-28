@@ -40,7 +40,7 @@ namespace Narvalo.Finance
         }
 
         // Check that currencies match.
-        private void ThrowIfCurrencyMismatch_(Money other)
+        private void ThrowIfCurrencyMismatch(Money other)
         {
             if (Currency != other.Currency)
             {
@@ -154,7 +154,7 @@ namespace Narvalo.Finance
 
         public int CompareTo(Money other)
         {
-            ThrowIfCurrencyMismatch_(other);
+            ThrowIfCurrencyMismatch(other);
 
             return Amount.CompareTo(other.Amount);
         }
@@ -187,7 +187,7 @@ namespace Narvalo.Finance
 
         public Money Add(Money money)
         {
-            ThrowIfCurrencyMismatch_(money);
+            ThrowIfCurrencyMismatch(money);
 
             var amount = checked(Amount + money.Amount);
 
@@ -214,7 +214,7 @@ namespace Narvalo.Finance
 
         public Money Subtract(Money money)
         {
-            ThrowIfCurrencyMismatch_(money);
+            ThrowIfCurrencyMismatch(money);
 
             return new Money(Amount - money.Amount, Currency);
         }

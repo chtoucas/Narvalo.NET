@@ -107,11 +107,9 @@
     <Compile Include="EmptyPartialViewResult.cs" />
     <Compile Include="HttpHandlerBase.cs" />
     <Compile Include="HttpHandlerBase`2.cs" />
-    <Compile Include="HttpResponse%24.Caching.cs">
-      <DependentUpon>HttpResponse%24.cs</DependentUpon>
-    </Compile>
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="HttpVerbs%24.cs" />
+    <Compile Include="HttpVersions%24.cs" />
     <Compile Include="HttpVersions.cs" />
     <Compile Include="IHttpQueryBinder`1.cs" />
     <Compile Include="Internal\LiteralControlTransformer.cs" />

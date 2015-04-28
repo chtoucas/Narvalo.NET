@@ -77,7 +77,7 @@ namespace Narvalo.BenchmarkCommon
 
             IEnumerable<Benchmark> benchmarks
                 = from type in assembly.GetExportedTypes()
-                  from benchmark in FindBenchmarks_(type)
+                  from benchmark in FindBenchmarks(type)
                   select benchmark;
 
             foreach (var benchmark in benchmarks)
@@ -91,7 +91,7 @@ namespace Narvalo.BenchmarkCommon
             Require.NotNull(type, "type");
             Contract.Ensures(Contract.Result<IEnumerable<BenchmarkMetric>>() != null);
 
-            IEnumerable<Benchmark> benchmarks = FindBenchmarks_(type);
+            IEnumerable<Benchmark> benchmarks = FindBenchmarks(type);
 
             foreach (var benchmark in benchmarks)
             {
@@ -99,7 +99,7 @@ namespace Narvalo.BenchmarkCommon
             }
         }
 
-        private IEnumerable<Benchmark> FindBenchmarks_(Type type)
+        private IEnumerable<Benchmark> FindBenchmarks(Type type)
         {
             Promise.NotNull(type, "Null guard for a private method call.");
 

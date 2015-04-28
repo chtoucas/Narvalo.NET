@@ -34,7 +34,7 @@ namespace Narvalo.Web.UI
             Contract.Assume(_fontsPath != null);
             Contract.Assume(_fontsPath.Length != 0);
 
-            return MakeUri_(_fontsPath, relativePath);
+            return MakeUri(_fontsPath, relativePath);
         }
 
         public override Uri GetImageUri(string relativePath)
@@ -43,7 +43,7 @@ namespace Narvalo.Web.UI
             Contract.Assume(_imagesPath != null);
             Contract.Assume(_imagesPath.Length != 0);
 
-            return MakeUri_(_imagesPath, relativePath);
+            return MakeUri(_imagesPath, relativePath);
         }
 
         public override Uri GetScriptUri(string relativePath)
@@ -52,7 +52,7 @@ namespace Narvalo.Web.UI
             Contract.Assume(_scriptsPath != null);
             Contract.Assume(_scriptsPath.Length != 0);
 
-            return MakeUri_(_scriptsPath, relativePath);
+            return MakeUri(_scriptsPath, relativePath);
         }
 
         public override Uri GetStyleUri(string relativePath)
@@ -61,7 +61,7 @@ namespace Narvalo.Web.UI
             Contract.Assume(_stylesPath != null);
             Contract.Assume(_stylesPath.Length != 0);
 
-            return MakeUri_(_stylesPath, relativePath);
+            return MakeUri(_stylesPath, relativePath);
         }
 
         // FIXME: If any value is invalid, return null.
@@ -98,7 +98,7 @@ namespace Narvalo.Web.UI
             if (stylesPath) { config.Remove(STYLES_PATH_KEY); }
         }
 
-        private static Uri MakeUri_(string baseIntermediatePath, string relativePath)
+        private static Uri MakeUri(string baseIntermediatePath, string relativePath)
         {
             Require.NotNull(relativePath, "relativePath");
             Contract.Requires(baseIntermediatePath != null);
@@ -108,7 +108,9 @@ namespace Narvalo.Web.UI
             // NB: If basePath or relativePath is null or empty, VirtualPathUtility.Combine will throw,
             // which is of course exactly what we want.
             var uriString = VirtualPathUtility.ToAbsolute(
-                relativePath.Length == 0 ? baseIntermediatePath : VirtualPathUtility.Combine(baseIntermediatePath, relativePath));
+                relativePath.Length == 0
+                ? baseIntermediatePath
+                : VirtualPathUtility.Combine(baseIntermediatePath, relativePath));
 
             return new Uri(uriString, UriKind.Relative);
         }

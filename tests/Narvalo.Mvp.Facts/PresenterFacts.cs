@@ -8,100 +8,103 @@ namespace Narvalo.Mvp
 
     public static partial class PresenterFacts
     {
-        public static class Ctor
+        #region Ctor()
+
+        [Fact]
+        public static void Ctor_ThrowsArgumentNullException_ForNullView_WithPresenterT1()
         {
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WithPresenterT1()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new MyPresenter<IMyView>(view: null));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WithPresenterOf()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new MyPresenterOf<MyViewModel>(view: null));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WithPresenterT2()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new MyPresenter<IMyViewWithModel, MyViewModel>(view: null));
-            }
-
-            [Fact]
-            public static void InitializesViewModel_WithPresenterOf()
-            {
-                // Arrange
-                var view = Substitute.For<IView<MyViewModel>>();
-
-                // Act
-                new MyPresenterOf<MyViewModel>(view);
-
-                // Assert
-                Assert.NotNull(view.Model);
-            }
-
-            [Fact]
-            public static void InitializesViewModel_WithPresenterT2()
-            {
-                // Arrange
-                var view = Substitute.For<IMyViewWithModel>();
-
-                // Act
-                new MyPresenter<IMyViewWithModel, MyViewModel>(view);
-
-                // Assert
-                Assert.NotNull(view.Model);
-            }
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => new MyPresenter<IMyView>(view: null));
         }
 
-        public static class ViewProperty
+        [Fact]
+        public static void Ctor_ThrowsArgumentNullException_ForNullView_WithPresenterOf()
         {
-            [Fact]
-            public static void IsSetCorrectly_WithPresenterT1()
-            {
-                // Arrange
-                var view = Substitute.For<IMyView>();
-
-                // Act
-                var presenter = new MyPresenter<IMyView>(view);
-
-                // Assert
-                Assert.Equal(view, presenter.View);
-            }
-
-            [Fact]
-            public static void IsSetCorrectly_WithPresenterOf()
-            {
-                // Arrange
-                var view = Substitute.For<IView<MyViewModel>>();
-
-                // Act
-                var presenter = new MyPresenterOf<MyViewModel>(view);
-
-                // Assert
-                Assert.Equal(view, presenter.View);
-            }
-
-            [Fact]
-            public static void IsSetCorrectly_WithPresenterT2()
-            {
-                // Arrange
-                var view = Substitute.For<IMyViewWithModel>();
-
-                // Act
-                var presenter = new MyPresenter<IMyViewWithModel, MyViewModel>(view);
-
-                // Assert
-                Assert.Equal(view, presenter.View);
-            }
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => new MyPresenterOf<MyViewModel>(view: null));
         }
 
-        #region Helper classes
+        [Fact]
+        public static void Ctor_ThrowsArgumentNullException_ForNullView_WithPresenterT2()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => new MyPresenter<IMyViewWithModel, MyViewModel>(view: null));
+        }
 
+        [Fact]
+        public static void Ctor_InitializesViewModel_WithPresenterOf()
+        {
+            // Arrange
+            var view = Substitute.For<IView<MyViewModel>>();
+
+            // Act
+            new MyPresenterOf<MyViewModel>(view);
+
+            // Assert
+            Assert.NotNull(view.Model);
+        }
+
+        [Fact]
+        public static void Ctor_InitializesViewModel_WithPresenterT2()
+        {
+            // Arrange
+            var view = Substitute.For<IMyViewWithModel>();
+
+            // Act
+            new MyPresenter<IMyViewWithModel, MyViewModel>(view);
+
+            // Assert
+            Assert.NotNull(view.Model);
+        }
+
+        #endregion
+
+        #region View
+
+        [Fact]
+        public static void View_IsSetCorrectly_WithPresenterT1()
+        {
+            // Arrange
+            var view = Substitute.For<IMyView>();
+
+            // Act
+            var presenter = new MyPresenter<IMyView>(view);
+
+            // Assert
+            Assert.Equal(view, presenter.View);
+        }
+
+        [Fact]
+        public static void View_IsSetCorrectly_WithPresenterOf()
+        {
+            // Arrange
+            var view = Substitute.For<IView<MyViewModel>>();
+
+            // Act
+            var presenter = new MyPresenterOf<MyViewModel>(view);
+
+            // Assert
+            Assert.Equal(view, presenter.View);
+        }
+
+        [Fact]
+        public static void View_IsSetCorrectly_WithPresenterT2()
+        {
+            // Arrange
+            var view = Substitute.For<IMyViewWithModel>();
+
+            // Act
+            var presenter = new MyPresenter<IMyViewWithModel, MyViewModel>(view);
+
+            // Assert
+            Assert.Equal(view, presenter.View);
+        }
+
+        #endregion
+    }
+
+    public static partial class PresenterFacts
+    {
         public interface IMyView : IView
         {
             event EventHandler TestHandler;
@@ -130,7 +133,5 @@ namespace Narvalo.Mvp
         {
             public MyPresenter(T1 view) : base(view) { }
         }
-
-        #endregion
     }
 }

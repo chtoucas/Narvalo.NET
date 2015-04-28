@@ -29,7 +29,7 @@ namespace Narvalo.Web.Optimization
             {
                 var span = block.Children[i] as Span;
 
-                if (!IsMarkup_(span))
+                if (!IsMarkup(span))
                 {
                     // On ne touche pas les éléments qui ne sont pas de type Markup.
                     continue;
@@ -39,7 +39,7 @@ namespace Narvalo.Web.Optimization
                 string content
                     = i == block.Children.Count - 1
                     ? span.Content
-                    : RemoveMarkupAndMergeContentAfter_(block, span.Content, ref i);
+                    : RemoveMarkupAndMergeContentAfter(block, span.Content, ref i);
 
                 if (String.IsNullOrWhiteSpace(content))
                 {
@@ -53,7 +53,7 @@ namespace Narvalo.Web.Optimization
                 builder.ClearSymbols();
 
                 // FIXME: On perd toute information contextuelle.
-                builder.Accept(new Symbol_ { Content = BustWhiteSpaces_(content) });
+                builder.Accept(new Symbol_ { Content = BustWhiteSpaces(content) });
                 span.ReplaceWith(builder);
             }
         }
@@ -80,21 +80,21 @@ namespace Narvalo.Web.Optimization
 
                 // FIXME: On perd toute information contextuelle. Peut-être pour remédier à ce problème
                 // on pourrait ré-utiliser un HtmlSymbol.
-                builder.Accept(new Symbol_ { Content = OptimizeContent_(sym, prevType) });
+                builder.Accept(new Symbol_ { Content = OptimizeContent(sym, prevType) });
                 prevType = sym.Type;
             }
 
             span.ReplaceWith(builder);
         }
 
-        private static bool IsMarkup_(Span span)
+        private static bool IsMarkup(Span span)
         {
             return span != null && span.Kind == SpanKind.Markup;
         }
 
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference",
             Justification = "[Intentionally] The use of a parameter passed by reference simplifies the algorithm. Only used privately.")]
-        private static string RemoveMarkupAndMergeContentAfter_(BlockBuilder block, string content, ref int currentIndex)
+        private static string RemoveMarkupAndMergeContentAfter(BlockBuilder block, string content, ref int currentIndex)
         {
             Contract.Requires(block != null);
 
@@ -109,7 +109,7 @@ namespace Narvalo.Web.Optimization
                 var nextSpan = block.Children[j] as Span;
 
                 // On s'arrête dès qu'on rencontre un Span qui n'est pas de type Markup.
-                if (!IsMarkup_(nextSpan))
+                if (!IsMarkup(nextSpan))
                 {
                     break;
                 }
@@ -142,12 +142,12 @@ namespace Narvalo.Web.Optimization
 
 #endif
 
-        private string BustWhiteSpaces_(string content)
+        private string BustWhiteSpaces(string content)
         {
             return _buster.Bust(content);
         }
 
-        private string OptimizeContent_(SymbolBase<HtmlSymbolType> sym, HtmlSymbolType previousType)
+        private string OptimizeContent(SymbolBase<HtmlSymbolType> sym, HtmlSymbolType previousType)
         {
             Contract.Requires(sym != null);
 
@@ -161,7 +161,7 @@ namespace Narvalo.Web.Optimization
             }
             else
             {
-                content = BustWhiteSpaces_(sym.Content);
+                content = BustWhiteSpaces(sym.Content);
             }
 
             return content;

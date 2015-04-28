@@ -9,9 +9,12 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("8b6b352b-110b-4f0f-bebb-6c1a3984cb0c")]
 
-[assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Scope = "type", Target = "Narvalo.Build.Properties.Strings",
+[assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
+    Scope = "type", Target = "Narvalo.Build.Properties.Strings",
     Justification = "[GeneratedCode] Default visibility for resources is internal.")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Narvalo.Build.Properties.Strings.#Culture",
+[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+    Scope = "member", Target = "Narvalo.Build.Properties.Strings.#Culture",
     Justification = "[GeneratedCode] Default visibility for resources is internal.")]
-[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "Narvalo.Build.Properties.Strings.#Culture",
+[assembly: SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+    Scope = "member", Target = "Narvalo.Build.Properties.Strings.#Culture",
     Justification = "[GeneratedCode] Default visibility for resources is internal.")]

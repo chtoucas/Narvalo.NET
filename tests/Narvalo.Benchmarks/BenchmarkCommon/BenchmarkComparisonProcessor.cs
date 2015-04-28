@@ -56,9 +56,9 @@ namespace Narvalo.BenchmarkCommon
         /// <returns>The collection of benchmark results, one result for each method run.</returns>
         public BenchmarkMetricCollection Process(Type type)
         {
-            IEnumerable<Benchmark> items = FindComparatives_(type);
-            var comparison = CreateComparison_(type, items);
-            IEnumerable<BenchmarkMetric> metrics = ProcessCore_(comparison);
+            IEnumerable<Benchmark> items = FindComparatives(type);
+            var comparison = CreateComparison(type, items);
+            IEnumerable<BenchmarkMetric> metrics = ProcessCore(comparison);
 
             return new BenchmarkMetricCollection(comparison.Name, metrics.ToList());
         }
@@ -73,15 +73,15 @@ namespace Narvalo.BenchmarkCommon
             foreach (var value in testData)
             {
                 // REVIEW: on peut sûrement éviter de relancer CreateComparison_ à chaque itération.
-                IEnumerable<Benchmark> items = FindComparatives_(type, value);
-                var comparison = CreateComparison_(type, items);
-                IEnumerable<BenchmarkMetric> metrics = ProcessCore_(comparison);
+                IEnumerable<Benchmark> items = FindComparatives(type, value);
+                var comparison = CreateComparison(type, items);
+                IEnumerable<BenchmarkMetric> metrics = ProcessCore(comparison);
 
                 yield return new BenchmarkMetricCollection(comparison.Name, metrics.ToList());
             }
         }
 
-        private static BenchmarkComparison CreateComparison_(Type type, IEnumerable<Benchmark> items)
+        private static BenchmarkComparison CreateComparison(Type type, IEnumerable<Benchmark> items)
         {
             BenchmarkComparisonAttribute attr
                 = type.GetCustomAttribute<BenchmarkComparisonAttribute>(inherit: false);
@@ -99,7 +99,7 @@ namespace Narvalo.BenchmarkCommon
                 attr.Iterations);
         }
 
-        private IEnumerable<BenchmarkMetric> ProcessCore_(BenchmarkComparison comparison)
+        private IEnumerable<BenchmarkMetric> ProcessCore(BenchmarkComparison comparison)
         {
             Require.NotNull(comparison, "comparison");
 
@@ -109,7 +109,7 @@ namespace Narvalo.BenchmarkCommon
             }
         }
 
-        private IEnumerable<Benchmark> FindComparatives_(Type type)
+        private IEnumerable<Benchmark> FindComparatives(Type type)
         {
             MethodInfo[] methods = type.GetMethods(DiscoveryBindings);
 
@@ -132,7 +132,7 @@ namespace Narvalo.BenchmarkCommon
             }
         }
 
-        private IEnumerable<Benchmark> FindComparatives_<T>(Type type, T value)
+        private IEnumerable<Benchmark> FindComparatives<T>(Type type, T value)
         {
             MethodInfo[] methods = type.GetMethods(DiscoveryBindings);
 

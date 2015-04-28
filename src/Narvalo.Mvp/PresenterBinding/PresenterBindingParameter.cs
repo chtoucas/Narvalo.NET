@@ -52,7 +52,7 @@ namespace Narvalo.Mvp.PresenterBinding
             return PresenterType == other.PresenterType
                 && ViewType == other.ViewType
                 && BindingMode == other.BindingMode
-                && SequenceEqual_(Views, other.Views);
+                && SequenceEqual(Views, other.Views);
         }
 
         public override int GetHashCode()
@@ -66,7 +66,7 @@ namespace Narvalo.Mvp.PresenterBinding
         /// <summary>
         /// An order independent version of Enumerable.SequenceEqual.
         /// </summary>
-        private static bool SequenceEqual_<T>(IEnumerable<T> left, IEnumerable<T> right)
+        private static bool SequenceEqual<T>(IEnumerable<T> left, IEnumerable<T> right)
         {
             Require.NotNull(left, "left");
             Require.NotNull(right, "right");

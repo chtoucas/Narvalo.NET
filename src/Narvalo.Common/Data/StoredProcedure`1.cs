@@ -56,7 +56,7 @@ namespace Narvalo.Data
 
             using (var connection = new SqlConnection(ConnectionString))
             {
-                using (var command = CreateCommand_(connection))
+                using (var command = CreateCommand(connection))
                 {
                     var parameters = command.Parameters;
                     Contract.Assume(parameters != null);
@@ -81,7 +81,7 @@ namespace Narvalo.Data
 
         [SuppressMessage("Microsoft.Security", "CA2100:ReviewSqlQueriesForSecurityVulnerabilities",
             Justification = "[Intentionally] The Code Analysis error is real, but we expect the consumer of this class to use a named SQL procedure.")]
-        private SqlCommand CreateCommand_(SqlConnection connection)
+        private SqlCommand CreateCommand(SqlConnection connection)
         {
             Promise.NotNull(connection, "Null guard for a private method call.");
             Contract.Ensures(Contract.Result<SqlCommand>() != null);

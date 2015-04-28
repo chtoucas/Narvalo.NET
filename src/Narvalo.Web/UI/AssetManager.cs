@@ -30,7 +30,7 @@ namespace Narvalo.Web.UI
             {
                 Contract.Ensures(Contract.Result<AssetProvider>() != null);
 
-                Initialize_();
+                Initialize();
                 return s_Provider;
             }
         }
@@ -41,7 +41,7 @@ namespace Narvalo.Web.UI
             {
                 Contract.Ensures(Contract.Result<AssetProviderCollection>() != null);
 
-                Initialize_();
+                Initialize();
                 return s_Providers;
             }
         }
@@ -167,7 +167,7 @@ namespace Narvalo.Web.UI
             s_Initialized = false;
         }
 
-        private static void Initialize_()
+        private static void Initialize()
         {
             if (!s_Initialized)
             {
@@ -180,7 +180,7 @@ namespace Narvalo.Web.UI
                             var section = WebConfigurationManager.GetSection(AssetSection.SectionName) as AssetSection;
                             if (section == null)
                             {
-                                InitializeDefault_();
+                                InitializeDefault();
                             }
                             else
                             {
@@ -210,7 +210,7 @@ namespace Narvalo.Web.UI
             }
         }
 
-        private static void InitializeDefault_()
+        private static void InitializeDefault()
         {
             // Use the default provider. WARNING: Don't forget to initialize it too!
             var tmpProvider = new DefaultAssetProvider();

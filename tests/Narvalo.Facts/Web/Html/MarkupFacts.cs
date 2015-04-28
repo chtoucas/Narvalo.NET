@@ -150,7 +150,8 @@ namespace Narvalo.Web.Html
         public static void Link_ReturnsExpectedHtml_ForCustomAttribute(string value)
         {
             // Arrange
-            var expectedValue = @"<link attrName=""attrValue"" href=""" + value + @""" rel=""stylesheet"" type=""text/css"" />";
+            var expectedValue =
+                @"<link attrName=""attrValue"" href=""" + value + @""" rel=""stylesheet"" type=""text/css"" />";
 
             // Act
             var result = Markup.Link(
@@ -262,7 +263,8 @@ namespace Narvalo.Web.Html
         public static void Script_ReturnsExpectedHtml_ForCustomAttribute(string value)
         {
             // Arrange
-            var expectedValue = @"<script attrName=""attrValue"" src=""" + value + @""" type=""text/javascript""></script>";
+            var expectedValue =
+                @"<script attrName=""attrValue"" src=""" + value + @""" type=""text/javascript""></script>";
 
             // Act
             var result = Markup.Script(

@@ -61,6 +61,7 @@ namespace Narvalo.Analyzers
             return content.StartsWith("Justification =")
                 || content.StartsWith("[assembly: AssemblyDescription", StringComparison.OrdinalIgnoreCase)
                 || content.StartsWith("[assembly: System.Runtime.CompilerServices.InternalsVisibleTo", StringComparison.OrdinalIgnoreCase)
+                || content.StartsWith(@"""", StringComparison.OrdinalIgnoreCase)
                 || content.StartsWith("//", StringComparison.OrdinalIgnoreCase)
                 || content.StartsWith("/*", StringComparison.OrdinalIgnoreCase)
                 || content.StartsWith("*", StringComparison.OrdinalIgnoreCase);

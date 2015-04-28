@@ -21,7 +21,7 @@
     <Compile Include="GhostScriptException.cs" />
     <Compile Include="GhostScriptHelper.cs" />
     <Compile Include="IGhostScriptApi.cs" />
-    <Compile Include="Internal\GhostScriptApiBase.cs" />
+    <Compile Include="Internal\GhostScriptApi.cs" />
     <Compile Include="Internal\NativeMethodsUtil.cs" />
     <Compile Include="Internal\Win32GhostScriptApi.cs" />
     <Compile Include="Internal\Win32GhostScriptSafeHandle.cs" />

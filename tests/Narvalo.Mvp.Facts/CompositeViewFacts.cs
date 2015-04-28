@@ -3,37 +3,40 @@
 namespace Narvalo.Mvp
 {
     using System;
+
     using NSubstitute;
     using Xunit;
 
     public static partial class CompositeViewFacts
     {
-        public static partial class AddMethod
+        #region Add()
+
+        [Fact]
+        public static void Add_ThrowsArgumentNullException_ForNullView()
         {
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullView()
-            {
-                // Arrange
-                var view = new MyCompositeView<IView<Object>>();
+            // Arrange
+            var view = new MyCompositeView<IView<Object>>();
 
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => view.Add(view: null));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_ForViewOfWrongType()
-            {
-                // Arrange
-                var view = new MyCompositeView<IView<String>>();
-
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => view.Add(Substitute.For<IView>()));
-                Assert.Throws<ArgumentException>(() => view.Add(Substitute.For<IView<Int32>>()));
-            }
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => view.Add(view: null));
         }
 
-        #region Helper classes
+        [Fact]
+        public static void Add_ThrowsArgumentException_ForViewOfWrongType()
+        {
+            // Arrange
+            var view = new MyCompositeView<IView<String>>();
 
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => view.Add(Substitute.For<IView>()));
+            Assert.Throws<ArgumentException>(() => view.Add(Substitute.For<IView<Int32>>()));
+        }
+
+        #endregion
+    }
+
+    public static partial class CompositeViewFacts
+    {
         public class MyCompositeView<TView> : CompositeView<TView> where TView : IView
         {
             public override event EventHandler Load
@@ -42,32 +45,31 @@ namespace Narvalo.Mvp
                 remove { throw new NotImplementedException(); }
             }
         }
-
-        #endregion
     }
 
 #if !NO_INTERNALS_VISIBLE_TO
 
     public static partial class CompositeViewFacts
     {
-        public static partial class AddMethod
+        #region Add()
+
+        [Fact]
+        public static void Add_AddsViewsToList()
         {
-            [Fact]
-            public static void AddsViewsToList()
-            {
-                // Arrange
-                var view = new MyCompositeView<IView<Object>>();
-                var view1 = Substitute.For<IView<Object>>();
-                var view2 = Substitute.For<IView<Object>>();
+            // Arrange
+            var view = new MyCompositeView<IView<Object>>();
+            var view1 = Substitute.For<IView<Object>>();
+            var view2 = Substitute.For<IView<Object>>();
 
-                // Act
-                view.Add(view1);
-                view.Add(view2);
+            // Act
+            view.Add(view1);
+            view.Add(view2);
 
-                // Assert
-                Assert.Equal(new[] { view1, view2 }, view.Views);
-            }
+            // Assert
+            Assert.Equal(new[] { view1, view2 }, view.Views);
         }
+
+        #endregion
     }
 
 #endif

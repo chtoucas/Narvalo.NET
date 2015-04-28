@@ -12,7 +12,7 @@ namespace Narvalo.Mvp.Windows.Forms
 
     public sealed class DefaultConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
-        private static readonly string[] s_ViewSuffixes = new[] 
+        private static readonly string[] s_ViewSuffixes = new[]
         {
             "UserControl",
             "Control",
@@ -43,7 +43,7 @@ namespace Narvalo.Mvp.Windows.Forms
         }
 
         public PresenterDiscoveryResult FindBindings(
-            IEnumerable<object> hosts, 
+            IEnumerable<object> hosts,
             IEnumerable<IView> views)
         {
             return _inner.FindBindings(hosts, views);

@@ -34,7 +34,7 @@ namespace Narvalo.Fx
         public static void IsError_ReturnsTrue_WhenError()
         {
             // Arrange
-            var edi = CreateEdi_();
+            var edi = CreateEdi();
             var voe = VoidOrError.Error(edi);
 
             // Act & Assert
@@ -56,8 +56,8 @@ namespace Narvalo.Fx
         public static void Error_ResultIsNotNull()
         {
             // Act
-            var edi = CreateEdi_();
-            var voe = VoidOrError.Error(edi); 
+            var edi = CreateEdi();
+            var voe = VoidOrError.Error(edi);
 
             // Assert
             Assert.NotNull(voe);
@@ -78,8 +78,8 @@ namespace Narvalo.Fx
         public static void ThrowIfError_ThrowsOriginalException_WhenError()
         {
             // Arrange
-            var edi = CreateEdiFrom_(new SimpleException());
-            var voe = VoidOrError.Error(edi); 
+            var edi = CreateEdiFrom(new SimpleException());
+            var voe = VoidOrError.Error(edi);
 
             // Act & Assert
             Assert.Throws<SimpleException>(() => voe.ThrowIfError());
@@ -100,8 +100,8 @@ namespace Narvalo.Fx
         public static void ToString_ResultIsNotNull_WhenError()
         {
             // Arrange
-            var edi = CreateEdi_();
-            var voe = VoidOrError.Error(edi); 
+            var edi = CreateEdi();
+            var voe = VoidOrError.Error(edi);
 
             // Act a Assert
             Assert.NotNull(voe.ToString());
@@ -112,7 +112,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var message = "My exception message.";
-            var edi = CreateEdiFrom_(new SimpleException(message));
+            var edi = CreateEdiFrom(new SimpleException(message));
             var voe = VoidOrError.Error(edi);
 
             // Act & Assert
@@ -124,12 +124,12 @@ namespace Narvalo.Fx
 
     public static partial class VoidOrErrorFacts
     {
-        private static ExceptionDispatchInfo CreateEdi_()
+        private static ExceptionDispatchInfo CreateEdi()
         {
-            return CreateEdiFrom_(new SimpleException());
+            return CreateEdiFrom(new SimpleException());
         }
 
-        private static ExceptionDispatchInfo CreateEdiFrom_(Exception exception)
+        private static ExceptionDispatchInfo CreateEdiFrom(Exception exception)
         {
             ExceptionDispatchInfo edi;
 

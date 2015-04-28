@@ -30,33 +30,33 @@ namespace Narvalo.Comparisons
         [BenchmarkComparative(DisplayName = "Activator")]
         public static void ViaActivator()
         {
-            var inst = NewActivator_<MyDerived>();
+            var inst = NewActivator<MyDerived>();
         }
 
         [BenchmarkComparative(DisplayName = "Dynamic method")]
         public static void ViaDynamicMethod()
         {
-            var inst = NewDynamicMethod_<MyDerived>();
+            var inst = NewDynamicMethod<MyDerived>();
         }
 
         [BenchmarkComparative(DisplayName = "Expression")]
         public static void ViaExpression()
         {
-            var inst = NewExpression_<MyDerived>();
+            var inst = NewExpression<MyDerived>();
         }
 
         [BenchmarkComparative(DisplayName = "Static property")]
         public static void ViaUniqueInstance()
         {
-            var inst = NewStaticField_<MyDerived>();
+            var inst = NewStaticField<MyDerived>();
         }
 
-        private static Func<T> NewActivator_<T>() where T : class
+        private static Func<T> NewActivator<T>() where T : class
         {
             return () => Activator.CreateInstance(typeof(T), nonPublic: true) as T;
         }
 
-        private static Func<T> NewStaticField_<T>()
+        private static Func<T> NewStaticField<T>()
         {
             var type = typeof(T);
             var fieldInfo = type.GetField("s_Instance", BindingFlags.NonPublic | BindingFlags.Static);
@@ -65,10 +65,14 @@ namespace Narvalo.Comparisons
             return () => (T)fieldValue;
         }
 
-        private static Func<T> NewDynamicMethod_<T>() where T : MyBase
+        private static Func<T> NewDynamicMethod<T>() where T : MyBase
         {
             var type = typeof(T);
-            var ctorInfo = type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
+            var ctorInfo = type.GetConstructor(
+                BindingFlags.NonPublic | BindingFlags.Instance,
+                null,
+                Type.EmptyTypes,
+                null);
             var method = new DynamicMethod("NewTCurrency", type, Type.EmptyTypes, type, skipVisibility: true);
 
             var il = method.GetILGenerator();
@@ -78,7 +82,7 @@ namespace Narvalo.Comparisons
             return (Func<T>)method.CreateDelegate(typeof(Func<T>));
         }
 
-        private static Func<T> NewExpression_<T>() where T : MyBase
+        private static Func<T> NewExpression<T>() where T : MyBase
         {
             var expr = Expression.New(typeof(T));
 

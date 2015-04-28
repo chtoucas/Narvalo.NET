@@ -36,14 +36,14 @@ namespace Narvalo.Mvp
 
         public void Publish<T>(T message)
         {
-            ThrowIfClosed_();
+            ThrowIfClosed();
 
             PublishCore(message);
         }
 
         public void Subscribe<T>(Action<T> onNext)
         {
-            ThrowIfClosed_();
+            ThrowIfClosed();
 
             SubscribeCore(onNext);
         }
@@ -59,7 +59,7 @@ namespace Narvalo.Mvp
                 "[MessageCoordinator] Even if subscription is allowed, no messages will ever be received.");
         }
 
-        private void ThrowIfClosed_()
+        private void ThrowIfClosed()
         {
             if (_closed)
             {

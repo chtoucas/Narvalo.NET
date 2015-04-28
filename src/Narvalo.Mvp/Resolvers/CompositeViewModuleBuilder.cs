@@ -18,7 +18,7 @@ namespace Narvalo.Mvp.Resolvers
             Require.NotNullOrEmpty(assemblyName, "assemblyName");
 
             _assemblyName = assemblyName;
-            _moduleBuilder = new Lazy<ModuleBuilder>(CreateModuleBuilder_);
+            _moduleBuilder = new Lazy<ModuleBuilder>(CreateModuleBuilder);
         }
 
         public TypeBuilder DefineType(Type viewType)
@@ -37,7 +37,7 @@ namespace Narvalo.Mvp.Resolvers
                 interfaces);
         }
 
-        private ModuleBuilder CreateModuleBuilder_()
+        private ModuleBuilder CreateModuleBuilder()
         {
             var assemblyName = new AssemblyName(_assemblyName);
 

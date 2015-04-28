@@ -32,21 +32,21 @@ namespace Narvalo
         public static void Unreachable_DoesNotThrow_ForComprehensiveSwitch()
         {
             // Act
-            ComprehensiveSwitch_(MyEnum_.One);
+            ComprehensiveSwitch(MyEnum_.One);
         }
 
         [Fact]
         public static void Unreachable_ThrowsInvalidOperationException_ForIncompleteSwitch()
         {
             // Act & Assert
-            Assert.Throws<NotSupportedException>(() => IncompleteSwitch_(MyEnum_.Two));
+            Assert.Throws<NotSupportedException>(() => IncompleteSwitch(MyEnum_.Two));
         }
 
         [Fact]
         public static void Unreachable_ThrowsCustomException_ForIncompleteSwitch()
         {
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => IncompleteSwitchWithCustomException_(MyEnum_.Two));
+            Assert.Throws<InvalidOperationException>(() => IncompleteSwitchWithCustomException(MyEnum_.Two));
         }
 
         #endregion
@@ -85,7 +85,7 @@ namespace Narvalo
             Two,
         }
 
-        private static string ComprehensiveSwitch_(MyEnum_ value)
+        private static string ComprehensiveSwitch(MyEnum_ value)
         {
             switch (value)
             {
@@ -98,7 +98,7 @@ namespace Narvalo
             }
         }
 
-        private static string IncompleteSwitch_(MyEnum_ value)
+        private static string IncompleteSwitch(MyEnum_ value)
         {
             switch (value)
             {
@@ -110,7 +110,7 @@ namespace Narvalo
             }
         }
 
-        private static string IncompleteSwitchWithCustomException_(MyEnum_ value)
+        private static string IncompleteSwitchWithCustomException(MyEnum_ value)
         {
             switch (value)
             {

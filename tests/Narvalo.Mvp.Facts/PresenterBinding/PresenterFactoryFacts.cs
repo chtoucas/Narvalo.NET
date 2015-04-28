@@ -3,122 +3,129 @@
 namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
+
     using NSubstitute;
     using Xunit;
 
     public static partial class PresenterFactoryFacts
     {
-        public static class CreateMethod
+        #region Create()
+
+        [Fact]
+        public static void Create_ThrowsArgumentNullException_ForNullPresenterType()
         {
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullPresenterType()
+            // Arrange
+            var factory = new PresenterFactory();
+            var viewType = typeof(IView);
+            var view = Substitute.For<IView>();
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => factory.Create(null, viewType, view));
+        }
+
+        [Fact]
+        public static void Create_ThrowsArgumentNullException_ForNullViewType()
+        {
+            // Arrange
+            var factory = new PresenterFactory();
+            var presenterType = typeof(IPresenter<IView>);
+            var view = Substitute.For<IView>();
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => factory.Create(presenterType, null, view));
+        }
+
+        [Fact]
+        public static void Create_ThrowsArgumentNullException_ForNullView()
+        {
+            // Arrange
+            var factory = new PresenterFactory();
+            var presenterType = typeof(IPresenter<IView>);
+            var viewType = typeof(IView);
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => factory.Create(presenterType, viewType, null));
+        }
+
+        [Fact]
+        public static void Create_ReturnsInstance()
+        {
+            // Arrange
+            var factory = new PresenterFactory();
+            var presenterType = typeof(MyPresenter);
+            var viewType = typeof(IView);
+            var view = Substitute.For<IView>();
+
+            // Act
+            var presenter = factory.Create(
+                presenterType,
+                viewType,
+                view);
+
+            // Assert
+            Assert.True(presenter is MyPresenter);
+        }
+
+        [Fact]
+        public static void Create_ThrowsPresenterBindingException_WhenConstructorThrows()
+        {
+            // Arrange
+            var factory = new PresenterFactory();
+            var presenterType = typeof(MyErrorPresenter);
+            var viewType = typeof(IView);
+            var view = Substitute.For<IView>();
+
+            // Act & Assert
+            Assert.Throws<PresenterBindingException>(() => factory.Create(presenterType, viewType, view));
+        }
+
+        [Fact]
+        public static void Create_WrapsOriginalException_WhenConstructorThrows()
+        {
+            // Arrange
+            var factory = new PresenterFactory();
+            var presenterType = typeof(MyErrorPresenter);
+            var viewType = typeof(IView);
+            var view = Substitute.For<IView>();
+
+            try
             {
-                // Arrange
-                var factory = new PresenterFactory();
-                var viewType = typeof(IView);
-                var view = Substitute.For<IView>();
-
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => factory.Create(null, viewType, view));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullViewType()
-            {
-                // Arrange
-                var factory = new PresenterFactory();
-                var presenterType = typeof(IPresenter<IView>);
-                var view = Substitute.For<IView>();
-
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => factory.Create(presenterType, null, view));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullView()
-            {
-                // Arrange
-                var factory = new PresenterFactory();
-                var presenterType = typeof(IPresenter<IView>);
-                var viewType = typeof(IView);
-
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => factory.Create(presenterType, viewType, null));
-            }
-
-            [Fact]
-            public static void ReturnsInstance()
-            {
-                // Arrange
-                var factory = new PresenterFactory();
-                var presenterType = typeof(MyPresenter);
-                var viewType = typeof(IView);
-                var view = Substitute.For<IView>();
-
                 // Act
-                var presenter = factory.Create(
-                    presenterType,
-                    viewType,
-                    view);
+                factory.Create(presenterType, viewType, view);
+            }
+            catch (PresenterBindingException ex)
+            {
+                // Assert
+                Assert.True(ex.InnerException is ApplicationException);
+            }
+        }
+
+        #endregion
+
+        #region Release()
+
+        [Fact]
+        public static void Release_DisposesPresenter()
+        {
+            // Arrange
+            var factory = new PresenterFactory();
+            var view = Substitute.For<IView>();
+
+            using (var presenter = new MyDisposablePresenter(view))
+            {
+                // Act
+                factory.Release(presenter);
 
                 // Assert
-                Assert.True(presenter is MyPresenter);
-            }
-
-            [Fact]
-            public static void ThrowsPresenterBindingException_WhenConstructorThrows()
-            {
-                // Arrange
-                var factory = new PresenterFactory();
-                var presenterType = typeof(MyErrorPresenter);
-                var viewType = typeof(IView);
-                var view = Substitute.For<IView>();
-
-                // Act & Assert
-                Assert.Throws<PresenterBindingException>(() => factory.Create(presenterType, viewType, view));
-            }
-
-            [Fact]
-            public static void WrapsOriginalException_WhenConstructorThrows()
-            {
-                // Arrange
-                var factory = new PresenterFactory();
-                var presenterType = typeof(MyErrorPresenter);
-                var viewType = typeof(IView);
-                var view = Substitute.For<IView>();
-
-                try {
-                    // Act
-                    factory.Create(presenterType, viewType, view);
-                }
-                catch (PresenterBindingException ex) {
-                    // Assert
-                    Assert.True(ex.InnerException is ApplicationException);
-                }
+                Assert.True(presenter.DisposeWasCalled);
             }
         }
 
-        public static class ReleaseMethod
-        {
-            [Fact]
-            public static void DisposesPresenter()
-            {
-                // Arrange
-                var factory = new PresenterFactory();
-                var view = Substitute.For<IView>();
+        #endregion
+    }
 
-                using (var presenter = new MyDisposablePresenter(view)) {
-                    // Act
-                    factory.Release(presenter);
-
-                    // Assert
-                    Assert.True(presenter.DisposeWasCalled);
-                }
-            }
-        }
-
-        #region Helper classes
-
+    public static partial class PresenterFactoryFacts
+    {
         public sealed class MyPresenter : Presenter<IView>
         {
             public MyPresenter(IView view) : base(view) { }
@@ -144,7 +151,5 @@ namespace Narvalo.Mvp.PresenterBinding
                 throw new ApplicationException("test exception");
             }
         }
-
-        #endregion
     }
 }

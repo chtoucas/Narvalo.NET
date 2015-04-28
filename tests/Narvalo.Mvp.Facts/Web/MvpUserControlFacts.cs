@@ -3,52 +3,54 @@
 namespace Narvalo.Mvp.Web
 {
     using System;
+
     using NSubstitute;
     using Xunit;
 
     public static class MvpUserControlFacts
     {
-        public static class ThrowIfNoPresenterBoundProperty
+        #region ThrowIfNoPresenterBound
+
+        [Fact]
+        public static void ThrowIfNoPresenterBound_IsTrue_ForDefautConstructor()
         {
-            [Fact]
-            public static void IsTrue_ForDefautConstructor()
-            {
-                // Arrange & Act
-                var control = Substitute.For<MvpUserControl>();
+            // Arrange & Act
+            var control = Substitute.For<MvpUserControl>();
 
-                // Assert
-                Assert.True(control.ThrowIfNoPresenterBound);
-            }
-
-            [Fact]
-            public static void IsTrue_ForDefautConstructor_WhenGeneric()
-            {
-                // Arrange & Act
-                var control = Substitute.For<MvpUserControl<Object>>();
-
-                // Assert
-                Assert.True(control.ThrowIfNoPresenterBound);
-            }
-
-            [Fact]
-            public static void IsFalse_ForCustomConstructor()
-            {
-                // Arrange & Act
-                var control = Substitute.For<MvpUserControl>(false);
-
-                // Assert
-                Assert.False(control.ThrowIfNoPresenterBound);
-            }
-
-            [Fact]
-            public static void IsFalse_ForCustomConstructor_WhenGeneric()
-            {
-                // Arrange & Act
-                var control = Substitute.For<MvpUserControl<Object>>(false);
-
-                // Assert
-                Assert.False(control.ThrowIfNoPresenterBound);
-            }
+            // Assert
+            Assert.True(control.ThrowIfNoPresenterBound);
         }
+
+        [Fact]
+        public static void ThrowIfNoPresenterBound_IsTrue_ForDefautConstructor_WhenGeneric()
+        {
+            // Arrange & Act
+            var control = Substitute.For<MvpUserControl<Object>>();
+
+            // Assert
+            Assert.True(control.ThrowIfNoPresenterBound);
+        }
+
+        [Fact]
+        public static void ThrowIfNoPresenterBound_IsFalse_ForCustomConstructor()
+        {
+            // Arrange & Act
+            var control = Substitute.For<MvpUserControl>(false);
+
+            // Assert
+            Assert.False(control.ThrowIfNoPresenterBound);
+        }
+
+        [Fact]
+        public static void ThrowIfNoPresenterBound_IsFalse_ForCustomConstructor_WhenGeneric()
+        {
+            // Arrange & Act
+            var control = Substitute.For<MvpUserControl<Object>>(false);
+
+            // Assert
+            Assert.False(control.ThrowIfNoPresenterBound);
+        }
+
+        #endregion
     }
 }

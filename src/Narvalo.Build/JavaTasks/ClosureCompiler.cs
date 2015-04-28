@@ -99,7 +99,7 @@ namespace Narvalo.Build.JavaTasks
                     break;
                 }
 
-                string outFile = GetCompressedFilePath_(inFile);
+                string outFile = GetCompressedFilePath(inFile);
 
                 Log.LogMessage(
                     MessageImportance.Normal,
@@ -114,7 +114,7 @@ namespace Narvalo.Build.JavaTasks
                 {
                     process.StartInfo = new ProcessStartInfo {
                         FileName = fullPathToTool,
-                        Arguments = GetCommandLineArguments_(inFile, outFile),
+                        Arguments = GetCommandLineArguments(inFile, outFile),
                         UseShellExecute = false,
                         CreateNoWindow = true,
                         RedirectStandardOutput = true,
@@ -146,7 +146,7 @@ namespace Narvalo.Build.JavaTasks
         /// <param name="inFile">The input file.</param>
         /// <param name="outFile">The output file.</param>
         /// <returns>The set of command-line arguments to use when starting the Closure executable.</returns>
-        private string GetCommandLineArguments_(string inFile, string outFile)
+        private string GetCommandLineArguments(string inFile, string outFile)
         {
             var sb = new StringBuilder();
             sb.AppendFormat(@"-jar ""{0}"" ", JarPath);
@@ -165,10 +165,12 @@ namespace Narvalo.Build.JavaTasks
         /// </summary>
         /// <param name="fileName">The name of the input file.</param>
         /// <returns>The filename for the compressed file.</returns>
-        private string GetCompressedFilePath_(string fileName)
+        private string GetCompressedFilePath(string fileName)
         {
             string name = fileName.Replace(".js", ".min.js");
-            return String.IsNullOrEmpty(OutputDirectory) ? name : Path.Combine(OutputDirectory, new FileInfo(name).Name);
+            return String.IsNullOrEmpty(OutputDirectory)
+                ? name
+                : Path.Combine(OutputDirectory, new FileInfo(name).Name);
         }
     }
 }

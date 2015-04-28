@@ -10,6 +10,21 @@ namespace Narvalo.Reliability
         private long _requestCount = 0;
         private long _successCount = 0;
 
+        public long FailureCount
+        {
+            get { return _failureCount; }
+        }
+
+        public long RequestCount
+        {
+            get { return _requestCount; }
+        }
+
+        public long SuccessCount
+        {
+            get { return _successCount; }
+        }
+
         public void Execute(Action action)
         {
             Require.NotNull(action, "action");
@@ -31,21 +46,6 @@ namespace Narvalo.Reliability
             }
 
             RecordSuccess();
-        }
-
-        public long FailureCount
-        {
-            get { return _failureCount; }
-        }
-
-        public long RequestCount
-        {
-            get { return _requestCount; }
-        }
-
-        public long SuccessCount
-        {
-            get { return _successCount; }
         }
 
         public void RecordFailure()

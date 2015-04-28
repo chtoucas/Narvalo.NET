@@ -171,7 +171,9 @@ namespace Narvalo.Build.JavaTasks
             }
 
             string name = fileName.Replace("." + FileExtension, ".min." + FileExtension);
-            return String.IsNullOrEmpty(OutputDirectory) ? name : Path.Combine(OutputDirectory, new FileInfo(name).Name);
+            return String.IsNullOrEmpty(OutputDirectory)
+                ? name
+                : Path.Combine(OutputDirectory, new FileInfo(name).Name);
         }
     }
 }

@@ -62,7 +62,7 @@ namespace Narvalo.Mvp.PresenterBinding
                            attr.PresenterType,
                            attr.ViewType,
                            attr.BindingMode,
-                           GetViewsToBind_(attr, view, pendingViews))).ToList();
+                           GetViewsToBind(attr, view, pendingViews))).ToList();
 
                 bindings.AddRange(bindingsThisRound);
 
@@ -78,7 +78,7 @@ namespace Narvalo.Mvp.PresenterBinding
             return new PresenterDiscoveryResult(boundViews, bindings);
         }
 
-        private static IEnumerable<IView> GetViewsToBind_(
+        private static IEnumerable<IView> GetViewsToBind(
             PresenterBindingAttribute attribute,
             IView view,
             IEnumerable<IView> pendingViews)

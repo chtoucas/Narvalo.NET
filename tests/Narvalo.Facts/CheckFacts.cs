@@ -83,7 +83,8 @@ namespace Narvalo
         public static void NotNullOrWhiteSpace_Throws_ForNull()
         {
             // Act & Assert
-            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Check.NotNullOrWhiteSpace(Constants.NullString, "rationale"));
+            AssertExt.DebugOnly.ThrowsAny<Exception>(
+                () => Check.NotNullOrWhiteSpace(Constants.NullString, "rationale"));
         }
 
         [Fact]
@@ -97,7 +98,8 @@ namespace Narvalo
         public static void NotNullOrWhiteSpace_Throws_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Check.NotNullOrWhiteSpace(Constants.WhiteSpaceOnlyString, "rationale"));
+            AssertExt.DebugOnly.ThrowsAny<Exception>(
+                () => Check.NotNullOrWhiteSpace(Constants.WhiteSpaceOnlyString, "rationale"));
         }
 
         #endregion
@@ -124,7 +126,8 @@ namespace Narvalo
         public static void NotNull_ThrowsIllegalConditionException_ForNull()
         {
             // Act & Assert
-            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Check.NotNull(Constants.NullString, "rationale"));
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(
+                () => Check.NotNull(Constants.NullString, "rationale"));
         }
 
         #endregion
@@ -135,14 +138,16 @@ namespace Narvalo
         public static void NotNullOrEmpty_ThrowsIllegalConditionException_ForNull()
         {
             // Act & Assert
-            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Check.NotNullOrEmpty(Constants.NullString, "rationale"));
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(
+                () => Check.NotNullOrEmpty(Constants.NullString, "rationale"));
         }
 
         [Fact]
         public static void NotNullOrEmpty_ThrowsIllegalConditionException_ForEmptyString()
         {
             // Act & Assert
-            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Check.NotNullOrEmpty(String.Empty, "rationale"));
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(
+                () => Check.NotNullOrEmpty(String.Empty, "rationale"));
         }
 
         #endregion
@@ -153,21 +158,24 @@ namespace Narvalo
         public static void NotNullOrWhiteSpace_ThrowsIllegalConditionException_ForNull()
         {
             // Act & Assert
-            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Check.NotNullOrWhiteSpace(Constants.NullString, "rationale"));
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(
+                () => Check.NotNullOrWhiteSpace(Constants.NullString, "rationale"));
         }
 
         [Fact]
         public static void NotNullOrWhiteSpace_ThrowsIllegalConditionException_ForEmptyString()
         {
             // Act & Assert
-            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Check.NotNullOrWhiteSpace(String.Empty, "rationale"));
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(
+                () => Check.NotNullOrWhiteSpace(String.Empty, "rationale"));
         }
 
         [Fact]
         public static void NotNullOrWhiteSpace_ThrowsIllegalConditionException_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Check.NotNullOrWhiteSpace(Constants.WhiteSpaceOnlyString, "rationale"));
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(
+                () => Check.NotNullOrWhiteSpace(Constants.WhiteSpaceOnlyString, "rationale"));
         }
 
         #endregion

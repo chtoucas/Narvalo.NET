@@ -13,13 +13,13 @@ namespace Narvalo.Externs.Log4Net
         {
             Require.NotNull(context, "context");
 
-            context.BeginRequest += OnBeginRequest_;
-            context.EndRequest += OnEndRequest_;
+            context.BeginRequest += OnBeginRequest;
+            context.EndRequest += OnEndRequest;
         }
 
         public void Dispose() { }
 
-        private void OnBeginRequest_(object sender, EventArgs e)
+        private void OnBeginRequest(object sender, EventArgs e)
         {
             var app = sender as HttpApplication;
 
@@ -35,7 +35,7 @@ namespace Narvalo.Externs.Log4Net
             properties["UserAgent"] = request.UserAgent;
         }
 
-        private void OnEndRequest_(object sender, EventArgs e)
+        private void OnEndRequest(object sender, EventArgs e)
         {
             log4net.ThreadContext.Properties.Clear();
         }

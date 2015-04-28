@@ -60,7 +60,7 @@ namespace Narvalo.Web
 
             context.Response.TrySkipIisCustomErrors = TrySkipIisCustomErrors;
 
-            if (ValidateHttpMethod_(context.Request))
+            if (ValidateHttpMethod(context.Request))
             {
                 ProcessRequestCore(context);
             }
@@ -87,7 +87,7 @@ namespace Narvalo.Web
                     AcceptedVerbs.ToString()));
         }
 
-        private bool ValidateHttpMethod_(HttpRequest request)
+        private bool ValidateHttpMethod(HttpRequest request)
         {
             Contract.Requires(request != null);
 

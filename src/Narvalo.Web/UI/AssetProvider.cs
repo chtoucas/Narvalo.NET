@@ -114,7 +114,7 @@ namespace Narvalo.Web.UI
 
             // REVIEW: Name is initialized by base.Initialize() but Name 
             // could also be overridden by a derived class.
-            //Contract.Assume(Name != null);
+            ////Contract.Assume(Name != null);
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "config",

@@ -7,208 +7,215 @@ namespace Narvalo.Mvp.Web.Core
     using System.Linq;
     using Xunit;
 
-    public static class AspNetMessageCoordinatorFacts
+    public static partial class AspNetMessageCoordinatorFacts
     {
-        public static class PublishMethod
-        {
-            [Fact]
-            public static void ThrowsInvalidOperationException_WhenCalledAfterClose()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                coordinator.Close();
+        #region Publish()
 
-                // Act & Assert
-                Assert.Throws<InvalidOperationException>(() => coordinator.Publish("message"));
+        [Fact]
+        public static void Publish_ThrowsInvalidOperationException_WhenCalledAfterClose()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            coordinator.Close();
+
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => coordinator.Publish("message"));
+        }
+
+        [Fact]
+        public static void Publish_AcceptsMessageWithoutMatchingSubscribers()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+
+            // Act & Assert
+            ////Assert.DoesNotThrow(() => coordinator.Publish("message"));
+            coordinator.Publish("message");
+            Assert.True(true);
+        }
+
+        [Fact]
+        public static void Publish_AcceptsNullMessage()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            string receivedMessage = "whatever";
+            coordinator.Subscribe<string>(_ => receivedMessage = _);
+
+            // Act
+            coordinator.Publish((string)null);
+
+            // Assert
+            Assert.Null(receivedMessage);
+        }
+
+        [Fact]
+        public static void Publish_PushesMessageToSubscribers()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            string receivedMessage = null;
+            coordinator.Subscribe<string>(_ => receivedMessage = _);
+
+            // Act
+            var publishedMessage = "hello";
+            coordinator.Publish(publishedMessage);
+
+            // Assert
+            Assert.Equal(publishedMessage, receivedMessage);
+        }
+
+        [Fact]
+        public static void Publish_PushesMessageToSubscribersOfBaseType()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            MyMessage receivedMessage = null;
+            coordinator.Subscribe<MyMessage>(_ => receivedMessage = _);
+
+            // Act
+            var publishedMessage = new MyInheritedMessage();
+            coordinator.Publish(publishedMessage);
+
+            // Assert
+            Assert.Equal(publishedMessage, receivedMessage);
+        }
+
+        [Fact]
+        public static void Publish_DoesNotPushMessageToSubscribersOfInheritedTypes()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            coordinator.Subscribe<MyInheritedMessage>(
+                _ => Assert.False(true, "Callback should never have been called."));
+
+            // Act
+            coordinator.Publish(new MyMessage());
+
+            // Assert
+        }
+
+        [Fact]
+        public static void Publish_PushesToSubscribersInOrderOfSubscription()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            var subscriberCount = 20;
+            var firedSubscribers = new List<int>();
+            for (var i = 0; i < subscriberCount; i++)
+            {
+                var subscriberIndex = i;
+                coordinator.Subscribe<string>(_ => firedSubscribers.Add(subscriberIndex));
             }
 
-            [Fact]
-            public static void AcceptsMessageWithoutMatchingSubscribers()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
+            // Act
+            coordinator.Publish("message");
 
-                // Act & Assert
-                //Assert.DoesNotThrow(() => coordinator.Publish("message"));
+            // Assert
+            Assert.Equal(Enumerable.Range(0, subscriberCount).ToArray(), firedSubscribers);
+        }
+
+        [Fact]
+        public static void Publish_StopsPushingMessageAfterFirstFailingSubscriber()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            coordinator.Subscribe<string>(
+                _ => { throw new ApplicationException("Test exception"); });
+            coordinator.Subscribe<string>(
+                _ => Assert.False(true, "This subscriber should not have been called."));
+
+            // Act
+            try
+            {
                 coordinator.Publish("message");
-                Assert.True(true);
             }
-
-            [Fact]
-            public static void AcceptsNullMessage()
+            catch (ApplicationException)
             {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                string receivedMessage = "whatever";
-                coordinator.Subscribe<string>(_ => receivedMessage = _);
-
-                // Act
-                coordinator.Publish((string)null);
-
-                // Assert
-                Assert.Null(receivedMessage);
             }
 
-            [Fact]
-            public static void PushesMessageToSubscribers()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                string receivedMessage = null;
-                coordinator.Subscribe<string>(_ => receivedMessage = _);
-
-                // Act
-                var publishedMessage = "hello";
-                coordinator.Publish(publishedMessage);
-
-                // Assert
-                Assert.Equal(publishedMessage, receivedMessage);
-            }
-
-            [Fact]
-            public static void PushesMessageToSubscribersOfBaseType()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                MyMessage receivedMessage = null;
-                coordinator.Subscribe<MyMessage>(_ => receivedMessage = _);
-
-                // Act
-                var publishedMessage = new MyInheritedMessage();
-                coordinator.Publish(publishedMessage);
-
-                // Assert
-                Assert.Equal(publishedMessage, receivedMessage);
-            }
-
-            [Fact]
-            public static void DoesNotPushMessageToSubscribersOfInheritedTypes()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                coordinator.Subscribe<MyInheritedMessage>(
-                    _ => Assert.False(true, "Callback should never have been called."));
-
-                // Act
-                coordinator.Publish(new MyMessage());
-
-                // Assert
-            }
-
-            [Fact]
-            public static void PushesToSubscribersInOrderOfSubscription()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                var subscriberCount = 20;
-                var firedSubscribers = new List<int>();
-                for (var i = 0; i < subscriberCount; i++) {
-                    var subscriberIndex = i;
-                    coordinator.Subscribe<string>(_ => firedSubscribers.Add(subscriberIndex));
-                }
-
-                // Act
-                coordinator.Publish("message");
-
-                // Assert
-                Assert.Equal(Enumerable.Range(0, subscriberCount).ToArray(), firedSubscribers);
-            }
-
-            [Fact]
-            public static void StopsPushingMessageAfterFirstFailingSubscriber()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                coordinator.Subscribe<string>(
-                    _ => { throw new ApplicationException("Test exception"); });
-                coordinator.Subscribe<string>(
-                    _ => Assert.False(true, "This subscriber should not have been called."));
-
-                // Act
-                try {
-                    coordinator.Publish("message");
-                }
-                catch (ApplicationException) {
-                }
-
-                // Assert
-            }
+            // Assert
         }
 
-        public static class CloseMethod
+        #endregion
+
+        #region Close()
+
+        [Fact]
+        public static void Close_MayBeCalledMultipleTimes()
         {
-            [Fact]
-            public static void MayBeCalledMultipleTimes()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                coordinator.Close();
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            coordinator.Close();
 
-                // Act & Assert
-                //Assert.DoesNotThrow(() => coordinator.Close());
-                coordinator.Close();
-                Assert.True(true);
-            }
+            // Act & Assert
+            ////Assert.DoesNotThrow(() => coordinator.Close());
+            coordinator.Close();
+            Assert.True(true);
         }
 
-        public static class SubscribeMethod
+        #endregion
+
+        #region Subscribe()
+
+        [Fact]
+        public static void Subscribe_ThrowsInvalidOperationException_WhenCalledAfterClose()
         {
-            [Fact]
-            public static void ThrowsInvalidOperationException_WhenCalledAfterClose()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                coordinator.Close();
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            coordinator.Close();
 
-                // Act & Assert
-                Assert.Throws<InvalidOperationException>(() => coordinator.Subscribe<string>(_ => { }));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullSubscriber()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-
-                // Act a Assert
-                Assert.Throws<ArgumentNullException>(() => coordinator.Subscribe((Action<object>)null));
-            }
-
-            [Fact]
-            public static void PushesPreviouslyPublishedMessagesToNewSubscribers()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                var publishedMessage = "hello";
-                coordinator.Publish(publishedMessage);
-
-                // Act
-                string receivedMessage = null;
-                coordinator.Subscribe<string>(_ => receivedMessage = _);
-
-                // Assert
-                Assert.Equal(publishedMessage, receivedMessage);
-            }
-
-            [Fact]
-            public static void PushesPreviouslyPublishedMessagesToNewSubscribersInOrderOfPublication()
-            {
-                // Arrange
-                var coordinator = new AspNetMessageCoordinator();
-                var messageCount = 20;
-                var publishedMessages = Enumerable.Range(0, messageCount).ToList();
-                foreach (var message in publishedMessages) {
-                    coordinator.Publish(message);
-                }
-
-                // Act
-                var receivedMessages = new List<int>();
-                coordinator.Subscribe<int>(_ => receivedMessages.Add(_));
-
-                // Assert
-                Assert.Equal(publishedMessages, receivedMessages);
-            }
+            // Act & Assert
+            Assert.Throws<InvalidOperationException>(() => coordinator.Subscribe<string>(_ => { }));
         }
+
+        [Fact]
+        public static void Subscribe_ThrowsArgumentNullException_ForNullSubscriber()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+
+            // Act a Assert
+            Assert.Throws<ArgumentNullException>(() => coordinator.Subscribe((Action<object>)null));
+        }
+
+        [Fact]
+        public static void Subscribe_PushesPreviouslyPublishedMessagesToNewSubscribers()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            var publishedMessage = "hello";
+            coordinator.Publish(publishedMessage);
+
+            // Act
+            string receivedMessage = null;
+            coordinator.Subscribe<string>(_ => receivedMessage = _);
+
+            // Assert
+            Assert.Equal(publishedMessage, receivedMessage);
+        }
+
+        [Fact]
+        public static void Subscribe_PushesPreviouslyPublishedMessagesToNewSubscribersInOrderOfPublication()
+        {
+            // Arrange
+            var coordinator = new AspNetMessageCoordinator();
+            var messageCount = 20;
+            var publishedMessages = Enumerable.Range(0, messageCount).ToList();
+            foreach (var message in publishedMessages)
+            {
+                coordinator.Publish(message);
+            }
+
+            // Act
+            var receivedMessages = new List<int>();
+            coordinator.Subscribe<int>(_ => receivedMessages.Add(_));
+
+            // Assert
+            Assert.Equal(publishedMessages, receivedMessages);
+        }
+
+        #endregion
 
         [Fact]
         public static void PushesMessages_WhenNestedInSubscriber()
@@ -241,15 +248,14 @@ namespace Narvalo.Mvp.Web.Core
             // Assert
             Assert.True(received);
         }
+    }
 
-        #region Helper classes
-
+    public static partial class AspNetMessageCoordinatorFacts
+    {
         public interface IMyMessage { }
 
         public class MyMessage : IMyMessage { }
 
         public class MyInheritedMessage : MyMessage { }
-
-        #endregion
     }
 }

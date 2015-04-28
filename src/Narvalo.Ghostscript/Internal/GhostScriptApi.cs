@@ -8,9 +8,9 @@ namespace Narvalo.GhostScript.Internal
 
     using Narvalo.GhostScript.Options;
 
-    internal abstract class GhostScriptApiBase : IGhostScriptApi
+    internal abstract class GhostScriptApi : IGhostScriptApi
     {
-        protected GhostScriptApiBase() { }
+        protected GhostScriptApi() { }
 
         public void Execute<T>(GhostScriptArgs<T> args) where T : Device
         {

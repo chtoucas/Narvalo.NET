@@ -9,7 +9,7 @@ namespace Narvalo.Finance.Internal
     using Narvalo.Finance.Currencies;
     using Xunit;
 
-    public static class CurrencyActivatorFacts
+    public static partial class CurrencyActivatorFacts
     {
         public class MyCurrency : Currency
         {
@@ -25,7 +25,10 @@ namespace Narvalo.Finance.Internal
         {
             private MyCurrencyWithoutDefaultCtor(string value) : base("YYY") { }
         }
+    }
 
+    public static partial class CurrencyActivatorFacts
+    {
         #region CreateInstance()
 
         [Fact]
@@ -49,7 +52,8 @@ namespace Narvalo.Finance.Internal
         [Fact]
         public static void CreateInstance_ThrowsMissingMemberException_ForMissingDefaultCtor()
         {
-            Assert.Throws<MissingMemberException>(() => CurrencyActivator<MyCurrencyWithoutDefaultCtor>.CreateInstance());
+            Assert.Throws<MissingMemberException>(
+                () => CurrencyActivator<MyCurrencyWithoutDefaultCtor>.CreateInstance());
         }
 
         #endregion

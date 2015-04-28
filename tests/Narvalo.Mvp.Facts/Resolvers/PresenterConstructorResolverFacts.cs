@@ -3,110 +3,114 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
+
     using NSubstitute;
     using Xunit;
 
-    public static class PresenterConstructorResolverFacts
+    public static partial class PresenterConstructorResolverFacts
     {
-        public static class ResolveMethod
+        #region Resolve()
+
+        [Fact]
+        public static void Resolve_ThrowsArgumentNullException_ForNullPresenterType()
         {
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullPresenterType()
+            // Arrange
+            var resolver = new PresenterConstructorResolver();
+            var viewType = typeof(IView);
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => resolver.Resolve(null, viewType));
+        }
+
+        [Fact]
+        public static void Resolve_ThrowsArgumentNullException_ForNullViewType()
+        {
+            // Arrange
+            var resolver = new PresenterConstructorResolver();
+            var presenterType = typeof(IPresenter<IView>);
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => resolver.Resolve(presenterType, null));
+        }
+
+        [Fact]
+        public static void Resolve_ThrowsArgumentException_ForViewTypeMismatch()
+        {
+            // Arrange
+            var resolver = new PresenterConstructorResolver();
+            var presenterType = typeof(MyPresenter<IMyView1>);
+            var viewType = typeof(IMyView2);
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => resolver.Resolve(presenterType, viewType));
+        }
+
+        [Fact]
+        public static void Resolve_ThrowsArgumentException_WhenMissingRequiredConstructor()
+        {
+            // Arrange
+            var resolver = new PresenterConstructorResolver();
+            var presenterType = typeof(MyBadPresenter<IMyView1>);
+            var viewType = typeof(IMyView1);
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => resolver.Resolve(presenterType, viewType));
+        }
+
+        [Fact]
+        public static void Resolve_ThrowsArgumentException_WhenPresenterTypeIsPrivate()
+        {
+            // Arrange
+            var resolver = new PresenterConstructorResolver();
+            var presenterType = typeof(MyPrivatePresenter_);
+            var viewType = typeof(IView);
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => resolver.Resolve(presenterType, viewType));
+        }
+
+        [Fact]
+        public static void Resolve_ReturnsExpectedConstructor()
+        {
+            // Arrange
+            var resolver = new PresenterConstructorResolver();
+            var presenterType = typeof(MyPresenter<IMyView1>);
+            var viewType = typeof(IMyView1);
+            var view = Substitute.For<IMyView1>();
+
+            // Act
+            var ctor = resolver.Resolve(presenterType, viewType);
+            var instance = ctor.Invoke(null, new[] { view });
+            var presenter = instance as MyPresenter<IMyView1>;
+
+            // Assert
+            Assert.True(presenter != null);
+
+            if (presenter != null)
             {
-                // Arrange
-                var resolver = new PresenterConstructorResolver();
-                var viewType = typeof(IView);
-
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => resolver.Resolve(null, viewType));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullViewType()
-            {
-                // Arrange
-                var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(IPresenter<IView>);
-
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => resolver.Resolve(presenterType, null));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_ForViewTypeMismatch()
-            {
-                // Arrange
-                var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(MyPresenter<IMyView1>);
-                var viewType = typeof(IMyView2);
-
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => resolver.Resolve(presenterType, viewType));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_WhenMissingRequiredConstructor()
-            {
-                // Arrange
-                var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(MyBadPresenter<IMyView1>);
-                var viewType = typeof(IMyView1);
-
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => resolver.Resolve(presenterType, viewType));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_WhenPresenterTypeIsPrivate()
-            {
-                // Arrange
-                var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(MyPrivatePresenter);
-                var viewType = typeof(IView);
-
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => resolver.Resolve(presenterType, viewType));
-            }
-
-            [Fact]
-            public static void ReturnsExpectedConstructor()
-            {
-                // Arrange
-                var resolver = new PresenterConstructorResolver();
-                var presenterType = typeof(MyPresenter<IMyView1>);
-                var viewType = typeof(IMyView1);
-                var view = Substitute.For<IMyView1>();
-
-                // Act
-                var ctor = resolver.Resolve(presenterType, viewType);
-                var instance = ctor.Invoke(null, new[] { view });
-                var presenter = instance as MyPresenter<IMyView1>;
-
-                // Assert
-                Assert.True(presenter != null);
-
-                if (presenter != null) {
-                    Assert.Equal(view, presenter.View);
-                }
-            }
-
-            [Fact]
-            public static void ReturnsDifferentConstructors_ForDifferentViewTypes()
-            {
-                // Arrange
-                var resolver = new PresenterConstructorResolver();
-
-                // Act
-                var ctor1 = resolver.Resolve(typeof(MyPresenter<IView>), typeof(IMyView3));
-                var ctor2 = resolver.Resolve(typeof(MyPresenter<IView>), typeof(IMyView4));
-
-                // Assert
-                Assert.NotEqual(ctor1, ctor2);
+                Assert.Equal(view, presenter.View);
             }
         }
 
-        #region Helper classes
+        [Fact]
+        public static void Resolve_ReturnsDifferentConstructors_ForDifferentViewTypes()
+        {
+            // Arrange
+            var resolver = new PresenterConstructorResolver();
 
+            // Act
+            var ctor1 = resolver.Resolve(typeof(MyPresenter<IView>), typeof(IMyView3));
+            var ctor2 = resolver.Resolve(typeof(MyPresenter<IView>), typeof(IMyView4));
+
+            // Assert
+            Assert.NotEqual(ctor1, ctor2);
+        }
+
+        #endregion
+    }
+
+    public static partial class PresenterConstructorResolverFacts
+    {
         public interface IMyView1 : IView<String> { }
 
         public interface IMyView2 : IView<Int16> { }
@@ -153,7 +157,7 @@ namespace Narvalo.Mvp.Resolvers
             }
         }
 
-        class MyPrivatePresenter : IPresenter<IView>
+        private class MyPrivatePresenter_ : IPresenter<IView>
         {
             public IView View
             {
@@ -165,7 +169,5 @@ namespace Narvalo.Mvp.Resolvers
                 get { throw new NotImplementedException(); }
             }
         }
-
-        #endregion
     }
 }

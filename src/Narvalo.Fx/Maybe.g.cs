@@ -490,7 +490,7 @@ namespace Narvalo.Fx
             Contract.Requires(resultSelector != null);
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            return JoinCore_(
+            return JoinCore(
                 @this,
                 inner,
                 outerKeySelector,
@@ -514,7 +514,7 @@ namespace Narvalo.Fx
             Contract.Requires(resultSelector != null);
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            return GroupJoinCore_(
+            return GroupJoinCore(
                 @this,
                 inner,
                 outerKeySelector,
@@ -526,7 +526,7 @@ namespace Narvalo.Fx
         
         [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
             Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
-        private static Maybe<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
+        private static Maybe<TResult> JoinCore<TSource, TInner, TKey, TResult>(
             Maybe<TSource> seq,
             Maybe<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -542,7 +542,7 @@ namespace Narvalo.Fx
             Contract.Requires(comparer != null);
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
             
-            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
                    from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
@@ -551,7 +551,7 @@ namespace Narvalo.Fx
         
         [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
             Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
-        private static Maybe<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
+        private static Maybe<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
             Maybe<TSource> seq,
             Maybe<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -567,13 +567,13 @@ namespace Narvalo.Fx
             Contract.Requires(comparer != null);
             Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
                    select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
         }
 
-        private static Func<TSource, Maybe<TKey>> GetKeyLookup_<TSource, TInner, TKey>(
+        private static Func<TSource, Maybe<TKey>> GetKeyLookup<TSource, TInner, TKey>(
             Maybe<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -975,7 +975,7 @@ namespace Narvalo.Fx.Internal
 
             var seed = Maybe.Of(Enumerable.Empty<TSource>());
             Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
-                = (m, n) => m.Bind(list => CollectCore_(n, list));
+                = (m, n) => m.Bind(list => CollectCore(n, list));
 
             var retval = @this.Aggregate(seed, fun);
             Contract.Assume(retval != null);
@@ -984,7 +984,7 @@ namespace Narvalo.Fx.Internal
         }
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static Maybe<IEnumerable<TSource>> CollectCore_<TSource>(
+        private static Maybe<IEnumerable<TSource>> CollectCore<TSource>(
             Maybe<TSource> m,
             IEnumerable<TSource> list)
         {

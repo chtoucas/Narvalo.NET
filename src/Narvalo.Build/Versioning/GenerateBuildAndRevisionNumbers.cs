@@ -75,7 +75,8 @@ namespace Narvalo.Build.Versioning
             var now = DateTime.UtcNow;
             var isMorning = now.Hour < 12;
             var numberOfHalfDays = 2 * (now - new DateTime(2014, 11, 30)).Days - (isMorning ? 1 : 0);
-            var numberOfSeconds = (now - new DateTime(now.Year, now.Month, now.Day, isMorning ? 0 : 12, 0, 0)).TotalSeconds;
+            var numberOfSeconds =
+                (now - new DateTime(now.Year, now.Month, now.Day, isMorning ? 0 : 12, 0, 0)).TotalSeconds;
 
             BuildNumber = (ushort)(numberOfHalfDays - 1);
             RevisionNumber = (ushort)numberOfSeconds;

@@ -3,67 +3,72 @@
 namespace Narvalo.Mvp
 {
     using System;
+
     using NSubstitute;
     using Xunit;
 
     public static class PresenterBindingAttributeFacts
     {
-        public static class Ctor
+        #region Ctor()
+
+        [Fact]
+        public static void Ctor_ThrowsArgumentNullException_ForNullPresenterType()
         {
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullPresenterType()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new PresenterBindingAttribute(presenterType: null));
-            }
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => new PresenterBindingAttribute(presenterType: null));
         }
 
-        public static class BindingModeProperty
+        #endregion
+
+        #region BindingMode
+
+        [Fact]
+        public static void BindingMode_IsDefault_ForDefaultConstructor()
         {
-            [Fact]
-            public static void IsDefault_ForDefaultConstructor()
-            {
-                // Arrange
-                var presenterType = Substitute.For<IPresenter<IView>>().GetType();
+            // Arrange
+            var presenterType = Substitute.For<IPresenter<IView>>().GetType();
 
-                // Act
-                var attribute = new PresenterBindingAttribute(presenterType);
+            // Act
+            var attribute = new PresenterBindingAttribute(presenterType);
 
-                // Assert
-                Assert.Equal(PresenterBindingMode.Default, attribute.BindingMode);
-            }
+            // Assert
+            Assert.Equal(PresenterBindingMode.Default, attribute.BindingMode);
         }
 
-        public static class PresenterTypeProperty
+        #endregion
+
+        #region PresenterType
+
+        [Fact]
+        public static void PresenterType_IsSetCorrectly()
         {
-            [Fact]
-            public static void IsSetCorrectly()
-            {
-                // Arrange
-                var presenterType = Substitute.For<IPresenter<IView>>().GetType();
+            // Arrange
+            var presenterType = Substitute.For<IPresenter<IView>>().GetType();
 
-                // Act
-                var attribute = new PresenterBindingAttribute(presenterType);
+            // Act
+            var attribute = new PresenterBindingAttribute(presenterType);
 
-                // Assert
-                Assert.Equal(presenterType, attribute.PresenterType);
-            }
+            // Assert
+            Assert.Equal(presenterType, attribute.PresenterType);
         }
 
-        public static class ViewTypeProperty
+        #endregion
+
+        #region ViewType
+
+        [Fact]
+        public static void ViewType_IsNull_ForDefaultConstructor()
         {
-            [Fact]
-            public static void IsNull_ForDefaultConstructor()
-            {
-                // Arrange
-                var presenterType = Substitute.For<IPresenter<IView>>().GetType();
+            // Arrange
+            var presenterType = Substitute.For<IPresenter<IView>>().GetType();
 
-                // Act
-                var attribute = new PresenterBindingAttribute(presenterType);
+            // Act
+            var attribute = new PresenterBindingAttribute(presenterType);
 
-                // Assert
-                Assert.Null(attribute.ViewType);
-            }
+            // Assert
+            Assert.Null(attribute.ViewType);
         }
+
+        #endregion
     }
 }

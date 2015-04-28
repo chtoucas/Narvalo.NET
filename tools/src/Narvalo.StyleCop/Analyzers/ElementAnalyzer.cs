@@ -117,9 +117,12 @@ namespace Narvalo.Analyzers
                         className);
                 }
             }
-            else
+            else if (userCode)
             {
-                if (userCode)
+                CsElement parentElement = element.FindParentElement();
+                bool isRootClass = parentElement.ElementType != ElementType.Class;
+
+                if (isRootClass)
                 {
                     string fileName = Path.GetFileNameWithoutExtension(element.Document.SourceCode.Path);
 
@@ -186,12 +189,12 @@ namespace Narvalo.Analyzers
             var name = AnalyzerUtility.TrimGenericInfoFromElementName(methodName);
 
             if (element.AccessModifier == AccessModifierType.Private
-                && !name.EndsWith("_", StringComparison.OrdinalIgnoreCase))
+                && name.EndsWith("_", StringComparison.OrdinalIgnoreCase))
             {
                 SourceAnalyzer.AddViolation(
                     element,
                     element.LineNumber,
-                    RuleName.PrivateMethodNamesMustEndWithUnderscore,
+                    RuleName.PrivateMethodNamesMustNotEndWithUnderscore,
                     element.FriendlyTypeText,
                     methodName);
             }

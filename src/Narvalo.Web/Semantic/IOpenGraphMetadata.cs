@@ -8,17 +8,17 @@ namespace Narvalo.Web.Semantic
     public interface IOpenGraphMetadata
     {
         OpenGraphImage Image { get; set; }
-        
+
         string Title { get; }
-        
+
         string Type { get; set; }
-        
+
         Uri Url { get; }
 
         string Description { get; }
-        
+
         string Determiner { get; set; }
-        
+
         OpenGraphLocale Locale { get; }
 
         IEnumerable<OpenGraphLocale> AlternativeLocales { get; }
@@ -26,7 +26,7 @@ namespace Narvalo.Web.Semantic
         string SiteName { get; set; }
 
         void AddAlternativeLocale(OpenGraphLocale locale);
-        
+
         void AddAlternativeLocales(IEnumerable<OpenGraphLocale> locales);
     }
 }

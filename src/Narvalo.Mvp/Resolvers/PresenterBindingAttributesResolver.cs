@@ -15,7 +15,7 @@ namespace Narvalo.Mvp.Resolvers
             Require.NotNull(viewType, "viewType");
 
             Trace.TraceInformation(
-                "[PresenterBindingAttributesResolver] Attempting to resolve '{0}'.", 
+                "[PresenterBindingAttributesResolver] Attempting to resolve '{0}'.",
                 viewType.FullName);
 
             var attributes = viewType
@@ -24,7 +24,8 @@ namespace Narvalo.Mvp.Resolvers
                 .ToArray();
 
             if (attributes.Any(a =>
-                    a.BindingMode == PresenterBindingMode.SharedPresenter && a.ViewType == null)) {
+                    a.BindingMode == PresenterBindingMode.SharedPresenter && a.ViewType == null))
+            {
                 throw new PresenterBindingException(
                     String.Format(
                         CultureInfo.InvariantCulture,
@@ -34,8 +35,7 @@ namespace Narvalo.Mvp.Resolvers
 
             return attributes
                 .Select(pba =>
-                    new PresenterBindingAttribute(pba.PresenterType)
-                    {
+                    new PresenterBindingAttribute(pba.PresenterType) {
                         BindingMode = pba.BindingMode,
                         Origin = viewType,
                         ViewType = pba.ViewType ?? viewType,

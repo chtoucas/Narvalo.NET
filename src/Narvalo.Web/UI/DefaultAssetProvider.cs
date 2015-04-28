@@ -25,25 +25,25 @@ namespace Narvalo.Web.UI
 
         public override Uri GetFontUri(string relativePath)
         {
-            return MakeUri_("~/fonts/", relativePath);
+            return MakeUri("~/fonts/", relativePath);
         }
 
         public override Uri GetImageUri(string relativePath)
         {
-            return MakeUri_("~/Images/", relativePath);
+            return MakeUri("~/Images/", relativePath);
         }
 
         public override Uri GetScriptUri(string relativePath)
         {
-            return MakeUri_("~/Scripts/", relativePath);
+            return MakeUri("~/Scripts/", relativePath);
         }
 
         public override Uri GetStyleUri(string relativePath)
         {
-            return MakeUri_("~/Content/", relativePath);
+            return MakeUri("~/Content/", relativePath);
         }
 
-        private static Uri MakeUri_(string baseIntermediatePath, string relativePath)
+        private static Uri MakeUri(string baseIntermediatePath, string relativePath)
         {
             Require.NotNull(relativePath, "relativePath");
             Contract.Requires(baseIntermediatePath != null);
@@ -53,7 +53,9 @@ namespace Narvalo.Web.UI
             // NB: If basePath or relativePath is null or empty, VirtualPathUtility.Combine will throw,
             // which is of course exactly what we want.
             var uriString = VirtualPathUtility.ToAbsolute(
-                relativePath.Length == 0 ? baseIntermediatePath : VirtualPathUtility.Combine(baseIntermediatePath, relativePath));
+                relativePath.Length == 0
+                ? baseIntermediatePath
+                : VirtualPathUtility.Combine(baseIntermediatePath, relativePath));
 
             return new Uri(uriString, UriKind.Relative);
         }

@@ -37,7 +37,7 @@ namespace Narvalo.Reliability
 
         public void Execute(Action action)
         {
-            ThrowIfDisposed_();
+            ThrowIfDisposed();
 
             if (_sem.Wait(_timeout))
             {
@@ -79,7 +79,7 @@ namespace Narvalo.Reliability
             }
         }
 
-        private void ThrowIfDisposed_()
+        private void ThrowIfDisposed()
         {
             if (_disposed)
             {

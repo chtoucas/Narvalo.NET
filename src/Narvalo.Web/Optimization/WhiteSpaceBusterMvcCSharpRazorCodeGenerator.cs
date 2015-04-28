@@ -33,7 +33,7 @@ namespace Narvalo.Web.Optimization
             // WhiteSpaceBusterMvcWebRazorHostFactory.
             if (mvcHost != null)
             {
-                SetBaseType_("dynamic");
+                SetBaseType("dynamic");
             }
         }
 
@@ -49,7 +49,7 @@ namespace Narvalo.Web.Optimization
             base.VisitSpan(span);
         }
 
-        private void SetBaseType_(string modelTypeName)
+        private void SetBaseType(string modelTypeName)
         {
             var baseType = new CodeTypeReference(Context.Host.DefaultBaseClass + "<" + modelTypeName + ">");
             Context.GeneratedClass.BaseTypes.Clear();

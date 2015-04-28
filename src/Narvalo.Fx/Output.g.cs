@@ -704,7 +704,7 @@ namespace Narvalo.Fx.Internal
 
             var seed = Output.Success(Enumerable.Empty<TSource>());
             Func<Output<IEnumerable<TSource>>, Output<TSource>, Output<IEnumerable<TSource>>> fun
-                = (m, n) => m.Bind(list => CollectCore_(n, list));
+                = (m, n) => m.Bind(list => CollectCore(n, list));
 
             var retval = @this.Aggregate(seed, fun);
             Contract.Assume(retval != null);
@@ -713,7 +713,7 @@ namespace Narvalo.Fx.Internal
         }
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static Output<IEnumerable<TSource>> CollectCore_<TSource>(
+        private static Output<IEnumerable<TSource>> CollectCore<TSource>(
             Output<TSource> m,
             IEnumerable<TSource> list)
         {

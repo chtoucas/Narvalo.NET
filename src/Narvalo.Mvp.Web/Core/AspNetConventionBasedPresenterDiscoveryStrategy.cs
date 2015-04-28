@@ -16,7 +16,7 @@ namespace Narvalo.Mvp.Web.Core
             "{namespace}.{presenter}",
         };
 
-        private static readonly string[] s_DefaultViewSuffixes = new[] 
+        private static readonly string[] s_DefaultViewSuffixes = new[]
         {
             // Web Forms
             "UserControl",
@@ -52,7 +52,10 @@ namespace Narvalo.Mvp.Web.Core
             _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver, enableCache);
         }
 
-        public static IEnumerable<string> DefaultPresenterNameTemplates { get { return s_DefaultPresenterNameTemplates; } }
+        public static IEnumerable<string> DefaultPresenterNameTemplates
+        {
+            get { return s_DefaultPresenterNameTemplates; }
+        }
 
         public static IEnumerable<string> DefaultViewSuffixes { get { return s_DefaultViewSuffixes; } }
 

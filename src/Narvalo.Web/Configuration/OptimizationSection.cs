@@ -48,7 +48,9 @@ namespace Narvalo.Web.Configuration
                     // guarantees that value is never null, but we never know.
                     var value = base[s_EnableWhiteSpaceBusting];
 
-                    return value == null ? ENABLE_WHITESPACE_BUSTING_DEFAUL_VALUE : (bool)base[s_EnableWhiteSpaceBusting];
+                    return value == null
+                        ? ENABLE_WHITESPACE_BUSTING_DEFAUL_VALUE
+                        : (bool)base[s_EnableWhiteSpaceBusting];
                 }
             }
 

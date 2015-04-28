@@ -7,7 +7,7 @@ namespace Narvalo.Mvp.Web
 
     using Narvalo.Mvp;
 
-    public abstract class HttpPresenter<TView> 
+    public abstract class HttpPresenter<TView>
         : Presenter<TView>, IHttpPresenter, Internal.IHttpPresenter
         where TView : class, IView
     {

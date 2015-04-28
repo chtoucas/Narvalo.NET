@@ -6,7 +6,7 @@ namespace Narvalo.GhostScript.Internal
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
-    internal class Win64GhostScriptApi : GhostScriptApiBase
+    internal class Win64GhostScriptApi : GhostScriptApi
     {
         public Win64GhostScriptApi() : base() { }
 
@@ -15,7 +15,7 @@ namespace Narvalo.GhostScript.Internal
         {
             int code;
 
-            using (var handle = CreateGSHandle_())
+            using (var handle = CreateGSHandle())
             {
                 try
                 {
@@ -37,7 +37,7 @@ namespace Narvalo.GhostScript.Internal
             }
         }
 
-        private static Win64GhostScriptSafeHandle CreateGSHandle_()
+        private static Win64GhostScriptSafeHandle CreateGSHandle()
         {
             Win64GhostScriptSafeHandle handle = null;
 

@@ -2,8 +2,10 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Scope = "member", Target = "Narvalo.Int64EncoderFacts+<get_FlickrBase58Data>d__3.#MoveNext()")]
-[assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "Narvalo.Int64EncoderFacts+<get_FlickrBase58Data>d__3.#MoveNext()")]
+[assembly: SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
+    Scope = "member", Target = "Narvalo.Int64EncoderFacts+<get_FlickrBase58Data>d__3.#MoveNext()")]
+[assembly: SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity",
+    Scope = "member", Target = "Narvalo.Int64EncoderFacts+<get_FlickrBase58Data>d__3.#MoveNext()")]
 
 namespace Narvalo
 {

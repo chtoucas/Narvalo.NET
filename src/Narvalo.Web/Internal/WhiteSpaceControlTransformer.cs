@@ -47,7 +47,7 @@ namespace Narvalo.Web.Internal
                     // Transform the literal.
                     if (literal.Length != 0)
                     {
-                        subBuilders[i] = TransformLiteral_(literal);
+                        subBuilders[i] = TransformLiteral(literal);
                     }
                 }
             }
@@ -69,7 +69,7 @@ namespace Narvalo.Web.Internal
             }
         }
 
-        private string TransformLiteral_(string value)
+        private string TransformLiteral(string value)
         {
             return _buster.Bust(value);
         }

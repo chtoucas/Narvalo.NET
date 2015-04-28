@@ -11,11 +11,11 @@ namespace MvpCommandLine
         public SamplePresenter(ISampleView view)
             : base(view)
         {
-            View.Load += View_Load_;
+            View.Load += View_Load;
             View.Completed += View_Completed;
         }
 
-        private void View_Load_(object sender, EventArgs e)
+        private void View_Load(object sender, EventArgs e)
         {
             View.ShowLoad();
         }

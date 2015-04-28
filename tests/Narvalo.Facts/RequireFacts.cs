@@ -172,7 +172,8 @@ namespace Narvalo
         public static void NotNullOrWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.NotNullOrWhiteSpace(Constants.WhiteSpaceOnlyString, "parameter"));
+            Assert.Throws<ArgumentException>(
+                () => Require.NotNullOrWhiteSpace(Constants.WhiteSpaceOnlyString, "parameter"));
         }
 
         #endregion

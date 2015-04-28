@@ -3,8 +3,8 @@
 namespace Narvalo.Reliability
 {
     // FIXME: à refaire en checkpoint sans exception...
-    public class FlowRateRegulator 
-        ////: IThrottle, IDisposable
+    public class FlowRateRegulator
+    ////: IThrottle, IDisposable
     {
         ////private readonly TimeSpan _timeout;
 

@@ -10,23 +10,23 @@ namespace Narvalo.Comparisons
         private const int ALPHABET_LENGTH = 58;
 
         private static readonly char[] s_AlphabetUnorderedArray = new char[] {
-            '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+            '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-            'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 
-            't', 'u', 'v', 'w', 'x', 'y', 'z', 
+            'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+            't', 'u', 'v', 'w', 'x', 'y', 'z',
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J',
-            'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 
+            'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T',
             'U', 'V', 'W', 'X', 'Y', 'Z',
         };
 
         private static readonly char[] s_AlphabetOrderedArray = new char[] {
-            '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+            '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J',
-            'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 
+            'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T',
             'U', 'V', 'W', 'X', 'Y', 'Z',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-            'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 
-            't', 'u', 'v', 'w', 'x', 'y', 'z', 
+            'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+            't', 'u', 'v', 'w', 'x', 'y', 'z',
         };
 
         ////public static void ConvertInt64_Decode() {
@@ -74,7 +74,7 @@ namespace Narvalo.Comparisons
         ////    return test.Compare(iterations, value /* 3471131850 */);
         ////}
 
-        private static long Decode_OrderedArray_(string value)
+        private static long Decode_OrderedArray(string value)
         {
             long retval = 0L;
             long multi = 1L;
@@ -95,7 +95,7 @@ namespace Narvalo.Comparisons
             return retval;
         }
 
-        private static long Decode_String_(string value)
+        private static long Decode_String(string value)
         {
             long retval = 0L;
             long multi = 1L;
@@ -118,7 +118,7 @@ namespace Narvalo.Comparisons
             return retval;
         }
 
-        private static long Decode_UnorderedArray_(string value)
+        private static long Decode_UnorderedArray(string value)
         {
             long retval = 0L;
             long multi = 1L;
@@ -139,7 +139,7 @@ namespace Narvalo.Comparisons
             return retval;
         }
 
-        private static string Encode_String_(long value)
+        private static string Encode_String(long value)
         {
             if (value == 0L)
             {
@@ -165,7 +165,7 @@ namespace Narvalo.Comparisons
             return retval;
         }
 
-        private static string Encode_Array_(long value)
+        private static string Encode_Array(long value)
         {
             string retval = String.Empty;
 

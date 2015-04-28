@@ -27,9 +27,9 @@ namespace Narvalo
         PrivateConstNamesMustOnlyContainUppercaseLettersDigitsAndUnderscores,
 
         /// <summary>
-        /// Private method names must end with an underscore.
+        /// Private method names must not end with an underscore.
         /// </summary>
-        PrivateMethodNamesMustEndWithUnderscore,
+        PrivateMethodNamesMustNotEndWithUnderscore,
 
         /// <summary>
         /// Internal method names must not end with "Internal".

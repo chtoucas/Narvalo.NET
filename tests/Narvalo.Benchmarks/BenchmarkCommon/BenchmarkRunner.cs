@@ -58,8 +58,8 @@ namespace Narvalo.BenchmarkCommon
             Require.NotNull(benchmark, "benchmark");
             Contract.Ensures(Contract.Result<BenchmarkMetric>() != null);
 
-            int iterations = WarmUp_(benchmark.Action);
-            TimeSpan duration = Time_(benchmark.Action, iterations);
+            int iterations = WarmUp(benchmark.Action);
+            TimeSpan duration = Time(benchmark.Action, iterations);
 
             return new BenchmarkMetric(benchmark.CategoryName, benchmark.Name, duration, iterations);
         }
@@ -74,14 +74,15 @@ namespace Narvalo.BenchmarkCommon
             // Warmup.
             benchmark.Action();
 
-            TimeSpan duration = Time_(benchmark.Action, iterations);
+            TimeSpan duration = Time(benchmark.Action, iterations);
 
             return new BenchmarkMetric(benchmark.CategoryName, benchmark.Name, duration, iterations, fixedTime: false);
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect",
+        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods",
+            MessageId = "System.GC.Collect",
             Justification = "[Intentionally] The call to GC methods is done on purpose to ensure timing happens in a clean room.")]
-        private TimeSpan Time_(Action action, int iterations)
+        private TimeSpan Time(Action action, int iterations)
         {
             Promise.NotNull(action, "Null guard for a private method call.");
             Contract.Ensures(Contract.Result<TimeSpan>().Ticks > 0L);
@@ -101,7 +102,7 @@ namespace Narvalo.BenchmarkCommon
             return _timer.ElapsedTime;
         }
 
-        private int WarmUp_(Action action)
+        private int WarmUp(Action action)
         {
             Promise.NotNull(action, "Null guard for a private method call.");
             Contract.Ensures(Contract.Result<int>() > 0);
@@ -111,7 +112,7 @@ namespace Narvalo.BenchmarkCommon
             int iterations = 100;
             while (iterations < Int32.MaxValue / 2)
             {
-                TimeSpan duration = Time_(action, iterations);
+                TimeSpan duration = Time(action, iterations);
 
                 if (duration >= WarmUpDuration)
                 {

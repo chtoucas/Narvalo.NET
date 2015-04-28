@@ -31,22 +31,22 @@ namespace Narvalo.Web.UI
 
         public override Uri GetFontUri(string relativePath)
         {
-            return MakeUri_(DefaultFontsPath, relativePath);
+            return MakeUri(DefaultFontsPath, relativePath);
         }
 
         public override Uri GetImageUri(string relativePath)
         {
-            return MakeUri_(DefaultImagesPath, relativePath);
+            return MakeUri(DefaultImagesPath, relativePath);
         }
 
         public override Uri GetScriptUri(string relativePath)
         {
-            return MakeUri_(DefaultScriptsPath, relativePath);
+            return MakeUri(DefaultScriptsPath, relativePath);
         }
 
         public override Uri GetStyleUri(string relativePath)
         {
-            return MakeUri_(DefaultStylesPath, relativePath);
+            return MakeUri(DefaultStylesPath, relativePath);
         }
 
         protected override void InitializeCustom(NameValueCollection config)
@@ -60,7 +60,7 @@ namespace Narvalo.Web.UI
             config.Remove(BASE_URI_KEY);
         }
 
-        private static string Combine_(string basePath, string relativePath)
+        private static string Combine(string basePath, string relativePath)
         {
             Contract.Requires(basePath != null);
             Contract.Requires(basePath.Length != 0);
@@ -78,7 +78,7 @@ namespace Narvalo.Web.UI
                 // FIXME: Message = "relativePath" is not a relative path.
                 throw new ArgumentOutOfRangeException();
             }
-            else if (HasTrailingSlash_(basePath))
+            else if (HasTrailingSlash(basePath))
             {
                 retval = basePath + relativePath;
             }
@@ -90,14 +90,14 @@ namespace Narvalo.Web.UI
             return retval;
         }
 
-        private static bool HasTrailingSlash_(string path)
+        private static bool HasTrailingSlash(string path)
         {
             Contract.Requires(path.Length > 0);
 
             return path[path.Length - 1] == '/';
         }
 
-        private Uri MakeUri_(string baseIntermediatePath, string relativePath)
+        private Uri MakeUri(string baseIntermediatePath, string relativePath)
         {
             Require.NotNull(relativePath, "relativePath");
             Contract.Requires(baseIntermediatePath != null);
@@ -108,7 +108,7 @@ namespace Narvalo.Web.UI
             // would have been thrown in InitializeCustom().
             Contract.Assume(_baseUri != null);
 
-            string relativeUri = Combine_(baseIntermediatePath, relativePath);
+            string relativeUri = Combine(baseIntermediatePath, relativePath);
 
             return new Uri(_baseUri, relativeUri);
         }

@@ -24,13 +24,13 @@ namespace Narvalo.Mvp.Resolvers
 
             var typeBuilder = new CompositeViewTypeBuilder(viewType, _moduleBuilder.DefineType(viewType));
 
-            var properties = FindProperties_(viewType);
+            var properties = FindProperties(viewType);
             foreach (var propertyInfo in properties)
             {
                 typeBuilder.AddProperty(propertyInfo);
             }
 
-            var events = FindEvents_(viewType);
+            var events = FindEvents(viewType);
             foreach (var eventInfo in events)
             {
                 typeBuilder.AddEvent(eventInfo);
@@ -77,19 +77,19 @@ namespace Narvalo.Mvp.Resolvers
             }
         }
 
-        private static IEnumerable<EventInfo> FindEvents_(Type viewType)
+        private static IEnumerable<EventInfo> FindEvents(Type viewType)
         {
             return viewType.GetEvents()
                 .Union(
                     viewType.GetInterfaces()
-                        .SelectMany<Type, EventInfo>(FindEvents_));
+                        .SelectMany<Type, EventInfo>(FindEvents));
         }
 
-        private static IEnumerable<PropertyInfo> FindProperties_(Type viewType)
+        private static IEnumerable<PropertyInfo> FindProperties(Type viewType)
         {
             return viewType.GetProperties()
                 .Union(
-                    viewType.GetInterfaces().SelectMany<Type, PropertyInfo>(FindProperties_))
+                    viewType.GetInterfaces().SelectMany<Type, PropertyInfo>(FindProperties))
                 .Select(p => new {
                     PropertyInfo = p,
                     PropertyInfoFromCompositeViewBase = typeof(CompositeView<>).GetProperty(p.Name)

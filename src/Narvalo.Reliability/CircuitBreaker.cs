@@ -76,7 +76,7 @@ namespace Narvalo.Reliability
         {
             Require.NotNull(action, "action");
 
-            ThrowIfDisposed_();
+            ThrowIfDisposed();
 
             if (!CanExecute)
             {
@@ -93,19 +93,19 @@ namespace Narvalo.Reliability
             }
             catch
             {
-                RecordFailure_();
+                RecordFailure();
                 throw;
             }
 
-            RecordSuccess_();
+            RecordSuccess();
         }
 
         public void Reset()
         {
-            ThrowIfDisposed_();
+            ThrowIfDisposed();
 
             StopTimer();
-            SetState_(CircuitBreakerState.Closed);
+            SetState(CircuitBreakerState.Closed);
             _failureCount = 0;
         }
 
@@ -150,7 +150,7 @@ namespace Narvalo.Reliability
                 throw new InvalidOperationException();
             }
 
-            SetState_(CircuitBreakerState.Closed);
+            SetState(CircuitBreakerState.Closed);
 
             // FIXME: trop tard si _setState échoue.
             if (AutoReset)
@@ -166,7 +166,7 @@ namespace Narvalo.Reliability
                 throw new InvalidOperationException();
             }
 
-            SetState_(CircuitBreakerState.HalfOpen);
+            SetState(CircuitBreakerState.HalfOpen);
 
             // FIXME: trop tard si _setState échoue.
             if (AutoReset)
@@ -182,7 +182,7 @@ namespace Narvalo.Reliability
                 throw new InvalidOperationException();
             }
 
-            SetState_(CircuitBreakerState.Open);
+            SetState(CircuitBreakerState.Open);
 
             // FIXME: trop tard si _setState échoue.
             if (executing && AutoReset)
@@ -245,7 +245,7 @@ namespace Narvalo.Reliability
 
         #endregion
 
-        private void RecordFailure_()
+        private void RecordFailure()
         {
             if (FailureCount < _threshold)
             {
@@ -262,7 +262,7 @@ namespace Narvalo.Reliability
             }
         }
 
-        private void RecordSuccess_()
+        private void RecordSuccess()
         {
             if (FailureCount > 0)
             {
@@ -275,14 +275,14 @@ namespace Narvalo.Reliability
             }
         }
 
-        private void SetState_(CircuitBreakerState newState)
+        private void SetState(CircuitBreakerState newState)
         {
             var lastState = CurrentState;
             _currentState = newState;
             OnStateChanged(new CircuitBreakerStateChangedEventArgs(lastState, newState));
         }
 
-        private void ThrowIfDisposed_()
+        private void ThrowIfDisposed()
         {
             if (_disposed)
             {

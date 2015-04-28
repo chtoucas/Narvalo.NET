@@ -3,27 +3,29 @@
 namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
+
     using Xunit;
 
     public static class CompositePresenterDiscoveryStrategyFacts
     {
-        public static class Ctor
-        {
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullStrategies()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new CompositePresenterDiscoveryStrategy(strategies: null));
-            }
+        #region Ctor()
 
-            [Fact]
-            public static void ThrowsArgumentException_ForEmptyStrategies()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentException>(
-                    () => new CompositePresenterDiscoveryStrategy(new IPresenterDiscoveryStrategy[0]));
-            }
+        [Fact]
+        public static void Ctor_ThrowsArgumentNullException_ForNullStrategies()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => new CompositePresenterDiscoveryStrategy(strategies: null));
         }
+
+        [Fact]
+        public static void Ctor_ThrowsArgumentException_ForEmptyStrategies()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentException>(
+                () => new CompositePresenterDiscoveryStrategy(new IPresenterDiscoveryStrategy[0]));
+        }
+
+        #endregion
 
         ////[Fact]
         ////public void CompositePresenterDiscoveryStrategyTests_GetBindings_ShouldYieldFromChildStrategy()

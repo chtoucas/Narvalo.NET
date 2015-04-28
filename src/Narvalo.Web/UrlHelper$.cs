@@ -26,7 +26,11 @@ namespace Narvalo.Web
                 .RawUrl;
         }
 
-        public static string AbsoluteAction(this UrlHelper @this, string actionName, string controllerName, object routeValues)
+        public static string AbsoluteAction(
+            this UrlHelper @this,
+            string actionName,
+            string controllerName,
+            object routeValues)
         {
             Require.Object(@this);
 
@@ -40,7 +44,11 @@ namespace Narvalo.Web
             return @this.Action(actionName, controllerName, routeValues, requestUrl.Scheme);
         }
 
-        public static string AbsoluteAction(this UrlHelper @this, string actionName, string controllerName, RouteValueDictionary routeValues)
+        public static string AbsoluteAction(
+            this UrlHelper @this,
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues)
         {
             Require.Object(@this);
 

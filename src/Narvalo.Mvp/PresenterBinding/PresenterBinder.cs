@@ -58,8 +58,8 @@ namespace Narvalo.Mvp.PresenterBinding
             {
                 if (_viewsToBind.Any())
                 {
-                    var presenters = from binding in FindBindings_(_hosts)
-                                     from view in GetViews_(binding)
+                    var presenters = from binding in FindBindings(_hosts)
+                                     from view in GetViews(binding)
                                      select CreatePresenter(binding, view);
 
                     foreach (var presenter in presenters)
@@ -127,7 +127,7 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-        private IEnumerable<PresenterBindingParameter> FindBindings_(IEnumerable<Object> hosts)
+        private IEnumerable<PresenterBindingParameter> FindBindings(IEnumerable<Object> hosts)
         {
             var viewsToBind = _viewsToBind.Distinct();
 
@@ -148,7 +148,7 @@ namespace Narvalo.Mvp.PresenterBinding
             return result.Bindings;
         }
 
-        private IEnumerable<IView> GetViews_(PresenterBindingParameter binding)
+        private IEnumerable<IView> GetViews(PresenterBindingParameter binding)
         {
             IEnumerable<IView> views;
 

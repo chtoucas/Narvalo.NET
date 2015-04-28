@@ -254,7 +254,8 @@ namespace Narvalo.GhostScript.Options
                     else if (PageSize.HasValue)
                     {
                         args.Add("-dDEVICEWIDTHPOINTS=" + PageSize.Value.Width.ToString(CultureInfo.InvariantCulture));
-                        args.Add("-dDEVICEHEIGHTPOINTS=" + PageSize.Value.Height.ToString(CultureInfo.InvariantCulture));
+                        args.Add(
+                            "-dDEVICEHEIGHTPOINTS=" + PageSize.Value.Height.ToString(CultureInfo.InvariantCulture));
                     }
 
                     break;

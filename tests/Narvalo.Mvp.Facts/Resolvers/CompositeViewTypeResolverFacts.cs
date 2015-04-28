@@ -3,25 +3,28 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
+
     using Xunit;
 
     public static partial class CompositeViewTypeResolverFacts
     {
-        public static class ResolveMethod
-        {
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullViewType()
-            {
-                // Arrange
-                var resolver = new CompositeViewTypeResolver();
+        #region Resolve()
 
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => resolver.Resolve(viewType: null));
-            }
+        [Fact]
+        public static void Resolve_ThrowsArgumentNullException_ForNullViewType()
+        {
+            // Arrange
+            var resolver = new CompositeViewTypeResolver();
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => resolver.Resolve(viewType: null));
         }
 
-        #region Helper classes
+        #endregion
+    }
 
+    public static partial class CompositeViewTypeResolverFacts
+    {
         public interface IMyView1 : IView { }
 
         public interface IMyView2 : IView<Object> { }
@@ -38,122 +41,121 @@ namespace Narvalo.Mvp.Resolvers
             void MyMethod();
         }
 
-        interface IMyPrivateView : IView { }
-
-        #endregion
+        private interface IMyPrivateView_ : IView { }
     }
 
 #if !NO_INTERNALS_VISIBLE_TO
 
     public static partial class CompositeViewTypeResolverFacts
     {
-        public static class ValidateViewTypeMethod
+        #region ValidateViewType()
+
+        [Fact]
+        public static void ValidateViewType_ThrowsArgumentException_ForViewTypeOfClassType()
         {
-            [Fact]
-            public static void ThrowsArgumentException_ForViewTypeOfClassType()
-            {
-                // Arrange
-                var viewType = typeof(Object);
+            // Arrange
+            var viewType = typeof(Object);
 
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => CompositeViewTypeResolver.ValidateViewType(viewType));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_ForViewTypeNotInheritingIView()
-            {
-                // Arrange
-                var viewType = typeof(IDisposable);
-
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => CompositeViewTypeResolver.ValidateViewType(viewType));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_ForViewTypeOfPrivateType()
-            {
-                // Arrange
-                var viewType = typeof(IMyPrivateView);
-
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => CompositeViewTypeResolver.ValidateViewType(viewType));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentException_ForViewTypeContainingPublicMethods()
-            {
-                // Arrange
-                var viewType = typeof(IMyViewWithMethod);
-
-                // Act & Assert
-                Assert.Throws<ArgumentException>(() => CompositeViewTypeResolver.ValidateViewType(viewType));
-            }
-
-            [Fact]
-            public static void Passes_ForViewTypeOfIViewType()
-            {
-                // Arrange
-                var viewType = typeof(IView);
-
-                // Act
-                CompositeViewTypeResolver.ValidateViewType(viewType);
-
-                // Assert
-                Assert.True(true);
-            }
-
-            [Fact]
-            public static void Passes_ForViewTypeInheritingIView()
-            {
-                // Arrange
-                var viewType = typeof(IMyView1);
-
-                // Act
-                CompositeViewTypeResolver.ValidateViewType(viewType);
-
-                // Assert
-                Assert.True(true);
-            }
-
-            [Fact]
-            public static void Passes_ForViewTypeInheritingGenericIView()
-            {
-                // Arrange
-                var viewType = typeof(IMyView2);
-
-                // Act
-                CompositeViewTypeResolver.ValidateViewType(viewType);
-
-                // Assert
-                Assert.True(true);
-            }
-
-            [Fact]
-            public static void Passes_ForViewTypeOfGenericIViewType()
-            {
-                // Arrange
-                var viewType = typeof(IView<Object>);
-
-                // Act
-                CompositeViewTypeResolver.ValidateViewType(viewType);
-
-                // Assert
-                Assert.True(true);
-            }
-
-            [Fact]
-            public static void Passes_ForViewTypeContainingPropertiesAndEventHandlers()
-            {
-                // Arrange
-                var viewType = typeof(IMyView);
-
-                // Act
-                CompositeViewTypeResolver.ValidateViewType(viewType);
-
-                // Assert
-                Assert.True(true);
-            }
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => CompositeViewTypeResolver.ValidateViewType(viewType));
         }
+
+        [Fact]
+        public static void ValidateViewType_ThrowsArgumentException_ForViewTypeNotInheritingIView()
+        {
+            // Arrange
+            var viewType = typeof(IDisposable);
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => CompositeViewTypeResolver.ValidateViewType(viewType));
+        }
+
+        [Fact]
+        public static void ValidateViewType_ThrowsArgumentException_ForViewTypeOfPrivateType()
+        {
+            // Arrange
+            var viewType = typeof(IMyPrivateView_);
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => CompositeViewTypeResolver.ValidateViewType(viewType));
+        }
+
+        [Fact]
+        public static void ValidateViewType_ThrowsArgumentException_ForViewTypeContainingPublicMethods()
+        {
+            // Arrange
+            var viewType = typeof(IMyViewWithMethod);
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => CompositeViewTypeResolver.ValidateViewType(viewType));
+        }
+
+        [Fact]
+        public static void ValidateViewType_Passes_ForViewTypeOfIViewType()
+        {
+            // Arrange
+            var viewType = typeof(IView);
+
+            // Act
+            CompositeViewTypeResolver.ValidateViewType(viewType);
+
+            // Assert
+            Assert.True(true);
+        }
+
+        [Fact]
+        public static void ValidateViewType_Passes_ForViewTypeInheritingIView()
+        {
+            // Arrange
+            var viewType = typeof(IMyView1);
+
+            // Act
+            CompositeViewTypeResolver.ValidateViewType(viewType);
+
+            // Assert
+            Assert.True(true);
+        }
+
+        [Fact]
+        public static void ValidateViewType_Passes_ForViewTypeInheritingGenericIView()
+        {
+            // Arrange
+            var viewType = typeof(IMyView2);
+
+            // Act
+            CompositeViewTypeResolver.ValidateViewType(viewType);
+
+            // Assert
+            Assert.True(true);
+        }
+
+        [Fact]
+        public static void ValidateViewType_Passes_ForViewTypeOfGenericIViewType()
+        {
+            // Arrange
+            var viewType = typeof(IView<Object>);
+
+            // Act
+            CompositeViewTypeResolver.ValidateViewType(viewType);
+
+            // Assert
+            Assert.True(true);
+        }
+
+        [Fact]
+        public static void ValidateViewType_Passes_ForViewTypeContainingPropertiesAndEventHandlers()
+        {
+            // Arrange
+            var viewType = typeof(IMyView);
+
+            // Act
+            CompositeViewTypeResolver.ValidateViewType(viewType);
+
+            // Assert
+            Assert.True(true);
+        }
+
+        #endregion
     }
 
 #endif

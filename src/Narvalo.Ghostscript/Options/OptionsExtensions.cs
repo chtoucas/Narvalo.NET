@@ -9,10 +9,10 @@ namespace Narvalo.GhostScript.Options
 
     public static class OptionsExtensions
     {
-        private static readonly IEnumerable<Interactions> InteractionsList
+        private static readonly IEnumerable<Interactions> s_InteractionsList
             = Enum.GetValues(typeof(Interactions)).Cast<Interactions>();
 
-        private static readonly IEnumerable<Miscs> MiscsList
+        private static readonly IEnumerable<Miscs> s_MiscsList
             = Enum.GetValues(typeof(Miscs)).Cast<Miscs>();
 
         public static void AddTo(this Eps eps, ICollection<string> args)
@@ -32,7 +32,7 @@ namespace Narvalo.GhostScript.Options
                 throw new ArgumentNullException("interactions");
             }
 
-            foreach (var value in InteractionsList)
+            foreach (var value in s_InteractionsList)
             {
                 if ((interactions & value) == value)
                 {
@@ -48,7 +48,7 @@ namespace Narvalo.GhostScript.Options
                 throw new ArgumentNullException("miscs");
             }
 
-            foreach (var value in MiscsList)
+            foreach (var value in s_MiscsList)
             {
                 if ((miscs & value) == value)
                 {

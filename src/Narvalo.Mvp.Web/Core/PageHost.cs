@@ -19,7 +19,7 @@ namespace Narvalo.Mvp.Web.Core
         {
             Require.NotNull(page, "page");
 
-            var hosts = FindHosts_(page);
+            var hosts = FindHosts(page);
 
             _presenterBinder = HttpPresenterBinderFactory.Create(hosts, context);
 
@@ -65,7 +65,7 @@ namespace Narvalo.Mvp.Web.Core
             _presenterBinder.RegisterView(view);
         }
 
-        private static IEnumerable<Control> FindHosts_(Page page)
+        private static IEnumerable<Control> FindHosts(Page page)
         {
             yield return page;
 

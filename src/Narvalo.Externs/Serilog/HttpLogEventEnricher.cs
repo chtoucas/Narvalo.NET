@@ -17,7 +17,8 @@ namespace Narvalo.Externs.Serilog
             Require.NotNull(logEvent, "logEvent");
             Require.NotNull(propertyFactory, "propertyFactory");
 
-            if (HttpContext.Current == null) {
+            if (HttpContext.Current == null)
+            {
                 return;
             }
 
@@ -26,14 +27,16 @@ namespace Narvalo.Externs.Serilog
             logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("Domain", req.Url.Host));
             logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("RawUrl", req.RawUrl));
 
-            if (req.UrlReferrer != null) {
+            if (req.UrlReferrer != null)
+            {
                 logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("UrlReferrer", req.UrlReferrer.ToString()));
             }
-            
-            if (!String.IsNullOrEmpty(req.UserHostAddress)) {
+
+            if (!String.IsNullOrEmpty(req.UserHostAddress))
+            {
                 logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("UserHostAddress", req.UserHostAddress));
             }
-            
+
             logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("UserAgent", req.UserAgent));
         }
     }

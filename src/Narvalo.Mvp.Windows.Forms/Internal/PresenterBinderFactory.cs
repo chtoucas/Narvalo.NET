@@ -20,8 +20,8 @@ namespace Narvalo.Mvp.Windows.Forms.Internal
         public static PresenterBinder Create(MvpUserControl control)
         {
             return Create(
-                control, 
-                PlatformServices.Current, 
+                control,
+                PlatformServices.Current,
                 MessageCoordinator.BlackHole);
         }
 

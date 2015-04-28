@@ -43,7 +43,9 @@ namespace Narvalo.Web.UI
             return true;
         }
 
-        public sealed override bool AllowVirtualReference(string referenceVirtualPath, VirtualReferenceType referenceType)
+        public sealed override bool AllowVirtualReference(
+            string referenceVirtualPath,
+            VirtualReferenceType referenceType)
         {
             return true;
         }

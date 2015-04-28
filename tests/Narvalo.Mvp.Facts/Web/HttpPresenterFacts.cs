@@ -5,106 +5,110 @@ namespace Narvalo.Mvp.Web
     using System;
     using System.Web;
     using System.Web.Caching;
+
     using Narvalo.Mvp;
     using NSubstitute;
     using Xunit;
 
     public static partial class HttpPresenterFacts
     {
-        public static class Ctor
+        #region Ctor()
+
+        [Fact]
+        public static void Ctor_ThrowsArgumentNullException_ForNullView_WhenIView()
         {
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WhenIView()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new MyHttpPresenter(view: null));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WhenIViewWithModel()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new MyHttpPresenterOf(view: null));
-            }
-
-            [Fact]
-            public static void ThrowsArgumentNullException_ForNullView_WhenViewWithModel()
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => new MyHttpPresenterWithModel(view: null));
-            }
-
-            [Fact]
-            public static void InitializesViewModel_WhenIViewWithModel()
-            {
-                // Arrange
-                var view = Substitute.For<IView<MyViewModel>>();
-
-                // Act
-                new MyHttpPresenterOf(view);
-
-                // Assert
-                Assert.NotNull(view.Model);
-            }
-
-            [Fact]
-            public static void InitializesViewModel_WhenViewWithModel()
-            {
-                // Arrange
-                var view = Substitute.For<IMyViewWithModel>();
-
-                // Act
-                new MyHttpPresenterWithModel(view);
-
-                // Assert
-                Assert.NotNull(view.Model);
-            }
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => new MyHttpPresenter(view: null));
         }
 
-        public static class ViewProperty
+        [Fact]
+        public static void Ctor_ThrowsArgumentNullException_ForNullView_WhenIViewWithModel()
         {
-            [Fact]
-            public static void IsSetCorrectly()
-            {
-                // Arrange
-                var view = Substitute.For<IMyView>();
-
-                // Act
-                var presenter = new MyHttpPresenter(view);
-
-                // Assert
-                Assert.Same(view, presenter.View);
-            }
-
-            [Fact]
-            public static void IsSetCorrectly_WhenIViewWithModel()
-            {
-                // Arrange
-                var view = Substitute.For<IView<MyViewModel>>();
-
-                // Act
-                var presenter = new MyHttpPresenterOf(view);
-
-                // Assert
-                Assert.Same(view, presenter.View);
-            }
-
-            [Fact]
-            public static void IsSetCorrectly_WhenViewWithModel()
-            {
-                // Arrange
-                var view = Substitute.For<IMyViewWithModel>();
-
-                // Act
-                var presenter = new MyHttpPresenterWithModel(view);
-
-                // Assert
-                Assert.Same(view, presenter.View);
-            }
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => new MyHttpPresenterOf(view: null));
         }
 
-        #region Helper classes
+        [Fact]
+        public static void Ctor_ThrowsArgumentNullException_ForNullView_WhenViewWithModel()
+        {
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => new MyHttpPresenterWithModel(view: null));
+        }
 
+        [Fact]
+        public static void Ctor_InitializesViewModel_WhenIViewWithModel()
+        {
+            // Arrange
+            var view = Substitute.For<IView<MyViewModel>>();
+
+            // Act
+            new MyHttpPresenterOf(view);
+
+            // Assert
+            Assert.NotNull(view.Model);
+        }
+
+        [Fact]
+        public static void Ctor_InitializesViewModel_WhenViewWithModel()
+        {
+            // Arrange
+            var view = Substitute.For<IMyViewWithModel>();
+
+            // Act
+            new MyHttpPresenterWithModel(view);
+
+            // Assert
+            Assert.NotNull(view.Model);
+        }
+
+        #endregion
+
+        #region View
+
+        [Fact]
+        public static void View_IsSetCorrectly()
+        {
+            // Arrange
+            var view = Substitute.For<IMyView>();
+
+            // Act
+            var presenter = new MyHttpPresenter(view);
+
+            // Assert
+            Assert.Same(view, presenter.View);
+        }
+
+        [Fact]
+        public static void View_IsSetCorrectly_WhenIViewWithModel()
+        {
+            // Arrange
+            var view = Substitute.For<IView<MyViewModel>>();
+
+            // Act
+            var presenter = new MyHttpPresenterOf(view);
+
+            // Assert
+            Assert.Same(view, presenter.View);
+        }
+
+        [Fact]
+        public static void View_IsSetCorrectly_WhenViewWithModel()
+        {
+            // Arrange
+            var view = Substitute.For<IMyViewWithModel>();
+
+            // Act
+            var presenter = new MyHttpPresenterWithModel(view);
+
+            // Assert
+            Assert.Same(view, presenter.View);
+        }
+
+        #endregion
+    }
+
+    public static partial class HttpPresenterFacts
+    {
         public interface IMyView : IView
         {
             event EventHandler TestHandler;
@@ -131,111 +135,114 @@ namespace Narvalo.Mvp.Web
         {
             public MyHttpPresenterWithModel(IMyViewWithModel view) : base(view) { }
         }
-
-        #endregion
     }
 
 #if !NO_INTERNALS_VISIBLE_TO
 
     public static partial class HttpPresenterFacts
     {
-        public static class HttpContextProperty
+        #region HttpContext
+
+        [Fact]
+        public static void HttpContext_ReturnsAmbientHttpContext()
         {
-            [Fact]
-            public static void ReturnsAmbientHttpContext()
-            {
-                // Arrange
-                var view = Substitute.For<IMyView>();
-                var httpContext = Substitute.For<HttpContextBase>();
+            // Arrange
+            var view = Substitute.For<IMyView>();
+            var httpContext = Substitute.For<HttpContextBase>();
 
-                // Act
-                var presenter = new MyHttpPresenter(view);
-                (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
+            // Act
+            var presenter = new MyHttpPresenter(view);
+            (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
-                // Assert
-                Assert.Same(httpContext, presenter.HttpContext);
-            }
+            // Assert
+            Assert.Same(httpContext, presenter.HttpContext);
         }
 
-        public static class CacheProperty
+        #endregion
+
+        #region Cache
+
+        [Fact]
+        public static void Cache_ReturnsCacheFromHttpContext()
         {
-            [Fact]
-            public static void ReturnsCacheFromHttpContext()
-            {
-                // Arrange
-                var view = Substitute.For<IMyView>();
-                var cache = new Cache();
-                var httpContext = Substitute.For<HttpContextBase>();
-                httpContext.Cache.Returns(cache);
+            // Arrange
+            var view = Substitute.For<IMyView>();
+            var cache = new Cache();
+            var httpContext = Substitute.For<HttpContextBase>();
+            httpContext.Cache.Returns(cache);
 
-                // Act
-                var presenter = new MyHttpPresenter(view);
-                (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
+            // Act
+            var presenter = new MyHttpPresenter(view);
+            (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
-                // Assert
-                Assert.Same(cache, presenter.Cache);
-            }
+            // Assert
+            Assert.Same(cache, presenter.Cache);
         }
 
-        public static class RequestProperty
+        #endregion
+
+        #region Request
+
+        [Fact]
+        public static void Request_ReturnsRequestFromHttpContext()
         {
-            [Fact]
-            public static void ReturnsRequestFromHttpContext()
-            {
-                // Arrange
-                var view = Substitute.For<IMyView>();
-                var request = Substitute.For<HttpRequestBase>();
-                var httpContext = Substitute.For<HttpContextBase>();
-                httpContext.Request.Returns(request);
+            // Arrange
+            var view = Substitute.For<IMyView>();
+            var request = Substitute.For<HttpRequestBase>();
+            var httpContext = Substitute.For<HttpContextBase>();
+            httpContext.Request.Returns(request);
 
-                // Act
-                var presenter = new MyHttpPresenter(view);
-                (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
+            // Act
+            var presenter = new MyHttpPresenter(view);
+            (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
-                // Assert
-                Assert.Same(request, presenter.Request);
-            }
+            // Assert
+            Assert.Same(request, presenter.Request);
         }
 
-        public static class ResponseProperty
+        #endregion
+
+        #region Response
+
+        [Fact]
+        public static void Response_ReturnsResponseFromHttpContext()
         {
-            [Fact]
-            public static void ReturnsResponseFromHttpContext()
-            {
-                // Arrange
-                var view = Substitute.For<IMyView>();
-                var response = Substitute.For<HttpResponseBase>();
-                var httpContext = Substitute.For<HttpContextBase>();
-                httpContext.Response.Returns(response);
+            // Arrange
+            var view = Substitute.For<IMyView>();
+            var response = Substitute.For<HttpResponseBase>();
+            var httpContext = Substitute.For<HttpContextBase>();
+            httpContext.Response.Returns(response);
 
-                // Act
-                var presenter = new MyHttpPresenter(view);
-                (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
+            // Act
+            var presenter = new MyHttpPresenter(view);
+            (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
-                // Assert
-                Assert.Same(response, presenter.Response);
-            }
+            // Assert
+            Assert.Same(response, presenter.Response);
         }
 
-        public static class ServerProperty
+        #endregion
+
+        #region Server
+
+        [Fact]
+        public static void Server_ReturnsServerFromHttpContext()
         {
-            [Fact]
-            public static void ReturnsServerFromHttpContext()
-            {
-                // Arrange
-                var view = Substitute.For<IMyView>();
-                var server = Substitute.For<HttpServerUtilityBase>();
-                var httpContext = Substitute.For<HttpContextBase>();
-                httpContext.Server.Returns(server);
+            // Arrange
+            var view = Substitute.For<IMyView>();
+            var server = Substitute.For<HttpServerUtilityBase>();
+            var httpContext = Substitute.For<HttpContextBase>();
+            httpContext.Server.Returns(server);
 
-                // Act
-                var presenter = new MyHttpPresenter(view);
-                (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
+            // Act
+            var presenter = new MyHttpPresenter(view);
+            (presenter as Internal.IHttpPresenter).HttpContext = httpContext;
 
-                // Assert
-                Assert.Same(server, presenter.Server);
-            }
+            // Assert
+            Assert.Same(server, presenter.Server);
         }
+
+        #endregion
     }
 
 #endif

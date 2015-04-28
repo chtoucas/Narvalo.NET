@@ -23,7 +23,7 @@ namespace Narvalo.Web
             binder.Bind(context.Request)
                 .Invoke(
                     action: _ => ProcessRequestCore(context, _),
-                    caseNone: () => ProcessBindingFailure_(context, binder));
+                    caseNone: () => ProcessBindingFailure(context, binder));
         }
 
         protected virtual void OnBindingFailure(HttpContext context, HttpQueryBinderException exception)
@@ -37,7 +37,7 @@ namespace Narvalo.Web
             response.Write(exception.Message);
         }
 
-        private void ProcessBindingFailure_(HttpContext context, TBinder binder)
+        private void ProcessBindingFailure(HttpContext context, TBinder binder)
         {
             Contract.Requires(context != null);
 
