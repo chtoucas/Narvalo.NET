@@ -5,7 +5,7 @@ namespace Narvalo
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// The Narvalo namespace contains classes dealing with Code Contracts
+    /// The <c>Narvalo</c> namespace contains classes dealing with Code Contracts
     /// and argument validation.
     /// </summary>
     /// <remarks>

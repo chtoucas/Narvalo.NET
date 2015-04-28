@@ -15,7 +15,7 @@ from the .NET team with few differences:
 - Do not use PascalCasing to name private constants, prefer `MY_PRIVATE_CONSTANT` over `MyPrivateConstant`.
 
 We also enforce the following rules:
-- Add a suffix to all private methods and classes with `_`.
+- Add a suffix to all private classes with `_`.
 - Directories must mirror namespaces.
 - Do not put more than one public class per file. The only exception is for Code Contracts classes.
 - All files must start with a copyright header:
@@ -33,8 +33,6 @@ We also enforce the following rules:
 Naming:
 
 - Consider not adding a "Base" suffix to abstract classes.
-- Consider not adding an internal access modifier to members of an internal class.
-- Consider adding an "Internal" suffix to the names of internal methods in a non-internal class with "Internal".
 - For concrete helper classes try to find a more useful suffix than "Helper" or "Utility"
   or use a verb. Examples: "Require", "ParseTo", StringManip"...
   If not, use "Helper" for concrete classes and "Utility" for static classes.

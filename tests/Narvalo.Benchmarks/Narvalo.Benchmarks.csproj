@@ -44,7 +44,6 @@
     <Compile Include="BenchmarkCommon\BenchmarkMetricCollectionFormatter.cs" />
     <Compile Include="BenchmarkCommon\BenchmarkMetricCollectionFormatterBase.cs" />
     <Compile Include="BenchmarkCommon\BenchmarkMetricFormatter.cs" />
-    <Compile Include="BenchmarkCommon\BenchmarkMetricFormatterBase.cs" />
     <Compile Include="BenchmarkCommon\BenchMetricConsoleFormatter.cs" />
     <Compile Include="BenchmarkCommon\Facts\BenchmarkMetricFacts.cs" />
     <Compile Include="BenchmarkCommon\BenchmarkProcessor.cs" />

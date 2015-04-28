@@ -105,8 +105,8 @@
     <Compile Include="Configuration\OptimizationSection.cs" />
     <Compile Include="Configuration\WebSectionManager.cs" />
     <Compile Include="EmptyPartialViewResult.cs" />
-    <Compile Include="HttpHandlerBase.cs" />
-    <Compile Include="HttpHandlerBase`2.cs" />
+    <Compile Include="HttpHandler.cs" />
+    <Compile Include="HttpHandler`2.cs" />
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="HttpVerbs%24.cs" />
     <Compile Include="HttpVersions%24.cs" />

@@ -9,7 +9,7 @@ namespace MvpWebForms.Views
 
     public sealed class ConcurrentModel
     {
-        readonly List<string> _messages = new List<string>();
+        private readonly List<string> _messages = new List<string>();
 
         public IList<string> Messages { get { return _messages; } }
 
@@ -17,11 +17,11 @@ namespace MvpWebForms.Views
         {
             lock (_messages)
             {
-                _messages.Add(Format_(message));
+                _messages.Add(Format(message));
             }
         }
 
-        private static string Format_(string message)
+        private static string Format(string message)
         {
             return String.Format(
                 CultureInfo.InvariantCulture,

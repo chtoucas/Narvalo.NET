@@ -15,9 +15,9 @@ namespace MvpWebForms.Presenters
     public sealed class WidgetsReadWritePresenter
         : Presenter<IWidgetsReadWriteView, WidgetsReadWriteModel>, IDisposable
     {
-        MvpWebFormsContext _dbContext = new MvpWebFormsContext();
+        private MvpWebFormsContext _dbContext = new MvpWebFormsContext();
 
-        bool _disposed = false;
+        private bool _disposed = false;
 
         public WidgetsReadWritePresenter(IWidgetsReadWriteView view)
             : base(view)

@@ -13,15 +13,15 @@ namespace Narvalo.Web
     /// <summary>
     /// Represents a custom HTTP handler that synchronously processes HTTP Web requests.
     /// </summary>
-    public abstract partial class HttpHandlerBase : IHttpHandler
+    public abstract partial class HttpHandler : IHttpHandler
     {
-        private bool _isReusable = false;
+        private bool _isReusable;
         private bool _trySkipIIsCustomErrors = true;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpHandlerBase"/> class.
+        /// Initializes a new instance of the <see cref="HttpHandler"/> class.
         /// </summary>
-        protected HttpHandlerBase() { }
+        protected HttpHandler() { }
 
         /// <summary>
         /// Gets or sets a value indicating whether another request can use the <see cref="IHttpHandler"/> instance.

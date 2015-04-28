@@ -15,25 +15,25 @@ namespace MvpWebForms.Views
 
         public void RecordViewLoad()
         {
-            Append_("View Load");
+            Append("View Load");
         }
 
         public void RecordAsyncStarted()
         {
-            Append_("Async Started");
+            Append("Async Started");
         }
 
         public void RecordAsyncEnded()
         {
-            Append_("Async Ended");
+            Append("Async Ended");
         }
 
         public void RecordPagePreRenderComplete()
         {
-            Append_("Page PreRenderComplete");
+            Append("Page PreRenderComplete");
         }
 
-        private static string Format_(string message)
+        private static string Format(string message)
         {
             return String.Format(
                 CultureInfo.InvariantCulture,
@@ -43,9 +43,9 @@ namespace MvpWebForms.Views
                 DateTime.Now.ToString(@"[HH:mm:ss fff\m\s]", CultureInfo.InvariantCulture));
         }
 
-        private void Append_(string message)
+        private void Append(string message)
         {
-            _messages.Add(Format_(message));
+            _messages.Add(Format(message));
         }
     }
 }

@@ -14,7 +14,10 @@ namespace MvpWebForms.Presenters
             : base(view)
         {
             View.Load += (sender, e) =>
-                View.Model.Message = String.Format(CultureInfo.InvariantCulture, @"Presenter instance: {0}", Guid.NewGuid());
+                View.Model.Message = String.Format(
+                CultureInfo.InvariantCulture,
+                "Presenter instance: {0}",
+                Guid.NewGuid());
         }
     }
 }

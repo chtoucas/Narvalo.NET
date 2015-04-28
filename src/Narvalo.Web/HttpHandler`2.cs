@@ -10,7 +10,7 @@ namespace Narvalo.Web
 
     using Narvalo.Web.Properties;
 
-    public abstract partial class HttpHandlerBase<TQuery, TBinder> : HttpHandlerBase
+    public abstract partial class HttpHandler<TQuery, TBinder> : HttpHandler
         where TBinder : IHttpQueryBinder<TQuery>, new()
     {
         protected abstract void ProcessRequestCore(HttpContext context, TQuery query);

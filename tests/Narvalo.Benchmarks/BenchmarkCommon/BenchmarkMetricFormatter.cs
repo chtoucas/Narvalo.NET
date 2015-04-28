@@ -5,12 +5,23 @@ namespace Narvalo.BenchmarkCommon
     using System;
     using System.Globalization;
 
-    public class BenchmarkMetricFormatter : BenchmarkMetricFormatterBase
+    public class BenchmarkMetricFormatter : IBenchmarkMetricFormatter
     {
-        public BenchmarkMetricFormatter() : base() { }
-
-        public override string FormatCore(CultureInfo cultureInfo, BenchmarkMetric metric)
+        public string Format(BenchmarkMetric metric)
         {
+            return Format(CultureInfo.CurrentCulture, metric);
+        }
+
+        public string Format(CultureInfo cultureInfo, BenchmarkMetric metric)
+        {
+            if (metric.Duration == TimeSpan.Zero)
+            {
+                return String.Format(
+                    cultureInfo,
+                   "XXX",
+                    metric.Iterations);
+            }
+
             return String.Format(
                 cultureInfo,
                "XXX",
@@ -19,14 +30,6 @@ namespace Narvalo.BenchmarkCommon
                 metric.Iterations,
                 metric.Duration.Ticks,
                 metric.TicksPerCall);
-        }
-
-        public override string FormatInvalidMetric(CultureInfo cultureInfo, BenchmarkMetric metric)
-        {
-            return String.Format(
-                cultureInfo,
-               "XXX",
-                metric.Iterations);
         }
     }
 }

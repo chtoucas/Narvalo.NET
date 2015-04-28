@@ -1,5 +1,9 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
+using global::System.Diagnostics.CodeAnalysis;
+
+[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText")]
+
 // Adapted from aspnetwebstack\test\System.Web.Mvc.Test\Util\MvcHelper.cs
 namespace Narvalo.TestCommon
 {
@@ -20,8 +24,15 @@ namespace Narvalo.TestCommon
         {
             HttpContextBase httpcontext = GetHttpContext("/app/", null, null);
             RouteCollection rt = new RouteCollection();
-            rt.Add(new Route("{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
-            rt.Add("namedroute", new Route("named/{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
+            rt.Add(
+                new Route("{controller}/{action}/{id}", null) {
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
+                });
+            rt.Add(
+                "namedroute",
+                new Route("named/{controller}/{action}/{id}", null) {
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
+                });
             RouteData rd = new RouteData();
             rd.Values.Add("controller", "home");
             rd.Values.Add("action", "oldaction");
@@ -44,8 +55,15 @@ namespace Narvalo.TestCommon
         {
             HttpContextBase httpcontext = GetHttpContext("/app/", null, null, protocol, port);
             RouteCollection rt = new RouteCollection();
-            rt.Add(new Route("{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
-            rt.Add("namedroute", new Route("named/{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
+            rt.Add(
+                new Route("{controller}/{action}/{id}", null) {
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
+                });
+            rt.Add(
+                "namedroute",
+                new Route("named/{controller}/{action}/{id}", null) {
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
+                });
             RouteData rd = new RouteData();
             rd.Values.Add("controller", "home");
             rd.Values.Add("action", "oldaction");
@@ -95,7 +113,9 @@ namespace Narvalo.TestCommon
             return new HtmlHelper(viewContext, container, new RouteCollection());
         }
 
-        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(ViewDataDictionary<TModel> viewData, string appPath)
+        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(
+            ViewDataDictionary<TModel> viewData,
+            string appPath)
         {
             ViewContext viewContext = GetViewContextWithPath(appPath, viewData);
             Mock<IViewDataContainer> mockContainer = new Mock<IViewDataContainer>();
@@ -109,7 +129,12 @@ namespace Narvalo.TestCommon
             return GetHtmlHelperWithPath(viewData, "/");
         }
 
-        public static HttpContextBase GetHttpContext(string appPath, string requestPath, string httpMethod, string protocol, int port)
+        public static HttpContextBase GetHttpContext(
+            string appPath,
+            string requestPath,
+            string httpMethod,
+            string protocol,
+            int port)
         {
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
 
@@ -144,7 +169,8 @@ namespace Narvalo.TestCommon
             }
 
             mockHttpContext.Setup(o => o.Session).Returns((HttpSessionStateBase)null);
-            mockHttpContext.Setup(o => o.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(r => AppPathModifier + r);
+            mockHttpContext.Setup(
+                o => o.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(r => AppPathModifier + r);
             mockHttpContext.Setup(o => o.Items).Returns(new Hashtable());
             return mockHttpContext.Object;
         }

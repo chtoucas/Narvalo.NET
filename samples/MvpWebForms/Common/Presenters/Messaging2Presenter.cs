@@ -22,7 +22,10 @@ namespace MvpWebForms.Presenters
 
             Messages.Subscribe<StringMessage>(_ =>
             {
-                View.Model.Message += String.Format(CultureInfo.InvariantCulture, "Presenter 2 received: {0}", _.Content);
+                View.Model.Message += String.Format(
+                    CultureInfo.InvariantCulture,
+                    "Presenter 2 received: {0}",
+                    _.Content);
             });
 
             Messages.Subscribe<Guid>(_ =>

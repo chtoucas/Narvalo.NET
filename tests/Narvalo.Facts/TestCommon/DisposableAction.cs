@@ -1,5 +1,9 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
+using global::System.Diagnostics.CodeAnalysis;
+
+[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText")]
+
 // Adapted from aspnetwebstack\src\System.Web.WebPages\Common\DisposableAction.cs
 namespace Narvalo.TestCommon
 {

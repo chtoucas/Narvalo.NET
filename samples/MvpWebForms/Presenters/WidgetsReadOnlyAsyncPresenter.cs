@@ -59,7 +59,10 @@ namespace MvpWebForms.Presenters
             var conn = new SqlConnection(connectionString);
             conn.Open();
 
-            var sql = String.Format(CultureInfo.InvariantCulture, "select Id, Name, Description from dbo.Widget where Id={0}", id);
+            var sql = String.Format(
+                CultureInfo.InvariantCulture,
+                "select Id, Name, Description from dbo.Widget where Id={0}",
+                id);
 
             var cmd = new SqlCommand(sql, conn);
 

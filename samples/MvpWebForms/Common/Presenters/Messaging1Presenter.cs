@@ -22,7 +22,10 @@ namespace MvpWebForms.Presenters
                 Content = "Hello from Messaging1Presenter!"
             };
 
-            View.Model.Message = String.Format(CultureInfo.InvariantCulture, "Presenter 1 publishes: {0}", message.Content);
+            View.Model.Message = String.Format(
+                CultureInfo.InvariantCulture,
+                "Presenter 1 publishes: {0}",
+                message.Content);
 
             Messages.Publish(message);
             Messages.Publish(123456);

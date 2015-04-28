@@ -12,7 +12,7 @@ namespace Narvalo.Xml
     /// </summary>
     [SuppressMessage("Gendarme.Rules.Naming", "AvoidRedundancyInTypeNameRule",
         Justification = "[Intentionally] The type only contains extension methods.")]
-    public static class XmlReaderMoreExtensions
+    public static class MoreXmlReaderExtensions
     {
         #region Wrappers for XmlReader methods using a XName parameter.
 

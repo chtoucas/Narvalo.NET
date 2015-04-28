@@ -1,14 +1,15 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
+using global::System.Diagnostics.CodeAnalysis;
+
+[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText")]
+
 // Adapted from aspnetwebstack\test\Microsoft.TestCommon\AppDomainUtils.cs
 namespace Narvalo.TestCommon
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
-    using System.Reflection;
-    using System.Web.Compilation;
-    using System.Web.Hosting;
 
     internal static class AppDomainUtility
     {
@@ -21,7 +22,8 @@ namespace Narvalo.TestCommon
 
         public static void RunInSeparateAppDomain(AppDomainSetup setup, Action action)
         {
-            var dir = Path.GetDirectoryName(typeof(AppDomainUtility).Assembly.CodeBase).Replace("file:\\", String.Empty);
+            var dir = Path.GetDirectoryName(typeof(AppDomainUtility).Assembly.CodeBase)
+                .Replace("file:\\", String.Empty);
             setup.PrivateBinPath = dir;
             setup.ApplicationBase = dir;
             setup.ApplicationName = Guid.NewGuid().ToString();
@@ -33,7 +35,10 @@ namespace Narvalo.TestCommon
             try
             {
                 appDomain = AppDomain.CreateDomain(setup.ApplicationName, null, setup);
-                AppDomainHelper helper = appDomain.CreateInstanceAndUnwrap(typeof(AppDomainUtility).Assembly.FullName, typeof(AppDomainHelper).FullName) as AppDomainHelper;
+                AppDomainHelper helper =
+                    appDomain.CreateInstanceAndUnwrap(
+                        typeof(AppDomainUtility).Assembly.FullName,
+                        typeof(AppDomainHelper).FullName) as AppDomainHelper;
                 helper.Run(action);
             }
             finally
