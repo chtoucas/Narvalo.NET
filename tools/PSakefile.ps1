@@ -6,7 +6,7 @@
 
 # We force the framework to be sure we use the v12.0 of the build tools.
 # For instance, this is a requirement for the _MyGet-Publish target where
-# the DeployOnBuild instruction is not understood by previsou versions of MSBuild.
+# the DeployOnBuild instruction is not understood by previous versions of MSBuild.
 Framework '4.5.1x64'
 
 # ------------------------------------------------------------------------------
@@ -459,103 +459,103 @@ Task _MyGet-InitializeVariables `
 # ------------------------------------------------------------------------------
 # Edge solution
 # ------------------------------------------------------------------------------
-
-Task Edge-FullBuild `
-    -Description '        Update then re-build the solution Edge.' `
-    -Depends _Edge-Update, _Edge-Rebuild
-
-Task _Edge-Rebuild `
-    -Description 'Re-build the solution Edge.' `
-    -Depends _Edge-InitializeVariables, _Edge-RestorePackages `
-{
-    MSBuild $Edge_Solution $Opts '/p:Configuration=Release', '/t:Rebuild'
-}
-
-Task _Edge-RestorePackages `
-    -Description 'Restore packages for the solution Edge.' `
-    -Depends _Edge-InitializeVariables `
-{
-    Restore-Packages -Source $Edge_Solution `
-        -PackagesDirectory $Edge_PackagesDirectory `
-        -ConfigFile $Edge_NuGetConfig `
-        -Verbosity $NuGetVerbosity
-}
-
-Task _Edge-Update `
-    -Description 'Safely update NuGet packages for the solution Edge.' `
-    -Depends _Edge-InitializeVariables `
-{
-    $nuget = Get-NuGet -Install
-
-    try {
-        . $nuget update $Edge_Solution `
-            -Safe `
-            -RepositoryPath $Edge_PackagesDirectory `
-            -ConfigFile $Edge_NuGetConfig `
-            -Verbosity $NuGetVerbosity
-    } catch {
-        Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
-    }
-}
-
-Task _Edge-InitializeVariables `
-    -Description 'Initialize variables only used by the Edge-* tasks.' `
-{
-    $script:Edge_Solution          = Get-LocalPath 'tools\src\MyPackages\Edge\Edge.sln'
-    $script:Edge_NuGetConfig       = Get-LocalPath 'tools\src\MyPackages\Edge\.nuget\NuGet.Config'
-    $script:Edge_PackagesDirectory = Get-LocalPath 'tools\src\MyPackages\Edge\packages'
-}
-
+#
+#Task Edge-FullBuild `
+#    -Description '        Update then re-build the solution Edge.' `
+#    -Depends _Edge-Update, _Edge-Rebuild
+#
+#Task _Edge-Rebuild `
+#    -Description 'Re-build the solution Edge.' `
+#    -Depends _Edge-InitializeVariables, _Edge-RestorePackages `
+#{
+#    MSBuild $Edge_Solution $Opts '/p:Configuration=Release', '/t:Rebuild'
+#}
+#
+#Task _Edge-RestorePackages `
+#    -Description 'Restore packages for the solution Edge.' `
+#    -Depends _Edge-InitializeVariables `
+#{
+#    Restore-Packages -Source $Edge_Solution `
+#        -PackagesDirectory $Edge_PackagesDirectory `
+#        -ConfigFile $Edge_NuGetConfig `
+#        -Verbosity $NuGetVerbosity
+#}
+#
+#Task _Edge-Update `
+#    -Description 'Safely update NuGet packages for the solution Edge.' `
+#    -Depends _Edge-InitializeVariables `
+#{
+#    $nuget = Get-NuGet -Install
+#
+#    try {
+#        . $nuget update $Edge_Solution `
+#            -Safe `
+#            -RepositoryPath $Edge_PackagesDirectory `
+#            -ConfigFile $Edge_NuGetConfig `
+#            -Verbosity $NuGetVerbosity
+#    } catch {
+#        Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
+#    }
+#}
+#
+#Task _Edge-InitializeVariables `
+#    -Description 'Initialize variables only used by the Edge-* tasks.' `
+#{
+#    $script:Edge_Solution          = Get-LocalPath 'tools\src\MyPackages\Edge\Edge.sln'
+#    $script:Edge_NuGetConfig       = Get-LocalPath 'tools\src\MyPackages\Edge\.nuget\NuGet.Config'
+#    $script:Edge_PackagesDirectory = Get-LocalPath 'tools\src\MyPackages\Edge\packages'
+#}
+#
 # ------------------------------------------------------------------------------
 # Retail solution
 # ------------------------------------------------------------------------------
-
-Task Retail-FullBuild `
-    -Description '        Update then re-build the solution Retail.' `
-    -Depends _Retail-Update, _Retail-Rebuild
-
-Task _Retail-Rebuild `
-    -Description 'Re-build the solution Retail.' `
-    -Depends _Retail-InitializeVariables, _Retail-RestorePackages `
-{
-    MSBuild $Retail_Solution $Opts '/p:Configuration=Release', '/t:Rebuild'
-}
-
-Task _Retail-RestorePackages `
-    -Description 'Restore packages for the solution Retail.' `
-    -Depends _Retail-InitializeVariables `
-{
-    Restore-Packages -Source $Retail_Solution `
-        -PackagesDirectory $Retail_PackagesDirectory `
-        -ConfigFile $Retail_NuGetConfig `
-        -Verbosity $NuGetVerbosity
-}
-
-Task _Retail-Update `
-    -Description 'Safely update NuGet packages for the solution Retail.' `
-    -Depends _Retail-InitializeVariables `
-{
-    $nuget = Get-NuGet -Install
-
-    try {
-        . $nuget update $Retail_Solution `
-            -Safe `
-            -RepositoryPath $Retail_PackagesDirectory `
-            -ConfigFile $Retail_NuGetConfig `
-            -Verbosity $NuGetVerbosity
-    } catch {
-        Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
-    }
-}
-
-Task _Retail-InitializeVariables `
-    -Description 'Initialize variables only used by the Retail-* tasks.' `
-{
-    $script:Retail_Solution          = Get-LocalPath 'tools\src\MyPackages\Retail\Retail.sln'
-    $script:Retail_NuGetConfig       = Get-LocalPath 'tools\src\MyPackages\Retail\.nuget\NuGet.Config'
-    $script:Retail_PackagesDirectory = Get-LocalPath 'tools\src\MyPackages\Retail\packages'
-}
-
+#
+#Task Retail-FullBuild `
+#    -Description '        Update then re-build the solution Retail.' `
+#    -Depends _Retail-Update, _Retail-Rebuild
+#
+#Task _Retail-Rebuild `
+#    -Description 'Re-build the solution Retail.' `
+#    -Depends _Retail-InitializeVariables, _Retail-RestorePackages `
+#{
+#    MSBuild $Retail_Solution $Opts '/p:Configuration=Release', '/t:Rebuild'
+#}
+#
+#Task _Retail-RestorePackages `
+#    -Description 'Restore packages for the solution Retail.' `
+#    -Depends _Retail-InitializeVariables `
+#{
+#    Restore-Packages -Source $Retail_Solution `
+#        -PackagesDirectory $Retail_PackagesDirectory `
+#        -ConfigFile $Retail_NuGetConfig `
+#        -Verbosity $NuGetVerbosity
+#}
+#
+#Task _Retail-Update `
+#    -Description 'Safely update NuGet packages for the solution Retail.' `
+#    -Depends _Retail-InitializeVariables `
+#{
+#    $nuget = Get-NuGet -Install
+#
+#    try {
+#        . $nuget update $Retail_Solution `
+#            -Safe `
+#            -RepositoryPath $Retail_PackagesDirectory `
+#            -ConfigFile $Retail_NuGetConfig `
+#            -Verbosity $NuGetVerbosity
+#    } catch {
+#        Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
+#    }
+#}
+#
+#Task _Retail-InitializeVariables `
+#    -Description 'Initialize variables only used by the Retail-* tasks.' `
+#{
+#    $script:Retail_Solution          = Get-LocalPath 'tools\src\MyPackages\Retail\Retail.sln'
+#    $script:Retail_NuGetConfig       = Get-LocalPath 'tools\src\MyPackages\Retail\.nuget\NuGet.Config'
+#    $script:Retail_PackagesDirectory = Get-LocalPath 'tools\src\MyPackages\Retail\packages'
+#}
+#
 # ------------------------------------------------------------------------------
 # Miscs
 # ------------------------------------------------------------------------------

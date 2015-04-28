@@ -107,11 +107,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGet", "src\MyGet\MyGet.cs
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NuGetAgent", "src\NuGetAgent\NuGetAgent.fsproj", "{702370E8-516C-4AE4-8913-CDB198070812}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommonMark", "CommonMark", "{3FFC3740-D625-42D8-AE35-45F789599C34}"
-	ProjectSection(SolutionItems) = preProject
-		src\CommonMark\index.html = src\CommonMark\index.html
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.StyleCop", "src\Narvalo.StyleCop\Narvalo.StyleCop.csproj", "{6FEBE148-83FF-4378-A4A6-887A1E8A7E51}"
 EndProject
 Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "Narvalo.ProjectAutomation", "src\Narvalo.ProjectAutomation\Narvalo.ProjectAutomation.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
