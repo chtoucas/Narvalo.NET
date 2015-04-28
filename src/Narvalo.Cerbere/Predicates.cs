@@ -21,8 +21,6 @@ namespace Narvalo
         [Pure]
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
             Justification = "[Intentionally] The rule does not apply here.")]
-        [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
-            Justification = "[Intentionally] Method marked as MonoTODO.")]
         public static bool IsFlagsEnum(Type type)
         {
             if (type == null)

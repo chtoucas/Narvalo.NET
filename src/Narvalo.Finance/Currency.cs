@@ -4,7 +4,6 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Collections.Concurrent;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
@@ -308,8 +307,6 @@ namespace Narvalo.Finance
         }
 
         /// <inheritdoc cref="Object.Equals(Object)" />
-        [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
-            Justification = "[Intentionally] Method marked as MonoTODO.")]
         public override bool Equals(object obj)
         {
             if (Object.ReferenceEquals(obj, null))

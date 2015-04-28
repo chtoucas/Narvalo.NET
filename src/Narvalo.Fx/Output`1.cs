@@ -45,8 +45,6 @@ namespace Narvalo.Fx
 
         #region Explicit casting operators
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator Output<T>(T value)
         {
             Contract.Ensures(Contract.Result<Output<T>>() != null);
@@ -54,8 +52,6 @@ namespace Narvalo.Fx
             return η(value);
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator Output<T>(ExceptionDispatchInfo exceptionInfo)
         {
             Contract.Requires(exceptionInfo != null);
@@ -64,8 +60,6 @@ namespace Narvalo.Fx
             return η(exceptionInfo);
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator T(Output<T> value)
         {
             Require.NotNull(value, "value");
@@ -87,8 +81,6 @@ namespace Narvalo.Fx
             return success.Value;
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator ExceptionDispatchInfo(Output<T> value)
         {
             Require.NotNull(value, "value");
@@ -251,8 +243,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectCasingRule",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
         internal static Output<T> η(T value)
         {
@@ -261,10 +251,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectCasingRule",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-            Justification = "[Ignore] Weird. This method does have plenty of callers inside the assembly.")]
         [DebuggerHidden]
         internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
         {
@@ -274,8 +260,6 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectCasingRule",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
         internal static Output<T> μ(Output<Output<T>> square)

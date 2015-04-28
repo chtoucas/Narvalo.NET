@@ -38,9 +38,9 @@ namespace Narvalo.Edu.Monads
 
     using global::Narvalo;
 
-    /// <summary>
-    /// Provides a set of static and extension methods for <see cref="Identity{T}" />.
-    /// </summary>
+    /// <content>
+    /// Provides a set of static methods for <see cref="Identity{T}" />.
+    /// </content>
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
@@ -190,7 +190,7 @@ namespace Narvalo.Edu.Monads
     } // End of the class Identity.
 
     /// <content>
-    /// Provides core Monad extension methods.
+    /// Provides the core monadic extension methods for <see cref="Identity{T}" />.
     /// </content>
     public static partial class Identity
     {
@@ -423,11 +423,9 @@ namespace Narvalo.Edu.Monads
         #endregion
     } // End of the class Identity.
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Identity{T}"/> class.
-    /// </summary>
-    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
+    /// </content>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -511,9 +509,9 @@ namespace Narvalo.Edu.Monads
 
     using Narvalo.Edu.Monads.Internal;
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.
-    /// </summary>
+    /// </content>
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -715,9 +713,9 @@ namespace Narvalo.Edu.Monads.Internal
    
    
 
-    /// <summary>
+    /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.
-    /// </summary>
+    /// </content>
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -730,7 +728,7 @@ namespace Narvalo.Edu.Monads.Internal
 
             var seed = Identity.Return(Enumerable.Empty<TSource>());
             Func<Identity<IEnumerable<TSource>>, Identity<TSource>, Identity<IEnumerable<TSource>>> fun
-                = (m, n) => m.Bind(list => CollectCore_(n, list));
+                = (m, n) => m.Bind(list => CollectCore(n, list));
 
             var retval = @this.Aggregate(seed, fun);
             Contract.Assume(retval != null);
@@ -739,7 +737,7 @@ namespace Narvalo.Edu.Monads.Internal
         }
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static Identity<IEnumerable<TSource>> CollectCore_<TSource>(
+        private static Identity<IEnumerable<TSource>> CollectCore<TSource>(
             Identity<TSource> m,
             IEnumerable<TSource> list)
         {

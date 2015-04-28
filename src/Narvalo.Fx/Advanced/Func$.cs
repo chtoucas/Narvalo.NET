@@ -35,8 +35,6 @@ namespace Narvalo.Fx.Advanced
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Nullable{T}"/> class.
     /// </content>
-    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)

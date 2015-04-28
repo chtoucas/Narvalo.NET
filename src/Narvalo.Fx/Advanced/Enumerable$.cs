@@ -16,8 +16,6 @@ namespace Narvalo.Fx.Advanced
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </content>
-    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class EnumerableExtensions
     {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(
@@ -52,8 +50,6 @@ namespace Narvalo.Fx.Advanced
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Output{T}"/> class.
     /// </content>
-    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class EnumerableExtensions
     {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(

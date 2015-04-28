@@ -4,7 +4,6 @@ namespace Narvalo.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Properties;
 
@@ -14,8 +13,6 @@ namespace Narvalo.Configuration
     public sealed class AbsoluteUriValidator : ConfigurationValidatorBase
     {
         /// <inheritdoc cref="System.Configuration.ConfigurationValidatorBase.CanValidate"/>
-        [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
-            Justification = "[Intentionally] Method marked as MonoTODO.")]
         public override bool CanValidate(Type type)
         {
             return type == typeof(Uri);

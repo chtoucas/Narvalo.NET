@@ -436,8 +436,6 @@ namespace Narvalo.Data
             return @this.MayGetCharsUnchecked(ordinal);
         }
 
-        [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
-            Justification = "[Intentionally] Missing method from Mono with no adequate replacement.")]
         [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", MessageId = "0",
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<char[]> MayGetCharsUnchecked(this SqlDataReader @this, int ordinal)

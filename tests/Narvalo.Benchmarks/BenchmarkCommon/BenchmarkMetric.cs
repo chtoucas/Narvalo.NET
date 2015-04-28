@@ -3,14 +3,11 @@
 namespace Narvalo.BenchmarkCommon
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
 
     using Narvalo.Properties;
 
-    [SuppressMessage("Gendarme.Rules.Maintainability", "AvoidLackOfCohesionOfMethodsRule",
-        Justification = "[Intentionally] If it were not a bit too large, we would have make it a struct.")]
     public sealed partial class BenchmarkMetric : IFormattable
     {
         private const long TICKS_PER_SECOND = 10000000L;

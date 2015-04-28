@@ -4,10 +4,7 @@ namespace Narvalo.Finance.Legacy
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Gendarme.Rules.Design", "ListsAreStronglyTypedRule",
-        Justification = "[Intentionally] The base class implements the strongly typed versions.")]
     public sealed class CurrencyInfoCollection : ReadOnlyCollection<CurrencyInfo>
     {
         public CurrencyInfoCollection(IList<CurrencyInfo> list) : base(list) { }

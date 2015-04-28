@@ -1,0 +1,12 @@
+﻿<#@ include file="Monad.tt" #>
+<# 
+    InitializeOr();
+
+    BindEnsuresSome = true;
+    UnitEnsuresSome = true;
+    MultiplicationEnsuresSome = true;
+
+    IsNullable = false;
+
+    ReturnName = "Of";
+#>

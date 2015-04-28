@@ -3,15 +3,12 @@
 namespace Narvalo.Xml
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Xml;
     using System.Xml.Linq;
 
     /// <summary>
     /// Provides extension methods for <see cref="XmlReader"/>.
     /// </summary>
-    [SuppressMessage("Gendarme.Rules.Naming", "AvoidRedundancyInTypeNameRule",
-        Justification = "[Intentionally] The type only contains extension methods.")]
     public static class MoreXmlReaderExtensions
     {
         #region Wrappers for XmlReader methods using a XName parameter.

@@ -2,10 +2,8 @@
 
 namespace Narvalo.Finance.Legacy
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    [SuppressMessage("Gendarme.Rules.Naming", "AvoidTypeInterfaceInconsistencyRule")]
     public sealed class CurrencyInfoProvider
     {
         private static readonly CurrencyInfoProvider s_Instance = new CurrencyInfoProvider();

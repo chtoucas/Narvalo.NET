@@ -62,7 +62,7 @@ namespace Narvalo.Fx
      * : An instance is _mutable_ if `T` is mutable. This should always raise a big warning.
      *   (TODO: Other things to discuss: impact on performances (boxing, size of the struct...)
      *   
-     * In the end, I prefer to be conservative; creating a structure seems way too hazardous.
+     * In the end, I prefer to be conservative.
      * 
      * ### Apparent Immutability ###
      * 
@@ -225,8 +225,6 @@ namespace Narvalo.Fx
             }
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator Maybe<T>(T value)
         {
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
@@ -234,8 +232,6 @@ namespace Narvalo.Fx
             return η(value);
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator T(Maybe<T> value)
         {
             Require.NotNull(value, "value");
@@ -505,8 +501,6 @@ namespace Narvalo.Fx
     {
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
             Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static bool operator true(Maybe<T> value)
         {
             Require.NotNull(value, "value");
@@ -516,8 +510,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
             Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static bool operator false(Maybe<T> value)
         {
             Require.NotNull(value, "value");
@@ -770,8 +762,6 @@ namespace Narvalo.Fx
                 get { return _inner.IsSome; }
             }
 
-            [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-                Justification = "[Ignore] Debugger-only code.")]
             public T Value
             {
                 get

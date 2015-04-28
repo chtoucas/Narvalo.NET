@@ -1820,6 +1820,7 @@ namespace Narvalo.Finance
             Assert.True(ZWR.Currency == Currency.Of("ZWR"));
             Assert.True(Object.ReferenceEquals(Currency.Of("ZWR"), Currency.Of("ZWR")));
             Assert.False(Object.ReferenceEquals(ZWR.Currency, Currency.Of("ZWR")));
+
         }
 
         #endregion

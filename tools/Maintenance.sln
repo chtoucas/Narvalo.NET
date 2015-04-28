@@ -44,6 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Settings", "2. Settings"
 	ProjectSection(SolutionItems) = preProject
 		..\etc\AssemblyInfo.Common.cs = ..\etc\AssemblyInfo.Common.cs
 		..\etc\CodeAnalysisDictionary.xml = ..\etc\CodeAnalysisDictionary.xml
+		..\etc\Empty.SourceAnalysis = ..\etc\Empty.SourceAnalysis
 		..\etc\FrameworkProfiles.props = ..\etc\FrameworkProfiles.props
 		..\etc\gendarme.ignore = ..\etc\gendarme.ignore
 		..\etc\gendarme.xml = ..\etc\gendarme.xml

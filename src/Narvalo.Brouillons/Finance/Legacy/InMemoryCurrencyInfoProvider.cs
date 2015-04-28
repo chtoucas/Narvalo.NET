@@ -3,13 +3,9 @@
 namespace Narvalo.Finance.Legacy
 {
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectPrefixRule",
-        Justification = "[Ignore] The type's name starts with 'In' not 'I'.")]
     public sealed partial class InMemoryCurrencyInfoProvider : ICurrencyInfoProvider
     {
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidRepetitiveCallsToPropertiesRule")]
         public CurrencyInfoCollection GetCurrencies(CurrencyTypes types)
         {
             switch (types)

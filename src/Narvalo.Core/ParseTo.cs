@@ -13,8 +13,6 @@ namespace Narvalo
     /// <summary>
     /// Provides parsing helpers.
     /// </summary>
-    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-        Justification = "[Intentionally] Delegation is done to offer a simplified API by automatically selecting the most common options for the consumer.")]
     public static partial class ParseTo
     {
         public static bool? Boolean(string value)
@@ -214,15 +212,11 @@ namespace Narvalo
     /// </content>
     public static partial class ParseTo
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
         {
             return Enum<TEnum>(value, ignoreCase: true);
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "AvoidMethodWithUnusedGenericTypeRule",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
             TryParser<TEnum> parser =

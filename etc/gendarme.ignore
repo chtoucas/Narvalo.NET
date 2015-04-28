@@ -54,6 +54,13 @@ A: Narvalo.Finance
 A: Narvalo.Fx
 A: Narvalo.Reliability
 
+# Narvalo.Cerbere
+# ---------------
+
+R: Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule
+# Justification = [Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.
+A: Narvalo.Cerbere
+
 # Narvalo.Fx
 # ----------
 
@@ -63,11 +70,4 @@ N: Narvalo.Fx
 N: Narvalo.Fx.Advanced
 N: Narvalo.Fx.Internal
 
-R: Gendarme.Rules.Naming.UseCorrectCasingRule
-# Justification = [Intentionally] Acceptable for namespaces and internal members (η, μ). Narvalo.FX would appear plain ugly to me.
-N: Narvalo.Fx
-N: Narvalo.Fx.Advanced
-N: Narvalo.Fx.Internal
-N: Narvalo.Fx.Properties
-
-# WARNING: The file must end with a newline or Gendarme will fail.
+# WARNING: The file must end with a newline; otherwise Gendarme will fail.

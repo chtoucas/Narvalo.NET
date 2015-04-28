@@ -18,6 +18,9 @@ Narvalo.Cerbere
 Narvalo.Fx
 ------------
 
+- See https://msdn.microsoft.com/en-us/magazine/dd942829.aspx
+  http://stackoverflow.com/questions/2410710/why-is-the-new-tuple-type-in-net-4-0-a-reference-type-class-and-not-a-value-t
+  https://github.com/dotnet/roslyn/issues/347
 - Split Monad.tt.
 - Equals for Maybe<T>.
 - SumCore() and CollectCore() assert that they never return null but this is not always true.

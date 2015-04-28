@@ -524,8 +524,6 @@ namespace Narvalo.Fx
         }
         
         
-        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
-            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
         private static Maybe<TResult> JoinCore<TSource, TInner, TKey, TResult>(
             Maybe<TSource> seq,
             Maybe<TInner> inner,
@@ -549,8 +547,6 @@ namespace Narvalo.Fx
                    select resultSelector.Invoke(outerValue, innerValue);
         }
         
-        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
-            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
         private static Maybe<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
             Maybe<TSource> seq,
             Maybe<TInner> inner,
@@ -674,8 +670,6 @@ namespace Narvalo.Fx
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </content>
-    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)

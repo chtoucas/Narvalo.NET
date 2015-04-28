@@ -3,7 +3,6 @@
 namespace Narvalo
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     public static class StringManip
@@ -31,8 +30,6 @@ namespace Narvalo
             return new String(arr);
         }
 
-        [SuppressMessage("Gendarme.Rules.Portability", "NewLineLiteralRule",
-            Justification = "[Intentionally] This method does not depend on platform specific rules.")]
         public static string StripCrLf(string value)
         {
             Require.NotNull(value, "value");

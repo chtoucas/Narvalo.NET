@@ -38,9 +38,9 @@ namespace Narvalo.Edu.Monads.Samples
 
     using global::Narvalo;
 
-    /// <summary>
-    /// Provides a set of static and extension methods for <see cref="MonadValue{T}" />.
-    /// </summary>
+    /// <content>
+    /// Provides a set of static methods for <see cref="MonadValue{T}" />.
+    /// </content>
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
@@ -214,7 +214,7 @@ namespace Narvalo.Edu.Monads.Samples
     } // End of the class MonadValue.
 
     /// <content>
-    /// Provides core Monad extension methods.
+    /// Provides the core monadic extension methods for <see cref="MonadValue{T}" />.
     /// </content>
     public static partial class MonadValue
     {
@@ -498,7 +498,7 @@ namespace Narvalo.Edu.Monads.Samples
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
 
-            return JoinCore_(
+            return JoinCore(
                 @this,
                 inner,
                 outerKeySelector,
@@ -523,7 +523,7 @@ namespace Narvalo.Edu.Monads.Samples
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
 
-            return GroupJoinCore_(
+            return GroupJoinCore(
                 @this,
                 inner,
                 outerKeySelector,
@@ -533,9 +533,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
         
         
-        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
-            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
-        private static MonadValue<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
+        private static MonadValue<TResult> JoinCore<TSource, TInner, TKey, TResult>(
             MonadValue<TSource> seq,
             MonadValue<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -552,16 +550,14 @@ namespace Narvalo.Edu.Monads.Samples
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
             
-            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
                    from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
         
-        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
-            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
-        private static MonadValue<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
+        private static MonadValue<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
             MonadValue<TSource> seq,
             MonadValue<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -578,13 +574,13 @@ namespace Narvalo.Edu.Monads.Samples
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
 
-            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
                    select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
         }
 
-        private static Func<TSource, MonadValue<TKey>> GetKeyLookup_<TSource, TInner, TKey>(
+        private static Func<TSource, MonadValue<TKey>> GetKeyLookup<TSource, TInner, TKey>(
             MonadValue<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -684,11 +680,9 @@ namespace Narvalo.Edu.Monads.Samples
         #endregion
     } // End of the class MonadValue.
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="MonadValue{T}"/> class.
-    /// </summary>
-    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
+    /// </content>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -752,9 +746,9 @@ namespace Narvalo.Edu.Monads.Samples
 
     using Narvalo.Edu.Monads.Samples.Internal;
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadValue{T}"/> class.
-    /// </summary>
+    /// </content>
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -929,9 +923,9 @@ namespace Narvalo.Edu.Monads.Samples.Internal
    
    
 
-    /// <summary>
+    /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadValue{T}"/> class.
-    /// </summary>
+    /// </content>
     internal static partial class EnumerableExtensions
     {
 
@@ -973,17 +967,14 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             {
                 var m = predicateM.Invoke(item);
 
-                if (m != null)
-                {
-                    m.Invoke(
-                        _ =>
+                m.Invoke(
+                    _ =>
+                    {
+                        if (_ == true)
                         {
-                            if (_ == true)
-                            {
-                                list.Add(item);
-                            }
-                        });
-                }
+                            list.Add(item);
+                        }
+                    });
             }
 
             return list;

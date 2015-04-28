@@ -3,7 +3,6 @@
 namespace Narvalo
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     /// <summary>
@@ -71,15 +70,11 @@ namespace Narvalo
     /// </content>
     public partial struct Range<T>
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static bool operator ==(Range<T> left, Range<T> right)
         {
             return left.Equals(right);
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static bool operator !=(Range<T> left, Range<T> right)
         {
             return !left.Equals(right);

@@ -86,15 +86,11 @@ namespace Narvalo.Fx
             }
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator Option<T>(T value)
         {
             return η(value);
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Ignore] An explicit conversion operator must be static.")]
         public static explicit operator T(Option<T> value)
         {
             Contract.Ensures(Contract.Result<T>() != null);
@@ -365,8 +361,6 @@ namespace Narvalo.Fx
     {
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
             Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static bool operator true(Option<T> value)
         {
             return value.IsSome;
@@ -374,8 +368,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
             Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static bool operator false(Option<T> value)
         {
             return !value.IsSome;
@@ -605,8 +597,6 @@ namespace Narvalo.Fx
                 get { return _inner.IsSome; }
             }
 
-            [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-                Justification = "[Ignore] Debugger-only code.")]
             public T Value
             {
                 get

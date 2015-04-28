@@ -4,7 +4,6 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Properties;
@@ -111,8 +110,6 @@ namespace Narvalo
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
             if (value == null)
@@ -133,8 +130,6 @@ namespace Narvalo
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> or empty.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
             NotNull(value, parameterName);
@@ -159,8 +154,6 @@ namespace Narvalo
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/>
         /// or empty, or does not consist only of white-space characters.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
             NotNull(value, parameterName);
@@ -187,8 +180,6 @@ namespace Narvalo
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
         /// the allowable range of values.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void InRange(int value, int minInclusive, int maxInclusive, string parameterName)
         {
             ValidateRange(minInclusive, maxInclusive);
@@ -218,8 +209,6 @@ namespace Narvalo
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
         /// the allowable range of values.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void InRange(long value, long minInclusive, long maxInclusive, string parameterName)
         {
             ValidateRange(minInclusive, maxInclusive);
@@ -246,8 +235,6 @@ namespace Narvalo
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is less than
         /// or equal to the minimum integer value.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void GreaterThan(int value, int minValue, string parameterName)
         {
             if (value <= minValue)
@@ -270,8 +257,6 @@ namespace Narvalo
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is less than
         /// or equal to the minimum long value.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void GreaterThan(long value, long minValue, string parameterName)
         {
             if (value <= minValue)
@@ -294,8 +279,6 @@ namespace Narvalo
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is less than
         /// the minimum integer value.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
         {
             if (value < minValue)
@@ -318,8 +301,6 @@ namespace Narvalo
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is less than
         /// the minimum long value.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
         {
             if (value < minValue)
@@ -342,8 +323,6 @@ namespace Narvalo
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
         /// or equal the maximum integer value.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void LessThan(int value, int maxValue, string parameterName)
         {
             if (value >= maxValue)
@@ -366,8 +345,6 @@ namespace Narvalo
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
         /// or equal the maximum long value.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void LessThan(long value, long maxValue, string parameterName)
         {
             if (value >= maxValue)
@@ -390,8 +367,6 @@ namespace Narvalo
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
         /// the maximum integer value.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
         {
             if (value > maxValue)
@@ -414,8 +389,6 @@ namespace Narvalo
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
         /// the maximum long value.</exception>
         [ContractArgumentValidator]
-        [SuppressMessage("Gendarme.Rules.Exceptions", "InstantiateArgumentExceptionCorrectlyRule",
-            Justification = "[Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.")]
         public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
         {
             if (value > maxValue)

@@ -35,8 +35,6 @@ namespace Narvalo.Finance
 
         public decimal Amount { get { return _amount; } }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static explicit operator Money<TCurrency>(Money value)
         {
             if (!(value.Currency == s_Currency))
@@ -47,8 +45,6 @@ namespace Narvalo.Finance
             return new Money<TCurrency>(value.Amount);
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static explicit operator Money(Money<TCurrency> value)
         {
             return new Money(value.Amount, s_Currency);
@@ -60,15 +56,11 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static bool operator ==(Money<TCurrency> left, Money<TCurrency> right)
         {
             return left.Equals(right);
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static bool operator !=(Money<TCurrency> left, Money<TCurrency> right)
         {
             return !left.Equals(right);
@@ -124,37 +116,21 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
-        [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
-            Justification = "[Intentionally] We do provide an alternate method but we call it CompareTo.")]
         public static bool operator <(Money<TCurrency> left, Money<TCurrency> right)
         {
             return left.CompareTo(right) < 0;
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
-        [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
-            Justification = "[Intentionally] We do provide an alternate method but we call it CompareTo.")]
         public static bool operator <=(Money<TCurrency> left, Money<TCurrency> right)
         {
             return left.CompareTo(right) <= 0;
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
-        [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
-            Justification = "[Intentionally] We do provide an alternate method but we call it CompareTo.")]
         public static bool operator >(Money<TCurrency> left, Money<TCurrency> right)
         {
             return left.CompareTo(right) > 0;
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
-        [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
-            Justification = "[Intentionally] We do provide an alternate method but we call it CompareTo.")]
         public static bool operator >=(Money<TCurrency> left, Money<TCurrency> right)
         {
             return left.CompareTo(right) >= 0;
@@ -186,8 +162,6 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static Money<TCurrency> operator +(Money<TCurrency> left, Money<TCurrency> right)
         {
             return left.Add(right);
@@ -213,8 +187,6 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static Money<TCurrency> operator -(Money<TCurrency> left, Money<TCurrency> right)
         {
             return left.Subtract(right);
@@ -236,15 +208,11 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static Money<TCurrency> operator *(decimal multiplier, Money<TCurrency> money)
         {
             return money.Multiply(multiplier);
         }
 
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static Money<TCurrency> operator *(Money<TCurrency> money, decimal multiplier)
         {
             return money.Multiply(multiplier);
@@ -263,8 +231,6 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static Money<TCurrency> operator /(Money<TCurrency> money, decimal divisor)
         {
             Contract.Requires(divisor != 0m);
@@ -288,10 +254,6 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
-        [SuppressMessage("Gendarme.Rules.Design", "ProvideAlternativeNamesForOperatorOverloadsRule",
-            Justification = "[Intentionally] We do provide an alternate method but we call it Remainder.")]
         public static Money<TCurrency> operator %(Money<TCurrency> money, decimal divisor)
         {
             Contract.Requires(divisor != 0m);
@@ -315,8 +277,6 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static Money<TCurrency> operator -(Money<TCurrency> money)
         {
             return money.Negate();
@@ -333,8 +293,6 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        [SuppressMessage("Gendarme.Rules.Design.Generic", "DoNotDeclareStaticMembersOnGenericTypesRule",
-            Justification = "[Intentionally] Operator's overloads must be static.")]
         public static Money<TCurrency> operator +(Money<TCurrency> money)
         {
             return money;

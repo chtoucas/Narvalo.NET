@@ -3,7 +3,6 @@
 namespace Narvalo.Xml
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Xml;
     using System.Xml.Linq;
@@ -11,8 +10,6 @@ namespace Narvalo.Xml
     /// <summary>
     /// Provides extension methods for <see cref="XmlReader"/>.
     /// </summary>
-    [SuppressMessage("Gendarme.Rules.Naming", "AvoidRedundancyInTypeNameRule",
-        Justification = "[Intentionally] The type only contains extension methods.")]
     public static class XmlReaderExtensions
     {
         #region Wrappers for XmlReader methods using a XName parameter.
@@ -94,8 +91,6 @@ namespace Narvalo.Xml
             return @this.ReadElementContentAsLong(name.LocalName, name.NamespaceName);
         }
 
-        [SuppressMessage("Gendarme.Rules.Portability", "MonoCompatibilityReviewRule",
-            Justification = "[Intentionally] Method marked as MonoTODO.")]
         public static object ReadElementContentAsObject(this XmlReader @this, XName name)
         {
             Require.Object(@this);

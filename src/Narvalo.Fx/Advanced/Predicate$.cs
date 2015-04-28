@@ -9,8 +9,6 @@ namespace Narvalo.Fx.Advanced
     /// <summary>
     /// Provides extension methods for <see cref="Func{T, Boolean}"/> and <see cref="Predicate{T}"/>.
     /// </summary>
-    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static class PredicateExtensions
     {
         public static Predicate<TSource> Negate<TSource>(this Predicate<TSource> @this)

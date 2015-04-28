@@ -77,8 +77,6 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-            Justification = "[Ignore] Weird. This method does have callers inside the assembly.")]
         internal static Switch<TLeft, TRight> η(TRight value)
         {
             Contract.Ensures(Contract.Result<Switch<TLeft, TRight>>() != null);
@@ -88,15 +86,11 @@ namespace Narvalo.Fx
 
         private sealed class Empty_ : Switch<TLeft, TRight>, IEquatable<Empty_>
         {
-            [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
-                Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
             {
                 return Switch<TResult, TRight>.Empty;
             }
 
-            [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
-                Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
             {
                 return Switch<TLeft, TResult>.Empty;
@@ -107,8 +101,6 @@ namespace Narvalo.Fx
                 return Switch<TResult, TRight>.Empty;
             }
 
-            [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
-                Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector)
             {
                 return Switch<TLeft, TResult>.Empty;
@@ -184,8 +176,6 @@ namespace Narvalo.Fx
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
-            [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
-                Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
             {
                 Require.NotNull(leftSelectorM, "leftSelectorM");
@@ -194,8 +184,6 @@ namespace Narvalo.Fx
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
-            [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
-                Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
             {
                 return new Switch<TLeft, TResult>.Left_(_value);
@@ -210,8 +198,6 @@ namespace Narvalo.Fx
             }
 
             /// <inheritdoc cref="Switch{TLeft, TResult}.Map{TResult}(Func{TRight, TResult})" />
-            [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
-                Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector)
             {
                 return new Switch<TLeft, TResult>.Left_(_value);
@@ -300,16 +286,12 @@ namespace Narvalo.Fx
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
-            [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
-                Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
             {
                 return new Switch<TResult, TRight>.Right_(_value);
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
-            [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
-                Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
             {
                 Require.NotNull(rightSelectorM, "rightSelectorM");
@@ -324,8 +306,6 @@ namespace Narvalo.Fx
             }
 
             /// <inheritdoc cref="Switch{TLeft, TResult}.Map{TResult}(Func{TRight, TResult})" />
-            [SuppressMessage("Gendarme.Rules.Naming", "ParameterNamesShouldMatchOverriddenMethodRule",
-                Justification = "[Ignore] Weird. Parameter names do match.")]
             public override Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector)
             {
                 Require.NotNull(rightSelector, "rightSelector");

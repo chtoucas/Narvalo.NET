@@ -38,9 +38,9 @@ namespace Narvalo.Edu.Monads.Samples
 
     using global::Narvalo;
 
-    /// <summary>
-    /// Provides a set of static and extension methods for <see cref="MonadOr{T}" />.
-    /// </summary>
+    /// <content>
+    /// Provides a set of static methods for <see cref="MonadOr{T}" />.
+    /// </content>
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
@@ -198,7 +198,7 @@ namespace Narvalo.Edu.Monads.Samples
     } // End of the class MonadOr.
 
     /// <content>
-    /// Provides core Monad extension methods.
+    /// Provides the core monadic extension methods for <see cref="MonadOr{T}" />.
     /// </content>
     public static partial class MonadOr
     {
@@ -476,7 +476,7 @@ namespace Narvalo.Edu.Monads.Samples
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
 
-            return JoinCore_(
+            return JoinCore(
                 @this,
                 inner,
                 outerKeySelector,
@@ -499,7 +499,7 @@ namespace Narvalo.Edu.Monads.Samples
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
 
-            return GroupJoinCore_(
+            return GroupJoinCore(
                 @this,
                 inner,
                 outerKeySelector,
@@ -509,9 +509,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
         
         
-        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
-            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
-        private static MonadOr<TResult> JoinCore_<TSource, TInner, TKey, TResult>(
+        private static MonadOr<TResult> JoinCore<TSource, TInner, TKey, TResult>(
             MonadOr<TSource> seq,
             MonadOr<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -526,16 +524,14 @@ namespace Narvalo.Edu.Monads.Samples
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
             
-            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
                    from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
         
-        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
-            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
-        private static MonadOr<TResult> GroupJoinCore_<TSource, TInner, TKey, TResult>(
+        private static MonadOr<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
             MonadOr<TSource> seq,
             MonadOr<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
@@ -550,13 +546,13 @@ namespace Narvalo.Edu.Monads.Samples
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
 
-            var keyLookupM = GetKeyLookup_(inner, outerKeySelector, innerKeySelector, comparer);
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
                    select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
         }
 
-        private static Func<TSource, MonadOr<TKey>> GetKeyLookup_<TSource, TInner, TKey>(
+        private static Func<TSource, MonadOr<TKey>> GetKeyLookup<TSource, TInner, TKey>(
             MonadOr<TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
@@ -651,11 +647,9 @@ namespace Narvalo.Edu.Monads.Samples
         #endregion
     } // End of the class MonadOr.
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="MonadOr{T}"/> class.
-    /// </summary>
-    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
+    /// </content>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -712,9 +706,9 @@ namespace Narvalo.Edu.Monads.Samples
 
     using Narvalo.Edu.Monads.Samples.Internal;
 
-    /// <summary>
+    /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadOr{T}"/> class.
-    /// </summary>
+    /// </content>
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -939,9 +933,9 @@ namespace Narvalo.Edu.Monads.Samples.Internal
    
    
 
-    /// <summary>
+    /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadOr{T}"/> class.
-    /// </summary>
+    /// </content>
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
@@ -954,7 +948,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
             var seed = MonadOr.Return(Enumerable.Empty<TSource>());
             Func<MonadOr<IEnumerable<TSource>>, MonadOr<TSource>, MonadOr<IEnumerable<TSource>>> fun
-                = (m, n) => m.Bind(list => CollectCore_(n, list));
+                = (m, n) => m.Bind(list => CollectCore(n, list));
 
             var retval = @this.Aggregate(seed, fun);
             Contract.Assume(retval != null);
@@ -963,7 +957,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
         }
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static MonadOr<IEnumerable<TSource>> CollectCore_<TSource>(
+        private static MonadOr<IEnumerable<TSource>> CollectCore<TSource>(
             MonadOr<TSource> m,
             IEnumerable<TSource> list)
         {

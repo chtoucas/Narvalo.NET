@@ -5,7 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -204,8 +203,6 @@ namespace Narvalo.Fx
             return retval;
         }
 
-        [SuppressMessage("Gendarme.Rules.Performance", "AvoidRepetitiveCallsToPropertiesRule",
-            Justification = "[Intentionally] Part of the 'raison d'être' of this method is to iterate over all the elements in the sequence.")]
         public static TSource Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, TSource> accumulator,

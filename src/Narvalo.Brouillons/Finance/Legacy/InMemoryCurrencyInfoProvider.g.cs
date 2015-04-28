@@ -35,8 +35,6 @@ namespace Narvalo.Finance.Legacy
             Justification = "[GeneratedCode] Lazy initialization of an (in-memory) list of currencies.")]
         [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
             Justification = "[GeneratedCode] Creation of an (in-memory) list of currencies.")]
-        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongMethodsRule",
-            Justification = "[GeneratedCode] Creation of an (in-memory) list of currencies.")]
         private static CurrencyInfoCollection InitializeCurrentCurrencies_()
         {
             var list = new List<CurrencyInfo>(275);
@@ -1698,8 +1696,6 @@ namespace Narvalo.Finance.Legacy
         /// </remarks>
         /// <value>The list of discontinued currencies.</value>
         [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals",
-            Justification = "[GeneratedCode] Creation of an (in-memory) list of currencies.")]
-        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongMethodsRule",
             Justification = "[GeneratedCode] Creation of an (in-memory) list of currencies.")]
         private static CurrencyInfoCollection InitializeLegacyCurrencies_()
         {

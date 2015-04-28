@@ -1102,8 +1102,6 @@ namespace <#= Namespace #>.Internal
         }
         
         
-        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
-            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
         private static <#= Name #><TResult> JoinCore<TSource, TInner, TKey, TResult>(
             <#= Name #><TSource> seq,
             <#= Name #><TInner> inner,
@@ -1132,8 +1130,6 @@ namespace <#= Namespace #>.Internal
                    select resultSelector.Invoke(outerValue, innerValue);
         }
         
-        [SuppressMessage("Gendarme.Rules.Smells", "AvoidLongParameterListsRule",
-            Justification = "[Intentionally] Correct but these are helper methods for private use only.")]
         private static <#= Name #><TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
             <#= Name #><TSource> seq,
             <#= Name #><TInner> inner,
@@ -1287,8 +1283,6 @@ namespace <#= Namespace #>.Internal
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
     /// </content>
-    [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-        Justification = "[Intentionally] Delegation is an unavoidable annoyance of fluent interfaces on delegates.")]
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -1441,7 +1435,9 @@ namespace <#= Namespace #>.Internal
             <#= Name #><TSource> m,
             IEnumerable<TSource> list)
         {
+<#+ if (IsNullable) { #>
             Contract.Requires(m != null);
+<#+ } #>
 
             return m.Bind(item => <#= Name #>.<#= ReturnName #>(list.Concat(Enumerable.Repeat(item, 1))));
         }
@@ -1728,6 +1724,7 @@ namespace <#= Namespace #>.Internal
             {
                 var m = predicateM.Invoke(item);
 
+<#+ if (IsNullable) { #>
                 if (m != null)
                 {
                     m.Invoke(
@@ -1739,6 +1736,16 @@ namespace <#= Namespace #>.Internal
                             }
                         });
                 }
+<#+ } else { #>
+                m.Invoke(
+                    _ =>
+                    {
+                        if (_ == true)
+                        {
+                            list.Add(item);
+                        }
+                    });
+<#+ } #>
             }
 
             return list;

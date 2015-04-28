@@ -9,8 +9,6 @@ namespace Narvalo.Data
     /// <summary>
     /// Provides extension methods for <see cref="IDataRecord"/>.
     /// </summary>
-    [SuppressMessage("Gendarme.Rules.Naming", "AvoidRedundancyInTypeNameRule",
-        Justification = "[Intentionally] IDataRecord name is defined by the framework.")]
     public static partial class DataRecordExtensions
     {
         public static bool GetBoolean(this IDataRecord @this, string name)

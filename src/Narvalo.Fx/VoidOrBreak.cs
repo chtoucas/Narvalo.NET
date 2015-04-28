@@ -110,8 +110,6 @@ namespace Narvalo.Fx
             /// </summary>
             [ContractVerification(false)] // Debugger-only code.
             [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
-            [SuppressMessage("Gendarme.Rules.Smells", "AvoidSpeculativeGeneralityRule",
-                Justification = "[Intentionally] Debugger-only code.")]
             private sealed class DebugView
             {
                 private readonly Break_ _inner;
@@ -121,8 +119,6 @@ namespace Narvalo.Fx
                     _inner = inner;
                 }
 
-                [SuppressMessage("Gendarme.Rules.Performance", "AvoidUncalledPrivateCodeRule",
-                    Justification = "[Ignore] Debugger-only code.")]
                 public string Reason
                 {
                     get { return _inner.Reason; }

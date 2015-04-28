@@ -39,36 +39,44 @@ namespace Narvalo.Fx
     using global::Narvalo;
 
     /// <content>
-    /// Provides a set of static methods for <see cref="Output{T}" />.
+    /// Provides a set of static methods for <see cref="Option{T}" />.
     /// </content>
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
     /// </remarks>
-    public static partial class Output
+    public static partial class Option
     {
-        private static readonly Output<global::Narvalo.Fx.Unit> s_Unit = Success(global::Narvalo.Fx.Unit.Single);
+        private static readonly Option<global::Narvalo.Fx.Unit> s_Unit = Of(global::Narvalo.Fx.Unit.Single);
+        private static readonly Option<global::Narvalo.Fx.Unit> s_None = Option<global::Narvalo.Fx.Unit>.None;
 
         /// <summary>
-        /// Gets the unique object of type <c>Output&lt;Unit&gt;</c>.
+        /// Gets the unique object of type <c>Option&lt;Unit&gt;</c>.
         /// </summary>
-        /// <value>The unique object of type <c>Output&lt;Unit&gt;</c>.</value>
-        public static Output<global::Narvalo.Fx.Unit> Unit { get { return s_Unit; } }
-
+        /// <value>The unique object of type <c>Option&lt;Unit&gt;</c>.</value>
+        public static Option<global::Narvalo.Fx.Unit> Unit { get { return s_Unit; } }
 
         /// <summary>
-        /// Obtains an instance of the <see cref="Output{T}"/> class for the specified value.
+        /// Gets the zero for <see cref="Option{T}"/>.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>mzero</c> in Haskell parlance.
+        /// </remarks>
+        /// <value>The zero for <see cref="Option{T}"/>.</value>
+        public static Option<global::Narvalo.Fx.Unit> None { get { return s_None; } }
+
+        /// <summary>
+        /// Obtains an instance of the <see cref="Option{T}"/> class for the specified value.
         /// </summary>
         /// <remarks>
         /// Named <c>return</c> in Haskell parlance.
         /// </remarks>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">A value to be wrapped into a <see cref="Output{T}"/> object.</param>
-        /// <returns>An instance of the <see cref="Output{T}"/> class for the specified value.</returns>
-        public static Output<T> Success<T>(T value)
+        /// <param name="value">A value to be wrapped into a <see cref="Option{T}"/> object.</param>
+        /// <returns>An instance of the <see cref="Option{T}"/> class for the specified value.</returns>
+        public static Option<T> Of<T>(T value)
         {
-            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
-            return Output<T>.η(value);
+            return Option<T>.η(value);
         }
         
         #region Generalisations of list functions (Prelude)
@@ -79,12 +87,10 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>join</c> in Haskell parlance.
         /// </remarks>
-        public static Output<T> Flatten<T>(Output<Output<T>> square)
+        public static Option<T> Flatten<T>(Option<Option<T>> square)
         {
-            Contract.Requires(square != null);
-            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
-            return Output<T>.μ(square);
+            return Option<T>.μ(square);
         }
 
         #endregion
@@ -92,132 +98,125 @@ namespace Narvalo.Fx
         #region Monadic lifting operators (Prelude)
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Output{T}" /> values.
+        /// Promotes a function to use and return <see cref="Option{T}" /> values.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM</c> in Haskell parlance.
         /// </remarks>
-        public static Func<Output<T>, Output<TResult>> Lift<T, TResult>(
+        public static Func<Option<T>, Option<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
         {
-            Contract.Ensures(Contract.Result<Func<Output<T>, Output<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<Option<T>, Option<TResult>>>() != null);
 
             return m =>
             {
-                Require.NotNull(m, "m");
                 return m.Select(fun);
             };
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Output{T}" /> values, scanning the 
+        /// Promotes a function to use and return <see cref="Option{T}" /> values, scanning the 
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM2</c> in Haskell parlance.
         /// </remarks>
-        public static Func<Output<T1>, Output<T2>, Output<TResult>>
+        public static Func<Option<T1>, Option<T2>, Option<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
         {
-            Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<Option<T1>, Option<T2>, Option<TResult>>>() != null);
 
             return (m1, m2) =>
             {
-                Require.NotNull(m1, "m1");
                 return m1.Zip(m2, fun);
             };
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Output{T}" /> values, scanning the 
+        /// Promotes a function to use and return <see cref="Option{T}" /> values, scanning the 
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM3</c> in Haskell parlance.
         /// </remarks>
-        public static Func<Output<T1>, Output<T2>, Output<T3>, Output<TResult>>
+        public static Func<Option<T1>, Option<T2>, Option<T3>, Option<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
         {
-            Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<T3>, Output<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<Option<T1>, Option<T2>, Option<T3>, Option<TResult>>>() != null);
 
             return (m1, m2, m3) =>
             {
-                Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, fun);
             };
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Output{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="Option{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM4</c> in Haskell parlance.
         /// </remarks>
-        public static Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<TResult>>
+        public static Func<Option<T1>, Option<T2>, Option<T3>, Option<T4>, Option<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
         {
-            Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<Option<T1>, Option<T2>, Option<T3>, Option<T4>, Option<TResult>>>() != null);
             
             return (m1, m2, m3, m4) =>
             {
-                Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="Output{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="Option{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM5</c> in Haskell parlance.
         /// </remarks>
-        public static Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<T5>, Output<TResult>>
+        public static Func<Option<T1>, Option<T2>, Option<T3>, Option<T4>, Option<T5>, Option<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
         {
-            Contract.Ensures(Contract.Result<Func<Output<T1>, Output<T2>, Output<T3>, Output<T4>, Output<T5>, Output<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<Option<T1>, Option<T2>, Option<T3>, Option<T4>, Option<T5>, Option<TResult>>>() != null);
        
             return (m1, m2, m3, m4, m5) =>
             {
-                Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }
 
         #endregion
-    } // End of the class Output.
+    } // End of the class Option.
 
     /// <content>
-    /// Provides the core monadic extension methods for <see cref="Output{T}" />.
+    /// Provides the core monadic extension methods for <see cref="Option{T}" />.
     /// </content>
-    public static partial class Output
+    public static partial class Option
     {
         #region Basic Monad functions (Prelude)
 
         /// <remarks>
         /// Named <c>fmap</c> in Haskell parlance.
         /// </remarks>
-        public static Output<TResult> Select<TSource, TResult>(
-            this Output<TSource> @this,
+        public static Option<TResult> Select<TSource, TResult>(
+            this Option<TSource> @this,
             Func<TSource, TResult> selector)
         {
-            Require.Object(@this);
             Require.NotNull(selector, "selector");
 
-            return @this.Bind(_ => Output.Success(selector.Invoke(_)));
+            return @this.Bind(_ => Option.Of(selector.Invoke(_)));
         }
 
         /// <remarks>
         /// Named <c>&gt;&gt;</c> in Haskell parlance.
         /// </remarks>
-        public static Output<TResult> Then<TSource, TResult>(
-            this Output<TSource> @this,
-            Output<TResult> other)
+        public static Option<TResult> Then<TSource, TResult>(
+            this Option<TSource> @this,
+            Option<TResult> other)
         {
-            Require.Object(@this);
 
             return @this.Bind(_ => other);
         }
@@ -226,15 +225,26 @@ namespace Narvalo.Fx
 
         #region Generalisations of list functions (Prelude)
 
+        /// <remarks>
+        /// Named <c>mfilter</c> in Haskell parlance.
+        /// </remarks>
+        public static Option<TSource> Where<TSource>(
+            this Option<TSource> @this,
+            Func<TSource, bool> predicate)
+        {
+            Require.NotNull(predicate, "predicate");
+
+            return @this.Bind(
+                _ => predicate.Invoke(_) ? @this : Option<TSource>.None);
+        }
 
         /// <remarks>
         /// Named <c>replicateM</c> in Haskell parlance.
         /// </remarks>
-        public static Output<IEnumerable<TSource>> Repeat<TSource>(
-            this Output<TSource> @this,
+        public static Option<IEnumerable<TSource>> Repeat<TSource>(
+            this Option<TSource> @this,
             int count)
         {
-            Require.Object(@this);
             Require.GreaterThanOrEqualTo(count, 1, "count");
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
@@ -244,19 +254,26 @@ namespace Narvalo.Fx
 
         #region Conditional execution of monadic expressions (Prelude)
 
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
+        public static Option<global::Narvalo.Fx.Unit> Guard(bool predicate)
+        {
+
+            return predicate ? Option.Unit : Option.None;
+        }
 
         /// <remarks>
         /// <para>Named <c>when</c> in Haskell parlance.</para>
         /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
         /// </remarks>
-        public static Output<TSource> When<TSource>(
-            this Output<TSource> @this,
+        public static Option<TSource> When<TSource>(
+            this Option<TSource> @this,
             bool predicate,
             Action action)
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             if (predicate)
             {
@@ -270,14 +287,13 @@ namespace Narvalo.Fx
         /// <para>Named <c>unless</c> in Haskell parlance.</para>
         /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
         /// </remarks>
-        public static Output<TSource> Unless<TSource>(
-            this Output<TSource> @this,
+        public static Option<TSource> Unless<TSource>(
+            this Option<TSource> @this,
             bool predicate,
             Action action)
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Output<TSource>>() != null);
 
             if (!predicate)
             {
@@ -292,48 +308,42 @@ namespace Narvalo.Fx
         #region Monadic lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
-        public static Output<TResult> Zip<TFirst, TSecond, TResult>(
-            this Output<TFirst> @this,
-            Output<TSecond> second,
+        public static Option<TResult> Zip<TFirst, TSecond, TResult>(
+            this Option<TFirst> @this,
+            Option<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        public static Output<TResult> Zip<T1, T2, T3, TResult>(
-            this Output<T1> @this,
-            Output<T2> second,
-            Output<T3> third,
+        public static Option<TResult> Zip<T1, T2, T3, TResult>(
+            this Option<T1> @this,
+            Option<T2> second,
+            Option<T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            Func<T1, Output<TResult>> g
+            Func<T1, Option<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
 
             return @this.Bind(g);
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        public static Output<TResult> Zip<T1, T2, T3, T4, TResult>(
-             this Output<T1> @this,
-             Output<T2> second,
-             Output<T3> third,
-             Output<T4> fourth,
+        public static Option<TResult> Zip<T1, T2, T3, T4, TResult>(
+             this Option<T1> @this,
+             Option<T2> second,
+             Option<T3> third,
+             Option<T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            Func<T1, Output<TResult>> g
+            Func<T1, Option<TResult>> g
                 = t1 => second.Zip(
                     third,
                     fourth,
@@ -343,19 +353,17 @@ namespace Narvalo.Fx
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        public static Output<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
-            this Output<T1> @this,
-            Output<T2> second,
-            Output<T3> third,
-            Output<T4> fourth,
-            Output<T5> fifth,
+        public static Option<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+            this Option<T1> @this,
+            Option<T2> second,
+            Option<T3> third,
+            Option<T4> fourth,
+            Option<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            Func<T1, Output<TResult>> g
+            Func<T1, Option<TResult>> g
                 = t1 => second.Zip(
                     third,
                     fourth,
@@ -373,12 +381,11 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Kind of generalisation of Zip (liftM2).
         /// </remarks>
-        public static Output<TResult> SelectMany<TSource, TMiddle, TResult>(
-            this Output<TSource> @this,
-            Func<TSource, Output<TMiddle>> valueSelectorM,
+        public static Option<TResult> SelectMany<TSource, TMiddle, TResult>(
+            this Option<TSource> @this,
+            Func<TSource, Option<TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
-            Require.Object(@this);
             Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
 
@@ -387,45 +394,220 @@ namespace Narvalo.Fx
                     middle => resultSelector.Invoke(_, middle)));
         }
 
+        public static Option<TResult> Join<TSource, TInner, TKey, TResult>(
+            this Option<TSource> @this,
+            Option<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector)
+        {
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
+
+            return @this.Join(
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                EqualityComparer<TKey>.Default);
+        }
+        
+        public static Option<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this Option<TSource> @this,
+            Option<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, Option<TInner>, TResult> resultSelector)
+        {
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
+
+            return @this.GroupJoin(
+                inner,
+                outerKeySelector,
+                innerKeySelector, 
+                resultSelector, 
+                EqualityComparer<TKey>.Default);
+        }
 
         #endregion
         
         #region LINQ extensions
 
+        public static Option<TResult> Join<TSource, TInner, TKey, TResult>(
+            this Option<TSource> @this,
+            Option<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
+
+            return JoinCore(
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
+        }
+        
+        public static Option<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this Option<TSource> @this,
+            Option<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, Option<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
+
+            return GroupJoinCore(
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
+        }
+        
+        
+        private static Option<TResult> JoinCore<TSource, TInner, TKey, TResult>(
+            Option<TSource> seq,
+            Option<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Require.NotNull(resultSelector, "resultSelector");
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(comparer != null);
+            
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in seq
+                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
+                   select resultSelector.Invoke(outerValue, innerValue);
+        }
+        
+        private static Option<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
+            Option<TSource> seq,
+            Option<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, Option<TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Require.NotNull(resultSelector, "resultSelector");
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(comparer != null);
+
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in seq
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+        }
+
+        private static Func<TSource, Option<TKey>> GetKeyLookup<TSource, TInner, TKey>(
+            Option<TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            IEqualityComparer<TKey> comparer)
+        {
+            Require.NotNull(outerKeySelector, "outerKeySelector");
+            Require.NotNull(comparer, "comparer");
+            Contract.Requires(innerKeySelector != null);
+            Contract.Ensures(Contract.Result<Func<TSource, Option<TKey>>>() != null);
+
+            return source =>
+            {
+                TKey outerKey = outerKeySelector.Invoke(source);
+            
+                return inner.Select(innerKeySelector).Where(_ => comparer.Equals(_, outerKey));
+            };
+        }
 
         #endregion
 
         #region Non-standard extensions
         
-        public static Output<TResult> Coalesce<TSource, TResult>(
-            this Output<TSource> @this,
+        public static Option<TResult> Coalesce<TSource, TResult>(
+            this Option<TSource> @this,
             Func<TSource, bool> predicate,
-            Output<TResult> then,
-            Output<TResult> otherwise)
+            Option<TResult> then,
+            Option<TResult> otherwise)
         {
-            Require.Object(@this);
             Require.NotNull(predicate, "predicate");
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
 
+        public static Option<TResult> Then<TSource, TResult>(
+            this Option<TSource> @this,
+            Func<TSource, bool> predicate,
+            Option<TResult> other)
+        {
+            Contract.Requires(predicate != null);
+
+            return @this.Coalesce(predicate, other, Option<TResult>.None);
+        }
+
+        public static Option<TResult> Otherwise<TSource, TResult>(
+            this Option<TSource> @this,
+            Func<TSource, bool> predicate,
+            Option<TResult> other)
+        {
+            Contract.Requires(predicate != null);
+
+            return @this.Coalesce(predicate, Option<TResult>.None, other);
+        }
 
         public static void Invoke<TSource>(
-            this Output<TSource> @this,
+            this Option<TSource> @this,
             Action<TSource> action)
         {
-            Require.Object(@this);
             Require.NotNull(action, "action");
 
             @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
 
+        public static void OnNone<TSource>(
+            this Option<TSource> @this,
+            Action action)
+        {
+            Require.NotNull(action, "action");
+
+            @this.Then(Option.Unit).Invoke(_ => action.Invoke());
+        }
+
+        public static void Invoke<TSource>(
+            this Option<TSource> @this,
+            Action<TSource> action,
+            Action caseNone)
+        {
+            Require.NotNull(action, "action");
+
+            @this.Bind(_ => { action.Invoke(_); return @this; })
+                .Then(Option.Unit)
+                .Bind(_ => { caseNone.Invoke(); return Unit; });
+        }
+
         #endregion
-    } // End of the class Output.
+    } // End of the class Option.
 
     /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Output{T}"/> class.
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Option{T}"/> class.
     /// </content>
     public static partial class FuncExtensions
     {
@@ -434,12 +616,11 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>=&lt;&lt;</c> in Haskell parlance.
         /// </remarks>
-        public static Output<TResult> Invoke<TSource, TResult>(
-            this Func<TSource, Output<TResult>> @this,
-            Output<TSource> value)
+        public static Option<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, Option<TResult>> @this,
+            Option<TSource> value)
         {
             Acknowledge.Object(@this);
-            Require.NotNull(value, "value");
 
             return value.Bind(@this);
         }
@@ -447,13 +628,13 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>&gt;=&gt;</c> in Haskell parlance.
         /// </remarks>
-        public static Func<TSource, Output<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, Output<TMiddle>> @this,
-            Func<TMiddle, Output<TResult>> funM)
+        public static Func<TSource, Option<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, Option<TMiddle>> @this,
+            Func<TMiddle, Option<TResult>> funM)
         {
             Require.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Func<TSource, Output<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<TSource, Option<TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -461,13 +642,13 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>&lt;=&lt;</c> in Haskell parlance.
         /// </remarks>
-        public static Func<TSource, Output<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, Output<TResult>> @this,
-            Func<TSource, Output<TMiddle>> funM)
+        public static Func<TSource, Option<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, Option<TResult>> @this,
+            Func<TSource, Option<TMiddle>> funM)
         {
             Acknowledge.Object(@this);
             Require.NotNull(funM, "funM");
-            Contract.Ensures(Contract.Result<Func<TSource, Output<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<TSource, Option<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -484,7 +665,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Output{T}"/> class.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Option{T}"/> class.
     /// </content>
     public static partial class EnumerableExtensions
     {
@@ -493,13 +674,27 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>sequence</c> in Haskell parlance.
         /// </remarks>
-        public static Output<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<Output<TSource>> @this)
+        public static Option<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<Option<TSource>> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
+        }
+
+        #endregion
+
+        #region Generalisations of list functions (Prelude)
+
+        /// <remarks>
+        /// Named <c>msum</c> in Haskell parlance.
+        /// </remarks>
+        public static Option<TSource> Sum<TSource>(
+            this IEnumerable<Option<TSource>> @this)
+        {
+            Acknowledge.Object(@this);
+
+            return @this.SumCore();
         }
 
         #endregion
@@ -525,13 +720,12 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance.
         /// </remarks>
-        public static Output<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Option<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Output<TResult>> funM)
+            Func<TSource, Option<TResult>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TResult>>>() != null);
 
             return @this.MapCore(funM);
         }
@@ -546,7 +740,7 @@ namespace Narvalo.Fx.Advanced
         /// </remarks>
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Output<bool>> predicateM)
+            Func<TSource, Option<bool>> predicateM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(predicateM != null);
@@ -558,10 +752,10 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
-        public static Output<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+        public static Option<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Output<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, Option<Tuple<TFirst, TSecond>>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
@@ -572,15 +766,14 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// Named <c>zipWithM</c> in Haskell parlance.
         /// </remarks>
-        public static Output<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+        public static Option<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Output<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Option<TResult>> resultSelectorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
             Contract.Requires(resultSelectorM != null);
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TResult>>>() != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -588,10 +781,10 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// Named <c>foldM</c> in Haskell parlance.
         /// </remarks>
-        public static Output<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Option<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Option<TAccumulate>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -603,10 +796,10 @@ namespace Narvalo.Fx.Advanced
 
         #region Aggregate Operators
         
-        public static Output<TAccumulate> FoldBack<TSource, TAccumulate>(
+        public static Option<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Option<TAccumulate>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -614,9 +807,9 @@ namespace Narvalo.Fx.Advanced
             return @this.FoldBackCore(seed, accumulatorM);
         }
         
-        public static Output<TSource> Reduce<TSource>(
+        public static Option<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Output<TSource>> accumulatorM)
+            Func<TSource, TSource, Option<TSource>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -624,9 +817,9 @@ namespace Narvalo.Fx.Advanced
             return @this.ReduceCore(accumulatorM);
         }
         
-        public static Output<TSource> ReduceBack<TSource>(
+        public static Option<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Output<TSource>> accumulatorM)
+            Func<TSource, TSource, Option<TSource>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -641,11 +834,11 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static Output<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Option<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM,
-            Func<Output<TAccumulate>, bool> predicate)
+            Func<TAccumulate, TSource, Option<TAccumulate>> accumulatorM,
+            Func<Option<TAccumulate>, bool> predicate)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -657,10 +850,10 @@ namespace Narvalo.Fx.Advanced
         /// <remarks>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static Output<TSource> Reduce<TSource>(
+        public static Option<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Output<TSource>> accumulatorM,
-            Func<Output<TSource>, bool> predicate)
+            Func<TSource, TSource, Option<TSource>> accumulatorM,
+            Func<Option<TSource>, bool> predicate)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -688,36 +881,45 @@ namespace Narvalo.Fx.Internal
    
 
     /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Output{T}"/> class.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Option{T}"/> class.
     /// </content>
     internal static partial class EnumerableExtensions
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Output<IEnumerable<TSource>> CollectCore<TSource>(
-            this IEnumerable<Output<TSource>> @this)
+        internal static Option<IEnumerable<TSource>> CollectCore<TSource>(
+            this IEnumerable<Option<TSource>> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
 
-            var seed = Output.Success(Enumerable.Empty<TSource>());
-            Func<Output<IEnumerable<TSource>>, Output<TSource>, Output<IEnumerable<TSource>>> fun
+            var seed = Option.Of(Enumerable.Empty<TSource>());
+            Func<Option<IEnumerable<TSource>>, Option<TSource>, Option<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(list => CollectCore(n, list));
 
             var retval = @this.Aggregate(seed, fun);
-            Contract.Assume(retval != null);
 
             return retval;
         }
         
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static Output<IEnumerable<TSource>> CollectCore<TSource>(
-            Output<TSource> m,
+        private static Option<IEnumerable<TSource>> CollectCore<TSource>(
+            Option<TSource> m,
             IEnumerable<TSource> list)
         {
-            Contract.Requires(m != null);
 
-            return m.Bind(item => Output.Success(list.Concat(Enumerable.Repeat(item, 1))));
+            return m.Bind(item => Option.Of(list.Concat(Enumerable.Repeat(item, 1))));
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static Option<TSource> SumCore<TSource>(
+            this IEnumerable<Option<TSource>> @this)
+        {
+            Acknowledge.Object(@this);
+
+            var retval = @this.Aggregate(Option<TSource>.None, (m, n) => m.OrElse(n));
+
+            return retval;
         }
     } // End of the class EnumerableExtensions.
 
@@ -728,13 +930,12 @@ namespace Narvalo.Fx.Internal
     {
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Output<IEnumerable<TResult>> MapCore<TSource, TResult>(
+        internal static Option<IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Output<TResult>> funM)
+            Func<TSource, Option<TResult>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TResult>>>() != null);
 
             return @this.Select(funM).EmptyIfNull().Collect();
         }
@@ -743,7 +944,7 @@ namespace Narvalo.Fx.Internal
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Output<bool>> predicateM)
+            Func<TSource, Option<bool>> predicateM)
         {
             Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
@@ -756,17 +957,14 @@ namespace Narvalo.Fx.Internal
             {
                 var m = predicateM.Invoke(item);
 
-                if (m != null)
-                {
-                    m.Invoke(
-                        _ =>
+                m.Invoke(
+                    _ =>
+                    {
+                        if (_ == true)
                         {
-                            if (_ == true)
-                            {
-                                list.Add(item);
-                            }
-                        });
-                }
+                            list.Add(item);
+                        }
+                    });
             }
 
             return list;
@@ -774,10 +972,10 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Output<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+        internal static Option<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Output<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, Option<Tuple<TFirst, TSecond>>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
@@ -796,18 +994,17 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Output<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
+        internal static Option<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, Output<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Option<TResult>> resultSelectorM)
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TResult>>>() != null);
 
-            Func<TFirst, TSecond, Output<TResult>> resultSelector
+            Func<TFirst, TSecond, Option<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
@@ -817,23 +1014,18 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Output<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static Option<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Option<TAccumulate>> accumulatorM)
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
 
-            Output<TAccumulate> retval = Output.Success(seed);
+            Option<TAccumulate> retval = Option.Of(seed);
 
             foreach (TSource item in @this)
             {
-                if (retval == null) 
-                {
-                    return null;
-                }
-
                 retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
@@ -842,10 +1034,10 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Output<TAccumulate> FoldBackCore<TSource, TAccumulate>(
+        internal static Option<TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Option<TAccumulate>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -855,9 +1047,9 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Output<TSource> ReduceCore<TSource>(
+        internal static Option<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Output<TSource>> accumulatorM)
+            Func<TSource, TSource, Option<TSource>> accumulatorM)
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -869,15 +1061,10 @@ namespace Narvalo.Fx.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Output<TSource> retval = Output.Success(iter.Current);
+                Option<TSource> retval = Option.Of(iter.Current);
 
                 while (iter.MoveNext())
                 {
-                    if (retval == null) 
-                    {
-                        return null;
-                    }
-
                     retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
@@ -887,9 +1074,9 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Output<TSource> ReduceBackCore<TSource>(
+        internal static Option<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Output<TSource>> accumulatorM)
+            Func<TSource, TSource, Option<TSource>> accumulatorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -899,27 +1086,22 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Output<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static Option<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, Output<TAccumulate>> accumulatorM,
-            Func<Output<TAccumulate>, bool> predicate)
+            Func<TAccumulate, TSource, Option<TAccumulate>> accumulatorM,
+            Func<Option<TAccumulate>, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
 
-            Output<TAccumulate> retval = Output.Success(seed);
+            Option<TAccumulate> retval = Option.Of(seed);
 
             using (var iter = @this.GetEnumerator())
             {
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
-
                     retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
@@ -929,10 +1111,10 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Output<TSource> ReduceCore<TSource>(
+        internal static Option<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, Output<TSource>> accumulatorM,
-            Func<Output<TSource>, bool> predicate)
+            Func<TSource, TSource, Option<TSource>> accumulatorM,
+            Func<Option<TSource>, bool> predicate)
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -945,15 +1127,10 @@ namespace Narvalo.Fx.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                Output<TSource> retval = Output.Success(iter.Current);
+                Option<TSource> retval = Option.Of(iter.Current);
 
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {
-                    if (retval == null)
-                    {
-                        return null;
-                    }
-
                     retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 

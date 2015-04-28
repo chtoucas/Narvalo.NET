@@ -6,7 +6,5 @@ namespace Narvalo.Internal
 
     [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#",
         Justification = "[Intentionally] The method implements the Try... pattern. Only used internally.")]
-    [SuppressMessage("Gendarme.Rules.Naming", "UseCorrectCasingRule",
-        Justification = "[Ignore] '__result' is a compiler generated parameter.")]
     internal delegate bool TryParser<TResult>(string value, out TResult result);
 }
