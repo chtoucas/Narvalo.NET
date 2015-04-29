@@ -8,6 +8,20 @@ namespace Narvalo
 
     public static partial class AcknowledgeFacts
     {
+        #region AssumeInvariant()
+
+        [Fact]
+        public static void Invariant_DoesNothing()
+        {
+            // Arrange
+            var obj = new Object();
+
+            // Act
+            Acknowledge.AssumeInvariant(obj);
+        }
+
+        #endregion
+
         #region Object()
 
         [Fact]
