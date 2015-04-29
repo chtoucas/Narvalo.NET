@@ -68,11 +68,11 @@ namespace Narvalo.Web
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-    [ContractClass(typeof(HttpHandlerBaseContract<,>))]
-    public abstract partial class HttpHandlerBase<TQuery, TBinder> { }
+    [ContractClass(typeof(HttpHandlerContract<,>))]
+    public abstract partial class HttpHandler<TQuery, TBinder> { }
 
-    [ContractClassFor(typeof(HttpHandlerBase<,>))]
-    internal abstract class HttpHandlerBaseContract<TQuery, TBinder> : HttpHandlerBase<TQuery, TBinder>
+    [ContractClassFor(typeof(HttpHandler<,>))]
+    internal abstract class HttpHandlerContract<TQuery, TBinder> : HttpHandler<TQuery, TBinder>
         where TBinder : IHttpQueryBinder<TQuery>, new()
     {
         protected override void ProcessRequestCore(HttpContext context, TQuery query)

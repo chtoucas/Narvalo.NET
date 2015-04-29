@@ -98,11 +98,11 @@ namespace Narvalo.Web
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-    [ContractClass(typeof(HttpHandlerBaseContract))]
-    public abstract partial class HttpHandlerBase { }
+    [ContractClass(typeof(HttpHandlerContract))]
+    public abstract partial class HttpHandler { }
 
-    [ContractClassFor(typeof(HttpHandlerBase))]
-    internal abstract class HttpHandlerBaseContract : HttpHandlerBase
+    [ContractClassFor(typeof(HttpHandler))]
+    internal abstract class HttpHandlerContract : HttpHandler
     {
         protected override void ProcessRequestCore(HttpContext context)
         {

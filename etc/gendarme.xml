@@ -3,7 +3,7 @@
 
   <ruleset name="narvalo-strict">
     <!--
-      AvoidAssemblyVersionMismatchRule: We use semantic versioning.
+      AvoidAssemblyVersionMismatchRule: We use Semantic Versioning.
     -->
     <rules include="*"
            exclude="AvoidAssemblyVersionMismatchRule"
@@ -33,7 +33,7 @@
     <rules include="*" from="Gendarme.Rules.Interoperability.Com.dll"/>
     <rules include="*" from="Gendarme.Rules.Maintainability.dll"/>
     <!--
-      AvoidRedundancyInTypeNameRule: Too many false positives.
+      AvoidRedundancyInTypeNameRule:
       AvoidTypeInterfaceInconsistencyRule:
       ParameterNamesShouldMatchOverriddenMethodRule: Already covered by FxCop.
       UseCorrectCasingRule: Already covered by FxCop.
@@ -48,7 +48,7 @@
            from="Gendarme.Rules.Naming.dll"/>
     <rules include="*" from="Gendarme.Rules.NUnit.dll"/>
     <!--
-      AvoidUncalledPrivateCodeRule: Already covered by FxCop and too many false positives.
+      AvoidUncalledPrivateCodeRule: Already covered by FxCop and many false positives.
     -->
     <rules include="*" 
            exclude="AvoidUncalledPrivateCodeRule"
