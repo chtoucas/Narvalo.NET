@@ -1,7 +1,6 @@
 <StyleCopSettings Version="105">
   <GlobalSettings>
     <StringProperty Name="MergeSettingsFiles">NoMerge</StringProperty>
-    <BooleanProperty Name="ViolationsAsErrors">True</BooleanProperty>
     <IntegerProperty Name="MaxViolationCount">100</IntegerProperty>
     <BooleanProperty Name="AutoCheckForUpdate">False</BooleanProperty>
   </GlobalSettings>

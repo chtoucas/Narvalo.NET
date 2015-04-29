@@ -205,7 +205,7 @@ Add the following content to you local customization property file `{ProjectName
 ```
 This has two consequences:
 - Test projects use a dummy assembly version.
-- Test projects use custom FxCop & StyleCop rules.
+- Test projects use custom FxCop rules.
 
 #### Sample projects
 Add the following content to you local customization property file `{ProjectName}.props`:
@@ -222,25 +222,31 @@ This has ony one effect:
 ### StyleCop
 
 Unless specified otherwise, a project inherits its StyleCop settings from a common settings file:
-- for libraries, `src\StyleCop.Settings` which link back to `etc\Loosy.SourceAnalysis`.
-- for tests, `tests\StyleCop.Settings` which link back to `etc\Tests.SourceAnalysis`.
-- for samples, `samples\StyleCop.Settings` which back link to `etc\Samples.SourceAnalysis`.
-- for tools, `tools\src\StyleCop.Settings` which back link to `etc\Loosy.SourceAnalysis`.
+- for libraries, tests and tools, `StyleCop.Settings` which link back to `etc\Loosy.SourceAnalysis`.
+- for samples, `samples\StyleCop.Settings` which link back to `etc\Empty.SourceAnalysis`.
+- Narvalo.Brouillons links back to `etc\Empty.SourceAnalysis`.
 
 This settings mirror what is done in the shared props.
 
+There are three ways to run StyleCop:
+- Inside VS from the menu.
+- On Release builds (we configured the projects to do it so).
+- From CI builds whe `SourceAnalysisEnabled` is `true`.
+
 Remarks:
-- When StyleCop is called explicitely from the menu, we do not use any overridden settings inside 
-  the local property file.
-- When a project is completed, we include the documentation rules, but on Release builds only.
+- When StyleCop is called explicitely from the menu, we only use the inherited settings from `StyleCop.Settings`.
+- On Release builds, we automatically run StyleCop. This time we use the settings defined in the
+  shared property file.
+- When a project is completed, we include the documentation rules.
   To achieve this we modify the project properties with 
 ```xml
 <PropertyGroup>
     <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Strict.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
 </PropertyGroup>
 ```
-  but we do not override the settings file `Settings.StyleCop`.
-- Narvalo.Brouillons does not enforce any rule; we override both the shared props and the local StyleCop settings.
+  but we do not override the settings file `Settings.StyleCop` which implies that it 
+  does not affect StyleCop when called from the menu but only applies when StyleCop 
+  is called on Release builds or by CI scripts.
 
 ### Code Contracts
 
