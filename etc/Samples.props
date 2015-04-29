@@ -13,7 +13,7 @@
 
   <PropertyGroup>
     <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <!--<SourceAnalysisOverrideSettingsFile>$(RepositoryRoot)samples\Settings.StyleCop</SourceAnalysisOverrideSettingsFile>-->
+    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Samples.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">

@@ -168,7 +168,6 @@ Create a property file `{ProjectName}.props` with the following content (this is
 ### Special Cases
 
 #### Portable Class Libraries
-
 We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
 - **Profile111** (.NET Framework 4.5, Windows 8, Windows Phone 8.1):
   * For MSBuild: `TargetFrameworkVersion=v4.5`.
@@ -205,8 +204,8 @@ Add the following content to you local customization property file `{ProjectName
 </Project>
 ```
 This has two consequences:
-- Test projects use a custom FxCop & StyleCop rules.
 - Test projects use a dummy assembly version.
+- Test projects use custom FxCop & StyleCop rules.
 
 #### Sample projects
 Add the following content to you local customization property file `{ProjectName}.props`:
@@ -217,8 +216,31 @@ Add the following content to you local customization property file `{ProjectName
 </Project>
 ```
 This has ony one effect:
-- Sample projects use a custom FxCop & StyleCop rules.
 - Sample projects use a dummy assembly version.
+- Sample projects use custom FxCop & StyleCop rules.
+
+### StyleCop
+
+Unless specified otherwise, a project inherits its StyleCop settings from a common settings file:
+- for libraries, `src\StyleCop.Settings` which link back to `etc\Loosy.SourceAnalysis`.
+- for tests, `tests\StyleCop.Settings` which link back to `etc\Tests.SourceAnalysis`.
+- for samples, `samples\StyleCop.Settings` which back link to `etc\Samples.SourceAnalysis`.
+- for tools, `tools\src\StyleCop.Settings` which back link to `etc\Loosy.SourceAnalysis`.
+
+This settings mirror what is done in the shared props.
+
+Remarks:
+- When StyleCop is called explicitely from the menu, we do not use any overridden settings inside 
+  the local property file.
+- When a project is completed, we include the documentation rules, but on Release builds only.
+  To achieve this we modify the project properties with 
+```xml
+<PropertyGroup>
+    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Strict.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+</PropertyGroup>
+```
+  but we do not override the settings file `Settings.StyleCop`.
+- Narvalo.Brouillons does not enforce any rule; we override both the shared props and the local StyleCop settings.
 
 ### Code Contracts
 

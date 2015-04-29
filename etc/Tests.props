@@ -2,23 +2,23 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Test projects should import this file in $(AssemblyName).props.
-    
+
     To identify test projects, we could have used:
     - the repository layout:
       <PropertyGroup>
         <_ParentProjectDirectory>$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))</_ParentProjectDirectory>
       </PropertyGroup>
-    
+
       '$(_ParentProjectDirectory.EndsWith(tests))' == 'true'
     - the project type Guid:
       '$(ProjectTypeGuids.Contains(3AC096D0-A1C2-E12C-1390-A8335801FDAB))' == 'true'
-    - the assembly name: 
+    - the assembly name:
       '$(AssemblyName.EndsWith(Facts))' == 'true'
   -->
 
   <PropertyGroup>
     <CodeAnalysisRuleSet Condition=" '$(Configuration)' != 'CodeContracts' ">$(RepositorySettingsDir)Tests.ruleset</CodeAnalysisRuleSet>
-    <!--<SourceAnalysisOverrideSettingsFile>$(RepositoryRoot)tests\Settings.StyleCop</SourceAnalysisOverrideSettingsFile>-->
+    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Tests.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">

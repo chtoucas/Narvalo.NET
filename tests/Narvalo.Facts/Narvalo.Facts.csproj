@@ -172,7 +172,6 @@
       <LastGenOutput>MaybeFacts.g.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
