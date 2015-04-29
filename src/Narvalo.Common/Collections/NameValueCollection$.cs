@@ -19,7 +19,6 @@ namespace Narvalo.Collections
         public static Maybe<string> MayGetSingle(this NameValueCollection @this, string name)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<string>>() != null);
 
             return from values in @this.MayGetValues(name)
                    where values.Length == 1
@@ -29,7 +28,6 @@ namespace Narvalo.Collections
         public static Maybe<string[]> MayGetValues(this NameValueCollection @this, string name)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<string[]>>() != null);
 
             return Maybe.Of(@this.GetValues(name));
         }
@@ -50,7 +48,6 @@ namespace Narvalo.Collections
             Func<string, Maybe<T>> parserM)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<T>>>() != null);
 
             return @this.MayGetValues(name).Bind(@_ => @_.Map(parserM));
         }

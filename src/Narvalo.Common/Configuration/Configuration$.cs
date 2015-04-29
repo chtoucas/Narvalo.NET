@@ -33,7 +33,6 @@ namespace Narvalo.Configuration
             where T : ConfigurationSection
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             T section = @this.GetSection(sectionName) as T;
 

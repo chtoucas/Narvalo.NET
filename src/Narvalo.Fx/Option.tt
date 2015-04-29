@@ -1,4 +1,0 @@
-﻿<#@ include file=".\CodeTemplates\Monad.Option.tt" #>
-<# EmitMonad(); #>
-
-<# EmitLinq(); #>

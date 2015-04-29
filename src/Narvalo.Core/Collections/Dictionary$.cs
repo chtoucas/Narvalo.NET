@@ -25,7 +25,6 @@ namespace Narvalo.Collections
             TKey key)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<TValue>>() != null);
 
             if (key == null) { return Maybe<TValue>.None; }
 

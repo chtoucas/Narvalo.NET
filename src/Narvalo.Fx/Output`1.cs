@@ -192,8 +192,6 @@ namespace Narvalo.Fx
 
         public Maybe<T> ValueOrNone()
         {
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
-
             if (IsSuccess)
             {
                 return Maybe.Of(ToValue());

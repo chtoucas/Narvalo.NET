@@ -46,8 +46,6 @@ namespace Narvalo.Web.Configuration
 
         public static Maybe<T> MayGetSection<T>(string sectionName) where T : ConfigurationSection
         {
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
-
             T section = WebConfigurationManager.GetSection(sectionName) as T;
 
             return Maybe.Of(section);
@@ -55,8 +53,6 @@ namespace Narvalo.Web.Configuration
 
         public static Maybe<T> MayGetSection<T>(string sectionName, string virtualPath) where T : ConfigurationSection
         {
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
-
             T section = WebConfigurationManager.GetSection(sectionName, virtualPath) as T;
 
             return Maybe.Of(section);

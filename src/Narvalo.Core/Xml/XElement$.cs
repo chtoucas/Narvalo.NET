@@ -25,7 +25,6 @@ namespace Narvalo.Xml
         public static Maybe<XAttribute> AttributeOrNone(this XElement @this, XName name)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<XAttribute>>() != null);
 
             return Maybe.Of(@this.Attribute(name));
         }
@@ -57,7 +56,6 @@ namespace Narvalo.Xml
         public static Maybe<XElement> ElementOrNone(this XElement @this, XName name)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<XElement>>() != null);
 
             return Maybe.Of(@this.Element(name));
         }
@@ -102,7 +100,6 @@ namespace Narvalo.Xml
         public static Maybe<XElement> NextElementOrNone(this XElement @this)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<XElement>>() != null);
 
             return Maybe.Of(NextElement(@this));
         }

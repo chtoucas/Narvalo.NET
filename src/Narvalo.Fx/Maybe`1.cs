@@ -62,12 +62,6 @@ namespace Narvalo.Fx
      * : An instance is _mutable_ if `T` is mutable. This should always raise a big warning.
      *   (TODO: Other things to discuss: impact on performances (boxing, size of the struct...)
      *   
-     * In the end, I prefer to be conservative.
-     * 
-     * ### Apparent Immutability ###
-     * 
-     * The class is mutable but it is not something observable from the outside.
-     *   
      * ### `Maybe<T>` vs `Nullable<T>` ###
      * 
      * For value types, most of the time `T?` offers a much better alternative. We can not discourage 
@@ -110,6 +104,7 @@ namespace Narvalo.Fx
      * 
      * ### Referential equality and structural equality ###
      * 
+     * (To be revised)
      * We redefine the `Equals()` method to allow for structural equality for reference types that
      * follow value type semantics. Nevertheless, we do not change the meaning of the equality
      * operators (`==` and `!=`) which continue to test referential equality, behaviour expected by
@@ -120,6 +115,7 @@ namespace Narvalo.Fx
      * 
      * ### Sample rules ###
      * 
+     * (To be revised)
      * ```csharp
      * Maybe<T>.None != null
      * Maybe<T>.None.Equals(null)
@@ -148,7 +144,7 @@ namespace Narvalo.Fx
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
         Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
-    public sealed partial class Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
+    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
     {
         private readonly bool _isSome;
 
@@ -158,15 +154,6 @@ namespace Narvalo.Fx
 
         /// <summary>
         /// Prevents a default instance of the <see cref="Maybe{T}" /> class from being created outside.
-        /// Initializes a new instance of the <see cref="Maybe{T}" /> class that does not hold any value.
-        /// </summary>
-        /// <seealso cref="Maybe{T}.None"/>
-        private Maybe()
-        {
-            _isSome = false;
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Maybe{T}" /> class for the specified value. 
         /// </summary>
         /// <param name="value">A value to wrap.</param>
@@ -174,10 +161,8 @@ namespace Narvalo.Fx
         /// <seealso cref="Maybe.Of{T}(T?)"/>
         private Maybe(T value)
         {
-            Contract.Requires(value != null);
-
             _value = value;
-            _isSome = true;
+            _isSome = value != null;
         }
 
         /// <summary>
@@ -227,14 +212,11 @@ namespace Narvalo.Fx
 
         public static explicit operator Maybe<T>(T value)
         {
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
-
             return η(value);
         }
 
         public static explicit operator T(Maybe<T> value)
         {
-            Require.NotNull(value, "value");
             Contract.Ensures(Contract.Result<T>() != null);
 
             if (!value.IsSome)
@@ -336,7 +318,7 @@ namespace Narvalo.Fx
     /// <content>
     /// Implements the <see cref="IEnumerable{T}"/> interface.
     /// </content>
-    public partial class Maybe<T>
+    public partial struct Maybe<T>
     {
         [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
@@ -367,8 +349,38 @@ namespace Narvalo.Fx
     /// <content>
     /// Implements the <see cref="IEquatable{T}"/> and <c>IEquatable&lt;Maybe&lt;T&gt;&gt;</c> interfaces.
     /// </content>
-    public partial class Maybe<T>
+    public partial struct Maybe<T>
     {
+        public static bool operator ==(Maybe<T> left, Maybe<T> right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator ==(Maybe<T> left, T right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator ==(T left, Maybe<T> right)
+        {
+            return right.Equals(left);
+        }
+
+        public static bool operator !=(Maybe<T> left, Maybe<T> right)
+        {
+            return !left.Equals(right);
+        }
+
+        public static bool operator !=(Maybe<T> left, T right)
+        {
+            return !left.Equals(right);
+        }
+
+        public static bool operator !=(T left, Maybe<T> right)
+        {
+            return !right.Equals(left);
+        }
+
         /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(Maybe<T> other)
         {
@@ -379,15 +391,10 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, "comparer");
 
-            if (Object.ReferenceEquals(other, null))
-            {
-                return !IsSome;
-            }
-
-            if (!IsSome || !other.IsSome)
+            if (!IsSome)
             {
                 // If one is none, both must be none to be equal.
-                return !IsSome && !other.IsSome;
+                return !other.IsSome;
             }
 
             return comparer.Equals(Value, other.Value);
@@ -403,7 +410,6 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, "comparer");
 
-            // REVIEW: Use return Equals(η(other), comparer)?
             if (!IsSome)
             {
                 return Object.ReferenceEquals(other, null);
@@ -422,9 +428,9 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, "comparer");
 
-            if (other == null)
+            if (other is Maybe<T>)
             {
-                return !IsSome;
+                return Equals((Maybe<T>)other, comparer);
             }
 
             if (other is T)
@@ -432,10 +438,7 @@ namespace Narvalo.Fx
                 return Equals((T)other, comparer);
             }
 
-            // Usually, we test the condition `obj.GetType() == this.GetType()`, in case `this` or
-            // `obj` is an instance of a derived type, something that can not happen here because
-            // Maybe is sealed.
-            return Equals(other as Maybe<T>, comparer);
+            return false;
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
@@ -450,61 +453,17 @@ namespace Narvalo.Fx
 
             return IsSome ? comparer.GetHashCode(Value) : 0;
         }
-
-        #region Equality operators (see "Referential equality and structural equality" above)
-
-        ////public static bool operator ==(Maybe<T> left, Maybe<T> right)
-        ////{
-        ////    if (ReferenceEquals(left, null)) {
-        ////        return ReferenceEquals(right, null) ? true : !right.IsSome;
-        ////    }
-
-        ////    return left.Equals(right);
-        ////}
-
-        ////public static bool operator ==(Maybe<T> left, T right)
-        ////{
-        ////    if (ReferenceEquals(left, null)) {
-        ////        return ReferenceEquals(right, null);
-        ////    }
-
-        ////    return left.Equals(right);
-        ////}
-
-        ////public static bool operator ==(T left, Maybe<T> right)
-        ////{
-        ////    return right == left;
-        ////}
-
-        ////public static bool operator !=(Maybe<T> left, Maybe<T> right)
-        ////{
-        ////    return !(left == right);
-        ////}
-
-        ////public static bool operator !=(Maybe<T> left, T right)
-        ////{
-        ////    return !(left == right);
-        ////}
-
-        ////public static bool operator !=(T left, Maybe<T> right)
-        ////{
-        ////    return !(right == left);
-        ////}
-
-        #endregion
     }
 
     /// <content>
     /// Provides boolean operators.
     /// </content>
-    public partial class Maybe<T>
+    public partial struct Maybe<T>
     {
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
             Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
         public static bool operator true(Maybe<T> value)
         {
-            Require.NotNull(value, "value");
-
             return value.IsSome;
         }
 
@@ -512,8 +471,6 @@ namespace Narvalo.Fx
             Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
         public static bool operator false(Maybe<T> value)
         {
-            Require.NotNull(value, "value");
-
             return !value.IsSome;
         }
     }
@@ -521,16 +478,15 @@ namespace Narvalo.Fx
     /// <content>
     /// Provides the core Monad methods.
     /// </content>
-    public partial class Maybe<T>
+    public partial struct Maybe<T>
     {
         [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
-            return IsSome ? (selector.Invoke(Value) ?? Maybe<TResult>.None) : Maybe<TResult>.None;
+            return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
         }
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
@@ -538,8 +494,6 @@ namespace Narvalo.Fx
         [DebuggerHidden]
         internal static Maybe<T> η(T value)
         {
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
-
             return value != null ? new Maybe<T>(value) : Maybe<T>.None;
         }
 
@@ -548,9 +502,6 @@ namespace Narvalo.Fx
         [DebuggerHidden]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
         {
-            Require.NotNull(square, "square");
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
-
             return square.IsSome ? square.Value : Maybe<T>.None;
         }
     }
@@ -558,7 +509,7 @@ namespace Narvalo.Fx
     /// <content>
     /// Provides the core MonadOr methods.
     /// </content>
-    public partial class Maybe<T>
+    public partial struct Maybe<T>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Maybe<T> s_None = new Maybe<T>();
@@ -572,8 +523,6 @@ namespace Narvalo.Fx
         {
             get
             {
-                Contract.Ensures(Contract.Result<Maybe<T>>() != null);
-
                 return s_None;
             }
         }
@@ -582,9 +531,6 @@ namespace Narvalo.Fx
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<T> OrElse(Maybe<T> other)
         {
-            Require.NotNull(other, "other");
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
-
             return !IsSome ? other : this;
         }
     }
@@ -592,7 +538,7 @@ namespace Narvalo.Fx
     /// <content>
     /// Provides overrides for a bunch of auto-generated (extension) methods (see Maybe.g.cs).
     /// </content>
-    public partial class Maybe<T>
+    public partial struct Maybe<T>
     {
         #region Basic Monad functions
 
@@ -601,7 +547,6 @@ namespace Narvalo.Fx
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
@@ -610,9 +555,6 @@ namespace Narvalo.Fx
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
-            Require.NotNull(other, "other");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
-
             return IsSome ? other : Maybe<TResult>.None;
         }
 
@@ -626,9 +568,7 @@ namespace Narvalo.Fx
             Maybe<TSecond> second,
             Func<T, TSecond, TResult> resultSelector)
         {
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return IsSome && second.IsSome
                 ? Maybe<TResult>.η(resultSelector.Invoke(Value, second.Value))
@@ -648,11 +588,9 @@ namespace Narvalo.Fx
             Func<T, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Require.NotNull(inner, "inner");
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             if (!IsSome || !inner.IsSome)
             {
@@ -676,11 +614,9 @@ namespace Narvalo.Fx
             Func<T, Maybe<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Require.NotNull(inner, "inner");
             Require.NotNull(outerKeySelector, "valueSelector");
             Require.NotNull(innerKeySelector, "innerKeySelector");
             Require.NotNull(resultSelector, "resultSelector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             // REVIEW: I can't remember why I didn't include !inner.IsSome before?
             if (!IsSome || !inner.IsSome)
@@ -741,7 +677,7 @@ namespace Narvalo.Fx
     /// <content>
     /// Provides a debugger view of <see cref="Maybe{T}"/>.
     /// </content>
-    public partial class Maybe<T>
+    public partial struct Maybe<T>
     {
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.

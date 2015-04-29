@@ -5,6 +5,8 @@
     BindEnsuresSome = true;
     UnitEnsuresSome = true;
     MultiplicationEnsuresSome = true;
+    
+    IsNullable = false;
 
     ReturnName = "Of";
 #>

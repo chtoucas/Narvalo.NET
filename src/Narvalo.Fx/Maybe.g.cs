@@ -75,7 +75,6 @@ namespace Narvalo.Fx
         /// <returns>An instance of the <see cref="Maybe{T}"/> class for the specified value.</returns>
         public static Maybe<T> Of<T>(T value)
         {
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             return Maybe<T>.η(value);
         }
@@ -90,8 +89,6 @@ namespace Narvalo.Fx
         /// </remarks>
         public static Maybe<T> Flatten<T>(Maybe<Maybe<T>> square)
         {
-            Contract.Requires(square != null);
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             return Maybe<T>.μ(square);
         }
@@ -113,7 +110,6 @@ namespace Narvalo.Fx
 
             return m =>
             {
-                Require.NotNull(m, "m");
                 return m.Select(fun);
             };
         }
@@ -132,7 +128,6 @@ namespace Narvalo.Fx
 
             return (m1, m2) =>
             {
-                Require.NotNull(m1, "m1");
                 return m1.Zip(m2, fun);
             };
         }
@@ -151,7 +146,6 @@ namespace Narvalo.Fx
 
             return (m1, m2, m3) =>
             {
-                Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, fun);
             };
         }
@@ -171,7 +165,6 @@ namespace Narvalo.Fx
             
             return (m1, m2, m3, m4) =>
             {
-                Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
@@ -191,7 +184,6 @@ namespace Narvalo.Fx
        
             return (m1, m2, m3, m4, m5) =>
             {
-                Require.NotNull(m1, "m1");
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }
@@ -213,9 +205,7 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             Func<TSource, TResult> selector)
         {
-            Require.Object(@this);
             Require.NotNull(selector, "selector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Bind(_ => Maybe.Of(selector.Invoke(_)));
         }
@@ -227,8 +217,6 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             Maybe<TResult> other)
         {
-            Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Bind(_ => other);
         }
@@ -244,9 +232,7 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             Func<TSource, bool> predicate)
         {
-            Require.Object(@this);
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.Bind(
                 _ => predicate.Invoke(_) ? @this : Maybe<TSource>.None);
@@ -259,9 +245,7 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             int count)
         {
-            Require.Object(@this);
             Require.GreaterThanOrEqualTo(count, 1, "count");
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -275,7 +259,6 @@ namespace Narvalo.Fx
         /// </remarks>
         public static Maybe<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
-            Contract.Ensures(Contract.Result<Maybe<global::Narvalo.Fx.Unit>>() != null);
 
             return predicate ? Maybe.Unit : Maybe.None;
         }
@@ -289,9 +272,7 @@ namespace Narvalo.Fx
             bool predicate,
             Action action)
         {
-            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             if (predicate)
             {
@@ -310,9 +291,7 @@ namespace Narvalo.Fx
             bool predicate,
             Action action)
         {
-            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             if (!predicate)
             {
@@ -332,10 +311,7 @@ namespace Narvalo.Fx
             Maybe<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -347,10 +323,7 @@ namespace Narvalo.Fx
             Maybe<T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             Func<T1, Maybe<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -366,10 +339,7 @@ namespace Narvalo.Fx
              Maybe<T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             Func<T1, Maybe<TResult>> g
                 = t1 => second.Zip(
@@ -389,10 +359,7 @@ namespace Narvalo.Fx
             Maybe<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             Func<T1, Maybe<TResult>> g
                 = t1 => second.Zip(
@@ -417,10 +384,8 @@ namespace Narvalo.Fx
             Func<TSource, Maybe<TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
         {
-            Require.Object(@this);
             Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Bind(
                 _ => valueSelectorM.Invoke(_).Select(
@@ -434,12 +399,9 @@ namespace Narvalo.Fx
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Contract.Requires(inner != null);
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Join(
                 inner,
@@ -456,12 +418,9 @@ namespace Narvalo.Fx
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, Maybe<TInner>, TResult> resultSelector)
         {
-            Require.Object(@this);
-            Contract.Requires(inner != null);
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.GroupJoin(
                 inner,
@@ -483,12 +442,9 @@ namespace Narvalo.Fx
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(inner != null);
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return JoinCore(
                 @this,
@@ -507,12 +463,9 @@ namespace Narvalo.Fx
             Func<TSource, Maybe<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(inner != null);
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return GroupJoinCore(
                 @this,
@@ -532,13 +485,10 @@ namespace Narvalo.Fx
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Require.NotNull(seq, "seq");
             Require.NotNull(resultSelector, "resultSelector");
-            Contract.Requires(inner != null);
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
             
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -555,13 +505,10 @@ namespace Narvalo.Fx
             Func<TSource, Maybe<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Require.NotNull(seq, "seq");
             Require.NotNull(resultSelector, "resultSelector");
-            Contract.Requires(inner != null);
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -575,7 +522,6 @@ namespace Narvalo.Fx
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
         {
-            Require.NotNull(inner, "inner");
             Require.NotNull(outerKeySelector, "outerKeySelector");
             Require.NotNull(comparer, "comparer");
             Contract.Requires(innerKeySelector != null);
@@ -599,9 +545,7 @@ namespace Narvalo.Fx
             Maybe<TResult> then,
             Maybe<TResult> otherwise)
         {
-            Require.Object(@this);
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -611,9 +555,7 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate,
             Maybe<TResult> other)
         {
-            Require.Object(@this);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Coalesce(predicate, other, Maybe<TResult>.None);
         }
@@ -623,9 +565,7 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate,
             Maybe<TResult> other)
         {
-            Require.Object(@this);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
@@ -634,7 +574,6 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             Action<TSource> action)
         {
-            Require.Object(@this);
             Require.NotNull(action, "action");
 
             @this.Bind(_ => { action.Invoke(_); return @this; });
@@ -645,7 +584,6 @@ namespace Narvalo.Fx
             this Maybe<TSource> @this,
             Action action)
         {
-            Require.Object(@this);
             Require.NotNull(action, "action");
 
             @this.Then(Maybe.Unit).Invoke(_ => action.Invoke());
@@ -656,7 +594,6 @@ namespace Narvalo.Fx
             Action<TSource> action,
             Action caseNone)
         {
-            Require.Object(@this);
             Require.NotNull(action, "action");
 
             @this.Bind(_ => { action.Invoke(_); return @this; })
@@ -682,8 +619,6 @@ namespace Narvalo.Fx
             Maybe<TSource> value)
         {
             Acknowledge.Object(@this);
-            Require.NotNull(value, "value");
-            Contract.Ensures(Contract.Result<Maybe<TResult>>() != null);
 
             return value.Bind(@this);
         }
@@ -741,7 +676,6 @@ namespace Narvalo.Fx
             this IEnumerable<Maybe<TSource>> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
         }
@@ -757,7 +691,6 @@ namespace Narvalo.Fx
             this IEnumerable<Maybe<TSource>> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.SumCore();
         }
@@ -791,7 +724,6 @@ namespace Narvalo.Fx.Advanced
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
 
             return @this.MapCore(funM);
         }
@@ -825,7 +757,6 @@ namespace Narvalo.Fx.Advanced
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -841,7 +772,6 @@ namespace Narvalo.Fx.Advanced
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
             Contract.Requires(resultSelectorM != null);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -856,7 +786,6 @@ namespace Narvalo.Fx.Advanced
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -872,7 +801,6 @@ namespace Narvalo.Fx.Advanced
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -883,7 +811,6 @@ namespace Narvalo.Fx.Advanced
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM);
         }
@@ -894,7 +821,6 @@ namespace Narvalo.Fx.Advanced
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -915,7 +841,6 @@ namespace Narvalo.Fx.Advanced
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -931,7 +856,6 @@ namespace Narvalo.Fx.Advanced
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -965,14 +889,12 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<Maybe<TSource>> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             var seed = Maybe.Of(Enumerable.Empty<TSource>());
             Func<Maybe<IEnumerable<TSource>>, Maybe<TSource>, Maybe<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(list => CollectCore(n, list));
 
             var retval = @this.Aggregate(seed, fun);
-            Contract.Assume(retval != null);
 
             return retval;
         }
@@ -982,7 +904,6 @@ namespace Narvalo.Fx.Internal
             Maybe<TSource> m,
             IEnumerable<TSource> list)
         {
-            Contract.Requires(m != null);
 
             return m.Bind(item => Maybe.Of(list.Concat(Enumerable.Repeat(item, 1))));
         }
@@ -993,10 +914,8 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<Maybe<TSource>> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             var retval = @this.Aggregate(Maybe<TSource>.None, (m, n) => m.OrElse(n));
-            Contract.Assume(retval != null);
 
             return retval;
         }
@@ -1015,7 +934,6 @@ namespace Narvalo.Fx.Internal
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
 
             return @this.Select(funM).EmptyIfNull().Collect();
         }
@@ -1037,17 +955,14 @@ namespace Narvalo.Fx.Internal
             {
                 var m = predicateM.Invoke(item);
 
-                if (m != null)
-                {
-                    m.Invoke(
-                        _ =>
+                m.Invoke(
+                    _ =>
+                    {
+                        if (_ == true)
                         {
-                            if (_ == true)
-                            {
-                                list.Add(item);
-                            }
-                        });
-                }
+                            list.Add(item);
+                        }
+                    });
             }
 
             return list;
@@ -1062,7 +977,6 @@ namespace Narvalo.Fx.Internal
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             var m = @this.Select(funM).EmptyIfNull().Collect();
 
@@ -1087,7 +1001,6 @@ namespace Narvalo.Fx.Internal
 
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TResult>>>() != null);
 
             Func<TFirst, TSecond, Maybe<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -1106,7 +1019,6 @@ namespace Narvalo.Fx.Internal
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             Maybe<TAccumulate> retval = Maybe.Of(seed);
 
@@ -1127,7 +1039,6 @@ namespace Narvalo.Fx.Internal
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
@@ -1140,7 +1051,6 @@ namespace Narvalo.Fx.Internal
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1168,7 +1078,6 @@ namespace Narvalo.Fx.Internal
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
@@ -1184,7 +1093,6 @@ namespace Narvalo.Fx.Internal
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Maybe<TAccumulate>>() != null);
 
             Maybe<TAccumulate> retval = Maybe.Of(seed);
 
@@ -1209,7 +1117,6 @@ namespace Narvalo.Fx.Internal
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator())
             {

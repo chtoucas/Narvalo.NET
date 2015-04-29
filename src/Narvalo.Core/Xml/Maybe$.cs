@@ -15,18 +15,13 @@ namespace Narvalo.Xml
     {
         public static Maybe<T> MapValue<T>(this Maybe<XElement> @this, Func<string, T> selector)
         {
-            Require.Object(@this);
             Require.NotNull(selector, "selector");
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             return from _ in @this select selector.Invoke(_.Value);
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XElement> @this)
         {
-            Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<string>>() != null);
-
             return from _ in @this select _.Value;
         }
     }
@@ -38,18 +33,13 @@ namespace Narvalo.Xml
     {
         public static Maybe<T> MapValue<T>(this Maybe<XAttribute> @this, Func<string, T> selector)
         {
-            Require.Object(@this);
             Require.NotNull(selector, "selector");
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             return from _ in @this select selector.Invoke(_.Value);
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XAttribute> @this)
         {
-            Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<string>>() != null);
-
             return from _ in @this select _.Value;
         }
     }

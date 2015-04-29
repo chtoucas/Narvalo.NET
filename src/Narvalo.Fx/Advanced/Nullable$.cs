@@ -201,8 +201,6 @@ namespace Narvalo.Fx.Advanced
 
         public static Maybe<TSource> ToMaybe<TSource>(this TSource? @this) where TSource : struct
         {
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
-
             return Maybe.Of(@this);
         }
 

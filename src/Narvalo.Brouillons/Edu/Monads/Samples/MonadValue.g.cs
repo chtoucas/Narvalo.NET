@@ -288,7 +288,6 @@ namespace Narvalo.Edu.Monads.Samples
             Action action)
             where TSource : struct
         {
-            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
 
             if (predicate)
@@ -309,7 +308,6 @@ namespace Narvalo.Edu.Monads.Samples
             Action action)
             where TSource : struct
         {
-            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
 
             if (!predicate)

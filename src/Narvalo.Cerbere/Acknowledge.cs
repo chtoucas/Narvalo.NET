@@ -33,7 +33,7 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Object<T>(T @this)
+        public static void Object<T>(T @this) where T : class
         {
             Contract.Requires(@this != null);
         }

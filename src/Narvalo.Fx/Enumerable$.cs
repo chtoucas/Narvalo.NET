@@ -39,7 +39,6 @@ namespace Narvalo.Fx
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return FirstOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -50,7 +49,6 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             IEnumerable<Maybe<TSource>> seq
                 = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
@@ -58,7 +56,6 @@ namespace Narvalo.Fx
             using (var iter = seq.EmptyIfNull().GetEnumerator())
             {
                 var current = iter.Current;
-                Contract.Assume(current != null);
 
                 return iter.MoveNext() ? current : Maybe<TSource>.None;
             }
@@ -67,7 +64,6 @@ namespace Narvalo.Fx
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return LastOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -76,7 +72,6 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return @this.Reverse().EmptyIfNull().FirstOrNone();
         }
@@ -84,7 +79,6 @@ namespace Narvalo.Fx
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             return SingleOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -95,7 +89,6 @@ namespace Narvalo.Fx
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<Maybe<TSource>>() != null);
 
             IEnumerable<Maybe<TSource>> seq
                 = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
@@ -103,7 +96,6 @@ namespace Narvalo.Fx
             using (var iter = seq.EmptyIfNull().GetEnumerator())
             {
                 var current = iter.Current;
-                Contract.Assume(current != null);
 
                 var result = iter.MoveNext() ? current : Maybe<TSource>.None;
 
@@ -242,14 +234,13 @@ namespace Narvalo.Fx
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<IEnumerable<TSource>>>() != null);
 
             var list = new List<TSource>();
 
             foreach (var m in @this)
             {
                 // REVIEW: Is this the expected behaviour when m is null?
-                if (m == null || !m.IsSome)
+                if (!m.IsSome)
                 {
                     return Maybe<IEnumerable<TSource>>.None;
                 }

@@ -24,7 +24,6 @@ namespace Narvalo.Xml
         public static Maybe<XAttribute> NextAttributeOrNone(this XAttribute @this)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<XAttribute>>() != null);
 
             return Maybe.Of(@this.NextAttribute);
         }
@@ -56,7 +55,6 @@ namespace Narvalo.Xml
         public static Maybe<XAttribute> PreviousAttributeOrNone(this XAttribute @this)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Maybe<XAttribute>>() != null);
 
             return Maybe.Of(@this.PreviousAttribute);
         }

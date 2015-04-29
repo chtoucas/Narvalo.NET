@@ -255,8 +255,6 @@ namespace Narvalo
     {
         public static Maybe<Uri> Uri(string value, UriKind uriKind)
         {
-            Contract.Ensures(Contract.Result<Maybe<Uri>>() != null);
-
             // REVIEW: Uri.TryCreate accepts empty strings.
             if (String.IsNullOrWhiteSpace(value))
             {

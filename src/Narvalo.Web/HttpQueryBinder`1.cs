@@ -31,7 +31,6 @@ namespace Narvalo.Web
         public Maybe<TQuery> Bind(HttpRequest request)
         {
             Require.NotNull(request, "request");
-            Contract.Ensures(Contract.Result<Maybe<TQuery>>() != null);
 
             return from _ in BindCore(request) where Validate(_) select _;
         }

@@ -168,37 +168,37 @@ namespace Narvalo.Fx
 
         #region op_Equality()
 
+        ////[Fact]
+        ////public static void Equality_ReturnsTrue_ForNullAsMaybeAndNull()
+        ////{
+        ////    // Arrange
+        ////    // REVIEW: Cast
+        ////    var simple = (Maybe<int>)null;
+        ////    var value = (Maybe<MyStruct_>)null;
+        ////    var reference = (Maybe<List<int>>)null;
+
+        ////    // Act & Assert
+        ////    Assert.True(simple == null);
+        ////    Assert.True(value == null);
+        ////    Assert.True(reference == null);
+        ////}
+
+        ////[Fact]
+        ////public static void Equality_ReturnsFalse_ForMaybeNoneAndNull()
+        ////{
+        ////    // Arrange
+        ////    var simple = Maybe<int>.None;
+        ////    var value = Maybe<MyStruct_>.None;
+        ////    var reference = Maybe<List<int>>.None;
+
+        ////    // Act & Assert
+        ////    Assert.False(simple == null);
+        ////    Assert.False(value == null);
+        ////    Assert.False(reference == null);
+        ////}
+
         [Fact]
-        public static void Equality_ReturnsTrue_ForNullAsMaybeAndNull()
-        {
-            // Arrange
-            // REVIEW: Cast
-            var simple = (Maybe<int>)null;
-            var value = (Maybe<MyStruct_>)null;
-            var reference = (Maybe<List<int>>)null;
-
-            // Act & Assert
-            Assert.True(simple == null);
-            Assert.True(value == null);
-            Assert.True(reference == null);
-        }
-
-        [Fact]
-        public static void Equality_ReturnsFalse_ForMaybeNoneAndNull()
-        {
-            // Arrange
-            var simple = Maybe<int>.None;
-            var value = Maybe<MyStruct_>.None;
-            var reference = Maybe<List<int>>.None;
-
-            // Act & Assert
-            Assert.False(simple == null);
-            Assert.False(value == null);
-            Assert.False(reference == null);
-        }
-
-        [Fact]
-        public static void Equality_FollowsReferentialEqualityRules()
+        public static void Equality_Succeeds()
         {
             // Arrange
             var simpleA0 = Maybe.Of(3141);
@@ -210,51 +210,52 @@ namespace Narvalo.Fx
             var almostValueA0 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
             var almostValueA1 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
 
-            var referenceA0 = Maybe.Of(new List<int>());
-            var referenceA1 = Maybe.Of(new List<int>());
+            // FIXME
+            //var referenceA0 = Maybe.Of(new List<int>());
+            //var referenceA1 = Maybe.Of(new List<int>());
 
             // Act & Assert
-            Assert.False(simpleA0 == simpleA1);
-            Assert.False(valueA0 == valueA1);
-            Assert.False(almostValueA0 == almostValueA1);
-            Assert.False(referenceA0 == referenceA1);
+            Assert.True(simpleA0 == simpleA1);
+            Assert.True(valueA0 == valueA1);
+            Assert.True(almostValueA0 == almostValueA1);
+            //Assert.True(referenceA0 != referenceA1);
         }
 
         #endregion
 
         #region op_Inequality()
 
+        ////[Fact]
+        ////public static void Inequality_ReturnsFalse_ForNullAsMaybeAndNull()
+        ////{
+        ////    // Arrange
+        ////    // REVIEW: Cast
+        ////    var simple = (Maybe<int>)null;
+        ////    var value = (Maybe<MyStruct_>)null;
+        ////    var reference = (Maybe<List<int>>)null;
+
+        ////    // Act & Assert
+        ////    Assert.False(simple != null);
+        ////    Assert.False(value != null);
+        ////    Assert.False(reference != null);
+        ////}
+
+        ////[Fact]
+        ////public static void Inequality_ReturnsTrue_ForMaybeNoneAndNull()
+        ////{
+        ////    // Arrange
+        ////    var simple = Maybe<int>.None;
+        ////    var value = Maybe<MyStruct_>.None;
+        ////    var reference = Maybe<List<int>>.None;
+
+        ////    // Act & Assert
+        ////    Assert.True(simple != null);
+        ////    Assert.True(value != null);
+        ////    Assert.True(reference != null);
+        ////}
+
         [Fact]
-        public static void Inequality_ReturnsFalse_ForNullAsMaybeAndNull()
-        {
-            // Arrange
-            // REVIEW: Cast
-            var simple = (Maybe<int>)null;
-            var value = (Maybe<MyStruct_>)null;
-            var reference = (Maybe<List<int>>)null;
-
-            // Act & Assert
-            Assert.False(simple != null);
-            Assert.False(value != null);
-            Assert.False(reference != null);
-        }
-
-        [Fact]
-        public static void Inequality_ReturnsTrue_ForMaybeNoneAndNull()
-        {
-            // Arrange
-            var simple = Maybe<int>.None;
-            var value = Maybe<MyStruct_>.None;
-            var reference = Maybe<List<int>>.None;
-
-            // Act & Assert
-            Assert.True(simple != null);
-            Assert.True(value != null);
-            Assert.True(reference != null);
-        }
-
-        [Fact]
-        public static void Inequality_FollowsReferentialEqualityRules()
+        public static void Inequality_Succeeds()
         {
             // Arrange
             var simpleA0 = Maybe.Of(3141);
@@ -266,14 +267,15 @@ namespace Narvalo.Fx
             var almostValueA0 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
             var almostValueA1 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
 
-            var referenceA0 = Maybe.Of(new List<int>());
-            var referenceA1 = Maybe.Of(new List<int>());
+            // FIXME
+            //var referenceA0 = Maybe.Of(new List<int>());
+            //var referenceA1 = Maybe.Of(new List<int>());
 
             // Act & Assert
-            Assert.True(simpleA0 != simpleA1);
-            Assert.True(valueA0 != valueA1);
-            Assert.True(almostValueA0 != almostValueA1);
-            Assert.True(referenceA0 != referenceA1);
+            Assert.False(simpleA0 != simpleA1);
+            Assert.False(valueA0 != valueA1);
+            Assert.False(almostValueA0 != almostValueA1);
+            //Assert.False(referenceA0 != referenceA1);
         }
 
         #endregion
@@ -342,7 +344,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Equals_ReturnsTrue_WhenNone_ForNull()
+        public static void Equals_ReturnsFalse_WhenNone_ForNull()
         {
             // Arrange
             var simple = Maybe<int>.None;
@@ -350,13 +352,20 @@ namespace Narvalo.Fx
             var reference = Maybe<List<int>>.None;
 
             // Act & Assert
-            Assert.True(simple.Equals(null));
-            Assert.True(value.Equals(null));
-            Assert.True(reference.Equals((object)null));
+            Assert.False(simple.Equals(null));
+            Assert.False(value.Equals(null));
+            Assert.False(reference.Equals((object)null));
+        }
 
-            // REVIEW: Cast
+        [Fact]
+        public static void Equals_ReturnsTrue_WhenNone_ForNullOfUnderlyingType()
+        {
+            // Arrange
+            var reference = Maybe<List<int>>.None;
+
+            // Act & Assert
             Assert.True(reference.Equals((List<int>)null));
-            Assert.True(reference.Equals((Maybe<List<int>>)null));
+            //Assert.True(reference.Equals((Maybe<List<int>>)null));
         }
 
         [Fact]
@@ -487,37 +496,37 @@ namespace Narvalo.Fx
         /// The correct behaviour is to return Maybe<T>.None.
         /// ]]>
         /// </summary>
-        [Fact, Issue]
-        public static void Bind_ReturnsNone_WhenSelectorReturnsNull()
-        {
-            // Arrange
-            var source = Maybe.Of(1);
-            Func<int, Maybe<int>> selector = _ => null;
+        ////[Fact, Issue]
+        ////public static void Bind_ReturnsNone_WhenSelectorReturnsNull()
+        ////{
+        ////    // Arrange
+        ////    var source = Maybe.Of(1);
+        ////    Func<int, Maybe<int>> selector = _ => null;
 
-            // Act
-            var m = source.Bind(selector);
+        ////    // Act
+        ////    var m = source.Bind(selector);
 
-            // Assert
-            Assert.True(m != null);
-            Assert.False(m.IsSome);
-        }
+        ////    // Assert
+        ////    Assert.True(m != null);
+        ////    Assert.False(m.IsSome);
+        ////}
 
         #endregion
 
         #region Linq Operators
 
-        [Fact]
-        public static void Where_ThrowsArgumentNullException_ForNullObject()
-        {
-            // Arrange
-            // REVIEW: Cast
-            var source = (Maybe<int>)null;
-            Func<int, bool> predicate = _ => _ == 1;
+        ////[Fact]
+        ////public static void Where_ThrowsArgumentNullException_ForNullObject()
+        ////{
+        ////    // Arrange
+        ////    // REVIEW: Cast
+        ////    var source = (Maybe<int>)null;
+        ////    Func<int, bool> predicate = _ => _ == 1;
 
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
-            Assert.Throws<ArgumentNullException>(() => from _ in source where predicate(_) select _);
-        }
+        ////    // Act & Assert
+        ////    Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
+        ////    Assert.Throws<ArgumentNullException>(() => from _ in source where predicate(_) select _);
+        ////}
 
         [Fact]
         public static void Where_ReturnsNone_ForUnsuccessfulPredicate()
@@ -535,21 +544,21 @@ namespace Narvalo.Fx
             Assert.False(q.IsSome);
         }
 
-        [Fact]
-        public static void Select_ThrowsArgumentNullException_ForNullObject()
-        {
-            // Arrange
-            // REVIEW: Cast
-            var source = (Maybe<int>)null;
-            Func<int, int> selector = _ => _;
+        ////[Fact]
+        ////public static void Select_ThrowsArgumentNullException_ForNullObject()
+        ////{
+        ////    // Arrange
+        ////    // REVIEW: Cast
+        ////    var source = (Maybe<int>)null;
+        ////    Func<int, int> selector = _ => _;
 
-            // Act & Assert
-            // NB: Apply only if Select is provided by an extension method.
-            ////Assert.Throws<ArgumentNullException>(() => source.Select(selector));
-            ////Assert.Throws<ArgumentNullException>(() => from _ in source select selector(_));
-            Assert.Throws<NullReferenceException>(() => source.Select(selector));
-            Assert.Throws<NullReferenceException>(() => from _ in source select selector(_));
-        }
+        ////    // Act & Assert
+        ////    // NB: Apply only if Select is provided by an extension method.
+        ////    ////Assert.Throws<ArgumentNullException>(() => source.Select(selector));
+        ////    ////Assert.Throws<ArgumentNullException>(() => from _ in source select selector(_));
+        ////    Assert.Throws<NullReferenceException>(() => source.Select(selector));
+        ////    Assert.Throws<NullReferenceException>(() => from _ in source select selector(_));
+        ////}
 
         [Fact]
         public static void Select_ReturnsNone_ForNoneObject()
@@ -567,22 +576,22 @@ namespace Narvalo.Fx
             Assert.False(q.IsSome);
         }
 
-        [Fact]
-        public static void SelectMany_ThrowsArgumentNullException_ForNullObject()
-        {
-            // Arrange
-            // REVIEW: Cast
-            var source = (Maybe<int>)null;
-            var middle = Maybe.Of(2);
-            Func<int, Maybe<int>> valueSelector = _ => middle;
-            Func<int, int, int> resultSelector = (i, j) => i + j;
+        ////[Fact]
+        ////public static void SelectMany_ThrowsArgumentNullException_ForNullObject()
+        ////{
+        ////    // Arrange
+        ////    // REVIEW: Cast
+        ////    var source = (Maybe<int>)null;
+        ////    var middle = Maybe.Of(2);
+        ////    Func<int, Maybe<int>> valueSelector = _ => middle;
+        ////    Func<int, int, int> resultSelector = (i, j) => i + j;
 
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
-            Assert.Throws<ArgumentNullException>(() => from i in source
-                                                       from j in middle
-                                                       select resultSelector(i, j));
-        }
+        ////    // Act & Assert
+        ////    Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+        ////    Assert.Throws<ArgumentNullException>(() => from i in source
+        ////                                               from j in middle
+        ////                                               select resultSelector(i, j));
+        ////}
 
         [Fact]
         public static void SelectMany_ReturnsNone_ForNoneObject()

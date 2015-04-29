@@ -795,7 +795,9 @@ namespace <#= Namespace #>.Internal
             Action action)
 <#+ WriteTypeConstraints_("TSource"); #>
         {
+<#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
+<#+ } #>
             Require.NotNull(action, "action");
 <#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
@@ -819,7 +821,9 @@ namespace <#= Namespace #>.Internal
             Action action)
 <#+ WriteTypeConstraints_("TSource"); #>
         {
+<#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
+<#+ } #>
             Require.NotNull(action, "action");
 <#+ if (IsNullable && WhenEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
