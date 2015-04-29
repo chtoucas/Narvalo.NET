@@ -5,12 +5,16 @@
       <!-- ### Mathematics ### -->
       <Word>Abelian</Word>
       <Word>Monoid</Word>
+
+      <Word>Ctor</Word>
     </Recognized>
 
     <Compound>
       <!-- ForInt32, ForInt64... -->
       <Term CompoundAlternate="ForInt">forint</Term>
       <Term CompoundAlternate="WebPages">webpages</Term>
+
+      <Term CompoundAlternate="NonEmpty">nonempty</Term>
     </Compound>
   </Words>
 </Dictionary>

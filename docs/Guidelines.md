@@ -7,32 +7,21 @@ Coding Style
 ### Mandatory Rules
 
 In general, we follow the [guidelines](https://github.com/dotnet/corefx/wiki/Coding-style)
-from the .NET team with few differences:
+from the .NET team with few differences.
+
+All rules (included a few custom ones) are checked by StyleCop.
+
+Rules not yet enforced via StyleCop are:
 - Namespace imports should be specified at the top of the file, _inside_ the namespace declarations.
   In case of namespace conflict, use the 'global::' prefix.
-- Do not use language keywords for methods calls (i.e. `Int32.Parse` instead of `int.Parse`),
-  for object creation and when used with `typeof`.
+- Consider separating System imports from the others.
+- Do not use language keywords for methods calls (i.e. prefere `Int32.Parse` over `int.Parse`),
+  for object creations and when used with `typeof`.
 - Do not use PascalCasing to name private constants, prefer `MY_PRIVATE_CONSTANT` over `MyPrivateConstant`.
-
-We also enforce the following rules:
-- Add a suffix to all private classes with `_`.
 - Directories must mirror namespaces.
 - Do not put more than one public class per file. The only exception is for Code Contracts classes.
-- All files must start with a copyright header:
-```csharp
-// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
-```
-
-### Optional Rules
-
 - Consider using regions or partial classes to organize code.
-- Consider separating System imports from the others.
-- Source lines should not exceed 120 characters.
 - Consider using named parameters for disambiguation of constant or null parameters.
-
-Naming:
-
-- Consider not adding a "Base" suffix to abstract classes.
 - For concrete helper classes try to find a more useful suffix than "Helper" or "Utility"
   or use a verb. Examples: "Require", "ParseTo", StringManip"...
   If not, use "Helper" for concrete classes and "Utility" for static classes.

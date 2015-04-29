@@ -329,29 +329,29 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForNamedCompositeValue()
         {
             // Act
-            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("CompositeValue1");
+            My.BitwiseEnum? result = ParseTo.Enum<My.BitwiseEnum>("CompositeValue1");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
+            Assert.Equal(My.BitwiseEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForNamedCompositeValueAndIgnoreCase()
         {
             // Act
-            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("compositeValue1");
+            My.BitwiseEnum? result = ParseTo.Enum<My.BitwiseEnum>("compositeValue1");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
+            Assert.Equal(My.BitwiseEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForNamedCompositeValueAndBadCase()
         {
             // Act
-            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("compositeValue1", ignoreCase: false);
+            My.BitwiseEnum? result = ParseTo.Enum<My.BitwiseEnum>("compositeValue1", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -361,29 +361,29 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForCompositeValue()
         {
             // Act
-            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("ActualValue1,ActualValue2");
+            My.BitwiseEnum? result = ParseTo.Enum<My.BitwiseEnum>("ActualValue1,ActualValue2");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
+            Assert.Equal(My.BitwiseEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForCompositeValueAndIgnoreCase()
         {
             // Act
-            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("actualValue1,actualValue2");
+            My.BitwiseEnum? result = ParseTo.Enum<My.BitwiseEnum>("actualValue1,actualValue2");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
+            Assert.Equal(My.BitwiseEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForCompositeValueAndBadCase()
         {
             // Act
-            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>("actualValue1,actualValue2", ignoreCase: false);
+            My.BitwiseEnum? result = ParseTo.Enum<My.BitwiseEnum>("actualValue1,actualValue2", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);
@@ -393,29 +393,29 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForCompositeValueWithWhiteSpaces()
         {
             // Act
-            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>(" ActualValue1,  ActualValue2 ");
+            My.BitwiseEnum? result = ParseTo.Enum<My.BitwiseEnum>(" ActualValue1,  ActualValue2 ");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
+            Assert.Equal(My.BitwiseEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsExpectedValue_ForCompositeValueWithWhiteSpacesAndIgnoreCase()
         {
             // Act
-            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>(" actualValue1,  actualValue2 ");
+            My.BitwiseEnum? result = ParseTo.Enum<My.BitwiseEnum>(" actualValue1,  actualValue2 ");
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(My.FlagsEnum.CompositeValue1, result.Value);
+            Assert.Equal(My.BitwiseEnum.CompositeValue1, result.Value);
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForCompositeValueWithWhiteSpacesAndBadCase()
         {
             // Act
-            My.FlagsEnum? result = ParseTo.Enum<My.FlagsEnum>(" actualValue1,  actualValue2 ", ignoreCase: false);
+            My.BitwiseEnum? result = ParseTo.Enum<My.BitwiseEnum>(" actualValue1,  actualValue2 ", ignoreCase: false);
 
             // Assert
             Assert.False(result.HasValue);

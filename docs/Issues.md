@@ -13,7 +13,7 @@ Design
 Narvalo.Cerbere
 ---------------
 
-- Overloads for Require.Greater...
+- More overloads for Require.Greater...
 
 Narvalo.Fx
 ------------
@@ -108,11 +108,6 @@ Infrastructure
 - Maybe we can simplify semantic versioning for edge packages:
   * http://semver.npmjs.com/
   * http://www.infoq.com/news/2015/04/semver-calculator-npm
-
-### CA, SA...
-
-- Update style guide
-- Explain StyleCop settings: StyleCop.Settings, MSBuild, local props file.
 
 ### Security
 

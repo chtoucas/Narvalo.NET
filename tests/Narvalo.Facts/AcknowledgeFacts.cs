@@ -13,11 +13,8 @@ namespace Narvalo
         [Fact]
         public static void Invariant_DoesNothing()
         {
-            // Arrange
-            var obj = new Object();
-
-            // Act
-            Acknowledge.AssumeInvariant(obj);
+            // Arrange a Act
+            Acknowledge.AssumeInvariant(new Object());
         }
 
         #endregion

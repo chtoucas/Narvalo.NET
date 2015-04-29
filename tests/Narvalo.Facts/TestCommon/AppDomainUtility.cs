@@ -2,7 +2,8 @@
 
 using global::System.Diagnostics.CodeAnalysis;
 
-[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText")]
+[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText",
+    Justification = "[Ignore] Microsoft source file.")]
 
 // Adapted from aspnetwebstack\test\Microsoft.TestCommon\AppDomainUtils.cs
 namespace Narvalo.TestCommon
@@ -52,7 +53,8 @@ namespace Narvalo.TestCommon
 
         public class AppDomainHelper : MarshalByRefObject
         {
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
+                Justification = "[Ignore] Microsoft source file.")]
             public void Run(Action action)
             {
                 action();

@@ -40,11 +40,16 @@
     <Compile Include="BenchmarkCommon\BenchmarkComparisonProcessor.cs" />
     <Compile Include="BenchmarkCommon\BenchmarkException.cs" />
     <Compile Include="BenchmarkCommon\BenchmarkMetric.cs" />
-    <Compile Include="BenchmarkCommon\BenchmarkMetricCollection.cs" />
-    <Compile Include="BenchmarkCommon\BenchmarkMetricCollectionFormatter.cs" />
-    <Compile Include="BenchmarkCommon\BenchmarkMetricCollectionFormatterBase.cs" />
+    <Compile Include="BenchmarkCommon\BenchmarkMetricCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BenchmarkCommon\BenchmarkMetricCollectionFormatter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BenchmarkCommon\BenchmarkMetricFormatter.cs" />
-    <Compile Include="BenchmarkCommon\BenchMetricConsoleFormatter.cs" />
+    <Compile Include="BenchmarkCommon\BenchMetricConsoleFormatter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BenchmarkCommon\Facts\BenchmarkMetricFacts.cs" />
     <Compile Include="BenchmarkCommon\BenchmarkProcessor.cs" />
     <Compile Include="BenchmarkCommon\BenchmarkRunner.cs" />

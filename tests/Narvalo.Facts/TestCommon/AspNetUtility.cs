@@ -30,12 +30,11 @@ namespace Narvalo.TestCommon
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#")]
-        public static IDisposable CreateHttpContext(string fileName, string url, string query)
+        public static IDisposable CreateHttpContext(string fileName, string address, string query)
         {
             using (var sw = new StringWriter(new StringBuilder(), CultureInfo.CurrentCulture))
             {
-                var request = new HttpRequest(fileName, url, query);
+                var request = new HttpRequest(fileName, address, query);
                 var httpContext = new HttpContext(request, new HttpResponse(sw));
                 HttpContext.Current = httpContext;
 

@@ -5,25 +5,34 @@ namespace Narvalo.Finance.Internal
 #if !NO_INTERNALS_VISIBLE_TO // White-box tests.
 
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Currencies;
     using Xunit;
 
     public static partial class CurrencyActivatorFacts
     {
-        public class MyCurrency : Currency
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
+            Justification = "[Intentionally] Testing dynamic contruction of a class.")]
+        private class MyCurrency_ : Currency
         {
-            public MyCurrency() : base("YYY") { }
+            public MyCurrency_() : base("YYY") { }
         }
 
-        public class MyCurrencyWithPrivateCtor : Currency
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
+            Justification = "[Intentionally] Testing dynamic contruction of a class.")]
+        private class MyCurrencyWithPrivateCtor_ : Currency
         {
-            private MyCurrencyWithPrivateCtor() : base("YYY") { }
+            private MyCurrencyWithPrivateCtor_() : base("YYY") { }
         }
 
-        public class MyCurrencyWithoutDefaultCtor : Currency
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
+            Justification = "[Intentionally] Testing dynamic contruction of a class.")]
+        private class MyCurrencyWithoutDefaultCtor_ : Currency
         {
-            private MyCurrencyWithoutDefaultCtor(string value) : base("YYY") { }
+            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+                Justification = "[Intentionally] Testing a class without public ctor.")]
+            private MyCurrencyWithoutDefaultCtor_(string value) : base("YYY") { }
         }
     }
 
@@ -34,26 +43,26 @@ namespace Narvalo.Finance.Internal
         [Fact]
         public static void CreateInstance_DoesNotThrow_ForBuiltInCurrency()
         {
-            var inst = CurrencyActivator<EUR>.CreateInstance();
+            CurrencyActivator<EUR>.CreateInstance();
         }
 
         [Fact]
         public static void CreateInstance_DoesNotThrow_WhenCtorIsPublic()
         {
-            var inst = CurrencyActivator<MyCurrency>.CreateInstance();
+            CurrencyActivator<MyCurrency_>.CreateInstance();
         }
 
         [Fact]
         public static void CreateInstance_DoesNotThrow_WhenCtorIsPrivate()
         {
-            var inst = CurrencyActivator<MyCurrencyWithPrivateCtor>.CreateInstance();
+            CurrencyActivator<MyCurrencyWithPrivateCtor_>.CreateInstance();
         }
 
         [Fact]
         public static void CreateInstance_ThrowsMissingMemberException_ForMissingDefaultCtor()
         {
             Assert.Throws<MissingMemberException>(
-                () => CurrencyActivator<MyCurrencyWithoutDefaultCtor>.CreateInstance());
+                () => CurrencyActivator<MyCurrencyWithoutDefaultCtor_>.CreateInstance());
         }
 
         #endregion

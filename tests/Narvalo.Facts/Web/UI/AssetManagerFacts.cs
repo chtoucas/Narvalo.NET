@@ -17,7 +17,8 @@ namespace Narvalo.Web.UI
         #region Provider
 
         [Fact]
-        [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "provider")]
+        [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "provider",
+            Justification = "[Intentionally] Testing that a property getter does not throw.")]
         public static void Provider_DoesNotThrow_ForMissingAssetSection()
         {
             // Arrange
@@ -45,7 +46,8 @@ namespace Narvalo.Web.UI
         #region Providers
 
         [Fact]
-        [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "providers")]
+        [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "providers",
+            Justification = "[Intentionally] Testing that a property getter does not throw.")]
         public static void Providers_DoesNotThrow_ForMissingAssetSection()
         {
             // Arrange

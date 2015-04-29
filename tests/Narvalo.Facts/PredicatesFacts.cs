@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.TestCommon;
     using Xunit;
@@ -12,6 +13,8 @@ namespace Narvalo
         #region IsFlagsEnum()
 
         [Fact]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
+            Justification = "[Intentionally] The rule does not apply here.")]
         public static void IsFlagsEnum_ReturnsFalse_ForNullInput()
         {
             // Arrange
@@ -22,16 +25,20 @@ namespace Narvalo
         }
 
         [Fact]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
+            Justification = "[Intentionally] The rule does not apply here.")]
         public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnumInput()
         {
             // Arrange
-            var type = typeof(My.FlagsEnum);
+            var type = typeof(My.BitwiseEnum);
 
             // Act & Assert
             Assert.True(Predicates.IsFlagsEnum(type));
         }
 
         [Fact]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
+            Justification = "[Intentionally] The rule does not apply here.")]
         public static void IsFlagsEnum_ReturnsFalse_ForNonFlagsEnumInput()
         {
             // Arrange
@@ -42,6 +49,8 @@ namespace Narvalo
         }
 
         [Fact]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
+            Justification = "[Intentionally] The rule does not apply here.")]
         public static void IsFlagsEnum_ReturnsFalse_ForSimpleTypeInput()
         {
             // Arrange
@@ -52,6 +61,8 @@ namespace Narvalo
         }
 
         [Fact]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
+            Justification = "[Intentionally] The rule does not apply here.")]
         public static void IsFlagsEnum_ReturnsFalse_ForNonEnumerationStructInput()
         {
             // Arrange

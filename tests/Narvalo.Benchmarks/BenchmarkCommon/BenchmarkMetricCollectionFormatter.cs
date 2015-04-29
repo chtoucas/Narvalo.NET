@@ -6,11 +6,16 @@ namespace Narvalo.BenchmarkCommon
     using System.Globalization;
     using System.Linq;
 
-    public class BenchmarkMetricCollectionFormatter : BenchmarkMetricCollectionFormatterBase
+    public class BenchmarkMetricCollectionFormatter : IBenchmarkMetricCollectionFormatter
     {
         public BenchmarkMetricCollectionFormatter() : base() { }
 
-        public override string Format(CultureInfo cultureInfo, BenchmarkMetricCollection metrics)
+        public string Format(BenchmarkMetricCollection metrics)
+        {
+            return Format(CultureInfo.CurrentCulture, metrics);
+        }
+
+        public virtual string Format(CultureInfo cultureInfo, BenchmarkMetricCollection metrics)
         {
             Require.NotNull(metrics, "metrics");
 

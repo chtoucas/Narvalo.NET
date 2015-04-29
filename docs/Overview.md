@@ -226,27 +226,26 @@ Unless specified otherwise, a project inherits its StyleCop settings from a comm
 - for samples, `samples\StyleCop.Settings` which link back to `etc\Empty.SourceAnalysis`.
 - Narvalo.Brouillons links back to `etc\Empty.SourceAnalysis`.
 
-This settings mirror what is done in the shared props.
+This settings mirror what is done in the shared (MSBuild) property file.
 
 There are three ways to run StyleCop:
-- Inside VS from the menu.
-- On Release builds (we configured the projects to do it so).
-- From CI builds whe `SourceAnalysisEnabled` is `true`.
+- Inside VS from the menu, using the inherited settings from `StyleCop.Settings`.
+- Inside VS, for Release builds, using the settings defined in the shared property file.
+- From CI builds when `SourceAnalysisEnabled` is `true`, using the settings defined
+  in the shared property file.
 
 Remarks:
-- When StyleCop is called explicitely from the menu, we only use the inherited settings from `StyleCop.Settings`.
-- On Release builds, we automatically run StyleCop. This time we use the settings defined in the
-  shared property file.
-- When a project is completed, we include the documentation rules.
-  To achieve this we modify the project properties with 
+- `etc\Loosy.SourceAnalysis` includes all rules except the documentation ones.
+- `etc\Empty.SourceAnalysis` disables all rules.
+- `etc\Strict.SourceAnalysis` enables all rules.
+- When documentation is completed, override the project properties as follows: 
 ```xml
 <PropertyGroup>
     <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Strict.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
 </PropertyGroup>
 ```
   but we do not override the settings file `Settings.StyleCop` which implies that it 
-  does not affect StyleCop when called from the menu but only applies when StyleCop 
-  is called on Release builds or by CI scripts.
+  does not affect StyleCop when called from the menu.
 
 ### Code Contracts
 

@@ -2,7 +2,8 @@
 
 using global::System.Diagnostics.CodeAnalysis;
 
-[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText")]
+[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText",
+    Justification = "[Ignore] Microsoft source file.")]
 
 // Adapted from aspnetwebstack\src\System.Web.WebPages\Common\DisposableAction.cs
 namespace Narvalo.TestCommon

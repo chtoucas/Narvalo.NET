@@ -15,7 +15,7 @@ namespace Narvalo.TestCommon
         }
 
         [Flags]
-        public enum FlagsEnum
+        public enum BitwiseEnum
         {
             None = 0,
             ActualValue1 = 1 << 0,
@@ -47,16 +47,16 @@ namespace Narvalo.TestCommon
             }
         }
 
-        public sealed class SimpleValue
-        {
-            private readonly int _value;
+        ////public sealed class SimpleValue
+        ////{
+        ////    private readonly int _value;
 
-            public SimpleValue(int value)
-            {
-                _value = value;
-            }
+        ////    public SimpleValue(int value)
+        ////    {
+        ////        _value = value;
+        ////    }
 
-            public int Value { get { return _value; } }
-        }
+        ////    public int Value { get { return _value; } }
+        ////}
     }
 }
