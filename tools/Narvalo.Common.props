@@ -119,9 +119,9 @@
     For a complete list of available options, see
       packages\StyleCop.MSBuild.*\build\StyleCop.MSBuild.Targets.
   -->
-  <!-- Inside VS, we automatically run StyleCop in Debug builds. -->
+  <!-- Inside VS, we automatically run StyleCop in Release builds. -->
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
-    <SourceAnalysisEnabled Condition=" '$(Configuration)' == 'Debug' ">true</SourceAnalysisEnabled>
+    <SourceAnalysisEnabled Condition=" '$(Configuration)' == 'Release' ">true</SourceAnalysisEnabled>
   </PropertyGroup>
   
   <PropertyGroup>

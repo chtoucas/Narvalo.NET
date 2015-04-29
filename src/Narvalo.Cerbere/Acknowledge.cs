@@ -12,9 +12,7 @@ namespace Narvalo
     public static class Acknowledge
     {
         /// <summary>
-        /// According to its documentation, CCCheck only assumes and asserts
-        /// object invariants for the "this" object. This method allows
-        /// to state explicitly the object invariance.
+        /// This method allows to state explicitly the object invariance.
         /// </summary>
         /// <remarks>To be recognized by CCCheck this method must be named exactly "AssumeInvariant".</remarks>
         /// <typeparam name="T">The underlying type of the object.</typeparam>
@@ -58,7 +56,7 @@ namespace Narvalo
         /// <summary>
         /// Asserts that a point of execution is unreachable.
         /// </summary>
-        /// <remarks>Adapted from <seealso cref="!:http://blogs.msdn.com/b/francesco/archive/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten.aspx"/>.</remarks>
+        /// <remarks>Adapted from <see cref="!:http://blogs.msdn.com/b/francesco/archive/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten.aspx"/>.</remarks>
         /// <example>
         /// <code>
         /// switch (myEnum)
@@ -84,7 +82,7 @@ namespace Narvalo
         /// <summary>
         /// Asserts that a point of execution is unreachable.
         /// </summary>
-        /// <remarks>Adapted from <seealso cref="!:http://blogs.msdn.com/b/francesco/archive/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten.aspx"/>.</remarks>
+        /// <remarks>Adapted from <see cref="!:http://blogs.msdn.com/b/francesco/archive/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten.aspx"/>.</remarks>
         /// <example>
         /// <code>
         /// switch (myEnum)

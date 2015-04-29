@@ -14,12 +14,6 @@
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="Narvalo.Reliability.props">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="AggregateGuardException.cs" />
     <Compile Include="BlackholeGuard.cs" />
     <Compile Include="CircuitBreaker.cs" />
