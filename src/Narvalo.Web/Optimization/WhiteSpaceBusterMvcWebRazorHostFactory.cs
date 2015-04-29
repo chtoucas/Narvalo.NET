@@ -2,7 +2,6 @@
 
 namespace Narvalo.Web.Optimization
 {
-    using System.Diagnostics.Contracts;
     using System.Web.Mvc;
     using System.Web.WebPages.Razor;
 

@@ -85,7 +85,7 @@ Library             | Status | PCL        | Security    | CA | GA | CC | SA  |
 --------------------|--------|------------|-------------|----|----|----|-----|
 Narvalo.Cerbere     | Beta   | Profile259 | Transparent | OK | OK | OK | OK+ |
 Narvalo.Fx          | Alpha  | Profile259 | Transparent | OK | OK | OK | OK  |
-Narvalo.Finance     |        | Profile111 | Transparent | OK | OK | OK | OK  |
+Narvalo.Finance     |        | Profile111 | Transparent | OK | !  | OK | OK  |
 Narvalo.Core        | Alpha  | Profile259 | Transparent | !  | !  | OK | OK  |
 Narvalo.Common      | Alpha  |            | APTCA       | !  | !  | OK | OK  |
 Narvalo.Web         |        |            |             |    |    |    | OK  |

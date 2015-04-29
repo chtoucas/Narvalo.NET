@@ -5,7 +5,6 @@ namespace Narvalo.Collections
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using Narvalo.Fx;

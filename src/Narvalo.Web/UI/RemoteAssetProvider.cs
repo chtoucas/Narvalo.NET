@@ -6,7 +6,6 @@ namespace Narvalo.Web.UI
     using System.Collections.Specialized;
     using System.Configuration.Provider;
     using System.Diagnostics.Contracts;
-    using System.IO;
 
     using Narvalo.Collections;
     using Narvalo.Web.Properties;

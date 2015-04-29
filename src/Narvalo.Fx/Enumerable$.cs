@@ -239,7 +239,6 @@ namespace Narvalo.Fx
 
             foreach (var m in @this)
             {
-                // REVIEW: Is this the expected behaviour when m is null?
                 if (!m.IsSome)
                 {
                     return Maybe<IEnumerable<TSource>>.None;

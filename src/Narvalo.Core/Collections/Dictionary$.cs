@@ -3,7 +3,6 @@
 namespace Narvalo.Collections
 {
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Fx;
 

@@ -3,7 +3,6 @@
 namespace Narvalo.Web
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Net;
     using System.Web;
 

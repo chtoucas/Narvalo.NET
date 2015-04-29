@@ -3,7 +3,6 @@
 namespace Narvalo.Xml
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Xml.Linq;
 
     using Narvalo.Fx;

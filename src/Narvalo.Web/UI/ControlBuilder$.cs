@@ -4,7 +4,6 @@ namespace Narvalo.Web.UI
 {
     using System;
     using System.Collections;
-    using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Web.UI;
 

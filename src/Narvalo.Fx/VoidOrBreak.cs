@@ -4,7 +4,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Fx.Properties;

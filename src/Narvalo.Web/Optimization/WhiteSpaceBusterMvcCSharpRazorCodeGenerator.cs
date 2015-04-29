@@ -6,7 +6,6 @@
 namespace Narvalo.Web.Optimization
 {
     using System.CodeDom;
-    using System.Diagnostics.Contracts;
     using System.Web.Mvc.Razor;
     using System.Web.Razor;
     using System.Web.Razor.Generator;

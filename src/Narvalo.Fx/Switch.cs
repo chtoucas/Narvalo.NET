@@ -2,7 +2,6 @@
 
 namespace Narvalo.Fx
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     public static class Switch
