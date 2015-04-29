@@ -144,7 +144,7 @@ namespace Narvalo.Fx
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
         Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
-    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>, IEquatable<T>
+    public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>
     {
         private readonly bool _isSome;
 
@@ -356,29 +356,9 @@ namespace Narvalo.Fx
             return left.Equals(right);
         }
 
-        public static bool operator ==(Maybe<T> left, T right)
-        {
-            return left.Equals(right);
-        }
-
-        public static bool operator ==(T left, Maybe<T> right)
-        {
-            return right.Equals(left);
-        }
-
         public static bool operator !=(Maybe<T> left, Maybe<T> right)
         {
             return !left.Equals(right);
-        }
-
-        public static bool operator !=(Maybe<T> left, T right)
-        {
-            return !left.Equals(right);
-        }
-
-        public static bool operator !=(T left, Maybe<T> right)
-        {
-            return !right.Equals(left);
         }
 
         /// <inheritdoc cref="IEquatable{T}.Equals" />
@@ -391,31 +371,12 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, "comparer");
 
-            if (!IsSome)
+            if (IsSome)
             {
-                // If one is none, both must be none to be equal.
-                return !other.IsSome;
+                return other.IsSome && comparer.Equals(Value, other.Value);
             }
 
-            return comparer.Equals(Value, other.Value);
-        }
-
-        /// <inheritdoc cref="IEquatable{T}.Equals" />
-        public bool Equals(T other)
-        {
-            return Equals(other, EqualityComparer<T>.Default);
-        }
-
-        public bool Equals(T other, IEqualityComparer<T> comparer)
-        {
-            Require.NotNull(comparer, "comparer");
-
-            if (!IsSome)
-            {
-                return Object.ReferenceEquals(other, null);
-            }
-
-            return comparer.Equals(Value, other);
+            return !other.IsSome;
         }
 
         /// <inheritdoc cref="Object.Equals(Object)" />
@@ -428,17 +389,12 @@ namespace Narvalo.Fx
         {
             Require.NotNull(comparer, "comparer");
 
-            if (other is Maybe<T>)
+            if (!(other is Maybe<T>))
             {
-                return Equals((Maybe<T>)other, comparer);
+                return false;
             }
 
-            if (other is T)
-            {
-                return Equals((T)other, comparer);
-            }
-
-            return false;
+            return Equals((Maybe<T>)other);
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
@@ -480,8 +436,6 @@ namespace Narvalo.Fx
     /// </content>
     public partial struct Maybe<T>
     {
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
             Require.NotNull(selector, "selector");
@@ -527,8 +481,6 @@ namespace Narvalo.Fx
             }
         }
 
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<T> OrElse(Maybe<T> other)
         {
             return !IsSome ? other : this;
@@ -542,8 +494,6 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions
 
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Require.NotNull(selector, "selector");
@@ -551,8 +501,6 @@ namespace Narvalo.Fx
             return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-28-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
         {
             return IsSome ? other : Maybe<TResult>.None;
@@ -562,8 +510,6 @@ namespace Narvalo.Fx
 
         #region Monadic lifting operators
 
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-39-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Zip<TSecond, TResult>(
             Maybe<TSecond> second,
             Func<T, TSecond, TResult> resultSelector)
@@ -579,8 +525,6 @@ namespace Narvalo.Fx
 
         #region LINQ extensions
 
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> Join<TInner, TKey, TResult>(
             Maybe<TInner> inner,
             Func<T, TKey> outerKeySelector,
@@ -605,8 +549,6 @@ namespace Narvalo.Fx
                 : Maybe<TResult>.None;
         }
 
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-62-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public Maybe<TResult> GroupJoin<TInner, TKey, TResult>(
             Maybe<TInner> inner,
             Func<T, TKey> outerKeySelector,

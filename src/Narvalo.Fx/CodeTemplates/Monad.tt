@@ -483,7 +483,17 @@ namespace <#= Namespace #>.Internal
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
         /// <value>The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.</value>
-        public static <#= Name #><global::<#= UnitFullName #>> Unit { get { return s_Unit; } }
+        public static <#= Name #><global::<#= UnitFullName #>> Unit
+        { 
+            get 
+            { 
+<#+ if (IsNullable && UnitEnsuresSome) { #>
+                Contract.Ensures(Contract.Result<<#= Name #><global::<#= UnitFullName #>>>() != null);
+<#+ } #>
+
+                return s_Unit; 
+            }
+        }
 
 <#+ if (HasZero) { #>
         /// <summary>

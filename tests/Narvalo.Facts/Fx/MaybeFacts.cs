@@ -210,15 +210,15 @@ namespace Narvalo.Fx
             var almostValueA0 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
             var almostValueA1 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
 
-            // FIXME
-            //var referenceA0 = Maybe.Of(new List<int>());
-            //var referenceA1 = Maybe.Of(new List<int>());
+            //// FIXME
+            ////var referenceA0 = Maybe.Of(new List<int>());
+            ////var referenceA1 = Maybe.Of(new List<int>());
 
             // Act & Assert
             Assert.True(simpleA0 == simpleA1);
             Assert.True(valueA0 == valueA1);
             Assert.True(almostValueA0 == almostValueA1);
-            //Assert.True(referenceA0 != referenceA1);
+            ////Assert.True(referenceA0 != referenceA1);
         }
 
         #endregion
@@ -267,15 +267,15 @@ namespace Narvalo.Fx
             var almostValueA0 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
             var almostValueA1 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
 
-            // FIXME
-            //var referenceA0 = Maybe.Of(new List<int>());
-            //var referenceA1 = Maybe.Of(new List<int>());
+            //// FIXME
+            ////var referenceA0 = Maybe.Of(new List<int>());
+            ////var referenceA1 = Maybe.Of(new List<int>());
 
             // Act & Assert
             Assert.False(simpleA0 != simpleA1);
             Assert.False(valueA0 != valueA1);
             Assert.False(almostValueA0 != almostValueA1);
-            //Assert.False(referenceA0 != referenceA1);
+            ////Assert.False(referenceA0 != referenceA1);
         }
 
         #endregion
@@ -357,54 +357,54 @@ namespace Narvalo.Fx
             Assert.False(reference.Equals((object)null));
         }
 
-        [Fact]
-        public static void Equals_ReturnsTrue_WhenNone_ForNullOfUnderlyingType()
-        {
-            // Arrange
-            var reference = Maybe<List<int>>.None;
+        ////[Fact]
+        ////public static void Equals_ReturnsTrue_WhenNone_ForNullOfUnderlyingType()
+        ////{
+        ////    // Arrange
+        ////    var reference = Maybe<List<int>>.None;
 
-            // Act & Assert
-            Assert.True(reference.Equals((List<int>)null));
-            //Assert.True(reference.Equals((Maybe<List<int>>)null));
-        }
+        ////    // Act & Assert
+        ////    Assert.True(reference.Equals((List<int>)null));
+        ////    //Assert.True(reference.Equals((Maybe<List<int>>)null));
+        ////}
 
-        [Fact]
-        public static void Equals_ReturnsTrue_ForOriginalValue()
-        {
-            // Arrange
-            var simple = 3141;
-            var simpleOpt = Maybe.Of(simple);
+        ////[Fact]
+        ////public static void Equals_ReturnsTrue_ForOriginalValue()
+        ////{
+        ////    // Arrange
+        ////    var simple = 3141;
+        ////    var simpleOpt = Maybe.Of(simple);
 
-            var value = new MyStruct_(3141);
-            var valueOpt = Maybe.Of(value);
+        ////    var value = new MyStruct_(3141);
+        ////    var valueOpt = Maybe.Of(value);
 
-            var reference = new List<int>();
-            var referenceOpt = Maybe.Of(reference);
+        ////    var reference = new List<int>();
+        ////    var referenceOpt = Maybe.Of(reference);
 
-            // Act & Assert
-            Assert.True(simpleOpt.Equals(simple));
-            Assert.True(valueOpt.Equals(value));
-            Assert.True(referenceOpt.Equals(reference));
-        }
+        ////    // Act & Assert
+        ////    Assert.True(simpleOpt.Equals(simple));
+        ////    Assert.True(valueOpt.Equals(value));
+        ////    Assert.True(referenceOpt.Equals(reference));
+        ////}
 
-        [Fact]
-        public static void Equals_ReturnsTrue_ForOriginalValueCastedToObject()
-        {
-            // Arrange
-            var simple = 3141;
-            var simpleOpt = Maybe.Of(simple);
+        ////[Fact]
+        ////public static void Equals_ReturnsTrue_ForOriginalValueCastedToObject()
+        ////{
+        ////    // Arrange
+        ////    var simple = 3141;
+        ////    var simpleOpt = Maybe.Of(simple);
 
-            var value = new MyStruct_(3141);
-            var valueOpt = Maybe.Of(value);
+        ////    var value = new MyStruct_(3141);
+        ////    var valueOpt = Maybe.Of(value);
 
-            var reference = new List<int>();
-            var referenceOpt = Maybe.Of(reference);
+        ////    var reference = new List<int>();
+        ////    var referenceOpt = Maybe.Of(reference);
 
-            // Act & Assert
-            Assert.True(simpleOpt.Equals((object)simple));
-            Assert.True(valueOpt.Equals((object)value));
-            Assert.True(referenceOpt.Equals((object)reference));
-        }
+        ////    // Act & Assert
+        ////    Assert.True(simpleOpt.Equals((object)simple));
+        ////    Assert.True(valueOpt.Equals((object)value));
+        ////    Assert.True(referenceOpt.Equals((object)reference));
+        ////}
 
         [Fact]
         public static void Equals_FollowsStructuralEqualityRules()

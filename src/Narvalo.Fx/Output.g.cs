@@ -52,7 +52,15 @@ namespace Narvalo.Fx
         /// Gets the unique object of type <c>Output&lt;Unit&gt;</c>.
         /// </summary>
         /// <value>The unique object of type <c>Output&lt;Unit&gt;</c>.</value>
-        public static Output<global::Narvalo.Fx.Unit> Unit { get { return s_Unit; } }
+        public static Output<global::Narvalo.Fx.Unit> Unit
+        { 
+            get 
+            { 
+                Contract.Ensures(Contract.Result<Output<global::Narvalo.Fx.Unit>>() != null);
+
+                return s_Unit; 
+            }
+        }
 
 
         /// <summary>
@@ -82,7 +90,6 @@ namespace Narvalo.Fx
         public static Output<T> Flatten<T>(Output<Output<T>> square)
         {
             Contract.Requires(square != null);
-            Contract.Ensures(Contract.Result<Output<T>>() != null);
 
             return Output<T>.μ(square);
         }

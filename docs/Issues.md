@@ -18,6 +18,7 @@ Narvalo.Cerbere
 Narvalo.Fx
 ------------
 
+- Update Maybe<T> documentation.
 - See https://msdn.microsoft.com/en-us/magazine/dd942829.aspx
   http://stackoverflow.com/questions/2410710/why-is-the-new-tuple-type-in-net-4-0-a-reference-type-class-and-not-a-value-t
   https://github.com/dotnet/roslyn/issues/347
@@ -94,6 +95,8 @@ Narvalo.Mvp
 
 Infrastructure
 --------------
+
+- Publishing Narvalo.Mvp should fail if we do not publish Narvalo.Core?
 
 ### Continuous Integration
 

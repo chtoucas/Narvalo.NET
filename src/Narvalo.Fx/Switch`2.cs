@@ -465,15 +465,11 @@ namespace Narvalo.Fx
 
         public override Maybe<TLeft> LeftOrNone() 
         {
-            Contract.Ensures(Contract.Result<Maybe<TLeft>>() != null);
-
             return default(Maybe<TLeft>);
         }
 
         public override Maybe<TRight> RightOrNone()
         {
-            Contract.Ensures(Contract.Result<Maybe<TRight>>() != null);
-
             return default(Maybe<TRight>);
         }
     }

@@ -53,7 +53,13 @@ namespace Narvalo.Fx
         /// Gets the unique object of type <c>Maybe&lt;Unit&gt;</c>.
         /// </summary>
         /// <value>The unique object of type <c>Maybe&lt;Unit&gt;</c>.</value>
-        public static Maybe<global::Narvalo.Fx.Unit> Unit { get { return s_Unit; } }
+        public static Maybe<global::Narvalo.Fx.Unit> Unit
+        { 
+            get 
+            { 
+                return s_Unit; 
+            }
+        }
 
         /// <summary>
         /// Gets the zero for <see cref="Maybe{T}"/>.
