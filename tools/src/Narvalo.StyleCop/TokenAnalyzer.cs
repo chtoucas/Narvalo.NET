@@ -1,9 +1,11 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Analyzers
+namespace Narvalo
 {
-    using global::StyleCop;
-    using global::StyleCop.CSharp;
+    using System;
+
+    using StyleCop;
+    using StyleCop.CSharp;
 
     public sealed class TokenAnalyzer : CSharpAnalyzer
     {
@@ -11,25 +13,26 @@ namespace Narvalo.Analyzers
 
         public TokenAnalyzer(SourceAnalyzer sourceAnalyzer) : base(sourceAnalyzer) { }
 
-        protected override void AnalyzeDocumentCore(CsDocument document, bool userCode)
+        public override void Analyze(CsDocument document, bool userCode)
         {
-            Param.AssertNotNull(document, "document");
-
-            // Skip non-user code
-            if (!userCode)
+            if (document == null)
             {
-                return;
+                throw new ArgumentNullException("document");
             }
 
-            foreach (var token in document.Tokens)
+            // Skip non-user code.
+            if (!userCode) { return; }
+
+            foreach (CsToken token in document.Tokens)
             {
-                VisitToken_(document, token);
+                CheckTrailingWhiteSpaces(document, token);
             }
         }
 
-        private void VisitToken_(CsDocument document, CsToken token)
+        private void CheckTrailingWhiteSpaces(CsDocument document, CsToken token)
         {
             Param.AssertNotNull(document, "document");
+            Param.AssertNotNull(token, "token");
 
             if (token.CsTokenType == CsTokenType.EndOfLine && _lastTokenWasWhitespace)
             {
@@ -39,6 +42,5 @@ namespace Narvalo.Analyzers
 
             _lastTokenWasWhitespace = token.CsTokenType == CsTokenType.WhiteSpace;
         }
-
     }
 }
