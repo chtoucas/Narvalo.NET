@@ -7,18 +7,6 @@
 # N: Used to filter out a namespace.
 # A: Used to filter out an assembly.
 #
-# The following rules are disabled in the configuration file:
-# - Gendarme.Rules.BadPractice.AvoidAssemblyVersionMismatchRule
-#   We use semantic versioning but still keep extended version information.
-# - Gendarme.Rules.Serialization.MarkEnumerationsAsSerializableRule
-#   Fixing this rule could make the code more confusing.
-#
-# We use the ignore file exclusively for defects that can not be masked
-# with a SuppressMessage attribute.
-# We also include warnings not yet reviewed or fixed. Beware the intention
-# is not to hide the warning but rather to keep a list of things to fix.
-# Moreover, we can easily see when new warnings are showing up.
-#
 # Sample ignore files from the Mono project:
 # https://github.com/mono/mono-tools/blob/master/gendarme/mono-options.ignore
 # https://github.com/mono/mono-tools/blob/master/gendarme/self-test.ignore
@@ -30,38 +18,35 @@
 # Global suppressions.
 # ==============================================================================
 
-# PCL Assemblies
-# --------------
+# Assemblies
+# ----------
 
 R: Gendarme.Rules.Exceptions.MissingExceptionConstructorsRule
-# Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
+# Justification = [Ignore] PCL do not support the standard serialization mechanism.
 A: Narvalo.Cerbere
 A: Narvalo.Finance
 A: Narvalo.Fx
 A: Narvalo.Reliability
 
 R: Gendarme.Rules.Serialization.MissingSerializableAttributeOnISerializableTypeRule
-# Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
+# Justification = [Ignore] PCL do not support the standard serialization mechanism.
 A: Narvalo.Cerbere
 A: Narvalo.Finance
 A: Narvalo.Fx
 A: Narvalo.Reliability
 
 R: Gendarme.Rules.Serialization.MissingSerializationConstructorRule
-# Justification = [Ignore] Portable Class Libraries do not support the standard serialization mechanism.
+# Justification = [Ignore] PCL do not support the standard serialization mechanism.
 A: Narvalo.Cerbere
 A: Narvalo.Finance
 A: Narvalo.Fx
 A: Narvalo.Reliability
 
-# Narvalo.Cerbere
-# ---------------
+R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
+# Justification = [Intentionally] Functional-like programming does this.
+A: Narvalo.Fx
 
-R: Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule
-# Justification = [Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.
-A: Narvalo.Cerbere
-
-# Narvalo.Fx
+# Namespaces
 # ----------
 
 R: Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule
@@ -69,5 +54,67 @@ R: Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule
 N: Narvalo.Fx
 N: Narvalo.Fx.Advanced
 N: Narvalo.Fx.Internal
+
+# Narvalo.Cerbere
+# ---------------
+
+R: Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule
+# Justification = [Ignore] We do initialize the exceptions correctly, but Gendarme does not recognize that.
+T: Narvalo.Enforce
+T: Narvalo.Require
+
+# Narvalo.Fx
+# ----------
+
+R: Gendarme.Rules.Performance.AvoidRepetitiveCallsToPropertiesRule
+# Justification = [Intentionally] It looks like a property, it tastes like a property but it does not behave like a property.
+M: TSource Narvalo.Fx.EnumerableExtensions::Reduce(System.Collections.Generic.IEnumerable`1<TSource>,System.Func`3<TSource,TSource,TSource>,System.Func`2<TSource,System.Boolean>)
+
+R: Gendarme.Rules.Smells.AvoidLongParameterListsRule
+# Justification = [Intentionally] Internal-only methods.
+M: Narvalo.Fx.Maybe`1<TResult> Narvalo.Fx.Maybe::JoinCore(Narvalo.Fx.Maybe`1<TSource>,Narvalo.Fx.Maybe`1<TInner>,System.Func`2<TSource,TKey>,System.Func`2<TInner,TKey>,System.Func`3<TSource,TInner,TResult>,System.Collections.Generic.IEqualityComparer`1<TKey>)
+M: Narvalo.Fx.Maybe`1<TResult> Narvalo.Fx.Maybe::GroupJoinCore(Narvalo.Fx.Maybe`1<TSource>,Narvalo.Fx.Maybe`1<TInner>,System.Func`2<TSource,TKey>,System.Func`2<TInner,TKey>,System.Func`3<TSource,Narvalo.Fx.Maybe`1<TInner>,TResult>,System.Collections.Generic.IEqualityComparer`1<TKey>)
+
+# Narvalo.Finance
+# ---------------
+
+R: Gendarme.Rules.Performance.AvoidLargeStructureRule
+# Justification = [Intentionally] The struct size is 20 bytes, which shouldn't cause any perf problems here.
+T: Narvalo.Finance.Money
+
+# Narvalo.Core
+# ------------
+
+R: Gendarme.Rules.Naming.AvoidRedundancyInTypeNameRule
+# Justification = [Ignore] .NET name.
+T: Narvalo.Xml.XmlReaderExtensions
+
+R: Gendarme.Rules.Portability.NewLineLiteralRule
+# Justification = [Ignore] This has nothing to do with OS-specific context.
+M: System.String Narvalo.StringManip::StripCrLf(System.String)
+
+R: Gendarme.Rules.Smells.AvoidCodeDuplicatedInSameClassRule
+# Justification = [Intentionally] Only looks superficially similar.
+T: Narvalo.Int64Encoder
+
+R: Gendarme.Rules.Smells.AvoidSpeculativeGeneralityRule
+# Justification = [Justification] Helper methods where we want to avoid code duplications.
+T: Narvalo.Int64Encoder
+T: Narvalo.ParseTo
+T: Narvalo.Xml.MaybeExtensions
+
+# Narvalo.Common
+# --------------
+
+R: Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule
+# Justification = [Intentionally] Exposing nested generics is a price to pay for monads.
+M: Narvalo.Fx.Maybe`1<System.Collections.Generic.IEnumerable`1<T>> Narvalo.Collections.NameValueCollectionExtensions::MayParseAll(System.Collections.Specialized.NameValueCollection,System.String,System.Func`2<System.String,Narvalo.Fx.Maybe`1<T>>)
+M: System.Collections.Generic.IEnumerable`1<T> Narvalo.Collections.NameValueCollectionExtensions::ParseAny(System.Collections.Specialized.NameValueCollection,System.String,System.Func`2<System.String,Narvalo.Fx.Maybe`1<T>>)
+M: Narvalo.Fx.Maybe`1<System.Collections.Generic.IEnumerable`1<T>> Narvalo.Collections.NameValueCollectionExtensions::MayParseAll(System.Collections.Specialized.NameValueCollection,System.String,System.Func`2<System.String,Narvalo.Fx.Maybe`1<T>>)
+
+R: Gendarme.Rules.Naming.AvoidRedundancyInTypeNameRule
+# Justification = [Ignore] .NET name.
+T: Narvalo.Configuration.ConfigurationExtensions
+T: Narvalo.Data.DataRecordExtensions
 
 # WARNING: The file must end with a newline; otherwise Gendarme will fail.

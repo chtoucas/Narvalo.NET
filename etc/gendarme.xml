@@ -11,19 +11,19 @@
     <rules include="*" from="Gendarme.Rules.Concurrency.dll" />
     <rules include="*" from="Gendarme.Rules.Correctness.dll"/>
     <!--
-      AvoidSmallNamespaceRule: Already covered by FxCop.
-      ProvideAlternativeNamesForOperatorOverloadsRule: Already covered by FxCop.
+      AvoidSmallNamespaceRule: Covered by FxCop (CA1020).
+      ProvideAlternativeNamesForOperatorOverloadsRule: Covered by FxCop (CA2225).
     -->
-    <rules include="*" 
+    <rules include="*"
            exclude=" AvoidSmallNamespaceRule
                     | ProvideAlternativeNamesForOperatorOverloadsRule"
            from="Gendarme.Rules.Design.dll"/>
     <!--
-      AvoidMethodWithUnusedGenericTypeRule:
-      DoNotDeclareStaticMembersOnGenericTypesRule:
+      AvoidMethodWithUnusedGenericTypeRule: Covered by FxCop (CA1004).
+      DoNotDeclareStaticMembersOnGenericTypesRule: Covered by FxCop (CA1000).
     -->
-    <rules include="*" 
-           exclude="AvoidMethodWithUnusedGenericTypeRule 
+    <rules include="*"
+           exclude="AvoidMethodWithUnusedGenericTypeRule
                     | DoNotDeclareStaticMembersOnGenericTypesRule"
            from="Gendarme.Rules.Design.Generic.dll"/>
     <rules include="*" from="Gendarme.Rules.Design.Linq.dll"/>
@@ -33,49 +33,39 @@
     <rules include="*" from="Gendarme.Rules.Interoperability.Com.dll"/>
     <rules include="*" from="Gendarme.Rules.Maintainability.dll"/>
     <!--
-      AvoidRedundancyInTypeNameRule:
-      AvoidTypeInterfaceInconsistencyRule:
-      ParameterNamesShouldMatchOverriddenMethodRule: Already covered by FxCop.
-      UseCorrectCasingRule: Already covered by FxCop.
-      UseCorrectPrefixRule: False positives with class names starting with an "I".
+      ParameterNamesShouldMatchOverriddenMethodRule: Covered by FxCop (CA1725).
+      UseCorrectCasingRule: Covered by StyleCop (SA1300).
     -->
-    <rules include="*" 
-           exclude="AvoidRedundancyInTypeNameRule 
-                    | AvoidTypeInterfaceInconsistencyRule
-                    | ParameterNamesShouldMatchOverriddenMethodRule 
-                    | UseCorrectCasingRule
-                    | UseCorrectPrefixRule"
+    <rules include="*"
+           exclude="ParameterNamesShouldMatchOverriddenMethodRule
+                    | UseCorrectCasingRule"
            from="Gendarme.Rules.Naming.dll"/>
     <rules include="*" from="Gendarme.Rules.NUnit.dll"/>
     <!--
-      AvoidUncalledPrivateCodeRule: Already covered by FxCop and many false positives.
+      AvoidUncalledPrivateCodeRule: Covered by FxCop (CA1811).
     -->
-    <rules include="*" 
+    <rules include="*"
            exclude="AvoidUncalledPrivateCodeRule"
            from="Gendarme.Rules.Performance.dll" />
     <!--
-      MonoCompatibilityReviewRule: Already covered by the API Portability Analyzer.
+      MonoCompatibilityReviewRule: Covered by the API Portability Analyzer.
     -->
-    <rules include="*" 
+    <rules include="*"
            exclude="MonoCompatibilityReviewRule"
            from="Gendarme.Rules.Portability.dll" />
     <rules include="*" from="Gendarme.Rules.Security.dll" />
     <rules include="*" from="Gendarme.Rules.Security.Cas.dll" />
     <!--
-      MarkEnumerationsAsSerializableRule: Disagree.
+      MarkEnumerationsAsSerializableRule: Fixing this rule could make the code more confusing.
     -->
     <rules include="*"
            exclude="MarkEnumerationsAsSerializableRule"
            from="Gendarme.Rules.Serialization.dll" />
     <!--
-      AvoidLongMethodsRule: 
-      AvoidLongParameterListsRule: 
-      AvoidSpeculativeGeneralityRule: 
+      AvoidLongMethodsRule: Covered by FxCop (CA1505).
     -->
-    <rules include="*" 
-           exclude="AvoidLongMethodsRule 
-                    | AvoidLongParameterListsRule 
-                    | AvoidSpeculativeGeneralityRule"
+    <rules include="*"
+           exclude="AvoidLongMethodsRule"
            from="Gendarme.Rules.Smells.dll"/>
     <rules include="*" from="Gendarme.Rules.Ui.dll" />
 

@@ -19,14 +19,13 @@ Narvalo.Fx
 ------------
 
 - Update Maybe<T> documentation.
-- See https://msdn.microsoft.com/en-us/magazine/dd942829.aspx
+  https://msdn.microsoft.com/en-us/magazine/dd942829.aspx
   http://stackoverflow.com/questions/2410710/why-is-the-new-tuple-type-in-net-4-0-a-reference-type-class-and-not-a-value-t
   https://github.com/dotnet/roslyn/issues/347
-- Split Monad.tt.
-- Equals for Maybe<T>.
-- SumCore() and CollectCore() assert that they never return null but this is not always true.
-- Confirm that Maybe methods never returns null.
-- Monad.tt, review true argument check for extension methods.
+- Monad.tt.
+  * Split.
+  * Review true argument check for extension methods.
+  * SumCore() and CollectCore() assert that they never return null but this is not always true.
 
 Narvalo.Core
 ------------

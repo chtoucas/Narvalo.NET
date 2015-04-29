@@ -161,8 +161,10 @@ namespace Narvalo.Fx
         /// <seealso cref="Maybe.Of{T}(T?)"/>
         private Maybe(T value)
         {
+            Contract.Requires(value != null);
+
             _value = value;
-            _isSome = value != null;
+            _isSome = false;
         }
 
         /// <summary>

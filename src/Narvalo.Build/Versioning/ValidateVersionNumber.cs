@@ -55,7 +55,7 @@ namespace Narvalo.Build.Versioning
             try
             {
                 // Assembly versioning requirement.
-                ushort version = Convert.ToUInt16(Value, CultureInfo.InvariantCulture);
+                Convert.ToUInt16(Value, CultureInfo.InvariantCulture);
             }
             catch (FormatException ex)
             {

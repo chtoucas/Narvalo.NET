@@ -89,7 +89,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Common.resx</DependentUpon>
     </Compile>
-    <Compile Include="Xml\MoreXmlReader%24.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\CustomDictionary.xml" />

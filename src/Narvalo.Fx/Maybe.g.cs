@@ -57,6 +57,7 @@ namespace Narvalo.Fx
         { 
             get 
             { 
+
                 return s_Unit; 
             }
         }

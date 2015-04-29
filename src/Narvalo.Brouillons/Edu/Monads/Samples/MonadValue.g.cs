@@ -53,7 +53,14 @@ namespace Narvalo.Edu.Monads.Samples
         /// Gets the unique object of type <c>MonadValue&lt;Unit&gt;</c>.
         /// </summary>
         /// <value>The unique object of type <c>MonadValue&lt;Unit&gt;</c>.</value>
-        public static MonadValue<global::Narvalo.Fx.Unit> Unit { get { return s_Unit; } }
+        public static MonadValue<global::Narvalo.Fx.Unit> Unit
+        { 
+            get 
+            { 
+
+                return s_Unit; 
+            }
+        }
 
         /// <summary>
         /// Gets the zero for <see cref="MonadValue{T}"/>.

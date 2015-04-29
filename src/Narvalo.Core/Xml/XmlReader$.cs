@@ -148,5 +148,25 @@ namespace Narvalo.Xml
         }
 
         #endregion
+
+        #region Wrappers not available with PCL.
+
+        ////public static DateTime ReadElementContentAsDateTime(this XmlReader @this, XName name)
+        ////{
+        ////    Require.Object(@this);
+        ////    Require.NotNull(name, "name");
+
+        ////    return @this.ReadElementContentAsDateTime(name.LocalName, name.NamespaceName);
+        ////}
+
+        ////public static string ReadElementString(this XmlReader @this, XName name)
+        ////{
+        ////    Require.Object(@this);
+        ////    Require.NotNull(name, "name");
+
+        ////    return @this.ReadElementString(name.LocalName, name.NamespaceName);
+        ////}
+
+        #endregion
     }
 }

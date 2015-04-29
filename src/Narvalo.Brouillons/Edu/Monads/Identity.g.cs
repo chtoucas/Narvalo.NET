@@ -52,7 +52,15 @@ namespace Narvalo.Edu.Monads
         /// Gets the unique object of type <c>Identity&lt;Unit&gt;</c>.
         /// </summary>
         /// <value>The unique object of type <c>Identity&lt;Unit&gt;</c>.</value>
-        public static Identity<global::Narvalo.Fx.Unit> Unit { get { return s_Unit; } }
+        public static Identity<global::Narvalo.Fx.Unit> Unit
+        { 
+            get 
+            { 
+                Contract.Ensures(Contract.Result<Identity<global::Narvalo.Fx.Unit>>() != null);
+
+                return s_Unit; 
+            }
+        }
 
 
         /// <summary>

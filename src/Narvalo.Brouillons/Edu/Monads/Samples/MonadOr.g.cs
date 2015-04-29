@@ -53,7 +53,14 @@ namespace Narvalo.Edu.Monads.Samples
         /// Gets the unique object of type <c>MonadOr&lt;Unit&gt;</c>.
         /// </summary>
         /// <value>The unique object of type <c>MonadOr&lt;Unit&gt;</c>.</value>
-        public static MonadOr<global::Narvalo.Fx.Unit> Unit { get { return s_Unit; } }
+        public static MonadOr<global::Narvalo.Fx.Unit> Unit
+        { 
+            get 
+            { 
+
+                return s_Unit; 
+            }
+        }
 
         /// <summary>
         /// Gets the zero for <see cref="MonadOr{T}"/>.
