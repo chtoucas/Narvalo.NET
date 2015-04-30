@@ -1,0 +1,312 @@
+﻿<#+
+    protected void EmitEnumerableInternalExtensions()
+    {
+        // Normally we would name the class with EnumerableExtensions, but we prefer
+        // Enumerable{Name}Extensions to avoid any method collision.
+        // Indeed if we generate two monads in the same namespace, we might end up 
+        // with two methods named the same in the same partial class.
+#>
+    /// <content>
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
+    /// </content>
+    internal static partial class EnumerableExtensions
+    {
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available when we enforce a generic type constraint on the underlying type of the monadic return value. #>
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><IEnumerable<TResult>> MapCore<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, <#= Name #><TResult>> funM)
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(funM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+<#+ } #>
+
+            return @this.Select(funM).EmptyIfNull().Collect();
+        }
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static IEnumerable<TSource> FilterCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, <#= Name #><bool>> predicateM)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ WriteObjectNotNull_(true); #>
+            Require.NotNull(predicateM, "predicateM");
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+
+            // NB: Haskell uses tail recursion, we don't.
+            var list = new List<TSource>();
+
+            foreach (var item in @this)
+            {
+                var m = predicateM.Invoke(item);
+
+<#+ if (IsNullable) { #>
+                if (m != null)
+                {
+                    m.Invoke(
+                        _ =>
+                        {
+                            if (_ == true)
+                            {
+                                list.Add(item);
+                            }
+                        });
+                }
+<#+ } else { #>
+                m.Invoke(
+                    _ =>
+                    {
+                        if (_ == true)
+                        {
+                            list.Add(item);
+                        }
+                    });
+<#+ } #>
+            }
+
+            return list;
+        }
+
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+            MapAndUnzipCore<TSource, TFirst, TSecond>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
+<#+ WriteTypeConstraints_("TSource", "TFirst", "TSecond"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(funM != null);
+<#+ if (IsNullable && MapEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+<#+ } #>
+
+            var m = @this.Select(funM).EmptyIfNull().Collect();
+
+            return m.<#= MapName #>(
+                tuples =>
+                {
+                    IEnumerable<TFirst> list1 = tuples.Select(_ => _.Item1);
+                    IEnumerable<TSecond> list2 = tuples.Select(_ => _.Item2);
+
+                    return new Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>(list1, list2);
+                });
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
+<#+ WriteTypeConstraints_("TFirst", "TSecond", "TResult"); #>
+        {
+            Require.NotNull(resultSelectorM, "resultSelectorM");
+
+            Acknowledge.Object(@this);
+            Contract.Requires(second != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+<#+ } #>
+
+            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector
+                = (v1, v2) => resultSelectorM.Invoke(v1, v2);
+
+            // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
+            // instead of using the Zip from LINQ.
+            return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
+        }
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><TAccumulate> FoldCore<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
+        {
+<#+ WriteObjectNotNull_(true); #>
+            Require.NotNull(accumulatorM, "accumulatorM");
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
+
+            <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
+
+            foreach (TSource item in @this)
+            {
+<#+ if (IsNullable && !HasZero) { #>
+                if (retval == null) 
+                {
+                    return null;
+                }
+
+<#+ } #>
+                retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
+            }
+
+            return retval;
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><TAccumulate> FoldBackCore<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(accumulatorM != null);
+<#+ // "Fold" can not guarantee non null return value. #>
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
+
+            return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><TSource> ReduceCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ WriteObjectNotNull_(true); #>
+            Require.NotNull(accumulatorM, "accumulatorM");
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            using (var iter = @this.GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
+                    throw new InvalidOperationException("Source sequence was empty.");
+                }
+
+                <#= Name #><TSource> retval = <#= Name #>.<#= ReturnName #>(iter.Current);
+
+                while (iter.MoveNext())
+                {
+<#+ if (IsNullable && !HasZero) { #>
+                    if (retval == null) 
+                    {
+                        return null;
+                    }
+
+<#+ } #>
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                }
+
+                return retval;
+            }
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><TSource> ReduceBackCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><TAccumulate> FoldCore<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
+            Func<<#= Name #><TAccumulate>, bool> predicate)
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
+        {
+<#+ WriteObjectNotNull_(true); #>
+            Require.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(predicate, "predicate");
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
+
+            <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
+
+            using (var iter = @this.GetEnumerator())
+            {
+                while (predicate.Invoke(retval) && iter.MoveNext())
+                {
+<#+ if (IsNullable && !HasZero) { #>
+                    if (retval == null)
+                    {
+                        return null;
+                    }
+
+<#+ } #>
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                }
+            }
+
+            return retval;
+        }
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><TSource> ReduceCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,
+            Func<<#= Name #><TSource>, bool> predicate)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ WriteObjectNotNull_(true); #>
+            Require.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(predicate, "predicate");
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            using (var iter = @this.GetEnumerator())
+            {
+                if (!iter.MoveNext())
+                {
+                    throw new InvalidOperationException("Source sequence was empty.");
+                }
+
+                <#= Name #><TSource> retval = <#= Name #>.<#= ReturnName #>(iter.Current);
+
+                while (predicate.Invoke(retval) && iter.MoveNext())
+                {
+<#+ if (IsNullable && !HasZero) { #>
+                    if (retval == null)
+                    {
+                        return null;
+                    }
+
+<#+ } #>
+                    retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
+                }
+
+                return retval;
+            }
+        }
+    } // End of the class EnumerableExtensions.
+<#+
+    }
+#>

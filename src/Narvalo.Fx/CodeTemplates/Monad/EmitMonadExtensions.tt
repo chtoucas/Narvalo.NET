@@ -1,0 +1,601 @@
+﻿<#+
+    protected void EmitMonadExtensions()
+    {
+#>
+    /// <content>
+    /// Provides the core monadic extension methods for <see cref="<#= Name #>{T}" />.
+    /// </content>
+    public static partial class <#= Name #>
+    {
+        #region Basic Monad functions (Prelude)
+
+        /// <remarks>
+        /// Named <c>fmap</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, TResult> selector)
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Require.NotNull(selector, "selector");
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Bind(_ => <#= Name #>.<#= ReturnName #>(selector.Invoke(_)));
+        }
+
+        /// <remarks>
+        /// Named <c>&gt;&gt;</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><TResult> Then<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TResult> other)
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Bind(_ => other);
+        }
+        
+        #endregion
+
+        #region Generalisations of list functions (Prelude)
+
+<#+ if (HasZero) { #>
+        /// <remarks>
+        /// Named <c>mfilter</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><TSource> <#= FilterName #><TSource>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Require.NotNull(predicate, "predicate");
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            return @this.Bind(
+                _ => predicate.Invoke(_) ? @this : <#= Name #><TSource>.<#= ZeroName #>);
+        }
+<#+ } // End of HasZero. #>
+
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+
+        /// <remarks>
+        /// Named <c>replicateM</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(
+            this <#= Name #><TSource> @this,
+            int count)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Require.GreaterThanOrEqualTo(count, 1, "count");
+<#+ if (IsNullable && MapEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+<#+ } #>
+
+            return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
+        }
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
+        
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+<#+ if (HasZero) { #>
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><global::<#= UnitFullName #>> Guard(bool predicate)
+        {
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><global::<#= UnitFullName #>>>() != null);
+<#+ } #>
+
+            return predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
+        }
+<#+ } // End of HasZero. #>
+
+        /// <remarks>
+        /// <para>Named <c>when</c> in Haskell parlance.</para>
+        /// <para>Haskell use a different signature. The method should return a <see cref="<#= UnitFullName #>"/>.</para>
+        /// </remarks>
+        public static <#= Name #><TSource> When<TSource>(
+            this <#= Name #><TSource> @this,
+            bool predicate,
+            Action action)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ if (IsNullable) { #>
+            Acknowledge.Object(@this);
+<#+ } #>
+            Require.NotNull(action, "action");
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            if (predicate)
+            {
+                action.Invoke();
+            }
+
+            return @this;
+        }
+
+        /// <remarks>
+        /// <para>Named <c>unless</c> in Haskell parlance.</para>
+        /// <para>Haskell use a different signature. The method should return a <see cref="<#= UnitFullName #>"/>.</para>
+        /// </remarks>
+        public static <#= Name #><TSource> Unless<TSource>(
+            this <#= Name #><TSource> @this,
+            bool predicate,
+            Action action)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ if (IsNullable) { #>
+            Acknowledge.Object(@this);
+<#+ } #>
+            Require.NotNull(action, "action");
+<#+ if (IsNullable && WhenEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            if (!predicate)
+            {
+                action.Invoke();
+            }
+
+            return @this;
+        }
+
+        #endregion
+
+        #region Monadic lifting operators (Prelude)
+
+        /// <see cref="Lift{T1, T2, T3}" />
+        public static <#= Name #><TResult> Zip<TFirst, TSecond, TResult>(
+            this <#= Name #><TFirst> @this,
+            <#= Name #><TSecond> second,
+            Func<TFirst, TSecond, TResult> resultSelector)
+<#+ WriteTypeConstraints_("TFirst", "TSecond", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("second"); #>
+            Require.NotNull(resultSelector, "resultSelector");
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Bind(v1 => second.<#= MapName #>(v2 => resultSelector.Invoke(v1, v2)));
+        }
+
+        /// <see cref="Lift{T1, T2, T3, T4}" />
+        public static <#= Name #><TResult> Zip<T1, T2, T3, TResult>(
+            this <#= Name #><T1> @this,
+            <#= Name #><T2> second,
+            <#= Name #><T3> third,
+            Func<T1, T2, T3, TResult> resultSelector)
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("second"); #>
+            Require.NotNull(resultSelector, "resultSelector");
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            Func<T1, <#= Name #><TResult>> g
+                = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
+
+            return @this.Bind(g);
+        }
+
+        /// <see cref="Lift{T1, T2, T3, T4, T5}" />
+        public static <#= Name #><TResult> Zip<T1, T2, T3, T4, TResult>(
+             this <#= Name #><T1> @this,
+             <#= Name #><T2> second,
+             <#= Name #><T3> third,
+             <#= Name #><T4> fourth,
+             Func<T1, T2, T3, T4, TResult> resultSelector)
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("second"); #>
+            Require.NotNull(resultSelector, "resultSelector");
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            Func<T1, <#= Name #><TResult>> g
+                = t1 => second.Zip(
+                    third,
+                    fourth,
+                    (t2, t3, t4) => resultSelector.Invoke(t1, t2, t3, t4));
+
+            return @this.Bind(g);
+        }
+
+        /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
+        public static <#= Name #><TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+            this <#= Name #><T1> @this,
+            <#= Name #><T2> second,
+            <#= Name #><T3> third,
+            <#= Name #><T4> fourth,
+            <#= Name #><T5> fifth,
+            Func<T1, T2, T3, T4, T5, TResult> resultSelector)
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "T5", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+<#+ WriteNotNull_("second"); #>
+            Require.NotNull(resultSelector, "resultSelector");
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            Func<T1, <#= Name #><TResult>> g
+                = t1 => second.Zip(
+                    third,
+                    fourth,
+                    fifth,
+                    (t2, t3, t4, t5) => resultSelector.Invoke(t1, t2, t3, t4, t5));
+
+            return @this.Bind(g);
+        }
+
+        #endregion
+
+        #region Query Expression Pattern
+
+<#+ if (!PreferLinqDialect) { #>
+<#+ if (HasFilter) { #>
+        public static <#= Name #><TSource> Where<TSource>(
+            this <#= Name #><TSource> @this, 
+            Func<TSource, bool> predicate)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+<#+ if (IsNullable && FilterEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            return @this.<#= FilterName #>(predicate);
+        }
+<#+ } // End of HasFilter. #>
+
+        public static <#= Name #><TResult> Select<TSource, TResult>(
+            this <#= Name #><TSource> @this, 
+            Func<TSource, TResult> selector)
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+<#+ if (IsNullable && MapEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.<#= MapName #>(selector);
+        }
+<#+ } // End of !PreferLinqDialect. #>
+
+        /// <remarks>
+        /// Kind of generalisation of Zip (liftM2).
+        /// </remarks>
+        public static <#= Name #><TResult> SelectMany<TSource, TMiddle, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, <#= Name #><TMiddle>> valueSelectorM,
+            Func<TSource, TMiddle, TResult> resultSelector)
+<#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Require.NotNull(valueSelectorM, "valueSelectorM");
+            Require.NotNull(resultSelector, "resultSelector");
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Bind(
+                _ => valueSelectorM.Invoke(_).<#= MapName #>(
+                    middle => resultSelector.Invoke(_, middle)));
+        }
+
+<#+ if (HasJoin) { #>
+        public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector)
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+<#+ if (IsNullable) { #>
+            Contract.Requires(inner != null);
+<#+ } #>
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
+<#+ if (IsNullable && JoinEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Join(
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                EqualityComparer<TKey>.Default);
+        }
+        
+        public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+<#+ if (IsNullable) { #>
+            Contract.Requires(inner != null);
+<#+ } #>
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
+<#+ if (IsNullable && GroupJoinEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.GroupJoin(
+                inner,
+                outerKeySelector,
+                innerKeySelector, 
+                resultSelector, 
+                EqualityComparer<TKey>.Default);
+        }
+<#+ } // End of HasJoin. #>
+
+        #endregion
+        
+        #region LINQ extensions
+
+<#+ if (HasJoin) { #>
+        public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+        {
+<#+ if (IsNullable) { #>
+            Acknowledge.Object(@this);
+            Contract.Requires(inner != null);
+<#+ } #>
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
+<#+ if (IsNullable && JoinEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return JoinCore(
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
+        }
+        
+        public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
+            this <#= Name #><TSource> @this,
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+        {
+<#+ if (IsNullable) { #>
+            Acknowledge.Object(@this);
+            Contract.Requires(inner != null);
+<#+ } #>
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(resultSelector != null);
+<#+ if (IsNullable && GroupJoinEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return GroupJoinCore(
+                @this,
+                inner,
+                outerKeySelector,
+                innerKeySelector,
+                resultSelector,
+                comparer ?? EqualityComparer<TKey>.Default);
+        }
+        
+        
+        private static <#= Name #><TResult> JoinCore<TSource, TInner, TKey, TResult>(
+            <#= Name #><TSource> seq,
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, TInner, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+        {
+<#+ WriteNotNull_("seq"); #>
+            Require.NotNull(resultSelector, "resultSelector");
+<#+ if (IsNullable) { #>
+            Contract.Requires(inner != null);
+<#+ } #>
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(comparer != null);
+<#+ if (IsNullable && MapEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+            
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in seq
+                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
+                   select resultSelector.Invoke(outerValue, innerValue);
+        }
+        
+        private static <#= Name #><TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
+            <#= Name #><TSource> seq,
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
+            IEqualityComparer<TKey> comparer)
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+        {
+<#+ WriteNotNull_("seq"); #>
+            Require.NotNull(resultSelector, "resultSelector");
+<#+ if (IsNullable) { #>
+            Contract.Requires(inner != null);
+<#+ } #>
+            Contract.Requires(outerKeySelector != null);
+            Contract.Requires(innerKeySelector != null);
+            Contract.Requires(comparer != null);
+<#+ if (IsNullable && MapEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
+
+            return from outerValue in seq
+                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
+        }
+
+        private static Func<TSource, <#= Name #><TKey>> GetKeyLookup<TSource, TInner, TKey>(
+            <#= Name #><TInner> inner,
+            Func<TSource, TKey> outerKeySelector,
+            Func<TInner, TKey> innerKeySelector,
+            IEqualityComparer<TKey> comparer)
+<#+ WriteTypeConstraints_("TSource", "TInner", "TKey"); #>
+        {
+<#+ WriteNotNull_("inner"); #>
+            Require.NotNull(outerKeySelector, "outerKeySelector");
+            Require.NotNull(comparer, "comparer");
+            Contract.Requires(innerKeySelector != null);
+            Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TKey>>>() != null);
+
+            return source =>
+            {
+                TKey outerKey = outerKeySelector.Invoke(source);
+            
+                return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(_ => comparer.Equals(_, outerKey));
+            };
+        }
+<#+ } // End of HasJoin. #>
+
+        #endregion
+
+        #region Non-standard extensions
+        
+        public static <#= Name #><TResult> Coalesce<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> then,
+            <#= Name #><TResult> otherwise)
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Require.NotNull(predicate, "predicate");
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+<#+ if (HasZero) { #>
+        public static <#= Name #><TResult> Then<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> other)
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Contract.Requires(predicate != null);
+<#+ if (IsNullable && CoalesceEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Coalesce(predicate, other, <#= Name #><TResult>.<#= ZeroName #>);
+        }
+
+        public static <#= Name #><TResult> Otherwise<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> other)
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Contract.Requires(predicate != null);
+<#+ if (IsNullable && CoalesceEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
+        }
+<#+ } // End of HasZero. #>
+
+        public static void Invoke<TSource>(
+            this <#= Name #><TSource> @this,
+            Action<TSource> action)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Require.NotNull(action, "action");
+
+            @this.Bind(_ => { action.Invoke(_); return @this; });
+        }
+
+<#+ if (HasThen) { #>
+
+        public static void On<#= ZeroName #><TSource>(
+            this <#= Name #><TSource> @this,
+            Action action)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Require.NotNull(action, "action");
+
+            @this.Then(<#= Name #>.Unit).Invoke(_ => action.Invoke());
+        }
+
+        public static void Invoke<TSource>(
+            this <#= Name #><TSource> @this,
+            Action<TSource> action,
+            Action case<#= ZeroName #>)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+<#+ WriteObjectNotNull_(); #>
+            Require.NotNull(action, "action");
+
+            @this.Bind(_ => { action.Invoke(_); return @this; })
+                .Then(<#= Name #>.Unit)
+                .Bind(_ => { case<#= ZeroName #>.Invoke(); return Unit; });
+        }
+<#+ } // End of HasThen. #>
+
+        #endregion
+    } // End of the class <#= Name #>.
+<#+
+    } 
+#>

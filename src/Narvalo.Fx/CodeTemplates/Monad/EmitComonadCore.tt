@@ -1,0 +1,30 @@
+﻿<#+
+    protected void EmitComonadCore() 
+    {
+#>
+    // Implements core Comonad methods.
+    public static partial class <#= Name #>
+    {
+        /// <remarks>
+        /// Named <c>extract</c> in Haskell parlance.
+        /// </remarks>
+        public static T Extract<T>(<#= Name #><T> monad)
+<#+ WriteTypeConstraints_("T"); #>
+        {
+            Contract.Requires(monad != null);
+
+            return <#= Name #><T>.ε(monad);
+        }
+
+        /// <remarks>
+        /// Named <c>duplicate</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> monad)
+<#+ WriteTypeConstraints_("T"); #>
+        {
+            return <#= Name #><T>.δ(monad);
+        }
+    } // End of the class <#= Name #>.
+<#+
+    } // End of EmitCoreComonad().
+#>

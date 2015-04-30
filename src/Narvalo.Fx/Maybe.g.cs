@@ -676,6 +676,7 @@ namespace Narvalo.Fx
     {
         #region Basic Monad functions (Prelude)
 
+
         /// <remarks>
         /// Named <c>sequence</c> in Haskell parlance.
         /// </remarks>

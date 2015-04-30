@@ -1,0 +1,72 @@
+﻿<#+
+    protected void EmitMonadEnumerableInternalExtensions()
+    {
+#>
+    /// <content>
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
+    /// </content>
+    internal static partial class EnumerableExtensions
+    {
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
+            this IEnumerable<<#= Name #><TSource>> @this)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+            Acknowledge.Object(@this);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+<#+ } #>
+
+            var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
+            Func<<#= Name #><IEnumerable<TSource>>, <#= Name #><TSource>, <#= Name #><IEnumerable<TSource>>> fun
+                = (m, n) => m.Bind(list => CollectCore(n, list));
+
+            var retval = @this.Aggregate(seed, fun);
+<#+ if (IsNullable) { #>
+            Contract.Assume(retval != null);
+<#+ } #>
+
+            return retval;
+        }
+        
+        // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
+        private static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
+            <#= Name #><TSource> m,
+            IEnumerable<TSource> list)
+        {
+<#+ if (IsNullable) { #>
+            Contract.Requires(m != null);
+<#+ } #>
+
+            return m.Bind(item => <#= Name #>.<#= ReturnName #>(list.Concat(Enumerable.Repeat(item, 1))));
+        }
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
+
+<#+ if (HasSum) { #>
+
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+            Justification = "[GeneratedCode] This method has been overridden locally.")]
+        internal static <#= Name #><TSource> SumCore<TSource>(
+            this IEnumerable<<#= Name #><TSource>> @this)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+            Acknowledge.Object(@this);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            var retval = @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
+<#+ if (IsNullable) { #>
+            Contract.Assume(retval != null);
+<#+ } #>
+
+            return retval;
+        }
+<#+ } // End of HasSum. #>
+    } // End of the class EnumerableExtensions.
+<#+
+    }
+#>

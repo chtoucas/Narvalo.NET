@@ -1,0 +1,56 @@
+﻿<#+
+    protected void EmitMonadEnumerableExtensions()
+    {
+#>
+    /// <content>
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
+    /// </content>
+    public static partial class EnumerableExtensions
+    {
+        #region Basic Monad functions (Prelude)
+
+
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+        /// <remarks>
+        /// Named <c>sequence</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<<#= Name #><TSource>> @this)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+            Acknowledge.Object(@this);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+<#+ } #>
+
+            return @this.CollectCore();
+        }
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
+
+        #endregion
+<#+ if (HasSum) { #>
+
+        #region Generalisations of list functions (Prelude)
+
+        /// <remarks>
+        /// Named <c>msum</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><TSource> Sum<TSource>(
+            this IEnumerable<<#= Name #><TSource>> @this)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+            Acknowledge.Object(@this);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            return @this.SumCore();
+        }
+
+        #endregion
+<#+ } // End of HasSum. #>
+    } // End of the class EnumerableExtensions.
+<#+
+    }
+#>

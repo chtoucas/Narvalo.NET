@@ -196,7 +196,6 @@ namespace Narvalo.Fx
 
         #endregion
     } // End of the class Output.
-
     /// <content>
     /// Provides the core monadic extension methods for <see cref="Output{T}" />.
     /// </content>
@@ -430,7 +429,6 @@ namespace Narvalo.Fx
 
         #endregion
     } // End of the class Output.
-
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Output{T}"/> class.
     /// </content>
@@ -496,6 +494,7 @@ namespace Narvalo.Fx
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
+
 
         /// <remarks>
         /// Named <c>sequence</c> in Haskell parlance.
@@ -727,7 +726,6 @@ namespace Narvalo.Fx.Internal
             return m.Bind(item => Output.Success(list.Concat(Enumerable.Repeat(item, 1))));
         }
     } // End of the class EnumerableExtensions.
-
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>

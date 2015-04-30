@@ -1,0 +1,204 @@
+﻿<#+
+    protected void EmitEnumerableExtensions()
+    {
+#>
+    /// <content>
+    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
+    /// </content>
+    public static partial class EnumerableExtensions
+    {
+        #region Basic Monad functions (Prelude)
+
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+        /// <remarks>
+        /// Named <c>mapM</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><IEnumerable<TResult>> Map<TSource, TResult>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, <#= Name #><TResult>> funM)
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(funM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+<#+ } #>
+
+            return @this.MapCore(funM);
+        }
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
+
+        #endregion
+
+        #region Generalisations of list functions (Prelude)
+
+        /// <remarks>
+        /// <para>Named <c>filterM</c> in Haskell parlance.</para>
+        /// <para>Haskell use a different signature.</para>
+        /// </remarks>
+        public static IEnumerable<TSource> Filter<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, <#= Name #><bool>> predicateM)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(predicateM != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+
+            return @this.FilterCore(predicateM);
+        }
+
+<#+ if (!HasUnderlyingTypeConstraint) { #>
+<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+        /// <remarks>
+        /// Named <c>mapAndUnzipM</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+            MapAndUnzip<TSource, TFirst, TSecond>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
+<#+ WriteTypeConstraints_("TSource", "TFirst", "TSecond"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(funM != null);
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+<#+ } #>
+
+            return @this.MapAndUnzipCore(funM);
+        }
+
+        /// <remarks>
+        /// Named <c>zipWithM</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> @this,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
+<#+ WriteTypeConstraints_("TFirst", "TSecond", "TResult"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(second != null);
+            Contract.Requires(resultSelectorM != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+<#+ } #>
+
+            return @this.ZipCore(second, resultSelectorM);
+        }
+<#+ } // End of !HasUnderlyingTypeConstraint. #>
+
+        /// <remarks>
+        /// Named <c>foldM</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
+
+            return @this.FoldCore(seed, accumulatorM);
+        }
+
+        #endregion
+
+        #region Aggregate Operators
+        
+        public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
+
+            return @this.FoldBackCore(seed, accumulatorM);
+        }
+        
+        public static <#= Name #><TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            return @this.ReduceCore(accumulatorM);
+        }
+        
+        public static <#= Name #><TSource> ReduceBack<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(accumulatorM != null);
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            return @this.ReduceBackCore(accumulatorM);
+        }
+
+        #endregion
+
+        #region Catamorphisms
+
+        /// <remarks>
+        /// <para>Haskell use a different signature.</para>
+        /// </remarks>
+        public static <#= Name #><TAccumulate> Fold<TSource, TAccumulate>(
+            this IEnumerable<TSource> @this,
+            TAccumulate seed,
+            Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
+            Func<<#= Name #><TAccumulate>, bool> predicate)
+<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(accumulatorM != null);
+            Contract.Requires(predicate != null);
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+<#+ } #>
+
+            return @this.FoldCore(seed, accumulatorM, predicate);
+        }
+
+        /// <remarks>
+        /// <para>Haskell use a different signature.</para>
+        /// </remarks>
+        public static <#= Name #><TSource> Reduce<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,
+            Func<<#= Name #><TSource>, bool> predicate)
+<#+ WriteTypeConstraints_("TSource"); #>
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(accumulatorM != null);
+            Contract.Requires(predicate != null);
+<#+ if (IsNullable && HasZero) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            return @this.ReduceCore(accumulatorM, predicate);
+        }
+
+        #endregion
+    } // End of the class EnumerableExtensions.
+<#+
+    }
+#>

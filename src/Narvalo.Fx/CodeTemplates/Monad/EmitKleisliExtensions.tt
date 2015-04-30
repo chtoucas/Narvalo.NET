@@ -1,0 +1,63 @@
+﻿<#+
+    public void EmitKleisliExtensions()
+    {
+#>
+    /// <content>
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
+    /// </content>
+    public static partial class FuncExtensions
+    {
+        #region Basic Monad functions (Prelude)
+
+        /// <remarks>
+        /// Named <c>=&lt;&lt;</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><TResult> Invoke<TSource, TResult>(
+            this Func<TSource, <#= Name #><TResult>> @this,
+            <#= Name #><TSource> value)
+<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+        {
+            Acknowledge.Object(@this);
+<#+ WriteNotNull_("value"); #>
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return value.Bind(@this);
+        }
+
+        /// <remarks>
+        /// Named <c>&gt;=&gt;</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<TSource, <#= Name #><TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, <#= Name #><TMiddle>> @this,
+            Func<TMiddle, <#= Name #><TResult>> funM)
+<#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
+        {
+<#+ WriteObjectNotNull_(true); #>
+            Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
+
+            return _ => @this.Invoke(_).Bind(funM);
+        }
+
+        /// <remarks>
+        /// Named <c>&lt;=&lt;</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, <#= Name #><TResult>> @this,
+            Func<TSource, <#= Name #><TMiddle>> funM)
+<#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
+        {
+            Acknowledge.Object(@this);
+            Require.NotNull(funM, "funM");
+            Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
+
+            return _ => funM.Invoke(_).Bind(@this);
+        }
+
+        #endregion
+    } // End of the class FuncExtensions.
+<#+
+    }
+#>

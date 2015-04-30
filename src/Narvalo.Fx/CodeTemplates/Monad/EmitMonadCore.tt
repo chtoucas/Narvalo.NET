@@ -1,0 +1,194 @@
+﻿<#+
+    protected void EmitMonadCore() 
+    {
+#>
+    /// <content>
+    /// Provides a set of static methods for <see cref="<#= Name #>{T}" />.
+    /// </content>
+    /// <remarks>
+    /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
+    /// </remarks>
+    public static partial class <#= Name #>
+    {
+        private static readonly <#= Name #><global::<#= UnitFullName #>> s_Unit = <#= ReturnName #>(global::<#= UnitFullName #>.Single);
+<#+ if (HasZero) { #>
+        private static readonly <#= Name #><global::<#= UnitFullName #>> s_<#= ZeroName #> = <#= Name #><global::<#= UnitFullName #>>.<#= ZeroName #>;
+<#+ } #>
+
+        /// <summary>
+        /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
+        /// </summary>
+        /// <value>The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.</value>
+        public static <#= Name #><global::<#= UnitFullName #>> Unit
+        { 
+            get 
+            { 
+<#+ if (IsNullable && UnitEnsuresSome) { #>
+                Contract.Ensures(Contract.Result<<#= Name #><global::<#= UnitFullName #>>>() != null);
+<#+ } #>
+
+                return s_Unit; 
+            }
+        }
+
+<#+ if (HasZero) { #>
+        /// <summary>
+        /// Gets the zero for <see cref="<#= Name #>{T}"/>.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>mzero</c> in Haskell parlance.
+        /// </remarks>
+        /// <value>The zero for <see cref="<#= Name #>{T}"/>.</value>
+        public static <#= Name #><global::<#= UnitFullName #>> <#= ZeroName #> { get { return s_<#= ZeroName #>; } }
+<#+ } #>
+
+        /// <summary>
+        /// Obtains an instance of the <see cref="<#= Name #>{T}"/> class for the specified value.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>return</c> in Haskell parlance.
+        /// </remarks>
+        /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
+        /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T}"/> object.</param>
+        /// <returns>An instance of the <see cref="<#= Name #>{T}"/> class for the specified value.</returns>
+        public static <#= Name #><T> <#= ReturnName #><T>(T value)
+<#+ WriteTypeConstraints_("T"); #>
+        {
+<#+ if (IsNullable && UnitEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
+<#+ } #>
+
+            return <#= Name #><T>.η(value);
+        }
+        
+        #region Generalisations of list functions (Prelude)
+
+        /// <summary>
+        /// Removes one level of structure, projecting its bound value into the outer level.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>join</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><T> Flatten<T>(<#= Name #><<#= Name #><T>> square)
+<#+ WriteTypeConstraints_("T"); #>
+        {
+<#+ if (IsNullable) { #>
+            Contract.Requires(square != null);
+<#+ } #>
+<#+ if (IsNullable && MultiplicationEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
+<#+ } #>
+
+            return <#= Name #><T>.μ(square);
+        }
+
+        #endregion
+
+        #region Monadic lifting operators (Prelude)
+
+        /// <summary>
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(
+            Func<T, TResult> fun)
+<#+ WriteTypeConstraints_("T", "TResult"); #>
+        {
+            Contract.Ensures(Contract.Result<Func<<#= Name #><T>, <#= Name #><TResult>>>() != null);
+
+            return m =>
+            {
+<#+ if (IsNullable) { PushIndent(); WriteNotNull_("m"); PopIndent(); }  #>
+                return m.<#= MapName #>(fun);
+            };
+        }
+
+        /// <summary>
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the 
+        /// monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM2</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>
+            Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
+<#+ WriteTypeConstraints_("T1", "T2", "TResult"); #>
+        {
+            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>() != null);
+
+            return (m1, m2) =>
+            {
+<#+ if (IsNullable) { PushIndent(); WriteNotNull_("m1"); PopIndent(); }  #>
+                return m1.Zip(m2, fun);
+            };
+        }
+
+        /// <summary>
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the 
+        /// monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM3</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>
+            Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "TResult"); #>
+        {
+            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>() != null);
+
+            return (m1, m2, m3) =>
+            {
+<#+ if (IsNullable) { PushIndent(); WriteNotNull_("m1"); PopIndent(); }  #>
+                return m1.Zip(m2, m3, fun);
+            };
+        }
+
+        /// <summary>
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
+        /// monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM4</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>
+            Lift<T1, T2, T3, T4, TResult>(
+            Func<T1, T2, T3, T4, TResult> fun)
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "TResult"); #>
+        {
+            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>() != null);
+            
+            return (m1, m2, m3, m4) =>
+            {
+<#+ if (IsNullable) { PushIndent(); WriteNotNull_("m1"); PopIndent(); }  #>
+                return m1.Zip(m2, m3, m4, fun);
+            };
+        }
+
+        /// <summary>
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
+        /// monadic arguments from left to right.
+        /// </summary>
+        /// <remarks>
+        /// Named <c>liftM5</c> in Haskell parlance.
+        /// </remarks>
+        public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>
+            Lift<T1, T2, T3, T4, T5, TResult>(
+            Func<T1, T2, T3, T4, T5, TResult> fun)
+<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "T5", "TResult"); #>
+        {
+            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>() != null);
+       
+            return (m1, m2, m3, m4, m5) =>
+            {
+<#+ if (IsNullable) { PushIndent(); WriteNotNull_("m1"); PopIndent(); }  #>
+                return m1.Zip(m2, m3, m4, m5, fun);
+            };
+        }
+
+        #endregion
+    } // End of the class <#= Name #>.
+<#+
+    }
+#>
