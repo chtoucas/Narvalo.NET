@@ -1,0 +1,1 @@
+﻿https://msdn.microsoft.com/en-us/magazine/hh975350.aspx
