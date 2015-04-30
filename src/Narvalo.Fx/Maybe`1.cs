@@ -164,7 +164,7 @@ namespace Narvalo.Fx
             Contract.Requires(value != null);
 
             _value = value;
-            _isSome = false;
+            _isSome = true;
         }
 
         /// <summary>
