@@ -1,4 +1,4 @@
-﻿<#@ include file=".\CodeTemplates\Monad.Output.tt" #>
+﻿<#@ include file=".\CodeTemplates\Output.tt" #>
 <# EmitMonad(); #>
 
 <# EmitLinq(); #>
