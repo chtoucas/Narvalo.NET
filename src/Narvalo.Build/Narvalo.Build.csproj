@@ -41,6 +41,9 @@
       <Link>Narvalo.Build.tasks</Link>
     </None>
     <None Include="Narvalo.Build.Version.props" />
+    <None Include="Narvalo.Build.props">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Strings.resx">
