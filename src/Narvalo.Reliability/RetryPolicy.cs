@@ -18,7 +18,7 @@ namespace Narvalo.Reliability
         {
             Require.GreaterThan(maxRetries, 0, "maxRetries");
             Require.NotNull(retryableExceptionTypes, "retryableExceptionTypes");
-            Enforce.GreaterThan(retryInterval, TimeSpan.Zero, "retryInterval");
+            Guard.GreaterThan(retryInterval, TimeSpan.Zero, "retryInterval");
 
             _maxRetries = maxRetries;
             _retryInterval = retryInterval;

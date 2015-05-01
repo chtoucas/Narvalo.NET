@@ -19,7 +19,7 @@ namespace Narvalo
     /// <para>If a condition does not hold, a <see cref="ArgumentException"/> is thrown.</para>
     /// <para>Only useful if you are using the "Custom Parameter Validation" assembly mode.</para>
     /// </remarks>
-    /// <seealso cref="Enforce"/>
+    /// <seealso cref="Guard"/>
     [DebuggerStepThrough]
     public static class Require
     {

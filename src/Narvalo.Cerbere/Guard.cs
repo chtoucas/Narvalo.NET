@@ -22,7 +22,7 @@ namespace Narvalo
     /// </remarks>
     /// <seealso cref="Require"/>
     [DebuggerStepThrough]
-    public static class Enforce
+    public static class Guard
     {
         /// <summary>
         /// Validates that the specified argument is in a given range, range borders included.
