@@ -1,6 +1,8 @@
 Issues & Roadmap
 ================
 
+CodeAnalysisDictionary does not seem to be understood.
+
 Design
 ------
 

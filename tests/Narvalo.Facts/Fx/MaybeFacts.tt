@@ -1,13 +1,16 @@
 ﻿<#@ template language="C#" debug="false" hostspecific="true" #>
 <#@ output extension=".g.cs" #>
-<#@ include file="$(T4NarvaloTemplates)\MonadFacts.tt" #>
-<#
-    ReturnName = "Of";
-    PlusName = "OrElse";
-    ZeroName = "None";
+<#@ include file="$(T4NarvaloTemplates)\Monad.Facts.tt" #>
+<#@ include file="$(T4NarvaloTemplates)\Maybe.tt" #>
+<#= new MaybeTemplate(this).Execute() #>
+<#+
 
-    HasPlus = true;
-    HasZero = true;
+    public partial class MaybeTemplate : MonadTemplate
+    {
+        protected override void WriteContent()
+        {
+            EmitFacts();
+        }
+    }
 
-    EmitFacts();
 #>

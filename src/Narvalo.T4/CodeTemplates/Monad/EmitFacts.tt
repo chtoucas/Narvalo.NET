@@ -1,0 +1,235 @@
+﻿<#@ include file="$(T4NarvaloTemplates)\Monad.Facts.tt" once="true" #><#+
+
+public partial class MonadTemplate
+{
+    public void EmitFacts()
+    {
+#>
+
+namespace <#= Namespace #>
+{
+    using System;
+
+    using Xunit;
+
+    public static partial class <#= Name #>
+    {
+        #region Linq Operators
+
+        [Fact]
+        public static void Select_ThrowsArgumentNullException_ForNullSelector()
+        {
+            // Arrange
+            var source = <#= ClassName #>.<#= ReturnName #>(1);
+            Func<int, int> selector = null;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.Select(selector));
+        }
+
+<#+ if (HasFilter) { #>
+        [Fact]
+        public static void Where_ThrowsArgumentNullException_ForNullPredicate()
+        {
+            // Arrange
+            var source = <#= ClassName #>.<#= ReturnName #>(1);
+            Func<int, bool> predicate = null;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
+        }
+<#+ } #>
+
+        [Fact]
+        public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
+        {
+            // Arrange
+            var source = <#= ClassName #>.<#= ReturnName #>(1);
+            Func<int, <#= ClassName #><int>> valueSelector = null;
+            Func<int, int, int> resultSelector = (i, j) => i + j;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+        }
+
+        [Fact]
+        public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
+        {
+            // Arrange
+            var source = <#= ClassName #>.<#= ReturnName #>(1);
+            var middle = <#= ClassName #>.<#= ReturnName #>(2);
+            Func<int, <#= ClassName #><int>> valueSelector = _ => middle;
+            Func<int, int, int> resultSelector = null;
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => source.SelectMany(valueSelector, resultSelector));
+        }
+
+        #endregion
+
+        #region Monad Laws
+
+<#+ if (HasZero && HasPlus) { #>
+        [Fact]
+        public static void <#= ClassName #>_SatisfiesFirstMonoidLaw()
+        {
+            // Arrange
+            var monad = <#= ClassName #>.<#= ReturnName #>(1);
+
+            // Act
+            var left = <#= ClassName #><int>.<#= ZeroName #>.<#= PlusName #>(monad);
+            var right = monad;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void <#= ClassName #>_SatisfiesSecondMonoidLaw()
+        {
+            // Arrange
+            var monad = <#= ClassName #>.<#= ReturnName #>(1);
+
+            // Act
+            var left = monad.<#= PlusName #>(<#= ClassName #><int>.<#= ZeroName #>);
+            var right = monad;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void <#= ClassName #>_SatisfiesThirdMonoidLaw()
+        {
+            // Arrange
+            var monadA = <#= ClassName #>.<#= ReturnName #>(1);
+            var monadB = <#= ClassName #>.<#= ReturnName #>(2);
+            var monadC = <#= ClassName #>.<#= ReturnName #>(3);
+
+            // Act
+            var left = monadA.<#= PlusName #>(monadB.<#= PlusName #>(monadC));
+            var right = monadA.<#= PlusName #>(monadB).<#= PlusName #>(monadC);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+<#+ } #>
+
+        [Fact]
+        public static void <#= ClassName #>_SatisfiesFirstMonadLaw()
+        {
+            // Arrange
+            int value = 1;
+            Func<int, <#= ClassName #><long>> kun = _ => <#= ClassName #>.<#= ReturnName #>((long)2 * _);
+
+            // Act
+            var left = <#= ClassName #>.<#= ReturnName #>(value).Bind(kun);
+            var right = kun(value);
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void <#= ClassName #>_SatisfiesSecondMonadLaw()
+        {
+            // Arrange
+            Func<int, <#= ClassName #><int>> create = _ => <#= ClassName #>.<#= ReturnName #>(_);
+            var monad = <#= ClassName #>.<#= ReturnName #>(1);
+
+            // Act
+            var left = monad.Bind(create);
+            var right = monad;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void <#= ClassName #>_SatisfiesThirdMonadLaw()
+        {
+            // Arrange
+            <#= ClassName #><short> m = <#= ClassName #>.<#= ReturnName #>((short)1);
+            Func<short, <#= ClassName #><int>> f = _ => <#= ClassName #>.<#= ReturnName #>((int)3 * _);
+            Func<int, <#= ClassName #><long>> g = _ => <#= ClassName #>.<#= ReturnName #>((long)2 * _);
+
+            // Act
+            var left = m.Bind(f).Bind(g);
+            var right = m.Bind(_ => f(_).Bind(g));
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+<#+ if (HasZero) { #>
+        [Fact]
+        public static void <#= ClassName #>_SatisfiesMonadZeroRule()
+        {
+            // Arrange
+            Func<int, <#= ClassName #><long>> kun = _ => <#= ClassName #>.<#= ReturnName #>((long)2 * _);
+
+            // Act
+            var left = <#= ClassName #><int>.<#= ZeroName #>.Bind(kun);
+            var right = <#= ClassName #><long>.<#= ZeroName #>;
+
+            // Assert
+            Assert.True(left.Equals(right));
+        }
+
+        [Fact]
+        public static void <#= ClassName #>_SatisfiesMonadMoreRule()
+        {
+            // Act
+            var leftSome = <#= ClassName #>.<#= ReturnName #>(1).Bind(_ => <#= ClassName #><int>.<#= ZeroName #>);
+            var leftNone = <#= ClassName #><int>.<#= ZeroName #>.Bind(_ => <#= ClassName #><int>.<#= ZeroName #>);
+            var right = <#= ClassName #><int>.<#= ZeroName #>;
+
+            // Assert
+            Assert.True(leftSome.Equals(right));
+            Assert.True(leftNone.Equals(right));
+        }
+
+<#+ } #>
+
+<#+ if (HasZero && HasPlus) { #>
+        [Fact]
+        public static void <#= ClassName #>_SatisfiesMonadOrRule()
+        {
+            // Arrange
+            var monad = <#= ClassName #>.<#= ReturnName #>(2);
+
+            // Act
+            var leftSome = monad.<#= PlusName #>(<#= ClassName #>.<#= ReturnName #>(1));
+            var leftNone = monad.<#= PlusName #>(<#= ClassName #><int>.<#= ZeroName #>);
+            var right = monad;
+
+            // Assert
+            Assert.True(leftSome.Equals(right));
+            Assert.True(leftNone.Equals(right));
+        }
+
+        [Fact]
+        public static void <#= ClassName #>_DoesNotSatisfyRightZeroForPlus()
+        {
+            // Arrange
+            var monad = <#= ClassName #>.<#= ReturnName #>(2);
+
+            // Act
+            var leftSome = <#= ClassName #>.<#= ReturnName #>(1).<#= PlusName #>(monad);
+            var leftNone = <#= ClassName #><int>.<#= ZeroName #>.<#= PlusName #>(monad);
+            var right = monad;
+
+            // Assert
+            Assert.False(leftSome.Equals(right));   // NB: Fails here the "Unit is a right zero for Plus".
+            Assert.True(leftNone.Equals(right));
+        }
+<#+ } #>
+
+        #endregion
+    }
+}
+<#+
+    }
+}
+
+#>

@@ -1,4 +1,4 @@
-﻿<#+
+﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
 
 public partial class MonadTemplate
 {
@@ -20,7 +20,7 @@ public partial class MonadTemplate
         public static <#= Name #><IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
-<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
@@ -43,7 +43,7 @@ public partial class MonadTemplate
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(predicateM != null);
@@ -61,7 +61,7 @@ public partial class MonadTemplate
             MapAndUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
-<#+ WriteTypeConstraints_("TSource", "TFirst", "TSecond"); #>
+<#+ WriteTypeConstraints("TSource", "TFirst", "TSecond"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
@@ -79,7 +79,7 @@ public partial class MonadTemplate
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
-<#+ WriteTypeConstraints_("TFirst", "TSecond", "TResult"); #>
+<#+ WriteTypeConstraints("TFirst", "TSecond", "TResult"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
@@ -99,7 +99,7 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
-<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
+<#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -118,7 +118,7 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
-<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
+<#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -132,7 +132,7 @@ public partial class MonadTemplate
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -146,7 +146,7 @@ public partial class MonadTemplate
         public static <#= Name #><TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -169,7 +169,7 @@ public partial class MonadTemplate
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
             Func<<#= Name #><TAccumulate>, bool> predicate)
-<#+ WriteTypeConstraints_("TSource", "TAccumulate"); #>
+<#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -188,7 +188,7 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,
             Func<<#= Name #><TSource>, bool> predicate)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);

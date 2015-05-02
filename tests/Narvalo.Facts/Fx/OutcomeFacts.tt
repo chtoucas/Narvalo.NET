@@ -1,9 +1,16 @@
 ﻿<#@ template language="C#" debug="false" hostspecific="true" #>
 <#@ output extension=".g.cs" #>
-<#@ include file="$(T4NarvaloTemplates)\MonadFacts.tt" #>
-<#
-    HasZero = false;
-    ReturnName = "Success";
+<#@ include file="$(T4NarvaloTemplates)\Monad.Facts.tt" #>
+<#@ include file="$(T4NarvaloTemplates)\Outcome.tt" #>
+<#= new OutcomeTemplate(this).Execute() #>
+<#+
 
-    EmitFacts();
+    public partial class OutcomeTemplate : MonadTemplate
+    {
+        protected override void WriteContent()
+        {
+            EmitFacts();
+        }
+    }
+
 #>

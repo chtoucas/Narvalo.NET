@@ -1,4 +1,4 @@
-﻿<#+
+﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
 
 public partial class MonadTemplate
 {
@@ -55,7 +55,7 @@ public partial class MonadTemplate
         /// <param name="value">A value to be wrapped into a <see cref="<#= Name #>{T}"/> object.</param>
         /// <returns>An instance of the <see cref="<#= Name #>{T}"/> class for the specified value.</returns>
         public static <#= Name #><T> <#= ReturnName #><T>(T value)
-<#+ WriteTypeConstraints_("T"); #>
+<#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable && UnitEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
@@ -73,7 +73,7 @@ public partial class MonadTemplate
         /// Named <c>join</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><T> Flatten<T>(<#= Name #><<#= Name #><T>> square)
-<#+ WriteTypeConstraints_("T"); #>
+<#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
             Contract.Requires(square != null);
@@ -97,13 +97,13 @@ public partial class MonadTemplate
         /// </remarks>
         public static Func<<#= Name #><T>, <#= Name #><TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
-<#+ WriteTypeConstraints_("T", "TResult"); #>
+<#+ WriteTypeConstraints("T", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T>, <#= Name #><TResult>>>() != null);
 
             return m =>
             {
-<#+ if (IsNullable) { PushIndent(); WriteNotNull_("m"); PopIndent(); }  #>
+<#+ if (IsNullable) { PushIndent(); WriteNotNull("m"); PopIndent(); }  #>
                 return m.<#= MapName #>(fun);
             };
         }
@@ -117,13 +117,13 @@ public partial class MonadTemplate
         /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
-<#+ WriteTypeConstraints_("T1", "T2", "TResult"); #>
+<#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>() != null);
 
             return (m1, m2) =>
             {
-<#+ if (IsNullable) { PushIndent(); WriteNotNull_("m1"); PopIndent(); }  #>
+<#+ if (IsNullable) { PushIndent(); WriteNotNull("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, fun);
             };
         }
@@ -137,13 +137,13 @@ public partial class MonadTemplate
         /// </remarks>
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
-<#+ WriteTypeConstraints_("T1", "T2", "T3", "TResult"); #>
+<#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>() != null);
 
             return (m1, m2, m3) =>
             {
-<#+ if (IsNullable) { PushIndent(); WriteNotNull_("m1"); PopIndent(); }  #>
+<#+ if (IsNullable) { PushIndent(); WriteNotNull("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, fun);
             };
         }
@@ -158,13 +158,13 @@ public partial class MonadTemplate
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
-<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "TResult"); #>
+<#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>() != null);
 
             return (m1, m2, m3, m4) =>
             {
-<#+ if (IsNullable) { PushIndent(); WriteNotNull_("m1"); PopIndent(); }  #>
+<#+ if (IsNullable) { PushIndent(); WriteNotNull("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
@@ -179,13 +179,13 @@ public partial class MonadTemplate
         public static Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
-<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "T5", "TResult"); #>
+<#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>() != null);
 
             return (m1, m2, m3, m4, m5) =>
             {
-<#+ if (IsNullable) { PushIndent(); WriteNotNull_("m1"); PopIndent(); }  #>
+<#+ if (IsNullable) { PushIndent(); WriteNotNull("m1"); PopIndent(); }  #>
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }

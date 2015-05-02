@@ -10,6 +10,9 @@ namespace Narvalo.T4
 
     using Microsoft.VisualStudio.TextTemplating;
 
+    /// <summary>
+    /// Provides a base class for ISO-4217 templates.
+    /// </summary>
     public abstract class Iso4217Template : VSTemplate
     {
         private static readonly XmlReaderSettings s_Settings = new XmlReaderSettings {
@@ -24,12 +27,12 @@ namespace Narvalo.T4
         };
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="_MonadTemplate"/> class.
+        /// Initializes a new instance of the <see cref="Iso4217Template"/> class.
         /// </summary>
         protected Iso4217Template() : base() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="_MonadTemplate"/> class.
+        /// Initializes a new instance of the <see cref="Iso4217Template"/> class.
         /// </summary>
         /// <param name="parent">The parent text transformation.</param>
         protected Iso4217Template(TextTransformation parent) : base(parent) { }

@@ -5,7 +5,7 @@ namespace Narvalo.Fx
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// The Narvalo.Fx namespace contains classes and interfaces inspired by functional programming.
+    /// The <c>Narvalo.Fx</c> namespace contains classes and interfaces inspired by functional programming.
     /// </summary>
     [CompilerGenerated]
     internal static class NamespaceDoc { }

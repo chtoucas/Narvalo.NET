@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Iso4217Template.cs" />
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="_MonadTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VSTemplate.cs" />
@@ -30,7 +31,7 @@
   <ItemGroup>
     <None Include="CodeTemplates\Maybe.tt" />
     <None Include="CodeTemplates\Monad.tt" />
-    <None Include="CodeTemplates\MonadFacts.tt" />
+    <None Include="CodeTemplates\Monad.Facts.tt" />
     <None Include="CodeTemplates\Monad\EmitComonadCore.tt" />
     <None Include="CodeTemplates\Monad\EmitEnumerableExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitEnumerableInternalExtensions.tt" />
@@ -39,15 +40,20 @@
     <None Include="CodeTemplates\Monad\EmitMonadEnumerableExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitMonadEnumerableInternalExtensions.tt" />
     <None Include="CodeTemplates\Monad\EmitMonadExtensions.tt" />
+    <None Include="CodeTemplates\Monad\EmitFacts.tt" />
     <None Include="CodeTemplates\Outcome.tt" />
-    <None Include="CodeTemplates\DTEUtility.tt" />
+    <None Include="CodeTemplates\DTE.tt" />
     <None Include="Narvalo.T4.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
+      <SubType>Designer</SubType>
+    </CodeAnalysisDictionary>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnalyzerUtility.cs" />
+    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="TokenAnalyzer.cs" />
     <Compile Include="DocumentAnalyzer.cs" />
     <Compile Include="ElementAnalyzer.cs" />
@@ -43,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CSharpRules.xml">

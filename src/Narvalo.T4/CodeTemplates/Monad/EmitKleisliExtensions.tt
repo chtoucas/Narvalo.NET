@@ -1,4 +1,4 @@
-﻿<#+
+﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
 
 public partial class MonadTemplate
 {
@@ -18,10 +18,10 @@ public partial class MonadTemplate
         public static <#= Name #><TResult> Invoke<TSource, TResult>(
             this Func<TSource, <#= Name #><TResult>> @this,
             <#= Name #><TSource> value)
-<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             Acknowledge.Object(@this);
-<#+ WriteNotNull_("value"); #>
+<#+ WriteNotNull("value"); #>
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -35,9 +35,9 @@ public partial class MonadTemplate
         public static Func<TSource, <#= Name #><TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, <#= Name #><TMiddle>> @this,
             Func<TMiddle, <#= Name #><TResult>> funM)
-<#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(true); #>
+<#+ WriteObjectNotNull(true); #>
             Contract.Requires(funM != null);
             Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
 
@@ -50,7 +50,7 @@ public partial class MonadTemplate
         public static Func<TSource, <#= Name #><TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, <#= Name #><TResult>> @this,
             Func<TSource, <#= Name #><TMiddle>> funM)
-<#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Acknowledge.Object(@this);
             Require.NotNull(funM, "funM");

@@ -69,7 +69,7 @@ namespace Narvalo.T4
         /// <summary>
         /// Gets or sets the name of the template.
         /// </summary>
-        /// <remarks>If none was specified, it is infered from the template's filename.</remarks>
+        /// <remarks>If none was specified, it is inferred from the template's filename.</remarks>
         protected string Name
         {
             get
@@ -96,7 +96,7 @@ namespace Narvalo.T4
         /// <summary>
         /// Gets or sets the name of the namespace.
         /// </summary>
-        /// <remarks>If none was specified, it is infered from the template location.</remarks>
+        /// <remarks>If none was specified, it is inferred from the template location.</remarks>
         protected string Namespace
         {
             get

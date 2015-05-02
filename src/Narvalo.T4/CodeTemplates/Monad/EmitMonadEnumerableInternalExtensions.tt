@@ -1,4 +1,4 @@
-﻿<#+
+﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
 
 public partial class MonadTemplate
 {
@@ -16,7 +16,7 @@ public partial class MonadTemplate
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
 <#+ if (IsNullable) { #>
@@ -54,7 +54,7 @@ public partial class MonadTemplate
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><TSource> SumCore<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
 <#+ if (IsNullable) { #>

@@ -1,4 +1,4 @@
-﻿<#+
+﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
 
 public partial class MonadTemplate
 {
@@ -18,9 +18,9 @@ public partial class MonadTemplate
         public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, TResult> selector)
-<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
             Require.NotNull(selector, "selector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -35,9 +35,9 @@ public partial class MonadTemplate
         public static <#= Name #><TResult> Then<TSource, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TResult> other)
-<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -56,9 +56,9 @@ public partial class MonadTemplate
         public static <#= Name #><TSource> <#= FilterName #><TSource>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
             Require.NotNull(predicate, "predicate");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
@@ -78,9 +78,9 @@ public partial class MonadTemplate
         public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(
             this <#= Name #><TSource> @this,
             int count)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
             Require.GreaterThanOrEqualTo(count, 1, "count");
 <#+ if (IsNullable && MapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
@@ -116,7 +116,7 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             bool predicate,
             Action action)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
 <#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
@@ -142,7 +142,7 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             bool predicate,
             Action action)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
 <#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
@@ -169,10 +169,10 @@ public partial class MonadTemplate
             this <#= Name #><TFirst> @this,
             <#= Name #><TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
-<#+ WriteTypeConstraints_("TFirst", "TSecond", "TResult"); #>
+<#+ WriteTypeConstraints("TFirst", "TSecond", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("second"); #>
+<#+ WriteObjectNotNull(); #>
+<#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -187,10 +187,10 @@ public partial class MonadTemplate
             <#= Name #><T2> second,
             <#= Name #><T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
-<#+ WriteTypeConstraints_("T1", "T2", "T3", "TResult"); #>
+<#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("second"); #>
+<#+ WriteObjectNotNull(); #>
+<#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -209,10 +209,10 @@ public partial class MonadTemplate
              <#= Name #><T3> third,
              <#= Name #><T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
-<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "TResult"); #>
+<#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("second"); #>
+<#+ WriteObjectNotNull(); #>
+<#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -235,10 +235,10 @@ public partial class MonadTemplate
             <#= Name #><T4> fourth,
             <#= Name #><T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
-<#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "T5", "TResult"); #>
+<#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
-<#+ WriteNotNull_("second"); #>
+<#+ WriteObjectNotNull(); #>
+<#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -263,9 +263,9 @@ public partial class MonadTemplate
         public static <#= Name #><TSource> Where<TSource>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
 <#+ if (IsNullable && FilterEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
@@ -277,9 +277,9 @@ public partial class MonadTemplate
         public static <#= Name #><TResult> Select<TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, TResult> selector)
-<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
 <#+ if (IsNullable && MapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -295,9 +295,9 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             Func<TSource, <#= Name #><TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
-<#+ WriteTypeConstraints_("TSource", "TMiddle", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
             Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable && BindEnsuresSome) { #>
@@ -316,9 +316,9 @@ public partial class MonadTemplate
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
@@ -343,9 +343,9 @@ public partial class MonadTemplate
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
-<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
@@ -377,7 +377,7 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
@@ -406,7 +406,7 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
@@ -436,9 +436,9 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ WriteNotNull_("seq"); #>
+<#+ WriteNotNull("seq"); #>
             Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
@@ -464,9 +464,9 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ WriteTypeConstraints_("TSource", "TInner", "TKey", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ WriteNotNull_("seq"); #>
+<#+ WriteNotNull("seq"); #>
             Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
@@ -489,9 +489,9 @@ public partial class MonadTemplate
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
-<#+ WriteTypeConstraints_("TSource", "TInner", "TKey"); #>
+<#+ WriteTypeConstraints("TSource", "TInner", "TKey"); #>
         {
-<#+ WriteNotNull_("inner"); #>
+<#+ WriteNotNull("inner"); #>
             Require.NotNull(outerKeySelector, "outerKeySelector");
             Require.NotNull(comparer, "comparer");
             Contract.Requires(innerKeySelector != null);
@@ -515,9 +515,9 @@ public partial class MonadTemplate
             Func<TSource, bool> predicate,
             <#= Name #><TResult> then,
             <#= Name #><TResult> otherwise)
-<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
             Require.NotNull(predicate, "predicate");
 <#+ if (IsNullable && BindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -531,9 +531,9 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate,
             <#= Name #><TResult> other)
-<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
             Contract.Requires(predicate != null);
 <#+ if (IsNullable && CoalesceEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -546,9 +546,9 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate,
             <#= Name #><TResult> other)
-<#+ WriteTypeConstraints_("TSource", "TResult"); #>
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
             Contract.Requires(predicate != null);
 <#+ if (IsNullable && CoalesceEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -561,9 +561,9 @@ public partial class MonadTemplate
         public static void Invoke<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
             Require.NotNull(action, "action");
 
             @this.Bind(_ => { action.Invoke(_); return @this; });
@@ -574,9 +574,9 @@ public partial class MonadTemplate
         public static void On<#= ZeroName #><TSource>(
             this <#= Name #><TSource> @this,
             Action action)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
             Require.NotNull(action, "action");
 
             @this.Then(<#= Name #>.Unit).Invoke(_ => action.Invoke());
@@ -586,9 +586,9 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             Action<TSource> action,
             Action case<#= ZeroName #>)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull_(); #>
+<#+ WriteObjectNotNull(); #>
             Require.NotNull(action, "action");
 
             @this.Bind(_ => { action.Invoke(_); return @this; })

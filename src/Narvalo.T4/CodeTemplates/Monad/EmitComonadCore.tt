@@ -1,4 +1,4 @@
-﻿<#+
+﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
 
 public partial class MonadTemplate
 {
@@ -12,7 +12,7 @@ public partial class MonadTemplate
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
         public static T Extract<T>(<#= Name #><T> monad)
-<#+ WriteTypeConstraints_("T"); #>
+<#+ WriteTypeConstraints("T"); #>
         {
             Contract.Requires(monad != null);
 
@@ -23,7 +23,7 @@ public partial class MonadTemplate
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> monad)
-<#+ WriteTypeConstraints_("T"); #>
+<#+ WriteTypeConstraints("T"); #>
         {
             return <#= Name #><T>.δ(monad);
         }

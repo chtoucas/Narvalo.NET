@@ -1,4 +1,4 @@
-﻿<#+
+﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
 
 public partial class MonadTemplate
 {
@@ -20,7 +20,7 @@ public partial class MonadTemplate
         /// </remarks>
         public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
 <#+ if (IsNullable) { #>
@@ -41,7 +41,7 @@ public partial class MonadTemplate
         /// </remarks>
         public static <#= Name #><TSource> Sum<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-<#+ WriteTypeConstraints_("TSource"); #>
+<#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
 <#+ if (IsNullable) { #>
