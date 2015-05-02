@@ -1,9 +1,26 @@
-﻿<#@ include file="..\..\..\..\Narvalo.Fx\CodeTemplates\Monad.tt" #>
-<# 
-    InitializePlus(); 
+﻿<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ output extension=".g.cs" #>
+<#@ include file="$(T4NarvaloTemplates)\Monad.tt" #>
+<#= new _Template(this).Execute() #>
+<#+
 
-    AdvancedNamespace = Namespace;
+    public partial class _Template : MonadTemplate
+    {
+        public _Template(TextTransformation parent) : base(parent) { }
+
+        public override void Initialize()
+        {
+            InitializePlus();
+
+            AdvancedNamespace = Namespace;
+        }
+
+        protected override void WriteContent()
+        {
+            EmitMonad();
+            WriteLine();
+            EmitLinq();
+        }
+    }
+
 #>
-<# EmitMonad(); #>
-
-<# EmitLinq(); #>

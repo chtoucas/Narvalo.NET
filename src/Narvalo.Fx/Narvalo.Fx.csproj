@@ -60,17 +60,6 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\Maybe.tt" />
-    <None Include="CodeTemplates\Monad\EmitMonadEnumerableExtensions.tt" />
-    <None Include="CodeTemplates\Monad\EmitKleisliExtensions.tt" />
-    <None Include="CodeTemplates\Monad\EmitMonadExtensions.tt" />
-    <None Include="CodeTemplates\Monad\EmitMonadCore.tt" />
-    <None Include="CodeTemplates\Monad\EmitComonadCore.tt" />
-    <None Include="CodeTemplates\Monad\EmitMonadEnumerableInternalExtensions.tt" />
-    <None Include="CodeTemplates\Monad\EmitEnumerableExtensions.tt" />
-    <None Include="CodeTemplates\Monad\EmitEnumerableInternalExtensions.tt" />
-    <None Include="CodeTemplates\Output.tt" />
-    <None Include="CodeTemplates\Monad.tt" />
     <None Include="Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>

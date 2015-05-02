@@ -19,7 +19,7 @@ namespace Narvalo.Finance.Legacy
     {
         private static readonly Lazy<CurrencyInfoCollection> s_CurrentCurrencies
             = new Lazy<CurrencyInfoCollection>(InitializeCurrentCurrencies_);
-        
+
         private static readonly Lazy<CurrencyInfoCollection> s_LegacyCurrencies
             = new Lazy<CurrencyInfoCollection>(InitializeLegacyCurrencies_);
 
@@ -1686,7 +1686,7 @@ namespace Narvalo.Finance.Legacy
 
             return new CurrencyInfoCollection(list);
         }
-        
+
         /// <summary>
         /// Gets the list of discontinued currencies.
         /// </summary>

@@ -1,11 +1,10 @@
-﻿<#@ template debug="true" hostspecific="true" #>
-<#@ output extension=".g.cs" #><#+
+﻿<#+
 
     private string _name;
     private string _plusName = "Plus";
     private string _returnName = "Return";
     private string _zeroName = "Zero";
-    
+
     // Gets or sets a value indicating whether the monad is a MonadPlus. Default to false.
     protected bool HasPlus { get; set; }
 
@@ -41,17 +40,17 @@
             _name = value;
         }
     }
-    
+
     // Gets or sets the name of the Plus method. Default to "Plus".
     protected string PlusName
     {
         get
-        { 
+        {
             if (!HasPlus) {
                 throw new InvalidOperationException("The monad is not a MonadPlus.");
             }
 
-            return _plusName; 
+            return _plusName;
         }
 
         set
@@ -61,7 +60,7 @@
             }
 
             _plusName = value;
-        } 
+        }
     }
 
     // Gets or sets the name of the Return method. Default to "Return".
@@ -69,27 +68,27 @@
     {
         get { return _returnName; }
 
-        set 
+        set
         {
             if (String.IsNullOrWhiteSpace(value)) {
                 throw new ArgumentException("The name of the Return method can not be null or blank.");
             }
 
-            _returnName = value; 
+            _returnName = value;
         }
     }
-    
+
     // Gets or sets the name of the Zero property. Default to "Zero".
-    protected string ZeroName 
-    { 
-        get 
-        { 
+    protected string ZeroName
+    {
+        get
+        {
             if (!HasZero) {
                 throw new InvalidOperationException("The monad is not a MonadZero.");
             }
 
-            return _zeroName; 
-        }  
+            return _zeroName;
+        }
 
         set
         {
@@ -98,15 +97,15 @@
             }
 
             _zeroName = value;
-        } 
+        }
     }
-    
-    protected string InferName() 
+
+    protected string InferName()
     {
         return System.IO.Path.GetFileNameWithoutExtension(Host.TemplateFile);
     }
-    
-    protected string InferNamespace() 
+
+    protected string InferNamespace()
     {
         return System.Runtime.Remoting.Messaging.CallContext
             .LogicalGetData("NamespaceHint")
@@ -192,9 +191,9 @@ namespace <#= InferNamespace() #>
         }
 
         #endregion
-        
+
         #region Monad Laws
-        
+
 <#+ if (HasZero && HasPlus) { #>
         [Fact]
         public static void <#= Name #>_SatisfiesFirstMonoidLaw()
@@ -209,7 +208,7 @@ namespace <#= InferNamespace() #>
             // Assert
             Assert.True(left.Equals(right));
         }
-        
+
         [Fact]
         public static void <#= Name #>_SatisfiesSecondMonoidLaw()
         {
@@ -286,7 +285,7 @@ namespace <#= InferNamespace() #>
             // Assert
             Assert.True(left.Equals(right));
         }
-        
+
 <#+ if (HasZero) { #>
         [Fact]
         public static void <#= Name #>_SatisfiesMonadZeroRule()
@@ -301,7 +300,7 @@ namespace <#= InferNamespace() #>
             // Assert
             Assert.True(left.Equals(right));
         }
-        
+
         [Fact]
         public static void <#= Name #>_SatisfiesMonadMoreRule()
         {

@@ -8,7 +8,7 @@
   <PropertyGroup>
     <!-- Other options: Release and CodeContracts. -->
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    
+
     <!-- Right now, AnyCPU is the only supported platform. -->
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 

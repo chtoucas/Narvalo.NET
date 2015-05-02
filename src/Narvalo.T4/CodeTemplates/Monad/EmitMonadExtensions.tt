@@ -1,4 +1,7 @@
 ﻿<#+
+
+public partial class MonadTemplate
+{
     protected void EmitMonadExtensions()
     {
 #>
@@ -41,7 +44,7 @@
 
             return @this.Bind(_ => other);
         }
-        
+
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -86,7 +89,7 @@
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
 <#+ } // End of !HasUnderlyingTypeConstraint. #>
-        
+
         #endregion
 
         #region Conditional execution of monadic expressions (Prelude)
@@ -258,7 +261,7 @@
 <#+ if (!PreferLinqDialect) { #>
 <#+ if (HasFilter) { #>
         public static <#= Name #><TSource> Where<TSource>(
-            this <#= Name #><TSource> @this, 
+            this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate)
 <#+ WriteTypeConstraints_("TSource"); #>
         {
@@ -272,7 +275,7 @@
 <#+ } // End of HasFilter. #>
 
         public static <#= Name #><TResult> Select<TSource, TResult>(
-            this <#= Name #><TSource> @this, 
+            this <#= Name #><TSource> @this,
             Func<TSource, TResult> selector)
 <#+ WriteTypeConstraints_("TSource", "TResult"); #>
         {
@@ -333,7 +336,7 @@
                 resultSelector,
                 EqualityComparer<TKey>.Default);
         }
-        
+
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -356,14 +359,14 @@
             return @this.GroupJoin(
                 inner,
                 outerKeySelector,
-                innerKeySelector, 
-                resultSelector, 
+                innerKeySelector,
+                resultSelector,
                 EqualityComparer<TKey>.Default);
         }
 <#+ } // End of HasJoin. #>
 
         #endregion
-        
+
         #region LINQ extensions
 
 <#+ if (HasJoin) { #>
@@ -395,7 +398,7 @@
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
         }
-        
+
         public static <#= Name #><TResult> GroupJoin<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -424,8 +427,8 @@
                 resultSelector,
                 comparer ?? EqualityComparer<TKey>.Default);
         }
-        
-        
+
+
         private static <#= Name #><TResult> JoinCore<TSource, TInner, TKey, TResult>(
             <#= Name #><TSource> seq,
             <#= Name #><TInner> inner,
@@ -446,14 +449,14 @@
 <#+ if (IsNullable && MapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
-            
+
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
             return from outerValue in seq
                    from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
                    select resultSelector.Invoke(outerValue, innerValue);
         }
-        
+
         private static <#= Name #><TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
             <#= Name #><TSource> seq,
             <#= Name #><TInner> inner,
@@ -497,7 +500,7 @@
             return source =>
             {
                 TKey outerKey = outerKeySelector.Invoke(source);
-            
+
                 return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(_ => comparer.Equals(_, outerKey));
             };
         }
@@ -506,7 +509,7 @@
         #endregion
 
         #region Non-standard extensions
-        
+
         public static <#= Name #><TResult> Coalesce<TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate,
@@ -597,5 +600,7 @@
         #endregion
     } // End of the class <#= Name #>.
 <#+
-    } 
+    } // T4: End of EmitMonadExtensions().
+}
+
 #>

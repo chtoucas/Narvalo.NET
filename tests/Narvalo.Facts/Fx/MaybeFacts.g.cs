@@ -72,9 +72,9 @@ namespace Narvalo.Fx
         }
 
         #endregion
-        
+
         #region Monad Laws
-        
+
         [Fact]
         public static void Maybe_SatisfiesFirstMonoidLaw()
         {
@@ -88,7 +88,7 @@ namespace Narvalo.Fx
             // Assert
             Assert.True(left.Equals(right));
         }
-        
+
         [Fact]
         public static void Maybe_SatisfiesSecondMonoidLaw()
         {
@@ -164,7 +164,7 @@ namespace Narvalo.Fx
             // Assert
             Assert.True(left.Equals(right));
         }
-        
+
         [Fact]
         public static void Maybe_SatisfiesMonadZeroRule()
         {
@@ -178,7 +178,7 @@ namespace Narvalo.Fx
             // Assert
             Assert.True(left.Equals(right));
         }
-        
+
         [Fact]
         public static void Maybe_SatisfiesMonadMoreRule()
         {

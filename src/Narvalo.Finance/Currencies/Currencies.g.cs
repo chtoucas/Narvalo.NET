@@ -17,7 +17,7 @@ using global::System.Diagnostics.CodeAnalysis;
     Justification = "[GeneratedCode] The empty static constructor is used to implement the lazy singleton pattern.")]
 [module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1508:ClosingCurlyBracketsMustNotBePrecededByBlankLine",
     Justification = "[GeneratedCode] Newline rule disabled for T4 templates.")]
-    
+
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY",
     Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
 
@@ -36,7 +36,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ADP s_Instance = new ADP();
 
         internal ADP() : base("ADP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Andorran Peseta".
         /// </summary>
@@ -62,7 +62,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AED s_Instance = new AED();
 
         internal AED() : base("AED") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "UAE Dirham".
         /// </summary>
@@ -88,7 +88,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AFA s_Instance = new AFA();
 
         internal AFA() : base("AFA") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
         /// </summary>
@@ -114,7 +114,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AFN s_Instance = new AFN();
 
         internal AFN() : base("AFN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
         /// </summary>
@@ -140,7 +140,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ALK s_Instance = new ALK();
 
         internal ALK() : base("ALK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Lek".
         /// </summary>
@@ -166,7 +166,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ALL s_Instance = new ALL();
 
         internal ALL() : base("ALL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lek".
         /// </summary>
@@ -192,7 +192,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AMD s_Instance = new AMD();
 
         internal AMD() : base("AMD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Armenian Dram".
         /// </summary>
@@ -218,7 +218,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ANG s_Instance = new ANG();
 
         internal ANG() : base("ANG") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Antillean Guilder".
         /// </summary>
@@ -244,7 +244,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AOA s_Instance = new AOA();
 
         internal AOA() : base("AOA") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
         /// </summary>
@@ -270,7 +270,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AOK s_Instance = new AOK();
 
         internal AOK() : base("AOK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
         /// </summary>
@@ -296,7 +296,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AON s_Instance = new AON();
 
         internal AON() : base("AON") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Kwanza".
         /// </summary>
@@ -322,7 +322,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AOR s_Instance = new AOR();
 
         internal AOR() : base("AOR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza Reajustado".
         /// </summary>
@@ -348,7 +348,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ARA s_Instance = new ARA();
 
         internal ARA() : base("ARA") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Austral".
         /// </summary>
@@ -374,7 +374,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ARP s_Instance = new ARP();
 
         internal ARP() : base("ARP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Argentino".
         /// </summary>
@@ -400,7 +400,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ARS s_Instance = new ARS();
 
         internal ARS() : base("ARS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Argentine Peso".
         /// </summary>
@@ -426,7 +426,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ARY s_Instance = new ARY();
 
         internal ARY() : base("ARY") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso".
         /// </summary>
@@ -452,7 +452,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ATS s_Instance = new ATS();
 
         internal ATS() : base("ATS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Schilling".
         /// </summary>
@@ -478,7 +478,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AUD s_Instance = new AUD();
 
         internal AUD() : base("AUD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Australian Dollar".
         /// </summary>
@@ -504,7 +504,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AWG s_Instance = new AWG();
 
         internal AWG() : base("AWG") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Aruban Florin".
         /// </summary>
@@ -530,7 +530,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AYM s_Instance = new AYM();
 
         internal AYM() : base("AYM") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijan Manat".
         /// </summary>
@@ -556,7 +556,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AZM s_Instance = new AZM();
 
         internal AZM() : base("AZM") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
         /// </summary>
@@ -582,7 +582,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly AZN s_Instance = new AZN();
 
         internal AZN() : base("AZN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
         /// </summary>
@@ -608,7 +608,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BAD s_Instance = new BAD();
 
         internal BAD() : base("BAD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dinar".
         /// </summary>
@@ -634,7 +634,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BAM s_Instance = new BAM();
 
         internal BAM() : base("BAM") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Mark".
         /// </summary>
@@ -660,7 +660,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BBD s_Instance = new BBD();
 
         internal BBD() : base("BBD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Barbados Dollar".
         /// </summary>
@@ -686,7 +686,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BDT s_Instance = new BDT();
 
         internal BDT() : base("BDT") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Taka".
         /// </summary>
@@ -712,7 +712,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BEC s_Instance = new BEC();
 
         internal BEC() : base("BEC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Franc".
         /// </summary>
@@ -738,7 +738,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BEF s_Instance = new BEF();
 
         internal BEF() : base("BEF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belgian Franc".
         /// </summary>
@@ -764,7 +764,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BEL s_Instance = new BEL();
 
         internal BEL() : base("BEL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Financial Franc".
         /// </summary>
@@ -790,7 +790,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BGJ s_Instance = new BGJ();
 
         internal BGJ() : base("BGJ") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev A/52".
         /// </summary>
@@ -816,7 +816,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BGK s_Instance = new BGK();
 
         internal BGK() : base("BGK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev A/62".
         /// </summary>
@@ -842,7 +842,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BGL s_Instance = new BGL();
 
         internal BGL() : base("BGL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev".
         /// </summary>
@@ -868,7 +868,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BGN s_Instance = new BGN();
 
         internal BGN() : base("BGN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bulgarian Lev".
         /// </summary>
@@ -894,7 +894,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BHD s_Instance = new BHD();
 
         internal BHD() : base("BHD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahraini Dinar".
         /// </summary>
@@ -920,7 +920,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BIF s_Instance = new BIF();
 
         internal BIF() : base("BIF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Burundi Franc".
         /// </summary>
@@ -946,7 +946,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BMD s_Instance = new BMD();
 
         internal BMD() : base("BMD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bermudian Dollar".
         /// </summary>
@@ -972,7 +972,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BND s_Instance = new BND();
 
         internal BND() : base("BND") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Brunei Dollar".
         /// </summary>
@@ -998,7 +998,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BOB s_Instance = new BOB();
 
         internal BOB() : base("BOB") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Boliviano".
         /// </summary>
@@ -1024,7 +1024,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BOP s_Instance = new BOP();
 
         internal BOP() : base("BOP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso boliviano".
         /// </summary>
@@ -1050,7 +1050,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BOV s_Instance = new BOV();
 
         internal BOV() : base("BOV") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mvdol".
         /// </summary>
@@ -1076,7 +1076,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BRB s_Instance = new BRB();
 
         internal BRB() : base("BRB") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro".
         /// </summary>
@@ -1102,7 +1102,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BRC s_Instance = new BRC();
 
         internal BRC() : base("BRC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzado".
         /// </summary>
@@ -1128,7 +1128,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BRE s_Instance = new BRE();
 
         internal BRE() : base("BRE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro".
         /// </summary>
@@ -1154,7 +1154,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BRL s_Instance = new BRL();
 
         internal BRL() : base("BRL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Brazilian Real".
         /// </summary>
@@ -1180,7 +1180,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BRN s_Instance = new BRN();
 
         internal BRN() : base("BRN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Cruzado".
         /// </summary>
@@ -1206,7 +1206,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BRR s_Instance = new BRR();
 
         internal BRR() : base("BRR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro Real".
         /// </summary>
@@ -1232,7 +1232,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BSD s_Instance = new BSD();
 
         internal BSD() : base("BSD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahamian Dollar".
         /// </summary>
@@ -1258,7 +1258,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BTN s_Instance = new BTN();
 
         internal BTN() : base("BTN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ngultrum".
         /// </summary>
@@ -1284,7 +1284,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BUK s_Instance = new BUK();
 
         internal BUK() : base("BUK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "N.A.".
         /// </summary>
@@ -1310,7 +1310,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BWP s_Instance = new BWP();
 
         internal BWP() : base("BWP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pula".
         /// </summary>
@@ -1336,7 +1336,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BYB s_Instance = new BYB();
 
         internal BYB() : base("BYB") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".
         /// </summary>
@@ -1362,7 +1362,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BYR s_Instance = new BYR();
 
         internal BYR() : base("BYR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".
         /// </summary>
@@ -1388,7 +1388,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly BZD s_Instance = new BZD();
 
         internal BZD() : base("BZD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belize Dollar".
         /// </summary>
@@ -1414,7 +1414,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CAD s_Instance = new CAD();
 
         internal CAD() : base("CAD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Canadian Dollar".
         /// </summary>
@@ -1440,7 +1440,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CDF s_Instance = new CDF();
 
         internal CDF() : base("CDF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Congolese Franc".
         /// </summary>
@@ -1466,7 +1466,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CHC s_Instance = new CHC();
 
         internal CHC() : base("CHC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc (for electronic)".
         /// </summary>
@@ -1492,7 +1492,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CHE s_Instance = new CHE();
 
         internal CHE() : base("CHE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Euro".
         /// </summary>
@@ -1518,7 +1518,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CHF s_Instance = new CHF();
 
         internal CHF() : base("CHF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Swiss Franc".
         /// </summary>
@@ -1544,7 +1544,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CHW s_Instance = new CHW();
 
         internal CHW() : base("CHW") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc".
         /// </summary>
@@ -1570,7 +1570,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CLF s_Instance = new CLF();
 
         internal CLF() : base("CLF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Fomento".
         /// </summary>
@@ -1596,7 +1596,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CLP s_Instance = new CLP();
 
         internal CLP() : base("CLP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Chilean Peso".
         /// </summary>
@@ -1622,7 +1622,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CNX s_Instance = new CNX();
 
         internal CNX() : base("CNX") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peoples Bank Dollar".
         /// </summary>
@@ -1648,7 +1648,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CNY s_Instance = new CNY();
 
         internal CNY() : base("CNY") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yuan Renminbi".
         /// </summary>
@@ -1674,7 +1674,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly COP s_Instance = new COP();
 
         internal COP() : base("COP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Colombian Peso".
         /// </summary>
@@ -1700,7 +1700,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly COU s_Instance = new COU();
 
         internal COU() : base("COU") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Real".
         /// </summary>
@@ -1726,7 +1726,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CRC s_Instance = new CRC();
 
         internal CRC() : base("CRC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Costa Rican Colon".
         /// </summary>
@@ -1752,7 +1752,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CSD s_Instance = new CSD();
 
         internal CSD() : base("CSD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
         /// </summary>
@@ -1778,7 +1778,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CSJ s_Instance = new CSJ();
 
         internal CSJ() : base("CSJ") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Krona A/53".
         /// </summary>
@@ -1804,7 +1804,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CSK s_Instance = new CSK();
 
         internal CSK() : base("CSK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Koruna".
         /// </summary>
@@ -1830,7 +1830,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CUC s_Instance = new CUC();
 
         internal CUC() : base("CUC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Convertible".
         /// </summary>
@@ -1856,7 +1856,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CUP s_Instance = new CUP();
 
         internal CUP() : base("CUP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cuban Peso".
         /// </summary>
@@ -1882,7 +1882,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CVE s_Instance = new CVE();
 
         internal CVE() : base("CVE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cabo Verde Escudo".
         /// </summary>
@@ -1908,7 +1908,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CYP s_Instance = new CYP();
 
         internal CYP() : base("CYP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cyprus Pound".
         /// </summary>
@@ -1934,7 +1934,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly CZK s_Instance = new CZK();
 
         internal CZK() : base("CZK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Czech Koruna".
         /// </summary>
@@ -1960,7 +1960,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly DDM s_Instance = new DDM();
 
         internal DDM() : base("DDM") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mark der DDR".
         /// </summary>
@@ -1986,7 +1986,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly DEM s_Instance = new DEM();
 
         internal DEM() : base("DEM") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Deutsche Mark".
         /// </summary>
@@ -2012,7 +2012,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly DJF s_Instance = new DJF();
 
         internal DJF() : base("DJF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Djibouti Franc".
         /// </summary>
@@ -2038,7 +2038,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly DKK s_Instance = new DKK();
 
         internal DKK() : base("DKK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Danish Krone".
         /// </summary>
@@ -2064,7 +2064,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly DOP s_Instance = new DOP();
 
         internal DOP() : base("DOP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dominican Peso".
         /// </summary>
@@ -2090,7 +2090,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly DZD s_Instance = new DZD();
 
         internal DZD() : base("DZD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Algerian Dinar".
         /// </summary>
@@ -2116,7 +2116,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ECS s_Instance = new ECS();
 
         internal ECS() : base("ECS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
         /// </summary>
@@ -2142,7 +2142,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ECV s_Instance = new ECV();
 
         internal ECV() : base("ECV") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Constante (UVC)".
         /// </summary>
@@ -2168,7 +2168,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly EEK s_Instance = new EEK();
 
         internal EEK() : base("EEK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kroon".
         /// </summary>
@@ -2194,7 +2194,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly EGP s_Instance = new EGP();
 
         internal EGP() : base("EGP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Egyptian Pound".
         /// </summary>
@@ -2220,7 +2220,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly EQE s_Instance = new EQE();
 
         internal EQE() : base("EQE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ekwele".
         /// </summary>
@@ -2246,7 +2246,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ERN s_Instance = new ERN();
 
         internal ERN() : base("ERN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nakfa".
         /// </summary>
@@ -2272,7 +2272,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ESA s_Instance = new ESA();
 
         internal ESA() : base("ESA") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".
         /// </summary>
@@ -2298,7 +2298,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ESB s_Instance = new ESB();
 
         internal ESB() : base("ESB") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the """A"" Account (convertible Peseta Account)".
         /// </summary>
@@ -2324,7 +2324,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ESP s_Instance = new ESP();
 
         internal ESP() : base("ESP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".
         /// </summary>
@@ -2350,7 +2350,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ETB s_Instance = new ETB();
 
         internal ETB() : base("ETB") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ethiopian Birr".
         /// </summary>
@@ -2376,7 +2376,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly EUR s_Instance = new EUR();
 
         internal EUR() : base("EUR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Euro".
         /// </summary>
@@ -2402,7 +2402,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly FIM s_Instance = new FIM();
 
         internal FIM() : base("FIM") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Markka".
         /// </summary>
@@ -2428,7 +2428,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly FJD s_Instance = new FJD();
 
         internal FJD() : base("FJD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Fiji Dollar".
         /// </summary>
@@ -2454,7 +2454,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly FKP s_Instance = new FKP();
 
         internal FKP() : base("FKP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Falkland Islands Pound".
         /// </summary>
@@ -2480,7 +2480,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly FRF s_Instance = new FRF();
 
         internal FRF() : base("FRF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "French Franc".
         /// </summary>
@@ -2506,7 +2506,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GBP s_Instance = new GBP();
 
         internal GBP() : base("GBP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound Sterling".
         /// </summary>
@@ -2532,7 +2532,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GEK s_Instance = new GEK();
 
         internal GEK() : base("GEK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Georgian Coupon".
         /// </summary>
@@ -2558,7 +2558,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GEL s_Instance = new GEL();
 
         internal GEL() : base("GEL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lari".
         /// </summary>
@@ -2584,7 +2584,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GHC s_Instance = new GHC();
 
         internal GHC() : base("GHC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cedi".
         /// </summary>
@@ -2610,7 +2610,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GHP s_Instance = new GHP();
 
         internal GHP() : base("GHP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
         /// </summary>
@@ -2636,7 +2636,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GHS s_Instance = new GHS();
 
         internal GHS() : base("GHS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
         /// </summary>
@@ -2662,7 +2662,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GIP s_Instance = new GIP();
 
         internal GIP() : base("GIP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gibraltar Pound".
         /// </summary>
@@ -2688,7 +2688,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GMD s_Instance = new GMD();
 
         internal GMD() : base("GMD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dalasi".
         /// </summary>
@@ -2714,7 +2714,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GNE s_Instance = new GNE();
 
         internal GNE() : base("GNE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syli".
         /// </summary>
@@ -2740,7 +2740,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GNF s_Instance = new GNF();
 
         internal GNF() : base("GNF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Franc".
         /// </summary>
@@ -2766,7 +2766,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GNS s_Instance = new GNS();
 
         internal GNS() : base("GNS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syli".
         /// </summary>
@@ -2792,7 +2792,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GQE s_Instance = new GQE();
 
         internal GQE() : base("GQE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ekwele".
         /// </summary>
@@ -2818,7 +2818,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GRD s_Instance = new GRD();
 
         internal GRD() : base("GRD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Drachma".
         /// </summary>
@@ -2844,7 +2844,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GTQ s_Instance = new GTQ();
 
         internal GTQ() : base("GTQ") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Quetzal".
         /// </summary>
@@ -2870,7 +2870,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GWE s_Instance = new GWE();
 
         internal GWE() : base("GWE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Escudo".
         /// </summary>
@@ -2896,7 +2896,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GWP s_Instance = new GWP();
 
         internal GWP() : base("GWP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea-Bissau Peso".
         /// </summary>
@@ -2922,7 +2922,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly GYD s_Instance = new GYD();
 
         internal GYD() : base("GYD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guyana Dollar".
         /// </summary>
@@ -2948,7 +2948,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly HKD s_Instance = new HKD();
 
         internal HKD() : base("HKD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Hong Kong Dollar".
         /// </summary>
@@ -2974,7 +2974,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly HNL s_Instance = new HNL();
 
         internal HNL() : base("HNL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lempira".
         /// </summary>
@@ -3000,7 +3000,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly HRD s_Instance = new HRD();
 
         internal HRD() : base("HRD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Croatian Dinar".
         /// </summary>
@@ -3026,7 +3026,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly HRK s_Instance = new HRK();
 
         internal HRK() : base("HRK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Croatian Kuna".
         /// </summary>
@@ -3052,7 +3052,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly HTG s_Instance = new HTG();
 
         internal HTG() : base("HTG") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gourde".
         /// </summary>
@@ -3078,7 +3078,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly HUF s_Instance = new HUF();
 
         internal HUF() : base("HUF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Forint".
         /// </summary>
@@ -3104,7 +3104,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly IDR s_Instance = new IDR();
 
         internal IDR() : base("IDR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rupiah".
         /// </summary>
@@ -3130,7 +3130,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly IEP s_Instance = new IEP();
 
         internal IEP() : base("IEP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Irish Pound".
         /// </summary>
@@ -3156,7 +3156,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ILP s_Instance = new ILP();
 
         internal ILP() : base("ILP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound".
         /// </summary>
@@ -3182,7 +3182,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ILR s_Instance = new ILR();
 
         internal ILR() : base("ILR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Shekel".
         /// </summary>
@@ -3208,7 +3208,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ILS s_Instance = new ILS();
 
         internal ILS() : base("ILS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Israeli Sheqel".
         /// </summary>
@@ -3234,7 +3234,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly INR s_Instance = new INR();
 
         internal INR() : base("INR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Indian Rupee".
         /// </summary>
@@ -3260,7 +3260,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly IQD s_Instance = new IQD();
 
         internal IQD() : base("IQD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iraqi Dinar".
         /// </summary>
@@ -3286,7 +3286,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly IRR s_Instance = new IRR();
 
         internal IRR() : base("IRR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iranian Rial".
         /// </summary>
@@ -3312,7 +3312,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ISJ s_Instance = new ISJ();
 
         internal ISJ() : base("ISJ") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Krona".
         /// </summary>
@@ -3338,7 +3338,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ISK s_Instance = new ISK();
 
         internal ISK() : base("ISK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iceland Krona".
         /// </summary>
@@ -3364,7 +3364,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ITL s_Instance = new ITL();
 
         internal ITL() : base("ITL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Italian Lira".
         /// </summary>
@@ -3390,7 +3390,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly JMD s_Instance = new JMD();
 
         internal JMD() : base("JMD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Jamaican Dollar".
         /// </summary>
@@ -3416,7 +3416,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly JOD s_Instance = new JOD();
 
         internal JOD() : base("JOD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Jordanian Dinar".
         /// </summary>
@@ -3442,7 +3442,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly JPY s_Instance = new JPY();
 
         internal JPY() : base("JPY") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yen".
         /// </summary>
@@ -3468,7 +3468,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly KES s_Instance = new KES();
 
         internal KES() : base("KES") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kenyan Shilling".
         /// </summary>
@@ -3494,7 +3494,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly KGS s_Instance = new KGS();
 
         internal KGS() : base("KGS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Som".
         /// </summary>
@@ -3520,7 +3520,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly KHR s_Instance = new KHR();
 
         internal KHR() : base("KHR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Riel".
         /// </summary>
@@ -3546,7 +3546,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly KMF s_Instance = new KMF();
 
         internal KMF() : base("KMF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Comoro Franc".
         /// </summary>
@@ -3572,7 +3572,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly KPW s_Instance = new KPW();
 
         internal KPW() : base("KPW") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "North Korean Won".
         /// </summary>
@@ -3598,7 +3598,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly KRW s_Instance = new KRW();
 
         internal KRW() : base("KRW") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Won".
         /// </summary>
@@ -3624,7 +3624,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly KWD s_Instance = new KWD();
 
         internal KWD() : base("KWD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kuwaiti Dinar".
         /// </summary>
@@ -3650,7 +3650,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly KYD s_Instance = new KYD();
 
         internal KYD() : base("KYD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cayman Islands Dollar".
         /// </summary>
@@ -3676,7 +3676,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly KZT s_Instance = new KZT();
 
         internal KZT() : base("KZT") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tenge".
         /// </summary>
@@ -3702,7 +3702,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LAJ s_Instance = new LAJ();
 
         internal LAJ() : base("LAJ") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip Pot Pol".
         /// </summary>
@@ -3728,7 +3728,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LAK s_Instance = new LAK();
 
         internal LAK() : base("LAK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip".
         /// </summary>
@@ -3754,7 +3754,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LBP s_Instance = new LBP();
 
         internal LBP() : base("LBP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lebanese Pound".
         /// </summary>
@@ -3780,7 +3780,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LKR s_Instance = new LKR();
 
         internal LKR() : base("LKR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sri Lanka Rupee".
         /// </summary>
@@ -3806,7 +3806,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LRD s_Instance = new LRD();
 
         internal LRD() : base("LRD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Liberian Dollar".
         /// </summary>
@@ -3832,7 +3832,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LSL s_Instance = new LSL();
 
         internal LSL() : base("LSL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Loti".
         /// </summary>
@@ -3858,7 +3858,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LSM s_Instance = new LSM();
 
         internal LSM() : base("LSM") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maloti".
         /// </summary>
@@ -3884,7 +3884,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LTL s_Instance = new LTL();
 
         internal LTL() : base("LTL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lithuanian Litas".
         /// </summary>
@@ -3910,7 +3910,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LTT s_Instance = new LTT();
 
         internal LTT() : base("LTT") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Talonas".
         /// </summary>
@@ -3936,7 +3936,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LUC s_Instance = new LUC();
 
         internal LUC() : base("LUC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Convertible Franc".
         /// </summary>
@@ -3962,7 +3962,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LUF s_Instance = new LUF();
 
         internal LUF() : base("LUF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Franc".
         /// </summary>
@@ -3988,7 +3988,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LUL s_Instance = new LUL();
 
         internal LUL() : base("LUL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Financial Franc".
         /// </summary>
@@ -4014,7 +4014,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LVL s_Instance = new LVL();
 
         internal LVL() : base("LVL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Latvian Lats".
         /// </summary>
@@ -4040,7 +4040,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LVR s_Instance = new LVR();
 
         internal LVR() : base("LVR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Latvian Ruble".
         /// </summary>
@@ -4066,7 +4066,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly LYD s_Instance = new LYD();
 
         internal LYD() : base("LYD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Libyan Dinar".
         /// </summary>
@@ -4092,7 +4092,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MAD s_Instance = new MAD();
 
         internal MAD() : base("MAD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Moroccan Dirham".
         /// </summary>
@@ -4118,7 +4118,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MAF s_Instance = new MAF();
 
         internal MAF() : base("MAF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mali Franc".
         /// </summary>
@@ -4144,7 +4144,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MDL s_Instance = new MDL();
 
         internal MDL() : base("MDL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Moldovan Leu".
         /// </summary>
@@ -4170,7 +4170,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MGA s_Instance = new MGA();
 
         internal MGA() : base("MGA") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Ariary".
         /// </summary>
@@ -4196,7 +4196,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MGF s_Instance = new MGF();
 
         internal MGF() : base("MGF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Franc".
         /// </summary>
@@ -4222,7 +4222,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MKD s_Instance = new MKD();
 
         internal MKD() : base("MKD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Denar".
         /// </summary>
@@ -4248,7 +4248,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MLF s_Instance = new MLF();
 
         internal MLF() : base("MLF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mali Franc".
         /// </summary>
@@ -4274,7 +4274,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MMK s_Instance = new MMK();
 
         internal MMK() : base("MMK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kyat".
         /// </summary>
@@ -4300,7 +4300,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MNT s_Instance = new MNT();
 
         internal MNT() : base("MNT") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tugrik".
         /// </summary>
@@ -4326,7 +4326,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MOP s_Instance = new MOP();
 
         internal MOP() : base("MOP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pataca".
         /// </summary>
@@ -4352,7 +4352,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MRO s_Instance = new MRO();
 
         internal MRO() : base("MRO") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ouguiya".
         /// </summary>
@@ -4378,7 +4378,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MTL s_Instance = new MTL();
 
         internal MTL() : base("MTL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maltese Lira".
         /// </summary>
@@ -4404,7 +4404,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MTP s_Instance = new MTP();
 
         internal MTP() : base("MTP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maltese Pound".
         /// </summary>
@@ -4430,7 +4430,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MUR s_Instance = new MUR();
 
         internal MUR() : base("MUR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mauritius Rupee".
         /// </summary>
@@ -4456,7 +4456,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MVQ s_Instance = new MVQ();
 
         internal MVQ() : base("MVQ") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maldive Rupee".
         /// </summary>
@@ -4482,7 +4482,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MVR s_Instance = new MVR();
 
         internal MVR() : base("MVR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rufiyaa".
         /// </summary>
@@ -4508,7 +4508,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MWK s_Instance = new MWK();
 
         internal MWK() : base("MWK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwacha".
         /// </summary>
@@ -4534,7 +4534,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MXN s_Instance = new MXN();
 
         internal MXN() : base("MXN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
         /// </summary>
@@ -4560,7 +4560,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MXP s_Instance = new MXP();
 
         internal MXP() : base("MXP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
         /// </summary>
@@ -4586,7 +4586,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MXV s_Instance = new MXV();
 
         internal MXV() : base("MXV") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Unidad de Inversion (UDI)".
         /// </summary>
@@ -4612,7 +4612,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MYR s_Instance = new MYR();
 
         internal MYR() : base("MYR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malaysian Ringgit".
         /// </summary>
@@ -4638,7 +4638,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MZE s_Instance = new MZE();
 
         internal MZE() : base("MZE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Escudo".
         /// </summary>
@@ -4664,7 +4664,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MZM s_Instance = new MZM();
 
         internal MZM() : base("MZM") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
         /// </summary>
@@ -4690,7 +4690,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly MZN s_Instance = new MZN();
 
         internal MZN() : base("MZN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
         /// </summary>
@@ -4716,7 +4716,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly NAD s_Instance = new NAD();
 
         internal NAD() : base("NAD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Namibia Dollar".
         /// </summary>
@@ -4742,7 +4742,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly NGN s_Instance = new NGN();
 
         internal NGN() : base("NGN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Naira".
         /// </summary>
@@ -4768,7 +4768,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly NIC s_Instance = new NIC();
 
         internal NIC() : base("NIC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba".
         /// </summary>
@@ -4794,7 +4794,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly NIO s_Instance = new NIO();
 
         internal NIO() : base("NIO") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba Oro".
         /// </summary>
@@ -4820,7 +4820,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly NLG s_Instance = new NLG();
 
         internal NLG() : base("NLG") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Guilder".
         /// </summary>
@@ -4846,7 +4846,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly NOK s_Instance = new NOK();
 
         internal NOK() : base("NOK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Norwegian Krone".
         /// </summary>
@@ -4872,7 +4872,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly NPR s_Instance = new NPR();
 
         internal NPR() : base("NPR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nepalese Rupee".
         /// </summary>
@@ -4898,7 +4898,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly NZD s_Instance = new NZD();
 
         internal NZD() : base("NZD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zealand Dollar".
         /// </summary>
@@ -4924,7 +4924,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly OMR s_Instance = new OMR();
 
         internal OMR() : base("OMR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rial Omani".
         /// </summary>
@@ -4950,7 +4950,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PAB s_Instance = new PAB();
 
         internal PAB() : base("PAB") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Balboa".
         /// </summary>
@@ -4976,7 +4976,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PEH s_Instance = new PEH();
 
         internal PEH() : base("PEH") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
         /// </summary>
@@ -5002,7 +5002,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PEI s_Instance = new PEI();
 
         internal PEI() : base("PEI") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Inti".
         /// </summary>
@@ -5028,7 +5028,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PEN s_Instance = new PEN();
 
         internal PEN() : base("PEN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nuevo Sol".
         /// </summary>
@@ -5054,7 +5054,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PES s_Instance = new PES();
 
         internal PES() : base("PES") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
         /// </summary>
@@ -5080,7 +5080,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PGK s_Instance = new PGK();
 
         internal PGK() : base("PGK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kina".
         /// </summary>
@@ -5106,7 +5106,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PHP s_Instance = new PHP();
 
         internal PHP() : base("PHP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Philippine Peso".
         /// </summary>
@@ -5132,7 +5132,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PKR s_Instance = new PKR();
 
         internal PKR() : base("PKR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pakistan Rupee".
         /// </summary>
@@ -5158,7 +5158,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PLN s_Instance = new PLN();
 
         internal PLN() : base("PLN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
         /// </summary>
@@ -5184,7 +5184,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PLZ s_Instance = new PLZ();
 
         internal PLZ() : base("PLZ") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
         /// </summary>
@@ -5210,7 +5210,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PTE s_Instance = new PTE();
 
         internal PTE() : base("PTE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Portuguese Escudo".
         /// </summary>
@@ -5236,7 +5236,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly PYG s_Instance = new PYG();
 
         internal PYG() : base("PYG") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guarani".
         /// </summary>
@@ -5262,7 +5262,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly QAR s_Instance = new QAR();
 
         internal QAR() : base("QAR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Qatari Rial".
         /// </summary>
@@ -5288,7 +5288,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly RHD s_Instance = new RHD();
 
         internal RHD() : base("RHD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".
         /// </summary>
@@ -5314,7 +5314,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ROK s_Instance = new ROK();
 
         internal ROK() : base("ROK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Leu A/52".
         /// </summary>
@@ -5340,7 +5340,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ROL s_Instance = new ROL();
 
         internal ROL() : base("ROL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Leu".
         /// </summary>
@@ -5366,7 +5366,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly RON s_Instance = new RON();
 
         internal RON() : base("RON") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Romanian Leu".
         /// </summary>
@@ -5392,7 +5392,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly RSD s_Instance = new RSD();
 
         internal RSD() : base("RSD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
         /// </summary>
@@ -5418,7 +5418,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly RUB s_Instance = new RUB();
 
         internal RUB() : base("RUB") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
         /// </summary>
@@ -5444,7 +5444,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly RUR s_Instance = new RUR();
 
         internal RUR() : base("RUR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
         /// </summary>
@@ -5470,7 +5470,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly RWF s_Instance = new RWF();
 
         internal RWF() : base("RWF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rwanda Franc".
         /// </summary>
@@ -5496,7 +5496,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SAR s_Instance = new SAR();
 
         internal SAR() : base("SAR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Saudi Riyal".
         /// </summary>
@@ -5522,7 +5522,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SBD s_Instance = new SBD();
 
         internal SBD() : base("SBD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Solomon Islands Dollar".
         /// </summary>
@@ -5548,7 +5548,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SCR s_Instance = new SCR();
 
         internal SCR() : base("SCR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Seychelles Rupee".
         /// </summary>
@@ -5574,7 +5574,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SDD s_Instance = new SDD();
 
         internal SDD() : base("SDD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Dinar".
         /// </summary>
@@ -5600,7 +5600,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SDG s_Instance = new SDG();
 
         internal SDG() : base("SDG") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
         /// </summary>
@@ -5626,7 +5626,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SDP s_Instance = new SDP();
 
         internal SDP() : base("SDP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
         /// </summary>
@@ -5652,7 +5652,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SEK s_Instance = new SEK();
 
         internal SEK() : base("SEK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Swedish Krona".
         /// </summary>
@@ -5678,7 +5678,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SGD s_Instance = new SGD();
 
         internal SGD() : base("SGD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Singapore Dollar".
         /// </summary>
@@ -5704,7 +5704,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SHP s_Instance = new SHP();
 
         internal SHP() : base("SHP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Saint Helena Pound".
         /// </summary>
@@ -5730,7 +5730,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SIT s_Instance = new SIT();
 
         internal SIT() : base("SIT") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tolar".
         /// </summary>
@@ -5756,7 +5756,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SKK s_Instance = new SKK();
 
         internal SKK() : base("SKK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Slovak Koruna".
         /// </summary>
@@ -5782,7 +5782,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SLL s_Instance = new SLL();
 
         internal SLL() : base("SLL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Leone".
         /// </summary>
@@ -5808,7 +5808,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SOS s_Instance = new SOS();
 
         internal SOS() : base("SOS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Somali Shilling".
         /// </summary>
@@ -5834,7 +5834,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SRD s_Instance = new SRD();
 
         internal SRD() : base("SRD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Dollar".
         /// </summary>
@@ -5860,7 +5860,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SRG s_Instance = new SRG();
 
         internal SRG() : base("SRG") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Guilder".
         /// </summary>
@@ -5886,7 +5886,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SSP s_Instance = new SSP();
 
         internal SSP() : base("SSP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "South Sudanese Pound".
         /// </summary>
@@ -5912,7 +5912,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly STD s_Instance = new STD();
 
         internal STD() : base("STD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dobra".
         /// </summary>
@@ -5938,7 +5938,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SUR s_Instance = new SUR();
 
         internal SUR() : base("SUR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rouble".
         /// </summary>
@@ -5964,7 +5964,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SVC s_Instance = new SVC();
 
         internal SVC() : base("SVC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "El Salvador Colon".
         /// </summary>
@@ -5990,7 +5990,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SYP s_Instance = new SYP();
 
         internal SYP() : base("SYP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syrian Pound".
         /// </summary>
@@ -6016,7 +6016,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly SZL s_Instance = new SZL();
 
         internal SZL() : base("SZL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lilangeni".
         /// </summary>
@@ -6042,7 +6042,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly THB s_Instance = new THB();
 
         internal THB() : base("THB") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Baht".
         /// </summary>
@@ -6068,7 +6068,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TJR s_Instance = new TJR();
 
         internal TJR() : base("TJR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tajik Ruble".
         /// </summary>
@@ -6094,7 +6094,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TJS s_Instance = new TJS();
 
         internal TJS() : base("TJS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Somoni".
         /// </summary>
@@ -6120,7 +6120,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TMM s_Instance = new TMM();
 
         internal TMM() : base("TMM") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan Manat".
         /// </summary>
@@ -6146,7 +6146,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TMT s_Instance = new TMT();
 
         internal TMT() : base("TMT") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan New Manat".
         /// </summary>
@@ -6172,7 +6172,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TND s_Instance = new TND();
 
         internal TND() : base("TND") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tunisian Dinar".
         /// </summary>
@@ -6198,7 +6198,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TOP s_Instance = new TOP();
 
         internal TOP() : base("TOP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pa’anga".
         /// </summary>
@@ -6224,7 +6224,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TPE s_Instance = new TPE();
 
         internal TPE() : base("TPE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Timor Escudo".
         /// </summary>
@@ -6250,7 +6250,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TRL s_Instance = new TRL();
 
         internal TRL() : base("TRL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Turkish Lira".
         /// </summary>
@@ -6276,7 +6276,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TRY s_Instance = new TRY();
 
         internal TRY() : base("TRY") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkish Lira".
         /// </summary>
@@ -6302,7 +6302,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TTD s_Instance = new TTD();
 
         internal TTD() : base("TTD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Trinidad and Tobago Dollar".
         /// </summary>
@@ -6328,7 +6328,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TWD s_Instance = new TWD();
 
         internal TWD() : base("TWD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Taiwan Dollar".
         /// </summary>
@@ -6354,7 +6354,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly TZS s_Instance = new TZS();
 
         internal TZS() : base("TZS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tanzanian Shilling".
         /// </summary>
@@ -6380,7 +6380,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly UAH s_Instance = new UAH();
 
         internal UAH() : base("UAH") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Hryvnia".
         /// </summary>
@@ -6406,7 +6406,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly UAK s_Instance = new UAK();
 
         internal UAK() : base("UAK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Karbovanet".
         /// </summary>
@@ -6432,7 +6432,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly UGS s_Instance = new UGS();
 
         internal UGS() : base("UGS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
         /// </summary>
@@ -6458,7 +6458,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly UGW s_Instance = new UGW();
 
         internal UGW() : base("UGW") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Shilling".
         /// </summary>
@@ -6484,7 +6484,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly UGX s_Instance = new UGX();
 
         internal UGX() : base("UGX") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
         /// </summary>
@@ -6510,7 +6510,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly USD s_Instance = new USD();
 
         internal USD() : base("USD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar".
         /// </summary>
@@ -6536,7 +6536,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly USN s_Instance = new USN();
 
         internal USN() : base("USN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Next day)".
         /// </summary>
@@ -6562,7 +6562,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly USS s_Instance = new USS();
 
         internal USS() : base("USS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Same day)".
         /// </summary>
@@ -6588,7 +6588,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly UYI s_Instance = new UYI();
 
         internal UYI() : base("UYI") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".
         /// </summary>
@@ -6614,7 +6614,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly UYN s_Instance = new UYN();
 
         internal UYN() : base("UYN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Uruguay Peso".
         /// </summary>
@@ -6640,7 +6640,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly UYP s_Instance = new UYP();
 
         internal UYP() : base("UYP") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguayan Peso".
         /// </summary>
@@ -6666,7 +6666,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly UYU s_Instance = new UYU();
 
         internal UYU() : base("UYU") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Uruguayo".
         /// </summary>
@@ -6692,7 +6692,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly UZS s_Instance = new UZS();
 
         internal UZS() : base("UZS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uzbekistan Sum".
         /// </summary>
@@ -6718,7 +6718,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly VEB s_Instance = new VEB();
 
         internal VEB() : base("VEB") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolivar".
         /// </summary>
@@ -6744,7 +6744,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly VEF s_Instance = new VEF();
 
         internal VEF() : base("VEF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolivar".
         /// </summary>
@@ -6770,7 +6770,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly VNC s_Instance = new VNC();
 
         internal VNC() : base("VNC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Dong".
         /// </summary>
@@ -6796,7 +6796,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly VND s_Instance = new VND();
 
         internal VND() : base("VND") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dong".
         /// </summary>
@@ -6822,7 +6822,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly VUV s_Instance = new VUV();
 
         internal VUV() : base("VUV") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Vatu".
         /// </summary>
@@ -6848,7 +6848,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly WST s_Instance = new WST();
 
         internal WST() : base("WST") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tala".
         /// </summary>
@@ -6874,7 +6874,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XAF s_Instance = new XAF();
 
         internal XAF() : base("XAF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BEAC".
         /// </summary>
@@ -6900,7 +6900,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XAG s_Instance = new XAG();
 
         internal XAG() : base("XAG") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Silver".
         /// </summary>
@@ -6926,7 +6926,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XAU s_Instance = new XAU();
 
         internal XAU() : base("XAU") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold".
         /// </summary>
@@ -6952,7 +6952,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XBA s_Instance = new XBA();
 
         internal XBA() : base("XBA") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".
         /// </summary>
@@ -6978,7 +6978,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XBB s_Instance = new XBB();
 
         internal XBB() : base("XBB") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".
         /// </summary>
@@ -7004,7 +7004,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XBC s_Instance = new XBC();
 
         internal XBC() : base("XBC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".
         /// </summary>
@@ -7030,7 +7030,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XBD s_Instance = new XBD();
 
         internal XBD() : base("XBD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".
         /// </summary>
@@ -7056,7 +7056,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XCD s_Instance = new XCD();
 
         internal XCD() : base("XCD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "East Caribbean Dollar".
         /// </summary>
@@ -7082,7 +7082,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XDR s_Instance = new XDR();
 
         internal XDR() : base("XDR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "SDR (Special Drawing Right)".
         /// </summary>
@@ -7108,7 +7108,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XEU s_Instance = new XEU();
 
         internal XEU() : base("XEU") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "European Currency Unit (E.C.U)".
         /// </summary>
@@ -7134,7 +7134,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XFO s_Instance = new XFO();
 
         internal XFO() : base("XFO") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold-Franc".
         /// </summary>
@@ -7160,7 +7160,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XFU s_Instance = new XFU();
 
         internal XFU() : base("XFU") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "UIC-Franc".
         /// </summary>
@@ -7186,7 +7186,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XOF s_Instance = new XOF();
 
         internal XOF() : base("XOF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BCEAO".
         /// </summary>
@@ -7212,7 +7212,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XPD s_Instance = new XPD();
 
         internal XPD() : base("XPD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Palladium".
         /// </summary>
@@ -7238,7 +7238,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XPF s_Instance = new XPF();
 
         internal XPF() : base("XPF") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFP Franc".
         /// </summary>
@@ -7264,7 +7264,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XPT s_Instance = new XPT();
 
         internal XPT() : base("XPT") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Platinum".
         /// </summary>
@@ -7290,7 +7290,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XRE s_Instance = new XRE();
 
         internal XRE() : base("XRE") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "RINET Funds Code".
         /// </summary>
@@ -7316,7 +7316,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XSU s_Instance = new XSU();
 
         internal XSU() : base("XSU") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
         /// </summary>
@@ -7342,7 +7342,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XTS s_Instance = new XTS();
 
         internal XTS() : base("XTS") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Codes specifically reserved for testing purposes".
         /// </summary>
@@ -7368,7 +7368,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XUA s_Instance = new XUA();
 
         internal XUA() : base("XUA") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "ADB Unit of Account".
         /// </summary>
@@ -7394,7 +7394,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly XXX s_Instance = new XXX();
 
         internal XXX() : base("XXX") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "The codes assigned for transactions where no currency is involved".
         /// </summary>
@@ -7420,7 +7420,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly YDD s_Instance = new YDD();
 
         internal YDD() : base("YDD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Dinar".
         /// </summary>
@@ -7446,7 +7446,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly YER s_Instance = new YER();
 
         internal YER() : base("YER") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Rial".
         /// </summary>
@@ -7472,7 +7472,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly YUD s_Instance = new YUD();
 
         internal YUD() : base("YUD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Yugoslavian Dinar".
         /// </summary>
@@ -7498,7 +7498,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly YUM s_Instance = new YUM();
 
         internal YUM() : base("YUM") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Dinar".
         /// </summary>
@@ -7524,7 +7524,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly YUN s_Instance = new YUN();
 
         internal YUN() : base("YUN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yugoslavian Dinar".
         /// </summary>
@@ -7550,7 +7550,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZAL s_Instance = new ZAL();
 
         internal ZAL() : base("ZAL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Financial Rand".
         /// </summary>
@@ -7576,7 +7576,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZAR s_Instance = new ZAR();
 
         internal ZAR() : base("ZAR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rand".
         /// </summary>
@@ -7602,7 +7602,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZMK s_Instance = new ZMK();
 
         internal ZMK() : base("ZMK") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
         /// </summary>
@@ -7628,7 +7628,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZMW s_Instance = new ZMW();
 
         internal ZMW() : base("ZMW") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
         /// </summary>
@@ -7654,7 +7654,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZRN s_Instance = new ZRN();
 
         internal ZRN() : base("ZRN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zaire".
         /// </summary>
@@ -7680,7 +7680,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZRZ s_Instance = new ZRZ();
 
         internal ZRZ() : base("ZRZ") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zaire".
         /// </summary>
@@ -7706,7 +7706,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZWC s_Instance = new ZWC();
 
         internal ZWC() : base("ZWC") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".
         /// </summary>
@@ -7732,7 +7732,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZWD s_Instance = new ZWD();
 
         internal ZWD() : base("ZWD") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (old)".
         /// </summary>
@@ -7758,7 +7758,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZWL s_Instance = new ZWL();
 
         internal ZWL() : base("ZWL") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".
         /// </summary>
@@ -7784,7 +7784,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZWN s_Instance = new ZWN();
 
         internal ZWN() : base("ZWN") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (new)".
         /// </summary>
@@ -7810,7 +7810,7 @@ namespace Narvalo.Finance.Currencies
         private static readonly ZWR s_Instance = new ZWR();
 
         internal ZWR() : base("ZWR") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".
         /// </summary>

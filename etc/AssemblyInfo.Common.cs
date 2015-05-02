@@ -19,7 +19,11 @@ using System.Runtime.InteropServices;
 
 [assembly: NeutralResourcesLanguage("en")]
 
+#if !NOT_CLS_COMPLIANT
 [assembly: CLSCompliant(true)]
+#else
+[assembly: CLSCompliant(false)]
+#endif
 [assembly: ComVisible(false)]
 
 #if DUMMY_GENERATED_VERSION

@@ -39,7 +39,7 @@ namespace <#= InferNamespace() #>
         codeSet.Add(currency.Code);
 
         // WARNING: If you change the name of the property "s_Currency",
-        // you MUST also change the value of INSTANCE_CURRENCY_FIELD in 
+        // you MUST also change the value of INSTANCE_CURRENCY_FIELD in
         // Internal.CurrencyActivator<TCurrency>.
 #>
     /// <summary>
@@ -62,27 +62,27 @@ namespace <#= InferNamespace() #>
         };
 
         private <#= currency.Code #>() : base("<#= currency.Code #>") { }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".</value>
         public static <#= currency.Code #> Currency
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<Currency>() != null);
                 return s_Currency;
             }
         }
-        
+
         /// <summary>
         /// Gets the unique instance of the <see cref="CurrencyInfo" /> class for the "<#= currency.EnglishName #>".
         /// </summary>
         /// <value>The unique instance of the <see cref="CurrencyInfo" /> class for the "<#= currency.EnglishName #>".</value>
         public static CurrencyInfo CurrencyInfo
-        { 
-            get 
+        {
+            get
             {
                 Contract.Ensures(Contract.Result<CurrencyInfo>() != null);
                 return s_CurrencyInfo;

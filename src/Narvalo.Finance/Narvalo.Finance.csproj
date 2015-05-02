@@ -76,9 +76,6 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\Iso4217.tt">
-      <LastGenOutput>Iso4217.g.cs</LastGenOutput>
-    </None>
     <None Include="Currencies\Currencies.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Currencies.g.cs</LastGenOutput>

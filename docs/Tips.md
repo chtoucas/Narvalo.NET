@@ -3,6 +3,18 @@ Tips
 
 Often obvious but worth recalling.
 
+### T4 Tips ###
+
+To include a file only once:
+```
+<#@ include file="file.t4" once="true" #>
+```
+
+Hard clean things running T4 inside VS:
+```
+<#@ CleanupBehavior processor="T4VSHost" CleanupAfterProcessingtemplate="true" #>
+```
+
 ### Use hyperlinks in documentation ###
 
 To use hyperlinks in C# documentation, prefix the reference with `!:`:

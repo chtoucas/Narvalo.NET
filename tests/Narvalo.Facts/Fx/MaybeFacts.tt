@@ -1,4 +1,6 @@
-﻿<#@ include file="..\CodeTemplates\MonadFacts.tt" #>
+﻿<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ output extension=".g.cs" #>
+<#@ include file="$(T4NarvaloTemplates)\MonadFacts.tt" #>
 <#
     ReturnName = "Of";
     PlusName = "OrElse";

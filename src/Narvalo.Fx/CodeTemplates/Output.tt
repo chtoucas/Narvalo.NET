@@ -1,7 +1,0 @@
-﻿<#@ include file="Monad.tt" #>
-<# 
-    UnitEnsuresSome = true;
-    MultiplicationEnsuresSome = false;
-
-    ReturnName = "Success";
-#>

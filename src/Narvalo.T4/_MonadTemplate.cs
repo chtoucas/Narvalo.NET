@@ -1,27 +1,16 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-// WARNING: This is only a proof of concept.
-// This file depends on Narvalo.Cerbere & Narvalo.Fx packages for four things:
-// - the classes Acknowledge, Assume and Require in the Narvalo namespace.
-// - the Unit class in the Narvalo.Fx namespace; but you can define your own: see UnitFullName.
-// The generated files are free of CA warnings except for CA1006:DoNotNestGenericTypesInMemberSignatures.
-
-// TODO: Protect the various T4 property's setters.
-// Better separation of concerns.
-
-// The following is going to change:
-// Some documentation is almost blindly copied from Haskell.
-// If the monad does have a zero, we do expect "Bind" & "η" to never return null but the zero.
-// If the monad does not have a zero, we do not have any expectation on the return value of Bind.
-
 namespace Narvalo.T4
 {
     using System;
 
-    public abstract class MonadTemplate : VSTemplate
-    {
-        private bool _initialized;
+    using Microsoft.VisualStudio.TextTemplating;
 
+    /// <summary>
+    /// Provides a base class for Monad templates hosted inside Visual Studio.
+    /// </summary>
+    public abstract class _MonadTemplate : VSTemplate
+    {
         private string _advancedNamespace;
 
         private bool _isNullable = true;
@@ -35,6 +24,17 @@ namespace Narvalo.T4
         private string _zeroName = "Zero";
 
         private string _unitFullName = "Narvalo.Fx.Unit";
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="_MonadTemplate"/> class.
+        /// </summary>
+        protected _MonadTemplate() : base() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="_MonadTemplate"/> class.
+        /// </summary>
+        /// <param name="parent">The parent text transformation.</param>
+        protected _MonadTemplate(TextTransformation parent) : base(parent) { }
 
         #region Monad characteristics.
 
@@ -273,7 +273,7 @@ namespace Narvalo.T4
         #region Postconditions.
 
         /// <summary>
-        // Gets or sets a value indicating whether Monad.Bind() ensures a non-null return value. Default to false.
+        /// Gets or sets a value indicating whether Monad.Bind() ensures a non-null return value. Default to false.
         /// </summary>
         protected bool BindEnsuresSome { get; set; }
 
@@ -323,6 +323,7 @@ namespace Narvalo.T4
 
         /// <summary>
         /// Gets a value indicating whether Monad.Join() ensures a non-null return value. Default to false.
+        /// </summary>
         /// <remarks>Monad.Join() uses Monad.Map().</remarks>
         protected bool JoinEnsuresSome { get { return MapEnsuresSome; } }
 
@@ -334,66 +335,53 @@ namespace Narvalo.T4
 
         #endregion
 
-        ////public override string TransformText()
-        ////{
-        ////    return GenerationEnvironment.ToString();
-        ////}
+        /// <inheritdoc cref="TextTransformation.TransformText" />
+        public override string TransformText()
+        {
+            WriteHeader();
 
-        #region Initalizers; all being mutually exclusive.
+            WriteContent();
+
+            return GenerationEnvironment.ToString();
+        }
+
+        protected virtual void WriteContent() { }
+
+        #region Initalizers.
 
         /// <summary>
         /// Initializes a MonadZero.
         /// </summary>
-        public void InitializeZero()
+        protected void InitializeZero()
         {
-            ThrowIfInitialized();
-
             // ZeroName use the default value.
             HasZero = true;
-
-            _initialized = true;
         }
 
         /// <summary>
         /// Initializes a MonadPlus.
         /// </summary>
-        public void InitializePlus()
+        protected void InitializePlus()
         {
-            ThrowIfInitialized();
-
             // ZeroName use the default value.
             HasZero = true;
 
             // PlusName use the default value.
             HasPlus = true;
-
-            _initialized = true;
         }
 
         /// <summary>
         /// Initializes a MonadOr.
         /// </summary>
-        public void InitializeOr()
+        protected void InitializeOr()
         {
-            ThrowIfInitialized();
-
             HasZero = true;
             ZeroName = "None";
 
             HasPlus = true;
             PlusName = "OrElse";
-
-            _initialized = true;
         }
 
         #endregion
-
-        private void ThrowIfInitialized()
-        {
-            if (_initialized)
-            {
-                throw new InvalidOperationException("You can only initialize the template once.");
-            }
-        }
     }
 }

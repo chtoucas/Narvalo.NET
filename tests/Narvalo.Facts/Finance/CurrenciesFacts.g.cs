@@ -20,7 +20,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Currencies;
     using Xunit;
-    
+
     [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
         Justification = "[Intentionally] Testing all currencies in a row.")]
     [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling",
@@ -338,7 +338,7 @@ namespace Narvalo.Finance
             Assert.True(ZWN.Currency != null);
             Assert.True(ZWR.Currency != null);
         }
-        
+
         [Fact]
         [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
             Justification = "[Intentionally] Testing all currencies in a row.")]
@@ -1852,7 +1852,7 @@ namespace Narvalo.Finance
         #endregion
 
         #region ToString()
-        
+
         [Fact]
         [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode",
             Justification = "[Intentionally] Testing all currencies in a row.")]

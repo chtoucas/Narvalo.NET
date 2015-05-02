@@ -1,4 +1,17 @@
-﻿<#@ include file=".\CodeTemplates\Maybe.tt" #>
-<# EmitMonad(); #>
+﻿<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ output extension=".g.cs" #>
+<#@ include file="$(T4NarvaloTemplates)\Maybe.tt" #>
+<#= new MaybeTemplate(this).Execute() #>
+<#+
 
-<# EmitLinq(); #>
+    public partial class MaybeTemplate : MonadTemplate
+    {
+        protected override void WriteContent()
+        {
+            EmitMonad();
+            WriteLine();
+            EmitLinq();
+        }
+    }
+
+#>

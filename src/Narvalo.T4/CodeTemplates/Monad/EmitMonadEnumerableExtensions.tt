@@ -1,4 +1,7 @@
 ﻿<#+
+
+public partial class MonadTemplate
+{
     protected void EmitMonadEnumerableExtensions()
     {
 #>
@@ -52,5 +55,7 @@
 <#+ } // End of HasSum. #>
     } // End of the class EnumerableExtensions.
 <#+
-    }
+    } // T4: End of EmitMonadEnumerableExtensions().
+}
+
 #>

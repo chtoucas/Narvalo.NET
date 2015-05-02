@@ -8,7 +8,7 @@
       <Import Project="..\..\tools\Narvalo.Common.props" />
     If the project does not follow the default repository layout, use instead:
       <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), Make.proj))\tools\Narvalo.Common.props" />
-    
+
     WARNING: Make sure the import is located just before Microsoft targets.
   -->
 
@@ -21,10 +21,10 @@
 
   <!-- Instruct MSBuild to import Narvalo.Common.targets after Microsoft.Common.targets. -->
   <PropertyGroup>
-    <!-- WARNING: Overriding this property may lead to unexpected results. 
-         Microsoft.Common.targets will completely ignore the original targets 
-         file which, by the way, is used by Code Contracts. A simple workaround 
-         is to import in Narvalo.Common.targets the orignal system-wide custom 
+    <!-- WARNING: Overriding this property may lead to unexpected results.
+         Microsoft.Common.targets will completely ignore the original targets
+         file which, by the way, is used by Code Contracts. A simple workaround
+         is to import in Narvalo.Common.targets the orignal system-wide custom
          after targets. -->
     <CustomAfterMicrosoftCommonTargets>$(MSBuildThisFileDirectory)Narvalo.Common.targets</CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
@@ -54,11 +54,11 @@
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
 
-  <!-- 
+  <!--
     Debug configuration is optimized for build speed.
     Release configuration is optimized for execution speed.
     CodeContracts configuration focuses on Code Contracts!
-    This explains why I choose to only check for overflow/underflow 
+    This explains why I choose to only check for overflow/underflow
     in Debug configuration.
   -->
 
@@ -87,10 +87,10 @@
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <!-- WARNING: Do not add the CODE_ANALYSIS symbol. Inside VS, it would cause 
-         FxCop to run automatically on build but Code Contracts and Code Analysis 
+    <!-- WARNING: Do not add the CODE_ANALYSIS symbol. Inside VS, it would cause
+         FxCop to run automatically on build but Code Contracts and Code Analysis
          don't play well together. Anyway, the build is already slow enough in this
-         confguration. Otherwise, note that the Code Contracts rewriter will 
+         confguration. Otherwise, note that the Code Contracts rewriter will
          define the CODE_ANALYSIS symbol. -->
     <DefineConstants>TRACE;CONTRACTS_FULL</DefineConstants>
   </PropertyGroup>
@@ -99,14 +99,14 @@
        are unreachable, leading to broken sources after refactoring. Unfortunately it does not
        play nicely with the VS environment: compiling is fine but running anything is broken. -->
   <!--<PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
-    <DefineConstants 
+    <DefineConstants
       Condition=" '$(Configuration)' != 'CodeContracts' And '$(CodeContractsRunCodeAnalysis)' != 'true' ">$(DefineConstants);CONTRACTS_FULL</DefineConstants>
   </PropertyGroup>-->
 
   <!-- Additional files -->
   <ItemGroup>
-    <!-- Unfortunately, when done here, the files won't appear in VS (even 
-         if they are declared as linked files). 
+    <!-- Unfortunately, when done here, the files won't appear in VS (even
+         if they are declared as linked files).
          Also a file update won't be caught immediately by VS. -->
     <Compile Include="$(RepositorySettingsDir)AssemblyInfo.Common.cs" />
     <Compile Include="$(RepositorySettingsDir)GlobalSuppressions.Common.cs" />
@@ -115,7 +115,7 @@
   </ItemGroup>
 
   <!-- Source Analysis -->
-  <!-- 
+  <!--
     For a complete list of available options, see
       packages\StyleCop.MSBuild.*\build\StyleCop.MSBuild.Targets.
   -->
@@ -123,10 +123,10 @@
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
     <SourceAnalysisEnabled Condition=" '$(Configuration)' == 'Release' ">true</SourceAnalysisEnabled>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <SourceAnalysisEnabled Condition=" '$(SourceAnalysisEnabled)' != 'true' ">false</SourceAnalysisEnabled>
-    
+
     <!-- Right now, we enable all StyleCop rules except the documentation ones. -->
     <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Loosy.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
 
@@ -198,11 +198,26 @@
     <CodeContractsShowSquigglies>false</CodeContractsShowSquigglies>
     <!-- Extra CCChecker options. -->
     <CodeContractsExtraAnalysisOptions>-outputwarnmasks -show unreached</CodeContractsExtraAnalysisOptions>
-    
+
     <!-- For command-line builds the following settings are reversed. -->
     <CodeContractsFailBuildOnWarnings>false</CodeContractsFailBuildOnWarnings>
     <CodeContractsRunInBackground>true</CodeContractsRunInBackground>
   </PropertyGroup>
+
+  <!-- T4 -->
+  <PropertyGroup>
+    <T4NarvaloLibrary>$(MSBuildThisFileDirectory)lib\Narvalo.T4.dll</T4NarvaloLibrary>
+    <T4NarvaloTemplates>$(RepositoryRoot)src\Narvalo.T4\CodeTemplates</T4NarvaloTemplates>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <T4ParameterValues Include="T4NarvaloLibrary">
+      <Value>$(T4NarvaloLibrary)</Value>
+    </T4ParameterValues>
+    <T4ParameterValues Include="T4NarvaloTemplates">
+      <Value>$(T4NarvaloTemplates)</Value>
+    </T4ParameterValues>
+  </ItemGroup>
 
   <!-- If any, import custom project properties. -->
   <Import Project="$(MSBuildProjectDirectory)\$(AssemblyName).props"

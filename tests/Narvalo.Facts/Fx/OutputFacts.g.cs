@@ -62,9 +62,9 @@ namespace Narvalo.Fx
         }
 
         #endregion
-        
+
         #region Monad Laws
-        
+
 
         [Fact]
         public static void Output_SatisfiesFirstMonadLaw()
@@ -111,7 +111,7 @@ namespace Narvalo.Fx
             // Assert
             Assert.True(left.Equals(right));
         }
-        
+
 
         #endregion
     }

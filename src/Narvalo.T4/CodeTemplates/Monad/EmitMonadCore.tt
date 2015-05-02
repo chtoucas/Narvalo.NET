@@ -1,5 +1,8 @@
 ﻿<#+
-    protected void EmitMonadCore() 
+
+public partial class MonadTemplate
+{
+    protected void EmitMonadCore()
     {
 #>
     /// <content>
@@ -20,14 +23,14 @@
         /// </summary>
         /// <value>The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.</value>
         public static <#= Name #><global::<#= UnitFullName #>> Unit
-        { 
-            get 
-            { 
+        {
+            get
+            {
 <#+ if (IsNullable && UnitEnsuresSome) { #>
                 Contract.Ensures(Contract.Result<<#= Name #><global::<#= UnitFullName #>>>() != null);
 <#+ } #>
 
-                return s_Unit; 
+                return s_Unit;
             }
         }
 
@@ -60,7 +63,7 @@
 
             return <#= Name #><T>.η(value);
         }
-        
+
         #region Generalisations of list functions (Prelude)
 
         /// <summary>
@@ -106,7 +109,7 @@
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the 
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
@@ -126,7 +129,7 @@
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the 
+        /// Promotes a function to use and return <see cref="<#= Name #>{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
@@ -158,7 +161,7 @@
 <#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>() != null);
-            
+
             return (m1, m2, m3, m4) =>
             {
 <#+ if (IsNullable) { PushIndent(); WriteNotNull_("m1"); PopIndent(); }  #>
@@ -179,7 +182,7 @@
 <#+ WriteTypeConstraints_("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
             Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>() != null);
-       
+
             return (m1, m2, m3, m4, m5) =>
             {
 <#+ if (IsNullable) { PushIndent(); WriteNotNull_("m1"); PopIndent(); }  #>
@@ -190,5 +193,7 @@
         #endregion
     } // End of the class <#= Name #>.
 <#+
-    }
+    } // T4: End of EmitMonadCore().
+}
+
 #>

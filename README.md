@@ -72,7 +72,8 @@ Narvalo.NET
 - **Narvalo.Ghostscript**, a .NET wrapper for GhostScript.
 - **Narvalo.Reliability** features reliability patterns.
 - **Narvalo.PowerShell**, collection of PowerShell modules.
-- **Narvalo.StyleCop.CSharp**, custom StyleCop rules.
+- **Narvalo.T4**, custom T4 templates (for internal use only).
+- **Narvalo.StyleCop.CSharp**, custom StyleCop rules (for internal use only).
 - **Narvalo.FxCop**, custom FxCop rules.
 - **Narvalo.Brouillons**, a "fourre-tout" of unfinished or severely broken codes.
 - **Narvalo.Benchmarks**, the benchmarking project.
@@ -81,9 +82,9 @@ Narvalo.NET
 
 For Code Contracts, StyleCop & Documentation, OK does not mean finished.
 
-Library             | Status | PCL        | Security    | CA | GA | CC | SA  |
---------------------|--------|------------|-------------|----|----|----|-----|
-Narvalo.Cerbere     | Beta   | Profile259 | Transparent | OK | OK | OK | OK+ |
+Library             | Status | PCL        | Security    | CA | GA | CC | SA  | TC
+--------------------|--------|------------|-------------|----|----|----|-----| ----
+Narvalo.Cerbere     | Beta   | Profile259 | Transparent | OK | OK | OK | OK+ | 100%
 Narvalo.Fx          | Beta   | Profile259 | Transparent | OK | OK | OK | OK  |
 Narvalo.Finance     |        | Profile111 | Transparent | OK | !  | OK | OK  |
 Narvalo.Core        | Alpha  | Profile259 | Transparent | !  | OK | OK | OK  |
@@ -97,6 +98,7 @@ Narvalo.Build       |        |            |             | !  |    |    | OK  |
 - GA: Static Analysis with Gendarme
 - CC: Static Analysis with Code Contracts
 - SA: Source Analysis with StyleCop. OK+ means that the assembly is fully documented.
+- TC: Code Coverage. OK means > 90%.
 
 #### Dead NuGet packages
 

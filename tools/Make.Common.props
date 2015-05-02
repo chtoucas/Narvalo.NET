@@ -2,7 +2,7 @@
 <Project ToolsVersion="12.0"
          InitialTargets="__InitializeMakeCommonProps"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  
+
   <!-- Import shared properties. -->
   <Import Project="$(MSBuildThisFileDirectory)Make.Shared.props" />
 
@@ -72,7 +72,7 @@
       use the standard behaviour: GenerateProjectSpecificOutputFolder = false.
 
       WARNING: We force the value of various paths. Although not required by the
-      standard MSBuild operations, we do use IntermediateOutputPath 
+      standard MSBuild operations, we do use IntermediateOutputPath
       in Make.CustomAfter.props. Concerning OutputPath, I didn't check if this is
       really necessary to also include it as it is supposed to be a legacy
       property, no longer in use.

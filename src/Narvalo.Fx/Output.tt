@@ -1,4 +1,17 @@
-﻿<#@ include file=".\CodeTemplates\Output.tt" #>
-<# EmitMonad(); #>
+﻿<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ output extension=".g.cs" #>
+<#@ include file="$(T4NarvaloTemplates)\Outcome.tt" #>
+<#= new OutcomeTemplate(this).Execute() #>
+<#+
 
-<# EmitLinq(); #>
+    public partial class OutcomeTemplate : MonadTemplate
+    {
+        protected override void WriteContent()
+        {
+            EmitMonad();
+            WriteLine();
+            EmitLinq();
+        }
+    }
+
+#>

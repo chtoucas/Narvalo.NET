@@ -1,4 +1,7 @@
 ﻿<#+
+
+public partial class MonadTemplate
+{
     protected void EmitMonadEnumerableInternalExtensions()
     {
 #>
@@ -31,7 +34,7 @@
 
             return retval;
         }
-        
+
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
         private static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
             <#= Name #><TSource> m,
@@ -68,5 +71,7 @@
 <#+ } // End of HasSum. #>
     } // End of the class EnumerableExtensions.
 <#+
-    }
+    } // T4: End of EmitMonadEnumerableInternalExtensions().
+}
+
 #>

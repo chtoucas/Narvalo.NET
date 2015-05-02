@@ -1,5 +1,8 @@
 ﻿<#+
-    protected void EmitComonadCore() 
+
+public partial class MonadTemplate
+{
+    protected void EmitComonadCore()
     {
 #>
     // Implements core Comonad methods.
@@ -26,5 +29,7 @@
         }
     } // End of the class <#= Name #>.
 <#+
-    } // End of EmitCoreComonad().
+    } // T4: End of EmitCoreComonad().
+}
+
 #>

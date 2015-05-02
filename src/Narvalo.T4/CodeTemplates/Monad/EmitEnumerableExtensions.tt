@@ -1,4 +1,7 @@
 ﻿<#+
+
+public partial class MonadTemplate
+{
     protected void EmitEnumerableExtensions()
     {
 #>
@@ -110,7 +113,7 @@
         #endregion
 
         #region Aggregate Operators
-        
+
         public static <#= Name #><TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -125,7 +128,7 @@
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
-        
+
         public static <#= Name #><TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
@@ -139,7 +142,7 @@
 
             return @this.ReduceCore(accumulatorM);
         }
-        
+
         public static <#= Name #><TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
@@ -200,5 +203,7 @@
         #endregion
     } // End of the class EnumerableExtensions.
 <#+
-    }
+    } // T4: End of EmitEnumerableExtensions().
+}
+
 #>
