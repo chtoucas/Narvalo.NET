@@ -6,6 +6,7 @@
 // behavior and will be lost if the code is regenerated.
 //
 // Runtime Version: 4.0.30319.34209
+// Microsoft.VisualStudio.TextTemplating: 12.0
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -191,6 +192,7 @@ namespace Narvalo.Edu.Monads
 
         #endregion
     } // End of the class Identity.
+
     /// <content>
     /// Provides the core monadic extension methods for <see cref="Identity{T}" />.
     /// </content>
@@ -395,9 +397,13 @@ namespace Narvalo.Edu.Monads
 
 
         #endregion
+    } // End of the class Identity.
 
-        #region Non-standard extensions
-
+    /// <content>
+    /// Provides the non-standard extension methods for <see cref="Identity{T}" />.
+    /// </content>
+    public static partial class Identity
+    {
         public static Identity<TResult> Coalesce<TSource, TResult>(
             this Identity<TSource> @this,
             Func<TSource, bool> predicate,
@@ -421,9 +427,8 @@ namespace Narvalo.Edu.Monads
             @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-
-        #endregion
     } // End of the class Identity.
+
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Identity{T}"/> class.
     /// </content>
@@ -534,7 +539,7 @@ namespace Narvalo.Edu.Monads
     } // End of the class EnumerableExtensions.
 }
 
-namespace Narvalo.Edu.Monads
+namespace Narvalo.Edu.Monads.Advanced
 {
     using System;
     using System.Collections.Generic;
@@ -711,6 +716,8 @@ namespace Narvalo.Edu.Monads.Internal
     using global::Narvalo;
     using Narvalo.Fx; // Necessary for EmptyIfNull().
     using Narvalo.Edu.Monads;
+    using Narvalo.Edu.Monads.Advanced;
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.
     /// </content>
@@ -744,6 +751,7 @@ namespace Narvalo.Edu.Monads.Internal
             return m.Bind(item => Identity.Return(list.Concat(Enumerable.Repeat(item, 1))));
         }
     } // End of the class EnumerableExtensions.
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>

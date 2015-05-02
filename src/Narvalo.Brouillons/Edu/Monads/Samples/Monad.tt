@@ -10,7 +10,6 @@
 
         public override void Initialize()
         {
-            AdvancedNamespace = Namespace;
             UnitEnsuresSome = true;
         }
 
@@ -18,6 +17,7 @@
         {
             EmitMonad();
             WriteLine();
+
             EmitLinq();
         }
     }

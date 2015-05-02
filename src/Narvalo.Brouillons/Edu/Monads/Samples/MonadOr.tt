@@ -11,14 +11,13 @@
         public override void Initialize()
         {
             InitializeOr();
-
-            AdvancedNamespace = Namespace;
         }
 
         protected override void WriteContent()
         {
             EmitMonad();
             WriteLine();
+
             EmitLinq();
         }
     }

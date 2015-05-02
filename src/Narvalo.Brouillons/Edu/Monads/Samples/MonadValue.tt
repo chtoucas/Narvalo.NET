@@ -12,8 +12,6 @@
         {
             InitializeOr();
 
-            AdvancedNamespace = Namespace;
-
             UnderlyingTypeConstraint = "struct";
             IsNullable = false;
         }
@@ -22,6 +20,7 @@
         {
             EmitMonad();
             WriteLine();
+
             EmitLinq();
         }
     }

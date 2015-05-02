@@ -13,6 +13,8 @@ namespace Narvalo.T4
      * Narvalo.T4
      * ==========
      *
+     * After a succesful build, the dll is copied to `tools\lib\`.
+     *
      * The interop library `EnvDTE` must not be embedded into `Narvalo.T4`;
      * otherwise the `DTE` property of `VSTemplate` won't work.
      * By the way, to access this property, you must add the following directive

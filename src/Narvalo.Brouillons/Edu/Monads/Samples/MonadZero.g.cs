@@ -6,6 +6,7 @@
 // behavior and will be lost if the code is regenerated.
 //
 // Runtime Version: 4.0.30319.34209
+// Microsoft.VisualStudio.TextTemplating: 12.0
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -198,6 +199,7 @@ namespace Narvalo.Edu.Monads.Samples
 
         #endregion
     } // End of the class MonadZero.
+
     /// <content>
     /// Provides the core monadic extension methods for <see cref="MonadZero{T}" />.
     /// </content>
@@ -574,9 +576,13 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
+    } // End of the class MonadZero.
 
-        #region Non-standard extensions
-
+    /// <content>
+    /// Provides the non-standard extension methods for <see cref="MonadZero{T}" />.
+    /// </content>
+    public static partial class MonadZero
+    {
         public static MonadZero<TResult> Coalesce<TSource, TResult>(
             this MonadZero<TSource> @this,
             Func<TSource, bool> predicate,
@@ -644,9 +650,8 @@ namespace Narvalo.Edu.Monads.Samples
                 .Then(MonadZero.Unit)
                 .Bind(_ => { caseZero.Invoke(); return Unit; });
         }
-
-        #endregion
     } // End of the class MonadZero.
+
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="MonadZero{T}"/> class.
     /// </content>
@@ -730,7 +735,7 @@ namespace Narvalo.Edu.Monads.Samples
     } // End of the class EnumerableExtensions.
 }
 
-namespace Narvalo.Edu.Monads.Samples
+namespace Narvalo.Edu.Monads.Samples.Advanced
 {
     using System;
     using System.Collections.Generic;
@@ -914,6 +919,8 @@ namespace Narvalo.Edu.Monads.Samples.Internal
     using global::Narvalo;
     using Narvalo.Fx; // Necessary for EmptyIfNull().
     using Narvalo.Edu.Monads.Samples;
+    using Narvalo.Edu.Monads.Samples.Advanced;
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadZero{T}"/> class.
     /// </content>
@@ -947,6 +954,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             return m.Bind(item => MonadZero.Return(list.Concat(Enumerable.Repeat(item, 1))));
         }
     } // End of the class EnumerableExtensions.
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>

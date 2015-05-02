@@ -3,6 +3,7 @@
 <#@ import namespace="Narvalo.T4" #>
 <#@ include file="Monad\EmitMonadCore.tt" #>
 <#@ include file="Monad\EmitMonadExtensions.tt" #>
+<#@ include file="Monad\EmitMonadExtraExtensions.tt" #>
 <#@ include file="Monad\EmitKleisliExtensions.tt" #>
 <#@ include file="Monad\EmitMonadEnumerableExtensions.tt" #>
 <#@ include file="Monad\EmitMonadEnumerableInternalExtensions.tt" #>
@@ -16,8 +17,7 @@
 // - the Unit class in the Narvalo.Fx namespace; but you can define your own: see UnitFullName.
 // The generated files are free of CA warnings except for CA1006:DoNotNestGenericTypesInMemberSignatures.
 
-// The following is going to change:
-// Some documentation is almost blindly copied from Haskell.
+// Remove this:
 // If the monad does have a zero, we do expect "Bind" & "η" to never return null but the zero.
 // If the monad does not have a zero, we do not have any expectation on the return value of Bind.
 
@@ -42,11 +42,18 @@ namespace <#= Namespace #>
 
     using global::Narvalo;
 
-<#+ EmitMonadCore(); #>
+<#+
+    EmitMonadCore();
+    WriteLine();
 
-<#+ EmitMonadExtensions(); #>
+    EmitMonadExtensions();
+    WriteLine();
 
-<#+ EmitKleisliExtensions(); #>
+    EmitMonadExtraExtensions();
+    WriteLine();
+
+    EmitKleisliExtensions();
+#>
 }
 <#+
     } // T4: End of EmitMonad().
@@ -86,7 +93,7 @@ namespace <#= Namespace #>
 <#+ EmitMonadEnumerableExtensions(); #>
 }
 
-namespace <#= AdvancedNamespace #>
+namespace <#= Namespace #>.Advanced
 {
     using System;
     using System.Collections.Generic;
@@ -110,13 +117,14 @@ namespace <#= Namespace #>.Internal
 <#+ if (Namespace != "Narvalo.Fx") { #>
     using <#= Namespace #>;
 <#+ } #>
-<#+ if (Namespace != AdvancedNamespace) { #>
-    using <#= AdvancedNamespace #>;
-<#+ } #>
+    using <#= Namespace #>.Advanced;
 
-<#+ EmitMonadEnumerableInternalExtensions(); #>
+<#+
+    EmitMonadEnumerableInternalExtensions();
+    WriteLine();
 
-<#+ EmitEnumerableInternalExtensions(); #>
+    EmitEnumerableInternalExtensions();
+#>
 }
 <#+
     } // T4: End of EmitLinq().
@@ -150,11 +158,7 @@ using global::System.Diagnostics.CodeAnalysis;
 <#+
     } // T4: End of WriteHeader().
 
-    /* ========================================================================================== *
-     * Private Methods
-     * ========================================================================================== */
-
-    private void WriteTypeConstraints(params string[] names)
+    protected void WriteTypeConstraints(params string[] names)
     {
         if (HasUnderlyingTypeConstraint) {
             foreach (var name in names) {
@@ -165,7 +169,7 @@ using global::System.Diagnostics.CodeAnalysis;
         }
     } // T4: End of WriteTypeConstraints().
 
-    private void WriteObjectNotNull(bool force = false)
+    protected void WriteObjectNotNull(bool force = false)
     {
         if (force || IsNullable) {
 #>
@@ -174,7 +178,7 @@ using global::System.Diagnostics.CodeAnalysis;
         }
     } // T4: End of WriteObjectNotNull().
 
-    private void WriteNotNull(string name)
+    protected void WriteNotNull(string name)
     {
         if (IsNullable) {
 #>

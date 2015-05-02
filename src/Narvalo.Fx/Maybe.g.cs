@@ -6,6 +6,7 @@
 // behavior and will be lost if the code is regenerated.
 //
 // Runtime Version: 4.0.30319.34209
+// Microsoft.VisualStudio.TextTemplating: 12.0
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -192,6 +193,7 @@ namespace Narvalo.Fx
 
         #endregion
     } // End of the class Maybe.
+
     /// <content>
     /// Provides the core monadic extension methods for <see cref="Maybe{T}" />.
     /// </content>
@@ -537,9 +539,13 @@ namespace Narvalo.Fx
         }
 
         #endregion
+    } // End of the class Maybe.
 
-        #region Non-standard extensions
-
+    /// <content>
+    /// Provides the non-standard extension methods for <see cref="Maybe{T}" />.
+    /// </content>
+    public static partial class Maybe
+    {
         public static Maybe<TResult> Coalesce<TSource, TResult>(
             this Maybe<TSource> @this,
             Func<TSource, bool> predicate,
@@ -601,9 +607,8 @@ namespace Narvalo.Fx
                 .Then(Maybe.Unit)
                 .Bind(_ => { caseNone.Invoke(); return Unit; });
         }
-
-        #endregion
     } // End of the class Maybe.
+
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </content>
@@ -875,6 +880,7 @@ namespace Narvalo.Fx.Internal
     using global::Narvalo;
     using Narvalo.Fx; // Necessary for EmptyIfNull().
     using Narvalo.Fx.Advanced;
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </content>
@@ -917,6 +923,7 @@ namespace Narvalo.Fx.Internal
             return retval;
         }
     } // End of the class EnumerableExtensions.
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>

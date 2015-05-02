@@ -13,21 +13,21 @@ public partial class MonadTemplate
     /// </remarks>
     public static partial class <#= Name #>
     {
-        private static readonly <#= Name #><global::<#= UnitFullName #>> s_Unit = <#= ReturnName #>(global::<#= UnitFullName #>.Single);
+        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Fx.Unit.Single);
 <#+ if (HasZero) { #>
-        private static readonly <#= Name #><global::<#= UnitFullName #>> s_<#= ZeroName #> = <#= Name #><global::<#= UnitFullName #>>.<#= ZeroName #>;
+        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_<#= ZeroName #> = <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
 <#+ } #>
 
         /// <summary>
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
         /// </summary>
         /// <value>The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.</value>
-        public static <#= Name #><global::<#= UnitFullName #>> Unit
+        public static <#= Name #><global::Narvalo.Fx.Unit> Unit
         {
             get
             {
 <#+ if (IsNullable && UnitEnsuresSome) { #>
-                Contract.Ensures(Contract.Result<<#= Name #><global::<#= UnitFullName #>>>() != null);
+                Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
                 return s_Unit;
@@ -42,7 +42,7 @@ public partial class MonadTemplate
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
         /// <value>The zero for <see cref="<#= Name #>{T}"/>.</value>
-        public static <#= Name #><global::<#= UnitFullName #>> <#= ZeroName #> { get { return s_<#= ZeroName #>; } }
+        public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #> { get { return s_<#= ZeroName #>; } }
 <#+ } #>
 
         /// <summary>

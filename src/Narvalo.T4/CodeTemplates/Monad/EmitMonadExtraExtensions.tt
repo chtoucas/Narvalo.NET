@@ -1,0 +1,104 @@
+﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
+
+public partial class MonadTemplate
+{
+    protected void EmitMonadExtraExtensions()
+    {
+#>
+    /// <content>
+    /// Provides the non-standard extension methods for <see cref="<#= Name #>{T}" />.
+    /// </content>
+    public static partial class <#= Name #>
+    {
+        public static <#= Name #><TResult> Coalesce<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> then,
+            <#= Name #><TResult> otherwise)
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+<#+ WriteObjectNotNull(); #>
+            Require.NotNull(predicate, "predicate");
+<#+ if (IsNullable && BindEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
+        }
+
+<#+ if (HasZero) { #>
+        public static <#= Name #><TResult> Then<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> other)
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+<#+ WriteObjectNotNull(); #>
+            Contract.Requires(predicate != null);
+<#+ if (IsNullable && CoalesceEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Coalesce(predicate, other, <#= Name #><TResult>.<#= ZeroName #>);
+        }
+
+        public static <#= Name #><TResult> Otherwise<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<TSource, bool> predicate,
+            <#= Name #><TResult> other)
+<#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+<#+ WriteObjectNotNull(); #>
+            Contract.Requires(predicate != null);
+<#+ if (IsNullable && CoalesceEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
+        }
+<#+ } // End of HasZero. #>
+
+        public static void Invoke<TSource>(
+            this <#= Name #><TSource> @this,
+            Action<TSource> action)
+<#+ WriteTypeConstraints("TSource"); #>
+        {
+<#+ WriteObjectNotNull(); #>
+            Require.NotNull(action, "action");
+
+            @this.Bind(_ => { action.Invoke(_); return @this; });
+        }
+
+<#+ if (HasThen) { #>
+
+        public static void On<#= ZeroName #><TSource>(
+            this <#= Name #><TSource> @this,
+            Action action)
+<#+ WriteTypeConstraints("TSource"); #>
+        {
+<#+ WriteObjectNotNull(); #>
+            Require.NotNull(action, "action");
+
+            @this.Then(<#= Name #>.Unit).Invoke(_ => action.Invoke());
+        }
+
+        public static void Invoke<TSource>(
+            this <#= Name #><TSource> @this,
+            Action<TSource> action,
+            Action case<#= ZeroName #>)
+<#+ WriteTypeConstraints("TSource"); #>
+        {
+<#+ WriteObjectNotNull(); #>
+            Require.NotNull(action, "action");
+
+            @this.Bind(_ => { action.Invoke(_); return @this; })
+                .Then(<#= Name #>.Unit)
+                .Bind(_ => { case<#= ZeroName #>.Invoke(); return Unit; });
+        }
+<#+ } // End of HasThen. #>
+    } // End of the class <#= Name #>.
+<#+
+    } // T4: End of EmitMonadExtraExtensions().
+}
+
+#>

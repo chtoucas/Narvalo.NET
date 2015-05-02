@@ -30,7 +30,7 @@ namespace Narvalo.Mvp.Resolvers
      *             }
      *         }
      *     }
-     *     
+     *
      *     public event EventHandler Searching
      *     {
      *         add
@@ -188,8 +188,8 @@ namespace Narvalo.Mvp.Resolvers
          * ```
          * It does this by emitting IL like this:
          * ```csharp
-         * .method public hidebysig newslot specialname virtual final 
-         *     instance class WebFormsMvp.FeatureDemos.Logic.Views.Models.CompositeDemoViewModel 
+         * .method public hidebysig newslot specialname virtual final
+         *     instance class WebFormsMvp.FeatureDemos.Logic.Views.Models.CompositeDemoViewModel
          *     get_Model() cil managed
          * {
          *     // Code size       22 (0x16)
@@ -276,7 +276,7 @@ namespace Narvalo.Mvp.Resolvers
          * ```
          * It does this by emitting IL like this:
          * ```csharp
-         * .method public hidebysig newslot specialname virtual final 
+         * .method public hidebysig newslot specialname virtual final
          *     instance void  set_Model(class WebFormsMvp.FeatureDemos.Logic.Views.Models.CompositeDemoViewModel 'value') cil managed
          * {
          *     // Code size       61 (0x3d)
@@ -293,7 +293,7 @@ namespace Narvalo.Mvp.Resolvers
          *     .try
          *     {
          *         IL_000e:  br.s       IL_001f
-         * 
+         *
          *         IL_0010:  ldloc.1
          *         IL_0011:  callvirt   instance !0 class [mscorlib]System.Collections.Generic.IEnumerator`1<class WebFormsMvp.FeatureDemos.Logic.Views.ICompositeDemoView>::get_Current()
          *         IL_0016:  stloc.0
@@ -306,9 +306,9 @@ namespace Narvalo.Mvp.Resolvers
          *         IL_0025:  stloc.2
          *         IL_0026:  ldloc.2
          *         IL_0027:  brtrue.s   IL_0010
-         * 
+         *
          *         IL_0029:  leave.s    IL_003b
-         * 
+         *
          *     }  // end .try
          *     finally
          *     {
@@ -318,7 +318,7 @@ namespace Narvalo.Mvp.Resolvers
          *         IL_002f:  stloc.2
          *         IL_0030:  ldloc.2
          *         IL_0031:  brtrue.s   IL_003a
-         * 
+         *
          *         IL_0033:  ldloc.1
          *         IL_0034:  callvirt   instance void [mscorlib]System.IDisposable::Dispose()
          *         IL_0039:  nop

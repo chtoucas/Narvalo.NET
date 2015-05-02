@@ -13,7 +13,7 @@ namespace Narvalo.T4
      * Narvalo.StyleCop
      * ================
      *
-     * - After every succesful build, the dll is copied to `tools\lib\StyleCop`.
+     * - After a succesful build, the dll is copied to `tools\lib\StyleCop`.
      * This operation might fail if Source Analysis has been performed before (it locks the dll).
      * - The assembly is called Narvalo.StyleCop but the default namespace is Narvalo.
      * When displaying warnings, the default behaviour of StyleCop is to use the part

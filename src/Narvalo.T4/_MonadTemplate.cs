@@ -12,12 +12,7 @@ namespace Narvalo.T4
     public abstract class _MonadTemplate : VSTemplate
     {
         /// <summary>
-        /// The name of the 'Advanced' namespace.
-        /// </summary>
-        private string _advancedNamespace;
-
-        /// <summary>
-        /// A value indicating whether the monad is nullable.
+        /// A value indicating whether the monad is null-able.
         /// </summary>
         private bool _isNullable = true;
 
@@ -44,11 +39,6 @@ namespace Narvalo.T4
         /// The name of the Zero property.
         /// </summary>
         private string _zeroName = "Zero";
-
-        /// <summary>
-        /// The fully qualified name of the Unit property.
-        /// </summary>
-        private string _unitFullName = "Narvalo.Fx.Unit";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="_MonadTemplate"/> class.
@@ -115,14 +105,15 @@ namespace Narvalo.T4
         #region Type constraints.
 
         /// <summary>
-        /// Gets or sets a value indicating whether the monad is nullable. Default to true.
+        /// Gets or sets a value indicating whether the monad is null-able. Default to true.
         /// </summary>
-        /// <value><see langword="true"/> if the monad is nullable; otherwise <see langword="false"/>.</value>
+        /// <value><see langword="true"/> if the monad is null-able; otherwise <see langword="false"/>.</value>
         protected bool IsNullable { get { return _isNullable; } set { _isNullable = value; } }
 
         /// <summary>
         /// Gets or sets a generic constraint on the underlying type T. Default to String.Empty.
         /// </summary>
+        /// <value>A generic constraint on the underlying type T.</value>
         protected string UnderlyingTypeConstraint
         {
             get
@@ -147,65 +138,6 @@ namespace Narvalo.T4
         #endregion
 
         #region Names
-
-        /// <summary>
-        /// Gets or sets the name of the 'Advanced' namespace.
-        /// </summary>
-        /// <remarks>If no namespace was specified, it will be deduced from Namespace.</remarks>
-        protected string AdvancedNamespace
-        {
-            get
-            {
-                if (_advancedNamespace == null)
-                {
-                    _advancedNamespace = Namespace + ".Advanced";
-                }
-
-                return _advancedNamespace;
-            }
-
-            set
-            {
-                if (_advancedNamespace != null)
-                {
-                    throw new InvalidOperationException("You can set the name of the 'Advanced' namespace only once.");
-                }
-
-                if (String.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("The 'Advanced' namespace can not be null or blank.", "value");
-                }
-
-                _advancedNamespace = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the fully qualified name of the Unit property. Default to "Narvalo.Fx.Unit".
-        /// </summary>
-        /// <value>The fully qualified name of the Unit property.</value>
-        protected string UnitFullName
-        {
-            get
-            {
-                return _unitFullName;
-            }
-
-            set
-            {
-                if (_unitFullName != null)
-                {
-                    throw new InvalidOperationException("You can set the name of the Unit full name only once.");
-                }
-
-                if (String.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("The Unit full name can not be null or blank.", "value");
-                }
-
-                _unitFullName = value;
-            }
-        }
 
         /// <summary>
         /// Gets or sets the name of the Zero property. Default to "Zero".

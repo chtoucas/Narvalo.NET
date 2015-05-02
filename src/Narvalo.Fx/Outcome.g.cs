@@ -6,6 +6,7 @@
 // behavior and will be lost if the code is regenerated.
 //
 // Runtime Version: 4.0.30319.34209
+// Microsoft.VisualStudio.TextTemplating: 12.0
 // </auto-generated>
 //------------------------------------------------------------------------------
 
@@ -191,6 +192,7 @@ namespace Narvalo.Fx
 
         #endregion
     } // End of the class Outcome.
+
     /// <content>
     /// Provides the core monadic extension methods for <see cref="Outcome{T}" />.
     /// </content>
@@ -395,9 +397,13 @@ namespace Narvalo.Fx
 
 
         #endregion
+    } // End of the class Outcome.
 
-        #region Non-standard extensions
-
+    /// <content>
+    /// Provides the non-standard extension methods for <see cref="Outcome{T}" />.
+    /// </content>
+    public static partial class Outcome
+    {
         public static Outcome<TResult> Coalesce<TSource, TResult>(
             this Outcome<TSource> @this,
             Func<TSource, bool> predicate,
@@ -421,9 +427,8 @@ namespace Narvalo.Fx
             @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-
-        #endregion
     } // End of the class Outcome.
+
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Outcome{T}"/> class.
     /// </content>
@@ -684,6 +689,7 @@ namespace Narvalo.Fx.Internal
     using global::Narvalo;
     using Narvalo.Fx; // Necessary for EmptyIfNull().
     using Narvalo.Fx.Advanced;
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Outcome{T}"/> class.
     /// </content>
@@ -717,6 +723,7 @@ namespace Narvalo.Fx.Internal
             return m.Bind(item => Outcome.Success(list.Concat(Enumerable.Repeat(item, 1))));
         }
     } // End of the class EnumerableExtensions.
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
