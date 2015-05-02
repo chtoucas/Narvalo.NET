@@ -104,8 +104,8 @@
     <Compile Include="Finance\Internal\CurrencyActivatorFacts.cs" />
     <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="FormatFacts.cs" />
-    <Compile Include="Fx\OutputFacts.g.cs">
-      <DependentUpon>OutputFacts.tt</DependentUpon>
+    <Compile Include="Fx\OutcomeFacts.g.cs">
+      <DependentUpon>OutcomeFacts.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -126,7 +126,7 @@
     <Compile Include="Fx\EitherFacts.cs" />
     <Compile Include="Fx\MaybeFacts.cs" />
     <Compile Include="Fx\Advanced\NullableFacts.cs" />
-    <Compile Include="Fx\OutputFacts.cs" />
+    <Compile Include="Fx\OutcomeFacts.cs" />
     <Compile Include="Fx\SequenceFacts.cs" />
     <Compile Include="Fx\VoidOrErrorFacts.cs" />
     <Compile Include="Fx\VoidOrBreakFacts.cs" />
@@ -162,9 +162,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CurrenciesFacts.g.cs</LastGenOutput>
     </None>
-    <None Include="Fx\OutputFacts.tt">
+    <None Include="Fx\OutcomeFacts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OutputFacts.g.cs</LastGenOutput>
+      <LastGenOutput>OutcomeFacts.g.cs</LastGenOutput>
     </None>
     <None Include="Fx\MaybeFacts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

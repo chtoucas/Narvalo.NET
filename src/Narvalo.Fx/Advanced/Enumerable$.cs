@@ -47,13 +47,13 @@ namespace Narvalo.Fx.Advanced
     }
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Output{T}"/> class.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Outcome{T}"/> class.
     /// </content>
     public static partial class EnumerableExtensions
     {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, Output<TResult>> funM)
+            Func<TSource, Outcome<TResult>> funM)
         {
             Require.Object(@this);
             Require.NotNull(funM, "funM");

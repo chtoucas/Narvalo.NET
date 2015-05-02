@@ -120,11 +120,11 @@
   <data name="Maybe_CannotCastNoneToValue" xml:space="preserve">
     <value>Il n'est pas possible de convertir explicitement un objet Maybe&lt;T&gt;.None en une valeur de type T.</value>
   </data>
-  <data name="Output_CannotCastFailureToValue" xml:space="preserve">
-    <value>Il n'est pas possible de convertir explicitement un échec de type Output&lt;T&gt; en une valeur de type T.</value>
+  <data name="Outcome_CannotCastFailureToValue" xml:space="preserve">
+    <value>Il n'est pas possible de convertir explicitement un échec de type Outcome&lt;T&gt; en une valeur de type T.</value>
   </data>
-  <data name="Output_CannotCastSuccessToException" xml:space="preserve">
-    <value>Il n'est pas possible de convertir explicitement un succès de type Output&lt;T&gt; en un objet de type ExceptionDispatchInfo.</value>
+  <data name="Outcome_CannotCastSuccessToException" xml:space="preserve">
+    <value>Il n'est pas possible de convertir explicitement un succès de type Outcome&lt;T&gt; en un objet de type ExceptionDispatchInfo.</value>
   </data>
   <data name="VoidOrBreak_BreakHasNoReason" xml:space="preserve">
     <value>Seule une sortie en erreur peut fournir un message d'erreur. Vous devriez toujours vérifier au préalable la valeur de la propriété IsBreak.</value>

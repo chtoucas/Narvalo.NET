@@ -8,7 +8,7 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
-    /// <seealso cref="Output{T}"/>
+    /// <seealso cref="Outcome{T}"/>
     /// <seealso cref="Either{T1, T2}"/>
     /// <seealso cref="Switch{T1, T2}"/>
     /// <seealso cref="VoidOrError"/>

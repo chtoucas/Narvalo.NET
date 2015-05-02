@@ -12,8 +12,8 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Properties;
 
     /// <summary>
-    /// Represents the output of a computation which may throw exceptions.
-    /// An instance of the <see cref="Output{T}"/> class contains either a <c>T</c>
+    /// Represents the outcome of a computation which may throw exceptions.
+    /// An instance of the <see cref="Outcome{T}"/> class contains either a <c>T</c>
     /// value or the exception state at the point it was thrown.
     /// </summary>
     /// <remarks>
@@ -25,46 +25,46 @@ namespace Narvalo.Fx
     /// <seealso cref="Switch{T1, T2}"/>
     /// <seealso cref="VoidOrBreak"/>
     /// <seealso cref="VoidOrError"/>
-    public abstract partial class Output<T>
+    public abstract partial class Outcome<T>
     {
         private readonly bool _isSuccess;
 
 #if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
-        protected Output(bool isSuccess) { _isSuccess = isSuccess; }
+        protected Outcome(bool isSuccess) { _isSuccess = isSuccess; }
 #else
-        private Output(bool isSuccess) { _isSuccess = isSuccess; }
+        private Outcome(bool isSuccess) { _isSuccess = isSuccess; }
 #endif
 
         /// <summary>
-        /// Gets a value indicating whether the output is successful. 
+        /// Gets a value indicating whether the outcome is successful.
         /// </summary>
         /// <remarks>Most of the time, you don't need to access this property.
         /// You are better off using the rich vocabulary that this class offers.</remarks>
-        /// <value><see langword="true"/> if the output is successful; otherwise <see langword="false"/>.</value>
+        /// <value><see langword="true"/> if the outcome is successful; otherwise <see langword="false"/>.</value>
         public bool IsSuccess { get { return _isSuccess; } }
 
         #region Explicit casting operators
 
-        public static explicit operator Output<T>(T value)
+        public static explicit operator Outcome<T>(T value)
         {
-            Contract.Ensures(Contract.Result<Output<T>>() != null);
+            Contract.Ensures(Contract.Result<Outcome<T>>() != null);
 
             return η(value);
         }
 
-        public static explicit operator Output<T>(ExceptionDispatchInfo exceptionInfo)
+        public static explicit operator Outcome<T>(ExceptionDispatchInfo exceptionInfo)
         {
             Contract.Requires(exceptionInfo != null);
-            Contract.Ensures(Contract.Result<Output<T>>() != null);
+            Contract.Ensures(Contract.Result<Outcome<T>>() != null);
 
             return η(exceptionInfo);
         }
 
-        public static explicit operator T(Output<T> value)
+        public static explicit operator T(Outcome<T> value)
         {
             Require.NotNull(value, "value");
 
-            // We check the value of the property IsSuccess even if this is not really necessary 
+            // We check the value of the property IsSuccess even if this is not really necessary
             // since a direct cast would have worked too:
             //  return ((Success_)value).Value;
             // but doing so allows us to throw a more meaningful exception and to effectively
@@ -72,7 +72,7 @@ namespace Narvalo.Fx
             // like "Unable to cast a Failure_ type to a Success_ type".
             if (!value.IsSuccess)
             {
-                throw new InvalidCastException(Strings.Output_CannotCastFailureToValue);
+                throw new InvalidCastException(Strings.Outcome_CannotCastFailureToValue);
             }
 
             var success = value as Success_;
@@ -81,12 +81,12 @@ namespace Narvalo.Fx
             return success.Value;
         }
 
-        public static explicit operator ExceptionDispatchInfo(Output<T> value)
+        public static explicit operator ExceptionDispatchInfo(Outcome<T> value)
         {
             Require.NotNull(value, "value");
             Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
 
-            // We check the value of the property IsSuccess even if this is not really necessary 
+            // We check the value of the property IsSuccess even if this is not really necessary
             // since a direct cast would have worked too:
             //  return ((Failure_)value).Value;
             // but doing so allows us to throw a more meaningful exception and to effectively
@@ -94,7 +94,7 @@ namespace Narvalo.Fx
             // like "Unable to cast a Success_ type to a Failure_ type".
             if (value.IsSuccess)
             {
-                throw new InvalidCastException(Strings.Output_CannotCastSuccessToException);
+                throw new InvalidCastException(Strings.Outcome_CannotCastSuccessToException);
             }
 
             var failure = value as Failure_;
@@ -108,14 +108,14 @@ namespace Narvalo.Fx
         #region Abstract methods
 
         // Core monad Bind method.
-        public abstract Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector);
+        public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
 
-        // Overrides the 'Select' auto-generated (extension) method (see Output.g.cs).
+        // Overrides the 'Select' auto-generated (extension) method (see Outcome.g.cs).
         // Since Select is a building block, we override it in Failure_ and Success_.
         // Otherwise we would have to call ToValue() or ToExceptionInfo() which imply a casting.
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select",
             Justification = "[Intentionally] No trouble here, this 'Select' is the one from the LINQ standard query operators.")]
-        public abstract Output<TResult> Select<TResult>(Func<T, TResult> selector);
+        public abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector);
 
         #endregion
 
@@ -216,7 +216,7 @@ namespace Narvalo.Fx
             }
         }
 
-        #region Overrides a bunch of auto-generated (extension) methods (see Output.g.cs).
+        #region Overrides a bunch of auto-generated (extension) methods (see Outcome.g.cs).
 
         public void Invoke(Action<T> action)
         {
@@ -228,11 +228,11 @@ namespace Narvalo.Fx
             }
         }
 
-        public Output<TResult> Then<TResult>(Output<TResult> other)
+        public Outcome<TResult> Then<TResult>(Outcome<TResult> other)
         {
             return IsSuccess
                 ? other
-                : Output<TResult>.η(ToExceptionDispatchInfo());
+                : Outcome<TResult>.η(ToExceptionDispatchInfo());
         }
 
         #endregion
@@ -242,7 +242,7 @@ namespace Narvalo.Fx
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
-        internal static Output<T> η(T value)
+        internal static Outcome<T> η(T value)
         {
             return new Success_(value);
         }
@@ -250,7 +250,7 @@ namespace Narvalo.Fx
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
-        internal static Output<T> η(ExceptionDispatchInfo exceptionInfo)
+        internal static Outcome<T> η(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, "exceptionInfo");
 
@@ -260,7 +260,7 @@ namespace Narvalo.Fx
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
-        internal static Output<T> μ(Output<Output<T>> square)
+        internal static Outcome<T> μ(Outcome<Outcome<T>> square)
         {
             Require.NotNull(square, "square");
 
@@ -280,7 +280,7 @@ namespace Narvalo.Fx
         /// Obtains the enclosed value.
         /// </summary>
         /// <remarks>
-        /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/> 
+        /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/>
         /// is <see langword="true"/>.
         /// </remarks>
         internal T ToValue()
@@ -297,7 +297,7 @@ namespace Narvalo.Fx
         /// Obtains the enclosed exception state.
         /// </summary>
         /// <remarks>
-        /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/> 
+        /// Any access to this method must be protected by checking before that <see cref="IsSuccess"/>
         /// is <see langword="false"/>.
         /// </remarks>
         internal ExceptionDispatchInfo ToExceptionDispatchInfo()
@@ -311,9 +311,9 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Represents the "success" part of the <see cref="Output{T}"/> type.
+        /// Represents the "success" part of the <see cref="Outcome{T}"/> type.
         /// </summary>
-        private sealed partial class Success_ : Output<T>, IEquatable<Success_>
+        private sealed partial class Success_ : Outcome<T>, IEquatable<Success_>
         {
             private readonly T _value;
 
@@ -325,18 +325,18 @@ namespace Narvalo.Fx
 
             internal T Value { get { return _value; } }
 
-            public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
+            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
             {
                 Require.NotNull(selector, "selector");
 
                 return selector.Invoke(Value);
             }
 
-            public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
+            public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
             {
                 Require.NotNull(selector, "selector");
 
-                return Output<TResult>.η(selector.Invoke(Value));
+                return Outcome<TResult>.η(selector.Invoke(Value));
             }
 
             public bool Equals(Success_ other)
@@ -373,9 +373,9 @@ namespace Narvalo.Fx
         }
 
         /// <summary>
-        /// Represents the "failure" part of the <see cref="Output{T}"/> type.
+        /// Represents the "failure" part of the <see cref="Outcome{T}"/> type.
         /// </summary>
-        private sealed partial class Failure_ : Output<T>, IEquatable<Failure_>
+        private sealed partial class Failure_ : Outcome<T>, IEquatable<Failure_>
         {
             private readonly ExceptionDispatchInfo _exceptionInfo;
 
@@ -397,14 +397,14 @@ namespace Narvalo.Fx
                 }
             }
 
-            public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
+            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
             {
-                return Output<TResult>.η(ExceptionInfo);
+                return Outcome<TResult>.η(ExceptionInfo);
             }
 
-            public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
+            public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
             {
-                return Output<TResult>.η(ExceptionInfo);
+                return Outcome<TResult>.η(ExceptionInfo);
             }
 
             public bool Equals(Failure_ other)
@@ -443,12 +443,12 @@ namespace Narvalo.Fx
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-    // In real world, only Success_ and Failure_ can inherit from Output.
-    // Adding the following object invariants on Output<T>:
+    // In real world, only Success_ and Failure_ can inherit from Outcome.
+    // Adding the following object invariants on Outcome<T>:
     //  (IsSuccess && this is Success_) || (this is Failure_)
     // should make unecessary any call to Contract.Assume but I have not been able to make this work.
-    [ContractClass(typeof(OutputContract<>))]
-    public partial class Output<T>
+    [ContractClass(typeof(OutcomeContract<>))]
+    public partial class Outcome<T>
     {
         private partial class Success_
         {
@@ -470,23 +470,23 @@ namespace Narvalo.Fx
         }
     }
 
-    [ContractClassFor(typeof(Output<>))]
-    internal abstract class OutputContract<T> : Output<T>
+    [ContractClassFor(typeof(Outcome<>))]
+    internal abstract class OutcomeContract<T> : Outcome<T>
     {
-        protected OutputContract(bool isSuccess) : base(isSuccess) { }
+        protected OutcomeContract(bool isSuccess) : base(isSuccess) { }
 
-        public override Output<TResult> Bind<TResult>(Func<T, Output<TResult>> selector)
+        public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
         {
             Contract.Requires(selector != null);
 
-            return default(Output<TResult>);
+            return default(Outcome<TResult>);
         }
 
-        public override Output<TResult> Select<TResult>(Func<T, TResult> selector)
+        public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
         {
             Contract.Requires(selector != null);
 
-            return default(Output<TResult>);
+            return default(Outcome<TResult>);
         }
     }
 

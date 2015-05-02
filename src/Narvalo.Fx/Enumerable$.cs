@@ -252,15 +252,15 @@ namespace Narvalo.Fx
     }
 
     /// <content>
-    /// Provides overrides for a bunch of auto-generated (extension) methods that depend on the <see cref="Output{T}"/> class.
+    /// Provides overrides for a bunch of auto-generated (extension) methods that depend on the <see cref="Outcome{T}"/> class.
     /// </content>
     public static partial class EnumerableExtensions
     {
         // Custom version of CollectCore.
-        internal static Output<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Output<TSource>> @this)
+        internal static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Output<IEnumerable<TSource>>>() != null);
+            Contract.Ensures(Contract.Result<Outcome<IEnumerable<TSource>>>() != null);
 
             var list = new List<TSource>();
 
@@ -274,13 +274,13 @@ namespace Narvalo.Fx
 
                 if (!m.IsSuccess)
                 {
-                    return Output.Failure<IEnumerable<TSource>>(m.ToExceptionDispatchInfo());
+                    return Outcome.Failure<IEnumerable<TSource>>(m.ToExceptionDispatchInfo());
                 }
 
                 list.Add(m.ToValue());
             }
 
-            return Output.Success(list.AsEnumerable());
+            return Outcome.Success(list.AsEnumerable());
         }
     }
 }

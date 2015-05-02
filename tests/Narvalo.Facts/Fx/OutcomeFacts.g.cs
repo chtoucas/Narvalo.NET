@@ -20,7 +20,7 @@ namespace Narvalo.Fx
 
     using Xunit;
 
-    public static partial class OutputFacts
+    public static partial class OutcomeFacts
     {
         #region Linq Operators
 
@@ -28,7 +28,7 @@ namespace Narvalo.Fx
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
             // Arrange
-            var source = Output.Success(1);
+            var source = Outcome.Success(1);
             Func<int, int> selector = null;
 
             // Act & Assert
@@ -40,8 +40,8 @@ namespace Narvalo.Fx
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
         {
             // Arrange
-            var source = Output.Success(1);
-            Func<int, Output<int>> valueSelector = null;
+            var source = Outcome.Success(1);
+            Func<int, Outcome<int>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             // Act & Assert
@@ -52,9 +52,9 @@ namespace Narvalo.Fx
         public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
         {
             // Arrange
-            var source = Output.Success(1);
-            var middle = Output.Success(2);
-            Func<int, Output<int>> valueSelector = _ => middle;
+            var source = Outcome.Success(1);
+            var middle = Outcome.Success(2);
+            Func<int, Outcome<int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
             // Act & Assert
@@ -67,14 +67,14 @@ namespace Narvalo.Fx
 
 
         [Fact]
-        public static void Output_SatisfiesFirstMonadLaw()
+        public static void Outcome_SatisfiesFirstMonadLaw()
         {
             // Arrange
             int value = 1;
-            Func<int, Output<long>> kun = _ => Output.Success((long)2 * _);
+            Func<int, Outcome<long>> kun = _ => Outcome.Success((long)2 * _);
 
             // Act
-            var left = Output.Success(value).Bind(kun);
+            var left = Outcome.Success(value).Bind(kun);
             var right = kun(value);
 
             // Assert
@@ -82,11 +82,11 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Output_SatisfiesSecondMonadLaw()
+        public static void Outcome_SatisfiesSecondMonadLaw()
         {
             // Arrange
-            Func<int, Output<int>> create = _ => Output.Success(_);
-            var monad = Output.Success(1);
+            Func<int, Outcome<int>> create = _ => Outcome.Success(_);
+            var monad = Outcome.Success(1);
 
             // Act
             var left = monad.Bind(create);
@@ -97,12 +97,12 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Output_SatisfiesThirdMonadLaw()
+        public static void Outcome_SatisfiesThirdMonadLaw()
         {
             // Arrange
-            Output<short> m = Output.Success((short)1);
-            Func<short, Output<int>> f = _ => Output.Success((int)3 * _);
-            Func<int, Output<long>> g = _ => Output.Success((long)2 * _);
+            Outcome<short> m = Outcome.Success((short)1);
+            Func<short, Outcome<int>> f = _ => Outcome.Success((int)3 * _);
+            Func<int, Outcome<long>> g = _ => Outcome.Success((long)2 * _);
 
             // Act
             var left = m.Bind(f).Bind(g);

@@ -2,7 +2,7 @@
 ==========
 
 The interop library `EnvDTE` must not be embedded into `Narvalo.T4`;
-otherwise the `DTE` property of `VSTemplate` won't work. 
+otherwise the `DTE` property of `VSTemplate` won't work.
 By the way, to access this property, you must add the following directive
 to your template:
 ```

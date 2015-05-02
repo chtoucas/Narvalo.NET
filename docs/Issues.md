@@ -73,6 +73,11 @@ Narvalo.Facts
 - Explore SpecFlow.
 - Write a T4 template for Monad tests.
 
+Narvalo.T4
+----------
+
+- Use SnvCurrencyXmlReader
+
 Narvalo.Mvp
 -----------
 

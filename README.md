@@ -80,8 +80,6 @@ Narvalo.NET
 
 #### Status for the NuGet packages
 
-For Code Contracts, StyleCop & Documentation, OK does not mean finished.
-
 Library             | Status | PCL        | Security    | CA | GA | CC | SA  | TC
 --------------------|--------|------------|-------------|----|----|----|-----| ----
 Narvalo.Cerbere     | Beta   | Profile259 | Transparent | OK | OK | OK | OK+ | 100%
