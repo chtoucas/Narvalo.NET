@@ -11,7 +11,7 @@
           <Value>\.g\.cs$</Value>
         </CollectionProperty>
         <BooleanProperty Name="AnalyzeDesignerFiles">False</BooleanProperty>
-        <BooleanProperty Name="AnalyzeGeneratedFiles">True</BooleanProperty>
+        <BooleanProperty Name="AnalyzeGeneratedFiles">False</BooleanProperty>
       </ParserSettings>
     </Parser>
   </Parsers>
