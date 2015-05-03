@@ -1,25 +1,25 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Edu.Monads.Samples
+namespace Narvalo.Fx.Samples
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public sealed class MonadOr<T>
+    public sealed class MonadPlus<T>
     {
         // [Haskell] mzero
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
             Justification = "[Educational] This code is not meant to be used.")]
-        public static MonadOr<T> None { get { throw new NotImplementedException(); } }
+        public static MonadPlus<T> Zero { get { throw new NotImplementedException(); } }
 
         // [Haskell] mplus
-        public MonadOr<T> OrElse(MonadOr<T> other)
+        public MonadPlus<T> Plus(MonadPlus<T> other)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] >>=
-        public MonadOr<TResult> Bind<TResult>(Func<T, MonadOr<TResult>> funM)
+        public MonadPlus<TResult> Bind<TResult>(Func<T, MonadPlus<TResult>> funM)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace Narvalo.Edu.Monads.Samples
         // [Haskell] return
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Educational] Standard naming convention from mathematics.")]
-        internal static MonadOr<T> η(T value)
+        internal static MonadPlus<T> η(T value)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,7 @@ namespace Narvalo.Edu.Monads.Samples
         // [Haskell] join
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Educational] Standard naming convention from mathematics.")]
-        internal static MonadOr<T> μ(MonadOr<MonadOr<T>> square)
+        internal static MonadPlus<T> μ(MonadPlus<MonadPlus<T>> square)
         {
             return square.Bind(_ => _);
         }

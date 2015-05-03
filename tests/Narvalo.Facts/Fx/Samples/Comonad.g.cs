@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Edu.Monads.Samples
+namespace Narvalo.Fx.Samples
 {
     using System.Diagnostics.Contracts;
 

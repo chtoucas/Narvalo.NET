@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Edu.Monads.Samples
+namespace Narvalo.Fx.Samples
 {
     using System;
     using System.Collections.Generic;
@@ -20,53 +20,46 @@ namespace Narvalo.Edu.Monads.Samples
     using global::Narvalo;
 
     /// <content>
-    /// Provides a set of static methods for <see cref="MonadPlus{T}" />.
+    /// Provides a set of static methods for <see cref="Monad{T}" />.
     /// </content>
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to override them locally.
     /// </remarks>
-    public static partial class MonadPlus
+    public static partial class Monad
     {
-        private static readonly MonadPlus<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
+        private static readonly Monad<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
 
-        private static readonly MonadPlus<global::Narvalo.Fx.Unit> s_Zero = MonadPlus<global::Narvalo.Fx.Unit>.Zero;
 
         /// <summary>
-        /// Gets the unique object of type <c>MonadPlus&lt;Unit&gt;</c>.
+        /// Gets the unique object of type <c>Monad&lt;Unit&gt;</c>.
         /// </summary>
-        /// <value>The unique object of type <c>MonadPlus&lt;Unit&gt;</c>.</value>
-        public static MonadPlus<global::Narvalo.Fx.Unit> Unit
+        /// <value>The unique object of type <c>Monad&lt;Unit&gt;</c>.</value>
+        public static Monad<global::Narvalo.Fx.Unit> Unit
         {
             get
             {
+                Contract.Ensures(Contract.Result<Monad<global::Narvalo.Fx.Unit>>() != null);
 
                 return s_Unit;
             }
         }
 
-        /// <summary>
-        /// Gets the zero for <see cref="MonadPlus{T}"/>.
-        /// </summary>
-        /// <remarks>
-        /// Named <c>mzero</c> in Haskell parlance.
-        /// </remarks>
-        /// <value>The zero for <see cref="MonadPlus{T}"/>.</value>
-        public static MonadPlus<global::Narvalo.Fx.Unit> Zero { get { return s_Zero; } }
 
         /// <summary>
-        /// Obtains an instance of the <see cref="MonadPlus{T}"/> class for the specified value.
+        /// Obtains an instance of the <see cref="Monad{T}"/> class for the specified value.
         /// </summary>
         /// <remarks>
         /// Named <c>return</c> in Haskell parlance.
         /// </remarks>
         /// <typeparam name="T">The underlying type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">A value to be wrapped into a <see cref="MonadPlus{T}"/> object.</param>
-        /// <returns>An instance of the <see cref="MonadPlus{T}"/> class for the specified value.</returns>
-        public static MonadPlus<T> Return<T>(T value)
+        /// <param name="value">A value to be wrapped into a <see cref="Monad{T}"/> object.</param>
+        /// <returns>An instance of the <see cref="Monad{T}"/> class for the specified value.</returns>
+        public static Monad<T> Return<T>(T value)
             /* T4: C# indent */
         {
+            Contract.Ensures(Contract.Result<Monad<T>>() != null);
 
-            return MonadPlus<T>.η(value);
+            return Monad<T>.η(value);
         }
 
         #region Generalisations of list functions (Prelude)
@@ -77,12 +70,12 @@ namespace Narvalo.Edu.Monads.Samples
         /// <remarks>
         /// Named <c>join</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<T> Flatten<T>(MonadPlus<MonadPlus<T>> square)
+        public static Monad<T> Flatten<T>(Monad<Monad<T>> square)
             /* T4: C# indent */
         {
             Contract.Requires(square != null);
 
-            return MonadPlus<T>.μ(square);
+            return Monad<T>.μ(square);
         }
 
         #endregion
@@ -90,16 +83,16 @@ namespace Narvalo.Edu.Monads.Samples
         #region Monadic lifting operators (Prelude)
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values.
+        /// Promotes a function to use and return <see cref="Monad{T}" /> values.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM</c> in Haskell parlance.
         /// </remarks>
-        public static Func<MonadPlus<T>, MonadPlus<TResult>> Lift<T, TResult>(
+        public static Func<Monad<T>, Monad<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<MonadPlus<T>, MonadPlus<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<Monad<T>, Monad<TResult>>>() != null);
 
             return m =>
             {
@@ -109,17 +102,17 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM2</c> in Haskell parlance.
         /// </remarks>
-        public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>
+        public static Func<Monad<T1>, Monad<T2>, Monad<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<Monad<T1>, Monad<T2>, Monad<TResult>>>() != null);
 
             return (m1, m2) =>
             {
@@ -129,17 +122,17 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM3</c> in Haskell parlance.
         /// </remarks>
-        public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>
+        public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<TResult>>>() != null);
 
             return (m1, m2, m3) =>
             {
@@ -149,18 +142,18 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM4</c> in Haskell parlance.
         /// </remarks>
-        public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>
+        public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<TResult>>>() != null);
 
             return (m1, m2, m3, m4) =>
             {
@@ -170,18 +163,18 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         /// <summary>
-        /// Promotes a function to use and return <see cref="MonadPlus{T}" /> values, scanning the
+        /// Promotes a function to use and return <see cref="Monad{T}" /> values, scanning the
         /// monadic arguments from left to right.
         /// </summary>
         /// <remarks>
         /// Named <c>liftM5</c> in Haskell parlance.
         /// </remarks>
-        public static Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>
+        public static Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<Monad<T1>, Monad<T2>, Monad<T3>, Monad<T4>, Monad<T5>, Monad<TResult>>>() != null);
 
             return (m1, m2, m3, m4, m5) =>
             {
@@ -191,35 +184,35 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    } // End of MonadPlus.
+    } // End of Monad.
 
     /// <content>
-    /// Provides the core monadic extension methods for <see cref="MonadPlus{T}" />.
+    /// Provides the core monadic extension methods for <see cref="Monad{T}" />.
     /// </content>
-    public static partial class MonadPlus
+    public static partial class Monad
     {
         #region Basic Monad functions (Prelude)
 
         /// <remarks>
         /// Named <c>fmap</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<TResult> Select<TSource, TResult>(
-            this MonadPlus<TSource> @this,
+        public static Monad<TResult> Select<TSource, TResult>(
+            this Monad<TSource> @this,
             Func<TSource, TResult> selector)
             /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
 
-            return @this.Bind(_ => MonadPlus.Return(selector.Invoke(_)));
+            return @this.Bind(_ => Monad.Return(selector.Invoke(_)));
         }
 
         /// <remarks>
         /// Named <c>&gt;&gt;</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<TResult> Then<TSource, TResult>(
-            this MonadPlus<TSource> @this,
-            MonadPlus<TResult> other)
+        public static Monad<TResult> Then<TSource, TResult>(
+            this Monad<TSource> @this,
+            Monad<TResult> other)
             /* T4: C# indent */
         {
             Require.Object(@this);
@@ -233,26 +226,10 @@ namespace Narvalo.Edu.Monads.Samples
 
 
         /// <remarks>
-        /// Named <c>mfilter</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadPlus<TSource> Where<TSource>(
-            this MonadPlus<TSource> @this,
-            Func<TSource, bool> predicate)
-            /* T4: C# indent */
-        {
-            Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
-
-            return @this.Bind(
-                _ => predicate.Invoke(_) ? @this : MonadPlus<TSource>.Zero);
-        }
-
-
-        /// <remarks>
         /// Named <c>replicateM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<IEnumerable<TSource>> Repeat<TSource>(
-            this MonadPlus<TSource> @this,
+        public static Monad<IEnumerable<TSource>> Repeat<TSource>(
+            this Monad<TSource> @this,
             int count)
         {
             Require.Object(@this);
@@ -268,28 +245,18 @@ namespace Narvalo.Edu.Monads.Samples
 
 
         /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadPlus<global::Narvalo.Fx.Unit> Guard(bool predicate)
-        {
-
-            return predicate ? MonadPlus.Unit : MonadPlus.Zero;
-        }
-
-
-        /// <remarks>
         /// <para>Named <c>when</c> in Haskell parlance.</para>
         /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
         /// </remarks>
-        public static MonadPlus<TSource> When<TSource>(
-            this MonadPlus<TSource> @this,
+        public static Monad<TSource> When<TSource>(
+            this Monad<TSource> @this,
             bool predicate,
             Action action)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
+            Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
 
             if (predicate)
             {
@@ -303,15 +270,15 @@ namespace Narvalo.Edu.Monads.Samples
         /// <para>Named <c>unless</c> in Haskell parlance.</para>
         /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
         /// </remarks>
-        public static MonadPlus<TSource> Unless<TSource>(
-            this MonadPlus<TSource> @this,
+        public static Monad<TSource> Unless<TSource>(
+            this Monad<TSource> @this,
             bool predicate,
             Action action)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
+            Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
 
             if (!predicate)
             {
@@ -326,9 +293,9 @@ namespace Narvalo.Edu.Monads.Samples
         #region Monadic lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
-        public static MonadPlus<TResult> Zip<TFirst, TSecond, TResult>(
-            this MonadPlus<TFirst> @this,
-            MonadPlus<TSecond> second,
+        public static Monad<TResult> Zip<TFirst, TSecond, TResult>(
+            this Monad<TFirst> @this,
+            Monad<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
             /* T4: C# indent */
         {
@@ -340,10 +307,10 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         /// <see cref="Lift{T1, T2, T3, T4}" />
-        public static MonadPlus<TResult> Zip<T1, T2, T3, TResult>(
-            this MonadPlus<T1> @this,
-            MonadPlus<T2> second,
-            MonadPlus<T3> third,
+        public static Monad<TResult> Zip<T1, T2, T3, TResult>(
+            this Monad<T1> @this,
+            Monad<T2> second,
+            Monad<T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
             /* T4: C# indent */
         {
@@ -351,18 +318,18 @@ namespace Narvalo.Edu.Monads.Samples
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            Func<T1, MonadPlus<TResult>> g
+            Func<T1, Monad<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
 
             return @this.Bind(g);
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5}" />
-        public static MonadPlus<TResult> Zip<T1, T2, T3, T4, TResult>(
-             this MonadPlus<T1> @this,
-             MonadPlus<T2> second,
-             MonadPlus<T3> third,
-             MonadPlus<T4> fourth,
+        public static Monad<TResult> Zip<T1, T2, T3, T4, TResult>(
+             this Monad<T1> @this,
+             Monad<T2> second,
+             Monad<T3> third,
+             Monad<T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
             /* T4: C# indent */
         {
@@ -370,7 +337,7 @@ namespace Narvalo.Edu.Monads.Samples
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            Func<T1, MonadPlus<TResult>> g
+            Func<T1, Monad<TResult>> g
                 = t1 => second.Zip(
                     third,
                     fourth,
@@ -380,12 +347,12 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         /// <see cref="Lift{T1, T2, T3, T4, T5, T6}" />
-        public static MonadPlus<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
-            this MonadPlus<T1> @this,
-            MonadPlus<T2> second,
-            MonadPlus<T3> third,
-            MonadPlus<T4> fourth,
-            MonadPlus<T5> fifth,
+        public static Monad<TResult> Zip<T1, T2, T3, T4, T5, TResult>(
+            this Monad<T1> @this,
+            Monad<T2> second,
+            Monad<T3> third,
+            Monad<T4> fourth,
+            Monad<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
             /* T4: C# indent */
         {
@@ -393,7 +360,7 @@ namespace Narvalo.Edu.Monads.Samples
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
 
-            Func<T1, MonadPlus<TResult>> g
+            Func<T1, Monad<TResult>> g
                 = t1 => second.Zip(
                     third,
                     fourth,
@@ -411,9 +378,9 @@ namespace Narvalo.Edu.Monads.Samples
         /// <remarks>
         /// Kind of generalisation of Zip (liftM2).
         /// </remarks>
-        public static MonadPlus<TResult> SelectMany<TSource, TMiddle, TResult>(
-            this MonadPlus<TSource> @this,
-            Func<TSource, MonadPlus<TMiddle>> valueSelectorM,
+        public static Monad<TResult> SelectMany<TSource, TMiddle, TResult>(
+            this Monad<TSource> @this,
+            Func<TSource, Monad<TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
             /* T4: C# indent */
         {
@@ -427,185 +394,24 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
 
-        public static MonadPlus<TResult> Join<TSource, TInner, TKey, TResult>(
-            this MonadPlus<TSource> @this,
-            MonadPlus<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, TInner, TResult> resultSelector)
-            /* T4: C# indent */
-        {
-            Require.Object(@this);
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
-
-            return @this.Join(
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                EqualityComparer<TKey>.Default);
-        }
-
-        public static MonadPlus<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this MonadPlus<TSource> @this,
-            MonadPlus<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, MonadPlus<TInner>, TResult> resultSelector)
-            /* T4: C# indent */
-        {
-            Require.Object(@this);
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
-
-            return @this.GroupJoin(
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                EqualityComparer<TKey>.Default);
-        }
-
-
         #endregion
 
         #region LINQ extensions
 
 
-        public static MonadPlus<TResult> Join<TSource, TInner, TKey, TResult>(
-            this MonadPlus<TSource> @this,
-            MonadPlus<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, TInner, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-            /* T4: C# indent */
-        {
-            Acknowledge.Object(@this);
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
-
-            return JoinCore(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                comparer ?? EqualityComparer<TKey>.Default);
-        }
-
-        public static MonadPlus<TResult> GroupJoin<TSource, TInner, TKey, TResult>(
-            this MonadPlus<TSource> @this,
-            MonadPlus<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, MonadPlus<TInner>, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-            /* T4: C# indent */
-        {
-            Acknowledge.Object(@this);
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
-
-            return GroupJoinCore(
-                @this,
-                inner,
-                outerKeySelector,
-                innerKeySelector,
-                resultSelector,
-                comparer ?? EqualityComparer<TKey>.Default);
-        }
-
-
-        private static MonadPlus<TResult> JoinCore<TSource, TInner, TKey, TResult>(
-            MonadPlus<TSource> seq,
-            MonadPlus<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, TInner, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-            /* T4: C# indent */
-        {
-            Require.NotNull(seq, "seq");
-            Require.NotNull(resultSelector, "resultSelector");
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(comparer != null);
-
-            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
-
-            return from outerValue in seq
-                   from innerValue in keyLookupM.Invoke(outerValue).Then(inner)
-                   select resultSelector.Invoke(outerValue, innerValue);
-        }
-
-        private static MonadPlus<TResult> GroupJoinCore<TSource, TInner, TKey, TResult>(
-            MonadPlus<TSource> seq,
-            MonadPlus<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            Func<TSource, MonadPlus<TInner>, TResult> resultSelector,
-            IEqualityComparer<TKey> comparer)
-            /* T4: C# indent */
-        {
-            Require.NotNull(seq, "seq");
-            Require.NotNull(resultSelector, "resultSelector");
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(comparer != null);
-
-            var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
-
-            return from outerValue in seq
-                   select resultSelector.Invoke(outerValue, keyLookupM.Invoke(outerValue).Then(inner));
-        }
-
-        private static Func<TSource, MonadPlus<TKey>> GetKeyLookup<TSource, TInner, TKey>(
-            MonadPlus<TInner> inner,
-            Func<TSource, TKey> outerKeySelector,
-            Func<TInner, TKey> innerKeySelector,
-            IEqualityComparer<TKey> comparer)
-            /* T4: C# indent */
-        {
-            Require.NotNull(inner, "inner");
-            Require.NotNull(outerKeySelector, "outerKeySelector");
-            Require.NotNull(comparer, "comparer");
-            Contract.Requires(innerKeySelector != null);
-            Contract.Ensures(Contract.Result<Func<TSource, MonadPlus<TKey>>>() != null);
-
-            return source =>
-            {
-                TKey outerKey = outerKeySelector.Invoke(source);
-
-                return inner.Select(innerKeySelector).Where(_ => comparer.Equals(_, outerKey));
-            };
-        }
-
-
         #endregion
-    } // End of MonadPlus.
+    } // End of Monad.
 
     /// <content>
-    /// Provides the non-standard extension methods for <see cref="MonadPlus{T}" />.
+    /// Provides the non-standard extension methods for <see cref="Monad{T}" />.
     /// </content>
-    public static partial class MonadPlus
+    public static partial class Monad
     {
-        public static MonadPlus<TResult> Coalesce<TSource, TResult>(
-            this MonadPlus<TSource> @this,
+        public static Monad<TResult> Coalesce<TSource, TResult>(
+            this Monad<TSource> @this,
             Func<TSource, bool> predicate,
-            MonadPlus<TResult> then,
-            MonadPlus<TResult> otherwise)
+            Monad<TResult> then,
+            Monad<TResult> otherwise)
             /* T4: C# indent */
         {
             Require.Object(@this);
@@ -615,33 +421,8 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
 
-        public static MonadPlus<TResult> Then<TSource, TResult>(
-            this MonadPlus<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadPlus<TResult> other)
-            /* T4: C# indent */
-        {
-            Require.Object(@this);
-            Contract.Requires(predicate != null);
-
-            return @this.Coalesce(predicate, other, MonadPlus<TResult>.Zero);
-        }
-
-        public static MonadPlus<TResult> Otherwise<TSource, TResult>(
-            this MonadPlus<TSource> @this,
-            Func<TSource, bool> predicate,
-            MonadPlus<TResult> other)
-            /* T4: C# indent */
-        {
-            Require.Object(@this);
-            Contract.Requires(predicate != null);
-
-            return @this.Coalesce(predicate, MonadPlus<TResult>.Zero, other);
-        }
-
-
         public static void Invoke<TSource>(
-            this MonadPlus<TSource> @this,
+            this Monad<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
         {
@@ -651,36 +432,10 @@ namespace Narvalo.Edu.Monads.Samples
             @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-
-        public static void OnZero<TSource>(
-            this MonadPlus<TSource> @this,
-            Action action)
-            /* T4: C# indent */
-        {
-            Require.Object(@this);
-            Require.NotNull(action, "action");
-
-            @this.Then(MonadPlus.Unit).Invoke(_ => action.Invoke());
-        }
-
-        public static void Invoke<TSource>(
-            this MonadPlus<TSource> @this,
-            Action<TSource> action,
-            Action caseZero)
-            /* T4: C# indent */
-        {
-            Require.Object(@this);
-            Require.NotNull(action, "action");
-
-            @this.Bind(_ => { action.Invoke(_); return @this; })
-                .Then(MonadPlus.Unit)
-                .Bind(_ => { caseZero.Invoke(); return Unit; });
-        }
-
-    } // End of MonadPlus.
+    } // End of Monad.
 
     /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="MonadPlus{T}"/> class.
+    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Monad{T}"/> class.
     /// </content>
     public static partial class FuncExtensions
     {
@@ -689,9 +444,9 @@ namespace Narvalo.Edu.Monads.Samples
         /// <remarks>
         /// Named <c>=&lt;&lt;</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<TResult> Invoke<TSource, TResult>(
-            this Func<TSource, MonadPlus<TResult>> @this,
-            MonadPlus<TSource> value)
+        public static Monad<TResult> Invoke<TSource, TResult>(
+            this Func<TSource, Monad<TResult>> @this,
+            Monad<TSource> value)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
@@ -703,14 +458,14 @@ namespace Narvalo.Edu.Monads.Samples
         /// <remarks>
         /// Named <c>&gt;=&gt;</c> in Haskell parlance.
         /// </remarks>
-        public static Func<TSource, MonadPlus<TResult>> Compose<TSource, TMiddle, TResult>(
-            this Func<TSource, MonadPlus<TMiddle>> @this,
-            Func<TMiddle, MonadPlus<TResult>> funM)
+        public static Func<TSource, Monad<TResult>> Compose<TSource, TMiddle, TResult>(
+            this Func<TSource, Monad<TMiddle>> @this,
+            Func<TMiddle, Monad<TResult>> funM)
             /* T4: C# indent */
         {
             Require.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Func<TSource, MonadPlus<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<TSource, Monad<TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -718,14 +473,14 @@ namespace Narvalo.Edu.Monads.Samples
         /// <remarks>
         /// Named <c>&lt;=&lt;</c> in Haskell parlance.
         /// </remarks>
-        public static Func<TSource, MonadPlus<TResult>> ComposeBack<TSource, TMiddle, TResult>(
-            this Func<TMiddle, MonadPlus<TResult>> @this,
-            Func<TSource, MonadPlus<TMiddle>> funM)
+        public static Func<TSource, Monad<TResult>> ComposeBack<TSource, TMiddle, TResult>(
+            this Func<TMiddle, Monad<TResult>> @this,
+            Func<TSource, Monad<TMiddle>> funM)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(funM, "funM");
-            Contract.Ensures(Contract.Result<Func<TSource, MonadPlus<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Func<TSource, Monad<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -734,15 +489,15 @@ namespace Narvalo.Edu.Monads.Samples
     } // End of FuncExtensions.
 }
 
-namespace Narvalo.Edu.Monads.Samples
+namespace Narvalo.Fx.Samples
 {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Edu.Monads.Samples.Internal;
+    using Narvalo.Fx.Samples.Internal;
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadPlus{T}"/> class.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Monad{T}"/> class.
     /// </content>
     public static partial class EnumerableExtensions
     {
@@ -752,11 +507,11 @@ namespace Narvalo.Edu.Monads.Samples
         /// <remarks>
         /// Named <c>sequence</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<IEnumerable<TSource>> Collect<TSource>(
-            this IEnumerable<MonadPlus<TSource>> @this)
+        public static Monad<IEnumerable<TSource>> Collect<TSource>(
+            this IEnumerable<Monad<TSource>> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TSource>>>() != null);
+            Contract.Ensures(Contract.Result<Monad<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
         }
@@ -764,35 +519,17 @@ namespace Narvalo.Edu.Monads.Samples
 
         #endregion
 
-
-        #region Generalisations of list functions (Prelude)
-
-        /// <remarks>
-        /// Named <c>msum</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadPlus<TSource> Sum<TSource>(
-            this IEnumerable<MonadPlus<TSource>> @this)
-            /* T4: C# indent */
-        {
-            Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
-
-            return @this.SumCore();
-        }
-
-        #endregion
-
     } // End of EnumerableExtensions.
 }
 
-namespace Narvalo.Edu.Monads.Samples.Advanced
+namespace Narvalo.Fx.Samples.Advanced
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Edu.Monads.Samples;
-    using Narvalo.Edu.Monads.Samples.Internal;
+    using Narvalo.Fx.Samples;
+    using Narvalo.Fx.Samples.Internal;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -805,13 +542,13 @@ namespace Narvalo.Edu.Monads.Samples.Advanced
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Monad<IEnumerable<TResult>> Map<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadPlus<TResult>> funM)
+            Func<TSource, Monad<TResult>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Monad<IEnumerable<TResult>>>() != null);
 
             return @this.MapCore(funM);
         }
@@ -827,7 +564,7 @@ namespace Narvalo.Edu.Monads.Samples.Advanced
         /// </remarks>
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadPlus<bool>> predicateM)
+            Func<TSource, Monad<bool>> predicateM)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
@@ -841,14 +578,13 @@ namespace Narvalo.Edu.Monads.Samples.Advanced
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+        public static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzip<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadPlus<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, Monad<Tuple<TFirst, TSecond>>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -856,15 +592,15 @@ namespace Narvalo.Edu.Monads.Samples.Advanced
         /// <remarks>
         /// Named <c>zipWithM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
+        public static Monad<IEnumerable<TResult>> Zip<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, MonadPlus<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
             Contract.Requires(resultSelectorM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Monad<IEnumerable<TResult>>>() != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -873,15 +609,14 @@ namespace Narvalo.Edu.Monads.Samples.Advanced
         /// <remarks>
         /// Named <c>foldM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadPlus<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Monad<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -890,39 +625,36 @@ namespace Narvalo.Edu.Monads.Samples.Advanced
 
         #region Aggregate Operators
 
-        public static MonadPlus<TAccumulate> FoldBack<TSource, TAccumulate>(
+        public static Monad<TAccumulate> FoldBack<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
 
-        public static MonadPlus<TSource> Reduce<TSource>(
+        public static Monad<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadPlus<TSource>> accumulatorM)
+            Func<TSource, TSource, Monad<TSource>> accumulatorM)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM);
         }
 
-        public static MonadPlus<TSource> ReduceBack<TSource>(
+        public static Monad<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadPlus<TSource>> accumulatorM)
+            Func<TSource, TSource, Monad<TSource>> accumulatorM)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -934,17 +666,16 @@ namespace Narvalo.Edu.Monads.Samples.Advanced
         /// <remarks>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static MonadPlus<TAccumulate> Fold<TSource, TAccumulate>(
+        public static Monad<TAccumulate> Fold<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM,
-            Func<MonadPlus<TAccumulate>, bool> predicate)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM,
+            Func<Monad<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -952,16 +683,15 @@ namespace Narvalo.Edu.Monads.Samples.Advanced
         /// <remarks>
         /// <para>Haskell use a different signature.</para>
         /// </remarks>
-        public static MonadPlus<TSource> Reduce<TSource>(
+        public static Monad<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadPlus<TSource>> accumulatorM,
-            Func<MonadPlus<TSource>, bool> predicate)
+            Func<TSource, TSource, Monad<TSource>> accumulatorM,
+            Func<Monad<TSource>, bool> predicate)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
             Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -970,7 +700,7 @@ namespace Narvalo.Edu.Monads.Samples.Advanced
     } // End of EnumerableExtensions.
 }
 
-namespace Narvalo.Edu.Monads.Samples.Internal
+namespace Narvalo.Fx.Samples.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -980,11 +710,11 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
     using global::Narvalo;
     using global::Narvalo.Fx; // Required for EmptyIfNull().
-    using Narvalo.Edu.Monads.Samples;
-    using Narvalo.Edu.Monads.Samples.Advanced;
+    using Narvalo.Fx.Samples;
+    using Narvalo.Fx.Samples.Advanced;
 
     /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadPlus{T}"/> class.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Monad{T}"/> class.
     /// </content>
     internal static partial class EnumerableExtensions
     {
@@ -992,14 +722,14 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<IEnumerable<TSource>> CollectCore<TSource>(
-            this IEnumerable<MonadPlus<TSource>> @this)
+        internal static Monad<IEnumerable<TSource>> CollectCore<TSource>(
+            this IEnumerable<Monad<TSource>> @this)
         {
             Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TSource>>>() != null);
+            Contract.Ensures(Contract.Result<Monad<IEnumerable<TSource>>>() != null);
 
-            var seed = MonadPlus.Return(Enumerable.Empty<TSource>());
-            Func<MonadPlus<IEnumerable<TSource>>, MonadPlus<TSource>, MonadPlus<IEnumerable<TSource>>> fun
+            var seed = Monad.Return(Enumerable.Empty<TSource>());
+            Func<Monad<IEnumerable<TSource>>, Monad<TSource>, Monad<IEnumerable<TSource>>> fun
                 = (m, n) => m.Bind(list => CollectCore(n, list));
 
             var retval = @this.Aggregate(seed, fun);
@@ -1009,29 +739,13 @@ namespace Narvalo.Edu.Monads.Samples.Internal
         }
 
         // NB: We do not inline this method to avoid the creation of an unused private field (CA1823 warning).
-        private static MonadPlus<IEnumerable<TSource>> CollectCore<TSource>(
-            MonadPlus<TSource> m,
+        private static Monad<IEnumerable<TSource>> CollectCore<TSource>(
+            Monad<TSource> m,
             IEnumerable<TSource> list)
         {
             Contract.Requires(m != null);
 
-            return m.Bind(item => MonadPlus.Return(list.Concat(Enumerable.Repeat(item, 1))));
-        }
-
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-            Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<TSource> SumCore<TSource>(
-            this IEnumerable<MonadPlus<TSource>> @this)
-            /* T4: C# indent */
-        {
-            Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
-
-            var retval = @this.Aggregate(MonadPlus<TSource>.Zero, (m, n) => m.Plus(n));
-            Contract.Assume(retval != null);
-
-            return retval;
+            return m.Bind(item => Monad.Return(list.Concat(Enumerable.Repeat(item, 1))));
         }
 
     } // End of EnumerableExtensions.
@@ -1045,13 +759,13 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<IEnumerable<TResult>> MapCore<TSource, TResult>(
+        internal static Monad<IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadPlus<TResult>> funM)
+            Func<TSource, Monad<TResult>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Monad<IEnumerable<TResult>>>() != null);
 
             return @this.Select(funM).EmptyIfNull().Collect();
         }
@@ -1061,7 +775,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadPlus<bool>> predicateM)
+            Func<TSource, Monad<bool>> predicateM)
             /* T4: C# indent */
         {
             Require.Object(@this);
@@ -1094,10 +808,10 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
+        internal static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
-            Func<TSource, MonadPlus<Tuple<TFirst, TSecond>>> funM)
+            Func<TSource, Monad<Tuple<TFirst, TSecond>>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
@@ -1116,18 +830,18 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
+        internal static Monad<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
-            Func<TFirst, TSecond, MonadPlus<TResult>> resultSelectorM)
+            Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
-            Contract.Ensures(Contract.Result<MonadPlus<IEnumerable<TResult>>>() != null);
+            Contract.Ensures(Contract.Result<Monad<IEnumerable<TResult>>>() != null);
 
-            Func<TFirst, TSecond, MonadPlus<TResult>> resultSelector
+            Func<TFirst, TSecond, Monad<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
 
             // WARNING: Do not remove "resultSelector", otherwise .NET will make a recursive call
@@ -1138,20 +852,24 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static Monad<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
-            MonadPlus<TAccumulate> retval = MonadPlus.Return(seed);
+            Monad<TAccumulate> retval = Monad.Return(seed);
 
             foreach (TSource item in @this)
             {
+                if (retval == null)
+                {
+                    return null;
+                }
+
                 retval = retval.Bind(_ => accumulatorM.Invoke(_, item));
             }
 
@@ -1160,29 +878,27 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<TAccumulate> FoldBackCore<TSource, TAccumulate>(
+        internal static Monad<TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<TSource> ReduceCore<TSource>(
+        internal static Monad<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadPlus<TSource>> accumulatorM)
+            Func<TSource, TSource, Monad<TSource>> accumulatorM)
             /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1191,10 +907,15 @@ namespace Narvalo.Edu.Monads.Samples.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadPlus<TSource> retval = MonadPlus.Return(iter.Current);
+                Monad<TSource> retval = Monad.Return(iter.Current);
 
                 while (iter.MoveNext())
                 {
+                    if (retval == null)
+                    {
+                        return null;
+                    }
+
                     retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 
@@ -1204,38 +925,41 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<TSource> ReduceBackCore<TSource>(
+        internal static Monad<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadPlus<TSource>> accumulatorM)
+            Func<TSource, TSource, Monad<TSource>> accumulatorM)
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<TAccumulate> FoldCore<TSource, TAccumulate>(
+        internal static Monad<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
-            Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM,
-            Func<MonadPlus<TAccumulate>, bool> predicate)
+            Func<TAccumulate, TSource, Monad<TAccumulate>> accumulatorM,
+            Func<Monad<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<MonadPlus<TAccumulate>>() != null);
 
-            MonadPlus<TAccumulate> retval = MonadPlus.Return(seed);
+            Monad<TAccumulate> retval = Monad.Return(seed);
 
             using (var iter = @this.GetEnumerator())
             {
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {
+                    if (retval == null)
+                    {
+                        return null;
+                    }
+
                     retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
             }
@@ -1245,16 +969,15 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadPlus<TSource> ReduceCore<TSource>(
+        internal static Monad<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
-            Func<TSource, TSource, MonadPlus<TSource>> accumulatorM,
-            Func<MonadPlus<TSource>, bool> predicate)
+            Func<TSource, TSource, Monad<TSource>> accumulatorM,
+            Func<Monad<TSource>, bool> predicate)
             /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
-            Contract.Ensures(Contract.Result<MonadPlus<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1263,10 +986,15 @@ namespace Narvalo.Edu.Monads.Samples.Internal
                     throw new InvalidOperationException("Source sequence was empty.");
                 }
 
-                MonadPlus<TSource> retval = MonadPlus.Return(iter.Current);
+                Monad<TSource> retval = Monad.Return(iter.Current);
 
                 while (predicate.Invoke(retval) && iter.MoveNext())
                 {
+                    if (retval == null)
+                    {
+                        return null;
+                    }
+
                     retval = retval.Bind(_ => accumulatorM.Invoke(_, iter.Current));
                 }
 

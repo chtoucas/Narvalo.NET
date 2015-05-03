@@ -93,6 +93,42 @@
       <Link>TestCommon\IssueAttribute.cs</Link>
     </Compile>
     <Compile Include="AcknowledgeFacts.cs" />
+    <Compile Include="Fx\Samples\Comonad.g.cs">
+      <DependentUpon>Comonad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Samples\Comonad`1.cs" />
+    <Compile Include="Fx\Samples\Monad.g.cs">
+      <DependentUpon>Monad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Samples\MonadOr.g.cs">
+      <DependentUpon>MonadOr.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Samples\MonadOr`1.cs" />
+    <Compile Include="Fx\Samples\MonadPlus.g.cs">
+      <DependentUpon>MonadPlus.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Samples\MonadPlus`1.cs" />
+    <Compile Include="Fx\Samples\MonadValue.g.cs">
+      <DependentUpon>MonadValue.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Samples\MonadValue`1.cs" />
+    <Compile Include="Fx\Samples\MonadZero.g.cs">
+      <DependentUpon>MonadZero.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Fx\Samples\MonadZero`1.cs" />
+    <Compile Include="Fx\Samples\Monad`1.cs" />
     <Compile Include="GuardFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="Finance\CurrenciesFacts.g.cs">
@@ -169,6 +205,30 @@
     <None Include="Fx\MaybeFacts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MaybeFacts.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\Samples\Comonad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Comonad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\Samples\Monad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Monad.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\Samples\MonadOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\Samples\MonadPlus.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\Samples\MonadValue.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadValue.g.cs</LastGenOutput>
+    </None>
+    <None Include="Fx\Samples\MonadZero.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

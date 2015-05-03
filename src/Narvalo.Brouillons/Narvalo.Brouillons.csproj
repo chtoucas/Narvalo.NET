@@ -92,42 +92,6 @@
     <Compile Include="Edu\Monads\Mu.cs" />
     <Compile Include="Edu\Monads\NamespaceDoc.cs" />
     <Compile Include="Edu\Monads\Rules.cs" />
-    <Compile Include="Edu\Monads\Samples\Comonad.g.cs">
-      <DependentUpon>Comonad.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\Comonad`1.cs" />
-    <Compile Include="Edu\Monads\Samples\Monad.g.cs">
-      <DependentUpon>Monad.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\MonadOr.g.cs">
-      <DependentUpon>MonadOr.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\MonadOr`1.cs" />
-    <Compile Include="Edu\Monads\Samples\MonadPlus.g.cs">
-      <DependentUpon>MonadPlus.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\MonadPlus`1.cs" />
-    <Compile Include="Edu\Monads\Samples\MonadValue.g.cs">
-      <DependentUpon>MonadValue.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\MonadValue`1.cs" />
-    <Compile Include="Edu\Monads\Samples\MonadZero.g.cs">
-      <DependentUpon>MonadZero.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Edu\Monads\Samples\MonadZero`1.cs" />
-    <Compile Include="Edu\Monads\Samples\Monad`1.cs" />
     <Compile Include="Edu\Monads\Stubs.cs" />
     <Compile Include="Edu\Monads\Stubs`1.cs" />
     <Compile Include="Edu\Web\WebApplication.cs" />
@@ -278,30 +242,6 @@
   <ItemGroup>
     <None Include="Edu\Linq\LINQ.md" />
     <None Include="Edu\Monads\Monads.md" />
-    <None Include="Edu\Monads\Samples\Comonad.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Comonad.g.cs</LastGenOutput>
-    </None>
-    <None Include="Edu\Monads\Samples\Monad.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Monad.g.cs</LastGenOutput>
-    </None>
-    <None Include="Edu\Monads\Samples\MonadOr.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadOr.g.cs</LastGenOutput>
-    </None>
-    <None Include="Edu\Monads\Samples\MonadPlus.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadPlus.g.cs</LastGenOutput>
-    </None>
-    <None Include="Edu\Monads\Samples\MonadValue.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadValue.g.cs</LastGenOutput>
-    </None>
-    <None Include="Edu\Monads\Samples\MonadZero.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MonadZero.g.cs</LastGenOutput>
-    </None>
     <None Include="Edu\Monads\Identity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.g.cs</LastGenOutput>

@@ -1,25 +1,19 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Edu.Monads.Samples
+namespace Narvalo.Fx.Samples
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public sealed class MonadPlus<T>
+    public sealed class MonadZero<T>
     {
         // [Haskell] mzero
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
             Justification = "[Educational] This code is not meant to be used.")]
-        public static MonadPlus<T> Zero { get { throw new NotImplementedException(); } }
-
-        // [Haskell] mplus
-        public MonadPlus<T> Plus(MonadPlus<T> other)
-        {
-            throw new NotImplementedException();
-        }
+        public static MonadZero<T> Zero { get { throw new NotImplementedException(); } }
 
         // [Haskell] >>=
-        public MonadPlus<TResult> Bind<TResult>(Func<T, MonadPlus<TResult>> funM)
+        public MonadZero<TResult> Bind<TResult>(Func<T, MonadZero<TResult>> funM)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +21,7 @@ namespace Narvalo.Edu.Monads.Samples
         // [Haskell] return
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Educational] Standard naming convention from mathematics.")]
-        internal static MonadPlus<T> η(T value)
+        internal static MonadZero<T> η(T value)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +29,7 @@ namespace Narvalo.Edu.Monads.Samples
         // [Haskell] join
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Educational] Standard naming convention from mathematics.")]
-        internal static MonadPlus<T> μ(MonadPlus<MonadPlus<T>> square)
+        internal static MonadZero<T> μ(MonadZero<MonadZero<T>> square)
         {
             return square.Bind(_ => _);
         }
