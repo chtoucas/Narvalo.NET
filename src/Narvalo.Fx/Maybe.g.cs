@@ -44,6 +44,7 @@ namespace Narvalo.Fx
             }
         }
 
+
         /// <summary>
         /// Gets the zero for <see cref="Maybe{T}"/>.
         /// </summary>
@@ -51,7 +52,15 @@ namespace Narvalo.Fx
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
         /// <value>The zero for <see cref="Maybe{T}"/>.</value>
-        public static Maybe<global::Narvalo.Fx.Unit> None { get { return s_None; } }
+        public static Maybe<global::Narvalo.Fx.Unit> None
+        {
+            get
+            {
+
+                return s_None;
+            }
+        }
+
 
         /// <summary>
         /// Obtains an instance of the <see cref="Maybe{T}"/> class for the specified value.
@@ -271,6 +280,7 @@ namespace Narvalo.Fx
         /// </remarks>
         public static Maybe<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
+            Contract.Ensures(Contract.Result<Maybe<global::Narvalo.Fx.Unit>>() != null);
 
             return predicate ? Maybe.Unit : Maybe.None;
         }
@@ -1234,4 +1244,3 @@ namespace Narvalo.Fx.Internal
         }
     } // End of EnumerableExtensions.
 }
-

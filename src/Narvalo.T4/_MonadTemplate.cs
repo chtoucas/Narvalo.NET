@@ -53,7 +53,7 @@ namespace Narvalo.T4
         /// <param name="parent">The parent text transformation.</param>
         protected _MonadTemplate(TextTransformation parent) : base(parent) { }
 
-        #region Monad characteristics.
+        #region Monad characteristics
 
         /// <summary>
         /// Gets or sets a value indicating whether the monad is a MonadPlus. Default to false.
@@ -104,7 +104,7 @@ namespace Narvalo.T4
 
         #endregion
 
-        #region Constraints.
+        #region Constraints
 
         /// <summary>
         /// Gets or sets a value indicating whether the monad is null-able. Default to true.
@@ -144,7 +144,7 @@ namespace Narvalo.T4
 
         #endregion
 
-        #region Method and Property Names.
+        #region Method and Property Names
 
         /// <summary>
         /// Gets or sets the name of the Zero property. Default to "Zero".
@@ -250,7 +250,7 @@ namespace Narvalo.T4
 
         #endregion
 
-        #region Primary Postconditions.
+        #region Postconditions (Core)
 
         /// <summary>
         /// Gets or sets a value indicating whether Monad.Bind() ensures a non-null return value. Default to false.
@@ -258,13 +258,6 @@ namespace Narvalo.T4
         /// <value><see langword="true"/> if Monad.Bind() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
         protected bool BindEnsuresSome { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether Monad.η() ensures a non-null return value. Default to false.
-        /// </summary>
-        /// <value><see langword="true"/> if Monad.η() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
-        protected bool ReturnEnsuresSome { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether Monad.μ() ensures a non-null return value. Default to false.
@@ -282,7 +275,7 @@ namespace Narvalo.T4
 
         #endregion
 
-        #region Postconditions.
+        #region Postconditions
 
         /// <summary>
         /// Gets a value indicating whether Monad.Bind() ensures a non-null return value. Default to false.
@@ -290,13 +283,6 @@ namespace Narvalo.T4
         /// <value><see langword="true"/> if Monad.Bind() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
         protected bool PostBindEnsuresSome { get { return IsNullable && BindEnsuresSome; } }
-
-        /// <summary>
-        /// Gets a value indicating whether Monad.Return() ensures a non-null return value. Default to false.
-        /// </summary>
-        /// <value><see langword="true"/> if Monad.Return() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
-        protected bool PostReturnEnsuresSome { get { return IsNullable && ReturnEnsuresSome; } }
 
         /// <summary>
         /// Gets a value indicating whether Monad.Multiplication() ensures a non-null return value. Default to false.
@@ -311,13 +297,6 @@ namespace Narvalo.T4
         /// <value><see langword="true"/> if Monad.Duplicate() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
         protected bool PostDuplicateEnsuresSome { get { return IsNullable && DuplicateEnsuresSome; } }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether Monad.Unit ensures a non-null return value. Default to false.
-        /// </summary>
-        /// <value><see langword="true"/> if Monad.Unit ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
-        protected bool PostUnitEnsuresSome { get { return PostReturnEnsuresSome; } }
 
         /// <summary>
         /// Gets a value indicating whether Monad.Map() ensures a non-null return value. Default to false.
@@ -373,7 +352,7 @@ namespace Narvalo.T4
             return GenerationEnvironment.ToString();
         }
 
-        #region Initalizers.
+        #region Initalizers
 
         /// <summary>
         /// Initializes a MonadZero.
@@ -415,7 +394,7 @@ namespace Narvalo.T4
 
         #endregion
 
-        #region Writers into the generated output.
+        #region Writers into the generated output
 
         protected virtual void WriteContent() { }
 

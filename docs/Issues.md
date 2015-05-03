@@ -4,7 +4,6 @@ Issues & Roadmap
 - CodeAnalysisDictionary does not seem to be understood.
 - When, Guard & co.
 - IsNullable && HasZero
-- PostunitEnsuresSome should be always true?! ZeroEnsuresSome?
 
 Design
 ------

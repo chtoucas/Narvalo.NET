@@ -146,6 +146,9 @@ namespace Narvalo.Fx
         Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
     public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>
     {
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static readonly Maybe<T> s_None = new Maybe<T>();
+
         private readonly bool _isSome;
 
         // You should NEVER use this field directly. Use instead the property; the Code Contracts
@@ -229,6 +232,20 @@ namespace Narvalo.Fx
             return value.Value;
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
+            Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
+        public static bool operator true(Maybe<T> value)
+        {
+            return value.IsSome;
+        }
+
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
+            Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
+        public static bool operator false(Maybe<T> value)
+        {
+            return !value.IsSome;
+        }
+
         public TResult Map<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
             Require.NotNull(caseSome, "caseSome");
@@ -305,195 +322,8 @@ namespace Narvalo.Fx
 
             return IsSome ? Format.CurrentCulture("Maybe({0})", Value) : "Maybe(None)";
         }
+        #region Overrides for auto-generated (extension) methods
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(!IsSome || Value != null);
-        }
-
-#endif
-    }
-
-    /// <content>
-    /// Implements the <see cref="IEnumerable{T}"/> interface.
-    /// </content>
-    public partial struct Maybe<T>
-    {
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public IEnumerable<T> ToEnumerable()
-        {
-            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
-
-            return IsSome ? Sequence.Single(Value) : Sequence.Empty<T>();
-        }
-
-        /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        {
-            Contract.Ensures(Contract.Result<IEnumerator<T>>() != null);
-
-            return ToEnumerable().GetEnumerator();
-        }
-
-        /// <inheritdoc cref="IEnumerable.GetEnumerator" />
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            Contract.Ensures(Contract.Result<IEnumerator>() != null);
-
-            return ToEnumerable().GetEnumerator();
-        }
-    }
-
-    /// <content>
-    /// Implements the <see cref="IEquatable{T}"/> and <c>IEquatable&lt;Maybe&lt;T&gt;&gt;</c> interfaces.
-    /// </content>
-    public partial struct Maybe<T>
-    {
-        public static bool operator ==(Maybe<T> left, Maybe<T> right)
-        {
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(Maybe<T> left, Maybe<T> right)
-        {
-            return !left.Equals(right);
-        }
-
-        /// <inheritdoc cref="IEquatable{T}.Equals" />
-        public bool Equals(Maybe<T> other)
-        {
-            return Equals(other, EqualityComparer<T>.Default);
-        }
-
-        public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
-        {
-            Require.NotNull(comparer, "comparer");
-
-            if (IsSome)
-            {
-                return other.IsSome && comparer.Equals(Value, other.Value);
-            }
-
-            return !other.IsSome;
-        }
-
-        /// <inheritdoc cref="Object.Equals(Object)" />
-        public override bool Equals(object obj)
-        {
-            return Equals(obj, EqualityComparer<T>.Default);
-        }
-
-        public bool Equals(object other, IEqualityComparer<T> comparer)
-        {
-            Require.NotNull(comparer, "comparer");
-
-            if (!(other is Maybe<T>))
-            {
-                return false;
-            }
-
-            return Equals((Maybe<T>)other);
-        }
-
-        /// <inheritdoc cref="Object.GetHashCode" />
-        public override int GetHashCode()
-        {
-            return GetHashCode(EqualityComparer<T>.Default);
-        }
-
-        public int GetHashCode(IEqualityComparer<T> comparer)
-        {
-            Require.NotNull(comparer, "comparer");
-
-            return IsSome ? comparer.GetHashCode(Value) : 0;
-        }
-    }
-
-    /// <content>
-    /// Provides boolean operators.
-    /// </content>
-    public partial struct Maybe<T>
-    {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
-            Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
-        public static bool operator true(Maybe<T> value)
-        {
-            return value.IsSome;
-        }
-
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
-            Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
-        public static bool operator false(Maybe<T> value)
-        {
-            return !value.IsSome;
-        }
-    }
-
-    /// <content>
-    /// Provides the core Monad methods.
-    /// </content>
-    public partial struct Maybe<T>
-    {
-        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
-        {
-            Require.NotNull(selector, "selector");
-
-            return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
-        }
-
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [DebuggerHidden]
-        internal static Maybe<T> η(T value)
-        {
-            return value != null ? new Maybe<T>(value) : Maybe<T>.None;
-        }
-
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        [DebuggerHidden]
-        internal static Maybe<T> μ(Maybe<Maybe<T>> square)
-        {
-            return square.IsSome ? square.Value : Maybe<T>.None;
-        }
-    }
-
-    /// <content>
-    /// Provides the core MonadOr methods.
-    /// </content>
-    public partial struct Maybe<T>
-    {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Maybe<T> s_None = new Maybe<T>();
-
-        /// <summary>
-        /// Gets an instance of <see cref="Maybe{T}" /> that does not enclose any value.
-        /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Maybe<T> None
-        {
-            get
-            {
-                return s_None;
-            }
-        }
-
-        public Maybe<T> OrElse(Maybe<T> other)
-        {
-            return !IsSome ? other : this;
-        }
-    }
-
-    /// <content>
-    /// Provides overrides for a bunch of auto-generated (extension) methods (see Maybe.g.cs).
-    /// </content>
-    public partial struct Maybe<T>
-    {
         #region Basic Monad functions
 
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
@@ -616,13 +446,9 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    }
 
-    /// <content>
-    /// Provides a debugger view of <see cref="Maybe{T}"/>.
-    /// </content>
-    public partial struct Maybe<T>
-    {
+        #endregion
+
         /// <summary>
         /// Represents a debugger type proxy for <see cref="Maybe{T}"/>.
         /// </summary>
@@ -654,6 +480,165 @@ namespace Narvalo.Fx
                     return _inner.Value;
                 }
             }
+        }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(!IsSome || Value != null);
+        }
+
+#endif
+    }
+
+    /// <content>
+    /// Implements the <see cref="IEnumerable{T}"/> interface.
+    /// </content>
+    public partial struct Maybe<T>
+    {
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",
+            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
+        public IEnumerable<T> ToEnumerable()
+        {
+            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
+
+            return IsSome ? Sequence.Single(Value) : Sequence.Empty<T>();
+        }
+
+        /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            Contract.Ensures(Contract.Result<IEnumerator<T>>() != null);
+
+            return ToEnumerable().GetEnumerator();
+        }
+
+        /// <inheritdoc cref="IEnumerable.GetEnumerator" />
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            Contract.Ensures(Contract.Result<IEnumerator>() != null);
+
+            return ToEnumerable().GetEnumerator();
+        }
+    }
+
+    /// <content>
+    /// Implements the <see cref="IEquatable{T}"/> and <c>IEquatable&lt;Maybe&lt;T&gt;&gt;</c> interfaces.
+    /// </content>
+    public partial struct Maybe<T>
+    {
+        public static bool operator ==(Maybe<T> left, Maybe<T> right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Maybe<T> left, Maybe<T> right)
+        {
+            return !left.Equals(right);
+        }
+
+        /// <inheritdoc cref="IEquatable{T}.Equals" />
+        public bool Equals(Maybe<T> other)
+        {
+            return Equals(other, EqualityComparer<T>.Default);
+        }
+
+        public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, "comparer");
+
+            if (IsSome)
+            {
+                return other.IsSome && comparer.Equals(Value, other.Value);
+            }
+
+            return !other.IsSome;
+        }
+
+        /// <inheritdoc cref="Object.Equals(Object)" />
+        public override bool Equals(object obj)
+        {
+            return Equals(obj, EqualityComparer<T>.Default);
+        }
+
+        public bool Equals(object other, IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, "comparer");
+
+            if (!(other is Maybe<T>))
+            {
+                return false;
+            }
+
+            return Equals((Maybe<T>)other);
+        }
+
+        /// <inheritdoc cref="Object.GetHashCode" />
+        public override int GetHashCode()
+        {
+            return GetHashCode(EqualityComparer<T>.Default);
+        }
+
+        public int GetHashCode(IEqualityComparer<T> comparer)
+        {
+            Require.NotNull(comparer, "comparer");
+
+            return IsSome ? comparer.GetHashCode(Value) : 0;
+        }
+    }
+
+    /// <content>
+    /// Provides the core Monad methods.
+    /// </content>
+    public partial struct Maybe<T>
+    {
+        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
+        {
+            Require.NotNull(selector, "selector");
+
+            return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
+        }
+
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [DebuggerHidden]
+        internal static Maybe<T> η(T value)
+        {
+            return value != null ? new Maybe<T>(value) : Maybe<T>.None;
+        }
+
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [DebuggerHidden]
+        internal static Maybe<T> μ(Maybe<Maybe<T>> square)
+        {
+            return square.IsSome ? square.Value : Maybe<T>.None;
+        }
+    }
+
+    /// <content>
+    /// Provides the core MonadOr methods.
+    /// </content>
+    public partial struct Maybe<T>
+    {
+        /// <summary>
+        /// Gets an instance of <see cref="Maybe{T}" /> that does not enclose any value.
+        /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
+            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static Maybe<T> None
+        {
+            get
+            {
+                return s_None;
+            }
+        }
+
+        public Maybe<T> OrElse(Maybe<T> other)
+        {
+            return !IsSome ? other : this;
         }
     }
 }

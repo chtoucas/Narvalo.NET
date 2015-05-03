@@ -4,6 +4,8 @@ public partial class MonadTemplate
 {
     protected void EmitMonadCore()
     {
+        // WARNING: It is your duty to ensure that Zero and Unit are not null.
+        // Actually, η should never return null.
 #>
     /// <content>
     /// Provides a set of static methods for <see cref="<#= Name #>{T}" />.
@@ -27,7 +29,7 @@ public partial class MonadTemplate
         {
             get
             {
-<#+ if (PostUnitEnsuresSome) { #>
+<#+ if (IsNullable) { #>
                 Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
@@ -36,6 +38,7 @@ public partial class MonadTemplate
         }
 
 <#+ if (HasZero) { #>
+
         /// <summary>
         /// Gets the zero for <see cref="<#= Name #>{T}"/>.
         /// </summary>
@@ -43,7 +46,18 @@ public partial class MonadTemplate
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
         /// <value>The zero for <see cref="<#= Name #>{T}"/>.</value>
-        public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #> { get { return s_<#= ZeroName #>; } }
+        public static <#= Name #><global::Narvalo.Fx.Unit> <#= ZeroName #>
+        {
+            get
+            {
+<#+ if (IsNullable) { #>
+                Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+<#+ } #>
+
+                return s_<#= ZeroName #>;
+            }
+        }
+
 <#+ } #>
 
         /// <summary>
@@ -58,7 +72,7 @@ public partial class MonadTemplate
         public static <#= Name #><T> <#= ReturnName #><T>(T value)
             <#+ WriteTypeConstraints("T"); #>
         {
-<#+ if (PostReturnEnsuresSome) { #>
+<#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
 <#+ } #>
 

@@ -16,14 +16,6 @@
 
             IsNullable = false;
         }
-
-        protected override void WriteContent()
-        {
-            EmitMonad();
-            WriteLine();
-
-            EmitLinq();
-        }
     }
 
 #>

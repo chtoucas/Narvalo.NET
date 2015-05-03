@@ -223,13 +223,9 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    }
 
-    /// <content>
-    /// Provides overrides for a bunch of auto-generated (extension) methods that depend on the <see cref="Maybe{T}"/> class..
-    /// </content>
-    public static partial class EnumerableExtensions
-    {
+        #region Overrides for auto-generated (extension) methods on IEnumerable<Maybe<T>>
+
         // Custom version of CollectCore.
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
@@ -249,13 +245,11 @@ namespace Narvalo.Fx
 
             return Maybe.Of(list.AsEnumerable());
         }
-    }
 
-    /// <content>
-    /// Provides overrides for a bunch of auto-generated (extension) methods that depend on the <see cref="Outcome{T}"/> class.
-    /// </content>
-    public static partial class EnumerableExtensions
-    {
+        #endregion
+
+        #region Overrides for auto-generated (extension) methods on IEnumerable<Outcome<T>>
+
         // Custom version of CollectCore.
         internal static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
@@ -282,5 +276,7 @@ namespace Narvalo.Fx
 
             return Outcome.Success(list.AsEnumerable());
         }
+
+        #endregion
     }
 }

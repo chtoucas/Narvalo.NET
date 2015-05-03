@@ -12,14 +12,6 @@
         {
             InitializeOr();
         }
-
-        protected override void WriteContent()
-        {
-            EmitMonad();
-            WriteLine();
-
-            EmitLinq();
-        }
     }
 
 #>

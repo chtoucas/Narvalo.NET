@@ -12,14 +12,6 @@
         {
             InitializePlus();
         }
-
-        protected override void WriteContent()
-        {
-            EmitMonad();
-            WriteLine();
-
-            EmitLinq();
-        }
     }
 
 #>

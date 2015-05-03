@@ -39,10 +39,12 @@ namespace Narvalo.Fx.Samples
         {
             get
             {
+                Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
 
                 return s_Unit;
             }
         }
+
 
         /// <summary>
         /// Gets the zero for <see cref="MonadOr{T}"/>.
@@ -51,7 +53,16 @@ namespace Narvalo.Fx.Samples
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
         /// <value>The zero for <see cref="MonadOr{T}"/>.</value>
-        public static MonadOr<global::Narvalo.Fx.Unit> None { get { return s_None; } }
+        public static MonadOr<global::Narvalo.Fx.Unit> None
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
+
+                return s_None;
+            }
+        }
+
 
         /// <summary>
         /// Obtains an instance of the <see cref="MonadOr{T}"/> class for the specified value.
@@ -65,6 +76,7 @@ namespace Narvalo.Fx.Samples
         public static MonadOr<T> Return<T>(T value)
             /* T4: C# indent */
         {
+            Contract.Ensures(Contract.Result<MonadOr<T>>() != null);
 
             return MonadOr<T>.η(value);
         }
@@ -272,6 +284,7 @@ namespace Narvalo.Fx.Samples
         /// </remarks>
         public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
+            Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
 
             return predicate ? MonadOr.Unit : MonadOr.None;
         }

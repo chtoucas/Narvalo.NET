@@ -203,13 +203,9 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
-    }
 
-    /// <content>
-    /// Implements parsers for value types that are not simple types.
-    /// </content>
-    public static partial class ParseTo
-    {
+        #region Implements parsers for value types that are not simple types
+
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
         {
             return Enum<TEnum>(value, ignoreCase: true);
@@ -244,13 +240,11 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
-    }
 
-    /// <content>
-    /// Implements parsers for reference types.
-    /// </content>
-    public static partial class ParseTo
-    {
+        #endregion
+
+        #region Implements parsers for reference types
+
         public static Maybe<Uri> Uri(string value, UriKind uriKind)
         {
             // REVIEW: Uri.TryCreate accepts empty strings.
@@ -272,5 +266,7 @@ namespace Narvalo
 
         ////    return parser.MayInvoke(value);
         ////}
+
+        #endregion
     }
 }

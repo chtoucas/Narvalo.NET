@@ -44,6 +44,7 @@ namespace Narvalo.Fx.Samples
             }
         }
 
+
         /// <summary>
         /// Gets the zero for <see cref="MonadValue{T}"/>.
         /// </summary>
@@ -51,7 +52,15 @@ namespace Narvalo.Fx.Samples
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
         /// <value>The zero for <see cref="MonadValue{T}"/>.</value>
-        public static MonadValue<global::Narvalo.Fx.Unit> None { get { return s_None; } }
+        public static MonadValue<global::Narvalo.Fx.Unit> None
+        {
+            get
+            {
+
+                return s_None;
+            }
+        }
+
 
         /// <summary>
         /// Obtains an instance of the <see cref="MonadValue{T}"/> class for the specified value.
@@ -274,6 +283,7 @@ namespace Narvalo.Fx.Samples
         /// </remarks>
         public static MonadValue<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
+            Contract.Ensures(Contract.Result<MonadValue<global::Narvalo.Fx.Unit>>() != null);
 
             return predicate ? MonadValue.Unit : MonadValue.None;
         }

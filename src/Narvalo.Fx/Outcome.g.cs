@@ -1002,4 +1002,3 @@ namespace Narvalo.Fx.Internal
         }
     } // End of EnumerableExtensions.
 }
-

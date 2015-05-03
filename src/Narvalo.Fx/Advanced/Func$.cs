@@ -10,7 +10,7 @@ namespace Narvalo.Fx.Advanced
     /// <summary>
     /// Provides extension methods for <see cref="Func{T}"/>.
     /// </summary>
-    public static partial class FuncExtensions
+    public static class FuncExtensions
     {
         public static Func<TResult> Bind<TSource, TResult>(
             this Func<TSource> @this,
@@ -30,14 +30,8 @@ namespace Narvalo.Fx.Advanced
 
             return () => selector.Invoke(@this.Invoke());
         }
-    }
 
-    /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Nullable{T}"/> class.
-    /// </content>
-    public static partial class FuncExtensions
-    {
-        #region Basic Monad functions (Prelude)
+        #region Extensions for Func<Nullable<T>> - Basic Monad functions (Prelude)
 
         public static TResult? Invoke<TSource, TResult>(
             this Func<TSource, TResult?> @this,
@@ -78,13 +72,9 @@ namespace Narvalo.Fx.Advanced
         }
 
         #endregion
-    }
 
-    /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Outcome{T}"/> class.
-    /// </content>
-    public static partial class FuncExtensions
-    {
+        #region Extensions for Func<Outcome<T>>
+
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static Outcome<TSource> Catch<TSource, TException>(this Func<TSource> @this) where TException : Exception
@@ -187,5 +177,7 @@ namespace Narvalo.Fx.Advanced
 
             return Outcome.Failure<TSource>(edi);
         }
+
+        #endregion
     }
 }

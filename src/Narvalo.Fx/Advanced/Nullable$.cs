@@ -17,7 +17,7 @@ namespace Narvalo.Fx.Advanced
     /// <item><description><c>Zero</c> is <see langword="null"/>.</description></item>
     /// </list>
     /// </remarks>
-    public static partial class NullableExtensions
+    public static class NullableExtensions
     {
         #region Monad
 

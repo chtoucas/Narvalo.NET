@@ -13,13 +13,9 @@ namespace Narvalo.Fx
         {
             return value.HasValue ? Maybe<T>.η(value.Value) : Maybe<T>.None;
         }
-    }
 
-    /// <content>
-    /// Provides extension methods for <see cref="Maybe{T}"/> when <c>T</c> is a struct.
-    /// </content>
-    public static partial class Maybe
-    {
+        #region Extension methods when T is a struct
+
         public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
         {
             return @this.ValueOrDefault();
@@ -65,5 +61,7 @@ namespace Narvalo.Fx
 
             return m.Value;
         }
+
+        #endregion
     }
 }

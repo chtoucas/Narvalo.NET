@@ -102,9 +102,7 @@ public partial class MonadTemplate
         /// </remarks>
         public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
-<#+ if (PostUnitEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
-<#+ } #>
 
             return predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
         }

@@ -39,10 +39,12 @@ namespace Narvalo.Fx.Samples
         {
             get
             {
+                Contract.Ensures(Contract.Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
 
                 return s_Unit;
             }
         }
+
 
         /// <summary>
         /// Gets the zero for <see cref="MonadZero{T}"/>.
@@ -51,7 +53,16 @@ namespace Narvalo.Fx.Samples
         /// Named <c>mzero</c> in Haskell parlance.
         /// </remarks>
         /// <value>The zero for <see cref="MonadZero{T}"/>.</value>
-        public static MonadZero<global::Narvalo.Fx.Unit> Zero { get { return s_Zero; } }
+        public static MonadZero<global::Narvalo.Fx.Unit> Zero
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
+
+                return s_Zero;
+            }
+        }
+
 
         /// <summary>
         /// Obtains an instance of the <see cref="MonadZero{T}"/> class for the specified value.
@@ -65,6 +76,7 @@ namespace Narvalo.Fx.Samples
         public static MonadZero<T> Return<T>(T value)
             /* T4: C# indent */
         {
+            Contract.Ensures(Contract.Result<MonadZero<T>>() != null);
 
             return MonadZero<T>.η(value);
         }
@@ -272,6 +284,7 @@ namespace Narvalo.Fx.Samples
         /// </remarks>
         public static MonadZero<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
+            Contract.Ensures(Contract.Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
 
             return predicate ? MonadZero.Unit : MonadZero.Zero;
         }

@@ -8,11 +8,6 @@
     {
         public _Template(TextTransformation parent) : base(parent) { }
 
-        public override void Initialize()
-        {
-            ReturnEnsuresSome = true;
-        }
-
         protected override void WriteContent()
         {
             EmitMonad();

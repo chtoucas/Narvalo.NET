@@ -25,7 +25,13 @@ public abstract partial class MonadTemplate : _MonadTemplate
 {
     protected MonadTemplate(TextTransformation parent) : base(parent) { }
 
-    // EmitMonad -----------------------------------------------------------------------------------
+    protected override void WriteContent()
+    {
+        EmitMonad();
+        WriteLine();
+
+        EmitLinq();
+    }
 
     /// <summary>
     /// Generates a Monad.
@@ -58,8 +64,6 @@ namespace <#= Namespace #>
 <#+
     } // T4: End of EmitMonad().
 
-    // EmitComonad ---------------------------------------------------------------------------------
-
     /// <summary>
     /// Generates a Comonad.
     /// </summary>
@@ -74,8 +78,6 @@ namespace <#= Namespace #>
 }
 <#+
     } // T4: End of EmitComonad().
-
-    // EmitLinq ------------------------------------------------------------------------------------
 
     /// <summary>
     /// Generates the LINQ extensions.

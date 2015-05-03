@@ -81,10 +81,10 @@
     <Compile Include="Edu\Linq\IQuerySyntax.cs" />
     <Compile Include="Edu\Linq\IQuerySyntax`1.cs" />
     <Compile Include="Edu\Linq\Lenses.cs" />
-    <Compile Include="Edu\Monads\Action`%24.cs" />
+    <Compile Include="Edu\Monads\Action%24.cs" />
     <Compile Include="Edu\Monads\Cokunc`.cs" />
     <Compile Include="Edu\Monads\Comonad`1.cs" />
-    <Compile Include="Edu\Monads\Kunc`%24.cs" />
+    <Compile Include="Edu\Monads\Kunc%24.cs" />
     <Compile Include="Edu\Monads\Kunc`.cs" />
     <Compile Include="Edu\Monads\Monad.cs" />
     <Compile Include="Edu\Monads\Monad`1.cs" />

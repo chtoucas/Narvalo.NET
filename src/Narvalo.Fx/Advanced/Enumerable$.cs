@@ -10,11 +10,6 @@ namespace Narvalo.Fx.Advanced
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
-    public static partial class EnumerableExtensions { }
-
-    /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
-    /// </content>
     public static partial class EnumerableExtensions
     {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(
@@ -31,26 +26,6 @@ namespace Narvalo.Fx.Advanced
                     select m.Value).EmptyIfNull();
         }
 
-        // Custom version of FilterCore with Maybe<T>.
-        internal static IEnumerable<TSource> FilterCore<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Maybe<bool>> predicateM)
-        {
-            Require.Object(@this);
-            Require.NotNull(predicateM, "predicateM");
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
-
-            return @this
-                .Where(_ => predicateM.Invoke(_).ValueOrElse(false))
-                .EmptyIfNull();
-        }
-    }
-
-    /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Outcome{T}"/> class.
-    /// </content>
-    public static partial class EnumerableExtensions
-    {
         public static IEnumerable<TResult> MapAny<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<TResult>> funM)
@@ -64,5 +39,22 @@ namespace Narvalo.Fx.Advanced
                     where m.IsSuccess
                     select m.ToValue()).EmptyIfNull();
         }
+
+        #region Overrides for auto-generated (extension) methods
+
+        internal static IEnumerable<TSource> FilterCore<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Maybe<bool>> predicateM)
+        {
+            Require.Object(@this);
+            Require.NotNull(predicateM, "predicateM");
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+
+            return @this
+                .Where(_ => predicateM.Invoke(_).ValueOrElse(false))
+                .EmptyIfNull();
+        }
+
+        #endregion
     }
 }
