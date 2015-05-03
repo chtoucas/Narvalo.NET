@@ -7,7 +7,7 @@
 
         public override void Initialize()
         {
-            UnitEnsuresSome = true;
+            ReturnEnsuresSome = true;
             MultiplicationEnsuresSome = false;
 
             ReturnName = "Success";

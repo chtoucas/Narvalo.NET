@@ -10,21 +10,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess",
-    Justification = "[GeneratedCode] Elements are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
-    Justification = "[GeneratedCode] Directives are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1403:FileMayOnlyContainASingleNamespace",
-    Justification = "[GeneratedCode] A T4 template may contain multiple namespaces.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1505:OpeningCurlyBracketsMustNotBeFollowedByBlankLine",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1507:CodeMustNotContainMultipleBlankLinesInARow",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-
 
 namespace Narvalo.Fx
 {
@@ -47,6 +32,7 @@ namespace Narvalo.Fx
             Assert.Throws<ArgumentNullException>(() => source.Select(selector));
         }
 
+
         [Fact]
         public static void Where_ThrowsArgumentNullException_ForNullPredicate()
         {
@@ -57,6 +43,7 @@ namespace Narvalo.Fx
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
         }
+
 
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
@@ -86,6 +73,7 @@ namespace Narvalo.Fx
         #endregion
 
         #region Monad Laws
+
 
         [Fact]
         public static void Maybe_SatisfiesFirstMonoidLaw()
@@ -130,6 +118,7 @@ namespace Narvalo.Fx
             // Assert
             Assert.True(left.Equals(right));
         }
+
 
         [Fact]
         public static void Maybe_SatisfiesFirstMonadLaw()
@@ -177,6 +166,7 @@ namespace Narvalo.Fx
             Assert.True(left.Equals(right));
         }
 
+
         [Fact]
         public static void Maybe_SatisfiesMonadZeroRule()
         {
@@ -203,6 +193,7 @@ namespace Narvalo.Fx
             Assert.True(leftSome.Equals(right));
             Assert.True(leftNone.Equals(right));
         }
+
 
         [Fact]
         public static void Maybe_SatisfiesMonadOrRule()
@@ -236,7 +227,8 @@ namespace Narvalo.Fx
             Assert.True(leftNone.Equals(right));
         }
 
+
         #endregion
-    }
-}
+    } // End of MaybeFacts.
+} // End of Narvalo.Fx.
 

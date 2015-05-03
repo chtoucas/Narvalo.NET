@@ -1,4 +1,4 @@
-﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
+﻿<#+
 
 public partial class MonadTemplate
 {
@@ -14,14 +14,14 @@ public partial class MonadTemplate
     /// </content>
     internal static partial class EnumerableExtensions
     {
-<#+ if (!HasUnderlyingTypeConstraint) { #>
-<#+ // Not available when we enforce a generic type constraint on the underlying type of the monadic return value. #>
+
+<#+ if (!HasTypeConstraints) { #>
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><IEnumerable<TResult>> MapCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
-<#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
@@ -31,16 +31,17 @@ public partial class MonadTemplate
 
             return @this.Select(funM).EmptyIfNull().Collect();
         }
-<#+ } // End of !HasUnderlyingTypeConstraint. #>
+
+<#+ } // T4: End of !HasTypeConstraints. #>
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><bool>> predicateM)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull(true); #>
+            <#+ WriteNotNull(true); #>
             Require.NotNull(predicateM, "predicateM");
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
@@ -72,25 +73,24 @@ public partial class MonadTemplate
                             list.Add(item);
                         }
                     });
-<#+ } #>
+<#+ } // T4: End of IsNullable. #>
             }
 
             return list;
         }
 
-<#+ if (!HasUnderlyingTypeConstraint) { #>
-<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+<#+ if (!HasTypeConstraints) { #>
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
-<#+ WriteTypeConstraints("TSource", "TFirst", "TSecond"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
-<#+ if (IsNullable && MapEnsuresSome) { #>
+<#+ if (PostMapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 <#+ } #>
 
@@ -112,7 +112,6 @@ public partial class MonadTemplate
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
-<#+ WriteTypeConstraints("TFirst", "TSecond", "TResult"); #>
         {
             Require.NotNull(resultSelectorM, "resultSelectorM");
 
@@ -129,7 +128,8 @@ public partial class MonadTemplate
             // instead of using the Zip from LINQ.
             return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
         }
-<#+ } // End of !HasUnderlyingTypeConstraint. #>
+
+<#+ } // T4: End of !HasTypeConstraints. #>
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -137,9 +137,9 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
-<#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
+            <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-<#+ WriteObjectNotNull(true); #>
+            <#+ WriteNotNull(true); #>
             Require.NotNull(accumulatorM, "accumulatorM");
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
@@ -168,7 +168,7 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
-<#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
+            <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -185,9 +185,9 @@ public partial class MonadTemplate
         internal static <#= Name #><TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull(true); #>
+            <#+ WriteNotNull(true); #>
             Require.NotNull(accumulatorM, "accumulatorM");
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
@@ -223,7 +223,7 @@ public partial class MonadTemplate
         internal static <#= Name #><TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -241,9 +241,9 @@ public partial class MonadTemplate
             TAccumulate seed,
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM,
             Func<<#= Name #><TAccumulate>, bool> predicate)
-<#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
+            <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-<#+ WriteObjectNotNull(true); #>
+            <#+ WriteNotNull(true); #>
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
 <#+ if (IsNullable && HasZero) { #>
@@ -276,9 +276,9 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM,
             Func<<#= Name #><TSource>, bool> predicate)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull(true); #>
+            <#+ WriteNotNull(true); #>
             Require.NotNull(accumulatorM, "accumulatorM");
             Require.NotNull(predicate, "predicate");
 <#+ if (IsNullable && HasZero) { #>
@@ -309,9 +309,9 @@ public partial class MonadTemplate
                 return retval;
             }
         }
-    } // End of the class EnumerableExtensions.
+    } // End of EnumerableExtensions.
 <#+
     } // T4: End of EmitEnumerableInternalExtensions().
-}
+} // T4: End of MonadTemplate.
 
 #>

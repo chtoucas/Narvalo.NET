@@ -10,14 +10,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::System.Diagnostics.CodeAnalysis;
 
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1409:RemoveUnnecessaryCode",
-    Justification = "[GeneratedCode] The empty static constructor is used to implement the lazy singleton pattern.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1508:ClosingCurlyBracketsMustNotBePrecededByBlankLine",
-    Justification = "[GeneratedCode] Newline rule disabled for T4 templates.")]
+using global::System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY",
     Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
@@ -34,8 +28,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ADP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ADP" /> class.
+        /// </summary>
         private static readonly ADP s_Instance = new ADP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ADP" /> class.
+        /// </summary>
         internal ADP() : base("ADP") { }
 
         /// <summary>
@@ -60,8 +60,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AED : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AED" /> class.
+        /// </summary>
         private static readonly AED s_Instance = new AED();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AED" /> class.
+        /// </summary>
         internal AED() : base("AED") { }
 
         /// <summary>
@@ -86,8 +92,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFA : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AFA" /> class.
+        /// </summary>
         private static readonly AFA s_Instance = new AFA();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AFA" /> class.
+        /// </summary>
         internal AFA() : base("AFA") { }
 
         /// <summary>
@@ -112,8 +124,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AFN" /> class.
+        /// </summary>
         private static readonly AFN s_Instance = new AFN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AFN" /> class.
+        /// </summary>
         internal AFN() : base("AFN") { }
 
         /// <summary>
@@ -138,8 +156,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ALK" /> class.
+        /// </summary>
         private static readonly ALK s_Instance = new ALK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ALK" /> class.
+        /// </summary>
         internal ALK() : base("ALK") { }
 
         /// <summary>
@@ -164,8 +188,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ALL" /> class.
+        /// </summary>
         private static readonly ALL s_Instance = new ALL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ALL" /> class.
+        /// </summary>
         internal ALL() : base("ALL") { }
 
         /// <summary>
@@ -190,8 +220,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AMD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AMD" /> class.
+        /// </summary>
         private static readonly AMD s_Instance = new AMD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AMD" /> class.
+        /// </summary>
         internal AMD() : base("AMD") { }
 
         /// <summary>
@@ -216,8 +252,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ANG : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ANG" /> class.
+        /// </summary>
         private static readonly ANG s_Instance = new ANG();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ANG" /> class.
+        /// </summary>
         internal ANG() : base("ANG") { }
 
         /// <summary>
@@ -242,8 +284,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOA : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AOA" /> class.
+        /// </summary>
         private static readonly AOA s_Instance = new AOA();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AOA" /> class.
+        /// </summary>
         internal AOA() : base("AOA") { }
 
         /// <summary>
@@ -268,8 +316,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AOK" /> class.
+        /// </summary>
         private static readonly AOK s_Instance = new AOK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AOK" /> class.
+        /// </summary>
         internal AOK() : base("AOK") { }
 
         /// <summary>
@@ -294,8 +348,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AON : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AON" /> class.
+        /// </summary>
         private static readonly AON s_Instance = new AON();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AON" /> class.
+        /// </summary>
         internal AON() : base("AON") { }
 
         /// <summary>
@@ -320,8 +380,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AOR" /> class.
+        /// </summary>
         private static readonly AOR s_Instance = new AOR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AOR" /> class.
+        /// </summary>
         internal AOR() : base("AOR") { }
 
         /// <summary>
@@ -346,8 +412,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARA : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ARA" /> class.
+        /// </summary>
         private static readonly ARA s_Instance = new ARA();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ARA" /> class.
+        /// </summary>
         internal ARA() : base("ARA") { }
 
         /// <summary>
@@ -372,8 +444,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ARP" /> class.
+        /// </summary>
         private static readonly ARP s_Instance = new ARP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ARP" /> class.
+        /// </summary>
         internal ARP() : base("ARP") { }
 
         /// <summary>
@@ -398,8 +476,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ARS" /> class.
+        /// </summary>
         private static readonly ARS s_Instance = new ARS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ARS" /> class.
+        /// </summary>
         internal ARS() : base("ARS") { }
 
         /// <summary>
@@ -424,8 +508,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARY : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ARY" /> class.
+        /// </summary>
         private static readonly ARY s_Instance = new ARY();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ARY" /> class.
+        /// </summary>
         internal ARY() : base("ARY") { }
 
         /// <summary>
@@ -450,8 +540,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ATS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ATS" /> class.
+        /// </summary>
         private static readonly ATS s_Instance = new ATS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ATS" /> class.
+        /// </summary>
         internal ATS() : base("ATS") { }
 
         /// <summary>
@@ -476,8 +572,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AUD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AUD" /> class.
+        /// </summary>
         private static readonly AUD s_Instance = new AUD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AUD" /> class.
+        /// </summary>
         internal AUD() : base("AUD") { }
 
         /// <summary>
@@ -502,8 +604,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AWG : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AWG" /> class.
+        /// </summary>
         private static readonly AWG s_Instance = new AWG();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AWG" /> class.
+        /// </summary>
         internal AWG() : base("AWG") { }
 
         /// <summary>
@@ -528,8 +636,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AYM : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AYM" /> class.
+        /// </summary>
         private static readonly AYM s_Instance = new AYM();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AYM" /> class.
+        /// </summary>
         internal AYM() : base("AYM") { }
 
         /// <summary>
@@ -554,8 +668,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZM : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AZM" /> class.
+        /// </summary>
         private static readonly AZM s_Instance = new AZM();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AZM" /> class.
+        /// </summary>
         internal AZM() : base("AZM") { }
 
         /// <summary>
@@ -580,8 +700,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="AZN" /> class.
+        /// </summary>
         private static readonly AZN s_Instance = new AZN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AZN" /> class.
+        /// </summary>
         internal AZN() : base("AZN") { }
 
         /// <summary>
@@ -606,8 +732,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BAD" /> class.
+        /// </summary>
         private static readonly BAD s_Instance = new BAD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BAD" /> class.
+        /// </summary>
         internal BAD() : base("BAD") { }
 
         /// <summary>
@@ -632,8 +764,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAM : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BAM" /> class.
+        /// </summary>
         private static readonly BAM s_Instance = new BAM();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BAM" /> class.
+        /// </summary>
         internal BAM() : base("BAM") { }
 
         /// <summary>
@@ -658,8 +796,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BBD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BBD" /> class.
+        /// </summary>
         private static readonly BBD s_Instance = new BBD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BBD" /> class.
+        /// </summary>
         internal BBD() : base("BBD") { }
 
         /// <summary>
@@ -684,8 +828,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BDT : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BDT" /> class.
+        /// </summary>
         private static readonly BDT s_Instance = new BDT();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BDT" /> class.
+        /// </summary>
         internal BDT() : base("BDT") { }
 
         /// <summary>
@@ -710,8 +860,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BEC" /> class.
+        /// </summary>
         private static readonly BEC s_Instance = new BEC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BEC" /> class.
+        /// </summary>
         internal BEC() : base("BEC") { }
 
         /// <summary>
@@ -736,8 +892,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BEF" /> class.
+        /// </summary>
         private static readonly BEF s_Instance = new BEF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BEF" /> class.
+        /// </summary>
         internal BEF() : base("BEF") { }
 
         /// <summary>
@@ -762,8 +924,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BEL" /> class.
+        /// </summary>
         private static readonly BEL s_Instance = new BEL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BEL" /> class.
+        /// </summary>
         internal BEL() : base("BEL") { }
 
         /// <summary>
@@ -788,8 +956,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGJ : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BGJ" /> class.
+        /// </summary>
         private static readonly BGJ s_Instance = new BGJ();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BGJ" /> class.
+        /// </summary>
         internal BGJ() : base("BGJ") { }
 
         /// <summary>
@@ -814,8 +988,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BGK" /> class.
+        /// </summary>
         private static readonly BGK s_Instance = new BGK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BGK" /> class.
+        /// </summary>
         internal BGK() : base("BGK") { }
 
         /// <summary>
@@ -840,8 +1020,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BGL" /> class.
+        /// </summary>
         private static readonly BGL s_Instance = new BGL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BGL" /> class.
+        /// </summary>
         internal BGL() : base("BGL") { }
 
         /// <summary>
@@ -866,8 +1052,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BGN" /> class.
+        /// </summary>
         private static readonly BGN s_Instance = new BGN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BGN" /> class.
+        /// </summary>
         internal BGN() : base("BGN") { }
 
         /// <summary>
@@ -892,8 +1084,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BHD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BHD" /> class.
+        /// </summary>
         private static readonly BHD s_Instance = new BHD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BHD" /> class.
+        /// </summary>
         internal BHD() : base("BHD") { }
 
         /// <summary>
@@ -918,8 +1116,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BIF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BIF" /> class.
+        /// </summary>
         private static readonly BIF s_Instance = new BIF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BIF" /> class.
+        /// </summary>
         internal BIF() : base("BIF") { }
 
         /// <summary>
@@ -944,8 +1148,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BMD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BMD" /> class.
+        /// </summary>
         private static readonly BMD s_Instance = new BMD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BMD" /> class.
+        /// </summary>
         internal BMD() : base("BMD") { }
 
         /// <summary>
@@ -970,8 +1180,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BND : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BND" /> class.
+        /// </summary>
         private static readonly BND s_Instance = new BND();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BND" /> class.
+        /// </summary>
         internal BND() : base("BND") { }
 
         /// <summary>
@@ -996,8 +1212,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOB : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BOB" /> class.
+        /// </summary>
         private static readonly BOB s_Instance = new BOB();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BOB" /> class.
+        /// </summary>
         internal BOB() : base("BOB") { }
 
         /// <summary>
@@ -1022,8 +1244,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BOP" /> class.
+        /// </summary>
         private static readonly BOP s_Instance = new BOP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BOP" /> class.
+        /// </summary>
         internal BOP() : base("BOP") { }
 
         /// <summary>
@@ -1048,8 +1276,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOV : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BOV" /> class.
+        /// </summary>
         private static readonly BOV s_Instance = new BOV();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BOV" /> class.
+        /// </summary>
         internal BOV() : base("BOV") { }
 
         /// <summary>
@@ -1074,8 +1308,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRB : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BRB" /> class.
+        /// </summary>
         private static readonly BRB s_Instance = new BRB();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BRB" /> class.
+        /// </summary>
         internal BRB() : base("BRB") { }
 
         /// <summary>
@@ -1100,8 +1340,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BRC" /> class.
+        /// </summary>
         private static readonly BRC s_Instance = new BRC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BRC" /> class.
+        /// </summary>
         internal BRC() : base("BRC") { }
 
         /// <summary>
@@ -1126,8 +1372,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BRE" /> class.
+        /// </summary>
         private static readonly BRE s_Instance = new BRE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BRE" /> class.
+        /// </summary>
         internal BRE() : base("BRE") { }
 
         /// <summary>
@@ -1152,8 +1404,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BRL" /> class.
+        /// </summary>
         private static readonly BRL s_Instance = new BRL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BRL" /> class.
+        /// </summary>
         internal BRL() : base("BRL") { }
 
         /// <summary>
@@ -1178,8 +1436,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BRN" /> class.
+        /// </summary>
         private static readonly BRN s_Instance = new BRN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BRN" /> class.
+        /// </summary>
         internal BRN() : base("BRN") { }
 
         /// <summary>
@@ -1204,8 +1468,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BRR" /> class.
+        /// </summary>
         private static readonly BRR s_Instance = new BRR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BRR" /> class.
+        /// </summary>
         internal BRR() : base("BRR") { }
 
         /// <summary>
@@ -1230,8 +1500,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BSD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BSD" /> class.
+        /// </summary>
         private static readonly BSD s_Instance = new BSD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BSD" /> class.
+        /// </summary>
         internal BSD() : base("BSD") { }
 
         /// <summary>
@@ -1256,8 +1532,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BTN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BTN" /> class.
+        /// </summary>
         private static readonly BTN s_Instance = new BTN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BTN" /> class.
+        /// </summary>
         internal BTN() : base("BTN") { }
 
         /// <summary>
@@ -1282,8 +1564,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BUK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BUK" /> class.
+        /// </summary>
         private static readonly BUK s_Instance = new BUK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BUK" /> class.
+        /// </summary>
         internal BUK() : base("BUK") { }
 
         /// <summary>
@@ -1308,8 +1596,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BWP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BWP" /> class.
+        /// </summary>
         private static readonly BWP s_Instance = new BWP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BWP" /> class.
+        /// </summary>
         internal BWP() : base("BWP") { }
 
         /// <summary>
@@ -1334,8 +1628,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYB : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BYB" /> class.
+        /// </summary>
         private static readonly BYB s_Instance = new BYB();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BYB" /> class.
+        /// </summary>
         internal BYB() : base("BYB") { }
 
         /// <summary>
@@ -1360,8 +1660,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BYR" /> class.
+        /// </summary>
         private static readonly BYR s_Instance = new BYR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BYR" /> class.
+        /// </summary>
         internal BYR() : base("BYR") { }
 
         /// <summary>
@@ -1386,8 +1692,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BZD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="BZD" /> class.
+        /// </summary>
         private static readonly BZD s_Instance = new BZD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BZD" /> class.
+        /// </summary>
         internal BZD() : base("BZD") { }
 
         /// <summary>
@@ -1412,8 +1724,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CAD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CAD" /> class.
+        /// </summary>
         private static readonly CAD s_Instance = new CAD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CAD" /> class.
+        /// </summary>
         internal CAD() : base("CAD") { }
 
         /// <summary>
@@ -1438,8 +1756,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CDF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CDF" /> class.
+        /// </summary>
         private static readonly CDF s_Instance = new CDF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CDF" /> class.
+        /// </summary>
         internal CDF() : base("CDF") { }
 
         /// <summary>
@@ -1464,8 +1788,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CHC" /> class.
+        /// </summary>
         private static readonly CHC s_Instance = new CHC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CHC" /> class.
+        /// </summary>
         internal CHC() : base("CHC") { }
 
         /// <summary>
@@ -1490,8 +1820,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CHE" /> class.
+        /// </summary>
         private static readonly CHE s_Instance = new CHE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CHE" /> class.
+        /// </summary>
         internal CHE() : base("CHE") { }
 
         /// <summary>
@@ -1516,8 +1852,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CHF" /> class.
+        /// </summary>
         private static readonly CHF s_Instance = new CHF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CHF" /> class.
+        /// </summary>
         internal CHF() : base("CHF") { }
 
         /// <summary>
@@ -1542,8 +1884,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHW : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CHW" /> class.
+        /// </summary>
         private static readonly CHW s_Instance = new CHW();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CHW" /> class.
+        /// </summary>
         internal CHW() : base("CHW") { }
 
         /// <summary>
@@ -1568,8 +1916,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CLF" /> class.
+        /// </summary>
         private static readonly CLF s_Instance = new CLF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CLF" /> class.
+        /// </summary>
         internal CLF() : base("CLF") { }
 
         /// <summary>
@@ -1594,8 +1948,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CLP" /> class.
+        /// </summary>
         private static readonly CLP s_Instance = new CLP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CLP" /> class.
+        /// </summary>
         internal CLP() : base("CLP") { }
 
         /// <summary>
@@ -1620,8 +1980,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNX : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CNX" /> class.
+        /// </summary>
         private static readonly CNX s_Instance = new CNX();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CNX" /> class.
+        /// </summary>
         internal CNX() : base("CNX") { }
 
         /// <summary>
@@ -1646,8 +2012,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNY : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CNY" /> class.
+        /// </summary>
         private static readonly CNY s_Instance = new CNY();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CNY" /> class.
+        /// </summary>
         internal CNY() : base("CNY") { }
 
         /// <summary>
@@ -1672,8 +2044,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="COP" /> class.
+        /// </summary>
         private static readonly COP s_Instance = new COP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="COP" /> class.
+        /// </summary>
         internal COP() : base("COP") { }
 
         /// <summary>
@@ -1698,8 +2076,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COU : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="COU" /> class.
+        /// </summary>
         private static readonly COU s_Instance = new COU();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="COU" /> class.
+        /// </summary>
         internal COU() : base("COU") { }
 
         /// <summary>
@@ -1724,8 +2108,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CRC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CRC" /> class.
+        /// </summary>
         private static readonly CRC s_Instance = new CRC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CRC" /> class.
+        /// </summary>
         internal CRC() : base("CRC") { }
 
         /// <summary>
@@ -1750,8 +2140,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CSD" /> class.
+        /// </summary>
         private static readonly CSD s_Instance = new CSD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSD" /> class.
+        /// </summary>
         internal CSD() : base("CSD") { }
 
         /// <summary>
@@ -1776,8 +2172,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSJ : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CSJ" /> class.
+        /// </summary>
         private static readonly CSJ s_Instance = new CSJ();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSJ" /> class.
+        /// </summary>
         internal CSJ() : base("CSJ") { }
 
         /// <summary>
@@ -1802,8 +2204,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CSK" /> class.
+        /// </summary>
         private static readonly CSK s_Instance = new CSK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CSK" /> class.
+        /// </summary>
         internal CSK() : base("CSK") { }
 
         /// <summary>
@@ -1828,8 +2236,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CUC" /> class.
+        /// </summary>
         private static readonly CUC s_Instance = new CUC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CUC" /> class.
+        /// </summary>
         internal CUC() : base("CUC") { }
 
         /// <summary>
@@ -1854,8 +2268,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CUP" /> class.
+        /// </summary>
         private static readonly CUP s_Instance = new CUP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CUP" /> class.
+        /// </summary>
         internal CUP() : base("CUP") { }
 
         /// <summary>
@@ -1880,8 +2300,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CVE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CVE" /> class.
+        /// </summary>
         private static readonly CVE s_Instance = new CVE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CVE" /> class.
+        /// </summary>
         internal CVE() : base("CVE") { }
 
         /// <summary>
@@ -1906,8 +2332,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CYP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CYP" /> class.
+        /// </summary>
         private static readonly CYP s_Instance = new CYP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CYP" /> class.
+        /// </summary>
         internal CYP() : base("CYP") { }
 
         /// <summary>
@@ -1932,8 +2364,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CZK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="CZK" /> class.
+        /// </summary>
         private static readonly CZK s_Instance = new CZK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CZK" /> class.
+        /// </summary>
         internal CZK() : base("CZK") { }
 
         /// <summary>
@@ -1958,8 +2396,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DDM : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="DDM" /> class.
+        /// </summary>
         private static readonly DDM s_Instance = new DDM();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DDM" /> class.
+        /// </summary>
         internal DDM() : base("DDM") { }
 
         /// <summary>
@@ -1984,8 +2428,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DEM : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="DEM" /> class.
+        /// </summary>
         private static readonly DEM s_Instance = new DEM();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DEM" /> class.
+        /// </summary>
         internal DEM() : base("DEM") { }
 
         /// <summary>
@@ -2010,8 +2460,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DJF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="DJF" /> class.
+        /// </summary>
         private static readonly DJF s_Instance = new DJF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DJF" /> class.
+        /// </summary>
         internal DJF() : base("DJF") { }
 
         /// <summary>
@@ -2036,8 +2492,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DKK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="DKK" /> class.
+        /// </summary>
         private static readonly DKK s_Instance = new DKK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DKK" /> class.
+        /// </summary>
         internal DKK() : base("DKK") { }
 
         /// <summary>
@@ -2062,8 +2524,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DOP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="DOP" /> class.
+        /// </summary>
         private static readonly DOP s_Instance = new DOP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DOP" /> class.
+        /// </summary>
         internal DOP() : base("DOP") { }
 
         /// <summary>
@@ -2088,8 +2556,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DZD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="DZD" /> class.
+        /// </summary>
         private static readonly DZD s_Instance = new DZD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DZD" /> class.
+        /// </summary>
         internal DZD() : base("DZD") { }
 
         /// <summary>
@@ -2114,8 +2588,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ECS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ECS" /> class.
+        /// </summary>
         private static readonly ECS s_Instance = new ECS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ECS" /> class.
+        /// </summary>
         internal ECS() : base("ECS") { }
 
         /// <summary>
@@ -2140,8 +2620,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ECV : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ECV" /> class.
+        /// </summary>
         private static readonly ECV s_Instance = new ECV();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ECV" /> class.
+        /// </summary>
         internal ECV() : base("ECV") { }
 
         /// <summary>
@@ -2166,8 +2652,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EEK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="EEK" /> class.
+        /// </summary>
         private static readonly EEK s_Instance = new EEK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EEK" /> class.
+        /// </summary>
         internal EEK() : base("EEK") { }
 
         /// <summary>
@@ -2192,8 +2684,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EGP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="EGP" /> class.
+        /// </summary>
         private static readonly EGP s_Instance = new EGP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EGP" /> class.
+        /// </summary>
         internal EGP() : base("EGP") { }
 
         /// <summary>
@@ -2218,8 +2716,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EQE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="EQE" /> class.
+        /// </summary>
         private static readonly EQE s_Instance = new EQE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EQE" /> class.
+        /// </summary>
         internal EQE() : base("EQE") { }
 
         /// <summary>
@@ -2244,8 +2748,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ERN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ERN" /> class.
+        /// </summary>
         private static readonly ERN s_Instance = new ERN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ERN" /> class.
+        /// </summary>
         internal ERN() : base("ERN") { }
 
         /// <summary>
@@ -2270,8 +2780,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESA : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ESA" /> class.
+        /// </summary>
         private static readonly ESA s_Instance = new ESA();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ESA" /> class.
+        /// </summary>
         internal ESA() : base("ESA") { }
 
         /// <summary>
@@ -2296,8 +2812,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESB : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ESB" /> class.
+        /// </summary>
         private static readonly ESB s_Instance = new ESB();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ESB" /> class.
+        /// </summary>
         internal ESB() : base("ESB") { }
 
         /// <summary>
@@ -2322,8 +2844,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ESP" /> class.
+        /// </summary>
         private static readonly ESP s_Instance = new ESP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ESP" /> class.
+        /// </summary>
         internal ESP() : base("ESP") { }
 
         /// <summary>
@@ -2348,8 +2876,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ETB : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ETB" /> class.
+        /// </summary>
         private static readonly ETB s_Instance = new ETB();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ETB" /> class.
+        /// </summary>
         internal ETB() : base("ETB") { }
 
         /// <summary>
@@ -2374,8 +2908,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EUR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="EUR" /> class.
+        /// </summary>
         private static readonly EUR s_Instance = new EUR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EUR" /> class.
+        /// </summary>
         internal EUR() : base("EUR") { }
 
         /// <summary>
@@ -2400,8 +2940,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FIM : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="FIM" /> class.
+        /// </summary>
         private static readonly FIM s_Instance = new FIM();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FIM" /> class.
+        /// </summary>
         internal FIM() : base("FIM") { }
 
         /// <summary>
@@ -2426,8 +2972,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FJD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="FJD" /> class.
+        /// </summary>
         private static readonly FJD s_Instance = new FJD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FJD" /> class.
+        /// </summary>
         internal FJD() : base("FJD") { }
 
         /// <summary>
@@ -2452,8 +3004,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FKP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="FKP" /> class.
+        /// </summary>
         private static readonly FKP s_Instance = new FKP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FKP" /> class.
+        /// </summary>
         internal FKP() : base("FKP") { }
 
         /// <summary>
@@ -2478,8 +3036,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FRF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="FRF" /> class.
+        /// </summary>
         private static readonly FRF s_Instance = new FRF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FRF" /> class.
+        /// </summary>
         internal FRF() : base("FRF") { }
 
         /// <summary>
@@ -2504,8 +3068,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GBP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GBP" /> class.
+        /// </summary>
         private static readonly GBP s_Instance = new GBP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GBP" /> class.
+        /// </summary>
         internal GBP() : base("GBP") { }
 
         /// <summary>
@@ -2530,8 +3100,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GEK" /> class.
+        /// </summary>
         private static readonly GEK s_Instance = new GEK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GEK" /> class.
+        /// </summary>
         internal GEK() : base("GEK") { }
 
         /// <summary>
@@ -2556,8 +3132,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GEL" /> class.
+        /// </summary>
         private static readonly GEL s_Instance = new GEL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GEL" /> class.
+        /// </summary>
         internal GEL() : base("GEL") { }
 
         /// <summary>
@@ -2582,8 +3164,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GHC" /> class.
+        /// </summary>
         private static readonly GHC s_Instance = new GHC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GHC" /> class.
+        /// </summary>
         internal GHC() : base("GHC") { }
 
         /// <summary>
@@ -2608,8 +3196,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GHP" /> class.
+        /// </summary>
         private static readonly GHP s_Instance = new GHP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GHP" /> class.
+        /// </summary>
         internal GHP() : base("GHP") { }
 
         /// <summary>
@@ -2634,8 +3228,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GHS" /> class.
+        /// </summary>
         private static readonly GHS s_Instance = new GHS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GHS" /> class.
+        /// </summary>
         internal GHS() : base("GHS") { }
 
         /// <summary>
@@ -2660,8 +3260,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GIP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GIP" /> class.
+        /// </summary>
         private static readonly GIP s_Instance = new GIP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GIP" /> class.
+        /// </summary>
         internal GIP() : base("GIP") { }
 
         /// <summary>
@@ -2686,8 +3292,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GMD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GMD" /> class.
+        /// </summary>
         private static readonly GMD s_Instance = new GMD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GMD" /> class.
+        /// </summary>
         internal GMD() : base("GMD") { }
 
         /// <summary>
@@ -2712,8 +3324,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GNE" /> class.
+        /// </summary>
         private static readonly GNE s_Instance = new GNE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GNE" /> class.
+        /// </summary>
         internal GNE() : base("GNE") { }
 
         /// <summary>
@@ -2738,8 +3356,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GNF" /> class.
+        /// </summary>
         private static readonly GNF s_Instance = new GNF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GNF" /> class.
+        /// </summary>
         internal GNF() : base("GNF") { }
 
         /// <summary>
@@ -2764,8 +3388,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GNS" /> class.
+        /// </summary>
         private static readonly GNS s_Instance = new GNS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GNS" /> class.
+        /// </summary>
         internal GNS() : base("GNS") { }
 
         /// <summary>
@@ -2790,8 +3420,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GQE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GQE" /> class.
+        /// </summary>
         private static readonly GQE s_Instance = new GQE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GQE" /> class.
+        /// </summary>
         internal GQE() : base("GQE") { }
 
         /// <summary>
@@ -2816,8 +3452,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GRD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GRD" /> class.
+        /// </summary>
         private static readonly GRD s_Instance = new GRD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GRD" /> class.
+        /// </summary>
         internal GRD() : base("GRD") { }
 
         /// <summary>
@@ -2842,8 +3484,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GTQ : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GTQ" /> class.
+        /// </summary>
         private static readonly GTQ s_Instance = new GTQ();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GTQ" /> class.
+        /// </summary>
         internal GTQ() : base("GTQ") { }
 
         /// <summary>
@@ -2868,8 +3516,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GWE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GWE" /> class.
+        /// </summary>
         private static readonly GWE s_Instance = new GWE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GWE" /> class.
+        /// </summary>
         internal GWE() : base("GWE") { }
 
         /// <summary>
@@ -2894,8 +3548,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GWP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GWP" /> class.
+        /// </summary>
         private static readonly GWP s_Instance = new GWP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GWP" /> class.
+        /// </summary>
         internal GWP() : base("GWP") { }
 
         /// <summary>
@@ -2920,8 +3580,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GYD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="GYD" /> class.
+        /// </summary>
         private static readonly GYD s_Instance = new GYD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GYD" /> class.
+        /// </summary>
         internal GYD() : base("GYD") { }
 
         /// <summary>
@@ -2946,8 +3612,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HKD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="HKD" /> class.
+        /// </summary>
         private static readonly HKD s_Instance = new HKD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HKD" /> class.
+        /// </summary>
         internal HKD() : base("HKD") { }
 
         /// <summary>
@@ -2972,8 +3644,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HNL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="HNL" /> class.
+        /// </summary>
         private static readonly HNL s_Instance = new HNL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HNL" /> class.
+        /// </summary>
         internal HNL() : base("HNL") { }
 
         /// <summary>
@@ -2998,8 +3676,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="HRD" /> class.
+        /// </summary>
         private static readonly HRD s_Instance = new HRD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HRD" /> class.
+        /// </summary>
         internal HRD() : base("HRD") { }
 
         /// <summary>
@@ -3024,8 +3708,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="HRK" /> class.
+        /// </summary>
         private static readonly HRK s_Instance = new HRK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HRK" /> class.
+        /// </summary>
         internal HRK() : base("HRK") { }
 
         /// <summary>
@@ -3050,8 +3740,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HTG : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="HTG" /> class.
+        /// </summary>
         private static readonly HTG s_Instance = new HTG();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HTG" /> class.
+        /// </summary>
         internal HTG() : base("HTG") { }
 
         /// <summary>
@@ -3076,8 +3772,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HUF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="HUF" /> class.
+        /// </summary>
         private static readonly HUF s_Instance = new HUF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HUF" /> class.
+        /// </summary>
         internal HUF() : base("HUF") { }
 
         /// <summary>
@@ -3102,8 +3804,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IDR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="IDR" /> class.
+        /// </summary>
         private static readonly IDR s_Instance = new IDR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IDR" /> class.
+        /// </summary>
         internal IDR() : base("IDR") { }
 
         /// <summary>
@@ -3128,8 +3836,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IEP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="IEP" /> class.
+        /// </summary>
         private static readonly IEP s_Instance = new IEP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IEP" /> class.
+        /// </summary>
         internal IEP() : base("IEP") { }
 
         /// <summary>
@@ -3154,8 +3868,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ILP" /> class.
+        /// </summary>
         private static readonly ILP s_Instance = new ILP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ILP" /> class.
+        /// </summary>
         internal ILP() : base("ILP") { }
 
         /// <summary>
@@ -3180,8 +3900,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ILR" /> class.
+        /// </summary>
         private static readonly ILR s_Instance = new ILR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ILR" /> class.
+        /// </summary>
         internal ILR() : base("ILR") { }
 
         /// <summary>
@@ -3206,8 +3932,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ILS" /> class.
+        /// </summary>
         private static readonly ILS s_Instance = new ILS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ILS" /> class.
+        /// </summary>
         internal ILS() : base("ILS") { }
 
         /// <summary>
@@ -3232,8 +3964,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class INR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="INR" /> class.
+        /// </summary>
         private static readonly INR s_Instance = new INR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="INR" /> class.
+        /// </summary>
         internal INR() : base("INR") { }
 
         /// <summary>
@@ -3258,8 +3996,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IQD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="IQD" /> class.
+        /// </summary>
         private static readonly IQD s_Instance = new IQD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IQD" /> class.
+        /// </summary>
         internal IQD() : base("IQD") { }
 
         /// <summary>
@@ -3284,8 +4028,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IRR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="IRR" /> class.
+        /// </summary>
         private static readonly IRR s_Instance = new IRR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IRR" /> class.
+        /// </summary>
         internal IRR() : base("IRR") { }
 
         /// <summary>
@@ -3310,8 +4060,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISJ : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ISJ" /> class.
+        /// </summary>
         private static readonly ISJ s_Instance = new ISJ();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ISJ" /> class.
+        /// </summary>
         internal ISJ() : base("ISJ") { }
 
         /// <summary>
@@ -3336,8 +4092,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ISK" /> class.
+        /// </summary>
         private static readonly ISK s_Instance = new ISK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ISK" /> class.
+        /// </summary>
         internal ISK() : base("ISK") { }
 
         /// <summary>
@@ -3362,8 +4124,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ITL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ITL" /> class.
+        /// </summary>
         private static readonly ITL s_Instance = new ITL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ITL" /> class.
+        /// </summary>
         internal ITL() : base("ITL") { }
 
         /// <summary>
@@ -3388,8 +4156,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JMD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="JMD" /> class.
+        /// </summary>
         private static readonly JMD s_Instance = new JMD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JMD" /> class.
+        /// </summary>
         internal JMD() : base("JMD") { }
 
         /// <summary>
@@ -3414,8 +4188,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JOD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="JOD" /> class.
+        /// </summary>
         private static readonly JOD s_Instance = new JOD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JOD" /> class.
+        /// </summary>
         internal JOD() : base("JOD") { }
 
         /// <summary>
@@ -3440,8 +4220,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JPY : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="JPY" /> class.
+        /// </summary>
         private static readonly JPY s_Instance = new JPY();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JPY" /> class.
+        /// </summary>
         internal JPY() : base("JPY") { }
 
         /// <summary>
@@ -3466,8 +4252,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KES : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="KES" /> class.
+        /// </summary>
         private static readonly KES s_Instance = new KES();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KES" /> class.
+        /// </summary>
         internal KES() : base("KES") { }
 
         /// <summary>
@@ -3492,8 +4284,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KGS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="KGS" /> class.
+        /// </summary>
         private static readonly KGS s_Instance = new KGS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KGS" /> class.
+        /// </summary>
         internal KGS() : base("KGS") { }
 
         /// <summary>
@@ -3518,8 +4316,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KHR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="KHR" /> class.
+        /// </summary>
         private static readonly KHR s_Instance = new KHR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KHR" /> class.
+        /// </summary>
         internal KHR() : base("KHR") { }
 
         /// <summary>
@@ -3544,8 +4348,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KMF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="KMF" /> class.
+        /// </summary>
         private static readonly KMF s_Instance = new KMF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KMF" /> class.
+        /// </summary>
         internal KMF() : base("KMF") { }
 
         /// <summary>
@@ -3570,8 +4380,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KPW : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="KPW" /> class.
+        /// </summary>
         private static readonly KPW s_Instance = new KPW();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KPW" /> class.
+        /// </summary>
         internal KPW() : base("KPW") { }
 
         /// <summary>
@@ -3596,8 +4412,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KRW : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="KRW" /> class.
+        /// </summary>
         private static readonly KRW s_Instance = new KRW();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KRW" /> class.
+        /// </summary>
         internal KRW() : base("KRW") { }
 
         /// <summary>
@@ -3622,8 +4444,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KWD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="KWD" /> class.
+        /// </summary>
         private static readonly KWD s_Instance = new KWD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KWD" /> class.
+        /// </summary>
         internal KWD() : base("KWD") { }
 
         /// <summary>
@@ -3648,8 +4476,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KYD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="KYD" /> class.
+        /// </summary>
         private static readonly KYD s_Instance = new KYD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KYD" /> class.
+        /// </summary>
         internal KYD() : base("KYD") { }
 
         /// <summary>
@@ -3674,8 +4508,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KZT : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="KZT" /> class.
+        /// </summary>
         private static readonly KZT s_Instance = new KZT();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KZT" /> class.
+        /// </summary>
         internal KZT() : base("KZT") { }
 
         /// <summary>
@@ -3700,8 +4540,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAJ : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LAJ" /> class.
+        /// </summary>
         private static readonly LAJ s_Instance = new LAJ();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LAJ" /> class.
+        /// </summary>
         internal LAJ() : base("LAJ") { }
 
         /// <summary>
@@ -3726,8 +4572,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LAK" /> class.
+        /// </summary>
         private static readonly LAK s_Instance = new LAK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LAK" /> class.
+        /// </summary>
         internal LAK() : base("LAK") { }
 
         /// <summary>
@@ -3752,8 +4604,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LBP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LBP" /> class.
+        /// </summary>
         private static readonly LBP s_Instance = new LBP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LBP" /> class.
+        /// </summary>
         internal LBP() : base("LBP") { }
 
         /// <summary>
@@ -3778,8 +4636,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LKR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LKR" /> class.
+        /// </summary>
         private static readonly LKR s_Instance = new LKR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LKR" /> class.
+        /// </summary>
         internal LKR() : base("LKR") { }
 
         /// <summary>
@@ -3804,8 +4668,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LRD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LRD" /> class.
+        /// </summary>
         private static readonly LRD s_Instance = new LRD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LRD" /> class.
+        /// </summary>
         internal LRD() : base("LRD") { }
 
         /// <summary>
@@ -3830,8 +4700,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LSL" /> class.
+        /// </summary>
         private static readonly LSL s_Instance = new LSL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LSL" /> class.
+        /// </summary>
         internal LSL() : base("LSL") { }
 
         /// <summary>
@@ -3856,8 +4732,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSM : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LSM" /> class.
+        /// </summary>
         private static readonly LSM s_Instance = new LSM();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LSM" /> class.
+        /// </summary>
         internal LSM() : base("LSM") { }
 
         /// <summary>
@@ -3882,8 +4764,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LTL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LTL" /> class.
+        /// </summary>
         private static readonly LTL s_Instance = new LTL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LTL" /> class.
+        /// </summary>
         internal LTL() : base("LTL") { }
 
         /// <summary>
@@ -3908,8 +4796,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LTT : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LTT" /> class.
+        /// </summary>
         private static readonly LTT s_Instance = new LTT();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LTT" /> class.
+        /// </summary>
         internal LTT() : base("LTT") { }
 
         /// <summary>
@@ -3934,8 +4828,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LUC" /> class.
+        /// </summary>
         private static readonly LUC s_Instance = new LUC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LUC" /> class.
+        /// </summary>
         internal LUC() : base("LUC") { }
 
         /// <summary>
@@ -3960,8 +4860,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LUF" /> class.
+        /// </summary>
         private static readonly LUF s_Instance = new LUF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LUF" /> class.
+        /// </summary>
         internal LUF() : base("LUF") { }
 
         /// <summary>
@@ -3986,8 +4892,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LUL" /> class.
+        /// </summary>
         private static readonly LUL s_Instance = new LUL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LUL" /> class.
+        /// </summary>
         internal LUL() : base("LUL") { }
 
         /// <summary>
@@ -4012,8 +4924,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LVL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LVL" /> class.
+        /// </summary>
         private static readonly LVL s_Instance = new LVL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LVL" /> class.
+        /// </summary>
         internal LVL() : base("LVL") { }
 
         /// <summary>
@@ -4038,8 +4956,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LVR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LVR" /> class.
+        /// </summary>
         private static readonly LVR s_Instance = new LVR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LVR" /> class.
+        /// </summary>
         internal LVR() : base("LVR") { }
 
         /// <summary>
@@ -4064,8 +4988,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LYD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="LYD" /> class.
+        /// </summary>
         private static readonly LYD s_Instance = new LYD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LYD" /> class.
+        /// </summary>
         internal LYD() : base("LYD") { }
 
         /// <summary>
@@ -4090,8 +5020,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MAD" /> class.
+        /// </summary>
         private static readonly MAD s_Instance = new MAD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MAD" /> class.
+        /// </summary>
         internal MAD() : base("MAD") { }
 
         /// <summary>
@@ -4116,8 +5052,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MAF" /> class.
+        /// </summary>
         private static readonly MAF s_Instance = new MAF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MAF" /> class.
+        /// </summary>
         internal MAF() : base("MAF") { }
 
         /// <summary>
@@ -4142,8 +5084,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MDL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MDL" /> class.
+        /// </summary>
         private static readonly MDL s_Instance = new MDL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MDL" /> class.
+        /// </summary>
         internal MDL() : base("MDL") { }
 
         /// <summary>
@@ -4168,8 +5116,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGA : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MGA" /> class.
+        /// </summary>
         private static readonly MGA s_Instance = new MGA();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MGA" /> class.
+        /// </summary>
         internal MGA() : base("MGA") { }
 
         /// <summary>
@@ -4194,8 +5148,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MGF" /> class.
+        /// </summary>
         private static readonly MGF s_Instance = new MGF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MGF" /> class.
+        /// </summary>
         internal MGF() : base("MGF") { }
 
         /// <summary>
@@ -4220,8 +5180,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MKD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MKD" /> class.
+        /// </summary>
         private static readonly MKD s_Instance = new MKD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MKD" /> class.
+        /// </summary>
         internal MKD() : base("MKD") { }
 
         /// <summary>
@@ -4246,8 +5212,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MLF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MLF" /> class.
+        /// </summary>
         private static readonly MLF s_Instance = new MLF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MLF" /> class.
+        /// </summary>
         internal MLF() : base("MLF") { }
 
         /// <summary>
@@ -4272,8 +5244,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MMK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MMK" /> class.
+        /// </summary>
         private static readonly MMK s_Instance = new MMK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MMK" /> class.
+        /// </summary>
         internal MMK() : base("MMK") { }
 
         /// <summary>
@@ -4298,8 +5276,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MNT : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MNT" /> class.
+        /// </summary>
         private static readonly MNT s_Instance = new MNT();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MNT" /> class.
+        /// </summary>
         internal MNT() : base("MNT") { }
 
         /// <summary>
@@ -4324,8 +5308,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MOP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MOP" /> class.
+        /// </summary>
         private static readonly MOP s_Instance = new MOP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MOP" /> class.
+        /// </summary>
         internal MOP() : base("MOP") { }
 
         /// <summary>
@@ -4350,8 +5340,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MRO : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MRO" /> class.
+        /// </summary>
         private static readonly MRO s_Instance = new MRO();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MRO" /> class.
+        /// </summary>
         internal MRO() : base("MRO") { }
 
         /// <summary>
@@ -4376,8 +5372,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MTL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MTL" /> class.
+        /// </summary>
         private static readonly MTL s_Instance = new MTL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MTL" /> class.
+        /// </summary>
         internal MTL() : base("MTL") { }
 
         /// <summary>
@@ -4402,8 +5404,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MTP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MTP" /> class.
+        /// </summary>
         private static readonly MTP s_Instance = new MTP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MTP" /> class.
+        /// </summary>
         internal MTP() : base("MTP") { }
 
         /// <summary>
@@ -4428,8 +5436,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MUR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MUR" /> class.
+        /// </summary>
         private static readonly MUR s_Instance = new MUR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MUR" /> class.
+        /// </summary>
         internal MUR() : base("MUR") { }
 
         /// <summary>
@@ -4454,8 +5468,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVQ : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MVQ" /> class.
+        /// </summary>
         private static readonly MVQ s_Instance = new MVQ();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MVQ" /> class.
+        /// </summary>
         internal MVQ() : base("MVQ") { }
 
         /// <summary>
@@ -4480,8 +5500,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MVR" /> class.
+        /// </summary>
         private static readonly MVR s_Instance = new MVR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MVR" /> class.
+        /// </summary>
         internal MVR() : base("MVR") { }
 
         /// <summary>
@@ -4506,8 +5532,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MWK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MWK" /> class.
+        /// </summary>
         private static readonly MWK s_Instance = new MWK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MWK" /> class.
+        /// </summary>
         internal MWK() : base("MWK") { }
 
         /// <summary>
@@ -4532,8 +5564,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MXN" /> class.
+        /// </summary>
         private static readonly MXN s_Instance = new MXN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MXN" /> class.
+        /// </summary>
         internal MXN() : base("MXN") { }
 
         /// <summary>
@@ -4558,8 +5596,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MXP" /> class.
+        /// </summary>
         private static readonly MXP s_Instance = new MXP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MXP" /> class.
+        /// </summary>
         internal MXP() : base("MXP") { }
 
         /// <summary>
@@ -4584,8 +5628,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXV : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MXV" /> class.
+        /// </summary>
         private static readonly MXV s_Instance = new MXV();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MXV" /> class.
+        /// </summary>
         internal MXV() : base("MXV") { }
 
         /// <summary>
@@ -4610,8 +5660,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MYR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MYR" /> class.
+        /// </summary>
         private static readonly MYR s_Instance = new MYR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MYR" /> class.
+        /// </summary>
         internal MYR() : base("MYR") { }
 
         /// <summary>
@@ -4636,8 +5692,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MZE" /> class.
+        /// </summary>
         private static readonly MZE s_Instance = new MZE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MZE" /> class.
+        /// </summary>
         internal MZE() : base("MZE") { }
 
         /// <summary>
@@ -4662,8 +5724,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZM : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MZM" /> class.
+        /// </summary>
         private static readonly MZM s_Instance = new MZM();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MZM" /> class.
+        /// </summary>
         internal MZM() : base("MZM") { }
 
         /// <summary>
@@ -4688,8 +5756,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="MZN" /> class.
+        /// </summary>
         private static readonly MZN s_Instance = new MZN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MZN" /> class.
+        /// </summary>
         internal MZN() : base("MZN") { }
 
         /// <summary>
@@ -4714,8 +5788,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NAD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="NAD" /> class.
+        /// </summary>
         private static readonly NAD s_Instance = new NAD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NAD" /> class.
+        /// </summary>
         internal NAD() : base("NAD") { }
 
         /// <summary>
@@ -4740,8 +5820,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NGN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="NGN" /> class.
+        /// </summary>
         private static readonly NGN s_Instance = new NGN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NGN" /> class.
+        /// </summary>
         internal NGN() : base("NGN") { }
 
         /// <summary>
@@ -4766,8 +5852,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="NIC" /> class.
+        /// </summary>
         private static readonly NIC s_Instance = new NIC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NIC" /> class.
+        /// </summary>
         internal NIC() : base("NIC") { }
 
         /// <summary>
@@ -4792,8 +5884,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIO : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="NIO" /> class.
+        /// </summary>
         private static readonly NIO s_Instance = new NIO();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NIO" /> class.
+        /// </summary>
         internal NIO() : base("NIO") { }
 
         /// <summary>
@@ -4818,8 +5916,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NLG : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="NLG" /> class.
+        /// </summary>
         private static readonly NLG s_Instance = new NLG();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NLG" /> class.
+        /// </summary>
         internal NLG() : base("NLG") { }
 
         /// <summary>
@@ -4844,8 +5948,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NOK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="NOK" /> class.
+        /// </summary>
         private static readonly NOK s_Instance = new NOK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NOK" /> class.
+        /// </summary>
         internal NOK() : base("NOK") { }
 
         /// <summary>
@@ -4870,8 +5980,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NPR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="NPR" /> class.
+        /// </summary>
         private static readonly NPR s_Instance = new NPR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NPR" /> class.
+        /// </summary>
         internal NPR() : base("NPR") { }
 
         /// <summary>
@@ -4896,8 +6012,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NZD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="NZD" /> class.
+        /// </summary>
         private static readonly NZD s_Instance = new NZD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NZD" /> class.
+        /// </summary>
         internal NZD() : base("NZD") { }
 
         /// <summary>
@@ -4922,8 +6044,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class OMR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="OMR" /> class.
+        /// </summary>
         private static readonly OMR s_Instance = new OMR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OMR" /> class.
+        /// </summary>
         internal OMR() : base("OMR") { }
 
         /// <summary>
@@ -4948,8 +6076,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PAB : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PAB" /> class.
+        /// </summary>
         private static readonly PAB s_Instance = new PAB();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PAB" /> class.
+        /// </summary>
         internal PAB() : base("PAB") { }
 
         /// <summary>
@@ -4974,8 +6108,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEH : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PEH" /> class.
+        /// </summary>
         private static readonly PEH s_Instance = new PEH();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PEH" /> class.
+        /// </summary>
         internal PEH() : base("PEH") { }
 
         /// <summary>
@@ -5000,8 +6140,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEI : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PEI" /> class.
+        /// </summary>
         private static readonly PEI s_Instance = new PEI();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PEI" /> class.
+        /// </summary>
         internal PEI() : base("PEI") { }
 
         /// <summary>
@@ -5026,8 +6172,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PEN" /> class.
+        /// </summary>
         private static readonly PEN s_Instance = new PEN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PEN" /> class.
+        /// </summary>
         internal PEN() : base("PEN") { }
 
         /// <summary>
@@ -5052,8 +6204,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PES : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PES" /> class.
+        /// </summary>
         private static readonly PES s_Instance = new PES();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PES" /> class.
+        /// </summary>
         internal PES() : base("PES") { }
 
         /// <summary>
@@ -5078,8 +6236,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PGK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PGK" /> class.
+        /// </summary>
         private static readonly PGK s_Instance = new PGK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PGK" /> class.
+        /// </summary>
         internal PGK() : base("PGK") { }
 
         /// <summary>
@@ -5104,8 +6268,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PHP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PHP" /> class.
+        /// </summary>
         private static readonly PHP s_Instance = new PHP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PHP" /> class.
+        /// </summary>
         internal PHP() : base("PHP") { }
 
         /// <summary>
@@ -5130,8 +6300,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PKR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PKR" /> class.
+        /// </summary>
         private static readonly PKR s_Instance = new PKR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PKR" /> class.
+        /// </summary>
         internal PKR() : base("PKR") { }
 
         /// <summary>
@@ -5156,8 +6332,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PLN" /> class.
+        /// </summary>
         private static readonly PLN s_Instance = new PLN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PLN" /> class.
+        /// </summary>
         internal PLN() : base("PLN") { }
 
         /// <summary>
@@ -5182,8 +6364,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLZ : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PLZ" /> class.
+        /// </summary>
         private static readonly PLZ s_Instance = new PLZ();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PLZ" /> class.
+        /// </summary>
         internal PLZ() : base("PLZ") { }
 
         /// <summary>
@@ -5208,8 +6396,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PTE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PTE" /> class.
+        /// </summary>
         private static readonly PTE s_Instance = new PTE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PTE" /> class.
+        /// </summary>
         internal PTE() : base("PTE") { }
 
         /// <summary>
@@ -5234,8 +6428,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PYG : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="PYG" /> class.
+        /// </summary>
         private static readonly PYG s_Instance = new PYG();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PYG" /> class.
+        /// </summary>
         internal PYG() : base("PYG") { }
 
         /// <summary>
@@ -5260,8 +6460,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class QAR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="QAR" /> class.
+        /// </summary>
         private static readonly QAR s_Instance = new QAR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QAR" /> class.
+        /// </summary>
         internal QAR() : base("QAR") { }
 
         /// <summary>
@@ -5286,8 +6492,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RHD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="RHD" /> class.
+        /// </summary>
         private static readonly RHD s_Instance = new RHD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RHD" /> class.
+        /// </summary>
         internal RHD() : base("RHD") { }
 
         /// <summary>
@@ -5312,8 +6524,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ROK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ROK" /> class.
+        /// </summary>
         private static readonly ROK s_Instance = new ROK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ROK" /> class.
+        /// </summary>
         internal ROK() : base("ROK") { }
 
         /// <summary>
@@ -5338,8 +6556,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ROL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ROL" /> class.
+        /// </summary>
         private static readonly ROL s_Instance = new ROL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ROL" /> class.
+        /// </summary>
         internal ROL() : base("ROL") { }
 
         /// <summary>
@@ -5364,8 +6588,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RON : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="RON" /> class.
+        /// </summary>
         private static readonly RON s_Instance = new RON();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RON" /> class.
+        /// </summary>
         internal RON() : base("RON") { }
 
         /// <summary>
@@ -5390,8 +6620,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RSD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="RSD" /> class.
+        /// </summary>
         private static readonly RSD s_Instance = new RSD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RSD" /> class.
+        /// </summary>
         internal RSD() : base("RSD") { }
 
         /// <summary>
@@ -5416,8 +6652,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUB : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="RUB" /> class.
+        /// </summary>
         private static readonly RUB s_Instance = new RUB();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RUB" /> class.
+        /// </summary>
         internal RUB() : base("RUB") { }
 
         /// <summary>
@@ -5442,8 +6684,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="RUR" /> class.
+        /// </summary>
         private static readonly RUR s_Instance = new RUR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RUR" /> class.
+        /// </summary>
         internal RUR() : base("RUR") { }
 
         /// <summary>
@@ -5468,8 +6716,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RWF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="RWF" /> class.
+        /// </summary>
         private static readonly RWF s_Instance = new RWF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RWF" /> class.
+        /// </summary>
         internal RWF() : base("RWF") { }
 
         /// <summary>
@@ -5494,8 +6748,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SAR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SAR" /> class.
+        /// </summary>
         private static readonly SAR s_Instance = new SAR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SAR" /> class.
+        /// </summary>
         internal SAR() : base("SAR") { }
 
         /// <summary>
@@ -5520,8 +6780,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SBD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SBD" /> class.
+        /// </summary>
         private static readonly SBD s_Instance = new SBD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SBD" /> class.
+        /// </summary>
         internal SBD() : base("SBD") { }
 
         /// <summary>
@@ -5546,8 +6812,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SCR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SCR" /> class.
+        /// </summary>
         private static readonly SCR s_Instance = new SCR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SCR" /> class.
+        /// </summary>
         internal SCR() : base("SCR") { }
 
         /// <summary>
@@ -5572,8 +6844,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SDD" /> class.
+        /// </summary>
         private static readonly SDD s_Instance = new SDD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SDD" /> class.
+        /// </summary>
         internal SDD() : base("SDD") { }
 
         /// <summary>
@@ -5598,8 +6876,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDG : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SDG" /> class.
+        /// </summary>
         private static readonly SDG s_Instance = new SDG();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SDG" /> class.
+        /// </summary>
         internal SDG() : base("SDG") { }
 
         /// <summary>
@@ -5624,8 +6908,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SDP" /> class.
+        /// </summary>
         private static readonly SDP s_Instance = new SDP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SDP" /> class.
+        /// </summary>
         internal SDP() : base("SDP") { }
 
         /// <summary>
@@ -5650,8 +6940,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SEK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SEK" /> class.
+        /// </summary>
         private static readonly SEK s_Instance = new SEK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SEK" /> class.
+        /// </summary>
         internal SEK() : base("SEK") { }
 
         /// <summary>
@@ -5676,8 +6972,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SGD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SGD" /> class.
+        /// </summary>
         private static readonly SGD s_Instance = new SGD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SGD" /> class.
+        /// </summary>
         internal SGD() : base("SGD") { }
 
         /// <summary>
@@ -5702,8 +7004,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SHP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SHP" /> class.
+        /// </summary>
         private static readonly SHP s_Instance = new SHP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SHP" /> class.
+        /// </summary>
         internal SHP() : base("SHP") { }
 
         /// <summary>
@@ -5728,8 +7036,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SIT : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SIT" /> class.
+        /// </summary>
         private static readonly SIT s_Instance = new SIT();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SIT" /> class.
+        /// </summary>
         internal SIT() : base("SIT") { }
 
         /// <summary>
@@ -5754,8 +7068,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SKK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SKK" /> class.
+        /// </summary>
         private static readonly SKK s_Instance = new SKK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SKK" /> class.
+        /// </summary>
         internal SKK() : base("SKK") { }
 
         /// <summary>
@@ -5780,8 +7100,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SLL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SLL" /> class.
+        /// </summary>
         private static readonly SLL s_Instance = new SLL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SLL" /> class.
+        /// </summary>
         internal SLL() : base("SLL") { }
 
         /// <summary>
@@ -5806,8 +7132,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SOS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SOS" /> class.
+        /// </summary>
         private static readonly SOS s_Instance = new SOS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SOS" /> class.
+        /// </summary>
         internal SOS() : base("SOS") { }
 
         /// <summary>
@@ -5832,8 +7164,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SRD" /> class.
+        /// </summary>
         private static readonly SRD s_Instance = new SRD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SRD" /> class.
+        /// </summary>
         internal SRD() : base("SRD") { }
 
         /// <summary>
@@ -5858,8 +7196,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRG : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SRG" /> class.
+        /// </summary>
         private static readonly SRG s_Instance = new SRG();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SRG" /> class.
+        /// </summary>
         internal SRG() : base("SRG") { }
 
         /// <summary>
@@ -5884,8 +7228,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SSP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SSP" /> class.
+        /// </summary>
         private static readonly SSP s_Instance = new SSP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SSP" /> class.
+        /// </summary>
         internal SSP() : base("SSP") { }
 
         /// <summary>
@@ -5910,8 +7260,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class STD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="STD" /> class.
+        /// </summary>
         private static readonly STD s_Instance = new STD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="STD" /> class.
+        /// </summary>
         internal STD() : base("STD") { }
 
         /// <summary>
@@ -5936,8 +7292,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SUR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SUR" /> class.
+        /// </summary>
         private static readonly SUR s_Instance = new SUR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SUR" /> class.
+        /// </summary>
         internal SUR() : base("SUR") { }
 
         /// <summary>
@@ -5962,8 +7324,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SVC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SVC" /> class.
+        /// </summary>
         private static readonly SVC s_Instance = new SVC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SVC" /> class.
+        /// </summary>
         internal SVC() : base("SVC") { }
 
         /// <summary>
@@ -5988,8 +7356,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SYP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SYP" /> class.
+        /// </summary>
         private static readonly SYP s_Instance = new SYP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SYP" /> class.
+        /// </summary>
         internal SYP() : base("SYP") { }
 
         /// <summary>
@@ -6014,8 +7388,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SZL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="SZL" /> class.
+        /// </summary>
         private static readonly SZL s_Instance = new SZL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SZL" /> class.
+        /// </summary>
         internal SZL() : base("SZL") { }
 
         /// <summary>
@@ -6040,8 +7420,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class THB : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="THB" /> class.
+        /// </summary>
         private static readonly THB s_Instance = new THB();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="THB" /> class.
+        /// </summary>
         internal THB() : base("THB") { }
 
         /// <summary>
@@ -6066,8 +7452,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TJR" /> class.
+        /// </summary>
         private static readonly TJR s_Instance = new TJR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TJR" /> class.
+        /// </summary>
         internal TJR() : base("TJR") { }
 
         /// <summary>
@@ -6092,8 +7484,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TJS" /> class.
+        /// </summary>
         private static readonly TJS s_Instance = new TJS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TJS" /> class.
+        /// </summary>
         internal TJS() : base("TJS") { }
 
         /// <summary>
@@ -6118,8 +7516,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMM : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TMM" /> class.
+        /// </summary>
         private static readonly TMM s_Instance = new TMM();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TMM" /> class.
+        /// </summary>
         internal TMM() : base("TMM") { }
 
         /// <summary>
@@ -6144,8 +7548,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMT : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TMT" /> class.
+        /// </summary>
         private static readonly TMT s_Instance = new TMT();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TMT" /> class.
+        /// </summary>
         internal TMT() : base("TMT") { }
 
         /// <summary>
@@ -6170,8 +7580,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TND : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TND" /> class.
+        /// </summary>
         private static readonly TND s_Instance = new TND();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TND" /> class.
+        /// </summary>
         internal TND() : base("TND") { }
 
         /// <summary>
@@ -6196,8 +7612,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TOP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TOP" /> class.
+        /// </summary>
         private static readonly TOP s_Instance = new TOP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TOP" /> class.
+        /// </summary>
         internal TOP() : base("TOP") { }
 
         /// <summary>
@@ -6222,8 +7644,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TPE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TPE" /> class.
+        /// </summary>
         private static readonly TPE s_Instance = new TPE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TPE" /> class.
+        /// </summary>
         internal TPE() : base("TPE") { }
 
         /// <summary>
@@ -6248,8 +7676,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TRL" /> class.
+        /// </summary>
         private static readonly TRL s_Instance = new TRL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TRL" /> class.
+        /// </summary>
         internal TRL() : base("TRL") { }
 
         /// <summary>
@@ -6274,8 +7708,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRY : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TRY" /> class.
+        /// </summary>
         private static readonly TRY s_Instance = new TRY();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TRY" /> class.
+        /// </summary>
         internal TRY() : base("TRY") { }
 
         /// <summary>
@@ -6300,8 +7740,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TTD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TTD" /> class.
+        /// </summary>
         private static readonly TTD s_Instance = new TTD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TTD" /> class.
+        /// </summary>
         internal TTD() : base("TTD") { }
 
         /// <summary>
@@ -6326,8 +7772,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TWD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TWD" /> class.
+        /// </summary>
         private static readonly TWD s_Instance = new TWD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TWD" /> class.
+        /// </summary>
         internal TWD() : base("TWD") { }
 
         /// <summary>
@@ -6352,8 +7804,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TZS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="TZS" /> class.
+        /// </summary>
         private static readonly TZS s_Instance = new TZS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TZS" /> class.
+        /// </summary>
         internal TZS() : base("TZS") { }
 
         /// <summary>
@@ -6378,8 +7836,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAH : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="UAH" /> class.
+        /// </summary>
         private static readonly UAH s_Instance = new UAH();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UAH" /> class.
+        /// </summary>
         internal UAH() : base("UAH") { }
 
         /// <summary>
@@ -6404,8 +7868,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="UAK" /> class.
+        /// </summary>
         private static readonly UAK s_Instance = new UAK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UAK" /> class.
+        /// </summary>
         internal UAK() : base("UAK") { }
 
         /// <summary>
@@ -6430,8 +7900,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="UGS" /> class.
+        /// </summary>
         private static readonly UGS s_Instance = new UGS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UGS" /> class.
+        /// </summary>
         internal UGS() : base("UGS") { }
 
         /// <summary>
@@ -6456,8 +7932,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGW : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="UGW" /> class.
+        /// </summary>
         private static readonly UGW s_Instance = new UGW();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UGW" /> class.
+        /// </summary>
         internal UGW() : base("UGW") { }
 
         /// <summary>
@@ -6482,8 +7964,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGX : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="UGX" /> class.
+        /// </summary>
         private static readonly UGX s_Instance = new UGX();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UGX" /> class.
+        /// </summary>
         internal UGX() : base("UGX") { }
 
         /// <summary>
@@ -6508,8 +7996,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="USD" /> class.
+        /// </summary>
         private static readonly USD s_Instance = new USD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="USD" /> class.
+        /// </summary>
         internal USD() : base("USD") { }
 
         /// <summary>
@@ -6534,8 +8028,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="USN" /> class.
+        /// </summary>
         private static readonly USN s_Instance = new USN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="USN" /> class.
+        /// </summary>
         internal USN() : base("USN") { }
 
         /// <summary>
@@ -6560,8 +8060,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="USS" /> class.
+        /// </summary>
         private static readonly USS s_Instance = new USS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="USS" /> class.
+        /// </summary>
         internal USS() : base("USS") { }
 
         /// <summary>
@@ -6586,8 +8092,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYI : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="UYI" /> class.
+        /// </summary>
         private static readonly UYI s_Instance = new UYI();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UYI" /> class.
+        /// </summary>
         internal UYI() : base("UYI") { }
 
         /// <summary>
@@ -6612,8 +8124,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="UYN" /> class.
+        /// </summary>
         private static readonly UYN s_Instance = new UYN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UYN" /> class.
+        /// </summary>
         internal UYN() : base("UYN") { }
 
         /// <summary>
@@ -6638,8 +8156,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYP : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="UYP" /> class.
+        /// </summary>
         private static readonly UYP s_Instance = new UYP();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UYP" /> class.
+        /// </summary>
         internal UYP() : base("UYP") { }
 
         /// <summary>
@@ -6664,8 +8188,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYU : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="UYU" /> class.
+        /// </summary>
         private static readonly UYU s_Instance = new UYU();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UYU" /> class.
+        /// </summary>
         internal UYU() : base("UYU") { }
 
         /// <summary>
@@ -6690,8 +8220,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UZS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="UZS" /> class.
+        /// </summary>
         private static readonly UZS s_Instance = new UZS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UZS" /> class.
+        /// </summary>
         internal UZS() : base("UZS") { }
 
         /// <summary>
@@ -6716,8 +8252,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEB : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="VEB" /> class.
+        /// </summary>
         private static readonly VEB s_Instance = new VEB();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VEB" /> class.
+        /// </summary>
         internal VEB() : base("VEB") { }
 
         /// <summary>
@@ -6742,8 +8284,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="VEF" /> class.
+        /// </summary>
         private static readonly VEF s_Instance = new VEF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VEF" /> class.
+        /// </summary>
         internal VEF() : base("VEF") { }
 
         /// <summary>
@@ -6768,8 +8316,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VNC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="VNC" /> class.
+        /// </summary>
         private static readonly VNC s_Instance = new VNC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VNC" /> class.
+        /// </summary>
         internal VNC() : base("VNC") { }
 
         /// <summary>
@@ -6794,8 +8348,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VND : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="VND" /> class.
+        /// </summary>
         private static readonly VND s_Instance = new VND();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VND" /> class.
+        /// </summary>
         internal VND() : base("VND") { }
 
         /// <summary>
@@ -6820,8 +8380,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VUV : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="VUV" /> class.
+        /// </summary>
         private static readonly VUV s_Instance = new VUV();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VUV" /> class.
+        /// </summary>
         internal VUV() : base("VUV") { }
 
         /// <summary>
@@ -6846,8 +8412,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class WST : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="WST" /> class.
+        /// </summary>
         private static readonly WST s_Instance = new WST();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WST" /> class.
+        /// </summary>
         internal WST() : base("WST") { }
 
         /// <summary>
@@ -6872,8 +8444,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XAF" /> class.
+        /// </summary>
         private static readonly XAF s_Instance = new XAF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XAF" /> class.
+        /// </summary>
         internal XAF() : base("XAF") { }
 
         /// <summary>
@@ -6898,8 +8476,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAG : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XAG" /> class.
+        /// </summary>
         private static readonly XAG s_Instance = new XAG();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XAG" /> class.
+        /// </summary>
         internal XAG() : base("XAG") { }
 
         /// <summary>
@@ -6924,8 +8508,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAU : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XAU" /> class.
+        /// </summary>
         private static readonly XAU s_Instance = new XAU();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XAU" /> class.
+        /// </summary>
         internal XAU() : base("XAU") { }
 
         /// <summary>
@@ -6950,8 +8540,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBA : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XBA" /> class.
+        /// </summary>
         private static readonly XBA s_Instance = new XBA();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XBA" /> class.
+        /// </summary>
         internal XBA() : base("XBA") { }
 
         /// <summary>
@@ -6976,8 +8572,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBB : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XBB" /> class.
+        /// </summary>
         private static readonly XBB s_Instance = new XBB();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XBB" /> class.
+        /// </summary>
         internal XBB() : base("XBB") { }
 
         /// <summary>
@@ -7002,8 +8604,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XBC" /> class.
+        /// </summary>
         private static readonly XBC s_Instance = new XBC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XBC" /> class.
+        /// </summary>
         internal XBC() : base("XBC") { }
 
         /// <summary>
@@ -7028,8 +8636,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XBD" /> class.
+        /// </summary>
         private static readonly XBD s_Instance = new XBD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XBD" /> class.
+        /// </summary>
         internal XBD() : base("XBD") { }
 
         /// <summary>
@@ -7054,8 +8668,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XCD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XCD" /> class.
+        /// </summary>
         private static readonly XCD s_Instance = new XCD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XCD" /> class.
+        /// </summary>
         internal XCD() : base("XCD") { }
 
         /// <summary>
@@ -7080,8 +8700,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XDR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XDR" /> class.
+        /// </summary>
         private static readonly XDR s_Instance = new XDR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XDR" /> class.
+        /// </summary>
         internal XDR() : base("XDR") { }
 
         /// <summary>
@@ -7106,8 +8732,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XEU : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XEU" /> class.
+        /// </summary>
         private static readonly XEU s_Instance = new XEU();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XEU" /> class.
+        /// </summary>
         internal XEU() : base("XEU") { }
 
         /// <summary>
@@ -7132,8 +8764,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XFO : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XFO" /> class.
+        /// </summary>
         private static readonly XFO s_Instance = new XFO();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XFO" /> class.
+        /// </summary>
         internal XFO() : base("XFO") { }
 
         /// <summary>
@@ -7158,8 +8796,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XFU : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XFU" /> class.
+        /// </summary>
         private static readonly XFU s_Instance = new XFU();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XFU" /> class.
+        /// </summary>
         internal XFU() : base("XFU") { }
 
         /// <summary>
@@ -7184,8 +8828,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XOF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XOF" /> class.
+        /// </summary>
         private static readonly XOF s_Instance = new XOF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XOF" /> class.
+        /// </summary>
         internal XOF() : base("XOF") { }
 
         /// <summary>
@@ -7210,8 +8860,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XPD" /> class.
+        /// </summary>
         private static readonly XPD s_Instance = new XPD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XPD" /> class.
+        /// </summary>
         internal XPD() : base("XPD") { }
 
         /// <summary>
@@ -7236,8 +8892,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPF : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XPF" /> class.
+        /// </summary>
         private static readonly XPF s_Instance = new XPF();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XPF" /> class.
+        /// </summary>
         internal XPF() : base("XPF") { }
 
         /// <summary>
@@ -7262,8 +8924,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPT : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XPT" /> class.
+        /// </summary>
         private static readonly XPT s_Instance = new XPT();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XPT" /> class.
+        /// </summary>
         internal XPT() : base("XPT") { }
 
         /// <summary>
@@ -7288,8 +8956,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XRE : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XRE" /> class.
+        /// </summary>
         private static readonly XRE s_Instance = new XRE();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XRE" /> class.
+        /// </summary>
         internal XRE() : base("XRE") { }
 
         /// <summary>
@@ -7314,8 +8988,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XSU : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XSU" /> class.
+        /// </summary>
         private static readonly XSU s_Instance = new XSU();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XSU" /> class.
+        /// </summary>
         internal XSU() : base("XSU") { }
 
         /// <summary>
@@ -7340,8 +9020,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XTS : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XTS" /> class.
+        /// </summary>
         private static readonly XTS s_Instance = new XTS();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XTS" /> class.
+        /// </summary>
         internal XTS() : base("XTS") { }
 
         /// <summary>
@@ -7366,8 +9052,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XUA : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XUA" /> class.
+        /// </summary>
         private static readonly XUA s_Instance = new XUA();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XUA" /> class.
+        /// </summary>
         internal XUA() : base("XUA") { }
 
         /// <summary>
@@ -7392,8 +9084,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XXX : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="XXX" /> class.
+        /// </summary>
         private static readonly XXX s_Instance = new XXX();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XXX" /> class.
+        /// </summary>
         internal XXX() : base("XXX") { }
 
         /// <summary>
@@ -7418,8 +9116,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YDD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="YDD" /> class.
+        /// </summary>
         private static readonly YDD s_Instance = new YDD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="YDD" /> class.
+        /// </summary>
         internal YDD() : base("YDD") { }
 
         /// <summary>
@@ -7444,8 +9148,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YER : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="YER" /> class.
+        /// </summary>
         private static readonly YER s_Instance = new YER();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="YER" /> class.
+        /// </summary>
         internal YER() : base("YER") { }
 
         /// <summary>
@@ -7470,8 +9180,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="YUD" /> class.
+        /// </summary>
         private static readonly YUD s_Instance = new YUD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="YUD" /> class.
+        /// </summary>
         internal YUD() : base("YUD") { }
 
         /// <summary>
@@ -7496,8 +9212,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUM : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="YUM" /> class.
+        /// </summary>
         private static readonly YUM s_Instance = new YUM();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="YUM" /> class.
+        /// </summary>
         internal YUM() : base("YUM") { }
 
         /// <summary>
@@ -7522,8 +9244,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="YUN" /> class.
+        /// </summary>
         private static readonly YUN s_Instance = new YUN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="YUN" /> class.
+        /// </summary>
         internal YUN() : base("YUN") { }
 
         /// <summary>
@@ -7548,8 +9276,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZAL" /> class.
+        /// </summary>
         private static readonly ZAL s_Instance = new ZAL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZAL" /> class.
+        /// </summary>
         internal ZAL() : base("ZAL") { }
 
         /// <summary>
@@ -7574,8 +9308,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZAR" /> class.
+        /// </summary>
         private static readonly ZAR s_Instance = new ZAR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZAR" /> class.
+        /// </summary>
         internal ZAR() : base("ZAR") { }
 
         /// <summary>
@@ -7600,8 +9340,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMK : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZMK" /> class.
+        /// </summary>
         private static readonly ZMK s_Instance = new ZMK();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZMK" /> class.
+        /// </summary>
         internal ZMK() : base("ZMK") { }
 
         /// <summary>
@@ -7626,8 +9372,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMW : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZMW" /> class.
+        /// </summary>
         private static readonly ZMW s_Instance = new ZMW();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZMW" /> class.
+        /// </summary>
         internal ZMW() : base("ZMW") { }
 
         /// <summary>
@@ -7652,8 +9404,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZRN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZRN" /> class.
+        /// </summary>
         private static readonly ZRN s_Instance = new ZRN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZRN" /> class.
+        /// </summary>
         internal ZRN() : base("ZRN") { }
 
         /// <summary>
@@ -7678,8 +9436,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZRZ : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZRZ" /> class.
+        /// </summary>
         private static readonly ZRZ s_Instance = new ZRZ();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZRZ" /> class.
+        /// </summary>
         internal ZRZ() : base("ZRZ") { }
 
         /// <summary>
@@ -7704,8 +9468,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWC : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZWC" /> class.
+        /// </summary>
         private static readonly ZWC s_Instance = new ZWC();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZWC" /> class.
+        /// </summary>
         internal ZWC() : base("ZWC") { }
 
         /// <summary>
@@ -7730,8 +9500,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWD : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZWD" /> class.
+        /// </summary>
         private static readonly ZWD s_Instance = new ZWD();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZWD" /> class.
+        /// </summary>
         internal ZWD() : base("ZWD") { }
 
         /// <summary>
@@ -7756,8 +9532,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWL : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZWL" /> class.
+        /// </summary>
         private static readonly ZWL s_Instance = new ZWL();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZWL" /> class.
+        /// </summary>
         internal ZWL() : base("ZWL") { }
 
         /// <summary>
@@ -7782,8 +9564,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWN : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZWN" /> class.
+        /// </summary>
         private static readonly ZWN s_Instance = new ZWN();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZWN" /> class.
+        /// </summary>
         internal ZWN() : base("ZWN") { }
 
         /// <summary>
@@ -7808,8 +9596,14 @@ namespace Narvalo.Finance.Currencies
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWR : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="ZWR" /> class.
+        /// </summary>
         private static readonly ZWR s_Instance = new ZWR();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZWR" /> class.
+        /// </summary>
         internal ZWR() : base("ZWR") { }
 
         /// <summary>

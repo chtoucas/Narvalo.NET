@@ -1,4 +1,4 @@
-﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
+﻿<#+
 
 public partial class MonadTemplate
 {
@@ -12,9 +12,11 @@ public partial class MonadTemplate
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
         public static T Extract<T>(<#= Name #><T> monad)
-<#+ WriteTypeConstraints("T"); #>
+            <#+ WriteTypeConstraints("T"); #>
         {
+<#+ if (IsNullable) { #>
             Contract.Requires(monad != null);
+<#+ } #>
 
             return <#= Name #><T>.ε(monad);
         }
@@ -23,13 +25,17 @@ public partial class MonadTemplate
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> monad)
-<#+ WriteTypeConstraints("T"); #>
+            <#+ WriteTypeConstraints("T"); #>
         {
+<#+ if (PostDuplicateEnsuresSome) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><<#= Name #><T>>>() != null);
+<#+ } #>
+
             return <#= Name #><T>.δ(monad);
         }
-    } // End of the class <#= Name #>.
+    } // End of <#= Name #>.
 <#+
     } // T4: End of EmitCoreComonad().
-}
+} // T4: End of MonadTemplate.
 
 #>

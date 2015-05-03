@@ -20,13 +20,6 @@ WriteHeader();
 
 using global::System.Diagnostics.CodeAnalysis;
 
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1409:RemoveUnnecessaryCode",
-    Justification = "[GeneratedCode] The empty static constructor is used to implement the lazy singleton pattern.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1508:ClosingCurlyBracketsMustNotBePrecededByBlankLine",
-    Justification = "[GeneratedCode] Newline rule disabled for T4 templates.")]
-
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY",
     Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
 
@@ -47,13 +40,19 @@ namespace <#= Namespace #>
     /// <summary>
     /// Represents the currency unit for the "<#= currency.EnglishName #>".
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "<#= DTE.Version #>")]
+    <# WriteCompilerAttributes(); #>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class <#= currency.Code #> : Currency
     {
+        /// <summary>
+        /// The unique instance of the <see cref="<#= currency.Code #>" /> class.
+        /// </summary>
         private static readonly <#= currency.Code #> s_Instance = new <#= currency.Code #>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="<#= currency.Code #>" /> class.
+        /// </summary>
         internal <#= currency.Code #>() : base("<#= currency.Code #>") { }
 
         /// <summary>

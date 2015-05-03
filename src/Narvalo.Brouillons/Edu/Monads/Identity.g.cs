@@ -10,21 +10,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess",
-    Justification = "[GeneratedCode] Elements are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
-    Justification = "[GeneratedCode] Directives are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1403:FileMayOnlyContainASingleNamespace",
-    Justification = "[GeneratedCode] A T4 template may contain multiple namespaces.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1505:OpeningCurlyBracketsMustNotBeFollowedByBlankLine",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1507:CodeMustNotContainMultipleBlankLinesInARow",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-
 namespace Narvalo.Edu.Monads
 {
     using System;
@@ -38,11 +23,12 @@ namespace Narvalo.Edu.Monads
     /// Provides a set of static methods for <see cref="Identity{T}" />.
     /// </content>
     /// <remarks>
-    /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
+    /// Sometimes we prefer to use extension methods over static methods to be able to override them locally.
     /// </remarks>
     public static partial class Identity
     {
         private static readonly Identity<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
+
 
         /// <summary>
         /// Gets the unique object of type <c>Identity&lt;Unit&gt;</c>.
@@ -69,6 +55,7 @@ namespace Narvalo.Edu.Monads
         /// <param name="value">A value to be wrapped into a <see cref="Identity{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Identity{T}"/> class for the specified value.</returns>
         public static Identity<T> Return<T>(T value)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Identity<T>>() != null);
 
@@ -84,6 +71,7 @@ namespace Narvalo.Edu.Monads
         /// Named <c>join</c> in Haskell parlance.
         /// </remarks>
         public static Identity<T> Flatten<T>(Identity<Identity<T>> square)
+            /* T4: C# indent */
         {
             Contract.Requires(square != null);
 
@@ -102,6 +90,7 @@ namespace Narvalo.Edu.Monads
         /// </remarks>
         public static Func<Identity<T>, Identity<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Func<Identity<T>, Identity<TResult>>>() != null);
 
@@ -121,6 +110,7 @@ namespace Narvalo.Edu.Monads
         /// </remarks>
         public static Func<Identity<T1>, Identity<T2>, Identity<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<TResult>>>() != null);
 
@@ -140,6 +130,7 @@ namespace Narvalo.Edu.Monads
         /// </remarks>
         public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>>() != null);
 
@@ -160,6 +151,7 @@ namespace Narvalo.Edu.Monads
         public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>>() != null);
 
@@ -180,6 +172,7 @@ namespace Narvalo.Edu.Monads
         public static Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>>() != null);
 
@@ -191,7 +184,7 @@ namespace Narvalo.Edu.Monads
         }
 
         #endregion
-    } // End of the class Identity.
+    } // End of Identity.
 
     /// <content>
     /// Provides the core monadic extension methods for <see cref="Identity{T}" />.
@@ -206,6 +199,7 @@ namespace Narvalo.Edu.Monads
         public static Identity<TResult> Select<TSource, TResult>(
             this Identity<TSource> @this,
             Func<TSource, TResult> selector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
@@ -219,6 +213,7 @@ namespace Narvalo.Edu.Monads
         public static Identity<TResult> Then<TSource, TResult>(
             this Identity<TSource> @this,
             Identity<TResult> other)
+            /* T4: C# indent */
         {
             Require.Object(@this);
 
@@ -243,6 +238,7 @@ namespace Narvalo.Edu.Monads
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
+
         #endregion
 
         #region Conditional execution of monadic expressions (Prelude)
@@ -256,6 +252,7 @@ namespace Narvalo.Edu.Monads
             this Identity<TSource> @this,
             bool predicate,
             Action action)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
@@ -277,6 +274,7 @@ namespace Narvalo.Edu.Monads
             this Identity<TSource> @this,
             bool predicate,
             Action action)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
@@ -299,6 +297,7 @@ namespace Narvalo.Edu.Monads
             this Identity<TFirst> @this,
             Identity<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
@@ -313,6 +312,7 @@ namespace Narvalo.Edu.Monads
             Identity<T2> second,
             Identity<T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
@@ -331,6 +331,7 @@ namespace Narvalo.Edu.Monads
              Identity<T3> third,
              Identity<T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
@@ -353,6 +354,7 @@ namespace Narvalo.Edu.Monads
             Identity<T4> fourth,
             Identity<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
@@ -380,6 +382,7 @@ namespace Narvalo.Edu.Monads
             this Identity<TSource> @this,
             Func<TSource, Identity<TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(valueSelectorM, "valueSelectorM");
@@ -397,7 +400,7 @@ namespace Narvalo.Edu.Monads
 
 
         #endregion
-    } // End of the class Identity.
+    } // End of Identity.
 
     /// <content>
     /// Provides the non-standard extension methods for <see cref="Identity{T}" />.
@@ -409,6 +412,7 @@ namespace Narvalo.Edu.Monads
             Func<TSource, bool> predicate,
             Identity<TResult> then,
             Identity<TResult> otherwise)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -420,6 +424,7 @@ namespace Narvalo.Edu.Monads
         public static void Invoke<TSource>(
             this Identity<TSource> @this,
             Action<TSource> action)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
@@ -427,7 +432,7 @@ namespace Narvalo.Edu.Monads
             @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-    } // End of the class Identity.
+    } // End of Identity.
 
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Identity{T}"/> class.
@@ -442,6 +447,7 @@ namespace Narvalo.Edu.Monads
         public static Identity<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Identity<TResult>> @this,
             Identity<TSource> value)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(value, "value");
@@ -455,6 +461,7 @@ namespace Narvalo.Edu.Monads
         public static Func<TSource, Identity<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Identity<TMiddle>> @this,
             Func<TMiddle, Identity<TResult>> funM)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Contract.Requires(funM != null);
@@ -469,6 +476,7 @@ namespace Narvalo.Edu.Monads
         public static Func<TSource, Identity<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Identity<TResult>> @this,
             Func<TSource, Identity<TMiddle>> funM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(funM, "funM");
@@ -478,7 +486,7 @@ namespace Narvalo.Edu.Monads
         }
 
         #endregion
-    } // End of the class FuncExtensions.
+    } // End of FuncExtensions.
 }
 
 namespace Narvalo.Edu.Monads
@@ -492,6 +500,7 @@ namespace Narvalo.Edu.Monads
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
         public static T Extract<T>(Identity<T> monad)
+            /* T4: C# indent */
         {
             Contract.Requires(monad != null);
 
@@ -502,10 +511,12 @@ namespace Narvalo.Edu.Monads
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
         public static Identity<Identity<T>> Duplicate<T>(Identity<T> monad)
+            /* T4: C# indent */
         {
+
             return Identity<T>.δ(monad);
         }
-    } // End of the class Identity.
+    } // End of Identity.
 }
 
 namespace Narvalo.Edu.Monads
@@ -535,8 +546,10 @@ namespace Narvalo.Edu.Monads
             return @this.CollectCore();
         }
 
+
         #endregion
-    } // End of the class EnumerableExtensions.
+
+    } // End of EnumerableExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Advanced
@@ -555,6 +568,7 @@ namespace Narvalo.Edu.Monads.Advanced
     {
         #region Basic Monad functions (Prelude)
 
+
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance.
         /// </remarks>
@@ -569,6 +583,7 @@ namespace Narvalo.Edu.Monads.Advanced
             return @this.MapCore(funM);
         }
 
+
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -580,6 +595,7 @@ namespace Narvalo.Edu.Monads.Advanced
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<bool>> predicateM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(predicateM != null);
@@ -587,6 +603,7 @@ namespace Narvalo.Edu.Monads.Advanced
 
             return @this.FilterCore(predicateM);
         }
+
 
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
@@ -618,6 +635,7 @@ namespace Narvalo.Edu.Monads.Advanced
             return @this.ZipCore(second, resultSelectorM);
         }
 
+
         /// <remarks>
         /// Named <c>foldM</c> in Haskell parlance.
         /// </remarks>
@@ -625,6 +643,7 @@ namespace Narvalo.Edu.Monads.Advanced
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -640,6 +659,7 @@ namespace Narvalo.Edu.Monads.Advanced
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -650,6 +670,7 @@ namespace Narvalo.Edu.Monads.Advanced
         public static Identity<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -660,6 +681,7 @@ namespace Narvalo.Edu.Monads.Advanced
         public static Identity<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -679,6 +701,7 @@ namespace Narvalo.Edu.Monads.Advanced
             TAccumulate seed,
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM,
             Func<Identity<TAccumulate>, bool> predicate)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -694,6 +717,7 @@ namespace Narvalo.Edu.Monads.Advanced
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Identity<TSource>> accumulatorM,
             Func<Identity<TSource>, bool> predicate)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -703,18 +727,19 @@ namespace Narvalo.Edu.Monads.Advanced
         }
 
         #endregion
-    } // End of the class EnumerableExtensions.
+    } // End of EnumerableExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
-    using Narvalo.Fx; // Necessary for EmptyIfNull().
+    using global::Narvalo.Fx; // Required for EmptyIfNull().
     using Narvalo.Edu.Monads;
     using Narvalo.Edu.Monads.Advanced;
 
@@ -723,6 +748,8 @@ namespace Narvalo.Edu.Monads.Internal
     /// </content>
     internal static partial class EnumerableExtensions
     {
+
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Identity<IEnumerable<TSource>> CollectCore<TSource>(
@@ -750,13 +777,16 @@ namespace Narvalo.Edu.Monads.Internal
 
             return m.Bind(item => Identity.Return(list.Concat(Enumerable.Repeat(item, 1))));
         }
-    } // End of the class EnumerableExtensions.
+
+    } // End of EnumerableExtensions.
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
     internal static partial class EnumerableExtensions
     {
+
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Identity<IEnumerable<TResult>> MapCore<TSource, TResult>(
@@ -770,11 +800,13 @@ namespace Narvalo.Edu.Monads.Internal
             return @this.Select(funM).EmptyIfNull().Collect();
         }
 
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<bool>> predicateM)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
@@ -802,6 +834,7 @@ namespace Narvalo.Edu.Monads.Internal
 
             return list;
         }
+
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -846,12 +879,14 @@ namespace Narvalo.Edu.Monads.Internal
             return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
         }
 
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Identity<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -877,6 +912,7 @@ namespace Narvalo.Edu.Monads.Internal
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -889,6 +925,7 @@ namespace Narvalo.Edu.Monads.Internal
         internal static Identity<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -921,6 +958,7 @@ namespace Narvalo.Edu.Monads.Internal
         internal static Identity<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -935,6 +973,7 @@ namespace Narvalo.Edu.Monads.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM,
             Func<Identity<TAccumulate>, bool> predicate)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -964,6 +1003,7 @@ namespace Narvalo.Edu.Monads.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Identity<TSource>> accumulatorM,
             Func<Identity<TSource>, bool> predicate)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -991,6 +1031,6 @@ namespace Narvalo.Edu.Monads.Internal
                 return retval;
             }
         }
-    } // End of the class EnumerableExtensions.
+    } // End of EnumerableExtensions.
 }
 

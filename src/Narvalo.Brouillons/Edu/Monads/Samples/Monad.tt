@@ -10,7 +10,7 @@
 
         public override void Initialize()
         {
-            UnitEnsuresSome = true;
+            ReturnEnsuresSome = true;
         }
 
         protected override void WriteContent()

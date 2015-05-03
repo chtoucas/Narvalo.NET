@@ -15,6 +15,9 @@ namespace Narvalo.T4
     /// </summary>
     public abstract class Iso4217Template : VSTemplate
     {
+        /// <summary>
+        /// Set of features to support on the <see cref="XmlReader"/>.
+        /// </summary>
         private static readonly XmlReaderSettings s_Settings = new XmlReaderSettings {
             CheckCharacters = false,
             CloseInput = true,
@@ -37,7 +40,11 @@ namespace Narvalo.T4
         /// <param name="parent">The parent text transformation.</param>
         protected Iso4217Template(TextTransformation parent) : base(parent) { }
 
-        protected bool Debug { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether debugging is enabled.
+        /// </summary>
+        /// <value><see langword="true"/> if debugging is enabled; otherwise <see langword="false"/>.</value>
+        public bool Debug { get; set; }
 
         protected List<Currency> ParseCurrent(string path)
         {
@@ -190,13 +197,11 @@ namespace Narvalo.T4
 
             public bool IsFund { get; set; }
 
+            public bool IsLegacy { get; set; }
+
             public short? MinorUnits { get; set; }
 
             public short NumericCode { get; set; }
-
-            public bool IsLegacy { get; set; }
-
-            public bool IsMetaCurrency { get { return Code[0] == 'X'; } }
         }
     }
 }

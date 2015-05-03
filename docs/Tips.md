@@ -3,6 +3,18 @@ Tips
 
 Often obvious but worth recalling.
 
+### SuppressMessage at module scope ###
+
+See [MSDN](http://msdn.microsoft.com/en-us/library/ms244717.aspx) for an explanation
+of the effect of the `SuppressMessage` attribute at module scope.
+
+```csharp
+using global::System.Diagnostics.CodeAnalysis;
+
+[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess",
+    Justification = "[GeneratedCode] Elements are correctly ordered in the T4 source file.")]
+```
+
 ### T4 Tips ###
 
 To include a file only once:

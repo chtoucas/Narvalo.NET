@@ -10,21 +10,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess",
-    Justification = "[GeneratedCode] Elements are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
-    Justification = "[GeneratedCode] Directives are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1403:FileMayOnlyContainASingleNamespace",
-    Justification = "[GeneratedCode] A T4 template may contain multiple namespaces.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1505:OpeningCurlyBracketsMustNotBeFollowedByBlankLine",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1507:CodeMustNotContainMultipleBlankLinesInARow",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-
 namespace Narvalo.Fx
 {
     using System;
@@ -38,11 +23,12 @@ namespace Narvalo.Fx
     /// Provides a set of static methods for <see cref="Outcome{T}" />.
     /// </content>
     /// <remarks>
-    /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
+    /// Sometimes we prefer to use extension methods over static methods to be able to override them locally.
     /// </remarks>
     public static partial class Outcome
     {
         private static readonly Outcome<global::Narvalo.Fx.Unit> s_Unit = Success(global::Narvalo.Fx.Unit.Single);
+
 
         /// <summary>
         /// Gets the unique object of type <c>Outcome&lt;Unit&gt;</c>.
@@ -69,6 +55,7 @@ namespace Narvalo.Fx
         /// <param name="value">A value to be wrapped into a <see cref="Outcome{T}"/> object.</param>
         /// <returns>An instance of the <see cref="Outcome{T}"/> class for the specified value.</returns>
         public static Outcome<T> Success<T>(T value)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Outcome<T>>() != null);
 
@@ -84,6 +71,7 @@ namespace Narvalo.Fx
         /// Named <c>join</c> in Haskell parlance.
         /// </remarks>
         public static Outcome<T> Flatten<T>(Outcome<Outcome<T>> square)
+            /* T4: C# indent */
         {
             Contract.Requires(square != null);
 
@@ -102,6 +90,7 @@ namespace Narvalo.Fx
         /// </remarks>
         public static Func<Outcome<T>, Outcome<TResult>> Lift<T, TResult>(
             Func<T, TResult> fun)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Func<Outcome<T>, Outcome<TResult>>>() != null);
 
@@ -121,6 +110,7 @@ namespace Narvalo.Fx
         /// </remarks>
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<TResult>>
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Func<Outcome<T1>, Outcome<T2>, Outcome<TResult>>>() != null);
 
@@ -140,6 +130,7 @@ namespace Narvalo.Fx
         /// </remarks>
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<TResult>>
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<TResult>>>() != null);
 
@@ -160,6 +151,7 @@ namespace Narvalo.Fx
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<TResult>>
             Lift<T1, T2, T3, T4, TResult>(
             Func<T1, T2, T3, T4, TResult> fun)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<TResult>>>() != null);
 
@@ -180,6 +172,7 @@ namespace Narvalo.Fx
         public static Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<T5>, Outcome<TResult>>
             Lift<T1, T2, T3, T4, T5, TResult>(
             Func<T1, T2, T3, T4, T5, TResult> fun)
+            /* T4: C# indent */
         {
             Contract.Ensures(Contract.Result<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<T5>, Outcome<TResult>>>() != null);
 
@@ -191,7 +184,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of the class Outcome.
+    } // End of Outcome.
 
     /// <content>
     /// Provides the core monadic extension methods for <see cref="Outcome{T}" />.
@@ -206,6 +199,7 @@ namespace Narvalo.Fx
         public static Outcome<TResult> Select<TSource, TResult>(
             this Outcome<TSource> @this,
             Func<TSource, TResult> selector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
@@ -219,6 +213,7 @@ namespace Narvalo.Fx
         public static Outcome<TResult> Then<TSource, TResult>(
             this Outcome<TSource> @this,
             Outcome<TResult> other)
+            /* T4: C# indent */
         {
             Require.Object(@this);
 
@@ -243,6 +238,7 @@ namespace Narvalo.Fx
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
+
         #endregion
 
         #region Conditional execution of monadic expressions (Prelude)
@@ -256,6 +252,7 @@ namespace Narvalo.Fx
             this Outcome<TSource> @this,
             bool predicate,
             Action action)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
@@ -277,6 +274,7 @@ namespace Narvalo.Fx
             this Outcome<TSource> @this,
             bool predicate,
             Action action)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(action, "action");
@@ -299,6 +297,7 @@ namespace Narvalo.Fx
             this Outcome<TFirst> @this,
             Outcome<TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
@@ -313,6 +312,7 @@ namespace Narvalo.Fx
             Outcome<T2> second,
             Outcome<T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
@@ -331,6 +331,7 @@ namespace Narvalo.Fx
              Outcome<T3> third,
              Outcome<T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
@@ -353,6 +354,7 @@ namespace Narvalo.Fx
             Outcome<T4> fourth,
             Outcome<T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(second, "second");
@@ -380,6 +382,7 @@ namespace Narvalo.Fx
             this Outcome<TSource> @this,
             Func<TSource, Outcome<TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(valueSelectorM, "valueSelectorM");
@@ -397,7 +400,7 @@ namespace Narvalo.Fx
 
 
         #endregion
-    } // End of the class Outcome.
+    } // End of Outcome.
 
     /// <content>
     /// Provides the non-standard extension methods for <see cref="Outcome{T}" />.
@@ -409,6 +412,7 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate,
             Outcome<TResult> then,
             Outcome<TResult> otherwise)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
@@ -420,6 +424,7 @@ namespace Narvalo.Fx
         public static void Invoke<TSource>(
             this Outcome<TSource> @this,
             Action<TSource> action)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
@@ -427,7 +432,7 @@ namespace Narvalo.Fx
             @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-    } // End of the class Outcome.
+    } // End of Outcome.
 
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Outcome{T}"/> class.
@@ -442,6 +447,7 @@ namespace Narvalo.Fx
         public static Outcome<TResult> Invoke<TSource, TResult>(
             this Func<TSource, Outcome<TResult>> @this,
             Outcome<TSource> value)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(value, "value");
@@ -455,6 +461,7 @@ namespace Narvalo.Fx
         public static Func<TSource, Outcome<TResult>> Compose<TSource, TMiddle, TResult>(
             this Func<TSource, Outcome<TMiddle>> @this,
             Func<TMiddle, Outcome<TResult>> funM)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Contract.Requires(funM != null);
@@ -469,6 +476,7 @@ namespace Narvalo.Fx
         public static Func<TSource, Outcome<TResult>> ComposeBack<TSource, TMiddle, TResult>(
             this Func<TMiddle, Outcome<TResult>> @this,
             Func<TSource, Outcome<TMiddle>> funM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Require.NotNull(funM, "funM");
@@ -478,7 +486,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of the class FuncExtensions.
+    } // End of FuncExtensions.
 }
 
 namespace Narvalo.Fx
@@ -508,8 +516,10 @@ namespace Narvalo.Fx
             return @this.CollectCore();
         }
 
+
         #endregion
-    } // End of the class EnumerableExtensions.
+
+    } // End of EnumerableExtensions.
 }
 
 namespace Narvalo.Fx.Advanced
@@ -528,6 +538,7 @@ namespace Narvalo.Fx.Advanced
     {
         #region Basic Monad functions (Prelude)
 
+
         /// <remarks>
         /// Named <c>mapM</c> in Haskell parlance.
         /// </remarks>
@@ -542,6 +553,7 @@ namespace Narvalo.Fx.Advanced
             return @this.MapCore(funM);
         }
 
+
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -553,6 +565,7 @@ namespace Narvalo.Fx.Advanced
         public static IEnumerable<TSource> Filter<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<bool>> predicateM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(predicateM != null);
@@ -560,6 +573,7 @@ namespace Narvalo.Fx.Advanced
 
             return @this.FilterCore(predicateM);
         }
+
 
         /// <remarks>
         /// Named <c>mapAndUnzipM</c> in Haskell parlance.
@@ -591,6 +605,7 @@ namespace Narvalo.Fx.Advanced
             return @this.ZipCore(second, resultSelectorM);
         }
 
+
         /// <remarks>
         /// Named <c>foldM</c> in Haskell parlance.
         /// </remarks>
@@ -598,6 +613,7 @@ namespace Narvalo.Fx.Advanced
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -613,6 +629,7 @@ namespace Narvalo.Fx.Advanced
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -623,6 +640,7 @@ namespace Narvalo.Fx.Advanced
         public static Outcome<TSource> Reduce<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Outcome<TSource>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -633,6 +651,7 @@ namespace Narvalo.Fx.Advanced
         public static Outcome<TSource> ReduceBack<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Outcome<TSource>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -652,6 +671,7 @@ namespace Narvalo.Fx.Advanced
             TAccumulate seed,
             Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM,
             Func<Outcome<TAccumulate>, bool> predicate)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -667,6 +687,7 @@ namespace Narvalo.Fx.Advanced
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Outcome<TSource>> accumulatorM,
             Func<Outcome<TSource>, bool> predicate)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -676,18 +697,19 @@ namespace Narvalo.Fx.Advanced
         }
 
         #endregion
-    } // End of the class EnumerableExtensions.
+    } // End of EnumerableExtensions.
 }
 
 namespace Narvalo.Fx.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
-    using Narvalo.Fx; // Necessary for EmptyIfNull().
+    using global::Narvalo.Fx; // Required for EmptyIfNull().
     using Narvalo.Fx.Advanced;
 
     /// <content>
@@ -695,6 +717,8 @@ namespace Narvalo.Fx.Internal
     /// </content>
     internal static partial class EnumerableExtensions
     {
+
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<IEnumerable<TSource>> CollectCore<TSource>(
@@ -722,13 +746,16 @@ namespace Narvalo.Fx.Internal
 
             return m.Bind(item => Outcome.Success(list.Concat(Enumerable.Repeat(item, 1))));
         }
-    } // End of the class EnumerableExtensions.
+
+    } // End of EnumerableExtensions.
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
     internal static partial class EnumerableExtensions
     {
+
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<IEnumerable<TResult>> MapCore<TSource, TResult>(
@@ -742,11 +769,13 @@ namespace Narvalo.Fx.Internal
             return @this.Select(funM).EmptyIfNull().Collect();
         }
 
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<bool>> predicateM)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(predicateM, "predicateM");
@@ -774,6 +803,7 @@ namespace Narvalo.Fx.Internal
 
             return list;
         }
+
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -818,12 +848,14 @@ namespace Narvalo.Fx.Internal
             return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
         }
 
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Outcome<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -849,6 +881,7 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             TAccumulate seed,
             Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -861,6 +894,7 @@ namespace Narvalo.Fx.Internal
         internal static Outcome<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Outcome<TSource>> accumulatorM)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -893,6 +927,7 @@ namespace Narvalo.Fx.Internal
         internal static Outcome<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Outcome<TSource>> accumulatorM)
+            /* T4: C# indent */
         {
             Acknowledge.Object(@this);
             Contract.Requires(accumulatorM != null);
@@ -907,6 +942,7 @@ namespace Narvalo.Fx.Internal
             TAccumulate seed,
             Func<TAccumulate, TSource, Outcome<TAccumulate>> accumulatorM,
             Func<Outcome<TAccumulate>, bool> predicate)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -936,6 +972,7 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Outcome<TSource>> accumulatorM,
             Func<Outcome<TSource>, bool> predicate)
+            /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, "accumulatorM");
@@ -963,6 +1000,6 @@ namespace Narvalo.Fx.Internal
                 return retval;
             }
         }
-    } // End of the class EnumerableExtensions.
+    } // End of EnumerableExtensions.
 }
 

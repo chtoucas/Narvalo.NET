@@ -12,7 +12,8 @@
         {
             InitializeOr();
 
-            UnderlyingTypeConstraint = "struct";
+            InitializeTypeConstraints("struct");
+
             IsNullable = false;
         }
 

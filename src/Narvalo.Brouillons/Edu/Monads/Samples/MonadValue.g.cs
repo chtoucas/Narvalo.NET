@@ -10,21 +10,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess",
-    Justification = "[GeneratedCode] Elements are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
-    Justification = "[GeneratedCode] Directives are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1403:FileMayOnlyContainASingleNamespace",
-    Justification = "[GeneratedCode] A T4 template may contain multiple namespaces.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1505:OpeningCurlyBracketsMustNotBeFollowedByBlankLine",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1507:CodeMustNotContainMultipleBlankLinesInARow",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-
 namespace Narvalo.Edu.Monads.Samples
 {
     using System;
@@ -38,11 +23,12 @@ namespace Narvalo.Edu.Monads.Samples
     /// Provides a set of static methods for <see cref="MonadValue{T}" />.
     /// </content>
     /// <remarks>
-    /// Sometimes we prefer to use extension methods over static methods to be able to locally override them.
+    /// Sometimes we prefer to use extension methods over static methods to be able to override them locally.
     /// </remarks>
     public static partial class MonadValue
     {
         private static readonly MonadValue<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
+
         private static readonly MonadValue<global::Narvalo.Fx.Unit> s_None = MonadValue<global::Narvalo.Fx.Unit>.None;
 
         /// <summary>
@@ -117,6 +103,7 @@ namespace Narvalo.Edu.Monads.Samples
 
             return m =>
             {
+                /* T4: C# indent */
                 return m.Select(fun);
             };
         }
@@ -138,6 +125,7 @@ namespace Narvalo.Edu.Monads.Samples
 
             return (m1, m2) =>
             {
+                /* T4: C# indent */
                 return m1.Zip(m2, fun);
             };
         }
@@ -160,6 +148,7 @@ namespace Narvalo.Edu.Monads.Samples
 
             return (m1, m2, m3) =>
             {
+                /* T4: C# indent */
                 return m1.Zip(m2, m3, fun);
             };
         }
@@ -184,6 +173,7 @@ namespace Narvalo.Edu.Monads.Samples
 
             return (m1, m2, m3, m4) =>
             {
+                /* T4: C# indent */
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
@@ -209,12 +199,13 @@ namespace Narvalo.Edu.Monads.Samples
 
             return (m1, m2, m3, m4, m5) =>
             {
+                /* T4: C# indent */
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }
 
         #endregion
-    } // End of the class MonadValue.
+    } // End of MonadValue.
 
     /// <content>
     /// Provides the core monadic extension methods for <see cref="MonadValue{T}" />.
@@ -232,6 +223,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TSource : struct
             where TResult : struct
         {
+            /* T4: C# indent */
             Require.NotNull(selector, "selector");
 
             return @this.Bind(_ => MonadValue.Return(selector.Invoke(_)));
@@ -246,6 +238,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TSource : struct
             where TResult : struct
         {
+            /* T4: C# indent */
 
             return @this.Bind(_ => other);
         }
@@ -253,6 +246,7 @@ namespace Narvalo.Edu.Monads.Samples
         #endregion
 
         #region Generalisations of list functions (Prelude)
+
 
         /// <remarks>
         /// Named <c>mfilter</c> in Haskell parlance.
@@ -262,15 +256,18 @@ namespace Narvalo.Edu.Monads.Samples
             Func<TSource, bool> predicate)
             where TSource : struct
         {
+            /* T4: C# indent */
             Require.NotNull(predicate, "predicate");
 
             return @this.Bind(
                 _ => predicate.Invoke(_) ? @this : MonadValue<TSource>.None);
         }
 
+
         #endregion
 
         #region Conditional execution of monadic expressions (Prelude)
+
 
         /// <remarks>
         /// Named <c>guard</c> in Haskell parlance.
@@ -280,6 +277,7 @@ namespace Narvalo.Edu.Monads.Samples
 
             return predicate ? MonadValue.Unit : MonadValue.None;
         }
+
 
         /// <remarks>
         /// <para>Named <c>when</c> in Haskell parlance.</para>
@@ -334,6 +332,8 @@ namespace Narvalo.Edu.Monads.Samples
             where TSecond : struct
             where TResult : struct
         {
+            /* T4: C# indent */
+            /* T4: C# indent */
             Require.NotNull(resultSelector, "resultSelector");
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
@@ -350,6 +350,8 @@ namespace Narvalo.Edu.Monads.Samples
             where T3 : struct
             where TResult : struct
         {
+            /* T4: C# indent */
+            /* T4: C# indent */
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, MonadValue<TResult>> g
@@ -371,6 +373,8 @@ namespace Narvalo.Edu.Monads.Samples
             where T4 : struct
             where TResult : struct
         {
+            /* T4: C# indent */
+            /* T4: C# indent */
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, MonadValue<TResult>> g
@@ -397,6 +401,8 @@ namespace Narvalo.Edu.Monads.Samples
             where T5 : struct
             where TResult : struct
         {
+            /* T4: C# indent */
+            /* T4: C# indent */
             Require.NotNull(resultSelector, "resultSelector");
 
             Func<T1, MonadValue<TResult>> g
@@ -425,6 +431,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TMiddle : struct
             where TResult : struct
         {
+            /* T4: C# indent */
             Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
 
@@ -432,6 +439,7 @@ namespace Narvalo.Edu.Monads.Samples
                 _ => valueSelectorM.Invoke(_).Select(
                     middle => resultSelector.Invoke(_, middle)));
         }
+
 
         public static MonadValue<TResult> Join<TSource, TInner, TKey, TResult>(
             this MonadValue<TSource> @this,
@@ -444,6 +452,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TKey : struct
             where TResult : struct
         {
+            /* T4: C# indent */
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
@@ -467,6 +476,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TKey : struct
             where TResult : struct
         {
+            /* T4: C# indent */
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
@@ -479,9 +489,11 @@ namespace Narvalo.Edu.Monads.Samples
                 EqualityComparer<TKey>.Default);
         }
 
+
         #endregion
 
         #region LINQ extensions
+
 
         public static MonadValue<TResult> Join<TSource, TInner, TKey, TResult>(
             this MonadValue<TSource> @this,
@@ -546,6 +558,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TKey : struct
             where TResult : struct
         {
+            /* T4: C# indent */
             Require.NotNull(resultSelector, "resultSelector");
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
@@ -570,6 +583,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TKey : struct
             where TResult : struct
         {
+            /* T4: C# indent */
             Require.NotNull(resultSelector, "resultSelector");
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
@@ -590,6 +604,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TInner : struct
             where TKey : struct
         {
+            /* T4: C# indent */
             Require.NotNull(outerKeySelector, "outerKeySelector");
             Require.NotNull(comparer, "comparer");
             Contract.Requires(innerKeySelector != null);
@@ -603,8 +618,9 @@ namespace Narvalo.Edu.Monads.Samples
             };
         }
 
+
         #endregion
-    } // End of the class MonadValue.
+    } // End of MonadValue.
 
     /// <content>
     /// Provides the non-standard extension methods for <see cref="MonadValue{T}" />.
@@ -619,10 +635,12 @@ namespace Narvalo.Edu.Monads.Samples
             where TSource : struct
             where TResult : struct
         {
+            /* T4: C# indent */
             Require.NotNull(predicate, "predicate");
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
+
 
         public static MonadValue<TResult> Then<TSource, TResult>(
             this MonadValue<TSource> @this,
@@ -631,6 +649,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TSource : struct
             where TResult : struct
         {
+            /* T4: C# indent */
             Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, other, MonadValue<TResult>.None);
@@ -643,16 +662,19 @@ namespace Narvalo.Edu.Monads.Samples
             where TSource : struct
             where TResult : struct
         {
+            /* T4: C# indent */
             Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, MonadValue<TResult>.None, other);
         }
+
 
         public static void Invoke<TSource>(
             this MonadValue<TSource> @this,
             Action<TSource> action)
             where TSource : struct
         {
+            /* T4: C# indent */
             Require.NotNull(action, "action");
 
             @this.Bind(_ => { action.Invoke(_); return @this; });
@@ -664,6 +686,7 @@ namespace Narvalo.Edu.Monads.Samples
             Action action)
             where TSource : struct
         {
+            /* T4: C# indent */
             Require.NotNull(action, "action");
 
             @this.Then(MonadValue.Unit).Invoke(_ => action.Invoke());
@@ -675,13 +698,15 @@ namespace Narvalo.Edu.Monads.Samples
             Action caseNone)
             where TSource : struct
         {
+            /* T4: C# indent */
             Require.NotNull(action, "action");
 
             @this.Bind(_ => { action.Invoke(_); return @this; })
                 .Then(MonadValue.Unit)
                 .Bind(_ => { caseNone.Invoke(); return Unit; });
         }
-    } // End of the class MonadValue.
+
+    } // End of MonadValue.
 
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="MonadValue{T}"/> class.
@@ -700,6 +725,7 @@ namespace Narvalo.Edu.Monads.Samples
             where TResult : struct
         {
             Acknowledge.Object(@this);
+            /* T4: C# indent */
 
             return value.Bind(@this);
         }
@@ -739,7 +765,7 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    } // End of the class FuncExtensions.
+    } // End of FuncExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Samples
@@ -757,8 +783,8 @@ namespace Narvalo.Edu.Monads.Samples
         #region Basic Monad functions (Prelude)
 
 
-
         #endregion
+
 
         #region Generalisations of list functions (Prelude)
 
@@ -775,7 +801,8 @@ namespace Narvalo.Edu.Monads.Samples
         }
 
         #endregion
-    } // End of the class EnumerableExtensions.
+
+    } // End of EnumerableExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Samples.Advanced
@@ -910,18 +937,19 @@ namespace Narvalo.Edu.Monads.Samples.Advanced
         }
 
         #endregion
-    } // End of the class EnumerableExtensions.
+    } // End of EnumerableExtensions.
 }
 
 namespace Narvalo.Edu.Monads.Samples.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
-    using Narvalo.Fx; // Necessary for EmptyIfNull().
+    using global::Narvalo.Fx; // Required for EmptyIfNull().
     using Narvalo.Edu.Monads.Samples;
     using Narvalo.Edu.Monads.Samples.Advanced;
 
@@ -930,6 +958,7 @@ namespace Narvalo.Edu.Monads.Samples.Internal
     /// </content>
     internal static partial class EnumerableExtensions
     {
+
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -943,13 +972,15 @@ namespace Narvalo.Edu.Monads.Samples.Internal
 
             return retval;
         }
-    } // End of the class EnumerableExtensions.
+
+    } // End of EnumerableExtensions.
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
     internal static partial class EnumerableExtensions
     {
+
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
@@ -1117,6 +1148,6 @@ namespace Narvalo.Edu.Monads.Samples.Internal
                 return retval;
             }
         }
-    } // End of the class EnumerableExtensions.
+    } // End of EnumerableExtensions.
 }
 

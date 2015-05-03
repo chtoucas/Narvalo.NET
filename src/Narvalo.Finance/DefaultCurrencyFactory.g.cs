@@ -10,13 +10,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace Narvalo.Finance
 {
     using System.Collections.Generic;
 
     public sealed partial class DefaultCurrencyFactory
     {
-        // The set of available currency codes.
+        /// <summary>
+        /// The set of available currency codes.
+        /// </summary>
         private static readonly HashSet<string> s_CodeSet = new HashSet<string>() {
             "ADP",
             "AED",

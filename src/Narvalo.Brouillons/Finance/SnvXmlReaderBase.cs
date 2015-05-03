@@ -8,13 +8,13 @@ namespace Narvalo.Finance
     using System.Xml.Linq;
     using System.Xml.Schema;
 
-    public abstract class SnvCurrencyXmlReaderBase
+    public abstract class SnvXmlReaderBase
     {
         private const string MINOR_UNITS_NOT_AVAILABLE = "N.A.";
 
         private readonly string _source;
 
-        protected SnvCurrencyXmlReaderBase(string source)
+        protected SnvXmlReaderBase(string source)
         {
             Require.NotNullOrEmpty(source, "source");
 
@@ -68,6 +68,7 @@ namespace Narvalo.Finance
         {
             short? result = ParseTo.Int16(value);
             Debug.Assert(result.HasValue);
+
             short retval = result.Value;
             Debug.Assert(retval > 0, "The numeric code MUST be strictly greater than 0.");
             Debug.Assert(retval < 1000, "The numeric code MUST be strictly less than 1000.");

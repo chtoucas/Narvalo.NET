@@ -10,14 +10,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1508:ClosingCurlyBracketsMustNotBePrecededByBlankLine",
-    Justification = "[GeneratedCode] Newline rule disabled for T4 templates.")]
 
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Currencies;
     using Xunit;

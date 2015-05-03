@@ -1,4 +1,4 @@
-﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
+﻿<#+
 
 public partial class MonadTemplate
 {
@@ -10,13 +10,13 @@ public partial class MonadTemplate
     /// </content>
     internal static partial class EnumerableExtensions
     {
-<#+ if (!HasUnderlyingTypeConstraint) { #>
-<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+
+<#+ if (!HasTypeConstraints) { #>
+
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-<#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
 <#+ if (IsNullable) { #>
@@ -46,7 +46,8 @@ public partial class MonadTemplate
 
             return m.Bind(item => <#= Name #>.<#= ReturnName #>(list.Concat(Enumerable.Repeat(item, 1))));
         }
-<#+ } // End of !HasUnderlyingTypeConstraint. #>
+
+<#+ } // T4: End of !HasTypeConstraints. #>
 
 <#+ if (HasSum) { #>
 
@@ -54,7 +55,7 @@ public partial class MonadTemplate
             Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static <#= Name #><TSource> SumCore<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
             Acknowledge.Object(@this);
 <#+ if (IsNullable) { #>
@@ -68,10 +69,11 @@ public partial class MonadTemplate
 
             return retval;
         }
-<#+ } // End of HasSum. #>
-    } // End of the class EnumerableExtensions.
+
+<#+ } // T4: End of HasSum. #>
+    } // End of EnumerableExtensions.
 <#+
     } // T4: End of EmitMonadEnumerableInternalExtensions().
-}
+} // T4: End of MonadTemplate.
 
 #>

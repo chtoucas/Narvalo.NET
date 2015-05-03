@@ -28,7 +28,9 @@ namespace <#= Namespace #>
 
     public sealed partial class <#= Name #>
     {
-        // The set of available currency codes.
+        /// <summary>
+        /// The set of available currency codes.
+        /// </summary>
         private static readonly HashSet<string> s_CodeSet = new HashSet<string>() {
 <# foreach (var code in codeSet.OrderBy(_ => _)) { #>
             "<#= code #>",

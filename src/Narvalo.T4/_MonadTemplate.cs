@@ -3,6 +3,7 @@
 namespace Narvalo.T4
 {
     using System;
+    using System.Linq;
 
     using Microsoft.VisualStudio.TextTemplating;
 
@@ -21,9 +22,10 @@ namespace Narvalo.T4
         /// </summary>
         private bool _preferLinqDialect = true;
 
-        private bool _hasUnderlyingTypeConstraint;
-
-        private string _underlyingTypeConstraint = String.Empty;
+        /// <summary>
+        /// The generic constraints on the underlying type T.
+        /// </summary>
+        private string _typeConstraints = String.Empty;
 
         /// <summary>
         /// The name of the Plus method.
@@ -102,7 +104,7 @@ namespace Narvalo.T4
 
         #endregion
 
-        #region Type constraints.
+        #region Constraints.
 
         /// <summary>
         /// Gets or sets a value indicating whether the monad is null-able. Default to true.
@@ -111,33 +113,38 @@ namespace Narvalo.T4
         protected bool IsNullable { get { return _isNullable; } set { _isNullable = value; } }
 
         /// <summary>
-        /// Gets or sets a generic constraint on the underlying type T. Default to String.Empty.
+        /// Gets the generic constraints on the underlying type T. Default to String.Empty.
         /// </summary>
-        /// <value>A generic constraint on the underlying type T.</value>
-        protected string UnderlyingTypeConstraint
+        /// <value>The generic constraints on the underlying type T.</value>
+        protected string TypeConstraints
         {
             get
             {
-                return _underlyingTypeConstraint;
+                if (!HasTypeConstraints)
+                {
+                    throw new InvalidOperationException("The underlying type does not enforce any type constraint.");
+                }
+
+                return _typeConstraints;
             }
 
-            set
+            private set
             {
-                _underlyingTypeConstraint = value;
-                _hasUnderlyingTypeConstraint = !String.IsNullOrWhiteSpace(value);
+                _typeConstraints = value;
+                HasTypeConstraints = !String.IsNullOrWhiteSpace(value);
             }
         }
 
         /// <summary>
-        /// Gets a value indicating whether the underlying type T satisfies a generic type constraint. Default to false.
+        /// Gets a value indicating whether the underlying type T has a generic type constraint. Default to false.
         /// </summary>
-        /// <value><see langword="true"/> if the underlying type T satisfies a generic type constraint;
+        /// <value><see langword="true"/> if the underlying type T has a generic type constraint;
         /// otherwise <see langword="false"/>.</value>
-        protected bool HasUnderlyingTypeConstraint { get { return _hasUnderlyingTypeConstraint; } }
+        protected bool HasTypeConstraints { get; private set; }
 
         #endregion
 
-        #region Names
+        #region Method and Property Names.
 
         /// <summary>
         /// Gets or sets the name of the Zero property. Default to "Zero".
@@ -243,7 +250,7 @@ namespace Narvalo.T4
 
         #endregion
 
-        #region Postconditions.
+        #region Primary Postconditions.
 
         /// <summary>
         /// Gets or sets a value indicating whether Monad.Bind() ensures a non-null return value. Default to false.
@@ -255,76 +262,104 @@ namespace Narvalo.T4
         /// <summary>
         /// Gets or sets a value indicating whether Monad.η() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <remarks>Monad.Return() being just the public alias of Monad.η(), this also applies
-        /// to the Monad.Return() method.</remarks>
         /// <value><see langword="true"/> if Monad.η() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool UnitEnsuresSome { get; set; }
+        protected bool ReturnEnsuresSome { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether Monad.μ() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <remarks>Monad.Flatten() being just the public alias of Monad.μ(), this also applies
-        /// to the Monad.Flatten() method.</remarks>
         /// <value><see langword="true"/> if Monad.μ() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
         protected bool MultiplicationEnsuresSome { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether Monad.When() ensures a non-null return value. Always true.
+        /// Gets or sets a value indicating whether Monad.δ() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <remarks>Whatever happen, Monad.When() always return a non-null value.</remarks>
-        /// <value><see langword="true"/> if Monad.When() ensures a non-null return value;
+        /// <value><see langword="true"/> if Monad.δ() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool WhenEnsuresSome { get { return true; } }
+        protected bool DuplicateEnsuresSome { get; set; }
+
+        #endregion
+
+        #region Postconditions.
+
+        /// <summary>
+        /// Gets a value indicating whether Monad.Bind() ensures a non-null return value. Default to false.
+        /// </summary>
+        /// <value><see langword="true"/> if Monad.Bind() ensures a non-null return value;
+        /// otherwise <see langword="false"/>.</value>
+        protected bool PostBindEnsuresSome { get { return IsNullable && BindEnsuresSome; } }
+
+        /// <summary>
+        /// Gets a value indicating whether Monad.Return() ensures a non-null return value. Default to false.
+        /// </summary>
+        /// <value><see langword="true"/> if Monad.Return() ensures a non-null return value;
+        /// otherwise <see langword="false"/>.</value>
+        protected bool PostReturnEnsuresSome { get { return IsNullable && ReturnEnsuresSome; } }
+
+        /// <summary>
+        /// Gets a value indicating whether Monad.Multiplication() ensures a non-null return value. Default to false.
+        /// </summary>
+        /// <value><see langword="true"/> if Monad.Multiplication() ensures a non-null return value;
+        /// otherwise <see langword="false"/>.</value>
+        protected bool PostMultiplicationEnsuresSome { get { return IsNullable && MultiplicationEnsuresSome; } }
+
+        /// <summary>
+        /// Gets a value indicating whether Monad.Duplicate() ensures a non-null return value. Default to false.
+        /// </summary>
+        /// <value><see langword="true"/> if Monad.Duplicate() ensures a non-null return value;
+        /// otherwise <see langword="false"/>.</value>
+        protected bool PostDuplicateEnsuresSome { get { return IsNullable && DuplicateEnsuresSome; } }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether Monad.Unit ensures a non-null return value. Default to false.
+        /// </summary>
+        /// <value><see langword="true"/> if Monad.Unit ensures a non-null return value;
+        /// otherwise <see langword="false"/>.</value>
+        protected bool PostUnitEnsuresSome { get { return PostReturnEnsuresSome; } }
 
         /// <summary>
         /// Gets a value indicating whether Monad.Map() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <remarks>Monad.Map() uses Monad.Bind().</remarks>
         /// <value><see langword="true"/> if Monad.Map() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool MapEnsuresSome { get { return BindEnsuresSome; } }
+        protected bool PostMapEnsuresSome { get { return PostBindEnsuresSome; } }
 
         /// <summary>
         /// Gets a value indicating whether Monad.Filter() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <remarks>Monad.Filter() uses Monad.Bind().</remarks>
         /// <value><see langword="true"/> if Monad.Filter() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool FilterEnsuresSome { get { return BindEnsuresSome; } }
+        protected bool PostFilterEnsuresSome { get { return PostBindEnsuresSome; } }
 
         /// <summary>
         /// Gets a value indicating whether Monad.Coalesce() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <remarks>Monad.Coalesce() uses Monad.Bind().</remarks>
         /// <value><see langword="true"/> if Monad.Coalesce() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool CoalesceEnsuresSome { get { return BindEnsuresSome; } }
+        protected bool PostCoalesceEnsuresSome { get { return PostBindEnsuresSome; } }
 
         /// <summary>
         /// Gets a value indicating whether Monad.Then() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <remarks>Monad.Then() uses Monad.Coalesce().</remarks>
         /// <value><see langword="true"/> if Monad.Then() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool ThenEnsuresSome { get { return CoalesceEnsuresSome; } }
+        protected bool PostThenEnsuresSome { get { return PostCoalesceEnsuresSome; } }
 
         /// <summary>
         /// Gets a value indicating whether Monad.Join() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <remarks>Monad.Join() uses Monad.Map().</remarks>
         /// <value><see langword="true"/> if Monad.Join() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool JoinEnsuresSome { get { return MapEnsuresSome; } }
+        protected bool PostJoinEnsuresSome { get { return PostMapEnsuresSome; } }
 
         /// <summary>
         /// Gets a value indicating whether Monad.GroupJoin() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <remarks>Monad.GroupJoin() uses Monad.Map().</remarks>
         /// <value><see langword="true"/> if Monad.GroupJoin() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool GroupJoinEnsuresSome { get { return MapEnsuresSome; } }
+        protected bool PostGroupJoinEnsuresSome { get { return PostMapEnsuresSome; } }
 
         #endregion
 
@@ -337,8 +372,6 @@ namespace Narvalo.T4
 
             return GenerationEnvironment.ToString();
         }
-
-        protected virtual void WriteContent() { }
 
         #region Initalizers.
 
@@ -373,6 +406,61 @@ namespace Narvalo.T4
 
             HasPlus = true;
             PlusName = "OrElse";
+        }
+
+        protected void InitializeTypeConstraints(params string[] constraints)
+        {
+            TypeConstraints = String.Join(", ", constraints.Where(_ => !String.IsNullOrWhiteSpace(_)));
+        }
+
+        #endregion
+
+        #region Writers into the generated output.
+
+        protected virtual void WriteContent() { }
+
+        protected void WriteNotNull(string name)
+        {
+            if (IsNullable)
+            {
+                WriteLine(@"Require.NotNull({0}, ""{0}"");", name);
+            }
+            else
+            {
+                // Ensures that the next line in the output is correctly indented.
+                WriteLine("/* T4: C# indent */");
+            }
+        }
+
+        protected void WriteNotNull(bool force = false)
+        {
+            if (force || IsNullable)
+            {
+                WriteLine(@"Require.Object(@this);");
+            }
+            else
+            {
+                // Ensures that the next line in the output is correctly indented.
+                WriteLine("/* T4: C# indent */");
+            }
+        }
+
+        protected void WriteTypeConstraints(params string[] typeNames)
+        {
+            if (!HasTypeConstraints)
+            {
+                // Ensures that the next line in the output is correctly indented.
+                WriteLine("/* T4: C# indent */");
+
+                return;
+            }
+
+            foreach (var typeName in typeNames)
+            {
+                PushIndent("            ");
+                WriteLine("where {0} : {1}", typeName, TypeConstraints);
+                PopIndent();
+            }
         }
 
         #endregion

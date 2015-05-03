@@ -1,4 +1,4 @@
-﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
+﻿<#+
 
 public partial class MonadTemplate
 {
@@ -18,11 +18,11 @@ public partial class MonadTemplate
         public static <#= Name #><TResult> <#= MapName #><TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, TResult> selector)
-<#+ WriteTypeConstraints("TSource", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
             Require.NotNull(selector, "selector");
-<#+ if (IsNullable && BindEnsuresSome) { #>
+<#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -35,10 +35,10 @@ public partial class MonadTemplate
         public static <#= Name #><TResult> Then<TSource, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TResult> other)
-<#+ WriteTypeConstraints("TSource", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
-<#+ if (IsNullable && BindEnsuresSome) { #>
+            <#+ WriteNotNull(); #>
+<#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -50,27 +50,28 @@ public partial class MonadTemplate
         #region Generalisations of list functions (Prelude)
 
 <#+ if (HasZero) { #>
+
         /// <remarks>
         /// Named <c>mfilter</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><TSource> <#= FilterName #><TSource>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
             Require.NotNull(predicate, "predicate");
-<#+ if (IsNullable && BindEnsuresSome) { #>
+<#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             return @this.Bind(
                 _ => predicate.Invoke(_) ? @this : <#= Name #><TSource>.<#= ZeroName #>);
         }
-<#+ } // End of HasZero. #>
 
-<#+ if (!HasUnderlyingTypeConstraint) { #>
-<#+ // Not available since we can not enforce our generic type constraint on the underlying type of monadic return value. #>
+<#+ } // T4: End of HasZero. #>
+
+<#+ if (!HasTypeConstraints) { #>
 
         /// <remarks>
         /// Named <c>replicateM</c> in Haskell parlance.
@@ -78,35 +79,37 @@ public partial class MonadTemplate
         public static <#= Name #><IEnumerable<TSource>> Repeat<TSource>(
             this <#= Name #><TSource> @this,
             int count)
-<#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
             Require.GreaterThanOrEqualTo(count, 1, "count");
-<#+ if (IsNullable && MapEnsuresSome) { #>
+<#+ if (PostMapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
 <#+ } #>
 
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
         }
-<#+ } // End of !HasUnderlyingTypeConstraint. #>
+
+<#+ } // T4: End of !HasTypeConstraints. #>
 
         #endregion
 
         #region Conditional execution of monadic expressions (Prelude)
 
 <#+ if (HasZero) { #>
+
         /// <remarks>
         /// Named <c>guard</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
-<#+ if (IsNullable) { #>
+<#+ if (PostUnitEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
             return predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
         }
-<#+ } // End of HasZero. #>
+
+<#+ } // T4: End of HasZero. #>
 
         /// <remarks>
         /// <para>Named <c>when</c> in Haskell parlance.</para>
@@ -116,7 +119,7 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             bool predicate,
             Action action)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
 <#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
@@ -142,13 +145,13 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             bool predicate,
             Action action)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
 <#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
 <#+ } #>
             Require.NotNull(action, "action");
-<#+ if (IsNullable && WhenEnsuresSome) { #>
+<#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -169,12 +172,12 @@ public partial class MonadTemplate
             this <#= Name #><TFirst> @this,
             <#= Name #><TSecond> second,
             Func<TFirst, TSecond, TResult> resultSelector)
-<#+ WriteTypeConstraints("TFirst", "TSecond", "TResult"); #>
+            <#+ WriteTypeConstraints("TFirst", "TSecond", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
-<#+ WriteNotNull("second"); #>
+            <#+ WriteNotNull(); #>
+            <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
-<#+ if (IsNullable && BindEnsuresSome) { #>
+<#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -187,12 +190,12 @@ public partial class MonadTemplate
             <#= Name #><T2> second,
             <#= Name #><T3> third,
             Func<T1, T2, T3, TResult> resultSelector)
-<#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
+            <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
-<#+ WriteNotNull("second"); #>
+            <#+ WriteNotNull(); #>
+            <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
-<#+ if (IsNullable && BindEnsuresSome) { #>
+<#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -209,12 +212,12 @@ public partial class MonadTemplate
              <#= Name #><T3> third,
              <#= Name #><T4> fourth,
              Func<T1, T2, T3, T4, TResult> resultSelector)
-<#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
+            <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
-<#+ WriteNotNull("second"); #>
+            <#+ WriteNotNull(); #>
+            <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
-<#+ if (IsNullable && BindEnsuresSome) { #>
+<#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -235,12 +238,12 @@ public partial class MonadTemplate
             <#= Name #><T4> fourth,
             <#= Name #><T5> fifth,
             Func<T1, T2, T3, T4, T5, TResult> resultSelector)
-<#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
+            <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
-<#+ WriteNotNull("second"); #>
+            <#+ WriteNotNull(); #>
+            <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, "resultSelector");
-<#+ if (IsNullable && BindEnsuresSome) { #>
+<#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -260,33 +263,36 @@ public partial class MonadTemplate
 
 <#+ if (!PreferLinqDialect) { #>
 <#+ if (HasFilter) { #>
+
         public static <#= Name #><TSource> Where<TSource>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull(); #>
-<#+ if (IsNullable && FilterEnsuresSome) { #>
+            <#+ WriteNotNull(); #>
+<#+ if (PostFilterEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             return @this.<#= FilterName #>(predicate);
         }
-<#+ } // End of HasFilter. #>
+
+<#+ } // T4: End of HasFilter. #>
 
         public static <#= Name #><TResult> Select<TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, TResult> selector)
-<#+ WriteTypeConstraints("TSource", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
-<#+ if (IsNullable && MapEnsuresSome) { #>
+            <#+ WriteNotNull(); #>
+<#+ if (PostMapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return @this.<#= MapName #>(selector);
         }
-<#+ } // End of !PreferLinqDialect. #>
+
+<#+ } // T4: End of !PreferLinqDialect. #>
 
         /// <remarks>
         /// Kind of generalisation of Zip (liftM2).
@@ -295,12 +301,12 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             Func<TSource, <#= Name #><TMiddle>> valueSelectorM,
             Func<TSource, TMiddle, TResult> resultSelector)
-<#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
             Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
-<#+ if (IsNullable && BindEnsuresSome) { #>
+<#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -310,22 +316,23 @@ public partial class MonadTemplate
         }
 
 <#+ if (HasJoin) { #>
+
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector)
-<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-<#+ if (IsNullable && JoinEnsuresSome) { #>
+<#+ if (PostJoinEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -343,16 +350,16 @@ public partial class MonadTemplate
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector)
-<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-<#+ if (IsNullable && GroupJoinEnsuresSome) { #>
+<#+ if (PostGroupJoinEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -363,13 +370,15 @@ public partial class MonadTemplate
                 resultSelector,
                 EqualityComparer<TKey>.Default);
         }
-<#+ } // End of HasJoin. #>
+
+<#+ } // T4: End of HasJoin. #>
 
         #endregion
 
         #region LINQ extensions
 
 <#+ if (HasJoin) { #>
+
         public static <#= Name #><TResult> Join<TSource, TInner, TKey, TResult>(
             this <#= Name #><TSource> @this,
             <#= Name #><TInner> inner,
@@ -377,7 +386,7 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
@@ -386,7 +395,7 @@ public partial class MonadTemplate
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-<#+ if (IsNullable && JoinEnsuresSome) { #>
+<#+ if (PostJoinEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -406,7 +415,7 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
@@ -415,7 +424,7 @@ public partial class MonadTemplate
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
-<#+ if (IsNullable && GroupJoinEnsuresSome) { #>
+<#+ if (PostGroupJoinEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -436,9 +445,9 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ WriteNotNull("seq"); #>
+            <#+ WriteNotNull("seq"); #>
             Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
@@ -446,7 +455,7 @@ public partial class MonadTemplate
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
-<#+ if (IsNullable && MapEnsuresSome) { #>
+<#+ if (PostMapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -464,9 +473,9 @@ public partial class MonadTemplate
             Func<TInner, TKey> innerKeySelector,
             Func<TSource, <#= Name #><TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
-<#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
-<#+ WriteNotNull("seq"); #>
+            <#+ WriteNotNull("seq"); #>
             Require.NotNull(resultSelector, "resultSelector");
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
@@ -474,7 +483,7 @@ public partial class MonadTemplate
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
-<#+ if (IsNullable && MapEnsuresSome) { #>
+<#+ if (PostMapEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -489,9 +498,9 @@ public partial class MonadTemplate
             Func<TSource, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
             IEqualityComparer<TKey> comparer)
-<#+ WriteTypeConstraints("TSource", "TInner", "TKey"); #>
+            <#+ WriteTypeConstraints("TSource", "TInner", "TKey"); #>
         {
-<#+ WriteNotNull("inner"); #>
+            <#+ WriteNotNull("inner"); #>
             Require.NotNull(outerKeySelector, "outerKeySelector");
             Require.NotNull(comparer, "comparer");
             Contract.Requires(innerKeySelector != null);
@@ -504,12 +513,13 @@ public partial class MonadTemplate
                 return inner.<#= MapName #>(innerKeySelector).<#= FilterName #>(_ => comparer.Equals(_, outerKey));
             };
         }
-<#+ } // End of HasJoin. #>
+
+<#+ } // T4: End of HasJoin. #>
 
         #endregion
-    } // End of the class <#= Name #>.
+    } // End of <#= Name #>.
 <#+
     } // T4: End of EmitMonadExtensions().
-}
+} // T4: End of MonadTemplate.
 
 #>

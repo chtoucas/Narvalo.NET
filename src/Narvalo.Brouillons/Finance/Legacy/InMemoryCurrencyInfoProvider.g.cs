@@ -10,6 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace Narvalo.Finance.Legacy
 {
     using System;

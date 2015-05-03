@@ -1,4 +1,4 @@
-﻿<#@ include file="$(T4NarvaloTemplates)\Monad.Facts.tt" once="true" #><#+
+﻿<#+
 
 public partial class MonadTemplate
 {
@@ -28,6 +28,7 @@ namespace <#= Namespace #>
         }
 
 <#+ if (HasFilter) { #>
+
         [Fact]
         public static void Where_ThrowsArgumentNullException_ForNullPredicate()
         {
@@ -38,7 +39,8 @@ namespace <#= Namespace #>
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() => source.Where(predicate));
         }
-<#+ } #>
+
+<#+ } // T4: End of HasFilter. #>
 
         [Fact]
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
@@ -70,6 +72,7 @@ namespace <#= Namespace #>
         #region Monad Laws
 
 <#+ if (HasZero && HasPlus) { #>
+
         [Fact]
         public static void <#= ClassName #>_SatisfiesFirstMonoidLaw()
         {
@@ -113,7 +116,8 @@ namespace <#= Namespace #>
             // Assert
             Assert.True(left.Equals(right));
         }
-<#+ } #>
+
+<#+ } // T4: End of HasZero && HasPlus. #>
 
         [Fact]
         public static void <#= ClassName #>_SatisfiesFirstMonadLaw()
@@ -162,6 +166,7 @@ namespace <#= Namespace #>
         }
 
 <#+ if (HasZero) { #>
+
         [Fact]
         public static void <#= ClassName #>_SatisfiesMonadZeroRule()
         {
@@ -189,9 +194,10 @@ namespace <#= Namespace #>
             Assert.True(leftNone.Equals(right));
         }
 
-<#+ } #>
+<#+ } // T4: End of HasZero. #>
 
 <#+ if (HasZero && HasPlus) { #>
+
         [Fact]
         public static void <#= ClassName #>_SatisfiesMonadOrRule()
         {
@@ -223,13 +229,14 @@ namespace <#= Namespace #>
             Assert.False(leftSome.Equals(right));   // NB: Fails here the "Unit is a right zero for Plus".
             Assert.True(leftNone.Equals(right));
         }
-<#+ } #>
+
+<#+ } // T4: End of HasZero && HasPlus. #>
 
         #endregion
-    }
-}
+    } // End of <#= Name #>.
+} // End of <#= Namespace #>.
 <#+
-    }
-}
+    } // T4: End of EmitFacts().
+} // T4: End of MonadTemplate.
 
 #>

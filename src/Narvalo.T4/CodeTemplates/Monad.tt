@@ -109,11 +109,12 @@ namespace <#= Namespace #>.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
-    using Narvalo.Fx; // Necessary for EmptyIfNull().
+    using global::Narvalo.Fx; // Required for EmptyIfNull().
 <#+ if (Namespace != "Narvalo.Fx") { #>
     using <#= Namespace #>;
 <#+ } #>
@@ -128,65 +129,6 @@ namespace <#= Namespace #>.Internal
 }
 <#+
     } // T4: End of EmitLinq().
-
-    /// <inheritdoc />
-    protected override void WriteHeader()
-    {
-        base.WriteHeader();
-
-        // We either favour T4 readibility over StyleCop rules or disable rules
-        // that do not make sense for T4 files.
-        // See http://msdn.microsoft.com/en-us/library/ms244717.aspx for an explanation
-        // of the effect of the SuppressMessage attribute at module scope.
-#>
-
-using global::System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess",
-    Justification = "[GeneratedCode] Elements are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
-    Justification = "[GeneratedCode] Directives are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1403:FileMayOnlyContainASingleNamespace",
-    Justification = "[GeneratedCode] A T4 template may contain multiple namespaces.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1505:OpeningCurlyBracketsMustNotBeFollowedByBlankLine",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1507:CodeMustNotContainMultipleBlankLinesInARow",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-
-<#+
-    } // T4: End of WriteHeader().
-
-    protected void WriteTypeConstraints(params string[] names)
-    {
-        if (HasUnderlyingTypeConstraint) {
-            foreach (var name in names) {
-#>
-            where <#= name #> : <#= UnderlyingTypeConstraint #>
-<#+
-            }
-        }
-    } // T4: End of WriteTypeConstraints().
-
-    protected void WriteObjectNotNull(bool force = false)
-    {
-        if (force || IsNullable) {
-#>
-            Require.Object(@this);
-<#+
-        }
-    } // T4: End of WriteObjectNotNull().
-
-    protected void WriteNotNull(string name)
-    {
-        if (IsNullable) {
-#>
-            Require.NotNull(<#= name #>, "<#= name #>");
-<#+
-        }
-    } // T4: End of WriteNotNull().
-
-}
+} // T4: End of MonadTemplate.
 
 #>

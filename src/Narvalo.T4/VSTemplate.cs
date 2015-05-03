@@ -35,7 +35,11 @@ namespace Narvalo.T4
 // Runtime Version: {0}
 // Microsoft.VisualStudio.TextTemplating: {1}
 // </auto-generated>
-//------------------------------------------------------------------------------";
+//------------------------------------------------------------------------------
+";
+
+        private const string COMPILER_ATTR_FORMAT =
+            @"[global::System.CodeDom.Compiler.GeneratedCode(""Microsoft.VisualStudio.TextTemplating"", ""{0}"")]";
 
         /// <summary>
         /// Lazy factory for the DTE.
@@ -186,6 +190,14 @@ namespace Narvalo.T4
         protected void WriteLine()
         {
             WriteLine(String.Empty);
+        }
+
+        /// <summary>
+        /// Write the T4 compiler attribute into the generated output.
+        /// </summary>
+        protected void WriteCompilerAttributes()
+        {
+            WriteLine(COMPILER_ATTR_FORMAT, DTE.Version);
         }
 
         private static ITextTemplatingEngineHost HostFactory(TextTransformation transformation)

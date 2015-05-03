@@ -10,21 +10,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1202:ElementsMustBeOrderedByAccess",
-    Justification = "[GeneratedCode] Elements are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1210:UsingDirectivesMustBeOrderedAlphabeticallyByNamespace",
-    Justification = "[GeneratedCode] Directives are correctly ordered in the T4 source file.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass",
-    Justification = "[GeneratedCode] A T4 template may contain multiple classes.")]
-[module: SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1403:FileMayOnlyContainASingleNamespace",
-    Justification = "[GeneratedCode] A T4 template may contain multiple namespaces.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1505:OpeningCurlyBracketsMustNotBeFollowedByBlankLine",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-[module: SuppressMessage("StyleCop.CSharp.LayoutRules", "SA1507:CodeMustNotContainMultipleBlankLinesInARow",
-    Justification = "[GeneratedCode] Newline rules are disabled for T4 templates.")]
-
 namespace Narvalo.Edu.Monads.Samples
 {
     using System.Diagnostics.Contracts;
@@ -36,6 +21,7 @@ namespace Narvalo.Edu.Monads.Samples
         /// Named <c>extract</c> in Haskell parlance.
         /// </remarks>
         public static T Extract<T>(Comonad<T> monad)
+            /* T4: C# indent */
         {
             Contract.Requires(monad != null);
 
@@ -46,9 +32,11 @@ namespace Narvalo.Edu.Monads.Samples
         /// Named <c>duplicate</c> in Haskell parlance.
         /// </remarks>
         public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> monad)
+            /* T4: C# indent */
         {
+
             return Comonad<T>.δ(monad);
         }
-    } // End of the class Comonad.
+    } // End of Comonad.
 }
 

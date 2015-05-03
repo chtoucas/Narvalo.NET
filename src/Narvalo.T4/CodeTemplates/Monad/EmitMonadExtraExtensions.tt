@@ -1,4 +1,4 @@
-﻿<#@ include file="$(T4NarvaloTemplates)\Monad.tt" once="true" #><#+
+﻿<#+
 
 public partial class MonadTemplate
 {
@@ -15,11 +15,11 @@ public partial class MonadTemplate
             Func<TSource, bool> predicate,
             <#= Name #><TResult> then,
             <#= Name #><TResult> otherwise)
-<#+ WriteTypeConstraints("TSource", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
             Require.NotNull(predicate, "predicate");
-<#+ if (IsNullable && BindEnsuresSome) { #>
+<#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -27,15 +27,16 @@ public partial class MonadTemplate
         }
 
 <#+ if (HasZero) { #>
+
         public static <#= Name #><TResult> Then<TSource, TResult>(
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate,
             <#= Name #><TResult> other)
-<#+ WriteTypeConstraints("TSource", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
             Contract.Requires(predicate != null);
-<#+ if (IsNullable && CoalesceEnsuresSome) { #>
+<#+ if (PostCoalesceEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
@@ -46,24 +47,25 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             Func<TSource, bool> predicate,
             <#= Name #><TResult> other)
-<#+ WriteTypeConstraints("TSource", "TResult"); #>
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
             Contract.Requires(predicate != null);
-<#+ if (IsNullable && CoalesceEnsuresSome) { #>
+<#+ if (PostCoalesceEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
         }
-<#+ } // End of HasZero. #>
+
+<#+ } // T4: End of HasZero. #>
 
         public static void Invoke<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
             Require.NotNull(action, "action");
 
             @this.Bind(_ => { action.Invoke(_); return @this; });
@@ -74,9 +76,9 @@ public partial class MonadTemplate
         public static void On<#= ZeroName #><TSource>(
             this <#= Name #><TSource> @this,
             Action action)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
             Require.NotNull(action, "action");
 
             @this.Then(<#= Name #>.Unit).Invoke(_ => action.Invoke());
@@ -86,19 +88,20 @@ public partial class MonadTemplate
             this <#= Name #><TSource> @this,
             Action<TSource> action,
             Action case<#= ZeroName #>)
-<#+ WriteTypeConstraints("TSource"); #>
+            <#+ WriteTypeConstraints("TSource"); #>
         {
-<#+ WriteObjectNotNull(); #>
+            <#+ WriteNotNull(); #>
             Require.NotNull(action, "action");
 
             @this.Bind(_ => { action.Invoke(_); return @this; })
                 .Then(<#= Name #>.Unit)
                 .Bind(_ => { case<#= ZeroName #>.Invoke(); return Unit; });
         }
-<#+ } // End of HasThen. #>
-    } // End of the class <#= Name #>.
+
+<#+ } // T4: End of HasThen. #>
+    } // End of <#= Name #>.
 <#+
     } // T4: End of EmitMonadExtraExtensions().
-}
+} // T4: End of MonadTemplate.
 
 #>

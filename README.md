@@ -90,7 +90,7 @@ Narvalo.Common      | Alpha  |            | APTCA       | !  | !  | OK | OK  |
 Narvalo.Web         |        |            |             |    |    |    | OK  |
 Narvalo.Mvp         | Beta   |            |             | !  |    |    | OK  |
 Narvalo.Mvp.Web     | Beta   |            |             | !  |    |    | OK  |
-Narvalo.Build       |        |            |             | !  |    |    | OK  |
+Narvalo.Build       |        |            |             | !  |    |    | OK+ |
 
 - CA: Static Analysis with FxCop
 - GA: Static Analysis with Gendarme
