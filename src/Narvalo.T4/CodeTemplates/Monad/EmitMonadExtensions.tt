@@ -98,20 +98,24 @@ public partial class MonadTemplate
 <#+ if (HasZero) { #>
 
         /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
+        /// More or less the <c>guard</c> in Haskell parlance.
         /// </remarks>
-        public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
+        public static <#= Name #><TSource> Guard<TSource>(
+            this <#= Name #><TSource> @this,
+            bool predicate)
+            <#+ WriteTypeConstraints("TSource"); #>
         {
-            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
-            return predicate ? <#= Name #>.Unit : <#= Name #>.<#= ZeroName #>;
+            return predicate ? @this : <#= Name #><TSource>.<#= ZeroName #>;
         }
 
 <#+ } // T4: End of HasZero. #>
 
         /// <remarks>
-        /// <para>Named <c>when</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
+        /// More or less the <c>when</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><TSource> When<TSource>(
             this <#= Name #><TSource> @this,
@@ -136,8 +140,7 @@ public partial class MonadTemplate
         }
 
         /// <remarks>
-        /// <para>Named <c>unless</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
+        /// More or less the <c>unless</c> in Haskell parlance.
         /// </remarks>
         public static <#= Name #><TSource> Unless<TSource>(
             this <#= Name #><TSource> @this,
@@ -260,6 +263,7 @@ public partial class MonadTemplate
         #region Query Expression Pattern
 
 <#+ if (!PreferLinqDialect) { #>
+
 <#+ if (HasFilter) { #>
 
         public static <#= Name #><TSource> Where<TSource>(

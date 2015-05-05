@@ -27,8 +27,10 @@ namespace Narvalo.Fx.Samples
     /// </remarks>
     public static partial class Monad
     {
+        /// <summary>
+        /// The unique object of type <c>Monad&lt;Unit&gt;</c>.
+        /// </summary>
         private static readonly Monad<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
-
 
         /// <summary>
         /// Gets the unique object of type <c>Monad&lt;Unit&gt;</c>.
@@ -245,10 +247,9 @@ namespace Narvalo.Fx.Samples
 
 
         /// <remarks>
-        /// <para>Named <c>when</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
+        /// Named <c>when</c> in Haskell parlance.
         /// </remarks>
-        public static Monad<TSource> When<TSource>(
+        public static Monad<global::Narvalo.Fx.Unit> When<TSource>(
             this Monad<TSource> @this,
             bool predicate,
             Action action)
@@ -263,14 +264,13 @@ namespace Narvalo.Fx.Samples
                 action.Invoke();
             }
 
-            return @this;
+            return Monad.Unit;
         }
 
         /// <remarks>
-        /// <para>Named <c>unless</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
+        /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static Monad<TSource> Unless<TSource>(
+        public static Monad<global::Narvalo.Fx.Unit> Unless<TSource>(
             this Monad<TSource> @this,
             bool predicate,
             Action action)
@@ -285,7 +285,7 @@ namespace Narvalo.Fx.Samples
                 action.Invoke();
             }
 
-            return @this;
+            return Monad.Unit;
         }
 
         #endregion

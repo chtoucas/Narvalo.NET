@@ -27,9 +27,10 @@ namespace Narvalo.Fx.Samples
     /// </remarks>
     public static partial class MonadValue
     {
+        /// <summary>
+        /// The unique object of type <c>MonadValue&lt;Unit&gt;</c>.
+        /// </summary>
         private static readonly MonadValue<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
-
-        private static readonly MonadValue<global::Narvalo.Fx.Unit> s_None = MonadValue<global::Narvalo.Fx.Unit>.None;
 
         /// <summary>
         /// Gets the unique object of type <c>MonadValue&lt;Unit&gt;</c>.
@@ -57,7 +58,7 @@ namespace Narvalo.Fx.Samples
             get
             {
 
-                return s_None;
+                return MonadValue<global::Narvalo.Fx.Unit>.None;
             }
         }
 
@@ -281,19 +282,20 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>guard</c> in Haskell parlance.
         /// </remarks>
-        public static MonadValue<global::Narvalo.Fx.Unit> Guard(bool predicate)
+        public static MonadValue<global::Narvalo.Fx.Unit> Guard<TSource>(
+            this MonadValue<TSource> @this,
+            bool predicate)
+            where TSource : struct
         {
-            Contract.Ensures(Contract.Result<MonadValue<global::Narvalo.Fx.Unit>>() != null);
 
-            return predicate ? MonadValue.Unit : MonadValue.None;
+            return predicate ? MonadValue.Unit : MonadValue<global::Narvalo.Fx.Unit>.None;
         }
 
 
         /// <remarks>
-        /// <para>Named <c>when</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
+        /// Named <c>when</c> in Haskell parlance.
         /// </remarks>
-        public static MonadValue<TSource> When<TSource>(
+        public static MonadValue<global::Narvalo.Fx.Unit> When<TSource>(
             this MonadValue<TSource> @this,
             bool predicate,
             Action action)
@@ -306,14 +308,13 @@ namespace Narvalo.Fx.Samples
                 action.Invoke();
             }
 
-            return @this;
+            return MonadValue.Unit;
         }
 
         /// <remarks>
-        /// <para>Named <c>unless</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
+        /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static MonadValue<TSource> Unless<TSource>(
+        public static MonadValue<global::Narvalo.Fx.Unit> Unless<TSource>(
             this MonadValue<TSource> @this,
             bool predicate,
             Action action)
@@ -326,7 +327,7 @@ namespace Narvalo.Fx.Samples
                 action.Invoke();
             }
 
-            return @this;
+            return MonadValue.Unit;
         }
 
         #endregion

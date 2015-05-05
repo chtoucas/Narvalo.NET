@@ -4,6 +4,8 @@ Issues & Roadmap
 - CodeAnalysisDictionary does not seem to be understood.
 - When, Guard & co.
 - IsNullable && HasZero
+- Remove Maybe.None.
+- Maybe and IEquatable<T>.
 
 Design
 ------

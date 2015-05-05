@@ -43,7 +43,7 @@ namespace Narvalo.Fx
         /// <value><see langword="true"/> if the outcome is successful; otherwise <see langword="false"/>.</value>
         public bool IsSuccess { get { return _isSuccess; } }
 
-        #region Explicit casting operators
+        #region Operators
 
         public static explicit operator Outcome<T>(T value)
         {

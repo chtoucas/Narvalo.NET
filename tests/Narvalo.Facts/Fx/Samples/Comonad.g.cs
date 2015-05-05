@@ -34,6 +34,7 @@ namespace Narvalo.Fx.Samples
         public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> monad)
             /* T4: C# indent */
         {
+            Contract.Ensures(Contract.Result<Comonad<Comonad<T>>>() != null);
 
             return Comonad<T>.δ(monad);
         }

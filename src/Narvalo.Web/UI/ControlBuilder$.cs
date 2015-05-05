@@ -17,7 +17,7 @@ namespace Narvalo.Web.UI
      * Par rapport au code d'origine, on a effectué les changements suivants :
      * - passage en méthodes d'extension ;
      * - certaines propriétés étant maintenant publiques, on a supprimé les méthodes
-     * permettant d'accéder aux propriétés suivantes : 
+     * permettant d'accéder aux propriétés suivantes :
      * - `ComplexPropertyEntries` ;
      * - `SubBuilders` ;
      * - `TemplatePropertyEntries`.

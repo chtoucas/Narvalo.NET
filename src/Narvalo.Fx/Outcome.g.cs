@@ -27,8 +27,10 @@ namespace Narvalo.Fx
     /// </remarks>
     public static partial class Outcome
     {
+        /// <summary>
+        /// The unique object of type <c>Outcome&lt;Unit&gt;</c>.
+        /// </summary>
         private static readonly Outcome<global::Narvalo.Fx.Unit> s_Unit = Success(global::Narvalo.Fx.Unit.Single);
-
 
         /// <summary>
         /// Gets the unique object of type <c>Outcome&lt;Unit&gt;</c>.
@@ -245,10 +247,9 @@ namespace Narvalo.Fx
 
 
         /// <remarks>
-        /// <para>Named <c>when</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
+        /// Named <c>when</c> in Haskell parlance.
         /// </remarks>
-        public static Outcome<TSource> When<TSource>(
+        public static Outcome<global::Narvalo.Fx.Unit> When<TSource>(
             this Outcome<TSource> @this,
             bool predicate,
             Action action)
@@ -263,14 +264,13 @@ namespace Narvalo.Fx
                 action.Invoke();
             }
 
-            return @this;
+            return Outcome.Unit;
         }
 
         /// <remarks>
-        /// <para>Named <c>unless</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
+        /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static Outcome<TSource> Unless<TSource>(
+        public static Outcome<global::Narvalo.Fx.Unit> Unless<TSource>(
             this Outcome<TSource> @this,
             bool predicate,
             Action action)
@@ -285,7 +285,7 @@ namespace Narvalo.Fx
                 action.Invoke();
             }
 
-            return @this;
+            return Outcome.Unit;
         }
 
         #endregion

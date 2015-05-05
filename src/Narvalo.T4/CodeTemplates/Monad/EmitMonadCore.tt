@@ -4,8 +4,6 @@ public partial class MonadTemplate
 {
     protected void EmitMonadCore()
     {
-        // WARNING: It is your duty to ensure that Zero and Unit are not null.
-        // Actually, η should never return null.
 #>
     /// <content>
     /// Provides a set of static methods for <see cref="<#= Name #>{T}" />.
@@ -15,11 +13,10 @@ public partial class MonadTemplate
     /// </remarks>
     public static partial class <#= Name #>
     {
+        /// <summary>
+        /// The unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
+        /// </summary>
         private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_Unit = <#= ReturnName #>(global::Narvalo.Fx.Unit.Single);
-
-<#+ if (HasZero) { #>
-        private static readonly <#= Name #><global::Narvalo.Fx.Unit> s_<#= ZeroName #> = <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
-<#+ } #>
 
         /// <summary>
         /// Gets the unique object of type <c><#= Name #>&lt;Unit&gt;</c>.
@@ -54,7 +51,7 @@ public partial class MonadTemplate
                 Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
-                return s_<#= ZeroName #>;
+                return <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
             }
         }
 

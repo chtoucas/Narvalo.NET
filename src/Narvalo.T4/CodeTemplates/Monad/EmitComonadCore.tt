@@ -27,9 +27,7 @@ public partial class MonadTemplate
         public static <#= Name #><<#= Name #><T>> Duplicate<T>(<#= Name #><T> monad)
             <#+ WriteTypeConstraints("T"); #>
         {
-<#+ if (PostDuplicateEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><<#= Name #><T>>>() != null);
-<#+ } #>
 
             return <#= Name #><T>.δ(monad);
         }

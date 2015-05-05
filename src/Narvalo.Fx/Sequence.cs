@@ -7,8 +7,75 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Linq;
 
+    public static class Sequence<T>
+    {
+        //public static Func<int, T> AlwaysDefault
+        //{
+        //    get
+        //    {
+        //        Contract.Ensures(Contract.Result<Func<int, T>>() != null);
+
+        //        return Stubs<int, T>.AlwaysDefault;
+        //    }
+        //}
+
+        public static T AlwaysDefault(int i)
+        {
+            return default(T);
+        }
+    }
+
     public static class Sequence
     {
+        private static readonly Func<int, int> s_Int32Increment = i => i + 1;
+
+        private static readonly Func<long, long> s_Int64Increment = i => i + 1L;
+
+        public static Func<int, int> Identity
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Func<int, int>>() != null);
+
+                return Stubs<int>.Identity;
+            }
+        }
+
+        public static Func<int, int> Increment
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Func<int, int>>() != null);
+
+                return s_Int32Increment;
+            }
+        }
+
+        public static Func<int, bool> AlwaysTrue
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Func<int, bool>>() != null);
+
+                return Stubs<int>.AlwaysTrue;
+            }
+        }
+
+        public static Func<int, bool> AlwaysFalse
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Func<int, bool>>() != null);
+
+                return Stubs<int>.AlwaysFalse;
+            }
+        }
+
+        public static long LongIncrement(long i)
+        {
+            return i + 1L;
+        }
+
         /// <summary>
         /// Generates a sequence that contains exactly one value.
         /// </summary>
@@ -24,16 +91,71 @@ namespace Narvalo.Fx
             yield return value;
         }
 
-        public static IEnumerable<TSource> Generate<TSource>(
-            TSource start,
+        #region Anamorphisms
+
+        /// <summary>
+        /// Generates an infinite sequence.
+        /// </summary>
+        public static IEnumerable<TResult> Unfold<TSource, TResult>(
+            TSource seed,
+            Func<TSource, Iteration<TResult, TSource>> generator)
+        {
+            Contract.Requires(generator != null);
+            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+
+            return Unfold(seed, generator, Stubs<TSource>.AlwaysTrue);
+        }
+
+        public static IEnumerable<TResult> Unfold<TSource, TResult>(
+            TSource seed,
+            Func<TSource, Iteration<TResult, TSource>> generator,
+            Func<TSource, bool> predicate)
+        {
+            Require.NotNull(generator, "generator");
+            Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+
+            TSource current = seed;
+
+            while (predicate.Invoke(current))
+            {
+                var iter = generator.Invoke(current);
+
+                yield return iter.Result;
+
+                current = iter.Next;
+            }
+        }
+
+        #endregion
+
+        #region List Comprehensions
+
+        /// <summary>
+        /// Generates an infinite sequence.
+        /// </summary>
+        public static IEnumerable<TSource> Gather<TSource>(
+            TSource seed,
             Func<TSource, TSource> iterator)
         {
-            Require.NotNull(iterator, "iterator");
+            Contract.Requires(iterator != null);
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
-            TSource current = start;
+            return Gather(seed, iterator, Stubs<TSource>.AlwaysTrue);
+        }
 
-            while (true)
+        public static IEnumerable<TSource> Gather<TSource>(
+            TSource seed,
+            Func<TSource, TSource> iterator,
+            Func<TSource, bool> predicate)
+        {
+            Require.NotNull(iterator, "iterator");
+            Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+
+            TSource current = seed;
+
+            while (predicate.Invoke(current))
             {
                 yield return current;
 
@@ -41,38 +163,51 @@ namespace Narvalo.Fx
             }
         }
 
-        #region Anamorphims
-
-        public static IEnumerable<TResult> Generate<TSource, TResult>(
-            Func<TSource, TSource> iterator,
+        /// <summary>
+        /// Generates an infinite sequence.
+        /// </summary>
+        /// <remarks>
+        /// This method can be derived from the Unfold anamorphism:
+        /// <code>
+        /// Sequence.Unfold(seed, _ => Iteration.Create(resultSelector.Invoke(_), iterator.Invoke(_)));
+        /// </code>
+        /// </remarks>
+        public static IEnumerable<TResult> Gather<TSource, TResult>(
             TSource seed,
+            Func<TSource, TSource> iterator,
             Func<TSource, TResult> resultSelector)
         {
             Contract.Requires(iterator != null);
             Contract.Requires(resultSelector != null);
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
-            return Generate(iterator, seed, resultSelector, Stubs<TSource>.AlwaysTrue);
+            return Gather(seed, iterator, resultSelector, Stubs<TSource>.AlwaysTrue);
         }
 
-        public static IEnumerable<TResult> Generate<TSource, TResult>(
-            Func<TSource, TSource> iterator,
+        /// <remarks>
+        /// This method can be derived from the Unfold anamorphism:
+        /// <code>
+        /// Sequence.Unfold(seed, _ => Iteration.Create(resultSelector.Invoke(_), iterator.Invoke(_)), predicate);
+        /// </code>
+        /// </remarks>
+        public static IEnumerable<TResult> Gather<TSource, TResult>(
             TSource seed,
+            Func<TSource, TSource> iterator,
             Func<TSource, TResult> resultSelector,
             Func<TSource, bool> predicate)
         {
             Require.NotNull(iterator, "iterator");
             Require.NotNull(resultSelector, "resultSelector");
-            Require.NotNull(resultSelector, "predicate");
+            Require.NotNull(predicate, "predicate");
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
-            TSource next = seed;
+            TSource current = seed;
 
-            while (predicate.Invoke(next))
+            while (predicate.Invoke(current))
             {
-                yield return resultSelector.Invoke(next);
+                yield return resultSelector.Invoke(current);
 
-                next = iterator.Invoke(next);
+                current = iterator.Invoke(current);
             }
         }
 
@@ -84,14 +219,14 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Workaround for the fact that <see cref="Enumerable.Empty{T}"/> does not have any contract attached.
         /// </remarks>
-        /// <typeparam name="TSource">The type to assign to the type parameter of the returned 
+        /// <typeparam name="TSource">The type to assign to the type parameter of the returned
         /// generic <see cref="IEnumerable{T}"/>.</typeparam>
         /// <returns>An empty <see cref="IEnumerable{T}"/> whose type argument is TResult.</returns>
         internal static IEnumerable<TSource> Empty<TSource>()
         {
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
-            // We could use "yield break", but Enumerable.Empty<T> is more readable 
+            // We could use "yield break", but Enumerable.Empty<T> is more readable
             // with the additional benefit of returning a singleton.
             var retval = Enumerable.Empty<TSource>();
             Contract.Assume(retval != null);

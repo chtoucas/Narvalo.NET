@@ -133,10 +133,7 @@ namespace Narvalo.Fx
      * - [Haskell](http://hackage.haskell.org/package/base-4.6.0.1/docs/Data-Maybe.html)
      * - [Kinds of Immutability](http://blogs.msdn.com/b/ericlippert/archive/2007/11/13/immutability-in-c-part-one-kinds-of-immutability.aspx)
      *
-     * Alternative implementations in C#:
-     * - [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons/blob/master/Application/iSynaptic.Commons/Maybe.cs)
-     *
-     * REVIEW: Is it such a good idea to implement <see cref="IEnumerable{T}"/>?
+     * There are many alternative implementations in C#; just google it!
      * ]]>
      * </content>
      */
@@ -146,13 +143,10 @@ namespace Narvalo.Fx
         Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
     public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Maybe<T> s_None = new Maybe<T>();
-
         private readonly bool _isSome;
 
-        // You should NEVER use this field directly. Use instead the property; the Code Contracts
-        // static checker should then prove that no illegal access to this field happen (i.e. when IsSome is false).
+        // You should NEVER use this field directly. Always use instead the property; the Code Contracts
+        // static checker should then prove that no illegal access to this field happens (i.e. when IsSome is false).
         private readonly T _value;
 
         /// <summary>
@@ -215,6 +209,8 @@ namespace Narvalo.Fx
             }
         }
 
+        #region Operators
+
         public static explicit operator Maybe<T>(T value)
         {
             return η(value);
@@ -245,6 +241,8 @@ namespace Narvalo.Fx
         {
             return !value.IsSome;
         }
+
+        #endregion
 
         public TResult Map<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
@@ -322,6 +320,7 @@ namespace Narvalo.Fx
 
             return IsSome ? Format.CurrentCulture("Maybe({0})", Value) : "Maybe(None)";
         }
+
         #region Overrides for auto-generated (extension) methods
 
         #region Basic Monad functions
@@ -624,17 +623,11 @@ namespace Narvalo.Fx
     public partial struct Maybe<T>
     {
         /// <summary>
-        /// Gets an instance of <see cref="Maybe{T}" /> that does not enclose any value.
+        /// An instance of <see cref="Maybe{T}" /> that does not enclose any value.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Maybe<T> None
-        {
-            get
-            {
-                return s_None;
-            }
-        }
+        public static readonly Maybe<T> None = new Maybe<T>();
 
         public Maybe<T> OrElse(Maybe<T> other)
         {

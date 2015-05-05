@@ -27,9 +27,10 @@ namespace Narvalo.Fx.Samples
     /// </remarks>
     public static partial class MonadOr
     {
+        /// <summary>
+        /// The unique object of type <c>MonadOr&lt;Unit&gt;</c>.
+        /// </summary>
         private static readonly MonadOr<global::Narvalo.Fx.Unit> s_Unit = Return(global::Narvalo.Fx.Unit.Single);
-
-        private static readonly MonadOr<global::Narvalo.Fx.Unit> s_None = MonadOr<global::Narvalo.Fx.Unit>.None;
 
         /// <summary>
         /// Gets the unique object of type <c>MonadOr&lt;Unit&gt;</c>.
@@ -59,7 +60,7 @@ namespace Narvalo.Fx.Samples
             {
                 Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
 
-                return s_None;
+                return MonadOr<global::Narvalo.Fx.Unit>.None;
             }
         }
 
@@ -93,6 +94,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Contract.Requires(square != null);
+            Contract.Ensures(Contract.Result<MonadOr<T>>() != null);
 
             return MonadOr<T>.μ(square);
         }
@@ -222,6 +224,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.NotNull(selector, "selector");
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return @this.Bind(_ => MonadOr.Return(selector.Invoke(_)));
         }
@@ -235,6 +238,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return @this.Bind(_ => other);
         }
@@ -254,6 +258,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<MonadOr<TSource>>() != null);
 
             return @this.Bind(
                 _ => predicate.Invoke(_) ? @this : MonadOr<TSource>.None);
@@ -269,6 +274,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.GreaterThanOrEqualTo(count, 1, "count");
+            Contract.Ensures(Contract.Result<MonadOr<IEnumerable<TSource>>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -282,19 +288,22 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>guard</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate)
+        public static MonadOr<global::Narvalo.Fx.Unit> Guard<TSource>(
+            this MonadOr<TSource> @this,
+            bool predicate)
+            /* T4: C# indent */
         {
+            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
 
-            return predicate ? MonadOr.Unit : MonadOr.None;
+            return predicate ? MonadOr.Unit : MonadOr<global::Narvalo.Fx.Unit>.None;
         }
 
 
         /// <remarks>
-        /// <para>Named <c>when</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
+        /// Named <c>when</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<TSource> When<TSource>(
+        public static MonadOr<global::Narvalo.Fx.Unit> When<TSource>(
             this MonadOr<TSource> @this,
             bool predicate,
             Action action)
@@ -309,14 +318,13 @@ namespace Narvalo.Fx.Samples
                 action.Invoke();
             }
 
-            return @this;
+            return MonadOr.Unit;
         }
 
         /// <remarks>
-        /// <para>Named <c>unless</c> in Haskell parlance.</para>
-        /// <para>Haskell use a different signature. The method should return a <see cref="Narvalo.Fx.Unit"/>.</para>
+        /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<TSource> Unless<TSource>(
+        public static MonadOr<global::Narvalo.Fx.Unit> Unless<TSource>(
             this MonadOr<TSource> @this,
             bool predicate,
             Action action)
@@ -331,7 +339,7 @@ namespace Narvalo.Fx.Samples
                 action.Invoke();
             }
 
-            return @this;
+            return MonadOr.Unit;
         }
 
         #endregion
@@ -348,6 +356,7 @@ namespace Narvalo.Fx.Samples
             Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -363,6 +372,7 @@ namespace Narvalo.Fx.Samples
             Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             Func<T1, MonadOr<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -382,6 +392,7 @@ namespace Narvalo.Fx.Samples
             Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             Func<T1, MonadOr<TResult>> g
                 = t1 => second.Zip(
@@ -405,6 +416,7 @@ namespace Narvalo.Fx.Samples
             Require.Object(@this);
             Require.NotNull(second, "second");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             Func<T1, MonadOr<TResult>> g
                 = t1 => second.Zip(
@@ -433,6 +445,7 @@ namespace Narvalo.Fx.Samples
             Require.Object(@this);
             Require.NotNull(valueSelectorM, "valueSelectorM");
             Require.NotNull(resultSelector, "resultSelector");
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return @this.Bind(
                 _ => valueSelectorM.Invoke(_).Select(
@@ -453,6 +466,7 @@ namespace Narvalo.Fx.Samples
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return @this.Join(
                 inner,
@@ -475,6 +489,7 @@ namespace Narvalo.Fx.Samples
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return @this.GroupJoin(
                 inner,
@@ -504,6 +519,7 @@ namespace Narvalo.Fx.Samples
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return JoinCore(
                 @this,
@@ -528,6 +544,7 @@ namespace Narvalo.Fx.Samples
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(resultSelector != null);
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return GroupJoinCore(
                 @this,
@@ -554,6 +571,7 @@ namespace Narvalo.Fx.Samples
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -577,6 +595,7 @@ namespace Narvalo.Fx.Samples
             Contract.Requires(outerKeySelector != null);
             Contract.Requires(innerKeySelector != null);
             Contract.Requires(comparer != null);
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -623,6 +642,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.NotNull(predicate, "predicate");
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -636,6 +656,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Contract.Requires(predicate != null);
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return @this.Coalesce(predicate, other, MonadOr<TResult>.None);
         }
@@ -648,6 +669,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Contract.Requires(predicate != null);
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return @this.Coalesce(predicate, MonadOr<TResult>.None, other);
         }
@@ -709,6 +731,7 @@ namespace Narvalo.Fx.Samples
         {
             Acknowledge.Object(@this);
             Require.NotNull(value, "value");
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
             return value.Bind(@this);
         }
@@ -1114,6 +1137,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
+            Contract.Ensures(Contract.Result<MonadOr<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             var m = @this.Select(funM).EmptyIfNull().Collect();
 

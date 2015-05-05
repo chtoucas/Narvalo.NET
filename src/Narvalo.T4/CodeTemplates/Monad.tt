@@ -12,14 +12,10 @@
 <#@ include file="Monad\EmitComonadCore.tt" #><#+
 
 // WARNING: This is only a proof of concept.
-// This file depends on Narvalo.Cerbere & Narvalo.Fx packages for four things:
-// - the classes Acknowledge, Assume and Require in the Narvalo namespace.
-// - the Unit class in the Narvalo.Fx namespace; but you can define your own: see UnitFullName.
+// This file depends on Narvalo.Cerbere & Narvalo.Fx packages for:
+// - The classes Acknowledge and Require in the Narvalo namespace.
+// - The Unit class and the EmptyIfNull() extension method in the Narvalo.Fx namespace.
 // The generated files are free of CA warnings except for CA1006:DoNotNestGenericTypesInMemberSignatures.
-
-// Remove this:
-// If the monad does have a zero, we do expect "Bind" & "η" to never return null but the zero.
-// If the monad does not have a zero, we do not have any expectation on the return value of Bind.
 
 public abstract partial class MonadTemplate : _MonadTemplate
 {

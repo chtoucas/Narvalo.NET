@@ -10,6 +10,18 @@ namespace Narvalo.T4
     /// <summary>
     /// Provides a base class for Monad templates.
     /// </summary>
+    /// <remarks>
+    /// <list type="bullet">
+    /// <item>It is your duty to ensure that Zero and Unit are not null.</item>
+    /// <item>We expect "η" &amp; "δ" to never return null. Am I right?</item>
+    /// <item>If the monad does have a zero, we do expect "Bind" &amp; "μ"
+    /// to never return null but the zero if needed.</item>
+    /// <item>If the monad does not have a zero, we do not have any expectation
+    /// on the return value of "Bind" &amp; "μ".</item>
+    /// <item>If you override any extension method, they must respect the same
+    /// contracts.</item>
+    /// </list>
+    /// </remarks>
     public abstract class _MonadTemplate : VSTemplate
     {
         /// <summary>
@@ -250,53 +262,25 @@ namespace Narvalo.T4
 
         #endregion
 
-        #region Postconditions (Core)
-
-        /// <summary>
-        /// Gets or sets a value indicating whether Monad.Bind() ensures a non-null return value. Default to false.
-        /// </summary>
-        /// <value><see langword="true"/> if Monad.Bind() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
-        protected bool BindEnsuresSome { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether Monad.μ() ensures a non-null return value. Default to false.
-        /// </summary>
-        /// <value><see langword="true"/> if Monad.μ() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
-        protected bool MultiplicationEnsuresSome { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether Monad.δ() ensures a non-null return value. Default to false.
-        /// </summary>
-        /// <value><see langword="true"/> if Monad.δ() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
-        protected bool DuplicateEnsuresSome { get; set; }
-
-        #endregion
-
         #region Postconditions
 
         /// <summary>
         /// Gets a value indicating whether Monad.Bind() ensures a non-null return value. Default to false.
         /// </summary>
+        /// <remarks>If the monad does have a zero, we expect "Bind"
+        /// to never return null but the zero if needed.</remarks>
         /// <value><see langword="true"/> if Monad.Bind() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool PostBindEnsuresSome { get { return IsNullable && BindEnsuresSome; } }
+        protected bool PostBindEnsuresSome { get { return IsNullable && HasZero; } }
 
         /// <summary>
-        /// Gets a value indicating whether Monad.Multiplication() ensures a non-null return value. Default to false.
+        /// Gets a value indicating whether Monad.μ() ensures a non-null return value. Default to false.
         /// </summary>
-        /// <value><see langword="true"/> if Monad.Multiplication() ensures a non-null return value;
+        /// <remarks>If the monad does have a zero, we expect "μ"
+        /// to never return null but the zero if needed.</remarks>
+        /// <value><see langword="true"/> if Monad.μ() ensures a non-null return value;
         /// otherwise <see langword="false"/>.</value>
-        protected bool PostMultiplicationEnsuresSome { get { return IsNullable && MultiplicationEnsuresSome; } }
-
-        /// <summary>
-        /// Gets a value indicating whether Monad.Duplicate() ensures a non-null return value. Default to false.
-        /// </summary>
-        /// <value><see langword="true"/> if Monad.Duplicate() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
-        protected bool PostDuplicateEnsuresSome { get { return IsNullable && DuplicateEnsuresSome; } }
+        protected bool PostMultiplicationEnsuresSome { get { return IsNullable && HasZero; } }
 
         /// <summary>
         /// Gets a value indicating whether Monad.Map() ensures a non-null return value. Default to false.
@@ -319,12 +303,12 @@ namespace Narvalo.T4
         /// otherwise <see langword="false"/>.</value>
         protected bool PostCoalesceEnsuresSome { get { return PostBindEnsuresSome; } }
 
-        /// <summary>
-        /// Gets a value indicating whether Monad.Then() ensures a non-null return value. Default to false.
-        /// </summary>
-        /// <value><see langword="true"/> if Monad.Then() ensures a non-null return value;
-        /// otherwise <see langword="false"/>.</value>
-        protected bool PostThenEnsuresSome { get { return PostCoalesceEnsuresSome; } }
+        ///// <summary>
+        ///// Gets a value indicating whether Monad.Then() ensures a non-null return value. Default to false.
+        ///// </summary>
+        ///// <value><see langword="true"/> if Monad.Then() ensures a non-null return value;
+        ///// otherwise <see langword="false"/>.</value>
+        ////protected bool PostThenEnsuresSome { get { return PostCoalesceEnsuresSome; } }
 
         /// <summary>
         /// Gets a value indicating whether Monad.Join() ensures a non-null return value. Default to false.
@@ -359,7 +343,6 @@ namespace Narvalo.T4
         /// </summary>
         protected void InitializeZero()
         {
-            // ZeroName use the default value.
             HasZero = true;
         }
 
@@ -368,10 +351,7 @@ namespace Narvalo.T4
         /// </summary>
         protected void InitializePlus()
         {
-            // ZeroName use the default value.
             HasZero = true;
-
-            // PlusName use the default value.
             HasPlus = true;
         }
 

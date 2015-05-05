@@ -3,7 +3,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Narvalo.Brouillons")]
+[assembly: AssemblyTitle("Narvalo.Edu")]
 [assembly: AssemblyDescription("")]
 
-[assembly: Guid("7e8fd841-aa2d-4519-8cd5-03dbde7a530e")]
+[assembly: Guid("4ac3e2fd-6804-4d2c-a833-e5bc7acec512")]

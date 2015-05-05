@@ -18,7 +18,6 @@ namespace Narvalo.Fx
         {
             Require.NotNull(square, "square");
 
-            // return square.Bind(_ => _);
             return square.Invoke();
         }
     }
