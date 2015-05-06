@@ -21,7 +21,7 @@ namespace Narvalo.Fx
 
             if (@this == null)
             {
-                return Sequence.Empty<TSource>();
+                return Sequence<TSource>.Empty;
             }
 
             return @this;

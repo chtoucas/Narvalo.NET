@@ -503,7 +503,7 @@ namespace Narvalo.Fx
         {
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 
-            return IsSome ? Sequence.Single(Value) : Sequence.Empty<T>();
+            return IsSome ? Sequence.Single(Value) : Sequence<T>.Empty;
         }
 
         /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />

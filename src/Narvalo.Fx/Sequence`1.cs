@@ -1,0 +1,33 @@
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Fx
+{
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Linq;
+
+    public static class Sequence<TElement>
+    {
+        /// <summary>
+        /// Gets the empty sequence that has the specified type argument.
+        /// </summary>
+        /// <remarks>
+        /// Workaround for the fact that <see cref="Enumerable.Empty{TElement}"/> does not have any contract attached.
+        /// </remarks>
+        /// <value>An empty <see cref="IEnumerable{TElement}"/> whose type argument is TElement.</value>
+        public static IEnumerable<TElement> Empty
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<IEnumerable<TElement>>() != null);
+
+                // We could use "yield break", but Enumerable.Empty<T> is more readable
+                // with the additional benefit of returning a singleton.
+                var retval = Enumerable.Empty<TElement>();
+                Contract.Assume(retval != null);
+
+                return retval;
+            }
+        }
+    }
+}

@@ -5,77 +5,9 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
-    using System.Linq;
-
-    public static class Sequence<T>
-    {
-        //public static Func<int, T> AlwaysDefault
-        //{
-        //    get
-        //    {
-        //        Contract.Ensures(Contract.Result<Func<int, T>>() != null);
-
-        //        return Stubs<int, T>.AlwaysDefault;
-        //    }
-        //}
-
-        public static T AlwaysDefault(int i)
-        {
-            return default(T);
-        }
-    }
 
     public static class Sequence
     {
-        private static readonly Func<int, int> s_Int32Increment = i => i + 1;
-
-        private static readonly Func<long, long> s_Int64Increment = i => i + 1L;
-
-        public static Func<int, int> Identity
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Func<int, int>>() != null);
-
-                return Stubs<int>.Identity;
-            }
-        }
-
-        public static Func<int, int> Increment
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Func<int, int>>() != null);
-
-                return s_Int32Increment;
-            }
-        }
-
-        public static Func<int, bool> AlwaysTrue
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Func<int, bool>>() != null);
-
-                return Stubs<int>.AlwaysTrue;
-            }
-        }
-
-        public static Func<int, bool> AlwaysFalse
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Func<int, bool>>() != null);
-
-                return Stubs<int>.AlwaysFalse;
-            }
-        }
-
-        public static long LongIncrement(long i)
-        {
-            return i + 1L;
-        }
-
         /// <summary>
         /// Generates a sequence that contains exactly one value.
         /// </summary>
@@ -167,7 +99,7 @@ namespace Narvalo.Fx
         /// Generates an infinite sequence.
         /// </summary>
         /// <remarks>
-        /// This method can be derived from the Unfold anamorphism:
+        /// This method can be derived from Unfold:
         /// <code>
         /// Sequence.Unfold(seed, _ => Iteration.Create(resultSelector.Invoke(_), iterator.Invoke(_)));
         /// </code>
@@ -185,7 +117,7 @@ namespace Narvalo.Fx
         }
 
         /// <remarks>
-        /// This method can be derived from the Unfold anamorphism:
+        /// This method can be derived from Unfold:
         /// <code>
         /// Sequence.Unfold(seed, _ => Iteration.Create(resultSelector.Invoke(_), iterator.Invoke(_)), predicate);
         /// </code>
@@ -212,26 +144,5 @@ namespace Narvalo.Fx
         }
 
         #endregion
-
-        /// <summary>
-        /// Returns an empty sequence that has the specified type argument.
-        /// </summary>
-        /// <remarks>
-        /// Workaround for the fact that <see cref="Enumerable.Empty{T}"/> does not have any contract attached.
-        /// </remarks>
-        /// <typeparam name="TSource">The type to assign to the type parameter of the returned
-        /// generic <see cref="IEnumerable{T}"/>.</typeparam>
-        /// <returns>An empty <see cref="IEnumerable{T}"/> whose type argument is TResult.</returns>
-        internal static IEnumerable<TSource> Empty<TSource>()
-        {
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
-
-            // We could use "yield break", but Enumerable.Empty<T> is more readable
-            // with the additional benefit of returning a singleton.
-            var retval = Enumerable.Empty<TSource>();
-            Contract.Assume(retval != null);
-
-            return retval;
-        }
     }
 }
