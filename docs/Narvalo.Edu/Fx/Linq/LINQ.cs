@@ -8,35 +8,35 @@ namespace Narvalo.Fx.Linq
     // LINQ from scratch.
     public static class LINQ
     {
-        #region Anamorphisms aka Lenses
+        #region Anamorphisms aka Lenses |(...)|
 
         #region Generation Operators
 
         public static IEnumerable<int> Range(int start, int count)
         {
-            return Sequence.Gather(0, Sequence.Increment, i => start + i, i => i < count);
+            return Sequence.Gather(0, i => i + 1, i => start + i, i => i < count);
         }
 
         public static IEnumerable<T> Repeat<T>(T value)
         {
-            return Sequence.Gather(0, Sequence.Increment, i => value);
+            return Sequence.Gather(0, i => i + 1, i => value);
         }
 
         public static IEnumerable<T> Repeat<T>(T value, int count)
         {
-            return Sequence.Gather(0, Sequence.Increment, i => value, i => i < count);
+            return Sequence.Gather(0, i => i + 1, i => value, i => i < count);
         }
 
         public static IEnumerable<T> Empty<T>()
         {
-            return Sequence.Gather(0, Sequence.Identity, Sequence<T>.AlwaysDefault, Sequence.AlwaysFalse);
+            return Sequence.Gather(0, Stubs<int>.Identity, Stubs<int, T>.AlwaysDefault, Stubs<int>.AlwaysFalse);
         }
 
         #endregion
 
         #endregion
 
-        #region Catamorphisms aka Bananas
+        #region Catamorphisms aka Bananas (|...|)
 
         #region Quantifiers
 

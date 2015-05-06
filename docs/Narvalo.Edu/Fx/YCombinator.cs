@@ -9,8 +9,7 @@ namespace Narvalo.Fx
     public static class YCombinator
     {
         public static Func<TSource, TResult> Y0<TSource, TResult>(
-            Func<Func<TSource, TResult>,
-            Func<TSource, TResult>> generator)
+            Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
         {
             Recursive<TSource, TResult> rec = r => _ => generator.Invoke(r.Invoke(r)).Invoke(_);
 
@@ -18,8 +17,7 @@ namespace Narvalo.Fx
         }
 
         public static Func<TSource, TResult> Y1<TSource, TResult>(
-            Func<Func<TSource, TResult>,
-            Func<TSource, TResult>> generator)
+            Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
         {
             Func<TSource, TResult> g = null;
 
