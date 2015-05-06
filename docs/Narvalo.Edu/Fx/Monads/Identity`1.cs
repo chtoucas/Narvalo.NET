@@ -8,7 +8,7 @@ namespace Narvalo.Fx.Monads
     using System.Diagnostics.Contracts;
 
     /// <summary>
-    /// Represents the trivial monad. Useless in the context of C#.
+    /// Represents the trivial monad. Pretty useless.
     /// </summary>
     /// <typeparam name="T">The underlying type of the value.</typeparam>
     public partial struct Identity<T> : IEquatable<Identity<T>>, IEquatable<T>

@@ -249,15 +249,10 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>when</c> in Haskell parlance.
         /// </remarks>
-        public static Outcome<global::Narvalo.Fx.Unit> When<TSource>(
-            this Outcome<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
+        public static Outcome<global::Narvalo.Fx.Unit> When(bool predicate, Action action)
         {
-            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Outcome<TSource>>() != null);
+            Contract.Ensures(Contract.Result<Outcome<global::Narvalo.Fx.Unit>>() != null);
 
             if (predicate)
             {
@@ -270,15 +265,10 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static Outcome<global::Narvalo.Fx.Unit> Unless<TSource>(
-            this Outcome<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
+        public static Outcome<global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
         {
-            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Outcome<TSource>>() != null);
+            Contract.Ensures(Contract.Result<Outcome<global::Narvalo.Fx.Unit>>() != null);
 
             if (!predicate)
             {

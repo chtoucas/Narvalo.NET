@@ -89,13 +89,7 @@ namespace Narvalo.T4
         /// Gets a value indicating whether the monad has Join and GroupJoin methods. Default to true.
         /// </summary>
         /// <value><see langword="true"/> if the monad has Join and GroupJoin methods; otherwise <see langword="false"/>.</value>
-        protected bool HasJoin { get { return HasZero; } }
-
-        /// <summary>
-        /// Gets a value indicating whether the monad has a Then method. Default to true.
-        /// </summary>
-        /// <value><see langword="true"/> if the monad has a Then method; otherwise <see langword="false"/>.</value>
-        protected bool HasThen { get { return HasZero; } }
+        protected bool HasJoin { get { return HasFilter; } }
 
         /// <summary>
         /// Gets a value indicating whether the monad has a Sum method. Default to true.
@@ -106,7 +100,8 @@ namespace Narvalo.T4
         /// <summary>
         /// Gets or sets a value indicating whether we prefer to use the LINQ dialect. Default to true.
         /// </summary>
-        /// <remarks>Among other things, this property changes the names of the Map and Filter methods.</remarks>
+        /// <remarks>Among other things, this property changes the names of the Map and Filter methods
+        /// to the preferred .NET equivalents: Select and Where.</remarks>
         /// <value><see langword="true"/> if we prefer to use the LINQ dialect; otherwise <see langword="false"/>.</value>
         protected bool PreferLinqDialect
         {

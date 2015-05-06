@@ -71,7 +71,7 @@ public partial class MonadTemplate
             @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-<#+ if (HasThen) { #>
+<#+ if (HasZero) { #>
 
         public static void On<#= ZeroName #><TSource>(
             this <#= Name #><TSource> @this,
@@ -98,7 +98,7 @@ public partial class MonadTemplate
                 .Bind(_ => { case<#= ZeroName #>.Invoke(); return Unit; });
         }
 
-<#+ } // T4: End of HasThen. #>
+<#+ } // T4: End of HasZero. #>
     } // End of <#= Name #>.
 <#+
     } // T4: End of EmitMonadExtraExtensions().

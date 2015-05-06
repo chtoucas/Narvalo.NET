@@ -98,37 +98,27 @@ public partial class MonadTemplate
 <#+ if (HasZero) { #>
 
         /// <remarks>
-        /// More or less the <c>guard</c> in Haskell parlance.
+        /// Named <c>guard</c> in Haskell parlance.
         /// </remarks>
-        public static <#= Name #><TSource> Guard<TSource>(
-            this <#= Name #><TSource> @this,
-            bool predicate)
-            <#+ WriteTypeConstraints("TSource"); #>
+        public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
-            return predicate ? @this : <#= Name #><TSource>.<#= ZeroName #>;
+            return predicate ? <#= Name #>.Unit : <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
         }
 
 <#+ } // T4: End of HasZero. #>
 
         /// <remarks>
-        /// More or less the <c>when</c> in Haskell parlance.
+        /// Named <c>when</c> in Haskell parlance.
         /// </remarks>
-        public static <#= Name #><TSource> When<TSource>(
-            this <#= Name #><TSource> @this,
-            bool predicate,
-            Action action)
-            <#+ WriteTypeConstraints("TSource"); #>
+        public static <#= Name #><global::Narvalo.Fx.Unit> When(bool predicate, Action action)
         {
-<#+ if (IsNullable) { #>
-            Acknowledge.Object(@this);
-<#+ } #>
             Require.NotNull(action, "action");
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
             if (predicate)
@@ -136,24 +126,17 @@ public partial class MonadTemplate
                 action.Invoke();
             }
 
-            return @this;
+            return <#= Name #>.Unit;
         }
 
         /// <remarks>
-        /// More or less the <c>unless</c> in Haskell parlance.
+        /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static <#= Name #><TSource> Unless<TSource>(
-            this <#= Name #><TSource> @this,
-            bool predicate,
-            Action action)
-            <#+ WriteTypeConstraints("TSource"); #>
+        public static <#= Name #><global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
         {
-<#+ if (IsNullable) { #>
-            Acknowledge.Object(@this);
-<#+ } #>
             Require.NotNull(action, "action");
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
             if (!predicate)
@@ -161,7 +144,7 @@ public partial class MonadTemplate
                 action.Invoke();
             }
 
-            return @this;
+            return <#= Name #>.Unit;
         }
 
         #endregion

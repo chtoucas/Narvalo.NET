@@ -282,10 +282,7 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>guard</c> in Haskell parlance.
         /// </remarks>
-        public static MonadValue<global::Narvalo.Fx.Unit> Guard<TSource>(
-            this MonadValue<TSource> @this,
-            bool predicate)
-            where TSource : struct
+        public static MonadValue<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
 
             return predicate ? MonadValue.Unit : MonadValue<global::Narvalo.Fx.Unit>.None;
@@ -295,11 +292,7 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>when</c> in Haskell parlance.
         /// </remarks>
-        public static MonadValue<global::Narvalo.Fx.Unit> When<TSource>(
-            this MonadValue<TSource> @this,
-            bool predicate,
-            Action action)
-            where TSource : struct
+        public static MonadValue<global::Narvalo.Fx.Unit> When(bool predicate, Action action)
         {
             Require.NotNull(action, "action");
 
@@ -314,11 +307,7 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static MonadValue<global::Narvalo.Fx.Unit> Unless<TSource>(
-            this MonadValue<TSource> @this,
-            bool predicate,
-            Action action)
-            where TSource : struct
+        public static MonadValue<global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
         {
             Require.NotNull(action, "action");
 

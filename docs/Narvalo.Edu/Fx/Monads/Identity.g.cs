@@ -244,13 +244,9 @@ namespace Narvalo.Fx.Monads
 
 
         /// <remarks>
-        /// More or less the <c>when</c> in Haskell parlance.
+        /// Named <c>when</c> in Haskell parlance.
         /// </remarks>
-        public static Identity<TSource> When<TSource>(
-            this Identity<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
+        public static Identity<global::Narvalo.Fx.Unit> When(bool predicate, Action action)
         {
             Require.NotNull(action, "action");
 
@@ -259,17 +255,13 @@ namespace Narvalo.Fx.Monads
                 action.Invoke();
             }
 
-            return @this;
+            return Identity.Unit;
         }
 
         /// <remarks>
-        /// More or less the <c>unless</c> in Haskell parlance.
+        /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static Identity<TSource> Unless<TSource>(
-            this Identity<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
+        public static Identity<global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
         {
             Require.NotNull(action, "action");
 
@@ -278,7 +270,7 @@ namespace Narvalo.Fx.Monads
                 action.Invoke();
             }
 
-            return @this;
+            return Identity.Unit;
         }
 
         #endregion

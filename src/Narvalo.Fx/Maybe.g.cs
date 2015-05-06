@@ -277,24 +277,19 @@ namespace Narvalo.Fx
 
 
         /// <remarks>
-        /// More or less the <c>guard</c> in Haskell parlance.
+        /// Named <c>guard</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<TSource> Guard<TSource>(
-            this Maybe<TSource> @this,
-            bool predicate)
+        public static Maybe<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
 
-            return predicate ? @this : Maybe<TSource>.None;
+            return predicate ? Maybe.Unit : Maybe<global::Narvalo.Fx.Unit>.None;
         }
 
 
         /// <remarks>
-        /// More or less the <c>when</c> in Haskell parlance.
+        /// Named <c>when</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<TSource> When<TSource>(
-            this Maybe<TSource> @this,
-            bool predicate,
-            Action action)
+        public static Maybe<global::Narvalo.Fx.Unit> When(bool predicate, Action action)
         {
             Require.NotNull(action, "action");
 
@@ -303,16 +298,13 @@ namespace Narvalo.Fx
                 action.Invoke();
             }
 
-            return @this;
+            return Maybe.Unit;
         }
 
         /// <remarks>
-        /// More or less the <c>unless</c> in Haskell parlance.
+        /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<TSource> Unless<TSource>(
-            this Maybe<TSource> @this,
-            bool predicate,
-            Action action)
+        public static Maybe<global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
         {
             Require.NotNull(action, "action");
 
@@ -321,7 +313,7 @@ namespace Narvalo.Fx
                 action.Invoke();
             }
 
-            return @this;
+            return Maybe.Unit;
         }
 
         #endregion

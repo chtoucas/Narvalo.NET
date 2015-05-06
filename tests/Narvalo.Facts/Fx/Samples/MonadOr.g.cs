@@ -288,12 +288,8 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>guard</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> Guard<TSource>(
-            this MonadOr<TSource> @this,
-            bool predicate)
-            /* T4: C# indent */
+        public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
-            Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
 
             return predicate ? MonadOr.Unit : MonadOr<global::Narvalo.Fx.Unit>.None;
@@ -303,15 +299,10 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>when</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> When<TSource>(
-            this MonadOr<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
+        public static MonadOr<global::Narvalo.Fx.Unit> When(bool predicate, Action action)
         {
-            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<MonadOr<TSource>>() != null);
+            Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
 
             if (predicate)
             {
@@ -324,15 +315,10 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>unless</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> Unless<TSource>(
-            this MonadOr<TSource> @this,
-            bool predicate,
-            Action action)
-            /* T4: C# indent */
+        public static MonadOr<global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
         {
-            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<MonadOr<TSource>>() != null);
+            Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
 
             if (!predicate)
             {
