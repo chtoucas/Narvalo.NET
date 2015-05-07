@@ -94,10 +94,10 @@ Things I am working on:
 
 Class                   | Type
 ----------------------- | ------------------
-`Identity<T>`           | Monad, Comonad (?)
+`Identity<T>`           | Monad, Comonad
 `Maybe<T>`              | MonadMore, MonadOr
-`Output<T>`             | Monad (?)
-`Either<TLeft, TRight>` | Monad (?)
+`Outcome<T>`            | Monad
+`Either<TLeft, TRight>` | Monad
 
 Illustration
 ------------
@@ -107,34 +107,34 @@ but they give a fairly simple way to understand the rules.
 
 From the Arithmetic,
 
-- Bind is *
-- Plus is +
-- Unit is 1
-- Zero is 0
+- `Bind` is `*`
+- `Plus` is `+`
+- `Unit` is `1`
+- `Zero` is `0`
 
 From the Boolean Algebra,
 
-- Bind is ∧, the logical conjunction AND
-- Plus is ∨, the logical disjunction OR
-- Unit is True
-- Zero is False
+- `Bind` is `∧`, the logical conjunction AND
+- `Plus` is `∨`, the logical disjunction OR
+- `Unit` is `True`
+- `Zero` is `False`
 
 We write the definitions and rules using the Haskell syntax.
 For a translation to .NET, see Internal\Rules.cs
 
 Core definitions:
 
-Description                       | Signature
---------------------------------- | ---------------------------
-Bind defined via Multiply and Map | `m >>= g = join (fmap g m)`
-Map defined by Bind & Unit        | `fmap f x = x >>= (return . f)`
-Multiply defined by Bind          | `join x = x >>= id`
-Then defined by Bind              | `m >> n = m >>= \_ -> n`
+Description                             | Signature
+--------------------------------------- | --------------------------------------
+`Bind` defined via `Multiply` and `Map` | `m >>= g = join (fmap g m)`
+`Map` defined by `Bind` & `Unit`        | `fmap f x = x >>= (return . f)`
+`Multiply` defined by `Bind`            | `join x = x >>= id`
+`Then` defined by `Bind`                | `m >> n = m >>= \_ -> n`
 
 Core rules:
 
 Description          | Signature
--------------------- | ---------------------------
+-------------------- | ---------------------------------------------------------
 [Map]                | `fmap id == id`
 [Map]                | `fmap (f . g) == fmap f . fmap g`
 [Then] Associativity | `(m >> n) >> o = m >> (n >> o)`
@@ -142,7 +142,7 @@ Description          | Signature
 ### Haskell
 
 Description                      | Signature
--------------------------------- | ---------------------------
+-------------------------------- | ---------------------------------------------
 [Monoid] Left identity           | `mplus mzero m = m`
 [Monoid] Right identity          | `mplus m mzero = m`
 [Monoid] Associativity           | `mplus a (mplus b c) = mplus (mplus a b) c`
@@ -163,7 +163,7 @@ Description                      | Signature
 ### Arithmetic
 
 Description                      | Signature
--------------------------------- | ---------------------------
+-------------------------------- | ---------------------------------------------
 [Monoid] Left identity           | `0 + x = x`
 [Monoid] Right identity          | `x + 0 = x`
 [Monoid] Associativity           | `x + (y + z) = (x + y) + z`
@@ -180,7 +180,7 @@ Description                      | Signature
 ### Boolean Algebra
 
 Description                      | Signature
--------------------------------- | ---------------------------
+-------------------------------- | ---------------------------------------------
 [Monoid] Left identity           | `False ∨ P = P`
 [Monoid] Right identity          | `P ∨ False = P`
 [Monoid] Associativity           | `P ∨ (Q ∨ R) = (P ∨ Q) ∨ R`
@@ -204,7 +204,7 @@ The immediate benefit is that we can use the query expression syntax (from, sele
 This is similar to the do syntaxic sugar of Haskell.
 
 Name               | Haskell           | Terminology used here
--------------------|-------------------|------------------------------------
+-------------------|-------------------|----------------------------------------
 _Monoid_           |                   |
 `Zero`             | `mzero`           | `Zero` or `None`, `Empty`, `Failure`,...
 `Plus`             | `mplus`           | `Plus` or `OrElse`,...
@@ -250,7 +250,7 @@ C#                | Haskell
 We do no
 
 C#                             | Haskell
------------------------------- | ----------------------------------------------------------
+------------------------------ | -------------------------------------------------------------------
 `Enumerable<T>.Map`            | `mapM :: Monad m => (a -> m b) -> [a] -> m [b]`
 _Ignore_                       | `mapM_ :: Monad m => (a -> m b) -> [a] -> m ()`
 _Ignore_                       | `forM :: Monad m => [a] -> (a -> m b) -> m [b]`
@@ -266,7 +266,7 @@ _Ignore_                       | `sequence_ :: Monad m => [m a] -> m ()`
 ### Generalisations of list functions
 
 C#                          | Haskell
---------------------------- | -------------------------------------------------------------------
+--------------------------- | ----------------------------------------------------------------------
 `Monad.Flatten`             | `join :: Monad m => m (m a) -> m a`
 `Enumerable<Monad<T>>.Sum`  | `msum :: MonadPlus m => [m a] -> m a`
 `Monad<T>.Filter`           | `mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a`
@@ -282,7 +282,7 @@ _Ignore_                    | `replicateM_ :: Monad m => Int -> m a -> m ()`
 ### Conditional execution of monadic expressions
 
 C#                    | Haskell
---------------------- | -------------------------------------------
+--------------------- | ----------------------------------------------------------------------------
 `Monad.Guard`         | `guard :: MonadPlus m => Bool -> m ()`
 `Monad.When`          | `when :: Monad m => Bool -> m () -> m ()`
 `Monad.Unless`        | `unless :: Monad m => Bool -> m () -> m ()`
@@ -292,7 +292,7 @@ C#                    | Haskell
 Implemented as static methods `Monad.Lift` and extension methods.
 
 C#                    |
---------------------- | -------------------------------------------------------------------------------------------------------
+--------------------- | ----------------------------------------------------------------------------
 `Monad<T>.Map`        | `liftM :: Monad m => (a1 -> r) -> m a1 -> m r`
 `Monad<T>.SelectMany` | `liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r`
 `Monad<T>.Zip`        | `liftM3 :: Monad m => (a1 -> a2 -> a3 -> r) -> m a1 -> m a2 -> m a3 -> m r`
