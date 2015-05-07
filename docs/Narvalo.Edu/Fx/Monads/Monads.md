@@ -124,68 +124,78 @@ For a translation to .NET, see Internal\Rules.cs
 
 Core definitions:
 
-- `m >>= g = join (fmap g m)`                              Bind defined via Multiply and Map
-- `fmap f x = x >>= (return . f)`                          Map defined by Bind & Unit
-- `join x = x >>= id`                                      Multiply defined by Bind
-- `m >> n = m >>= \_ -> n`                                 Then defined by Bind
+Description                       | Signature
+--------------------------------- | ---------------------------
+Bind defined via Multiply and Map | `m >>= g = join (fmap g m)`
+Map defined by Bind & Unit        | `fmap f x = x >>= (return . f)`
+Multiply defined by Bind          | `join x = x >>= id`
+Then defined by Bind              | `m >> n = m >>= \_ -> n`
 
 Core rules:
 
-- `fmap id == id`                                          [Map]
-- `fmap (f . g) == fmap f . fmap g`                        [Map]
-- `(m >> n) >> o = m >> (n >> o)`                          [Then]      Associativity
+Description          | Signature
+-------------------- | ---------------------------
+[Map]                | `fmap id == id`
+[Map]                | `fmap (f . g) == fmap f . fmap g`
+[Then] Associativity | `(m >> n) >> o = m >> (n >> o)`
 
 ### Haskell
 
-- `mplus mzero m = m`                                      [Monoid]    Left identity
-- mplus m mzero = m                                      [Monoid]    Right identity
-- mplus a (mplus b c) = mplus (mplus a b) c              [Monoid]    Associativity
-- return x >>= f = f x                                   [Monad]     Left identity
-  return >=> g ≡ g
-- m >>= return = m                                       [Monad]     Right identity
-  f >=> return ≡ f
-- (m >>= f) >>= g = m >>= (\x -> f x >>= g)              [Monad]     Associativity
-  (f >=> g) >=> h ≡ f >=> (g >=> h)
-- mzero >>= f = mzero                                    [MonadZero] Left zero
-- v >> mzero = mzero                                     [MonadMore] Right zero
-- m >>= (\x -> mzero) = mzero
-- mplus a b >>= f = mplus (a >>= f) (b >>= f)            [MonadPlus] Right distributivity
--                                                        [...]       Left distributivity
-- morelse (return a) b ≡ return a                        [MonadOr]   Left zero
-- morelse a (return b) ≡ return b                        [...]       Right zero
+Description                      | Signature
+-------------------------------- | ---------------------------
+[Monoid] Left identity           | `mplus mzero m = m`
+[Monoid] Right identity          | `mplus m mzero = m`
+[Monoid] Associativity           | `mplus a (mplus b c) = mplus (mplus a b) c`
+[Monad] Left identity            | `return x >>= f = f x`
+                                 | `return >=> g ≡ g`
+[Monad] Right identity           | `m >>= return = m`
+                                 | `f >=> return ≡ f`
+[Monad] Associativity            | `(m >>= f) >>= g = m >>= (\x -> f x >>= g)`
+                                 | `(f >=> g) >=> h ≡ f >=> (g >=> h)`
+[MonadZero] Left zero            | `mzero >>= f = mzero`
+[MonadMore] Right zero           | `v >> mzero = mzero`
+                                 | `m >>= (\x -> mzero) = mzero`
+[MonadPlus] Right distributivity | `mplus a b >>= f = mplus (a >>= f) (b >>= f)`
+[...] Left distributivity        |
+[MonadOr] Left zero              | `morelse (return a) b ≡ return a`
+[...] Right zero                 | `morelse a (return b) ≡ return b`
 
 ### Arithmetic
 
-- 0 + x = x                                              [Monoid]    Left identity
-- x + 0 = x                                              [Monoid]    Right identity
-- x + (y + z) = (x + y) + z                              [Monoid]    Associativity
-- 1 * x = x                                              [Monad]     Left identity
-- x * 1 = x                                              [Monad]     Right identity
-- x * (y * z) = (x * y) * z                              [Monad]     Associativity
-- 0 * x = 0                                              [MonadZero] Left zero
-- x * 0 = 0                                              [MonadMore] Right zero
-- (x + y) * z = x * z + x * z                            [MonadPlus] Right distributivity
-- x * (y + z) = x * y + x * z                            [...]       Left distributivity
-- (not available)                                        [MonadOr]   Left zero
-- (not available)                                        [...]       Right zero
+Description                      | Signature
+-------------------------------- | ---------------------------
+[Monoid] Left identity           | `0 + x = x`
+[Monoid] Right identity          | `x + 0 = x`
+[Monoid] Associativity           | `x + (y + z) = (x + y) + z`
+[Monad] Left identity            | `1 * x = x`
+[Monad] Right identity           | `x * 1 = x`
+[Monad] Associativity            | `x * (y * z) = (x * y) * z`
+[MonadZero] Left zero            | `0 * x = 0`
+[MonadMore] Right zero           | `x * 0 = 0`
+[MonadPlus] Right distributivity | `(x + y) * z = x * z + x * z`
+[...] Left distributivity        | `x * (y + z) = x * y + x * z`
+[MonadOr] Left zero              | (not available)
+[...] Right zero                 | (not available)
 
 ### Boolean Algebra
 
-- False ∨ P = P                                          [Monoid]    Left identity
-- P ∨ False = P                                          [Monoid]    Right identity
-- P ∨ (Q ∨ R) = (P ∨ Q) ∨ z                            [Monoid]    Associativity
-- True ∧ P = P                                           [Monad]     Left identity
-- P ∧ True = P                                           [Monad]     Right identity
-- P ∧ (Q ∧ R) = (P ∧ Q) ∧ z                            [Monad]     Associativity
-- False ∧ P = False                                      [MonadZero] Left zero
-- P ∧ False = False                                      [MonadMore] Right zero
--                                                        [MonadPlus] Right distributivity
-- P ∧ (Q ∨ R) = (P ∧ Q) ∨ (P ∧ R)                      [...]       Left distributivity
-- True ∨ P = True                                        [MonadOr]   Left zero
-- P ∨ True = True                                        [...]       Right zero
+Description                      | Signature
+-------------------------------- | ---------------------------
+[Monoid] Left identity           | `False ∨ P = P`
+[Monoid] Right identity          | `P ∨ False = P`
+[Monoid] Associativity           | `P ∨ (Q ∨ R) = (P ∨ Q) ∨ R`
+[Monad] Left identity            | `True ∧ P = P`
+[Monad] Right identity           | `P ∧ True = P`
+[Monad] Associativity            | `P ∧ (Q ∧ R) = (P ∧ Q) ∧ R`
+[MonadZero] Left zero            | `False ∧ P = False`
+[MonadMore] Right zero           | `P ∧ False = False`
+[MonadPlus] Right distributivity |
+[...] Left distributivity        | `P ∧ (Q ∨ R) = (P ∧ Q) ∨ (P ∧ R)`
+[MonadOr] Left zero              | `True ∨ P = True`
+[...] Right zero                 | `P ∨ True = True`
 
-Implementation
---------------
+Naming
+------
 
 Sometimes we choose a more appropriate name than the default one.
 
@@ -213,7 +223,12 @@ _Comonad_          |                   |
 From Haskell to C#
 ------------------
 
+All variants that return a `Monad<Unit>` instead of a `Monad<T>` are not implemented;
+they obviously make little sense in the contexte of C#.
+
 ### Monad
+
+We do not implement `fail` as .NET provides its own way of reporting errors.
 
 C#                | Haskell
 ----------------- | -----------------------------------------------
@@ -227,10 +242,12 @@ _Ignore_          | `fail :: String -> m a`
 
 C#                | Haskell
 ----------------- | ----------------------------
-`Monad.Zero`      | `mzero :: m a`
+`Monad<T>.Zero`   | `mzero :: m a`
 `Monad<T>.Plus`   | `mplus :: m a -> m a -> m a`
 
 ### Basic Monad functions
+
+We do no
 
 C#                             | Haskell
 ------------------------------ | ----------------------------------------------------------
