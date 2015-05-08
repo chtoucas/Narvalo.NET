@@ -12,50 +12,38 @@ concepts in a very friendly way.
 Monoid
 ------
 
-A Monoid has an `Empty` element and an `Append` operation:
-```csharp
-public class Monoid<T>
-{
-    public static Monoid<T> Empty { get { throw new NotImplementedException(); } }
+A Monoid has an `Empty` element and an `Append` operation that satisfies the Monoid laws:
+- `Empty` is the identity for `Append`: `mappend mempty m = m` and `mappend m mempty = m`.
+- `Append` is associative: `mappend a (mappend b c) = mappend (mappend a b) c`.
 
-    public Monoid<T> Append(Monoid<T> other)
-    {
+In C#,
+```csharp
+public class Monoid<T> {
+    public static Monoid<T> Empty {
+        get { throw new NotImplementedException(); } 
+    }
+
+    public Monoid<T> Append(Monoid<T> other) {
         throw new NotImplementedException();
     }
 }
-```
-and `Monoid<T>` satisfies the Monoid laws:
-- `Empty` is the identity for `Append`
-```csharp
-/// <summary>
-/// First Monoid Law: Empty is a left identity for Append.
-/// </summary>
-public static bool FirstMonoidLaw<T>(Monoid<T> m)
-{
-    // mplus mzero m = m
-    return Monoid<T>.Empty.Append(m) == m;
-}
 
-/// <summary>
-/// Second Monoid Law: Empty is a right identity for Append.
-/// </summary>
-public static bool SecondMonoidLaw<T>(Monoid<T> m)
-{
-    // mplus m mzero = m
-    return m.Append(Monoid<T>.Empty) == m;
+public static class MonoidLaws {
+    // Empty is a left identity for Append.
+    public static void FirstLaw<T>(Monoid<T> m) {
+        Monoid<T>.Empty.Append(m) == m;
+    }
+    
+    // Empty is a right identity for Append.
+    public static void SecondLaw<T>(Monoid<T> m) {
+        m.Append(Monoid<T>.Empty) == m;
+    }
+    
+    // Append is associative.
+    public static bool ThirdLaw<T>(Monoid<T> a, Monoid<T> b, Monoid<T> c) {
+        return a.Append(b.Append(c)) == (a.Append(b)).Append(c);
+    }
 }
-```
-- `Append` is associative
-```csharp
-/// <summary>
-/// Third Monoid Law: Append is associative.
-/// </summary>
-public static bool ThirdMonoidLaw<T>(Monoid<T> a, Monoid<T> b, Monoid<T> c)
-{
-    // mplus a (mplus b c) = mplus (mplus a b) c
-    return a.Append(b.Append(c)) == (a.Append(b)).Append(c);
-}
-```
 
 Haskell also includes a `Concat` operation which in fact derives from `Empty`
 and `Append`: `FoldR Append Empty`.
