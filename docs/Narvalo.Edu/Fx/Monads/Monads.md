@@ -11,20 +11,19 @@ The .NET type system is not rich enough to make general
 monadic constructions but it gives developers access to some powerful monadic
 concepts in a very friendly way.
 
-We provide two analogies for illustration. Beware they are not accurate,
+For illustration, we provide two analogies from Mathematics. Beware they are not accurate,
 but they give a fairly simple way to understand the rules.
-
 From the Arithmetic,
-- `Bind` is `*`
-- `Plus` is `+`
-- `Unit` is `1`
-- `Zero` is `0`
+- `Bind` is `*`.
+- `Plus` is `+`.
+- `Unit` is `1`.
+- `Zero` is `0`.
 
 From the Boolean Algebra,
-- `Bind` is `∧`, the logical conjunction AND
-- `Plus` is `∨`, the logical disjunction OR
-- `Unit` is `True`
-- `Zero` is `False`
+- `Bind` is `∧`, the logical conjunction AND.
+- `Plus` is `∨`, the logical disjunction OR.
+- `Unit` is `True`.
+- `Zero` is `False`.
 
 Monoid
 ------
@@ -37,20 +36,22 @@ In the context of monads, we use different names: `Plus` or `OrElse` for `Append
 and `Zero` for `Empty`.
 
 Rule           | Arithmetic
--------------- | --------------------------------------------------------------
+-------------- | ---------------------------------------------------------------
 Left identity  | `0 + x = x`
 Right identity | `x + 0 = x`
 Associativity  | `x + (y + z) = (x + y) + z`
 
 Rule           | Boolean Algebra
--------------- | --------------------------------------------------------------
+-------------- | ---------------------------------------------------------------
 Left identity  | `False ∨ P = P`
 Right identity | `P ∨ False = P`
 Associativity  | `P ∨ (Q ∨ R) = (P ∨ Q) ∨ R`
 
 In Haskell:
 ```haskell
+-- Empty method
 mempty :: a
+-- Append method
 mappend :: a -> a -> a
 
 -- First law: mempty is a left identity for mappend.
@@ -75,17 +76,17 @@ public class Monoid<T> {
 }
 
 public static class MonoidLaws {
-    // Empty is a left identity for Append.
+    // First law: Empty is a left identity for Append.
     public static void FirstLaw<T>(Monoid<T> m) {
         Monoid<T>.Empty.Append(m) == m;
     }
 
-    // Empty is a right identity for Append.
+    // Second law: Empty is a right identity for Append.
     public static void SecondLaw<T>(Monoid<T> m) {
         m.Append(Monoid<T>.Empty) == m;
     }
 
-    // Append is associative.
+    // Third law: Append is associative.
     public static bool ThirdLaw<T>(Monoid<T> a, Monoid<T> b, Monoid<T> c) {
         return a.Append(b.Append(c)) == (a.Append(b)).Append(c);
     }
@@ -95,8 +96,8 @@ public static class MonoidLaws {
 Haskell also includes a `Concat` operation which derives from `Empty`
 and `Append`:
 ```haskell
+-- Concat method
 mconcat :: [a] -> a
-
 mconcat = foldr mappend mempty
 ```
 
@@ -105,18 +106,178 @@ Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/D
 Monad
 -----
 
-A Monad has a Unit element and a Bind operation that satisfy the three
+A Monad has a unit element `Return` and a `Bind` operation that satisfy the three
 monad laws:
-- `Unit` is the identity for `Bind`: `return x >>= f = f x` and `m >>= return = m`.
-- `Bind` is associative: `(m >>= f) >>= g = m >>= (\x -> f x >>= g)`
+- `Return` is the identity for `Bind`.
+- `Bind` is associative.
 
-If one wishes to stay close to the category roots of Monads, a Monad is
-equivalently defines with a `Unit` element and two operations `Map`
-and `Multiply`.
-
-NB: Haskell also provides a fail method which is not part of the standard definition
+Haskell also provides a fail method which is not part of the standard definition
 of a monad. It is mostly used for pattern matching failure, something we do not
 have in .NET.
+
+Rule           | Arithmetic
+-------------- | ---------------------------------------------------------------
+Left identity  | `1 * x = x`
+Right identity | `x * 1 = x`
+Associativity  | `x * (y * z) = (x * y) * z`
+
+Rule           | Boolean Algebra
+-------------- | ---------------------------------------------------------------
+Left identity  | `True ∧ P = P`
+Right identity | `P ∧ True = P`
+Associativity  | `P ∧ (Q ∧ R) = (P ∧ Q) ∧ R`
+
+In Haskell:
+```haskell
+-- Bind method
+(>>=) :: forall a b. m a -> (a -> m b) -> m b
+-- Return method
+return :: a -> m a
+
+-- First law: return is a left identity for >>=.
+return a >>= f == f a
+-- Second law: return is a right identity for >>=.
+m >>= return == m
+-- Third law: bind is associative.
+m >>= (\x -> f x >>= g) == (m >>= f) >>= g
+```
+
+In C#:
+```csharp
+// Skeleton definition of a monad.
+public class Monad<T> {
+    public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> kun) {
+        throw new NotImplementedException();
+    }
+}
+
+public static class Monad {
+    public static Monad<T> Return<T>(T value) {
+        throw new NotImplementedException();
+    }
+}
+
+public static class MonadLaws {
+    // First law: Return is a left identity for Bind.
+    public static void FirstLaw<X, Y>(Func<X, Monad<Y>> f, X value) {
+        Monad.Return(value).Bind(f) == f(value);
+    }
+
+    // Second law: Return is a right identity for Bind.
+    public static void SecondLaw<X>(Monad<X> m) {
+        m.Bind(Monad.Return) == m;
+    }
+
+    // Third law: Bind is associative.
+    public static void ThirdLaw<X, Y, Z>(Monad<X> m, Func<X, Monad<Y>> f, Func<Y, Monad<Z>> g) {
+        m.Bind(_ => f(_).Bind(g)) == m.Bind(f).Bind(g);
+    }
+}
+```
+
+Functions in the Kleisli category
+---------------------------------
+
+A function in the Kleisli category is simply a function that maps values to a monad.
+Of course, functions can be invoked or composed with another function.
+
+In Haskell:
+```haskell
+-- Invoke method
+(=<<) :: Monad m => (a -> m b) -> m a -> m b
+f =<< x = x >>= f
+
+-- Compose method
+(>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c
+f >=> g = \x -> f x >>= g
+
+-- ComposeBack method
+(<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
+(<=<) = flip (>=>)
+```
+
+In C#:
+```csharp
+public delegate Monad<T> Kunc<T>();
+
+public delegate Monad<TResult> Kunc<in T, TResult>(T arg);
+
+public delegate Monad<TResult> Kunc<in T1, in T2, TResult>(T1 arg1, T2 arg2);
+
+public static partial class KuncExtensions
+{
+    public static Monad<TResult> Invoke<TSource, TResult>(
+        this Kunc<TSource, TResult> @this,
+        Monad<TSource> monad)
+    {
+        return monad.Bind(@this);
+    }
+
+    public static Kunc<TSource, TResult> Compose<TSource, TMiddle, TResult>(
+        this Kunc<TSource, TMiddle> @this,
+        Kunc<TMiddle, TResult> kun)
+    {
+        return _ => @this.Invoke(_).Bind(kun);
+    }
+
+    public static Kunc<TSource, TResult> ComposeBack<TSource, TMiddle, TResult>(
+        this Kunc<TMiddle, TResult> @this,
+        Kunc<TSource, TMiddle> kun)
+    {
+        return _ => kun.Invoke(_).Bind(@this);
+    }
+```
+
+Now we can then rewrite the monad laws in a more readable fashion.
+
+In Haskell:
+```haskell
+return >=> g ≡ g
+f >=> return ≡ f
+(f >=> g) >=> h ≡ f >=> (g >=> h)
+```
+
+In C#:
+```csharp
+public static class MonadLaws {
+    public static void FirstLaw<X, Y>(Kunc<X, Y> g, X value) {
+        Kunc<X, X> id = _ => Monad.Return(_);
+
+        id.Compose(g).Invoke(value) == g(value);
+    }
+
+    public static void SecondLaw<X, Y>(Kunc<X, Y> f, X value)
+    {
+        f.Compose(Monad.Return).Invoke(value) == f(value);
+    }
+
+    public static void ThirdLaw<X, Y, Z, T>(Kunc<X, Y> f, Kunc<Y, Z> g, Kunc<Z, T> h, X value) {
+        (f.Compose(g)).Compose(h).Invoke(value) == f.Compose(g.Compose(h)).Invoke(value);
+    }
+}
+```
+
+Monad Revisited
+---------------
+
+If one wishes to stay close to the category roots of monads, a Monad is
+equivalently defined by a unit element `Return` and two operations `Map`
+and `Multiply`.
+
+Description                             | Signature
+--------------------------------------- | --------------------------------------
+`Bind` defined via `Multiply` and `Map` | `m >>= g = join (fmap g m)`
+`Map` defined by `Bind` & `Unit`        | `fmap f x = x >>= (return . f)`
+`Multiply` defined by `Bind`            | `join x = x >>= id`
+`Then` defined by `Bind`                | `m >> n = m >>= \_ -> n`
+
+Core rules:
+
+Description          | Signature
+-------------------- | ---------------------------------------------------------
+`Map`                | `fmap id == id`
+`Map`                | `fmap (f . g) == fmap f . fmap g`
+`Then` Associativity | `(m >> n) >> o = m >> (n >> o)`
 
 Comonad
 -------
@@ -182,55 +343,12 @@ Class                   | Type
 Illustration
 ------------
 
-We provide two analogies to illustrate the rules. Beware they are not accurate,
-but they give a fairly simple way to understand the rules.
-
-From the Arithmetic,
-
-- `Bind` is `*`
-- `Plus` is `+`
-- `Unit` is `1`
-- `Zero` is `0`
-
-From the Boolean Algebra,
-
-- `Bind` is `∧`, the logical conjunction AND
-- `Plus` is `∨`, the logical disjunction OR
-- `Unit` is `True`
-- `Zero` is `False`
-
 We write the definitions and rules using the Haskell syntax.
-
-Core definitions:
-
-Description                             | Signature
---------------------------------------- | --------------------------------------
-`Bind` defined via `Multiply` and `Map` | `m >>= g = join (fmap g m)`
-`Map` defined by `Bind` & `Unit`        | `fmap f x = x >>= (return . f)`
-`Multiply` defined by `Bind`            | `join x = x >>= id`
-`Then` defined by `Bind`                | `m >> n = m >>= \_ -> n`
-
-Core rules:
-
-Description          | Signature
--------------------- | ---------------------------------------------------------
-`Map`                | `fmap id == id`
-`Map`                | `fmap (f . g) == fmap f . fmap g`
-`Then` Associativity | `(m >> n) >> o = m >> (n >> o)`
 
 ### Haskell
 
 Description                      | Signature
 -------------------------------- | ---------------------------------------------
-[Monoid] Left identity           | `mplus mzero m = m`
-[Monoid] Right identity          | `mplus m mzero = m`
-[Monoid] Associativity           | `mplus a (mplus b c) = mplus (mplus a b) c`
-[Monad] Left identity            | `return x >>= f = f x`
-                                 | `return >=> g ≡ g`
-[Monad] Right identity           | `m >>= return = m`
-                                 | `f >=> return ≡ f`
-[Monad] Associativity            | `(m >>= f) >>= g = m >>= (\x -> f x >>= g)`
-                                 | `(f >=> g) >=> h ≡ f >=> (g >=> h)`
 [MonadZero] Left zero            | `mzero >>= f = mzero`
 [MonadMore] Right zero           | `v >> mzero = mzero`
                                  | `m >>= (\x -> mzero) = mzero`
@@ -243,12 +361,6 @@ Description                      | Signature
 
 Description                      | Signature
 -------------------------------- | ---------------------------------------------
-[Monoid] Left identity           | `0 + x = x`
-[Monoid] Right identity          | `x + 0 = x`
-[Monoid] Associativity           | `x + (y + z) = (x + y) + z`
-[Monad] Left identity            | `1 * x = x`
-[Monad] Right identity           | `x * 1 = x`
-[Monad] Associativity            | `x * (y * z) = (x * y) * z`
 [MonadZero] Left zero            | `0 * x = 0`
 [MonadMore] Right zero           | `x * 0 = 0`
 [MonadPlus] Right distributivity | `(x + y) * z = x * z + x * z`
@@ -260,12 +372,6 @@ Description                      | Signature
 
 Description                      | Signature
 -------------------------------- | ---------------------------------------------
-[Monoid] Left identity           | `False ∨ P = P`
-[Monoid] Right identity          | `P ∨ False = P`
-[Monoid] Associativity           | `P ∨ (Q ∨ R) = (P ∨ Q) ∨ R`
-[Monad] Left identity            | `True ∧ P = P`
-[Monad] Right identity           | `P ∧ True = P`
-[Monad] Associativity            | `P ∧ (Q ∧ R) = (P ∧ Q) ∧ R`
 [MonadZero] Left zero            | `False ∧ P = False`
 [MonadMore] Right zero           | `P ∧ False = False`
 [MonadPlus] Right distributivity |
