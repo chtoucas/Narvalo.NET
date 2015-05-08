@@ -28,7 +28,7 @@ From the _Boolean Algebra_,
 Monoid
 ------
 
-A Monoid has an `Empty` element and an `Append` operation that satisfy the Monoid laws:
+A Monoid has an `Empty` element and an `Append` operation that satisfy the monoid laws:
 - `Empty` is the identity for `Append`.
 - `Append` is associative.
 
@@ -49,9 +49,9 @@ Associativity  | `P ∨ (Q ∨ R) = (P ∨ Q) ∨ R`
 
 In Haskell:
 ```haskell
--- Empty method
+-- Empty method.
 mempty :: a
--- Append method
+-- Append method.
 mappend :: a -> a -> a
 
 -- First law: Empty is a left identity for Append.
@@ -105,10 +105,49 @@ mconcat = foldr mappend mempty
 
 Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Monoid.html)
 
+Functor
+-------
+
+A Functor has a `Map` operation that satisfy the functor laws:
+- The identity map is a fixed point for `Map`.
+- `Map` preserves the composition operator.
+
+In Haskell:
+```haskell
+-- First law: The identity map is a fixed point for `Map`.
+fmap id == id
+-- Second law: `Map` preserves the composition operator.
+fmap (f . g) == fmap f . fmap g
+```
+
+In C#:
+```csharp
+public class Functor<T> {
+    // Map method.
+    public Functor<TResult> Map<TResult>(Func<T, TResult> selector) {
+        throw new NotImplementedException();
+    }
+}
+
+public static class FunctorLaws {
+    // First law: The identity map is a fixed point for `Map`.
+    public static void FirstLaw<X>(Functor<X> m) {
+        Func<Functor<X>, Functor<X>> id = _ => _;
+
+        m.Map(_ => _) == id.Invoke(m);
+    }
+
+    // Second law: `Map` preserves the composition operator.
+    public static void SecondLaw<X, Y, Z>(Functor<X> m, Func<Y, Z> f, Func<X, Y> g) {
+        m.Map(_ => f(g(_))) == m.Map(g).Map(f);
+    }
+}
+```
+
 Monad
 -----
 
-A Monad has a unit element `Return` and a `Bind` operation that satisfy the monad laws:
+A Monad has a unit element `Return` and a `Bind` operation that satisfy the Monad laws:
 - `Return` is the identity for `Bind`.
 - `Bind` is associative.
 
@@ -232,7 +271,7 @@ public static partial class KuncExtensions
 }
 ```
 
-`Invoke` is just `Bind` with the arguments flipped, we can then rewrite
+`Invoke` being just `Bind` with the arguments flipped, we can then rewrite
 the monad laws in a more readable fashion.
 
 In Haskell:
@@ -268,8 +307,9 @@ public static class MonadLaws {
 Monad Revisited
 ---------------
 
-If one wishes to stay closer to the category definition of monads, a Monad is
-equivalently defined by a unit element `Return` and two operations `Map` and `Multiply`.
+If one wishes to stay closer to the definition of monads from category theory, a Monad is
+equivalently defined by a unit element `Return` and two operations `Map` and `Multiply`
+where `Map` must satisfy the functor laws.
 
 In Haskell:
 ```haskell
@@ -303,7 +343,7 @@ public static class Monad {
 }
 ```
 
-Going from (`Return`, `Map`, `Multiply`) to (`Return`, Bind`):
+### Going from (`Return`, `Map`, `Multiply`) to (`Return`, `Bind`):
 ```haskell
 -- Bind defined via Multiply and Map.
 m >>= g = join (fmap g m)
@@ -311,13 +351,13 @@ m >>= g = join (fmap g m)
 ```csharp
 public class Monad<T> {
     // Bind defined via Multiply and Map.
-    public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun) {
+    public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> kun) {
         return Monad<TResult>.Multiply(Map(kun));
     }
 }
 ```
 
-Going from (`Return`, `Bind`) to (`Return`, `Map`, `Multiply`):
+### Going from (`Return`, `Bind`) to (`Return`, `Map`, `Multiply`):
 ```haskell
 -- Map defined via Return and Bind.
 fmap f x = x >>= (return . f)
@@ -340,14 +380,18 @@ public static class Monad {
 }
 ```
 
+The first functor law can be deduced from the definition of `Map` and the second
+monad law:
+```haskell
+fmap id x = x >>= (return . id) = x >>= return = x
+```
+
 Description                             | Signature
 --------------------------------------- | --------------------------------------
 `Then` defined by `Bind`                | `m >> n = m >>= \_ -> n`
 
 Description          | Signature
 -------------------- | ---------------------------------------------------------
-`Map`                | `fmap id == id`
-`Map`                | `fmap (f . g) == fmap f . fmap g`
 `Then` Associativity | `(m >> n) >> o = m >> (n >> o)`
 
 Comonad
