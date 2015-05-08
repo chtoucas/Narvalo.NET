@@ -13,13 +13,13 @@ concepts in a very friendly way.
 
 For illustration, we provide two analogies from Mathematics. Beware they are not accurate,
 but they give a fairly simple way to understand the rules.
-From the Arithmetic,
+From the _Arithmetic_,
 - `Bind` is `*`.
 - `Plus` is `+`.
 - `Unit` is `1`.
 - `Zero` is `0`.
 
-From the Boolean Algebra,
+From the _Boolean Algebra_,
 - `Bind` is `∧`, the logical conjunction AND.
 - `Plus` is `∨`, the logical disjunction OR.
 - `Unit` is `True`.
@@ -32,8 +32,8 @@ A Monoid has an `Empty` element and an `Append` operation that satisfy the Monoi
 - `Empty` is the identity for `Append`.
 - `Append` is associative.
 
-In the context of monads, we use different names: `Plus` or `OrElse` for `Append`
-and `Zero` for `Empty`.
+In the context of monads, we use different names: `Plus` or `OrElse` instead of `Append`
+and `Zero` instead of `Empty`.
 
 Rule           | Arithmetic
 -------------- | ---------------------------------------------------------------
@@ -54,11 +54,11 @@ mempty :: a
 -- Append method
 mappend :: a -> a -> a
 
--- First law: mempty is a left identity for mappend.
+-- First law: Empty is a left identity for Append.
 mappend mempty x = x
--- Second law: mempty is a right identity for mappend.
+-- Second law: Empty is a right identity for Append.
 mappend x mempty = x
--- Third law: mempty is associative.
+-- Third law: Empty is associative.
 mappend x (mappend y z) = mappend (mappend x y) z
 ```
 
@@ -66,10 +66,12 @@ In C#,
 ```csharp
 // Skeleton definition of a monoid.
 public class Monoid<T> {
+    // Empty property.
     public static Monoid<T> Empty {
         get { throw new NotImplementedException(); }
     }
 
+    // Append method.
     public Monoid<T> Append(Monoid<T> other) {
         throw new NotImplementedException();
     }
@@ -93,8 +95,7 @@ public static class MonoidLaws {
 }
 ```
 
-Haskell also includes a `Concat` operation which derives from `Empty`
-and `Append`:
+Haskell also includes a `Concat` operation which derives from `Empty` and `Append`:
 ```haskell
 -- Concat method
 mconcat :: [a] -> a
@@ -106,12 +107,12 @@ Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/D
 Monad
 -----
 
-A Monad has a unit element `Return` and a `Bind` operation that satisfy the three
+A Monad has a `Unit` element and a `Bind` operation that satisfy the
 monad laws:
-- `Return` is the identity for `Bind`.
+- `Unit` is the identity for `Bind`.
 - `Bind` is associative.
 
-Haskell also provides a fail method which is not part of the standard definition
+Haskell also provides a `fail` method which is not part of the standard definition
 of a monad. It is mostly used for pattern matching failure, something we do not
 have in .NET.
 
@@ -131,14 +132,14 @@ In Haskell:
 ```haskell
 -- Bind method
 (>>=) :: forall a b. m a -> (a -> m b) -> m b
--- Return method
+-- Unit method
 return :: a -> m a
 
--- First law: return is a left identity for >>=.
+-- First law: Unit is a left identity for Bind.
 return a >>= f == f a
--- Second law: return is a right identity for >>=.
+-- Second law: Unit is a right identity for Bind.
 m >>= return == m
--- Third law: bind is associative.
+-- Third law: Bind is associative.
 m >>= (\x -> f x >>= g) == (m >>= f) >>= g
 ```
 
@@ -146,24 +147,26 @@ In C#:
 ```csharp
 // Skeleton definition of a monad.
 public class Monad<T> {
+    // Bind method.
     public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> kun) {
         throw new NotImplementedException();
     }
 }
 
 public static class Monad {
+    // Unit method.
     public static Monad<T> Return<T>(T value) {
         throw new NotImplementedException();
     }
 }
 
 public static class MonadLaws {
-    // First law: Return is a left identity for Bind.
+    // First law: Unit is a left identity for Bind.
     public static void FirstLaw<X, Y>(Func<X, Monad<Y>> f, X value) {
         Monad.Return(value).Bind(f) == f(value);
     }
 
-    // Second law: Return is a right identity for Bind.
+    // Second law: Unit is a right identity for Bind.
     public static void SecondLaw<X>(Monad<X> m) {
         m.Bind(Monad.Return) == m;
     }
@@ -178,7 +181,7 @@ public static class MonadLaws {
 Functions in the Kleisli category
 ---------------------------------
 
-A function in the Kleisli category is simply a function that maps values to a monad.
+A function in the Kleisli category is simply a function that maps a value to a monad.
 Of course, functions can be invoked or composed with another function.
 
 In Haskell:
@@ -198,59 +201,60 @@ f >=> g = \x -> f x >>= g
 
 In C#:
 ```csharp
-public delegate Monad<T> Kunc<T>();
-
-public delegate Monad<TResult> Kunc<in T, TResult>(T arg);
-
-public delegate Monad<TResult> Kunc<in T1, in T2, TResult>(T1 arg1, T2 arg2);
+public delegate Monad<TResult> Kunc<in TSource, TResult>(TSource arg);
 
 public static partial class KuncExtensions
 {
+    // Invoke method.
     public static Monad<TResult> Invoke<TSource, TResult>(
         this Kunc<TSource, TResult> @this,
-        Monad<TSource> monad)
-    {
+        Monad<TSource> monad) {
         return monad.Bind(@this);
     }
 
+    // Compose method.
     public static Kunc<TSource, TResult> Compose<TSource, TMiddle, TResult>(
         this Kunc<TSource, TMiddle> @this,
-        Kunc<TMiddle, TResult> kun)
-    {
+        Kunc<TMiddle, TResult> kun) {
         return _ => @this.Invoke(_).Bind(kun);
     }
 
+    // ComposeBack method.
     public static Kunc<TSource, TResult> ComposeBack<TSource, TMiddle, TResult>(
         this Kunc<TMiddle, TResult> @this,
-        Kunc<TSource, TMiddle> kun)
-    {
+        Kunc<TSource, TMiddle> kun) {
         return _ => kun.Invoke(_).Bind(@this);
     }
+}
 ```
 
-Now we can then rewrite the monad laws in a more readable fashion.
+`Invoke` is just `Bind` with the arguments flipped, we can then rewrite
+the monad laws in a more readable fashion.
 
 In Haskell:
 ```haskell
+-- First law: Unit is a left identity for Compose.
 return >=> g ≡ g
+-- Second law: Unit is a right identity for Compose.
 f >=> return ≡ f
+-- Third law: Compose is associative.
 (f >=> g) >=> h ≡ f >=> (g >=> h)
 ```
 
 In C#:
 ```csharp
 public static class MonadLaws {
+    // First law: Unit is a left identity for Compose.
     public static void FirstLaw<X, Y>(Kunc<X, Y> g, X value) {
-        Kunc<X, X> id = _ => Monad.Return(_);
-
-        id.Compose(g).Invoke(value) == g(value);
+        Monad.Return.Compose(g).Invoke(value) == g(value);
     }
 
-    public static void SecondLaw<X, Y>(Kunc<X, Y> f, X value)
-    {
+    // Second law: Unit is a right identity for Compose.
+    public static void SecondLaw<X, Y>(Kunc<X, Y> f, X value) {
         f.Compose(Monad.Return).Invoke(value) == f(value);
     }
 
+    // Third law: Compose is associative.
     public static void ThirdLaw<X, Y, Z, T>(Kunc<X, Y> f, Kunc<Y, Z> g, Kunc<Z, T> h, X value) {
         (f.Compose(g)).Compose(h).Invoke(value) == f.Compose(g.Compose(h)).Invoke(value);
     }
@@ -260,18 +264,81 @@ public static class MonadLaws {
 Monad Revisited
 ---------------
 
-If one wishes to stay close to the category roots of monads, a Monad is
-equivalently defined by a unit element `Return` and two operations `Map`
-and `Multiply`.
+If one wishes to stay closer to the category definition of monads, a Monad is
+equivalently defined by a `Unit` element and two operations `Map` and `Multiply`.
+
+In Haskell:
+```haskell
+-- Unit method.
+return :: a -> m a
+-- Map method.
+fmap :: (a -> b) -> f a -> f b
+-- Multiply method.
+join :: Monad m => m (m a) -> m a
+```
+
+In C#:
+```csharp
+public class Monad<T> {
+    // Map method.
+    public Monad<TResult> Map<TResult>(Func<T, TResult> selector) {
+        throw new NotImplementedException();
+    }
+}
+
+public static class Monad {
+    // Unit method.
+    public static Monad<T> Return<T>(T value) {
+        throw new NotImplementedException();
+    }
+
+    // Multiply method.
+    public static Monad<T> Flatten<T>(Monad<Monad<T>> square) {
+        throw new NotImplementedException();
+    }
+}
+```
+
+Going from (`Unit`, `Map`, `Multiply`) to (`Unit`, Bind`):
+```haskell
+-- Bind defined via Multiply and Map.
+m >>= g = join (fmap g m)
+```
+```csharp
+public class Monad<T> {
+    // Bind defined via Multiply and Map.
+    public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun) {
+        return Monad<TResult>.μ(Map(_ => kun.Invoke(_)));
+    }
+}
+```
+
+Going from (`Unit`, Bind`) to (`Unit`, `Map`, `Multiply`):
+```haskell
+-- Map defined via Unit and Bind.
+fmap f x = x >>= (return . f)
+-- Multiply defined via Bind.
+join x = x >>= id
+```
+```csharp
+public class Monad<T> {
+    // Map defined via Unit and Bind.
+    public Monad<TResult> Map<TResult>(Func<T, TResult> selector) {
+        return Bind(_ => Monad<TResult>.η(selector.Invoke(_)));
+    }
+}
+
+public static class Monad {
+    // Multiply defined via Bind.
+    internal static Monad<T> μ(Monad<Monad<T>> square) {
+        return square.Bind(_ => _);
+    }
+}
+```
 
 Description                             | Signature
 --------------------------------------- | --------------------------------------
-`Bind` defined via `Multiply` and `Map` | `m >>= g = join (fmap g m)`
-`Map` defined by `Bind` & `Unit`        | `fmap f x = x >>= (return . f)`
-`Multiply` defined by `Bind`            | `join x = x >>= id`
 `Then` defined by `Bind`                | `m >> n = m >>= \_ -> n`
-
-Core rules:
 
 Description          | Signature
 -------------------- | ---------------------------------------------------------
