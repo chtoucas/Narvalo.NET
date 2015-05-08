@@ -29,20 +29,19 @@ From the Boolean Algebra,
 Monoid
 ------
 
-A Monoid has an `Empty` element and an `Append` operation that satisfies the Monoid laws:
+A Monoid has an `Empty` element and an `Append` operation that satisfy the Monoid laws:
 - `Empty` is the identity for `Append`.
 - `Append` is associative.
+
 In the context of monads, we use different names: `Plus` or `OrElse` for `Append`
 and `Zero` for `Empty`.
-
-### Arithmetic
 
 Rule           | Arithmetic
 -------------- | --------------------------------------------------------------
 Left identity  | `0 + x = x`
 Right identity | `x + 0 = x`
 Associativity  | `x + (y + z) = (x + y) + z`
--------------- | --------------------------------------------------------------
+
 Rule           | Boolean Algebra
 -------------- | --------------------------------------------------------------
 Left identity  | `False ∨ P = P`
