@@ -2,7 +2,7 @@
 =========
 
 You shouldn't be afraid of the monad! We don't need to understand the theory
-behind to make good use of it, really. In fact, I guess that the monad theory,
+behind to make good use of it. In fact, I guess that the monad theory,
 or more precisely category theory, has influenced the design of many parts of
 the .NET framework ; LINQ and the Reactive Extensions being the most obvious
 proofs of that. The .NET type system is not rich enough to make general
@@ -13,14 +13,24 @@ Monoid
 ------
 
 A Monoid has an `Empty` element and an `Append` operation that satisfies the Monoid laws:
-- `Empty` is the identity for `Append`: `mappend mempty m = m` and `mappend m mempty = m`.
-- `Append` is associative: `mappend a (mappend b c) = mappend (mappend a b) c`.
+- `Empty` is the identity for `Append`.
+- `Append` is associative.
+
+In Haskell:
+```haskell
+mempty :: a
+mappend :: a -> a -> a
+
+mappend mempty x = x
+mappend x mempty = x
+mappend x (mappend y z) = mappend (mappend x y) z
+```
 
 In C#,
 ```csharp
 public class Monoid<T> {
     public static Monoid<T> Empty {
-        get { throw new NotImplementedException(); } 
+        get { throw new NotImplementedException(); }
     }
 
     public Monoid<T> Append(Monoid<T> other) {
@@ -33,36 +43,45 @@ public static class MonoidLaws {
     public static void FirstLaw<T>(Monoid<T> m) {
         Monoid<T>.Empty.Append(m) == m;
     }
-    
+
     // Empty is a right identity for Append.
     public static void SecondLaw<T>(Monoid<T> m) {
         m.Append(Monoid<T>.Empty) == m;
     }
-    
+
     // Append is associative.
     public static bool ThirdLaw<T>(Monoid<T> a, Monoid<T> b, Monoid<T> c) {
         return a.Append(b.Append(c)) == (a.Append(b)).Append(c);
     }
 }
 
-Haskell also includes a `Concat` operation which in fact derives from `Empty`
-and `Append`: `FoldR Append Empty`.
+Haskell also includes a `Concat` operation which derives from `Empty`
+and `Append`:
+```haskell
+mconcat :: [a] -> a
+
+mconcat = foldr mappend mempty
+```
+
+In the context of monads, we will use different names: `Plus` for `Append`
+and `Zero` for `Empty`.
+
+Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Monoid.html)
 
 Monad
 -----
 
-A Monad has a Unit element and a Bind operation must satisfy the three
+A Monad has a Unit element and a Bind operation that satisfy the three
 monad laws:
+- `Unit` is the identity for `Bind`: `return x >>= f = f x` and `m >>= return = m`.
+- `Bind` is associative: `(m >>= f) >>= g = m >>= (\x -> f x >>= g)`
 
-- `Unit` is the identity for `Bind`
-- `Bind` is associative
-
-If one wishes to stay close to the Category roots of Monads, a Monad is
+If one wishes to stay close to the category roots of Monads, a Monad is
 equivalently defines with a `Unit` element and two operations `Map`
 and `Multiply`.
 
-NB: Haskell also provides a fail method that is not part of the standard
-definition. It is mostly used for pattern matching failure, something we do not
+NB: Haskell also provides a fail method which is not part of the standard definition
+of a monad. It is mostly used for pattern matching failure, something we do not
 have in .NET.
 
 Comonad
