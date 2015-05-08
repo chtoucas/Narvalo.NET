@@ -5,18 +5,57 @@ You shouldn't be afraid of the monad! We don't need to understand the theory
 behind to make good use of it, really. In fact, I guess that the monad theory,
 or more precisely category theory, has influenced the design of many parts of
 the .NET framework ; LINQ and the Reactive Extensions being the most obvious
-proofs of that. The .NET type system is not rich enough to make very general
+proofs of that. The .NET type system is not rich enough to make general
 monadic constructions but it gives developers access to some powerful monadic
 concepts in a very friendly way.
 
 Monoid
 ------
 
-A Monoid has an `Empty` element and an `Append` operation that satisfy
-the Monoid laws:
+A Monoid has an `Empty` element and an `Append` operation:
+```csharp
+public class Monoid<T>
+{
+    public static Monoid<T> Empty { get { throw new NotImplementedException(); } }
 
+    public Monoid<T> Append(Monoid<T> other)
+    {
+        throw new NotImplementedException();
+    }
+}
+```
+and `Monoid<T>` satisfies the Monoid laws:
 - `Empty` is the identity for `Append`
+```csharp
+/// <summary>
+/// First Monoid Law: Empty is a left identity for Append.
+/// </summary>
+public static bool FirstMonoidLaw<T>(Monoid<T> m)
+{
+    // mplus mzero m = m
+    return Monoid<T>.Empty.Append(m) == m;
+}
+
+/// <summary>
+/// Second Monoid Law: Empty is a right identity for Append.
+/// </summary>
+public static bool SecondMonoidLaw<T>(Monoid<T> m)
+{
+    // mplus m mzero = m
+    return m.Append(Monoid<T>.Empty) == m;
+}
+```
 - `Append` is associative
+```csharp
+/// <summary>
+/// Third Monoid Law: Append is associative.
+/// </summary>
+public static bool ThirdMonoidLaw<T>(Monoid<T> a, Monoid<T> b, Monoid<T> c)
+{
+    // mplus a (mplus b c) = mplus (mplus a b) c
+    return a.Append(b.Append(c)) == (a.Append(b)).Append(c);
+}
+```
 
 Haskell also includes a `Concat` operation which in fact derives from `Empty`
 and `Append`: `FoldR Append Empty`.
@@ -135,9 +174,9 @@ Core rules:
 
 Description          | Signature
 -------------------- | ---------------------------------------------------------
-[Map]                | `fmap id == id`
-[Map]                | `fmap (f . g) == fmap f . fmap g`
-[Then] Associativity | `(m >> n) >> o = m >> (n >> o)`
+`Map`                | `fmap id == id`
+`Map`                | `fmap (f . g) == fmap f . fmap g`
+`Then` Associativity | `(m >> n) >> o = m >> (n >> o)`
 
 ### Haskell
 
@@ -223,12 +262,10 @@ _Comonad_          |                   |
 From Haskell to C#
 ------------------
 
-All variants that return a `Monad<Unit>` instead of a `Monad<T>` are not implemented;
-they obviously make little sense in the contexte of C#.
+All variants that return a `Monad<Unit>` instead of a `Monad<T>` (those that have
+a postfix `_`) are not implemented; ignoring the result achieves the same effect.
 
 ### Monad
-
-We do not implement `fail` as .NET provides its own way of reporting errors.
 
 C#                | Haskell
 ----------------- | -----------------------------------------------
@@ -236,7 +273,9 @@ C#                | Haskell
 `Monad<T>.Bind`   | `(>>=) :: forall a b. m a -> (a -> m b) -> m b`
 `Monad<T>.Then`   | `(>>) :: forall a b. m a -> m b -> m b`
 `Monad.Return`    | `return :: a -> m a`
-_Ignore_          | `fail :: String -> m a`
+(1)               | `fail :: String -> m a`
+
+(1) We do not implement `fail` as .NET has its own way of reporting errors.
 
 ### MonadPlus
 
@@ -247,13 +286,11 @@ C#                | Haskell
 
 ### Basic Monad functions
 
-We do no
-
 C#                             | Haskell
 ------------------------------ | -------------------------------------------------------------------
-`Enumerable<T>.Map`            | `mapM :: Monad m => (a -> m b) -> [a] -> m [b]`
+`Func.Map`                     | `mapM :: Monad m => (a -> m b) -> [a] -> m [b]`
 _Ignore_                       | `mapM_ :: Monad m => (a -> m b) -> [a] -> m ()`
-_Ignore_                       | `forM :: Monad m => [a] -> (a -> m b) -> m [b]`
+`Enumerable<T>.ForEach`        | `forM :: Monad m => [a] -> (a -> m b) -> m [b]`
 _Ignore_                       | `forM_ :: Monad m => [a] -> (a -> m b) -> m ()`
 `Enumerable<Monad<T>>.Collect` | `sequence :: Monad m => [m a] -> m [a]`
 _Ignore_                       | `sequence_ :: Monad m => [m a] -> m ()`
@@ -284,14 +321,16 @@ _Ignore_                    | `replicateM_ :: Monad m => Int -> m a -> m ()`
 C#                    | Haskell
 --------------------- | ----------------------------------------------------------------------------
 `Monad.Guard`         | `guard :: MonadPlus m => Bool -> m ()`
-`Monad.When`          | `when :: Monad m => Bool -> m () -> m ()`
-`Monad.Unless`        | `unless :: Monad m => Bool -> m () -> m ()`
+(1)                   | `when :: Monad m => Bool -> m () -> m ()`
+(1)                   | `unless :: Monad m => Bool -> m () -> m ()`
+
+(1) `when` and `unless` are related to the way I/O operations are handled in Haskell.
 
 ### Monadic lifting operators
 
-Implemented as static methods `Monad.Lift` and extension methods.
+Implemented as both static methods (`Monad.Lift`) and extension methods.
 
-C#                    |
+C#                    | Haskell
 --------------------- | ----------------------------------------------------------------------------
 `Monad<T>.Map`        | `liftM :: Monad m => (a1 -> r) -> m a1 -> m r`
 `Monad<T>.SelectMany` | `liftM2 :: Monad m => (a1 -> a2 -> r) -> m a1 -> m a2 -> m r`
@@ -299,6 +338,19 @@ C#                    |
 `Monad<T>.Zip`        | `liftM4 :: Monad m => (a1 -> a2 -> a3 -> a4 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m r`
 `Monad<T>.Zip`        | `liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r`
                       | `ap :: Monad m => m (a -> b) -> m a -> m b`
+
+### Extras
+
+C#                    | Haskell (if it existed)
+--------------------- | ----------------------------------------------------------------------------
+`Monad<T>.Coalesce`   | `coalesce :: Monad m => (a -> Bool) -> m a -> m b -> m b -> m b`
+`Monad<T>.Then`       | `then :: MonadPlus m => (a -> Bool) -> m a -> m b -> m b`
+`Monad<T>.Otherwise`  | `otherwise :: MonadPlus m => (a -> Bool) -> m a -> m b -> m b`
+`Monad<T>.When`       | `when :: Monad m => Bool -> m a -> () -> m a`
+`Monad<T>.Unless`     | `unless :: Monad m => Bool -> m a -> () -> m a`
+`Monad<T>.Invoke`     | `invoke :: MonadPlus m => m a -> (a -> m ()) -> m () -> m a`
+`Monad<T>.OnZero`     | `onzero :: MonadPlus m => m a -> m () -> m ()`
+`Monad<T>.Invoke`     | `invoke :: Monad m => m a -> (a -> m ()) -> m ()`
 
 References
 ----------

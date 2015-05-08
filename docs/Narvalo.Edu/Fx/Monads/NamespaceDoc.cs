@@ -21,13 +21,13 @@ namespace Narvalo.Edu.Monads
      * - MONAD_VIA_MAP_MULTIPLY
      *   The default behaviour is to define Monads via Bind.
      *
+     * - COMONAD_VIA_MAP_COMULTIPLY
+     *   The default behaviour is to define Comonads via cobind.
+     *
      * - MONAD_DISABLE_ZERO
      * - MONAD_DISABLE_PLUS
      *   A Monad does not necessary have a Zero and a Plus operation.
      *   NB: Disabling Zero automatically disables Plus.
-     *
-     * - COMONAD_VIA_MAP_COMULTIPLY
-     *   The default behaviour is to define Comonads via cobind.
      * ]]>
      * </content>
      */
