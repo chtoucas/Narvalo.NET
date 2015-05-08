@@ -5,9 +5,26 @@ You shouldn't be afraid of the monad! We don't need to understand the theory
 behind to make good use of it. In fact, I guess that the monad theory,
 or more precisely category theory, has influenced the design of many parts of
 the .NET framework ; LINQ and the Reactive Extensions being the most obvious
-proofs of that. The .NET type system is not rich enough to make general
+proofs of that.
+
+The .NET type system is not rich enough to make general
 monadic constructions but it gives developers access to some powerful monadic
 concepts in a very friendly way.
+
+We provide two analogies for illustration. Beware they are not accurate,
+but they give a fairly simple way to understand the rules.
+
+From the Arithmetic,
+- `Bind` is `*`
+- `Plus` is `+`
+- `Unit` is `1`
+- `Zero` is `0`
+
+From the Boolean Algebra,
+- `Bind` is `∧`, the logical conjunction AND
+- `Plus` is `∨`, the logical disjunction OR
+- `Unit` is `True`
+- `Zero` is `False`
 
 Monoid
 ------
@@ -15,19 +32,39 @@ Monoid
 A Monoid has an `Empty` element and an `Append` operation that satisfies the Monoid laws:
 - `Empty` is the identity for `Append`.
 - `Append` is associative.
+In the context of monads, we use different names: `Plus` or `OrElse` for `Append`
+and `Zero` for `Empty`.
+
+### Arithmetic
+
+Rule           | Arithmetic
+-------------- | --------------------------------------------------------------
+Left identity  | `0 + x = x`
+Right identity | `x + 0 = x`
+Associativity  | `x + (y + z) = (x + y) + z`
+-------------- | --------------------------------------------------------------
+Rule           | Boolean Algebra
+-------------- | --------------------------------------------------------------
+Left identity  | `False ∨ P = P`
+Right identity | `P ∨ False = P`
+Associativity  | `P ∨ (Q ∨ R) = (P ∨ Q) ∨ R`
 
 In Haskell:
 ```haskell
 mempty :: a
 mappend :: a -> a -> a
 
+-- First law: mempty is a left identity for mappend.
 mappend mempty x = x
+-- Second law: mempty is a right identity for mappend.
 mappend x mempty = x
+-- Third law: mempty is associative.
 mappend x (mappend y z) = mappend (mappend x y) z
 ```
 
 In C#,
 ```csharp
+// Skeleton definition of a monoid.
 public class Monoid<T> {
     public static Monoid<T> Empty {
         get { throw new NotImplementedException(); }
@@ -54,6 +91,7 @@ public static class MonoidLaws {
         return a.Append(b.Append(c)) == (a.Append(b)).Append(c);
     }
 }
+```
 
 Haskell also includes a `Concat` operation which derives from `Empty`
 and `Append`:
@@ -62,9 +100,6 @@ mconcat :: [a] -> a
 
 mconcat = foldr mappend mempty
 ```
-
-In the context of monads, we will use different names: `Plus` for `Append`
-and `Zero` for `Empty`.
 
 Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Monoid.html)
 
@@ -166,7 +201,6 @@ From the Boolean Algebra,
 - `Zero` is `False`
 
 We write the definitions and rules using the Haskell syntax.
-For a translation to .NET, see Internal\Rules.cs
 
 Core definitions:
 
