@@ -17,7 +17,8 @@ which follows a set of simple rules from which we can derive a very rich vocabul
 
 Whenever it is possible, we illustrate the discussion with analogies from
 arithmetic, the boolean algebra and LINQ. Beware, these analogies are not always
-accurate, but they give a fairly easy way to get a feeling of what's going on.
+accurate (most of the time they ain't), but they should give you a feeling
+of what's going on.
 
 We also provide examples from Haskell, but if you do not have any knowledge of
 it, feel free to skip them.
@@ -50,10 +51,12 @@ Associativity  | `x + (y + z) = (x + y) + z` and `P ∨ (Q ∨ R) = (P ∨ Q) �
 For LINQ, `Empty` is the empty sequence `Enumerable.Empty<T>()` and `Append`
 is the concatenation operation on sequences: `IEnumerable<T>.Concat()`:
 ```csharp
-// First law: Appending a list to an empty list returns the list.
+// First law: Appending a list q to an empty list returns the list q.
 empty.Concat(q) == q;
-// Second law: Appending an empty list to a list returns the list.
+
+// Second law: Appending an empty list to a list q returns the list q.
 q.Concat(empty) == q;
+
 // Third law: Appending a list s to a list r then appending the result
 // to a third list q is the same as appending the list r to the list q
 // then appending the list s to the result.
@@ -155,14 +158,21 @@ A functor has a `Map` operation that satisfy the **functor laws**:
 
 For LINQ, `Map` is the select method `IEnumerable<T>.Select()`:
 ```csharp
-// First law: Iterating over list and returning the unmodified items is the same as iterating over the list.
+// First law: Iterating over list and returning the unmodified items
+// is the same as iterating over the list.
 q.Select(_ => _) == q;
+
 from _ in q select _ == q;
-// Second law: Iterating over a list and returning the result of applying g then f to each item is the same
-// as iterating over the list while applying g to each item followed by another iteration that returns the
-// results of applying f.
+
+// Second law: Iterating over a list and returning the result of applying g
+// then f to each item is the same as iterating over the list while applying g
+// to each item followed by another iteration that returns the results of applying f.
 q.Select(_ => f(g(_))) == q.Select(g).Select(f);
-from _ in q select f.Invoke(g.Invoke(_)) == from item in (from _ in q select g.Invoke(_)) select f.Invoke(item);
+
+from _ in q select f(g(_))
+    == from item
+           in (from _ in q select g(_))
+       select f(item);
 ```
 
 In Haskell, we have:
@@ -192,7 +202,7 @@ public static class FunctorLaws {
 
     // Second law: Map preserves the composition operator.
     public static void SecondLaw<X, Y, Z>(Functor<X> m, Func<Y, Z> f, Func<X, Y> g) {
-        m.Map(_ => f.Invoke(g.Invoke(_))) == m.Map(g).Map(f);
+        m.Map(_ => f(g(_))) == m.Map(g).Map(f);
     }
 }
 ```
@@ -229,7 +239,7 @@ public static class Sequence {
         Func<TSource, IEnumerable<TResult>> fun)
     {
         return from _ in @this
-               from item in fun.Invoke(_)
+               from item in fun(_)
                select item;
     }
 
@@ -241,19 +251,27 @@ public static class Sequence {
 
 // First law: Iterating over a list of one element and creating a list by applying f
 // to this unique value is the same as creating a list by applying f to the unique element.
-Sequence.Single(value).Bind(f) == f.Invoke(value);
-from _ in Sequence.Single(value) from item in f.Invoke(_) select item == f.Invoke(value);
+Sequence.Single(value).Bind(f) == f(value);
+
+from _ in Sequence.Single(value) from item in f(_) select item
+    == f(value);
+
 // Second law: Iterating over a list and for each element returning a list containing only
 // this element is the same as iterating over the list.
 q.Bind(Sequence.Single) == q;
-from _ in q from item in Sequence.Single(_) select item == q;
+
+from _ in q from item in Sequence.Single(_) select item
+    == q;
+
 // Third law: Bind is associative.
 q.Bind(_ => f(_).Bind(g)) == q.Bind(f).Bind(g);
+
 from _ in q
-from item in (from outer in f.Invoke(_) from inner in g.Invoke(outer) select inner)
+from item
+    in (from outer in f(_) from inner in g(outer) select inner)
 select item
-    == from _ in (from outer in q from inner in f.Invoke(outer) select inner)
-       from item in g.Invoke(_)
+    == from _ in (from outer in q from inner in f(outer) select inner)
+       from item in g(_)
        select item;
 ```
 
@@ -293,7 +311,7 @@ public static class Monad {
 public static class MonadLaws {
     // First law: Return is a left identity for Bind.
     public static void FirstLaw<X, Y>(Func<X, Monad<Y>> f, X value) {
-        Monad.Return(value).Bind(f) == f.Invoke(value);
+        Monad.Return(value).Bind(f) == f(value);
     }
 
     // Second law: Return is a right identity for Bind.
@@ -472,7 +490,7 @@ In C#:
 public class Monad<T> {
     // Map defined via Return and Bind.
     public Monad<TResult> Map<TResult>(Func<T, TResult> selector) {
-        return Bind(_ => Monad<TResult>.Return(selector.Invoke(_)));
+        return Bind(_ => Monad<TResult>.Return(selector(_)));
     }
 }
 
