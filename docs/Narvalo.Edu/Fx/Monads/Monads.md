@@ -50,11 +50,13 @@ Associativity  | `x + (y + z) = (x + y) + z` and `P ∨ (Q ∨ R) = (P ∨ Q) �
 For LINQ, `Empty` is the empty sequence `Enumerable.Empty<T>()` and `Append`
 is the concatenation operation on sequences: `IEnumerable<T>.Concat()`:
 ```csharp
-// First law: Empty is a left identity for Append.
+// First law: Appending a list to an empty list returns the list.
 empty.Concat(q) == q;
-// Second law: Empty is a right identity for Append.
+// Second law: Appending an empty list to a list returns the list.
 q.Concat(empty) == q;
-// Third law: Empty is associative.
+// Third law: Appending a list s to a list r then appending the result
+// to a third list q is the same as appending the list r to the list q
+// then appending the list s to the result.
 q.Concat(r.Concat(s)) == q.Concat(r).Concat(s);
 ```
 
@@ -69,7 +71,7 @@ mappend :: a -> a -> a
 mappend mempty x = x
 -- Second law: Empty is a right identity for Append.
 mappend x mempty = x
--- Third law: Empty is associative.
+-- Third law: Append is associative.
 mappend x (mappend y z) = mappend (mappend x y) z
 ```
 
@@ -153,12 +155,14 @@ A functor has a `Map` operation that satisfy the **functor laws**:
 
 For LINQ, `Map` is the select method `IEnumerable<T>.Select()`:
 ```csharp
-// First law: The identity map is a fixed point for Map.
+// First law: Iterating over list and returning the unmodified items is the same as iterating over the list.
 q.Select(_ => _) == q;
 from _ in q select _ == q;
-// Second law: Map preserves the composition operator.
+// Second law: Iterating over a list and returning the result of applying g then f to each item is the same
+// as iterating over the list while applying g to each item followed by another iteration that returns the
+// results of applying f.
 q.Select(_ => f(g(_))) == q.Select(g).Select(f);
-from _ in q select f(g(_)) == from v in (from _ in q select g(_)) select f(v);
+from _ in q select f.Invoke(g.Invoke(_)) == from item in (from _ in q select g.Invoke(_)) select f.Invoke(item);
 ```
 
 In Haskell, we have:
@@ -188,7 +192,7 @@ public static class FunctorLaws {
 
     // Second law: Map preserves the composition operator.
     public static void SecondLaw<X, Y, Z>(Functor<X> m, Func<Y, Z> f, Func<X, Y> g) {
-        m.Map(_ => f(g(_))) == m.Map(g).Map(f);
+        m.Map(_ => f.Invoke(g.Invoke(_))) == m.Map(g).Map(f);
     }
 }
 ```
@@ -235,10 +239,12 @@ public static class Sequence {
     }
 }
 
-// First law: Return is a left identity for Bind.
-Sequence.Single(value).Bind(fun) == fun.Invoke(value);
-from _ in Sequence.Single(value) from item in fun.Invoke(_) select item == fun.Invoke(value);
-// Second law: Return is a right identity for Bind.
+// First law: Iterating over a list of one element and creating a list by applying f
+// to this unique value is the same as creating a list by applying f to the unique element.
+Sequence.Single(value).Bind(f) == f.Invoke(value);
+from _ in Sequence.Single(value) from item in f.Invoke(_) select item == f.Invoke(value);
+// Second law: Iterating over a list and for each element returning a list containing only
+// this element is the same as iterating over the list.
 q.Bind(Sequence.Single) == q;
 from _ in q from item in Sequence.Single(_) select item == q;
 // Third law: Bind is associative.
