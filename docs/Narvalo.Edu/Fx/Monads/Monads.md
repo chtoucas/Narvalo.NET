@@ -19,8 +19,12 @@ Whenever it is possible, we illustrate the discussion with analogies from
 arithmetic, the boolean algebra and LINQ. Beware, these analogies are not always
 accurate, but they give a fairly easy way to get a feeling of what's going on.
 
+We also provide examples from Haskell, but if you do not have any knowledge of
+it, feel free to skip them.
+
 Before moving to monads, we explain two preliminary concepts: monoids and functors.
-You can skip these sections, they are not necessary to understand monads.
+They are not necessary to understand monads but they are sufficiently simple that
+I could not resist including them. Better to start slowly.
 
 Monoid
 ------
@@ -29,27 +33,22 @@ A Monoid has an `Empty` element and an `Append` operation that satisfy the monoi
 - `Empty` is an identity for `Append`,
 - `Append` is associative.
 
-Since `Append` is not necessary a commutative operation, the first law is really
-made of two rules: `Empty` is a left identity for `Append` and `Empty` is a
-right identity for `Append`.
+Since `Append` is not necessary a commutative operation, the first law really
+means two things: "`Empty` is a left identity for `Append`" and "`Empty` is a
+right identity for `Append`".
 
 In arithmetic, `Empty` would be `0` and `Append` would be `+`.
 For the boolean algebra, `Empty` would be `False` and `Append` would be `∧`,
-the logical conjunction AND. The rules should then be obious to anyone:
+the logical conjunction AND. The rules should then be familiar to anyone:
 
-Rule           | Arithmetic
+Rule           | Description
 -------------- | ---------------------------------------------------------------
-Left identity  | `0 + x = x`
-Right identity | `x + 0 = x`
-Associativity  | `x + (y + z) = (x + y) + z`
-Rule           | Boolean Algebra
--------------- | ---------------------------------------------------------------
-Left identity  | `False ∨ P = P`
-Right identity | `P ∨ False = P`
-Associativity  | `P ∨ (Q ∨ R) = (P ∨ Q) ∨ R`
+Left identity  | `0 + x = x` and `False ∨ P = P`
+Right identity | `x + 0 = x` and `P ∨ False = P`
+Associativity  | `x + (y + z) = (x + y) + z` and `P ∨ (Q ∨ R) = (P ∨ Q) ∨ R`
 
 For LINQ, `Empty` is the empty sequence `Enumerable.Empty<T>()` and `Append`
-is the concatenation of two sequences `IEnumerable<T>.Concat()`.
+is the concatenation operation on sequences: `IEnumerable<T>.Concat()`:
 ```csharp
 // First law: Empty is a left identity for Append.
 empty.Concat(q) == q;
@@ -59,7 +58,7 @@ q.Concat(empty) == q;
 q.Concat(r.Concat(s)) == q.Concat(r).Concat(s);
 ```
 
-In Haskell:
+In Haskell, things read as follows:
 ```haskell
 -- Empty method.
 mempty :: a
@@ -74,7 +73,8 @@ mappend x mempty = x
 mappend x (mappend y z) = mappend (mappend x y) z
 ```
 
-In C#,
+In C#, it is just a matter of generalizing the LINQ definitions to an
+hypothetical `Monoid<T>` class:
 ```csharp
 // Skeleton definition of a monoid.
 public class Monoid<T> {
@@ -114,9 +114,10 @@ Haskell also includes a `Concat` operation which derives from `Empty` and `Appen
 mconcat :: [a] -> a
 mconcat = foldr mappend mempty
 ```
+Beware this `Concat` is NOT the one from LINQ.
 
-In the context of monads, we use different names: `Plus` or `OrElse` instead of `Append`
-and `Zero` instead of `Empty`.
+In the context of monads, the monoid operations appear under various names:
+`Plus`, `Concat` or `OrElse` instead of `Append`, and `Zero` instead of `Empty`.
 
 Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Monoid.html)
 
