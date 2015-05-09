@@ -6,7 +6,7 @@ fact that many people try to explain them using the jargon of category theory.
 Truth to be told, you shouldn't be afraid of the monad! We don't need to
 understand the theory behind to make good use of it.
 
-The .NET type system is not rich enough to make general monadic constructions
+The C# type system is not rich enough to make general monadic constructions
 but it gives developers access to some powerful monadic concepts in a very
 friendly way. In fact, monad theory has clearly influenced the design of some
 core parts of the .NET framework; LINQ and the Reactive extensions being the
@@ -29,7 +29,7 @@ I could not resist including them. Better to start slowly.
 Monoid
 ------
 
-A Monoid has an `Empty` element and an `Append` operation that satisfy the *monoid laws*:
+A Monoid has an `Empty` element and an `Append` operation that satisfy the **monoid laws**:
 - `Empty` is an identity for `Append`,
 - `Append` is associative.
 
@@ -38,8 +38,8 @@ means two things: "`Empty` is a left identity for `Append`" and "`Empty` is a
 right identity for `Append`".
 
 In arithmetic, `Empty` would be `0` and `Append` would be `+`.
-For the boolean algebra, `Empty` would be `False` and `Append` would be `∧`,
-the logical conjunction AND. The rules should then be familiar to anyone:
+For the boolean algebra, `Empty` would be `False` and `Append` would be `∨`,
+the logical disjunction OR. The rules should then be familiar to anyone:
 
 Rule           | Translation
 -------------- | ---------------------------------------------------------------
@@ -114,7 +114,7 @@ Haskell also includes a `Concat` operation which derives from `Empty` and `Appen
 mconcat :: [a] -> a
 mconcat = foldr mappend mempty
 ```
-Beware this `Concat` is NOT the one from LINQ.
+Beware this `Concat` is NOT the one from LINQ:
 ```csharp
 // Concat for our hypothetical monoid class.
 public static Monoid<T> Concat<T>(this IEnumerable<Monoid<T>> @this)
@@ -133,28 +133,36 @@ public static IEnumerable<T> Concat<T>(this IEnumerable<IEnumerable<T>> @this)
 }
 ```
 
-In the context of monads, the monoid operations appear under different names:
-`Plus`, `Concat` or `OrElse` instead of `Append`, and `Zero` instead of `Empty`.
-
 Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Monoid.html)
 
 Functor
 -------
 
-A Functor has a `Map` operation that satisfy the *functor laws*:
-- The identity map is a fixed point for `Map`.
+A Functor has a `Map` operation that satisfy the **functor laws**:
+- The identity map is a fixed point for `Map`,
 - `Map` preserves the composition operator.
 
-In Haskell:
+For LINQ, `Map` is the select method `IEnumerable<T>.Select()`:
+```csharp
+// First law: The identity map is a fixed point for Map.
+q.Select(_ => _) == q;
+from _ in q select _ == q;
+// Second law: Map preserves the composition operator.
+q.Select(_ => f(g(_))) == q.Select(g).Select(f);
+from _ in q select f(g(_)) == from v in (from _ in q select g(_)) select f(v);
+```
+
+In Haskell, we have:
 ```haskell
--- First law: The identity map is a fixed point for `Map`.
+-- First law: The identity map is a fixed point for Map.
 fmap id == id
--- Second law: `Map` preserves the composition operator.
+-- Second law: Map preserves the composition operator.
 fmap (f . g) == fmap f . fmap g
 ```
 
-In C#:
+and in C#,
 ```csharp
+// Skeleton definition of a functor.
 public class Functor<T> {
     // Map method.
     public Functor<TResult> Map<TResult>(Func<T, TResult> selector) {
@@ -162,15 +170,14 @@ public class Functor<T> {
     }
 }
 
+// Functor laws.
 public static class FunctorLaws {
-    // First law: The identity map is a fixed point for `Map`.
+    // First law: The identity map is a fixed point for Map.
     public static void FirstLaw<X>(Functor<X> m) {
-        Func<Functor<X>, Functor<X>> id = _ => _;
-
-        m.Map(_ => _) == id.Invoke(m);
+        m.Map(_ => _) == m;
     }
 
-    // Second law: `Map` preserves the composition operator.
+    // Second law: Map preserves the composition operator.
     public static void SecondLaw<X, Y, Z>(Functor<X> m, Func<Y, Z> f, Func<X, Y> g) {
         m.Map(_ => f(g(_))) == m.Map(g).Map(f);
     }
@@ -180,37 +187,23 @@ public static class FunctorLaws {
 Monad
 -----
 
-A Monad has a unit element `Return` and a `Bind` operation that satisfy the Monad laws:
+A Monad has a unit element `Return` and a `Bind` operation that satisfy the **monad laws**:
 - `Return` is the identity for `Bind`.
 - `Bind` is associative.
 
-Haskell also provides a `fail` method which is not part of the standard definition
-of a monad. It is mostly used for pattern matching failure, something we do not
-have in .NET.
+Since `Bind` is not necessary a commutative operation, the first law really
+means two things: "`Return` is a left identity for `Bind`" and "`Return` is a
+right identity for `Bind`".
 
-Rule           | Arithmetic
--------------- | ---------------------------------------------------------------
-Return         | `1`
-Bind           | `*`
-Left identity  | `1 * x = x`
-Right identity | `x * 1 = x`
-Associativity  | `x * (y * z) = (x * y) * z`
+In arithmetic, `Return` would be `1` and `Bind` would be `*`.
+For the boolean algebra, `Return` would be `True` and `Append` would be `∧`,
+the logical conjunction AND. The rules should then be familiar to anyone:
 
-Rule           | Boolean Algebra
+Rule           | Translation
 -------------- | ---------------------------------------------------------------
-Return         | `∨`, the logical disjunction OR,
-Bind           | `True`
-Left identity  | `True ∧ P = P`
-Right identity | `P ∧ True = P`
-Associativity  | `P ∧ (Q ∧ R) = (P ∧ Q) ∧ R`
-
-Rule           | Lists
--------------- | ---------------------------------------------------------------
-Return         | `v -> [v]`
-Bind           | `xs -> f = append (map f xs)`
-Left identity  | `True ∧ P = P`
-Right identity | `P ∧ True = P`
-Associativity  | `P ∧ (Q ∧ R) = (P ∧ Q) ∧ R`
+Left identity  | `1 * x = x` and `True ∧ P = P`
+Right identity | `x * 1 = x` and `P ∧ True = P`
+Associativity  | `x * (y * z) = (x * y) * z` and `P ∧ (Q ∧ R) = (P ∧ Q) ∧ R`
 
 In Haskell:
 ```haskell
@@ -262,6 +255,10 @@ public static class MonadLaws {
     }
 }
 ```
+
+Haskell also provides a `fail` method which is not part of the standard definition
+of a monad. It is mostly used for pattern matching failure, something we do not
+have in .NET.
 
 Functions in the Kleisli category
 ---------------------------------
