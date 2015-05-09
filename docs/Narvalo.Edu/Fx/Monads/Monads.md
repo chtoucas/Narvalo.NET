@@ -1,29 +1,36 @@
 ﻿On Monads
 =========
 
-You shouldn't be afraid of the monad! We don't need to understand the theory
-behind to make good use of it. In fact, I guess that the monad theory,
-or more precisely category theory, has influenced the design of many parts of
-the .NET framework ; LINQ and the Reactive Extensions being the most obvious
-proofs of that.
+Monads have the undeserved reputation of being hard. It is certainly due to the
+fact that many people try to explain them using the jargon of category theory.
+Truth to be told, you shouldn't be afraid of the monad! We don't need to
+understand the theory behind to make good use of it.
 
-The .NET type system is not rich enough to make general
-monadic constructions but it gives developers access to some powerful monadic
-concepts in a very friendly way.
+The .NET type system is not rich enough to make general monadic constructions
+but it gives developers access to some powerful monadic concepts in a very
+friendly way. In fact, monad theory has clearly influenced the design of some
+core parts of the .NET framework; LINQ and the Reactive extensions being the
+most obvious proofs of that.
 
-For illustration, we provide two analogies from Mathematics. Beware they are not accurate,
-but they give a fairly simple way to understand the rules.
-From the _Arithmetic_,
-- `Bind` is `*`.
-- `Plus` is `+`.
-- `Unit` is `1`.
-- `Zero` is `0`.
+A way to think about a monad is that it maps a value into a richer structure
+which follows a set of simple rules from which we can derive a very rich vocabulary.
 
-From the _Boolean Algebra_,
-- `Bind` is `∧`, the logical conjunction AND.
-- `Plus` is `∨`, the logical disjunction OR.
-- `Unit` is `True`.
+Whenever it is possible, we illustrate the discussion with analogies from
+arithmetic, boolean algebra and LINQ. Beware, they are not always accurate,
+but they give a fairly easy way to get a sense of the rules.
+The first analogy comes from the _Arithmetic_,
+- `Bind` is `*`,
+- `Plus` is `+`,
+- `Unit` is `1`,
+- `Zero` is `0`,
+(`Bind`, `Plus`, `Unit` and `Zero` will be explained below)
+and the second one is the _Boolean Algebra_,
+- `Bind` is `∧`, the logical conjunction AND,
+- `Plus` is `∨`, the logical disjunction OR,
+- `Unit` is `True`,
 - `Zero` is `False`.
+
+Before moving to monads, we explain two preliminary concepts: monoids and functors.
 
 Monoid
 ------
@@ -35,17 +42,31 @@ A Monoid has an `Empty` element and an `Append` operation that satisfy the monoi
 In the context of monads, we use different names: `Plus` or `OrElse` instead of `Append`
 and `Zero` instead of `Empty`.
 
+In arithmetic, `Empty` would be `0` and `Append` would be `+`.
 Rule           | Arithmetic
 -------------- | ---------------------------------------------------------------
 Left identity  | `0 + x = x`
 Right identity | `x + 0 = x`
 Associativity  | `x + (y + z) = (x + y) + z`
 
+For the boolean algebra, `Empty` would be `False` and `Append` would be `∧`,
+the logical conjunction AND.
 Rule           | Boolean Algebra
 -------------- | ---------------------------------------------------------------
 Left identity  | `False ∨ P = P`
 Right identity | `P ∨ False = P`
 Associativity  | `P ∨ (Q ∨ R) = (P ∨ Q) ∨ R`
+
+For LINQ, `Empty` is the empty sequence `Enumerable.Empty<T>()` and `Append`
+is the concatenation of two sequences `IEnumerable<T>.Concat()`.
+```csharp
+// First law: Empty is a left identity for Append.
+empty.Concat(q) == q;
+// Second law: Empty is a right identity for Append.
+q.Concat(empty) == q;
+// Third law: Empty is associative.
+x.Concat(y.Concat(z)) == x.Concat(y).Concat(z);
+```
 
 In Haskell:
 ```haskell
@@ -157,12 +178,24 @@ have in .NET.
 
 Rule           | Arithmetic
 -------------- | ---------------------------------------------------------------
+Return         | `1`
+Bind           | `*`
 Left identity  | `1 * x = x`
 Right identity | `x * 1 = x`
 Associativity  | `x * (y * z) = (x * y) * z`
 
 Rule           | Boolean Algebra
 -------------- | ---------------------------------------------------------------
+Return         | `∨`, the logical disjunction OR,
+Bind           | `True`
+Left identity  | `True ∧ P = P`
+Right identity | `P ∧ True = P`
+Associativity  | `P ∧ (Q ∧ R) = (P ∧ Q) ∧ R`
+
+Rule           | Lists
+-------------- | ---------------------------------------------------------------
+Return         | `v -> [v]`
+Bind           | `xs -> f = append (map f xs)`
 Left identity  | `True ∧ P = P`
 Right identity | `P ∧ True = P`
 Associativity  | `P ∧ (Q ∧ R) = (P ∧ Q) ∧ R`
@@ -289,7 +322,9 @@ In C#:
 public static class MonadLaws {
     // First law: Return is a left identity for Compose.
     public static void FirstLaw<X, Y>(Kunc<X, Y> g, X value) {
-        Monad.Return.Compose(g).Invoke(value) == g(value);
+        Kunc<X, X> kReturn = Monad.Return;
+
+        return kReturn.Compose(g).Invoke(value) == g(value);
     }
 
     // Second law: Return is a right identity for Compose.
@@ -307,9 +342,9 @@ public static class MonadLaws {
 Monad Revisited
 ---------------
 
-If one wishes to stay closer to the definition of monads from category theory, a Monad is
-equivalently defined by a unit element `Return` and two operations `Map` and `Multiply`
-where `Map` must satisfy the functor laws.
+If one wishes to stay closer to the definition of monads from category theory,
+a Monad is equivalently defined by a unit element `Return` and two operations
+`Map` and `Multiply` where `Map` must satisfy the functor laws.
 
 In Haskell:
 ```haskell
@@ -344,10 +379,13 @@ public static class Monad {
 ```
 
 ### Going from (`Return`, `Map`, `Multiply`) to (`Return`, `Bind`):
+In Haskell:
 ```haskell
 -- Bind defined via Multiply and Map.
 m >>= g = join (fmap g m)
 ```
+
+In C#:
 ```csharp
 public class Monad<T> {
     // Bind defined via Multiply and Map.
@@ -358,12 +396,15 @@ public class Monad<T> {
 ```
 
 ### Going from (`Return`, `Bind`) to (`Return`, `Map`, `Multiply`):
+In Haskell:
 ```haskell
 -- Map defined via Return and Bind.
 fmap f x = x >>= (return . f)
 -- Multiply defined via Bind.
 join x = x >>= id
 ```
+
+In C#:
 ```csharp
 public class Monad<T> {
     // Map defined via Return and Bind.
@@ -374,14 +415,14 @@ public class Monad<T> {
 
 public static class Monad {
     // Multiply defined via Bind.
-    internal static Monad<T> Multiply(Monad<Monad<T>> square) {
+    public static Monad<T> Multiply(Monad<Monad<T>> square) {
         return square.Bind(_ => _);
     }
 }
 ```
 
-The first functor law can be deduced from the definition of `Map` and the second
-monad law:
+The first functor law can be deduced from the above definition of `Map`
+and the second monad law:
 ```haskell
 fmap id x = x >>= (return . id) = x >>= return = x
 ```
