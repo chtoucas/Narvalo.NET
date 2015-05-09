@@ -29,7 +29,7 @@ I could not resist including them. Better to start slowly.
 Monoid
 ------
 
-A Monoid has an `Empty` element and an `Append` operation that satisfy the monoid laws:
+A Monoid has an `Empty` element and an `Append` operation that satisfy the *monoid laws*:
 - `Empty` is an identity for `Append`,
 - `Append` is associative.
 
@@ -41,7 +41,7 @@ In arithmetic, `Empty` would be `0` and `Append` would be `+`.
 For the boolean algebra, `Empty` would be `False` and `Append` would be `∧`,
 the logical conjunction AND. The rules should then be familiar to anyone:
 
-Rule           | Description
+Rule           | Translation
 -------------- | ---------------------------------------------------------------
 Left identity  | `0 + x = x` and `False ∨ P = P`
 Right identity | `x + 0 = x` and `P ∨ False = P`
@@ -115,8 +115,25 @@ mconcat :: [a] -> a
 mconcat = foldr mappend mempty
 ```
 Beware this `Concat` is NOT the one from LINQ.
+```csharp
+// Concat for our hypothetical monoid class.
+public static Monoid<T> Concat<T>(this IEnumerable<Monoid<T>> @this)
+{
+    Func<Monoid<T>, Monoid<T>, Monoid<T>> accumulator = (m1, m2) => m1.Append(m2);
 
-In the context of monads, the monoid operations appear under various names:
+    return @this.Aggregate(Monoid<T>.Empty, accumulator);
+}
+
+// Concat for LINQ.
+public static IEnumerable<T> Concat<T>(this IEnumerable<IEnumerable<T>> @this)
+{
+    Func<IEnumerable<T>, IEnumerable<T>, IEnumerable<T>> accumulator = (seq1, seq2) => seq1.Concat(seq2);
+
+    return @this.Aggregate(Enumerable.Empty<T>(), accumulator);
+}
+```
+
+In the context of monads, the monoid operations appear under different names:
 `Plus`, `Concat` or `OrElse` instead of `Append`, and `Zero` instead of `Empty`.
 
 Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Monoid.html)
@@ -124,7 +141,7 @@ Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/D
 Functor
 -------
 
-A Functor has a `Map` operation that satisfy the functor laws:
+A Functor has a `Map` operation that satisfy the *functor laws*:
 - The identity map is a fixed point for `Map`.
 - `Map` preserves the composition operator.
 
