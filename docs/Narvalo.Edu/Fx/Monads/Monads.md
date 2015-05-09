@@ -52,17 +52,17 @@ For LINQ, `Empty` is the empty sequence `Enumerable.Empty<T>()` and `Append`
 is the concatenation operation on sequences: `IEnumerable<T>.Concat()`:
 ```csharp
 // First law: Appending a list q to an empty list returns the list q.
-// Example: [] + [1, 2, 3] = [1, 2, 3]
+// For instance, [] + [1, 2, 3] = [1, 2, 3]
 empty.Concat(q) == q;
 
 // Second law: Appending an empty list to a list q returns the list q.
-// Example: [1, 2, 3] + [] = [1, 2, 3]
+// For instance, [1, 2, 3] + [] = [1, 2, 3]
 q.Concat(empty) == q;
 
 // Third law: Appending a list s to a list r then appending the result
 // to a third list q is the same as appending the list r to the list q
 // then appending the list s to the result.
-// Example: on the LHS we have:
+// For instance, on the LHS we have:
 //  [1, 2] + ([3, 4] + [5, 6])
 //      -> [1, 2] + [3, 4, 5, 6]
 //      -> [1, 2, 3, 4, 5, 6]
@@ -143,7 +143,7 @@ public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> @this)
 // Using the query expression syntax, this is even clearer.
 public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> @this)
 {
-    // Example: [[1, 2], [3, 4]] = [1, 2, 3, 4]
+    // For instance, [[1, 2], [3, 4]] = [1, 2, 3, 4]
     return from _ in @this
            from item in _
            select item;
@@ -171,7 +171,7 @@ For LINQ, `Map` is the select method `IEnumerable<T>.Select()`:
 ```csharp
 // First law: Iterating over list and returning the unmodified items
 // is the same as iterating over the list.
-// Example: with id: x -> x,
+// For instance, with id: x -> x,
 //  [1, 2] -> [id(1), id(2)] = [1, 2]
 q.Select(_ => _) == q;
 
@@ -180,7 +180,7 @@ from _ in q select _ == q;
 // Second law: Iterating over a list and returning the result of applying g
 // then f to each item is the same as iterating over the list while applying g
 // to each item followed by another iteration that returns the results of applying f.
-// Example: with
+// For instance, with
 //  f: x -> -x
 //  g: x -> x * x
 //  h = f . g: x -> -1 * x * x
@@ -255,7 +255,8 @@ Associativity  | `x * (y * z) = (x * y) * z` and `P ∧ (Q ∧ R) = (P ∧ Q) �
 For LINQ,
 ```csharp
 public static class Sequence {
-    // Bind method.
+    // Map each element of a list to a list, resulting in a list of lists
+    // which is then flattened.
     public IEnumerable<TResult> Bind<TSource, TResult>(
         this IEnumerable<TSource> @this,
         Func<TSource, IEnumerable<TResult>> fun)
@@ -265,7 +266,7 @@ public static class Sequence {
                select item;
     }
 
-    // Return method.
+    // Create a list of one element from a value.
     public static IEnumerable<T> Single<T>(T value) {
         yield return value;
     }
@@ -273,9 +274,9 @@ public static class Sequence {
 
 // First law: Iterating over a list of one element and creating a list by applying f
 // to this unique value is the same as creating a list by applying f to the unique element.
-// Example: with f: x -> [x, 2], on the LHS we have:
+// For instance, with f: x -> [x, 2], on the LHS we have:
 //  1 -> [1]
-//    -> [f(1)] = [[1, 2]]
+//    -> [f(1)] = [[1, 2]]          (apply f)
 //    -> [1, 2]                     (flatten)
 // and on the RHS:
 //  f(1) = [1, 2]
@@ -286,8 +287,8 @@ from _ in Sequence.Single(value) from item in f(_) select item
 
 // Second law: Iterating over a list and for each element returning a list containing only
 // this element is the same as iterating over the list.
-// Example:
-//  [1, 2, 3] -> [[1], [2], [3]]
+// For instance,
+//  [1, 2, 3] -> [[1], [2], [3]]    (apply Single)
 //            -> [1, 2, 3]          (flatten)
 q.Bind(Sequence.Single) == q;
 
@@ -295,21 +296,21 @@ from _ in q from item in Sequence.Single(_) select item
     == q;
 
 // Third law: Bind is associative.
-// Example: with
+// For instance, with
 //  f: x -> [x, 1]
 //  g: x -> [x, 2]
 // we have on the LHS:
-//  [3, 4] -> [f(3), f(4)]
+//  [3, 4] -> [f(3), f(4)]                              (apply f)
 //              = [[3, 1], [4, 1]]
-//         -> [[g(3), g(1)], [g(4), g(1)]]
+//         -> [[g(3), g(1)], [g(4), g(1)]]              (apply g)
 //              = [[[3, 2], [1, 2]], [[4, 2], [1, 2]]]
 //         -> [[3, 2, 1, 2], [4, 2, 1, 2]]              (flatten the inner seq)
 //         -> [3, 2, 1, 2, 4, 2, 1, 2]                  (flatten the outer seq)
 // and on the RHS:
-//  [3, 4] -> [f(3), f(4)]
+//  [3, 4] -> [f(3), f(4)]                              (apply f)
 //              = [[3, 1], [4, 1]]
 //         -> [3, 1, 4, 1]                              (flatten)
-//         -> [g(3), g(1), g(4), g(1))]
+//         -> [g(3), g(1), g(4), g(1))]                 (apply g)
 //              = [[3, 2], [1, 2], [4, 2], [1, 2]]
 //         -> [3, 2, 1, 2, 4, 2, 1, 2]                  (flatten)
 q.Bind(_ => f(_).Bind(g)) == q.Bind(f).Bind(g);
