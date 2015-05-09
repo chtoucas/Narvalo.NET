@@ -29,7 +29,7 @@ I could not resist including them. Better to start slowly.
 Monoid
 ------
 
-A Monoid has an `Empty` element and an `Append` operation that satisfy the **monoid laws**:
+A monoid has an `Empty` element and an `Append` operation that satisfy the **monoid laws**:
 - `Empty` is an identity for `Append`,
 - `Append` is associative.
 
@@ -114,22 +114,31 @@ Haskell also includes a `Concat` operation which derives from `Empty` and `Appen
 mconcat :: [a] -> a
 mconcat = foldr mappend mempty
 ```
+
 Beware this `Concat` is NOT the one from LINQ:
 ```csharp
-// Concat for our hypothetical monoid class.
-public static Monoid<T> Concat<T>(this IEnumerable<Monoid<T>> @this)
-{
-    Func<Monoid<T>, Monoid<T>, Monoid<T>> accumulator = (m1, m2) => m1.Append(m2);
-
-    return @this.Aggregate(Monoid<T>.Empty, accumulator);
-}
-
 // Concat for LINQ.
-public static IEnumerable<T> Concat<T>(this IEnumerable<IEnumerable<T>> @this)
+public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> @this)
 {
     Func<IEnumerable<T>, IEnumerable<T>, IEnumerable<T>> accumulator = (seq1, seq2) => seq1.Concat(seq2);
 
     return @this.Aggregate(Enumerable.Empty<T>(), accumulator);
+}
+
+// Using the query expression syntax, this is even clearer.
+public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> @this)
+{
+    return from _ in @this
+           from item in _
+           select item;
+}
+
+// Concat for our hypothetical monoid class.
+public static Monoid<T> Flatten<T>(this IEnumerable<Monoid<T>> @this)
+{
+    Func<Monoid<T>, Monoid<T>, Monoid<T>> accumulator = (m1, m2) => m1.Append(m2);
+
+    return @this.Aggregate(Monoid<T>.Empty, accumulator);
 }
 ```
 
@@ -138,7 +147,7 @@ Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/D
 Functor
 -------
 
-A Functor has a `Map` operation that satisfy the **functor laws**:
+A functor has a `Map` operation that satisfy the **functor laws**:
 - The identity map is a fixed point for `Map`,
 - `Map` preserves the composition operator.
 
@@ -184,10 +193,12 @@ public static class FunctorLaws {
 }
 ```
 
+Reference: [Data.Functor](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Functor.html)
+
 Monad
 -----
 
-A Monad has a unit element `Return` and a `Bind` operation that satisfy the **monad laws**:
+A monad has a unit element `Return` and a `Bind` operation that satisfy the **monad laws**:
 - `Return` is the identity for `Bind`.
 - `Bind` is associative.
 
@@ -204,6 +215,41 @@ Rule           | Translation
 Left identity  | `1 * x = x` and `True ∧ P = P`
 Right identity | `x * 1 = x` and `P ∧ True = P`
 Associativity  | `x * (y * z) = (x * y) * z` and `P ∧ (Q ∧ R) = (P ∧ Q) ∧ R`
+
+For LINQ,
+```csharp
+public static class Sequence {
+    // Bind method.
+    public IEnumerable<TResult> Bind<TSource, TResult>(
+        this IEnumerable<TSource> @this,
+        Func<TSource, IEnumerable<TResult>> fun)
+    {
+        return from _ in @this
+               from item in fun.Invoke(_)
+               select item;
+    }
+
+    // Return method.
+    public static IEnumerable<T> Single<T>(T value) {
+        yield return value;
+    }
+}
+
+// First law: Return is a left identity for Bind.
+Sequence.Single(value).Bind(fun) == fun.Invoke(value);
+from _ in Sequence.Single(value) from item in fun.Invoke(_) select item == fun.Invoke(value);
+// Second law: Return is a right identity for Bind.
+q.Bind(Sequence.Single) == q;
+from _ in q from item in Sequence.Single(_) select item == q;
+// Third law: Bind is associative.
+q.Bind(_ => f(_).Bind(g)) == q.Bind(f).Bind(g);
+from _ in q
+from item in (from outer in f.Invoke(_) from inner in g.Invoke(outer) select inner)
+select item
+    == from _ in (from outer in q from inner in f.Invoke(outer) select inner)
+       from item in g.Invoke(_)
+       select item;
+```
 
 In Haskell:
 ```haskell
@@ -225,7 +271,7 @@ In C#:
 // Skeleton definition of a monad.
 public class Monad<T> {
     // Bind method.
-    public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> kun) {
+    public Monad<TResult> Bind<TResult>(Func<T, Monad<TResult>> fun) {
         throw new NotImplementedException();
     }
 }
@@ -239,12 +285,12 @@ public static class Monad {
 
 // Monad laws.
 public static class MonadLaws {
-    // First law: Unit is a left identity for Bind.
+    // First law: Return is a left identity for Bind.
     public static void FirstLaw<X, Y>(Func<X, Monad<Y>> f, X value) {
-        Monad.Return(value).Bind(f) == f(value);
+        Monad.Return(value).Bind(f) == f.Invoke(value);
     }
 
-    // Second law: Unit is a right identity for Bind.
+    // Second law: Return is a right identity for Bind.
     public static void SecondLaw<X>(Monad<X> m) {
         m.Bind(Monad.Return) == m;
     }
@@ -259,6 +305,8 @@ public static class MonadLaws {
 Haskell also provides a `fail` method which is not part of the standard definition
 of a monad. It is mostly used for pattern matching failure, something we do not
 have in .NET.
+
+Reference: [Control.Monad](https://hackage.haskell.org/package/base-4.6.0.1/docs/Control-Monad.html)
 
 Functions in the Kleisli category
 ---------------------------------
@@ -483,10 +531,8 @@ MonadMore | Monad + Monoid + Zero = zero for Bind
 MonadPlus | Monad + Monoid + Right distributivity
 MonadOr   | Monad + Monoid + Unit = left zero for Plus
 
-Sample monads
--------------
-
-Already found in the Framework:
+Monads in the .NET framework
+----------------------------
 
 Class            | Type
 ---------------- | ------------------------
@@ -496,14 +542,17 @@ Class            | Type
 `Task<T>`        | Monad, Comonad (?)
 `IEnumerable<T>` | MonadZero, MonadPlus (?)
 
-Things I am working on:
+### `IEnumerable<T>`
 
-Class                   | Type
------------------------ | ------------------
-`Identity<T>`           | Monad, Comonad
-`Maybe<T>`              | MonadMore, MonadOr
-`Outcome<T>`            | Monad
-`Either<TLeft, TRight>` | Monad
+### `Nullable<T>`
+
+### `Func<T>`
+
+### `Lazy<T>`
+
+### `Task<T>`
+
+Reference: [Stephen Toub](http://blogs.msdn.com/b/pfxteam/archive/2013/04/03/tasks-monads-and-linq.aspx)
 
 Illustration
 ------------
