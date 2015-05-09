@@ -12,47 +12,36 @@ friendly way. In fact, monad theory has clearly influenced the design of some
 core parts of the .NET framework; LINQ and the Reactive extensions being the
 most obvious proofs of that.
 
-A way to think about a monad is that it maps a value into a richer structure
+A way to think about a monad is that it maps a value to a richer structure
 which follows a set of simple rules from which we can derive a very rich vocabulary.
 
 Whenever it is possible, we illustrate the discussion with analogies from
-arithmetic, boolean algebra and LINQ. Beware, they are not always accurate,
-but they give a fairly easy way to get a sense of the rules.
-The first analogy comes from the _Arithmetic_,
-- `Bind` is `*`,
-- `Plus` is `+`,
-- `Unit` is `1`,
-- `Zero` is `0`,
-(`Bind`, `Plus`, `Unit` and `Zero` will be explained below)
-and the second one is the _Boolean Algebra_,
-- `Bind` is `∧`, the logical conjunction AND,
-- `Plus` is `∨`, the logical disjunction OR,
-- `Unit` is `True`,
-- `Zero` is `False`.
+arithmetic, the boolean algebra and LINQ. Beware, these analogies are not always
+accurate, but they give a fairly easy way to get a feeling of what's going on.
 
 Before moving to monads, we explain two preliminary concepts: monoids and functors.
+You can skip these sections, they are not necessary to understand monads.
 
 Monoid
 ------
 
 A Monoid has an `Empty` element and an `Append` operation that satisfy the monoid laws:
-- `Empty` is the identity for `Append`.
+- `Empty` is an identity for `Append`,
 - `Append` is associative.
 
-In the context of monads, we use different names: `Plus` or `OrElse` instead of `Append`
-and `Zero` instead of `Empty`.
+Since `Append` is not necessary a commutative operation, the first law is really
+made of two rules: `Empty` is a left identity for `Append` and `Empty` is a
+right identity for `Append`.
 
 In arithmetic, `Empty` would be `0` and `Append` would be `+`.
+For the boolean algebra, `Empty` would be `False` and `Append` would be `∧`,
+the logical conjunction AND. The rules should then be obious to anyone:
 
 Rule           | Arithmetic
 -------------- | ---------------------------------------------------------------
 Left identity  | `0 + x = x`
 Right identity | `x + 0 = x`
 Associativity  | `x + (y + z) = (x + y) + z`
-
-For the boolean algebra, `Empty` would be `False` and `Append` would be `∧`,
-the logical conjunction AND.
-
 Rule           | Boolean Algebra
 -------------- | ---------------------------------------------------------------
 Left identity  | `False ∨ P = P`
@@ -67,7 +56,7 @@ empty.Concat(q) == q;
 // Second law: Empty is a right identity for Append.
 q.Concat(empty) == q;
 // Third law: Empty is associative.
-x.Concat(y.Concat(z)) == x.Concat(y).Concat(z);
+q.Concat(r.Concat(s)) == q.Concat(r).Concat(s);
 ```
 
 In Haskell:
@@ -125,6 +114,9 @@ Haskell also includes a `Concat` operation which derives from `Empty` and `Appen
 mconcat :: [a] -> a
 mconcat = foldr mappend mempty
 ```
+
+In the context of monads, we use different names: `Plus` or `OrElse` instead of `Append`
+and `Zero` instead of `Empty`.
 
 Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Monoid.html)
 
