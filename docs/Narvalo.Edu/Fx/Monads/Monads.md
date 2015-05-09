@@ -43,6 +43,7 @@ In the context of monads, we use different names: `Plus` or `OrElse` instead of 
 and `Zero` instead of `Empty`.
 
 In arithmetic, `Empty` would be `0` and `Append` would be `+`.
+
 Rule           | Arithmetic
 -------------- | ---------------------------------------------------------------
 Left identity  | `0 + x = x`
@@ -51,6 +52,7 @@ Associativity  | `x + (y + z) = (x + y) + z`
 
 For the boolean algebra, `Empty` would be `False` and `Append` would be `∧`,
 the logical conjunction AND.
+
 Rule           | Boolean Algebra
 -------------- | ---------------------------------------------------------------
 Left identity  | `False ∨ P = P`
