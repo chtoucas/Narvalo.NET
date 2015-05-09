@@ -12,8 +12,8 @@ friendly way. In fact, monad theory has clearly influenced the design of some
 core parts of the .NET framework; LINQ and the Reactive extensions being the
 most obvious proofs of that.
 
-A way to think about a monad is that it maps a value to a richer structure
-which follows a set of simple rules from which we can derive a very rich vocabulary.
+**A way to think about a monad is that it maps a value to a richer structure
+which follows a set of simple rules from which we can derive a very rich vocabulary.**
 
 Whenever it is possible, we illustrate the discussion with analogies from
 arithmetic, the boolean algebra and LINQ. Beware, these analogies are not always
@@ -23,12 +23,58 @@ of what's going on.
 We also provide examples from Haskell, but if you do not have any knowledge of
 it, feel free to skip them.
 
+References:
+- The first discussion of monads in the context of .NET seems to be due to
+  [Wes Dyer](http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx)
+- A popular explanation of monads from [Lippert](http://ericlippert.com/category/monads/)
+- A more abstract discussion of monads from [Meijer](http://laser.inf.ethz.ch/2012/slides/Meijer/)
+
+### Outline
+
+```
+Monoid
+Functor
+    Applicative Functor
+Monad
+    Query Expression Syntax
+Functions in the Kleisli Category
+Triad: Monad Revisited
+    From Triads to Monads
+    From Monads to Triads
+Comonad
+Richer Monads
+    MonadPlus
+    Monad Reform
+        MonadZero
+        MonadMore
+        MonadPlus
+        MonadOr
+Summary
+Monads in the .NET Framework
+    `IEnumerable<T>`
+    `Nullable<T>`
+    `Func<T>`
+    `Lazy<T>`
+    `Task<T>`
+Monad Vocabulary
+    Terminology
+    An Haskell to C# Dictionary
+Maybe Monad
+State Monad
+Write Monad
+Reader Monad
+Error Monad
+LINQ
+```
+
 Before moving to monads, we explain two preliminary concepts: monoids and functors.
 They are not necessary to understand monads but they are sufficiently simple that
 I could not resist including them. Better to start slowly.
 
 Monoid
 ------
+
+Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Monoid.html)
 
 A monoid has an `Empty` element and an `Append` operation that satisfy the **monoid laws**:
 - `Empty` is an identity for `Append`,
@@ -130,7 +176,7 @@ mconcat :: [a] -> a
 mconcat = foldr mappend mempty
 ```
 
-Beware this `Concat` is NOT the one from LINQ:
+Beware this `Concat` is NOT the one from LINQ, it is more a way of flattening a list of lists:
 ```csharp
 // Concat for LINQ.
 public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> @this)
@@ -148,8 +194,10 @@ public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> @this)
            from item in _
            select item;
 }
+```
 
-// Concat for our hypothetical monoid class.
+For our hypothetical monoid class, this translates to:
+```csharp
 public static Monoid<T> Flatten<T>(this IEnumerable<Monoid<T>> @this)
 {
     Func<Monoid<T>, Monoid<T>, Monoid<T>> accumulator = (m1, m2) => m1.Append(m2);
@@ -158,10 +206,10 @@ public static Monoid<T> Flatten<T>(this IEnumerable<Monoid<T>> @this)
 }
 ```
 
-Reference: [Data.Monoid](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Monoid.html)
-
 Functor
 -------
+
+Reference: [Data.Functor](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Functor.html)
 
 A functor has a `Map` operation that satisfy the **functor laws**:
 - The identity map is a fixed point for `Map`,
@@ -174,7 +222,7 @@ For LINQ, `Map` is the select method `IEnumerable<T>.Select()`:
 // For instance, with id: x -> x,
 //  [1, 2] -> [id(1), id(2)] = [1, 2]
 q.Select(_ => _) == q;
-
+// written using the query expression syntax:
 from _ in q select _ == q;
 
 // Second law: Iterating over a list and returning the result of applying g
@@ -190,7 +238,7 @@ from _ in q select _ == q;
 //  [1, 2] -> [g(1), g(2)] = [1, 4]
 //         -> [f(1), f(4)] = [-1, -4]
 q.Select(_ => f(g(_))) == q.Select(g).Select(f);
-
+// written using the query expression syntax:
 from _ in q select f(g(_))
     == from item
            in (from _ in q select g(_))
@@ -199,6 +247,9 @@ from _ in q select f(g(_))
 
 In Haskell, we have:
 ```haskell
+-- Map method.
+fmap :: (a -> b) -> f a -> f b
+
 -- First law: The identity map is a fixed point for Map.
 fmap id == id
 -- Second law: Map preserves the composition operator.
@@ -229,10 +280,14 @@ public static class FunctorLaws {
 }
 ```
 
-Reference: [Data.Functor](https://hackage.haskell.org/package/base-4.7.0.1/docs/Data-Functor.html)
+### Applicative Functor
 
 Monad
 -----
+
+References:
+- [Haskell](http://www.haskell.org/onlinereport/monad.html)
+- [Control.Monad](https://hackage.haskell.org/package/base-4.6.0.1/docs/Control-Monad.html)
 
 A monad has a unit element `Return` and a `Bind` operation that satisfy the **monad laws**:
 - `Return` is the identity for `Bind`.
@@ -281,7 +336,7 @@ public static class Sequence {
 // and on the RHS:
 //  f(1) = [1, 2]
 Sequence.Single(value).Bind(f) == f(value);
-
+// written using the query expression syntax:
 from _ in Sequence.Single(value) from item in f(_) select item
     == f(value);
 
@@ -291,7 +346,7 @@ from _ in Sequence.Single(value) from item in f(_) select item
 //  [1, 2, 3] -> [[1], [2], [3]]    (apply Single)
 //            -> [1, 2, 3]          (flatten)
 q.Bind(Sequence.Single) == q;
-
+// written using the query expression syntax:
 from _ in q from item in Sequence.Single(_) select item
     == q;
 
@@ -314,7 +369,7 @@ from _ in q from item in Sequence.Single(_) select item
 //              = [[3, 2], [1, 2], [4, 2], [1, 2]]
 //         -> [3, 2, 1, 2, 4, 2, 1, 2]                  (flatten)
 q.Bind(_ => f(_).Bind(g)) == q.Bind(f).Bind(g);
-
+// written using the query expression syntax:
 from _ in q
 from item
     in (from outer in f(_) from inner in g(outer) select inner)
@@ -379,9 +434,7 @@ Haskell also provides a `fail` method which is not part of the standard definiti
 of a monad. It is mostly used for pattern matching failure, something we do not
 have in .NET.
 
-Reference: [Control.Monad](https://hackage.haskell.org/package/base-4.6.0.1/docs/Control-Monad.html)
-
-Functions in the Kleisli category
+Functions in the Kleisli Category
 ---------------------------------
 
 A function in the Kleisli category is simply a function that maps a value to a monad.
@@ -469,8 +522,8 @@ public static class MonadLaws {
 }
 ```
 
-Monad Revisited
----------------
+Triad: Monad Revisited
+------------------------
 
 If one wishes to stay closer to the definition of monads from category theory,
 a Monad is equivalently defined by a unit element `Return` and two operations
@@ -508,7 +561,8 @@ public static class Monad {
 }
 ```
 
-### Going from (`Return`, `Map`, `Multiply`) to (`Return`, `Bind`):
+### From Triads to Monads
+
 In Haskell:
 ```haskell
 -- Bind defined via Multiply and Map.
@@ -525,7 +579,8 @@ public class Monad<T> {
 }
 ```
 
-### Going from (`Return`, `Bind`) to (`Return`, `Map`, `Multiply`):
+### From Monads to Triads
+
 In Haskell:
 ```haskell
 -- Map defined via Return and Bind.
@@ -576,59 +631,37 @@ There are two equivalent ways to define a Comonad:
 Richer Monads
 -------------
 
+References:
+- [MonadPlus](http://www.haskell.org/haskellwiki/MonadPlus)
+- [MonadPlus Reform](http://www.haskell.org/haskellwiki/MonadPlus_reform_proposal)
+
+### MonadPlus
+
+### MonadPlus Reform
+
 We follow (mostly) the proposed new terminology from the MonadPlus Reform.
 
+#### MonadZero
+
 _MonadZero_, a MonadZero is a Monad with a left zero for `Bind`.
+
+#### MonadMore
 
 _MonadMore_, a MonadMore is a Monad which is also a Monoid and for which `Zero`
  is a zero for `Bind`. This is what Haskell calls a MonadPlus.
 
+#### MonadPlus
+
 _MonadPlus_, a MonadPlus is a Monad which is also a Monoid and for which Bind
- is right distributive over Plus.
- REVIEW: Haskell uses the term left distributive. Am I missing something?
+is right distributive over Plus.
+
+REVIEW: Haskell uses the term left distributive. Am I missing something?
+
+#### MonadOr
 
 _MonadOr_, a MonadOr is a Monad which is also a Monoid and for which Unit is
- a left zero for Plus. Here, we prefer to use OrElse instead of Plus for the
- Monoid composition operation.
-
-Summary
--------
-
-Name      | Description
---------- | ------------------------------------------
-Monoid    | (Plus, Zero) + Monoid Laws
-Monad     | (Bind, Unit) + Monad Laws
-Comonad   | (Cobind, Counit) + Comonad Laws
-MonadZero | (Monad, Zero) + Zero = left zero for Bind
-MonadMore | Monad + Monoid + Zero = zero for Bind
-MonadPlus | Monad + Monoid + Right distributivity
-MonadOr   | Monad + Monoid + Unit = left zero for Plus
-
-Monads in the .NET framework
-----------------------------
-
-Class            | Type
----------------- | ------------------------
-`Nullable<T>`    | MonadMore, MonadOr (?)
-`Func<T>`        |
-`Lazy<T>`        | Monad, Comonad (?)
-`Task<T>`        | Monad, Comonad (?)
-`IEnumerable<T>` | MonadZero, MonadPlus (?)
-
-### `IEnumerable<T>`
-
-### `Nullable<T>`
-
-### `Func<T>`
-
-### `Lazy<T>`
-
-### `Task<T>`
-
-Reference: [Stephen Toub](http://blogs.msdn.com/b/pfxteam/archive/2013/04/03/tasks-monads-and-linq.aspx)
-
-Illustration
-------------
+a left zero for Plus. Here, we prefer to use OrElse instead of Plus for the
+Monoid composition operation.
 
 We write the definitions and rules using the Haskell syntax.
 
@@ -666,8 +699,46 @@ Description                      | Signature
 [MonadOr] Left zero              | `True ∨ P = True`
 [...] Right zero                 | `P ∨ True = True`
 
-Naming
-------
+Summary
+-------
+
+Name      | Description
+--------- | ------------------------------------------
+Monoid    | (Plus, Zero) + Monoid Laws
+Monad     | (Bind, Unit) + Monad Laws
+Comonad   | (Cobind, Counit) + Comonad Laws
+MonadZero | (Monad, Zero) + Zero = left zero for Bind
+MonadMore | Monad + Monoid + Zero = zero for Bind
+MonadPlus | Monad + Monoid + Right distributivity
+MonadOr   | Monad + Monoid + Unit = left zero for Plus
+
+Monads in the .NET Framework
+----------------------------
+
+Class            | Type
+---------------- | ------------------------
+`IEnumerable<T>` | MonadZero, MonadPlus (?)
+`Nullable<T>`    | MonadMore, MonadOr (?)
+`Func<T>`        |
+`Lazy<T>`        | Monad, Comonad (?)
+`Task<T>`        | Monad, Comonad (?)
+
+### `IEnumerable<T>`
+
+### `Nullable<T>`
+
+### `Func<T>`
+
+### `Lazy<T>`
+
+### `Task<T>`
+
+Reference: [Stephen Toub](http://blogs.msdn.com/b/pfxteam/archive/2013/04/03/tasks-monads-and-linq.aspx)
+
+Monad Vocabulary
+----------------
+
+### Terminology
 
 Sometimes we choose a more appropriate name than the default one.
 
@@ -692,13 +763,12 @@ _Comonad_          |                   |
 `Cobind`           | `extend`          | `Extend`
 `Comultiply` (`δ`) | `duplicate`       | `Duplicate`
 
-From Haskell to C#
-------------------
+### An Haskell to C# Dictionary
 
 All variants that return a `Monad<Unit>` instead of a `Monad<T>` (those that have
 a postfix `_`) are not implemented; ignoring the result achieves the same effect.
 
-### Monad
+#### Monad
 
 C#                | Haskell
 ----------------- | -----------------------------------------------
@@ -710,14 +780,14 @@ C#                | Haskell
 
 (1) We do not implement `fail` as .NET has its own way of reporting errors.
 
-### MonadPlus
+#### MonadPlus
 
 C#                | Haskell
 ----------------- | ----------------------------
 `Monad<T>.Zero`   | `mzero :: m a`
 `Monad<T>.Plus`   | `mplus :: m a -> m a -> m a`
 
-### Basic Monad functions
+#### Basic Monad functions
 
 C#                             | Haskell
 ------------------------------ | -------------------------------------------------------------------
@@ -733,7 +803,7 @@ _Ignore_                       | `sequence_ :: Monad m => [m a] -> m ()`
                                | `forever :: Monad m => m a -> m b`
                                | `void :: Functor f => f a -> f ()`
 
-### Generalisations of list functions
+#### Generalisations of list functions
 
 C#                          | Haskell
 --------------------------- | ----------------------------------------------------------------------
@@ -759,7 +829,7 @@ C#                    | Haskell
 
 (1) `when` and `unless` are related to the way I/O operations are handled in Haskell.
 
-### Monadic lifting operators
+#### Monadic lifting operators
 
 Implemented as both static methods (`Monad.Lift`) and extension methods.
 
@@ -772,7 +842,7 @@ C#                    | Haskell
 `Monad<T>.Zip`        | `liftM5 :: Monad m => (a1 -> a2 -> a3 -> a4 -> a5 -> r) -> m a1 -> m a2 -> m a3 -> m a4 -> m a5 -> m r`
                       | `ap :: Monad m => m (a -> b) -> m a -> m b`
 
-### Extras
+#### Extras
 
 C#                    | Haskell (if it existed)
 --------------------- | ----------------------------------------------------------------------------
@@ -785,20 +855,9 @@ C#                    | Haskell (if it existed)
 `Monad<T>.OnZero`     | `onzero :: MonadPlus m => m a -> m () -> m ()`
 `Monad<T>.Invoke`     | `invoke :: Monad m => m a -> (a -> m ()) -> m ()`
 
-References
-----------
-
-+ [Wes Dyer](http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx)
-+ [Lippert](http://ericlippert.com/category/monads/)
-+ [Meijer](http://laser.inf.ethz.ch/2012/slides/Meijer/)
-+ [Stephen Toub on the Task Comonad](http://blogs.msdn.com/b/pfxteam/archive/2013/04/03/tasks-monads-and-linq.aspx)
-+ [Haskell](http://www.haskell.org/onlinereport/monad.html)
-+ [MonadPlus](http://www.haskell.org/haskellwiki/MonadPlus)
-+ [MonadPlus Reform](http://www.haskell.org/haskellwiki/MonadPlus_reform_proposal)
-+ [Control.Monad](http://hackage.haskell.org/package/base-4.6.0.1/docs/Control-Monad.html)
+Implementations
+---------------
 
 Implementations in .NET:
-
-+ [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons) in C#
-+ [SharpMaLib](http://sharpmalib.codeplex.com/) in F#
-
+- [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons) in C#
+- [SharpMaLib](http://sharpmalib.codeplex.com/) in F#
