@@ -1,4 +1,6 @@
-﻿On Monads
+﻿% On Monads
+
+On Monads
 =========
 
 Monads have the undeserved reputation of being hard. It is certainly due to the
@@ -923,3 +925,6 @@ Implementations
 Implementations in .NET:
 - [iSynaptic.Commons](https://github.com/iSynaptic/iSynaptic.Commons) in C#
 - [SharpMaLib](http://sharpmalib.codeplex.com/) in F#
+
+
+% pandoc -s -S --toc -c pandoc.css monad.md -o monad.html
