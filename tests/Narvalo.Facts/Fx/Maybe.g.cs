@@ -229,6 +229,6 @@ namespace Narvalo.Fx
 
 
         #endregion
-    } // End of MaybeFacts.
+    } // End of Maybe.
 } // End of Narvalo.Fx.
 

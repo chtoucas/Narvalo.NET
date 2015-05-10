@@ -15,7 +15,7 @@ namespace Narvalo.Fx
         /// Workaround for the fact that <see cref="Enumerable.Empty{TElement}"/> does not have any contract attached.
         /// </remarks>
         /// <value>An empty <see cref="IEnumerable{TElement}"/> whose type argument is TElement.</value>
-        public static IEnumerable<TElement> Empty
+        internal static IEnumerable<TElement> Empty
         {
             get
             {

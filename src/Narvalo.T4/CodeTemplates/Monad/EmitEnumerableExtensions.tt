@@ -15,9 +15,9 @@ public partial class MonadTemplate
 <#+ if (!HasTypeConstraints) { #>
 
         /// <remarks>
-        /// Named <c>mapM</c> in Haskell parlance.
+        /// Named <c>forM</c> in Haskell parlance.
         /// </remarks>
-        public static <#= Name #><IEnumerable<TResult>> Map<TSource, TResult>(
+        public static <#= Name #><IEnumerable<TResult>> ForEach<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
         {
@@ -27,7 +27,7 @@ public partial class MonadTemplate
             Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
 <#+ } #>
 
-            return @this.MapCore(funM);
+            return @this.ForEachCore(funM);
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>

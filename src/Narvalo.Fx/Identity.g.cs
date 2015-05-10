@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Fx.Monads
+namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
@@ -217,6 +217,33 @@ namespace Narvalo.Fx.Monads
             /* T4: C# indent */
 
             return @this.Bind(_ => other);
+        }
+
+        /// <remarks>
+        /// Named <c>forever</c> in Haskell parlance.
+        /// </remarks>
+        public static Identity<TResult> Forever<TSource, TResult>(
+            this Identity<TSource> @this,
+            Func<Identity<TResult>> fun
+            )
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
+
+            return @this.Then(@this.Forever(fun));
+        }
+
+        /// <remarks>
+        /// Named <c>void</c> in Haskell parlance.
+        /// </remarks>
+        public static Identity<global::Narvalo.Fx.Unit> Forget<TSource>(this Identity<TSource> @this)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return Identity.Unit;
         }
 
         #endregion
@@ -474,7 +501,7 @@ namespace Narvalo.Fx.Monads
     } // End of FuncExtensions.
 }
 
-namespace Narvalo.Fx.Monads
+namespace Narvalo.Fx
 {
     using System.Diagnostics.Contracts;
 
@@ -504,12 +531,12 @@ namespace Narvalo.Fx.Monads
     } // End of Identity.
 }
 
-namespace Narvalo.Fx.Monads
+namespace Narvalo.Fx
 {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Fx.Monads.Internal;
+    using Narvalo.Fx.Internal;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.
@@ -536,14 +563,14 @@ namespace Narvalo.Fx.Monads
     } // End of EnumerableExtensions.
 }
 
-namespace Narvalo.Fx.Monads.Advanced
+namespace Narvalo.Fx.Advanced
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Fx.Monads;
-    using Narvalo.Fx.Monads.Internal;
+    using Narvalo.Fx;
+    using Narvalo.Fx.Internal;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -712,7 +739,7 @@ namespace Narvalo.Fx.Monads.Advanced
     } // End of EnumerableExtensions.
 }
 
-namespace Narvalo.Fx.Monads.Internal
+namespace Narvalo.Fx.Internal
 {
     using System;
     using System.Collections.Generic;
@@ -722,8 +749,7 @@ namespace Narvalo.Fx.Monads.Internal
 
     using global::Narvalo;
     using global::Narvalo.Fx; // Required for EmptyIfNull().
-    using Narvalo.Fx.Monads;
-    using Narvalo.Fx.Monads.Advanced;
+    using Narvalo.Fx.Advanced;
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.

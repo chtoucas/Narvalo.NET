@@ -1,24 +1,2 @@
 ﻿<#@ include file="Monad.tt" once="true" #>
-<#@ include file="Monad\EmitFacts.tt" #><#+
-
-// Imports the Monad template definition and adds the testing methods.
-
-public partial class MonadTemplate
-{
-    private string _className;
-
-    protected string ClassName
-    {
-        get
-        {
-            if (_className == null)
-            {
-                _className = Name.Replace("Facts", String.Empty);
-            }
-
-            return _className;
-        }
-    }
-}
-
-#>
+<#@ include file="Monad\EmitFacts.tt" #>

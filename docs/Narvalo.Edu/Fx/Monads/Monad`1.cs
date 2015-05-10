@@ -7,20 +7,16 @@ namespace Narvalo.Fx.Monads
 
     public sealed class Monad<T>
     {
-#if !MONAD_DISABLE_ZERO
         // [Haskell] mzero
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
             Justification = "[Educational] This code is not meant to be used.")]
         public static Monad<T> Zero { get { throw new NotImplementedException(); } }
 
-#if !MONAD_DISABLE_PLUS
         // [Haskell] mplus
         public Monad<T> Plus(Monad<T> other)
         {
             throw new NotImplementedException();
         }
-#endif
-#endif
 
         // [Haskell] >>=
         public Monad<TResult> Bind<TResult>(Kunc<T, TResult> kun)

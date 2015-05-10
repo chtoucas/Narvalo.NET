@@ -12,7 +12,7 @@ namespace <#= Namespace #>
 
     using Xunit;
 
-    public static partial class <#= Name #>
+    public static partial class <#= Name #>Facts
     {
         #region Linq Operators
 
@@ -20,7 +20,7 @@ namespace <#= Namespace #>
         public static void Select_ThrowsArgumentNullException_ForNullSelector()
         {
             // Arrange
-            var source = <#= ClassName #>.<#= ReturnName #>(1);
+            var source = <#= Name #>.<#= ReturnName #>(1);
             Func<int, int> selector = null;
 
             // Act & Assert
@@ -33,7 +33,7 @@ namespace <#= Namespace #>
         public static void Where_ThrowsArgumentNullException_ForNullPredicate()
         {
             // Arrange
-            var source = <#= ClassName #>.<#= ReturnName #>(1);
+            var source = <#= Name #>.<#= ReturnName #>(1);
             Func<int, bool> predicate = null;
 
             // Act & Assert
@@ -46,8 +46,8 @@ namespace <#= Namespace #>
         public static void SelectMany_ThrowsArgumentNullException_ForNullValueSelector()
         {
             // Arrange
-            var source = <#= ClassName #>.<#= ReturnName #>(1);
-            Func<int, <#= ClassName #><int>> valueSelector = null;
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            Func<int, <#= Name #><int>> valueSelector = null;
             Func<int, int, int> resultSelector = (i, j) => i + j;
 
             // Act & Assert
@@ -58,9 +58,9 @@ namespace <#= Namespace #>
         public static void SelectMany_ThrowsArgumentNullException_ForNullResultSelector()
         {
             // Arrange
-            var source = <#= ClassName #>.<#= ReturnName #>(1);
-            var middle = <#= ClassName #>.<#= ReturnName #>(2);
-            Func<int, <#= ClassName #><int>> valueSelector = _ => middle;
+            var source = <#= Name #>.<#= ReturnName #>(1);
+            var middle = <#= Name #>.<#= ReturnName #>(2);
+            Func<int, <#= Name #><int>> valueSelector = _ => middle;
             Func<int, int, int> resultSelector = null;
 
             // Act & Assert
@@ -74,13 +74,13 @@ namespace <#= Namespace #>
 <#+ if (HasZero && HasPlus) { #>
 
         [Fact]
-        public static void <#= ClassName #>_SatisfiesFirstMonoidLaw()
+        public static void <#= Name #>_SatisfiesFirstMonoidLaw()
         {
             // Arrange
-            var monad = <#= ClassName #>.<#= ReturnName #>(1);
+            var monad = <#= Name #>.<#= ReturnName #>(1);
 
             // Act
-            var left = <#= ClassName #><int>.<#= ZeroName #>.<#= PlusName #>(monad);
+            var left = <#= Name #><int>.<#= ZeroName #>.<#= PlusName #>(monad);
             var right = monad;
 
             // Assert
@@ -88,13 +88,13 @@ namespace <#= Namespace #>
         }
 
         [Fact]
-        public static void <#= ClassName #>_SatisfiesSecondMonoidLaw()
+        public static void <#= Name #>_SatisfiesSecondMonoidLaw()
         {
             // Arrange
-            var monad = <#= ClassName #>.<#= ReturnName #>(1);
+            var monad = <#= Name #>.<#= ReturnName #>(1);
 
             // Act
-            var left = monad.<#= PlusName #>(<#= ClassName #><int>.<#= ZeroName #>);
+            var left = monad.<#= PlusName #>(<#= Name #><int>.<#= ZeroName #>);
             var right = monad;
 
             // Assert
@@ -102,12 +102,12 @@ namespace <#= Namespace #>
         }
 
         [Fact]
-        public static void <#= ClassName #>_SatisfiesThirdMonoidLaw()
+        public static void <#= Name #>_SatisfiesThirdMonoidLaw()
         {
             // Arrange
-            var monadA = <#= ClassName #>.<#= ReturnName #>(1);
-            var monadB = <#= ClassName #>.<#= ReturnName #>(2);
-            var monadC = <#= ClassName #>.<#= ReturnName #>(3);
+            var monadA = <#= Name #>.<#= ReturnName #>(1);
+            var monadB = <#= Name #>.<#= ReturnName #>(2);
+            var monadC = <#= Name #>.<#= ReturnName #>(3);
 
             // Act
             var left = monadA.<#= PlusName #>(monadB.<#= PlusName #>(monadC));
@@ -120,14 +120,14 @@ namespace <#= Namespace #>
 <#+ } // T4: End of HasZero && HasPlus. #>
 
         [Fact]
-        public static void <#= ClassName #>_SatisfiesFirstMonadLaw()
+        public static void <#= Name #>_SatisfiesFirstMonadLaw()
         {
             // Arrange
             int value = 1;
-            Func<int, <#= ClassName #><long>> kun = _ => <#= ClassName #>.<#= ReturnName #>((long)2 * _);
+            Func<int, <#= Name #><long>> kun = _ => <#= Name #>.<#= ReturnName #>((long)2 * _);
 
             // Act
-            var left = <#= ClassName #>.<#= ReturnName #>(value).Bind(kun);
+            var left = <#= Name #>.<#= ReturnName #>(value).Bind(kun);
             var right = kun(value);
 
             // Assert
@@ -135,11 +135,11 @@ namespace <#= Namespace #>
         }
 
         [Fact]
-        public static void <#= ClassName #>_SatisfiesSecondMonadLaw()
+        public static void <#= Name #>_SatisfiesSecondMonadLaw()
         {
             // Arrange
-            Func<int, <#= ClassName #><int>> create = _ => <#= ClassName #>.<#= ReturnName #>(_);
-            var monad = <#= ClassName #>.<#= ReturnName #>(1);
+            Func<int, <#= Name #><int>> create = _ => <#= Name #>.<#= ReturnName #>(_);
+            var monad = <#= Name #>.<#= ReturnName #>(1);
 
             // Act
             var left = monad.Bind(create);
@@ -150,12 +150,12 @@ namespace <#= Namespace #>
         }
 
         [Fact]
-        public static void <#= ClassName #>_SatisfiesThirdMonadLaw()
+        public static void <#= Name #>_SatisfiesThirdMonadLaw()
         {
             // Arrange
-            <#= ClassName #><short> m = <#= ClassName #>.<#= ReturnName #>((short)1);
-            Func<short, <#= ClassName #><int>> f = _ => <#= ClassName #>.<#= ReturnName #>((int)3 * _);
-            Func<int, <#= ClassName #><long>> g = _ => <#= ClassName #>.<#= ReturnName #>((long)2 * _);
+            <#= Name #><short> m = <#= Name #>.<#= ReturnName #>((short)1);
+            Func<short, <#= Name #><int>> f = _ => <#= Name #>.<#= ReturnName #>((int)3 * _);
+            Func<int, <#= Name #><long>> g = _ => <#= Name #>.<#= ReturnName #>((long)2 * _);
 
             // Act
             var left = m.Bind(f).Bind(g);
@@ -168,26 +168,26 @@ namespace <#= Namespace #>
 <#+ if (HasZero) { #>
 
         [Fact]
-        public static void <#= ClassName #>_SatisfiesMonadZeroRule()
+        public static void <#= Name #>_SatisfiesMonadZeroRule()
         {
             // Arrange
-            Func<int, <#= ClassName #><long>> kun = _ => <#= ClassName #>.<#= ReturnName #>((long)2 * _);
+            Func<int, <#= Name #><long>> kun = _ => <#= Name #>.<#= ReturnName #>((long)2 * _);
 
             // Act
-            var left = <#= ClassName #><int>.<#= ZeroName #>.Bind(kun);
-            var right = <#= ClassName #><long>.<#= ZeroName #>;
+            var left = <#= Name #><int>.<#= ZeroName #>.Bind(kun);
+            var right = <#= Name #><long>.<#= ZeroName #>;
 
             // Assert
             Assert.True(left.Equals(right));
         }
 
         [Fact]
-        public static void <#= ClassName #>_SatisfiesMonadMoreRule()
+        public static void <#= Name #>_SatisfiesMonadMoreRule()
         {
             // Act
-            var leftSome = <#= ClassName #>.<#= ReturnName #>(1).Bind(_ => <#= ClassName #><int>.<#= ZeroName #>);
-            var leftNone = <#= ClassName #><int>.<#= ZeroName #>.Bind(_ => <#= ClassName #><int>.<#= ZeroName #>);
-            var right = <#= ClassName #><int>.<#= ZeroName #>;
+            var leftSome = <#= Name #>.<#= ReturnName #>(1).Bind(_ => <#= Name #><int>.<#= ZeroName #>);
+            var leftNone = <#= Name #><int>.<#= ZeroName #>.Bind(_ => <#= Name #><int>.<#= ZeroName #>);
+            var right = <#= Name #><int>.<#= ZeroName #>;
 
             // Assert
             Assert.True(leftSome.Equals(right));
@@ -199,14 +199,14 @@ namespace <#= Namespace #>
 <#+ if (HasZero && HasPlus) { #>
 
         [Fact]
-        public static void <#= ClassName #>_SatisfiesMonadOrRule()
+        public static void <#= Name #>_SatisfiesMonadOrRule()
         {
             // Arrange
-            var monad = <#= ClassName #>.<#= ReturnName #>(2);
+            var monad = <#= Name #>.<#= ReturnName #>(2);
 
             // Act
-            var leftSome = monad.<#= PlusName #>(<#= ClassName #>.<#= ReturnName #>(1));
-            var leftNone = monad.<#= PlusName #>(<#= ClassName #><int>.<#= ZeroName #>);
+            var leftSome = monad.<#= PlusName #>(<#= Name #>.<#= ReturnName #>(1));
+            var leftNone = monad.<#= PlusName #>(<#= Name #><int>.<#= ZeroName #>);
             var right = monad;
 
             // Assert
@@ -215,14 +215,14 @@ namespace <#= Namespace #>
         }
 
         [Fact]
-        public static void <#= ClassName #>_DoesNotSatisfyRightZeroForPlus()
+        public static void <#= Name #>_DoesNotSatisfyRightZeroForPlus()
         {
             // Arrange
-            var monad = <#= ClassName #>.<#= ReturnName #>(2);
+            var monad = <#= Name #>.<#= ReturnName #>(2);
 
             // Act
-            var leftSome = <#= ClassName #>.<#= ReturnName #>(1).<#= PlusName #>(monad);
-            var leftNone = <#= ClassName #><int>.<#= ZeroName #>.<#= PlusName #>(monad);
+            var leftSome = <#= Name #>.<#= ReturnName #>(1).<#= PlusName #>(monad);
+            var leftNone = <#= Name #><int>.<#= ZeroName #>.<#= PlusName #>(monad);
             var right = monad;
 
             // Assert

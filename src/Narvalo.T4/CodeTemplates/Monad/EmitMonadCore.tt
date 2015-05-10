@@ -99,6 +99,26 @@ public partial class MonadTemplate
 
         #endregion
 
+        #region Conditional execution of monadic expressions (Prelude)
+
+<#+ if (HasZero) { #>
+
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
+        {
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+<#+ } #>
+
+            return predicate ? <#= Name #>.Unit : <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
+        }
+
+<#+ } // T4: End of HasZero. #>
+
+        #endregion
+
         #region Monadic lifting operators (Prelude)
 
         /// <summary>

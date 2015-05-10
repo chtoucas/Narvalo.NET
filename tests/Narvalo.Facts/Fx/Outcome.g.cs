@@ -111,6 +111,6 @@ namespace Narvalo.Fx
 
 
         #endregion
-    } // End of OutcomeFacts.
+    } // End of Outcome.
 } // End of Narvalo.Fx.
 

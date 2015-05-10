@@ -22,6 +22,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fx\Monads\Applicative.cs" />
+    <Compile Include="Fx\Monads\Assert.cs" />
+    <Compile Include="Fx\Monads\Functor`1.cs" />
     <Compile Include="Fx\SequenceEx.cs" />
     <Compile Include="Fx\YCombinator.cs" />
     <Compile Include="Fx\Linq\IGroupingQuerySyntax`1.cs" />
@@ -32,12 +35,6 @@
     <Compile Include="Fx\Monads\Action%24.cs" />
     <Compile Include="Fx\Monads\Cokunc`.cs" />
     <Compile Include="Fx\Monads\Comonad`1.cs" />
-    <Compile Include="Fx\Monads\Identity.g.cs">
-      <DependentUpon>Identity.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Fx\Monads\Identity`1.cs" />
     <Compile Include="Fx\Monads\Kunc%24.cs" />
     <Compile Include="Fx\Monads\Kunc`.cs" />
     <Compile Include="Fx\Monads\Monad.cs" />
@@ -54,10 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fx\Linq\LINQ.md" />
-    <None Include="Fx\Monads\Identity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Identity.g.cs</LastGenOutput>
-    </None>
     <None Include="Fx\Monads\Monads.md" />
   </ItemGroup>
   <ItemGroup>

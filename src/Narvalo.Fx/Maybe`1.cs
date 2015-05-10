@@ -409,7 +409,7 @@ namespace Narvalo.Fx
 
         #region Non-standard extensions
 
-        public void Invoke(Action<T> action, Action caseNone)
+        public Maybe<T> Invoke(Action<T> action, Action caseNone)
         {
             Require.NotNull(action, "action");
             Require.NotNull(caseNone, "caseNone");
@@ -422,9 +422,11 @@ namespace Narvalo.Fx
             {
                 caseNone.Invoke();
             }
+
+            return this;
         }
 
-        public void Invoke(Action<T> action)
+        public Maybe<T> Invoke(Action<T> action)
         {
             Require.NotNull(action, "action");
 
@@ -432,9 +434,11 @@ namespace Narvalo.Fx
             {
                 action.Invoke(Value);
             }
+
+            return this;
         }
 
-        public void OnNone(Action action)
+        public Maybe<T> OnNone(Action action)
         {
             Require.NotNull(action, "action");
 
@@ -442,6 +446,8 @@ namespace Narvalo.Fx
             {
                 action.Invoke();
             }
+
+            return this;
         }
 
         #endregion

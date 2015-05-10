@@ -45,6 +45,39 @@ public partial class MonadTemplate
             return @this.Bind(_ => other);
         }
 
+        /// <remarks>
+        /// Named <c>forever</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><TResult> Forever<TSource, TResult>(
+            this <#= Name #><TSource> @this,
+            Func<<#= Name #><TResult>> fun
+            )
+            <#+ WriteTypeConstraints("TSource", "TResult"); #>
+        {
+            <#+ WriteNotNull(); #>
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+<#+ } #>
+
+            // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
+
+            return @this.Then(@this.Forever(fun));
+        }
+
+        /// <remarks>
+        /// Named <c>void</c> in Haskell parlance.
+        /// </remarks>
+        public static <#= Name #><global::Narvalo.Fx.Unit> Forget<TSource>(this <#= Name #><TSource> @this)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+            <#+ WriteNotNull(); #>
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+<#+ } #>
+
+            return <#= Name #>.Unit;
+        }
+
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -90,62 +123,6 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of !HasTypeConstraints. #>
-
-        #endregion
-
-        #region Conditional execution of monadic expressions (Prelude)
-
-<#+ if (HasZero) { #>
-
-        /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
-        public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
-        {
-<#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
-<#+ } #>
-
-            return predicate ? <#= Name #>.Unit : <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
-        }
-
-<#+ } // T4: End of HasZero. #>
-
-        /// <remarks>
-        /// Named <c>when</c> in Haskell parlance.
-        /// </remarks>
-        public static <#= Name #><global::Narvalo.Fx.Unit> When(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-<#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
-<#+ } #>
-
-            if (predicate)
-            {
-                action.Invoke();
-            }
-
-            return <#= Name #>.Unit;
-        }
-
-        /// <remarks>
-        /// Named <c>unless</c> in Haskell parlance.
-        /// </remarks>
-        public static <#= Name #><global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-<#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
-<#+ } #>
-
-            if (!predicate)
-            {
-                action.Invoke();
-            }
-
-            return <#= Name #>.Unit;
-        }
 
         #endregion
 

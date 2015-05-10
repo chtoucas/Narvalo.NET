@@ -6,7 +6,7 @@ public partial class MonadTemplate
     {
 #>
     /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="<#= Name #>{T}"/> class.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
     internal static partial class EnumerableExtensions
     {

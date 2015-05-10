@@ -60,6 +60,10 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Identity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Identity.g.cs</LastGenOutput>
+    </None>
     <None Include="Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>
@@ -86,6 +90,12 @@
     <Compile Include="Either`2.cs" />
     <Compile Include="Enumerable%24.cs" />
     <Compile Include="Func.cs" />
+    <Compile Include="Identity.g.cs">
+      <DependentUpon>Identity.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Identity`1.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iteration`2.cs" />
     <Compile Include="Maybe.cs" />

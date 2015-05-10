@@ -43,6 +43,7 @@ namespace <#= Namespace #>
     using System.Linq;
 
     using global::Narvalo;
+    using <#= Namespace #>.Internal;
 
 <#+
     EmitMonadCore();

@@ -140,15 +140,15 @@
     <Compile Include="Finance\Internal\CurrencyActivatorFacts.cs" />
     <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="FormatFacts.cs" />
-    <Compile Include="Fx\OutcomeFacts.g.cs">
-      <DependentUpon>OutcomeFacts.tt</DependentUpon>
+    <Compile Include="Fx\Outcome.g.cs">
+      <DependentUpon>Outcome.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Fx\MaybeFacts.g.cs">
+    <Compile Include="Fx\Maybe.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MaybeFacts.tt</DependentUpon>
+      <DependentUpon>Maybe.tt</DependentUpon>
     </Compile>
     <Compile Include="Fx\StubsFacts.cs" />
     <Compile Include="Fx\UnitFacts.cs" />
@@ -198,13 +198,13 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CurrenciesFacts.g.cs</LastGenOutput>
     </None>
-    <None Include="Fx\OutcomeFacts.tt">
+    <None Include="Fx\Outcome.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OutcomeFacts.g.cs</LastGenOutput>
+      <LastGenOutput>Outcome.g.cs</LastGenOutput>
     </None>
-    <None Include="Fx\MaybeFacts.tt">
+    <None Include="Fx\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MaybeFacts.g.cs</LastGenOutput>
+      <LastGenOutput>Maybe.g.cs</LastGenOutput>
     </None>
     <None Include="Fx\Samples\Comonad.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

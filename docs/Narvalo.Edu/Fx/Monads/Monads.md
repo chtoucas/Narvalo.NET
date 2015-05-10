@@ -24,10 +24,10 @@ We also provide examples from Haskell, but if you do not have any knowledge of
 it, feel free to skip them.
 
 References:
-- The first discussion of monads in the context of .NET seems to be due to
+- The first public discussion of monads in the context of .NET seems to be due to
   [Wes Dyer](http://blogs.msdn.com/b/wesdyer/archive/2008/01/11/the-marvels-of-monads.aspx)
-- A popular explanation of monads from [Lippert](http://ericlippert.com/category/monads/)
-- A more abstract discussion of monads from [Meijer](http://laser.inf.ethz.ch/2012/slides/Meijer/)
+- A popular explanation of monads by [Eric Lippert](http://ericlippert.com/category/monads/)
+- A more abstract one by [Erik Meijer](http://laser.inf.ethz.ch/2012/slides/Meijer/)
 
 ### Outline
 
@@ -36,7 +36,6 @@ Monoid
 Functor
     Applicative Functor
 Monad
-    Query Expression Syntax
 Functions in the Kleisli Category
 Triad: Monad Revisited
     From Triads to Monads
@@ -49,13 +48,14 @@ Richer Monads
         MonadMore
         MonadPlus
         MonadOr
-Summary
+Summary of what we have seen so far
 Monads in the .NET Framework
     `IEnumerable<T>`
     `Nullable<T>`
     `Func<T>`
     `Lazy<T>`
     `Task<T>`
+LINQ and the Query Expression Syntax
 Monad Vocabulary
     Terminology
     An Haskell to C# Dictionary
@@ -64,7 +64,6 @@ State Monad
 Write Monad
 Reader Monad
 Error Monad
-LINQ
 ```
 
 Before moving to monads, we explain two preliminary concepts: monoids and functors.
@@ -163,8 +162,8 @@ public static class MonoidLaws {
     }
 
     // Third law: Append is associative.
-    public static bool ThirdLaw<T>(Monoid<T> a, Monoid<T> b, Monoid<T> c) {
-        return a.Append(b.Append(c)) == (a.Append(b)).Append(c);
+    public static void ThirdLaw<T>(Monoid<T> a, Monoid<T> b, Monoid<T> c) {
+        a.Append(b.Append(c)) == (a.Append(b)).Append(c);
     }
 }
 ```
@@ -222,7 +221,7 @@ For LINQ, `Map` is the select method `IEnumerable<T>.Select()`:
 // For instance, with id: x -> x,
 //  [1, 2] -> [id(1), id(2)] = [1, 2]
 q.Select(_ => _) == q;
-// written using the query expression syntax:
+// or using the query expression syntax:
 from _ in q select _ == q;
 
 // Second law: Iterating over a list and returning the result of applying g
@@ -238,7 +237,7 @@ from _ in q select _ == q;
 //  [1, 2] -> [g(1), g(2)] = [1, 4]
 //         -> [f(1), f(4)] = [-1, -4]
 q.Select(_ => f(g(_))) == q.Select(g).Select(f);
-// written using the query expression syntax:
+// or using the query expression syntax:
 from _ in q select f(g(_))
     == from item
            in (from _ in q select g(_))
@@ -282,6 +281,71 @@ public static class FunctorLaws {
 
 ### Applicative Functor
 
+Reference: [Control.Applicative](https://hackage.haskell.org/package/base-4.5.0.0/docs/Control-Applicative.html)
+
+In Haskell,
+```haskell
+-- Pure method.
+pure :: a -> f a
+-- Gather method.
+(<*>) :: f (a -> b) -> f a -> f b
+
+-- First law:
+pure id <*> v = v
+-- Second law:
+pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
+-- Third law:
+pure f <*> pure x = pure (f x)
+-- Fourth law:
+u <*> pure y = pure ($ y) <*> u
+```
+
+For LINQ,
+```csharp
+public static class Sequence {
+    // Create a list of one element from a value.
+    public static IEnumerable<T> Pure<T>(T value) {
+        yield return value
+    }
+
+    // For instance, with
+    //  f: x -> x
+    //  g: x -> 2 * x
+    //  h: x -> 3 * x
+    // we have lifting [1, 2] with [f, g, h] gives:
+    //  [1, 2] -> [f(1), f(2), g(1), g(2), h(1), h(2)]
+    //              = [1, 2, 2, 4, 3, 6]
+    public static IEnumerable<TResult> Gather<TSource, TResult>(
+        this IEnumerable<TSource> @this,
+        IEnumerable<Func<T, TResult>> funs)
+    {
+        foreach (var fun in funs) {
+            foreach (var item in @this) {
+                yield return funs(item);
+            }
+        }
+    }
+}
+```
+
+In C#,
+```csharp
+// Skeleton definition of an applicative functor.
+public static class Applicative<T> {
+    // Gather method.
+    public Applicative<TResult> Gather<TResult>(Applicative<Func<T, TResult>> funs) {
+        throw new NotImplementedException();
+    }
+}
+
+public static class Applicative {
+    // Pure method.
+    public static Applicative<T> Pure<T>(T value) {
+        throw new NotImplementedException();
+    }
+}
+```
+
 Monad
 -----
 
@@ -312,7 +376,7 @@ For LINQ,
 public static class Sequence {
     // Map each element of a list to a list, resulting in a list of lists
     // which is then flattened.
-    public IEnumerable<TResult> Bind<TSource, TResult>(
+    public static IEnumerable<TResult> Bind<TSource, TResult>(
         this IEnumerable<TSource> @this,
         Func<TSource, IEnumerable<TResult>> fun)
     {
@@ -336,7 +400,7 @@ public static class Sequence {
 // and on the RHS:
 //  f(1) = [1, 2]
 Sequence.Single(value).Bind(f) == f(value);
-// written using the query expression syntax:
+// or using the query expression syntax:
 from _ in Sequence.Single(value) from item in f(_) select item
     == f(value);
 
@@ -346,7 +410,7 @@ from _ in Sequence.Single(value) from item in f(_) select item
 //  [1, 2, 3] -> [[1], [2], [3]]    (apply Single)
 //            -> [1, 2, 3]          (flatten)
 q.Bind(Sequence.Single) == q;
-// written using the query expression syntax:
+// or using the query expression syntax:
 from _ in q from item in Sequence.Single(_) select item
     == q;
 
@@ -369,7 +433,7 @@ from _ in q from item in Sequence.Single(_) select item
 //              = [[3, 2], [1, 2], [4, 2], [1, 2]]
 //         -> [3, 2, 1, 2, 4, 2, 1, 2]                  (flatten)
 q.Bind(_ => f(_).Bind(g)) == q.Bind(f).Bind(g);
-// written using the query expression syntax:
+// or using the query expression syntax:
 from _ in q
 from item
     in (from outer in f(_) from inner in g(outer) select inner)

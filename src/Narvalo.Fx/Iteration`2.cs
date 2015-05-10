@@ -76,7 +76,7 @@ namespace Narvalo.Fx
             var h1 = comparer.GetHashCode(Result);
             var h2 = comparer.GetHashCode(Next);
 
-            return (((h1 << 5) + h1) ^ h2);
+            return ((h1 << 5) + h1) ^ h2;
         }
 
         //public int CompareTo(object obj)

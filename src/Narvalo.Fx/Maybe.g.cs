@@ -18,6 +18,7 @@ namespace Narvalo.Fx
     using System.Linq;
 
     using global::Narvalo;
+    using Narvalo.Fx.Internal;
 
     /// <content>
     /// Provides a set of static methods for <see cref="Maybe{T}" />.
@@ -93,6 +94,21 @@ namespace Narvalo.Fx
 
             return Maybe<T>.μ(square);
         }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
+        public static Maybe<global::Narvalo.Fx.Unit> Guard(bool predicate)
+        {
+
+            return predicate ? Maybe.Unit : Maybe<global::Narvalo.Fx.Unit>.None;
+        }
+
 
         #endregion
 
@@ -236,6 +252,33 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
+        /// <remarks>
+        /// Named <c>forever</c> in Haskell parlance.
+        /// </remarks>
+        public static Maybe<TResult> Forever<TSource, TResult>(
+            this Maybe<TSource> @this,
+            Func<Maybe<TResult>> fun
+            )
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
+
+            return @this.Then(@this.Forever(fun));
+        }
+
+        /// <remarks>
+        /// Named <c>void</c> in Haskell parlance.
+        /// </remarks>
+        public static Maybe<global::Narvalo.Fx.Unit> Forget<TSource>(this Maybe<TSource> @this)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+
+            return Maybe.Unit;
+        }
+
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -270,51 +313,6 @@ namespace Narvalo.Fx
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
-
-        #endregion
-
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<global::Narvalo.Fx.Unit> Guard(bool predicate)
-        {
-
-            return predicate ? Maybe.Unit : Maybe<global::Narvalo.Fx.Unit>.None;
-        }
-
-
-        /// <remarks>
-        /// Named <c>when</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<global::Narvalo.Fx.Unit> When(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-
-            if (predicate)
-            {
-                action.Invoke();
-            }
-
-            return Maybe.Unit;
-        }
-
-        /// <remarks>
-        /// Named <c>unless</c> in Haskell parlance.
-        /// </remarks>
-        public static Maybe<global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-
-            if (!predicate)
-            {
-                action.Invoke();
-            }
-
-            return Maybe.Unit;
-        }
 
         #endregion
 
@@ -584,7 +582,7 @@ namespace Narvalo.Fx
     } // End of Maybe.
 
     /// <content>
-    /// Provides the non-standard extension methods for <see cref="Maybe{T}" />.
+    /// Provides non-standard extension methods for <see cref="Maybe{T}" />.
     /// </content>
     public static partial class Maybe
     {
@@ -608,7 +606,6 @@ namespace Narvalo.Fx
             Maybe<TResult> other)
             /* T4: C# indent */
         {
-            /* T4: C# indent */
             Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, other, Maybe<TResult>.None);
@@ -620,14 +617,38 @@ namespace Narvalo.Fx
             Maybe<TResult> other)
             /* T4: C# indent */
         {
-            /* T4: C# indent */
             Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, Maybe<TResult>.None, other);
         }
 
 
-        public static void Invoke<TSource>(
+        public static Maybe<TSource> When<TSource>(
+            this Maybe<TSource> @this,
+            bool predicate,
+            Action action)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(action, "action");
+
+            if (predicate) { action.Invoke(); }
+
+            return @this;
+        }
+
+        public static Maybe<TSource> Unless<TSource>(
+            this Maybe<TSource> @this,
+            bool predicate,
+            Action action)
+            /* T4: C# indent */
+        {
+            Contract.Requires(action != null);
+
+            return @this.When(!predicate, action);
+        }
+
+        public static Maybe<TSource> Invoke<TSource>(
             this Maybe<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -635,11 +656,11 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(action, "action");
 
-            @this.Bind(_ => { action.Invoke(_); return @this; });
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
 
-        public static void OnNone<TSource>(
+        public static Maybe<TSource> OnNone<TSource>(
             this Maybe<TSource> @this,
             Action action)
             /* T4: C# indent */
@@ -647,31 +668,45 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(action, "action");
 
-            @this.Then(Maybe.Unit).Invoke(_ => action.Invoke());
+            //@this.OrElse(Maybe.Unit).Invoke(_ => action.Invoke());
+
+            return @this;
         }
 
-        public static void Invoke<TSource>(
+        public static Maybe<TSource> Invoke<TSource>(
             this Maybe<TSource> @this,
             Action<TSource> action,
             Action caseNone)
             /* T4: C# indent */
         {
-            /* T4: C# indent */
             Require.NotNull(action, "action");
 
-            @this.Bind(_ => { action.Invoke(_); return @this; })
-                .Then(Maybe.Unit)
-                .Bind(_ => { caseNone.Invoke(); return Unit; });
+            return @this.Invoke(action).OnNone(caseNone);
         }
 
     } // End of Maybe.
 
     /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Maybe{T}"/> class.
+    /// Provides extension methods for <see cref="Func{T}"/> in the Kleisli category.
     /// </content>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
+        /// </remarks>
+        public static Maybe<IEnumerable<TResult>> Map<TSource, TResult>(
+            this Func<TSource, Maybe<TResult>> @this,
+            IEnumerable<TSource> seq)
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(seq != null);
+
+            return seq.ForEachCore(@this);
+        }
+
 
         /// <remarks>
         /// Named <c>=&lt;&lt;</c> in Haskell parlance.
@@ -729,7 +764,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
     public static partial class EnumerableExtensions
     {
@@ -788,16 +823,16 @@ namespace Narvalo.Fx.Advanced
 
 
         /// <remarks>
-        /// Named <c>mapM</c> in Haskell parlance.
+        /// Named <c>forM</c> in Haskell parlance.
         /// </remarks>
-        public static Maybe<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Maybe<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
 
-            return @this.MapCore(funM);
+            return @this.ForEachCore(funM);
         }
 
 
@@ -959,7 +994,7 @@ namespace Narvalo.Fx.Internal
     using Narvalo.Fx.Advanced;
 
     /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Maybe{T}"/> class.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
     internal static partial class EnumerableExtensions
     {
@@ -1015,7 +1050,7 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Maybe<IEnumerable<TResult>> MapCore<TSource, TResult>(
+        internal static Maybe<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Maybe<TResult>> funM)
         {

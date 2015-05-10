@@ -6,7 +6,7 @@ public partial class MonadTemplate
     {
 #>
     /// <content>
-    /// Provides the non-standard extension methods for <see cref="<#= Name #>{T}" />.
+    /// Provides non-standard extension methods for <see cref="<#= Name #>{T}" />.
     /// </content>
     public static partial class <#= Name #>
     {
@@ -34,7 +34,9 @@ public partial class MonadTemplate
             <#= Name #><TResult> other)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-            <#+ WriteNotNull(); #>
+<#+ if (IsNullable) { #>
+            Acknowledge.Object(@this);
+<#+ } #>
             Contract.Requires(predicate != null);
 <#+ if (PostCoalesceEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -49,7 +51,9 @@ public partial class MonadTemplate
             <#= Name #><TResult> other)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-            <#+ WriteNotNull(); #>
+<#+ if (IsNullable) { #>
+            Acknowledge.Object(@this);
+<#+ } #>
             Contract.Requires(predicate != null);
 <#+ if (PostCoalesceEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
@@ -60,42 +64,87 @@ public partial class MonadTemplate
 
 <#+ } // T4: End of HasZero. #>
 
-        public static void Invoke<TSource>(
+        public static <#= Name #><TSource> When<TSource>(
+            this <#= Name #><TSource> @this,
+            bool predicate,
+            Action action)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+            <#+ WriteNotNull(); #>
+            Require.NotNull(action, "action");
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            if (predicate) { action.Invoke(); }
+
+            return @this;
+        }
+
+        public static <#= Name #><TSource> Unless<TSource>(
+            this <#= Name #><TSource> @this,
+            bool predicate,
+            Action action)
+            <#+ WriteTypeConstraints("TSource"); #>
+        {
+<#+ if (IsNullable) { #>
+            Acknowledge.Object(@this);
+<#+ } #>
+            Contract.Requires(action != null);
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
+
+            return @this.When(!predicate, action);
+        }
+
+        public static <#= Name #><TSource> Invoke<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(action, "action");
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
-            @this.Bind(_ => { action.Invoke(_); return @this; });
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
 <#+ if (HasZero) { #>
 
-        public static void On<#= ZeroName #><TSource>(
+        public static <#= Name #><TSource> On<#= ZeroName #><TSource>(
             this <#= Name #><TSource> @this,
             Action action)
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(action, "action");
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
-            @this.Then(<#= Name #>.Unit).Invoke(_ => action.Invoke());
+            //@this.<#= PlusName #>(<#= Name #>.Unit).Invoke(_ => action.Invoke());
+
+            return @this;
         }
 
-        public static void Invoke<TSource>(
+        public static <#= Name #><TSource> Invoke<TSource>(
             this <#= Name #><TSource> @this,
             Action<TSource> action,
             Action case<#= ZeroName #>)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            <#+ WriteNotNull(); #>
+<#+ if (IsNullable) { #>
+            Acknowledge.Object(@this);
+<#+ } #>
             Require.NotNull(action, "action");
+<#+ if (IsNullable) { #>
+            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+<#+ } #>
 
-            @this.Bind(_ => { action.Invoke(_); return @this; })
-                .Then(<#= Name #>.Unit)
-                .Bind(_ => { case<#= ZeroName #>.Invoke(); return Unit; });
+            return @this.Invoke(action).On<#= ZeroName #>(case<#= ZeroName #>);
         }
 
 <#+ } // T4: End of HasZero. #>
