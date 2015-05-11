@@ -50,10 +50,6 @@
     <Compile Include="Web\WebApplication.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Fx\Linq\LINQ.md" />
-    <None Include="Fx\Monads\Monads.md" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Cerbere</Name>

@@ -112,6 +112,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.StyleCop", "src\Nar
 EndProject
 Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "Narvalo.ProjectAutomation", "src\Narvalo.ProjectAutomation\Narvalo.ProjectAutomation.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "notes", "notes", "{91A378B9-AD78-4404-B039-F03FD4B42151}"
+	ProjectSection(SolutionItems) = preProject
+		..\docs\notes\linq.md = ..\docs\notes\linq.md
+		..\docs\notes\monads.md = ..\docs\notes\monads.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeContracts|Any CPU = CodeContracts|Any CPU
@@ -151,5 +157,6 @@ Global
 		{480E9A5C-6E59-44BC-9D25-3A2BC0057B2B} = {C951776C-B912-4BB2-95ED-02A5D7A3F4A4}
 		{3F9AE29F-3375-4748-8CDE-EFB0B2BE4EFA} = {480E9A5C-6E59-44BC-9D25-3A2BC0057B2B}
 		{234E8E32-CA91-4F16-BE5A-7E5E079C203C} = {C951776C-B912-4BB2-95ED-02A5D7A3F4A4}
+		{91A378B9-AD78-4404-B039-F03FD4B42151} = {2F6EB97B-14A3-45FD-A665-A8C60D8744C2}
 	EndGlobalSection
 EndGlobal
