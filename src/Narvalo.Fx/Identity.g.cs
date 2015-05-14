@@ -18,6 +18,7 @@ namespace Narvalo.Fx
     using System.Linq;
 
     using global::Narvalo;
+    using Narvalo.Fx.Internal;
 
     /// <content>
     /// Provides a set of static methods for <see cref="Identity{T}" />.
@@ -76,6 +77,11 @@ namespace Narvalo.Fx
 
             return Identity<T>.μ(square);
         }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
 
         #endregion
 
@@ -267,41 +273,6 @@ namespace Narvalo.Fx
 
         #endregion
 
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>when</c> in Haskell parlance.
-        /// </remarks>
-        public static Identity<global::Narvalo.Fx.Unit> When(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-
-            if (predicate)
-            {
-                action.Invoke();
-            }
-
-            return Identity.Unit;
-        }
-
-        /// <remarks>
-        /// Named <c>unless</c> in Haskell parlance.
-        /// </remarks>
-        public static Identity<global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-
-            if (!predicate)
-            {
-                action.Invoke();
-            }
-
-            return Identity.Unit;
-        }
-
-        #endregion
-
         #region Monadic lifting operators (Prelude)
 
         /// <see cref="Lift{T1, T2, T3}" />
@@ -415,7 +386,7 @@ namespace Narvalo.Fx
     } // End of Identity.
 
     /// <content>
-    /// Provides the non-standard extension methods for <see cref="Identity{T}" />.
+    /// Provides non-standard extension methods for <see cref="Identity{T}" />.
     /// </content>
     public static partial class Identity
     {
@@ -433,7 +404,32 @@ namespace Narvalo.Fx
         }
 
 
-        public static void Invoke<TSource>(
+        public static Identity<TSource> When<TSource>(
+            this Identity<TSource> @this,
+            bool predicate,
+            Action action)
+            /* T4: C# indent */
+        {
+            /* T4: C# indent */
+            Require.NotNull(action, "action");
+
+            if (predicate) { action.Invoke(); }
+
+            return @this;
+        }
+
+        public static Identity<TSource> Unless<TSource>(
+            this Identity<TSource> @this,
+            bool predicate,
+            Action action)
+            /* T4: C# indent */
+        {
+            Contract.Requires(action != null);
+
+            return @this.When(!predicate, action);
+        }
+
+        public static Identity<TSource> Invoke<TSource>(
             this Identity<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
@@ -441,17 +437,32 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(action, "action");
 
-            @this.Bind(_ => { action.Invoke(_); return @this; });
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
     } // End of Identity.
 
     /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Identity{T}"/> class.
+    /// Provides extension methods for <see cref="Func{T}"/> in the Kleisli category.
     /// </content>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
+        /// </remarks>
+        public static Identity<IEnumerable<TResult>> Map<TSource, TResult>(
+            this Func<TSource, Identity<TResult>> @this,
+            IEnumerable<TSource> seq)
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(seq != null);
+
+            return seq.ForEachCore(@this);
+        }
+
 
         /// <remarks>
         /// Named <c>=&lt;&lt;</c> in Haskell parlance.
@@ -539,7 +550,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Identity{S}"/>.
     /// </content>
     public static partial class EnumerableExtensions
     {
@@ -581,16 +592,16 @@ namespace Narvalo.Fx.Advanced
 
 
         /// <remarks>
-        /// Named <c>mapM</c> in Haskell parlance.
+        /// Named <c>forM</c> in Haskell parlance.
         /// </remarks>
-        public static Identity<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Identity<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<TResult>> funM)
         {
             Acknowledge.Object(@this);
             Contract.Requires(funM != null);
 
-            return @this.MapCore(funM);
+            return @this.ForEachCore(funM);
         }
 
 
@@ -752,7 +763,7 @@ namespace Narvalo.Fx.Internal
     using Narvalo.Fx.Advanced;
 
     /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Identity{T}"/> class.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
     internal static partial class EnumerableExtensions
     {
@@ -794,7 +805,7 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Identity<IEnumerable<TResult>> MapCore<TSource, TResult>(
+        internal static Identity<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<TResult>> funM)
         {

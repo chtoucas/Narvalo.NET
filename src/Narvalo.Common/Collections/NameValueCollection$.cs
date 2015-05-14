@@ -48,7 +48,7 @@ namespace Narvalo.Collections
         {
             Acknowledge.Object(@this);
 
-            return @this.MayGetValues(name).Bind(@_ => @_.Map(parserM));
+            return @this.MayGetValues(name).Bind(@_ => @_.ForEach(parserM));
         }
     }
 }

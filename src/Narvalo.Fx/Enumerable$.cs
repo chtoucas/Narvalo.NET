@@ -113,7 +113,7 @@ namespace Narvalo.Fx
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
-            return @this.Concat(Sequence.Single(element)).EmptyIfNull();
+            return @this.Concat(Sequence.Pure(element)).EmptyIfNull();
         }
 
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
@@ -121,7 +121,7 @@ namespace Narvalo.Fx
             Acknowledge.Object(@this);
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
-            return Sequence.Single(element).Concat(@this).EmptyIfNull();
+            return Sequence.Pure(element).Concat(@this).EmptyIfNull();
         }
 
         #endregion

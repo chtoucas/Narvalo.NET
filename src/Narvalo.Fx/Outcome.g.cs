@@ -18,6 +18,7 @@ namespace Narvalo.Fx
     using System.Linq;
 
     using global::Narvalo;
+    using Narvalo.Fx.Internal;
 
     /// <content>
     /// Provides a set of static methods for <see cref="Outcome{T}" />.
@@ -79,6 +80,11 @@ namespace Narvalo.Fx
 
             return Outcome<T>.μ(square);
         }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
 
         #endregion
 
@@ -222,6 +228,35 @@ namespace Narvalo.Fx
             return @this.Bind(_ => other);
         }
 
+        /// <remarks>
+        /// Named <c>forever</c> in Haskell parlance.
+        /// </remarks>
+        public static Outcome<TResult> Forever<TSource, TResult>(
+            this Outcome<TSource> @this,
+            Func<Outcome<TResult>> fun
+            )
+            /* T4: C# indent */
+        {
+            Require.Object(@this);
+            Contract.Ensures(Contract.Result<Outcome<TResult>>() != null);
+
+            // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
+
+            return @this.Then(@this.Forever(fun));
+        }
+
+        /// <remarks>
+        /// Named <c>void</c> in Haskell parlance.
+        /// </remarks>
+        public static Outcome<global::Narvalo.Fx.Unit> Forget<TSource>(this Outcome<TSource> @this)
+            /* T4: C# indent */
+        {
+            Require.Object(@this);
+            Contract.Ensures(Contract.Result<Outcome<global::Narvalo.Fx.Unit>>() != null);
+
+            return Outcome.Unit;
+        }
+
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -240,43 +275,6 @@ namespace Narvalo.Fx
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
-
-        #endregion
-
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>when</c> in Haskell parlance.
-        /// </remarks>
-        public static Outcome<global::Narvalo.Fx.Unit> When(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Outcome<global::Narvalo.Fx.Unit>>() != null);
-
-            if (predicate)
-            {
-                action.Invoke();
-            }
-
-            return Outcome.Unit;
-        }
-
-        /// <remarks>
-        /// Named <c>unless</c> in Haskell parlance.
-        /// </remarks>
-        public static Outcome<global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Outcome<global::Narvalo.Fx.Unit>>() != null);
-
-            if (!predicate)
-            {
-                action.Invoke();
-            }
-
-            return Outcome.Unit;
-        }
 
         #endregion
 
@@ -393,7 +391,7 @@ namespace Narvalo.Fx
     } // End of Outcome.
 
     /// <content>
-    /// Provides the non-standard extension methods for <see cref="Outcome{T}" />.
+    /// Provides non-standard extension methods for <see cref="Outcome{T}" />.
     /// </content>
     public static partial class Outcome
     {
@@ -411,25 +409,70 @@ namespace Narvalo.Fx
         }
 
 
-        public static void Invoke<TSource>(
+        public static Outcome<TSource> When<TSource>(
+            this Outcome<TSource> @this,
+            bool predicate,
+            Action action)
+            /* T4: C# indent */
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<Outcome<TSource>>() != null);
+
+            if (predicate) { action.Invoke(); }
+
+            return @this;
+        }
+
+        public static Outcome<TSource> Unless<TSource>(
+            this Outcome<TSource> @this,
+            bool predicate,
+            Action action)
+            /* T4: C# indent */
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(action != null);
+            Contract.Ensures(Contract.Result<Outcome<TSource>>() != null);
+
+            return @this.When(!predicate, action);
+        }
+
+        public static Outcome<TSource> Invoke<TSource>(
             this Outcome<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<Outcome<TSource>>() != null);
 
-            @this.Bind(_ => { action.Invoke(_); return @this; });
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
     } // End of Outcome.
 
     /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="Outcome{T}"/> class.
+    /// Provides extension methods for <see cref="Func{T}"/> in the Kleisli category.
     /// </content>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
+        /// </remarks>
+        public static Outcome<IEnumerable<TResult>> Map<TSource, TResult>(
+            this Func<TSource, Outcome<TResult>> @this,
+            IEnumerable<TSource> seq)
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(seq != null);
+            Contract.Ensures(Contract.Result<Outcome<IEnumerable<TResult>>>() != null);
+
+            return seq.ForEachCore(@this);
+        }
+
 
         /// <remarks>
         /// Named <c>=&lt;&lt;</c> in Haskell parlance.
@@ -487,7 +530,7 @@ namespace Narvalo.Fx
     using Narvalo.Fx.Internal;
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Outcome{T}"/> class.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Outcome{S}"/>.
     /// </content>
     public static partial class EnumerableExtensions
     {
@@ -530,9 +573,9 @@ namespace Narvalo.Fx.Advanced
 
 
         /// <remarks>
-        /// Named <c>mapM</c> in Haskell parlance.
+        /// Named <c>forM</c> in Haskell parlance.
         /// </remarks>
-        public static Outcome<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static Outcome<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<TResult>> funM)
         {
@@ -540,7 +583,7 @@ namespace Narvalo.Fx.Advanced
             Contract.Requires(funM != null);
             Contract.Ensures(Contract.Result<Outcome<IEnumerable<TResult>>>() != null);
 
-            return @this.MapCore(funM);
+            return @this.ForEachCore(funM);
         }
 
 
@@ -703,7 +746,7 @@ namespace Narvalo.Fx.Internal
     using Narvalo.Fx.Advanced;
 
     /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="Outcome{T}"/> class.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
     internal static partial class EnumerableExtensions
     {
@@ -748,7 +791,7 @@ namespace Narvalo.Fx.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static Outcome<IEnumerable<TResult>> MapCore<TSource, TResult>(
+        internal static Outcome<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Outcome<TResult>> funM)
         {

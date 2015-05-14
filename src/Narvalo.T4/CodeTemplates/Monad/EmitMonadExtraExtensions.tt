@@ -125,7 +125,8 @@ public partial class MonadTemplate
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
-            //@this.<#= PlusName #>(<#= Name #>.Unit).Invoke(_ => action.Invoke());
+            // FIXME
+            //@this.PlusName(<#= Name #>.Unit).Invoke(_ => action.Invoke());
 
             return @this;
         }

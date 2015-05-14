@@ -18,6 +18,7 @@ namespace Narvalo.Fx.Samples
     using System.Linq;
 
     using global::Narvalo;
+    using Narvalo.Fx.Samples.Internal;
 
     /// <content>
     /// Provides a set of static methods for <see cref="MonadValue{T}" />.
@@ -93,6 +94,21 @@ namespace Narvalo.Fx.Samples
 
             return MonadValue<T>.μ(square);
         }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
+        public static MonadValue<global::Narvalo.Fx.Unit> Guard(bool predicate)
+        {
+
+            return predicate ? MonadValue.Unit : MonadValue<global::Narvalo.Fx.Unit>.None;
+        }
+
 
         #endregion
 
@@ -253,6 +269,34 @@ namespace Narvalo.Fx.Samples
             return @this.Bind(_ => other);
         }
 
+        /// <remarks>
+        /// Named <c>forever</c> in Haskell parlance.
+        /// </remarks>
+        public static MonadValue<TResult> Forever<TSource, TResult>(
+            this MonadValue<TSource> @this,
+            Func<MonadValue<TResult>> fun
+            )
+            where TSource : struct
+            where TResult : struct
+        {
+            /* T4: C# indent */
+
+            // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
+
+            return @this.Then(@this.Forever(fun));
+        }
+
+        /// <remarks>
+        /// Named <c>void</c> in Haskell parlance.
+        /// </remarks>
+        public static MonadValue<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadValue<TSource> @this)
+            where TSource : struct
+        {
+            /* T4: C# indent */
+
+            return MonadValue.Unit;
+        }
+
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -273,51 +317,6 @@ namespace Narvalo.Fx.Samples
                 _ => predicate.Invoke(_) ? @this : MonadValue<TSource>.None);
         }
 
-
-        #endregion
-
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadValue<global::Narvalo.Fx.Unit> Guard(bool predicate)
-        {
-
-            return predicate ? MonadValue.Unit : MonadValue<global::Narvalo.Fx.Unit>.None;
-        }
-
-
-        /// <remarks>
-        /// Named <c>when</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadValue<global::Narvalo.Fx.Unit> When(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-
-            if (predicate)
-            {
-                action.Invoke();
-            }
-
-            return MonadValue.Unit;
-        }
-
-        /// <remarks>
-        /// Named <c>unless</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadValue<global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-
-            if (!predicate)
-            {
-                action.Invoke();
-            }
-
-            return MonadValue.Unit;
-        }
 
         #endregion
 
@@ -623,7 +622,7 @@ namespace Narvalo.Fx.Samples
     } // End of MonadValue.
 
     /// <content>
-    /// Provides the non-standard extension methods for <see cref="MonadValue{T}" />.
+    /// Provides non-standard extension methods for <see cref="MonadValue{T}" />.
     /// </content>
     public static partial class MonadValue
     {
@@ -649,7 +648,6 @@ namespace Narvalo.Fx.Samples
             where TSource : struct
             where TResult : struct
         {
-            /* T4: C# indent */
             Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, other, MonadValue<TResult>.None);
@@ -662,14 +660,38 @@ namespace Narvalo.Fx.Samples
             where TSource : struct
             where TResult : struct
         {
-            /* T4: C# indent */
             Contract.Requires(predicate != null);
 
             return @this.Coalesce(predicate, MonadValue<TResult>.None, other);
         }
 
 
-        public static void Invoke<TSource>(
+        public static MonadValue<TSource> When<TSource>(
+            this MonadValue<TSource> @this,
+            bool predicate,
+            Action action)
+            where TSource : struct
+        {
+            /* T4: C# indent */
+            Require.NotNull(action, "action");
+
+            if (predicate) { action.Invoke(); }
+
+            return @this;
+        }
+
+        public static MonadValue<TSource> Unless<TSource>(
+            this MonadValue<TSource> @this,
+            bool predicate,
+            Action action)
+            where TSource : struct
+        {
+            Contract.Requires(action != null);
+
+            return @this.When(!predicate, action);
+        }
+
+        public static MonadValue<TSource> Invoke<TSource>(
             this MonadValue<TSource> @this,
             Action<TSource> action)
             where TSource : struct
@@ -677,11 +699,11 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
             Require.NotNull(action, "action");
 
-            @this.Bind(_ => { action.Invoke(_); return @this; });
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
 
-        public static void OnNone<TSource>(
+        public static MonadValue<TSource> OnNone<TSource>(
             this MonadValue<TSource> @this,
             Action action)
             where TSource : struct
@@ -689,31 +711,32 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
             Require.NotNull(action, "action");
 
-            @this.Then(MonadValue.Unit).Invoke(_ => action.Invoke());
+            // FIXME
+            //@this.PlusName(MonadValue.Unit).Invoke(_ => action.Invoke());
+
+            return @this;
         }
 
-        public static void Invoke<TSource>(
+        public static MonadValue<TSource> Invoke<TSource>(
             this MonadValue<TSource> @this,
             Action<TSource> action,
             Action caseNone)
             where TSource : struct
         {
-            /* T4: C# indent */
             Require.NotNull(action, "action");
 
-            @this.Bind(_ => { action.Invoke(_); return @this; })
-                .Then(MonadValue.Unit)
-                .Bind(_ => { caseNone.Invoke(); return Unit; });
+            return @this.Invoke(action).OnNone(caseNone);
         }
 
     } // End of MonadValue.
 
     /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="MonadValue{T}"/> class.
+    /// Provides extension methods for <see cref="Func{T}"/> in the Kleisli category.
     /// </content>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
+
 
         /// <remarks>
         /// Named <c>=&lt;&lt;</c> in Haskell parlance.
@@ -776,7 +799,7 @@ namespace Narvalo.Fx.Samples
     using Narvalo.Fx.Samples.Internal;
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadValue{T}"/> class.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="MonadValue{S}"/>.
     /// </content>
     public static partial class EnumerableExtensions
     {
@@ -954,7 +977,7 @@ namespace Narvalo.Fx.Samples.Internal
     using Narvalo.Fx.Samples.Advanced;
 
     /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadValue{T}"/> class.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
     internal static partial class EnumerableExtensions
     {

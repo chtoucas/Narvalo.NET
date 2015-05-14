@@ -18,6 +18,7 @@ namespace Narvalo.Fx.Samples
     using System.Linq;
 
     using global::Narvalo;
+    using Narvalo.Fx.Samples.Internal;
 
     /// <content>
     /// Provides a set of static methods for <see cref="MonadOr{T}" />.
@@ -98,6 +99,22 @@ namespace Narvalo.Fx.Samples
 
             return MonadOr<T>.μ(square);
         }
+
+        #endregion
+
+        #region Conditional execution of monadic expressions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>guard</c> in Haskell parlance.
+        /// </remarks>
+        public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate)
+        {
+            Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
+
+            return predicate ? MonadOr.Unit : MonadOr<global::Narvalo.Fx.Unit>.None;
+        }
+
 
         #endregion
 
@@ -243,6 +260,35 @@ namespace Narvalo.Fx.Samples
             return @this.Bind(_ => other);
         }
 
+        /// <remarks>
+        /// Named <c>forever</c> in Haskell parlance.
+        /// </remarks>
+        public static MonadOr<TResult> Forever<TSource, TResult>(
+            this MonadOr<TSource> @this,
+            Func<MonadOr<TResult>> fun
+            )
+            /* T4: C# indent */
+        {
+            Require.Object(@this);
+            Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
+
+            // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
+
+            return @this.Then(@this.Forever(fun));
+        }
+
+        /// <remarks>
+        /// Named <c>void</c> in Haskell parlance.
+        /// </remarks>
+        public static MonadOr<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadOr<TSource> @this)
+            /* T4: C# indent */
+        {
+            Require.Object(@this);
+            Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
+
+            return MonadOr.Unit;
+        }
+
         #endregion
 
         #region Generalisations of list functions (Prelude)
@@ -279,54 +325,6 @@ namespace Narvalo.Fx.Samples
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
 
-
-        #endregion
-
-        #region Conditional execution of monadic expressions (Prelude)
-
-
-        /// <remarks>
-        /// Named <c>guard</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> Guard(bool predicate)
-        {
-            Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
-
-            return predicate ? MonadOr.Unit : MonadOr<global::Narvalo.Fx.Unit>.None;
-        }
-
-
-        /// <remarks>
-        /// Named <c>when</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> When(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
-
-            if (predicate)
-            {
-                action.Invoke();
-            }
-
-            return MonadOr.Unit;
-        }
-
-        /// <remarks>
-        /// Named <c>unless</c> in Haskell parlance.
-        /// </remarks>
-        public static MonadOr<global::Narvalo.Fx.Unit> Unless(bool predicate, Action action)
-        {
-            Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<MonadOr<global::Narvalo.Fx.Unit>>() != null);
-
-            if (!predicate)
-            {
-                action.Invoke();
-            }
-
-            return MonadOr.Unit;
-        }
 
         #endregion
 
@@ -615,7 +613,7 @@ namespace Narvalo.Fx.Samples
     } // End of MonadOr.
 
     /// <content>
-    /// Provides the non-standard extension methods for <see cref="MonadOr{T}" />.
+    /// Provides non-standard extension methods for <see cref="MonadOr{T}" />.
     /// </content>
     public static partial class MonadOr
     {
@@ -640,7 +638,7 @@ namespace Narvalo.Fx.Samples
             MonadOr<TResult> other)
             /* T4: C# indent */
         {
-            Require.Object(@this);
+            Acknowledge.Object(@this);
             Contract.Requires(predicate != null);
             Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
@@ -653,7 +651,7 @@ namespace Narvalo.Fx.Samples
             MonadOr<TResult> other)
             /* T4: C# indent */
         {
-            Require.Object(@this);
+            Acknowledge.Object(@this);
             Contract.Requires(predicate != null);
             Contract.Ensures(Contract.Result<MonadOr<TResult>>() != null);
 
@@ -661,51 +659,99 @@ namespace Narvalo.Fx.Samples
         }
 
 
-        public static void Invoke<TSource>(
+        public static MonadOr<TSource> When<TSource>(
+            this MonadOr<TSource> @this,
+            bool predicate,
+            Action action)
+            /* T4: C# indent */
+        {
+            Require.Object(@this);
+            Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<MonadOr<TSource>>() != null);
+
+            if (predicate) { action.Invoke(); }
+
+            return @this;
+        }
+
+        public static MonadOr<TSource> Unless<TSource>(
+            this MonadOr<TSource> @this,
+            bool predicate,
+            Action action)
+            /* T4: C# indent */
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(action != null);
+            Contract.Ensures(Contract.Result<MonadOr<TSource>>() != null);
+
+            return @this.When(!predicate, action);
+        }
+
+        public static MonadOr<TSource> Invoke<TSource>(
             this MonadOr<TSource> @this,
             Action<TSource> action)
             /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<MonadOr<TSource>>() != null);
 
-            @this.Bind(_ => { action.Invoke(_); return @this; });
+            return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
 
-        public static void OnNone<TSource>(
+        public static MonadOr<TSource> OnNone<TSource>(
             this MonadOr<TSource> @this,
             Action action)
             /* T4: C# indent */
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<MonadOr<TSource>>() != null);
 
-            @this.Then(MonadOr.Unit).Invoke(_ => action.Invoke());
+            // FIXME
+            //@this.PlusName(MonadOr.Unit).Invoke(_ => action.Invoke());
+
+            return @this;
         }
 
-        public static void Invoke<TSource>(
+        public static MonadOr<TSource> Invoke<TSource>(
             this MonadOr<TSource> @this,
             Action<TSource> action,
             Action caseNone)
             /* T4: C# indent */
         {
-            Require.Object(@this);
+            Acknowledge.Object(@this);
             Require.NotNull(action, "action");
+            Contract.Ensures(Contract.Result<MonadOr<TSource>>() != null);
 
-            @this.Bind(_ => { action.Invoke(_); return @this; })
-                .Then(MonadOr.Unit)
-                .Bind(_ => { caseNone.Invoke(); return Unit; });
+            return @this.Invoke(action).OnNone(caseNone);
         }
 
     } // End of MonadOr.
 
     /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> that depend on the <see cref="MonadOr{T}"/> class.
+    /// Provides extension methods for <see cref="Func{T}"/> in the Kleisli category.
     /// </content>
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
+
+
+        /// <remarks>
+        /// Named <c>mapM</c> in Haskell parlance. Same as <c>forM</c> with its arguments flipped.
+        /// </remarks>
+        public static MonadOr<IEnumerable<TResult>> Map<TSource, TResult>(
+            this Func<TSource, MonadOr<TResult>> @this,
+            IEnumerable<TSource> seq)
+        {
+            Acknowledge.Object(@this);
+            Contract.Requires(seq != null);
+            Contract.Ensures(Contract.Result<MonadOr<IEnumerable<TResult>>>() != null);
+
+            return seq.ForEachCore(@this);
+        }
+
 
         /// <remarks>
         /// Named <c>=&lt;&lt;</c> in Haskell parlance.
@@ -764,7 +810,7 @@ namespace Narvalo.Fx.Samples
     using Narvalo.Fx.Samples.Internal;
 
     /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadOr{T}"/> class.
+    /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="MonadOr{S}"/>.
     /// </content>
     public static partial class EnumerableExtensions
     {
@@ -825,9 +871,9 @@ namespace Narvalo.Fx.Samples.Advanced
 
 
         /// <remarks>
-        /// Named <c>mapM</c> in Haskell parlance.
+        /// Named <c>forM</c> in Haskell parlance.
         /// </remarks>
-        public static MonadOr<IEnumerable<TResult>> Map<TSource, TResult>(
+        public static MonadOr<IEnumerable<TResult>> ForEach<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<TResult>> funM)
         {
@@ -835,7 +881,7 @@ namespace Narvalo.Fx.Samples.Advanced
             Contract.Requires(funM != null);
             Contract.Ensures(Contract.Result<MonadOr<IEnumerable<TResult>>>() != null);
 
-            return @this.MapCore(funM);
+            return @this.ForEachCore(funM);
         }
 
 
@@ -1006,7 +1052,7 @@ namespace Narvalo.Fx.Samples.Internal
     using Narvalo.Fx.Samples.Advanced;
 
     /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> that depend on the <see cref="MonadOr{T}"/> class.
+    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
     internal static partial class EnumerableExtensions
     {
@@ -1067,7 +1113,7 @@ namespace Narvalo.Fx.Samples.Internal
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "[GeneratedCode] This method has been overridden locally.")]
-        internal static MonadOr<IEnumerable<TResult>> MapCore<TSource, TResult>(
+        internal static MonadOr<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadOr<TResult>> funM)
         {

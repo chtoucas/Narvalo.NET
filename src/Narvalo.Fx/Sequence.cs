@@ -15,7 +15,7 @@ namespace Narvalo.Fx
         /// <typeparam name="TSource">The type of the value to be used in the result sequence.</typeparam>
         /// <param name="value">The single value of the sequence.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> that contains a single element.</returns>
-        public static IEnumerable<TSource> Single<TSource>(TSource value)
+        public static IEnumerable<TSource> Pure<TSource>(TSource value)
         {
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
