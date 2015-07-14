@@ -14,8 +14,8 @@ namespace Narvalo
     /// <para>The methods will be recognized as parameter validators by FxCop.</para>
     /// <para>The methods MUST appear after all Code Contracts.</para>
     /// <para>If a condition does not hold, an <see cref="ArgumentException"/> is thrown.</para>
-    /// <para>This class exists because CCCheck does not seem to be able to comprehend a precondition 
-    /// used in conjunction with <see cref="IComparable{T}"/>; otherwise these helpers would have 
+    /// <para>This class exists because CCCheck does not seem to be able to comprehend a precondition
+    /// used in conjunction with <see cref="IComparable{T}"/>; otherwise these helpers would have
     /// been alongside the others in <see cref="Require"/>.</para>
     /// <para>This class only accept generics of value type. Adding reference types would make
     /// each method check too many things at a time (null-checks).</para>
@@ -32,7 +32,7 @@ namespace Narvalo
         /// <param name="minInclusive">The minimum value (inclusive).</param>
         /// <param name="maxInclusive">The maximum value (inclusive).</param>
         /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than 
+        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than
         /// or equal to <paramref name="maxInclusive"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
         /// the allowable range of values.</exception>

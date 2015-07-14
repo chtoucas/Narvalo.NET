@@ -16,7 +16,7 @@ namespace Narvalo
         /// Returns a value indicating whether the specified <paramref name="type"/> is a flags enumeration.
         /// </summary>
         /// <param name="type">The type to test.</param>
-        /// <returns><see langword="true"/> if the specified <paramref name="type"/> is a flags enumeration; 
+        /// <returns><see langword="true"/> if the specified <paramref name="type"/> is a flags enumeration;
         /// otherwise <see langword="false"/>.</returns>
         [Pure]
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags",
@@ -39,7 +39,7 @@ namespace Narvalo
         /// Returns a value indicating whether the specified value consists only of white-space characters.
         /// </summary>
         /// <param name="value">The string to test.</param>
-        /// <returns><see langword="true"/> if the specified value consists only of white-space characters; 
+        /// <returns><see langword="true"/> if the specified value consists only of white-space characters;
         /// otherwise <see langword="false"/>.</returns>
         [Pure]
         public static bool IsWhiteSpace(string value)

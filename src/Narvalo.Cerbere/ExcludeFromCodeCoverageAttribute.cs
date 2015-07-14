@@ -8,13 +8,13 @@ namespace Narvalo
     /// Specifies that the attributed code should be excluded from code coverage information.
     /// </summary>
     /// <remarks>PCL shim for the System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute class.</remarks>
-    [AttributeUsage(AttributeTargets.Class 
-        | AttributeTargets.Struct 
-        | AttributeTargets.Constructor 
-        | AttributeTargets.Method 
-        | AttributeTargets.Property 
-        | AttributeTargets.Event, 
-        Inherited = false, 
+    [AttributeUsage(AttributeTargets.Class
+        | AttributeTargets.Struct
+        | AttributeTargets.Constructor
+        | AttributeTargets.Method
+        | AttributeTargets.Property
+        | AttributeTargets.Event,
+        Inherited = false,
         AllowMultiple = false)]
     public sealed class ExcludeFromCodeCoverageAttribute : Attribute
     {
