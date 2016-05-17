@@ -37,7 +37,7 @@ Narvalo.Core
 ------------
 
 - XmlReader
-- ParseTo 
+- ParseTo
 - StringHelper
 - `Range<T>`. Why force struct constraint? Require for "T?" where T is a struct?
 
@@ -60,6 +60,11 @@ Narvalo.Reliability
 -------------------
 
 - Very much a work in progress.
+- See
+  * kite (java)
+    https://github.com/williewheeler/kite
+  * jrugged (java)
+  * Hystrix (java)
 
 Narvalo.Web
 -----------
@@ -102,6 +107,9 @@ Narvalo.Mvp
     are fully loaded before we reach the `CreateControl` or `Load` events in the form
     container where we normally perform the binding.
   * The message coordinator must support unsubscription (automatic or manual).
+- See
+  http://aspiringcraftsman.com/tag/model-view-presenter/
+  http://aspiringcraftsman.com/2007/08/25/interactive-application-architecture/
 
 Infrastructure
 --------------
