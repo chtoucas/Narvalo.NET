@@ -23,7 +23,7 @@ Set-StrictMode -Version Latest
 #>
 function Approve-ProjectRoot {
     [CmdletBinding()]
-    param([Parameter(Mandatory = $true)] [string] $Path) 
+    param([Parameter(Mandatory = $true)] [string] $Path)
 
     if (![System.IO.Path]::IsPathRooted($path)) {
         throw 'When importing the ''Narvalo.ProjectAutomation'' module, ',
@@ -49,20 +49,20 @@ New-Variable -Name ProjectRoot `
     -Scope Script `
     -Option ReadOnly `
     -Description 'Path to the local repository for the project Narvalo.NET.'
-    
+
 New-Variable -Name CopyrightHeader `
     -Value '// Copyright (c) Narvalo.Org.',
         'All rights reserved. See LICENSE.txt in the project root for license information.' `
     -Scope Script `
     -Option ReadOnly `
     -Description 'C# copyright header.'
-     
+
 New-Variable -Name DefaultNuGetVerbosity `
     -Value 'normal' `
     -Scope Script `
     -Option ReadOnly `
     -Description 'Default NuGet verbosity.'
-    
+
 #$MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
 #    Remove-Variable -Name ProjectRoot -Scope Script -Force
 #}
@@ -71,11 +71,11 @@ New-Variable -Name DefaultNuGetVerbosity `
 # Public functions
 # ------------------------------------------------------------------------------
 
-<# 
+<#
 .SYNOPSIS
     Exit current process gracefully.
 .DESCRIPTION
-    Depending on the specified error code, display a colorful message for success 
+    Depending on the specified error code, display a colorful message for success
     or failure then exit the current process.
 .PARAMETER ExitCode
     Specifies the exit code.
@@ -89,29 +89,29 @@ New-Variable -Name DefaultNuGetVerbosity `
 function Exit-Gracefully {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
         [string] $Message,
-        
-        [Parameter(Mandatory = $false, Position = 1)] 
+
+        [Parameter(Mandatory = $false, Position = 1)]
         [int] $ExitCode = 0
     )
-    
+
     if ($exitCode -eq 0) {
         $backgroundColor = 'DarkGreen'
     } else {
         $backgroundColor = 'Red'
     }
-        
+
     Write-Host $message -BackgroundColor $backgroundColor -ForegroundColor Yellow
 
     Exit $exitCode
 }
 
-<# 
+<#
 .SYNOPSIS
     Get the path to the locally installed 7-Zip command.
 .DESCRIPTION
-    Get the path to the locally installed 7-Zip command. 
+    Get the path to the locally installed 7-Zip command.
     Optionally install the 7-Zip commmand in the local repository.
 .PARAMETER Install
     If present and the command does not exist, install 7-Zip.
@@ -133,13 +133,13 @@ function Get-7Zip {
     return $sevenZip
 }
 
-<# 
+<#
 .SYNOPSIS
     Get the path to the system git command.
 .INPUTS
     None.
 .OUTPUTS
-    System.String. Get-Git returns a string that contains the path to the git command 
+    System.String. Get-Git returns a string that contains the path to the git command
     or $null if git is nowhere to be found.
 #>
 function Get-Git {
@@ -150,7 +150,7 @@ function Get-Git {
 
     $git = (Get-Command "git.exe" -CommandType Application -TotalCount 1 -ErrorAction SilentlyContinue)
 
-    if ($git -eq $null) { 
+    if ($git -eq $null) {
         Write-Warning 'git.exe could not be found in your PATH. Please ensure git is installed.'
 
         return $null
@@ -176,12 +176,12 @@ function Get-Git {
 function Get-GitCommitHash {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
         [string] $Git,
 
         [switch] $Abbrev
     )
-    
+
     Write-Verbose 'Getting the last git commit hash.'
 
     if ($abbrev.IsPresent) {
@@ -223,12 +223,12 @@ function Get-GitCommitHash {
 function Get-GitStatus {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
         [string] $Git,
 
         [switch] $Short
     )
-    
+
     Write-Verbose 'Getting the git status.'
 
     if ($short.IsPresent) {
@@ -272,7 +272,7 @@ function Get-GitStatus {
 function Get-LocalPath {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0)] 
+        [Parameter(Mandatory = $true, Position = 0)]
         [AllowEmptyString()]
         [Alias('p')] [string] $Path,
 
@@ -290,7 +290,7 @@ function Get-LocalPath {
 .SYNOPSIS
     Get the path to the locally installed NuGet command.
 .DESCRIPTION
-    Get the path to the locally installed NuGet command. 
+    Get the path to the locally installed NuGet command.
     Optionally install the NuGet commmand in the local repository.
 .PARAMETER Install
     If present and the command does not exist, install NuGet.
@@ -320,13 +320,13 @@ function Get-NuGet {
 .INPUTS
     None.
 .OUTPUTS
-    System.String. Get-PSakeModulePath returns a string that contains the path 
+    System.String. Get-PSakeModulePath returns a string that contains the path
     to the PSake module.
 #>
 function Get-PSakeModulePath {
     [CmdletBinding()]
     param([switch] $NoVersion)
-    
+
     if ($noVersion.IsPresent) {
         Get-LocalPath 'packages\psake\tools\psake.psm1'
     } else {
@@ -349,7 +349,7 @@ function Get-PSakeModulePath {
 function Install-7Zip {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
         [Alias('o')] [string] $OutFile,
 
         [switch] $Force
@@ -374,7 +374,7 @@ function Install-7Zip {
 function Install-NuGet {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
         [Alias('o')] [string] $OutFile,
 
         [switch] $Force
@@ -399,15 +399,15 @@ function Install-NuGet {
 function Install-PSake {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $false, Position = 0)] 
+        [Parameter(Mandatory = $false, Position = 0)]
         [ValidateSet('quiet', 'normal', 'detailed')]
         [string] $Verbosity = $script:DefaultNuGetVerbosity
     )
-    
+
     Write-Verbose 'Installing PSake.'
 
     $nuget = Get-NuGet -Install
-    
+
     try {
         Write-Debug 'Call nuget.exe install psake.'
         . $nuget install psake `
@@ -435,7 +435,7 @@ function Install-PSake {
 function Invoke-AnalyzeTask {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param([switch] $NoConfirm)
-    
+
     if ($noConfirm.IsPresent -or (Confirm-Yes 'Analyze C# project files for common problems?')) {
         Measure-CSharpProjects 'src', 'samples', 'test'
     }
@@ -456,7 +456,7 @@ function Invoke-PurgeTask {
     param([switch] $NoConfirm)
 
     # Add a new task: remove ignored files?
-    
+
     if ($noConfirm.IsPresent -or (Confirm-Yes 'Remove ''bin'' and ''obj'' directories?')) {
         Remove-BinAndObj 'samples', 'src', 'tests'
     }
@@ -502,7 +502,7 @@ function Invoke-RepairTask {
 .SYNOPSIS
     Analyze project files.
 .PARAMETER PathList
-    Specifies the list of paths, relative to the project root, where to 
+    Specifies the list of paths, relative to the project root, where to
     look for C# projects.
 .INPUTS
     The list of paths, relative to the project root, where to look for C# projects.
@@ -512,13 +512,13 @@ function Invoke-RepairTask {
 function Measure-CSharpProjects {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
         [Alias('p')] [string[]] $PathList
     )
 
     PROCESS {
-        $pathList | 
-            %{ Get-LocalPath $_ } | 
+        $pathList |
+            %{ Get-LocalPath $_ } |
             %{ ls $_ -Recurse -Filter *.csproj } |
             %{ Measure-ProjectFile $_ }
     }
@@ -532,7 +532,7 @@ function Measure-CSharpProjects {
 .INPUTS
     None.
 .OUTPUTS
-    System.String[]. Measure-ProjectFile may return an array of strings 
+    System.String[]. Measure-ProjectFile may return an array of strings
     that contains details about any problems found.
 #>
 function Measure-ProjectFile {
@@ -542,11 +542,11 @@ function Measure-ProjectFile {
     Write-Verbose "Analyzing the project '$($file.Name)'."
 
     $content = [xml](cat $file.FullName)
-    
-    # If .NET supported XPath 2.0, we could use a simpler XPath query 
+
+    # If .NET supported XPath 2.0, we could use a simpler XPath query
     # (namespace removed for the sake of simplification):
     #   /Project/ItemGroup/Compile[lower-case(./ExcludeFromStyleCop)="true"]
-    $nodes = $content | 
+    $nodes = $content |
         Select-Xml `
             –Namespace @{ m = 'http://schemas.microsoft.com/developer/msbuild/2003' } `
             -XPath '/m:Project/m:ItemGroup/m:Compile[translate(./m:ExcludeFromStyleCop, "TRUE", "true") = "true"]'
@@ -566,7 +566,7 @@ function Measure-ProjectFile {
     Specifies the list of paths, relative to the project root, where to look for
     'bin' and 'obj' directories.
 .INPUTS
-    The list of paths, relative to the project root, where to look for 'bin' 
+    The list of paths, relative to the project root, where to look for 'bin'
     and 'obj' directories.
 .OUTPUTS
     None.
@@ -574,7 +574,7 @@ function Measure-ProjectFile {
 function Remove-BinAndObj {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
         [Alias('p')] [string[]] $PathList
     )
 
@@ -608,10 +608,10 @@ function Remove-BinAndObj {
 function Remove-LocalItem {
     [CmdletBinding(DefaultParametersetName = 'Relative', SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ParameterSetName = 'Relative')]  
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ParameterSetName = 'Relative')]
         [string] $RelativePath,
 
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ParameterSetName = 'Absolute')]  
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ParameterSetName = 'Absolute')]
         [string] $Path,
 
         [switch] $Recurse
@@ -619,7 +619,7 @@ function Remove-LocalItem {
 
     if ($PsCmdlet.ParameterSetName -eq 'Relative') {
         $path = Get-LocalPath $relativePath
-    } 
+    }
 
     if (Test-Path $path) {
         rm $path -Force -Recurse:$recurse.IsPresent
@@ -643,10 +643,10 @@ function Remove-LocalItem {
 function Remove-UntrackedItems {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
         [string] $Git
     )
-    
+
     try {
         Push-Location $script:ProjectRoot
 
@@ -667,7 +667,7 @@ function Remove-UntrackedItems {
 .SYNOPSIS
     Add a copyright header to all C# files missing one.
 .PARAMETER PathList
-    Specifies the list of paths, relative to the project root, where to 
+    Specifies the list of paths, relative to the project root, where to
     look for C# files.
 .INPUTS
     The list of paths, relative to the project root, where to look for C# files.
@@ -676,12 +676,12 @@ function Remove-UntrackedItems {
     explanation of what has been done.
 #>
 function Repair-Copyright {
-    [CmdletBinding(SupportsShouldProcess = $true)] 
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)] 
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
         [Alias('p')] [string[]] $PathList
     )
-    
+
     BEGIN {
         $count = 0
     }
@@ -722,16 +722,16 @@ function Repair-Copyright {
 function Restore-Packages {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0)] 
+        [Parameter(Mandatory = $true, Position = 0)]
         [Alias('s')] [string] $Source,
-        
-        [Parameter(Mandatory = $true, Position = 1)] 
+
+        [Parameter(Mandatory = $true, Position = 1)]
         [string] $PackagesDirectory,
-        
-        [Parameter(Mandatory = $true, Position = 2)] 
+
+        [Parameter(Mandatory = $true, Position = 2)]
         [string] $ConfigFile,
-        
-        [Parameter(Mandatory = $false, Position = 3)] 
+
+        [Parameter(Mandatory = $false, Position = 3)]
         [ValidateSet('', 'quiet', 'normal', 'detailed')]
         [string] $Verbosity
     )
@@ -766,7 +766,7 @@ function Restore-Packages {
 function Restore-SolutionPackages {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $false, Position = 0)] 
+        [Parameter(Mandatory = $false, Position = 0)]
         [string] $Verbosity
     )
 
@@ -811,7 +811,7 @@ function Stop-AnyMSBuildProcess {
 function Add-Copyright {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $true, Position = 0)] 
+        [Parameter(Mandatory = $true, Position = 0)]
         [Alias('p')] [string] $Path
     )
 
@@ -825,7 +825,7 @@ function Add-Copyright {
 
 <#
 .SYNOPSIS
-    Requests confirmation from the user. 
+    Requests confirmation from the user.
 .PARAMETER Query
     Specifies the query to be displayed to the user.
 .INPUTS
@@ -835,13 +835,13 @@ function Add-Copyright {
 #>
 function Confirm-Yes {
     param(
-        [Parameter(Mandatory = $true, Position = 0)] 
+        [Parameter(Mandatory = $true, Position = 0)]
         [string] $Query
     )
 
     while ($true) {
         $answer = (Read-Host $query, '[y/N]')
-        
+
         if ($answer -eq '' -or $answer -eq 'n') {
             return $false
         } elseif ($answer -eq 'y') {
@@ -870,8 +870,8 @@ function Find-MissingCopyright {
     Write-Verbose 'Find all C# source files, ignoring designer generated files and temporary build directories.'
 
     ls $path -Recurse -Filter *.cs -Exclude *.Designer.cs |
-        ?{ -not ($_.FullName.Contains('bin\') -or $_.FullName.Contains('obj\')) } | 
-        ?{ -not (Test-Copyright $_.FullName) } | 
+        ?{ -not ($_.FullName.Contains('bin\') -or $_.FullName.Contains('obj\')) } |
+        ?{ -not (Test-Copyright $_.FullName) } |
         select FullName
 }
 
@@ -886,24 +886,24 @@ function Find-MissingCopyright {
 function Install-RemoteItem {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)] 
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [System.Uri] $Uri,
 
-        [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true)] 
+        [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true)]
         [Alias('o')] [string] $OutFile,
 
-        [Parameter(Mandatory = $true, Position = 2)] 
+        [Parameter(Mandatory = $true, Position = 2)]
         [string] $Name,
 
         [switch] $Force
     )
-    
+
     if (!$force -and (Test-Path $outFile -PathType Leaf)) {
         Write-Verbose "$name is already installed."
     } else {
         Write-Verbose "Installing ${name}."
 
-        # We could use 
+        # We could use
         #   Invoke-WebRequest $uri -OutFile $outFile
         # but it displays a very ugly progress bar.
         try {
@@ -929,7 +929,7 @@ function Install-RemoteItem {
 function Test-Copyright {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $true, Position = 0)] 
+        [Parameter(Mandatory = $true, Position = 0)]
         [Alias('p')] [string] $Path
     )
 
@@ -945,14 +945,14 @@ function Test-Copyright {
 Export-ModuleMember -Function `
     Exit-Gracefully,
     Get-7Zip,
-    Get-Git, 
-    Get-GitCommitHash, 
+    Get-Git,
+    Get-GitCommitHash,
     Get-GitStatus,
     Get-LocalPath,
-    Get-NuGet, 
+    Get-NuGet,
     Get-PSakeModulePath,
     Install-7Zip,
-    Install-NuGet, 
+    Install-NuGet,
     Install-PSake,
     Invoke-AnalyzeTask,
     Invoke-PurgeTask,
@@ -966,5 +966,5 @@ Export-ModuleMember -Function `
     Restore-Packages,
     Restore-SolutionPackages,
     Stop-AnyMSBuildProcess
-        
+
 # ------------------------------------------------------------------------------
