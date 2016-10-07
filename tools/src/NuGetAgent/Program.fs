@@ -11,17 +11,17 @@ module Program =
     module Args =
 
         /// Parser template for the command-line arguments.
-        type private ParserTemplate = 
+        type private ParserTemplate =
             | [<Mandatory; AltCommandLine("-p")>] Path of string
             | [<AltCommandLine("-r")>] Retail
             interface IArgParserTemplate with
-                member s.Usage = 
+                member s.Usage =
                     match s with
                     | Path _   -> "Specify the path to the directory where packages to be published are located."
                     | Retail _ -> "If present, packages are for retail."
 
         /// Parse command-line arguments.
-        let parse args = 
+        let parse args =
             let parser = UnionArgParser.Create<ParserTemplate>()
             let result = parser.ParseCommandLine(args, new ProcessExiter())
 
@@ -32,7 +32,7 @@ module Program =
 
     /// Entry point for the application.
     [<EntryPoint>]
-    let main args = 
+    let main args =
         let path, retail = Args.parse args
 
         Publishers.Processor.Create(retail).PublishPackagesFrom path

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-#load @"src\NuGetAgent\Scripts\load-project.fsx"
+#load @"src\NuGetAgent\Scripts\load-project-release.fsx"
 
 open NuGetAgent
 

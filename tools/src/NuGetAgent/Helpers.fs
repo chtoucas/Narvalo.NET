@@ -27,21 +27,21 @@ type MachineWideSettings(settings:IEnumerable<Settings>) =
 let readApiKey (settings:ISettings) (key:string) =
     let apiKey = settings.GetDecryptedValue(Constants.ApiKeysSectionName, key)
 
-    if String.IsNullOrWhiteSpace(apiKey) 
+    if String.IsNullOrWhiteSpace(apiKey)
     then failwithf "No API key could be found for the source: '%s'." key
     else apiKey
 
 /// Load the NuGet settings.
 let loadNuGetSettings =
     let baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-    let machineWideSettings = 
+    let machineWideSettings =
         new MachineWideSettings(
             NuGet.Settings.LoadMachineWideSettings(new PhysicalFileSystem(baseDirectory)))
 
     // Personal NuGet.config can be found in %APPDATA%\Roaming\NuGet\NuGet.config
     NuGet.Settings.LoadDefaultSettings(
-        new PhysicalFileSystem(Directory.GetCurrentDirectory()), 
-        configFileName=null, 
+        new PhysicalFileSystem(Directory.GetCurrentDirectory()),
+        configFileName=null,
         machineWideSettings=machineWideSettings)
 
 /// Container for the various NuGet API keys.
