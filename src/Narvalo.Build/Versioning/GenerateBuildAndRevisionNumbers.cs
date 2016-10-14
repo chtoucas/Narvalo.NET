@@ -27,23 +27,23 @@ namespace Narvalo.Build.Versioning
      * The default build number increments daily. The default revision number is
      * the number of seconds since midnight local time (without taking into account
      * time zone adjustments for daylight saving time), divided by 2.
-     * For further informations, see 
+     * For further informations, see
      * [AssemblyVersionAttribute](http://msdn.microsoft.com/en-us/library/system.reflection.assemblyversionattribute.aspx).
-     * 
+     *
      * Remarks:
      * - This feature is only available to `AssemblyVersion`, not to `AssemblyFileVersion`.
      * - During the same day, two builds may end up with the same assembly version.
      * - Build and revision numbers must be less or equal to 65534 (ie `UInt16.MaxValue - 1`).
-     * 
+     *
      * Here I implement a slight variation of the same algorithm:
      * - Use UTC time.
      * - The build number is the number of half-days since 2014-12-01 (minus one to start at zero).
-     * - The revision number is the number of seconds since midnight in the morning 
+     * - The revision number is the number of seconds since midnight in the morning
      *   and since midday in the afternoon.
-     *   
-     * This way, there is less chance of getting the same numbers during 
+     *
+     * This way, there is less chance of getting the same numbers during
      * a single day on the same build machine. The scheme will break in approximately 89 years...
-     * 
+     *
      * Worth reminding, if we used a scheme that simply incremented the build
      * numbers, we would generate a lot of unecessary holes in the sequence.
      * Indeed due to incremental batching a build might not do anything.

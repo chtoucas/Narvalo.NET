@@ -15,7 +15,7 @@ namespace Narvalo.Build
     /// Download latest version of NuGet:
     /// <code>
     /// <![CDATA[
-    /// <DownloadFile Address="https://nuget.org/nuget.exe" 
+    /// <DownloadFile Address="https://nuget.org/nuget.exe"
     ///               OutputFile="$(SolutionDir)\tools\nuget.exe" />
     /// ]]>
     /// </code>

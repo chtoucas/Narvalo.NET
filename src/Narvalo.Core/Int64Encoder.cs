@@ -20,14 +20,14 @@ namespace Narvalo
         private const int BASE58_MAX_LENGTH = 11;
         private const int FLICKR_BASE58_MAX_LENGTH = 11;
 
-        // On exclue la lettre "l".
+        // On exclut la lettre "l".
         private static readonly char[] s_Base25Alphabet = new char[] {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
             'v', 'w', 'x', 'y', 'z',
         };
 
-        // On exclue le chiffre zéro et la lettre "l".
+        // On exclut le chiffre zéro et la lettre "l".
         private static readonly char[] s_Base34Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
@@ -35,7 +35,7 @@ namespace Narvalo
             'v', 'w', 'x', 'y', 'z',
         };
 
-        // On exclue le chiffre zéro et les lettres "I", "O" et "l".
+        // On exclut le chiffre zéro et les lettres "I", "O" et "l".
         private static readonly char[] s_Base58Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K',
@@ -46,7 +46,7 @@ namespace Narvalo
             'v', 'w', 'x', 'y', 'z',
         };
 
-        // On exclue le chiffre zéro et les lettres "I", "O" et "l".
+        // On exclut le chiffre zéro et les lettres "I", "O" et "l".
         private static readonly char[] s_FlickrBase58Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',

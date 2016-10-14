@@ -28,7 +28,7 @@ namespace Narvalo.Build
      * <content markup="commonmark">
      * <![CDATA[
      * It is possible to do this in pure MSBuild: [MSDN](http://blogs.msdn.com/b/msbuild/archive/2005/09/29/475046.aspx).
-     * 
+     *
      * The first step is to create an ItemGroup
      * with the files you want to concatenate:
      * ```xml
