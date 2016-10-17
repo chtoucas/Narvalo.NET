@@ -15,7 +15,7 @@ Rules not yet enforced via StyleCop are:
 - Namespace imports should be specified at the top of the file, _inside_ the namespace declarations.
   In case of namespace conflict, use the 'global::' prefix.
 - Consider separating System imports from the others.
-- Do not use language keywords for methods calls (i.e. prefere `Int32.Parse` over `int.Parse`),
+- Do not use language keywords for methods calls (i.e. prefer `Int32.Parse` over `int.Parse`),
   for object creations and when used with `typeof`.
 - Do not use PascalCasing to name private constants, prefer `MY_PRIVATE_CONSTANT` over `MyPrivateConstant`.
 - Directories must mirror namespaces.

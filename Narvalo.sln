@@ -38,7 +38,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Documentation", "0. Docu
 		docs\Issues.md = docs\Issues.md
 		docs\Overview.md = docs\Overview.md
 		README.md = README.md
-		docs\Tips.md = docs\Tips.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Reliability", "src\Narvalo.Reliability\Narvalo.Reliability.csproj", "{853A6068-E459-4E5C-B478-21FB801F01FE}"
