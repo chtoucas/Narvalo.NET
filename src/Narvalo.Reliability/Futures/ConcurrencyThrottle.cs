@@ -5,45 +5,44 @@ namespace Narvalo.Reliability
     using System;
     using System.Threading;
 
-    public class ConcurrencyThrottle : ISentinel, IDisposable
+    public class ConcurrencyThrottle : IReliabilitySentinel, IDisposable
     {
-        private readonly int _maxConcurrentRequests;
-        private readonly TimeSpan _timeout;
-
         private bool _disposed = false;
         private SemaphoreSlim _sem;
 
         // FIXME: vérifier timeout pour ne pas attendre indéfininent ou timeout < 0.
         public ConcurrencyThrottle(int maxConcurrentRequests, TimeSpan timeout)
         {
-            Require.GreaterThanOrEqualTo(maxConcurrentRequests, 1, "maxConcurrentRequests");
+            Require.GreaterThanOrEqualTo(maxConcurrentRequests, 1, nameof(maxConcurrentRequests));
 
-            _maxConcurrentRequests = maxConcurrentRequests;
-            _timeout = timeout;
+            MaxConcurrentRequests = maxConcurrentRequests;
+            Timeout = timeout;
 
-            // NB: Contrairement à un Semaphore, SemaphoreSlim n'est pas partagé par l'ensemble 
+            // NB: Contrairement à un Semaphore, SemaphoreSlim n'est pas partagé par l'ensemble
             // des processus de l'hôte.
             _sem = new SemaphoreSlim(maxConcurrentRequests);
         }
 
-        public int MaxConcurrentRequests { get { return _maxConcurrentRequests; } }
+        public int MaxConcurrentRequests { get; }
 
-        public TimeSpan Timeout { get { return _timeout; } }
+        public TimeSpan Timeout { get; }
 
         ////public bool CanExecute
         ////{
         ////    get { return _sem.CurrentCount < _maxConcurrentRequests; }
         ////}
 
-        public void Execute(Action action)
+        public void Invoke(Action action)
         {
+            Require.NotNull(action, nameof(action));
+
             ThrowIfDisposed();
 
-            if (_sem.Wait(_timeout))
+            if (_sem.Wait(Timeout))
             {
                 try
                 {
-                    action();
+                    action.Invoke();
                 }
                 finally
                 {

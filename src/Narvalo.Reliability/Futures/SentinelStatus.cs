@@ -2,7 +2,7 @@
 
 namespace Narvalo.Reliability
 {
-    public enum GuardStatus
+    public enum SentinelStatus
     {
         Busy,
 

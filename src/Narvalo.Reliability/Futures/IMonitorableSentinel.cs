@@ -2,14 +2,8 @@
 
 namespace Narvalo.Reliability
 {
-    public enum GuardType
+    public interface IMonitorableSentinel : IReliabilitySentinel
     {
-        None,
-
-        Plural,
-
-        Unsafe,
-
-        Wait,
+        SentinelStatus Status { get; }
     }
 }

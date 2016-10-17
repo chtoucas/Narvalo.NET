@@ -2,10 +2,15 @@
 
 namespace Narvalo.Reliability
 {
-    public class ThrottleException : GuardException
+    using System;
+
+    public class ThrottleException : SentinelException
     {
         public ThrottleException() : base() { }
 
         public ThrottleException(string message) : base(message) { }
+
+        public ThrottleException(string message, Exception innerException)
+            : base(message, innerException) { }
     }
 }

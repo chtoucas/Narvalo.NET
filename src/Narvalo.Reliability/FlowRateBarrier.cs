@@ -7,54 +7,48 @@ namespace Narvalo.Reliability
 
     public class FlowRateBarrier : IBarrier, IDisposable
     {
-        private readonly TimeSpan _resetInterval;
-        private readonly int _maxRequestsPerInterval;
-
         private bool _disposed = false;
         private int _requestCount = 0;
         private Timer _resetTimer;
 
         public FlowRateBarrier(int maxRequestsPerInterval, TimeSpan resetInterval)
         {
-            Require.GreaterThanOrEqualTo(maxRequestsPerInterval, 1, "maxRequestsPerInterval");
+            Require.GreaterThanOrEqualTo(maxRequestsPerInterval, 1, nameof(maxRequestsPerInterval));
 
-            _maxRequestsPerInterval = maxRequestsPerInterval;
-            _resetInterval = resetInterval;
+            MaxRequestsPerInterval = maxRequestsPerInterval;
+            ResetInterval = resetInterval;
 
             ////_resetTimer = new Timer((state) => { _requestCount = 0; }, null /* state */, new TimeSpan(0), resetInterval);
             _resetTimer = new Timer(
                 (state) =>
                 {
                     _requestCount = 0;
-                    _resetTimer.Change(_resetInterval, new TimeSpan(-1));
+                    _resetTimer.Change(ResetInterval, new TimeSpan(-1L));
                 },
                 null /* state */,
-                _resetInterval,
-                new TimeSpan(-1));
+                ResetInterval,
+                new TimeSpan(-1L));
         }
 
-        public int MaxRequestsPerInterval { get { return _maxRequestsPerInterval; } }
+        public int MaxRequestsPerInterval { get; }
 
-        public TimeSpan ResetInterval { get { return _resetInterval; } }
+        public TimeSpan ResetInterval { get; }
 
-        public bool CanExecute
+        public bool CanInvoke => _requestCount <= MaxRequestsPerInterval;
+
+        public void Invoke(Action action)
         {
-            get { return _requestCount <= _maxRequestsPerInterval; }
-        }
-
-        public void Execute(Action action)
-        {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             ThrowIfDisposed();
 
-            if (!CanExecute)
+            if (!CanInvoke)
             {
                 throw new InvalidOperationException("Flow rate exceeded.");
             }
 
             _requestCount++;
-            action();
+            action.Invoke();
         }
 
         public void Dispose()

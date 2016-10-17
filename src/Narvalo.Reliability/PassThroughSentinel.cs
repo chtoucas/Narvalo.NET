@@ -4,11 +4,11 @@ namespace Narvalo.Reliability
 {
     using System;
 
-    public class NoopSentinel : ISentinel
+    public sealed class PassThroughSentinel : IReliabilitySentinel
     {
-        public void Execute(Action action)
+        public void Invoke(Action action)
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             action.Invoke();
         }

@@ -9,21 +9,16 @@ namespace Narvalo.Reliability
     // IMPORTANT: Implémenter Thread-Safety
     public class CircuitBreaker : IBarrier, IDisposable
     {
-        private readonly TimeSpan _resetInterval;
-        private readonly int _threshold;
-
         private bool _autoReset = false;
         private bool _disposed = false;
-        private int _failureCount = 0;
         private Timer _resetTimer;
-        private CircuitBreakerState _currentState = CircuitBreakerState.Closed;
 
         public CircuitBreaker(int threshold, TimeSpan resetInterval)
         {
-            Require.GreaterThanOrEqualTo(threshold, 1, "threshold");
+            Require.GreaterThanOrEqualTo(threshold, 1, nameof(threshold));
 
-            _threshold = threshold;
-            _resetInterval = resetInterval;
+            Threshold = threshold;
+            ResetInterval = resetInterval;
             _resetTimer = InitializeTimer();
         }
 
@@ -40,31 +35,29 @@ namespace Narvalo.Reliability
             {
                 _autoReset = value;
                 ////if (_autoReset & IsOpen) {
-                ////    StartResetTimer();
+                ////    StartTimer();
                 ////}
             }
         }
 
-        public bool CanExecute { get { return !IsOpen; } }
+        public bool CanInvoke => !IsOpen;
 
-        public double CurrentServiceLevel
-        {
-            get { return 100D * (Threshold - FailureCount) / Threshold; }
-        }
+        public double CurrentServiceLevel => 100D * (Threshold - FailureCount) / Threshold;
 
-        public CircuitBreakerState CurrentState { get { return _currentState; } }
+        public CircuitBreakerState CurrentState { get; private set; } = CircuitBreakerState.Closed;
 
-        public int FailureCount { get { return _failureCount; } }
+        public int FailureCount { get; private set; } = 0;
 
-        public bool IsClosed { get { return CurrentState == CircuitBreakerState.Closed; } }
+        public bool IsClosed => CurrentState == CircuitBreakerState.Closed;
 
-        public bool IsHalfOpen { get { return CurrentState == CircuitBreakerState.HalfOpen; } }
+        // REVIEW: Opened?
+        public bool IsHalfOpen => CurrentState == CircuitBreakerState.HalfOpen;
 
-        public bool IsOpen { get { return CurrentState == CircuitBreakerState.Open; } }
+        public bool IsOpen => CurrentState == CircuitBreakerState.Open;
 
-        public TimeSpan ResetInterval { get { return _resetInterval; } }
+        public TimeSpan ResetInterval { get; }
 
-        public int Threshold { get { return _threshold; } }
+        public int Threshold { get; }
 
         public void Dispose()
         {
@@ -72,13 +65,13 @@ namespace Narvalo.Reliability
             GC.SuppressFinalize(this);
         }
 
-        public void Execute(Action action)
+        public void Invoke(Action action)
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             ThrowIfDisposed();
 
-            if (!CanExecute)
+            if (!CanInvoke)
             {
                 throw new InvalidOperationException("The circuit is open");
             }
@@ -87,7 +80,7 @@ namespace Narvalo.Reliability
             {
                 action.Invoke();
             }
-            catch (GuardException)
+            catch (SentinelException)
             {
                 throw;
             }
@@ -106,23 +99,14 @@ namespace Narvalo.Reliability
 
             StopTimer();
             SetState(CircuitBreakerState.Closed);
-            _failureCount = 0;
+            FailureCount = 0;
         }
 
-        internal void Close()
-        {
-            Close(false /* executing */);
-        }
+        internal void Close() => Close(false /* executing */);
 
-        internal void HalfOpen()
-        {
-            HalfOpen(false /* executing */);
-        }
+        internal void HalfOpen() => HalfOpen(false /* executing */);
 
-        internal void Trip()
-        {
-            Trip(false /* executing */);
-        }
+        internal void Trip() => Trip(false /* executing */);
 
         protected virtual void Dispose(bool disposing)
         {
@@ -152,7 +136,7 @@ namespace Narvalo.Reliability
 
             SetState(CircuitBreakerState.Closed);
 
-            // FIXME: trop tard si _setState échoue.
+            // FIXME: trop tard si SetState échoue.
             if (AutoReset)
             {
                 StopTimer();
@@ -163,12 +147,12 @@ namespace Narvalo.Reliability
         {
             if (executing && CurrentState != CircuitBreakerState.Open)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("XXX");
             }
 
             SetState(CircuitBreakerState.HalfOpen);
 
-            // FIXME: trop tard si _setState échoue.
+            // FIXME: trop tard si SetState échoue.
             if (AutoReset)
             {
                 StopTimer();
@@ -184,7 +168,7 @@ namespace Narvalo.Reliability
 
             SetState(CircuitBreakerState.Open);
 
-            // FIXME: trop tard si _setState échoue.
+            // FIXME: trop tard si SetState échoue.
             if (executing && AutoReset)
             {
                 StartTimer();
@@ -192,14 +176,7 @@ namespace Narvalo.Reliability
         }
 
         protected virtual void OnStateChanged(CircuitBreakerStateChangedEventArgs e)
-        {
-            EventHandler<CircuitBreakerStateChangedEventArgs> localHandler = StateChangedEventHandler;
-
-            if (localHandler != null)
-            {
-                localHandler(this, e);
-            }
-        }
+            => StateChangedEventHandler?.Invoke(this, e);
 
         #endregion
 
@@ -233,28 +210,22 @@ namespace Narvalo.Reliability
             return resetTimer;
         }
 
-        protected void StartTimer()
-        {
-            _resetTimer.Change(ResetInterval, new TimeSpan(-1));
-        }
+        protected void StartTimer() => _resetTimer.Change(ResetInterval, new TimeSpan(-1L));
 
-        protected void StopTimer()
-        {
-            _resetTimer.Change(Timeout.Infinite, Timeout.Infinite);
-        }
+        protected void StopTimer() => _resetTimer.Change(Timeout.Infinite, Timeout.Infinite);
 
         #endregion
 
         private void RecordFailure()
         {
-            if (FailureCount < _threshold)
+            if (FailureCount < Threshold)
             {
                 // Tant qu'on n'a pas atteint le seuil maximum d'erreurs, on incrémente le compteur.
-                _failureCount++;
+                FailureCount++;
             }
 
             bool openCircuit = CurrentState == CircuitBreakerState.HalfOpen
-                || (CurrentState == CircuitBreakerState.Closed && FailureCount >= _threshold);
+                || (CurrentState == CircuitBreakerState.Closed && FailureCount >= Threshold);
 
             if (openCircuit)
             {
@@ -266,7 +237,7 @@ namespace Narvalo.Reliability
         {
             if (FailureCount > 0)
             {
-                _failureCount--;
+                FailureCount--;
             }
 
             if (IsHalfOpen)
@@ -278,7 +249,7 @@ namespace Narvalo.Reliability
         private void SetState(CircuitBreakerState newState)
         {
             var lastState = CurrentState;
-            _currentState = newState;
+            CurrentState = newState;
             OnStateChanged(new CircuitBreakerStateChangedEventArgs(lastState, newState));
         }
 

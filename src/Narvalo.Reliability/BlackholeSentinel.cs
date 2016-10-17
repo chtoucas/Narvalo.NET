@@ -4,10 +4,8 @@ namespace Narvalo.Reliability
 {
     using System;
 
-    public class BlackholeGuard : ISentinel
+    public sealed class BlackholeSentinel : IReliabilitySentinel
     {
-        public void Execute(Action action)
-        {
-        }
+        public void Invoke(Action action) { }
     }
 }

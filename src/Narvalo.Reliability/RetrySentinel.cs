@@ -6,24 +6,22 @@ namespace Narvalo.Reliability
     using System.Collections.Generic;
     using System.Threading;
 
-    public class RetryGuard : ISentinel
+    public sealed class RetrySentinel : IReliabilitySentinel
     {
-        private readonly RetryPolicy _policy;
-
-        public RetryGuard(RetryPolicy policy)
+        public RetrySentinel(RetryPolicy policy)
         {
-            Require.NotNull(policy, "policy");
+            Require.NotNull(policy, nameof(policy));
 
-            _policy = policy;
+            Policy = policy;
         }
 
-        public int MaxTries { get { return 1 + _policy.MaxRetries; } }
+        public int MaxTries { get { return 1 + Policy.MaxRetries; } }
 
-        public RetryPolicy Policy { get { return _policy; } }
+        public RetryPolicy Policy { get; }
 
-        public void Execute(Action action)
+        public void Invoke(Action action)
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             int attempts = 0;
             var exceptions = new List<Exception>();
@@ -32,42 +30,43 @@ namespace Narvalo.Reliability
             {
                 try
                 {
-                    action();
+                    action.Invoke();
                     break;
                 }
-                catch (GuardException)
+                catch (SentinelException)
                 {
-                    throw NewAggregateGuardException("XXX", exceptions);
+                    throw CreateAggregateException("XXX", exceptions);
                 }
                 catch (Exception ex)
                 {
                     exceptions.Add(ex);
 
-                    if (!_policy.MayRetryAfter(ex))
+                    if (!Policy.MayRetryAfter(ex))
                     {
-                        throw NewAggregateGuardException("XXX", exceptions);
+                        throw CreateAggregateException("XXX", exceptions);
                     }
 
                     // On n'attend pas si on a déjà atteint la limite d'essais acceptés.
                     if (attempts < MaxTries)
                     {
                         ////Thread.Sleep(_retryInterval);
-                        Wait(_policy.RetryInterval);
+                        Wait(Policy.RetryInterval);
                     }
                 }
             }
         }
 
-        private static AggregateGuardException NewAggregateGuardException(
-           string message, IList<Exception> exceptions)
+        private static AggregateSentinelException CreateAggregateException(
+           string message,
+           IList<Exception> exceptions)
         {
             if (exceptions.Count > 0)
             {
-                return new AggregateGuardException("XXX", new AggregateException(exceptions));
+                return new AggregateSentinelException(message, new AggregateException(exceptions));
             }
             else
             {
-                return new AggregateGuardException("XXX");
+                return new AggregateSentinelException(message);
             }
         }
 

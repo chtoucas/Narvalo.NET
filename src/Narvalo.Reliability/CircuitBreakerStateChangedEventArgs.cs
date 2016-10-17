@@ -6,25 +6,16 @@ namespace Narvalo.Reliability
 
     public class CircuitBreakerStateChangedEventArgs : EventArgs
     {
-        private readonly CircuitBreakerState _lastState;
-        private readonly CircuitBreakerState _newState;
-
         public CircuitBreakerStateChangedEventArgs(
             CircuitBreakerState lastState,
             CircuitBreakerState newState)
         {
-            _lastState = lastState;
-            _newState = newState;
+            LastState = lastState;
+            NewState = newState;
         }
 
-        public CircuitBreakerState LastState
-        {
-            get { return _lastState; }
-        }
+        public CircuitBreakerState LastState { get; }
 
-        public CircuitBreakerState NewState
-        {
-            get { return _newState; }
-        }
+        public CircuitBreakerState NewState { get; }
     }
 }

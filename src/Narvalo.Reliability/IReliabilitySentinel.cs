@@ -4,27 +4,27 @@ namespace Narvalo.Reliability
 {
     using System;
 
-    public partial interface ISentinel
+    public partial interface IReliabilitySentinel
     {
         // TODO: Ajouter les variantes async : Task, Begin/End, async ?
-        void Execute(Action action);
+        void Invoke(Action action);
     }
 }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
-    
+
 namespace Narvalo.Reliability
 {
     using System;
     using System.Diagnostics.Contracts;
 
     [ContractClass(typeof(ISentinelContract))]
-    public partial interface ISentinel { }
+    public partial interface IReliabilitySentinel { }
 
-    [ContractClassFor(typeof(ISentinel))]
-    internal abstract class ISentinelContract : ISentinel
+    [ContractClassFor(typeof(IReliabilitySentinel))]
+    internal abstract class IReliabilitySentinelContract : IReliabilitySentinel
     {
-        void ISentinel.Execute(Action action)
+        void IReliabilitySentinel.Invoke(Action action)
         {
             Contract.Requires(action != null);
         }

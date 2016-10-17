@@ -2,8 +2,8 @@
 
 namespace Narvalo.Reliability
 {
-    public interface IBarrier : ISentinel
+    public interface IBarrier : IReliabilitySentinel
     {
-        bool CanExecute { get; }
+        bool CanInvoke { get; }
     }
 }
