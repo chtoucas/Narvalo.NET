@@ -116,6 +116,12 @@ Infrastructure
 
 - Publishing Narvalo.Mvp should fail if we do not publish Narvalo.Core?
 
+### VS2015
+- ToolsVersion="14.0" everywhere.
+- Set `StyleCopEnabled` to `false` (see `Narvalo.Reliability.props).
+- Migrate from StyleCop to the appropriate source analyzer.
+- T4 templates? (see Make.CustomAfter.targets)
+
 ### Continuous Integration
 
 - Enable Continuous Integration with AppVeyor.
