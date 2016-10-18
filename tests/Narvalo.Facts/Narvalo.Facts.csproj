@@ -90,10 +90,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="..\Common\EnvironmentFacts.cs">
+    <Compile Include="..\Narvalo.TestCommon\EnvironmentFacts.cs">
       <Link>TestCommon\EnvironmentFacts.cs</Link>
     </Compile>
-    <Compile Include="..\Common\IssueAttribute.cs">
+    <Compile Include="..\Narvalo.TestCommon\IssueAttribute.cs">
       <Link>TestCommon\IssueAttribute.cs</Link>
     </Compile>
     <Compile Include="AcknowledgeFacts.cs" />
