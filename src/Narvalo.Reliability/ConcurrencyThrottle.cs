@@ -10,27 +10,27 @@ namespace Narvalo.Reliability
         private bool _disposed = false;
         private SemaphoreSlim _sem;
 
-        // FIXME: vérifier timeout pour ne pas attendre indéfininent ou timeout < 0.
-        public ConcurrencyThrottle(int maxConcurrentRequests, TimeSpan timeout)
-        {
-            Require.GreaterThanOrEqualTo(maxConcurrentRequests, 1, nameof(maxConcurrentRequests));
+        public ConcurrencyThrottle(int maxConcurrentThreads, int millisecondsTimeout)
+            : this(maxConcurrentThreads, TimeSpan.FromMilliseconds(millisecondsTimeout)) { }
 
-            MaxConcurrentRequests = maxConcurrentRequests;
+        // FIXME: vérifier timeout pour ne pas attendre indéfininent ou timeout < 0.
+        public ConcurrencyThrottle(int maxConcurrentThreads, TimeSpan timeout)
+        {
+            Require.GreaterThanOrEqualTo(maxConcurrentThreads, 1, nameof(maxConcurrentThreads));
+
+            MaxConcurrentThreads = maxConcurrentThreads;
             Timeout = timeout;
 
             // NB: Contrairement à un Semaphore, SemaphoreSlim n'est pas partagé par l'ensemble
             // des processus de l'hôte.
-            _sem = new SemaphoreSlim(maxConcurrentRequests);
+            _sem = new SemaphoreSlim(maxConcurrentThreads);
         }
 
-        public int MaxConcurrentRequests { get; }
+        //public bool CanInvoke => _sem.CurrentCount < MaxConcurrentThreads;
+
+        public int MaxConcurrentThreads { get; }
 
         public TimeSpan Timeout { get; }
-
-        ////public bool CanExecute
-        ////{
-        ////    get { return _sem.CurrentCount < _maxConcurrentRequests; }
-        ////}
 
         public void Invoke(Action action)
         {
@@ -51,7 +51,7 @@ namespace Narvalo.Reliability
             }
             else
             {
-                throw new ThrottleException();
+                throw new ReliabilityException("XXX");
             }
         }
 

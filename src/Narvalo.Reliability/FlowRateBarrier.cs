@@ -5,7 +5,7 @@ namespace Narvalo.Reliability
     using System;
     using System.Threading;
 
-    public class FlowRateBarrier : IBarrier, IDisposable
+    public class FlowRateBarrier : IReliabilitySentinel, IDisposable
     {
         private bool _disposed = false;
         private int _requestCount = 0;
@@ -44,7 +44,8 @@ namespace Narvalo.Reliability
 
             if (!CanInvoke)
             {
-                throw new InvalidOperationException("Flow rate exceeded.");
+                throw new ReliabilityException("Flow rate exceeded.");
+                //throw new InvalidOperationException("Flow rate exceeded.");
             }
 
             _requestCount++;

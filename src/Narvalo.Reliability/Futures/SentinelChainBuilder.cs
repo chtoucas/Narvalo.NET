@@ -18,7 +18,8 @@ namespace Narvalo.Reliability
             Add(sentinel);
         }
 
-        public IReadOnlyCollection<IReliabilitySentinel> Sentinels => new ReadOnlyCollection<IReliabilitySentinel>(_sentinels);
+        public IReadOnlyCollection<IReliabilitySentinel> Sentinels
+            => new ReadOnlyCollection<IReliabilitySentinel>(_sentinels);
 
         public void Add(IReliabilitySentinel sentinel)
         {

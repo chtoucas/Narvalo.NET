@@ -6,6 +6,9 @@ namespace Narvalo.Reliability
 
     public partial interface IReliabilitySentinel
     {
+        // REVIEW: Put this into a separate interface? IBarrier
+        //bool CanInvoke { get; }
+
         // TODO: Ajouter les variantes async : Task, Begin/End, async ?
         void Invoke(Action action);
     }

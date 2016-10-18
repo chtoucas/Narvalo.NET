@@ -15,7 +15,7 @@ namespace Narvalo.Reliability
             Policy = policy;
         }
 
-        public int MaxTries { get { return 1 + Policy.MaxRetries; } }
+        public int MaxTries => 1 + Policy.MaxRetries;
 
         public RetryPolicy Policy { get; }
 
@@ -33,7 +33,7 @@ namespace Narvalo.Reliability
                     action.Invoke();
                     break;
                 }
-                catch (SentinelException)
+                catch (ReliabilityException)
                 {
                     throw CreateAggregateException("XXX", exceptions);
                 }
@@ -56,17 +56,17 @@ namespace Narvalo.Reliability
             }
         }
 
-        private static AggregateSentinelException CreateAggregateException(
+        private static AggregateReliabilityException CreateAggregateException(
            string message,
            IList<Exception> exceptions)
         {
             if (exceptions.Count > 0)
             {
-                return new AggregateSentinelException(message, new AggregateException(exceptions));
+                return new AggregateReliabilityException(message, new AggregateException(exceptions));
             }
             else
             {
-                return new AggregateSentinelException(message);
+                return new AggregateReliabilityException(message);
             }
         }
 

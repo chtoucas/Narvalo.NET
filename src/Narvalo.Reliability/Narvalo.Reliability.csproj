@@ -42,15 +42,14 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>-->
   <ItemGroup>
-    <Compile Include="AggregateSentinelException.cs" />
+    <Compile Include="AggregateReliabilityException.cs" />
     <Compile Include="BlackholeSentinel.cs" />
     <Compile Include="CircuitBreaker.cs" />
     <Compile Include="CircuitBreakerState.cs" />
     <Compile Include="CircuitBreakerStateChangedEventArgs.cs" />
     <Compile Include="FlowRateBarrier.cs" />
     <Compile Include="Futures\SentinelChain.cs" />
-    <Compile Include="SentinelException.cs" />
-    <Compile Include="IBarrier.cs" />
+    <Compile Include="ReliabilityException.cs" />
     <Compile Include="Futures\IReliabilityMonitor.cs" />
     <Compile Include="IReliabilitySentinel.cs" />
     <Compile Include="PassThroughSentinel.cs" />
@@ -69,7 +68,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
-    <Compile Include="Futures\ConcurrencyThrottle.cs" />
+    <Compile Include="ConcurrencyThrottle.cs" />
     <Compile Include="Futures\FlowRateRegulator.cs" />
     <Compile Include="Futures\IMonitorableSentinel.cs" />
     <Compile Include="Futures\IThrottle.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="Futures\SentinelChainBuilder.cs" />
     <Compile Include="Futures\SentinelStatus.cs" />
     <Compile Include="Futures\SentinelType.cs" />
-    <Compile Include="Futures\ThrottleException.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Strings.resx">

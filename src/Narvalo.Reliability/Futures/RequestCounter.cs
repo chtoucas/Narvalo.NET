@@ -22,7 +22,7 @@ namespace Narvalo.Reliability
             {
                 action.Invoke();
             }
-            catch (SentinelException)
+            catch (ReliabilityException)
             {
                 throw;
             }

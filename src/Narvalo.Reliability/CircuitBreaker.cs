@@ -7,7 +7,7 @@ namespace Narvalo.Reliability
     using System.Threading;
 
     // IMPORTANT: Implémenter Thread-Safety
-    public class CircuitBreaker : IBarrier, IDisposable
+    public class CircuitBreaker : IReliabilitySentinel, IDisposable
     {
         private bool _autoReset = false;
         private bool _disposed = false;
@@ -73,14 +73,15 @@ namespace Narvalo.Reliability
 
             if (!CanInvoke)
             {
-                throw new InvalidOperationException("The circuit is open");
+                throw new ReliabilityException("The circuit is open");
+                //throw new InvalidOperationException("The circuit is open");
             }
 
             try
             {
                 action.Invoke();
             }
-            catch (SentinelException)
+            catch (ReliabilityException)
             {
                 throw;
             }

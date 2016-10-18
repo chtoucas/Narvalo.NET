@@ -2,7 +2,7 @@
 
 namespace Narvalo.Reliability
 {
-    public interface IThrottle : IBarrier
+    public interface IThrottle : IReliabilitySentinel
     {
         bool IsConstricted { get; }
 

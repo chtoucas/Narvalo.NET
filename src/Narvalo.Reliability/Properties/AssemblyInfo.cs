@@ -6,5 +6,5 @@ using System.Reflection;
 [assembly: AssemblyDescription("")]
 
 #if !NO_INTERNALS_VISIBLE_TO // Make internals visible to the test projects.
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Reliability.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
 #endif
