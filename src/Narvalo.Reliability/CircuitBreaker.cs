@@ -6,12 +6,14 @@ namespace Narvalo.Reliability
     using System.Diagnostics.Contracts;
     using System.Threading;
 
-    // IMPORTANT: Implémenter Thread-Safety
+    // TODO: Thread-Safety
     public class CircuitBreaker : IReliabilitySentinel, IDisposable
     {
         private bool _autoReset = false;
         private bool _disposed = false;
         private Timer _resetTimer;
+
+        private int _failureCount = 0;
 
         public CircuitBreaker(int threshold, TimeSpan resetInterval)
         {
@@ -19,11 +21,12 @@ namespace Narvalo.Reliability
 
             Threshold = threshold;
             ResetInterval = resetInterval;
-            _resetTimer = InitializeTimer();
+            _resetTimer = CreateTimer();
         }
 
         public event EventHandler<CircuitBreakerStateChangedEventArgs> StateChangedEventHandler;
 
+        // REVIEW: read-only?
         public bool AutoReset
         {
             get
@@ -50,7 +53,7 @@ namespace Narvalo.Reliability
 
         public bool IsClosed => CurrentState == CircuitBreakerState.Closed;
 
-        // REVIEW: Opened?
+        // REVIEW: Spelling: Open or Opened?
         public bool IsHalfOpen => CurrentState == CircuitBreakerState.HalfOpen;
 
         public bool IsOpen => CurrentState == CircuitBreakerState.Open;
@@ -74,7 +77,7 @@ namespace Narvalo.Reliability
             if (!CanInvoke)
             {
                 throw new ReliabilityException("The circuit is open");
-                //throw new InvalidOperationException("The circuit is open");
+                // REVIEW: throw new InvalidOperationException("The circuit is open");
             }
 
             try
@@ -100,7 +103,8 @@ namespace Narvalo.Reliability
 
             StopTimer();
             SetState(CircuitBreakerState.Closed);
-            FailureCount = 0;
+            //FailureCount = 0;
+            Interlocked.Exchange(ref _failureCount, 0);
         }
 
         internal void Close() => Close(false /* executing */);
@@ -130,15 +134,20 @@ namespace Narvalo.Reliability
 
         protected virtual void Close(bool executing)
         {
-            if (executing && CurrentState != CircuitBreakerState.HalfOpen)
+            if (executing)
             {
-                throw new InvalidOperationException();
+                Check.Condition(IsHalfOpen, "XXX");
             }
+            //if (executing && !IsHalfOpen)
+            //{
+            //    // REVIEW: ReliabilityException?
+            //    throw new InvalidOperationException("XXX");
+            //}
 
             SetState(CircuitBreakerState.Closed);
 
             // FIXME: trop tard si SetState échoue.
-            if (AutoReset)
+            if (executing && AutoReset)
             {
                 StopTimer();
             }
@@ -146,15 +155,20 @@ namespace Narvalo.Reliability
 
         protected virtual void HalfOpen(bool executing)
         {
-            if (executing && CurrentState != CircuitBreakerState.Open)
+            if (executing)
             {
-                throw new InvalidOperationException("XXX");
+                Check.Condition(IsOpen, "XXX");
             }
+            //if (executing && !IsOpen)
+            //{
+            //    // REVIEW: ReliabilityException?
+            //    throw new InvalidOperationException("XXX");
+            //}
 
             SetState(CircuitBreakerState.HalfOpen);
 
             // FIXME: trop tard si SetState échoue.
-            if (AutoReset)
+            if (executing && AutoReset)
             {
                 StopTimer();
             }
@@ -162,10 +176,15 @@ namespace Narvalo.Reliability
 
         protected virtual void Trip(bool executing)
         {
-            if (executing && CurrentState == CircuitBreakerState.Open)
+            if (executing)
             {
-                throw new InvalidOperationException();
+                Check.Condition(!IsOpen, "XXX");
             }
+            //if (executing && IsOpen)
+            //{
+            //    // REVIEW: ReliabilityException?
+            //    throw new InvalidOperationException("XXX");
+            //}
 
             SetState(CircuitBreakerState.Open);
 
@@ -184,12 +203,12 @@ namespace Narvalo.Reliability
         #region Timer.
 
         // http://msdn.microsoft.com/en-us/magazine/cc164015.aspx
-        protected Timer InitializeTimer()
+        protected Timer CreateTimer()
         {
             Contract.Ensures(Contract.Result<Timer>() != null);
 
-            // On crée un timer mais on ne le démarre pas encore.
-            // FIXME: ré-entrance
+            // Create a timer but does not start it yet.
+            // FIXME: reentrancy?
             var resetTimer = new Timer(
                 (state) =>
                 {
@@ -198,19 +217,14 @@ namespace Narvalo.Reliability
                         HalfOpen(true /* executing */);
                     }
                 },
-                null,
+                null /* state */,
                 Timeout.Infinite,
                 Timeout.Infinite);
-
-            ////using Timer = System.Timers.Timer;
-            ////_timer = new Timer(ResetInterval.TotalMilliseconds);
-            ////_timer.Elapsed += (object sender, ElapsedEventArgs e) => {
-            ////    if (IsOpen) HalfOpen(true /* executing */);
-            ////};
 
             return resetTimer;
         }
 
+        // NB: Timeout.Infinite = new TimeSpan(-1L)
         protected void StartTimer() => _resetTimer.Change(ResetInterval, new TimeSpan(-1L));
 
         protected void StopTimer() => _resetTimer.Change(Timeout.Infinite, Timeout.Infinite);
@@ -222,11 +236,11 @@ namespace Narvalo.Reliability
             if (FailureCount < Threshold)
             {
                 // Tant qu'on n'a pas atteint le seuil maximum d'erreurs, on incrémente le compteur.
-                FailureCount++;
+                Interlocked.Increment(ref _failureCount);
+                //FailureCount++;
             }
 
-            bool openCircuit = CurrentState == CircuitBreakerState.HalfOpen
-                || (CurrentState == CircuitBreakerState.Closed && FailureCount >= Threshold);
+            bool openCircuit = IsHalfOpen || (IsClosed && FailureCount >= Threshold);
 
             if (openCircuit)
             {
@@ -238,7 +252,8 @@ namespace Narvalo.Reliability
         {
             if (FailureCount > 0)
             {
-                FailureCount--;
+                //FailureCount--;
+                Interlocked.Decrement(ref _failureCount);
             }
 
             if (IsHalfOpen)
@@ -249,7 +264,7 @@ namespace Narvalo.Reliability
 
         private void SetState(CircuitBreakerState newState)
         {
-            var lastState = CurrentState;
+            CircuitBreakerState lastState = CurrentState;
             CurrentState = newState;
             OnStateChanged(new CircuitBreakerStateChangedEventArgs(lastState, newState));
         }

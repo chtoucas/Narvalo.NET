@@ -3,7 +3,6 @@
 namespace Narvalo.Reliability
 {
     using System;
-    //using System.Collections.Generic;
     using System.Runtime.Serialization;
 
     using Xunit;
@@ -12,14 +11,14 @@ namespace Narvalo.Reliability
     // http://www.codeproject.com/Articles/37549/CLR-Injection-Runtime-Method-Replacer
     // http://blog.stevensanderson.com/2009/08/24/writing-great-unit-tests-best-and-worst-practises/
 
-    public partial class CircuitBreakerFacts
+    public static partial class CircuitBreakerFacts
     {
-        private static CircuitBreaker NewCircuitBreaker()
+        private static CircuitBreaker CreateCircuitBreaker()
         {
             return new CircuitBreaker(1 /* threshold */, TimeSpan.Zero);
         }
 
-        //private static CircuitBreaker NewCircuitBreaker(int threshold)
+        //private static CircuitBreaker CreateCircuitBreaker(int threshold)
         //{
         //    return new CircuitBreaker(threshold, TimeSpan.MaxValue);
         //}
@@ -39,19 +38,17 @@ namespace Narvalo.Reliability
         }
     }
 
-    public partial class CircuitBreakerFacts
+    public static partial class CircuitBreakerFacts
     {
+        #region CanInvoke
 
 #if !NO_INTERNALS_VISIBLE_TO // White-box tests.
-#endif
-
-        #region CanInvoke()
 
         [Fact]
-        public void CanInvoke_ReturnsTrue_WhenClosed()
+        public static void CanInvoke_ReturnsTrue_WhenClosed()
         {
             // Arrange
-            var cb = NewCircuitBreaker();
+            var cb = CreateCircuitBreaker();
 
             // Act
             cb.Close();
@@ -61,10 +58,10 @@ namespace Narvalo.Reliability
         }
 
         [Fact]
-        public void CanInvoke_ReturnsTrue_WhenHalfOpen()
+        public static void CanInvoke_ReturnsTrue_WhenHalfOpen()
         {
             // Arrange
-            var cb = NewCircuitBreaker();
+            var cb = CreateCircuitBreaker();
 
             // Act
             cb.HalfOpen();
@@ -73,18 +70,20 @@ namespace Narvalo.Reliability
             Assert.True(cb.CanInvoke);
         }
 
-        //[Fact]
-        //public void CanInvoke_ReturnsFalse_WhenOpen()
-        //{
-        //    // Arrange
-        //    var cb = NewCircuitBreaker();
+        [Fact]
+        public static void CanInvoke_ReturnsFalse_WhenOpen()
+        {
+            // Arrange
+            var cb = CreateCircuitBreaker();
 
-        //    // Act
-        //    cb.Open();
+            // Act
+            cb.Trip();
 
-        //    // Assert
-        //    Assert.False(cb.CanInvoke);
-        //}
+            // Assert
+            Assert.False(cb.CanInvoke);
+        }
+
+#endif
 
         #endregion
 
@@ -93,10 +92,10 @@ namespace Narvalo.Reliability
         #region Closed circuit
 
         [Fact]
-        public void Invoke_WhenClosed_InvokesOperation()
+        public static void Invoke_WhenClosed_InvokesOperation()
         {
             // Arrange
-            var cb = NewCircuitBreaker();
+            var cb = CreateCircuitBreaker();
             bool wasCalled = false;
             Action op = () => { wasCalled = true; };
 
@@ -108,10 +107,10 @@ namespace Narvalo.Reliability
         }
 
         [Fact]
-        public void Invoke_ActionWithCapturedVariable_WhenClosed_AssignsCapturedVariable()
+        public static void Invoke_AssignsCapturedVariable_WhenClosed()
         {
             // Arrange
-            var cb = NewCircuitBreaker();
+            var cb = CreateCircuitBreaker();
             int expectedValue = 1;
             int? result = null;
             Action op = () => { result = expectedValue; };
@@ -124,10 +123,10 @@ namespace Narvalo.Reliability
         }
 
         [Fact]
-        public void Invoke_SuccessfulAction_WhenClosed_DoesNotChangeState()
+        public static void Invoke_DoesNotChangeState_ForSuccessfulAction_WhenClosed()
         {
             // Arrange
-            var cb = NewCircuitBreaker();
+            var cb = CreateCircuitBreaker();
             Action op = () => { };
 
             // Act
@@ -138,10 +137,10 @@ namespace Narvalo.Reliability
         }
 
         [Fact]
-        public void Invoke_FaultyAction_WhenClosed_Rethrows()
+        public static void Invoke_Rethrows_ForFaultyAction_WhenClosed()
         {
             // Arrange
-            var cb = NewCircuitBreaker();
+            var cb = CreateCircuitBreaker();
             Action op = () => { throw new RetryableException(); };
 
             // Act & Assert
@@ -153,7 +152,7 @@ namespace Narvalo.Reliability
         #region Open circuit
 
         //[Fact]
-        //public void Invoke_WhenOpen_DoesNotInvokeOperation()
+        //public static void Invoke_WhenOpen_DoesNotInvokeOperation()
         //{
         //    // Arrange
         //    var cb = NewCircuitBreaker();
@@ -170,7 +169,7 @@ namespace Narvalo.Reliability
         //}
 
         //[Fact]
-        //public void Invoke_WhenOpen_ThrowsInvalidOperationException()
+        //public static void Invoke_WhenOpen_ThrowsInvalidOperationException()
         //{
         //    // Arrange
         //    var cb = NewCircuitBreaker();
@@ -191,7 +190,7 @@ namespace Narvalo.Reliability
         //[TestCase("bad bad good", Result = 80d)]
         //[TestCase("bad bad good good", Result = 100d)]
         //[TestCase("bad good bad good", Result = 100d)]
-        //public double ServiceLevel(string callPattern) {
+        //public static double ServiceLevel(string callPattern) {
         //    var cb = new CircuitBreaker(5, TimeSpan.FromMilliseconds(60));
 
         //    foreach (var call in callPattern.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)) {

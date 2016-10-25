@@ -6,7 +6,7 @@ namespace Narvalo.Reliability
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
-    public partial class RetrySentinelFacts
+    public static partial class RetrySentinelFacts
     {
         private static readonly IList<Type> s_RetryableExceptions
             = new List<Type>(1) { typeof(RetryableException), };
