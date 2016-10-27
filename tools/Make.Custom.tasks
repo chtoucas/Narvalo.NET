@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- Define the CodeTaskFactoryAssemblyFile property. -->
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(MSBuildToolsVersion)' != '14.0' ">
     <CodeTaskFactoryAssemblyFile>$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll</CodeTaskFactoryAssemblyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(MSBuildToolsVersion)' == '14.0' ">
+    <CodeTaskFactoryAssemblyFile>$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll</CodeTaskFactoryAssemblyFile>
   </PropertyGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)Package.Narvalo.targets" />
@@ -35,7 +38,7 @@ try {
       .Replace("$version$", Version)
       .Replace("$description$", Description)
       .Replace("$files$", Files)
-      
+
       .Replace("$title$", String.IsNullOrWhiteSpace(Title) ? String.Empty : "<title>" + Title + "</title>")
       .Replace("$summary$", String.IsNullOrWhiteSpace(Summary) ? String.Empty : "<summary>" + Summary + "</summary>")
       .Replace("$releaseNotes$", String.IsNullOrWhiteSpace(ReleaseNotes) ? String.Empty : "<releaseNotes>" + ReleaseNotes + "</releaseNotes>")
@@ -44,7 +47,7 @@ try {
       .Replace("$dependencies$", String.IsNullOrWhiteSpace(Dependencies) ? String.Empty : "<dependencies>" + Dependencies + "</dependencies>")
       .Replace("$references$", String.IsNullOrWhiteSpace(References) ? String.Empty : References)
       ;
-    
+
     File.WriteAllText(OutFile, nuspec);
 }
 catch (IOException ex) {
@@ -79,7 +82,7 @@ int metadataIndex = version.LastIndexOf("+");
 if (metadataIndex > 0) { version = version.Remove(metadataIndex); }
 
 if (!Retail) {
-    // In non-retail mode, we also remove the prerelease label since it is 
+    // In non-retail mode, we also remove the prerelease label since it is
     // dynamically replaced by a timestamp in Make.CustomAfter.targets.
     int prereleaseIndex = version.LastIndexOf("-");
     if (prereleaseIndex > 0) { version = version.Remove(prereleaseIndex); }
@@ -115,14 +118,14 @@ using (var reader = XmlReader.Create(Config)) {
   var rootElement = XElement.Load(reader, LoadOptions.None);
 
   var packages = rootElement.Elements("package");
-  
+
   foreach (var package in packages) {
     Dependencies += String.Format(
       "\n<dependency id=\"{0}\" version=\"{1}\" />",
-      package.Attribute("id").Value, 
-      package.Attribute("version").Value); 
+      package.Attribute("id").Value,
+      package.Attribute("version").Value);
   }
-  
+
   if (Dependencies.Length != 0) {
     Dependencies += "\n    ";
   }
