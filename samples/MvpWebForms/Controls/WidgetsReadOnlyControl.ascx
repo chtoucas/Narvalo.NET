@@ -23,7 +23,7 @@
   </p>
  </fieldset>
  <div class="results">
-  <asp:DetailsView runat="server" 
+  <asp:DetailsView runat="server"
    DataSource="<%# Model.Widgets %>"
    EmptyDataText="No matching results found"
    Visible="<%# Model.ShowResult %>" />
