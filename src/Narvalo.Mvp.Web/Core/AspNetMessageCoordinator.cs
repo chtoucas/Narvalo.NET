@@ -17,7 +17,7 @@ namespace Narvalo.Mvp.Web.Core
     // activated during the same HTTP request.
     // When a message is published, it will be handled by all present AND future handlers.
     // You then do not have to worry about the order of the pub/sub events.
-    // A good rule of thumb is to subscribe or publish messages during the Load event. 
+    // A good rule of thumb is to subscribe or publish messages during the Load event.
     // NB: After pre-render completes, the message bus is closed.
     public sealed class AspNetMessageCoordinator : IMessageCoordinator
     {
@@ -121,7 +121,7 @@ namespace Narvalo.Mvp.Web.Core
             foreach (var type in neverReceivedMessages)
             {
                 Trace.TraceWarning(
-                    "[AspNetMessageCoordinator] You published a message of type '{1}' but you did not registered any handler for it.",
+                    "[AspNetMessageCoordinator] You published a message of type '{0}' but you did not registered any handler for it.",
                     type.FullName);
             }
         }
