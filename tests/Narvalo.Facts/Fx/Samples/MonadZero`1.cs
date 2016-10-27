@@ -31,7 +31,7 @@ namespace Narvalo.Fx.Samples
             Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static MonadZero<T> μ(MonadZero<MonadZero<T>> square)
         {
-            return square.Bind(_ => _);
+            return square.Bind(Stubs<MonadZero<T>>.Identity);
         }
     }
 }

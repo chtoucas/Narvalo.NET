@@ -37,7 +37,7 @@ namespace Narvalo.Fx.Samples
             Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static MonadPlus<T> μ(MonadPlus<MonadPlus<T>> square)
         {
-            return square.Bind(_ => _);
+            return square.Bind(Stubs<MonadPlus<T>>.Identity);
         }
     }
 }

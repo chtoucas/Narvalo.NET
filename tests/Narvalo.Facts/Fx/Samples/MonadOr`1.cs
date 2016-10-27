@@ -37,7 +37,7 @@ namespace Narvalo.Fx.Samples
             Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static MonadOr<T> μ(MonadOr<MonadOr<T>> square)
         {
-            return square.Bind(_ => _);
+            return square.Bind(Stubs<MonadOr<T>>.Identity);
         }
     }
 }
