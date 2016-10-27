@@ -1,3 +1,18 @@
+Migration to VS2015
+===================
+
+- ToolsVersion="14.0" everywhere.
+- Disabled StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
+- Migrate from StyleCop to the appropriate source analyzer.
+- T4 templates? (see Make.CustomAfter.targets)
+- MvpWebForms sample project: OutputPath is wrong (temporary fix: override OutputPath
+  property in project file). Other strange thing, MvpWebForms.dll.config is created.
+  LocalDB requires SQL Server Express.
+- Add a shared project for Narvalo.T4 
+- Disabled code contracts dans PSakefile: '/p:SkipCodeContractsReferenceAssembly=true'
+  dans _CI-InitializeVariables et _Package-InitializeVariables
+    
+
 Issues & Roadmap
 ================
 
@@ -115,12 +130,6 @@ Infrastructure
 --------------
 
 - Publishing Narvalo.Mvp should fail if we do not publish Narvalo.Core?
-
-### VS2015
-- ToolsVersion="14.0" everywhere.
-- Set `StyleCopEnabled` to `false` (see `Narvalo.Reliability.props).
-- Migrate from StyleCop to the appropriate source analyzer.
-- T4 templates? (see Make.CustomAfter.targets)
 
 ### Continuous Integration
 
