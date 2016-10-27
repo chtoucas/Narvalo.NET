@@ -8,7 +8,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
 
     /// <summary>
-    /// Represents the (possibly empty) sum of two types. An instance of the 
+    /// Represents the (possibly empty) sum of two types. An instance of the
     /// <see cref="Switch{TLeft, TRight}"/> class contains either a <c>TLeft</c>
     /// value or a <c>TRight</c> value or nothing.
     /// </summary>
@@ -189,7 +189,7 @@ namespace Narvalo.Fx
                 return new Switch<TLeft, TResult>.Left_(_value);
             }
 
-            /// <inheritdoc cref="Switch{TResult, TRight}.Map{TResult}(Func{TLeft, TResult})" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Map{TResult}(Func{TLeft, TResult})" />
             public override Switch<TResult, TRight> Map<TResult>(Func<TLeft, TResult> leftSelector)
             {
                 Require.NotNull(leftSelector, "leftSelector");
@@ -197,7 +197,7 @@ namespace Narvalo.Fx
                 return Switch<TResult, TRight>.η(leftSelector.Invoke(_value));
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TResult}.Map{TResult}(Func{TRight, TResult})" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Map{TResult}(Func{TRight, TResult})" />
             public override Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector)
             {
                 return new Switch<TLeft, TResult>.Left_(_value);
@@ -299,13 +299,13 @@ namespace Narvalo.Fx
                 return rightSelectorM.Invoke(_value);
             }
 
-            /// <inheritdoc cref="Switch{TResult, TRight}.Map{TResult}(Func{TLeft, TResult})" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Map{TResult}(Func{TLeft, TResult})" />
             public override Switch<TResult, TRight> Map<TResult>(Func<TLeft, TResult> leftSelector)
             {
                 return new Switch<TResult, TRight>.Right_(_value);
             }
 
-            /// <inheritdoc cref="Switch{TLeft, TResult}.Map{TResult}(Func{TRight, TResult})" />
+            /// <inheritdoc cref="Switch{TLeft, TRight}.Map{TResult}(Func{TRight, TResult})" />
             public override Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector)
             {
                 Require.NotNull(rightSelector, "rightSelector");
@@ -463,7 +463,7 @@ namespace Narvalo.Fx
             return default(Switch<TRight, TLeft>);
         }
 
-        public override Maybe<TLeft> LeftOrNone() 
+        public override Maybe<TLeft> LeftOrNone()
         {
             return default(Maybe<TLeft>);
         }
