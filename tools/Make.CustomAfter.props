@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0"
+<Project ToolsVersion="14.0"
          InitialTargets="__InitialMakeCustomAfterProps"
          TreatAsLocalProperty="BuildGeneratedVersion"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -65,7 +65,7 @@
     <!-- Code Contracts background checking is not available in terminal. -->
     <CodeContractsRunInBackground>false</CodeContractsRunInBackground>
 
-    <!-- Original documentation file (before the Code Contracts transformation). 
+    <!-- Original documentation file (before the Code Contracts transformation).
          NB: This is not something that you can change. Only defined to make
          things clearer. -->
     <OriginalDocumentationFile>$(OutDir)$(AssemblyName).xml.old</OriginalDocumentationFile>

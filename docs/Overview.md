@@ -77,7 +77,7 @@ Edit the project file:
 A typical project file should then look like this:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ProjectGuid>{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}</ProjectGuid>
@@ -106,7 +106,7 @@ Test and sample projects do not need a version property file.
 Create a version property file: `{ProjectName}.Version.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(RepositorySettingsDir)Narvalo.CurrentVersion.props" />
 </Project>
 ```
@@ -114,7 +114,7 @@ Create a version property file: `{ProjectName}.Version.props`:
 When you want to override the default version properties:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MajorVersion>1</MajorVersion>
     <MinorVersion>2</MinorVersion>
@@ -150,7 +150,7 @@ using System.Runtime.CompilerServices;
 Create a property file `{ProjectName}.props` with the following content (this is just a sample):
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Custom.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
@@ -199,7 +199,7 @@ To create a test project use the "Unit Test Project" template from Visual Studio
 Add the following content to you local customization property file `{ProjectName}.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(RepositorySettingsDir)Tests.props" />
 </Project>
 ```
@@ -211,7 +211,7 @@ This has two consequences:
 Add the following content to you local customization property file `{ProjectName}.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(RepositorySettingsDir)Samples.props" />
 </Project>
 ```

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- This file defines MSBuild properties shared among Make.* files. -->
 
   <!-- Import shared properties, if not already done. -->
@@ -11,12 +11,12 @@
     <!-- Right now, I don't see any circumstances under which we would need
          to override the default value. Does not have any effect on some projects
          (e.g. test projects override this property). -->
-    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">12.0</VisualStudioVersion>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">14.0</VisualStudioVersion>
   </PropertyGroup>
 
   <!-- Define common Narvalo project options. -->
   <PropertyGroup>
-    <!-- If true, dynamically generate the assemblies' version. Default to true. 
+    <!-- If true, dynamically generate the assemblies' version. Default to true.
          Beware, a newly generated assembly version forces a fresh build.
          For incremental batching to work be sure to use: BuildGeneratedVersion=false. -->
     <BuildGeneratedVersion Condition=" '$(BuildGeneratedVersion)' != 'false' ">true</BuildGeneratedVersion>

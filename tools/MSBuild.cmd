@@ -8,10 +8,10 @@
 :: Uncomment the next line to remove any limitation on property functions.
 @rem @set MSBUILDENABLEALLPROPERTYFUNCTIONS=1
 
-@set MSBuild="%ProgramFiles(x86)%\MSBuild\12.0\Bin\MSBuild.exe"
+@set MSBuild="%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe"
 @if exist %MSBuild% ( @goto Execute )
 
-@set MSBuild="%ProgramFiles%\MSBuild\12.0\Bin\MSBuild.exe"
+@set MSBuild="%ProgramFiles%\MSBuild\14.0\Bin\MSBuild.exe"
 @if exist %MSBuild% ( @goto Execute )
 
 @if defined VS120COMNTOOLS (

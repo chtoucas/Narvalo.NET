@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0"
+<Project ToolsVersion="14.0"
          InitialTargets="__InitializeMakeCustomAfterTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- This file is injected at the end of Narvalo.Common.targets by Make.proj. -->

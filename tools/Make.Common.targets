@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Project ToolsVersion="12.0"
+<Project ToolsVersion="14.0"
          DefaultTargets="Build"
          InitialTargets="__InitializeMakeCommonTargets"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -10,7 +10,7 @@
 
   <!-- Import common tasks. -->
   <!--<Import Project="$(MSBuildThisFileDirectory)Make.Common.tasks" />-->
-  
+
   <!-- Import Narvalo tasks. -->
   <Import Project="$(MSBuildThisFileDirectory)Package.Narvalo.targets" />
 
@@ -81,7 +81,7 @@
 
   <!-- PEVerify target. -->
   <Target Name="PEVerify">
-    <!-- WARNING: Child PEVerify target is a non-standard MSBuild target. 
+    <!-- WARNING: Child PEVerify target is a non-standard MSBuild target.
          The projects must have imported Narvalo.Common.targets. -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"
@@ -92,7 +92,7 @@
 
   <!-- SecAnnotate target. -->
   <Target Name="SecAnnotate">
-    <!-- WARNING: Child SecAnnotate target is a non-standard MSBuild target. 
+    <!-- WARNING: Child SecAnnotate target is a non-standard MSBuild target.
          The projects must have imported Narvalo.Common.targets. -->
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="$(BuildProperties)"

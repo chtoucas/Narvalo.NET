@@ -404,7 +404,7 @@ Task _MyGet-Publish `
     # Cf. http://sedodream.com/2012/08/19/VisualStudioProjectCompatabilityAndVisualStudioVersion.aspx.
     MSBuild $MyGet_Project $Opts `
         '/t:Rebuild',
-        '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=12.0'
+        '/p:Configuration=Release;PublishProfile=NarvaloOrg;DeployOnBuild=true;VisualStudioVersion=14.0'
 }
 
 Task _MyGet-RestorePackages `
@@ -572,15 +572,16 @@ Task Environment `
     # >   Copyright (C) Microsoft Corporation. Tous droits réservés.
     # >
     # >   12.0.31101.0
-    $infos = (MSBuild '/version') -Split "`n", 4
+	# Since VS 2015, we no longer get the framework version
+    $infos = (MSBuild '/version') -Split "`n", 3
 
-    $msbuild = $infos[4]
-    $netFramework = ($infos[1] -Split ' ', 5)[4].TrimEnd(']')
+    $msbuild = $infos[3]
+    #$netFramework = ($infos[1] -Split ' ', 5)[4].TrimEnd(']')
     $psakeFramework = $psake.context.peek().config.framework
     $psakeVersion = $psake.version
 
     Write-Host "  MSBuild         v$msbuild"
-    Write-Host "  .NET Framework  v$netFramework"
+    #Write-Host "  .NET Framework  v$netFramework"
     Write-Host "  PSake           v$psakeVersion"
     Write-Host "  PSake Framework v$psakeFramework"
 }
