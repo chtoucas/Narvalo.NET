@@ -4,6 +4,7 @@ namespace Narvalo.Reliability
 {
     using System;
 
+    // FIXME: Thread-safety for Func.
     public sealed class ReliabilityWrapper
     {
         private readonly IReliabilitySentinel _sentinel;
