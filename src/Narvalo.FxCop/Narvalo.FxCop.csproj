@@ -30,7 +30,7 @@
     <Compile Include="IntrospectionRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="..\..\Narvalo.Common.props" />
+  <Import Project="..\..\tools\Narvalo.Common.props" />
   <PropertyGroup>
     <!-- In order to reference FxCopSdk, we must force target the x86 architecture. -->
     <PlatformTarget>x86</PlatformTarget>
