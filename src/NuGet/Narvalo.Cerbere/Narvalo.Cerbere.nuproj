@@ -10,7 +10,7 @@
 
       This is a portable class library targeting Profile259.
 
-      A code contracts reference assembly is included if you ever need it.
+      <!--A code contracts reference assembly is included if you ever need it.-->
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Require, Assert, Guard, Check, Validate, CodeContracts, Contracts</NuTags>
@@ -29,10 +29,12 @@
 <file src="Narvalo.Cerbere.dll" target="lib\$(Profile259)\" />
 <file src="Narvalo.Cerbere.pdb" target="lib\$(Profile259)\" />
 <file src="Narvalo.Cerbere.xml" target="lib\$(Profile259)\" />
-<file src="CodeContracts\Narvalo.Cerbere.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
-<file src="CodeContracts\Narvalo.Cerbere.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
 <file src="fr\Narvalo.Cerbere.resources.dll" target="lib\$(Profile259)\fr\" />
       ]]>
+      <!--
+<file src="CodeContracts\Narvalo.Cerbere.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Cerbere.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
+      -->
     </NuFiles>
   </PropertyGroup>
 </Project>

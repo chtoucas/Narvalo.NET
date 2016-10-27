@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(RepositorySettingsDir)FrameworkProfiles.props" />
-  
+
   <PropertyGroup>
     <NuId>Narvalo.Finance</NuId>
     <NuTitle>Narvalo.Finance</NuTitle>
@@ -10,9 +10,9 @@
       This package provides various financial utilities: Currency (ISO 4217), Money types, BIC (ISO 9362), IBAN &amp; BBAN.
 
       This is a portable class library targeting Profile111.
-
-      A code contracts reference assembly is included if you ever need it.
       ]]>
+
+      <!--A code contracts reference assembly is included if you ever need it.-->
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Currency, Money, BIC, IBAN, BBAN</NuTags>
@@ -31,10 +31,12 @@
 <file src="Narvalo.Finance.dll" target="lib\$(Profile111)\" />
 <file src="Narvalo.Finance.pdb" target="lib\$(Profile111)\" />
 <file src="Narvalo.Finance.xml" target="lib\$(Profile111)\" />
-<file src="CodeContracts\Narvalo.Finance.Contracts.dll" target="lib\$(Profile111)\CodeContracts\" />
-<file src="CodeContracts\Narvalo.Finance.Contracts.xml" target="lib\$(Profile111)\CodeContracts\" />
 <file src="fr\Narvalo.Finance.resources.dll" target="lib\$(Profile111)\fr\" />
       ]]>
+      <!--
+<file src="CodeContracts\Narvalo.Finance.Contracts.dll" target="lib\$(Profile111)\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Finance.Contracts.xml" target="lib\$(Profile111)\CodeContracts\" />
+      -->
     </NuFiles>
   </PropertyGroup>
 </Project>

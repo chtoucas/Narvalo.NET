@@ -208,6 +208,7 @@ Task _CI-InitializeVariables `
     # - Do not sign assemblies
     # - Do not skip the generation of the Code Contracts reference assembly
     # - Leak internals to enable all white-box tests.
+    # FIXME: CodeContracts disabled.
     $script:CI_Props = `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=false',
@@ -272,6 +273,7 @@ Task _Package-InitializeVariables `
     # - Sign assemblies
     # - Do not skip the generation of the Code Contracts reference assembly
     # - Unconditionally hide internals (implies no white-box testing)
+    # FIXME: CodeContracts disabled.
     $script:Package_Props = `
         '/p:Configuration=Release',
         '/p:BuildGeneratedVersion=true',

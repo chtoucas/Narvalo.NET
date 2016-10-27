@@ -83,7 +83,7 @@
 
     <Error Text="You MUST create a version file to generate the assembly versions: $(VersionFile)."
            Condition=" '$(VersionExists)' != 'true' " />
-    <!-- To get last commit hash we could use https://github.com/loresoft/msbuildtasks. 
+    <!-- To get last commit hash we could use https://github.com/loresoft/msbuildtasks.
          NB: MSBuild makes it way too hard to get the console output from an executable. -->
     <Message Text="Won't be able to add the git commit hash to the assembly version information."
              Importance="low"
@@ -238,7 +238,7 @@ using System.Reflection;
     <PropertyGroup>
       <!-- WARNING: The directory path must not end with a slash.
            http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab
-           https://github.com/autofac/Autofac/blob/v3.5.2/default.proj 
+           https://github.com/autofac/Autofac/blob/v3.5.2/default.proj
       -->
       <_PortableReferenceDirectory>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETPortable\$(TargetFrameworkVersion)</_PortableReferenceDirectory>
       <_SecAnnotateReferenceDirectory Condition=" '$(TargetFrameworkProfile.StartsWith(Profile))' == 'true' ">/referencedir:"$(_PortableReferenceDirectory)"</_SecAnnotateReferenceDirectory>
@@ -253,12 +253,12 @@ using System.Reflection;
     </PropertyGroup>
 
     <!-- WARNING: The /verify switch disable output and other things. From the documentation:
-         Verifies only that an assembly's annotations are correct; does not attempt to make multiple passes 
+         Verifies only that an assembly's annotations are correct; does not attempt to make multiple passes
          to find all required annotations if the assembly does not verify. -->
     <!-- NB: Available options:
-         /maximumpasses:1 to limit the number of passes. 
-         /includesignatures for detail signatures. 
-         /showstatistics 
+         /maximumpasses:1 to limit the number of passes.
+         /includesignatures for detail signatures.
+         /showstatistics
          /verbose -->
     <Exec Command="&quot;$(SecAnnotateCommand)&quot; $(_ForceTransparency) /verbose /showstatistics $(_SecAnnotateReferenceDirectory) /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
           WorkingDirectory="$(OutDir)"
@@ -305,7 +305,8 @@ using System.Reflection;
     <!-- The package creation will fail anyway, but better diagnose an invalid configuration before. -->
     <Error Text="You MUST NOT use 'SkipDocumentation=true' to create a NuGet package."
            Condition=" '$(SkipDocumentation)' == 'true' " />
-    <Error Text="You MUST NOT use 'SkipCodeContractsReferenceAssembly=true' to create a NuGet package."
+    <!-- FIXME: CodeContracts disabled. -->
+    <Warning Text="You MUST NOT use 'SkipCodeContractsReferenceAssembly=true' to create a NuGet package."
            Condition=" '$(SkipCodeContractsReferenceAssembly)' == 'true' " />
 
     <WriteNuspec TemplateFile="$(RepositorySettingsDir)Template.nuspec"
