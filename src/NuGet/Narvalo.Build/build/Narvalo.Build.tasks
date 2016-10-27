@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <NarvaloAssemblyFile>$(MSBuildThisFileDirectory)..\tools\Narvalo.Build.dll</NarvaloAssemblyFile>
+  </PropertyGroup>
+
+  <UsingTask AssemblyFile="$(NarvaloAssemblyFile)" TaskName="Narvalo.Build.DownloadFile" />
+  <UsingTask AssemblyFile="$(NarvaloAssemblyFile)" TaskName="Narvalo.Build.MergeFiles" />
+
+  <UsingTask AssemblyFile="$(NarvaloAssemblyFile)" TaskName="Narvalo.Build.Versioning.GenerateBuildAndRevisionNumbers" />
+  <UsingTask AssemblyFile="$(NarvaloAssemblyFile)" TaskName="Narvalo.Build.Versioning.GenerateBuildStamp" />
+  <UsingTask AssemblyFile="$(NarvaloAssemblyFile)" TaskName="Narvalo.Build.Versioning.ValidatePrereleaseLabel" />
+  <UsingTask AssemblyFile="$(NarvaloAssemblyFile)" TaskName="Narvalo.Build.Versioning.ValidateVersionNumber" />
+  
+  <UsingTask AssemblyFile="$(NarvaloAssemblyFile)" TaskName="Narvalo.Build.JavaTasks.ClosureCompiler" />
+  <UsingTask AssemblyFile="$(NarvaloAssemblyFile)" TaskName="Narvalo.Build.JavaTasks.JavaScriptYuiCompressor" />
+  <UsingTask AssemblyFile="$(NarvaloAssemblyFile)" TaskName="Narvalo.Build.JavaTasks.StyleSheetYuiCompressor" />
+</Project>
