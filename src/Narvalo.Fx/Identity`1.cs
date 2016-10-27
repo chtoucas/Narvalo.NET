@@ -28,21 +28,12 @@ namespace Narvalo.Fx
     /// </content>
     public partial struct Identity<T>
     {
-        public static bool operator ==(Identity<T> left, Identity<T> right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(Identity<T> left, Identity<T> right) => left.Equals(right);
 
-        public static bool operator !=(Identity<T> left, Identity<T> right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator !=(Identity<T> left, Identity<T> right) => !left.Equals(right);
 
         /// <inheritdoc cref="IEquatable{T}.Equals" />
-        public bool Equals(Identity<T> other)
-        {
-            return Equals(other, EqualityComparer<T>.Default);
-        }
+        public bool Equals(Identity<T> other) => Equals(other, EqualityComparer<T>.Default);
 
         public bool Equals(Identity<T> other, IEqualityComparer<T> comparer)
         {
@@ -56,10 +47,7 @@ namespace Narvalo.Fx
             return comparer.Equals(Value, other.Value);
         }
 
-        public bool Equals(T other)
-        {
-            return Equals(η(other), EqualityComparer<T>.Default);
-        }
+        public bool Equals(T other) => Equals(η(other), EqualityComparer<T>.Default);
 
         public bool Equals(T other, IEqualityComparer<T> comparer)
         {
@@ -68,10 +56,7 @@ namespace Narvalo.Fx
             return Equals(η(other), comparer);
         }
 
-        public override bool Equals(object obj)
-        {
-            return Equals(obj, EqualityComparer<T>.Default);
-        }
+        public override bool Equals(object obj) => Equals(obj, EqualityComparer<T>.Default);
 
         public bool Equals(object other, IEqualityComparer<T> comparer)
         {
@@ -91,10 +76,7 @@ namespace Narvalo.Fx
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
-        public override int GetHashCode()
-        {
-            return GetHashCode(EqualityComparer<T>.Default);
-        }
+        public override int GetHashCode() => GetHashCode(EqualityComparer<T>.Default);
 
         public int GetHashCode(IEqualityComparer<T> comparer)
         {
@@ -118,17 +100,11 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        internal static Identity<T> η(T value)
-        {
-            return new Identity<T>(value);
-        }
+        internal static Identity<T> η(T value) => new Identity<T>(value);
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        internal static Identity<T> μ(Identity<Identity<T>> square)
-        {
-            return square.Value;
-        }
+        internal static Identity<T> μ(Identity<Identity<T>> square) => square.Value;
     }
 
     /// <content>
@@ -145,16 +121,10 @@ namespace Narvalo.Fx
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        internal static T ε(Identity<T> monad)
-        {
-            return monad.Value;
-        }
+        internal static T ε(Identity<T> monad) => monad.Value;
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
-        internal static Identity<Identity<T>> δ(Identity<T> monad)
-        {
-            return new Identity<Identity<T>>(monad);
-        }
+        internal static Identity<Identity<T>> δ(Identity<T> monad) => new Identity<Identity<T>>(monad);
     }
 }

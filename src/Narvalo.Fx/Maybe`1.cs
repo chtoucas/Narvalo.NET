@@ -270,20 +270,14 @@ namespace Narvalo.Fx
         /// Obtains the enclosed value if any; otherwise the default value of the type T.
         /// </summary>
         /// <returns>The enclosed value if any; otherwise the default value of the type T.</returns>
-        public T ValueOrDefault()
-        {
-            return IsSome ? Value : default(T);
-        }
+        public T ValueOrDefault() => IsSome ? Value : default(T);
 
         /// <summary>
         /// Obtains the enclosed value if any; otherwise <paramref name="other"/>.
         /// </summary>
         /// <param name="other">A default value to be used if if there is no underlying value.</param>
         /// <returns>The enclosed value if any; otherwise <paramref name="other"/>.</returns>
-        public T ValueOrElse(T other)
-        {
-            return IsSome ? Value : other;
-        }
+        public T ValueOrElse(T other) => IsSome ? Value : other;
 
         public T ValueOrElse(Func<T> valueFactory)
         {
@@ -534,21 +528,12 @@ namespace Narvalo.Fx
     /// </content>
     public partial struct Maybe<T>
     {
-        public static bool operator ==(Maybe<T> left, Maybe<T> right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(Maybe<T> left, Maybe<T> right) => left.Equals(right);
 
-        public static bool operator !=(Maybe<T> left, Maybe<T> right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator !=(Maybe<T> left, Maybe<T> right) => !left.Equals(right);
 
         /// <inheritdoc cref="IEquatable{T}.Equals" />
-        public bool Equals(Maybe<T> other)
-        {
-            return Equals(other, EqualityComparer<T>.Default);
-        }
+        public bool Equals(Maybe<T> other) => Equals(other, EqualityComparer<T>.Default);
 
         public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
         {
@@ -563,10 +548,7 @@ namespace Narvalo.Fx
         }
 
         /// <inheritdoc cref="Object.Equals(Object)" />
-        public override bool Equals(object obj)
-        {
-            return Equals(obj, EqualityComparer<T>.Default);
-        }
+        public override bool Equals(object obj) => Equals(obj, EqualityComparer<T>.Default);
 
         public bool Equals(object other, IEqualityComparer<T> comparer)
         {
@@ -581,10 +563,7 @@ namespace Narvalo.Fx
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
-        public override int GetHashCode()
-        {
-            return GetHashCode(EqualityComparer<T>.Default);
-        }
+        public override int GetHashCode() => GetHashCode(EqualityComparer<T>.Default);
 
         public int GetHashCode(IEqualityComparer<T> comparer)
         {
@@ -610,17 +589,13 @@ namespace Narvalo.Fx
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
         internal static Maybe<T> η(T value)
-        {
-            return value != null ? new Maybe<T>(value) : Maybe<T>.None;
-        }
+            => value != null ? new Maybe<T>(value) : Maybe<T>.None;
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
-        {
-            return square.IsSome ? square.Value : Maybe<T>.None;
-        }
+            => square.IsSome ? square.Value : Maybe<T>.None;
     }
 
     /// <content>
@@ -635,9 +610,6 @@ namespace Narvalo.Fx
             Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static readonly Maybe<T> None = new Maybe<T>();
 
-        public Maybe<T> OrElse(Maybe<T> other)
-        {
-            return !IsSome ? other : this;
-        }
+        public Maybe<T> OrElse(Maybe<T> other) => !IsSome ? other : this;
     }
 }
