@@ -572,7 +572,7 @@ Task Environment `
     # >   Copyright (C) Microsoft Corporation. Tous droits réservés.
     # >
     # >   12.0.31101.0
-	# Since VS 2015, we no longer get the framework version
+    # Since VS 2015, we no longer get the framework version
     $infos = (MSBuild '/version') -Split "`n", 3
 
     $msbuild = $infos[3]

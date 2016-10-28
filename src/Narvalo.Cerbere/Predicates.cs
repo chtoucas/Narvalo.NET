@@ -28,7 +28,7 @@ namespace Narvalo
                 return false;
             }
 
-            var typeInfo = type.GetTypeInfo();
+            TypeInfo typeInfo = type.GetTypeInfo();
 
             return typeInfo != null
                 && typeInfo.IsEnum
