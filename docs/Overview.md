@@ -15,6 +15,22 @@ inside Visual Studio as smooth and swift as they can be.
 Prerequisites
 -------------
 
+- [Visual Studio Community 2015](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
+- PowerShell
+
+Optional components:
+- [Code Contracts extension for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970)
+- [.NET Portability Analyzer](https://visualstudiogallery.msdn.microsoft.com/1177943e-cfb7-4822-a8a6-e56c7905292b)
+  to help evaluate portability across .NET platforms.
+- .NET Framework 3.5 required. The MSBuild file for Code Contracts requires MSBuild v3.5.
+
+Components necessary to run the build scripts:
+- Code Contracts (see above).
+- Visual Extensibility Tools provides T4 integration in MSBuild.
+
+Prerequisites (Old)
+-------------------
+
 - [Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
 - PowerShell v3
 
@@ -51,7 +67,7 @@ Solutions
 ---------
 
 There are two solutions.
-- `Narvalo.sln` contains all projects. 
+- `Narvalo.sln` contains all projects.
 - `tools\Narvalo Maintenance.sln` contains documentation, settings, maintenance scripts and projects:
   * MyGet, private NuGet server.
   * NuGetAgent, a NuGet publishing tool.
@@ -172,14 +188,14 @@ We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
 - **Profile111** (.NET Framework 4.5, Windows 8, Windows Phone 8.1):
   * For MSBuild: `TargetFrameworkVersion=v4.5`.
   * Use this profile if you need `System.Collections.Concurrent.ConcurrentDictionary`.
-- **Profile151** (.NET Framework 4.5.1, Windows 8.1, Windows Phone 8.1): 
+- **Profile151** (.NET Framework 4.5.1, Windows 8.1, Windows Phone 8.1):
   * For MSBuild: `TargetFrameworkVersion=v4.6`.
   * Use this profile if you need `System.Threading.Timer`.
-- **Profile259** (.NET Framework 4.5, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8): 
+- **Profile259** (.NET Framework 4.5, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8):
   * For MSBuild: `TargetFrameworkVersion=v4.5`.
 
 See
-- Profiles used by the project: `etc/FrameworkProfiles.props`. 
+- Profiles used by the project: `etc/FrameworkProfiles.props`.
 - Locally available profiles: `C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\`.
 - Stephen Cleary's [blog post](http://blog.stephencleary.com/2012/05/framework-profiles-in-net.html),
   the list of [Portable Class Library profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview),
@@ -238,13 +254,13 @@ Remarks:
 - `etc\Loosy.SourceAnalysis` includes all rules except the documentation ones.
 - `etc\Empty.SourceAnalysis` disables all rules.
 - `etc\Strict.SourceAnalysis` enables all rules.
-- When documentation is completed, override the project properties as follows: 
+- When documentation is completed, override the project properties as follows:
 ```xml
 <PropertyGroup>
     <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Strict.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
 </PropertyGroup>
 ```
-  but we do not override the settings file `Settings.StyleCop` which implies that it 
+  but we do not override the settings file `Settings.StyleCop` which implies that it
   does not affect StyleCop when called from the menu.
 
 ### Code Contracts
@@ -272,7 +288,7 @@ tools\nuget.exe update self
 ### Visual Studio or Framework Updates
 
 After upgrading Visual Studio or MSBuild, do not forget to update the `VisualStudioVersion` property
-in both Make.Shared.props, PSakefile.ps1 and MSBuild.cmd. We might also need to update the 
+in both Make.Shared.props, PSakefile.ps1 and MSBuild.cmd. We might also need to update the
 `SDK40ToolsPath` property.
 
 Appendices

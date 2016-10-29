@@ -2,19 +2,19 @@ Migration to VS2015
 ===================
 
 - Disabled StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
-- Code contracts (disabled fro the time being)
+- Code contracts (disabled)
   NB: CC is unusable right now (the task depends on MSBuild v3.5)
     https://github.com/Microsoft/CodeContracts/issues/353
-  * PSakefile: '/p:SkipCodeContractsReferenceAssembly=true' instead of 
+  * PSakefile: '/p:SkipCodeContractsReferenceAssembly=true' instead of
     '/p:SkipCodeContractsReferenceAssembly=false'
     in _CI-InitializeVariables and _Package-InitializeVariables
   * Raise a warning instead of an error in Make.CustomAfter.targets if skipping CC
   * If no CC assembly is built, do not reference it in the NuGet specs.
-  
+
 - Analyzers:
   * Migrate from StyleCop to StyleCop.Analyzers
   * Improve DisableAnalyzersForVisualStudioBuild target in Narvalo.Common.targets
-- In PSakefile.ps1, do we need to change the VisualStudioVersion (_MyGet-Publish)? See also 
+- In PSakefile.ps1, do we need to change the VisualStudioVersion (_MyGet-Publish)? See also
   the Framework property at the beginning of the file.
 - For test projects, we should automatically add the TestCommon shared project.
     <Import Project="..\Narvalo.TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
