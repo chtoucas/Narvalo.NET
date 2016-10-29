@@ -186,12 +186,14 @@ namespace Narvalo
 
             if (value < minInclusive || value > maxInclusive)
             {
-                var message = Format.Resource(
-                    Strings_Cerbere.Enforce_NotInRange_Format,
+                throw new ArgumentOutOfRangeException(
                     parameterName,
-                    minInclusive,
-                    maxInclusive);
-                throw new ArgumentOutOfRangeException(parameterName, value, message);
+                    value,
+                    Format.Resource(
+                        Strings_Cerbere.Enforce_NotInRange_Format,
+                        parameterName,
+                        minInclusive,
+                        maxInclusive));
             }
 
             Contract.EndContractBlock();
@@ -215,12 +217,14 @@ namespace Narvalo
 
             if (value < minInclusive || value > maxInclusive)
             {
-                var message = Format.Resource(
-                    Strings_Cerbere.Enforce_NotInRange_Format,
+                throw new ArgumentOutOfRangeException(
                     parameterName,
-                    minInclusive,
-                    maxInclusive);
-                throw new ArgumentOutOfRangeException(parameterName, value, message);
+                    value,
+                    Format.Resource(
+                        Strings_Cerbere.Enforce_NotInRange_Format,
+                        parameterName,
+                        minInclusive,
+                        maxInclusive));
             }
 
             Contract.EndContractBlock();
