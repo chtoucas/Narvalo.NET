@@ -1,7 +1,6 @@
 Migration to VS2015
 ===================
 
-- ToolsVersion="14.0" everywhere.
 - Disabled StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
 - Code contracts (disabled fro the time being)
   NB: CC is unusable right now (the task depends on MSBuild v3.5)
@@ -11,14 +10,14 @@ Migration to VS2015
     in _CI-InitializeVariables and _Package-InitializeVariables
   * Raise a warning instead of an error in Make.CustomAfter.targets if skipping CC
   * If no CC assembly is built, do not reference it in the NuGet specs.
-
+  
+- Analyzers:
+  * Migrate from StyleCop to StyleCop.Analyzers
+  * Improve DisableAnalyzersForVisualStudioBuild target in Narvalo.Common.targets
 - In PSakefile.ps1, do we need to change the VisualStudioVersion (_MyGet-Publish)? See also 
   the Framework property at the beginning of the file.
 - For test projects, we should automatically add the TestCommon shared project.
     <Import Project="..\Narvalo.TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
-- Improve DisableAnalyzersForVisualStudioBuild target in Narvalo.Common.targets
-- Add the VS version to Narvalo.T4 assembly file?
-- Migrate from StyleCop to StyleCop.Analyzers
 - MvpWebForms sample project: OutputPath is wrong (temporary fix: override OutputPath
   property in project file). Other strange thing, MvpWebForms.dll.config is created.
   LocalDB requires SQL Server Express.

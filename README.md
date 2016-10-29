@@ -72,8 +72,8 @@ Narvalo.NET
 - **Narvalo.Reliability** features reliability patterns.
 - **Narvalo.PowerShell**, collection of PowerShell modules.
 - **Narvalo.T4**, custom T4 templates (for internal use only).
-- **Narvalo.StyleCop.CSharp**, custom StyleCop rules (for internal use only).
-- **Narvalo.FxCop**, custom FxCop rules.
+- **Narvalo.StyleCop**, custom StyleCop rules for C# (for internal use only).
+- **Narvalo.FxCop**, custom FxCop rules (to be removed).
 - **Narvalo.Brouillons**, a "fourre-tout" of unfinished or severely broken codes.
 - **Narvalo.Benchmarks**, the benchmarking project.
 
