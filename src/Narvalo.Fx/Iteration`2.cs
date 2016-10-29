@@ -57,7 +57,7 @@ namespace Narvalo.Fx
 
         public bool Equals(Iteration<TResult, TSource> other, IEqualityComparer comparer)
         {
-            Require.NotNull(comparer, "comparer");
+            Require.NotNull(comparer, nameof(comparer));
 
             return comparer.Equals(Result, other.Result)
                 && comparer.Equals(Next, other.Next);
@@ -71,10 +71,10 @@ namespace Narvalo.Fx
 
         public int GetHashCode(IEqualityComparer comparer)
         {
-            Require.NotNull(comparer, "comparer");
+            Require.NotNull(comparer, nameof(comparer));
 
-            var h1 = comparer.GetHashCode(Result);
-            var h2 = comparer.GetHashCode(Next);
+            int h1 = Result != null ? comparer.GetHashCode(Result) : 0;
+            int h2 = Next != null ? comparer.GetHashCode(Next) : 0;
 
             return ((h1 << 5) + h1) ^ h2;
         }
