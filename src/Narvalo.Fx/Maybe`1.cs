@@ -497,7 +497,7 @@ namespace Narvalo.Fx
     /// </content>
     public partial struct Maybe<T>
     {
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0",
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-14-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public IEnumerable<T> ToEnumerable()
         {

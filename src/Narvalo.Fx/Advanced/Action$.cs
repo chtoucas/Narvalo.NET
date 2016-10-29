@@ -35,7 +35,7 @@ namespace Narvalo.Fx.Advanced
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-20-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static VoidOrError Catch<T1Exception, T2Exception>(this Action @this)
             where T1Exception : Exception
@@ -60,7 +60,7 @@ namespace Narvalo.Fx.Advanced
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-20-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception>(this Action @this)
             where T1Exception : Exception
@@ -87,7 +87,7 @@ namespace Narvalo.Fx.Advanced
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-23-0",
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-20-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static VoidOrError Catch<T1Exception, T2Exception, T3Exception, T4Exception>(this Action @this)
             where T1Exception : Exception
