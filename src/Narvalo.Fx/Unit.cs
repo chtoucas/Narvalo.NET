@@ -11,9 +11,9 @@ namespace Narvalo.Fx
         public static readonly Unit Single = new Unit();
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
-            Justification = "[Ignore] This method always returns the same result.")]
+            Justification = "[Intentionally] This method always returns 'true'.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
-            Justification = "[Ignore] This method always returns the same result.")]
+            Justification = "[Intentionally] This method always returns 'true'.")]
         public static bool operator ==(Unit left, Unit right)
         {
             Contract.Ensures(Contract.Result<bool>() == true);
@@ -22,9 +22,9 @@ namespace Narvalo.Fx
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "left",
-            Justification = "[Ignore] This method always returns the same result.")]
+            Justification = "[Intentionally] This method always returns 'false'.")]
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "right",
-            Justification = "[Ignore] This method always returns the same result.")]
+            Justification = "[Intentionally] This method always returns 'false'.")]
         public static bool operator !=(Unit left, Unit right)
         {
             Contract.Ensures(Contract.Result<bool>() == false);
