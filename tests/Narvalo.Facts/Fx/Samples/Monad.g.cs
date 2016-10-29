@@ -14,6 +14,7 @@ namespace Narvalo.Fx.Samples
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -238,7 +239,6 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Monad<TResult>>() != null);
 
             // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
 
@@ -248,6 +248,8 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
+            Justification = "[Intentionally] This method always returns the same result.")]
         public static Monad<global::Narvalo.Fx.Unit> Forget<TSource>(this Monad<TSource> @this)
             /* T4: C# indent */
         {
@@ -444,7 +446,6 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.NotNull(action, "action");
-            Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }

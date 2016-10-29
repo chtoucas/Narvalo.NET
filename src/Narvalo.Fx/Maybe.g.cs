@@ -14,6 +14,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -271,6 +272,8 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
+            Justification = "[Intentionally] This method always returns the same result.")]
         public static Maybe<global::Narvalo.Fx.Unit> Forget<TSource>(this Maybe<TSource> @this)
             /* T4: C# indent */
         {
@@ -680,7 +683,8 @@ namespace Narvalo.Fx
             Action caseNone)
             /* T4: C# indent */
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
+            Require.NotNull(caseNone, nameof(caseNone));
 
             return @this.Invoke(action).OnNone(caseNone);
         }

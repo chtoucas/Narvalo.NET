@@ -14,6 +14,7 @@ namespace Narvalo.Fx.Samples
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -289,6 +290,8 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
+            Justification = "[Intentionally] This method always returns the same result.")]
         public static MonadValue<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadValue<TSource> @this)
             where TSource : struct
         {
@@ -723,7 +726,8 @@ namespace Narvalo.Fx.Samples
             Action caseNone)
             where TSource : struct
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
+            Require.NotNull(caseNone, nameof(caseNone));
 
             return @this.Invoke(action).OnNone(caseNone);
         }

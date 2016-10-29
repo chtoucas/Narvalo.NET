@@ -105,7 +105,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             Require.NotNull(action, "action");
-<#+ if (IsNullable) { #>
+<#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
@@ -140,7 +140,8 @@ public partial class MonadTemplate
 <#+ if (IsNullable) { #>
             Acknowledge.Object(@this);
 <#+ } #>
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
+            Require.NotNull(case<#= ZeroName #>, nameof(case<#= ZeroName #>));
 <#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>

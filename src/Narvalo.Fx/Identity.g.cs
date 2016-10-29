@@ -14,6 +14,7 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -244,6 +245,8 @@ namespace Narvalo.Fx
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
+            Justification = "[Intentionally] This method always returns the same result.")]
         public static Identity<global::Narvalo.Fx.Unit> Forget<TSource>(this Identity<TSource> @this)
             /* T4: C# indent */
         {
@@ -535,7 +538,6 @@ namespace Narvalo.Fx
         public static Identity<Identity<T>> Duplicate<T>(Identity<T> monad)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Identity<Identity<T>>>() != null);
 
             return Identity<T>.δ(monad);
         }
