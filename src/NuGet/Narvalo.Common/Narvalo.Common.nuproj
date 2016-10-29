@@ -5,8 +5,11 @@
     <NuTitle>Narvalo.Common</NuTitle>
     <NuDescription>
       This package provides various utilities and extension methods: directory walker, extension methods for Collections, Configuration, SQL client.
+    </NuDescription>
+    <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
+      $(NuDescription)
 
-      <!--A code contracts reference assembly is included if you ever need it.-->
+      A code contracts reference assembly is included if you ever need it.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Utilities, Extensions</NuTags>
@@ -27,10 +30,13 @@
 <file src="Narvalo.Common.xml" target="lib\net45\" />
 <file src="fr\Narvalo.Common.resources.dll" target="lib\net45\fr\" />
       ]]>
-      <!--
+    </NuFiles>
+    <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
+      $(NuFiles)
+      <![CDATA[
 <file src="CodeContracts\Narvalo.Common.Contracts.dll" target="lib\net45\CodeContracts\" />
 <file src="CodeContracts\Narvalo.Common.Contracts.xml" target="lib\net45\CodeContracts\" />
-      -->
+      ]]>
     </NuFiles>
   </PropertyGroup>
 </Project>

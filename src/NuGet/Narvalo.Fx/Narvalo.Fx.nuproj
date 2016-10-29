@@ -11,8 +11,11 @@
 
       This is a portable class library targeting Profile259.
       ]]>
+    </NuDescription>
+    <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
+      $(NuDescription)
 
-      <!--A code contracts reference assembly is included if you ever need it.-->
+      A code contracts reference assembly is included if you ever need it.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Maybe, Option, Error, Either, Linq, Monad, Functional</NuTags>
@@ -33,10 +36,13 @@
 <file src="Narvalo.Fx.xml" target="lib\$(Profile259)\" />
 <file src="fr\Narvalo.Fx.resources.dll" target="lib\$(Profile259)\fr\" />
       ]]>
-      <!--
+    </NuFiles>
+    <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
+      $(NuFiles)
+      <![CDATA[
 <file src="CodeContracts\Narvalo.Fx.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
 <file src="CodeContracts\Narvalo.Fx.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
-      -->
+      ]]>
     </NuFiles>
   </PropertyGroup>
 </Project>

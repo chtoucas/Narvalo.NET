@@ -5,8 +5,11 @@
     <NuTitle>Narvalo.Web</NuTitle>
     <NuDescription>
       This package provides types that might prove useful for Web development: generic HttpHandler type, asset providers, Razor and WebForms compile-time optimizers, preliminary support for OpenGraph and Schema.Org.
+    </NuDescription>
+    <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
+      $(NuDescription)
 
-      <!--A code contracts reference assembly is also provided if you need it.-->
+      A code contracts reference assembly is included if you ever need it.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>ASP.NET, MVC, WebForms, Razor, Optimization</NuTags>
@@ -27,10 +30,13 @@
 <file src="Narvalo.Web.xml" target="lib\net45\" />
 <file src="fr\Narvalo.Web.resources.dll" target="lib\net45\fr\" />
       ]]>
-      <!--
+    </NuFiles>
+    <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
+      $(NuFiles)
+      <![CDATA[
 <file src="CodeContracts\Narvalo.Web.Contracts.dll" target="lib\net45\CodeContracts\" />
 <file src="CodeContracts\Narvalo.Web.Contracts.xml" target="lib\net45\CodeContracts\" />
-      -->
+      ]]>
     </NuFiles>
   </PropertyGroup>
 </Project>
