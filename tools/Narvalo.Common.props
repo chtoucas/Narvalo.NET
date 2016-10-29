@@ -227,7 +227,7 @@
   <Import Project="$(CustomAfterNarvaloCommonProps)"
           Condition=" '$(CustomAfterNarvaloCommonProps)' != '' " />
 
-  <!-- Mark Make.Common.props as already imported. -->
+  <!-- Mark Narvalo.Common.props as already imported. -->
   <PropertyGroup>
     <NarvaloCommonPropsImported>true</NarvaloCommonPropsImported>
   </PropertyGroup>

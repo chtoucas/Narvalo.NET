@@ -73,13 +73,13 @@
   </PropertyGroup>
 
   <!-- Code Contracts reference assembly. -->
-  <PropertyGroup Condition=" '$(SkipCodeContractsReferenceAssembly)' == 'true' " >
+  <PropertyGroup Condition=" '$(SkipCodeContractsReferenceAssembly)' == 'true' ">
     <!-- If requested, completely disable the generation of the CC reference assembly. -->
     <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
     <CodeContractsEmitXMLDocs>false</CodeContractsEmitXMLDocs>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' " >
+  <PropertyGroup Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
     <!-- Whenever we build the CC reference assembly we also patch the documentation. -->
     <CodeContractsEmitXMLDocs>true</CodeContractsEmitXMLDocs>
   </PropertyGroup>
