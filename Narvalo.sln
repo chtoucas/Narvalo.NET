@@ -33,7 +33,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Documentation", "0. Docu
 	ProjectSection(SolutionItems) = preProject
 		docs\BuildAndRelease.md = docs\BuildAndRelease.md
 		docs\Changelog.md = docs\Changelog.md
-		etc\gendarme.ignore = etc\gendarme.ignore
 		docs\Guidelines.md = docs\Guidelines.md
 		docs\Issues.md = docs\Issues.md
 		docs\Overview.md = docs\Overview.md
