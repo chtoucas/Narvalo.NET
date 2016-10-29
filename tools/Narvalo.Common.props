@@ -206,7 +206,7 @@
 
   <!-- T4 -->
   <PropertyGroup>
-    <T4NarvaloLibrary>$(MSBuildThisFileDirectory)lib\Narvalo.T4.dll</T4NarvaloLibrary>
+    <T4NarvaloLibrary>$(MSBuildThisFileDirectory)lib\Narvalo.T4.v$(VisualStudioVersion).dll</T4NarvaloLibrary>
     <T4NarvaloTemplates>$(RepositoryRoot)src\Narvalo.T4\CodeTemplates</T4NarvaloTemplates>
   </PropertyGroup>
 

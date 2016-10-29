@@ -271,8 +271,9 @@ tools\nuget.exe update self
 
 ### Visual Studio or Framework Updates
 
-After upgrading Visual Studio, do not forget to update the `VisualStudioVersion` property in both
-Shared.props and build.cmd. We might also need to update the `SDK40ToolsPath` property.
+After upgrading Visual Studio or MSBuild, do not forget to update the `VisualStudioVersion` property
+in both Make.Shared.props, PSakefile.ps1 and MSBuild.cmd. We might also need to update the 
+`SDK40ToolsPath` property.
 
 Appendices
 ----------
