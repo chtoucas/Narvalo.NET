@@ -123,10 +123,10 @@ if ($safe.IsPresent) {
 Invoke-PSake $psakefile `
     -NoLogo `
     -TaskList $taskList `
-    -Parameters @{ 
-        'developer' = $developer; 
-        'verbosity' = $verbosity; 
-        'retail' = $retail.IsPresent; 
+    -Parameters @{
+        'developer' = $developer;
+        'verbosity' = $verbosity;
+        'retail' = $retail.IsPresent;
     }
 
 # ------------------------------------------------------------------------------

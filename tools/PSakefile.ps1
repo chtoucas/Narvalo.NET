@@ -7,6 +7,8 @@
 # We force the framework to be sure we use the v12.0 of the build tools.
 # For instance, this is a requirement for the _MyGet-Publish target where
 # the DeployOnBuild instruction is not understood by previous versions of MSBuild.
+# TODO: Check if this is still necessary. We could also use Invoke-psake -framework '4.5.1x64' in
+# make.ps1.
 Framework '4.5.1x64'
 
 # ------------------------------------------------------------------------------

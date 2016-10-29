@@ -3,18 +3,25 @@ Migration to VS2015
 
 - ToolsVersion="14.0" everywhere.
 - Disabled StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
-- Migrate from StyleCop to the appropriate source analyzer.
-- T4 templates? (see Make.CustomAfter.targets) We should create Narvalo.T4.V12;dll and
-  Narvalo.T4.V14.dll instead of a single assembly: this prevents T4 generation in VS 2013
+- Code contracts (disabled fro the time being)
+  NB: CC is unusable right now (the task depends on MSBuild v3.5)
+    https://github.com/Microsoft/CodeContracts/issues/353
+  * PSakefile: '/p:SkipCodeContractsReferenceAssembly=true' instead of 
+    '/p:SkipCodeContractsReferenceAssembly=false'
+    in _CI-InitializeVariables and _Package-InitializeVariables
+  * Raise a warning instead of an error in Make.CustomAfter.targets if skipping CC
+  * If no CC assembly is built, do not reference it in the NuGet specs.
+
+- In PSakefile.ps1, do we need to change the VisualStudioVersion (_MyGet-Publish)? See also 
+  the Framework property at the beginning of the file.
+- For test projects, we should automatically add the TestCommon shared project.
+    <Import Project="..\Narvalo.TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
+- Improve DisableAnalyzersForVisualStudioBuild target in Narvalo.Common.targets
+- Add the VS version to Narvalo.T4 assembly file?
+- Migrate from StyleCop to StyleCop.Analyzers
 - MvpWebForms sample project: OutputPath is wrong (temporary fix: override OutputPath
   property in project file). Other strange thing, MvpWebForms.dll.config is created.
   LocalDB requires SQL Server Express.
-- Add a shared project for Narvalo.T4
-- Disabled code contracts
-  * dans PSakefile: '/p:SkipCodeContractsReferenceAssembly=true'
-    dans _CI-InitializeVariables et _Package-InitializeVariables
-  * Nuget specs (should use condition SkipCodeContractsReferenceAssembly)
-  * Raise Warning instead of Error in Make.CustomAfter.targets when skipping CC
 
 
 Issues & Roadmap
