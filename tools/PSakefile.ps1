@@ -216,7 +216,7 @@ Task _CI-InitializeVariables `
         '/p:BuildGeneratedVersion=false',
         "/p:Retail=$Retail",
         '/p:SignAssembly=false',
-        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipCodeContractsReferenceAssembly=false',
         '/p:VisibleInternals=true'
 
     # FIXME: Don't understand why doing what follows does not work.
@@ -282,7 +282,7 @@ Task _Package-InitializeVariables `
         "/p:GitCommitHash=$GitCommitHash",
         "/p:Retail=$Retail",
         '/p:SignAssembly=true',
-        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipCodeContractsReferenceAssembly=false',
         '/p:VisibleInternals=false'
 
     # Packaging targets:
