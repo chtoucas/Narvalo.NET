@@ -8,7 +8,7 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
 
     /// <summary>
-    /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class 
+    /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
     /// contains either a <c>TLeft</c> value or a <c>TRight</c> value but not both.
     /// </summary>
     /// <remarks>The enclosed value might be <see langword="null"/>.</remarks>
@@ -63,27 +63,21 @@ namespace Narvalo.Fx
 
             public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
-                Require.NotNull(caseLeft, "caseLeft");
+                Require.NotNull(caseLeft, nameof(caseLeft));
 
                 caseLeft.Invoke(_value);
             }
 
             public override TResult Map<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
-                Require.NotNull(caseLeft, "caseLeft");
+                Require.NotNull(caseLeft, nameof(caseLeft));
 
                 return caseLeft.Invoke(_value);
             }
 
-            public override Maybe<TLeft> LeftOrNone()
-            {
-                return Maybe.Of(_value);
-            }
+            public override Maybe<TLeft> LeftOrNone() => Maybe.Of(_value);
 
-            public override Maybe<TRight> RightOrNone()
-            {
-                return Maybe<TRight>.None;
-            }
+            public override Maybe<TRight> RightOrNone() => Maybe<TRight>.None;
 
             public bool Equals(Left_ other)
             {
@@ -100,15 +94,10 @@ namespace Narvalo.Fx
                 return EqualityComparer<TLeft>.Default.Equals(_value, other._value);
             }
 
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as Left_);
-            }
+            public override bool Equals(object obj) => Equals(obj as Left_);
 
             public override int GetHashCode()
-            {
-                return _value == null ? 0 : EqualityComparer<TLeft>.Default.GetHashCode(_value);
-            }
+                => _value == null ? 0 : EqualityComparer<TLeft>.Default.GetHashCode(_value);
 
             public override string ToString()
             {
@@ -129,27 +118,21 @@ namespace Narvalo.Fx
 
             public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight)
             {
-                Require.NotNull(caseRight, "caseRight");
+                Require.NotNull(caseRight, nameof(caseRight));
 
                 caseRight.Invoke(_value);
             }
 
             public override TResult Map<TResult>(Func<TLeft, TResult> caseLeft, Func<TRight, TResult> caseRight)
             {
-                Require.NotNull(caseRight, "caseRight");
+                Require.NotNull(caseRight, nameof(caseRight));
 
                 return caseRight.Invoke(_value);
             }
 
-            public override Maybe<TLeft> LeftOrNone()
-            {
-                return Maybe<TLeft>.None;
-            }
+            public override Maybe<TLeft> LeftOrNone() => Maybe<TLeft>.None;
 
-            public override Maybe<TRight> RightOrNone()
-            {
-                return Maybe.Of(_value);
-            }
+            public override Maybe<TRight> RightOrNone() => Maybe.Of(_value);
 
             public bool Equals(Right_ other)
             {
@@ -166,15 +149,10 @@ namespace Narvalo.Fx
                 return EqualityComparer<TRight>.Default.Equals(_value, other._value);
             }
 
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as Right_);
-            }
+            public override bool Equals(object obj) => Equals(obj as Right_);
 
             public override int GetHashCode()
-            {
-                return _value == null ? 0 : EqualityComparer<TRight>.Default.GetHashCode(_value);
-            }
+                =>_value == null ? 0 : EqualityComparer<TRight>.Default.GetHashCode(_value);
 
             public override string ToString()
             {
@@ -207,15 +185,9 @@ namespace Narvalo.Fx
             return default(TResult);
         }
 
-        public override Maybe<TLeft> LeftOrNone() 
-        {
-            return default(Maybe<TLeft>);
-        }
+        public override Maybe<TLeft> LeftOrNone() => default(Maybe<TLeft>);
 
-        public override Maybe<TRight> RightOrNone()
-        {
-            return default(Maybe<TRight>);
-        }
+        public override Maybe<TRight> RightOrNone() => default(Maybe<TRight>);
     }
 
 #endif
