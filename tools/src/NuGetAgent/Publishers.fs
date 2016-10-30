@@ -37,29 +37,29 @@ module Publishers =
                 let obsoletePackages, newerPackages =
                     repository.FindPackagesById package.Id
                     |> List.ofSeq
-                    |> List.partition(fun p -> p.Version < package.Version)
+                    |> List.partition(fun p -> p.Version <= package.Version)
 
                 match purge with
                 | None
                 | Some(true) ->
                     // Delete obsolete packages.
                     obsoletePackages
-                    |> List.iter(fun p -> this._DeletePackage(p.Id, p.Version.ToString()))
+                    |> List.iter(fun p -> this.DeletePackage(p.Id, p.Version.ToString()))
                 | Some(false) -> ()
 
                 // Publish the package.
                 if newerPackages.Any()
                 then printfn "Skipping... a more recent version already exists."
-                else this._PushPackage(package)
+                else this.PushPackage(package)
 
         /// Delete a package from the remote server.
-        member private this._DeletePackage(id, version) =
+        member private this.DeletePackage(id, version) =
             printfn "Deleting version %s" version
 
             server.DeletePackage(apiKey, id, version)
 
         /// Push a package to the remote server.
-        member private this._PushPackage(package:IPackage) =
+        member private this.PushPackage(package:IPackage) =
             printfn "Publishing package..."
 
             // NB: The timeout is in milliseconds.
@@ -80,10 +80,10 @@ module Publishers =
 
                 if remotePackage <> null
                 then printfn "Skipping... the package already exists on the server."
-                else this._PushPackage(package)
+                else this.PushPackage(package)
 
         /// Push a package to the remote server.
-        member private this._PushPackage(package:IPackage) =
+        member private this.PushPackage(package:IPackage) =
             printfn "Pushing package..."
 
             // NB: The timeout is in milliseconds.

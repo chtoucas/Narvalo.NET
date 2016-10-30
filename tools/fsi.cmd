@@ -5,7 +5,7 @@
 
 :Setup
 
-@set FsiVersion=3.1
+@set FsiVersion=4.0
 @set FrameworkVersion=v4.0
 
 @set Fsi="%ProgramFiles(x86)%\Microsoft SDKs\F#\%FsiVersion%\Framework\%FrameworkVersion%\fsi.exe"
@@ -27,7 +27,7 @@
 :NotFound
 
 @echo.
-@echo *** Looks like fsi.exe v3.1 is not installed on your system ***
+@echo *** Looks like fsi.exe v4.0 is not installed on your system ***
 @echo.
 
 @endlocal
