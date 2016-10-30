@@ -192,6 +192,7 @@ MSBuild and `PSakefile`:
   it does not seem to be understood by MSBuild. Setting `CodeAnalysisLogFile` or
   `CodeAnalysisSucceededFile` disables incremental building. Currently, Code Analysis hooks
   are disabled in `Narvalo.Common.targets`.
+- **Bug:** Make sure PSake reports failure whenever an error occurs.
 - Complete common settings for F# projects.
 - Enable T4-regeneration outside VS since, currently it does not work when building from the command-line.
 - Make sure a build fails when SecAnnotate does too.

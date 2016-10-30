@@ -45,19 +45,6 @@
 
   <!-- ### Analyzers Hooks ### -->
 
-  <!-- See https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/1618 -->
-  <Target Name="DisableAnalyzersForVisualStudioBuild"
-        BeforeTargets="CoreCompile"
-        Condition="'$(BuildingInsideVisualStudio)' == 'True' And '$(BuildingProject)' == 'True'">
-    <!--
-    Disable analyzers when building a project inside Visual Studio. Note that analyzer behavior for IntelliSense
-    purposes is not altered by this.
-    -->
-    <ItemGroup Condition=" '$(Configuration)' != 'Release' ">
-      <Analyzer Remove="@(Analyzer)"/>
-    </ItemGroup>
-  </Target>
-
   <!-- ### Source Analysis Hooks ### -->
   <!--
     Below, use $(StyleCopEnabled) not $(SourceAnalysisEnabled) as this is the actual
