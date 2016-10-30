@@ -18,7 +18,7 @@ namespace Narvalo.Finance
 
         public Money(decimal amount, Currency currency)
         {
-            Require.NotNull(currency, "currency");
+            Require.NotNull(currency, nameof(currency));
 
             _amount = amount;
             _currency = currency;
@@ -62,20 +62,11 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
-        public static bool operator ==(Money left, Money right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(Money left, Money right) => left.Equals(right);
 
-        public static bool operator !=(Money left, Money right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator !=(Money left, Money right) => !left.Equals(right);
 
-        public bool Equals(Money other)
-        {
-            return Amount == other.Amount && Currency.Equals(other.Currency);
-        }
+        public bool Equals(Money other) => Amount == other.Amount && Currency.Equals(other.Currency);
 
         public override bool Equals(object obj)
         {
@@ -105,15 +96,10 @@ namespace Narvalo.Finance
     public partial struct Money
     {
         /// <inheritdoc cref="Object.ToString" />
-        public override string ToString()
-        {
-            return MoneyFormatter.Format(Amount, Currency);
-        }
+        public override string ToString() => MoneyFormatter.Format(Amount, Currency);
 
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            return MoneyFormatter.Format(Amount, format, formatProvider);
-        }
+            => MoneyFormatter.Format(Amount, format, formatProvider);
     }
 
     /// <content>
@@ -121,25 +107,13 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
-        public static bool operator <(Money left, Money right)
-        {
-            return left.CompareTo(right) < 0;
-        }
+        public static bool operator <(Money left, Money right) => left.CompareTo(right) < 0;
 
-        public static bool operator <=(Money left, Money right)
-        {
-            return left.CompareTo(right) <= 0;
-        }
+        public static bool operator <=(Money left, Money right) => left.CompareTo(right) <= 0;
 
-        public static bool operator >(Money left, Money right)
-        {
-            return left.CompareTo(right) > 0;
-        }
+        public static bool operator >(Money left, Money right) => left.CompareTo(right) > 0;
 
-        public static bool operator >=(Money left, Money right)
-        {
-            return left.CompareTo(right) >= 0;
-        }
+        public static bool operator >=(Money left, Money right) => left.CompareTo(right) >= 0;
 
         public int CompareTo(Money other)
         {
@@ -169,23 +143,20 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
-        public static Money operator +(Money left, Money right)
-        {
-            return left.Add(right);
-        }
+        public static Money operator +(Money left, Money right) => left.Add(right);
 
         public Money Add(Money money)
         {
             ThrowIfCurrencyMismatch(money);
 
-            var amount = checked(Amount + money.Amount);
+            decimal amount = checked(Amount + money.Amount);
 
             return new Money(amount, Currency);
         }
 
         public Money Add(decimal amount)
         {
-            var value = checked(Amount + amount);
+            decimal value = checked(Amount + amount);
 
             return new Money(value, Currency);
         }
@@ -196,10 +167,7 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
-        public static Money operator -(Money left, Money right)
-        {
-            return left.Subtract(right);
-        }
+        public static Money operator -(Money left, Money right) => left.Subtract(right);
 
         public Money Subtract(Money money)
         {
@@ -208,10 +176,7 @@ namespace Narvalo.Finance
             return new Money(Amount - money.Amount, Currency);
         }
 
-        public Money Subtract(decimal amount)
-        {
-            return new Money(Amount - amount, Currency);
-        }
+        public Money Subtract(decimal amount) => new Money(Amount - amount, Currency);
     }
 
     /// <content>
@@ -219,19 +184,13 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
-        public static Money operator *(decimal multiplier, Money money)
-        {
-            return money.Multiply(multiplier);
-        }
+        public static Money operator *(decimal multiplier, Money money) => money.Multiply(multiplier);
 
-        public static Money operator *(Money money, decimal multiplier)
-        {
-            return money.Multiply(multiplier);
-        }
+        public static Money operator *(Money money, decimal multiplier) => money.Multiply(multiplier);
 
         public Money Multiply(decimal multiplier)
         {
-            var amount = checked(multiplier * Amount);
+            decimal amount = checked(multiplier * Amount);
 
             return new Money(amount, Currency);
         }
@@ -288,15 +247,9 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
-        public static Money operator -(Money money)
-        {
-            return money.Negate();
-        }
+        public static Money operator -(Money money) => money.Negate();
 
-        public Money Negate()
-        {
-            return new Money(-Amount, Currency);
-        }
+        public Money Negate() => new Money(-Amount, Currency);
     }
 
     /// <content>
@@ -304,14 +257,8 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money
     {
-        public static Money operator +(Money money)
-        {
-            return money;
-        }
+        public static Money operator +(Money money) => money;
 
-        public Money Plus()
-        {
-            return this;
-        }
+        public Money Plus() => this;
     }
 }

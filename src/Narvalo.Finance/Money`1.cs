@@ -46,9 +46,7 @@ namespace Narvalo.Finance
         }
 
         public static explicit operator Money(Money<TCurrency> value)
-        {
-            return new Money(value.Amount, s_Currency);
-        }
+            => new Money(value.Amount, s_Currency);
     }
 
     /// <content>
@@ -57,19 +55,13 @@ namespace Narvalo.Finance
     public partial struct Money<TCurrency>
     {
         public static bool operator ==(Money<TCurrency> left, Money<TCurrency> right)
-        {
-            return left.Equals(right);
-        }
+            => left.Equals(right);
 
         public static bool operator !=(Money<TCurrency> left, Money<TCurrency> right)
-        {
-            return !left.Equals(right);
-        }
+            => !left.Equals(right);
 
         public bool Equals(Money<TCurrency> other)
-        {
-            return Amount == other.Amount;
-        }
+            => Amount == other.Amount;
 
         public override bool Equals(object obj)
         {
@@ -100,15 +92,10 @@ namespace Narvalo.Finance
     public partial struct Money<TCurrency>
     {
         /// <inheritdoc cref="Object.ToString" />
-        public override string ToString()
-        {
-            return MoneyFormatter.Format(Amount, s_Currency);
-        }
+        public override string ToString() => MoneyFormatter.Format(Amount, s_Currency);
 
         public string ToString(string format, IFormatProvider formatProvider)
-        {
-            return MoneyFormatter.Format(Amount, format, formatProvider);
-        }
+            => MoneyFormatter.Format(Amount, format, formatProvider);
     }
 
     /// <content>
@@ -117,29 +104,18 @@ namespace Narvalo.Finance
     public partial struct Money<TCurrency>
     {
         public static bool operator <(Money<TCurrency> left, Money<TCurrency> right)
-        {
-            return left.CompareTo(right) < 0;
-        }
+            => left.CompareTo(right) < 0;
 
         public static bool operator <=(Money<TCurrency> left, Money<TCurrency> right)
-        {
-            return left.CompareTo(right) <= 0;
-        }
+            => left.CompareTo(right) <= 0;
 
         public static bool operator >(Money<TCurrency> left, Money<TCurrency> right)
-        {
-            return left.CompareTo(right) > 0;
-        }
+            => left.CompareTo(right) > 0;
 
         public static bool operator >=(Money<TCurrency> left, Money<TCurrency> right)
-        {
-            return left.CompareTo(right) >= 0;
-        }
+            => left.CompareTo(right) >= 0;
 
-        public int CompareTo(Money<TCurrency> other)
-        {
-            return Amount.CompareTo(other.Amount);
-        }
+        public int CompareTo(Money<TCurrency> other) => Amount.CompareTo(other.Amount);
 
         int IComparable.CompareTo(object obj)
         {
@@ -163,20 +139,18 @@ namespace Narvalo.Finance
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator +(Money<TCurrency> left, Money<TCurrency> right)
-        {
-            return left.Add(right);
-        }
+            => left.Add(right);
 
         public Money<TCurrency> Add(Money<TCurrency> money)
         {
-            var amount = checked(Amount + money.Amount);
+            decimal amount = checked(Amount + money.Amount);
 
             return new Money<TCurrency>(amount);
         }
 
         public Money<TCurrency> Add(decimal amount)
         {
-            var value = checked(Amount + amount);
+            decimal value = checked(Amount + amount);
 
             return new Money<TCurrency>(value);
         }
@@ -188,19 +162,11 @@ namespace Narvalo.Finance
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator -(Money<TCurrency> left, Money<TCurrency> right)
-        {
-            return left.Subtract(right);
-        }
+            => left.Subtract(right);
 
-        public Money<TCurrency> Subtract(Money<TCurrency> money)
-        {
-            return new Money<TCurrency>(Amount - money.Amount);
-        }
+        public Money<TCurrency> Subtract(Money<TCurrency> money) => new Money<TCurrency>(Amount - money.Amount);
 
-        public Money<TCurrency> Subtract(decimal amount)
-        {
-            return new Money<TCurrency>(Amount - amount);
-        }
+        public Money<TCurrency> Subtract(decimal amount) => new Money<TCurrency>(Amount - amount);
     }
 
     /// <content>
@@ -209,14 +175,10 @@ namespace Narvalo.Finance
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator *(decimal multiplier, Money<TCurrency> money)
-        {
-            return money.Multiply(multiplier);
-        }
+            => money.Multiply(multiplier);
 
         public static Money<TCurrency> operator *(Money<TCurrency> money, decimal multiplier)
-        {
-            return money.Multiply(multiplier);
-        }
+            => money.Multiply(multiplier);
 
         public Money<TCurrency> Multiply(decimal multiplier)
         {
@@ -293,14 +255,8 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        public static Money<TCurrency> operator +(Money<TCurrency> money)
-        {
-            return money;
-        }
+        public static Money<TCurrency> operator +(Money<TCurrency> money) => money;
 
-        public Money<TCurrency> Plus()
-        {
-            return this;
-        }
+        public Money<TCurrency> Plus() => this;
     }
 }

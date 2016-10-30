@@ -64,14 +64,14 @@ namespace Narvalo.Finance
         /// <returns>The currency for the specified code.</returns>
         public static Currency Of(string code)
         {
-            Require.NotNull(code, "code");
+            Require.NotNull(code, nameof(code));
             ContractFor.CurrencyCode(code);
             Contract.Ensures(Contract.Result<Currency>() != null);
 
-            var retval = s_Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency);
-            Contract.Assume(retval != null);
+            var currency = s_Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency);
+            Contract.Assume(currency != null);
 
-            return retval;
+            return currency;
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Narvalo.Finance
         /// <returns>The currency for the specified region info.</returns>
         public static Currency OfRegion(RegionInfo regionInfo)
         {
-            Require.NotNull(regionInfo, "regionInfo");
+            Require.NotNull(regionInfo, nameof(regionInfo));
             Contract.Ensures(Contract.Result<Currency>() != null);
 
             var code = regionInfo.ISOCurrencySymbol;
@@ -289,10 +289,7 @@ namespace Narvalo.Finance
             return left.Equals(right);
         }
 
-        public static bool operator !=(Currency left, Currency right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(Currency left, Currency right) => !(left == right);
 
         /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(Currency other)
@@ -332,10 +329,8 @@ namespace Narvalo.Finance
 
         /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode()
-        {
             // REVIEW: Maybe we could cache the hashcode?
-            return Code.GetHashCode();
-        }
+            => Code.GetHashCode();
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 

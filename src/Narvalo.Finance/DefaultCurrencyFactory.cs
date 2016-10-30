@@ -6,9 +6,6 @@ namespace Narvalo.Finance
     {
         public DefaultCurrencyFactory() { }
 
-        protected override bool IsValid(string code)
-        {
-            return s_CodeSet.Contains(code);
-        }
+        protected override bool IsValid(string code) => s_CodeSet.Contains(code);
     }
 }

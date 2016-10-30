@@ -92,6 +92,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bic.cs" />
     <Compile Include="Currencies\Currencies.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,8 +108,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Iban.cs" />
     <Compile Include="Internal\ContractFor.cs" />
     <Compile Include="Internal\CurrencyActivator`1.cs" />
+    <Compile Include="Internal\Helpers.cs" />
     <Compile Include="Internal\MoneyFormatter.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />

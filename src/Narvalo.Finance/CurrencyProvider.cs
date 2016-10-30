@@ -46,7 +46,7 @@ namespace Narvalo.Finance
 
         public void InnerSetFactory(CurrencyFactory factory)
         {
-            Require.NotNull(factory, "factory");
+            Require.NotNull(factory, nameof(factory));
 
             _factory = factory;
         }
