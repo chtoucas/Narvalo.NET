@@ -37,7 +37,7 @@ namespace Narvalo.Fx
 
         public bool Equals(Identity<T> other, IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, "comparer");
+            Require.NotNull(comparer, nameof(comparer));
 
             if (Value == null)
             {
@@ -60,7 +60,7 @@ namespace Narvalo.Fx
 
         public bool Equals(object other, IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, "comparer");
+            Require.NotNull(comparer, nameof(comparer));
 
             if (other is Identity<T>)
             {
@@ -80,7 +80,7 @@ namespace Narvalo.Fx
 
         public int GetHashCode(IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, "comparer");
+            Require.NotNull(comparer, nameof(comparer));
 
             return Value != null ? comparer.GetHashCode(Value) : 0;
         }
@@ -93,7 +93,7 @@ namespace Narvalo.Fx
     {
         public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> selector)
         {
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return selector.Invoke(Value);
         }
@@ -114,7 +114,7 @@ namespace Narvalo.Fx
     {
         public Identity<TResult> Extend<TResult>(Func<Identity<T>, TResult> fun)
         {
-            Require.NotNull(fun, "fun");
+            Require.NotNull(fun, nameof(fun));
 
             return new Identity<TResult>(fun.Invoke(this));
         }

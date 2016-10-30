@@ -62,7 +62,7 @@ namespace Narvalo.Fx
 
         public static explicit operator T(Outcome<T> value)
         {
-            Require.NotNull(value, "value");
+            Require.NotNull(value, nameof(value));
 
             // We check the value of the property IsSuccess even if this is not really necessary
             // since a direct cast would have worked too:
@@ -83,7 +83,7 @@ namespace Narvalo.Fx
 
         public static explicit operator ExceptionDispatchInfo(Outcome<T> value)
         {
-            Require.NotNull(value, "value");
+            Require.NotNull(value, nameof(value));
             Contract.Ensures(Contract.Result<ExceptionDispatchInfo>() != null);
 
             // We check the value of the property IsSuccess even if this is not really necessary
@@ -121,8 +121,8 @@ namespace Narvalo.Fx
 
         public void Invoke(Action<T> caseSuccess, Action<ExceptionDispatchInfo> caseFailure)
         {
-            Require.NotNull(caseSuccess, "caseSuccess");
-            Require.NotNull(caseFailure, "caseFailure");
+            Require.NotNull(caseSuccess, nameof(caseSuccess));
+            Require.NotNull(caseFailure, nameof(caseFailure));
 
             if (IsSuccess)
             {
@@ -136,8 +136,8 @@ namespace Narvalo.Fx
 
         public TResult Map<TResult>(Func<T, TResult> caseSuccess, Func<TResult> caseFailure)
         {
-            Require.NotNull(caseSuccess, "caseSuccess");
-            Require.NotNull(caseFailure, "caseFailure");
+            Require.NotNull(caseSuccess, nameof(caseSuccess));
+            Require.NotNull(caseFailure, nameof(caseFailure));
 
             return IsSuccess
                 ? caseSuccess.Invoke(ToValue())
@@ -156,7 +156,7 @@ namespace Narvalo.Fx
 
         public void OnFailure(Action<ExceptionDispatchInfo> action)
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             if (!IsSuccess)
             {
@@ -168,24 +168,18 @@ namespace Narvalo.Fx
         /// Obtains the underlying value if any; otherwise the default value of the type T.
         /// </summary>
         /// <returns>The underlying value if any; otherwise the default value of the type T.</returns>
-        public T ValueOrDefault()
-        {
-            return IsSuccess ? ToValue() : default(T);
-        }
+        public T ValueOrDefault() => IsSuccess ? ToValue() : default(T);
 
         /// <summary>
         /// Returns the underlying value if any; otherwise <paramref name="other"/>.
         /// </summary>
         /// <param name="other">A default value to be used if if there is no underlying value.</param>
         /// <returns>The underlying value if any; otherwise <paramref name="other"/>.</returns>
-        public T ValueOrElse(T other)
-        {
-            return IsSuccess ? ToValue() : other;
-        }
+        public T ValueOrElse(T other) => IsSuccess ? ToValue() : other;
 
         public T ValueOrElse(Func<T> valueFactory)
         {
-            Require.NotNull(valueFactory, "valueFactory");
+            Require.NotNull(valueFactory, nameof(valueFactory));
 
             return IsSuccess ? ToValue() : valueFactory.Invoke();
         }
@@ -220,7 +214,7 @@ namespace Narvalo.Fx
 
         public void Invoke(Action<T> action)
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             if (IsSuccess)
             {
@@ -229,11 +223,9 @@ namespace Narvalo.Fx
         }
 
         public Outcome<TResult> Then<TResult>(Outcome<TResult> other)
-        {
-            return IsSuccess
+            => IsSuccess
                 ? other
                 : Outcome<TResult>.η(ToExceptionDispatchInfo());
-        }
 
         #endregion
 
@@ -242,17 +234,14 @@ namespace Narvalo.Fx
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
-        internal static Outcome<T> η(T value)
-        {
-            return new Success_(value);
-        }
+        internal static Outcome<T> η(T value) => new Success_(value);
 
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
         internal static Outcome<T> η(ExceptionDispatchInfo exceptionInfo)
         {
-            Require.NotNull(exceptionInfo, "exceptionInfo");
+            Require.NotNull(exceptionInfo, nameof(exceptionInfo));
 
             return new Failure_(exceptionInfo);
         }
@@ -262,7 +251,7 @@ namespace Narvalo.Fx
         [DebuggerHidden]
         internal static Outcome<T> μ(Outcome<Outcome<T>> square)
         {
-            Require.NotNull(square, "square");
+            Require.NotNull(square, nameof(square));
 
             if (square.IsSuccess)
             {
@@ -327,14 +316,14 @@ namespace Narvalo.Fx
 
             public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
             {
-                Require.NotNull(selector, "selector");
+                Require.NotNull(selector, nameof(selector));
 
                 return selector.Invoke(Value);
             }
 
             public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
             {
-                Require.NotNull(selector, "selector");
+                Require.NotNull(selector, nameof(selector));
 
                 return Outcome<TResult>.η(selector.Invoke(Value));
             }
@@ -354,15 +343,10 @@ namespace Narvalo.Fx
                 return EqualityComparer<T>.Default.Equals(Value, other.Value);
             }
 
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as Success_);
-            }
+            public override bool Equals(object obj) => Equals(obj as Success_);
 
             public override int GetHashCode()
-            {
-                return Value == null ? 0 : EqualityComparer<T>.Default.GetHashCode(Value);
-            }
+                => Value == null ? 0 : EqualityComparer<T>.Default.GetHashCode(Value);
 
             public override string ToString()
             {
@@ -398,14 +382,10 @@ namespace Narvalo.Fx
             }
 
             public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
-            {
-                return Outcome<TResult>.η(ExceptionInfo);
-            }
+                => Outcome<TResult>.η(ExceptionInfo);
 
             public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
-            {
-                return Outcome<TResult>.η(ExceptionInfo);
-            }
+                => Outcome<TResult>.η(ExceptionInfo);
 
             public bool Equals(Failure_ other)
             {
@@ -422,15 +402,10 @@ namespace Narvalo.Fx
                 return EqualityComparer<ExceptionDispatchInfo>.Default.Equals(ExceptionInfo, other.ExceptionInfo);
             }
 
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as Failure_);
-            }
+            public override bool Equals(object obj) => Equals(obj as Failure_);
 
             public override int GetHashCode()
-            {
-                return EqualityComparer<ExceptionDispatchInfo>.Default.GetHashCode(ExceptionInfo);
-            }
+                => EqualityComparer<ExceptionDispatchInfo>.Default.GetHashCode(ExceptionInfo);
 
             public override string ToString()
             {

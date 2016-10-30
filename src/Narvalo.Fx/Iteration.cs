@@ -5,8 +5,6 @@ namespace Narvalo.Fx
     public static class Iteration
     {
         public static Iteration<TResult, TSource> Create<TResult, TSource>(TResult result, TSource next)
-        {
-            return new Iteration<TResult, TSource>(result, next);
-        }
+            => new Iteration<TResult, TSource>(result, next);
     }
 }

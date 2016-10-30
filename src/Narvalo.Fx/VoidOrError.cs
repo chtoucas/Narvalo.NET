@@ -39,7 +39,7 @@ namespace Narvalo.Fx
 
         public static VoidOrError Error(ExceptionDispatchInfo exceptionInfo)
         {
-            Require.NotNull(exceptionInfo, "exceptionInfo");
+            Require.NotNull(exceptionInfo, nameof(exceptionInfo));
             Contract.Ensures(Contract.Result<VoidOrError>() != null);
 
             return new VoidOrError.Error_(exceptionInfo);
@@ -68,10 +68,7 @@ namespace Narvalo.Fx
                 _exceptionInfo = exceptionInfo;
             }
 
-            public override void ThrowIfError()
-            {
-                _exceptionInfo.Throw();
-            }
+            public override void ThrowIfError() => _exceptionInfo.Throw();
 
             public override string ToString()
             {

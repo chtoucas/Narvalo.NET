@@ -18,7 +18,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(predicate, nameof(predicate));
 <#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -71,7 +71,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 <#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
@@ -104,7 +104,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 <#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
@@ -120,7 +120,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 <#+ if (IsNullable) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>

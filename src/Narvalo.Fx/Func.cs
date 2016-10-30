@@ -16,7 +16,7 @@ namespace Narvalo.Fx
 
         public static Func<T> Flatten<T>(Func<Func<T>> square)
         {
-            Require.NotNull(square, "square");
+            Require.NotNull(square, nameof(square));
 
             return square.Invoke();
         }

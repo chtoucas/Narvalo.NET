@@ -105,7 +105,7 @@ namespace Narvalo.Fx.Samples
 
             return m =>
             {
-                Require.NotNull(m, "m");
+                Require.NotNull(m, nameof(m));
                 return m.Select(fun);
             };
         }
@@ -125,7 +125,7 @@ namespace Narvalo.Fx.Samples
 
             return (m1, m2) =>
             {
-                Require.NotNull(m1, "m1");
+                Require.NotNull(m1, nameof(m1));
                 return m1.Zip(m2, fun);
             };
         }
@@ -145,7 +145,7 @@ namespace Narvalo.Fx.Samples
 
             return (m1, m2, m3) =>
             {
-                Require.NotNull(m1, "m1");
+                Require.NotNull(m1, nameof(m1));
                 return m1.Zip(m2, m3, fun);
             };
         }
@@ -166,7 +166,7 @@ namespace Narvalo.Fx.Samples
 
             return (m1, m2, m3, m4) =>
             {
-                Require.NotNull(m1, "m1");
+                Require.NotNull(m1, nameof(m1));
                 return m1.Zip(m2, m3, m4, fun);
             };
         }
@@ -187,7 +187,7 @@ namespace Narvalo.Fx.Samples
 
             return (m1, m2, m3, m4, m5) =>
             {
-                Require.NotNull(m1, "m1");
+                Require.NotNull(m1, nameof(m1));
                 return m1.Zip(m2, m3, m4, m5, fun);
             };
         }
@@ -211,7 +211,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return @this.Bind(_ => Monad.Return(selector.Invoke(_)));
         }
@@ -290,8 +290,8 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(second, nameof(second));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -305,8 +305,8 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(second, nameof(second));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             Func<T1, Monad<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -324,8 +324,8 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(second, nameof(second));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             Func<T1, Monad<TResult>> g
                 = t1 => second.Zip(
@@ -347,8 +347,8 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(second, "second");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(second, nameof(second));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             Func<T1, Monad<TResult>> g
                 = t1 => second.Zip(
@@ -375,8 +375,8 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(valueSelectorM, "valueSelectorM");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(valueSelectorM, nameof(valueSelectorM));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(
                 _ => valueSelectorM.Invoke(_).Select(
@@ -405,7 +405,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(predicate, nameof(predicate));
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -418,7 +418,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
             Contract.Ensures(Contract.Result<Monad<TSource>>() != null);
 
             if (predicate) { action.Invoke(); }
@@ -445,7 +445,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
@@ -484,7 +484,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
-            Require.NotNull(value, "value");
+            Require.NotNull(value, nameof(value));
 
             return value.Bind(@this);
         }
@@ -513,7 +513,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Acknowledge.Object(@this);
-            Require.NotNull(funM, "funM");
+            Require.NotNull(funM, nameof(funM));
             Contract.Ensures(Contract.Result<Func<TSource, Monad<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
@@ -813,7 +813,7 @@ namespace Narvalo.Fx.Samples.Internal
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(predicateM, "predicateM");
+            Require.NotNull(predicateM, nameof(predicateM));
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
@@ -869,7 +869,7 @@ namespace Narvalo.Fx.Samples.Internal
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Monad<TResult>> resultSelectorM)
         {
-            Require.NotNull(resultSelectorM, "resultSelectorM");
+            Require.NotNull(resultSelectorM, nameof(resultSelectorM));
 
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
@@ -893,7 +893,7 @@ namespace Narvalo.Fx.Samples.Internal
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(accumulatorM, nameof(accumulatorM));
 
             Monad<TAccumulate> retval = Monad.Return(seed);
 
@@ -932,7 +932,7 @@ namespace Narvalo.Fx.Samples.Internal
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(accumulatorM, nameof(accumulatorM));
 
             using (var iter = @this.GetEnumerator())
             {
@@ -980,8 +980,8 @@ namespace Narvalo.Fx.Samples.Internal
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(accumulatorM, "accumulatorM");
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(predicate, nameof(predicate));
 
             Monad<TAccumulate> retval = Monad.Return(seed);
 
@@ -1010,8 +1010,8 @@ namespace Narvalo.Fx.Samples.Internal
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Require.NotNull(accumulatorM, "accumulatorM");
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(predicate, nameof(predicate));
 
             using (var iter = @this.GetEnumerator())
             {

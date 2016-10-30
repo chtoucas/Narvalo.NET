@@ -23,24 +23,17 @@ namespace Narvalo.Fx
         public TSource Next { get { return _next; } }
 
         public static bool operator ==(Iteration<TResult, TSource> left, Iteration<TResult, TSource> right)
-        {
-            return left.Equals(right);
-        }
+            => left.Equals(right);
 
         public static bool operator !=(Iteration<TResult, TSource> left, Iteration<TResult, TSource> right)
-        {
-            return !left.Equals(right);
-        }
+            => !left.Equals(right);
 
         /// <inheritdoc cref="Object.Equals(Object)" />
-        public override bool Equals(object obj)
-        {
-            return Equals(obj, EqualityComparer<object>.Default);
-        }
+        public override bool Equals(object obj) => Equals(obj, EqualityComparer<object>.Default);
 
         public bool Equals(object other, IEqualityComparer comparer)
         {
-            Require.NotNull(comparer, "comparer");
+            Require.NotNull(comparer, nameof(comparer));
 
             if (!(other is Iteration<TResult, TSource>))
             {
@@ -51,9 +44,7 @@ namespace Narvalo.Fx
         }
 
         public bool Equals(Iteration<TResult, TSource> other)
-        {
-            return Equals(other, EqualityComparer<object>.Default);
-        }
+            => Equals(other, EqualityComparer<object>.Default);
 
         public bool Equals(Iteration<TResult, TSource> other, IEqualityComparer comparer)
         {
@@ -64,10 +55,7 @@ namespace Narvalo.Fx
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
-        public override int GetHashCode()
-        {
-            return GetHashCode(EqualityComparer<object>.Default);
-        }
+        public override int GetHashCode() => GetHashCode(EqualityComparer<object>.Default);
 
         public int GetHashCode(IEqualityComparer comparer)
         {
@@ -86,7 +74,7 @@ namespace Narvalo.Fx
 
         //public int CompareTo(object obj, IComparer comparer)
         //{
-        //    Require.NotNull(comparer, "comparer");
+        //    Require.NotNull(comparer, nameof(comparer));
 
         //    if (!(obj is Iteration<TResult, TSource>))
         //    {

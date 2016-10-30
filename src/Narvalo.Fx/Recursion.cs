@@ -9,7 +9,7 @@ namespace Narvalo.Fx
         public static Func<TSource, TResult> Fix<TSource, TResult>(
             Func<Func<TSource, TResult>, Func<TSource, TResult>> generator)
         {
-            Require.NotNull(generator, "generator");
+            Require.NotNull(generator, nameof(generator));
 
             Func<TSource, TResult> g = null;
 

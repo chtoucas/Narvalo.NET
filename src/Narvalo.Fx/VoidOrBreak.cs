@@ -49,7 +49,7 @@ namespace Narvalo.Fx
 
         public static VoidOrBreak Break(string message)
         {
-            Require.NotNullOrEmpty(message, "message");
+            Require.NotNullOrEmpty(message, nameof(message));
             Contract.Ensures(Contract.Result<VoidOrBreak>() != null);
 
             return new VoidOrBreak.Break_(message);

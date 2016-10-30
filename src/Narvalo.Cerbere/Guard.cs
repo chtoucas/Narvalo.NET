@@ -56,6 +56,7 @@ namespace Narvalo
                     parameterName,
                     minInclusive,
                     maxInclusive);
+
                 throw new ArgumentOutOfRangeException(parameterName, value, message);
             }
         }

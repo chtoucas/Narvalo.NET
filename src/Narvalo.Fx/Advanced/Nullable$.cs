@@ -25,7 +25,7 @@ namespace Narvalo.Fx.Advanced
             where TSource : struct
             where TResult : struct
         {
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return @this.HasValue ? selector.Invoke(@this.Value) : null;
         }
@@ -38,7 +38,7 @@ namespace Narvalo.Fx.Advanced
             where TSource : struct
             where TResult : struct
         {
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return @this.HasValue ? (TResult?)selector.Invoke(@this.Value) : null;
         }
@@ -46,9 +46,7 @@ namespace Narvalo.Fx.Advanced
         public static TResult? Then<TSource, TResult>(this TSource? @this, TResult? other)
             where TSource : struct
             where TResult : struct
-        {
-            return @this.HasValue ? other : null;
-        }
+            => @this.HasValue ? other : null;
 
         #endregion
 
@@ -62,7 +60,7 @@ namespace Narvalo.Fx.Advanced
             where TSecond : struct
             where TResult : struct
         {
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.HasValue && second.HasValue
                 ? (TResult?)resultSelector.Invoke(@this.Value, second.Value)
@@ -78,7 +76,7 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, bool> predicate)
             where TSource : struct
         {
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(predicate, nameof(predicate));
 
             return @this.Bind(_ => predicate.Invoke(_) ? @this : null);
         }
@@ -91,8 +89,8 @@ namespace Narvalo.Fx.Advanced
             where TMiddle : struct
             where TResult : struct
         {
-            Require.NotNull(valueSelector, "valueSelector");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(valueSelector, nameof(valueSelector));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             return @this.Bind(_ => valueSelector(_).Select(middle => resultSelector(_, middle)));
         }
@@ -109,7 +107,7 @@ namespace Narvalo.Fx.Advanced
             where TSource : struct
             where TResult : struct
         {
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(predicate, nameof(predicate));
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -141,8 +139,8 @@ namespace Narvalo.Fx.Advanced
         public static void Invoke<TSource>(this TSource? @this, Action<TSource> action, Action caseNull)
             where TSource : struct
         {
-            Require.NotNull(action, "action");
-            Require.NotNull(caseNull, "caseNull");
+            Require.NotNull(action, nameof(action));
+            Require.NotNull(caseNull, nameof(caseNull));
 
             if (@this.HasValue)
             {
@@ -157,7 +155,7 @@ namespace Narvalo.Fx.Advanced
         public static void Invoke<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             if (@this.HasValue)
             {
@@ -168,7 +166,7 @@ namespace Narvalo.Fx.Advanced
         public static void OnNull<TSource>(this TSource? @this, Action action)
             where TSource : struct
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             if (!@this.HasValue)
             {
@@ -181,7 +179,7 @@ namespace Narvalo.Fx.Advanced
         public static TSource ValueOrThrow<TSource>(this TSource? @this, Exception exception)
             where TSource : struct
         {
-            Require.NotNull(exception, "exception");
+            Require.NotNull(exception, nameof(exception));
 
             return @this.ValueOrThrow(() => exception);
         }
@@ -189,7 +187,7 @@ namespace Narvalo.Fx.Advanced
         public static TSource ValueOrThrow<TSource>(this TSource? @this, Func<Exception> exceptionFactory)
             where TSource : struct
         {
-            Require.NotNull(exceptionFactory, "exceptionFactory");
+            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
 
             if (!@this.HasValue)
             {

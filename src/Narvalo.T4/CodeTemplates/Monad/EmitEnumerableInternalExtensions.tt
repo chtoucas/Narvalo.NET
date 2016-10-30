@@ -42,7 +42,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(true); #>
-            Require.NotNull(predicateM, "predicateM");
+            Require.NotNull(predicateM, nameof(predicateM));
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
@@ -113,7 +113,7 @@ public partial class MonadTemplate
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
         {
-            Require.NotNull(resultSelectorM, "resultSelectorM");
+            Require.NotNull(resultSelectorM, nameof(resultSelectorM));
 
             Acknowledge.Object(@this);
             Contract.Requires(second != null);
@@ -140,7 +140,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             <#+ WriteNotNull(true); #>
-            Require.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(accumulatorM, nameof(accumulatorM));
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
@@ -188,7 +188,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(true); #>
-            Require.NotNull(accumulatorM, "accumulatorM");
+            Require.NotNull(accumulatorM, nameof(accumulatorM));
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
@@ -244,8 +244,8 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
             <#+ WriteNotNull(true); #>
-            Require.NotNull(accumulatorM, "accumulatorM");
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(predicate, nameof(predicate));
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
@@ -279,8 +279,8 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(true); #>
-            Require.NotNull(accumulatorM, "accumulatorM");
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(accumulatorM, nameof(accumulatorM));
+            Require.NotNull(predicate, nameof(predicate));
 <#+ if (IsNullable && HasZero) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>

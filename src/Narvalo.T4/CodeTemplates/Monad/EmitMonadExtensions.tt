@@ -21,7 +21,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 <#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -95,7 +95,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
             <#+ WriteNotNull(); #>
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(predicate, nameof(predicate));
 <#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
 <#+ } #>
@@ -139,7 +139,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -157,7 +157,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -179,7 +179,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -205,7 +205,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
             <#+ WriteNotNull("second"); #>
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -268,8 +268,8 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             <#+ WriteNotNull(); #>
-            Require.NotNull(valueSelectorM, "valueSelectorM");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(valueSelectorM, nameof(valueSelectorM));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
             Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -412,7 +412,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
             <#+ WriteNotNull("seq"); #>
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
@@ -440,7 +440,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
             <#+ WriteNotNull("seq"); #>
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (IsNullable) { #>
             Contract.Requires(inner != null);
 <#+ } #>
@@ -465,8 +465,8 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey"); #>
         {
             <#+ WriteNotNull("inner"); #>
-            Require.NotNull(outerKeySelector, "outerKeySelector");
-            Require.NotNull(comparer, "comparer");
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(comparer, nameof(comparer));
             Contract.Requires(innerKeySelector != null);
             Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TKey>>>() != null);
 

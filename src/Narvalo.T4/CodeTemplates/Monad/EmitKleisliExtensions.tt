@@ -73,7 +73,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             Acknowledge.Object(@this);
-            Require.NotNull(funM, "funM");
+            Require.NotNull(funM, nameof(funM));
             Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);

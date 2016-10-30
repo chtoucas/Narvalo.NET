@@ -10,47 +10,35 @@ namespace Narvalo.Fx
     public static partial class Maybe
     {
         public static Maybe<T> Of<T>(T? value) where T : struct
-        {
-            return value.HasValue ? Maybe<T>.η(value.Value) : Maybe<T>.None;
-        }
+            => value.HasValue ? Maybe<T>.η(value.Value) : Maybe<T>.None;
 
         #region Extension methods when T is a struct
 
         public static T? ToNullable<T>(this Maybe<T?> @this) where T : struct
-        {
-            return @this.ValueOrDefault();
-        }
+            => @this.ValueOrDefault();
 
         public static T? ToNullable<T>(this Maybe<T> @this) where T : struct
-        {
-            return @this.IsSome ? (T?)@this.Value : null;
-        }
+            => @this.IsSome ? (T?)@this.Value : null;
 
         public static T UnpackOrDefault<T>(this Maybe<T?> @this) where T : struct
-        {
-            return UnpackOrElse(@this, default(T));
-        }
+            => UnpackOrElse(@this, default(T));
 
         public static T UnpackOrElse<T>(this Maybe<T?> @this, T defaultValue) where T : struct
-        {
-            return UnpackOrElse(@this, () => defaultValue);
-        }
+            => UnpackOrElse(@this, () => defaultValue);
 
         public static T UnpackOrElse<T>(this Maybe<T?> @this, Func<T> defaultValueFactory) where T : struct
         {
-            Require.NotNull(defaultValueFactory, "defaultValueFactory");
+            Require.NotNull(defaultValueFactory, nameof(defaultValueFactory));
 
             return @this.ValueOrDefault() ?? defaultValueFactory.Invoke();
         }
 
         public static T UnpackOrThrow<T>(this Maybe<T?> @this, Exception exception) where T : struct
-        {
-            return UnpackOrThrow(@this, () => exception);
-        }
+            => UnpackOrThrow(@this, () => exception);
 
         public static T UnpackOrThrow<T>(this Maybe<T?> @this, Func<Exception> exceptionFactory) where T : struct
         {
-            Require.NotNull(exceptionFactory, "exceptionFactory");
+            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
 
             T? m = @this.ValueOrDefault();
 

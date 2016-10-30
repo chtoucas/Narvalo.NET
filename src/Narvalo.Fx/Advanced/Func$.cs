@@ -17,7 +17,7 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, Func<TResult>> selector)
         {
             Require.Object(@this);
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return selector.Invoke(@this.Invoke());
         }
@@ -25,7 +25,7 @@ namespace Narvalo.Fx.Advanced
         public static Func<TResult> Select<TSource, TResult>(this Func<TSource> @this, Func<TSource, TResult> selector)
         {
             Require.Object(@this);
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
             Contract.Ensures(Contract.Result<Func<TResult>>() != null);
 
             return () => selector.Invoke(@this.Invoke());
@@ -65,7 +65,7 @@ namespace Narvalo.Fx.Advanced
             where TResult : struct
         {
             Require.Object(@this);
-            Require.NotNull(funM, "funM");
+            Require.NotNull(funM, nameof(funM));
             Contract.Ensures(Contract.Result<Func<TSource, TResult?>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);

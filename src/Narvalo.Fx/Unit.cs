@@ -32,15 +32,9 @@ namespace Narvalo.Fx
             return false;
         }
 
-        public bool Equals(Unit other)
-        {
-            return true;
-        }
+        public bool Equals(Unit other) => true;
 
-        public override bool Equals(object obj)
-        {
-            return obj is Unit;
-        }
+        public override bool Equals(object obj) => obj is Unit;
 
         public override int GetHashCode()
         {

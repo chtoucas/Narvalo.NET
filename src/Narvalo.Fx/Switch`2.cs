@@ -87,28 +87,20 @@ namespace Narvalo.Fx
         private sealed class Empty_ : Switch<TLeft, TRight>, IEquatable<Empty_>
         {
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
-            {
-                return Switch<TResult, TRight>.Empty;
-            }
+                => Switch<TResult, TRight>.Empty;
 
             public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
-            {
-                return Switch<TLeft, TResult>.Empty;
-            }
+                => Switch<TLeft, TResult>.Empty;
 
             public override Switch<TResult, TRight> Map<TResult>(Func<TLeft, TResult> leftSelector)
-            {
-                return Switch<TResult, TRight>.Empty;
-            }
+                => Switch<TResult, TRight>.Empty;
 
             public override Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector)
-            {
-                return Switch<TLeft, TResult>.Empty;
-            }
+                => Switch<TLeft, TResult>.Empty;
 
             public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
-                Require.NotNull(otherwise, "otherwise");
+                Require.NotNull(otherwise, nameof(otherwise));
 
                 otherwise.Invoke();
             }
@@ -118,25 +110,16 @@ namespace Narvalo.Fx
                 Func<TRight, TResult> caseRight,
                 Func<TResult> otherwise)
             {
-                Require.NotNull(otherwise, "otherwise");
+                Require.NotNull(otherwise, nameof(otherwise));
 
                 return otherwise.Invoke();
             }
 
-            public override Switch<TRight, TLeft> Swap()
-            {
-                return Switch<TRight, TLeft>.Empty;
-            }
+            public override Switch<TRight, TLeft> Swap() => Switch<TRight, TLeft>.Empty;
 
-            public override Maybe<TLeft> LeftOrNone()
-            {
-                return Maybe<TLeft>.None;
-            }
+            public override Maybe<TLeft> LeftOrNone() => Maybe<TLeft>.None;
 
-            public override Maybe<TRight> RightOrNone()
-            {
-                return Maybe<TRight>.None;
-            }
+            public override Maybe<TRight> RightOrNone() => Maybe<TRight>.None;
 
             public override string ToString()
             {
@@ -145,20 +128,11 @@ namespace Narvalo.Fx
                 return "Either(Empty)";
             }
 
-            public bool Equals(Empty_ other)
-            {
-                return true;
-            }
+            public bool Equals(Empty_ other) => true;
 
-            public override bool Equals(object obj)
-            {
-                return obj is Empty_;
-            }
+            public override bool Equals(object obj) => obj is Empty_;
 
-            public override int GetHashCode()
-            {
-                return 0;
-            }
+            public override int GetHashCode() => 0;
         }
 
         /// <summary>
@@ -178,35 +152,31 @@ namespace Narvalo.Fx
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
             {
-                Require.NotNull(leftSelectorM, "leftSelectorM");
+                Require.NotNull(leftSelectorM, nameof(leftSelectorM));
 
                 return leftSelectorM.Invoke(_value);
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
             public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
-            {
-                return new Switch<TLeft, TResult>.Left_(_value);
-            }
+                => new Switch<TLeft, TResult>.Left_(_value);
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Map{TResult}(Func{TLeft, TResult})" />
             public override Switch<TResult, TRight> Map<TResult>(Func<TLeft, TResult> leftSelector)
             {
-                Require.NotNull(leftSelector, "leftSelector");
+                Require.NotNull(leftSelector, nameof(leftSelector));
 
                 return Switch<TResult, TRight>.η(leftSelector.Invoke(_value));
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Map{TResult}(Func{TRight, TResult})" />
             public override Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector)
-            {
-                return new Switch<TLeft, TResult>.Left_(_value);
-            }
+                => new Switch<TLeft, TResult>.Left_(_value);
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Invoke" />
             public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
-                Require.NotNull(caseLeft, "caseLeft");
+                Require.NotNull(caseLeft, nameof(caseLeft));
 
                 caseLeft.Invoke(_value);
             }
@@ -217,26 +187,17 @@ namespace Narvalo.Fx
                 Func<TRight, TResult> caseRight,
                 Func<TResult> otherwise)
             {
-                Require.NotNull(caseLeft, "caseLeft");
+                Require.NotNull(caseLeft, nameof(caseLeft));
 
                 return caseLeft.Invoke(_value);
             }
 
             /// <inheritdoc cref="Switch{TRight, TLeft}.Swap" />
-            public override Switch<TRight, TLeft> Swap()
-            {
-                return Switch<TRight, TLeft>.η(_value);
-            }
+            public override Switch<TRight, TLeft> Swap() => Switch<TRight, TLeft>.η(_value);
 
-            public override Maybe<TLeft> LeftOrNone()
-            {
-                return Maybe.Of(_value);
-            }
+            public override Maybe<TLeft> LeftOrNone() => Maybe.Of(_value);
 
-            public override Maybe<TRight> RightOrNone()
-            {
-                return Maybe<TRight>.None;
-            }
+            public override Maybe<TRight> RightOrNone() => Maybe<TRight>.None;
 
             public bool Equals(Left_ other)
             {
@@ -253,15 +214,9 @@ namespace Narvalo.Fx
                 return EqualityComparer<TLeft>.Default.Equals(_value, other._value);
             }
 
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as Left_);
-            }
+            public override bool Equals(object obj) => Equals(obj as Left_);
 
-            public override int GetHashCode()
-            {
-                return EqualityComparer<TLeft>.Default.GetHashCode(_value);
-            }
+            public override int GetHashCode() => EqualityComparer<TLeft>.Default.GetHashCode(_value);
 
             public override string ToString()
             {
@@ -287,42 +242,35 @@ namespace Narvalo.Fx
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TLeft, Switch{TResult, TRight}})" />
             public override Switch<TResult, TRight> Bind<TResult>(Func<TLeft, Switch<TResult, TRight>> leftSelectorM)
-            {
-                return new Switch<TResult, TRight>.Right_(_value);
-            }
+                => new Switch<TResult, TRight>.Right_(_value);
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Bind{TResult}(Func{TRight, Switch{TLeft, TResult}})" />
             public override Switch<TLeft, TResult> Bind<TResult>(Func<TRight, Switch<TLeft, TResult>> rightSelectorM)
             {
-                Require.NotNull(rightSelectorM, "rightSelectorM");
+                Require.NotNull(rightSelectorM, nameof(rightSelectorM));
 
                 return rightSelectorM.Invoke(_value);
             }
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Map{TResult}(Func{TLeft, TResult})" />
             public override Switch<TResult, TRight> Map<TResult>(Func<TLeft, TResult> leftSelector)
-            {
-                return new Switch<TResult, TRight>.Right_(_value);
-            }
+                => new Switch<TResult, TRight>.Right_(_value);
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Map{TResult}(Func{TRight, TResult})" />
             public override Switch<TLeft, TResult> Map<TResult>(Func<TRight, TResult> rightSelector)
             {
-                Require.NotNull(rightSelector, "rightSelector");
+                Require.NotNull(rightSelector, nameof(rightSelector));
 
                 return Switch<TLeft, TResult>.η(rightSelector.Invoke(_value));
             }
 
             /// <inheritdoc cref="Switch{TRight, TLeft}.Swap" />
-            public override Switch<TRight, TLeft> Swap()
-            {
-                return Switch<TRight, TLeft>.η(_value);
-            }
+            public override Switch<TRight, TLeft> Swap() => Switch<TRight, TLeft>.η(_value);
 
             /// <inheritdoc cref="Switch{TLeft, TRight}.Invoke" />
             public override void Invoke(Action<TLeft> caseLeft, Action<TRight> caseRight, Action otherwise)
             {
-                Require.NotNull(caseRight, "caseRight");
+                Require.NotNull(caseRight, nameof(caseRight));
 
                 caseRight.Invoke(_value);
             }
@@ -333,20 +281,14 @@ namespace Narvalo.Fx
                 Func<TRight, TResult> caseRight,
                 Func<TResult> otherwise)
             {
-                Require.NotNull(caseRight, "caseRight");
+                Require.NotNull(caseRight, nameof(caseRight));
 
                 return caseRight.Invoke(_value);
             }
 
-            public override Maybe<TLeft> LeftOrNone()
-            {
-                return Maybe<TLeft>.None;
-            }
+            public override Maybe<TLeft> LeftOrNone() => Maybe<TLeft>.None;
 
-            public override Maybe<TRight> RightOrNone()
-            {
-                return Maybe.Of(_value);
-            }
+            public override Maybe<TRight> RightOrNone() => Maybe.Of(_value);
 
             public bool Equals(Right_ other)
             {
@@ -363,15 +305,9 @@ namespace Narvalo.Fx
                 return EqualityComparer<TRight>.Default.Equals(_value, other._value);
             }
 
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as Right_);
-            }
+            public override bool Equals(object obj) => Equals(obj as Right_);
 
-            public override int GetHashCode()
-            {
-                return EqualityComparer<TRight>.Default.GetHashCode(_value);
-            }
+            public override int GetHashCode() => EqualityComparer<TRight>.Default.GetHashCode(_value);
 
             public override string ToString()
             {
@@ -463,15 +399,9 @@ namespace Narvalo.Fx
             return default(Switch<TRight, TLeft>);
         }
 
-        public override Maybe<TLeft> LeftOrNone()
-        {
-            return default(Maybe<TLeft>);
-        }
+        public override Maybe<TLeft> LeftOrNone() => default(Maybe<TLeft>);
 
-        public override Maybe<TRight> RightOrNone()
-        {
-            return default(Maybe<TRight>);
-        }
+        public override Maybe<TRight> RightOrNone() => default(Maybe<TRight>);
     }
 
 #endif

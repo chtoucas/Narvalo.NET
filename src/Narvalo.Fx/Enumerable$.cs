@@ -48,7 +48,7 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate)
         {
             Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(predicate, nameof(predicate));
 
             IEnumerable<Maybe<TSource>> seq
                 = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
@@ -71,7 +71,7 @@ namespace Narvalo.Fx
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
             Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(predicate, nameof(predicate));
 
             return @this.Reverse().EmptyIfNull().FirstOrNone();
         }
@@ -88,7 +88,7 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate)
         {
             Require.Object(@this);
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(predicate, nameof(predicate));
 
             IEnumerable<Maybe<TSource>> seq
                 = from t in @this where predicate.Invoke(t) select Maybe.Of(t);
@@ -179,8 +179,8 @@ namespace Narvalo.Fx
             Func<TAccumulate, bool> predicate)
         {
             Require.Object(@this);
-            Require.NotNull(accumulator, "accumulator");
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
 
             TAccumulate retval = seed;
 
@@ -201,8 +201,8 @@ namespace Narvalo.Fx
             Func<TSource, bool> predicate)
         {
             Require.Object(@this);
-            Require.NotNull(accumulator, "accumulator");
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(accumulator, nameof(accumulator));
+            Require.NotNull(predicate, nameof(predicate));
 
             using (var iter = @this.GetEnumerator())
             {

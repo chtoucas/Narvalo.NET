@@ -211,10 +211,7 @@ namespace Narvalo.Fx
 
         #region Operators
 
-        public static explicit operator Maybe<T>(T value)
-        {
-            return η(value);
-        }
+        public static explicit operator Maybe<T>(T value) => η(value);
 
         public static explicit operator T(Maybe<T> value)
         {
@@ -230,24 +227,18 @@ namespace Narvalo.Fx
 
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
             Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
-        public static bool operator true(Maybe<T> value)
-        {
-            return value.IsSome;
-        }
+        public static bool operator true(Maybe<T> value) => value.IsSome;
 
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
             Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
-        public static bool operator false(Maybe<T> value)
-        {
-            return !value.IsSome;
-        }
+        public static bool operator false(Maybe<T> value) => !value.IsSome;
 
         #endregion
 
         public TResult Map<TResult>(Func<T, TResult> caseSome, Func<TResult> caseNone)
         {
-            Require.NotNull(caseSome, "caseSome");
-            Require.NotNull(caseNone, "caseNone");
+            Require.NotNull(caseSome, nameof(caseSome));
+            Require.NotNull(caseNone, nameof(caseNone));
 
             if (IsSome)
             {
@@ -281,14 +272,14 @@ namespace Narvalo.Fx
 
         public T ValueOrElse(Func<T> valueFactory)
         {
-            Require.NotNull(valueFactory, "valueFactory");
+            Require.NotNull(valueFactory, nameof(valueFactory));
 
             return IsSome ? Value : valueFactory.Invoke();
         }
 
         public T ValueOrThrow(Exception exception)
         {
-            Require.NotNull(exception, "exception");
+            Require.NotNull(exception, nameof(exception));
             Contract.Ensures(Contract.Result<T>() != null);
 
             return ValueOrThrow(() => exception);
@@ -296,7 +287,7 @@ namespace Narvalo.Fx
 
         public T ValueOrThrow(Func<Exception> exceptionFactory)
         {
-            Require.NotNull(exceptionFactory, "exceptionFactory");
+            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
             Contract.Ensures(Contract.Result<T>() != null);
 
             if (!IsSome)
@@ -321,15 +312,13 @@ namespace Narvalo.Fx
 
         public Maybe<TResult> Select<TResult>(Func<T, TResult> selector)
         {
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return IsSome ? Maybe<TResult>.η(selector.Invoke(Value)) : Maybe<TResult>.None;
         }
 
         public Maybe<TResult> Then<TResult>(Maybe<TResult> other)
-        {
-            return IsSome ? other : Maybe<TResult>.None;
-        }
+            => IsSome ? other : Maybe<TResult>.None;
 
         #endregion
 
@@ -339,7 +328,7 @@ namespace Narvalo.Fx
             Maybe<TSecond> second,
             Func<T, TSecond, TResult> resultSelector)
         {
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             return IsSome && second.IsSome
                 ? Maybe<TResult>.η(resultSelector.Invoke(Value, second.Value))
@@ -357,9 +346,9 @@ namespace Narvalo.Fx
             Func<T, TInner, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             if (!IsSome || !inner.IsSome)
             {
@@ -381,9 +370,9 @@ namespace Narvalo.Fx
             Func<T, Maybe<TInner>, TResult> resultSelector,
             IEqualityComparer<TKey> comparer)
         {
-            Require.NotNull(outerKeySelector, "valueSelector");
-            Require.NotNull(innerKeySelector, "innerKeySelector");
-            Require.NotNull(resultSelector, "resultSelector");
+            Require.NotNull(outerKeySelector, nameof(outerKeySelector));
+            Require.NotNull(innerKeySelector, nameof(innerKeySelector));
+            Require.NotNull(resultSelector, nameof(resultSelector));
 
             // REVIEW: I can't remember why I didn't include !inner.IsSome before?
             if (!IsSome || !inner.IsSome)
@@ -405,8 +394,8 @@ namespace Narvalo.Fx
 
         public Maybe<T> Invoke(Action<T> action, Action caseNone)
         {
-            Require.NotNull(action, "action");
-            Require.NotNull(caseNone, "caseNone");
+            Require.NotNull(action, nameof(action));
+            Require.NotNull(caseNone, nameof(caseNone));
 
             if (IsSome)
             {
@@ -422,7 +411,7 @@ namespace Narvalo.Fx
 
         public Maybe<T> Invoke(Action<T> action)
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             if (IsSome)
             {
@@ -434,7 +423,7 @@ namespace Narvalo.Fx
 
         public Maybe<T> OnNone(Action action)
         {
-            Require.NotNull(action, "action");
+            Require.NotNull(action, nameof(action));
 
             if (!IsSome)
             {
@@ -537,7 +526,7 @@ namespace Narvalo.Fx
 
         public bool Equals(Maybe<T> other, IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, "comparer");
+            Require.NotNull(comparer, nameof(comparer));
 
             if (IsSome)
             {
@@ -552,7 +541,7 @@ namespace Narvalo.Fx
 
         public bool Equals(object other, IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, "comparer");
+            Require.NotNull(comparer, nameof(comparer));
 
             if (!(other is Maybe<T>))
             {
@@ -567,7 +556,7 @@ namespace Narvalo.Fx
 
         public int GetHashCode(IEqualityComparer<T> comparer)
         {
-            Require.NotNull(comparer, "comparer");
+            Require.NotNull(comparer, nameof(comparer));
 
             return IsSome ? comparer.GetHashCode(Value) : 0;
         }
@@ -580,7 +569,7 @@ namespace Narvalo.Fx
     {
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
         {
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
         }

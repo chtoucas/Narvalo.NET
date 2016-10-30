@@ -17,7 +17,7 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, Maybe<TResult>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(funM, "funM");
+            Require.NotNull(funM, nameof(funM));
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
             return (from _ in @this
@@ -31,7 +31,7 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, Outcome<TResult>> funM)
         {
             Require.Object(@this);
-            Require.NotNull(funM, "funM");
+            Require.NotNull(funM, nameof(funM));
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
             return (from _ in @this
@@ -47,7 +47,7 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, Maybe<bool>> predicateM)
         {
             Require.Object(@this);
-            Require.NotNull(predicateM, "predicateM");
+            Require.NotNull(predicateM, nameof(predicateM));
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             return @this

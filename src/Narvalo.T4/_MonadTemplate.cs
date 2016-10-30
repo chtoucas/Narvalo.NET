@@ -159,7 +159,7 @@ namespace Narvalo.T4
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("The name of the Zero property can not be null or blank.", "value");
+                    throw new ArgumentException("The name of the Zero property can not be null or blank.", nameof(value));
                 }
 
                 _zeroName = value;
@@ -186,7 +186,7 @@ namespace Narvalo.T4
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("The name of the Plus method can not be null or blank.", "value");
+                    throw new ArgumentException("The name of the Plus method can not be null or blank.", nameof(value));
                 }
 
                 _plusName = value;
@@ -208,7 +208,7 @@ namespace Narvalo.T4
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("The name of the Return method can not be null or blank.", "value");
+                    throw new ArgumentException("The name of the Return method can not be null or blank.", nameof(value));
                 }
 
                 _returnName = value;
@@ -367,7 +367,7 @@ namespace Narvalo.T4
         {
             if (IsNullable)
             {
-                WriteLine(@"Require.NotNull({0}, ""{0}"");", name);
+                WriteLine(@"Require.NotNull({0}, nameof({0}));", name);
             }
             else
             {

@@ -43,8 +43,8 @@ namespace Narvalo.Fx
             Func<TSource, Iteration<TResult, TSource>> generator,
             Func<TSource, bool> predicate)
         {
-            Require.NotNull(generator, "generator");
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(generator, nameof(generator));
+            Require.NotNull(predicate, nameof(predicate));
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
             TSource current = seed;
@@ -81,8 +81,8 @@ namespace Narvalo.Fx
             Func<TSource, TSource> iterator,
             Func<TSource, bool> predicate)
         {
-            Require.NotNull(iterator, "iterator");
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(iterator, nameof(iterator));
+            Require.NotNull(predicate, nameof(predicate));
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             TSource current = seed;
@@ -128,9 +128,9 @@ namespace Narvalo.Fx
             Func<TSource, TResult> resultSelector,
             Func<TSource, bool> predicate)
         {
-            Require.NotNull(iterator, "iterator");
-            Require.NotNull(resultSelector, "resultSelector");
-            Require.NotNull(predicate, "predicate");
+            Require.NotNull(iterator, nameof(iterator));
+            Require.NotNull(resultSelector, nameof(resultSelector));
+            Require.NotNull(predicate, nameof(predicate));
             Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
 
             TSource current = seed;
