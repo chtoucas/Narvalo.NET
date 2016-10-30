@@ -29,6 +29,7 @@ Optional components:
 Components necessary to run the build scripts:
 - Code Contracts (see above).
 - Visual Extensibility Tools provides T4 integration in MSBuild.
+- Tools and Windows SDK for PEVerify.exe.
 
 Prerequisites (Old)
 -------------------

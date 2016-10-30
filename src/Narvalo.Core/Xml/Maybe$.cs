@@ -14,7 +14,7 @@ namespace Narvalo.Xml
     {
         public static Maybe<T> MapValue<T>(this Maybe<XElement> @this, Func<string, T> selector)
         {
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return from _ in @this select selector.Invoke(_.Value);
         }
@@ -32,7 +32,7 @@ namespace Narvalo.Xml
     {
         public static Maybe<T> MapValue<T>(this Maybe<XAttribute> @this, Func<string, T> selector)
         {
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return from _ in @this select selector.Invoke(_.Value);
         }
