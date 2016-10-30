@@ -111,10 +111,10 @@ namespace Narvalo.Finance
     public partial class Currency
     {
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class 
+        /// Gets the unique instance of the <see cref="Currency" /> class
         /// for the pseudo-currency for transactions where no currency is involved.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class 
+        /// <value>The unique instance of the <see cref="Currency" /> class
         /// for the pseudo-currency for transactions where no currency is involved.</value>
         public static Currency None
         {
@@ -127,10 +127,10 @@ namespace Narvalo.Finance
         }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class 
+        /// Gets the unique instance of the <see cref="Currency" /> class
         /// for the currency specifically reserved for testing purposes.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class 
+        /// <value>The unique instance of the <see cref="Currency" /> class
         /// for the currency specifically reserved for testing purposes.</value>
         public static Currency Test
         {

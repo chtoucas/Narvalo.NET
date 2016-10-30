@@ -101,7 +101,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Narvalo.Common.props" />
+    <None Include="Narvalo.Common.props">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Narvalo.Common.Version.props" />
   </ItemGroup>
   <ItemGroup>

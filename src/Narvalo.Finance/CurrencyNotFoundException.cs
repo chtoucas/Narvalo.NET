@@ -30,8 +30,8 @@ namespace Narvalo.Finance
         /// that is the cause of this exception.
         /// </summary>
         /// <param name="message">The error message to display with this exception.</param>
-        /// <param name="innerException">The exception that is the cause of the current exception. 
-        /// If the innerException parameter is not a null reference, the current exception is raised 
+        /// <param name="innerException">The exception that is the cause of the current exception.
+        /// If the innerException parameter is not a null reference, the current exception is raised
         /// in a catch block that handles the inner exception.</param>
         public CurrencyNotFoundException(string message, Exception innerException) :
             base(message, innerException) { }

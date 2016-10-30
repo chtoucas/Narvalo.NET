@@ -13,7 +13,7 @@ namespace Narvalo.Finance.Internal
         public static void CurrencyCode(string code)
         {
             // I would like to validate individual characters, but I can't make it work.
-            // NB: For PCL classes, we must convert the string to an array before 
+            // NB: For PCL classes, we must convert the string to an array before
             // being able to use LINQ operators on it.
             // Contract.Requires(
             //    Contract.ForAll(code.ToCharArray(), c => c >= 65 && c <= 90),
