@@ -12,7 +12,6 @@
     </NuDescription>
     <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
       $(NuDescription)
-
       A code contracts reference assembly is included if you ever need it.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
@@ -36,9 +35,14 @@
       ]]>
     </NuFiles>
     <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-      $(NuFiles)
       <![CDATA[
+$(NuFiles)
 <file src="CodeContracts\Narvalo.Cerbere.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
+      ]]>
+    </NuFiles>
+    <NuFiles Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
+      <![CDATA[
+$(NuFiles)
 <file src="CodeContracts\Narvalo.Cerbere.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
       ]]>
     </NuFiles>

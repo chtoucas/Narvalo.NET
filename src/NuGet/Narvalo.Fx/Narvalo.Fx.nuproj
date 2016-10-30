@@ -14,9 +14,11 @@
     </NuDescription>
     <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
       $(NuDescription)
-
       A code contracts reference assembly is included if you ever need it.
     </NuDescription>
+    <NuSummary>
+      This package features implementations of some of the usual suspects from functional programming.
+    </NuSummary>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Maybe, Option, Error, Either, Linq, Monad, Functional</NuTags>
     <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
@@ -38,9 +40,14 @@
       ]]>
     </NuFiles>
     <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-      $(NuFiles)
       <![CDATA[
+$(NuFiles)
 <file src="CodeContracts\Narvalo.Fx.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
+      ]]>
+    </NuFiles>
+    <NuFiles Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
+      <![CDATA[
+$(NuFiles)
 <file src="CodeContracts\Narvalo.Fx.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
       ]]>
     </NuFiles>
