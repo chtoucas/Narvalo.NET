@@ -303,10 +303,9 @@ using System.Reflection;
            Condition=" '$(BuildGeneratedVersion)' != 'true' " />
 
     <!-- The package creation will fail anyway, but better diagnose an invalid configuration before. -->
-    <Error Text="You MUST NOT use 'SkipDocumentation=true' to create a NuGet package."
+    <Error Text="You MUST NOT use 'SkipDocumentation=true' when creating a NuGet package."
            Condition=" '$(SkipDocumentation)' == 'true' " />
-    <!-- FIXME: CodeContracts disabled. -->
-    <Warning Text="You MUST NOT use 'SkipCodeContractsReferenceAssembly=true' to create a NuGet package."
+    <Error Text="You MUST NOT use 'SkipCodeContractsReferenceAssembly=true' when creating a NuGet package."
            Condition=" '$(SkipCodeContractsReferenceAssembly)' == 'true' " />
 
     <WriteNuspec TemplateFile="$(RepositorySettingsDir)Template.nuspec"

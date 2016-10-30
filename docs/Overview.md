@@ -22,7 +22,9 @@ Optional components:
 - [Code Contracts extension for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970)
 - [.NET Portability Analyzer](https://visualstudiogallery.msdn.microsoft.com/1177943e-cfb7-4822-a8a6-e56c7905292b)
   to help evaluate portability across .NET platforms.
-- .NET Framework 3.5 required. The MSBuild file for Code Contracts requires MSBuild v3.5.
+- .NET Framework 3.5 required, installing it from the optional Windows components is sufficient. 
+  The MSBuild file for Code Contracts requires MSBuild v3.5.
+  See [CC Issue](https://github.com/Microsoft/CodeContracts/issues/353)
 
 Components necessary to run the build scripts:
 - Code Contracts (see above).

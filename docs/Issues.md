@@ -3,14 +3,14 @@ Migration to VS2015
 
 - Disabled StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
 - Code contracts (disabled)
-  NB: CC is unusable right now (the task depends on MSBuild v3.5)
-    https://github.com/Microsoft/CodeContracts/issues/353
   * PSakefile: '/p:SkipCodeContractsReferenceAssembly=true' instead of
     '/p:SkipCodeContractsReferenceAssembly=false'
     in _CI-InitializeVariables and _Package-InitializeVariables
   * Raise a warning instead of an error in Make.CustomAfter.targets if skipping CC
-  * If no CC assembly is built, do not reference it in the NuGet specs.
+  * Disabled CodeContractsEmitXMLDocs in Make.CustomAfter.props.
 
+- Force MininalVisualStudioVersion in the solution files?
+- PEVerify does not always run?
 - Analyzers:
   * Migrate from StyleCop to StyleCop.Analyzers
   * Improve DisableAnalyzersForVisualStudioBuild target in Narvalo.Common.targets
@@ -21,6 +21,8 @@ Migration to VS2015
 - MvpWebForms sample project: OutputPath is wrong (temporary fix: override OutputPath
   property in project file). Other strange thing, MvpWebForms.dll.config is created.
   LocalDB requires SQL Server Express.
+- C#
+  * use `nameof` everywhere
 
 
 Issues & Roadmap
@@ -57,6 +59,7 @@ Narvalo.Fx
   * Split.
   * Review true argument check for extension methods.
   * SumCore() and CollectCore() assert that they never return null but this is not always true.
+- Use of .Then(): in JoinCore and GroupJoinCore() can return null.
 
 Narvalo.Core
 ------------
