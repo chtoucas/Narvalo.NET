@@ -59,6 +59,28 @@ return !Log.HasLoggedErrors;
     </Task>
   </UsingTask>
 
+  <!-- GetBuildStampAsPreReleaseLabel task. -->
+  <UsingTask TaskName="GetBuildStampAsPreReleaseLabel" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+    <ParameterGroup>
+      <BuildStamp ParameterType="System.String" Required="true" />
+      <PreReleaseLabel ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+// Semantic versioning v1.0 has a weird behaviour: 1.0.0-T1 < 1.0.0-T10 < 1.0.0-T2.
+var stamp = String.Empty;
+
+for (int i = 0; i < 10 - BuildStamp.Length; i++) { stamp += "0"; }
+
+PreReleaseLabel = "T" + stamp + BuildStamp;
+
+return !Log.HasLoggedErrors;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
   <!-- FindProductVersion task. -->
   <UsingTask TaskName="FindProductVersion" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
     <ParameterGroup>

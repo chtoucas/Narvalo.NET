@@ -396,12 +396,17 @@ using System.Reflection;
           Condition=" '$(NuProjectExists)' == 'true' And '$(Retail)' != 'true' "
           DependsOnTargets="GenerateBuildStamp">
     <!-- For non-retail packages, we change various bits on the fly. -->
+
+    <GetBuildStampAsPreReleaseLabel BuildStamp="$(BuildStamp)">
+      <Output TaskParameter="PreReleaseLabel" PropertyName="BuildStampAsPreReleaseLabel"/>
+    </GetBuildStampAsPreReleaseLabel>
+
     <PropertyGroup>
       <EDGE>EDGE</EDGE>
 
       <NuId>$(NuId).$(EDGE)</NuId>
       <NuTitle Condition=" '$(NuTitle)' != '' ">$(NuTitle) ($(EDGE))</NuTitle>
-      <NuVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)-T$(BuildStamp)</NuVersion>
+      <NuVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)-$(BuildStampAsPreReleaseLabel)</NuVersion>
     </PropertyGroup>
   </Target>
 </Project>
