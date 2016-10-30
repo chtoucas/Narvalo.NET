@@ -81,7 +81,9 @@
 
   <PropertyGroup Condition=" '$(CodeContractsReferenceAssembly)' == 'Build' ">
     <!-- Whenever we build the CC reference assembly we also patch the documentation. -->
-    <CodeContractsEmitXMLDocs>true</CodeContractsEmitXMLDocs>
+    <!-- REVIEW: ccdocgen.exe often fails for obscure reasons.
+         For the time being, patching the XML doc is done only on explicit request. -->
+    <!--<CodeContractsEmitXMLDocs>true</CodeContractsEmitXMLDocs>-->
   </PropertyGroup>
 
   <!-- Sign the assembly. -->
