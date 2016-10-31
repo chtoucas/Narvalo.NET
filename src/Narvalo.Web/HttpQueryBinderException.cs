@@ -4,13 +4,10 @@ namespace Narvalo.Web
 {
     using System;
     using System.Runtime.Serialization;
-    using System.Security;
 
     [Serializable]
     public class HttpQueryBinderException : Exception
     {
-        private string _memberName = String.Empty;
-
         public HttpQueryBinderException() { }
 
         public HttpQueryBinderException(string message) : base(message) { }
@@ -21,16 +18,16 @@ namespace Narvalo.Web
         protected HttpQueryBinderException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public string MemberName { get { return _memberName; } set { _memberName = value; } }
+        public string MemberName { get; set; } = String.Empty;
 
 #if SECURITY_ANNOTATIONS
-        [SecurityCritical]
+        [System.Security.SecurityCritical]
 #endif
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
 
-            info.AddValue("MemberName", _memberName);
+            info.AddValue("MemberName", MemberName);
         }
     }
 }
