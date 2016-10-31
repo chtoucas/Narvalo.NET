@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 [assembly: AssemblyTitle("Narvalo.Cerbere")]
-[assembly: AssemblyDescription("Narvalo Cerbere Library providing argument validation methods and Code Contracts helpers.")]
+[assembly: AssemblyDescription("Library providing argument validation methods and Code Contracts helpers.")]
 
 #if SECURITY_ANNOTATIONS
 [assembly: System.Security.SecurityTransparent]

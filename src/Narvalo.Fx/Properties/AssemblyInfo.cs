@@ -3,7 +3,7 @@
 using System.Reflection;
 
 [assembly: AssemblyTitle("Narvalo.Fx")]
-[assembly: AssemblyDescription("Narvalo FX Library featuring implementations of functional patterns.")]
+[assembly: AssemblyDescription("Library featuring implementations of functional patterns.")]
 
 #if SECURITY_ANNOTATIONS
 [assembly: System.Security.SecurityTransparent]

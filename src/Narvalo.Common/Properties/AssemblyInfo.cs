@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Narvalo.Common")]
-[assembly: AssemblyDescription("Narvalo Common Library containing mostly extension methods for classes from the BCL and few goodies.")]
+[assembly: AssemblyDescription("Library containing mostly extension methods for classes from the BCL and few goodies.")]
 
 [assembly: Guid("8cd3c522-030f-49b4-bd87-285e2b35425b")]
 
