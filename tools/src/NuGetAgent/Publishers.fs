@@ -37,7 +37,7 @@ module Publishers =
                 let obsoletePackages, newerPackages =
                     repository.FindPackagesById package.Id
                     |> List.ofSeq
-                    |> List.partition(fun p -> p.Version <= package.Version)
+                    |> List.partition(fun p -> p.Version < package.Version)
 
                 match purge with
                 | None
@@ -49,6 +49,9 @@ module Publishers =
 
                 // Publish the package.
                 if newerPackages.Any()
+                // TODO: Display a differente message detailing the two possible cases:
+                // - package already published
+                // - a more recent version already published
                 then printfn "Skipping... a more recent version already exists."
                 else this.PushPackage(package)
 
