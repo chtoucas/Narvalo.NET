@@ -4,7 +4,7 @@ Add-Type -AssemblyName 'System.IO.Compression.FileSystem'
 
 # ------------------------------------------------------------------------------
 
-<# 
+<#
 .SYNOPSIS
     Uncompress a ZIP file.
 .PARAMETER Path
@@ -26,7 +26,7 @@ function Expand-ZipArchive {
     Write-Verbose 'done'
 }
 
-<# 
+<#
 .SYNOPSIS
     Merge UTF-8 files.
 .DESCRIPTION

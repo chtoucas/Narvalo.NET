@@ -2,7 +2,7 @@ Set-StrictMode -Version Latest
 
 # ------------------------------------------------------------------------------
 
-<# 
+<#
 .SYNOPSIS
     Return the path to MSDeploy.
 #>
@@ -19,7 +19,7 @@ function Get-WebDeployInstallPath {
     return (Get-ItemProperty $regKey).InstallPath
 }
 
-<# 
+<#
 .SYNOPSIS
     Import WebAdministration as module or snap-in.
 .LINK
