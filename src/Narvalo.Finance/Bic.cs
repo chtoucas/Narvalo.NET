@@ -93,7 +93,7 @@ namespace Narvalo.Finance
 #if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             Contract.Invariant(BranchCode != null);
             Contract.Invariant(CountryCode != null);

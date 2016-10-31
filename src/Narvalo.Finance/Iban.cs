@@ -146,7 +146,7 @@ namespace Narvalo.Finance
 #if CONTRACTS_FULL
 
         [ContractInvariantMethod]
-        private void ObjectInvariants()
+        private void ObjectInvariant()
         {
             Contract.Invariant(_bban != null);
             Contract.Invariant(_checkDigit!= null);
