@@ -70,27 +70,27 @@ Narvalo.NET
 #### Other projects
 - **Narvalo.PowerShell**, collection of sample PowerShell modules.
 - **Narvalo.T4**, custom T4 templates (for internal use only).
-- **Narvalo.StyleCop**, custom StyleCop rules for C# (for internal use only).
+- **Narvalo.StyleCop**, custom StyleCop rules for C# (for internal use only; to be replaced by Narvalo.Analyzers).
 - **Narvalo.Benchmarks**, the benchmarking project (for internal use only).
 - **Narvalo.Mvp.Windows.Forms** (incomplete & unusable).
 - **Narvalo.Ghostscript**, a .NET wrapper for GhostScript (incomplete & broken).
 - **Narvalo.Reliability** features reliability patterns (incomplete & broken).
-- **Narvalo.FxCop**, custom FxCop rules (to be replaced by `Narvalo.Analyzer`).
+- **Narvalo.FxCop**, custom FxCop rules (empty; to be replaced by Narvalo.Analyzers).
 - **Narvalo.Brouillons**, a "fourre-tout" of unfinished or severely broken codes.
 
 #### Status for the NuGet packages
 
-Library             | Status | PCL        | Security    | CA | GA | CC | SA  | TC
---------------------|--------|------------|-------------|----|----|----|-----| ----
-Narvalo.Cerbere (*) | Beta   | Profile259 | Transparent | OK | OK | OK | OK+ | 100%
-Narvalo.Fx      (*) | Beta   | Profile259 | Transparent | OK | OK | OK | OK  |
-Narvalo.Finance (*) |        | Profile111 | Transparent | OK | !  | OK | OK  |
-Narvalo.Core        | Alpha  | Profile259 | Transparent | !  | OK | OK | OK  |
-Narvalo.Common      | Alpha  |            | APTCA       | !  | !  | OK | OK  |
-Narvalo.Web         |        |            |             |    |    |    | OK  |
-Narvalo.Mvp         | Beta   |            |             | !  |    |    | OK  |
-Narvalo.Mvp.Web     | Beta   |            |             | !  |    |    | OK  |
-Narvalo.Build       | Stable |            |             | !  |    |    | OK+ |
+Library             | Status | PCL        | CA | GA | CC | SA  | TC
+--------------------|--------|------------|----|----|----|-----|-----
+Narvalo.Cerbere (*) | Beta   | Profile259 | OK | OK | OK | OK+ | 100%
+Narvalo.Fx      (*) | Beta   | Profile259 | OK | OK | OK | OK  |
+Narvalo.Finance (*) |        | Profile111 | OK | !  | OK | OK  |
+Narvalo.Core        | Alpha  | Profile259 | !  | OK | OK | OK  |
+Narvalo.Common      | Alpha  |            | !  | !  | OK | OK  |
+Narvalo.Web         |        |            |    |    |    | OK  |
+Narvalo.Mvp         | Beta   |            | !  |    |    | OK  |
+Narvalo.Mvp.Web     | Beta   |            | !  |    |    | OK  |
+Narvalo.Build       | Stable |            | !  |    |    | OK+ |
 
 (*) Not yet published.
 

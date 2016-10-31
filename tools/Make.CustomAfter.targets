@@ -248,8 +248,9 @@ using System.Reflection;
     <PropertyGroup>
     <!-- We force transparency for PCL libraries, otherwise SecAnnotate does not recognize it. -->
       <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Cerbere' " >/t:Narvalo.Cerbere.dll</_ForceTransparency>
-      <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Fx' " >$(_ForceTransparency) /t:Narvalo.Fx.dll</_ForceTransparency>
+      <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Core' " >$(_ForceTransparency) /t:Narvalo.Core.dll</_ForceTransparency>
       <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Finance' " >$(_ForceTransparency) /t:Narvalo.Finance.dll</_ForceTransparency>
+      <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Fx' " >$(_ForceTransparency) /t:Narvalo.Fx.dll</_ForceTransparency>
     </PropertyGroup>
 
     <!-- WARNING: The /verify switch disable output and other things. From the documentation:

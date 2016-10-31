@@ -8,10 +8,10 @@ Migration to VS2015
   * use `nameof` everywhere.
   * decide rules to when to use the new `=>` syntax for methods.
   * review the use of `var`.
-- Remove the following attributes: `ComVisible`, `AllowPartiallyTrustedCallers`, 
-  `SecurityTransparent`, `SecurityCritical`, `SecuritySafeCritical`?
-  See https://github.com/dotnet/corefx/issues/12592
-  Disable SecAnnotate.
+- Use the new global `EnableSecurityAnnotations`:
+  * When `true`, define `SECURITY_ANNOTATIONS`.
+  * Add Sec suffix when building an assembly with Security annotations.
+    See $(ConfigurationVariant) and $(_ConfigurationMetadata)
 - Force `MininalVisualStudioVersion` in the solution files? 
 - In `PSakefile.ps1`, do we need to change `VisualStudioVersion` (`_MyGet-Publish`)? See also
   the Framework property at the beginning of the file.
@@ -160,28 +160,42 @@ Infrastructure
 
 ### Security
 
-- https://msdn.microsoft.com/en-us/library/dd233102.aspx
-- https://msdn.microsoft.com/en-us/magazine/ee336023.aspx
-- http://stackoverflow.com/questions/5055632/net-4-allowpartiallytrustedcallers-attribute-and-security-markings-like-secur
-- Bug: In MSBuild, we force security transparency for our PCL libraries in MSBuild.
-- Do not run SecAnnotate on test libraries?
-- See permcalc & PEVerify /transparent  https://msdn.microsoft.com/en-us/library/62bwd2yd.aspx
-- Narvalo.Web
-    * Review added SecuritySafeCritical & SecurityCritical attributes.
-    * Security attributes and ASP.NET MVC do not work together:
-      See https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307
-- AllowPartiallyTrusted & SecurityRules options:
+Library             | 
+--------------------|------------
+Narvalo.Cerbere     | Transparent
+Narvalo.Fx          | Transparent
+Narvalo.Finance     | Transparent
+Narvalo.Core        | Transparent
+Narvalo.Common      | APTCA    
+
+- Review the security attributes (those that exist are most certainly wrong):
+  * `AllowPartiallyTrustedCallers`,  `SecurityTransparent`, `SecurityCritical`, `SecuritySafeCritical`?
+  (link)[https://github.com/dotnet/corefx/issues/12592]
+  * Security attributes and ASP.NET MVC do not work together:
+  [link](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307)
+- Bug: In MSBuild:
+  * (SecAnnotate), we force security transparency for our PCL libraries in MSBuild.
+  See `$(_ForceTransparency)` in MSBuild (looks a bit fragile to have to explicitly list the PCL librairies).
+  * If we set `SkipVerificationInFullTrust` to true, we should use `PEVerify /transparent`
+  [link](https://msdn.microsoft.com/en-us/library/dd233102(v=vs.110).aspx)
+  * Do not run SecAnnotate.exe on test libraries?
+- See permcalc & PEVerify /transparent  [link](https://msdn.microsoft.com/en-us/library/62bwd2yd.aspx)
+- AllowPartiallyTrusted, SecurityRules and SecurityPermission attributes:
 ```
 [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
 [assembly: SecurityRules(SecurityRuleSet.Level2, SkipVerificationInFullTrust = true)]
+[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 ```
 
 References:
 - [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
+- [Security-Transparent Code, Level 2](https://msdn.microsoft.com/en-us/library/dd233102(v=vs.110).aspx)
 - [APTCA](https://msdn.microsoft.com/en-us/magazine/ee336023.aspx)
 - [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)
 - [SecAnnotate and PCL](http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab)
 - [Tutorial](http://www.codeproject.com/Articles/329666/Things-I-learned-while-implementing-my-first-Level)
+- [Simple Talk](https://www.simple-talk.com/dotnet/net-framework/whats-new-in-code-access-security-in-net-framework-4-0-part-i/)
+- http://stackoverflow.com/questions/5055632/net-4-allowpartiallytrustedcallers-attribute-and-security-markings-like-secur
 
 ### Scripts
 

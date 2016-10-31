@@ -2,12 +2,13 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using System.Security;
 
 [assembly: AssemblyTitle("Narvalo.Cerbere")]
 [assembly: AssemblyDescription("Narvalo Cerbere Library providing argument validation methods and Code Contracts helpers.")]
 
-[assembly: SecurityTransparent]
+#if SECURITY_ANNOTATIONS
+[assembly: System.Security.SecurityTransparent]
+#endif
 
 [assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
     Scope = "type", Target = "Narvalo.Properties.Strings_Cerbere",

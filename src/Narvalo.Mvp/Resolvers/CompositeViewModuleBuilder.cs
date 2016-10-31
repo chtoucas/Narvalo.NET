@@ -42,9 +42,11 @@ namespace Narvalo.Mvp.Resolvers
             var assemblyName = new AssemblyName(_assemblyName);
 
             // FIXME: Why does it fail when we add the "SecurityTransparent" attribute?
+            // Maybe because we didn't add Narvalo.Mvp to the $(_ForceTransparency) property
+            // in Make.CustomAfter.targets.
             // var attributeBuilders = new CustomAttributeBuilder[] {
             //    new CustomAttributeBuilder(
-            //        typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes), 
+            //        typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes),
             //        new Object[0])
             // };
             var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(

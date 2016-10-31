@@ -23,7 +23,9 @@ namespace Narvalo.Web
 
         public string MemberName { get { return _memberName; } set { _memberName = value; } }
 
+#if SECURITY_ANNOTATIONS
         [SecurityCritical]
+#endif
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

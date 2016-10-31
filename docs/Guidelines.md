@@ -137,7 +137,7 @@ Standard compilation symbols:
 - `CODE_ANALYSIS`
 - `CONTRACTS_FULL`
 
-Compilation symbols for .NET versions:
+Compilation symbols for .NET versions (mostly unused):
 - `NET_35`
 - `NET_40`
 
@@ -146,6 +146,7 @@ Symbols used to define the assembly properties:
 - `DUMMY_GENERATED_VERSION`
 - `NO_INTERNALS_VISIBLE_TO`
 - `SIGNED_ASSEMBLY`
+- `SECURITY_ANNOTATIONS`
 
 [References]
 - [Eric Lippert](http://ericlippert.com/2009/09/10/whats-the-difference-between-conditional-compilation-and-the-conditional-attribute/)
@@ -301,8 +302,8 @@ References:
 - [CoreClr](https://github.com/dotnet/coreclr/wiki/Performance-Requirements)
 - [Delegates](http://blogs.msdn.com/b/pfxteam/archive/2012/02/03/10263921.aspx)
 
-Security
---------
+Security (Obsolete?)
+--------------------
 
 Consider applying the `SecurityTransparent` attribute or the `AllowPartiallyTrustedCallers`
 attribute to the assembly. If you do so, verify the assembly with the `SecAnnotate` tool.

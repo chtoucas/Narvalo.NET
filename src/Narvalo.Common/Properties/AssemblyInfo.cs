@@ -3,14 +3,15 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Security;
 
 [assembly: AssemblyTitle("Narvalo.Common")]
 [assembly: AssemblyDescription("Narvalo Common Library containing mostly extension methods for classes from the BCL and few goodies.")]
 
 [assembly: Guid("8cd3c522-030f-49b4-bd87-285e2b35425b")]
 
-[assembly: AllowPartiallyTrustedCallers]
+#if SECURITY_ANNOTATIONS
+[assembly: System.Security.AllowPartiallyTrustedCallers]
+#endif
 
 [assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
     Scope = "type", Target = "Narvalo.Properties.Strings_Common",

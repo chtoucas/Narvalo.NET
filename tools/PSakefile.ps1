@@ -189,6 +189,8 @@ Task SecurityAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias SA `
 {
+    Exit-Gracefully -ExitCode 1 ` 'Currently disabled (MSBuild scripts must be updated).'
+
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Clean;SecAnnotate;PEVerify',
         # For static analysis, we hide internals, otherwise we might not truly
@@ -197,6 +199,7 @@ Task SecurityAnalysis `
         '/p:SignAssembly=true',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
+        '/p:EnableSecurityAnnotations=true',
         '/p:Filter=_Safe_'
 }
 
@@ -217,7 +220,8 @@ Task _CI-InitializeVariables `
         "/p:Retail=$Retail",
         '/p:SignAssembly=false',
         '/p:SkipCodeContractsReferenceAssembly=false',
-        '/p:VisibleInternals=true'
+        '/p:VisibleInternals=true',
+        '/p:EnableSecurityAnnotations=false'
 
     # FIXME: Don't understand why doing what follows does not work.
     # Either MSBuild or PowerShell mixes up the MSBuild parameters.
@@ -283,7 +287,8 @@ Task _Package-InitializeVariables `
         "/p:Retail=$Retail",
         '/p:SignAssembly=true',
         '/p:SkipCodeContractsReferenceAssembly=false',
-        '/p:VisibleInternals=false'
+        '/p:VisibleInternals=false',
+        '/p:EnableSecurityAnnotations=false'
 
     # Packaging targets:
     # - Rebuild all
