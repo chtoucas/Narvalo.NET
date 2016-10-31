@@ -2,11 +2,11 @@ Migration to VS2015
 ===================
 
 - Migrate from StyleCop to StyleCop.Analyzers.
-  * Disable StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
+  * Disable StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets`).
   * Create `Narvalo.Analyzers` replacement of `Narvalo.StyleCop` and `Narvalo.FxCop`.
 - C#
   * use `nameof` everywhere.
-  * decide rules to when to use the new => syntax for methods.
+  * decide rules to when to use the new `=>` syntax for methods.
   * review the use of `var`.
 - Remove the following attributes: `ComVisible`, `AllowPartiallyTrustedCallers`, 
   `SecurityTransparent`, `SecurityCritical`, `SecuritySafeCritical`?
