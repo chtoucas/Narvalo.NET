@@ -25,6 +25,7 @@
     <ConfigurationVariant Condition=" '$(SignAssembly)' == 'true' ">+Signed</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(BuildGeneratedVersion)' == 'true' ">$(ConfigurationVariant)+SemVer</ConfigurationVariant>
     <ConfigurationVariant Condition=" '$(VisibleInternals)' == 'false' ">$(ConfigurationVariant)+Closed</ConfigurationVariant>
+    <ConfigurationVariant Condition=" '$(EnableSecurityAnnotations)' == 'true' ">$(ConfigurationVariant)+SecAttrs</ConfigurationVariant>
   </PropertyGroup>
 
   <!-- Define common MSBuild project properties. -->

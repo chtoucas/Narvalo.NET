@@ -169,13 +169,6 @@
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
 
-  <!-- Gendarme Analysis -->
-  <PropertyGroup>
-    <EnableGendarme Condition=" '$(EnableGendarme)' != 'true' ">false</EnableGendarme>
-
-    <DefineConstants Condition=" '$(EnableGendarme)' == 'true' ">$(DefineConstants);CODE_ANALYSIS</DefineConstants>
-  </PropertyGroup>
-
   <!-- Code Contracts -->
   <!--
     For a complete list of available options, see
@@ -202,6 +195,13 @@
     <!-- For command-line builds the following settings are reversed. -->
     <CodeContractsFailBuildOnWarnings>false</CodeContractsFailBuildOnWarnings>
     <CodeContractsRunInBackground>true</CodeContractsRunInBackground>
+  </PropertyGroup>
+
+  <!-- Security Annotations. -->
+  <PropertyGroup>
+    <EnableSecurityAnnotations Condition=" '$(EnableSecurityAnnotations)' != 'true' ">false</EnableSecurityAnnotations>
+
+    <DefineConstants Condition=" '$(EnableSecurityAnnotations)' == 'true' ">$(DefineConstants);SECURITY_ANNOTATIONS</DefineConstants>
   </PropertyGroup>
 
   <!-- T4 -->

@@ -42,6 +42,7 @@
       DeletePEVerifyLogFile;
       DeleteSecAnnotateDummyOutput;
       DeleteSecAnnotateLogFile;
+      DeleteSecAnnotateVerifyLogFile;
       DeleteSecAnnotateOutput
     </CleanDependsOn>
   </PropertyGroup>
@@ -98,6 +99,8 @@
       <_ConfigurationMetadata Condition=" '$(BuildGeneratedVersion)' != 'true' ">$(_ConfigurationMetadata)+FakeVer</_ConfigurationMetadata>
       <_ConfigurationMetadata Condition=" '$(VisibleInternals)' == 'true' ">$(_ConfigurationMetadata)+Leaky</_ConfigurationMetadata>
       <_ConfigurationMetadata Condition=" '$(VisibleInternals)' != 'true' ">$(_ConfigurationMetadata)+Closed</_ConfigurationMetadata>
+      <_ConfigurationMetadata Condition=" '$(EnableSecurityAnnotations)' == 'true' ">$(_ConfigurationMetadata)+SecAttrs</_ConfigurationMetadata>
+      <_ConfigurationMetadata Condition=" '$(EnableSecurityAnnotations)' != 'true' ">$(_ConfigurationMetadata)+NoSecAttrs</_ConfigurationMetadata>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Retail)' != 'true' ">
@@ -184,7 +187,12 @@ using System.Reflection;
           Outputs="$(PEVerifyDummyOutput)">
     <Message Text="Verifying $(AssemblyName) with PEVerify..." Importance="high" />
 
-    <Exec Command="&quot;$(PEVerifyCommand)&quot; &quot;$(TargetPath)&quot; /nologo /md /il /unique >> &quot;$(PEVerifyLogFile)&quot;"
+    <PropertyGroup>
+      <!-- If we run SecAnnotate... In that case, and only in that case, we add the /transparent option. -->
+      <_PEVerifyTransparent Condition=" '$(EnableSecurityAnnotations)' == 'true' " >/transparent</_PEVerifyTransparent>
+    </PropertyGroup>
+
+    <Exec Command="&quot;$(PEVerifyCommand)&quot; &quot;$(TargetPath)&quot; $(_PEVerifyTransparent) /nologo /md /il /unique >> &quot;$(PEVerifyLogFile)&quot;"
           LogStandardErrorAsError="true"
           ContinueOnError="false" />
 
@@ -209,6 +217,11 @@ using System.Reflection;
     <Delete Files="$(SecAnnotateLogFile)" />
   </Target>
 
+  <!-- DeleteSecAnnotateVerifyLogFile target. -->
+  <Target Name="DeleteSecAnnotateVerifyLogFile">
+    <Delete Files="$(SecAnnotateVerifyLogFile)" />
+  </Target>
+
   <!-- DeleteSecAnnotateOutput target. -->
   <Target Name="DeleteSecAnnotateOutput">
     <Delete Files="$(SecAnnotateOutput)" />
@@ -224,7 +237,8 @@ using System.Reflection;
   <!-- WARNING: Delete previous log before doing anything. We append to it
        and we don't want to let it grow endlessly. As a side-effect, we can not
        use the log file for incremental batching. -->
-  <Target Name="SecAnnotate" DependsOnTargets="DeleteSecAnnotateLogFile;$(CoreSecAnnotate)" />
+  <Target Name="SecAnnotate"
+          DependsOnTargets="DeleteSecAnnotateLogFile;DeleteSecAnnotateVerifyLogFile;$(CoreSecAnnotate)" />
 
   <!-- _SecAnnotate target. -->
   <Target Name="_SecAnnotate"
@@ -233,7 +247,10 @@ using System.Reflection;
           Outputs="$(SecAnnotateDummyOutput)">
     <!-- REVIEW: We use SecAnnotateDummyOutput since SecAnnotateOutput is not always written (for instance
          when there is no error). -->
-    <Message Text="Analyzing $(AssemblyName) with SecAnnotate..." Importance="high" />
+    <!-- In order for SecAnnotate to be useful, we must have built assemblies with all security-related
+         annotations. -->
+    <Error Text="You MUST set 'EnableSecurityAnnotations' to 'true' to be able to run SecAnnotate."
+           Condition=" '$(EnableSecurityAnnotations)' != 'true' " />
 
     <PropertyGroup>
       <!-- WARNING: The directory path must not end with a slash.
@@ -241,12 +258,14 @@ using System.Reflection;
            https://github.com/autofac/Autofac/blob/v3.5.2/default.proj
       -->
       <_PortableReferenceDirectory>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETPortable\$(TargetFrameworkVersion)</_PortableReferenceDirectory>
+      <!-- REVIEW: Not sure that it is still necessary. -->
       <_SecAnnotateReferenceDirectory Condition=" '$(TargetFrameworkProfile.StartsWith(Profile))' == 'true' ">/referencedir:"$(_PortableReferenceDirectory)"</_SecAnnotateReferenceDirectory>
       <_SecAnnotateReferenceDirectory>$(_SecAnnotateReferenceDirectory) /referencedir:"$(OutputPath.TrimEnd('\'))"</_SecAnnotateReferenceDirectory>
     </PropertyGroup>
 
     <PropertyGroup>
-    <!-- We force transparency for PCL libraries, otherwise SecAnnotate does not recognize it. -->
+    <!-- WARNING: We force transparency for PCL libraries, otherwise SecAnnotate does not recognize it when mixing
+         PCL and standard libraries. -->
       <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Cerbere' " >/t:Narvalo.Cerbere.dll</_ForceTransparency>
       <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Core' " >$(_ForceTransparency) /t:Narvalo.Core.dll</_ForceTransparency>
       <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Finance' " >$(_ForceTransparency) /t:Narvalo.Finance.dll</_ForceTransparency>
@@ -255,12 +274,21 @@ using System.Reflection;
 
     <!-- WARNING: The /verify switch disable output and other things. From the documentation:
          Verifies only that an assembly's annotations are correct; does not attempt to make multiple passes
-         to find all required annotations if the assembly does not verify. -->
+         to find all required annotations if the assembly does not verify.
+         NB: Event if this command fails, we run the next command.
+         NB: We do not use $(_ForceTransparency) and $(_SecAnnotateReferenceDirectory). -->
+    <Message Text="Verifying $(AssemblyName) with SecAnnotate..." Importance="high" />
+    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /verify &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateVerifyLogFile)&quot;"
+          WorkingDirectory="$(OutDir)"
+          LogStandardErrorAsError="true"
+          ContinueOnError="true" />
     <!-- NB: Available options:
          /maximumpasses:1 to limit the number of passes.
          /includesignatures for detail signatures.
          /showstatistics
-         /verbose -->
+         /verbose
+         NB: SecAnnotateOutput is only created when they are errors. -->
+    <Message Text="Analyzing $(AssemblyName) with SecAnnotate..." Importance="high" />
     <Exec Command="&quot;$(SecAnnotateCommand)&quot; $(_ForceTransparency) /verbose /showstatistics $(_SecAnnotateReferenceDirectory) /out:&quot;$(SecAnnotateOutput)&quot; &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateLogFile)&quot;"
           WorkingDirectory="$(OutDir)"
           LogStandardErrorAsError="true"
