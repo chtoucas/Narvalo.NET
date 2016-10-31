@@ -9,6 +9,7 @@ Narvalo.NET
 - [DevOps](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/BuildAndRelease.md)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 - [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)
+  on which depend all MVP-related packages.
 
 #### General Purpose Libraries
 - **Narvalo.Cerbere**
@@ -35,7 +36,7 @@ Narvalo.NET
   extension methods for Configuration and SQL client.
 - **Narvalo.Web**
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web),
-  [package](https://www.nuget.org/packages/Narvalo.Common/)),
+  [package](https://www.nuget.org/packages/Narvalo.Web/)),
   this library provides types that might prove useful for Web development: generic HttpHandler
   type, asset providers, Razor and WebForms compile-time optimizers, preliminary support
   for OpenGraph and Schema.Org.
@@ -67,36 +68,40 @@ Narvalo.NET
   custom MSBuild tasks.
 
 #### Other projects
-- **Narvalo.Mvp.Windows.Forms**
-- **Narvalo.Ghostscript**, a .NET wrapper for GhostScript.
-- **Narvalo.Reliability** features reliability patterns.
-- **Narvalo.PowerShell**, collection of PowerShell modules.
+- **Narvalo.PowerShell**, collection of sample PowerShell modules.
 - **Narvalo.T4**, custom T4 templates (for internal use only).
 - **Narvalo.StyleCop**, custom StyleCop rules for C# (for internal use only).
-- **Narvalo.FxCop**, custom FxCop rules (to be removed).
+- **Narvalo.Benchmarks**, the benchmarking project (for internal use only).
+- **Narvalo.Mvp.Windows.Forms** (incomplete & unusable).
+- **Narvalo.Ghostscript**, a .NET wrapper for GhostScript (incomplete & broken).
+- **Narvalo.Reliability** features reliability patterns (incomplete & broken).
+- **Narvalo.FxCop**, custom FxCop rules (to be replaced by `Narvalo.Analyzer`).
 - **Narvalo.Brouillons**, a "fourre-tout" of unfinished or severely broken codes.
-- **Narvalo.Benchmarks**, the benchmarking project.
 
 #### Status for the NuGet packages
 
 Library             | Status | PCL        | Security    | CA | GA | CC | SA  | TC
 --------------------|--------|------------|-------------|----|----|----|-----| ----
-Narvalo.Cerbere     | Beta   | Profile259 | Transparent | OK | OK | OK | OK+ | 100%
-Narvalo.Fx          | Beta   | Profile259 | Transparent | OK | OK | OK | OK  |
-Narvalo.Finance     |        | Profile111 | Transparent | OK | !  | OK | OK  |
+Narvalo.Cerbere (*) | Beta   | Profile259 | Transparent | OK | OK | OK | OK+ | 100%
+Narvalo.Fx      (*) | Beta   | Profile259 | Transparent | OK | OK | OK | OK  |
+Narvalo.Finance (*) |        | Profile111 | Transparent | OK | !  | OK | OK  |
 Narvalo.Core        | Alpha  | Profile259 | Transparent | !  | OK | OK | OK  |
 Narvalo.Common      | Alpha  |            | APTCA       | !  | !  | OK | OK  |
 Narvalo.Web         |        |            |             |    |    |    | OK  |
 Narvalo.Mvp         | Beta   |            |             | !  |    |    | OK  |
 Narvalo.Mvp.Web     | Beta   |            |             | !  |    |    | OK  |
-Narvalo.Build       |        |            |             | !  |    |    | OK+ |
+Narvalo.Build       | Stable |            |             | !  |    |    | OK+ |
 
+(*) Not yet published.
+
+Explanations:
 - CA: Static Analysis with FxCop
 - GA: Static Analysis with Gendarme
 - CC: Static Analysis with Code Contracts
 - SA: Source Analysis with StyleCop. OK+ means that the assembly is fully documented.
 - TC: Code Coverage. OK means > 90%.
 
-#### Dead NuGet packages
+#### Retired NuGet packages
 
-- Narvalo.Web.Extras, replaced by Narvalo.Web.
+- [Narvalo.Web.Extras](https://www.nuget.org/packages/Narvalo.Web.Extras/), 
+  replaced by [Narvalo.Web](https://www.nuget.org/packages/Narvalo.Web/).
