@@ -3,26 +3,26 @@ Migration to VS2015
 
 - Disabled StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
 - Code contracts (disabled)
-  * PSakefile: '/p:SkipCodeContractsReferenceAssembly=true' instead of
-    '/p:SkipCodeContractsReferenceAssembly=false'
-    in _CI-InitializeVariables and _Package-InitializeVariables
-  * Raise a warning instead of an error in Make.CustomAfter.targets if skipping CC
-  * Disabled CodeContractsEmitXMLDocs in Make.CustomAfter.props.
+  * `PSakefile`: `'/p:SkipCodeContractsReferenceAssembly=true'` instead of
+    `'/p:SkipCodeContractsReferenceAssembly=false'`
+    in `_CI-InitializeVariables` and `_Package-InitializeVariables`.
+  * Raise a warning instead of an error in `Make.CustomAfter.targets` if skipping CC.
+  * Disabled `CodeContractsEmitXMLDocs` in `Make.CustomAfter.props`.
 
-- Force MininalVisualStudioVersion in the solution files?
-- PEVerify does not always run?
+- Force `MininalVisualStudioVersion` in the solution files? 
+- Do we really need to use `ToolsVersion="14.0"`.
 - Analyzers:
-  * Migrate from StyleCop to StyleCop.Analyzers
-  * Improve DisableAnalyzersForVisualStudioBuild target in Narvalo.Common.targets
-- In PSakefile.ps1, do we need to change the VisualStudioVersion (_MyGet-Publish)? See also
+  * Migrate from StyleCop to StyleCop.Analyzers.
+  * Improve `DisableAnalyzersForVisualStudioBuild` target in `Narvalo.Common.targets`.
+- In `PSakefile.ps1`, do we need to change `VisualStudioVersion` (`_MyGet-Publish`)? See also
   the Framework property at the beginning of the file.
 - For test projects, we should automatically add the TestCommon shared project.
-    <Import Project="..\Narvalo.TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
-- MvpWebForms sample project: OutputPath is wrong (temporary fix: override OutputPath
-  property in project file). Other strange thing, MvpWebForms.dll.config is created.
+    `<Import Project="..\Narvalo.TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />`
+- MvpWebForms sample project: `OutputPath` is wrong (temporary fix: override `OutputPath`
+  property in project file). Other strange thing, `MvpWebForms.dll.config` is created.
   LocalDB requires SQL Server Express.
 - C#
-  * use `nameof` everywhere
+  * use `nameof` everywhere.
 
 
 Issues & Roadmap
