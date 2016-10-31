@@ -8,10 +8,8 @@ Migration to VS2015
   * use `nameof` everywhere.
   * decide rules to when to use the new `=>` syntax for methods.
   * review the use of `var`.
-- Use the new global `EnableSecurityAnnotations`:
-  * When `true`, define `SECURITY_ANNOTATIONS`.
-  * Add Sec suffix when building an assembly with Security annotations.
-    See $(ConfigurationVariant) and $(_ConfigurationMetadata)
+- Check that moving EnableGendarme form Narvalo.Common.props to Make.CustomAfter.props didn't break
+  anything.
 - Force `MininalVisualStudioVersion` in the solution files? 
 - In `PSakefile.ps1`, do we need to change `VisualStudioVersion` (`_MyGet-Publish`)? See also
   the Framework property at the beginning of the file.
@@ -28,6 +26,7 @@ Migration to VS2015
 Issues & Roadmap
 ================
 
+- Provide better `AssemblyDescription`.
 - CodeAnalysisDictionary does not seem to be understood.
 - When, Guard & co.
 - IsNullable && HasZero
@@ -169,14 +168,16 @@ Narvalo.Core        | Transparent
 Narvalo.Common      | APTCA    
 
 - Review the security attributes (those that exist are most certainly wrong):
-  * `AllowPartiallyTrustedCallers`,  `SecurityTransparent`, `SecurityCritical`, `SecuritySafeCritical`?
+  * `AllowPartiallyTrustedCallers`,  `SecurityTransparent`
+  * `SecurityCritical`, `SecuritySafeCritical`
   (link)[https://github.com/dotnet/corefx/issues/12592]
-  * Security attributes and ASP.NET MVC do not work together:
+  * APTCA and ASP.NET MVC do not work together:
   [link](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307)
 - Bug: In MSBuild:
   * (SecAnnotate), we force security transparency for our PCL libraries in MSBuild.
-  See `$(_ForceTransparency)` in MSBuild (looks a bit fragile to have to explicitly list the PCL librairies).
-  * If we set `SkipVerificationInFullTrust` to true, we should use `PEVerify /transparent`
+  See `$(_ForceTransparency)` in MSBuild (looks a bit fragile to have to explicitly list the PCL 
+  librairies, better, we could use a rsp file).
+  * If `SkipVerificationInFullTrust` is true, we should use `PEVerify /transparent`
   [link](https://msdn.microsoft.com/en-us/library/dd233102(v=vs.110).aspx)
   * Do not run SecAnnotate.exe on test libraries?
 - See permcalc & PEVerify /transparent  [link](https://msdn.microsoft.com/en-us/library/62bwd2yd.aspx)

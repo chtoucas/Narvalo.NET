@@ -302,8 +302,9 @@ References:
 - [CoreClr](https://github.com/dotnet/coreclr/wiki/Performance-Requirements)
 - [Delegates](http://blogs.msdn.com/b/pfxteam/archive/2012/02/03/10263921.aspx)
 
-Security (Obsolete?)
---------------------
+Security
+--------
 
 Consider applying the `SecurityTransparent` attribute or the `AllowPartiallyTrustedCallers`
-attribute to the assembly. If you do so, verify the assembly with the `SecAnnotate` tool.
+attribute (if the assembly contains security critical methods) to the assembly. If you do so, 
+verify the  assembly with the `SecAnnotate` tool.
