@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyProduct("Narvalo.Org Libraries & Tools.")]
 [assembly: AssemblyCompany("Narvalo.Org - http://narvalo.org")]
-[assembly: AssemblyCopyright("Copyright © 2010-2015 Narvalo.Org")]
+[assembly: AssemblyCopyright("Copyright © 2010-2016 Narvalo.Org")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
