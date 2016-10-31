@@ -67,7 +67,7 @@ trap {
 function Confirm-Continue {
     while ($true) {
         $answer = Read-Host 'Are you sure you wish to continue? [y/N]'
-        
+
         if ($answer -eq '' -or $answer -eq 'n') {
             Write-Host "Stopping on user request.`n"
             Exit 0
@@ -105,7 +105,7 @@ if (!$analyze.IsPresent -and !$purge.IsPresent -and !$repair.IsPresent) {
 }
 
 if ($force.IsPresent) {
-    Write-Warning '''Force'' mode on, any modification will be permanent.' 
+    Write-Warning '''Force'' mode on, any modification will be permanent.'
     Confirm-Continue
 
     if ($yes.IsPresent) {
@@ -116,8 +116,8 @@ if ($force.IsPresent) {
     Write-Warning 'Safe mode on, no modifications to the repository will happen. Use the option ''-Force'' when you are ready.'
 }
 
-$whatIf  = !$force.IsPresent       
-   
+$whatIf  = !$force.IsPresent
+
 if ($analyze.IsPresent) {
     Write-Host -ForeGround DarkCyan @"
 

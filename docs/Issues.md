@@ -1,19 +1,10 @@
 Migration to VS2015
 ===================
 
-- Disabled StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
-- Code contracts (disabled)
-  * `PSakefile`: `'/p:SkipCodeContractsReferenceAssembly=true'` instead of
-    `'/p:SkipCodeContractsReferenceAssembly=false'`
-    in `_CI-InitializeVariables` and `_Package-InitializeVariables`.
-  * Raise a warning instead of an error in `Make.CustomAfter.targets` if skipping CC.
-  * Disabled `CodeContractsEmitXMLDocs` in `Make.CustomAfter.props`.
-
 - Force `MininalVisualStudioVersion` in the solution files? 
-- Do we really need to use `ToolsVersion="14.0"`.
-- Analyzers:
-  * Migrate from StyleCop to StyleCop.Analyzers.
-  * Improve `DisableAnalyzersForVisualStudioBuild` target in `Narvalo.Common.targets`.
+- Do we really need to use `ToolsVersion="14.0"`?
+- Migrate from StyleCop to StyleCop.Analyzers.
+  * Disabled StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
 - In `PSakefile.ps1`, do we need to change `VisualStudioVersion` (`_MyGet-Publish`)? See also
   the Framework property at the beginning of the file.
 - For test projects, we should automatically add the TestCommon shared project.
@@ -21,8 +12,10 @@ Migration to VS2015
 - MvpWebForms sample project: `OutputPath` is wrong (temporary fix: override `OutputPath`
   property in project file). Other strange thing, `MvpWebForms.dll.config` is created.
   LocalDB requires SQL Server Express.
+- Move to .Net Standard
 - C#
   * use `nameof` everywhere.
+  * decide rules to when to use the new => syntax for methods.
 
 
 Issues & Roadmap

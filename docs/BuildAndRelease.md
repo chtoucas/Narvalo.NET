@@ -37,7 +37,7 @@ Three build configurations are available:
 Add relevant files as linked files to the "Properties" folder
 - Shared assembly informations: `etc\AssemblyInfo.Common.cs`
 - Code Analysis dictionary: `etc\CodeAnalysisDictionary.xml` with build action _CodeAnalysisDictionary_
-- Strong Name Key: `etc\Narvalo.snk`
+- Strong Name Key: `etc\private\Narvalo.snk`
 
 In Debug mode:
 - "Build" panel, treat all warnings as errors.
@@ -50,7 +50,7 @@ In Release mode:
 - "Build" panel, output XML documentation file.
 - "Code Analysis" panel, use "Narvalo Rules" and enable Code Analysis on Build.
 
-For all modes:
-- "Signing" panel, sign the assembly using the "etc\Narvalo.snk" key.
+All modes:
+- "Signing" panel, sign the assembly using the "etc\private\Narvalo.snk" key.
 - "Build" panel, uncheck "Prefer 32-bit" if checked.
 - "Code Analysis" panel, uncheck "Suppress results from generated code (managed only)".

@@ -2,13 +2,18 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- See
        C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\
-       http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview -->
+       https://docs.nuget.org/ndocs/schema/target-frameworks
+       https://github.com/dotnet/corefx/blob/master/Documentation/architecture/net-platform-standard.md
+       http://portablelibraryprofiles.apps.stephencleary.com/ -->
   <PropertyGroup>
-    <!-- .NET Portable Subset (.NET Framework 4.5, Windows 8, Windows Phone 8.1) -->
-    <Profile111>portable-net45+netcore45+wpa81+MonoAndroid1+MonoTouch1</Profile111>
-    <!-- .NET Portable Subset (.NET Framework 4.5.1, Windows 8.1, Windows Phone 8.1) -->
+    <!-- .NET Portable Subset (.NET Framework 4.5, Windows 8, Windows Phone 8.1)
+         Supported by .Net Standard 1.1 -->
+    <Profile111>portable-net45+netcore45+wpa81</Profile111>
+    <!-- .NET Portable Subset (.NET Framework 4.5.1, Windows 8.1, Windows Phone 8.1)
+         Supported by .Net Standard 1.2 -->
     <Profile151>portable-net451+netcore451+wpa81</Profile151>
-    <!-- .NET Portable Subset (.NET Framework 4.5, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8) -->
-    <Profile259>portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1</Profile259>
+    <!-- .NET Portable Subset (.NET Framework 4.5, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8)
+         Supported by .Net Standard 1.0 -->
+    <Profile259>portable-net45+netcore45+wpa81+wp8</Profile259>
   </PropertyGroup>
 </Project>
