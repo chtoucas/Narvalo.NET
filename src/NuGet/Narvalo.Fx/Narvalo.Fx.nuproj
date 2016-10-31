@@ -7,14 +7,14 @@
     <NuTitle>Narvalo.Fx</NuTitle>
     <NuDescription>
       <![CDATA[
-      This package features implementations of some of the usual suspects from functional programming: Option (Maybe&lt;T&gt;) and Error (Output&lt;T&gt;) monads, simple pattern matching (Either&lt;T1, T2&gt;, Switch&lt;T1, T2&gt;), generators and delegate extensions.
+This package features implementations of some of the usual suspects from functional programming: Option (Maybe&lt;T&gt;) and Error (Output&lt;T&gt;) monads, simple pattern matching (Either&lt;T1, T2&gt;, Switch&lt;T1, T2&gt;), generators and delegate extensions.
 
-      This is a portable class library targeting Profile259.
+This is a portable class library targeting Profile259.
       ]]>
     </NuDescription>
     <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-      $(NuDescription)
-      A code contracts reference assembly is included if you ever need it.
+$(NuDescription)
+A code contracts reference assembly is included if you ever need it.
     </NuDescription>
     <NuSummary>
       This package features implementations of some of the usual suspects from functional programming.

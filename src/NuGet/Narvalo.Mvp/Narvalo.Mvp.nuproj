@@ -4,9 +4,9 @@
     <NuId>Narvalo.Mvp</NuId>
     <NuTitle>Narvalo.Mvp</NuTitle>
     <NuDescription>
-      This package contains a MVP framework largely inspired by webformsmvp. Contrary to webformsmvp, it is not restricted to the WebForms platform; nevertheless, featurewise, it should be on par with WebFormsMvp.
+This package contains a MVP framework largely inspired by webformsmvp. Contrary to webformsmvp, it is not restricted to the WebForms platform; nevertheless, featurewise, it should be on par with WebFormsMvp.
 
-      Samples are available on the project web site.
+Samples are available on the project web site.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>MVP</NuTags>

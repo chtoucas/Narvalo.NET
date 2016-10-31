@@ -4,9 +4,9 @@
     <NuId>Narvalo.Mvp.Web</NuId>
     <NuTitle>Narvalo.Mvp.Web</NuTitle>
     <NuDescription>
-      This package enhances the Narvalo.Mvp package to provide support for ASP.NET WebForms.
+This package enhances the Narvalo.Mvp package to provide support for ASP.NET WebForms.
 
-      Samples are available on the project web site.
+Samples are available on the project web site.
     </NuDescription>
     <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>MVP, ASP.NET, WebForms</NuTags>
