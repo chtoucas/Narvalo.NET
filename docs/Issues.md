@@ -1,21 +1,28 @@
 Migration to VS2015
 ===================
 
-- Force `MininalVisualStudioVersion` in the solution files? 
-- Do we really need to use `ToolsVersion="14.0"`?
 - Migrate from StyleCop to StyleCop.Analyzers.
-  * Disabled StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
+  * Disable StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets).
+  * Create `Narvalo.Analyzers` replacement of `Narvalo.StyleCop` and `Narvalo.FxCop`.
+- C#
+  * use `nameof` everywhere.
+  * decide rules to when to use the new => syntax for methods.
+  * review the use of `var`.
+- Remove the following attributes: `ComVisible`, `AllowPartiallyTrustedCallers`, 
+  `SecurityTransparent`, `SecurityCritical`, `SecuritySafeCritical`?
+  See https://github.com/dotnet/corefx/issues/12592
+  Disable SecAnnotate.
+- Force `MininalVisualStudioVersion` in the solution files? 
 - In `PSakefile.ps1`, do we need to change `VisualStudioVersion` (`_MyGet-Publish`)? See also
   the Framework property at the beginning of the file.
+  Check also TargetFrameworkVersion.
 - For test projects, we should automatically add the TestCommon shared project.
     `<Import Project="..\Narvalo.TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />`
 - MvpWebForms sample project: `OutputPath` is wrong (temporary fix: override `OutputPath`
   property in project file). Other strange thing, `MvpWebForms.dll.config` is created.
   LocalDB requires SQL Server Express.
 - Move to .Net Standard
-- C#
-  * use `nameof` everywhere.
-  * decide rules to when to use the new => syntax for methods.
+- Do we really need to use `ToolsVersion="14.0"`?
 
 
 Issues & Roadmap
