@@ -75,8 +75,7 @@ All suppressions must be justified and tagged:
 - `[Ignore]` Only use this to tag a false positive and for unrecognized
   Code Contracts postconditions; if they are no longer necessary CCCheck will tell us.
 - `[GeneratedCode]` Used to mark a suppression related to generated code.
-- `[Intentionally]` Used in all other cases
-- `[Educational]` Only used inside the project Narvalo.Brouillons.
+- `[Intentionally]` Used in all other cases.
 
 Consider putting the justification on its own line. This helps to quickly see them in search results.
 

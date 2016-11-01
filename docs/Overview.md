@@ -234,7 +234,6 @@ This has ony one effect:
 Unless specified otherwise, a project inherits its StyleCop settings from a common settings file:
 - for libraries, tests and tools, `StyleCop.Settings` which link back to `etc\Loosy.SourceAnalysis`.
 - for samples, `samples\StyleCop.Settings` which link back to `etc\Empty.SourceAnalysis`.
-- Narvalo.Brouillons links back to `etc\Empty.SourceAnalysis`.
 
 This settings mirror what is done in the shared (MSBuild) property file.
 
@@ -287,8 +286,8 @@ tools\nuget.exe update -Self
 ### Visual Studio or Framework Updates
 
 After upgrading Visual Studio or MSBuild, do not forget to update the
-`VisualStudioVersion` property in both Make.Shared.props, PSakefile.ps1
-and MSBuild.cmd. We might also need to update the `SDK40ToolsPath` property.
+`VisualStudioVersion` property in both Make.Shared.props and PSakefile.ps1.
+We might also need to update the `SDK40ToolsPath` property.
 
 Other places to look at:
 - fsci.cmd (for F# updates)

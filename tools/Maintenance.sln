@@ -74,11 +74,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Scripts", "5. Scripts", 
 		fsi.cmd = fsi.cmd
 		..\make.cmd = ..\make.cmd
 		..\make.ps1 = ..\make.ps1
-		MSBuild.cmd = MSBuild.cmd
 		src\Narvalo.Local.psm1 = src\Narvalo.Local.psm1
 		publish-edge.fsx = publish-edge.fsx
 		publish-retail.fsx = publish-retail.fsx
-		tryout.cmd = tryout.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{234E8E32-CA91-4F16-BE5A-7E5E079C203C}"

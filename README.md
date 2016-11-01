@@ -40,9 +40,6 @@ Narvalo.NET
   this library provides types that might prove useful for Web development: generic HttpHandler
   type, asset providers, Razor and WebForms compile-time optimizers, preliminary support
   for OpenGraph and Schema.Org.
-- **Narvalo.Externs**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Externs)),
-  this project contains sample codes for Autofac, Serilog, Castle Windsor...
 - **Narvalo.Facts** ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/tests/Narvalo.Facts))
   is the test project.
 
@@ -68,14 +65,11 @@ Narvalo.NET
   custom MSBuild tasks.
 
 #### Other projects
-- **Narvalo.PowerShell**, collection of PowerShell utilities.
 - **Narvalo.T4**, custom T4 templates (for internal use only).
 - **Narvalo.StyleCop**, custom StyleCop rules for C# (for internal use only).
-- **Narvalo.Benchmarks**, the benchmarking project (for internal use only).
 - **Narvalo.Mvp.Windows.Forms** (_incomplete & unusable_).
 - **Narvalo.Ghostscript**, a .NET wrapper for GhostScript (_incomplete & broken_).
 - **Narvalo.Reliability** features reliability patterns (_incomplete & broken_).
-- **Narvalo.Brouillons**, a "fourre-tout" of _unfinished or severely broken_ codes.
 
 #### Status for the NuGet packages
 
