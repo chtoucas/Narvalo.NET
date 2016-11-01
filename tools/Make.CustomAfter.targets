@@ -268,8 +268,8 @@ using System.Reflection;
     </PropertyGroup>
 
     <PropertyGroup>
-    <!-- WARNING: We force transparency for PCL libraries, otherwise SecAnnotate does not recognize it when mixing
-         PCL and standard libraries. -->
+    <!-- WARNING: We force transparency for PCL libraries, otherwise SecAnnotate does not recognize
+         this when mixing PCL and standard libraries. -->
       <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Cerbere' " >/t:Narvalo.Cerbere.dll</_ForceTransparency>
       <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Core' " >$(_ForceTransparency) /t:Narvalo.Core.dll</_ForceTransparency>
       <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Finance' " >$(_ForceTransparency) /t:Narvalo.Finance.dll</_ForceTransparency>
@@ -280,9 +280,9 @@ using System.Reflection;
          Verifies only that an assembly's annotations are correct; does not attempt to make multiple passes
          to find all required annotations if the assembly does not verify.
          NB: Event if this command fails, we run the next command.
-         NB: We do not use $(_ForceTransparency) and $(_SecAnnotateReferenceDirectory). -->
+         NB: We do not use $(_SecAnnotateReferenceDirectory) to see if it makes any difference. -->
     <Message Text="Verifying $(AssemblyName) with SecAnnotate..." Importance="high" />
-    <Exec Command="&quot;$(SecAnnotateCommand)&quot; /verify &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateVerifyLogFile)&quot;"
+    <Exec Command="&quot;$(SecAnnotateCommand)&quot; $(_ForceTransparency) /verify &quot;$(TargetPath)&quot; >> &quot;$(SecAnnotateVerifyLogFile)&quot;"
           WorkingDirectory="$(OutDir)"
           LogStandardErrorAsError="true"
           ContinueOnError="true" />

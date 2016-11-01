@@ -125,7 +125,7 @@ Task Test `
     -Description '[ALL  ] Build then run tests.' `
     -Depends _CI-InitializeVariables `
 {
-    MSBuild $Foundations $Opts $CI_Props `
+    MSBuild $Everything $Opts $CI_Props `
         '/t:Xunit',
         '/p:Configuration=Debug',
         '/p:SkipCodeContractsReferenceAssembly=true',
