@@ -72,9 +72,9 @@ Narvalo.NET
 - **Narvalo.T4**, custom T4 templates (for internal use only).
 - **Narvalo.StyleCop**, custom StyleCop rules for C# (for internal use only).
 - **Narvalo.Benchmarks**, the benchmarking project (for internal use only).
-- **Narvalo.Mvp.Windows.Forms** (incomplete & unusable).
-- **Narvalo.Ghostscript**, a .NET wrapper for GhostScript (incomplete & broken).
-- **Narvalo.Reliability** features reliability patterns (incomplete & broken).
+- **Narvalo.Mvp.Windows.Forms** (**incomplete & unusable**).
+- **Narvalo.Ghostscript**, a .NET wrapper for GhostScript (**incomplete & broken**).
+- **Narvalo.Reliability** features reliability patterns (**incomplete & broken**).
 - **Narvalo.Brouillons**, a "fourre-tout" of unfinished or severely broken codes.
 
 #### Status for the NuGet packages
@@ -102,5 +102,5 @@ Explanations:
 
 #### Retired NuGet packages
 
-- [Narvalo.Web.Extras](https://www.nuget.org/packages/Narvalo.Web.Extras/), 
+- [Narvalo.Web.Extras](https://www.nuget.org/packages/Narvalo.Web.Extras/),
   replaced by [Narvalo.Web](https://www.nuget.org/packages/Narvalo.Web/).

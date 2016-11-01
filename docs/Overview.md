@@ -5,46 +5,29 @@ Technology footprint
 --------------------
 
 - Most developments are done in C#.
-- Static and quality analysis are done with StyleCop, FxCop, Gendarme, Code Contracts
-  and a tailor-made script.
 - All tasks are fully automated with MSBuild, PowerShell (PSake) and F# scripts.
-
-Extra care has been taken to completely isolate the CI environment and to keep the development
-inside Visual Studio as smooth and swift as they can be.
 
 Prerequisites
 -------------
 
 - [Visual Studio Community 2015](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
-- PowerShell
-
-Optional components:
-- [Code Contracts extension for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970)
-- [.NET Portability Analyzer](https://visualstudiogallery.msdn.microsoft.com/1177943e-cfb7-4822-a8a6-e56c7905292b)
-  to help evaluate portability across .NET platforms.
-- .NET Framework 3.5 required, installing it from the optional Windows components is sufficient. 
-  The MSBuild file for Code Contracts requires MSBuild v3.5.
-  See [CC Issue](https://github.com/Microsoft/CodeContracts/issues/353)
-
-Components necessary to run the build scripts:
-- Code Contracts (see above).
-- Visual Extensibility Tools provides T4 integration in MSBuild.
-- Tools and Windows SDK for PEVerify.exe.
-
-Prerequisites (Old)
--------------------
-
-- [Visual Studio Community 2013](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
 - PowerShell v3
 
 Optional components:
-- [StyleCop](http://stylecop.codeplex.com) for source analysis integration inside Visual Studio.
 - [Code Contracts extension for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970)
 - [.NET Portability Analyzer](https://visualstudiogallery.msdn.microsoft.com/1177943e-cfb7-4822-a8a6-e56c7905292b)
   to help evaluate portability across .NET platforms.
+- .NET Framework v3.5, installing it from the _optional Windows components_
+  is sufficient. The reason is that the MSBuild scripts for Code Contracts
+  require MSBuild v3.5; see [CC Issue](https://github.com/Microsoft/CodeContracts/issues/353)
 
 Components necessary to run the build scripts:
 - Code Contracts (see above).
+- Visual Extensibility Tools (VS option) provides T4 integration in MSBuild.
+- Tools and Windows SDK (VS option) for PEVerify.exe.
+
+Obsolete requirements:
+- [StyleCop](http://stylecop.codeplex.com) for source analysis integration inside Visual Studio.
 - [Microsoft Visual Studio 2013 SDK](http://www.microsoft.com/en-us/download/details.aspx?id=40758),
   prerequisite for the Modeling SDK (see below).
 - [Modeling SDK for Microsoft Visual Studio 2013](http://www.microsoft.com/en-us/download/details.aspx?id=40754),
@@ -64,24 +47,24 @@ Project Layout
 - `src\NuGet`, NuGet projects.
 - `tests`, test projects.
 - `tools`, build and maintenance scripts.
-- `work`, temporary directory created during builds.
+- `work`, temporary directory created during CI builds.
 
 Solutions
 ---------
 
 There are two solutions.
 - `Narvalo.sln` contains all projects.
-- `tools\Narvalo Maintenance.sln` contains documentation, settings, maintenance scripts and projects:
+- `tools\Maintenance.sln` contains documentation, settings, maintenance scripts
+  and various helper projects:
   * MyGet, private NuGet server.
   * NuGetAgent, a NuGet publishing tool.
-  * Prose, a literal programming tool.
+  * Narvalo.ProjectAutomation, PowerShell project.
 
-How to initialize a new project
--------------------------------
+How to initialize a new C# project
+----------------------------------
 
 The following procedure enables us to centralize all settings into a single place.
 Except for Code Contracts, there should be no need to edit the project properties anymore.
-For more the details about this shared configuration, see the section "Global settings" below.
 
 Create a project and add it to the solution `Narvalo.sln`.
 
@@ -91,7 +74,7 @@ Edit the project file:
 <Import Project="..\..\tools\Narvalo.Common.props" />
 ```
 - Remove all sections about Debug, Release and CodeContracts.
-- Remove all properties configured globally.
+- Remove all properties configured globally (see below).
 
 A typical project file should then look like this:
 ```xml
@@ -122,7 +105,7 @@ A typical project file should then look like this:
 This is mandatory only for NuGet projects.
 Test and sample projects do not need a version property file.
 
-Create a version property file: `{ProjectName}.Version.props`:
+Create a version property file: `{AssemblyName}.Version.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -157,16 +140,14 @@ using System.Reflection;
 
 Optionally, give access to internals to the test project:
 ```csharp
-using System.Runtime.CompilerServices;
-
-#if !NO_INTERNALS_VISIBLE_TO
-[assembly: InternalsVisibleTo("Narvalo.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
+#if !NO_INTERNALS_VISIBLE_TO // Make internals visible to the test projects.
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
 #endif
 ```
 
-### Overriding the global settings
+### Overriding the global settings (sample)
 
-Create a property file `{ProjectName}.props` with the following content (this is just a sample):
+Create a property file `{AssemblyName}.props` with the following content:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -215,7 +196,7 @@ Ensure that it is copied to the output directory.
 
 #### Test projects
 To create a test project use the "Unit Test Project" template from Visual Studio.
-Add the following content to you local customization property file `{ProjectName}.props`:
+Add the following content to you local customization property file `{AssemblyName}.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -227,7 +208,7 @@ This has two consequences:
 - Test projects use custom FxCop rules.
 
 #### Sample projects
-Add the following content to you local customization property file `{ProjectName}.props`:
+Add the following content to you local customization property file `{AssemblyName}.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -238,7 +219,7 @@ This has ony one effect:
 - Sample projects use a dummy assembly version.
 - Sample projects use custom FxCop & StyleCop rules.
 
-### StyleCop
+### StyleCop (obsolete)
 
 Unless specified otherwise, a project inherits its StyleCop settings from a common settings file:
 - for libraries, tests and tools, `StyleCop.Settings` which link back to `etc\Loosy.SourceAnalysis`.
@@ -269,30 +250,41 @@ Remarks:
 ### Code Contracts
 
 When a project is ready for Code Contracts, add the following lines to the
-local property file `{ProjectName}.props`:
+local property file `{AssemblyName}.props`:
 ```xml
 <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
   <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+  <CodeContractsEmitXMLDocs>true</CodeContractsEmitXMLDocs>
 </PropertyGroup>
 ```
+The part concerning the XML docs is optional (often it fails with the current
+version of the CC tools).
 
-Update external dependencies
-----------------------------
+Update notes
+------------
 
 ### NuGet Updates
 
 For package updates, use the Narvalo.sln solution.
 
-**WARNING:** If the NuGet core framework is updated, do not forget to also update `tools\nuget.exe`:
+**WARNING:** If the NuGet core framework is updated, do not forget to also
+update `tools\nuget.exe` (I believe this is done automatically whenever we use
+it to install/update packages):
 ```
-tools\nuget.exe update self
+tools\nuget.exe update -Self
 ```
 
 ### Visual Studio or Framework Updates
 
-After upgrading Visual Studio or MSBuild, do not forget to update the `VisualStudioVersion` property
-in both Make.Shared.props, PSakefile.ps1 and MSBuild.cmd. We might also need to update the
-`SDK40ToolsPath` property.
+After upgrading Visual Studio or MSBuild, do not forget to update the
+`VisualStudioVersion` property in both Make.Shared.props, PSakefile.ps1
+and MSBuild.cmd. We might also need to update the `SDK40ToolsPath` property.
+
+### Copyright
+
+Appears in several places:
+- `etc\AssemblyInfo.Common.cs`
+- `LICENSE.txt`
 
 Appendices
 ----------
