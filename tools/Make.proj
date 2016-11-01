@@ -39,6 +39,7 @@
     </When>
 
     <Otherwise>
+      <!-- Include everything. -->
       <ItemGroup>
         <ProjectsToBuild Include="$(RepositoryRoot)samples\**\*.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\**\*.csproj" />

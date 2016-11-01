@@ -1,17 +1,11 @@
 Overview
 ========
 
-Technology footprint
---------------------
-
-- Most developments are done in C#.
-- All tasks are fully automated with MSBuild, PowerShell (PSake) and F# scripts.
-
 Prerequisites
 -------------
 
 - [Visual Studio Community 2015](http://msdn.microsoft.com/en-us/visual-studio-community-vs.aspx)
-- PowerShell v3
+- PowerShell v4
 
 Optional components:
 - [Code Contracts extension for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970)
@@ -23,8 +17,8 @@ Optional components:
 
 Components necessary to run the build scripts:
 - Code Contracts (see above).
-- Visual Extensibility Tools (VS option) provides T4 integration in MSBuild.
-- Tools and Windows SDK (VS option) for PEVerify.exe.
+- Visual Extensibility Tools (VS optional component) provides T4 integration in MSBuild.
+- Tools and Windows SDK (VS optional component) for PEVerify.exe.
 
 Obsolete requirements:
 - [StyleCop](http://stylecop.codeplex.com) for source analysis integration inside Visual Studio.
@@ -60,13 +54,23 @@ There are two solutions.
   * NuGetAgent, a NuGet publishing tool.
   * Narvalo.ProjectAutomation, PowerShell project.
 
+Most developments are done in C#. Three build configurations are available:
+- Debug configuration is optimized for development.
+- Release configuration is optimized for safety.
+- CodeContracts is solely for Code Contracts analysis.
+
+All tasks are fully automated with MSBuild, PowerShell (PSake) and F# scripts.
+
 How to initialize a new C# project
 ----------------------------------
 
 The following procedure enables us to centralize all settings into a single place.
-Except for Code Contracts, there should be no need to edit the project properties anymore.
+Except for Code Contracts, there should be no need to edit the project properties
+anymore.
 
 Create a project and add it to the solution `Narvalo.sln`.
+
+**WARNING** When ready for CI, add the project to Make.Foundations.proj.
 
 Edit the project file:
 - Add the following line at the bottom of the project file, just BEFORE the Microsoft targets:
@@ -74,7 +78,7 @@ Edit the project file:
 <Import Project="..\..\tools\Narvalo.Common.props" />
 ```
 - Remove all sections about Debug, Release and CodeContracts.
-- Remove all properties configured globally (see below).
+- Remove all properties configured globally.
 
 A typical project file should then look like this:
 ```xml
@@ -257,8 +261,8 @@ local property file `{AssemblyName}.props`:
   <CodeContractsEmitXMLDocs>true</CodeContractsEmitXMLDocs>
 </PropertyGroup>
 ```
-The part concerning the XML docs is optional (often it fails with the current
-version of the CC tools).
+The part concerning the XML docs is optional (often it causes the build to fail
+with the current version of the CC tools).
 
 Update notes
 ------------
@@ -279,6 +283,10 @@ tools\nuget.exe update -Self
 After upgrading Visual Studio or MSBuild, do not forget to update the
 `VisualStudioVersion` property in both Make.Shared.props, PSakefile.ps1
 and MSBuild.cmd. We might also need to update the `SDK40ToolsPath` property.
+
+Other places to look at:
+- fsci.cmd (for F# updates)
+- `TargetFrameworkVersion` in Narvalo.Common.props
 
 ### Copyright
 

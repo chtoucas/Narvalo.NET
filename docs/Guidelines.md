@@ -6,13 +6,14 @@ Coding Style
 
 ### Mandatory Rules
 
-In general, we follow the [guidelines](https://github.com/dotnet/corefx/wiki/Coding-style)
-from the .NET team with few differences.
+In general, we follow the guidelines from the .NET team with few differences:
+- [CoreFX](https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/)
+- [CoreClr](https://github.com/dotnet/coreclr/blob/master/Documentation/coding-guidelines/)
 
 All rules (included a few custom ones) are checked by StyleCop.
 
 Rules not yet enforced via StyleCop are:
-- Namespace imports should be specified at the top of the file, _inside_ the namespace declarations.
+- Namespace imports should be specified at the top of the file, _outside_ the namespace declarations.
   In case of namespace conflict, use the 'global::' prefix.
 - Consider separating System imports from the others.
 - Do not use language keywords for methods calls (i.e. prefer `Int32.Parse` over `int.Parse`),
@@ -20,7 +21,7 @@ Rules not yet enforced via StyleCop are:
 - Do not use PascalCasing to name private constants, prefer `MY_PRIVATE_CONSTANT` over `MyPrivateConstant`.
 - Directories must mirror namespaces.
 - Do not put more than one public class per file. The only exception is for Code Contracts classes.
-- Consider using regions or partial classes to organize code.
+- Consider using regions or (preferably) partial classes to organize code.
 - Consider using named parameters for disambiguation of constant or null parameters.
 - For concrete helper classes try to find a more useful suffix than "Helper" or "Utility"
   or use a verb. Examples: "Require", "ParseTo", StringManip"...
@@ -46,12 +47,14 @@ Design Recommendations
   * `Select` (LINQ operator)
   * `Add`, collection initializer
 - All static members should be thread-safe.
-- Consider putting internal classes in a separate directory named "Internal".
 
 ### Optional Rules
 
-- Consider putting optional extensions in a separate directory.
 - Projects should use a minimal set of references.
+- Consider making read-only property thread-safe.
+- Consider putting internal classes in a subnamespace named "Internal".
+- Consider putting classes intended for advanced usages or uncommon scenarios in a subnamespace
+  named "Advanced". Same applies to optional extensions.
 
 ### Localization & Resources
 
@@ -88,7 +91,7 @@ For a detailed description of each rule, check out the official
 
 To suppress a StyleCop warning for a Narvalo.StyleCop rule, use:
 ```csharp
-[SuppressMessage("Narvalo.CSharpRules", "NA1006:InternalMethodsMustNotEndWithInternal", 
+[SuppressMessage("Narvalo.CSharpRules", "NA1006:InternalMethodsMustNotEndWithInternal",
     Justification = "...")]
 ```
 
@@ -144,9 +147,10 @@ Compilation symbols for .NET versions (mostly unused):
 Symbols used to define the assembly properties:
 - `BUILD_GENERATED_VERSION`
 - `DUMMY_GENERATED_VERSION`
+- `NOT_CLS_COMPLIANT`
 - `NO_INTERNALS_VISIBLE_TO`
-- `SIGNED_ASSEMBLY`
 - `SECURITY_ANNOTATIONS`
+- `SIGNED_ASSEMBLY`
 
 [References]
 - [Eric Lippert](http://ericlippert.com/2009/09/10/whats-the-difference-between-conditional-compilation-and-the-conditional-attribute/)
@@ -213,8 +217,7 @@ Non-standard tags:
 Tests
 -----
 
-Test projects are first-class citizens; translate: they must pass successfully
-all static analysis.
+Test projects are first-class citizens; translate: they must pass all static analysis.
 
 ### Mandatory Rules
 - Use the same directory hierarchy that the one used by the libraries.
@@ -298,13 +301,36 @@ Performance
 ### Boxing and Unboxing
 
 References:
-- [CoreFX](https://github.com/dotnet/corefx/wiki/Performance)
-- [CoreClr](https://github.com/dotnet/coreclr/wiki/Performance-Requirements)
+- [CoreFX](https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/performance-guidelines.md)
+- [CoreClr](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/performance-guidelines.md)
 - [Delegates](http://blogs.msdn.com/b/pfxteam/archive/2012/02/03/10263921.aspx)
 
 Security
 --------
 
 Consider applying the `SecurityTransparent` attribute or the `AllowPartiallyTrustedCallers`
-attribute (if the assembly contains security critical methods) to the assembly. If you do so, 
+attribute (if the assembly contains security critical methods) to the assembly. If you do so,
 verify the  assembly with the `SecAnnotate` tool.
+
+Library             | Attribute
+--------------------|------------
+Narvalo.Cerbere     | Transparent
+Narvalo.Common      | APTCA
+Narvalo.Core        | Transparent
+Narvalo.Finance     | Transparent
+Narvalo.Fx          | Transparent
+Narvalo.Web         | (None)      <- see below.
+
+Remark: APTCA and ASP.NET MVC [do not work together](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307):
+all methods in ASP.NET MVC v5 default to  SecurityCritical.
+
+References:
+- [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
+- [Security-Transparent Code, Level 2](https://msdn.microsoft.com/en-us/library/dd233102(v=vs.110).aspx)
+- [APTCA](https://msdn.microsoft.com/en-us/magazine/ee336023.aspx)
+- [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)
+- [SecAnnotate and PCL](http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab)
+- [Tutorial](http://www.codeproject.com/Articles/329666/Things-I-learned-while-implementing-my-first-Level)
+- [Simple Talk Tutorial](https://www.simple-talk.com/dotnet/net-framework/whats-new-in-code-access-security-in-net-framework-4-0-part-i/)
+- http://stackoverflow.com/questions/5055632/net-4-allowpartiallytrustedcallers-attribute-and-security-markings-like-secur
+

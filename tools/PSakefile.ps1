@@ -770,18 +770,19 @@ function Invoke-OpenCover {
     )
 
     # TODO: Make it survive NuGet updates.
-    $openCoverVersion = '4.5.3723'
-    $reportGeneratorVersion = '2.1.4.0'
-    $xunitVersion = '2.0.0'
+    $openCoverVersion = '4.6.519'
+    $reportGeneratorVersion = '2.4.5.0'
+    $xunitVersion = '2.1.0'
 
-    $openCover = Get-LocalPath "packages\OpenCover.$openCoverVersion\OpenCover.Console.exe" -Resolve
-    $reportGenerator = Get-LocalPath "packages\ReportGenerator.$reportGeneratorVersion\ReportGenerator.exe" -Resolve
+    $openCover = Get-LocalPath "packages\OpenCover.$openCoverVersion\tools\OpenCover.Console.exe" -Resolve
+    $reportGenerator = Get-LocalPath "packages\ReportGenerator.$reportGeneratorVersion\tools\ReportGenerator.exe" -Resolve
     $xunit = Get-LocalPath "packages\xunit.runner.console.$xunitVersion\tools\xunit.console.exe" -Resolve
 
     $coverageFile = Get-LocalPath 'work\log\opencover.xml'
     $coverageFilter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
     $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;Narvalo.ExcludeFromCodeCoverageAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
 
+    # TODO: Add Narvalo.Reliability.Facts.
     $testAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
 
     # Be careful with arguments containing spaces.

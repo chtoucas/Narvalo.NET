@@ -1,26 +1,42 @@
-Migration to VS2015
-===================
+Current works
+=============
 
+- Add `Narvalo.Reliability` and `Narvalo.Reliability.Facts` to Make projects (see also OpenCover below).
+- Check that moving EnableGendarme form Narvalo.Common.props to Make.CustomAfter.props
+  didn't break anything.
 - Migrate from StyleCop to StyleCop.Analyzers.
-  * Disable StyleCop `StyleCopEnabled` to `false` (see `Package.StyleCop.targets`).
-  * Create `Narvalo.Analyzers` replacement of `Narvalo.StyleCop` and `Narvalo.FxCop`.
+  * Disable StyleCop: set `StyleCopEnabled` to `false` (see `Package.StyleCop.targets`).
+  * When migration is done, update the README to detail the new static analysis results
+    and the documentation: Overview.md and Guidelines.md.
+  * Create `tools\src\Narvalo.ProjectAnalyzers` replacement of `Narvalo.StyleCop`.
+  * Create `src\Narvalo.Analyzers`.
+  * RuleSet Schema:
+    [Format](https://github.com/dotnet/roslyn/blob/master/docs/compilers/Rule%20Set%20Format.md)
+    and [Schema](https://github.com/dotnet/roslyn/blob/master/src/Compilers/Core/Portable/RuleSet/RuleSetSchema.xsd)
 - C#
   * use `nameof` everywhere.
   * decide rules to when to use the new `=>` syntax for methods.
   * review the use of `var`.
-- Check that moving EnableGendarme form Narvalo.Common.props to Make.CustomAfter.props didn't break
-  anything.
-- Force `MininalVisualStudioVersion` in the solution files? 
-- In `PSakefile.ps1`, do we need to change `VisualStudioVersion` (`_MyGet-Publish`)? See also
-  the Framework property at the beginning of the file.
-  Check also TargetFrameworkVersion.
 - For test projects, we should automatically add the TestCommon shared project.
     `<Import Project="..\Narvalo.TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />`
-- MvpWebForms sample project: `OutputPath` is wrong (temporary fix: override `OutputPath`
+- **Bug:** in the MvpWebForms sample project, `OutputPath` is wrong (temporary fix: override `OutputPath`
   property in project file). Other strange thing, `MvpWebForms.dll.config` is created.
-  LocalDB requires SQL Server Express.
+  The database requires [SQL Server 2012 Express LocalDB](https://www.microsoft.com/en-us/download/details.aspx?id=29062).
 - Move to .Net Standard
-- Do we really need to use `ToolsVersion="14.0"`?
+  * [CoreFX](https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/porting.md#unsupported-technologies)
+  * [Porting to .NET Core](https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/)
+- VS 2015
+  * Do we need to change `VisualStudioVersion` (`_MyGet-Publish`)? See also
+    the Framework property at the beginning of the file.
+  * Check `TargetFrameworkVersion`.
+  * Do we really need to use `ToolsVersion="14.0"`?
+  * Force `MininalVisualStudioVersion` in the solution files?
+- OpenCover
+  * Update the PSake task (missing xunit.runner.console package).
+  * Handle more than one test project (`Narvalo.Reliability.Facts`).
+- Solution-level packages are no longer supported
+  * [GitHub Issue](https://github.com/NuGet/Home/issues/522)
+  * [Bring back solution level packages](https://github.com/NuGet/Home/issues/1521)
 
 
 Issues & Roadmap
@@ -58,7 +74,7 @@ Narvalo.Fx
   * Split.
   * Review true argument check for extension methods.
   * SumCore() and CollectCore() assert that they never return null but this is not always true.
-- Use of .Then(): in JoinCore and GroupJoinCore() can return null.
+  * Use of .Then(): in JoinCore and GroupJoinCore() can return null.
 
 Narvalo.Core
 ------------
@@ -86,12 +102,10 @@ Narvalo.Finance
 Narvalo.Reliability
 -------------------
 
-- Very much a work in progress.
 - See
-  * kite (java)
-    https://github.com/williewheeler/kite
-  * jrugged (java)
-  * Hystrix (java)
+  * [kite](https://github.com/williewheeler/kite)
+  * jrugged
+  * [Hystrix](https://github.com/Netflix/Hystrix)
 
 Narvalo.Web
 -----------
@@ -135,8 +149,8 @@ Narvalo.Mvp
     container where we normally perform the binding.
   * The message coordinator must support unsubscription (automatic or manual).
 - See
-  http://aspiringcraftsman.com/tag/model-view-presenter/
-  http://aspiringcraftsman.com/2007/08/25/interactive-application-architecture/
+  * http://aspiringcraftsman.com/tag/model-view-presenter/
+  * http://aspiringcraftsman.com/2007/08/25/interactive-application-architecture/
 
 Infrastructure
 --------------
@@ -147,7 +161,10 @@ Infrastructure
 
 - Enable Continuous Integration with AppVeyor.
 - Analyze logs and reports across builds.
-- Build C# documentation.
+- Build C# documentation:
+  * [Monodoc](http://www.mono-project.com/docs/tools+libraries/tools/monodoc/generating-documentation/)
+  * [.NET docs](https://github.com/dotnet/docs/issues/772)
+  * DocPlagiarizer
 - Build and test all possible configurations.
 
 ### Packages
@@ -159,44 +176,19 @@ Infrastructure
 
 ### Security
 
-Library             | 
---------------------|------------
-Narvalo.Cerbere     | Transparent
-Narvalo.Fx          | Transparent
-Narvalo.Finance     | Transparent
-Narvalo.Core        | Transparent
-Narvalo.Common      | APTCA    
-
-- Review the security attributes (those that exist are most certainly wrong):
+- Review the usefulness of security attributes (link)[https://github.com/dotnet/corefx/issues/12592]
   * `AllowPartiallyTrustedCallers`,  `SecurityTransparent`
   * `SecurityCritical`, `SecuritySafeCritical`
-  (link)[https://github.com/dotnet/corefx/issues/12592]
-  * APTCA and ASP.NET MVC do not work together:
-  [link](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307)
-- Bug: In MSBuild:
-  * (SecAnnotate), we force security transparency for our PCL libraries in MSBuild.
-  See `$(_ForceTransparency)` in MSBuild (looks a bit fragile to have to explicitly list the PCL 
-  librairies, better, we could use a rsp file).
-  * If `SkipVerificationInFullTrust` is true, we should use `PEVerify /transparent`
-  [link](https://msdn.microsoft.com/en-us/library/dd233102(v=vs.110).aspx)
-  * Do not run SecAnnotate.exe on test libraries?
-- See permcalc & PEVerify /transparent  [link](https://msdn.microsoft.com/en-us/library/62bwd2yd.aspx)
-- AllowPartiallyTrusted, SecurityRules and SecurityPermission attributes:
+- Assembly level attributes: AllowPartiallyTrusted, SecurityRules and SecurityPermission attributes:
 ```
 [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
 [assembly: SecurityRules(SecurityRuleSet.Level2, SkipVerificationInFullTrust = true)]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 ```
-
-References:
-- [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
-- [Security-Transparent Code, Level 2](https://msdn.microsoft.com/en-us/library/dd233102(v=vs.110).aspx)
-- [APTCA](https://msdn.microsoft.com/en-us/magazine/ee336023.aspx)
-- [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)
-- [SecAnnotate and PCL](http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab)
-- [Tutorial](http://www.codeproject.com/Articles/329666/Things-I-learned-while-implementing-my-first-Level)
-- [Simple Talk](https://www.simple-talk.com/dotnet/net-framework/whats-new-in-code-access-security-in-net-framework-4-0-part-i/)
-- http://stackoverflow.com/questions/5055632/net-4-allowpartiallytrustedcallers-attribute-and-security-markings-like-secur
+- In MSBuild (SecAnnotate), we force security transparency for our PCL libraries.
+  `$(_ForceTransparency)` looks a bit fragile to have to explicitly list the PCL
+  librairies, better, we could use a rsp file.
+- See permcalc & PEVerify /transparent  [link](https://msdn.microsoft.com/en-us/library/62bwd2yd.aspx)
 
 ### Scripts
 
@@ -210,13 +202,11 @@ MSBuild and `PSakefile`:
 - **Bug:** Make sure PSake reports failure whenever an error occurs.
 - Complete common settings for F# projects.
 - Enable T4-regeneration outside VS since, currently it does not work when building from the command-line.
-- Make sure a build fails when SecAnnotate does too.
 - What's going on when the `Package` target is also defined?
 - Verify that `SkipDocumentation` is true when building Code Contracts documentation.
 
 `publish-*.fsx`
 - **Bug:** Fails to push to the official NuGet server but works otherwise.
-- **Bug:** Finding previous version of packages seems incorrect and deleting fails sometimes?
 
 `checkup.ps1`:
 - Find projects not using `Narvalo.Common.props`.
