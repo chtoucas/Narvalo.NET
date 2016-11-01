@@ -7,3 +7,4 @@
 #r "System.Xml.Linq.dll"
 #r "../../../packages/UnionArgParser.0.8.6/lib/net40/UnionArgParser.dll"
 #r "../../../packages/NuGet.Core.2.12.0/lib/net40-Client/NuGet.Core.dll"
+#r "Microsoft.CSharp.dll"
