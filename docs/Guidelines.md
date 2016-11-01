@@ -309,20 +309,21 @@ Security
 --------
 
 Consider applying the `SecurityTransparent` attribute or the `AllowPartiallyTrustedCallers`
-attribute (if the assembly contains security critical methods) to the assembly. If you do so,
-verify the  assembly with the `SecAnnotate` tool.
+attribute to the assembly. If you do so, verify the  assembly with the `SecAnnotate` tool (done 
+automatically if we use the SecurityAnalysis task from the PSake file).
 
 Library             | Attribute
 --------------------|------------
 Narvalo.Cerbere     | Transparent
-Narvalo.Common      | APTCA
+Narvalo.Common      | Transparent
 Narvalo.Core        | Transparent
 Narvalo.Finance     | Transparent
 Narvalo.Fx          | Transparent
 Narvalo.Web         | (None)      <- see below.
 
-Remark: APTCA and ASP.NET MVC [do not work together](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307):
-all methods in ASP.NET MVC v5 default to  SecurityCritical.
+Remark:
+All methods in ASP.NET MVC v5 default to SecurityCritical, our only choice would be to mark Narvalo.Web with
+the APTCA attribute, but APTCA and ASP.NET MVC [do not work together](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307).
 
 References:
 - [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
@@ -330,7 +331,7 @@ References:
 - [APTCA](https://msdn.microsoft.com/en-us/magazine/ee336023.aspx)
 - [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)
 - [SecAnnotate and PCL](http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab)
-- [Tutorial](http://www.codeproject.com/Articles/329666/Things-I-learned-while-implementing-my-first-Level)
 - [Simple Talk Tutorial](https://www.simple-talk.com/dotnet/net-framework/whats-new-in-code-access-security-in-net-framework-4-0-part-i/)
 - http://stackoverflow.com/questions/5055632/net-4-allowpartiallytrustedcallers-attribute-and-security-markings-like-secur
+- https://msdn.microsoft.com/en-us/magazine/ee336023.aspx
 

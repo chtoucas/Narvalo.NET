@@ -182,6 +182,9 @@ We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
 - **Profile259** (.NET Framework 4.5, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8):
   * For MSBuild: `TargetFrameworkVersion=v4.5`.
 
+When creating the project we should add it to the list of PCL projects used by SecAnnotate
+(see Make.CustomAfter.targets).
+
 See
 - Profiles used by the project: `etc/FrameworkProfiles.props`.
 - Locally available profiles: `C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\`.
@@ -210,6 +213,9 @@ Add the following content to you local customization property file `{AssemblyNam
 This has two consequences:
 - Test projects use a dummy assembly version.
 - Test projects use custom FxCop rules.
+
+When creating the project we should add it to the list of test projects used by OpenCover in the
+PSake file.
 
 #### Sample projects
 Add the following content to you local customization property file `{AssemblyName}.props`:

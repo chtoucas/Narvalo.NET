@@ -1,7 +1,7 @@
 Current works
 =============
 
-- Add `Narvalo.Reliability` and `Narvalo.Reliability.Facts` to Make projects (see also OpenCover below).
+- Add Narvalo.Reliability and Narvalo.Reliability.Facts to Make projects (see also OpenCover below).
 - Check that moving EnableGendarme form Narvalo.Common.props to Make.CustomAfter.props
   didn't break anything.
 - Migrate from StyleCop to StyleCop.Analyzers.
@@ -42,21 +42,19 @@ Current works
 Issues & Roadmap
 ================
 
-- Provide better `AssemblyDescription`.
-- CodeAnalysisDictionary does not seem to be understood.
-- When, Guard & co.
-- IsNullable && HasZero
-- Remove Maybe.None.
-- Maybe and IEquatable<T>.
-
 Design
 ------
 
-- Statics and thread-safety.
+- Provide better assembly descriptions.
+- Thread-safety: statics and read-only properties.
 - Review all `Format` and boxing
 - Where it makes sense, add `EditorBrowsableState`, `DebuggerDisplay` and `DebuggerTypeProxy` attributes.
 - Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
 - Review all `IEnumerable` extensions for null-checking and deferred execution.
+- When, Guard & co.
+- IsNullable && HasZero
+- Remove Maybe.None.
+- Maybe and IEquatable<T>.
 
 Narvalo.Cerbere
 ---------------
@@ -102,10 +100,10 @@ Narvalo.Finance
 Narvalo.Reliability
 -------------------
 
-- See
-  * [kite](https://github.com/williewheeler/kite)
-  * jrugged
-  * [Hystrix](https://github.com/Netflix/Hystrix)
+See
+- [kite](https://github.com/williewheeler/kite)
+- jrugged
+- [Hystrix](https://github.com/Netflix/Hystrix)
 
 Narvalo.Web
 -----------
@@ -156,30 +154,28 @@ Infrastructure
 --------------
 
 - Publishing Narvalo.Mvp should fail if we do not publish Narvalo.Core?
+- CodeAnalysisDictionary does not seem to be understood.
 
 ### Continuous Integration
 
-- Enable Continuous Integration with AppVeyor.
+- Enable Continuous Integration (AppVeyor?).
 - Analyze logs and reports across builds.
 - Build C# documentation:
   * [Monodoc](http://www.mono-project.com/docs/tools+libraries/tools/monodoc/generating-documentation/)
   * [.NET docs](https://github.com/dotnet/docs/issues/772)
   * DocPlagiarizer
-- Build and test all possible configurations.
 
 ### Packages
 
 - Create symbol packages (or use GitLink?).
-- Maybe we can simplify semantic versioning for edge packages:
-  * http://semver.npmjs.com/
-  * http://www.infoq.com/news/2015/04/semver-calculator-npm
+- Apply security attributes?
 
 ### Security
 
-- Review the usefulness of security attributes (link)[https://github.com/dotnet/corefx/issues/12592]
+- Review the (usefulness)[https://github.com/dotnet/corefx/issues/12592] of the security attributes:
   * `AllowPartiallyTrustedCallers`,  `SecurityTransparent`
   * `SecurityCritical`, `SecuritySafeCritical`
-- Assembly level attributes: AllowPartiallyTrusted, SecurityRules and SecurityPermission attributes:
+- Here are some commonly found assembly level attributes:
 ```
 [assembly: AllowPartiallyTrustedCallers(PartialTrustVisibilityLevel = PartialTrustVisibilityLevel.NotVisibleByDefault)]
 [assembly: SecurityRules(SecurityRuleSet.Level2, SkipVerificationInFullTrust = true)]
@@ -188,7 +184,7 @@ Infrastructure
 - In MSBuild (SecAnnotate), we force security transparency for our PCL libraries.
   `$(_ForceTransparency)` looks a bit fragile to have to explicitly list the PCL
   librairies, better, we could use a rsp file.
-- See permcalc & PEVerify /transparent  [link](https://msdn.microsoft.com/en-us/library/62bwd2yd.aspx)
+- What about permcalc?
 
 ### Scripts
 
