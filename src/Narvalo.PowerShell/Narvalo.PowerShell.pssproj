@@ -37,7 +37,6 @@
     <Compile Include="Narvalo.PowerShell.SqlServer.psm1" />
     <Compile Include="Narvalo.PowerShell.Utility.psm1" />
     <Compile Include="Narvalo.PowerShell.Web.psm1" />
-    <Compile Include="PowerShell.md" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />
