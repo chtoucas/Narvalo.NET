@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: Guid("8cd3c522-030f-49b4-bd87-285e2b35425b")]
 
 #if SECURITY_ANNOTATIONS
-[assembly: System.Security.AllowPartiallyTrustedCallers]
+[assembly: System.Security.SecurityTransparent]
 #endif
 
 [assembly: SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
