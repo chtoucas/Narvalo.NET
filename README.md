@@ -68,14 +68,13 @@ Narvalo.NET
   custom MSBuild tasks.
 
 #### Other projects
-- **Narvalo.PowerShell**, collection of sample PowerShell modules.
+- **Narvalo.PowerShell**, collection of PowerShell utilities.
 - **Narvalo.T4**, custom T4 templates (for internal use only).
-- **Narvalo.StyleCop**, custom StyleCop rules for C# (for internal use only; to be replaced by Narvalo.Analyzers).
+- **Narvalo.StyleCop**, custom StyleCop rules for C# (for internal use only).
 - **Narvalo.Benchmarks**, the benchmarking project (for internal use only).
 - **Narvalo.Mvp.Windows.Forms** (incomplete & unusable).
 - **Narvalo.Ghostscript**, a .NET wrapper for GhostScript (incomplete & broken).
 - **Narvalo.Reliability** features reliability patterns (incomplete & broken).
-- **Narvalo.FxCop**, custom FxCop rules (empty; to be replaced by Narvalo.Analyzers).
 - **Narvalo.Brouillons**, a "fourre-tout" of unfinished or severely broken codes.
 
 #### Status for the NuGet packages
