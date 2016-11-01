@@ -188,7 +188,11 @@ using System.Reflection;
     <Message Text="Verifying $(AssemblyName) with PEVerify..." Importance="high" />
 
     <PropertyGroup>
-      <!-- If we run SecAnnotate... In that case, and only in that case, we add the /transparent option. -->
+      <!-- If we run SecAnnotate... In that case, and only in that case, we add the /transparent option.
+           If SkipVerificationInFullTrust is true:
+             [assembly: SecurityRules(SecurityRuleSet.Level2, SkipVerificationInFullTrust = true)]
+           we should use `PEVerify /transparent`
+           See https://msdn.microsoft.com/en-us/library/dd233102(v=vs.110).aspx -->
       <_PEVerifyTransparent Condition=" '$(EnableSecurityAnnotations)' == 'true' " >/transparent</_PEVerifyTransparent>
     </PropertyGroup>
 

@@ -189,6 +189,7 @@ Task SecurityAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias SA `
 {
+    # Keep the PEVerify target (see the comments in the MSBuild target _PEVerify).
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Clean;SecAnnotate;PEVerify',
         # For static analysis, we hide internals, otherwise we might not truly
