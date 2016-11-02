@@ -4,7 +4,15 @@ Current works
 - Add Narvalo.Reliability and Narvalo.Reliability.Facts to Make projects (see also OpenCover below).
 - Check that moving EnableGendarme form Narvalo.Common.props to Make.CustomAfter.props
   didn't break anything.
-- Use docfx for documentation generation.
+- Build C# documentation (docfx):
+  * [docfx](http://dotnet.github.io/docfx/tutorial/docfx_getting_started.html)
+  * External links via `<see cref="!:" />` are not understood by docfx.
+  * NamespaceDocs are not understood by docsfx.
+  * `<content markup="commonmark">` is not understood.
+  * reference MSDN package without version
+  * [Monodoc](http://www.mono-project.com/docs/tools+libraries/tools/monodoc/generating-documentation/)
+  * [.NET docs](https://github.com/dotnet/docs/issues/772)
+  * DocPlagiarizer
 - Migrate from StyleCop to StyleCop.Analyzers.
   * Disable StyleCop: set `StyleCopEnabled` to `false` (see `Package.StyleCop.targets`).
   * When migration is done, update the README to detail the new static analysis results
@@ -162,11 +170,6 @@ Infrastructure
 
 - Enable Continuous Integration (AppVeyor?).
 - Analyze logs and reports across builds.
-- Build C# documentation:
-  * [docfx](http://dotnet.github.io/docfx/tutorial/docfx_getting_started.html)
-  * [Monodoc](http://www.mono-project.com/docs/tools+libraries/tools/monodoc/generating-documentation/)
-  * [.NET docs](https://github.com/dotnet/docs/issues/772)
-  * DocPlagiarizer
 
 ### Packages
 

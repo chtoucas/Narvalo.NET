@@ -1,17 +1,17 @@
 Narvalo.NET
 ===========
 
-#### Documentation
-- [Project Overview](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Overview.md)
-- [Project Changelog](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Changelog.md)
-- [Issues and Roadmap](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Issues.md)
-- [Developer Guidelines](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/Guidelines.md)
-- [DevOps](https://github.com/chtoucas/Narvalo.NET/tree/master/docs/BuildAndRelease.md)
+## Documentation
+- [Project Overview](Overview.md)
+- [Project Changelog](Changelog.md)
+- [Issues and Roadmap](Issues.md)
+- [Developer Guidelines](Guidelines.md)
+- [DevOps](BuildAndRelease.md)
 - [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
 - [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)
   on which depend all MVP-related packages.
 
-#### General Purpose Libraries
+## General Purpose Libraries
 - **Narvalo.Cerbere**
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Cerbere)),
   this library provides argument validation methods and Code Contracts helpers.
@@ -43,7 +43,7 @@ Narvalo.NET
 - **Narvalo.Facts** ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/tests/Narvalo.Facts))
   is the test project.
 
-#### MVP Framework
+## MVP Framework
 - **Narvalo.Mvp**
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp),
   [package](https://www.nuget.org/packages/Narvalo.Mvp/)),
@@ -58,20 +58,20 @@ Narvalo.NET
 - **Narvalo.Mvp.Facts** ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/tests/Narvalo.Mvp.Facts))
   is the test project.
 
-#### Developer Tools
+## Developer Tools
 - **Narvalo.Build**
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build),
   [package](https://www.nuget.org/packages/Narvalo.Build/)),
   custom MSBuild tasks.
 
-#### Other projects
+## Other projects
 - **Narvalo.T4**, custom T4 templates (for internal use only).
 - **Narvalo.StyleCop**, custom StyleCop rules for C# (for internal use only).
 - **Narvalo.Mvp.Windows.Forms** (_incomplete & unusable_).
 - **Narvalo.Ghostscript**, a .NET wrapper for GhostScript (_incomplete & broken_).
 - **Narvalo.Reliability** features reliability patterns (_incomplete & broken_).
 
-#### Status for the NuGet packages
+## Status for the NuGet packages
 
 Library             | Status | PCL        | CA | GA | CC | SA  | TC
 --------------------|--------|------------|----|----|----|-----|-----
@@ -94,7 +94,7 @@ Explanations:
 - SA: Source Analysis with StyleCop. OK+ means that the assembly is fully documented.
 - TC: Code Coverage. OK means > 90%.
 
-#### Retired NuGet packages
+### Retired NuGet packages
 
 - [Narvalo.Web.Extras](https://www.nuget.org/packages/Narvalo.Web.Extras/),
   replaced by [Narvalo.Web](https://www.nuget.org/packages/Narvalo.Web/).

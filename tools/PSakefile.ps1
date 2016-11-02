@@ -60,6 +60,16 @@ Task Default -Depends Build
 # NB: No need to restore packages before building the projects $Everything
 # or $Foundations; this will be done in MSBuild.
 
+Task RestorePackages `
+    -Description 'Restore solution-level packages.' `
+    -Alias restore `
+{
+    Restore-Packages -Source (Get-LocalPath '.nuget\packages.config') `
+        -PackagesDirectory (Get-LocalPath 'packages') `
+        -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
+        -Verbosity $NuGetVerbosity
+}
+
 Task Build `
     -Description '[ALL+ ] Build.' `
     -Depends _CI-InitializeVariables `

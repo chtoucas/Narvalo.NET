@@ -1,38 +1,48 @@
-{
+﻿{
   "metadata": [
     {
       "src": [
         {
           "files": [
             "Narvalo.Cerbere/Narvalo.Cerbere.csproj",
+            "Narvalo.Fx/Narvalo.Fx.csproj",
+            "Narvalo.Finance/Narvalo.Finance.csproj"
           ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": "../src"
         }
       ],
-      "dest": "api",
+      "dest": "api"
     }
   ],
   "build": {
     "content": [
       {
-        "files": ["toc.yml", "**/*.yml"],
+        "files": [ "toc.yml", "**/*.yml" ],
         "src": "api",
-        "dest": "api",
+        "dest": "api"
       },
       {
-        "files": ["toc.yml", "*.md"],
-      },
+        "files": [ "toc.yml", "*.md" ]
+      }
     ],
     "resource": [],
     "overwrite": [],
-    "dest": "work",
+    "dest": "www",
+    "globalMetadata": {
+      "_appTitle": "Narvalo.NET website",
+      "_appFooter": "Copyright (c) Narvalo.Org",
+      "_disableContribution": true
+    },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
       "default"
     ],
     "postProcessors": [],
+    "xref": [
+      "../packages/msdn.4.5.2.0.1.0-alpha-1610081127/content/msdn.4.5.2.zip"
+    ],
     "noLangKeyword": false
   }
 }
