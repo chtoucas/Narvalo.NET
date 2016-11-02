@@ -4,6 +4,7 @@ Current works
 - Add Narvalo.Reliability and Narvalo.Reliability.Facts to Make projects (see also OpenCover below).
 - Check that moving EnableGendarme form Narvalo.Common.props to Make.CustomAfter.props
   didn't break anything.
+- Use docfx for documentation generation.
 - Migrate from StyleCop to StyleCop.Analyzers.
   * Disable StyleCop: set `StyleCopEnabled` to `false` (see `Package.StyleCop.targets`).
   * When migration is done, update the README to detail the new static analysis results
@@ -101,6 +102,7 @@ Narvalo.Reliability
 -------------------
 
 See
+- [Polly](https://github.com/App-vNext/Polly)
 - [kite](https://github.com/williewheeler/kite)
 - jrugged
 - [Hystrix](https://github.com/Netflix/Hystrix)

@@ -1,0 +1,38 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "Narvalo.Cerbere/Narvalo.Cerbere.csproj",
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "../src"
+        }
+      ],
+      "dest": "api",
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": ["toc.yml", "**/*.yml"],
+        "src": "api",
+        "dest": "api",
+      },
+      {
+        "files": ["toc.yml", "*.md"],
+      },
+    ],
+    "resource": [],
+    "overwrite": [],
+    "dest": "work",
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": [
+      "default"
+    ],
+    "postProcessors": [],
+    "noLangKeyword": false
+  }
+}
