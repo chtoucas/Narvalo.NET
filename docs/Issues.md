@@ -161,6 +161,7 @@ Infrastructure
 - Enable Continuous Integration (AppVeyor?).
 - Analyze logs and reports across builds.
 - Build C# documentation:
+  * [docfx](http://dotnet.github.io/docfx/tutorial/docfx_getting_started.html)
   * [Monodoc](http://www.mono-project.com/docs/tools+libraries/tools/monodoc/generating-documentation/)
   * [.NET docs](https://github.com/dotnet/docs/issues/772)
   * DocPlagiarizer

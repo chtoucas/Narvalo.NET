@@ -5,7 +5,7 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.Internal.Helpers;
+    using static Narvalo.Finance.Internal.CharsUtility;
 
     /// <summary>
     /// Represents a Business Identifier Code (BIC).
@@ -123,6 +123,7 @@ namespace Narvalo.Finance
                 }
             }
 
+            // TODO: Do everything in one pass: validation and parsing.
             // The first four letters define the institution or bank code.
             string institutionCode = value.Substring(0, 4);
             for (int i = 0; i < institutionCode.Length; i++)

@@ -4,7 +4,7 @@ namespace Narvalo.Finance.Internal
 {
     using System;
 
-    internal static class Helpers
+    internal static class CharsUtility
     {
         public static bool IsDigit(Char c) => IsDigit((int)c);
 

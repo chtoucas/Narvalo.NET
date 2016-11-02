@@ -5,7 +5,7 @@ namespace Narvalo.Mvp.Windows.Forms
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// The Narvalo.Mvp.Windows.Forms namespace contains classes and interfaces 
+    /// The Narvalo.Mvp.Windows.Forms namespace contains classes and interfaces
     /// that extend the Narvalo.Mvp namespace to provide support for Windows Forms.
     /// </summary>
     [CompilerGenerated]

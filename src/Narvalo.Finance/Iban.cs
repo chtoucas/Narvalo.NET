@@ -5,7 +5,7 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.Internal.Helpers;
+    using static Narvalo.Finance.Internal.CharsUtility;
 
     /// <summary>
     /// Represents an International Bank Account Number (IBAN).
@@ -113,6 +113,7 @@ namespace Narvalo.Finance
                 }
             }
 
+            // TODO: Do everything in one pass: validation and parsing.
             for (int i = 0; i < value.Length; i++)
             {
                 var pos = (int)value[i];

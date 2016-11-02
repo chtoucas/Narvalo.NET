@@ -28,7 +28,7 @@ namespace Narvalo.Mvp.Windows.Forms
         {
             public DefaultPlatformServices_()
             {
-                // Since "AttributeBasedPresenterDiscoveryStrategy" provides the most complete 
+                // Since "AttributeBasedPresenterDiscoveryStrategy" provides the most complete
                 // implementation of "IPresenterDiscoveryStrategy", we keep it on top the list.
                 SetPresenterDiscoveryStrategy(
                     () => new CompositePresenterDiscoveryStrategy(
