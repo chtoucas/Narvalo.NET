@@ -9,7 +9,7 @@ Current works
   * External links via `<see cref="!:" />` are not understood by docfx.
   * NamespaceDocs are not understood by docsfx.
   * `<content markup="commonmark">` is not understood.
-  * reference MSDN package without version
+  * reference the MSDN package without version
   * [Monodoc](http://www.mono-project.com/docs/tools+libraries/tools/monodoc/generating-documentation/)
   * [.NET docs](https://github.com/dotnet/docs/issues/772)
   * DocPlagiarizer
@@ -45,6 +45,7 @@ Current works
   * Handle more than one test project (`Narvalo.Reliability.Facts`).
   * Simply move to a MSBuild target.
 - Solution-level packages are no longer supported
+  * Currently, we can use `make.ps1 restore`: add an update task.
   * [GitHub Issue](https://github.com/NuGet/Home/issues/522)
   * [Bring back solution level packages](https://github.com/NuGet/Home/issues/1521)
 

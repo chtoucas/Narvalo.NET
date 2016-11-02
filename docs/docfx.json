@@ -4,9 +4,7 @@
       "src": [
         {
           "files": [
-            "Narvalo.Cerbere/Narvalo.Cerbere.csproj",
-            "Narvalo.Fx/Narvalo.Fx.csproj",
-            "Narvalo.Finance/Narvalo.Finance.csproj"
+            "Narvalo.Cerbere/Narvalo.Cerbere.csproj"
           ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": "../src"
