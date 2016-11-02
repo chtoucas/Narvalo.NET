@@ -17,20 +17,14 @@ namespace Narvalo.GhostScript.Options
 
         public static void AddTo(this Eps eps, ICollection<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("interactions");
-            }
+            Require.NotNull(args, nameof(args));
 
             args.Add(GetParameter(eps));
         }
 
         public static void AddTo(this Interactions interactions, ICollection<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("interactions");
-            }
+            Require.NotNull(args, nameof(args));
 
             foreach (var value in s_InteractionsList)
             {
@@ -43,10 +37,7 @@ namespace Narvalo.GhostScript.Options
 
         public static void AddTo(this Miscs miscs, ICollection<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("miscs");
-            }
+            Require.NotNull(args, nameof(args));
 
             foreach (var value in s_MiscsList)
             {

@@ -8,18 +8,14 @@ namespace Narvalo.GhostScript.Internal
     using System.Security;
     using System.Security.Permissions;
 
+    // FIXME: Use the .NET 4 security attributes.
     [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
     internal sealed class Win32GhostScriptSafeHandle : SafeHandle
     {
         public Win32GhostScriptSafeHandle()
-            : base(IntPtr.Zero, true /* onwshandle */)
-        {
-        }
+            : base(IntPtr.Zero, true /* onwshandle */) { }
 
-        public override bool IsInvalid
-        {
-            get { return handle == IntPtr.Zero; }
-        }
+        public override bool IsInvalid => handle == IntPtr.Zero;
 
         // https://msdn.microsoft.com/en-us/magazine/cc163716.aspx
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -28,7 +24,7 @@ namespace Narvalo.GhostScript.Internal
         {
             int code = Win32NativeMethods.gsapi_exit(handle);
             Win32NativeMethods.gsapi_delete_instance(handle);
-            return NativeMethodsUtil.IsSuccess(code);
+            return NativeMethodsUtility.IsSuccess(code);
         }
     }
 }

@@ -46,6 +46,7 @@ Issues & Roadmap
 - Provide better assembly descriptions.
 - Thread-safety: statics and read-only properties.
 - Prefer `for` to `foreach` with arrays.
+- Change `retval` for a more meaningful name.
 - Review all `Format` and boxing
 - Where it makes sense, add `EditorBrowsableState`, `DebuggerDisplay` and `DebuggerTypeProxy` attributes.
 - Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.

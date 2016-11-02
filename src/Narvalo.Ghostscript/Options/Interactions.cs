@@ -15,7 +15,7 @@ namespace Narvalo.GhostScript.Options
         NoPrompt,
 
         /// <summary>
-        /// Suppresses routine information comments on standard output. This is currently 
+        /// Suppresses routine information comments on standard output. This is currently
         /// necessary when redirecting device output to standard output.
         /// </summary>
         Quiet,

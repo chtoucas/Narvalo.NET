@@ -4,41 +4,32 @@ namespace Narvalo.GhostScript.Options
 {
     using System;
     using System.Collections.Generic;
-    ////using System.ComponentModel;
 
     public class GhostScriptArgs<T> where T : Device
     {
-        private readonly T _device;
-        private readonly string _inputFile;
-
-        private Interactions _interactions = Interactions.Default;
-        private Miscs _miscs = Miscs.Default;
-        private string _outputFile;
-        private Pdf _pdf;
-
         public GhostScriptArgs(string inputFile, T device)
         {
-            Require.NotNullOrEmpty(inputFile, "inputFile");
-            Require.NotNull(device, "device");
+            Require.NotNullOrEmpty(inputFile, nameof(inputFile));
+            Require.NotNull(device, nameof(device));
 
-            _inputFile = inputFile;
-            _device = device;
+            InputFile = inputFile;
+            Device = device;
         }
 
-        public bool CanOutput { get { return !String.IsNullOrEmpty(OutputFile); } }
+        public bool CanOutput => !String.IsNullOrEmpty(OutputFile);
 
-        public T Device { get { return _device; } }
+        public T Device { get; }
 
-        public string InputFile { get { return _inputFile; } }
+        public string InputFile { get; }
 
-        public Interactions Interactions { get { return _interactions; } set { _interactions = value; } }
+        public Interactions Interactions { get; set; } = Interactions.Default;
 
-        public Miscs Miscs { get { return _miscs; } set { _miscs = value; } }
+        public Miscs Miscs { get; set; } = Miscs.Default;
 
         // REVIEW: Ce paramètre ne devrait-il pas être obligatoire ?
-        public string OutputFile { get { return _outputFile; } set { _outputFile = value; } }
+        public string OutputFile { get; set; }
 
-        public Pdf Pdf { get { return _pdf; } set { _pdf = value; } }
+        public Pdf Pdf { get; set; }
 
         public string[] ToParamArray()
         {

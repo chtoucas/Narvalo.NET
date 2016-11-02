@@ -5,11 +5,11 @@ namespace Narvalo.GhostScript.Options
     using System;
     using System.Collections.Generic;
 
-    public class PrinterDevice : OutputDevice
+    public sealed class PrinterDevice : OutputDevice
     {
         public PrinterDevice() : base() { }
 
-        public override bool CanDisplay { get { return true; } }
+        public override bool CanDisplay => true;
 
         public override string DeviceName
         {

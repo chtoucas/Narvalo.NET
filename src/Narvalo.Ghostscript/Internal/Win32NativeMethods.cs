@@ -8,25 +8,25 @@ namespace Narvalo.GhostScript.Internal
 
     internal static class Win32NativeMethods
     {
-        private const string GhostScriptDllName = "gsdll32.dll";
+        private const string DLL_NAME = "gsdll32.dll";
 
         // int gsapi_new_instance (void **pinstance, void *caller_handle);
-        [DllImport(GhostScriptDllName, EntryPoint = "gsapi_new_instance", SetLastError = true)]
+        [DllImport(DLL_NAME, EntryPoint = "gsapi_new_instance", SetLastError = true)]
         public static extern int gsapi_new_instance(out Win32GhostScriptSafeHandle pinstance, IntPtr caller_handle);
 
         // void gsapi_delete_instance (void *instance);
-        [DllImport(GhostScriptDllName, EntryPoint = "gsapi_delete_instance", SetLastError = true)]
+        [DllImport(DLL_NAME, EntryPoint = "gsapi_delete_instance", SetLastError = true)]
         public static extern void gsapi_delete_instance(IntPtr handle);
 
         // int gsapi_init_with_args (void *instance, int argc, char **argv);
-        [DllImport(GhostScriptDllName, EntryPoint = "gsapi_init_with_args", SetLastError = true)]
+        [DllImport(DLL_NAME, EntryPoint = "gsapi_init_with_args", SetLastError = true)]
 
         // WARNING: this method may raise a CSE: SecurityCriticalAttribute
         [SecurityCritical]
         public static extern int gsapi_init_with_args(Win32GhostScriptSafeHandle instance, int argc, IntPtr argv);
 
         // int gsapi_exit (void *instance);
-        [DllImport(GhostScriptDllName, EntryPoint = "gsapi_exit", SetLastError = true)]
+        [DllImport(DLL_NAME, EntryPoint = "gsapi_exit", SetLastError = true)]
         public static extern int gsapi_exit(IntPtr handle);
 
         //// int gsapi_revision (gsapi_revision_t *pr, int len);

@@ -21,7 +21,7 @@ namespace Narvalo.GhostScript
             }
             else
             {
-                throw new PlatformNotSupportedException();
+                throw new PlatformNotSupportedException("XXX");
             }
         }
     }

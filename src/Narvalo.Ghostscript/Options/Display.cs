@@ -4,71 +4,58 @@ namespace Narvalo.GhostScript.Options
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Globalization;
 
     /// <remarks>
     /// To force a specific paper size and ignore the paper size specified in the document,
     /// select a paper size, and also include the FixedMedia.
     /// </remarks>
-    public class Display
+    public sealed class Display
     {
-        private PaperSize _defaultPaperSize = PaperSize.None;
-        private bool? _fixedMedia;
-        private bool? _fixedResolution;
-        private Size? _mediaSize;
-        private bool? _orient1;
-        private Size? _pageSize;
-        private PageSizeMode _pageSizeMode = PageSizeMode.None;
-        private PaperSize _paperSize = PaperSize.None;
-        private bool _pdfFitPage = false;
-        private bool? _printed;
-        private Size? _resolution;
-
         public Display() : base() { }
 
         /// <summary>
-        /// This value will be used to replace the device default papersize ONLY if the default papersize 
-        /// for the device is 'letter' or 'a4' serving to insulate users of A4 or 8.5x11 from particular 
+        /// This value will be used to replace the device default papersize ONLY if the default papersize
+        /// for the device is 'letter' or 'a4' serving to insulate users of A4 or 8.5x11 from particular
         /// device defaults (the collection of contributed drivers in Ghostscript vary as to the default size).
         /// </summary>
-        public PaperSize DefaultPaperSize { get { return _defaultPaperSize; } set { _defaultPaperSize = value; } }
+        public PaperSize DefaultPaperSize { get; set; } = PaperSize.None;
 
         /// <summary>
-        /// Causes the media size to be fixed after initialization, forcing pages of other sizes or 
-        /// orientations to be clipped. This may be useful when printing documents on a printer that 
-        /// can handle their requested paper size but whose default is some other size. 
+        /// Causes the media size to be fixed after initialization, forcing pages of other sizes or
+        /// orientations to be clipped. This may be useful when printing documents on a printer that
+        /// can handle their requested paper size but whose default is some other size.
         /// </summary>
-        public bool? FixedMedia { get { return _fixedMedia; } set { _fixedMedia = value; } }
+        public bool? FixedMedia { get; set; }
 
         /// <summary>
         /// Causes the media resolution to be fixed similarly.
         /// </summary>
-        public bool? FixedResolution { get { return _fixedResolution; } set { _fixedResolution = value; } }
+        public bool? FixedResolution { get; set; }
 
         /// <summary>
-        /// Determines whether the file should be displayed or printed using the "screen" or 
-        /// "printer" options for annotations and images. With -dPrinted, the output will use 
-        /// the file's "print" options; with -dPrinted=false, the output will use the file's "screen" 
-        /// options. If neither of these is specified, the output will use the screen options for any 
-        /// output device that doesn't have an OutputFile parameter, and the printer options for devices 
+        /// Determines whether the file should be displayed or printed using the "screen" or
+        /// "printer" options for annotations and images. With -dPrinted, the output will use
+        /// the file's "print" options; with -dPrinted=false, the output will use the file's "screen"
+        /// options. If neither of these is specified, the output will use the screen options for any
+        /// output device that doesn't have an OutputFile parameter, and the printer options for devices
         /// that do have this parameter.
         /// </summary>
-        public bool? Printed { get { return _printed; } set { _printed = value; } }
+        public bool? Printed { get; set; }
 
-        public bool? Orient1 { get { return _orient1; } set { _orient1 = value; } }
+        public bool? Orient1 { get; set; }
 
         /// <summary>
-        /// Specifying the device width and height in pixels for the benefit of devices such as X11 windows 
-        /// and VESA displays that require (or allow) you to specify width and height. 
+        /// Specifying the device width and height in pixels for the benefit of devices such as X11 windows
+        /// and VESA displays that require (or allow) you to specify width and height.
         /// </summary>
-        public Size? MediaSize { get { return _mediaSize; } set { _mediaSize = value; } }
+        public Size? MediaSize { get; set; }
 
-        public Size? PageSize { get { return _pageSize; } set { _pageSize = value; } }
+        public Size? PageSize { get; set; }
 
-        public PageSizeMode PageSizeMode { get { return _pageSizeMode; } set { _pageSizeMode = value; } }
+        public PageSizeMode PageSizeMode { get; set; } = PageSizeMode.None;
 
-        public PaperSize PaperSize { get { return _paperSize; } set { _paperSize = value; } }
+        public PaperSize PaperSize { get; set; } = PaperSize.None;
 
         /// <summary>
         /// Rather than selecting a PageSize given by the PDF MediaBox, TrimBox (see -dUseTrimBox)
@@ -79,9 +66,9 @@ namespace Narvalo.GhostScript.Options
         /// This is also useful for creating fixed size images of PDF files that may have a variety
         /// of page sizes, for example thumbnail images.
         /// </summary>
-        public bool PdfFitPage { get { return _pdfFitPage; } set { _pdfFitPage = value; } }
+        public bool PdfFitPage { get; set; } = false;
 
-        public Size? Resolution { get { return _resolution; } set { _resolution = value; } }
+        public Size? Resolution { get; set; }
 
         public static string GetPaperSizeName(PaperSize paperSize)
         {
@@ -177,7 +164,7 @@ namespace Narvalo.GhostScript.Options
 
         public void AddTo(ICollection<string> args)
         {
-            Require.NotNull(args, "args");
+            Require.NotNull(args, nameof(args));
 
             if (Orient1.HasValue)
             {

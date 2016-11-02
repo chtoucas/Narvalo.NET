@@ -9,7 +9,7 @@ namespace Narvalo.GhostScript.Options
     {
         protected Device() { }
 
-        public virtual bool CanDisplay { get { return false; } }
+        public virtual bool CanDisplay => false;
 
         public virtual void AddDisplayTo(ICollection<string> args)
         {

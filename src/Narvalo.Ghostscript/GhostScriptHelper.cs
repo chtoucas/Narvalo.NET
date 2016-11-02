@@ -12,11 +12,11 @@ namespace Narvalo.GhostScript
     {
         public static Bitmap ExtractCover(string inputFile)
         {
-            Require.NotNullOrEmpty(inputFile, "inputFile");
+            Require.NotNullOrEmpty(inputFile, nameof(inputFile));
 
             if (!File.Exists(inputFile))
             {
-                throw new FileNotFoundException();
+                throw new FileNotFoundException("XXX");
             }
 
             Bitmap retval;
@@ -51,7 +51,7 @@ namespace Narvalo.GhostScript
 
         public static string ExtractText(string inputFile)
         {
-            Require.NotNullOrEmpty(inputFile, "inputFile");
+            Require.NotNullOrEmpty(inputFile, nameof(inputFile));
 
             if (!File.Exists(inputFile))
             {

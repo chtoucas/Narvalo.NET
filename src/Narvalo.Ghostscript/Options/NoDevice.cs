@@ -2,19 +2,15 @@
 
 namespace Narvalo.GhostScript.Options
 {
-    using System;
     using System.Collections.Generic;
 
-    public class NoDevice : Device
+    public sealed class NoDevice : Device
     {
         public NoDevice() : base() { }
 
         public override void AddTo(ICollection<string> args)
         {
-            if (args == null)
-            {
-                throw new ArgumentNullException("args");
-            }
+            Require.NotNull(args, nameof(args));
 
             args.Add("-dNODISPLAY");
         }

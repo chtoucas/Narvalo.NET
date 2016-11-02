@@ -6,35 +6,27 @@ namespace Narvalo.GhostScript.Options
     using System.Collections.Generic;
     using System.Globalization;
 
-    public class Pdf
+    public sealed class Pdf
     {
-        private int? _firstPage;
-        private int? _lastPage;
-        private bool _noUserInit = false;
-        private string _password;
-        private bool _renderTTNotDef = false;
-        private bool _showAcroForm = false;
-        private bool _showAnnotations = true;
-
         public Pdf() : base() { }
 
-        public int? FirstPage { get { return _firstPage; } set { _firstPage = value; } }
+        public int? FirstPage { get; set; }
 
-        public int? LastPage { get { return _lastPage; } set { _lastPage = value; } }
+        public int? LastPage { get; set; }
 
-        public bool NoUserInit { get { return _noUserInit; } set { _noUserInit = value; } }
+        public bool NoUserInit { get; set; } = false;
 
-        public string Password { get { return _password; } set { _password = value; } }
+        public string Password { get; set; }
 
-        public bool RenderTTNotDef { get { return _renderTTNotDef; } set { _renderTTNotDef = value; } }
+        public bool RenderTTNotDef { get; set; } = false;
 
-        public bool ShowAcroForm { get { return _showAcroForm; } set { _showAcroForm = value; } }
+        public bool ShowAcroForm { get; set; } = false;
 
-        public bool ShowAnnotations { get { return _showAnnotations; } set { _showAnnotations = value; } }
+        public bool ShowAnnotations { get; set; } = true;
 
         public void AddTo(ICollection<string> args)
         {
-            Require.NotNull(args, "args");
+            Require.NotNull(args, nameof(args));
 
             if (!String.IsNullOrEmpty(Password))
             {

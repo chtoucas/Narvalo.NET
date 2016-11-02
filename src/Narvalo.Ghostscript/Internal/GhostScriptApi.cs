@@ -14,14 +14,14 @@ namespace Narvalo.GhostScript.Internal
 
         public void Execute<T>(GhostScriptArgs<T> args) where T : Device
         {
-            Require.NotNull(args, "args");
+            Require.NotNull(args, nameof(args));
 
             Execute(args.ToParamArray());
         }
 
         public void Execute(string[] args)
         {
-            Require.NotNull(args, "args");
+            Require.NotNull(args, nameof(args));
 
             string[] tmpArgs = PrepareParams(args);
 

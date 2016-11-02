@@ -2,11 +2,8 @@
 
 namespace Narvalo.GhostScript.Options
 {
-    public class PrinterArgs : GhostScriptArgs<PrinterDevice>
+    public sealed class PrinterArgs : GhostScriptArgs<PrinterDevice>
     {
-        public PrinterArgs(string inputFile)
-            : base(inputFile, new PrinterDevice())
-        {
-        }
+        public PrinterArgs(string inputFile) : base(inputFile, new PrinterDevice()) { }
     }
 }

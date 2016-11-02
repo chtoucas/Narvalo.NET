@@ -6,42 +6,29 @@ namespace Narvalo.GhostScript.Options
 
     public struct Size : IEquatable<Size>
     {
-        private readonly int _width;
-        private readonly int _height;
-
         public Size(int dpi)
         {
-            _width = dpi;
-            _height = dpi;
+            Width = dpi;
+            Height = dpi;
         }
 
         public Size(int width, int height)
         {
-            _width = width;
-            _height = height;
+            Width = width;
+            Height = height;
         }
 
-        public int Width { get { return _width; } }
+        public int Width { get; }
 
-        public int Height { get { return _height; } }
+        public int Height { get; }
 
-        public bool IsSquare { get { return _width == _height; } }
+        public bool IsSquare => Width == Height;
 
-        public static bool operator ==(Size left, Size right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(Size left, Size right) => left.Equals(right);
 
-        public static bool operator !=(Size left, Size right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator !=(Size left, Size right) => !left.Equals(right);
 
-        public bool Equals(Size other)
-        {
-            return _width == other._width
-                && _height == other._height;
-        }
+        public bool Equals(Size other) => Width == other.Width && Height == other.Height;
 
         public override bool Equals(object obj)
         {

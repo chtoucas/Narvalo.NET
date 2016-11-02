@@ -4,33 +4,22 @@ namespace Narvalo.GhostScript.Options
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
 
-    public class ImageDevice : OutputDevice
+    public sealed class ImageDevice : OutputDevice
     {
-        private readonly ImageFormat _format;
-
-        private Display _display;
-
         public ImageDevice(ImageFormat format)
             : base()
         {
-            _format = format;
+            ImageFormat = format;
         }
 
-        public override bool CanDisplay { get { return true; } }
+        public override bool CanDisplay => true;
 
-        public override string DeviceName
-        {
-            get
-            {
-                return GetDeviceName(ImageFormat);
-            }
-        }
+        public override string DeviceName => GetDeviceName(ImageFormat);
 
-        public Display Display { get { return _display; } set { _display = value; } }
+        public Display Display { get; set; }
 
-        public ImageFormat ImageFormat { get { return _format; } }
+        public ImageFormat ImageFormat { get; }
 
         public override void AddDisplayTo(ICollection<string> args)
         {
