@@ -44,7 +44,7 @@ namespace Narvalo.Mvp.Resolvers
         private interface IMyPrivateView_ : IView { }
     }
 
-#if !NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
 
     public static partial class CompositeViewTypeResolverFacts
     {

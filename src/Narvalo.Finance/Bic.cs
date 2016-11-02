@@ -90,7 +90,7 @@ namespace Narvalo.Finance
 
         public override string ToString() => _value;
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
         [ContractInvariantMethod]
         private void ObjectInvariant()

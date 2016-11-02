@@ -34,6 +34,7 @@ Current works
 - OpenCover
   * Update the PSake task (missing xunit.runner.console package).
   * Handle more than one test project (`Narvalo.Reliability.Facts`).
+  * Simply move to a MSBuild target.
 - Solution-level packages are no longer supported
   * [GitHub Issue](https://github.com/NuGet/Home/issues/522)
   * [Bring back solution level packages](https://github.com/NuGet/Home/issues/1521)
@@ -42,11 +43,9 @@ Current works
 Issues & Roadmap
 ================
 
-Design
-------
-
 - Provide better assembly descriptions.
 - Thread-safety: statics and read-only properties.
+- Prefer `for` to `foreach` with arrays.
 - Review all `Format` and boxing
 - Where it makes sense, add `EditorBrowsableState`, `DebuggerDisplay` and `DebuggerTypeProxy` attributes.
 - Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.

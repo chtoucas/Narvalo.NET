@@ -105,7 +105,7 @@ namespace Narvalo.Mvp.Resolvers
         public interface IMyComplexView : IMyView, IMyAltView<Object> { }
     }
 
-#if !NO_INTERNALS_VISIBLE_TO
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
     public static partial class PresenterTypeResolverFacts
     {
         #region GetCandidatePrefixesFromInterfaces()

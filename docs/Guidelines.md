@@ -127,21 +127,11 @@ Compilation Symbols
 Compilation Symbols are a pain in the ass: it prevents clean refatoring, things might
 or might not work depending on the build configuration.
 
-**Always** prefer conditional attributes to `#ifdef`. We only accept three exceptions:
-object invariants, exposing internals to test projects and white-box tests (see below).
-
-If you use an `#ifdef` directive you must justify it with a comment placed on
-the same line as the `#if`. This helps to quickly spot the justification in search results.
-
 Standard compilation symbols:
 - `DEBUG`
 - `TRACE`
 - `CODE_ANALYSIS`
 - `CONTRACTS_FULL`
-
-Compilation symbols for .NET versions (mostly unused):
-- `NET_35`
-- `NET_40`
 
 Symbols used to define the assembly properties:
 - `BUILD_GENERATED_VERSION`
@@ -150,6 +140,40 @@ Symbols used to define the assembly properties:
 - `NO_INTERNALS_VISIBLE_TO`
 - `SECURITY_ANNOTATIONS`
 - `SIGNED_ASSEMBLY`
+
+**Always** prefer conditional attributes to `#if` directives. We only accept three exceptions:
+object invariants and CC hacks (`CONTRACTS_FULL`), exposing internals to test projects 
+and white-box tests (`NO_INTERNALS_VISIBLE_TO`), and security annotations (`SECURITY_ANNOTATIONS`).
+If you use an `#if` directive you should justify it with a comment placed on
+the same line as the `#if` (this helps to quickly spot the justification in search results):
+```csharp
+#if !NO_INTERNALS_VISIBLE_TO // Make internals visible to the test projects.
+#endif
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
+#endif
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#endif
+#if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
+#endif
+#if CONTRACTS_FULL // Helps CCCheck with the object invariance.
+#endif
+```
+NB: This is not necessary for security annotations. 
+
+The list of namespace imports **must** not depend on the value of compilation symbols.
+For instance, do not write:
+```csharp
+using System.Security;
+
+#if SECURITY_ANNOTATIONS
+[assembly: SecurityTransparent]
+#endif
+```
+but prefer:
+```csharp
+#if SECURITY_ANNOTATIONS
+[assembly: System.Security.SecurityTransparent]
+#endif
 
 [References]
 - [Eric Lippert](http://ericlippert.com/2009/09/10/whats-the-difference-between-conditional-compilation-and-the-conditional-attribute/)
@@ -248,25 +272,6 @@ public static class MyTypeFacts
 
 ### White-Box Tests
 
-If a test suite contains white-box tests, add also a fake test as follows:
-```csharp
-#if NO_INTERNALS_VISIBLE_TO // White-box tests.
-
-    public static partial class MyTypeFacts
-    {
-        [Fact(Skip = "White-box tests disabled for this configuration.")]
-        public static void Maybe_BlackBox() { }
-    }
-
-#else
-
-    // Here goes the white-box tests.
-
-#endif
-```
-
-### White-Box Tests
-
 Wrap white-box tests as follow:
 ```csharp
     public static partial class Facts
@@ -283,6 +288,8 @@ Wrap white-box tests as follow:
 
 #endif
 ```
+
+Add `Narvalo.TestCommon.EnvironmentFacts.cs` to test projects.
 
 Multi-Threading
 ---------------
@@ -308,7 +315,7 @@ Security
 --------
 
 Consider applying the `SecurityTransparent` attribute or the `AllowPartiallyTrustedCallers`
-attribute to the assembly. If you do so, verify the  assembly with the `SecAnnotate` tool (done 
+attribute to the assembly. If you do so, verify the assembly with the `SecAnnotate` tool (done 
 automatically if we use the SecurityAnalysis task from the PSake file).
 
 Library             | Attribute

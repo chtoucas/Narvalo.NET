@@ -2,13 +2,11 @@
 
 namespace Narvalo.TestCommon
 {
-    using Xunit;
-
     public static class EnvironmentFacts
     {
-#if NO_INTERNALS_VISIBLE_TO // White-box testing.
+#if NO_INTERNALS_VISIBLE_TO // White-box tests.
 
-        [Fact(Skip = "White-box tests are disabled for this configuration.")]
+        [Xunit.Fact(Skip = "White-box tests are disabled for this configuration.")]
         public static void InternalsAreHidden() { }
 
 #endif
