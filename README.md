@@ -8,17 +8,17 @@ Narvalo.NET
 
 ## General Purpose Libraries
 - **Narvalo.Cerbere**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Cerbere)),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Cerbere),
   [package](https://www.nuget.org/packages/Narvalo.Cerbere/)),
   this library provides argument validation methods and Code Contracts helpers.
 - **Narvalo.Fx**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Fx)),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Fx),
   [package](https://www.nuget.org/packages/Narvalo.Fx/)),
   this library features implementations of some of the usual suspects from functional
   programming: Option (`Maybe<T>`) and Error (`Output<T>`) monads, simple pattern matching
   (`Either<T1, T2>`, `Switch<T1, T2>`), generators and delegate extensions.
 - **Narvalo.Finance**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance)),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance),
   [package](https://www.nuget.org/packages/Narvalo.Finance/)),
   this package provides various financial utilities: Currency (ISO 4217), Money types,
   BIC (ISO 9362), IBAN & BBAN.
