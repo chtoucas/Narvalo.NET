@@ -98,8 +98,8 @@ Task OpenCover `
     # For static analysis, we hide internals, otherwise we might not truly
     # analyze the public API.
     MSBuild $Foundations $Opts $CI_Props `
-        '/p:Configuration=Debug',
         '/t:Build',
+        '/p:Configuration=Debug',
         '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
@@ -118,8 +118,8 @@ Task OpenCoverWithDetails `
     # For static analysis, we hide internals, otherwise we might not truly
     # analyze the public API.
     MSBuild $Foundations $Opts $CI_Props `
-        '/p:Configuration=Debug',
         '/t:Build',
+        '/p:Configuration=Debug',
         '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
@@ -136,6 +136,8 @@ Task Analyze `
     # - Build all projects
     # - Run Source Analysis
     # - Verify Portable Executable (PE) format
+    # NB: Adding Build to the targets is not necessary, but it makes clearer that
+    # we do not just run PEVerify.
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Build;PEVerify',
         '/p:Configuration=Debug',
@@ -208,13 +210,13 @@ Task CodeContractsAnalysis `
 }
 
 Task SecurityAnalysis `
-    -Description 'Run SecAnnotate.' `
+    -Description 'Run Secuirty Analysis.' `
     -Depends _CI-InitializeVariables `
     -Alias SA `
 {
     # Keep the PEVerify target (see the comments in the MSBuild target _PEVerify).
     MSBuild $Foundations $Opts $CI_Props `
-        '/t:Clean;SecAnnotate;PEVerify',
+        '/t:SecAnnotate;PEVerify',
         # For static analysis, we hide internals, otherwise we might not truly
         # analyze the public API.
         '/p:VisibleInternals=false',
@@ -317,7 +319,7 @@ Task _Package-InitializeVariables `
     # - Verify Portable Executable (PE) format
     # - Run Xunit tests
     # - Package
-    $script:Package_Targets = '/t:Rebuild;PEVerify;Xunit;Package'
+    $script:Package_Targets = '/t:PEVerify;Xunit;Package'
 }
 
 Task _Package-CheckVariablesForRetail `
@@ -325,10 +327,10 @@ Task _Package-CheckVariablesForRetail `
     -Depends _Initialize-GitCommitHash `
     -PreCondition { $Retail } `
 {
-    if ($GitCommitHash -eq '') {
-        Exit-Gracefully -ExitCode 1 `
-            'When building retail packages, the git commit hash MUST not be empty.'
-    }
+    #if ($GitCommitHash -eq '') {
+    #    Exit-Gracefully -ExitCode 1 `
+    #        'When building retail packages, the git commit hash MUST not be empty.'
+    #}
 }
 
 # ------------------------------------------------------------------------------

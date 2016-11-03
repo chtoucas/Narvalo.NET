@@ -361,7 +361,7 @@ using System.Reflection;
   <!-- DeleteNupkgFile target. -->
   <Target Name="DeleteNupkgFile"
           Condition=" '$(NuProjectExists)' == 'true' And '$(Retail)' == 'true' ">
-    <!-- No need to try to delete a non-retail packages. Its name changes over time. -->
+    <!-- No need to try to delete a non-retail packages. Its name changes at each run. -->
     <PropertyGroup>
       <_NupkgFile>$(WorkPackagesDir)$(NuId).$(NuVersion).nupkg</_NupkgFile>
     </PropertyGroup>

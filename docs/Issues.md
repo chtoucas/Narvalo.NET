@@ -34,7 +34,10 @@ Current works
   * Check `TargetFrameworkVersion`.
   * Do we really need to use `ToolsVersion="14.0"`?
   * Force `MininalVisualStudioVersion` in the solution files?
-- OpenCover & Gendarme: move the core logic from PSake to MSBuild.
+- Build scripts:
+  * OpenCover & Gendarme: move the core logic from PSake to MSBuild.
+  * Should I call Rebuild before Package?
+  * Should I call Rebuild before the analysis tasks?
 - Solution-level packages are no longer supported. Currently, we can use `make.ps1 restore`,
   we still need an update task.
   * [GitHub Issue](https://github.com/NuGet/Home/issues/522)
