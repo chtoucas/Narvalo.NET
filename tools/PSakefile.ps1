@@ -60,23 +60,8 @@ Task Default -Depends Build
 # NB: No need to restore packages before building the projects $Everything
 # or $Foundations; this will be done in MSBuild.
 
-Task RestoreSolutionPackages `
-    -Description 'Restore solution-level packages.' `
-    -Alias restorepacks `
-{
-    # Usually, this is not necessary to run this task, since it is already done in make.ps1.
-    Restore-SolutionPackages -Verbosity quiet
-}
-
-Task Build `
-    -Description '[ALL+ ] Build.' `
-    -Depends _CI-InitializeVariables `
-{
-    MSBuild $Everything $Opts $CI_Props '/t:Build'
-}
-
 Task FullClean `
-    -Description '        Delete the entire build directory.' `
+    -Description 'Delete permanently the "work" directory.' `
     -Alias Clean `
     -ContinueOnError `
 {
@@ -84,8 +69,67 @@ Task FullClean `
     Remove-LocalItem 'work' -Recurse
 }
 
-Task Check `
-    -Description '[SAFE ] Build, run StyleCop, FxCop and PEVerify (SLOW).' `
+Task Build `
+    -Description 'Build.' `
+    -Depends _CI-InitializeVariables `
+{
+    MSBuild $Everything $Opts $CI_Props '/t:Build'
+}
+
+Task Test `
+    -Description 'Build then run tests.' `
+    -Depends _CI-InitializeVariables `
+{
+    MSBuild $Everything $Opts $CI_Props `
+        '/t:Xunit',
+        '/p:Configuration=Debug',
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true'
+}
+
+Task OpenCover `
+    -Description 'Run OpenCover (summary only).' `
+    -Depends _CI-InitializeVariables `
+    -Alias Cover `
+{
+    Write-Host "** WARNING ** Only core packages are included." -ForegroundColor Yellow
+
+    # Use debug build to also cover debug-only tests.
+    # For static analysis, we hide internals, otherwise we might not truly
+    # analyze the public API.
+    MSBuild $Foundations $Opts $CI_Props `
+        '/p:Configuration=Debug',
+        '/t:Build',
+        '/p:VisibleInternals=false',
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true',
+        '/p:Filter=_Core_'
+
+    Invoke-OpenCover 'Debug+Closed' -Summary
+}
+
+Task OpenCoverWithDetails `
+    -Description 'Run OpenCover (full details).' `
+    -Depends _CI-InitializeVariables `
+{
+    Write-Host "** WARNING ** Only core packages are included. Excluding some assemblies from the report." -ForegroundColor Yellow
+
+    # Use debug build to also cover debug-only tests.
+    # For static analysis, we hide internals, otherwise we might not truly
+    # analyze the public API.
+    MSBuild $Foundations $Opts $CI_Props `
+        '/p:Configuration=Debug',
+        '/t:Build',
+        '/p:VisibleInternals=false',
+        '/p:SkipCodeContractsReferenceAssembly=true',
+        '/p:SkipDocumentation=true',
+        '/p:Filter=_Core_'
+
+    Invoke-OpenCover 'Debug+Closed'
+}
+
+Task Analyze `
+    -Description 'Build then analyze with StyleCop, FxCop and PEVerify.' `
     -Depends _CI-InitializeVariables `
 {
     # Perform the following operations:
@@ -100,10 +144,10 @@ Task Check `
         '/p:SkipDocumentation=true',
         '/p:RunCodeAnalysis=true',
         '/p:SourceAnalysisEnabled=true',
-        '/p:Filter=_Safe_'
+        '/p:Filter=_Analyze_'
 }
 #Task SourceAnalysis `
-#    -Description '[SAFE ] Run source analysis.' `
+#    -Description 'Run source analysis.' `
 #    -Depends _CI-InitializeVariables `
 #{
 #    MSBuild $Foundations $Opts $CI_Props `
@@ -112,10 +156,10 @@ Task Check `
 #        '/p:SkipCodeContractsReferenceAssembly=true',
 #        '/p:SkipDocumentation=true',
 #        '/p:SourceAnalysisEnabled=true',
-#        '/p:Filter=_Safe_'
+#        '/p:Filter=_Analyze_'
 #}
 #Task CodeAnalysis `
-#    -Description '[SAFE ] Run Code Analysis (SLOW).' `
+#    -Description 'Run Code Analysis.' `
 #    -Depends _CI-InitializeVariables `
 #{
 #    # For static analysis, we hide internals, otherwise we might not truly
@@ -126,45 +170,16 @@ Task Check `
 #        '/p:RunCodeAnalysis=true',
 #        '/p:SkipCodeContractsReferenceAssembly=true',
 #        '/p:SkipDocumentation=true',
-#        '/p:Filter=_Safe_'
+#        '/p:Filter=_Analyze_'
 #}
 
-Task Test `
-    -Description '[ALL  ] Build then run tests.' `
-    -Depends _CI-InitializeVariables `
-{
-    MSBuild $Everything $Opts $CI_Props `
-        '/t:Xunit',
-        '/p:Configuration=Debug',
-        '/p:SkipCodeContractsReferenceAssembly=true',
-        '/p:SkipDocumentation=true'
-}
-
-Task OpenCover `
-    -Description '[CORE ] Run OpenCover (EXTREMELY SLOW).' `
-    -Depends _CI-InitializeVariables `
-    -Alias Cover `
-{
-    # Use debug build to also cover debug-only tests.
-    # For static analysis, we hide internals, otherwise we might not truly
-    # analyze the public API.
-    MSBuild $Foundations $Opts $CI_Props `
-        '/p:Configuration=Debug',
-        '/t:Build',
-        '/p:VisibleInternals=false',
-        '/p:SkipCodeContractsReferenceAssembly=true',
-        '/p:SkipDocumentation=true',
-        '/p:Filter=_Core_'
-
-    Invoke-OpenCover 'Debug+Closed'
-    #Invoke-OpenCover 'Debug+Closed' -Summary
-}
-
 Task GendarmeAnalysis `
-    -Description '[CORE ] Run Mono.Gendarme (SLOW).' `
+    -Description '** Disabled ** Run Mono.Gendarme.' `
     -Depends _CI-InitializeVariables `
     -Alias Keuf `
 {
+    Exit-Gracefully -ExitCode 1 ` 'Gendarme does not work with the binaries produced by VS 2015.'
+
     # For static analysis, we hide internals, otherwise we might not truly
     # analyze the public API.
     MSBuild $Foundations $Opts $CI_Props `
@@ -173,13 +188,13 @@ Task GendarmeAnalysis `
         '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
-        '/p:Filter=_Core_'
+        '/p:Filter=_Analyze_'
 
     Invoke-Gendarme 'Release+Closed'
 }
 
 Task CodeContractsAnalysis `
-    -Description '[SAFE ] Run Code Contracts Analysis (EXTREMELY SLOW).' `
+    -Description 'Run Code Contracts Analysis.' `
     -Depends _CI-InitializeVariables `
     -Alias CC `
 {
@@ -189,11 +204,11 @@ Task CodeContractsAnalysis `
         '/t:Build',
         '/p:VisibleInternals=false',
         '/p:Configuration=CodeContracts',
-        '/p:Filter=_Safe_'
+        '/p:Filter=_CodeContracts_'
 }
 
 Task SecurityAnalysis `
-    -Description '[SAFE ] Run SecAnnotate (SLOW).' `
+    -Description 'Run SecAnnotate.' `
     -Depends _CI-InitializeVariables `
     -Alias SA `
 {
@@ -207,7 +222,7 @@ Task SecurityAnalysis `
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:EnableSecurityAnnotations=true',
-        '/p:Filter=_Safe_'
+        '/p:Filter=_Security_'
 }
 
 Task _CI-InitializeVariables `
@@ -244,12 +259,12 @@ Task _CI-InitializeVariables `
 # ------------------------------------------------------------------------------
 
 Task Package-All `
-    -Description '[ALL  ] Package.' `
+    -Description 'Package everything.' `
     -Depends Package-Core, Package-Mvp, Package-Build `
     -Alias Pack
 
 Task Package-Core `
-    -Description '[CORE ] Package.' `
+    -Description 'Create the core NuGet packages.' `
     -Depends _Package-InitializeVariables `
     -Alias PackCore `
 {
@@ -258,7 +273,7 @@ Task Package-Core `
 }
 
 Task Package-Mvp `
-    -Description '[MVP  ] Package.' `
+    -Description 'Create the MVP-related packages.' `
     -Depends _Package-InitializeVariables `
     -Alias PackMvp `
 {
@@ -267,7 +282,7 @@ Task Package-Mvp `
 }
 
 Task Package-Build `
-    -Description '[BUILD] Package.' `
+    -Description 'Create the Narvalo.Build package.' `
     -Depends _Package-InitializeVariables `
     -Alias PackBuild `
 {
@@ -321,12 +336,12 @@ Task _Package-CheckVariablesForRetail `
 # ------------------------------------------------------------------------------
 
 Task Publish-All `
-    -Description '[ALL  ] Publish.' `
+    -Description 'Publish everything.' `
     -Depends Publish-Core, Publish-Mvp, Publish-Build `
     -Alias Push
 
 Task Publish-Core `
-    -Description '[CORE ] Publish.' `
+    -Description 'Publish the core packages.' `
     -Depends _Publish-DependsOn, Package-Core `
     -RequiredVariables Retail `
     -Alias PushCore `
@@ -335,7 +350,7 @@ Task Publish-Core `
 }
 
 Task Publish-Mvp `
-    -Description '[MVP  ] Publish.' `
+    -Description 'Publish the MVP-related packages.' `
     -Depends _Publish-DependsOn, Package-Mvp `
     -RequiredVariables Retail `
     -Alias PushMvp `
@@ -344,7 +359,7 @@ Task Publish-Mvp `
 }
 
 Task Publish-Build `
-    -Description '[BUILD] Publish.' `
+    -Description 'Publish the Narvalo.Build package.' `
     -Depends _Publish-DependsOn, Package-Build `
     -RequiredVariables Retail `
     -Alias PushBuild `
@@ -374,7 +389,7 @@ Task _Publish-InitializeVariables `
 # ------------------------------------------------------------------------------
 
 Task NuGetAgent-Build `
-    -Description '        Build the project NuGetAgent.' `
+    -Description 'Build the project NuGetAgent.' `
     -Depends _NuGetAgent-InitializeVariables, _NuGetAgent-RestorePackages `
     -Alias NuGetAgent `
 {
@@ -403,7 +418,7 @@ Task _NuGetAgent-InitializeVariables `
 # ------------------------------------------------------------------------------
 
 Task MyGet-Package `
-    -Description '        Package the project MyGet.' `
+    -Description 'Package the project MyGet.' `
     -Depends _MyGet-InitializeVariables, _MyGet-DeleteStagingDirectory, _MyGet-Publish, _MyGet-Zip `
     -Alias MyGet `
 {
@@ -477,7 +492,7 @@ Task _MyGet-InitializeVariables `
 # ------------------------------------------------------------------------------
 #
 #Task Edge-FullBuild `
-#    -Description '        Update then re-build the solution Edge.' `
+#    -Description 'Update then re-build the solution Edge.' `
 #    -Depends _Edge-Update, _Edge-Rebuild
 #
 #Task _Edge-Rebuild `
@@ -527,7 +542,7 @@ Task _MyGet-InitializeVariables `
 # ------------------------------------------------------------------------------
 #
 #Task Retail-FullBuild `
-#    -Description '        Update then re-build the solution Retail.' `
+#    -Description 'Update then re-build the solution Retail.' `
 #    -Depends _Retail-Update, _Retail-Rebuild
 #
 #Task _Retail-Rebuild `
@@ -576,8 +591,16 @@ Task _MyGet-InitializeVariables `
 # Miscs
 # ------------------------------------------------------------------------------
 
+Task RestoreSolutionPackages `
+    -Description 'Restore solution-level packages.' `
+    -Alias restore `
+{
+    # Usually, it is not necessary to run this task, since it is already done in make.ps1.
+    Restore-SolutionPackages -Verbosity quiet
+}
+
 Task Environment `
-    -Description '        Display the build environment.' `
+    -Description 'Display infos on the build environment.' `
     -Alias Env `
 {
     # The output of running "MSBuild /version" looks like:
@@ -804,12 +827,12 @@ function Invoke-OpenCover {
 
     if ($summary.IsPresent) {
         $summaryDirectory = Get-LocalPath 'work\log'
-        $reportSummaryFilters = '+*'
+        $summaryFilters = '+*'
 
         . $reportGenerator `
           -verbosity:Info `
           -reporttypes:HtmlSummary `
-          -filters:$reportSummaryFilters `
+          -filters:$summaryFilters `
           -reports:$coverageFile `
           -targetdir:$summaryDirectory
     }

@@ -1,14 +1,11 @@
 Current works
 =============
 
-- Add Narvalo.Reliability and Narvalo.Reliability.Facts to Make projects (see also OpenCover below).
-- Check that moving EnableGendarme form Narvalo.Common.props to Make.CustomAfter.props
-  didn't break anything.
 - DocFX:
   * External links via `<see cref="!:" />` are not understood by docfx.
-  * NamespaceDocs are not understood by docsfx.
-  * `<content markup="commonmark">` is not understood.
-  * Reference the MSDN package without version
+  * NamespaceDocs are not understood by docfx, rewrite needed.
+  * `<content markup="commonmark">` is not understood, rewrite needed.
+  * Reference the MSDN package without version attached.
   * Build tasks (clean, build)
 - Migrate from StyleCop to StyleCop.Analyzers.
   * Disable StyleCop: set `StyleCopEnabled` to `false` (see `Package.StyleCop.targets`).
@@ -21,7 +18,7 @@ Current works
     and [Schema](https://github.com/dotnet/roslyn/blob/master/src/Compilers/Core/Portable/RuleSet/RuleSetSchema.xsd)
 - C#
   * use `nameof` everywhere.
-  * decide rules to when to use the new `=>` syntax for methods.
+  * rules to explain when to use the new `=>` syntax for methods.
   * review the use of `var`.
 - For test projects, we should automatically add the TestCommon shared project.
     `<Import Project="..\Narvalo.TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />`
@@ -37,12 +34,9 @@ Current works
   * Check `TargetFrameworkVersion`.
   * Do we really need to use `ToolsVersion="14.0"`?
   * Force `MininalVisualStudioVersion` in the solution files?
-- OpenCover
-  * Update the PSake task (missing xunit.runner.console package).
-  * Handle more than one test project (`Narvalo.Reliability.Facts`).
-  * Simply move to a MSBuild target.
-- Solution-level packages are no longer supported
-  * Currently, we can use `make.ps1 restore`: add an update task.
+- OpenCover & Gendarme: move the core logic from PSake to MSBuild.
+- Solution-level packages are no longer supported. Currently, we can use `make.ps1 restore`,
+  we still need an update task.
   * [GitHub Issue](https://github.com/NuGet/Home/issues/522)
   * [Bring back solution level packages](https://github.com/NuGet/Home/issues/1521)
 
@@ -51,7 +45,7 @@ Issues & Roadmap
 ================
 
 - Provide better assembly descriptions.
-- Thread-safety: statics and read-only properties.
+- Thread-safety: statics (always) and read-only properties (?).
 - Prefer `for` to `foreach` with arrays.
 - Change `retval` for a more meaningful name.
 - Review all `Format` and boxing
