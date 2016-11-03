@@ -73,9 +73,9 @@ module Publishers =
         // API Key for the NuGet server.
         let apiKey = apiKeysContainer.NuGetApiKey
         // NuGet server.
-        let server = new PackageServer(Constants.NuGetSource, Constants.UserAgent)
+        let server = new PackageServer(Constants.NuGetServerSource, Constants.UserAgent)
         // NuGet repository.
-        let repository = PackageRepositoryFactory.Default.CreateRepository(Constants.NuGetSource)
+        let repository = PackageRepositoryFactory.Default.CreateRepository(Constants.NuGetRepositorySource)
 
         interface IPublisher with
             member this.PublishPackage(package:IPackage) =

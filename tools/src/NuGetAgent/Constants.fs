@@ -21,8 +21,11 @@ let [<Literal>] MyGetServerSource = "http://narvalo.org/myget/"
 /// Official NuGet's config key.
 let [<Literal>] NuGetConfigKey = "https://www.nuget.org"
 
-/// Official NuGet source.
-let [<Literal>] NuGetSource = "https://www.nuget.org/api/v2/"
+/// Official NuGet repository source.
+let [<Literal>] NuGetRepositorySource = "https://www.nuget.org/api/v2/"
+
+/// Official NuGet server source.
+let [<Literal>] NuGetServerSource = "https://www.nuget.org/"
 
 /// User-Agent string.
 let [<Literal>] UserAgent = "NuGet Agent - Narvalo.Org"

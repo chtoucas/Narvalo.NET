@@ -327,10 +327,10 @@ Task _Package-CheckVariablesForRetail `
     -Depends _Initialize-GitCommitHash `
     -PreCondition { $Retail } `
 {
-    #if ($GitCommitHash -eq '') {
-    #    Exit-Gracefully -ExitCode 1 `
-    #        'When building retail packages, the git commit hash MUST not be empty.'
-    #}
+    if ($GitCommitHash -eq '') {
+        Exit-Gracefully -ExitCode 1 `
+            'When building retail packages, the git commit hash MUST not be empty.'
+    }
 }
 
 # ------------------------------------------------------------------------------
