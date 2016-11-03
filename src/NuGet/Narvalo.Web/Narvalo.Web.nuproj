@@ -4,7 +4,7 @@
     <NuId>Narvalo.Web</NuId>
     <NuTitle>Narvalo.Web</NuTitle>
     <NuDescription>
-This package provides types that might prove useful for Web development: generic HttpHandler type, asset providers, Razor and WebForms compile-time optimizers, preliminary support for OpenGraph and Schema.Org.
+Provides types that might prove useful for Web development: generic HttpHandler type, asset providers, Razor and WebForms compile-time optimizers, preliminary support for OpenGraph and Schema.Org.
     </NuDescription>
     <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
 $(NuDescription)

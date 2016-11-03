@@ -1,20 +1,20 @@
 Status
 ======
 
-Library                   | Status      | PCL/Platform     | CA | CC | TC
+Library                   | Version     | PCL/Platform     | CA | CC | TC
 --------------------------|-------------|------------------|----|----|-----
 Narvalo.Build             | 1.1.0       | .NET 4.5         |    |    |
 Narvalo.Cerbere           | 1.0.0       | Profile259       |    | OK | 100%
-Narvalo.Common            | Preview     | .NET 4.5         |    | OK |
-Narvalo.Core              | Preview     | Profile259       |    | OK |
-Narvalo.Finance           | Preview     | Profile111       |    | OK |
-Narvalo.Fx                | Preview     | Profile259       |    | OK |
+Narvalo.Common            | 0.24.0      | .NET 4.5         |    | OK |
+Narvalo.Core              | 0.24.0      | Profile259       |    | OK |
+Narvalo.Finance           | 0.24.0      | Profile111       |    | OK |
+Narvalo.Fx                | 0.24.0      | Profile259       |    | OK |
 Narvalo.Ghostscript       |             | .NET 4.5         |    |    |
-Narvalo.Mvp               | 1.0.0-alpha | .NET 4.5         |    |    |
-Narvalo.Mvp.Web           | 1.0.0-alpha | .NET 4.5         |    |    |
+Narvalo.Mvp               | 0.99.0      | .NET 4.5         |    |    |
+Narvalo.Mvp.Web           | 0.99.0      | .NET 4.5         |    |    |
 Narvalo.Mvp.Windows.Forms |             | .NET 4.5         |    |    |
 Narvalo.Reliability       |             | .NETStandard 1.2 |    |    |
-Narvalo.Web               | Preview     | .NET 4.5         |    | OK |
+Narvalo.Web               | 0.24.0      | .NET 4.5         |    | OK |
 
 Explanations:
 - CA: Static Analysis with:

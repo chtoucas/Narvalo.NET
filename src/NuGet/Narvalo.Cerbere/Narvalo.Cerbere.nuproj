@@ -6,7 +6,7 @@
     <NuId>Narvalo.Cerbere</NuId>
     <NuTitle>Narvalo.Cerbere</NuTitle>
     <NuDescription>
-This package provides argument validation methods and Code Contracts helpers.
+Provides argument validation methods and Code Contracts helpers.
 
 This is a portable class library targeting Profile259.
     </NuDescription>

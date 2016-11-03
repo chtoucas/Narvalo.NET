@@ -7,7 +7,7 @@
     <NuTitle>Narvalo.Finance</NuTitle>
     <NuDescription>
       <![CDATA[
-This package provides various financial utilities: Currency (ISO 4217), Money types, BIC (ISO 9362), IBAN &amp; BBAN.
+Provides various financial utilities: Currency (ISO 4217), Money types, BIC (ISO 9362), IBAN &amp; BBAN.
 
 This is a portable class library targeting Profile111.
       ]]>

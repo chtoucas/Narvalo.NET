@@ -4,7 +4,7 @@
     <NuId>Narvalo.Mvp.Web</NuId>
     <NuTitle>Narvalo.Mvp.Web</NuTitle>
     <NuDescription>
-This package enhances the Narvalo.Mvp package to provide support for ASP.NET WebForms.
+Enhances the Narvalo.Mvp package with support for ASP.NET WebForms.
 
 Samples are available on the project web site.
     </NuDescription>
