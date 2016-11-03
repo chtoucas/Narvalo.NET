@@ -1,10 +1,8 @@
-Guidelines
-==========
+Coding Rules
+============
 
 Coding Style
 ------------
-
-### Mandatory Rules
 
 In general, we follow the guidelines from the .NET team with few differences:
 - [CoreFX](https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/)
@@ -27,6 +25,17 @@ Rules not yet enforced via StyleCop are:
   or use a verb. Examples: "Require", "ParseTo", StringManip"...
   If not, use "Helper" for concrete classes and "Utility" for static classes.
 
+### StyleCop
+
+For a detailed description of each rule, check out the official
+[documentation](http://www.stylecop.com/docs/).
+
+To suppress a StyleCop warning for a Narvalo.StyleCop rule, use:
+```csharp
+[SuppressMessage("Narvalo.CSharpRules", "NA1006:InternalMethodsMustNotEndWithInternal",
+    Justification = "...")]
+```
+
 ### Tasks
 
 Consider using tasks:
@@ -39,7 +48,9 @@ For temporary string content, use `"XXX"`.
 Design Recommendations
 ----------------------
 
-### Mandatory Rules
+### Rules
+
+#### Mandatory Rules
 
 - Do not write extension methods on core types.
 - Do not use reserved words unless they are used in their intended sense:
@@ -48,7 +59,7 @@ Design Recommendations
   * `Add`, collection initializer
 - All static members should be thread-safe.
 
-### Optional Rules
+#### Optional Rules
 
 - Projects should use a minimal set of references.
 - Consider making read-only property thread-safe.
@@ -83,17 +94,6 @@ For Gendarme, we use a global suppression file `etc\gendarme.ignore` shared acro
 all projects. This file is used exclusively for defects that can not be masked
 with a `SuppressMessage` attribute and for suppressions at assembly-level or at namespace-level.
 
-### StyleCop
-
-For a detailed description of each rule, check out the official
-[documentation](http://www.stylecop.com/docs/).
-
-To suppress a StyleCop warning for a Narvalo.StyleCop rule, use:
-```csharp
-[SuppressMessage("Narvalo.CSharpRules", "NA1006:InternalMethodsMustNotEndWithInternal",
-    Justification = "...")]
-```
-
 ### FxCop
 
 Except for test projects we use a strict ruleset;
@@ -110,7 +110,8 @@ directory `Properties` rather than modifying the global one.
 
 ### Gendarme
 
-### Code Contracts
+Code Contracts
+--------------
 
 The target is full CC coverage: we enable all options of the static contract checker
 except "Check redundant assume".
@@ -120,63 +121,6 @@ except "Check redundant assume".
 
 Remember that you can mark a type/member with the attribute `[ContractVerification(false)]`.
 If this is expected to be permanent, justify it.
-
-Compilation Symbols
--------------------
-
-Compilation Symbols are a pain in the ass: it prevents clean refatoring, things might
-or might not work depending on the build configuration.
-
-Standard compilation symbols:
-- `DEBUG`
-- `TRACE`
-- `CODE_ANALYSIS`
-- `CONTRACTS_FULL`
-
-Symbols used to define the assembly properties:
-- `BUILD_GENERATED_VERSION`
-- `DUMMY_GENERATED_VERSION`
-- `NOT_CLS_COMPLIANT`
-- `NO_INTERNALS_VISIBLE_TO`
-- `SECURITY_ANNOTATIONS`
-- `SIGNED_ASSEMBLY`
-
-**Always** prefer conditional attributes to `#if` directives. We only accept three exceptions:
-object invariants and CC hacks (`CONTRACTS_FULL`), exposing internals to test projects 
-and white-box tests (`NO_INTERNALS_VISIBLE_TO`), and security annotations (`SECURITY_ANNOTATIONS`).
-If you use an `#if` directive you should justify it with a comment placed on
-the same line as the `#if` (this helps to quickly spot the justification in search results):
-```csharp
-#if !NO_INTERNALS_VISIBLE_TO // Make internals visible to the test projects.
-#endif
-#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
-#endif
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-#endif
-#if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
-#endif
-#if CONTRACTS_FULL // Helps CCCheck with the object invariance.
-#endif
-```
-NB: This is not necessary for security annotations. 
-
-The list of namespace imports **must** not depend on the value of compilation symbols.
-For instance, do not write:
-```csharp
-using System.Security;
-
-#if SECURITY_ANNOTATIONS
-[assembly: SecurityTransparent]
-#endif
-```
-but prefer:
-```csharp
-#if SECURITY_ANNOTATIONS
-[assembly: System.Security.SecurityTransparent]
-#endif
-
-[References]
-- [Eric Lippert](http://ericlippert.com/2009/09/10/whats-the-difference-between-conditional-compilation-and-the-conditional-attribute/)
 
 ### Object Invariants
 
@@ -215,6 +159,64 @@ Wrap any object invariants method and contract class with a compiler conditional
 #endif
 ```
 
+Compilation Symbols
+-------------------
+
+Compilation Symbols are a pain in the ass: it prevents clean refatoring, things might
+or might not work depending on the build configuration.
+
+Standard compilation symbols:
+- `DEBUG`
+- `TRACE`
+- `CODE_ANALYSIS`
+- `CONTRACTS_FULL`
+
+Symbols used to define the assembly properties:
+- `BUILD_GENERATED_VERSION`
+- `DUMMY_GENERATED_VERSION`
+- `NOT_CLS_COMPLIANT`
+- `NO_INTERNALS_VISIBLE_TO`
+- `SECURITY_ANNOTATIONS`
+- `SIGNED_ASSEMBLY`
+
+**Always** prefer conditional attributes to `#if` directives. We only accept three exceptions:
+object invariants and CC hacks (`CONTRACTS_FULL`), exposing internals to test projects
+and white-box tests (`NO_INTERNALS_VISIBLE_TO`), and security annotations (`SECURITY_ANNOTATIONS`).
+If you use an `#if` directive you should justify it with a comment placed on
+the same line as the `#if` (this helps to quickly spot the justification in search results):
+```csharp
+#if !NO_INTERNALS_VISIBLE_TO // Make internals visible to the test projects.
+#endif
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
+#endif
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#endif
+#if CONTRACTS_FULL // Custom ctor visibility for the contract class only.
+#endif
+#if CONTRACTS_FULL // Helps CCCheck with the object invariance.
+#endif
+```
+NB: This is not necessary for security annotations.
+
+The list of namespace imports **must** not depend on the value of compilation symbols.
+For instance, do not write:
+```csharp
+using System.Security;
+
+#if SECURITY_ANNOTATIONS
+[assembly: SecurityTransparent]
+#endif
+```
+but prefer:
+```csharp
+#if SECURITY_ANNOTATIONS
+[assembly: System.Security.SecurityTransparent]
+#endif
+```
+
+References:
+- [Eric Lippert](http://ericlippert.com/2009/09/10/whats-the-difference-between-conditional-compilation-and-the-conditional-attribute/)
+
 Documentation
 -------------
 
@@ -242,7 +244,9 @@ Tests
 
 Test projects are first-class citizens; translate: they must pass all static analysis.
 
-### Mandatory Rules
+### Rules
+
+#### Mandatory Rules
 - Use the same directory hierarchy that the one used by the libraries.
 - Name [TypeUnderTest]Facts a test class.
 - Name [UnitOfWork]_[ExpectedOutcomeOrBehaviour]_[Context] a unit test.
@@ -262,7 +266,7 @@ public static class MyTypeFacts
 }
 ```
 
-### Optional Rules
+#### Optional Rules
 - Consider adding a suffix _For{WhichArgument} to describe the arguments used.
 - Consider adding a suffix _{Context} to describe the context.
 - Consider using the same ordering for tests than the one used inside classes.
@@ -315,21 +319,8 @@ Security
 --------
 
 Consider applying the `SecurityTransparent` attribute or the `AllowPartiallyTrustedCallers`
-attribute to the assembly. If you do so, verify the assembly with the `SecAnnotate` tool (done 
+attribute to the assembly. If you do so, verify the assembly with the `SecAnnotate` tool (done
 automatically if we use the SecurityAnalysis task from the PSake file).
-
-Library             | Attribute
---------------------|------------
-Narvalo.Cerbere     | Transparent
-Narvalo.Common      | Transparent
-Narvalo.Core        | Transparent
-Narvalo.Finance     | Transparent
-Narvalo.Fx          | Transparent
-Narvalo.Web         | (None)      <- see below.
-
-Remark:
-All methods in ASP.NET MVC v5 default to SecurityCritical, our only choice would be to mark Narvalo.Web with
-the APTCA attribute, but APTCA and ASP.NET MVC [do not work together](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307).
 
 References:
 - [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)

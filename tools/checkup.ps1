@@ -148,7 +148,7 @@ if ($repair.IsPresent) {
     Write-Host -ForeGround DarkCyan @"
 
 Ready to proceed to the repair tasks. You will be offered the following options:
-- Scan the repository for any C# source files missing a copyright header then repair them. 
+- Scan the repository for any C# source files missing a copyright header then repair them.
   *** This operation puts a lot of stress on the file system ****
 
 "@

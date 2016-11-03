@@ -1,10 +1,5 @@
-Narvalo.NET
-===========
-
-- [Documentation](https://github.com/chtoucas/Narvalo.NET/tree/master/docs)
-- [License](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE.txt)
-- [License for WebFormsMvp](https://github.com/chtoucas/Narvalo.NET/tree/master/LICENSE-WebFormsMvp.txt)
-  on which depend all MVP-related packages.
+Projects
+========
 
 ## General Purpose Libraries
 - **Narvalo.Cerbere**
@@ -58,3 +53,20 @@ Narvalo.NET
 - [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
 - [WebForms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWebForms)
 - [Windows Forms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWindowsForms)
+
+## Test Projects
+- **Narvalo.Facts** ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/tests/Narvalo.Facts))
+- **Narvalo.Mvp.Facts** ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/tests/Narvalo.Mvp.Facts))
+- **Narvalo.Reliability.Facts** ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/tests/Narvalo.Reliability.Facts))
+
+## Other projects
+- **Narvalo.T4**, custom T4 templates (for internal use only).
+- **Narvalo.StyleCop**, custom StyleCop rules for C# (for internal use only).
+- **Narvalo.Mvp.Windows.Forms** (_incomplete & unusable_).
+- **Narvalo.Ghostscript**, a .NET wrapper for GhostScript (_incomplete & broken_).
+- **Narvalo.Reliability** features reliability patterns (_incomplete & broken_).
+
+## Retired projects
+
+- [Narvalo.Web.Extras](https://www.nuget.org/packages/Narvalo.Web.Extras/),
+  replaced by [Narvalo.Web](https://www.nuget.org/packages/Narvalo.Web/).

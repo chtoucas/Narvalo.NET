@@ -470,6 +470,7 @@ function Invoke-PurgeTask {
     }
 
     if ($noConfirm.IsPresent -or (Confirm-Yes 'Remove the locally installed tools?')) {
+        # NB. 7-zip is no longer installed.
         Remove-LocalItem -Path (Get-7Zip)
         Remove-LocalItem -Path (Get-NuGet)
     }

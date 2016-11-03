@@ -19,6 +19,7 @@ Components necessary to run the build scripts:
 - Code Contracts (see above).
 - Visual Extensibility Tools (VS optional component) provides T4 integration in MSBuild.
 - Tools and Windows SDK (VS optional component) for PEVerify.exe.
+- [DocFX](https://dotnet.github.io/docfx/) to build the documentation.
 
 Obsolete requirements:
 - [StyleCop](http://stylecop.codeplex.com) for source analysis integration inside Visual Studio.
@@ -269,8 +270,8 @@ local property file `{AssemblyName}.props`:
 The part concerning the XML docs is optional (often it causes the build to fail
 with the current version of the CC tools).
 
-Update notes
-------------
+Updating
+--------
 
 ### NuGet Updates
 
@@ -293,9 +294,9 @@ Other places to look at:
 - fsci.cmd (for F# updates)
 - `TargetFrameworkVersion` in Narvalo.Common.props
 
-### Copyright
+### Copyright Year Update
 
-Appears in several places:
+A copyright appears in two places:
 - `etc\AssemblyInfo.Common.cs`
 - `LICENSE.txt`
 

@@ -21,7 +21,7 @@
         "dest": "api"
       },
       {
-        "files": [ "toc.yml", "*.md" ]
+        "files": [ "*.{md,yml}", "engineering/**/*.{md,yml}" ]
       }
     ],
     "resource": [],
@@ -34,13 +34,9 @@
     },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
-    "template": [
-      "default"
-    ],
+    "template": ["default"],
     "postProcessors": [],
-    "xref": [
-      "../packages/msdn.4.5.2.0.1.0-alpha-1610081127/content/msdn.4.5.2.zip"
-    ],
+    "xref": ["../packages/msdn.4.5.2.0.1.0-alpha-1610081127/content/msdn.4.5.2.zip"],
     "noLangKeyword": false
   }
 }

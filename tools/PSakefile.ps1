@@ -60,14 +60,12 @@ Task Default -Depends Build
 # NB: No need to restore packages before building the projects $Everything
 # or $Foundations; this will be done in MSBuild.
 
-Task RestorePackages `
+Task RestoreSolutionPackages `
     -Description 'Restore solution-level packages.' `
-    -Alias restore `
+    -Alias restorepacks `
 {
-    Restore-Packages -Source (Get-LocalPath '.nuget\packages.config') `
-        -PackagesDirectory (Get-LocalPath 'packages') `
-        -ConfigFile (Get-LocalPath '.nuget\NuGet.Config') `
-        -Verbosity $NuGetVerbosity
+    # Usually, this is not necessary to run this task, since it is already done in make.ps1.
+    Restore-SolutionPackages -Verbosity quiet
 }
 
 Task Build `
