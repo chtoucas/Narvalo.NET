@@ -1,26 +1,28 @@
 Status
 ======
 
-Library             | Status | PCL        | CA | GA | CC | SA  | TC
---------------------|--------|------------|----|----|----|-----|-----
-Narvalo.Cerbere (*) | Beta   | Profile259 | OK | OK | OK | OK+ | 100%
-Narvalo.Fx      (*) | Beta   | Profile259 | OK | OK | OK | OK  |
-Narvalo.Finance (*) |        | Profile111 | OK | !  | OK | OK  |
-Narvalo.Core        | Alpha  | Profile259 | !  | OK | OK | OK  |
-Narvalo.Common      | Alpha  |            | !  | !  | OK | OK  |
-Narvalo.Web         |        |            |    |    |    | OK  |
-Narvalo.Mvp         | Beta   |            | !  |    |    | OK  |
-Narvalo.Mvp.Web     | Beta   |            | !  |    |    | OK  |
-Narvalo.Build       | Stable |            | !  |    |    | OK+ |
-
-(*) Not yet published.
+Library                   | Status      | PCL/Platform     | CA | CC | TC
+--------------------------|-------------|------------------|----|----|-----
+Narvalo.Build             | 1.1.0       | .NET 4.5         |    |    |
+Narvalo.Cerbere           | 1.0.0       | Profile259       |    | OK | 100%
+Narvalo.Common            | Preview     | .NET 4.5         |    | OK |
+Narvalo.Core              | Preview     | Profile259       |    | OK |
+Narvalo.Finance           | Preview     | Profile111       |    | OK |
+Narvalo.Fx                | Preview     | Profile259       |    | OK |
+Narvalo.Ghostscript       |             | .NET 4.5         |    |    |
+Narvalo.Mvp               | 1.0.0-alpha | .NET 4.5         |    |    |
+Narvalo.Mvp.Web           | 1.0.0-alpha | .NET 4.5         |    |    |
+Narvalo.Mvp.Windows.Forms |             | .NET 4.5         |    |    |
+Narvalo.Reliability       |             | .NETStandard 1.2 |    |    |
+Narvalo.Web               | Preview     | .NET 4.5         |    | OK |
 
 Explanations:
-- CA: Static Analysis with FxCop
-- GA: Static Analysis with Gendarme
+- CA: Static Analysis with:
+  * Analyzers shipped with VS
+  * SonarCube analyzers
+  * StyleCop analyzers
 - CC: Static Analysis with Code Contracts
-- SA: Source Analysis with StyleCop. OK+ means that the assembly is fully documented.
-- TC: Code Coverage. OK means > 90%.
+- TC: Code Coverage.
 
 Security
 --------
@@ -32,8 +34,12 @@ Narvalo.Common      | Transparent
 Narvalo.Core        | Transparent
 Narvalo.Finance     | Transparent
 Narvalo.Fx          | Transparent
-Narvalo.Web         | (None)      <- see below.
+
+Currently, all other assemblies do not specifiy a security attribute, therefore
+use the default policy (security critical).
 
 Remark:
-All methods in ASP.NET MVC v5 default to SecurityCritical, our only choice would be to mark Narvalo.Web with
-the APTCA attribute, but APTCA and ASP.NET MVC [do not work together](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307).
+All methods in ASP.NET MVC v5 default to security critical, our only choice would
+be to mark Narvalo.Web with the APTCA attribute and to apply the correct security
+attribute where it is needed, but APTCA and ASP.NET MVC
+[do not work together](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307).

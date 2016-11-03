@@ -270,6 +270,9 @@ local property file `{AssemblyName}.props`:
 The part concerning the XML docs is optional (often it causes the build to fail
 with the current version of the CC tools).
 
+You MUST also configure VS to build the project when selecting the Code Contracts
+configuration.
+
 Updating
 --------
 

@@ -11,6 +11,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Documentation", "1. Documentation", "{2F6EB97B-14A3-45FD-A665-A8C60D8744C2}"
 	ProjectSection(SolutionItems) = preProject
 		..\docs\docfx.json = ..\docs\docfx.json
+		..\docs\issues.md = ..\docs\issues.md
 		..\LICENSE.txt = ..\LICENSE.txt
 		..\README.md = ..\README.md
 	EndProjectSection
