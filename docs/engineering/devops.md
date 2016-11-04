@@ -1,10 +1,40 @@
 Developer Operations
 ====================
 
-Before going further, you should read [Versioning](versioning.md).
+Updating
+--------
+
+### NuGet Updates
+
+For package updates, use the Narvalo.sln solution.
+
+**WARNING:** If the NuGet core framework is updated, do not forget to also
+update `tools\nuget.exe` (I believe this is done automatically whenever we use
+it to install/update packages):
+```
+tools\nuget.exe update -Self
+```
+
+### Visual Studio or Framework Updates
+
+After upgrading Visual Studio or MSBuild, do not forget to update the
+`VisualStudioVersion` property in both Make.Shared.props and PSakefile.ps1.
+We might also need to update the `SDK40ToolsPath` property.
+
+Other places to look at:
+- fsci.cmd (for F# updates)
+- `TargetFrameworkVersion` in Narvalo.Common.props
+
+### Copyright Year Update
+
+A copyright appears in two places:
+- `etc\AssemblyInfo.Common.cs`
+- `LICENSE.txt`
 
 Releasing a NuGet package
 -------------------------
+
+Before going further, you should read [Versioning](versioning.md).
 
 Checklist:
 - The shared version: `etc\Narvalo.CurrentVersion.props`.
