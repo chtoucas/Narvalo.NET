@@ -2,17 +2,12 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <NuId>Narvalo.Web</NuId>
-    <NuTitle>Narvalo.Web</NuTitle>
     <NuDescription>
+      <![CDATA[
 Provides types that might prove useful for Web development: generic HttpHandler type, asset providers, Razor and WebForms compile-time optimizers, preliminary support for OpenGraph and Schema.Org.
+      ]]>
     </NuDescription>
-    <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-$(NuDescription)
-A code contracts reference assembly is included if you ever need it.
-    </NuDescription>
-    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>ASP.NET, MVC, WebForms, Razor, Optimization</NuTags>
-    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuReferences>
       <![CDATA[
@@ -42,5 +37,6 @@ $(NuFiles)
 <file src="CodeContracts\Narvalo.Web.Contracts.xml" target="lib\net45\CodeContracts\" />
       ]]>
     </NuFiles>
+
   </PropertyGroup>
 </Project>

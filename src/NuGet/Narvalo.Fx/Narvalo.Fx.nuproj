@@ -4,24 +4,17 @@
 
   <PropertyGroup>
     <NuId>Narvalo.Fx</NuId>
-    <NuTitle>Narvalo.Fx</NuTitle>
+    <NuSummary>
+      <![CDATA[
+Features implementations of some of the usual suspects from functional programming.
+      ]]>
+    </NuSummary>
     <NuDescription>
       <![CDATA[
 Features implementations of some of the usual suspects from functional programming: Option (Maybe&lt;T&gt;) and Error (Output&lt;T&gt;) monads, simple pattern matching (Either&lt;T1, T2&gt;, Switch&lt;T1, T2&gt;), generators and delegate extensions.
-
-This is a portable class library targeting Profile259.
       ]]>
     </NuDescription>
-    <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-$(NuDescription)
-A code contracts reference assembly is included if you ever need it.
-    </NuDescription>
-    <NuSummary>
-      This package features implementations of some of the usual suspects from functional programming.
-    </NuSummary>
-    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Maybe, Option, Error, Either, Linq, Monad, Functional</NuTags>
-    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuReferences>
       <![CDATA[

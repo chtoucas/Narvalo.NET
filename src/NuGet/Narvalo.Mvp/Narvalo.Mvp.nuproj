@@ -2,15 +2,18 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <NuId>Narvalo.Mvp</NuId>
-    <NuTitle>Narvalo.Mvp</NuTitle>
-    <NuDescription>
+    <NuSummary>
+      <![CDATA[
 Features a MVP framework largely inspired by webformsmvp. Contrary to webformsmvp, it is not restricted to the WebForms platform; nevertheless, featurewise, it should be on par with WebFormsMvp.
-
+      ]]>
+    </NuSummary>
+    <NuDescription>
+      <![CDATA[
+$(NuSummary)
 Samples are available on the project web site.
+      ]]>
     </NuDescription>
-    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>MVP</NuTags>
-    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuFiles>
       <![CDATA[

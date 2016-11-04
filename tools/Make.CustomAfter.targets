@@ -268,7 +268,7 @@ using System.Reflection;
     </PropertyGroup>
 
     <PropertyGroup>
-    <!-- WARNING: We force transparency for PCL libraries, otherwise SecAnnotate does not recognize
+      <!-- WARNING: We force transparency for PCL libraries, otherwise SecAnnotate does not recognize
          this when mixing PCL and standard libraries. -->
       <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Cerbere' " >/t:Narvalo.Cerbere.dll</_ForceTransparency>
       <_ForceTransparency Condition=" '$(AssemblyName)' != 'Narvalo.Core' " >$(_ForceTransparency) /t:Narvalo.Core.dll</_ForceTransparency>

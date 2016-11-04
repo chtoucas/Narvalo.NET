@@ -4,21 +4,12 @@
 
   <PropertyGroup>
     <NuId>Narvalo.Finance</NuId>
-    <NuTitle>Narvalo.Finance</NuTitle>
     <NuDescription>
       <![CDATA[
 Provides various financial utilities: Currency (ISO 4217), Money types, BIC (ISO 9362), IBAN &amp; BBAN.
-
-This is a portable class library targeting Profile111.
       ]]>
     </NuDescription>
-    <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-$(NuDescription)
-A code contracts reference assembly is included if you ever need it.
-    </NuDescription>
-    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Currency, Money, BIC, IBAN, BBAN</NuTags>
-    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuReferences>
       <![CDATA[

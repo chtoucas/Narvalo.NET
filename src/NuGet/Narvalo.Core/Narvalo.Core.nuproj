@@ -4,19 +4,12 @@
 
   <PropertyGroup>
     <NuId>Narvalo.Core</NuId>
-    <NuTitle>Narvalo.Core</NuTitle>
     <NuDescription>
+      <![CDATA[
 Provides various utilities and extension methods: Range type, Int64 encoders, extension methods for Collections and XDom.
-
-This is a portable class library targeting Profile259.
+      ]]>
     </NuDescription>
-    <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-$(NuDescription)
-A code contracts reference assembly is included if you ever need it.
-    </NuDescription>
-    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Range, Utilities, Extensions</NuTags>
-    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuReferences>
       <![CDATA[

@@ -2,15 +2,18 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <NuId>Narvalo.Mvp.Web</NuId>
-    <NuTitle>Narvalo.Mvp.Web</NuTitle>
-    <NuDescription>
+    <NuSummary>
+      <![CDATA[
 Enhances the Narvalo.Mvp package with support for ASP.NET WebForms.
-
+      ]]>
+    </NuSummary>
+    <NuDescription>
+      <![CDATA[
+$(NuSummary)
 Samples are available on the project web site.
+      ]]>
     </NuDescription>
-    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>MVP, ASP.NET, WebForms</NuTags>
-    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuFiles>
       <![CDATA[

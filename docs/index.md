@@ -1,5 +1,5 @@
-Narvalo.NET
-===========
+Overview
+========
 
 - [Status](status.md)
 - [Project Changelog](changelog.md)
@@ -50,11 +50,10 @@ Narvalo.NET
   ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Web))
   [![NuGet](https://img.shields.io/nuget/v/Narvalo.Mvp.Web.svg)](https://www.nuget.org/packages/Narvalo.Mvp.Web/),
   enhances Narvalo.Mvp to provide support for ASP.NET WebForms similar to WebFormsMvp.
-
-Samples:
-- [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
-- [WebForms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWebForms)
-- [Windows Forms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWindowsForms)
+- Samples:
+  * [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
+  * [WebForms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWebForms)
+  * [Windows Forms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWindowsForms)
 
 ## Developer Tools
 - **Narvalo.Build**

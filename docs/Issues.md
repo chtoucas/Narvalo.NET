@@ -10,6 +10,14 @@ Current works
   * OpenCover & Gendarme: move the core logic from PSake to MSBuild.
   * Should I call Rebuild before Package?
   * Should I call Rebuild before the analysis tasks?
+  * In addition to `$(SkipCodeContractsReferenceAssembly)`, should we check
+    `$(SkipCodeContractsReferenceAssembly)` too?
+  * Nuspec: handle automatically PCL, `FrameworkProfiles.props` import
+    and files to be added (we certainly can do this for all packages, non-PCL).
+  * Nuspec: In `Make.CustomAfter.props`, we use $(TargetFrameworkProfile) to
+    patch the description $(NuDescription) for PCL libraries, is it the right way
+    to do this (In `Make.CustomAfter.targets`, we use
+    `'$(TargetFrameworkProfile.StartsWith(Profile))' == 'true'`).
 - DocFX:
   * External links via `<see cref="!:" />` are not understood by docfx.
   * NamespaceDocs are not understood by docfx, rewrite needed.

@@ -2,17 +2,12 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <NuId>Narvalo.Common</NuId>
-    <NuTitle>Narvalo.Common</NuTitle>
     <NuDescription>
+      <![CDATA[
 Provides various utilities and extension methods: directory walker, extension methods for Collections, Configuration, SQL client.
+      ]]>
     </NuDescription>
-    <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-$(NuDescription)
-A code contracts reference assembly is included if you ever need it.
-    </NuDescription>
-    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Utilities, Extensions</NuTags>
-    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuReferences>
       <![CDATA[

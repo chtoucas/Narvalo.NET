@@ -4,19 +4,12 @@
 
   <PropertyGroup>
     <NuId>Narvalo.Cerbere</NuId>
-    <NuTitle>Narvalo.Cerbere</NuTitle>
     <NuDescription>
+      <![CDATA[
 Provides argument validation methods and Code Contracts helpers.
-
-This is a portable class library targeting Profile259.
+      ]]>
     </NuDescription>
-    <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
-$(NuDescription)
-A code contracts reference assembly is included if you ever need it.
-    </NuDescription>
-    <NuCopyright>Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
     <NuTags>Require, Assert, Guard, Check, Validate, CodeContracts, Contracts</NuTags>
-    <NuReleaseNotes>See https://github.com/chtoucas/Narvalo.NET/blob/master/Changelog.md</NuReleaseNotes>
 
     <NuReferences>
       <![CDATA[
