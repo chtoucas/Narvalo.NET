@@ -3,7 +3,7 @@ Overview
 
 - [Adding or Configuring a Project](project.md)
 - [Coding Rules](rules.md)
-- [Building Infrastructure](build.md)
+- [Build Infrastructure](build.md)
 - [Versioning](versioning.md)
 - [Developer Operations](devops.md)
 
@@ -24,7 +24,9 @@ Optional components:
 Components necessary to run the build scripts:
 - Code Contracts (see above).
 - Visual Extensibility Tools (VS optional component) provides T4 integration in MSBuild.
-- Tools and Windows SDK (VS optional component) for PEVerify.exe.
+
+Optional necessary to run the build scripts:
+- Tools and Windows SDK (VS optional component) for PEVerify.exe and SecAnnotate.exe.
 - [DocFX](https://dotnet.github.io/docfx/) to build the documentation.
 
 Obsolete requirements:
@@ -67,3 +69,33 @@ Most developments are done in C#. Three build configurations are available:
 - CodeContracts is solely for Code Contracts analysis.
 
 All tasks are fully automated with MSBuild, PowerShell (PSake) and F# scripts.
+
+Projects
+--------
+
+- Libraries
+  * Narvalo.Cerbere
+  * Narvalo.Common
+  * Narvalo.Core
+  * Narvalo.Finance
+  * Narvalo.Ghostscript
+  * Narvalo.Fx
+  * Narvalo.Reliability
+  * Narvalo.Web
+- MVP Framework
+  * Narvalo.Mvp
+  * Narvalo.Mvp.Web
+  * Narvalo.Mvp.Windows.Forms
+- Developer Tools
+  * Narvalo.Build
+- Samples
+  * MvpCommandLine
+  * MvpWebForms
+  * MvpWindowsForms
+- Tests
+  * Narvalo.Facts
+  * Narvalo.Mvp.Facts
+  * Narvalo.Reliability.Facts
+- For internal use only
+  * Narvalo.T4
+  * Narvalo.StyleCop
