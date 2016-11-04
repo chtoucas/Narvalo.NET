@@ -1,6 +1,12 @@
 ﻿- name: Overview
   href: index.md
+- name: Adding or Configuring a Project
+  href: project.md
 - name: Coding Rules
   href: rules.md
-- name: Building and releasing
+- name: Building Infrastructure
   href: build.md
+- name: Versioning
+  href: versioning.md
+- name: Developer Operations
+  href: devops.md

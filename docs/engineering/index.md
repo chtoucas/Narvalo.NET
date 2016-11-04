@@ -1,12 +1,11 @@
 Overview
 ========
 
-- [Overview](engineering/index.md)
-- [Adding or Configuring a Project](engineering/project.md)
-- [Coding Rules](engineering/rules.md)
-- [Building Infrastructure](engineering/build.md)
-- [Versioning](engineering/versioning.md)
-- [Developer Operations](engineering/devops.md)
+- [Adding or Configuring a Project](project.md)
+- [Coding Rules](rules.md)
+- [Building Infrastructure](build.md)
+- [Versioning](versioning.md)
+- [Developer Operations](devops.md)
 
 Prerequisites
 -------------
