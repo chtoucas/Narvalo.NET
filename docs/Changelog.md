@@ -1,7 +1,7 @@
 ChangeLog
 =========
 
-XXXX-XX-XX - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
+2016-11-04 - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
 
 _Focus on API and code quality of Narvalo.Web_

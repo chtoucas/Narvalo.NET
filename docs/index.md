@@ -9,5 +9,7 @@ Narvalo.NET
 ## Engineering Guides
 
 - [Overview](engineering/index.md)
-- [Rules](engineering/rules.md)
-- [Building and releasing](engineering/build.md)
+- [Coding Rules](engineering/rules.md)
+- [Building Infrastructure](engineering/build.md)
+- [Versioning](engineering/versioning.md)
+- [Developer Operations](engineering/devops.md)

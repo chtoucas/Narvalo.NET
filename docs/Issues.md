@@ -1,6 +1,11 @@
 Current works
 =============
 
+- Documentation:
+  * Version & dependencies.
+  * Changelog
+  * Icons in Wiki
+  * GitHub projects.
 - Build scripts:
   * OpenCover & Gendarme: move the core logic from PSake to MSBuild.
   * Should I call Rebuild before Package?
