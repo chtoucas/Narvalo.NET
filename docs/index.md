@@ -8,20 +8,22 @@ Overview
 Status
 ------
 
-Library                   | Version     | PCL/Platform     | SA | CC | TC
---------------------------|-------------|------------------|----|----|-----
-Narvalo.Build             | 1.1.0       | .NET 4.5         |    |    |
-Narvalo.Cerbere           | 1.0.0       | Profile259       |    | OK | 100%
-Narvalo.Common            | 0.24.0      | .NET 4.5         |    | OK |
-Narvalo.Core              | 0.24.0      | Profile259       |    | OK |
-Narvalo.Finance           | 0.24.0      | Profile111       |    | OK |
-Narvalo.Fx                | 0.24.0      | Profile259       |    | OK |
-Narvalo.Ghostscript       |             | .NET 4.5         |    |    |
-Narvalo.Mvp               | 0.99.0      | .NET 4.5         |    |    |
-Narvalo.Mvp.Web           | 0.99.0      | .NET 4.5         |    |    |
-Narvalo.Mvp.Windows.Forms |             | .NET 4.5         |    |    |
-Narvalo.Reliability       |             | .NETStandard 1.2 |    |    |
-Narvalo.Web               | 0.24.0      | .NET 4.5         |    | OK |
+Library                   | Version     | PCL/Platform     | Security (*) | SA | CC | TC
+--------------------------|-------------|------------------|--------------|----|----|-----
+Narvalo.Build             | 1.1.0       | .NET 4.5         |              |    |    |
+Narvalo.Cerbere           | 1.0.0       | Profile259       | Transparent  |    | OK | 100%
+Narvalo.Common            | 0.24.0      | .NET 4.5         | Transparent  |    | OK |
+Narvalo.Core              | 0.24.0      | Profile259       | Transparent  |    | OK |
+Narvalo.Finance           | 0.24.0      | Profile111       | Transparent  |    | OK |
+Narvalo.Fx                | 0.24.0      | Profile259       | Transparent  |    | OK |
+Narvalo.Ghostscript       |             | .NET 4.5         |              |    |    |
+Narvalo.Mvp               | 0.99.0      | .NET 4.5         |              |    |    |
+Narvalo.Mvp.Web           | 0.99.0      | .NET 4.5         |              |    |    |
+Narvalo.Mvp.Windows.Forms |             | .NET 4.5         |              |    |    |
+Narvalo.Reliability       |             | .NETStandard 1.2 |              |    |    |
+Narvalo.Web               | 0.24.0      | .NET 4.5         |              |    | OK |
+
+(*) Security attributes are not present in the assemblies distributed via NuGet.
 
 Explanations:
 - SA: Static Analysis with:
@@ -31,71 +33,43 @@ Explanations:
 - CC: Code Contracts
 - TC: Code Coverage.
 
-## Security
+Overview
+--------
 
-**WARNING** Security attributes are not applied to the assemblies distributed
-via NuGet packages.
-
-Library             | Attribute
---------------------|------------
-Narvalo.Cerbere     | Transparent
-Narvalo.Common      | Transparent
-Narvalo.Core        | Transparent
-Narvalo.Finance     | Transparent
-Narvalo.Fx          | Transparent
-
-Currently, all other assemblies do not specify any security attribute, therefore
-use the default policy (security critical).
-
-Remark:
-All methods in ASP.NET MVC v5 default to security critical, our only choice would
-be to mark Narvalo.Web with the APTCA attribute and to apply the correct security
-attribute where it is needed, but APTCA and ASP.NET MVC
-[do not work together](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307).
-
-## General Purpose Libraries
+## Libraries
 - **Narvalo.Cerbere**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Cerbere))
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Cerbere.svg)](https://www.nuget.org/packages/Narvalo.Cerbere/),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Cerbere)),
   this library provides argument validation methods and Code Contracts helpers.
-- **Narvalo.Fx**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Fx))
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Fx.svg)](https://www.nuget.org/packages/Narvalo.Fx/),
+- **Narvalo.Fx**,
   this library features implementations of some of the usual suspects from functional
   programming: Option (`Maybe<T>`) and Error (`Output<T>`) monads, simple pattern matching
   (`Either<T1, T2>`, `Switch<T1, T2>`), generators and delegate extensions.
 - **Narvalo.Finance**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance))
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Finance.svg)](https://www.nuget.org/packages/Narvalo.Finance/),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Finance)),
   this package provides various financial utilities: Currency (ISO 4217), Money types,
   BIC (ISO 9362), IBAN & BBAN.
 - **Narvalo.Core**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core))
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Core.svg)](https://www.nuget.org/packages/Narvalo.Core/),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Core)),
   this library provides various utilities and extension methods: Range type,
   Int64 encoders, extension methods for Collections and XDom.
 - **Narvalo.Common**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common))
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Common.svg)](https://www.nuget.org/packages/Narvalo.Common/),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Common)),
   this library provides various utilities and extension methods: directory walker,
   extension methods for Configuration and SQL client.
 - **Narvalo.Web**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web))
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Web.svg)](https://www.nuget.org/packages/Narvalo.Web/),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Web)),
   this library provides types that might prove useful for Web development: generic HttpHandler
   type, asset providers, Razor and WebForms compile-time optimizers, preliminary support
   for OpenGraph and Schema.Org.
 
 ## MVP Framework
 - **Narvalo.Mvp**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp))
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Mvp.svg)](https://www.nuget.org/packages/Narvalo.Mvp/),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp)),
   a simple MVP framework largely inspired by [WebFormsMvp](https://github.com/webformsmvp/webformsmvp).
   Contrary to WebFormsMvp, it is not restricted to the WebForms platform; nevertheless, featurewise,
   it should be on par with WebFormsMvp. Includes support for command-line applications.
 - **Narvalo.Mvp.Web**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Web))
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Mvp.Web.svg)](https://www.nuget.org/packages/Narvalo.Mvp.Web/),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Mvp.Web))),
   enhances Narvalo.Mvp to provide support for ASP.NET WebForms similar to WebFormsMvp.
 - Samples:
   * [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
@@ -104,8 +78,7 @@ attribute where it is needed, but APTCA and ASP.NET MVC
 
 ## Developer Tools
 - **Narvalo.Build**
-  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build))
-  [![NuGet](https://img.shields.io/nuget/v/Narvalo.Build.svg)](https://www.nuget.org/packages/Narvalo.Build/),
+  ([sources](https://github.com/chtoucas/Narvalo.NET/tree/master/src/Narvalo.Build)),
   custom MSBuild tasks.
 
 ## Test Projects

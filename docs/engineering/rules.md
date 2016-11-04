@@ -318,9 +318,18 @@ References:
 Security
 --------
 
+**WARNING:** Currently, security attributes are not present in the assemblies distributed
+via NuGet, therefore they use the default policy (security critical).
+
 Consider applying the `SecurityTransparent` attribute or the `AllowPartiallyTrustedCallers`
 attribute to the assembly. If you do so, verify the assembly with the `SecAnnotate` tool (done
 automatically if we use the SecurityAnalysis task from the PSake file).
+
+Remark:
+All methods in ASP.NET MVC v5 default to security critical, our only choice would
+be to mark Narvalo.Web with the APTCA attribute and to apply the correct security
+attribute where it is needed, but APTCA and ASP.NET MVC
+[do not work together](https://github.com/DotNetOpenAuth/DotNetOpenAuth/issues/307).
 
 References:
 - [CAS](http://msdn.microsoft.com/en-us/library/c5tk9z76%28v=vs.110%29.aspx)
