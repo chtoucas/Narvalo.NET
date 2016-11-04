@@ -34,7 +34,7 @@ A copyright appears in two places:
 Releasing a NuGet package
 -------------------------
 
-Before going further, you should read [Versioning](versioning.md).
+Before going further, you MUST read [Versioning](versioning.md).
 
 Checklist:
 - The shared version: `etc\Narvalo.CurrentVersion.props`.

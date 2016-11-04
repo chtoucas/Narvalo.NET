@@ -1,8 +1,8 @@
 Assembly Versioning
 ===================
 
-Semantic Version
-----------------
+Versions
+--------
 
 - AssemblyVersion, version used by the runtime.
   MAJOR.MINOR.0.0
@@ -22,6 +22,32 @@ BUILD and REVISION are generated automatically:
 
 I do not change the AssemblyVersion when PATCH is incremented.
 
+Version updates
+---------------
+
+## Behaviour
+
+## Non-retail packages
+
+## Package dependencies:
+
+Library                   | Internal Dependencies
+--------------------------|-----------------------------------------------------
+Narvalo.Build             | -
+Narvalo.Cerbere           | -
+Narvalo.Common            | Cerbere, Fx
+Narvalo.Core              | Cerbere, Fx
+Narvalo.Finance           | Cerbere
+Narvalo.Fx                | Cerbere
+Narvalo.Ghostscript       | Cerbere
+Narvalo.Mvp               | Cerbere
+Narvalo.Mvp.Web           | Cerbere, Mvp
+Narvalo.Mvp.Windows.Forms | Cerbere, Mvp
+Narvalo.Reliability       | Cerbere
+Narvalo.Web               | Cerbere, Core, Common, Fx
+
+TODO: Explain package versioning and the consequences on major, minor and patch upgrades.
+
 All core Narvalo projects use the same version, let's see if things work with NuGet:
 - Patch update: X.Y.0.0 -> X.Y.1.0
   * If I publish Narvalo.Core but not Narvalo.Common, binding redirect works
@@ -40,6 +66,3 @@ All core Narvalo projects use the same version, let's see if things work with Nu
     changed so Narvalo.Common should replace the direct reference and use
     the NuGet package for Narvalo.Core. If necessary we can roll back
     at any time and next time we must publish both packages.
-
-Package dependencies
---------------------

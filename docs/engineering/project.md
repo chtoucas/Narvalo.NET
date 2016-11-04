@@ -46,6 +46,8 @@ A typical project file should then look like this:
 
 ### Add Versioning
 
+See also [Versioning](versioning.md).
+
 This is mandatory only for NuGet projects.
 Test and sample projects do not need a version property file.
 
