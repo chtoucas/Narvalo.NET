@@ -1,5 +1,5 @@
-Coding Rules
-============
+Coding Recommandations
+======================
 
 Coding Style
 ------------
@@ -45,8 +45,8 @@ Consider using tasks:
 
 For temporary string content, use `"XXX"`.
 
-Design Recommendations
-----------------------
+Design
+------
 
 ### Rules
 
@@ -227,7 +227,7 @@ Non-standard tags:
 - `<content></content>` used for documenting partial classes.
 - `<internalonly/>` for internal members or types.
 
-### Literate Programming (Kind Of)
+### Literate Programming (Obsolete)
 
 ```csharp
 /**
@@ -300,20 +300,6 @@ Multi-Threading
 
 Always remember that you are not an expert in multi-threading:
 **Always prefer high-level constructs to low-level primitives**.
-
-Performance
------------
-
-### Delegates
-
-### Virtual Methods
-
-### Boxing and Unboxing
-
-References:
-- [CoreFX](https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/performance-guidelines.md)
-- [CoreClr](https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/performance-guidelines.md)
-- [Delegates](http://blogs.msdn.com/b/pfxteam/archive/2012/02/03/10263921.aspx)
 
 Security
 --------

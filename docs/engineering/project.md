@@ -1,8 +1,8 @@
 Adding or Configuring a Project
 ===============================
 
-How to initialize a new C# project
-----------------------------------
+Initialize a C# project
+-----------------------
 
 The following procedure enables us to centralize all settings into a single place.
 Except for Code Contracts, there should be no need to edit the project properties
@@ -44,7 +44,8 @@ A typical project file should then look like this:
 </Project>
 ```
 
-### Add Versioning
+Assembly Versioning
+-------------------
 
 See also [Versioning](versioning.md).
 
@@ -72,7 +73,8 @@ When you want to override the default version properties:
 </Project>
 ```
 
-### Assembly Information
+Assembly Information
+--------------------
 
 Clean up the assembly information file:
 ```csharp
@@ -91,7 +93,8 @@ Optionally, give access to internals to the test project:
 #endif
 ```
 
-### Overriding the global settings (sample)
+Overriding the global settings (sample)
+---------------------------------------
 
 Create a property file `{AssemblyName}.props` with the following content:
 ```xml
@@ -111,9 +114,10 @@ Create a property file `{AssemblyName}.props` with the following content:
 </Project>
 ```
 
-### Special Cases
+Special Cases
+-------------
 
-#### Portable Class Libraries
+### Portable Class Libraries
 We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
 - **Profile111** (.NET Framework 4.5, Windows 8, Windows Phone 8.1):
   * For MSBuild: `TargetFrameworkVersion=v4.5`.
@@ -134,7 +138,7 @@ See
   the list of [Portable Class Library profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview),
   the [tool](https://github.com/StephenCleary/PortableLibraryProfiles).
 
-#### Desktop applications
+### Desktop applications
 Desktop applications should include a .ini containing:
 ```
 [.NET Framework Debugging Control]
@@ -143,7 +147,7 @@ AllowOptimize=1
 ```
 Ensure that it is copied to the output directory.
 
-#### Test projects
+### Test projects
 To create a test project use the "Unit Test Project" template from Visual Studio.
 Add the following content to you local customization property file `{AssemblyName}.props`:
 ```xml
@@ -159,7 +163,7 @@ This has two consequences:
 When creating the project we should add it to the list of test projects used by OpenCover in the
 PSake file.
 
-#### Sample projects
+### Sample projects
 Add the following content to you local customization property file `{AssemblyName}.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -171,7 +175,8 @@ This has ony one effect:
 - Sample projects use a dummy assembly version.
 - Sample projects use custom FxCop & StyleCop rules.
 
-### StyleCop (obsolete)
+StyleCop (obsolete)
+-------------------
 
 Unless specified otherwise, a project inherits its StyleCop settings from a common settings file:
 - for libraries, tests and tools, `StyleCop.Settings` which link back to `etc\Loosy.SourceAnalysis`.
@@ -198,7 +203,8 @@ Remarks:
   but we do not override the settings file `Settings.StyleCop` which implies that it
   does not affect StyleCop when called from the menu.
 
-### Code Contracts
+Code Contracts
+--------------
 
 When a project is ready for Code Contracts, add the following lines to the
 local property file `{AssemblyName}.props`:
