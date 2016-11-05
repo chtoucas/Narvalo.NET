@@ -1653,7 +1653,39 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Belarussian Ruble".
+    /// Represents the currency unit for the "Belarusian Ruble".
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
+        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    public sealed class BYN : Currency
+    {
+        /// <summary>
+        /// The unique instance of the <see cref="BYN" /> class.
+        /// </summary>
+        private static readonly BYN s_Instance = new BYN();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BYN" /> class.
+        /// </summary>
+        internal BYN() : base("BYN") { }
+
+        /// <summary>
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".
+        /// </summary>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".</value>
+        public static BYN Currency
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Currency>() != null);
+                return s_Instance;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Represents the currency unit for the "Belarusian Ruble".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
@@ -1671,9 +1703,9 @@ namespace Narvalo.Finance.Currencies
         internal BYR() : base("BYR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".</value>
         public static BYR Currency
         {
             get
@@ -3701,7 +3733,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Croatian Kuna".
+    /// Represents the currency unit for the "Kuna".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
@@ -3719,9 +3751,9 @@ namespace Narvalo.Finance.Currencies
         internal HRK() : base("HRK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Croatian Kuna".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kuna".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Croatian Kuna".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kuna".</value>
         public static HRK Currency
         {
             get
@@ -5525,7 +5557,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kwacha".
+    /// Represents the currency unit for the "Malawi Kwacha".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
@@ -5543,9 +5575,9 @@ namespace Narvalo.Finance.Currencies
         internal MWK() : base("MWK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwacha".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Malawi Kwacha".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwacha".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Malawi Kwacha".</value>
         public static MWK Currency
         {
             get
@@ -6165,7 +6197,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Nuevo Sol".
+    /// Represents the currency unit for the "Sol".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
@@ -6183,9 +6215,9 @@ namespace Narvalo.Finance.Currencies
         internal PEN() : base("PEN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Nuevo Sol".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Nuevo Sol".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
         public static PEN Currency
         {
             get
@@ -6581,7 +6613,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "New Romanian Leu".
+    /// Represents the currency unit for the "Romanian Leu".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
@@ -6599,9 +6631,9 @@ namespace Narvalo.Finance.Currencies
         internal RON() : base("RON") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Romanian Leu".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Romanian Leu".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Romanian Leu".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Romanian Leu".</value>
         public static RON Currency
         {
             get
@@ -8277,7 +8309,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bolivar".
+    /// Represents the currency unit for the "Bolívar".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
@@ -8295,9 +8327,9 @@ namespace Narvalo.Finance.Currencies
         internal VEF() : base("VEF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolivar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolívar".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bolivar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bolívar".</value>
         public static VEF Currency
         {
             get

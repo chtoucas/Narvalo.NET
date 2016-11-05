@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by SIX (SIX Group Services AG) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="ISO_4217" type="ISOCcyList"/>
+	<xs:complexType name="ISOCcyList">
+		<xs:sequence>
+			<xs:element name="CcyTbl" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>List of active currency codes by ISO-4217</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CcyNtry" type="IsoActiveCurrencyInformationType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Element to describe one active currency</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HstrcCcyTbl" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>List of historic currency codes by ISO-4217</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="HstrcCcyNtry" type="IsoActiveOrHistoricCurrencyInformationType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Element to describe one historic currency</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Pblshd" type="ISODate" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="IsoActiveOrHistoricCurrencyInformationType">
+		<xs:annotation>
+			<xs:documentation>Subelements describing a currency</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CtryNm" type="Max140Text">
+				<xs:annotation>
+					<xs:documentation>Country name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CcyNm" type="CurrencyName">
+				<xs:annotation>
+					<xs:documentation>Currency name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ccy" type="ActiveOrHistoricCurrencyCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>3 letter currency code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CcyNbr" type="ActiveOrHistoricCurrencyNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>3 digit currency code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CcyMnrUnts" type="MinorUnitType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Decimal places of  the currency</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WthdrwlDt" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date of withdrawal of the  currency</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IsoActiveCurrencyInformationType">
+		<xs:complexContent>
+			<xs:restriction base="IsoActiveOrHistoricCurrencyInformationType">
+				<xs:sequence>
+					<xs:element name="CtryNm" type="Max140Text"/>
+					<xs:element name="CcyNm" type="CurrencyName"/>
+					<xs:element name="Ccy" type="ActiveOrHistoricCurrencyCode" minOccurs="0"/>
+					<xs:element name="CcyNbr" type="ActiveOrHistoricCurrencyNumber" minOccurs="0"/>
+					<xs:element name="CcyMnrUnts" type="MinorUnitType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CurrencyName">
+		<xs:simpleContent>
+			<xs:extension base="Max140Text">
+				<xs:attribute name="IsFund" type="xs:boolean"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="ActiveOrHistoricCurrencyCode">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Z]{3,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ActiveOrHistoricCurrencyNumber">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{3,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MinorUnitType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]|N\.A\."/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Max140Text">
+		<xs:annotation>
+			<xs:documentation>Textblock</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="140"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ISODate">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+</xs:schema>

@@ -86,6 +86,7 @@ namespace Narvalo.Finance
             Assert.True(BUK.Currency != null);
             Assert.True(BWP.Currency != null);
             Assert.True(BYB.Currency != null);
+            Assert.True(BYN.Currency != null);
             Assert.True(BYR.Currency != null);
             Assert.True(BZD.Currency != null);
             Assert.True(CAD.Currency != null);
@@ -599,6 +600,11 @@ namespace Narvalo.Finance
             Assert.True(BYB.Currency == Currency.Of("BYB"));
             Assert.True(Object.ReferenceEquals(Currency.Of("BYB"), Currency.Of("BYB")));
             Assert.False(Object.ReferenceEquals(BYB.Currency, Currency.Of("BYB")));
+
+            Assert.True(BYN.Currency.Equals(Currency.Of("BYN")));
+            Assert.True(BYN.Currency == Currency.Of("BYN"));
+            Assert.True(Object.ReferenceEquals(Currency.Of("BYN"), Currency.Of("BYN")));
+            Assert.False(Object.ReferenceEquals(BYN.Currency, Currency.Of("BYN")));
 
             Assert.True(BYR.Currency.Equals(Currency.Of("BYR")));
             Assert.True(BYR.Currency == Currency.Of("BYR"));
@@ -1910,6 +1916,7 @@ namespace Narvalo.Finance
             Assert.True(BUK.Currency.ToString() != null);
             Assert.True(BWP.Currency.ToString() != null);
             Assert.True(BYB.Currency.ToString() != null);
+            Assert.True(BYN.Currency.ToString() != null);
             Assert.True(BYR.Currency.ToString() != null);
             Assert.True(BZD.Currency.ToString() != null);
             Assert.True(CAD.Currency.ToString() != null);

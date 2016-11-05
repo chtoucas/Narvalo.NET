@@ -72,6 +72,7 @@ namespace Narvalo.Finance
             "BUK",
             "BWP",
             "BYB",
+            "BYN",
             "BYR",
             "BZD",
             "CAD",
