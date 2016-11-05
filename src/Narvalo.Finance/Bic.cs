@@ -33,15 +33,6 @@ namespace Narvalo.Finance
         private readonly string _locationCode;
         private readonly string _value;
 
-        //public Bic(string institutionCode, string countryCode, string locationCode, string branchCode)
-        //    : this(
-        //          institutionCode,
-        //          countryCode,
-        //          locationCode,
-        //          branchCode,
-        //          institutionCode + countryCode + locationCode + branchCode)
-        //{ }
-
         private Bic(string institutionCode, string countryCode, string locationCode, string branchCode, string value)
         {
             Contract.Requires(institutionCode != null);
@@ -70,9 +61,7 @@ namespace Narvalo.Finance
             get
             {
                 Contract.Ensures(Contract.Result<string>() != null);
-                //Contract.Ensures(Contract.Result<string>() != null
-                //    && (Contract.Result<string>().Length == 0
-                //        || Contract.Result<string>().Length == BRANCH_LENGTH));
+                //Contract.Ensures(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
                 return _branchCode;
             }
         }
@@ -131,12 +120,43 @@ namespace Narvalo.Finance
             }
         }
 
+        public static Bic Create(string institutionCode, string countryCode, string locationCode, string branchCode)
+        {
+            Require.NotNull(institutionCode, nameof(institutionCode));
+            Require.NotNull(countryCode, nameof(countryCode));
+            Require.NotNull(locationCode, nameof(locationCode));
+            Require.NotNull(branchCode, nameof(branchCode));
+            Contract.Requires(institutionCode.Length == PREFIX_LENGTH);
+            Contract.Requires(countryCode.Length == COUNTRY_LENGTH);
+            Contract.Requires(locationCode.Length == SUFFIX_LENGTH);
+
+            if (institutionCode.Length != PREFIX_LENGTH)
+            {
+                throw new ArgumentException("XXX", nameof(institutionCode));
+            }
+            if (countryCode.Length != COUNTRY_LENGTH)
+            {
+                throw new ArgumentException("XXX", nameof(countryCode));
+            }
+            if (locationCode.Length != SUFFIX_LENGTH)
+            {
+                throw new ArgumentException("XXX", nameof(locationCode));
+            }
+
+            return new Bic(
+                institutionCode,
+                countryCode,
+                locationCode,
+                branchCode,
+                institutionCode + countryCode + locationCode + branchCode
+            );
+        }
+
         public static Bic Parse(string value)
         {
             Require.NotNull(value, nameof(value));
 
             Bic? iban = ParseCore(value, true /* throwOnError */);
-
             Contract.Assume(iban.HasValue);
 
             return iban.Value;
@@ -160,24 +180,24 @@ namespace Narvalo.Finance
         [Pure]
         public bool CheckSwiftFormat() => CheckFormat(false /* isoConformance */);
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+//#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(BranchCode != null);
-            //Contract.Invariant(BranchCode.Length == 0 || BranchCode.Length == BRANCH_LENGTH);
-            Contract.Invariant(CountryCode != null);
-            Contract.Invariant(CountryCode.Length == COUNTRY_LENGTH);
-            Contract.Invariant(InstitutionCode != null);
-            Contract.Invariant(InstitutionCode.Length == PREFIX_LENGTH);
-            Contract.Invariant(LocationCode != null);
-            Contract.Invariant(LocationCode.Length == SUFFIX_LENGTH);
-            Contract.Invariant(_value != null);
-            //Contract.Invariant(_value.Length == PARTY_LENGTH || _value.Length == BIC_LENGTH);
-        }
+//        [ContractInvariantMethod]
+//        private void ObjectInvariant()
+//        {
+//            Contract.Invariant(BranchCode != null);
+//            //Contract.Invariant(BranchCode.Length == 0 || BranchCode.Length == BRANCH_LENGTH);
+//            Contract.Invariant(CountryCode != null);
+//            //Contract.Invariant(CountryCode.Length == COUNTRY_LENGTH);
+//            Contract.Invariant(InstitutionCode != null);
+//            //Contract.Invariant(InstitutionCode.Length == PREFIX_LENGTH);
+//            Contract.Invariant(LocationCode != null);
+//            //Contract.Invariant(LocationCode.Length == SUFFIX_LENGTH);
+//            Contract.Invariant(_value != null);
+//            //Contract.Invariant(_value.Length == PARTY_LENGTH || _value.Length == BIC_LENGTH);
+//        }
 
-#endif
+//#endif
 
         // NB: We only perform basic validation on the input string.
         private static Bic? ParseCore(string value, bool throwOnError)
@@ -199,24 +219,20 @@ namespace Narvalo.Finance
             // The first four letters or digits define the institution or bank code.
             // NB: SWIFT is more restrictive than ISO as it only expects letters.
             string institutionCode = value.Substring(0, PREFIX_LENGTH);
-            Contract.Assert(institutionCode != null);
             Contract.Assert(institutionCode.Length == PREFIX_LENGTH);
 
             // The next two letters define the ISO 3166-1 alpha-2 country code.
             string countryCode = value.Substring(PREFIX_LENGTH, COUNTRY_LENGTH);
-            Contract.Assert(countryCode != null);
             Contract.Assert(countryCode.Length == COUNTRY_LENGTH);
 
             // The next two letters or digits define the location code.
             string locationCode = value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH, SUFFIX_LENGTH);
-            Contract.Assert(locationCode != null);
             Contract.Assert(locationCode.Length == SUFFIX_LENGTH);
 
             // The next three letters or digits define the branch code (optional).
             string branchCode = value.Length == PARTY_LENGTH
                 ? String.Empty
                 : value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH + SUFFIX_LENGTH, BRANCH_LENGTH);
-            Contract.Assert(branchCode != null);
             //Contract.Assert(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
 
             return new Bic(institutionCode, countryCode, locationCode, branchCode, value);

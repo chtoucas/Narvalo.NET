@@ -3,14 +3,13 @@
 namespace Narvalo.Finance.Internal
 {
     using System;
-    using System.Diagnostics.Contracts;
 
     // TODO: Argument validation.
     internal static class AsciiUtility
     {
         public static bool IsDigitOrUpperLetter(string value)
         {
-            Contract.Requires(value != null);
+            Promise.NotNull(value, "XXX");
 
             for (int i = 0; i < value.Length; i++)
             {
@@ -25,7 +24,7 @@ namespace Narvalo.Finance.Internal
 
         public static bool IsDigit(string value)
         {
-            Contract.Requires(value != null);
+            Promise.NotNull(value, "XXX");
 
             for (int i = 0; i < value.Length; i++)
             {
@@ -40,7 +39,7 @@ namespace Narvalo.Finance.Internal
 
         public static bool IsUpperLetter(string value)
         {
-            Contract.Requires(value != null);
+            Promise.NotNull(value, "XXX");
 
             for (int i = 0; i < value.Length; i++)
             {
