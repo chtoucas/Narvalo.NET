@@ -5,7 +5,7 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.Internal.CharsUtility;
+    using static Narvalo.Finance.Internal.AsciiUtility;
 
     /// <summary>
     /// Represents an International Bank Account Number (IBAN).
@@ -15,6 +15,11 @@ namespace Narvalo.Finance
     /// </remarks>
     public partial struct Iban : IEquatable<Iban>
     {
+        private const int MIN_LENGTH = 14;
+        private const int MAX_LENGTH = 34;
+        private const int COUNTRY_LENGTH = 2;
+        private const int CHECKDIGIT_LENGTH = 2;
+
         private readonly string _bban;
         private readonly string _checkDigit;
         private readonly string _countryCode;
@@ -99,7 +104,7 @@ namespace Narvalo.Finance
         {
             Contract.Requires(value != null);
 
-            if (value.Length < 14 || value.Length > 34)
+            if (value.Length < MIN_LENGTH || value.Length > MAX_LENGTH)
             {
                 if (throwOnError)
                 {
@@ -107,39 +112,28 @@ namespace Narvalo.Finance
                         "The IBAN string MUST be at most 34 characters long and at least 14 characters long.",
                         nameof(value));
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
 
-            // TODO: Do everything in one pass: validation and parsing.
-            for (int i = 0; i < value.Length; i++)
+            if (!IsDigitOrUpperLetter(value))
             {
-                var pos = (int)value[i];
-                bool valid = IsDigit(pos) || IsUpperLetter(pos);
-
-                if (!valid)
+                if (throwOnError)
                 {
-                    if (throwOnError)
-                    {
-                        throw new ArgumentException(
-                            "The IBAN string MUST only contains digits and ASCII uppercase letters.",
-                            nameof(value));
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    throw new ArgumentException(
+                        "The IBAN string MUST only contains digits and ASCII uppercase letters.",
+                        nameof(value));
                 }
+
+                return null;
             }
 
             // The first two letters define the ISO 3166-1 alpha-2 country code.
-            string countryCode = value.Substring(0, 2);
+            string countryCode = value.Substring(0, COUNTRY_LENGTH);
 
-            string checkDigit = value.Substring(2, 2);
+            string checkDigit = value.Substring(COUNTRY_LENGTH, CHECKDIGIT_LENGTH);
 
-            string bban = value.Substring(4);
+            string bban = value.Substring(COUNTRY_LENGTH + CHECKDIGIT_LENGTH);
 
             return new Iban(countryCode, checkDigit, bban, value);
         }

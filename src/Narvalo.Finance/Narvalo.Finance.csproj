@@ -90,6 +90,9 @@
     <None Include="Narvalo.Finance.Version.props">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Resources\ISO4217\schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bic.cs" />
@@ -111,7 +114,7 @@
     <Compile Include="Iban.cs" />
     <Compile Include="Internal\ContractFor.cs" />
     <Compile Include="Internal\CurrencyActivator`1.cs" />
-    <Compile Include="Internal\CharsUtility.cs" />
+    <Compile Include="Internal\AsciiUtility.cs" />
     <Compile Include="Internal\MoneyFormatter.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />
@@ -146,6 +149,8 @@
   <ItemGroup>
     <Content Include="Resources\ISO4217\20150101\A1.xml" />
     <Content Include="Resources\ISO4217\20150101\A3.xml" />
+    <Content Include="Resources\ISO4217\A1.xml" />
+    <Content Include="Resources\ISO4217\A3.xml" />
     <Content Include="Resources\ISO4217\README.txt" />
   </ItemGroup>
   <ItemGroup>
