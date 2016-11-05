@@ -295,6 +295,18 @@ Wrap white-box tests as follow:
 
 Add `Narvalo.TestCommon.EnvironmentFacts.cs` to test projects.
 
+Useful attributes
+-----------------
+
+### Usability attributes
+- `DebuggerStepThrough`
+- `DebuggerHidden`
+- `[DebuggerBrowsable(DebuggerBrowsableState.Never)]`
+- `[EditorBrowsableAttribute(EditorBrowsableState.Never)]`
+
+### Performance attributes
+- `[MethodImpl(MethodImplOptions.AggressiveInlining)]`
+
 Multi-Threading
 ---------------
 

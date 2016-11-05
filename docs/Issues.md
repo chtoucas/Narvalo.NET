@@ -107,6 +107,13 @@ Narvalo.Common
 Narvalo.Finance
 ---------------
 
+- See https://github.com/JodaOrg/joda-money,
+  http://www.ibancalculator.com/
+  https://www.theswiftcodes.com/
+- Since we generate automatically the currencies, is it possible that one currency
+  simply disappears after un update? This would be a breaking change.
+- Add a numeric representation of a currency.
+  See http://www.iso.org/iso/home/standards/currency_codes.htm
 - Decimal overloads.
 - Handle overflows.
 - Comparisons between `Money` and `Money<T>`. Or simply remove `Money`?

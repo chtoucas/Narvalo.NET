@@ -78,7 +78,7 @@ namespace Narvalo.Web.UI
         /// Initializes the provider.
         /// </summary>
         /// <param name="name">The friendly name of the provider.</param>
-        /// <param name="config">A collection of the name/value pairs representing 
+        /// <param name="config">A collection of the name/value pairs representing
         /// the provider-specific attributes specified in the configuration for this provider.</param>
         public sealed override void Initialize(string name, NameValueCollection config)
         {
@@ -112,7 +112,7 @@ namespace Narvalo.Web.UI
                 }
             }
 
-            // REVIEW: Name is initialized by base.Initialize() but Name 
+            // REVIEW: Name is initialized by base.Initialize() but Name
             // could also be overridden by a derived class.
             ////Contract.Assume(Name != null);
         }
