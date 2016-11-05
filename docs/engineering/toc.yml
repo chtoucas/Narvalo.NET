@@ -4,8 +4,6 @@
   href: project.md
 - name: Coding Rules
   href: rules.md
-- name: Performance
-  href: performance.md
 - name: Build Infrastructure
   href: build.md
 - name: Versioning

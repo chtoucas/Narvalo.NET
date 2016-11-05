@@ -60,7 +60,8 @@ Create a version property file: `{AssemblyName}.Version.props`:
 </Project>
 ```
 
-When you want to override the default version properties:
+When you want to override the default version properties,
+create a property file `{AssemblyName}.Version.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -73,8 +74,8 @@ When you want to override the default version properties:
 </Project>
 ```
 
-Assembly Information
---------------------
+Assembly Informations
+---------------------
 
 Clean up the assembly information file:
 ```csharp
@@ -117,7 +118,8 @@ Create a property file `{AssemblyName}.props` with the following content:
 Special Cases
 -------------
 
-### Portable Class Libraries
+### Portable Class Library
+
 We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
 - **Profile111** (.NET Framework 4.5, Windows 8, Windows Phone 8.1):
   * For MSBuild: `TargetFrameworkVersion=v4.5`.
@@ -138,7 +140,8 @@ See
   the list of [Portable Class Library profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview),
   the [tool](https://github.com/StephenCleary/PortableLibraryProfiles).
 
-### Desktop applications
+### Desktop application
+
 Desktop applications should include a .ini containing:
 ```
 [.NET Framework Debugging Control]
@@ -147,7 +150,8 @@ AllowOptimize=1
 ```
 Ensure that it is copied to the output directory.
 
-### Test projects
+### Test project
+
 To create a test project use the "Unit Test Project" template from Visual Studio.
 Add the following content to you local customization property file `{AssemblyName}.props`:
 ```xml
@@ -163,7 +167,8 @@ This has two consequences:
 When creating the project we should add it to the list of test projects used by OpenCover in the
 PSake file.
 
-### Sample projects
+### Sample project
+
 Add the following content to you local customization property file `{AssemblyName}.props`:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>

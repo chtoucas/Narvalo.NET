@@ -50,7 +50,7 @@ Project Layout
 - `src\NuGet`, NuGet projects.
 - `tests`, test projects.
 - `tools`, build and maintenance scripts.
-- `work`, temporary directory created during CI builds.
+- `work`, temporary directory created during cmdline builds.
 
 Solutions
 ---------
@@ -70,8 +70,7 @@ Most developments are done in C#. Three build configurations are available:
 
 All tasks are fully automated with MSBuild, PowerShell (PSake) and F# scripts.
 
-Projects
---------
+### Projects
 
 - Libraries
   * Narvalo.Cerbere

@@ -1,5 +1,5 @@
-Coding Recommandations
-======================
+Coding Rules
+============
 
 Coding Style
 ------------
@@ -62,7 +62,7 @@ Design
 #### Optional Rules
 
 - Projects should use a minimal set of references.
-- Consider making read-only property thread-safe.
+- Consider making read-only properties thread-safe.
 - Consider putting internal classes in a subnamespace named "Internal".
 - Consider putting classes intended for advanced usages or uncommon scenarios in a subnamespace
   named "Advanced". Same applies to optional extensions.
