@@ -21,7 +21,7 @@
         "dest": "api"
       },
       {
-        "files": [ "*.{md,yml}", "engineering/**/*.{md,yml}" ]
+        "files": [ "*.{md,yml}", "engineering/**/*.{md,yml}", "tutorials/**/*.{md,yml}" ]
       }
     ],
     "resource": [],

@@ -302,6 +302,7 @@ Useful attributes
 - `DebuggerStepThrough`
 - `DebuggerHidden`
 - `[DebuggerBrowsable(DebuggerBrowsableState.Never)]`
+- `[DebuggerDisplay("{{ToString()}}")]`
 - `[EditorBrowsableAttribute(EditorBrowsableState.Never)]`
 
 ### Performance attributes
