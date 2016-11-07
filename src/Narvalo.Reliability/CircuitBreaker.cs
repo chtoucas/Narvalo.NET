@@ -7,7 +7,7 @@ namespace Narvalo.Reliability
     using System.Threading;
 
     // TODO: Thread-Safety
-    public class CircuitBreaker : IReliabilitySentinel, IDisposable
+    public sealed class CircuitBreaker : IReliabilitySentinel, IDisposable
     {
         private bool _autoReset = false;
         private bool _disposed = false;
@@ -63,8 +63,16 @@ namespace Narvalo.Reliability
 
         public void Dispose()
         {
-            Dispose(true /* disposing */);
-            GC.SuppressFinalize(this);
+            if (!_disposed)
+            {
+                if (_resetTimer != null)
+                {
+                    _resetTimer.Dispose();
+                    _resetTimer = null;
+                }
+
+                _disposed = true;
+            }
         }
 
         public void Invoke(Action action)
@@ -112,28 +120,11 @@ namespace Narvalo.Reliability
 
         internal void Trip() => Trip(false /* executing */);
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                if (disposing)
-                {
-                    if (_resetTimer != null)
-                    {
-                        _resetTimer.Dispose();
-                        _resetTimer = null;
-                    }
-                }
-
-                _disposed = true;
-            }
-        }
-
         #region State management.
 
-        protected virtual void Close(bool executing)
+        private void Close(bool executing)
         {
-            Check.Condition(!executing || IsHalfOpen, "XXX");
+            Promise.Condition(!executing || IsHalfOpen);
 
             SetState(CircuitBreakerState.Closed);
 
@@ -145,9 +136,9 @@ namespace Narvalo.Reliability
             }
         }
 
-        protected virtual void HalfOpen(bool executing)
+        private void HalfOpen(bool executing)
         {
-            Check.Condition(!executing || IsOpen, "XXX");
+            Promise.Condition(!executing || IsOpen);
 
             SetState(CircuitBreakerState.HalfOpen);
 
@@ -159,9 +150,9 @@ namespace Narvalo.Reliability
             }
         }
 
-        protected virtual void Trip(bool executing)
+        private void Trip(bool executing)
         {
-            Check.Condition(!executing || !IsOpen, "XXX");
+            Promise.Condition(!executing || !IsOpen);
 
             SetState(CircuitBreakerState.Open);
 
@@ -173,7 +164,7 @@ namespace Narvalo.Reliability
             }
         }
 
-        protected virtual void OnStateChanged(CircuitBreakerStateChangedEventArgs e)
+        private void OnStateChanged(CircuitBreakerStateChangedEventArgs e)
             => StateChangedEventHandler?.Invoke(this, e);
 
         #endregion
@@ -182,7 +173,7 @@ namespace Narvalo.Reliability
 
         // Create a timer but does not start it yet.
         // http://msdn.microsoft.com/en-us/magazine/cc164015.aspx
-        protected Timer CreateTimer()
+        private Timer CreateTimer()
         {
             Contract.Ensures(Contract.Result<Timer>() != null);
 
@@ -202,9 +193,9 @@ namespace Narvalo.Reliability
         }
 
         // NB: Timeout.Infinite = new TimeSpan(-1L)
-        protected void StartTimer() => _resetTimer.Change(ResetInterval, new TimeSpan(-1L));
+        private void StartTimer() => _resetTimer.Change(ResetInterval, new TimeSpan(-1L));
 
-        protected void StopTimer() => _resetTimer.Change(Timeout.Infinite, Timeout.Infinite);
+        private void StopTimer() => _resetTimer.Change(Timeout.Infinite, Timeout.Infinite);
 
         #endregion
 
