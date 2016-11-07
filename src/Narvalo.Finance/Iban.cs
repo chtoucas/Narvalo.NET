@@ -3,9 +3,8 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.Internal.AsciiUtility;
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Represents an International Bank Account Number (IBAN).
@@ -27,12 +26,12 @@ namespace Narvalo.Finance
 
         private Iban(string countryCode, string checkDigit, string bban, string value)
         {
-            Contract.Requires(countryCode != null);
-            Contract.Requires(countryCode.Length == COUNTRY_LENGTH);
-            Contract.Requires(checkDigit != null);
-            Contract.Requires(checkDigit.Length == CHECKDIGIT_LENGTH);
-            Contract.Requires(bban != null);
-            Contract.Requires(value != null);
+            Promise.NotNull(countryCode);
+            Promise.NotNull(checkDigit);
+            Promise.NotNull(bban);
+            Promise.NotNull(value);
+            Promise.Condition(countryCode.Length == COUNTRY_LENGTH);
+            Promise.Condition(checkDigit.Length == CHECKDIGIT_LENGTH);
 
             _countryCode = countryCode;
             _checkDigit = checkDigit;
@@ -47,7 +46,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
+                Ensures(Result<string>() != null);
                 return _bban;
             }
         }
@@ -59,8 +58,8 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
-                Contract.Ensures(Contract.Result<string>().Length == CHECKDIGIT_LENGTH);
+                Ensures(Result<string>() != null);
+                Ensures(Result<string>().Length == CHECKDIGIT_LENGTH);
                 return _checkDigit;
             }
         }
@@ -72,8 +71,8 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
-                Contract.Ensures(Contract.Result<string>().Length == COUNTRY_LENGTH);
+                Ensures(Result<string>() != null);
+                Ensures(Result<string>().Length == COUNTRY_LENGTH);
                 return _countryCode;
             }
         }
@@ -83,17 +82,8 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(checkDigit, nameof(checkDigit));
             Require.NotNull(bban, nameof(bban));
-            Contract.Requires(countryCode.Length == COUNTRY_LENGTH);
-            Contract.Requires(checkDigit.Length == CHECKDIGIT_LENGTH);
-
-            if (countryCode.Length != COUNTRY_LENGTH)
-            {
-                throw new ArgumentException("XXX", nameof(countryCode));
-            }
-            if (checkDigit.Length != CHECKDIGIT_LENGTH)
-            {
-                throw new ArgumentException("XXX", nameof(checkDigit));
-            }
+            Require.Condition(countryCode.Length == COUNTRY_LENGTH, nameof(countryCode));
+            Require.Condition(checkDigit.Length == CHECKDIGIT_LENGTH, nameof(checkDigit));
 
             return new Iban(countryCode, checkDigit, bban, countryCode + checkDigit + bban);
         }
@@ -103,7 +93,7 @@ namespace Narvalo.Finance
             Require.NotNull(value, nameof(value));
 
             Iban? iban = ParseCore(value, true /* throwOnError */);
-            Contract.Assume(iban.HasValue);
+            Assume(iban.HasValue);
 
             return iban.Value;
         }
@@ -122,15 +112,14 @@ namespace Narvalo.Finance
 
         private static Iban? ParseCore(string value, bool throwOnError)
         {
-            Contract.Requires(value != null);
+            Promise.NotNull(value);
 
             if (value.Length < MIN_LENGTH || value.Length > MAX_LENGTH)
             {
                 if (throwOnError)
                 {
-                    throw new ArgumentException(
-                        "The IBAN string MUST be at most 34 characters long and at least 14 characters long.",
-                        nameof(value));
+                    throw new FormatException(
+                        "The IBAN string MUST be at most 34 characters long and at least 14 characters long.");
                 }
 
                 return null;
@@ -140,9 +129,8 @@ namespace Narvalo.Finance
             //{
             //    if (throwOnError)
             //    {
-            //        throw new ArgumentException(
-            //            "The IBAN string MUST only contains digits and ASCII uppercase letters.",
-            //            nameof(value));
+            //        throw new FormatException(
+            //            "The IBAN string MUST only contains digits and ASCII uppercase letters.");
             //    }
 
             //    return null;
@@ -150,28 +138,28 @@ namespace Narvalo.Finance
 
             // The first two letters define the ISO 3166-1 alpha-2 country code.
             string countryCode = value.Substring(0, COUNTRY_LENGTH);
-            Contract.Assert(countryCode.Length == COUNTRY_LENGTH);
+            Assert(countryCode.Length == COUNTRY_LENGTH);
 
             string checkDigit = value.Substring(COUNTRY_LENGTH, CHECKDIGIT_LENGTH);
-            Contract.Assert(checkDigit.Length == CHECKDIGIT_LENGTH);
+            Assert(checkDigit.Length == CHECKDIGIT_LENGTH);
 
             string bban = value.Substring(COUNTRY_LENGTH + CHECKDIGIT_LENGTH);
 
             return new Iban(countryCode, checkDigit, bban, value);
         }
 
-//#if CONTRACTS_FULL // Contract Class and Object Invariants.
+        //#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-//        [ContractInvariantMethod]
-//        private void ObjectInvariant()
-//        {
-//            Contract.Invariant(_bban != null);
-//            Contract.Invariant(_checkDigit != null);
-//            Contract.Invariant(_countryCode != null);
-//            Contract.Invariant(_value != null);
-//        }
+        //        [System.Diagnostics.Contracts.ContractInvariantMethod]
+        //        private void ObjectInvariant()
+        //        {
+        //            Invariant(_bban != null);
+        //            Invariant(_checkDigit != null);
+        //            Invariant(_countryCode != null);
+        //            Invariant(_value != null);
+        //        }
 
-//#endif
+        //#endif
     }
 
     // Implements the IEquatable<Iban> interface.

@@ -2,9 +2,9 @@
 
 namespace Narvalo.Finance
 {
-    using System.Diagnostics.Contracts;
-
     using Narvalo.Finance.Internal;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public abstract class CurrencyFactory
     {
@@ -23,7 +23,7 @@ namespace Narvalo.Finance
         public Currency GetCurrency(string code)
         {
             ContractFor.CurrencyCode(code);
-            Contract.Ensures(Contract.Result<Currency>() != null);
+            Ensures(Result<Currency>() != null);
 
             if (!IsValid(code))
             {

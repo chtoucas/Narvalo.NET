@@ -9,6 +9,10 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
+    using static System.Diagnostics.Contracts.Contract;
+
+    // FIXME: Use int's to represent the amount and, later on, create a BigMoney struct based
+    // on BigRational (BigDecimal?) for arbitrary-precision calculations.
     [DebuggerDisplay("{{ToString()}}")]
     public partial struct Money
         : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
@@ -30,8 +34,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
-
+                Ensures(Result<Currency>() != null);
                 return _currency;
             }
         }
@@ -48,10 +51,10 @@ namespace Narvalo.Finance
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [ContractInvariantMethod]
+        [System.Diagnostics.Contracts.ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(_currency != null);
+            Invariant(_currency != null);
         }
 
 #endif

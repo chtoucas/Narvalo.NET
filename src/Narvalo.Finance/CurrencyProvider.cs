@@ -2,7 +2,7 @@
 
 namespace Narvalo.Finance
 {
-    using System.Diagnostics.Contracts;
+    using static System.Diagnostics.Contracts.Contract;
 
     public sealed class CurrencyProvider
     {
@@ -21,8 +21,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<CurrencyFactory>() != null);
-
+                Ensures(Result<CurrencyFactory>() != null);
                 return s_Instance.InnerCurrent;
             }
         }
@@ -31,15 +30,14 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<CurrencyFactory>() != null);
-
+                Ensures(Result<CurrencyFactory>() != null);
                 return _factory;
             }
         }
 
         public static void SetFactory(CurrencyFactory factory)
         {
-            Contract.Requires(factory != null);
+            Promise.NotNull(factory);
 
             s_Instance.InnerSetFactory(factory);
         }
@@ -53,10 +51,10 @@ namespace Narvalo.Finance
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [ContractInvariantMethod]
+        [System.Diagnostics.Contracts.ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(_factory != null);
+            Invariant(_factory != null);
         }
 
 #endif

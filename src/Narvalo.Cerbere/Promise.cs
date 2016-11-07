@@ -34,6 +34,42 @@ namespace Narvalo
     [DebuggerStepThrough]
     public static class Promise
     {
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void Condition(bool testCondition)
+        {
+            Contract.Requires(testCondition);
+            Debug.Assert(testCondition);
+        }
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void NotNull<T>(T value) where T : class
+        {
+            Contract.Requires(value != null);
+            Debug.Assert(value != null);
+        }
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void NotNullOrEmpty(string value)
+        {
+            Contract.Requires(!String.IsNullOrEmpty(value));
+            Debug.Assert(!String.IsNullOrEmpty(value));
+        }
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void NotNullOrWhiteSpace(string value)
+        {
+            Contract.Requires(!String.IsNullOrWhiteSpace(value));
+            Debug.Assert(!String.IsNullOrWhiteSpace(value));
+        }
+
         /// <summary>
         /// Promises and checks that a condition holds.
         /// </summary>
@@ -66,7 +102,7 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void NotNull<T>(T value, string rationale)
+        public static void NotNull<T>(T value, string rationale) where T : class
         {
             Contract.Requires(value != null);
 

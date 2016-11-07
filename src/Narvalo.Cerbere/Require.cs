@@ -23,6 +23,17 @@ namespace Narvalo
     [DebuggerStepThrough]
     public static class Require
     {
+        [ContractArgumentValidator]
+        public static void Condition(bool testCondition, string parameterName)
+        {
+            if (!testCondition)
+            {
+                throw new ArgumentException("XXX", parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
         /// <summary>
         /// Validates that the specified object is not <see langword="null"/>.
         /// Meant to be used inside an extension method to validate the first parameter which

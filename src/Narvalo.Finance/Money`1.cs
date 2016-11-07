@@ -5,7 +5,6 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
@@ -22,18 +21,16 @@ namespace Narvalo.Finance
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0m);
 
-        private readonly decimal _amount;
-
         public Money(decimal amount)
         {
-            _amount = amount;
+            Amount = amount;
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static Money<TCurrency> Zero { get { return s_Zero; } }
 
-        public decimal Amount { get { return _amount; } }
+        public decimal Amount { get; }
 
         public static explicit operator Money<TCurrency>(Money value)
         {
@@ -54,14 +51,11 @@ namespace Narvalo.Finance
     /// </content>
     public partial struct Money<TCurrency>
     {
-        public static bool operator ==(Money<TCurrency> left, Money<TCurrency> right)
-            => left.Equals(right);
+        public static bool operator ==(Money<TCurrency> left, Money<TCurrency> right) => left.Equals(right);
 
-        public static bool operator !=(Money<TCurrency> left, Money<TCurrency> right)
-            => !left.Equals(right);
+        public static bool operator !=(Money<TCurrency> left, Money<TCurrency> right) => !left.Equals(right);
 
-        public bool Equals(Money<TCurrency> other)
-            => Amount == other.Amount;
+        public bool Equals(Money<TCurrency> other) => Amount == other.Amount;
 
         public override bool Equals(object obj)
         {
@@ -195,7 +189,7 @@ namespace Narvalo.Finance
     {
         public static Money<TCurrency> operator /(Money<TCurrency> money, decimal divisor)
         {
-            Contract.Requires(divisor != 0m);
+            Promise.Condition(divisor != 0m);
 
             return money.Divide(divisor);
         }
@@ -218,7 +212,7 @@ namespace Narvalo.Finance
     {
         public static Money<TCurrency> operator %(Money<TCurrency> money, decimal divisor)
         {
-            Contract.Requires(divisor != 0m);
+            Promise.Condition(divisor != 0m);
 
             return money.Remainder(divisor);
         }

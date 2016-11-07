@@ -18,8 +18,8 @@ namespace Narvalo.Finance.Internal
             // Contract.Requires(
             //    Contract.ForAll(code.ToCharArray(), c => c >= 65 && c <= 90),
             //    "The code MUST be all CAPS and ASCII.");
-            Contract.Requires(code != null);
-            Contract.Requires(code.Length == 3, "A currency code MUST be composed of exactly 3 letters.");
+            Promise.NotNull(code);
+            Promise.Condition(code.Length == 3, "A currency code MUST be composed of exactly 3 letters.");
         }
     }
 }

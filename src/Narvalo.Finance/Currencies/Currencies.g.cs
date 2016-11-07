@@ -18,7 +18,7 @@ using global::System.Diagnostics.CodeAnalysis;
 
 namespace Narvalo.Finance.Currencies
 {
-    using System.Diagnostics.Contracts;
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Represents the currency unit for the "Andorran Peseta".
@@ -46,7 +46,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -78,7 +78,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -110,7 +110,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -142,7 +142,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -174,7 +174,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -206,7 +206,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -238,7 +238,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -270,7 +270,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -302,7 +302,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -334,7 +334,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -366,7 +366,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -398,7 +398,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -430,7 +430,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -462,7 +462,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -494,7 +494,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -526,7 +526,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -558,7 +558,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -590,7 +590,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -622,7 +622,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -654,7 +654,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -686,7 +686,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -718,7 +718,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -750,7 +750,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -782,7 +782,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -814,7 +814,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -846,7 +846,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -878,7 +878,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -910,7 +910,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -942,7 +942,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -974,7 +974,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1006,7 +1006,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1038,7 +1038,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1070,7 +1070,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1102,7 +1102,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1134,7 +1134,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1166,7 +1166,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1198,7 +1198,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1230,7 +1230,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1262,7 +1262,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1294,7 +1294,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1326,7 +1326,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1358,7 +1358,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1390,7 +1390,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1422,7 +1422,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1454,7 +1454,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1486,7 +1486,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1518,7 +1518,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1550,7 +1550,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1582,7 +1582,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1614,7 +1614,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1646,7 +1646,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1678,7 +1678,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1710,7 +1710,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1742,7 +1742,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1774,7 +1774,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1806,7 +1806,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1838,7 +1838,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1870,7 +1870,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1902,7 +1902,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1934,7 +1934,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1966,7 +1966,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -1998,7 +1998,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2030,7 +2030,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2062,7 +2062,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2094,7 +2094,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2126,7 +2126,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2158,7 +2158,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2190,7 +2190,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2222,7 +2222,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2254,7 +2254,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2286,7 +2286,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2318,7 +2318,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2350,7 +2350,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2382,7 +2382,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2414,7 +2414,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2446,7 +2446,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2478,7 +2478,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2510,7 +2510,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2542,7 +2542,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2574,7 +2574,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2606,7 +2606,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2638,7 +2638,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2670,7 +2670,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2702,7 +2702,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2734,7 +2734,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2766,7 +2766,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2798,7 +2798,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2830,7 +2830,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2862,7 +2862,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2894,7 +2894,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2926,7 +2926,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2958,7 +2958,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -2990,7 +2990,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3022,7 +3022,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3054,7 +3054,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3086,7 +3086,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3118,7 +3118,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3150,7 +3150,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3182,7 +3182,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3214,7 +3214,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3246,7 +3246,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3278,7 +3278,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3310,7 +3310,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3342,7 +3342,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3374,7 +3374,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3406,7 +3406,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3438,7 +3438,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3470,7 +3470,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3502,7 +3502,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3534,7 +3534,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3566,7 +3566,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3598,7 +3598,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3630,7 +3630,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3662,7 +3662,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3694,7 +3694,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3726,7 +3726,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3758,7 +3758,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3790,7 +3790,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3822,7 +3822,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3854,7 +3854,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3886,7 +3886,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3918,7 +3918,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3950,7 +3950,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -3982,7 +3982,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4014,7 +4014,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4046,7 +4046,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4078,7 +4078,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4110,7 +4110,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4142,7 +4142,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4174,7 +4174,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4206,7 +4206,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4238,7 +4238,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4270,7 +4270,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4302,7 +4302,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4334,7 +4334,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4366,7 +4366,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4398,7 +4398,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4430,7 +4430,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4462,7 +4462,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4494,7 +4494,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4526,7 +4526,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4558,7 +4558,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4590,7 +4590,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4622,7 +4622,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4654,7 +4654,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4686,7 +4686,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4718,7 +4718,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4750,7 +4750,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4782,7 +4782,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4814,7 +4814,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4846,7 +4846,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4878,7 +4878,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4910,7 +4910,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4942,7 +4942,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -4974,7 +4974,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5006,7 +5006,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5038,7 +5038,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5070,7 +5070,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5102,7 +5102,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5134,7 +5134,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5166,7 +5166,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5198,7 +5198,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5230,7 +5230,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5262,7 +5262,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5294,7 +5294,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5326,7 +5326,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5358,7 +5358,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5390,7 +5390,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5422,7 +5422,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5454,7 +5454,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5486,7 +5486,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5518,7 +5518,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5550,7 +5550,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5582,7 +5582,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5614,7 +5614,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5646,7 +5646,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5678,7 +5678,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5710,7 +5710,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5742,7 +5742,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5774,7 +5774,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5806,7 +5806,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5838,7 +5838,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5870,7 +5870,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5902,7 +5902,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5934,7 +5934,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5966,7 +5966,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -5998,7 +5998,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6030,7 +6030,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6062,7 +6062,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6094,7 +6094,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6126,7 +6126,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6158,7 +6158,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6190,7 +6190,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6222,7 +6222,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6254,7 +6254,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6286,7 +6286,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6318,7 +6318,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6350,7 +6350,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6382,7 +6382,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6414,7 +6414,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6446,7 +6446,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6478,7 +6478,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6510,7 +6510,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6542,7 +6542,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6574,7 +6574,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6606,7 +6606,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6638,7 +6638,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6670,7 +6670,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6702,7 +6702,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6734,7 +6734,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6766,7 +6766,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6798,7 +6798,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6830,7 +6830,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6862,7 +6862,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6894,7 +6894,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6926,7 +6926,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6958,7 +6958,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -6990,7 +6990,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7022,7 +7022,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7054,7 +7054,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7086,7 +7086,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7118,7 +7118,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7150,7 +7150,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7182,7 +7182,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7214,7 +7214,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7246,7 +7246,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7278,7 +7278,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7310,7 +7310,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7342,7 +7342,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7374,7 +7374,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7406,7 +7406,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7438,7 +7438,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7470,7 +7470,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7502,7 +7502,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7534,7 +7534,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7566,7 +7566,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7598,7 +7598,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7630,7 +7630,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7662,7 +7662,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7694,7 +7694,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7726,7 +7726,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7758,7 +7758,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7790,7 +7790,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7822,7 +7822,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7854,7 +7854,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7886,7 +7886,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7918,7 +7918,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7950,7 +7950,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -7982,7 +7982,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8014,7 +8014,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8046,7 +8046,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8078,7 +8078,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8110,7 +8110,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8142,7 +8142,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8174,7 +8174,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8206,7 +8206,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8238,7 +8238,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8270,7 +8270,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8302,7 +8302,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8334,7 +8334,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8366,7 +8366,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8398,7 +8398,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8430,7 +8430,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8462,7 +8462,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8494,7 +8494,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8526,7 +8526,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8558,7 +8558,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8590,7 +8590,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8622,7 +8622,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8654,7 +8654,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8686,7 +8686,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8718,7 +8718,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8750,7 +8750,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8782,7 +8782,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8814,7 +8814,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8846,7 +8846,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8878,7 +8878,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8910,7 +8910,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8942,7 +8942,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -8974,7 +8974,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9006,7 +9006,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9038,7 +9038,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9070,7 +9070,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9102,7 +9102,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9134,7 +9134,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9166,7 +9166,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9198,7 +9198,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9230,7 +9230,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9262,7 +9262,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9294,7 +9294,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9326,7 +9326,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9358,7 +9358,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9390,7 +9390,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9422,7 +9422,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9454,7 +9454,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9486,7 +9486,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9518,7 +9518,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9550,7 +9550,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9582,7 +9582,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9614,7 +9614,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }
@@ -9646,7 +9646,7 @@ namespace Narvalo.Finance.Currencies
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
                 return s_Instance;
             }
         }

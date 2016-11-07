@@ -10,6 +10,8 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Currencies;
     using Narvalo.Finance.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <summary>
     /// Represents a currency unit such as Euro or US Dollar.
     /// </summary>
@@ -48,8 +50,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
-
+                Ensures(Result<string>() != null);
                 return _code;
             }
         }
@@ -66,10 +67,10 @@ namespace Narvalo.Finance
         {
             Require.NotNull(code, nameof(code));
             ContractFor.CurrencyCode(code);
-            Contract.Ensures(Contract.Result<Currency>() != null);
+            Ensures(Result<Currency>() != null);
 
             var currency = s_Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency);
-            Contract.Assume(currency != null);
+            Assume(currency != null);
 
             return currency;
         }
@@ -84,11 +85,11 @@ namespace Narvalo.Finance
         public static Currency OfRegion(RegionInfo regionInfo)
         {
             Require.NotNull(regionInfo, nameof(regionInfo));
-            Contract.Ensures(Contract.Result<Currency>() != null);
+            Ensures(Result<Currency>() != null);
 
             var code = regionInfo.ISOCurrencySymbol;
-            Contract.Assume(code != null);
-            Contract.Assume(code.Length == 3);
+            Assume(code != null);
+            Assume(code.Length == 3);
 
             return Of(code);
         }
@@ -99,7 +100,7 @@ namespace Narvalo.Finance
         /// <returns>A string containing the code of the currency.</returns>
         public override string ToString()
         {
-            Contract.Ensures(Contract.Result<string>() != null);
+            Ensures(Result<string>() != null);
 
             return Code;
         }
@@ -120,7 +121,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return XXX.Currency;
             }
@@ -136,7 +137,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return XTS.Currency;
             }
@@ -150,7 +151,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return EUR.Currency;
             }
@@ -164,7 +165,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return GBP.Currency;
             }
@@ -178,7 +179,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return CHF.Currency;
             }
@@ -192,7 +193,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return USD.Currency;
             }
@@ -206,7 +207,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return JPY.Currency;
             }
@@ -221,7 +222,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return XAU.Currency;
             }
@@ -236,7 +237,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return XPD.Currency;
             }
@@ -251,7 +252,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return XPT.Currency;
             }
@@ -266,7 +267,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Contract.Ensures(Contract.Result<Currency>() != null);
+                Ensures(Result<Currency>() != null);
 
                 return XAG.Currency;
             }
@@ -334,11 +335,11 @@ namespace Narvalo.Finance
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [ContractInvariantMethod]
+        [System.Diagnostics.Contracts.ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(_code != null);
-            Contract.Invariant(_code.Length == 3);
+            Invariant(_code != null);
+            Invariant(_code.Length == 3);
         }
 
 #endif
