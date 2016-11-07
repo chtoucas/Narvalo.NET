@@ -2,8 +2,6 @@
   href: index.md
 - name: Adding or Configuring a Project
   href: project.md
-- name: Coding Rules
-  href: rules.md
 - name: Build Infrastructure
   href: build.md
 - name: Versioning

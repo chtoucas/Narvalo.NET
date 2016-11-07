@@ -2,7 +2,6 @@ Overview
 ========
 
 - [Adding or Configuring a Project](project.md)
-- [Coding Rules](rules.md)
 - [Build Infrastructure](build.md)
 - [Versioning](versioning.md)
 - [Developer Operations](devops.md)
