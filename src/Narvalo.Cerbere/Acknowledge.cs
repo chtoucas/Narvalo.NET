@@ -56,7 +56,7 @@ namespace Narvalo
         /// <summary>
         /// Asserts that a point of execution is unreachable.
         /// </summary>
-        /// <remarks>Adapted from <see cref="!:http://blogs.msdn.com/b/francesco/archive/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten.aspx"/>.</remarks>
+        /// <remarks>Adapted from <see cref="!:https://blogs.msdn.microsoft.com/francesco/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten/"/>.</remarks>
         /// <example>
         /// <code>
         /// switch (myEnum)
@@ -82,7 +82,7 @@ namespace Narvalo
         /// <summary>
         /// Asserts that a point of execution is unreachable.
         /// </summary>
-        /// <remarks>Adapted from <see cref="!:http://blogs.msdn.com/b/francesco/archive/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten.aspx"/>.</remarks>
+        /// <remarks>Adapted from <see cref="!:https://blogs.msdn.microsoft.com/francesco/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten/"/>.</remarks>
         /// <example>
         /// <code>
         /// switch (myEnum)

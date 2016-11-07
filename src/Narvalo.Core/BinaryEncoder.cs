@@ -43,6 +43,7 @@ namespace Narvalo
 
         #region Z-Base32
 
+        // TODO: I borrowed this somewhere, need a reference.
         public static string ToZBase32String(byte[] value)
         {
             Require.NotNull(value, "value");

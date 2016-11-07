@@ -23,7 +23,7 @@ namespace Narvalo
     /// Only the first two will survive in retail builds.</para>
     /// <para>Each one serves a different purpose.</para>
     /// <para>For parameter validation of public methods, use <see cref="Require"/>
-    /// and <see cref="Guard"/> which provides support for conditions not yet handled
+    /// and also <see cref="Guard"/> which provides support for conditions not yet handled
     /// by Code Contracts.</para>
     /// <para>For parameter validation of private methods, use <see cref="Promise"/>.</para>
     /// <para>For parameter validation of protected overridden methods in sealed classes,
