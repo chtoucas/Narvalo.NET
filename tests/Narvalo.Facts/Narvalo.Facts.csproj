@@ -103,6 +103,7 @@
       <Link>TestCommon\IssueAttribute.cs</Link>
     </Compile>
     <Compile Include="AcknowledgeFacts.cs" />
+    <Compile Include="Finance\BicFacts.cs" />
     <Compile Include="Fx\Samples\Comonad.g.cs">
       <DependentUpon>Comonad.tt</DependentUpon>
       <AutoGen>True</AutoGen>

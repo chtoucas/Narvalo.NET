@@ -34,17 +34,17 @@ namespace Narvalo.Finance
         public static void Aliases_AreNotNull()
         {
             // Act & Assert
-            Assert.True(Currency.None != null);
-            Assert.True(Currency.Test != null);
-            Assert.True(Currency.Euro != null);
-            Assert.True(Currency.PoundSterling != null);
-            Assert.True(Currency.SwissFranc != null);
-            Assert.True(Currency.UnitedStatesDollar != null);
-            Assert.True(Currency.Yen != null);
-            Assert.True(Currency.Gold != null);
-            Assert.True(Currency.Palladium != null);
-            Assert.True(Currency.Platinum != null);
-            Assert.True(Currency.Silver != null);
+            Assert.NotNull(Currency.None);
+            Assert.NotNull(Currency.Test);
+            Assert.NotNull(Currency.Euro);
+            Assert.NotNull(Currency.PoundSterling);
+            Assert.NotNull(Currency.SwissFranc);
+            Assert.NotNull(Currency.UnitedStatesDollar);
+            Assert.NotNull(Currency.Yen);
+            Assert.NotNull(Currency.Gold);
+            Assert.NotNull(Currency.Palladium);
+            Assert.NotNull(Currency.Platinum);
+            Assert.NotNull(Currency.Silver);
         }
     }
 }
