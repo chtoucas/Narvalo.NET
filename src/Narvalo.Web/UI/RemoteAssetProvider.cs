@@ -50,7 +50,7 @@ namespace Narvalo.Web.UI
 
         protected override void InitializeCustom(NameValueCollection config)
         {
-            InitializeCustomCore(config);
+            Promise.NotNull(config);
 
             _baseUri = config.MayGetSingle(BASE_URI_KEY)
                 .Bind(_ => ParseTo.Uri(_, UriKind.Absolute))
@@ -103,7 +103,7 @@ namespace Narvalo.Web.UI
             Contract.Requires(baseIntermediatePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
-            // Here we can be sure that _baseUri is not null and is absolute; otherwise an exception 
+            // Here we can be sure that _baseUri is not null and is absolute; otherwise an exception
             // would have been thrown in InitializeCustom().
             Contract.Assume(_baseUri != null);
 

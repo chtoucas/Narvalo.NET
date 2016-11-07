@@ -79,7 +79,7 @@ namespace Narvalo.Web.UI
 
         protected override void InitializeCustom(NameValueCollection config)
         {
-            InitializeCustomCore(config);
+            Promise.NotNull(config);
 
             var fontsPath = config.MayGetSingle(FONTS_PATH_KEY);
             var imagesPath = config.MayGetSingle(IMAGES_PATH_KEY);
