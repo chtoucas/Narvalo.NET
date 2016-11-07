@@ -4,12 +4,11 @@ namespace Narvalo.Finance.Internal
 {
     using System;
 
-    // TODO: Argument validation.
-    internal static class AsciiUtility
+    internal static class AsciiHelpers
     {
         public static bool IsDigitOrUpperLetter(string value)
         {
-            Promise.NotNull(value, "XXX");
+            Promise.NotNull(value, "Prove that any call to this internal method is guarded upstream.");
 
             for (int i = 0; i < value.Length; i++)
             {
@@ -24,7 +23,7 @@ namespace Narvalo.Finance.Internal
 
         public static bool IsDigit(string value)
         {
-            Promise.NotNull(value, "XXX");
+            Promise.NotNull(value, "Prove that any call to this internal method is guarded upstream.");
 
             for (int i = 0; i < value.Length; i++)
             {
@@ -39,7 +38,7 @@ namespace Narvalo.Finance.Internal
 
         public static bool IsUpperLetter(string value)
         {
-            Promise.NotNull(value, "XXX");
+            Promise.NotNull(value, "Prove that any call to this internal method is guarded upstream.");
 
             for (int i = 0; i < value.Length; i++)
             {
@@ -52,10 +51,10 @@ namespace Narvalo.Finance.Internal
             return true;
         }
 
-        private static bool IsDigit(Char c) => c >= '0' && c <= '9';
+        private static bool IsDigit(Char ch) => ch >= '0' && ch <= '9';
 
-        private static bool IsDigitOrUpperLetter(Char c) => IsDigit(c) || IsUpperLetter(c);
+        private static bool IsDigitOrUpperLetter(Char ch) => IsDigit(ch) || IsUpperLetter(ch);
 
-        private static bool IsUpperLetter(Char c) => c >= 'A' && c <= 'Z';
+        private static bool IsUpperLetter(Char ch) => ch >= 'A' && ch <= 'Z';
     }
 }
