@@ -21,6 +21,8 @@ namespace Narvalo.Fx
     using global::Narvalo;
     using Narvalo.Fx.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <content>
     /// Provides a set of static methods for <see cref="Identity{T}" />.
     /// </content>
@@ -98,7 +100,7 @@ namespace Narvalo.Fx
             Func<T, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<Identity<T>, Identity<TResult>>>() != null);
+            Ensures(Result<Func<Identity<T>, Identity<TResult>>>() != null);
 
             return m =>
             {
@@ -118,7 +120,7 @@ namespace Narvalo.Fx
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<TResult>>>() != null);
+            Ensures(Result<Func<Identity<T1>, Identity<T2>, Identity<TResult>>>() != null);
 
             return (m1, m2) =>
             {
@@ -138,7 +140,7 @@ namespace Narvalo.Fx
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>>() != null);
+            Ensures(Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>>() != null);
 
             return (m1, m2, m3) =>
             {
@@ -159,7 +161,7 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>>() != null);
+            Ensures(Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>>() != null);
 
             return (m1, m2, m3, m4) =>
             {
@@ -180,7 +182,7 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, T5, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>>() != null);
+            Ensures(Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>>() != null);
 
             return (m1, m2, m3, m4, m5) =>
             {
@@ -427,7 +429,7 @@ namespace Narvalo.Fx
             Action action)
             /* T4: C# indent */
         {
-            Contract.Requires(action != null);
+            Demand.NotNull(action);
 
             return @this.When(!predicate, action);
         }
@@ -460,8 +462,8 @@ namespace Narvalo.Fx
             this Func<TSource, Identity<TResult>> @this,
             IEnumerable<TSource> seq)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(seq != null);
+            Demand.Object(@this);
+            Demand.NotNull(seq);
 
             return seq.ForEachCore(@this);
         }
@@ -475,7 +477,7 @@ namespace Narvalo.Fx
             Identity<TSource> value)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             /* T4: C# indent */
 
             return value.Bind(@this);
@@ -490,8 +492,8 @@ namespace Narvalo.Fx
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Func<TSource, Identity<TResult>>>() != null);
+            Demand.NotNull(funM);
+            Ensures(Result<Func<TSource, Identity<TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -504,9 +506,9 @@ namespace Narvalo.Fx
             Func<TSource, Identity<TMiddle>> funM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Require.NotNull(funM, nameof(funM));
-            Contract.Ensures(Contract.Result<Func<TSource, Identity<TResult>>>() != null);
+            Ensures(Result<Func<TSource, Identity<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -518,6 +520,8 @@ namespace Narvalo.Fx
 namespace Narvalo.Fx
 {
     using System.Diagnostics.Contracts;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     // Implements core Comonad methods.
     public static partial class Identity
@@ -551,6 +555,8 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Identity{S}"/>.
     /// </content>
@@ -565,7 +571,7 @@ namespace Narvalo.Fx
         public static Identity<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Identity<TSource>> @this)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.CollectCore();
         }
@@ -585,6 +591,8 @@ namespace Narvalo.Fx.Advanced
     using Narvalo.Fx;
     using Narvalo.Fx.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
@@ -600,8 +608,8 @@ namespace Narvalo.Fx.Advanced
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<TResult>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
 
             return @this.ForEachCore(funM);
         }
@@ -620,9 +628,9 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, Identity<bool>> predicateM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(predicateM != null);
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(predicateM);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -636,8 +644,8 @@ namespace Narvalo.Fx.Advanced
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -650,9 +658,9 @@ namespace Narvalo.Fx.Advanced
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Identity<TResult>> resultSelectorM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(second != null);
-            Contract.Requires(resultSelectorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(second);
+            Demand.NotNull(resultSelectorM);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -667,8 +675,8 @@ namespace Narvalo.Fx.Advanced
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -683,8 +691,8 @@ namespace Narvalo.Fx.Advanced
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -694,8 +702,8 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.ReduceCore(accumulatorM);
         }
@@ -705,8 +713,8 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -725,9 +733,9 @@ namespace Narvalo.Fx.Advanced
             Func<Identity<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Requires(predicate != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Demand.NotNull(predicate);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -741,9 +749,9 @@ namespace Narvalo.Fx.Advanced
             Func<Identity<TSource>, bool> predicate)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Requires(predicate != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Demand.NotNull(predicate);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -764,6 +772,8 @@ namespace Narvalo.Fx.Internal
     using global::Narvalo.Fx; // Required for EmptyIfNull().
     using Narvalo.Fx.Advanced;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
@@ -776,7 +786,7 @@ namespace Narvalo.Fx.Internal
         internal static Identity<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Identity<TSource>> @this)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             var seed = Identity.Return(Enumerable.Empty<TSource>());
             Func<Identity<IEnumerable<TSource>>, Identity<TSource>, Identity<IEnumerable<TSource>>> fun
@@ -811,8 +821,8 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<TResult>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
 
             return @this.Select(funM).EmptyIfNull().Collect();
         }
@@ -827,7 +837,7 @@ namespace Narvalo.Fx.Internal
         {
             Require.Object(@this);
             Require.NotNull(predicateM, nameof(predicateM));
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -857,8 +867,8 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
 
             var m = @this.Select(funM).EmptyIfNull().Collect();
 
@@ -881,8 +891,8 @@ namespace Narvalo.Fx.Internal
         {
             Require.NotNull(resultSelectorM, nameof(resultSelectorM));
 
-            Acknowledge.Object(@this);
-            Contract.Requires(second != null);
+            Demand.Object(@this);
+            Demand.NotNull(second);
 
             Func<TFirst, TSecond, Identity<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -922,8 +932,8 @@ namespace Narvalo.Fx.Internal
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
@@ -963,8 +973,8 @@ namespace Narvalo.Fx.Internal
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }

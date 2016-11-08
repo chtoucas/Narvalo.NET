@@ -14,6 +14,8 @@ namespace Narvalo.Fx.Samples
 {
     using System.Diagnostics.Contracts;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     // Implements core Comonad methods.
     public static partial class Comonad
     {
@@ -23,7 +25,7 @@ namespace Narvalo.Fx.Samples
         public static T Extract<T>(Comonad<T> monad)
             /* T4: C# indent */
         {
-            Contract.Requires(monad != null);
+            Demand.NotNull(monad);
 
             return Comonad<T>.ε(monad);
         }
@@ -34,7 +36,7 @@ namespace Narvalo.Fx.Samples
         public static Comonad<Comonad<T>> Duplicate<T>(Comonad<T> monad)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Comonad<Comonad<T>>>() != null);
+            Ensures(Result<Comonad<Comonad<T>>>() != null);
 
             return Comonad<T>.δ(monad);
         }

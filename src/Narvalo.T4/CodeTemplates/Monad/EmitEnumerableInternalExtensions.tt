@@ -23,10 +23,10 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+            Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
 <#+ } #>
 
             return @this.Select(funM).EmptyIfNull().Collect();
@@ -43,7 +43,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(true); #>
             Require.NotNull(predicateM, nameof(predicateM));
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -88,10 +88,10 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
 <#+ if (PostMapEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+            Ensures(Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 <#+ } #>
 
             var m = @this.Select(funM).EmptyIfNull().Collect();
@@ -115,10 +115,10 @@ public partial class MonadTemplate
         {
             Require.NotNull(resultSelectorM, nameof(resultSelectorM));
 
-            Acknowledge.Object(@this);
-            Contract.Requires(second != null);
+            Demand.Object(@this);
+            Demand.NotNull(second);
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+            Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
 <#+ } #>
 
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector
@@ -142,7 +142,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(true); #>
             Require.NotNull(accumulatorM, nameof(accumulatorM));
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+            Ensures(Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
             <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
@@ -170,11 +170,11 @@ public partial class MonadTemplate
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 <#+ // "Fold" can not guarantee non null return value. #>
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+            Ensures(Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
@@ -190,7 +190,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(true); #>
             Require.NotNull(accumulatorM, nameof(accumulatorM));
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             using (var iter = @this.GetEnumerator())
@@ -225,10 +225,10 @@ public partial class MonadTemplate
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
@@ -247,7 +247,7 @@ public partial class MonadTemplate
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+            Ensures(Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
             <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
@@ -282,7 +282,7 @@ public partial class MonadTemplate
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             using (var iter = @this.GetEnumerator())

@@ -21,10 +21,10 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+            Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
 <#+ } #>
 
             return @this.ForEachCore(funM);
@@ -45,9 +45,9 @@ public partial class MonadTemplate
             Func<TSource, <#= Name #><bool>> predicateM)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(predicateM != null);
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(predicateM);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -62,10 +62,10 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+            Ensures(Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 <#+ } #>
 
             return @this.MapAndUnzipCore(funM);
@@ -79,11 +79,11 @@ public partial class MonadTemplate
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(second != null);
-            Contract.Requires(resultSelectorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(second);
+            Demand.NotNull(resultSelectorM);
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+            Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
 <#+ } #>
 
             return @this.ZipCore(second, resultSelectorM);
@@ -100,10 +100,10 @@ public partial class MonadTemplate
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+            Ensures(Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
             return @this.FoldCore(seed, accumulatorM);
@@ -119,10 +119,10 @@ public partial class MonadTemplate
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+            Ensures(Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
             return @this.FoldBackCore(seed, accumulatorM);
@@ -133,10 +133,10 @@ public partial class MonadTemplate
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             return @this.ReduceCore(accumulatorM);
@@ -147,10 +147,10 @@ public partial class MonadTemplate
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             return @this.ReduceBackCore(accumulatorM);
@@ -170,11 +170,11 @@ public partial class MonadTemplate
             Func<<#= Name #><TAccumulate>, bool> predicate)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Requires(predicate != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Demand.NotNull(predicate);
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TAccumulate>>() != null);
+            Ensures(Result<<#= Name #><TAccumulate>>() != null);
 <#+ } #>
 
             return @this.FoldCore(seed, accumulatorM, predicate);
@@ -189,11 +189,11 @@ public partial class MonadTemplate
             Func<<#= Name #><TSource>, bool> predicate)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Requires(predicate != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Demand.NotNull(predicate);
 <#+ if (IsNullable && HasZero) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             return @this.ReduceCore(accumulatorM, predicate);

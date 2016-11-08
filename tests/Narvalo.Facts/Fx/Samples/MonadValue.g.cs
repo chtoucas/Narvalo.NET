@@ -21,6 +21,8 @@ namespace Narvalo.Fx.Samples
     using global::Narvalo;
     using Narvalo.Fx.Samples.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <content>
     /// Provides a set of static methods for <see cref="MonadValue{T}" />.
     /// </content>
@@ -126,7 +128,7 @@ namespace Narvalo.Fx.Samples
             where T : struct
             where TResult : struct
         {
-            Contract.Ensures(Contract.Result<Func<MonadValue<T>, MonadValue<TResult>>>() != null);
+            Ensures(Result<Func<MonadValue<T>, MonadValue<TResult>>>() != null);
 
             return m =>
             {
@@ -148,7 +150,7 @@ namespace Narvalo.Fx.Samples
             where T2 : struct
             where TResult : struct
         {
-            Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<TResult>>>() != null);
+            Ensures(Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<TResult>>>() != null);
 
             return (m1, m2) =>
             {
@@ -171,7 +173,7 @@ namespace Narvalo.Fx.Samples
             where T3 : struct
             where TResult : struct
         {
-            Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<TResult>>>() != null);
+            Ensures(Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<TResult>>>() != null);
 
             return (m1, m2, m3) =>
             {
@@ -196,7 +198,7 @@ namespace Narvalo.Fx.Samples
             where T4 : struct
             where TResult : struct
         {
-            Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<TResult>>>() != null);
+            Ensures(Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<TResult>>>() != null);
 
             return (m1, m2, m3, m4) =>
             {
@@ -222,7 +224,7 @@ namespace Narvalo.Fx.Samples
             where T5 : struct
             where TResult : struct
         {
-            Contract.Ensures(Contract.Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<T5>, MonadValue<TResult>>>() != null);
+            Ensures(Result<Func<MonadValue<T1>, MonadValue<T2>, MonadValue<T3>, MonadValue<T4>, MonadValue<T5>, MonadValue<TResult>>>() != null);
 
             return (m1, m2, m3, m4, m5) =>
             {
@@ -455,9 +457,9 @@ namespace Narvalo.Fx.Samples
             where TResult : struct
         {
             /* T4: C# indent */
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
 
             return @this.Join(
                 inner,
@@ -479,9 +481,9 @@ namespace Narvalo.Fx.Samples
             where TResult : struct
         {
             /* T4: C# indent */
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
 
             return @this.GroupJoin(
                 inner,
@@ -509,9 +511,9 @@ namespace Narvalo.Fx.Samples
             where TKey : struct
             where TResult : struct
         {
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
 
             return JoinCore(
                 @this,
@@ -534,9 +536,9 @@ namespace Narvalo.Fx.Samples
             where TKey : struct
             where TResult : struct
         {
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
 
             return GroupJoinCore(
                 @this,
@@ -562,9 +564,9 @@ namespace Narvalo.Fx.Samples
         {
             /* T4: C# indent */
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(comparer != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -587,9 +589,9 @@ namespace Narvalo.Fx.Samples
         {
             /* T4: C# indent */
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(comparer != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -609,8 +611,8 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
-            Contract.Requires(innerKeySelector != null);
-            Contract.Ensures(Contract.Result<Func<TSource, MonadValue<TKey>>>() != null);
+            Demand.NotNull(innerKeySelector);
+            Ensures(Result<Func<TSource, MonadValue<TKey>>>() != null);
 
             return source =>
             {
@@ -651,7 +653,7 @@ namespace Narvalo.Fx.Samples
             where TSource : struct
             where TResult : struct
         {
-            Contract.Requires(predicate != null);
+            Demand.NotNull(predicate);
 
             return @this.Coalesce(predicate, other, MonadValue<TResult>.None);
         }
@@ -663,7 +665,7 @@ namespace Narvalo.Fx.Samples
             where TSource : struct
             where TResult : struct
         {
-            Contract.Requires(predicate != null);
+            Demand.NotNull(predicate);
 
             return @this.Coalesce(predicate, MonadValue<TResult>.None, other);
         }
@@ -689,7 +691,7 @@ namespace Narvalo.Fx.Samples
             Action action)
             where TSource : struct
         {
-            Contract.Requires(action != null);
+            Demand.NotNull(action);
 
             return @this.When(!predicate, action);
         }
@@ -751,7 +753,7 @@ namespace Narvalo.Fx.Samples
             where TSource : struct
             where TResult : struct
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             /* T4: C# indent */
 
             return value.Bind(@this);
@@ -768,8 +770,8 @@ namespace Narvalo.Fx.Samples
             where TResult : struct
         {
             Require.Object(@this);
-            Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Func<TSource, MonadValue<TResult>>>() != null);
+            Demand.NotNull(funM);
+            Ensures(Result<Func<TSource, MonadValue<TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -784,9 +786,9 @@ namespace Narvalo.Fx.Samples
             where TMiddle : struct
             where TResult : struct
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Require.NotNull(funM, nameof(funM));
-            Contract.Ensures(Contract.Result<Func<TSource, MonadValue<TResult>>>() != null);
+            Ensures(Result<Func<TSource, MonadValue<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -801,6 +803,8 @@ namespace Narvalo.Fx.Samples
     using System.Diagnostics.Contracts;
 
     using Narvalo.Fx.Samples.Internal;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="MonadValue{S}"/>.
@@ -822,7 +826,7 @@ namespace Narvalo.Fx.Samples
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.SumCore();
         }
@@ -840,6 +844,8 @@ namespace Narvalo.Fx.Samples.Advanced
 
     using Narvalo.Fx.Samples;
     using Narvalo.Fx.Samples.Internal;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -862,9 +868,9 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, MonadValue<bool>> predicateM)
             where TSource : struct
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(predicateM != null);
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(predicateM);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -880,8 +886,8 @@ namespace Narvalo.Fx.Samples.Advanced
             where TSource : struct
             where TAccumulate : struct
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -897,8 +903,8 @@ namespace Narvalo.Fx.Samples.Advanced
             where TSource : struct
             where TAccumulate : struct
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -908,8 +914,8 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.ReduceCore(accumulatorM);
         }
@@ -919,8 +925,8 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -940,9 +946,9 @@ namespace Narvalo.Fx.Samples.Advanced
             where TSource : struct
             where TAccumulate : struct
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Requires(predicate != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Demand.NotNull(predicate);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -956,9 +962,9 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<MonadValue<TSource>, bool> predicate)
             where TSource : struct
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Requires(predicate != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Demand.NotNull(predicate);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -980,6 +986,8 @@ namespace Narvalo.Fx.Samples.Internal
     using Narvalo.Fx.Samples;
     using Narvalo.Fx.Samples.Advanced;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
@@ -993,7 +1001,7 @@ namespace Narvalo.Fx.Samples.Internal
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             var retval = @this.Aggregate(MonadValue<TSource>.None, (m, n) => m.OrElse(n));
 
@@ -1018,7 +1026,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Require.Object(@this);
             Require.NotNull(predicateM, nameof(predicateM));
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -1072,8 +1080,8 @@ namespace Narvalo.Fx.Samples.Internal
             where TSource : struct
             where TAccumulate : struct
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
@@ -1113,8 +1121,8 @@ namespace Narvalo.Fx.Samples.Internal
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }

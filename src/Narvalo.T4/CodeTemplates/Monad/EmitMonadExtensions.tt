@@ -23,7 +23,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(selector, nameof(selector));
 <#+ if (PostBindEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return @this.Bind(_ => <#= Name #>.<#= ReturnName #>(selector.Invoke(_)));
@@ -39,7 +39,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (PostBindEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return @this.Bind(_ => other);
@@ -56,7 +56,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (PostThenEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
@@ -74,7 +74,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+            Ensures(Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
             return <#= Name #>.Unit;
@@ -97,7 +97,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(predicate, nameof(predicate));
 <#+ if (PostBindEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             return @this.Bind(
@@ -118,7 +118,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.GreaterThanOrEqualTo(count, 1, "count");
 <#+ if (PostMapEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+            Ensures(Result<<#= Name #><IEnumerable<TSource>>>() != null);
 <#+ } #>
 
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
@@ -141,7 +141,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return @this.Bind(v1 => second.<#= MapName #>(v2 => resultSelector.Invoke(v1, v2)));
@@ -159,7 +159,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             Func<T1, <#= Name #><TResult>> g
@@ -181,7 +181,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             Func<T1, <#= Name #><TResult>> g
@@ -207,7 +207,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             Func<T1, <#= Name #><TResult>> g
@@ -235,7 +235,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (PostFilterEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             return @this.<#= FilterName #>(predicate);
@@ -250,7 +250,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (PostMapEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return @this.<#= MapName #>(selector);
@@ -271,7 +271,7 @@ public partial class MonadTemplate
             Require.NotNull(valueSelectorM, nameof(valueSelectorM));
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return @this.Bind(
@@ -291,13 +291,13 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (IsNullable) { #>
-            Contract.Requires(inner != null);
+            Demand.NotNull(inner);
 <#+ } #>
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
 <#+ if (PostJoinEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return @this.Join(
@@ -318,13 +318,13 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (IsNullable) { #>
-            Contract.Requires(inner != null);
+            Demand.NotNull(inner);
 <#+ } #>
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
 <#+ if (PostGroupJoinEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return @this.GroupJoin(
@@ -353,14 +353,14 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
-            Acknowledge.Object(@this);
-            Contract.Requires(inner != null);
+            Demand.Object(@this);
+            Demand.NotNull(inner);
 <#+ } #>
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
 <#+ if (PostJoinEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return JoinCore(
@@ -382,14 +382,14 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
-            Acknowledge.Object(@this);
-            Contract.Requires(inner != null);
+            Demand.Object(@this);
+            Demand.NotNull(inner);
 <#+ } #>
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
 <#+ if (PostGroupJoinEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return GroupJoinCore(
@@ -414,13 +414,13 @@ public partial class MonadTemplate
             <#+ WriteNotNull("seq"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (IsNullable) { #>
-            Contract.Requires(inner != null);
+            Demand.NotNull(inner);
 <#+ } #>
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(comparer != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
 <#+ if (PostMapEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
@@ -442,13 +442,13 @@ public partial class MonadTemplate
             <#+ WriteNotNull("seq"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (IsNullable) { #>
-            Contract.Requires(inner != null);
+            Demand.NotNull(inner);
 <#+ } #>
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(comparer != null);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
 <#+ if (PostMapEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
@@ -467,8 +467,8 @@ public partial class MonadTemplate
             <#+ WriteNotNull("inner"); #>
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
-            Contract.Requires(innerKeySelector != null);
-            Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TKey>>>() != null);
+            Demand.NotNull(innerKeySelector);
+            Ensures(Result<Func<TSource, <#= Name #><TKey>>>() != null);
 
             return source =>
             {

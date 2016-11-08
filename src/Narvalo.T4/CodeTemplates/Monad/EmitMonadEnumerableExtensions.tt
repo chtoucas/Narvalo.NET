@@ -20,9 +20,9 @@ public partial class MonadTemplate
         public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+            Ensures(Result<<#= Name #><IEnumerable<TSource>>>() != null);
 <#+ } #>
 
             return @this.CollectCore();
@@ -43,9 +43,9 @@ public partial class MonadTemplate
             this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             return @this.SumCore();

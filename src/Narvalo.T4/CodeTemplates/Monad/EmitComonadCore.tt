@@ -15,7 +15,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
-            Contract.Requires(monad != null);
+            Demand.NotNull(monad);
 <#+ } #>
 
             return <#= Name #><T>.ε(monad);
@@ -28,7 +28,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><<#= Name #><T>>>() != null);
+            Ensures(Result<<#= Name #><<#= Name #><T>>>() != null);
 <#+ } #>
 
             return <#= Name #><T>.δ(monad);

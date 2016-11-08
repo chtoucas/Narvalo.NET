@@ -21,6 +21,8 @@ namespace Narvalo.Fx.Samples
     using global::Narvalo;
     using Narvalo.Fx.Samples.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <content>
     /// Provides a set of static methods for <see cref="MonadZero{T}" />.
     /// </content>
@@ -42,7 +44,7 @@ namespace Narvalo.Fx.Samples
         {
             get
             {
-                Contract.Ensures(Contract.Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
+                Ensures(Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
 
                 return s_Unit;
             }
@@ -60,7 +62,7 @@ namespace Narvalo.Fx.Samples
         {
             get
             {
-                Contract.Ensures(Contract.Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
+                Ensures(Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
 
                 return MonadZero<global::Narvalo.Fx.Unit>.Zero;
             }
@@ -79,7 +81,7 @@ namespace Narvalo.Fx.Samples
         public static MonadZero<T> Return<T>(T value)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<MonadZero<T>>() != null);
+            Ensures(Result<MonadZero<T>>() != null);
 
             return MonadZero<T>.η(value);
         }
@@ -95,8 +97,8 @@ namespace Narvalo.Fx.Samples
         public static MonadZero<T> Flatten<T>(MonadZero<MonadZero<T>> square)
             /* T4: C# indent */
         {
-            Contract.Requires(square != null);
-            Contract.Ensures(Contract.Result<MonadZero<T>>() != null);
+            Demand.NotNull(square);
+            Ensures(Result<MonadZero<T>>() != null);
 
             return MonadZero<T>.μ(square);
         }
@@ -111,7 +113,7 @@ namespace Narvalo.Fx.Samples
         /// </remarks>
         public static MonadZero<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
-            Contract.Ensures(Contract.Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
+            Ensures(Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
 
             return predicate ? MonadZero.Unit : MonadZero<global::Narvalo.Fx.Unit>.Zero;
         }
@@ -131,7 +133,7 @@ namespace Narvalo.Fx.Samples
             Func<T, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<MonadZero<T>, MonadZero<TResult>>>() != null);
+            Ensures(Result<Func<MonadZero<T>, MonadZero<TResult>>>() != null);
 
             return m =>
             {
@@ -151,7 +153,7 @@ namespace Narvalo.Fx.Samples
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<TResult>>>() != null);
+            Ensures(Result<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<TResult>>>() != null);
 
             return (m1, m2) =>
             {
@@ -171,7 +173,7 @@ namespace Narvalo.Fx.Samples
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<TResult>>>() != null);
+            Ensures(Result<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<TResult>>>() != null);
 
             return (m1, m2, m3) =>
             {
@@ -192,7 +194,7 @@ namespace Narvalo.Fx.Samples
             Func<T1, T2, T3, T4, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<TResult>>>() != null);
+            Ensures(Result<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<TResult>>>() != null);
 
             return (m1, m2, m3, m4) =>
             {
@@ -213,7 +215,7 @@ namespace Narvalo.Fx.Samples
             Func<T1, T2, T3, T4, T5, TResult> fun)
             /* T4: C# indent */
         {
-            Contract.Ensures(Contract.Result<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<T5>, MonadZero<TResult>>>() != null);
+            Ensures(Result<Func<MonadZero<T1>, MonadZero<T2>, MonadZero<T3>, MonadZero<T4>, MonadZero<T5>, MonadZero<TResult>>>() != null);
 
             return (m1, m2, m3, m4, m5) =>
             {
@@ -242,7 +244,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.NotNull(selector, nameof(selector));
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return @this.Bind(_ => MonadZero.Return(selector.Invoke(_)));
         }
@@ -256,7 +258,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return @this.Bind(_ => other);
         }
@@ -271,7 +273,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
 
@@ -287,7 +289,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
+            Ensures(Result<MonadZero<global::Narvalo.Fx.Unit>>() != null);
 
             return MonadZero.Unit;
         }
@@ -307,7 +309,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.NotNull(predicate, nameof(predicate));
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             return @this.Bind(
                 _ => predicate.Invoke(_) ? @this : MonadZero<TSource>.Zero);
@@ -323,7 +325,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.GreaterThanOrEqualTo(count, 1, "count");
-            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TSource>>>() != null);
+            Ensures(Result<MonadZero<IEnumerable<TSource>>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -343,7 +345,7 @@ namespace Narvalo.Fx.Samples
             Require.Object(@this);
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -359,7 +361,7 @@ namespace Narvalo.Fx.Samples
             Require.Object(@this);
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             Func<T1, MonadZero<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -379,7 +381,7 @@ namespace Narvalo.Fx.Samples
             Require.Object(@this);
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             Func<T1, MonadZero<TResult>> g
                 = t1 => second.Zip(
@@ -403,7 +405,7 @@ namespace Narvalo.Fx.Samples
             Require.Object(@this);
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             Func<T1, MonadZero<TResult>> g
                 = t1 => second.Zip(
@@ -432,7 +434,7 @@ namespace Narvalo.Fx.Samples
             Require.Object(@this);
             Require.NotNull(valueSelectorM, nameof(valueSelectorM));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return @this.Bind(
                 _ => valueSelectorM.Invoke(_).Select(
@@ -449,11 +451,11 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Demand.NotNull(inner);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return @this.Join(
                 inner,
@@ -472,11 +474,11 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Demand.NotNull(inner);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return @this.GroupJoin(
                 inner,
@@ -501,12 +503,12 @@ namespace Narvalo.Fx.Samples
             IEqualityComparer<TKey> comparer)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(inner);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return JoinCore(
                 @this,
@@ -526,12 +528,12 @@ namespace Narvalo.Fx.Samples
             IEqualityComparer<TKey> comparer)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(resultSelector != null);
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(inner);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(resultSelector);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return GroupJoinCore(
                 @this,
@@ -554,11 +556,11 @@ namespace Narvalo.Fx.Samples
         {
             Require.NotNull(seq, nameof(seq));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(comparer != null);
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Demand.NotNull(inner);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -578,11 +580,11 @@ namespace Narvalo.Fx.Samples
         {
             Require.NotNull(seq, nameof(seq));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Contract.Requires(inner != null);
-            Contract.Requires(outerKeySelector != null);
-            Contract.Requires(innerKeySelector != null);
-            Contract.Requires(comparer != null);
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Demand.NotNull(inner);
+            Demand.NotNull(outerKeySelector);
+            Demand.NotNull(innerKeySelector);
+            Demand.NotNull(comparer);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -600,8 +602,8 @@ namespace Narvalo.Fx.Samples
             Require.NotNull(inner, nameof(inner));
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
-            Contract.Requires(innerKeySelector != null);
-            Contract.Ensures(Contract.Result<Func<TSource, MonadZero<TKey>>>() != null);
+            Demand.NotNull(innerKeySelector);
+            Ensures(Result<Func<TSource, MonadZero<TKey>>>() != null);
 
             return source =>
             {
@@ -629,7 +631,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.NotNull(predicate, nameof(predicate));
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -641,9 +643,9 @@ namespace Narvalo.Fx.Samples
             MonadZero<TResult> other)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(predicate);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return @this.Coalesce(predicate, other, MonadZero<TResult>.Zero);
         }
@@ -654,9 +656,9 @@ namespace Narvalo.Fx.Samples
             MonadZero<TResult> other)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(predicate);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return @this.Coalesce(predicate, MonadZero<TResult>.Zero, other);
         }
@@ -670,7 +672,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.NotNull(action, nameof(action));
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             if (predicate) { action.Invoke(); }
 
@@ -683,9 +685,9 @@ namespace Narvalo.Fx.Samples
             Action action)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(action != null);
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(action);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             return @this.When(!predicate, action);
         }
@@ -697,7 +699,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.NotNull(action, nameof(action));
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
@@ -710,7 +712,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.Object(@this);
             Require.NotNull(action, nameof(action));
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             // FIXME
             //@this.PlusName(MonadZero.Unit).Invoke(_ => action.Invoke());
@@ -724,10 +726,10 @@ namespace Narvalo.Fx.Samples
             Action caseZero)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Require.NotNull(action, nameof(action));
             Require.NotNull(caseZero, nameof(caseZero));
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             return @this.Invoke(action).OnZero(caseZero);
         }
@@ -749,9 +751,9 @@ namespace Narvalo.Fx.Samples
             this Func<TSource, MonadZero<TResult>> @this,
             IEnumerable<TSource> seq)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(seq != null);
-            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TResult>>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(seq);
+            Ensures(Result<MonadZero<IEnumerable<TResult>>>() != null);
 
             return seq.ForEachCore(@this);
         }
@@ -765,9 +767,9 @@ namespace Narvalo.Fx.Samples
             MonadZero<TSource> value)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Require.NotNull(value, nameof(value));
-            Contract.Ensures(Contract.Result<MonadZero<TResult>>() != null);
+            Ensures(Result<MonadZero<TResult>>() != null);
 
             return value.Bind(@this);
         }
@@ -781,8 +783,8 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Func<TSource, MonadZero<TResult>>>() != null);
+            Demand.NotNull(funM);
+            Ensures(Result<Func<TSource, MonadZero<TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -795,9 +797,9 @@ namespace Narvalo.Fx.Samples
             Func<TSource, MonadZero<TMiddle>> funM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Require.NotNull(funM, nameof(funM));
-            Contract.Ensures(Contract.Result<Func<TSource, MonadZero<TResult>>>() != null);
+            Ensures(Result<Func<TSource, MonadZero<TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -813,6 +815,8 @@ namespace Narvalo.Fx.Samples
 
     using Narvalo.Fx.Samples.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="MonadZero{S}"/>.
     /// </content>
@@ -827,8 +831,8 @@ namespace Narvalo.Fx.Samples
         public static MonadZero<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<MonadZero<TSource>> @this)
         {
-            Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TSource>>>() != null);
+            Demand.Object(@this);
+            Ensures(Result<MonadZero<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
         }
@@ -848,6 +852,8 @@ namespace Narvalo.Fx.Samples.Advanced
     using Narvalo.Fx.Samples;
     using Narvalo.Fx.Samples.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
@@ -863,9 +869,9 @@ namespace Narvalo.Fx.Samples.Advanced
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<TResult>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TResult>>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
+            Ensures(Result<MonadZero<IEnumerable<TResult>>>() != null);
 
             return @this.ForEachCore(funM);
         }
@@ -884,9 +890,9 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, MonadZero<bool>> predicateM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(predicateM != null);
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(predicateM);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             return @this.FilterCore(predicateM);
         }
@@ -900,9 +906,9 @@ namespace Narvalo.Fx.Samples.Advanced
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<Tuple<TFirst, TSecond>>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
+            Ensures(Result<MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -915,10 +921,10 @@ namespace Narvalo.Fx.Samples.Advanced
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, MonadZero<TResult>> resultSelectorM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(second != null);
-            Contract.Requires(resultSelectorM != null);
-            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TResult>>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(second);
+            Demand.NotNull(resultSelectorM);
+            Ensures(Result<MonadZero<IEnumerable<TResult>>>() != null);
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -933,9 +939,9 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Ensures(Result<MonadZero<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -950,9 +956,9 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Ensures(Result<MonadZero<TAccumulate>>() != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -962,9 +968,9 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM);
         }
@@ -974,9 +980,9 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -995,10 +1001,10 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<MonadZero<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Demand.NotNull(predicate);
+            Ensures(Result<MonadZero<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -1012,10 +1018,10 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<MonadZero<TSource>, bool> predicate)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Requires(predicate != null);
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Demand.NotNull(predicate);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -1037,6 +1043,8 @@ namespace Narvalo.Fx.Samples.Internal
     using Narvalo.Fx.Samples;
     using Narvalo.Fx.Samples.Advanced;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
@@ -1049,8 +1057,8 @@ namespace Narvalo.Fx.Samples.Internal
         internal static MonadZero<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<MonadZero<TSource>> @this)
         {
-            Acknowledge.Object(@this);
-            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TSource>>>() != null);
+            Demand.Object(@this);
+            Ensures(Result<MonadZero<IEnumerable<TSource>>>() != null);
 
             var seed = MonadZero.Return(Enumerable.Empty<TSource>());
             Func<MonadZero<IEnumerable<TSource>>, MonadZero<TSource>, MonadZero<IEnumerable<TSource>>> fun
@@ -1067,7 +1075,7 @@ namespace Narvalo.Fx.Samples.Internal
             MonadZero<TSource> m,
             IEnumerable<TSource> list)
         {
-            Contract.Requires(m != null);
+            Demand.NotNull(m);
 
             return m.Bind(item => MonadZero.Return(list.Concat(Enumerable.Repeat(item, 1))));
         }
@@ -1087,9 +1095,9 @@ namespace Narvalo.Fx.Samples.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<TResult>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TResult>>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
+            Ensures(Result<MonadZero<IEnumerable<TResult>>>() != null);
 
             return @this.Select(funM).EmptyIfNull().Collect();
         }
@@ -1104,7 +1112,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Require.Object(@this);
             Require.NotNull(predicateM, nameof(predicateM));
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -1137,9 +1145,9 @@ namespace Narvalo.Fx.Samples.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, MonadZero<Tuple<TFirst, TSecond>>> funM)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(funM);
+            Ensures(Result<MonadZero<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             var m = @this.Select(funM).EmptyIfNull().Collect();
 
@@ -1162,9 +1170,9 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Require.NotNull(resultSelectorM, nameof(resultSelectorM));
 
-            Acknowledge.Object(@this);
-            Contract.Requires(second != null);
-            Contract.Ensures(Contract.Result<MonadZero<IEnumerable<TResult>>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(second);
+            Ensures(Result<MonadZero<IEnumerable<TResult>>>() != null);
 
             Func<TFirst, TSecond, MonadZero<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -1185,7 +1193,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, nameof(accumulatorM));
-            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
+            Ensures(Result<MonadZero<TAccumulate>>() != null);
 
             MonadZero<TAccumulate> retval = MonadZero.Return(seed);
 
@@ -1205,9 +1213,9 @@ namespace Narvalo.Fx.Samples.Internal
             Func<TAccumulate, TSource, MonadZero<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Ensures(Result<MonadZero<TAccumulate>>() != null);
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
@@ -1221,7 +1229,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Require.Object(@this);
             Require.NotNull(accumulatorM, nameof(accumulatorM));
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1248,9 +1256,9 @@ namespace Narvalo.Fx.Samples.Internal
             Func<TSource, TSource, MonadZero<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(accumulatorM != null);
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Demand.Object(@this);
+            Demand.NotNull(accumulatorM);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
@@ -1267,7 +1275,7 @@ namespace Narvalo.Fx.Samples.Internal
             Require.Object(@this);
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
-            Contract.Ensures(Contract.Result<MonadZero<TAccumulate>>() != null);
+            Ensures(Result<MonadZero<TAccumulate>>() != null);
 
             MonadZero<TAccumulate> retval = MonadZero.Return(seed);
 
@@ -1293,7 +1301,7 @@ namespace Narvalo.Fx.Samples.Internal
             Require.Object(@this);
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
-            Contract.Ensures(Contract.Result<MonadZero<TSource>>() != null);
+            Ensures(Result<MonadZero<TSource>>() != null);
 
             using (var iter = @this.GetEnumerator())
             {

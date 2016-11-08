@@ -21,10 +21,10 @@ public partial class MonadTemplate
             this Func<TSource, <#= Name #><TResult>> @this,
             IEnumerable<TSource> seq)
         {
-            Acknowledge.Object(@this);
-            Contract.Requires(seq != null);
+            Demand.Object(@this);
+            Demand.NotNull(seq);
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TResult>>>() != null);
+            Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
 <#+ } #>
 
             return seq.ForEachCore(@this);
@@ -40,10 +40,10 @@ public partial class MonadTemplate
             <#= Name #><TSource> value)
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             <#+ WriteNotNull("value"); #>
 <#+ if (PostBindEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TResult>>() != null);
+            Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
 
             return value.Bind(@this);
@@ -58,8 +58,8 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
             <#+ WriteNotNull(true); #>
-            Contract.Requires(funM != null);
-            Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
+            Demand.NotNull(funM);
+            Ensures(Result<Func<TSource, <#= Name #><TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -72,9 +72,9 @@ public partial class MonadTemplate
             Func<TSource, <#= Name #><TMiddle>> funM)
             <#+ WriteTypeConstraints("TSource", "TMiddle", "TResult"); #>
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Require.NotNull(funM, nameof(funM));
-            Contract.Ensures(Contract.Result<Func<TSource, <#= Name #><TResult>>>() != null);
+            Ensures(Result<Func<TSource, <#= Name #><TResult>>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }

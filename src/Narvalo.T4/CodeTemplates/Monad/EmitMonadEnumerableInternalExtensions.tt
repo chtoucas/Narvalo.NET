@@ -18,9 +18,9 @@ public partial class MonadTemplate
         internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><IEnumerable<TSource>>>() != null);
+            Ensures(Result<<#= Name #><IEnumerable<TSource>>>() != null);
 <#+ } #>
 
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
@@ -41,7 +41,7 @@ public partial class MonadTemplate
             IEnumerable<TSource> list)
         {
 <#+ if (IsNullable) { #>
-            Contract.Requires(m != null);
+            Demand.NotNull(m);
 <#+ } #>
 
             return m.Bind(item => <#= Name #>.<#= ReturnName #>(list.Concat(Enumerable.Repeat(item, 1))));
@@ -57,9 +57,9 @@ public partial class MonadTemplate
             this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><TSource>>() != null);
+            Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
 
             var retval = @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));

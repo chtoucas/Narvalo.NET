@@ -46,6 +46,8 @@ namespace <#= Namespace #>
     using global::Narvalo;
     using <#= Namespace #>.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
 <#+
     EmitMonadCore();
     WriteLine();
@@ -72,6 +74,8 @@ namespace <#= Namespace #>
 {
     using System.Diagnostics.Contracts;
 
+    using static System.Diagnostics.Contracts.Contract;
+
 <#+ EmitComonadCore(); #>
 }
 <#+
@@ -90,6 +94,8 @@ namespace <#= Namespace #>
 
     using <#= Namespace #>.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
 <#+ EmitMonadEnumerableExtensions(); #>
 }
 
@@ -101,6 +107,8 @@ namespace <#= Namespace #>.Advanced
 
     using <#= Namespace #>;
     using <#= Namespace #>.Internal;
+
+    using static System.Diagnostics.Contracts.Contract;
 
 <#+ EmitEnumerableExtensions(); #>
 }
@@ -119,6 +127,8 @@ namespace <#= Namespace #>.Internal
     using <#= Namespace #>;
 <#+ } #>
     using <#= Namespace #>.Advanced;
+
+    using static System.Diagnostics.Contracts.Contract;
 
 <#+
     EmitMonadEnumerableInternalExtensions();

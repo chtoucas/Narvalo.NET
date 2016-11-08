@@ -27,7 +27,7 @@ public partial class MonadTemplate
             get
             {
 <#+ if (IsNullable) { #>
-                Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+                Ensures(Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
                 return s_Unit;
@@ -48,7 +48,7 @@ public partial class MonadTemplate
             get
             {
 <#+ if (IsNullable) { #>
-                Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+                Ensures(Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
                 return <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
@@ -70,7 +70,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
+            Ensures(Result<<#= Name #><T>>() != null);
 <#+ } #>
 
             return <#= Name #><T>.η(value);
@@ -88,10 +88,10 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
-            Contract.Requires(square != null);
+            Demand.NotNull(square);
 <#+ } #>
 <#+ if (PostMultiplicationEnsuresSome) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><T>>() != null);
+            Ensures(Result<<#= Name #><T>>() != null);
 <#+ } #>
 
             return <#= Name #><T>.μ(square);
@@ -109,7 +109,7 @@ public partial class MonadTemplate
         public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
 <#+ if (IsNullable) { #>
-            Contract.Ensures(Contract.Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+            Ensures(Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
 <#+ } #>
 
             return predicate ? <#= Name #>.Unit : <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
@@ -131,7 +131,7 @@ public partial class MonadTemplate
             Func<T, TResult> fun)
             <#+ WriteTypeConstraints("T", "TResult"); #>
         {
-            Contract.Ensures(Contract.Result<Func<<#= Name #><T>, <#= Name #><TResult>>>() != null);
+            Ensures(Result<Func<<#= Name #><T>, <#= Name #><TResult>>>() != null);
 
             return m =>
             {
@@ -151,7 +151,7 @@ public partial class MonadTemplate
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             <#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
         {
-            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>() != null);
+            Ensures(Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>() != null);
 
             return (m1, m2) =>
             {
@@ -171,7 +171,7 @@ public partial class MonadTemplate
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
         {
-            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>() != null);
+            Ensures(Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>() != null);
 
             return (m1, m2, m3) =>
             {
@@ -192,7 +192,7 @@ public partial class MonadTemplate
             Func<T1, T2, T3, T4, TResult> fun)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
         {
-            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>() != null);
+            Ensures(Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>() != null);
 
             return (m1, m2, m3, m4) =>
             {
@@ -213,7 +213,7 @@ public partial class MonadTemplate
             Func<T1, T2, T3, T4, T5, TResult> fun)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
-            Contract.Ensures(Contract.Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>() != null);
+            Ensures(Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>() != null);
 
             return (m1, m2, m3, m4, m5) =>
             {
