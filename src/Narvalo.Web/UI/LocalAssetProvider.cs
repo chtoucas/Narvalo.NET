@@ -8,6 +8,7 @@ namespace Narvalo.Web.UI
     using System.Web;
 
     using Narvalo.Collections;
+    using Narvalo.Fx;
     using Narvalo.Web.Properties;
 
     public sealed class LocalAssetProvider : AssetProvider
@@ -81,10 +82,10 @@ namespace Narvalo.Web.UI
         {
             Promise.NotNull(config);
 
-            var fontsPath = config.MayGetSingle(FONTS_PATH_KEY);
-            var imagesPath = config.MayGetSingle(IMAGES_PATH_KEY);
-            var scriptsPath = config.MayGetSingle(SCRIPTS_PATH_KEY);
-            var stylesPath = config.MayGetSingle(STYLES_PATH_KEY);
+            Maybe<string> fontsPath = config.MayGetSingle(FONTS_PATH_KEY);
+            Maybe<string> imagesPath = config.MayGetSingle(IMAGES_PATH_KEY);
+            Maybe<string> scriptsPath = config.MayGetSingle(SCRIPTS_PATH_KEY);
+            Maybe<string> stylesPath = config.MayGetSingle(STYLES_PATH_KEY);
 
             // FIXME: If none after normalization, throw.
             _fontsPath = fontsPath.Select(NormalizeAppRelativePath).ValueOrElse("~/assets/fonts/");

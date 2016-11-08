@@ -5,10 +5,11 @@ namespace Narvalo.Web.UI
     using System;
     using System.Collections.Specialized;
     using System.Configuration.Provider;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Web.Properties;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Provides a base implementation for the asset provider model.
@@ -33,8 +34,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
-
+                Ensures(Result<string>() != null);
                 return String.IsNullOrWhiteSpace(_defaultDescription)
                     ? Strings.AssetProvider_Description
                     : _defaultDescription;
@@ -55,8 +55,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
-
+                Ensures(Result<string>() != null);
                 return String.IsNullOrWhiteSpace(_defaultName) ? DefaultDefaultName : _defaultName;
             }
 
