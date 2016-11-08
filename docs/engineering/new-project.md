@@ -8,17 +8,15 @@ The following procedure enables us to centralize all settings into a single plac
 Except for Code Contracts, there should be no need to edit the project properties
 anymore.
 
-Create a project and add it to the solution `Narvalo.sln`.
-
-**WARNING** When ready for CI, add the project to Make.Foundations.proj.
+Create a project and add it to `Narvalo.sln` and `Make.Foundations.proj`.
 
 Edit the project file:
-- Add the following line at the bottom of the project file, just BEFORE the Microsoft targets:
+- Add the following line at the bottom of the project file, BEFORE the Microsoft targets:
 ```xml
 <Import Project="..\..\tools\Narvalo.Common.props" />
 ```
 - Remove all sections about Debug, Release and CodeContracts.
-- Remove all properties configured globally.
+- Remove all properties already configured globally.
 
 A typical project file should then look like this:
 ```xml
@@ -49,8 +47,8 @@ Assembly Versioning
 
 See also [Versioning](versioning.md).
 
-This is mandatory only for NuGet projects.
-Test and sample projects do not need a version property file.
+- This is mandatory only for NuGet projects.
+- Test and sample projects do not need a version property file.
 
 Create a version property file: `{AssemblyName}.Version.props`:
 ```xml
@@ -164,8 +162,11 @@ This has two consequences:
 - Test projects use a dummy assembly version.
 - Test projects use custom FxCop rules.
 
-When creating the project we should add it to the list of test projects used by OpenCover in the
-PSake file.
+
+Add `Narvalo.TestCommon.EnvironmentFacts.cs` and `Narvalo.TestCommon.IssueAttribute.cs` to the 
+project.
+
+Add the project to the list of test projects used by OpenCover in the Psake file.
 
 ### Sample project
 

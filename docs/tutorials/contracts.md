@@ -1,87 +1,61 @@
-Object Contracts
-================
+Code Contracts
+==============
 
 Preconditions
 -------------
 
 ```csharp
-public class MyObject
-{
-  public void Method1(string value)
-  {
-    // CC + Exception
-    Require.NotNull(value, nameof(value));
-
-    // Inline code that fails if 'value' is null.
-    if (value.Length == 1) {
-      ...
-    }
-  }
-
-  public void Method2(string value)
-  {
-    // CC + Exception
-    Require.NotNull(value, nameof(value));
-
-    // Code that calls at least one private/protected/internal method
+public class MyClass {
+  public void PublicMethod(string value) {
+    Require.NotNull(value, nameof(value));  // Code Contract + Throw ArgumentException
+    
+    // Code that calls at least 
+    // - one public/internal method from another object
+    // - or one private/protected/internal method from this object
     // that requires value not to be null.
+    OtherObject.PublicMethod(value);
+    OtherObject.InternalMethod(value);
     InternalMethod(value);
     ProtectedMethod(value);
     PrivateMethod(value);
   }
-
-  public void Method3(string value)
-  {
-    // CC only
-    Contract.Requires(value != null);
-
-    // Code that only calls public methods that require value not to be null.
-    Method3(value);
+  
+  public void PublicMethod2(string value) {
+    Contract.Requires(value != null);       // Code Contract
+  
+    // Code that only calls public methods.
+    OtherObject.PublicMethod(value);
+    PublicMethod(value);
   }
-
-  internal void InternalMethod(string value)
-  {
-    // CC + Debug check
-    Promise.NotNull(value);
-
-    // Inline code that fails if 'value' is null.
-    if (value.Length == 1) ...
+  
+  internal void InternalMethod(string value) {
+    Promise.NotNull(value);                 // Code Contract + Debug.Assert
   }
-
-  protected void ProtectedMethod(string value)
-  {
-    // CC + Debug check
-    Promise.NotNull(value);
-
-    // Inline code that fails if 'value' is null.
-    if (value.Length == 1) ...
+  
+  protected virtual void ProtectedVirtualMethod(string value) {
+    Promise.NotNull(value);                 // Code Contract + Debug.Assert
   }
-
-  protected virtual void ProtectedVirtualMethod(string value)
-  {
+  
+  protected void ProtectedMethod(string value) {
+    Promise.NotNull(value);                 // Code Contract + Debug.Assert
   }
-
-  private void PrivateMethod(string value)
-  {
-    // CC + Debug check
-    Promise.NotNull(value);
-
-    // Inline code that fails if 'value' is null.
-    if (value.Length == 1) ...
+  
+  private void PrivateMethod(string value) {
+    Promise.NotNull(value);                 // Code Contract + Debug.Assert
   }
-}
-
-public class DerivedObject : MyObject
-{
-  protected override void ProtectedVirtualMethod(string value)
-  {
-  }
-}
-
-internal class InternalObject
-{
 }
 ```
+
+```csharp
+public class DerivedClass : MyClass {
+  protected override void ProtectedVirtualMethod(string value) {
+    // Same contract as the overriden method.
+    Promise.NotNull(value);                 // Code Contract + Debug.Assert
+  }
+}
+```
+
+**TODO:** Abstract classes.
 
 Postconditions
 --------------
@@ -89,4 +63,6 @@ Postconditions
 Check points
 ------------
 
+Invariants
+----------
 

@@ -1,7 +1,9 @@
 ﻿- name: Overview
   href: index.md
-- name: Adding or Configuring a Project
-  href: project.md
+- name: Configuring a new Project
+  href: new-project.md
+- name: Coding Guidelines
+  href: coding-guidelines.md
 - name: Build Infrastructure
   href: build.md
 - name: Versioning
