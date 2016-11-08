@@ -21,73 +21,41 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void Object<T>(T @this) where T : class
-        {
-            Contract.Requires(@this != null);
-            Debug.Assert(@this != null);
-        }
+        public static void Object<T>(T @this) where T : class => True(@this != null);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void Property<T>(T value) where T : class
-        {
-            Contract.Requires(value != null);
-            Debug.Assert(value != null);
-        }
+        public static void Property<T>(T value) where T : class => True(value != null);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void PropertyNotEmpty(string value)
-        {
-            Contract.Requires(!String.IsNullOrEmpty(value));
-            Debug.Assert(!String.IsNullOrEmpty(value));
-        }
+        public static void PropertyNotEmpty(string value) => True(!String.IsNullOrEmpty(value));
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void PropertyNotWhiteSpace(string value)
-        {
-            Contract.Requires(!String.IsNullOrWhiteSpace(value));
-            Debug.Assert(!String.IsNullOrWhiteSpace(value));
-        }
+        public static void PropertyNotWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void NotNull<T>(T value) where T : class
-        {
-            Contract.Requires(value != null);
-            Debug.Assert(value != null);
-        }
+        public static void NotNull<T>(T value) where T : class => True(value != null);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void NotNullOrEmpty(string value)
-        {
-            Contract.Requires(!String.IsNullOrEmpty(value));
-            Debug.Assert(!String.IsNullOrEmpty(value));
-        }
+        public static void NotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void NotNullOrWhiteSpace(string value)
-        {
-            Contract.Requires(!String.IsNullOrWhiteSpace(value));
-            Debug.Assert(!String.IsNullOrWhiteSpace(value));
-        }
+        public static void NotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void Range(bool rangeCondition)
-        {
-            Contract.Requires(rangeCondition);
-            Debug.Assert(rangeCondition);
-        }
+        public static void Range(bool rangeCondition) => True(rangeCondition);
     }
 }

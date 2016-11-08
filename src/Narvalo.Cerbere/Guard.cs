@@ -46,7 +46,7 @@ namespace Narvalo
                         Strings_Cerbere.Enforce_InvalidRange_Format,
                         minInclusive,
                         maxInclusive),
-                    "minInclusive");
+                    parameterName);
             }
 
             if (value.CompareTo(minInclusive) < 0 || value.CompareTo(maxInclusive) > 0)
@@ -135,7 +135,6 @@ namespace Narvalo
         /// <param name="value">The argument to check.</param>
         /// <param name="maxValue">The maximum value (inclusive).</param>
         /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
         /// the maximum value.</exception>
         public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
