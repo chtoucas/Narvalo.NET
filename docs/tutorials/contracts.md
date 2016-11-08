@@ -4,6 +4,9 @@ Code Contracts
 Preconditions
 -------------
 
+- `Narvalo.Require`
+- `Narvalo.Demand`
+
 ```csharp
 public class MyClass {
   public void PublicMethod(string value) {
@@ -29,19 +32,19 @@ public class MyClass {
   }
   
   internal void InternalMethod(string value) {
-    Promise.NotNull(value);                 // Code Contract + Debug.Assert
+    Demand.NotNull(value);                 // Code Contract + Debug.Assert
   }
   
   protected virtual void ProtectedVirtualMethod(string value) {
-    Promise.NotNull(value);                 // Code Contract + Debug.Assert
+    Demand.NotNull(value);                 // Code Contract + Debug.Assert
   }
   
   protected void ProtectedMethod(string value) {
-    Promise.NotNull(value);                 // Code Contract + Debug.Assert
+    Demand.NotNull(value);                 // Code Contract + Debug.Assert
   }
   
   private void PrivateMethod(string value) {
-    Promise.NotNull(value);                 // Code Contract + Debug.Assert
+    Demand.NotNull(value);                 // Code Contract + Debug.Assert
   }
 }
 ```
@@ -49,8 +52,7 @@ public class MyClass {
 ```csharp
 public class DerivedClass : MyClass {
   protected override void ProtectedVirtualMethod(string value) {
-    // Same contract as the overriden method.
-    Promise.NotNull(value);                 // Code Contract + Debug.Assert
+    // Same contract as the overriden method. Nothing to do.
   }
 }
 ```
@@ -62,6 +64,8 @@ Postconditions
 
 Check points
 ------------
+
+- `Narvalo.Check`
 
 Invariants
 ----------

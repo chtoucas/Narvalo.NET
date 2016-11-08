@@ -118,7 +118,7 @@ namespace Narvalo.Web.UI
 
         protected virtual void InitializeCustom(NameValueCollection config)
         {
-            // Intentionally left blank.
+            Promise.NotNull(config);
         }
     }
 }

@@ -24,11 +24,22 @@ namespace Narvalo
     public static class Require
     {
         [ContractArgumentValidator]
-        public static void Condition(bool testCondition, string parameterName)
+        public static void True(bool testCondition, string parameterName)
         {
             if (!testCondition)
             {
                 throw new ArgumentException("XXX", parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        public static void True(bool testCondition, string parameterName, string message)
+        {
+            if (!testCondition)
+            {
+                throw new ArgumentException(message, parameterName);
             }
 
             Contract.EndContractBlock();

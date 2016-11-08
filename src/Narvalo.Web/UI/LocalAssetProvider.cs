@@ -80,8 +80,6 @@ namespace Narvalo.Web.UI
 
         protected override void InitializeCustom(NameValueCollection config)
         {
-            Promise.NotNull(config);
-
             Maybe<string> fontsPath = config.MayGetSingle(FONTS_PATH_KEY);
             Maybe<string> imagesPath = config.MayGetSingle(IMAGES_PATH_KEY);
             Maybe<string> scriptsPath = config.MayGetSingle(SCRIPTS_PATH_KEY);

@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.Contracts;
 
     using Narvalo.Internal;
 
@@ -29,6 +30,14 @@ namespace Narvalo
     [DebuggerStepThrough]
     public static class Check
     {
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void True(bool testCondition)
+        {
+            Contract.Assert(testCondition);
+            Debug.Assert(testCondition);
+        }
+
         /// <summary>
         /// Checks that a condition holds.
         /// </summary>

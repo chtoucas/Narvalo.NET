@@ -8,7 +8,7 @@ namespace Narvalo.Finance.Internal
     {
         public static string Format(decimal amount, Currency currency)
         {
-            Promise.NotNull(currency);
+            Demand.NotNull(currency);
 
             return Narvalo.Format.CurrentCulture("{0} {1:F2}", currency.Code, amount);
         }

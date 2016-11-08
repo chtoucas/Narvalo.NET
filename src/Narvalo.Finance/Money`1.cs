@@ -189,7 +189,7 @@ namespace Narvalo.Finance
     {
         public static Money<TCurrency> operator /(Money<TCurrency> money, decimal divisor)
         {
-            Promise.Condition(divisor != 0m);
+            Demand.True(divisor != 0m);
 
             return money.Divide(divisor);
         }
@@ -212,7 +212,7 @@ namespace Narvalo.Finance
     {
         public static Money<TCurrency> operator %(Money<TCurrency> money, decimal divisor)
         {
-            Promise.Condition(divisor != 0m);
+            Demand.True(divisor != 0m);
 
             return money.Remainder(divisor);
         }

@@ -9,20 +9,20 @@ namespace Narvalo
 
     public static partial class PromiseFacts
     {
-        #region Condition()
+        #region True()
 
         [Fact]
-        public static void Condition_DoesNotThrow_ForTrueCondition()
+        public static void True_DoesNotThrow_ForTrueCondition()
         {
             // Act
-            Promise.Condition(true, "rationale");
+            Promise.True(true, "rationale");
         }
 
         [Fact]
-        public static void Condition_Throws_ForFalseCondition()
+        public static void True_Throws_ForFalseCondition()
         {
             // Act & Assert
-            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Promise.Condition(false, "rationale"));
+            AssertExt.DebugOnly.ThrowsAny<Exception>(() => Promise.True(false, "rationale"));
         }
 
         #endregion
@@ -109,13 +109,13 @@ namespace Narvalo
 
     public static partial class PromiseFacts
     {
-        #region Condition()
+        #region True()
 
         [Fact]
-        public static void Condition_ThrowsIllegalConditionException_ForFalseCondition()
+        public static void True_ThrowsIllegalConditionException_ForFalseCondition()
         {
             // Act & Assert
-            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Promise.Condition(false, "rationale"));
+            AssertExt.DebugOnly.Throws<Internal.IllegalConditionException>(() => Promise.True(false, "rationale"));
         }
 
         #endregion

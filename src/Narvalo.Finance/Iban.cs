@@ -26,12 +26,12 @@ namespace Narvalo.Finance
 
         private Iban(string countryCode, string checkDigit, string bban, string value)
         {
-            Promise.NotNull(countryCode);
-            Promise.NotNull(checkDigit);
-            Promise.NotNull(bban);
-            Promise.NotNull(value);
-            Promise.Condition(countryCode.Length == COUNTRY_LENGTH);
-            Promise.Condition(checkDigit.Length == CHECKDIGIT_LENGTH);
+            Demand.NotNull(countryCode);
+            Demand.NotNull(checkDigit);
+            Demand.NotNull(bban);
+            Demand.NotNull(value);
+            Demand.True(countryCode.Length == COUNTRY_LENGTH);
+            Demand.True(checkDigit.Length == CHECKDIGIT_LENGTH);
 
             _countryCode = countryCode;
             _checkDigit = checkDigit;
@@ -82,8 +82,8 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(checkDigit, nameof(checkDigit));
             Require.NotNull(bban, nameof(bban));
-            Require.Condition(countryCode.Length == COUNTRY_LENGTH, nameof(countryCode));
-            Require.Condition(checkDigit.Length == CHECKDIGIT_LENGTH, nameof(checkDigit));
+            Require.True(countryCode.Length == COUNTRY_LENGTH, nameof(countryCode));
+            Require.True(checkDigit.Length == CHECKDIGIT_LENGTH, nameof(checkDigit));
 
             return new Iban(countryCode, checkDigit, bban, countryCode + checkDigit + bban);
         }
@@ -112,7 +112,7 @@ namespace Narvalo.Finance
 
         private static Iban? ParseCore(string value, bool throwOnError)
         {
-            Promise.NotNull(value);
+            Demand.NotNull(value);
 
             if (value.Length < MIN_LENGTH || value.Length > MAX_LENGTH)
             {

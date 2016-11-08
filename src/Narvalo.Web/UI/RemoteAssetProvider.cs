@@ -50,8 +50,6 @@ namespace Narvalo.Web.UI
 
         protected override void InitializeCustom(NameValueCollection config)
         {
-            Promise.NotNull(config);
-
             _baseUri = config.MayGetSingle(BASE_URI_KEY)
                 .Bind(_ => ParseTo.Uri(_, UriKind.Absolute))
                 .ValueOrThrow(() => new ProviderException(Strings.RemoteAssetProvider_MissingOrInvalidBaseUri));

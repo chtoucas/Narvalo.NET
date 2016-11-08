@@ -37,41 +37,14 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void Condition(bool testCondition)
+        public static void True(bool testCondition)
         {
             Contract.Requires(testCondition);
             Debug.Assert(testCondition);
         }
 
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void NotNull<T>(T value) where T : class
-        {
-            Contract.Requires(value != null);
-            Debug.Assert(value != null);
-        }
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void NotNullOrEmpty(string value)
-        {
-            Contract.Requires(!String.IsNullOrEmpty(value));
-            Debug.Assert(!String.IsNullOrEmpty(value));
-        }
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void NotNullOrWhiteSpace(string value)
-        {
-            Contract.Requires(!String.IsNullOrWhiteSpace(value));
-            Debug.Assert(!String.IsNullOrWhiteSpace(value));
-        }
-
         /// <summary>
-        /// Promises and checks that a condition holds.
+        /// Validates that a condition holds.
         /// </summary>
         /// <remarks>
         /// <para>All methods called within the condition must be pure.</para>
@@ -80,6 +53,20 @@ namespace Narvalo
         /// </remarks>
         /// <param name="testCondition">The conditional expression to evaluate.</param>
         /// <param name="rationale">The rationale for the promise.</param>
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void True(bool testCondition, string rationale)
+        {
+            Contract.Requires(testCondition);
+
+            if (!testCondition)
+            {
+                throw new IllegalConditionException("A promise did not hold: " + rationale);
+            }
+        }
+
+        [Obsolete("Use Promise.True() instead.")]
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
@@ -93,8 +80,17 @@ namespace Narvalo
             }
         }
 
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void NotNull<T>(T value) where T : class
+        {
+            Contract.Requires(value != null);
+            Debug.Assert(value != null);
+        }
+
         /// <summary>
-        /// Promises and checks that the specified argument is not <see langword="null"/>.
+        /// Validates that the specified argument is not <see langword="null"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="value">The argument to check.</param>
@@ -112,8 +108,17 @@ namespace Narvalo
             }
         }
 
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void NotNullOrEmpty(string value)
+        {
+            Contract.Requires(!String.IsNullOrEmpty(value));
+            Debug.Assert(!String.IsNullOrEmpty(value));
+        }
+
         /// <summary>
-        /// Promises and checks that the specified argument is not <see langword="null"/> or empty.
+        /// Validates that the specified argument is not <see langword="null"/> or empty.
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="rationale">The rationale for the promise.</param>
@@ -130,8 +135,17 @@ namespace Narvalo
             }
         }
 
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void NotNullOrWhiteSpace(string value)
+        {
+            Contract.Requires(!String.IsNullOrWhiteSpace(value));
+            Debug.Assert(!String.IsNullOrWhiteSpace(value));
+        }
+
         /// <summary>
-        /// Promises and checks that the specified argument is not <see langword="null"/> or empty,
+        /// Validates that the specified argument is not <see langword="null"/> or empty,
         /// and does not consist only of white-space characters.
         /// </summary>
         /// <param name="value">The argument to check.</param>

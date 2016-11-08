@@ -8,7 +8,8 @@ namespace Narvalo.Finance.Internal
     {
         public static bool IsDigitOrUpperLetter(string value)
         {
-            Promise.NotNull(value, "Prove that any call to this internal method is guarded upstream.");
+            // Prove that any call to this internal method is guarded upstream.
+            Demand.NotNull(value);
 
             for (int i = 0; i < value.Length; i++)
             {
@@ -23,7 +24,8 @@ namespace Narvalo.Finance.Internal
 
         public static bool IsDigit(string value)
         {
-            Promise.NotNull(value, "Prove that any call to this internal method is guarded upstream.");
+            // Prove that any call to this internal method is guarded upstream.
+            Demand.NotNull(value);
 
             for (int i = 0; i < value.Length; i++)
             {
@@ -38,7 +40,8 @@ namespace Narvalo.Finance.Internal
 
         public static bool IsUpperLetter(string value)
         {
-            Promise.NotNull(value, "Prove that any call to this internal method is guarded upstream.");
+            // Prove that any call to this internal method is guarded upstream.
+            Demand.NotNull(value);
 
             for (int i = 0; i < value.Length; i++)
             {

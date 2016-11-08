@@ -3,6 +3,7 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics;
 
     using static System.Diagnostics.Contracts.Contract;
     using static Narvalo.Finance.Internal.AsciiHelpers;
@@ -35,16 +36,16 @@ namespace Narvalo.Finance
 
         private Bic(string institutionCode, string countryCode, string locationCode, string branchCode, string value)
         {
-            Promise.NotNull(institutionCode);
-            Promise.NotNull(countryCode);
-            Promise.NotNull(locationCode);
-            Promise.NotNull(branchCode);
-            Promise.NotNull(value);
-            Promise.Condition(institutionCode.Length == PREFIX_LENGTH);
-            Promise.Condition(countryCode.Length == COUNTRY_LENGTH);
-            Promise.Condition(locationCode.Length == SUFFIX_LENGTH);
-            //Promise.Condition(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
-            //Promise.Condition(value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH);
+            Demand.NotNull(institutionCode);
+            Demand.NotNull(countryCode);
+            Demand.NotNull(locationCode);
+            Demand.NotNull(branchCode);
+            Demand.NotNull(value);
+            Demand.True(institutionCode.Length == PREFIX_LENGTH);
+            Demand.True(countryCode.Length == COUNTRY_LENGTH);
+            Demand.True(locationCode.Length == SUFFIX_LENGTH);
+            Debug.Assert(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
+            Debug.Assert(value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH);
 
             _institutionCode = institutionCode;
             _countryCode = countryCode;
@@ -126,9 +127,10 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(locationCode, nameof(locationCode));
             Require.NotNull(branchCode, nameof(branchCode));
-            Require.Condition(institutionCode.Length == PREFIX_LENGTH, nameof(institutionCode));
-            Require.Condition(countryCode.Length == COUNTRY_LENGTH, nameof(countryCode));
-            Require.Condition(locationCode.Length == SUFFIX_LENGTH, nameof(locationCode));
+            Require.True(institutionCode.Length == PREFIX_LENGTH, nameof(institutionCode));
+            Require.True(countryCode.Length == COUNTRY_LENGTH, nameof(countryCode));
+            Require.True(locationCode.Length == SUFFIX_LENGTH, nameof(locationCode));
+            Require.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH, nameof(branchCode));
 
             return new Bic(
                 institutionCode,
@@ -187,7 +189,7 @@ namespace Narvalo.Finance
         // NB: We only perform basic validation on the input string.
         private static Bic? ParseCore(string value, bool throwOnError)
         {
-            Promise.NotNull(value);
+            Demand.NotNull(value);
 
             if (value.Length != BIC_LENGTH && value.Length != PARTY_LENGTH)
             {
@@ -202,21 +204,21 @@ namespace Narvalo.Finance
             // The first four letters or digits define the institution or bank code.
             // NB: SWIFT is more restrictive than ISO as it only expects letters.
             string institutionCode = value.Substring(0, PREFIX_LENGTH);
-            Assert(institutionCode.Length == PREFIX_LENGTH);
+            Check.True(institutionCode.Length == PREFIX_LENGTH);
 
             // The next two letters define the ISO 3166-1 alpha-2 country code.
             string countryCode = value.Substring(PREFIX_LENGTH, COUNTRY_LENGTH);
-            Assert(countryCode.Length == COUNTRY_LENGTH);
+            Check.True(countryCode.Length == COUNTRY_LENGTH);
 
             // The next two letters or digits define the location code.
             string locationCode = value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH, SUFFIX_LENGTH);
-            Assert(locationCode.Length == SUFFIX_LENGTH);
+            Check.True(locationCode.Length == SUFFIX_LENGTH);
 
             // The next three letters or digits define the branch code (optional).
             string branchCode = value.Length == PARTY_LENGTH
                 ? String.Empty
                 : value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH + SUFFIX_LENGTH, BRANCH_LENGTH);
-            //Assert(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
+            Debug.Assert(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
 
             return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }
