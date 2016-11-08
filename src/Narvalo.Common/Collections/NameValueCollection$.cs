@@ -17,7 +17,7 @@ namespace Narvalo.Collections
     {
         public static Maybe<string> MayGetSingle(this NameValueCollection @this, string name)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return from values in @this.MayGetValues(name)
                    where values.Length == 1
@@ -36,7 +36,7 @@ namespace Narvalo.Collections
             string name,
             Func<string, Maybe<T>> parserM)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return (from @_ in @this.MayGetValues(name) select @_.MapAny(parserM)).ValueOrElse(Enumerable.Empty<T>());
         }
@@ -46,7 +46,7 @@ namespace Narvalo.Collections
             string name,
             Func<string, Maybe<T>> parserM)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.MayGetValues(name).Bind(@_ => @_.ForEach(parserM));
         }

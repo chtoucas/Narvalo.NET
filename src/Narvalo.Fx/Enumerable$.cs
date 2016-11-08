@@ -29,7 +29,7 @@ namespace Narvalo.Fx
 
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return !@this.Any();
         }
@@ -38,7 +38,7 @@ namespace Narvalo.Fx
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return FirstOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -63,7 +63,7 @@ namespace Narvalo.Fx
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return LastOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -78,7 +78,7 @@ namespace Narvalo.Fx
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return SingleOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -110,7 +110,7 @@ namespace Narvalo.Fx
 
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             return @this.Concat(Sequence.Pure(element)).EmptyIfNull();
@@ -118,7 +118,7 @@ namespace Narvalo.Fx
 
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
 
             return Sequence.Pure(element).Concat(@this).EmptyIfNull();
@@ -152,7 +152,7 @@ namespace Narvalo.Fx
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> accumulator)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(accumulator != null);
 
             return @this.Reverse().Aggregate(seed, accumulator);
@@ -162,7 +162,7 @@ namespace Narvalo.Fx
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, TSource> accumulator)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(accumulator != null);
 
             return @this.Reverse().Aggregate(accumulator);

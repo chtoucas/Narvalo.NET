@@ -39,7 +39,7 @@ namespace Narvalo.Fx.Advanced
             where TSource : struct
             where TResult : struct
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return value.Bind(@this);
         }

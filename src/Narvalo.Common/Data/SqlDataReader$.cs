@@ -10,14 +10,14 @@ namespace Narvalo.Data
     using Narvalo.Fx;
 
     /*!
-     * Méthodes d'extension pour `SqlDataReader` 
+     * Méthodes d'extension pour `SqlDataReader`
      * =========================================
-     * 
+     *
      * TODO: Mettre à jour!
-     * 
+     *
      * Objets de type valeur
      * ---------------------
-     * 
+     *
      * On implémente les méthodes suivantes :
      * ```
      * T GetValue(this SqlDataReader @this, string name)
@@ -26,10 +26,10 @@ namespace Narvalo.Data
      * T? GetNullableValue(this SqlDataReader @this, int ordinal)
      * T? GetNullableValue(this SqlDataReader @this, string name)
      * ```
-     *     
+     *
      * Objets de type référence
      * ------------------------
-     * 
+     *
      * On implémente les méthodes suivantes :
      * ```
      * Maybe<T> MayGetReference(this SqlDataReader @this, int ordinal)
@@ -363,7 +363,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBytesUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             return @this.GetSqlBytes(ordinal).ToMaybe();
@@ -380,7 +380,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBytesUnchecked(this SqlDataReader @this, string name)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.MayGetBytes(@this.GetOrdinal(name));
         }
@@ -397,7 +397,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBinaryUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             return @this.GetSqlBinary(ordinal).ToMaybe();
@@ -414,7 +414,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBinaryUnchecked(this SqlDataReader @this, string name)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.MayGetBinary(@this.GetOrdinal(name));
         }
@@ -431,7 +431,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<char[]> MayGetCharsUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             return @this.GetSqlChars(ordinal).ToMaybe();
@@ -448,7 +448,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<char[]> MayGetCharsUnchecked(this SqlDataReader @this, string name)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.MayGetChars(@this.GetOrdinal(name));
         }
@@ -465,7 +465,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetStringUnchecked(this SqlDataReader @this, int ordinal, string defaultValue)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             var value = @this.GetSqlString(ordinal);
@@ -483,7 +483,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetStringUnchecked(this SqlDataReader @this, string name, string defaultValue)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.GetString(@this.GetOrdinal(name), defaultValue);
         }
@@ -500,7 +500,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetStringUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             return @this.GetSqlString(ordinal).ToMaybe();
@@ -517,7 +517,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetStringUnchecked(this SqlDataReader @this, string name)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.MayGetString(@this.GetOrdinal(name));
         }
@@ -534,7 +534,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal GetMoneyUnchecked(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             var value = @this.GetSqlMoney(ordinal);
@@ -552,7 +552,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal GetMoneyUnchecked(this SqlDataReader @this, string name, decimal defaultValue)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.GetMoney(@this.GetOrdinal(name), defaultValue);
         }
@@ -569,7 +569,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal? GetNullableMoneyUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             var value = @this.GetSqlMoney(ordinal);
@@ -588,7 +588,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal? GetNullableMoneyUnchecked(this SqlDataReader @this, string name)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.GetNullableMoney(@this.GetOrdinal(name));
         }
@@ -605,7 +605,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetXmlUnchecked(this SqlDataReader @this, int ordinal, string defaultValue)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             var value = @this.GetSqlXml(ordinal);
@@ -625,7 +625,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetXmlUnchecked(this SqlDataReader @this, string name, string defaultValue)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.GetXml(@this.GetOrdinal(name), defaultValue);
         }
@@ -642,7 +642,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetXmlUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
             Contract.Requires(ordinal >= 0);
 
             return @this.GetSqlXml(ordinal).ToMaybe();
@@ -659,7 +659,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetXmlUnchecked(this SqlDataReader @this, string name)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             return @this.MayGetXml(@this.GetOrdinal(name));
         }

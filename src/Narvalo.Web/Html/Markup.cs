@@ -16,7 +16,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Image(string path)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Image(path, null, (IDictionary<string, object>)null);
@@ -24,7 +24,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Image(string path, string alt)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Image(path, alt, (IDictionary<string, object>)null);
@@ -32,7 +32,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Image(string path, object attributes)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Image(path, null, new RouteValueDictionary(attributes));
@@ -40,7 +40,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Image(string path, IDictionary<string, object> attributes)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Image(path, null, attributes);
@@ -48,7 +48,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Image(string path, string alt, object attributes)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Image(path, alt, new RouteValueDictionary(attributes));
@@ -56,7 +56,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Image(string path, string alt, IDictionary<string, object> attributes)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return new HtmlString(ImageCore(path, alt, attributes));
@@ -68,7 +68,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Link(string path)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Link(path, null, null, (IDictionary<string, object>)null);
@@ -76,7 +76,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Link(string path, string linkType)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Link(path, linkType, null, (IDictionary<string, object>)null);
@@ -84,7 +84,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Link(string path, string linkType, string relation)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Link(path, linkType, relation, (IDictionary<string, object>)null);
@@ -96,7 +96,7 @@ namespace Narvalo.Web.Html
             string relation,
             object attributes)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Link(path, linkType, relation, new RouteValueDictionary(attributes));
@@ -108,7 +108,7 @@ namespace Narvalo.Web.Html
             string relation,
             IDictionary<string, object> attributes)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return new HtmlString(LinkCore(path, linkType, relation, attributes));
@@ -120,7 +120,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Script(string path)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Script(path, null, (IDictionary<string, object>)null);
@@ -128,7 +128,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Script(string path, string scriptType)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Script(path, scriptType, (IDictionary<string, object>)null);
@@ -136,7 +136,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Script(string path, string scriptType, object attributes)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return Script(path, scriptType, new RouteValueDictionary(attributes));
@@ -144,7 +144,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Script(string path, string scriptType, IDictionary<string, object> attributes)
         {
-            Acknowledge.NotNullOrEmpty(path);
+            Demand.NotNullOrEmpty(path);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             return new HtmlString(ScriptCore(path, scriptType, attributes));

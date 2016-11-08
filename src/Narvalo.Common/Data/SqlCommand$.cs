@@ -34,7 +34,7 @@ namespace Narvalo.Data
             SqlDbType parameterType,
             object value)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
@@ -66,7 +66,7 @@ namespace Narvalo.Data
             T? value)
             where T : struct
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
@@ -96,7 +96,7 @@ namespace Narvalo.Data
             SqlDbType parameterType,
             T value)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
@@ -128,7 +128,7 @@ namespace Narvalo.Data
             T value,
             bool condition)
         {
-            Acknowledge.Object(@this);
+            Demand.Object(@this);
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
