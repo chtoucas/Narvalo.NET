@@ -185,7 +185,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Promise.True(IsSome, "Prove that any call to this internal property is guarded upstream.");
+                Check.True(IsSome);
                 Contract.Ensures(Contract.Result<T>() != null);
 
 #if CONTRACTS_FULL // Helps CCCheck with the object invariance.

@@ -21,6 +21,7 @@ namespace Narvalo
     /// each method check too many things at a time (null-checks).</para>
     /// </remarks>
     /// <seealso cref="Require"/>
+    [Obsolete("Use Require instead.")]
     [DebuggerStepThrough]
     public static class Guard
     {

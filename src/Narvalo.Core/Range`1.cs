@@ -18,7 +18,7 @@ namespace Narvalo
         public Range(T lowerEnd, T upperEnd)
         {
             // REVIEW: Strict range? Do we allow for equality?
-            Guard.LessThanOrEqualTo(lowerEnd, upperEnd, "lowerEnd");
+            Require.LessThanOrEqualTo(lowerEnd, upperEnd, "lowerEnd");
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;
@@ -29,7 +29,7 @@ namespace Narvalo
         public T UpperEnd { get { return _upperEnd; } }
 
         /// <summary>
-        /// Returns <see langword="true"/> if the value is included in the range. 
+        /// Returns <see langword="true"/> if the value is included in the range.
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="value"></param>
@@ -42,7 +42,7 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Returns <see langword="true"/> if the value is included in the range. 
+        /// Returns <see langword="true"/> if the value is included in the range.
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="range"></param>

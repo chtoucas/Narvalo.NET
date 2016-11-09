@@ -48,7 +48,7 @@ namespace Narvalo.Web.Optimization
                 return "\x20";
             }
 
-            // On remplace les chaînes de caractères constituées d'espace, tabulation 
+            // On remplace les chaînes de caractères constituées d'espace, tabulation
             // et contenant un retour à la ligne par un retour à ligne.
             if (String.IsNullOrWhiteSpace(value))
             {
@@ -72,7 +72,7 @@ namespace Narvalo.Web.Optimization
 
         private static bool IsTabsOrSpaces(string value)
         {
-            Promise.NotNull(value, "Null guard for a private method call.");
+            Demand.NotNull(value);
 
             for (int i = 0; i < value.Length; i++)
             {

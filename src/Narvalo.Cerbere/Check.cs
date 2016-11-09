@@ -34,6 +34,7 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         public static void True(bool testCondition)
         {
+            // TODO: Explain Requires not Assert
             Contract.Requires(testCondition);
             Debug.Assert(testCondition);
         }
