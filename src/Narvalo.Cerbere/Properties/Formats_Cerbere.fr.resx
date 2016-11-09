@@ -117,19 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Require_ObjectNull" xml:space="preserve">
-    <value>The object parameter is null.</value>
+  <data name="Require_NotGreaterThanOrEqualTo" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas supérieure ou égale à '{1}'.</value>
   </data>
-  <data name="Require_PropertyNull" xml:space="preserve">
-    <value>The property value is null.</value>
+  <data name="Require_Empty" xml:space="preserve">
+    <value>La valeur de '{0}' est vide.</value>
   </data>
-  <data name="Require_PropertyEmpty" xml:space="preserve">
-    <value>The property value is empty.</value>
+  <data name="Require_Null" xml:space="preserve">
+    <value>La valeur de '{0}' est null.</value>
   </data>
-  <data name="Require_PropertyEmptyOrWhiteSpace" xml:space="preserve">
-    <value>The property value is empty or contains only white-space characters.</value>
+  <data name="Require_EmptyOrWhiteSpace" xml:space="preserve">
+    <value>La valeur de '{0}' est vide ou ne contient que des espaces blancs.</value>
   </data>
-  <data name="Require_Failure" xml:space="preserve">
-    <value>XXX</value>
+  <data name="Require_InvalidRange" xml:space="preserve">
+    <value>La valeur du paramètre 'minInclusive' ({0}) doit être supérieure ou égale à celle du paramètre 'maxInclusive' ({1}).</value>
+  </data>
+  <data name="Require_NotGreaterThan" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas supérieure à '{1}'.</value>
+  </data>
+  <data name="Require_NotInRange" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas dans l'intervalle [{1} - {2}].</value>
+  </data>
+  <data name="Require_NotLessThan" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas inférieure à '{1}'.</value>
+  </data>
+  <data name="Require_NotLessThanOrEqualTo" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas inférieure ou égale à '{1}'.</value>
   </data>
 </root>

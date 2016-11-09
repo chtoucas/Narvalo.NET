@@ -31,18 +31,17 @@ namespace Narvalo
     /// </list>
     /// </para>
     /// </remarks>
-    [Obsolete]
     [DebuggerStepThrough]
     public static class Promise
     {
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void True(bool testCondition)
-        {
-            Contract.Requires(testCondition);
-            Debug.Assert(testCondition);
-        }
+        //[ContractAbbreviator]
+        //[Conditional("DEBUG")]
+        //[Conditional("CONTRACTS_FULL")]
+        //public static void True(bool testCondition)
+        //{
+        //    Contract.Requires(testCondition);
+        //    Debug.Assert(testCondition);
+        //}
 
         /// <summary>
         /// Validates that a condition holds.
@@ -67,7 +66,6 @@ namespace Narvalo
             }
         }
 
-        [Obsolete("Use Promise.True() instead.")]
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
@@ -81,14 +79,14 @@ namespace Narvalo
             }
         }
 
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void NotNull<T>(T value) where T : class
-        {
-            Contract.Requires(value != null);
-            Debug.Assert(value != null);
-        }
+        //[ContractAbbreviator]
+        //[Conditional("DEBUG")]
+        //[Conditional("CONTRACTS_FULL")]
+        //public static void NotNull<T>(T value) where T : class
+        //{
+        //    Contract.Requires(value != null);
+        //    Debug.Assert(value != null);
+        //}
 
         /// <summary>
         /// Validates that the specified argument is not <see langword="null"/>.
@@ -109,14 +107,14 @@ namespace Narvalo
             }
         }
 
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void NotNullOrEmpty(string value)
-        {
-            Contract.Requires(!String.IsNullOrEmpty(value));
-            Debug.Assert(!String.IsNullOrEmpty(value));
-        }
+        //[ContractAbbreviator]
+        //[Conditional("DEBUG")]
+        //[Conditional("CONTRACTS_FULL")]
+        //public static void NotNullOrEmpty(string value)
+        //{
+        //    Contract.Requires(!String.IsNullOrEmpty(value));
+        //    Debug.Assert(!String.IsNullOrEmpty(value));
+        //}
 
         /// <summary>
         /// Validates that the specified argument is not <see langword="null"/> or empty.
@@ -136,14 +134,14 @@ namespace Narvalo
             }
         }
 
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void NotNullOrWhiteSpace(string value)
-        {
-            Contract.Requires(!String.IsNullOrWhiteSpace(value));
-            Debug.Assert(!String.IsNullOrWhiteSpace(value));
-        }
+        //[ContractAbbreviator]
+        //[Conditional("DEBUG")]
+        //[Conditional("CONTRACTS_FULL")]
+        //public static void NotNullOrWhiteSpace(string value)
+        //{
+        //    Contract.Requires(!String.IsNullOrWhiteSpace(value));
+        //    Debug.Assert(!String.IsNullOrWhiteSpace(value));
+        //}
 
         /// <summary>
         /// Validates that the specified argument is not <see langword="null"/> or empty,

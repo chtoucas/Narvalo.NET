@@ -65,9 +65,19 @@
     <Compile Include="Check.cs" />
     <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
     <Compile Include="Format.cs" />
+    <Compile Include="Properties\Formats_Cerbere.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Formats_Cerbere.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Formats_Cerbere.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Formats_Cerbere.resx</DependentUpon>
+    </Compile>
     <Compile Include="Internal\IllegalConditionException.cs" />
     <Compile Include="NamespaceDoc.cs" />
-    <Compile Include="Predicates.cs" />
+    <Compile Include="Internal\Predicates.cs" />
     <Compile Include="Demand.cs" />
     <Compile Include="Promise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +104,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Formats_Cerbere.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Formats_Cerbere.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Formats_Cerbere.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Formats_Cerbere.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Strings_Cerbere.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings_Cerbere.fr.Designer.cs</LastGenOutput>

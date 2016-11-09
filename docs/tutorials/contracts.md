@@ -4,15 +4,20 @@ Code Contracts
 Preconditions
 -------------
 
-- `Narvalo.Require`
-- `Narvalo.Demand`
+Preconditions that will survive in Release mode:
+- `Narvalo.Require`: Code Contracts + Throws on failure
+- `Narvalo.Guard`: Throws on failure (if CC can't handle the situation) <- Remove?
+
+Preconditions that will not survive in Release mode:
+- `Narvalo.Demand`: Code Contract + Debug.Assert
+- `Debug.Assert` (if CC can't handle the situation)
 
 ```csharp
 public class MyClass {
   public void PublicMethod(string value) {
-    Require.NotNull(value, nameof(value));  // Code Contract + Throw ArgumentException
-    
-    // Code that calls at least 
+    Require.NotNull(value, nameof(value));
+
+    // Code that calls at least
     // - one public/internal method from another object
     // - or one private/protected/internal method from this object
     // that requires value not to be null.
@@ -22,29 +27,29 @@ public class MyClass {
     ProtectedMethod(value);
     PrivateMethod(value);
   }
-  
+
   public void PublicMethod2(string value) {
-    Contract.Requires(value != null);       // Code Contract
-  
+    Require.NotNull(value != null);
+
     // Code that only calls public methods.
     OtherObject.PublicMethod(value);
     PublicMethod(value);
   }
-  
+
   internal void InternalMethod(string value) {
-    Demand.NotNull(value);                 // Code Contract + Debug.Assert
+    Demand.NotNull(value);
   }
-  
+
   protected virtual void ProtectedVirtualMethod(string value) {
-    Demand.NotNull(value);                 // Code Contract + Debug.Assert
+    Demand.NotNull(value);
   }
-  
+
   protected void ProtectedMethod(string value) {
-    Demand.NotNull(value);                 // Code Contract + Debug.Assert
+    Demand.NotNull(value);
   }
-  
+
   private void PrivateMethod(string value) {
-    Demand.NotNull(value);                 // Code Contract + Debug.Assert
+    Demand.NotNull(value);
   }
 }
 ```
@@ -65,7 +70,13 @@ Postconditions
 Check points
 ------------
 
-- `Narvalo.Check`
+Postconditions that will survive in Release mode:
+- `Narvalo.Promise`: Code Contract + Throws on failure
+- `Narvalo.???`: Throws on failure (if CC can't handle the situation)
+
+Postconditions that will not survive in Release mode:
+- `Narvalo.Check`: Code Contract + Debug.Assert
+- `Debug.Assert` (if CC can't handle the situation)
 
 Invariants
 ----------

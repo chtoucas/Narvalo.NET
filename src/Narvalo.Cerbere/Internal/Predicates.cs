@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Internal
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -10,7 +10,14 @@ namespace Narvalo
     /// <summary>
     /// Provides predicate methods.
     /// </summary>
-    public static class Predicates
+#if CONTRACTS_FULL
+    // All members mentioned in a contract must be at least as visible as the method in which they appear.
+    // Failing to do so will produce a CC1038 error.
+    public
+#else
+    internal
+#endif
+        static class Predicates
     {
         /// <summary>
         /// Returns a value indicating whether the specified <paramref name="type"/> is a flags enumeration.
@@ -42,12 +49,13 @@ namespace Narvalo
         /// <returns><see langword="true"/> if the specified value consists only of white-space characters;
         /// otherwise <see langword="false"/>.</returns>
         [Pure]
-        public static bool IsWhiteSpace(string value)
+        public static bool IsEmptyOrWhiteSpace(string value)
         {
-            if (value == null)
-            {
-                return false;
-            }
+            Contract.Requires(value != null);
+            //if (value == null)
+            //{
+            //    return false;
+            //}
 
             for (int i = 0; i < value.Length; i++)
             {

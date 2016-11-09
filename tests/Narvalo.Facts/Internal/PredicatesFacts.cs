@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo
+namespace Narvalo.Internal
 {
+#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
+
     using System;
     using System.Diagnostics.CodeAnalysis;
 
@@ -74,36 +76,38 @@ namespace Narvalo
 
         #endregion
 
-        #region IsWhiteSpace()
+        #region IsEmptyOrWhiteSpace()
 
         [Fact]
         public static void IsWhiteSpace_ReturnsTrue_ForEmptyString()
         {
             // Act & Assert
-            Assert.True(Predicates.IsWhiteSpace(String.Empty));
+            Assert.True(Predicates.IsEmptyOrWhiteSpace(String.Empty));
         }
 
         [Fact]
         public static void IsWhiteSpace_ReturnsTrue_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            Assert.True(Predicates.IsWhiteSpace(Constants.WhiteSpaceOnlyString));
+            Assert.True(Predicates.IsEmptyOrWhiteSpace(Constants.WhiteSpaceOnlyString));
         }
 
         [Fact]
         public static void IsWhiteSpace_ReturnsFalse_ForNullString()
         {
             // Act & Assert
-            Assert.False(Predicates.IsWhiteSpace(null));
+            Assert.False(Predicates.IsEmptyOrWhiteSpace(null));
         }
 
         [Fact]
         public static void IsWhiteSpace_ReturnsFalse_ForNonEmptyOrWhiteSpaceString()
         {
             // Act & Assert
-            Assert.False(Predicates.IsWhiteSpace("value"));
+            Assert.False(Predicates.IsEmptyOrWhiteSpace("value"));
         }
 
         #endregion
     }
+
+#endif
 }

@@ -1,6 +1,17 @@
 ChangeLog
 =========
 
+XXXX-XX-XX - 
+-----------------------------------------------------------------------
+
+#### Bugfixes
+
+#### Breaking changes
+
+#### Enhancements
+
+#### Improvements
+
 2016-11-04 - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------
 

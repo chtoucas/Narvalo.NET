@@ -32,9 +32,18 @@ namespace Narvalo
     {
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void True(bool testCondition)
+        public static void True(bool testCondition) => TrueInner(testCondition);
+
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void False(bool testCondition) => TrueInner(!testCondition);
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        private static void TrueInner(bool testCondition)
         {
-            // TODO: Explain Requires not Assert
+            // TODO: Explain Requires vs Assert here.
             Contract.Requires(testCondition);
             Debug.Assert(testCondition);
         }

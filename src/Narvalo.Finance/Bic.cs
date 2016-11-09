@@ -130,7 +130,7 @@ namespace Narvalo.Finance
             Require.True(institutionCode.Length == PREFIX_LENGTH, nameof(institutionCode));
             Require.True(countryCode.Length == COUNTRY_LENGTH, nameof(countryCode));
             Require.True(locationCode.Length == SUFFIX_LENGTH, nameof(locationCode));
-            //Require.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH, nameof(branchCode));
+            Guard.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH, nameof(branchCode));
 
             return new Bic(
                 institutionCode,

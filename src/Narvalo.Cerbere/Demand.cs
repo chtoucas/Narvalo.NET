@@ -21,6 +21,11 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
+        public static void False(bool testCondition) => True(!testCondition);
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
         public static void Object<T>(T @this) where T : class => True(@this != null);
 
         [ContractAbbreviator]
