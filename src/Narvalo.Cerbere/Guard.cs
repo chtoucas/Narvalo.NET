@@ -4,10 +4,9 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.Contracts;
 
     using Narvalo.Properties;
-
-    using static Narvalo.Internal.Predicates;
 
     /// <summary>
     /// Provides helper methods to perform argument validation.
@@ -28,7 +27,7 @@ namespace Narvalo
     public static class Guard
     {
         public static void True(bool testCondition, string parameterName)
-            => True(testCondition, parameterName, Strings_Cerbere.Require_Failure);
+            => True(testCondition, parameterName, Strings_Cerbere.Argument_FailedPrecondition);
 
         public static void True(bool testCondition, string parameterName, string message)
         {
@@ -56,6 +55,7 @@ namespace Narvalo
         /// or equal to <paramref name="maxInclusive"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
         /// the allowable range of values.</exception>
+        [ContractArgumentValidator]
         public static void InRange<T>(T value, T minInclusive, T maxInclusive, string parameterName)
             where T : struct, IComparable<T>
         {
@@ -63,7 +63,7 @@ namespace Narvalo
             {
                 throw new ArgumentException(
                     Format.Resource(
-                        Formats_Cerbere.Require_InvalidRange,
+                        Strings_Cerbere.Argument_InvalidRange,
                         minInclusive,
                         maxInclusive),
                     parameterName);
@@ -71,14 +71,17 @@ namespace Narvalo
 
             if (value.CompareTo(minInclusive) < 0 || value.CompareTo(maxInclusive) > 0)
             {
-                var message = Format.Resource(
-                    Formats_Cerbere.Require_NotInRange,
+                throw new ArgumentOutOfRangeException(
                     parameterName,
-                    minInclusive,
-                    maxInclusive);
-
-                throw new ArgumentOutOfRangeException(parameterName, value, message);
+                    value,
+                    Format.Resource(
+                        Strings_Cerbere.ArgumentOutOfRange_NotInRange,
+                        parameterName,
+                        minInclusive,
+                        maxInclusive));
             }
+
+            Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -99,7 +102,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Formats_Cerbere.Require_NotGreaterThan, parameterName, minValue));
+                    Format.Resource(Strings_Cerbere.ArgumentOutOfRange_NotGreaterThan, parameterName, minValue));
             }
         }
 
@@ -121,7 +124,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Formats_Cerbere.Require_NotGreaterThanOrEqualTo, parameterName, minValue));
+                    Format.Resource(Strings_Cerbere.ArgumentOutOfRange_NotGreaterThanOrEqualTo, parameterName, minValue));
             }
         }
 
@@ -143,7 +146,7 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Formats_Cerbere.Require_NotLessThan, parameterName, maxValue));
+                    Format.Resource(Strings_Cerbere.ArgumentOutOfRange_NotLessThan, parameterName, maxValue));
             }
         }
 
@@ -157,6 +160,7 @@ namespace Narvalo
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
         /// the maximum value.</exception>
+        [ContractArgumentValidator]
         public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
             where T : struct, IComparable<T>
         {
@@ -165,8 +169,10 @@ namespace Narvalo
                 throw new ArgumentOutOfRangeException(
                     parameterName,
                     value,
-                    Format.Resource(Formats_Cerbere.Require_NotLessThanOrEqualTo, parameterName, maxValue));
+                    Format.Resource(Strings_Cerbere.ArgumentOutOfRange_NotLessThanOrEqualTo, parameterName, maxValue));
             }
+
+            Contract.EndContractBlock();
         }
     }
 }

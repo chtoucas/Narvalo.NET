@@ -92,7 +92,7 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets the institution code.
         /// </summary>
-        /// <remarks>As of ISO 9362:2014, this is also called the Business party prefix.</remarks>
+        /// <remarks>As of ISO 9362:2014, this is also the Business party prefix.</remarks>
         public string InstitutionCode
         {
             get
@@ -110,7 +110,7 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets the location code.
         /// </summary>
-        /// <remarks>As of ISO 9362:2014, this is also called the Business party suffix.</remarks>
+        /// <remarks>As of ISO 9362:2014, this is also the Business party suffix.</remarks>
         public string LocationCode
         {
             get

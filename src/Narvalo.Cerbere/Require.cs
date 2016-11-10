@@ -31,7 +31,7 @@ namespace Narvalo
         {
             if (!testCondition)
             {
-                throw new ArgumentException(Strings_Cerbere.Require_Failure, parameterName);
+                throw new ArgumentException(Strings_Cerbere.Argument_FailedPrecondition, parameterName);
             }
 
             Contract.EndContractBlock();
@@ -61,7 +61,7 @@ namespace Narvalo
         {
             if (@this == null)
             {
-                throw new ArgumentNullException("this", Strings_Cerbere.Require_ObjectNull);
+                throw new ArgumentNullException("this", Strings_Cerbere.ArgumentNull_Object);
             }
 
             Contract.EndContractBlock();
@@ -79,7 +79,7 @@ namespace Narvalo
         {
             if (value == null)
             {
-                throw new ArgumentNullException("value", Strings_Cerbere.Require_PropertyNull);
+                throw new ArgumentNullException("value", Strings_Cerbere.ArgumentNull_Property);
             }
 
             Contract.EndContractBlock();
@@ -99,7 +99,7 @@ namespace Narvalo
 
             if (value.Length == 0)
             {
-                throw new ArgumentException(Strings_Cerbere.Require_PropertyEmpty, "value");
+                throw new ArgumentException(Strings_Cerbere.Argument_EmptyString, "value");
             }
 
             Contract.EndContractBlock();
@@ -121,7 +121,7 @@ namespace Narvalo
 
             if (IsEmptyOrWhiteSpace(value))
             {
-                throw new ArgumentException(Strings_Cerbere.Require_PropertyEmptyOrWhiteSpace, "value");
+                throw new ArgumentException(Strings_Cerbere.Argument_EmptyOrWhiteSpaceString, "value");
             }
 
             Contract.EndContractBlock();
@@ -139,9 +139,7 @@ namespace Narvalo
         {
             if (value == null)
             {
-                throw new ArgumentNullException(
-                    parameterName,
-                    Format.Resource(Formats_Cerbere.Require_Null, parameterName));
+                throw new ArgumentNullException(parameterName, Strings_Cerbere.ArgumentNull_Generic);
             }
 
             Contract.EndContractBlock();
@@ -161,9 +159,7 @@ namespace Narvalo
 
             if (value.Length == 0)
             {
-                throw new ArgumentException(
-                    Format.Resource(Formats_Cerbere.Require_Empty, parameterName),
-                    parameterName);
+                throw new ArgumentException(Strings_Cerbere.Argument_EmptyString, parameterName);
             }
 
             Contract.EndContractBlock();
@@ -185,383 +181,10 @@ namespace Narvalo
 
             if (IsEmptyOrWhiteSpace(value))
             {
-                throw new ArgumentException(
-                    Format.Resource(Formats_Cerbere.Require_EmptyOrWhiteSpace, parameterName),
-                    parameterName);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is in a given range of integers, range borders included.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="minInclusive">The minimum integer value (inclusive).</param>
-        /// <param name="maxInclusive">The maximum integer value (inclusive).</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than
-        /// or equal to <paramref name="maxInclusive"/>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
-        /// the allowable range of values.</exception>
-        [ContractArgumentValidator]
-        public static void InRange(int value, int minInclusive, int maxInclusive, string parameterName)
-        {
-            ValidateRange(minInclusive, maxInclusive);
-
-            if (value < minInclusive || value > maxInclusive)
-            {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    Format.Resource(
-                        Formats_Cerbere.Require_NotInRange,
-                        parameterName,
-                        minInclusive,
-                        maxInclusive));
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is in a given range of long integers, range borders included.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="minInclusive">The minimum long value (inclusive).</param>
-        /// <param name="maxInclusive">The maximum long value (inclusive).</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than
-        /// or equal to <paramref name="maxInclusive"/>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
-        /// the allowable range of values.</exception>
-        [ContractArgumentValidator]
-        public static void InRange(long value, long minInclusive, long maxInclusive, string parameterName)
-        {
-            ValidateRange(minInclusive, maxInclusive);
-
-            if (value < minInclusive || value > maxInclusive)
-            {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    Format.Resource(
-                        Formats_Cerbere.Require_NotInRange,
-                        parameterName,
-                        minInclusive,
-                        maxInclusive));
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is greater than a minimum integer value.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="minValue">The minimum integer value.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is less than
-        /// or equal to the minimum integer value.</exception>
-        [ContractArgumentValidator]
-        public static void GreaterThan(int value, int minValue, string parameterName)
-        {
-            if (value <= minValue)
-            {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    Format.Resource(Formats_Cerbere.Require_NotGreaterThan, parameterName, minValue));
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is greater than a minimum long value.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="minValue">The minimum long value.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is less than
-        /// or equal to the minimum long value.</exception>
-        [ContractArgumentValidator]
-        public static void GreaterThan(long value, long minValue, string parameterName)
-        {
-            if (value <= minValue)
-            {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    Format.Resource(Formats_Cerbere.Require_NotGreaterThan, parameterName, minValue));
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is greater than or equal to a minimum integer value.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="minValue">The minimum integer value (inclusive).</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is less than
-        /// the minimum integer value.</exception>
-        [ContractArgumentValidator]
-        public static void GreaterThanOrEqualTo(int value, int minValue, string parameterName)
-        {
-            if (value < minValue)
-            {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    Format.Resource(Formats_Cerbere.Require_NotGreaterThanOrEqualTo, parameterName, minValue));
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is greater than or equal to a minimum long value.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="minValue">The minimum long value (inclusive).</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is less than
-        /// the minimum long value.</exception>
-        [ContractArgumentValidator]
-        public static void GreaterThanOrEqualTo(long value, long minValue, string parameterName)
-        {
-            if (value < minValue)
-            {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    Format.Resource(Formats_Cerbere.Require_NotGreaterThanOrEqualTo, parameterName, minValue));
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is less than a maximum integer value.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="maxValue">The maximum integer value.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
-        /// or equal the maximum integer value.</exception>
-        [ContractArgumentValidator]
-        public static void LessThan(int value, int maxValue, string parameterName)
-        {
-            if (value >= maxValue)
-            {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    Format.Resource(Formats_Cerbere.Require_NotLessThan, parameterName, maxValue));
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is less than a maximum long value.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="maxValue">The maximum long value.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
-        /// or equal the maximum long value.</exception>
-        [ContractArgumentValidator]
-        public static void LessThan(long value, long maxValue, string parameterName)
-        {
-            if (value >= maxValue)
-            {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    Format.Resource(Formats_Cerbere.Require_NotLessThan, parameterName, maxValue));
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is less or equal to a maximum integer value.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="maxValue">The maximum integer value (inclusive).</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
-        /// the maximum integer value.</exception>
-        [ContractArgumentValidator]
-        public static void LessThanOrEqualTo(int value, int maxValue, string parameterName)
-        {
-            if (value > maxValue)
-            {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    Format.Resource(Formats_Cerbere.Require_NotLessThanOrEqualTo, parameterName, maxValue));
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is less or equal to a maximum long value.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="maxValue">The maximum long value (inclusive).</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
-        /// the maximum long value.</exception>
-        [ContractArgumentValidator]
-        public static void LessThanOrEqualTo(long value, long maxValue, string parameterName)
-        {
-            if (value > maxValue)
-            {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    value,
-                    Format.Resource(Formats_Cerbere.Require_NotLessThanOrEqualTo, parameterName, maxValue));
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Checks that the minimum value is lower or equal to the maximum value of the range.
-        /// </summary>
-        /// <remarks>
-        /// This method was created to silent a CC1025 error:
-        ///  "After contract block, found use of local variable defined in contract block"
-        /// We don't use Require.LessThanOrEqualTo because we want to throw an ArgumentException
-        /// instead of an ArgumentOutOfRangeException.
-        /// </remarks>
-        /// <param name="minInclusive">The minimum integer value.</param>
-        /// <param name="maxInclusive">The maximum integer value.</param>
-        [ContractArgumentValidator]
-        private static void ValidateRange(int minInclusive, int maxInclusive)
-        {
-            if (minInclusive > maxInclusive)
-            {
-                throw new ArgumentException(
-                    Format.Resource(
-                        Formats_Cerbere.Require_InvalidRange,
-                        minInclusive,
-                        maxInclusive),
-                    "minInclusive");
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Checks that the minimum value is lower or equal to the maximum value of the range.
-        /// </summary>
-        /// <remarks>
-        /// This method was created to silent a CC1025 error:
-        ///  "After contract block, found use of local variable defined in contract block"
-        /// We don't use Require.LessThanOrEqualTo because we want to throw an ArgumentException
-        /// instead of an ArgumentOutOfRangeException.
-        /// </remarks>
-        /// <param name="minInclusive">The minimum long value.</param>
-        /// <param name="maxInclusive">The maximum long value.</param>
-        [ContractArgumentValidator]
-        private static void ValidateRange(long minInclusive, long maxInclusive)
-        {
-            if (minInclusive > maxInclusive)
-            {
-                throw new ArgumentException(
-                    Format.Resource(
-                        Formats_Cerbere.Require_InvalidRange,
-                        minInclusive,
-                        maxInclusive),
-                    "minInclusive");
+                throw new ArgumentException(Strings_Cerbere.Argument_EmptyOrWhiteSpaceString, parameterName);
             }
 
             Contract.EndContractBlock();
         }
     }
-
-#if FIXME
-
-    public static partial class Require
-    {
-        /// <summary>
-        /// Validates that the specified argument is in a given range, range borders included.
-        /// </summary>
-        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="minInclusive">The minimum value (inclusive).</param>
-        /// <param name="maxInclusive">The maximum value (inclusive).</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="minInclusive"/> is greater than
-        /// or equal to <paramref name="maxInclusive"/>.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
-        /// the allowable range of values.</exception>
-        public static void InRange<T>(T value, T minInclusive, T maxInclusive, string parameterName)
-            where T : struct, IComparable<T>
-            => Guard.InRange(value, minInclusive, maxInclusive, parameterName);
-
-        /// <summary>
-        /// Validates that the specified argument is greater than a minimum value.
-        /// This method does not enforce any Code Contracts specification.
-        /// </summary>
-        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="minValue">The minimum value.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is less than
-        /// or equal to the minimum value.</exception>
-        public static void GreaterThan<T>(T value, T minValue, string parameterName)
-            where T : struct, IComparable<T>
-            => Guard.GreaterThan(value, minValue, parameterName);
-
-        /// <summary>
-        /// Validates that the specified argument is greater than or equal to a minimum value.
-        /// This method does not enforce any Code Contracts specification.
-        /// </summary>
-        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="minValue">The minimum value (inclusive).</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is less than
-        /// the minimum value.</exception>
-        public static void GreaterThanOrEqualTo<T>(T value, T minValue, string parameterName)
-            where T : struct, IComparable<T>
-            => Guard.GreaterThanOrEqualTo(value, minValue, parameterName);
-
-        /// <summary>
-        /// Validates that the specified argument is less than a maximum value.
-        /// This method does not enforce any Code Contracts specification.
-        /// </summary>
-        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="maxValue">The maximum value.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
-        /// or equal the maximum value.</exception>
-        public static void LessThan<T>(T value, T maxValue, string parameterName)
-            where T : struct, IComparable<T>
-            => Guard.LessThan(value, maxValue, parameterName);
-
-        /// <summary>
-        /// Validates that the specified argument is less or equal to a maximum value.
-        /// This method does not enforce any Code Contracts specification.
-        /// </summary>
-        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="maxValue">The maximum value (inclusive).</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
-        /// the maximum value.</exception>
-        public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
-            where T : struct, IComparable<T>
-            => Guard.LessThanOrEqualTo(value, maxValue, parameterName);
-    }
-
-#endif
 }

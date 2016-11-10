@@ -11,8 +11,8 @@ namespace Narvalo.Internal
     /// Provides predicate methods.
     /// </summary>
 #if CONTRACTS_FULL
-    // All members mentioned in a contract must be at least as visible as the method in which they appear.
-    // Failing to do so will produce a CC1038 error.
+    // All members mentioned in a contract must be at least as visible as the method in which they
+    // appear. Failing to do so will produce a CC1038 error.
     public
 #else
     internal

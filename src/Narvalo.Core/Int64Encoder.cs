@@ -177,6 +177,7 @@ namespace Narvalo
                 int index = Array.BinarySearch(alphabet, value[i]);
                 if (index < 0)
                 {
+                    // REVIEW: Use FormatException instead?
                     throw new ArgumentException(
                         Format.Resource(Strings_Core.Int64Encoder_IllegalCharacter_Format, value[i], i),
                         "value");
