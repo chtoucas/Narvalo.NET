@@ -46,7 +46,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Ensure<string>.NotNull();
                 return _bban;
             }
         }
@@ -58,8 +58,9 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Ensure<string>.NotNull();
                 Ensures(Result<string>().Length == CHECKDIGIT_LENGTH);
+
                 return _checkDigit;
             }
         }
@@ -71,8 +72,9 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Ensure<string>.NotNull();
                 Ensures(Result<string>().Length == COUNTRY_LENGTH);
+
                 return _countryCode;
             }
         }

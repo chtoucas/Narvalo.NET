@@ -107,7 +107,7 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The object parameter is null..
+        ///   Looks up a localized string similar to The object instance canont be null..
         /// </summary>
         internal static string ArgumentNull_Object {
             get {
@@ -116,7 +116,7 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The property value is null..
+        ///   Looks up a localized string similar to The property value cannot be null..
         /// </summary>
         internal static string ArgumentNull_Property {
             get {

@@ -4,7 +4,6 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Properties;
 
@@ -55,7 +54,6 @@ namespace Narvalo
         /// or equal to <paramref name="maxInclusive"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is outside
         /// the allowable range of values.</exception>
-        [ContractArgumentValidator]
         public static void InRange<T>(T value, T minInclusive, T maxInclusive, string parameterName)
             where T : struct, IComparable<T>
         {
@@ -80,8 +78,6 @@ namespace Narvalo
                         minInclusive,
                         maxInclusive));
             }
-
-            Contract.EndContractBlock();
         }
 
         /// <summary>
@@ -160,7 +156,6 @@ namespace Narvalo
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="value"/> is greater than
         /// the maximum value.</exception>
-        [ContractArgumentValidator]
         public static void LessThanOrEqualTo<T>(T value, T maxValue, string parameterName)
             where T : struct, IComparable<T>
         {
@@ -171,8 +166,6 @@ namespace Narvalo
                     value,
                     Format.Resource(Strings_Cerbere.ArgumentOutOfRange_NotLessThanOrEqualTo, parameterName, maxValue));
             }
-
-            Contract.EndContractBlock();
         }
     }
 }

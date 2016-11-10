@@ -61,7 +61,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Ensure<string>.NotNull();
                 //Ensures(Result<string>().Length == 0 || Result<string>().Length == BRANCH_LENGTH);
                 return _branchCode;
             }
@@ -71,7 +71,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Ensure<string>.NotNull();
                 return InstitutionCode + CountryCode + LocationCode;
             }
         }
@@ -83,7 +83,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Ensure<string>.NotNull();
                 Ensures(Result<string>().Length == COUNTRY_LENGTH);
                 return _countryCode;
             }
@@ -97,7 +97,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Ensure<string>.NotNull();
                 Ensures(Result<string>().Length == PREFIX_LENGTH);
                 return _institutionCode;
             }
@@ -115,7 +115,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Ensure<string>.NotNull();
                 Ensures(Result<string>().Length == SUFFIX_LENGTH);
                 return _locationCode;
             }

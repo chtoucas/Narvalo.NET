@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-// All compilation symbols found below are eventually defined on the fly by the build script.
-
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
@@ -31,9 +29,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyInformationalVersion("1.0.0-DUMMY")]
 #elif BUILD_GENERATED_VERSION
-// Versions are automatically generated and made available in a separate file.
+// Version attributes are automatically generated and made available in a separate file.
 #else
-// In Visual Studio, assemblies get a fake version.
+// Inside Visual Studio, assemblies get a fake version.
 [assembly: AssemblyConfiguration("Development Build.")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

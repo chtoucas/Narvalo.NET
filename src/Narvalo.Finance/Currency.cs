@@ -4,7 +4,6 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Collections.Concurrent;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     using Narvalo.Finance.Currencies;
@@ -50,7 +49,8 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Ensure<string>.NotNull();
+
                 return _code;
             }
         }
@@ -67,7 +67,7 @@ namespace Narvalo.Finance
         {
             Require.NotNull(code, nameof(code));
             ContractFor.CurrencyCode(code);
-            Ensures(Result<Currency>() != null);
+            Ensure<Currency>.NotNull();
 
             var currency = s_Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency);
             Assume(currency != null);
@@ -85,7 +85,7 @@ namespace Narvalo.Finance
         public static Currency OfRegion(RegionInfo regionInfo)
         {
             Require.NotNull(regionInfo, nameof(regionInfo));
-            Ensures(Result<Currency>() != null);
+            Ensure<Currency>.NotNull();
 
             var code = regionInfo.ISOCurrencySymbol;
             Assume(code != null);
@@ -100,7 +100,7 @@ namespace Narvalo.Finance
         /// <returns>A string containing the code of the currency.</returns>
         public override string ToString()
         {
-            Ensures(Result<string>() != null);
+            Ensure<string>.NotNull();
 
             return Code;
         }
@@ -121,7 +121,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return XXX.Currency;
             }
@@ -137,7 +137,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return XTS.Currency;
             }
@@ -151,7 +151,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return EUR.Currency;
             }
@@ -165,7 +165,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return GBP.Currency;
             }
@@ -179,7 +179,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return CHF.Currency;
             }
@@ -193,7 +193,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return USD.Currency;
             }
@@ -207,7 +207,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return JPY.Currency;
             }
@@ -222,7 +222,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return XAU.Currency;
             }
@@ -237,7 +237,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return XPD.Currency;
             }
@@ -252,7 +252,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return XPT.Currency;
             }
@@ -267,7 +267,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
 
                 return XAG.Currency;
             }

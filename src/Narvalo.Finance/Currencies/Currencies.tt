@@ -63,7 +63,7 @@ namespace <#= Namespace #>
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Ensure<Currency>.NotNull();
                 return s_Instance;
             }
         }

@@ -64,6 +64,7 @@
     <Compile Include="Acknowledge.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
+    <Compile Include="Ensure`1.cs" />
     <Compile Include="Format.cs" />
     <Compile Include="Internal\IllegalConditionException.cs" />
     <Compile Include="NamespaceDoc.cs" />

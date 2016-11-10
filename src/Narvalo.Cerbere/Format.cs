@@ -35,9 +35,9 @@ namespace Narvalo
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string CurrentCulture(string format, params object[] args)
         {
-            Contract.Requires(format != null);
-            Contract.Requires(args != null);
-            Contract.Ensures(Contract.Result<string>() != null);
+            Demand.NotNull(format);
+            Demand.NotNull(args);
+            Ensure<string>.NotNull();
 
             return String.Format(CultureInfo.CurrentCulture, format, args);
         }
@@ -54,9 +54,9 @@ namespace Narvalo
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string InvariantCulture(string format, params object[] args)
         {
-            Contract.Requires(format != null);
-            Contract.Requires(args != null);
-            Contract.Ensures(Contract.Result<string>() != null);
+            Demand.NotNull(format);
+            Demand.NotNull(args);
+            Ensure<string>.NotNull();
 
             return String.Format(CultureInfo.InvariantCulture, format, args);
         }
@@ -76,9 +76,9 @@ namespace Narvalo
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Resource(string localizedResource, params object[] args)
         {
-            Contract.Requires(localizedResource != null);
-            Contract.Requires(args != null);
-            Contract.Ensures(Contract.Result<string>() != null);
+            Demand.NotNull(localizedResource);
+            Demand.NotNull(args);
+            Ensure<string>.NotNull();
 
             return String.Format(CultureInfo.CurrentCulture, localizedResource, args);
         }

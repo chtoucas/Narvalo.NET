@@ -29,7 +29,7 @@ public class MyClass {
   }
 
   public void PublicMethod2(string value) {
-    Require.NotNull(value != null);
+    Demand.NotNull(value);
 
     // Code that only calls public methods.
     OtherObject.PublicMethod(value);

@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ArgumentNull_Object" xml:space="preserve">
-    <value>The object parameter is null.</value>
+    <value>The object instance canont be null.</value>
   </data>
   <data name="ArgumentNull_Property" xml:space="preserve">
-    <value>The property value is null.</value>
+    <value>The property value cannot be null.</value>
   </data>
   <data name="Argument_FailedPrecondition" xml:space="preserve">
     <value>XXX</value>

@@ -55,7 +55,8 @@ namespace Narvalo
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="this"/>.</typeparam>
         /// <param name="this">The object to check.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="this"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="this"/> is
+        /// <see langword="null"/>.</exception>
         [ContractArgumentValidator]
         public static void Object<T>([ValidatedNotNull]T @this) where T : class
         {
@@ -73,7 +74,8 @@ namespace Narvalo
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="value">The property value to check.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
         [ContractArgumentValidator]
         public static void Property<T>([ValidatedNotNull]T value) where T : class
         {
@@ -90,8 +92,10 @@ namespace Narvalo
         /// Meant to be used inside a property setter to validate the new value.
         /// </summary>
         /// <param name="value">The property value to check.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> or empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/> or empty.</exception>
         [ContractArgumentValidator]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {
@@ -111,8 +115,10 @@ namespace Narvalo
         /// Meant to be used inside a property setter to validate the new value.
         /// </summary>
         /// <param name="value">The property value to check.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>
         /// or empty, or does not consist only of white-space characters.</exception>
         [ContractArgumentValidator]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
@@ -133,7 +139,8 @@ namespace Narvalo
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
         [ContractArgumentValidator]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
         {
@@ -150,8 +157,10 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/> or empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/> or empty.</exception>
         [ContractArgumentValidator]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
@@ -171,8 +180,10 @@ namespace Narvalo
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <see langword="null"/>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>
         /// or empty, or does not consist only of white-space characters.</exception>
         [ContractArgumentValidator]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
