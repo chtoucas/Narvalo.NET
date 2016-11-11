@@ -40,7 +40,6 @@ namespace <#= Namespace #>
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
@@ -72,8 +71,6 @@ namespace <#= Namespace #>
 #>
 namespace <#= Namespace #>
 {
-    using System.Diagnostics.Contracts;
-
     using static System.Diagnostics.Contracts.Contract;
 
 <#+ EmitComonadCore(); #>
@@ -90,7 +87,6 @@ namespace <#= Namespace #>
 namespace <#= Namespace #>
 {
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     using <#= Namespace #>.Internal;
 
@@ -103,7 +99,6 @@ namespace <#= Namespace #>.Advanced
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     using <#= Namespace #>;
     using <#= Namespace #>.Internal;

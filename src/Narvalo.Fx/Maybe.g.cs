@@ -15,7 +15,6 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
@@ -766,7 +765,6 @@ namespace Narvalo.Fx
 namespace Narvalo.Fx
 {
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Fx.Internal;
 
@@ -818,7 +816,6 @@ namespace Narvalo.Fx.Advanced
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Fx;
     using Narvalo.Fx.Internal;

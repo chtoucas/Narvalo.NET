@@ -12,8 +12,6 @@
 
 namespace Narvalo.Fx.Samples
 {
-    using System.Diagnostics.Contracts;
-
     using static System.Diagnostics.Contracts.Contract;
 
     // Implements core Comonad methods.

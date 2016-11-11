@@ -15,7 +15,6 @@ namespace Narvalo.Fx.Samples
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
@@ -811,7 +810,6 @@ namespace Narvalo.Fx.Samples
 namespace Narvalo.Fx.Samples
 {
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Fx.Samples.Internal;
 
@@ -847,7 +845,6 @@ namespace Narvalo.Fx.Samples.Advanced
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Fx.Samples;
     using Narvalo.Fx.Samples.Internal;
