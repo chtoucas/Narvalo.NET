@@ -123,7 +123,7 @@
   <data name="ArgumentNull_Property" xml:space="preserve">
     <value>The property value cannot be null.</value>
   </data>
-  <data name="Argument_FailedPrecondition" xml:space="preserve">
+  <data name="Argument_FailedCondition" xml:space="preserve">
     <value>XXX</value>
   </data>
   <data name="ArgumentNull_Generic" xml:space="preserve">
@@ -152,5 +152,8 @@
   </data>
   <data name="Argument_InvalidRange" xml:space="preserve">
     <value>The value of the parameter 'minInclusive' ({0}) must be greater than or equal to value of the parameter 'maxInclusive' ({1}).</value>
+  </data>
+  <data name="ArgumentOutOfRange_FailedCondition" xml:space="preserve">
+    <value>XXX</value>
   </data>
 </root>

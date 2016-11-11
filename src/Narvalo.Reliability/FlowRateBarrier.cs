@@ -13,7 +13,7 @@ namespace Narvalo.Reliability
 
         public FlowRateBarrier(int maxRequestsPerInterval, TimeSpan resetInterval)
         {
-            Require.GreaterThanOrEqualTo(maxRequestsPerInterval, 1, nameof(maxRequestsPerInterval));
+            Require.Range(maxRequestsPerInterval >= 1, nameof(maxRequestsPerInterval));
 
             MaxRequestsPerInterval = maxRequestsPerInterval;
             ResetInterval = resetInterval;

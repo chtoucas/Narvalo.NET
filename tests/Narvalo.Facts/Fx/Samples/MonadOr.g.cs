@@ -324,7 +324,7 @@ namespace Narvalo.Fx.Samples
             int count)
         {
             Require.Object(@this);
-            Require.GreaterThanOrEqualTo(count, 1, "count");
+            Require.Range(count >= 1, nameof(count));
             Ensures(Result<MonadOr<IEnumerable<TSource>>>() != null);
 
             return @this.Select(_ => Enumerable.Repeat(_, count));

@@ -6,11 +6,11 @@ Preconditions
 
 Preconditions that will survive in Release mode:
 - `Narvalo.Require`: Code Contracts + Throws on failure
-- `Narvalo.Guard`: Throws on failure (if CC can't handle the situation) <- Remove?
+- `Narvalo.Require.ThrowOnly`: Throws on failure (if CC can't handle the situation)
 
 Preconditions that will not survive in Release mode:
 - `Narvalo.Demand`: Code Contract + Debug.Assert
-- `Debug.Assert` (if CC can't handle the situation)
+- `Narvalo.Demand.DebugOnly`: Debug.Assert (if CC can't handle the situation)
 
 ```csharp
 public class MyClass {
@@ -67,16 +67,18 @@ public class DerivedClass : MyClass {
 Postconditions
 --------------
 
+```csharp
+using static System.Diagnostics.Contracts.Contract;
+
+Ensures(Result<string>() != null);
+```
+
 Check points
 ------------
 
-Postconditions that will survive in Release mode:
-- `Narvalo.Promise`: Code Contract + Throws on failure
-- `Narvalo.???`: Throws on failure (if CC can't handle the situation)
-
-Postconditions that will not survive in Release mode:
+None of these assertions that will not survive in Release mode:
 - `Narvalo.Check`: Code Contract + Debug.Assert
-- `Debug.Assert` (if CC can't handle the situation)
+- `Narvalo.Check.DebugOnly` Debug.Assert (if CC can't handle the situation)
 
 Invariants
 ----------

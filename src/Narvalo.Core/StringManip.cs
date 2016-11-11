@@ -56,8 +56,8 @@ namespace Narvalo
         public static string Substring(string value, int startIndex, int length, string postfix)
         {
             Require.NotNull(value, "value");
-            Require.GreaterThanOrEqualTo(startIndex, 0, "startIndex");
-            Require.GreaterThanOrEqualTo(length, 1, "length");
+            Require.Range(startIndex >= 0, "startIndex");
+            Require.Range(length >= 1, "length");
             Contract.Ensures(Contract.Result<string>() != null);
 
             if (value.Length <= length) {
@@ -87,7 +87,7 @@ namespace Narvalo
         public static string Truncate(string value, int length, string postfix)
         {
             Require.NotNull(value, "value");
-            Require.GreaterThanOrEqualTo(length, 1, "length");
+            Require.Range(length >= 1, "length");
             Contract.Ensures(Contract.Result<string>() != null);
 
             if (value.Length <= length) {

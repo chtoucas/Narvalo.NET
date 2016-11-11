@@ -64,24 +64,15 @@
     <Compile Include="Acknowledge.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
-    <Compile Include="Ensure`1.cs" />
     <Compile Include="Format.cs" />
-    <Compile Include="Internal\IllegalConditionException.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Internal\Predicates.cs" />
     <Compile Include="Demand.cs" />
-    <Compile Include="Promise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Guard.cs" />
     <Compile Include="Properties\Strings_Cerbere.fr.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings_Cerbere.fr.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Require.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Require.tt</DependentUpon>
     </Compile>
     <Compile Include="Require.cs" />
     <Compile Include="Properties\Strings_Cerbere.Designer.cs">
@@ -114,12 +105,6 @@
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Require.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Require.g.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

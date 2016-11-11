@@ -49,7 +49,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<string>.NotNull();
+                Ensures(Result<string>() != null);
 
                 return _code;
             }
@@ -67,7 +67,7 @@ namespace Narvalo.Finance
         {
             Require.NotNull(code, nameof(code));
             ContractFor.CurrencyCode(code);
-            Ensure<Currency>.NotNull();
+            Ensures(Result<Currency>() != null);
 
             var currency = s_Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency);
             Assume(currency != null);
@@ -85,7 +85,7 @@ namespace Narvalo.Finance
         public static Currency OfRegion(RegionInfo regionInfo)
         {
             Require.NotNull(regionInfo, nameof(regionInfo));
-            Ensure<Currency>.NotNull();
+            Ensures(Result<Currency>() != null);
 
             var code = regionInfo.ISOCurrencySymbol;
             Assume(code != null);
@@ -100,7 +100,7 @@ namespace Narvalo.Finance
         /// <returns>A string containing the code of the currency.</returns>
         public override string ToString()
         {
-            Ensure<string>.NotNull();
+            Ensures(Result<string>() != null);
 
             return Code;
         }
@@ -121,7 +121,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return XXX.Currency;
             }
@@ -137,7 +137,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return XTS.Currency;
             }
@@ -151,7 +151,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return EUR.Currency;
             }
@@ -165,7 +165,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return GBP.Currency;
             }
@@ -179,7 +179,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return CHF.Currency;
             }
@@ -193,7 +193,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return USD.Currency;
             }
@@ -207,7 +207,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return JPY.Currency;
             }
@@ -222,7 +222,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return XAU.Currency;
             }
@@ -237,7 +237,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return XPD.Currency;
             }
@@ -252,7 +252,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return XPT.Currency;
             }
@@ -267,7 +267,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<Currency>.NotNull();
+                Ensures(Result<Currency>() != null);
 
                 return XAG.Currency;
             }

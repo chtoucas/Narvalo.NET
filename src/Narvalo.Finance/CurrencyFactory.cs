@@ -23,7 +23,7 @@ namespace Narvalo.Finance
         public Currency GetCurrency(string code)
         {
             ContractFor.CurrencyCode(code);
-            Ensure<Currency>.NotNull();
+            Ensures(Result<Currency>() != null);
 
             if (!IsValid(code))
             {

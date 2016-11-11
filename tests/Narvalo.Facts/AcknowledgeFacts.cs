@@ -19,24 +19,6 @@ namespace Narvalo
 
         #endregion
 
-        #region Object()
-
-        [Fact]
-        public static void Object_DoesNotThrow_ForNull()
-        {
-            // Act
-            Acknowledge.Object((string)null);
-        }
-
-        [Fact]
-        public static void Object_DoesNotThrow_ForNonNull()
-        {
-            // Act
-            Acknowledge.Object("this");
-        }
-
-        #endregion
-
         #region Unreachable()
 
         [Fact]
@@ -58,31 +40,6 @@ namespace Narvalo
         {
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => IncompleteSwitchWithCustomException(MyEnum_.Two));
-        }
-
-        #endregion
-
-        #region NotNullOrEmpty()
-
-        [Fact]
-        public static void NotNullOrEmpty_DoesNothing()
-        {
-            // Act
-            Acknowledge.NotNullOrEmpty(null);
-            Acknowledge.NotNullOrEmpty(String.Empty);
-            Acknowledge.NotNullOrEmpty("value");
-        }
-
-        #endregion
-
-        #region Object()
-
-        [Fact]
-        public static void Object_DoesNothing()
-        {
-            // Act
-            Acknowledge.Object((string)null);
-            Acknowledge.Object("value");
         }
 
         #endregion

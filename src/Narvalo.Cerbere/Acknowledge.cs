@@ -24,36 +24,6 @@ namespace Narvalo
         public static void AssumeInvariant<T>(T obj) where T : class { }
 
         /// <summary>
-        /// Checks that the specified object parameter is not <see langword="null"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of <paramref name="this"/>.</typeparam>
-        /// <param name="this">The object to check.</param>
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Object<T>(T @this) where T : class
-        {
-            Contract.Requires(@this != null);
-        }
-
-        /// <summary>
-        /// Checks that the specified object parameter is not <see langword="null"/> or empty.
-        /// </summary>
-        /// <param name="value">The value to check.</param>
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void NotNullOrEmpty(string value)
-        {
-            Contract.Requires(value != null);
-            Contract.Requires(value.Length != 0);
-        }
-
-        /// <summary>
         /// Asserts that a point of execution is unreachable.
         /// </summary>
         /// <remarks>Adapted from <see cref="!:https://blogs.msdn.microsoft.com/francesco/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten/"/>.</remarks>

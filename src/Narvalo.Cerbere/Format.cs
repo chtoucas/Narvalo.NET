@@ -8,6 +8,8 @@ namespace Narvalo
     using System.Globalization;
     using System.Runtime.CompilerServices;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <summary>
     /// Provides helper methods to format strings.
     /// </summary>
@@ -37,7 +39,7 @@ namespace Narvalo
         {
             Demand.NotNull(format);
             Demand.NotNull(args);
-            Ensure<string>.NotNull();
+            Ensures(Result<string>() != null);
 
             return String.Format(CultureInfo.CurrentCulture, format, args);
         }
@@ -56,7 +58,7 @@ namespace Narvalo
         {
             Demand.NotNull(format);
             Demand.NotNull(args);
-            Ensure<string>.NotNull();
+            Ensures(Result<string>() != null);
 
             return String.Format(CultureInfo.InvariantCulture, format, args);
         }
@@ -78,7 +80,7 @@ namespace Narvalo
         {
             Demand.NotNull(localizedResource);
             Demand.NotNull(args);
-            Ensure<string>.NotNull();
+            Ensures(Result<string>() != null);
 
             return String.Format(CultureInfo.CurrentCulture, localizedResource, args);
         }

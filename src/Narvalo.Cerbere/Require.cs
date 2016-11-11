@@ -22,16 +22,15 @@ namespace Narvalo
     /// <para>Only useful if you are using the "Custom Parameter Validation" assembly mode.</para>
     /// </remarks>
     /// <seealso cref="Demand"/>
-    /// <seealso cref="Guard"/>
     [DebuggerStepThrough]
-    public static partial class Require
+    public static class Require
     {
         [ContractArgumentValidator]
         public static void True(bool testCondition, string parameterName)
         {
             if (!testCondition)
             {
-                throw new ArgumentException(Strings_Cerbere.Argument_FailedPrecondition, parameterName);
+                throw new ArgumentException(Strings_Cerbere.Argument_FailedCondition, parameterName);
             }
 
             Contract.EndContractBlock();
@@ -43,6 +42,117 @@ namespace Narvalo
             if (!testCondition)
             {
                 throw new ArgumentException(message, parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        public static void False(bool testCondition, string parameterName)
+        {
+            if (testCondition)
+            {
+                throw new ArgumentException(Strings_Cerbere.Argument_FailedCondition, parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        public static void False(bool testCondition, string parameterName, string message)
+        {
+            if (testCondition)
+            {
+                throw new ArgumentException(message, parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        public static void Range(bool rangeCondition, string parameterName)
+        {
+            if (!rangeCondition)
+            {
+                throw new ArgumentOutOfRangeException(
+                    parameterName,
+                    Strings_Cerbere.ArgumentOutOfRange_FailedCondition);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        public static void Range(bool rangeCondition, string parameterName, string message)
+        {
+            if (!rangeCondition)
+            {
+                throw new ArgumentOutOfRangeException(parameterName, message);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        /// <summary>
+        /// Validates that the specified argument is not <see langword="null"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
+        /// <param name="value">The argument to check.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        [ContractArgumentValidator]
+        public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(parameterName, Strings_Cerbere.ArgumentNull_Generic);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        /// <summary>
+        /// Validates that the specified argument is not <see langword="null"/> or empty.
+        /// </summary>
+        /// <param name="value">The argument to check.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/> or empty.</exception>
+        [ContractArgumentValidator]
+        public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
+        {
+            NotNull(value, parameterName);
+
+            if (value.Length == 0)
+            {
+                throw new ArgumentException(Strings_Cerbere.Argument_EmptyString, parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        /// <summary>
+        /// Validates that the specified argument is not <see langword="null"/> or empty,
+        /// and does not consist only of white-space characters.
+        /// </summary>
+        /// <param name="value">The argument to check.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>
+        /// or empty, or does not consist only of white-space characters.</exception>
+        [ContractArgumentValidator]
+        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
+        {
+            NotNull(value, parameterName);
+
+            if (IsEmptyOrWhiteSpace(value))
+            {
+                throw new ArgumentException(Strings_Cerbere.Argument_EmptyOrWhiteSpaceString, parameterName);
             }
 
             Contract.EndContractBlock();
@@ -134,68 +244,49 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Validates that the specified argument is not <see langword="null"/>.
+        /// Provides helper methods to perform argument validation.
         /// </summary>
-        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>.</exception>
-        [ContractArgumentValidator]
-        public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
+        /// <remarks>
+        /// <para>The methods will be recognized as parameter validators by FxCop.</para>
+        /// <para>The methods MUST appear after all Code Contracts.</para>
+        /// <para>If a condition does not hold, an <see cref="ArgumentException"/> is thrown.</para>
+        /// <para>This class exists because CCCheck does not seem to be able to comprehend a precondition
+        /// used in conjunction with <see cref="IComparable{T}"/>; otherwise these helpers would have
+        /// been alongside the others in <see cref="Require"/>.</para>
+        /// <para>This class only accept generics of value type. Adding reference types would make
+        /// each method check too many things at a time (null-checks).</para>
+        /// </remarks>
+        /// <seealso cref="Require"/>
+        /// <seealso cref="Demand"/>
+        public static class ThrowOnly
         {
-            if (value == null)
+            public static void True(bool testCondition, string parameterName)
+                => True(testCondition, parameterName, Strings_Cerbere.Argument_FailedCondition);
+
+            public static void True(bool testCondition, string parameterName, string message)
             {
-                throw new ArgumentNullException(parameterName, Strings_Cerbere.ArgumentNull_Generic);
+                if (!testCondition)
+                {
+                    throw new ArgumentException(message, parameterName);
+                }
             }
 
-            Contract.EndContractBlock();
-        }
+            public static void False(bool testCondition, string parameterName)
+                => True(!testCondition, parameterName);
 
-        /// <summary>
-        /// Validates that the specified argument is not <see langword="null"/> or empty.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/> or empty.</exception>
-        [ContractArgumentValidator]
-        public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
-        {
-            NotNull(value, parameterName);
+            public static void False(bool testCondition, string parameterName, string message)
+                => True(!testCondition, parameterName, message);
 
-            if (value.Length == 0)
+            public static void Range(bool rangeCondition, string parameterName)
+                => Range(rangeCondition, parameterName, Strings_Cerbere.ArgumentOutOfRange_FailedCondition);
+
+            public static void Range(bool rangeCondition, string parameterName, string message)
             {
-                throw new ArgumentException(Strings_Cerbere.Argument_EmptyString, parameterName);
+                if (!rangeCondition)
+                {
+                    throw new ArgumentOutOfRangeException(parameterName, message);
+                }
             }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified argument is not <see langword="null"/> or empty,
-        /// and does not consist only of white-space characters.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>
-        /// or empty, or does not consist only of white-space characters.</exception>
-        [ContractArgumentValidator]
-        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
-        {
-            NotNull(value, parameterName);
-
-            if (IsEmptyOrWhiteSpace(value))
-            {
-                throw new ArgumentException(Strings_Cerbere.Argument_EmptyOrWhiteSpaceString, parameterName);
-            }
-
-            Contract.EndContractBlock();
         }
     }
 }

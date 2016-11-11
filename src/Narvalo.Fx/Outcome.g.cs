@@ -274,7 +274,7 @@ namespace Narvalo.Fx
             int count)
         {
             Require.Object(@this);
-            Require.GreaterThanOrEqualTo(count, 1, "count");
+            Require.Range(count >= 1, nameof(count));
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }

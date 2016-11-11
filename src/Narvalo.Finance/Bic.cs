@@ -44,8 +44,8 @@ namespace Narvalo.Finance
             Demand.True(institutionCode.Length == PREFIX_LENGTH);
             Demand.True(countryCode.Length == COUNTRY_LENGTH);
             Demand.True(locationCode.Length == SUFFIX_LENGTH);
-            Debug.Assert(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
-            Debug.Assert(value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH);
+            Demand.DebugOnly.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
+            Demand.DebugOnly.True(value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH);
 
             _institutionCode = institutionCode;
             _countryCode = countryCode;
@@ -61,8 +61,9 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<string>.NotNull();
+                Ensures(Result<string>() != null);
                 //Ensures(Result<string>().Length == 0 || Result<string>().Length == BRANCH_LENGTH);
+
                 return _branchCode;
             }
         }
@@ -71,7 +72,8 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<string>.NotNull();
+                Ensures(Result<string>() != null);
+
                 return InstitutionCode + CountryCode + LocationCode;
             }
         }
@@ -83,8 +85,9 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<string>.NotNull();
+                Ensures(Result<string>() != null);
                 Ensures(Result<string>().Length == COUNTRY_LENGTH);
+
                 return _countryCode;
             }
         }
@@ -97,8 +100,9 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<string>.NotNull();
+                Ensures(Result<string>() != null);
                 Ensures(Result<string>().Length == PREFIX_LENGTH);
+
                 return _institutionCode;
             }
         }
@@ -115,8 +119,9 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensure<string>.NotNull();
+                Ensures(Result<string>() != null);
                 Ensures(Result<string>().Length == SUFFIX_LENGTH);
+
                 return _locationCode;
             }
         }
@@ -130,7 +135,7 @@ namespace Narvalo.Finance
             Require.True(institutionCode.Length == PREFIX_LENGTH, nameof(institutionCode));
             Require.True(countryCode.Length == COUNTRY_LENGTH, nameof(countryCode));
             Require.True(locationCode.Length == SUFFIX_LENGTH, nameof(locationCode));
-            Guard.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH, nameof(branchCode));
+            Require.ThrowOnly.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH, nameof(branchCode));
 
             return new Bic(
                 institutionCode,
@@ -218,7 +223,7 @@ namespace Narvalo.Finance
             string branchCode = value.Length == PARTY_LENGTH
                 ? String.Empty
                 : value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH + SUFFIX_LENGTH, BRANCH_LENGTH);
-            Debug.Assert(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
+            Check.DebugOnly.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
 
             return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }

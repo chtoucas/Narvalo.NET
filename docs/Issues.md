@@ -1,6 +1,8 @@
 Current works
 =============
 
+- Put the private key in the repository
+  See: https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx
 - Documentation:
   * Version & dependencies.
   * Changelog

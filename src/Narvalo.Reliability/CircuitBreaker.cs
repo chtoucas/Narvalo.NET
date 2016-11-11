@@ -17,7 +17,7 @@ namespace Narvalo.Reliability
 
         public CircuitBreaker(int threshold, TimeSpan resetInterval)
         {
-            Require.GreaterThanOrEqualTo(threshold, 1, nameof(threshold));
+            Require.Range(threshold >= 1, nameof(threshold));
 
             Threshold = threshold;
             ResetInterval = resetInterval;

@@ -16,7 +16,7 @@ namespace Narvalo.Reliability
         // FIXME: vérifier timeout pour ne pas attendre indéfininent ou timeout < 0.
         public ConcurrencyThrottle(int maxConcurrentThreads, TimeSpan timeout)
         {
-            Require.GreaterThanOrEqualTo(maxConcurrentThreads, 1, nameof(maxConcurrentThreads));
+            Require.Range(maxConcurrentThreads >= 1, nameof(maxConcurrentThreads));
 
             MaxConcurrentThreads = maxConcurrentThreads;
             Timeout = timeout;

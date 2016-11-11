@@ -140,7 +140,6 @@
     </Compile>
     <Compile Include="Fx\Samples\MonadZero`1.cs" />
     <Compile Include="Fx\Samples\Monad`1.cs" />
-    <Compile Include="GuardFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="Finance\CurrenciesFacts.g.cs">
       <AutoGen>True</AutoGen>
@@ -180,7 +179,6 @@
     <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="TestCommon\SimpleException.cs" />
     <Compile Include="CheckFacts.cs" />
-    <Compile Include="PromiseFacts.cs" />
     <Compile Include="RequireFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

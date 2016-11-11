@@ -85,7 +85,7 @@ namespace Narvalo
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static string ToFlickrBase58String(long value)
         {
-            Require.GreaterThanOrEqualTo(value, 0L, "value");
+            Require.Range(value >= 0L, "value");
             Contract.Ensures(Contract.Result<string>() != null);
 
             string retval = String.Empty;
@@ -130,7 +130,7 @@ namespace Narvalo
         public static long FromFlickrBase58String(string value)
         {
             Require.NotNull(value, "value");
-            Require.LessThanOrEqualTo(value.Length, FLICKR_BASE58_MAX_LENGTH, "value.Length");
+            Require.Range(value.Length <= FLICKR_BASE58_MAX_LENGTH, "value.Length");
             Contract.Ensures(Contract.Result<long>() >= 0L);
 
             long retval = 0L;
@@ -164,7 +164,7 @@ namespace Narvalo
         internal static long Decode(string value, char[] alphabet, int alphabetLength)
         {
             Require.NotNull(value, "value");
-            Require.LessThanOrEqualTo(value.Length, alphabetLength, "value.Length");
+            Require.Range(value.Length <= alphabetLength, "value.Length");
             Contract.Requires(alphabet != null);
             Contract.Requires(alphabetLength > 0);
             Contract.Ensures(Contract.Result<long>() >= 0L);
@@ -200,7 +200,7 @@ namespace Narvalo
 
         internal static string Encode(long value, char[] alphabet, int alphabetLength)
         {
-            Require.GreaterThanOrEqualTo(value, 0L, "value");
+            Require.Range(value >= 0L, "value");
             Contract.Requires(alphabet != null);
             Contract.Requires(alphabetLength > 0);
             Contract.Ensures(Contract.Result<string>() != null);

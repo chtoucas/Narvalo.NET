@@ -5,6 +5,8 @@ namespace Narvalo
     using System;
     using System.Diagnostics.Contracts;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <summary>
     /// Represents a range of values.
     /// </summary>
@@ -18,7 +20,7 @@ namespace Narvalo
         public Range(T lowerEnd, T upperEnd)
         {
             // REVIEW: Strict range? Do we allow for equality?
-            Guard.LessThanOrEqualTo(lowerEnd, upperEnd, "lowerEnd");
+            Require.ThrowOnly.Range(lowerEnd.CompareTo(upperEnd) <= 0, nameof(lowerEnd));
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;
@@ -56,12 +58,9 @@ namespace Narvalo
 
         public override string ToString()
         {
-            Contract.Ensures(Contract.Result<string>() != null);
+            Ensures(Result<string>() != null);
 
-            return Format.CurrentCulture(
-                "LowerEnd({0}) - UpperEnd({1})",
-                LowerEnd.ToString(),
-                UpperEnd.ToString());
+            return Format.CurrentCulture("LowerEnd({0}) - UpperEnd({1})", LowerEnd, UpperEnd);
         }
     }
 

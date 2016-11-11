@@ -48,63 +48,13 @@ namespace Narvalo
             Debug.Assert(testCondition);
         }
 
-        /// <summary>
-        /// Checks that a condition holds.
-        /// </summary>
-        /// <param name="testCondition">The conditional expression to evaluate.</param>
-        /// <param name="rationale">The rationale for the promise.</param>
-        [Conditional("DEBUG")]
-        public static void Condition(bool testCondition, string rationale)
+        public static class DebugOnly
         {
-            if (!testCondition)
-            {
-                throw new IllegalConditionException("A condition did not hold: " + rationale);
-            }
-        }
+            [Conditional("DEBUG")]
+            public static void True(bool testCondition) =>  Debug.Assert(testCondition);
 
-        /// <summary>
-        /// Checks that the specified argument is not <see langword="null"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="rationale">The message to send to display if the test fails.</param>
-        [Conditional("DEBUG")]
-        public static void NotNull<T>(T value, string rationale) where T : class
-        {
-            if (value == null)
-            {
-                throw new IllegalConditionException("The parameter value is null: " + rationale);
-            }
-        }
-
-        /// <summary>
-        /// Checks that the specified argument is not <see langword="null"/> or empty.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="rationale">The message to send to display if the test fails.</param>
-        [Conditional("DEBUG")]
-        public static void NotNullOrEmpty(string value, string rationale)
-        {
-            if (String.IsNullOrEmpty(value))
-            {
-                throw new IllegalConditionException("The parameter value is null or empty: " + rationale);
-            }
-        }
-
-        /// <summary>
-        /// Checks that the specified argument is not <see langword="null"/> or empty,
-        /// and does not consist only of white-space characters.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="rationale">The message to send to display if the test fails.</param>
-        [Conditional("DEBUG")]
-        public static void NotNullOrWhiteSpace(string value, string rationale)
-        {
-            if (String.IsNullOrWhiteSpace(value))
-            {
-                throw new IllegalConditionException(
-                    "The parameter value is null or empty, or consists only of white-space characters: " + rationale);
-            }
+            [Conditional("DEBUG")]
+            public static void False(bool testCondition) => True(!testCondition);
         }
     }
 }

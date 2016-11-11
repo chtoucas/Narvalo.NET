@@ -82,9 +82,9 @@ namespace Narvalo.Properties {
         /// <summary>
         ///   Looks up a localized string similar to XXX.
         /// </summary>
-        internal static string Argument_FailedPrecondition {
+        internal static string Argument_FailedCondition {
             get {
-                return ResourceManager.GetString("Argument_FailedPrecondition", resourceCulture);
+                return ResourceManager.GetString("Argument_FailedCondition", resourceCulture);
             }
         }
         
@@ -121,6 +121,15 @@ namespace Narvalo.Properties {
         internal static string ArgumentNull_Property {
             get {
                 return ResourceManager.GetString("ArgumentNull_Property", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XXX.
+        /// </summary>
+        internal static string ArgumentOutOfRange_FailedCondition {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_FailedCondition", resourceCulture);
             }
         }
         
