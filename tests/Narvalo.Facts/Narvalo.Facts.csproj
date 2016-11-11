@@ -102,7 +102,7 @@
     <Compile Include="..\Narvalo.TestCommon\IssueAttribute.cs">
       <Link>TestCommon\IssueAttribute.cs</Link>
     </Compile>
-    <Compile Include="AcknowledgeFacts.cs" />
+    <Compile Include="ContractHelpersFacts.cs" />
     <Compile Include="Finance\BicFacts.cs" />
     <Compile Include="Fx\Samples\Comonad.g.cs">
       <DependentUpon>Comonad.tt</DependentUpon>
@@ -178,7 +178,6 @@
     <Compile Include="Fx\VoidOrBreakFacts.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
     <Compile Include="TestCommon\SimpleException.cs" />
-    <Compile Include="CheckFacts.cs" />
     <Compile Include="RequireFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

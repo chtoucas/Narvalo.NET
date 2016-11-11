@@ -258,7 +258,7 @@ namespace Narvalo
         /// </remarks>
         /// <seealso cref="Require"/>
         /// <seealso cref="Demand"/>
-        public static class ThrowOnly
+        public static class Unproven
         {
             public static void True(bool testCondition, string parameterName)
                 => True(testCondition, parameterName, Strings_Cerbere.Argument_FailedCondition);

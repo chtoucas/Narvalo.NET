@@ -2,11 +2,8 @@
 
 namespace Narvalo
 {
-    using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
-
-    using Narvalo.Internal;
 
     /// <summary>
     /// Provides helper methods to check for conditions on parameters.
@@ -48,12 +45,18 @@ namespace Narvalo
             Debug.Assert(testCondition);
         }
 
-        public static class DebugOnly
+        public static class Unproven
         {
             [Conditional("DEBUG")]
-            public static void True(bool testCondition) =>  Debug.Assert(testCondition);
+            [Conditional("CONTRACTS_FULL")]
+            public static void True(bool testCondition)
+            {
+                Contract.Assume(testCondition);
+                Debug.Assert(testCondition);
+            }
 
             [Conditional("DEBUG")]
+            [Conditional("CONTRACTS_FULL")]
             public static void False(bool testCondition) => True(!testCondition);
         }
     }

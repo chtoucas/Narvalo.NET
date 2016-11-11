@@ -6,7 +6,7 @@ namespace Narvalo
 
     using Xunit;
 
-    public static partial class AcknowledgeFacts
+    public static partial class ContractHelpersFacts
     {
         #region AssumeInvariant()
 
@@ -14,7 +14,7 @@ namespace Narvalo
         public static void Invariant_DoesNothing()
         {
             // Arrange a Act
-            Acknowledge.AssumeInvariant(new Object());
+            ContractHelpers.AssumeInvariant(new Object());
         }
 
         #endregion
@@ -45,7 +45,7 @@ namespace Narvalo
         #endregion
     }
 
-    public static partial class AcknowledgeFacts
+    public static partial class ContractHelpersFacts
     {
         private enum MyEnum_
         {
@@ -62,7 +62,7 @@ namespace Narvalo
                     return "OK";
 
                 default:
-                    throw Acknowledge.Unreachable("Found a missing case in the switch.");
+                    throw ContractHelpers.Unreachable("Found a missing case in the switch.");
             }
         }
 
@@ -74,7 +74,7 @@ namespace Narvalo
                     return "OK";
 
                 default:
-                    throw Acknowledge.Unreachable("Found a missing case in the switch.");
+                    throw ContractHelpers.Unreachable("Found a missing case in the switch.");
             }
         }
 
@@ -86,7 +86,7 @@ namespace Narvalo
                     return "OK";
 
                 default:
-                    throw Acknowledge.Unreachable(
+                    throw ContractHelpers.Unreachable(
                         new InvalidOperationException("Found a missing case in the switch."));
             }
         }

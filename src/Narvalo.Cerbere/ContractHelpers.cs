@@ -9,7 +9,7 @@ namespace Narvalo
     /// <summary>
     /// Provides Code Contracts abbreviators and helpers.
     /// </summary>
-    public static class Acknowledge
+    public static class ContractHelpers
     {
         /// <summary>
         /// This method allows to state explicitly the object invariance.
@@ -17,11 +17,12 @@ namespace Narvalo
         /// <remarks>To be recognized by CCCheck this method must be named exactly "AssumeInvariant".</remarks>
         /// <typeparam name="T">The underlying type of the object.</typeparam>
         /// <param name="obj">The invariant object.</param>
+        [Pure]
         [DebuggerHidden]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void AssumeInvariant<T>(T obj) where T : class { }
+        public static void AssumeInvariant<T>(T obj) { }
 
         /// <summary>
         /// Asserts that a point of execution is unreachable.

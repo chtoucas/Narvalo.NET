@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     [DebuggerStepThrough]
@@ -63,7 +64,7 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         public static void PropertyNotWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
 
-        public static class DebugOnly
+        public static class Unproven
         {
             [Conditional("DEBUG")]
             public static void True(bool testCondition) => Debug.Assert(testCondition);

@@ -3,7 +3,6 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Diagnostics;
 
     using static System.Diagnostics.Contracts.Contract;
     using static Narvalo.Finance.Internal.AsciiHelpers;
@@ -44,8 +43,8 @@ namespace Narvalo.Finance
             Demand.True(institutionCode.Length == PREFIX_LENGTH);
             Demand.True(countryCode.Length == COUNTRY_LENGTH);
             Demand.True(locationCode.Length == SUFFIX_LENGTH);
-            Demand.DebugOnly.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
-            Demand.DebugOnly.True(value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH);
+            Demand.Unproven.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
+            Demand.Unproven.True(value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH);
 
             _institutionCode = institutionCode;
             _countryCode = countryCode;
@@ -135,7 +134,7 @@ namespace Narvalo.Finance
             Require.True(institutionCode.Length == PREFIX_LENGTH, nameof(institutionCode));
             Require.True(countryCode.Length == COUNTRY_LENGTH, nameof(countryCode));
             Require.True(locationCode.Length == SUFFIX_LENGTH, nameof(locationCode));
-            Require.ThrowOnly.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH, nameof(branchCode));
+            Require.Unproven.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH, nameof(branchCode));
 
             return new Bic(
                 institutionCode,
@@ -172,24 +171,24 @@ namespace Narvalo.Finance
 
         public bool CheckSwiftFormat() => CheckFormat(false /* isoConformance */);
 
-        //#if CONTRACTS_FULL // Contract Class and Object Invariants.
+//#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        //        [System.Diagnostics.Contracts.ContractInvariantMethod]
-        //        private void ObjectInvariant()
-        //        {
-        //            Invariant(BranchCode != null);
-        //            //Invariant(BranchCode.Length == 0 || BranchCode.Length == BRANCH_LENGTH);
-        //            Invariant(CountryCode != null);
-        //            //Invariant(CountryCode.Length == COUNTRY_LENGTH);
-        //            Invariant(InstitutionCode != null);
-        //            //Invariant(InstitutionCode.Length == PREFIX_LENGTH);
-        //            Invariant(LocationCode != null);
-        //            //Invariant(LocationCode.Length == SUFFIX_LENGTH);
-        //            Invariant(_value != null);
-        //            //Invariant(_value.Length == PARTY_LENGTH || _value.Length == BIC_LENGTH);
-        //        }
+//        [System.Diagnostics.Contracts.ContractInvariantMethod]
+//        private void ObjectInvariant()
+//        {
+//            Invariant(BranchCode != null);
+//            //Invariant(BranchCode.Length == 0 || BranchCode.Length == BRANCH_LENGTH);
+//            Invariant(CountryCode != null);
+//            //Invariant(CountryCode.Length == COUNTRY_LENGTH);
+//            Invariant(InstitutionCode != null);
+//            //Invariant(InstitutionCode.Length == PREFIX_LENGTH);
+//            Invariant(LocationCode != null);
+//            //Invariant(LocationCode.Length == SUFFIX_LENGTH);
+//            //Invariant(_value != null);
+//            //Invariant(_value.Length == PARTY_LENGTH || _value.Length == BIC_LENGTH);
+//        }
 
-        //#endif
+//#endif
 
         // NB: We only perform basic validation on the input string.
         private static Bic? ParseCore(string value, bool throwOnError)
@@ -223,7 +222,7 @@ namespace Narvalo.Finance
             string branchCode = value.Length == PARTY_LENGTH
                 ? String.Empty
                 : value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH + SUFFIX_LENGTH, BRANCH_LENGTH);
-            Check.DebugOnly.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
+            Check.Unproven.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
 
             return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }

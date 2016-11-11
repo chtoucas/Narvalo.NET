@@ -26,6 +26,7 @@ namespace Narvalo.Fx.Samples
             Justification = "[Educational] Standard naming convention from mathematics.")]
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
+            // REVIEW: Why can't I use "_ => _" as with C# 5?
             return square.Bind(Stubs<Monad<T>>.Identity);
         }
     }

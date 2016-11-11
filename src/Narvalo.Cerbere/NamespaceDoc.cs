@@ -32,7 +32,7 @@ namespace Narvalo
     /// When the base method declares a contract use <see cref="Check"/> instead.</para>
     /// <para>We also provide one static class to help with Code Contracts:
     /// <list type="bullet">
-    /// <item><see cref="Acknowledge"/> provides Code Contracts abbreviators and helpers.</item>
+    /// <item><see cref="ContractHelpers"/> provides Code Contracts abbreviators and helpers.</item>
     /// </list>
     /// </para>
     /// </remarks>

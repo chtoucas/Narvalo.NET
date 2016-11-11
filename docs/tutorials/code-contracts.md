@@ -5,12 +5,12 @@ Preconditions
 -------------
 
 Preconditions that will survive in Release mode:
-- `Narvalo.Require`: Code Contracts + Throws on failure
-- `Narvalo.Require.ThrowOnly`: Throws on failure (if CC can't handle the situation)
+- `Narvalo.Require`: Code Contract + Throws on failure
+- `Narvalo.Require.Unproven`: Throws on failure (if CC can't handle the situation)
 
 Preconditions that will not survive in Release mode:
 - `Narvalo.Demand`: Code Contract + Debug.Assert
-- `Narvalo.Demand.DebugOnly`: Debug.Assert (if CC can't handle the situation)
+- `Narvalo.Demand.Unproven`: Debug.Assert (if CC can't handle the situation)
 
 ```csharp
 public class MyClass {
@@ -78,7 +78,7 @@ Check points
 
 None of these assertions that will not survive in Release mode:
 - `Narvalo.Check`: Code Contract + Debug.Assert
-- `Narvalo.Check.DebugOnly` Debug.Assert (if CC can't handle the situation)
+- `Narvalo.Check.Unproven` Debug.Assert (if CC can't handle the situation)
 
 Invariants
 ----------
