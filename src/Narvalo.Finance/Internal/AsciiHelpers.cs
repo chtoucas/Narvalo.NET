@@ -3,9 +3,16 @@
 namespace Narvalo.Finance.Internal
 {
     using System;
+    using System.Diagnostics.Contracts;
 
-    internal static class AsciiHelpers
+#if CONTRACTS_FULL
+    public
+#else
+    internal
+#endif
+        static class AsciiHelpers
     {
+        [Pure]
         public static bool IsDigitOrUpperLetter(string value)
         {
             // Prove that any call to this internal method is guarded upstream.
@@ -22,6 +29,7 @@ namespace Narvalo.Finance.Internal
             return true;
         }
 
+        [Pure]
         public static bool IsDigit(string value)
         {
             // Prove that any call to this internal method is guarded upstream.
@@ -38,6 +46,7 @@ namespace Narvalo.Finance.Internal
             return true;
         }
 
+        [Pure]
         public static bool IsUpperLetter(string value)
         {
             // Prove that any call to this internal method is guarded upstream.

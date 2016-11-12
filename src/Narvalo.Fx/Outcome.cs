@@ -5,6 +5,8 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Outcome{T}"/>.
     /// </summary>
@@ -13,7 +15,7 @@ namespace Narvalo.Fx
         public static Outcome<T> Failure<T>(ExceptionDispatchInfo exceptionInfo)
         {
             Contract.Requires(exceptionInfo != null);
-            Contract.Ensures(Contract.Result<Outcome<T>>() != null);
+            Ensures(Result<Outcome<T>>() != null);
 
             return Outcome<T>.η(exceptionInfo);
         }

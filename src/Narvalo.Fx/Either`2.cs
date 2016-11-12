@@ -5,7 +5,8 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
@@ -38,7 +39,7 @@ namespace Narvalo.Fx
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Either<TLeft, TRight> η(TLeft value)
         {
-            Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
+            Ensures(Result<Either<TLeft, TRight>>() != null);
 
             return new Left_(value);
         }
@@ -47,7 +48,7 @@ namespace Narvalo.Fx
             Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Either<TLeft, TRight> η(TRight value)
         {
-            Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
+            Ensures(Result<Either<TLeft, TRight>>() != null);
 
             return new Right_(value);
         }
@@ -101,7 +102,7 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Contract.Ensures(Contract.Result<string>() != null);
+                Ensures(Result<string>() != null);
 
                 return Format.CurrentCulture("Left({0})", _value);
             }
@@ -152,18 +153,25 @@ namespace Narvalo.Fx
             public override bool Equals(object obj) => Equals(obj as Right_);
 
             public override int GetHashCode()
-                =>_value == null ? 0 : EqualityComparer<TRight>.Default.GetHashCode(_value);
+                => _value == null ? 0 : EqualityComparer<TRight>.Default.GetHashCode(_value);
 
             public override string ToString()
             {
-                Contract.Ensures(Contract.Result<string>() != null);
+                Ensures(Result<string>() != null);
 
                 return Format.CurrentCulture("Right({0})", _value);
             }
         }
     }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Fx
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
 
     [ContractClass(typeof(EitherContract<,>))]
     public partial class Either<TLeft, TRight> { }
@@ -189,6 +197,6 @@ namespace Narvalo.Fx
 
         public override Maybe<TRight> RightOrNone() => default(Maybe<TRight>);
     }
+}
 
 #endif
-}

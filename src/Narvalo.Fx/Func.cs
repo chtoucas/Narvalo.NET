@@ -3,13 +3,14 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics.Contracts;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public static class Func
     {
         public static Func<T> Return<T>(T value)
         {
-            Contract.Ensures(Contract.Result<Func<T>>() != null);
+            Ensures(Result<Func<T>>() != null);
 
             return () => value;
         }

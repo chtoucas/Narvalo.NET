@@ -10,6 +10,7 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Internal;
 
     using static System.Diagnostics.Contracts.Contract;
+    using static Narvalo.Finance.Internal.AsciiHelpers;
 
     /// <summary>
     /// Represents a currency unit such as Euro or US Dollar.
@@ -89,6 +90,7 @@ namespace Narvalo.Finance
 
             var code = regionInfo.ISOCurrencySymbol;
             Assume(code != null);
+            Assume(IsUpperLetter(code));
             Assume(code.Length == 3);
 
             return Of(code);

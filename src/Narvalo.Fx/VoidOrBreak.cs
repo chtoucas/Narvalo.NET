@@ -8,6 +8,8 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <seealso cref="Outcome{T}"/>
     /// <seealso cref="Either{T1, T2}"/>
     /// <seealso cref="Switch{T1, T2}"/>
@@ -31,7 +33,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Contract.Ensures(Contract.Result<VoidOrBreak>() != null);
+                Ensures(Result<VoidOrBreak>() != null);
 
                 return s_Void;
             }
@@ -50,14 +52,14 @@ namespace Narvalo.Fx
         public static VoidOrBreak Break(string message)
         {
             Require.NotNullOrEmpty(message, nameof(message));
-            Contract.Ensures(Contract.Result<VoidOrBreak>() != null);
+            Ensures(Result<VoidOrBreak>() != null);
 
             return new VoidOrBreak.Break_(message);
         }
 
         public override string ToString()
         {
-            Contract.Ensures(Contract.Result<string>() != null);
+            Ensures(Result<string>() != null);
 
             return "Void";
         }
@@ -71,7 +73,7 @@ namespace Narvalo.Fx
             public Break_(string reason)
                 : base(true)
             {
-                Contract.Requires(reason != null);
+                Demand.NotNull(reason);
 
                 _reason = reason;
             }
@@ -80,7 +82,7 @@ namespace Narvalo.Fx
             {
                 get
                 {
-                    Contract.Ensures(Contract.Result<string>() != null);
+                    Ensures(Result<string>() != null);
 
                     return _reason;
                 }
@@ -88,7 +90,7 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Contract.Ensures(Contract.Result<string>() != null);
+                Ensures(Result<string>() != null);
 
                 return Format.CurrentCulture("Break({0})", _reason);
             }
@@ -98,8 +100,8 @@ namespace Narvalo.Fx
             [ContractInvariantMethod]
             private void ObjectInvariant()
             {
-                Contract.Invariant(_reason != null);
-                Contract.Invariant(_isBreak);
+                Invariant(_reason != null);
+                Invariant(_isBreak);
             }
 
 #endif

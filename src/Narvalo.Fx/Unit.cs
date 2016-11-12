@@ -4,7 +4,8 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public struct Unit : IEquatable<Unit>
     {
@@ -16,7 +17,7 @@ namespace Narvalo.Fx
             Justification = "[Intentionally] This method always returns 'true'.")]
         public static bool operator ==(Unit left, Unit right)
         {
-            Contract.Ensures(Contract.Result<bool>() == true);
+            Ensures(Result<bool>() == true);
 
             return true;
         }
@@ -27,7 +28,7 @@ namespace Narvalo.Fx
             Justification = "[Intentionally] This method always returns 'false'.")]
         public static bool operator !=(Unit left, Unit right)
         {
-            Contract.Ensures(Contract.Result<bool>() == false);
+            Ensures(Result<bool>() == false);
 
             return false;
         }
@@ -38,14 +39,14 @@ namespace Narvalo.Fx
 
         public override int GetHashCode()
         {
-            Contract.Ensures(Contract.Result<int>() == 0);
+            Ensures(Result<int>() == 0);
 
             return 0;
         }
 
         public override string ToString()
         {
-            Contract.Ensures(Contract.Result<string>() != null);
+            Ensures(Result<string>() != null);
 
             return "()";
         }

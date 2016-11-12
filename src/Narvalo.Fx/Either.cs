@@ -2,20 +2,20 @@
 
 namespace Narvalo.Fx
 {
-    using System.Diagnostics.Contracts;
+    using static System.Diagnostics.Contracts.Contract;
 
     public static class Either
     {
         public static Either<TLeft, TRight> Left<TLeft, TRight>(TLeft value)
         {
-            Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
+            Ensures(Result<Either<TLeft, TRight>>() != null);
 
             return Either<TLeft, TRight>.η(value);
         }
 
         public static Either<TLeft, TRight> Right<TLeft, TRight>(TRight value)
         {
-            Contract.Ensures(Contract.Result<Either<TLeft, TRight>>() != null);
+            Ensures(Result<Either<TLeft, TRight>>() != null);
 
             return Either<TLeft, TRight>.η(value);
         }

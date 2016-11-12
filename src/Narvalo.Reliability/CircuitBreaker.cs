@@ -124,7 +124,7 @@ namespace Narvalo.Reliability
 
         private void Close(bool executing)
         {
-            Check.True(!executing || IsHalfOpen);
+            Demand.True(!executing || IsHalfOpen);
 
             SetState(CircuitBreakerState.Closed);
 
@@ -138,7 +138,7 @@ namespace Narvalo.Reliability
 
         private void HalfOpen(bool executing)
         {
-            Check.True(!executing || IsOpen);
+            Demand.True(!executing || IsOpen);
 
             SetState(CircuitBreakerState.HalfOpen);
 
@@ -152,7 +152,7 @@ namespace Narvalo.Reliability
 
         private void Trip(bool executing)
         {
-            Check.True(!executing || !IsOpen);
+            Demand.True(!executing || !IsOpen);
 
             SetState(CircuitBreakerState.Open);
 

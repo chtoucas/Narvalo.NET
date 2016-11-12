@@ -6,6 +6,8 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     public static class Sequence
     {
         /// <summary>
@@ -17,7 +19,7 @@ namespace Narvalo.Fx
         /// <returns>An <see cref="IEnumerable{T}"/> that contains a single element.</returns>
         public static IEnumerable<TSource> Pure<TSource>(TSource value)
         {
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             // Enumerable.Repeat(value, 1) would work too, but is less readable.
             yield return value;
@@ -33,7 +35,7 @@ namespace Narvalo.Fx
             Func<TSource, Iteration<TResult, TSource>> generator)
         {
             Contract.Requires(generator != null);
-            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+            Ensures(Result<IEnumerable<TResult>>() != null);
 
             return Unfold(seed, generator, Stubs<TSource>.AlwaysTrue);
         }
@@ -45,7 +47,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(generator, nameof(generator));
             Require.NotNull(predicate, nameof(predicate));
-            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+            Ensures(Result<IEnumerable<TResult>>() != null);
 
             TSource current = seed;
 
@@ -71,7 +73,7 @@ namespace Narvalo.Fx
             Func<TSource, TSource> iterator)
         {
             Contract.Requires(iterator != null);
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             return Gather(seed, iterator, Stubs<TSource>.AlwaysTrue);
         }
@@ -83,7 +85,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(iterator, nameof(iterator));
             Require.NotNull(predicate, nameof(predicate));
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             TSource current = seed;
 
@@ -111,7 +113,7 @@ namespace Narvalo.Fx
         {
             Contract.Requires(iterator != null);
             Contract.Requires(resultSelector != null);
-            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+            Ensures(Result<IEnumerable<TResult>>() != null);
 
             return Gather(seed, iterator, resultSelector, Stubs<TSource>.AlwaysTrue);
         }
@@ -131,7 +133,7 @@ namespace Narvalo.Fx
             Require.NotNull(iterator, nameof(iterator));
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(predicate, nameof(predicate));
-            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+            Ensures(Result<IEnumerable<TResult>>() != null);
 
             TSource current = seed;
 

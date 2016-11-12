@@ -3,7 +3,6 @@
 namespace Narvalo.Fx.Advanced
 {
     using System;
-    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Provides extension methods for <see cref="Nullable{T}"/>.
@@ -119,7 +118,7 @@ namespace Narvalo.Fx.Advanced
             where TSource : struct
             where TResult : struct
         {
-            Contract.Requires(predicate != null);
+            Demand.NotNull(predicate);
 
             return Coalesce(@this, predicate, other, null);
         }
@@ -131,7 +130,7 @@ namespace Narvalo.Fx.Advanced
             where TSource : struct
             where TResult : struct
         {
-            Contract.Requires(predicate != null);
+            Demand.NotNull(predicate);
 
             return Coalesce(@this, predicate, null, other);
         }
@@ -205,7 +204,7 @@ namespace Narvalo.Fx.Advanced
         public static void OnValue<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct
         {
-            Contract.Requires(action != null);
+            Demand.NotNull(action);
 
             @this.Invoke(action);
         }

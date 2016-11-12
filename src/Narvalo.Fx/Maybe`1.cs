@@ -11,6 +11,8 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <summary>
     /// Represents an object that is either a single value of type T, or no value at all.
     /// </summary>
@@ -185,8 +187,8 @@ namespace Narvalo.Fx
         {
             get
             {
-                Contract.Ensures(Contract.Result<T>() != null);
-                Check.True(IsSome);
+                Demand.True(IsSome);
+                Ensures(Result<T>() != null);
 
 #if CONTRACTS_FULL // Helps CCCheck with the object invariance.
 
@@ -215,7 +217,7 @@ namespace Narvalo.Fx
 
         public static explicit operator T(Maybe<T> value)
         {
-            Contract.Ensures(Contract.Result<T>() != null);
+            Ensures(Result<T>() != null);
 
             if (!value.IsSome)
             {
@@ -280,7 +282,7 @@ namespace Narvalo.Fx
         public T ValueOrThrow(Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Contract.Ensures(Contract.Result<T>() != null);
+            Ensures(Result<T>() != null);
 
             return ValueOrThrow(() => exception);
         }
@@ -288,7 +290,7 @@ namespace Narvalo.Fx
         public T ValueOrThrow(Func<Exception> exceptionFactory)
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-            Contract.Ensures(Contract.Result<T>() != null);
+            Ensures(Result<T>() != null);
 
             if (!IsSome)
             {
@@ -301,7 +303,7 @@ namespace Narvalo.Fx
         /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
-            Contract.Ensures(Contract.Result<string>() != null);
+            Ensures(Result<string>() != null);
 
             return IsSome ? Format.CurrentCulture("Maybe({0})", Value) : "Maybe(None)";
         }
@@ -490,7 +492,7 @@ namespace Narvalo.Fx
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public IEnumerable<T> ToEnumerable()
         {
-            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
+            Ensures(Result<IEnumerable<T>>() != null);
 
             return IsSome ? Sequence.Pure(Value) : Sequence<T>.Empty;
         }
@@ -498,7 +500,7 @@ namespace Narvalo.Fx
         /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            Contract.Ensures(Contract.Result<IEnumerator<T>>() != null);
+            Ensures(Result<IEnumerator<T>>() != null);
 
             return ToEnumerable().GetEnumerator();
         }
@@ -506,7 +508,7 @@ namespace Narvalo.Fx
         /// <inheritdoc cref="IEnumerable.GetEnumerator" />
         IEnumerator IEnumerable.GetEnumerator()
         {
-            Contract.Ensures(Contract.Result<IEnumerator>() != null);
+            Ensures(Result<IEnumerator>() != null);
 
             return ToEnumerable().GetEnumerator();
         }

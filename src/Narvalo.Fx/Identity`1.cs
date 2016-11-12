@@ -5,7 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Represents the trivial monad. Pretty useless.
@@ -51,7 +50,7 @@ namespace Narvalo.Fx
 
         public bool Equals(T other, IEqualityComparer<T> comparer)
         {
-            Contract.Requires(comparer != null);
+            Demand.NotNull(comparer);
 
             return Equals(η(other), comparer);
         }

@@ -4,8 +4,9 @@ namespace Narvalo.Fx.Advanced
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.Linq;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -18,7 +19,7 @@ namespace Narvalo.Fx.Advanced
         {
             Require.Object(@this);
             Require.NotNull(funM, nameof(funM));
-            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+            Ensures(Result<IEnumerable<TResult>>() != null);
 
             return (from _ in @this
                     let m = funM.Invoke(_)
@@ -32,7 +33,7 @@ namespace Narvalo.Fx.Advanced
         {
             Require.Object(@this);
             Require.NotNull(funM, nameof(funM));
-            Contract.Ensures(Contract.Result<IEnumerable<TResult>>() != null);
+            Ensures(Result<IEnumerable<TResult>>() != null);
 
             return (from _ in @this
                     let m = funM.Invoke(_)
@@ -48,7 +49,7 @@ namespace Narvalo.Fx.Advanced
         {
             Require.Object(@this);
             Require.NotNull(predicateM, nameof(predicateM));
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             return @this
                 .Where(_ => predicateM.Invoke(_).ValueOrElse(false))

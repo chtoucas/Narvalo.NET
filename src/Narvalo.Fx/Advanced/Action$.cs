@@ -4,8 +4,9 @@ namespace Narvalo.Fx.Advanced
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Provides extension methods for <see cref="Action"/>.
@@ -17,7 +18,7 @@ namespace Narvalo.Fx.Advanced
         public static VoidOrError Catch<TException>(this Action @this) where TException : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<VoidOrError>() != null);
+            Ensures(Result<VoidOrError>() != null);
 
             try
             {
@@ -42,7 +43,7 @@ namespace Narvalo.Fx.Advanced
             where T2Exception : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<VoidOrError>() != null);
+            Ensures(Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
 
@@ -68,7 +69,7 @@ namespace Narvalo.Fx.Advanced
             where T3Exception : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<VoidOrError>() != null);
+            Ensures(Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
 
@@ -96,7 +97,7 @@ namespace Narvalo.Fx.Advanced
             where T4Exception : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<VoidOrError>() != null);
+            Ensures(Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
 

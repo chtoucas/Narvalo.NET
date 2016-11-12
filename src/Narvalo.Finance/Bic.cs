@@ -3,6 +3,7 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     using static System.Diagnostics.Contracts.Contract;
     using static Narvalo.Finance.Internal.AsciiHelpers;
@@ -43,8 +44,8 @@ namespace Narvalo.Finance
             Demand.True(institutionCode.Length == PREFIX_LENGTH);
             Demand.True(countryCode.Length == COUNTRY_LENGTH);
             Demand.True(locationCode.Length == SUFFIX_LENGTH);
-            Demand.Unproven.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
-            Demand.Unproven.True(value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH);
+            Demand.True(Predicates.ValidateBranchCode(branchCode));
+            Demand.True(Predicates.ValidateInnerValue(value));
 
             _institutionCode = institutionCode;
             _countryCode = countryCode;
@@ -134,15 +135,13 @@ namespace Narvalo.Finance
             Require.True(institutionCode.Length == PREFIX_LENGTH, nameof(institutionCode));
             Require.True(countryCode.Length == COUNTRY_LENGTH, nameof(countryCode));
             Require.True(locationCode.Length == SUFFIX_LENGTH, nameof(locationCode));
-            Require.Unproven.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH, nameof(branchCode));
+            Require.True(Predicates.ValidateBranchCode(branchCode), nameof(branchCode));
 
-            return new Bic(
-                institutionCode,
-                countryCode,
-                locationCode,
-                branchCode,
-                institutionCode + countryCode + locationCode + branchCode
-            );
+            var value = institutionCode + countryCode + locationCode + branchCode;
+            Assume(Predicates.ValidateInnerValue(value));
+            Check.True(Predicates.ValidateInnerValue(value));
+
+            return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }
 
         public static Bic Parse(string value)
@@ -151,6 +150,7 @@ namespace Narvalo.Finance
 
             Bic? iban = ParseCore(value, true /* throwOnError */);
             Assume(iban.HasValue);
+            Check.True(iban.HasValue);
 
             return iban.Value;
         }
@@ -171,24 +171,24 @@ namespace Narvalo.Finance
 
         public bool CheckSwiftFormat() => CheckFormat(false /* isoConformance */);
 
-//#if CONTRACTS_FULL // Contract Class and Object Invariants.
+        //#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-//        [System.Diagnostics.Contracts.ContractInvariantMethod]
-//        private void ObjectInvariant()
-//        {
-//            Invariant(BranchCode != null);
-//            //Invariant(BranchCode.Length == 0 || BranchCode.Length == BRANCH_LENGTH);
-//            Invariant(CountryCode != null);
-//            //Invariant(CountryCode.Length == COUNTRY_LENGTH);
-//            Invariant(InstitutionCode != null);
-//            //Invariant(InstitutionCode.Length == PREFIX_LENGTH);
-//            Invariant(LocationCode != null);
-//            //Invariant(LocationCode.Length == SUFFIX_LENGTH);
-//            //Invariant(_value != null);
-//            //Invariant(_value.Length == PARTY_LENGTH || _value.Length == BIC_LENGTH);
-//        }
+        //        [System.Diagnostics.Contracts.ContractInvariantMethod]
+        //        private void ObjectInvariant()
+        //        {
+        //            Invariant(BranchCode != null);
+        //            //Invariant(BranchCode.Length == 0 || BranchCode.Length == BRANCH_LENGTH);
+        //            Invariant(CountryCode != null);
+        //            //Invariant(CountryCode.Length == COUNTRY_LENGTH);
+        //            Invariant(InstitutionCode != null);
+        //            //Invariant(InstitutionCode.Length == PREFIX_LENGTH);
+        //            Invariant(LocationCode != null);
+        //            //Invariant(LocationCode.Length == SUFFIX_LENGTH);
+        //            //Invariant(_value != null);
+        //            //Invariant(_value.Length == PARTY_LENGTH || _value.Length == BIC_LENGTH);
+        //        }
 
-//#endif
+        //#endif
 
         // NB: We only perform basic validation on the input string.
         private static Bic? ParseCore(string value, bool throwOnError)
@@ -204,6 +204,8 @@ namespace Narvalo.Finance
 
                 return null;
             }
+            Assume(Predicates.ValidateInnerValue(value));
+            Check.True(Predicates.ValidateInnerValue(value));
 
             // The first four letters or digits define the institution or bank code.
             // NB: SWIFT is more restrictive than ISO as it only expects letters.
@@ -222,7 +224,8 @@ namespace Narvalo.Finance
             string branchCode = value.Length == PARTY_LENGTH
                 ? String.Empty
                 : value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH + SUFFIX_LENGTH, BRANCH_LENGTH);
-            Check.Unproven.True(branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH);
+            Assume(Predicates.ValidateBranchCode(branchCode));
+            Check.True(Predicates.ValidateBranchCode(branchCode));
 
             return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }
@@ -233,6 +236,31 @@ namespace Narvalo.Finance
                 && IsUpperLetter(CountryCode)
                 && IsDigitOrUpperLetter(LocationCode)
                 && (BranchCode.Length == 0 ? true : IsDigitOrUpperLetter(BranchCode));
+
+#if CONTRACTS_FULL
+        public
+#else
+        private
+#endif
+        static class Predicates
+        {
+            [Pure]
+            public static bool ValidateBranchCode(string branchCode)
+            {
+                Demand.NotNull(branchCode);
+
+                return branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH;
+            }
+
+            [Pure]
+            public static bool ValidateInnerValue(string value)
+            {
+                Demand.NotNull(value);
+
+                return value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH;
+            }
+
+        }
     }
 
     // Implements the IEquatable<Bic> interface.

@@ -4,8 +4,9 @@ namespace Narvalo.Fx.Advanced
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Provides extension methods for <see cref="Func{T}"/>.
@@ -26,7 +27,7 @@ namespace Narvalo.Fx.Advanced
         {
             Require.Object(@this);
             Require.NotNull(selector, nameof(selector));
-            Contract.Ensures(Contract.Result<Func<TResult>>() != null);
+            Ensures(Result<Func<TResult>>() != null);
 
             return () => selector.Invoke(@this.Invoke());
         }
@@ -52,7 +53,7 @@ namespace Narvalo.Fx.Advanced
             where TResult : struct
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Func<TSource, TResult?>>() != null);
+            Ensures(Result<Func<TSource, TResult?>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -66,7 +67,7 @@ namespace Narvalo.Fx.Advanced
         {
             Require.Object(@this);
             Require.NotNull(funM, nameof(funM));
-            Contract.Ensures(Contract.Result<Func<TSource, TResult?>>() != null);
+            Ensures(Result<Func<TSource, TResult?>>() != null);
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -80,7 +81,7 @@ namespace Narvalo.Fx.Advanced
         public static Outcome<TSource> Catch<TSource, TException>(this Func<TSource> @this) where TException : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Outcome<TSource>>() != null);
+            Ensures(Result<Outcome<TSource>>() != null);
 
             try
             {
@@ -105,7 +106,7 @@ namespace Narvalo.Fx.Advanced
             where T2Exception : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Outcome<TSource>>() != null);
+            Ensures(Result<Outcome<TSource>>() != null);
 
             ExceptionDispatchInfo edi;
 
@@ -131,7 +132,7 @@ namespace Narvalo.Fx.Advanced
             where T3Exception : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Outcome<TSource>>() != null);
+            Ensures(Result<Outcome<TSource>>() != null);
 
             ExceptionDispatchInfo edi;
 
@@ -160,7 +161,7 @@ namespace Narvalo.Fx.Advanced
             where T4Exception : Exception
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Outcome<TSource>>() != null);
+            Ensures(Result<Outcome<TSource>>() != null);
 
             ExceptionDispatchInfo edi;
 

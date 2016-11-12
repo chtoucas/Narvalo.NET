@@ -3,7 +3,8 @@
 namespace Narvalo.Fx
 {
     using System;
-    using System.Diagnostics.Contracts;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Provides helper methods pertaining to <see cref="Action"/> instances.
@@ -20,7 +21,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Contract.Ensures(Contract.Result<Action>() != null);
+                Ensures(Result<Action>() != null);
 
                 return s_Noop;
             }

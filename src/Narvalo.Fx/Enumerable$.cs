@@ -5,8 +5,9 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.Contracts;
     using System.Linq;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -17,7 +18,7 @@ namespace Narvalo.Fx
         // I think that all LINQ operators never return a null but rather an empty sequence if needed.
         public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
         {
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             if (@this == null)
             {
@@ -111,7 +112,7 @@ namespace Narvalo.Fx
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Demand.Object(@this);
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             return @this.Concat(Sequence.Pure(element)).EmptyIfNull();
         }
@@ -119,7 +120,7 @@ namespace Narvalo.Fx
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Demand.Object(@this);
-            Contract.Ensures(Contract.Result<IEnumerable<TSource>>() != null);
+            Ensures(Result<IEnumerable<TSource>>() != null);
 
             return Sequence.Pure(element).Concat(@this).EmptyIfNull();
         }
@@ -131,7 +132,7 @@ namespace Narvalo.Fx
         public static ICollection<TSource> ToCollection<TSource>(this IEnumerable<TSource> @this)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<ICollection<TSource>>() != null);
+            Ensures(Result<ICollection<TSource>>() != null);
 
             var retval = new Collection<TSource>();
 
@@ -153,7 +154,7 @@ namespace Narvalo.Fx
             Func<TAccumulate, TSource, TAccumulate> accumulator)
         {
             Demand.Object(@this);
-            Contract.Requires(accumulator != null);
+            Demand.NotNull(accumulator);
 
             return @this.Reverse().Aggregate(seed, accumulator);
         }
@@ -163,7 +164,7 @@ namespace Narvalo.Fx
             Func<TSource, TSource, TSource> accumulator)
         {
             Demand.Object(@this);
-            Contract.Requires(accumulator != null);
+            Demand.NotNull(accumulator);
 
             return @this.Reverse().Aggregate(accumulator);
         }
@@ -254,7 +255,7 @@ namespace Narvalo.Fx
         internal static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Outcome<IEnumerable<TSource>>>() != null);
+            Ensures(Result<Outcome<IEnumerable<TSource>>>() != null);
 
             var list = new List<TSource>();
 

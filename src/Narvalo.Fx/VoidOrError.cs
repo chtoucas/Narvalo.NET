@@ -2,9 +2,12 @@
 
 namespace Narvalo.Fx
 {
+    using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <seealso cref="Outcome{T}"/>
     /// <seealso cref="Either{T1, T2}"/>
@@ -29,7 +32,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Contract.Ensures(Contract.Result<VoidOrError>() != null);
+                Ensures(Result<VoidOrError>() != null);
 
                 return s_Void;
             }
@@ -40,7 +43,7 @@ namespace Narvalo.Fx
         public static VoidOrError Error(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, nameof(exceptionInfo));
-            Contract.Ensures(Contract.Result<VoidOrError>() != null);
+            Ensures(Result<VoidOrError>() != null);
 
             return new VoidOrError.Error_(exceptionInfo);
         }
@@ -49,7 +52,7 @@ namespace Narvalo.Fx
 
         public override string ToString()
         {
-            Contract.Ensures(Contract.Result<string>() != null);
+            Ensures(Result<string>() != null);
 
             return "Void";
         }
@@ -63,7 +66,7 @@ namespace Narvalo.Fx
             public Error_(ExceptionDispatchInfo exceptionInfo)
                 : base(true)
             {
-                Contract.Requires(exceptionInfo != null);
+                Demand.NotNull(exceptionInfo);
 
                 _exceptionInfo = exceptionInfo;
             }
@@ -72,10 +75,10 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Contract.Ensures(Contract.Result<string>() != null);
+                Ensures(Result<string>() != null);
 
-                var exception = _exceptionInfo.SourceException;
-                Contract.Assume(exception != null);
+                Exception exception = _exceptionInfo.SourceException;
+                Assume(exception != null);
 
                 return Format.CurrentCulture("Error({0})", exception.Message);
             }
@@ -85,7 +88,7 @@ namespace Narvalo.Fx
             [ContractInvariantMethod]
             private void ObjectInvariant()
             {
-                Contract.Invariant(_exceptionInfo != null);
+                Invariant(_exceptionInfo != null);
             }
 
 #endif
