@@ -25,7 +25,7 @@ namespace Narvalo.Finance
             ContractFor.CurrencyCode(code);
             Ensures(Result<Currency>() != null);
 
-            if (!IsValid(code))
+            if (!Validate(code))
             {
                 throw new CurrencyNotFoundException("Unknown currency: " + code + ".");
             }
@@ -33,6 +33,6 @@ namespace Narvalo.Finance
             return new Currency(code);
         }
 
-        protected abstract bool IsValid(string code);
+        protected abstract bool Validate(string code);
     }
 }

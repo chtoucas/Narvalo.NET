@@ -32,26 +32,31 @@ namespace Narvalo.Finance
         private readonly string _countryCode;
         private readonly string _institutionCode;
         private readonly string _locationCode;
-        private readonly string _value;
+        private readonly string _innerValue;
 
-        private Bic(string institutionCode, string countryCode, string locationCode, string branchCode, string value)
+        private Bic(
+            string institutionCode,
+            string countryCode,
+            string locationCode,
+            string branchCode,
+            string innerValue)
         {
             Demand.NotNull(institutionCode);
             Demand.NotNull(countryCode);
             Demand.NotNull(locationCode);
             Demand.NotNull(branchCode);
-            Demand.NotNull(value);
-            Demand.True(institutionCode.Length == PREFIX_LENGTH);
-            Demand.True(countryCode.Length == COUNTRY_LENGTH);
-            Demand.True(locationCode.Length == SUFFIX_LENGTH);
-            Demand.True(Predicates.ValidateBranchCode(branchCode));
-            Demand.True(Predicates.ValidateInnerValue(value));
+            Demand.NotNull(innerValue);
+            Demand.True(PredicateFor.InstitutionCode(institutionCode));
+            Demand.True(PredicateFor.CountryCode(countryCode));
+            Demand.True(PredicateFor.LocationCode(locationCode));
+            Demand.True(PredicateFor.BranchCode(branchCode));
+            Demand.True(PredicateFor.InnerValue(innerValue));
 
             _institutionCode = institutionCode;
             _countryCode = countryCode;
             _locationCode = locationCode;
             _branchCode = branchCode;
-            _value = value;
+            _innerValue = innerValue;
         }
 
         /// <summary>
@@ -62,7 +67,7 @@ namespace Narvalo.Finance
             get
             {
                 Ensures(Result<string>() != null);
-                //Ensures(Result<string>().Length == 0 || Result<string>().Length == BRANCH_LENGTH);
+                Ensures(Result<string>().Length == 0 || Result<string>().Length == BRANCH_LENGTH);
 
                 return _branchCode;
             }
@@ -132,27 +137,27 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(locationCode, nameof(locationCode));
             Require.NotNull(branchCode, nameof(branchCode));
-            Require.True(institutionCode.Length == PREFIX_LENGTH, nameof(institutionCode));
-            Require.True(countryCode.Length == COUNTRY_LENGTH, nameof(countryCode));
-            Require.True(locationCode.Length == SUFFIX_LENGTH, nameof(locationCode));
-            Require.True(Predicates.ValidateBranchCode(branchCode), nameof(branchCode));
+            Require.True(PredicateFor.InstitutionCode(institutionCode), nameof(institutionCode));
+            Require.True(PredicateFor.CountryCode(countryCode), nameof(countryCode));
+            Require.True(PredicateFor.LocationCode(locationCode), nameof(locationCode));
+            Require.True(PredicateFor.BranchCode(branchCode), nameof(branchCode));
 
-            var value = institutionCode + countryCode + locationCode + branchCode;
-            Assume(Predicates.ValidateInnerValue(value));
-            Check.True(Predicates.ValidateInnerValue(value));
+            var innerValue = institutionCode + countryCode + locationCode + branchCode;
+            Assume(PredicateFor.InnerValue(innerValue));
+            Check.True(PredicateFor.InnerValue(innerValue));
 
-            return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
+            return new Bic(institutionCode, countryCode, locationCode, branchCode, innerValue);
         }
 
         public static Bic Parse(string value)
         {
             Require.NotNull(value, nameof(value));
 
-            Bic? iban = ParseCore(value, true /* throwOnError */);
-            Assume(iban.HasValue);
-            Check.True(iban.HasValue);
+            Bic? bic = ParseCore(value, true /* throwOnError */);
+            Assume(bic.HasValue);
+            Check.True(bic.HasValue);
 
-            return iban.Value;
+            return bic.Value;
         }
 
         public static Bic? TryParse(string value)
@@ -165,30 +170,30 @@ namespace Narvalo.Finance
             return ParseCore(value, false /* throwOnError */);
         }
 
-        public override string ToString() => _value;
+        public override string ToString()
+        {
+            Ensures(Result<string>() != null);
+
+            return _innerValue;
+        }
 
         public bool CheckFormat() => CheckFormat(true /* isoConformance */);
 
         public bool CheckSwiftFormat() => CheckFormat(false /* isoConformance */);
 
-        //#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        //        [System.Diagnostics.Contracts.ContractInvariantMethod]
-        //        private void ObjectInvariant()
-        //        {
-        //            Invariant(BranchCode != null);
-        //            //Invariant(BranchCode.Length == 0 || BranchCode.Length == BRANCH_LENGTH);
-        //            Invariant(CountryCode != null);
-        //            //Invariant(CountryCode.Length == COUNTRY_LENGTH);
-        //            Invariant(InstitutionCode != null);
-        //            //Invariant(InstitutionCode.Length == PREFIX_LENGTH);
-        //            Invariant(LocationCode != null);
-        //            //Invariant(LocationCode.Length == SUFFIX_LENGTH);
-        //            //Invariant(_value != null);
-        //            //Invariant(_value.Length == PARTY_LENGTH || _value.Length == BIC_LENGTH);
-        //        }
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Invariant(_branchCode != null);
+            Invariant(_countryCode != null);
+            Invariant(_innerValue != null);
+            Invariant(_institutionCode != null);
+            Invariant(_locationCode != null);
+        }
 
-        //#endif
+#endif
 
         // NB: We only perform basic validation on the input string.
         private static Bic? ParseCore(string value, bool throwOnError)
@@ -204,28 +209,28 @@ namespace Narvalo.Finance
 
                 return null;
             }
-            Assume(Predicates.ValidateInnerValue(value));
-            Check.True(Predicates.ValidateInnerValue(value));
+            Assume(PredicateFor.InnerValue(value));
+            Check.True(PredicateFor.InnerValue(value));
 
             // The first four letters or digits define the institution or bank code.
             // NB: SWIFT is more restrictive than ISO as it only expects letters.
             string institutionCode = value.Substring(0, PREFIX_LENGTH);
-            Check.True(institutionCode.Length == PREFIX_LENGTH);
+            Check.True(PredicateFor.InstitutionCode(institutionCode));
 
             // The next two letters define the ISO 3166-1 alpha-2 country code.
             string countryCode = value.Substring(PREFIX_LENGTH, COUNTRY_LENGTH);
-            Check.True(countryCode.Length == COUNTRY_LENGTH);
+            Check.True(PredicateFor.CountryCode(countryCode));
 
             // The next two letters or digits define the location code.
             string locationCode = value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH, SUFFIX_LENGTH);
-            Check.True(locationCode.Length == SUFFIX_LENGTH);
+            Check.True(PredicateFor.LocationCode(locationCode));
 
             // The next three letters or digits define the branch code (optional).
             string branchCode = value.Length == PARTY_LENGTH
                 ? String.Empty
                 : value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH + SUFFIX_LENGTH, BRANCH_LENGTH);
-            Assume(Predicates.ValidateBranchCode(branchCode));
-            Check.True(Predicates.ValidateBranchCode(branchCode));
+            Assume(PredicateFor.BranchCode(branchCode));
+            Check.True(PredicateFor.BranchCode(branchCode));
 
             return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }
@@ -242,10 +247,10 @@ namespace Narvalo.Finance
 #else
         private
 #endif
-        static class Predicates
+        static class PredicateFor
         {
             [Pure]
-            public static bool ValidateBranchCode(string branchCode)
+            public static bool BranchCode(string branchCode)
             {
                 Demand.NotNull(branchCode);
 
@@ -253,13 +258,36 @@ namespace Narvalo.Finance
             }
 
             [Pure]
-            public static bool ValidateInnerValue(string value)
+            public static bool CountryCode(string countryCode)
+            {
+                Demand.NotNull(countryCode);
+
+                return countryCode.Length == COUNTRY_LENGTH;
+            }
+
+            [Pure]
+            public static bool InnerValue(string value)
             {
                 Demand.NotNull(value);
 
                 return value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH;
             }
 
+            [Pure]
+            public static bool InstitutionCode(string institutionCode)
+            {
+                Demand.NotNull(institutionCode);
+
+                return institutionCode.Length == PREFIX_LENGTH;
+            }
+
+            [Pure]
+            public static bool LocationCode(string locationCode)
+            {
+                Demand.NotNull(locationCode);
+
+                return locationCode.Length == SUFFIX_LENGTH;
+            }
         }
     }
 
@@ -270,7 +298,7 @@ namespace Narvalo.Finance
 
         public static bool operator !=(Bic left, Bic right) => !left.Equals(right);
 
-        public bool Equals(Bic other) => _value == other._value;
+        public bool Equals(Bic other) => _innerValue == other._innerValue;
 
         public override bool Equals(object obj)
         {
@@ -282,6 +310,6 @@ namespace Narvalo.Finance
             return Equals((Bic)obj);
         }
 
-        public override int GetHashCode() => _value.GetHashCode();
+        public override int GetHashCode() => _innerValue.GetHashCode();
     }
 }
