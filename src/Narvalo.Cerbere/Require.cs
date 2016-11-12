@@ -258,6 +258,7 @@ namespace Narvalo
         /// </remarks>
         /// <seealso cref="Require"/>
         /// <seealso cref="Demand"/>
+        [Obsolete]
         public static class Unproven
         {
             public static void True(bool testCondition, string parameterName)
