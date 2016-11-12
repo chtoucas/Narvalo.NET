@@ -3,7 +3,8 @@
 namespace Narvalo
 {
     using System;
-    using System.Diagnostics.Contracts;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public static class StringManip
     {
@@ -17,10 +18,11 @@ namespace Narvalo
         /// </remarks>
         public static string Reverse(string value)
         {
-            Require.NotNull(value, "value");
-            Contract.Ensures(Contract.Result<string>() != null);
+            Require.NotNull(value, nameof(value));
+            Ensures(Result<string>() != null);
 
-            if (value.Length == 0) {
+            if (value.Length == 0)
+            {
                 return String.Empty;
             }
 
@@ -32,10 +34,11 @@ namespace Narvalo
 
         public static string StripCrLf(string value)
         {
-            Require.NotNull(value, "value");
-            Contract.Ensures(Contract.Result<string>() != null);
+            Require.NotNull(value, nameof(value));
+            Ensures(Result<string>() != null);
 
-            if (value.Length == 0) {
+            if (value.Length == 0)
+            {
                 return String.Empty;
             }
 
@@ -45,31 +48,35 @@ namespace Narvalo
 
         public static string Substring(string value, int startIndex, int length)
         {
-            Contract.Requires(value != null);
-            Contract.Requires(startIndex >= 0);
-            Contract.Requires(length >= 1);
-            Contract.Ensures(Contract.Result<string>() != null);
+            Demand.NotNull(value);
+            Demand.True(startIndex >= 0);
+            Demand.True(length >= 1);
+            Ensures(Result<string>() != null);
 
             return Substring(value, startIndex, length, "...");
         }
 
         public static string Substring(string value, int startIndex, int length, string postfix)
         {
-            Require.NotNull(value, "value");
-            Require.Range(startIndex >= 0, "startIndex");
-            Require.Range(length >= 1, "length");
-            Contract.Ensures(Contract.Result<string>() != null);
+            Require.NotNull(value, nameof(value));
+            Require.Range(startIndex >= 0, nameof(startIndex));
+            Require.Range(length >= 1, nameof(length));
+            Ensures(Result<string>() != null);
 
-            if (value.Length <= length) {
+            if (value.Length <= length)
+            {
                 // The input string is too short.
                 return value;
             }
-            else {
-                if (value.Length < startIndex || value.Length < startIndex + length) {
+            else
+            {
+                if (value.Length < startIndex || value.Length < startIndex + length)
+                {
                     // The start index ot the end index is too large.
                     return value.Substring(value.Length - length, length - 1) + postfix;
                 }
-                else {
+                else
+                {
                     return value.Substring(startIndex, length - 1) + postfix;
                 }
             }
@@ -77,23 +84,25 @@ namespace Narvalo
 
         public static string Truncate(string value, int length)
         {
-            Contract.Requires(value != null);
-            Contract.Requires(length >= 1);
-            Contract.Ensures(Contract.Result<string>() != null);
+            Demand.NotNull(value);
+            Demand.True(length >= 1);
+            Ensures(Result<string>() != null);
 
-            return Truncate(value, length, postfix: "...");
+            return Truncate(value, length, "..." /* postfix */);
         }
 
         public static string Truncate(string value, int length, string postfix)
         {
-            Require.NotNull(value, "value");
-            Require.Range(length >= 1, "length");
-            Contract.Ensures(Contract.Result<string>() != null);
+            Require.NotNull(value, nameof(value));
+            Require.Range(length >= 1, nameof(length));
+            Ensures(Result<string>() != null);
 
-            if (value.Length <= length) {
+            if (value.Length <= length)
+            {
                 return value;
             }
-            else {
+            else
+            {
                 return value.Substring(0, length - 1) + postfix;
             }
         }

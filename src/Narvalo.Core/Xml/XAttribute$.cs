@@ -3,10 +3,11 @@
 namespace Narvalo.Xml
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Xml.Linq;
 
     using Narvalo.Fx;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Provides extension methods for <see cref="XAttribute"/>.
@@ -16,7 +17,7 @@ namespace Narvalo.Xml
         public static T Value<T>(this XAttribute @this, Func<string, T> selector)
         {
             Require.Object(@this);
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return selector.Invoke(@this.Value);
         }
@@ -30,9 +31,9 @@ namespace Narvalo.Xml
 
         public static XAttribute NextAttributeOrThrow(this XAttribute @this, Exception exception)
         {
-            Require.NotNull(exception, "exception");
+            Require.NotNull(exception, nameof(exception));
             Demand.Object(@this);
-            Contract.Ensures(Contract.Result<XAttribute>() != null);
+            Ensures(Result<XAttribute>() != null);
 
             return NextAttributeOrThrow(@this, () => exception);
         }
@@ -40,8 +41,8 @@ namespace Narvalo.Xml
         public static XAttribute NextAttributeOrThrow(this XAttribute @this, Func<Exception> exceptionFactory)
         {
             Require.Object(@this);
-            Require.NotNull(exceptionFactory, "exceptionFactory");
-            Contract.Ensures(Contract.Result<XAttribute>() != null);
+            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
+            Ensures(Result<XAttribute>() != null);
 
             XAttribute attr = @this.NextAttribute;
             if (attr == null)
@@ -61,9 +62,9 @@ namespace Narvalo.Xml
 
         public static XAttribute PreviousAttributeOrThrow(this XAttribute @this, Exception exception)
         {
-            Require.NotNull(exception, "exception");
+            Require.NotNull(exception, nameof(exception));
             Demand.Object(@this);
-            Contract.Ensures(Contract.Result<XAttribute>() != null);
+            Ensures(Result<XAttribute>() != null);
 
             return PreviousAttributeOrThrow(@this, () => exception);
         }
@@ -71,8 +72,8 @@ namespace Narvalo.Xml
         public static XAttribute PreviousAttributeOrThrow(this XAttribute @this, Func<Exception> exceptionFactory)
         {
             Require.Object(@this);
-            Require.NotNull(exceptionFactory, "exceptionFactory");
-            Contract.Ensures(Contract.Result<XAttribute>() != null);
+            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
+            Ensures(Result<XAttribute>() != null);
 
             XAttribute attr = @this.PreviousAttribute;
             if (attr == null)

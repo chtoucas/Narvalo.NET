@@ -13,10 +13,7 @@ namespace Narvalo
     /// </summary>
     public static partial class ParseTo
     {
-        public static bool? Boolean(string value)
-        {
-            return Boolean(value, BooleanStyles.Default);
-        }
+        public static bool? Boolean(string value) => Boolean(value, BooleanStyles.Default);
 
         public static bool? Boolean(string value, BooleanStyles style)
         {
@@ -54,9 +51,7 @@ namespace Narvalo
         }
 
         public static decimal? Decimal(string value)
-        {
-            return Decimal(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
-        }
+            => Decimal(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
 
         public static decimal? Decimal(string value, NumberStyles style, IFormatProvider provider)
         {
@@ -87,9 +82,7 @@ namespace Narvalo
         }
 
         public static short? Int16(string value)
-        {
-            return Int16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
-        }
+            => Int16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
 
         public static short? Int16(string value, NumberStyles style, IFormatProvider provider)
         {
@@ -99,9 +92,7 @@ namespace Narvalo
         }
 
         public static int? Int32(string value)
-        {
-            return Int32(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
-        }
+            => Int32(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
 
         public static int? Int32(string value, NumberStyles style, IFormatProvider provider)
         {
@@ -111,9 +102,7 @@ namespace Narvalo
         }
 
         public static long? Int64(string value)
-        {
-            return Int64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
-        }
+            => Int64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
 
         public static long? Int64(string value, NumberStyles style, IFormatProvider provider)
         {
@@ -123,9 +112,7 @@ namespace Narvalo
         }
 
         public static float? Single(string value)
-        {
-            return Single(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
-        }
+            => Single(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
 
         public static float? Single(string value, NumberStyles style, IFormatProvider provider)
         {
@@ -136,9 +123,7 @@ namespace Narvalo
 
         [CLSCompliant(false)]
         public static sbyte? SByte(string value)
-        {
-            return SByte(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
-        }
+            => SByte(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
 
         [CLSCompliant(false)]
         public static sbyte? SByte(string value, NumberStyles style, IFormatProvider provider)
@@ -150,9 +135,7 @@ namespace Narvalo
 
         [CLSCompliant(false)]
         public static byte? Byte(string value)
-        {
-            return Byte(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
-        }
+            => Byte(value, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
 
         [CLSCompliant(false)]
         public static byte? Byte(string value, NumberStyles style, IFormatProvider provider)
@@ -164,9 +147,7 @@ namespace Narvalo
 
         [CLSCompliant(false)]
         public static ushort? UInt16(string value)
-        {
-            return UInt16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
-        }
+            => UInt16(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
 
         [CLSCompliant(false)]
         public static ushort? UInt16(string value, NumberStyles style, IFormatProvider provider)
@@ -178,9 +159,7 @@ namespace Narvalo
 
         [CLSCompliant(false)]
         public static uint? UInt32(string value)
-        {
-            return UInt32(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
-        }
+            => UInt32(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
 
         [CLSCompliant(false)]
         public static uint? UInt32(string value, NumberStyles style, IFormatProvider provider)
@@ -192,9 +171,7 @@ namespace Narvalo
 
         [CLSCompliant(false)]
         public static ulong? UInt64(string value)
-        {
-            return UInt64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
-        }
+            => UInt64(value, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
 
         [CLSCompliant(false)]
         public static ulong? UInt64(string value, NumberStyles style, IFormatProvider provider)
@@ -207,9 +184,7 @@ namespace Narvalo
         #region Implements parsers for value types that are not simple types
 
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
-        {
-            return Enum<TEnum>(value, ignoreCase: true);
-        }
+            => Enum<TEnum>(value, ignoreCase: true);
 
         public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
@@ -219,15 +194,10 @@ namespace Narvalo
             return parser.NullInvoke(value);
         }
 
-        public static DateTime? DateTime(string value)
-        {
-            return DateTime(value, "o");
-        }
+        public static DateTime? DateTime(string value) => DateTime(value, "o");
 
         public static DateTime? DateTime(string value, string format)
-        {
-            return DateTime(value, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
-        }
+            => DateTime(value, format, CultureInfo.InvariantCulture, DateTimeStyles.None);
 
         public static DateTime? DateTime(
             string value,

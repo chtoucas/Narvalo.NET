@@ -4,7 +4,8 @@ namespace Narvalo.Collections
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.Contracts;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerator{T}"/>.
@@ -14,7 +15,7 @@ namespace Narvalo.Collections
         public static Collection<T> ToCollection<T>(this IEnumerator<T> @this)
         {
             Require.Object(@this);
-            Contract.Ensures(Contract.Result<Collection<T>>() != null);
+            Ensures(Result<Collection<T>>() != null);
 
             var retval = new Collection<T>();
 

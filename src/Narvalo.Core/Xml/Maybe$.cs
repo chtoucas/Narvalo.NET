@@ -20,9 +20,7 @@ namespace Narvalo.Xml
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XElement> @this)
-        {
-            return from _ in @this select _.Value;
-        }
+            => from _ in @this select _.Value;
     }
 
     /// <content>
@@ -38,8 +36,6 @@ namespace Narvalo.Xml
         }
 
         public static Maybe<string> ValueOrNone(this Maybe<XAttribute> @this)
-        {
-            return from _ in @this select _.Value;
-        }
+            => from _ in @this select _.Value;
     }
 }

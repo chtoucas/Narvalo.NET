@@ -3,11 +3,12 @@
 namespace Narvalo.Xml
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Xml;
     using System.Xml.Linq;
 
     using Narvalo.Fx;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
     /// Provides extension methods for <see cref="XElement"/>.
@@ -17,7 +18,7 @@ namespace Narvalo.Xml
         public static T Value<T>(this XElement @this, Func<string, T> selector)
         {
             Require.Object(@this);
-            Require.NotNull(selector, "selector");
+            Require.NotNull(selector, nameof(selector));
 
             return selector.Invoke(@this.Value);
         }
@@ -31,9 +32,9 @@ namespace Narvalo.Xml
 
         public static XAttribute AttributeOrThrow(this XElement @this, XName name, Exception exception)
         {
-            Require.NotNull(exception, "exception");
+            Require.NotNull(exception, nameof(exception));
             Demand.Object(@this);
-            Contract.Ensures(Contract.Result<XAttribute>() != null);
+            Ensures(Result<XAttribute>() != null);
 
             return AttributeOrThrow(@this, name, () => exception);
         }
@@ -41,8 +42,8 @@ namespace Narvalo.Xml
         public static XAttribute AttributeOrThrow(this XElement @this, XName name, Func<Exception> exceptionFactory)
         {
             Require.Object(@this);
-            Require.NotNull(exceptionFactory, "exceptionFactory");
-            Contract.Ensures(Contract.Result<XAttribute>() != null);
+            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
+            Ensures(Result<XAttribute>() != null);
 
             XAttribute attr = @this.Attribute(name);
             if (attr == null)
@@ -62,9 +63,9 @@ namespace Narvalo.Xml
 
         public static XElement ElementOrThrow(this XElement @this, XName name, Exception exception)
         {
-            Require.NotNull(exception, "exception");
+            Require.NotNull(exception, nameof(exception));
             Demand.Object(@this);
-            Contract.Ensures(Contract.Result<XElement>() != null);
+            Ensures(Result<XElement>() != null);
 
             return ElementOrThrow(@this, name, () => exception);
         }
@@ -72,8 +73,8 @@ namespace Narvalo.Xml
         public static XElement ElementOrThrow(this XElement @this, XName name, Func<Exception> exceptionFactory)
         {
             Require.Object(@this);
-            Require.NotNull(exceptionFactory, "exceptionFactory");
-            Contract.Ensures(Contract.Result<XElement>() != null);
+            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
+            Ensures(Result<XElement>() != null);
 
             XElement child = @this.Element(name);
             if (child == null)
@@ -106,9 +107,9 @@ namespace Narvalo.Xml
 
         public static XElement NextElementOrThrow(this XElement @this, Exception exception)
         {
-            Require.NotNull(exception, "exception");
+            Require.NotNull(exception, nameof(exception));
             Demand.Object(@this);
-            Contract.Ensures(Contract.Result<XElement>() != null);
+            Ensures(Result<XElement>() != null);
 
             return NextElementOrThrow(@this, () => exception);
         }
@@ -116,8 +117,8 @@ namespace Narvalo.Xml
         public static XElement NextElementOrThrow(this XElement @this, Func<Exception> exceptionFactory)
         {
             Require.Object(@this);
-            Require.NotNull(exceptionFactory, "exceptionFactory");
-            Contract.Ensures(Contract.Result<XElement>() != null);
+            Require.NotNull(exceptionFactory, nameof(exceptionFactory));
+            Ensures(Result<XElement>() != null);
 
             XNode nextElement = @this.NextNode;
             while (nextElement != null && nextElement.NodeType != XmlNodeType.Element)
@@ -125,14 +126,14 @@ namespace Narvalo.Xml
                 nextElement = nextElement.NextNode;
             }
 
-            var retval = nextElement as XElement;
+            var elmt = nextElement as XElement;
 
-            if (retval == null)
+            if (elmt == null)
             {
                 throw exceptionFactory.Invoke();
             }
 
-            return retval;
+            return elmt;
         }
     }
 }
