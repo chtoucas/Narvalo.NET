@@ -20,7 +20,7 @@ namespace Narvalo
         public Range(T lowerEnd, T upperEnd)
         {
             // REVIEW: Strict range? Do we allow for equality?
-            Require.Unproven.Range(lowerEnd.CompareTo(upperEnd) <= 0, nameof(lowerEnd));
+            Require.Range(PredicateFor.Range(lowerEnd, upperEnd), nameof(lowerEnd));
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;
