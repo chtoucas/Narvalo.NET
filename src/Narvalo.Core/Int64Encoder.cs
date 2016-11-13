@@ -190,20 +190,27 @@ namespace Narvalo
             Demand.NotNull(alphabet);
             Demand.Range(value >= 0L);
             Demand.Range(alphabetLength > 0);
+            Demand.Range(maxLength >= 0);
             Ensures(Result<string>() != null);
 
             if (value == 0L) { return String.Empty; }
+
+            Assume(alphabet.Length == alphabetLength);
+            Check.True(alphabet.Length == alphabetLength);
 
             var arr = new char[maxLength];
 
             int i = 0;
             while (value > 0L)
             {
-                long r = value % alphabetLength;
+                long index = value % alphabetLength;
 
-                Assume(r < alphabet.Length);
+                Assume(index < alphabet.Length);
+                Check.True(index < alphabet.Length);
+                Assume(i < maxLength);
+                Check.True(i < maxLength);
 
-                arr[i] = alphabet[r];
+                arr[i] = alphabet[index];
                 i++;
                 value /= alphabetLength;
             }
