@@ -51,11 +51,10 @@ namespace Narvalo.Internal
         [Pure]
         public static bool IsEmptyOrWhiteSpace(string value)
         {
-            Contract.Requires(value != null);
-            //if (value == null)
-            //{
-            //    return false;
-            //}
+            if (value == null)
+            {
+                return false;
+            }
 
             for (int i = 0; i < value.Length; i++)
             {

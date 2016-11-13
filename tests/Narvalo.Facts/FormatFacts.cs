@@ -4,7 +4,6 @@ namespace Narvalo
 {
     using System;
 
-    using Narvalo.TestCommon;
     using Xunit;
 
     public static class FormatFacts

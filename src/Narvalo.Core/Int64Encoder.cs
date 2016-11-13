@@ -14,21 +14,19 @@ namespace Narvalo
         private const int BASE25_ALPHABET_LENGTH = 25;
         private const int BASE34_ALPHABET_LENGTH = 34;
         private const int BASE58_ALPHABET_LENGTH = 58;
-        private const int FLICKR_BASE58_ALPHABET_LENGTH = 58;
 
         private const int BASE25_MAX_LENGTH = 14;
         private const int BASE34_MAX_LENGTH = 13;
         private const int BASE58_MAX_LENGTH = 11;
-        private const int FLICKR_BASE58_MAX_LENGTH = 11;
 
-        // On exclut la lettre "l".
+        // All lowercase ASCII letters except "l".
         private static readonly char[] s_Base25Alphabet = new char[] {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
             'v', 'w', 'x', 'y', 'z',
         };
 
-        // On exclut le chiffre zéro et la lettre "l".
+        // All lowercase ASCII letters and digits except zero and "l".
         private static readonly char[] s_Base34Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
@@ -36,7 +34,7 @@ namespace Narvalo
             'v', 'w', 'x', 'y', 'z',
         };
 
-        // On exclut le chiffre zéro et les lettres "I", "O" et "l".
+        // All ASCII letters and digits except zero and "I", "O" et "l".
         private static readonly char[] s_Base58Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K',
@@ -47,7 +45,8 @@ namespace Narvalo
             'v', 'w', 'x', 'y', 'z',
         };
 
-        // On exclut le chiffre zéro et les lettres "I", "O" et "l".
+        // All ASCII letters and digits except zero and "I", "O" et "l".
+        // Beware, this array is not sorted.
         private static readonly char[] s_FlickrBase58Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
@@ -63,7 +62,7 @@ namespace Narvalo
             Require.Range(value >= 0L, nameof(value));
             Ensures(Result<string>() != null);
 
-            return Encode(value, s_Base25Alphabet, BASE25_ALPHABET_LENGTH);
+            return Encode(value, s_Base25Alphabet, BASE25_ALPHABET_LENGTH, BASE25_MAX_LENGTH);
         }
 
         public static string ToBase34String(long value)
@@ -71,7 +70,7 @@ namespace Narvalo
             Require.Range(value >= 0L, nameof(value));
             Ensures(Result<string>() != null);
 
-            return Encode(value, s_Base34Alphabet, BASE34_ALPHABET_LENGTH);
+            return Encode(value, s_Base34Alphabet, BASE34_ALPHABET_LENGTH, BASE34_MAX_LENGTH);
         }
 
         public static string ToBase58String(long value)
@@ -79,7 +78,7 @@ namespace Narvalo
             Require.Range(value >= 0L, nameof(value));
             Ensures(Result<string>() != null);
 
-            return Encode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
+            return Encode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH, BASE58_MAX_LENGTH);
         }
 
         [SuppressMessage("Microsoft.Contracts", "Suggestion-31-0",
@@ -93,12 +92,12 @@ namespace Narvalo
 
             while (value > 0L)
             {
-                long r = value % FLICKR_BASE58_ALPHABET_LENGTH;
+                long r = value % BASE58_ALPHABET_LENGTH;
 
                 Assume(r < s_FlickrBase58Alphabet.Length);
 
                 retval = s_FlickrBase58Alphabet[r].ToString() + retval;
-                value /= FLICKR_BASE58_ALPHABET_LENGTH;
+                value /= BASE58_ALPHABET_LENGTH;
             }
 
             return retval;
@@ -134,7 +133,7 @@ namespace Narvalo
         public static long FromFlickrBase58String(string value)
         {
             Require.NotNull(value, nameof(value));
-            Require.True(value.Length <= FLICKR_BASE58_MAX_LENGTH, nameof(value));
+            Require.True(value.Length <= BASE58_MAX_LENGTH, nameof(value));
             Ensures(Result<long>() >= 0L);
 
             long retval = 0L;
@@ -155,7 +154,7 @@ namespace Narvalo
                     retval += multiplier * index;
                     if (i != 0)
                     {
-                        multiplier *= FLICKR_BASE58_ALPHABET_LENGTH;
+                        multiplier *= BASE58_ALPHABET_LENGTH;
                     }
                 }
             }
@@ -163,7 +162,7 @@ namespace Narvalo
             return retval;
         }
 
-        internal static long Decode(string value, char[] alphabet, int alphabetLength)
+        private static long Decode(string value, char[] alphabet, int alphabetLength)
         {
             Demand.NotNull(value);
             Demand.True(value.Length <= alphabetLength);
@@ -197,26 +196,48 @@ namespace Narvalo
             return retval;
         }
 
-        internal static string Encode(long value, char[] alphabet, int alphabetLength)
+        private static string Encode(long value, char[] alphabet, int alphabetLength, int maxLength)
         {
             Demand.Range(value >= 0L);
             Demand.NotNull(alphabet);
             Demand.Range(alphabetLength > 0);
             Ensures(Result<string>() != null);
 
+            //var reversed = new char[maxLength];
             string retval = String.Empty;
 
+            //int i = 0;
             while (value > 0L)
             {
                 long r = value % alphabetLength;
 
                 Assume(r < alphabet.Length);
 
+                //reversed[i] = alphabet[r];
+                //i++;
                 retval = alphabet[r].ToString() + retval;
                 value /= alphabetLength;
             }
 
+            //Array.Reverse(reversed);
+
+            //return new String(reversed, maxLength - i + 1, maxLength);
+
             return retval;
+        }
+
+        private static char[] ReverseArray(char[] value)
+        {
+            int len = value.Length - 1;
+
+            for (int i = 0; i < len; i++, len--)
+            {
+                value[i] ^= value[len];
+                value[len] ^= value[i];
+                value[i] ^= value[len];
+            }
+
+            return value;
         }
     }
 }
