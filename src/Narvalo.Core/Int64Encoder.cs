@@ -3,7 +3,6 @@
 namespace Narvalo
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Properties;
 
@@ -20,6 +19,7 @@ namespace Narvalo
         private const int BASE58_MAX_LENGTH = 11;
 
         // All lowercase ASCII letters except "l".
+        // NB: This array is sorted.
         private static readonly char[] s_Base25Alphabet = new char[] {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
@@ -27,6 +27,7 @@ namespace Narvalo
         };
 
         // All lowercase ASCII letters and digits except zero and "l".
+        // NB: This array is sorted.
         private static readonly char[] s_Base34Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
@@ -35,6 +36,7 @@ namespace Narvalo
         };
 
         // All ASCII letters and digits except zero and "I", "O" et "l".
+        // NB: This array is sorted.
         private static readonly char[] s_Base58Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K',
@@ -46,7 +48,7 @@ namespace Narvalo
         };
 
         // All ASCII letters and digits except zero and "I", "O" et "l".
-        // Beware, this array is not sorted.
+        // WARNING: This array is NOT sorted.
         private static readonly char[] s_FlickrBase58Alphabet = new char[] {
             '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
@@ -81,26 +83,12 @@ namespace Narvalo
             return Encode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH, BASE58_MAX_LENGTH);
         }
 
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-31-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static string ToFlickrBase58String(long value)
         {
             Require.Range(value >= 0L, nameof(value));
             Ensures(Result<string>() != null);
 
-            string retval = String.Empty;
-
-            while (value > 0L)
-            {
-                long r = value % BASE58_ALPHABET_LENGTH;
-
-                Assume(r < s_FlickrBase58Alphabet.Length);
-
-                retval = s_FlickrBase58Alphabet[r].ToString() + retval;
-                value /= BASE58_ALPHABET_LENGTH;
-            }
-
-            return retval;
+            return Encode(value, s_FlickrBase58Alphabet, BASE58_ALPHABET_LENGTH, BASE58_MAX_LENGTH);
         }
 
         public static long FromBase25String(string value)
@@ -130,6 +118,7 @@ namespace Narvalo
             return Decode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH);
         }
 
+        // NB: We can not use Decode() since s_FlickrBase58Alphabet is not sorted.
         public static long FromFlickrBase58String(string value)
         {
             Require.NotNull(value, nameof(value));
@@ -165,8 +154,8 @@ namespace Narvalo
         private static long Decode(string value, char[] alphabet, int alphabetLength)
         {
             Demand.NotNull(value);
-            Demand.True(value.Length <= alphabetLength);
             Demand.NotNull(alphabet);
+            Demand.True(value.Length <= alphabetLength);
             Demand.Range(alphabetLength > 0);
             Ensures(Result<long>() >= 0L);
 
@@ -198,46 +187,30 @@ namespace Narvalo
 
         private static string Encode(long value, char[] alphabet, int alphabetLength, int maxLength)
         {
-            Demand.Range(value >= 0L);
             Demand.NotNull(alphabet);
+            Demand.Range(value >= 0L);
             Demand.Range(alphabetLength > 0);
             Ensures(Result<string>() != null);
 
-            //var reversed = new char[maxLength];
-            string retval = String.Empty;
+            if (value == 0L) { return String.Empty; }
 
-            //int i = 0;
+            var arr = new char[maxLength];
+
+            int i = 0;
             while (value > 0L)
             {
                 long r = value % alphabetLength;
 
                 Assume(r < alphabet.Length);
 
-                //reversed[i] = alphabet[r];
-                //i++;
-                retval = alphabet[r].ToString() + retval;
+                arr[i] = alphabet[r];
+                i++;
                 value /= alphabetLength;
             }
 
-            //Array.Reverse(reversed);
+            Array.Reverse(arr);
 
-            //return new String(reversed, maxLength - i + 1, maxLength);
-
-            return retval;
-        }
-
-        private static char[] ReverseArray(char[] value)
-        {
-            int len = value.Length - 1;
-
-            for (int i = 0; i < len; i++, len--)
-            {
-                value[i] ^= value[len];
-                value[len] ^= value[i];
-                value[i] ^= value[len];
-            }
-
-            return value;
+            return new String(arr, maxLength - i, i);
         }
     }
 }

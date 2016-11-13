@@ -61,10 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Facts", "tests\Narv
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		tests\Narvalo.TestCommon\Narvalo.TestCommon.projitems*{85346649-7dd6-4235-88e5-45de7cfe2867}*SharedItemsImports = 4
 		tests\Narvalo.TestCommon\Narvalo.TestCommon.projitems*{c141265f-95ed-4093-a56c-5991dba96f67}*SharedItemsImports = 13
 		tests\Narvalo.TestCommon\Narvalo.TestCommon.projitems*{d05b40a6-15b6-46d0-abc1-8f8cfc5d02e8}*SharedItemsImports = 4
-		tests\Narvalo.TestCommon\Narvalo.TestCommon.projitems*{e94f4d98-3882-4713-90fd-27c515b68bb0}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeContracts|Any CPU = CodeContracts|Any CPU

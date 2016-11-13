@@ -23,7 +23,7 @@ namespace Narvalo
         {
             get
             {
-                yield return new object[] { String.Empty, 0 };
+                yield return new object[] { String.Empty, 0L };
                 yield return new object[] { "NQm6nKp8qFC", Int64.MaxValue };
             }
         }
