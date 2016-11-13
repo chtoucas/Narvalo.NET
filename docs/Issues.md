@@ -39,8 +39,6 @@ Current works
   * use `nameof` everywhere.
   * rules to explain when to use the new `=>` syntax for methods.
   * review the use of `var`.
-- For test projects, we should automatically add the TestCommon shared project.
-    `<Import Project="..\Narvalo.TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />`
 - **Bug:** in the MvpWebForms sample project, `OutputPath` is wrong (temporary fix: override `OutputPath`
   property in project file). Other strange thing, `MvpWebForms.dll.config` is created.
   The database requires [SQL Server 2012 Express LocalDB](https://www.microsoft.com/en-us/download/details.aspx?id=29062).

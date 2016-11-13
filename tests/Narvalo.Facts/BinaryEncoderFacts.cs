@@ -40,7 +40,7 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("ZBase32TestData")]
+        [MemberData(nameof(ZBase32TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void ToZBase32String_ReturnsExpectedString(string value, string expectedValue)
         {

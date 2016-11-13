@@ -583,7 +583,7 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("Base58TestData")]
+        [MemberData(nameof(Base58TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void FromBase58String_ReturnsExpectedString(string value, long expectedValue)
         {
@@ -603,7 +603,7 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("FlickrBase58TestData")]
+        [MemberData(nameof(FlickrBase58TestData), DisableDiscoveryEnumeration = true)]
         [Trait("Slow", "Sample")]
         [CLSCompliant(false)]
         public static void FromFlickrBase58String_TestSuite(string value, long expectedValue)
@@ -624,7 +624,7 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("Base58TestData")]
+        [MemberData(nameof(Base58TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void ToBase58String_TestSuite(string expectedValue, long value)
         {
@@ -644,7 +644,7 @@ namespace Narvalo
         }
 
         [Theory]
-        [MemberData("FlickrBase58TestData")]
+        [MemberData(nameof(FlickrBase58TestData), DisableDiscoveryEnumeration = true)]
         [Trait("Slow", "Sample")]
         [CLSCompliant(false)]
         public static void ToFlickrBase58String_ReturnsExpectedString(string expectedValue, long value)

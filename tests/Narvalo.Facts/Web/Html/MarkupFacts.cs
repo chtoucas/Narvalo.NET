@@ -40,7 +40,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Link_ReturnsExpectedHtml(string value)
         {
@@ -55,7 +55,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Link_ReturnsExpectedHtml_ForNullLinkType(string value)
         {
@@ -70,7 +70,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Link_ReturnsExpectedHtml_ForEmptyLinkType(string value)
         {
@@ -85,7 +85,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Link_ReturnsExpectedHtml_ForNonNullOrEmptyLinkType(string value)
         {
@@ -100,7 +100,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Link_ReturnsExpectedHtml_ForNullRelation(string value)
         {
@@ -115,7 +115,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Link_ReturnsExpectedHtml_ForEmptyRelation(string value)
         {
@@ -130,7 +130,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Link_ReturnsExpectedHtml_ForNonNullOrEmptyRelation(string value)
         {
@@ -145,7 +145,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Link_ReturnsExpectedHtml_ForCustomAttribute(string value)
         {
@@ -165,7 +165,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Link_ReturnsExpectedHtml_ForOverriddenAttribute(string value)
         {
@@ -198,7 +198,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Script_ReturnsExpectedHtml(string value)
         {
@@ -213,7 +213,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Script_ReturnsExpectedHtml_ForNullScriptType(string value)
         {
@@ -228,7 +228,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Script_ReturnsExpectedHtml_ForEmptyScriptType(string value)
         {
@@ -243,7 +243,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Script_ReturnsExpectedHtml_ForNonNullOrEmptyScriptType(string value)
         {
@@ -258,7 +258,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Script_ReturnsExpectedHtml_ForCustomAttribute(string value)
         {
@@ -277,7 +277,7 @@ namespace Narvalo.Web.Html
         }
 
         [Theory]
-        [MemberData("Paths")]
+        [MemberData(nameof(Paths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Script_ReturnsExpectedHtml_ForOverriddenAttribute(string value)
         {

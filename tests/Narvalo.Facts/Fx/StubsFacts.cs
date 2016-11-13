@@ -95,7 +95,7 @@ namespace Narvalo.Fx
         }
 
         [Theory]
-        [MemberData("StringTestData")]
+        [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void AlwaysFalse_ReturnsFalse_StringTestSuite(string input)
         {
@@ -104,7 +104,7 @@ namespace Narvalo.Fx
         }
 
         [Theory]
-        [MemberData("Int32TestData")]
+        [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void AlwaysFalse_ReturnsFalse_Int32TestSuite(int input)
         {
@@ -127,7 +127,7 @@ namespace Narvalo.Fx
         }
 
         [Theory]
-        [MemberData("StringTestData")]
+        [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void AlwaysTrue_ReturnsTrue_StringTestSuite(string input)
         {
@@ -136,7 +136,7 @@ namespace Narvalo.Fx
         }
 
         [Theory]
-        [MemberData("Int32TestData")]
+        [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void AlwaysTrue_ReturnsTrue_Int32TestSuite(int input)
         {
@@ -159,7 +159,7 @@ namespace Narvalo.Fx
         }
 
         [Theory]
-        [MemberData("StringTestData")]
+        [MemberData(nameof(StringTestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Identity_ReturnsBackInput_StringTestSuite(string input)
         {
@@ -168,7 +168,7 @@ namespace Narvalo.Fx
         }
 
         [Theory]
-        [MemberData("Int32TestData")]
+        [MemberData(nameof(Int32TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Identity_ReturnsBackInput_Int32TestSuite(int input)
         {
