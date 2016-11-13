@@ -16,11 +16,8 @@ Narvalo.Common            | 0.24.0      | .NET 4.5         | Transparent  |    |
 Narvalo.Core              | 0.24.0      | Profile259       | Transparent  |    | OK |
 Narvalo.Finance           | 0.24.0      | Profile111       | Transparent  |    | OK |
 Narvalo.Fx                | 0.24.0      | Profile259       | Transparent  |    | OK |
-Narvalo.Ghostscript       |             | .NET 4.5         |              |    |    |
 Narvalo.Mvp               | 0.99.0      | .NET 4.5         |              |    |    |
 Narvalo.Mvp.Web           | 0.99.0      | .NET 4.5         |              |    |    |
-Narvalo.Mvp.Windows.Forms |             | .NET 4.5         |              |    |    |
-Narvalo.Reliability       |             | .NETStandard 1.2 |              |    |    |
 Narvalo.Web               | 0.24.0      | .NET 4.5         |              |    | OK |
 
 (*) Security attributes are not present in the assemblies distributed via NuGet.

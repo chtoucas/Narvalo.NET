@@ -26,10 +26,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -81,10 +79,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Narvalo.Mvp.Windows.Forms\Narvalo.Mvp.Windows.Forms.csproj">
-      <Project>{4c908c48-2bd9-4e23-bcbe-ed3604e0d387}</Project>
-      <Name>Narvalo.Mvp.Windows.Forms</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Mvp\Narvalo.Mvp.csproj">
       <Project>{2944d621-7f6e-4792-94ad-0021c6b73981}</Project>
       <Name>Narvalo.Mvp</Name>

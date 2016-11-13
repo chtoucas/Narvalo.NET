@@ -77,24 +77,18 @@ All tasks are fully automated with MSBuild, PowerShell (PSake) and F# scripts.
   * Narvalo.Common
   * Narvalo.Core
   * Narvalo.Finance
-  * Narvalo.Ghostscript
   * Narvalo.Fx
-  * Narvalo.Reliability
   * Narvalo.Web
 - MVP Framework
   * Narvalo.Mvp
   * Narvalo.Mvp.Web
-  * Narvalo.Mvp.Windows.Forms
 - Developer Tools
   * Narvalo.Build
 - Samples
   * MvpCommandLine
   * MvpWebForms
-  * MvpWindowsForms
 - Tests
   * Narvalo.Facts
   * Narvalo.Mvp.Facts
-  * Narvalo.Reliability.Facts
 - For internal use only
   * Narvalo.T4
-  * Narvalo.StyleCop

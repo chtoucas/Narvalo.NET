@@ -21,11 +21,6 @@
     <Compile Include="CircuitBreakerStateChangedEventArgs.cs" />
     <Compile Include="FlowRateBarrier.cs" />
     <Compile Include="Futures\SentinelChain.cs" />
-    <Compile Include="Properties\Strings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
     <Compile Include="ReliabilityException.cs" />
     <Compile Include="Futures\IReliabilityMonitor.cs" />
     <Compile Include="IReliabilitySentinel.cs" />
@@ -35,11 +30,6 @@
     <Compile Include="Futures\RequestCounter.cs" />
     <Compile Include="RetrySentinel.cs" />
     <Compile Include="RetryPolicy.cs" />
-    <Compile Include="Properties\Strings.fr.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.fr.resx</DependentUpon>
-    </Compile>
     <Compile Include="ConcurrencyThrottle.cs" />
     <Compile Include="Futures\FlowRateRegulator.cs" />
     <Compile Include="Futures\IMonitorableSentinel.cs" />
@@ -48,16 +38,6 @@
     <Compile Include="Futures\SentinelChainBuilder.cs" />
     <Compile Include="Futures\SentinelStatus.cs" />
     <Compile Include="Futures\SentinelType.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Strings.fr.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.fr.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
