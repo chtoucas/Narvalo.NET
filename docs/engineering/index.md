@@ -30,7 +30,6 @@ Optional necessary to run the build scripts:
 - [DocFX](https://dotnet.github.io/docfx/) to build the documentation.
 
 Obsolete requirements:
-- [StyleCop](http://stylecop.codeplex.com) for source analysis integration inside Visual Studio.
 - [Microsoft Visual Studio 2013 SDK](http://www.microsoft.com/en-us/download/details.aspx?id=40758),
   prerequisite for the Modeling SDK (see below).
 - [Modeling SDK for Microsoft Visual Studio 2013](http://www.microsoft.com/en-us/download/details.aspx?id=40754),

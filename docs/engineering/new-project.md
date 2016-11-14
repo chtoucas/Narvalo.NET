@@ -188,35 +188,7 @@ Add the following content to you local customization property file `{AssemblyNam
 ```
 This has ony one effect:
 - Sample projects use a dummy assembly version.
-- Sample projects use custom FxCop & StyleCop rules.
-
-StyleCop (obsolete)
--------------------
-
-Unless specified otherwise, a project inherits its StyleCop settings from a common settings file:
-- for libraries, tests and tools, `StyleCop.Settings` which link back to `etc\Loosy.SourceAnalysis`.
-- for samples, `samples\StyleCop.Settings` which link back to `etc\Empty.SourceAnalysis`.
-
-This settings mirror what is done in the shared (MSBuild) property file.
-
-There are three ways to run StyleCop:
-- Inside VS from the menu, using the inherited settings from `StyleCop.Settings`.
-- Inside VS, for Release builds, using the settings defined in the shared property file.
-- From CI builds when `SourceAnalysisEnabled` is `true`, using the settings defined
-  in the shared property file.
-
-Remarks:
-- `etc\Loosy.SourceAnalysis` includes all rules except the documentation ones.
-- `etc\Empty.SourceAnalysis` disables all rules.
-- `etc\Strict.SourceAnalysis` enables all rules.
-- When documentation is completed, override the project properties as follows:
-```xml
-<PropertyGroup>
-    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Strict.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
-</PropertyGroup>
-```
-  but we do not override the settings file `Settings.StyleCop` which implies that it
-  does not affect StyleCop when called from the menu.
+- Sample projects use custom FxCop rules.
 
 Code Contracts
 --------------
