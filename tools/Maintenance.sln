@@ -8,17 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E60806
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Documentation", "1. Documentation", "{2F6EB97B-14A3-45FD-A665-A8C60D8744C2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Build", "3. Build", "{2D3181AE-6786-49EE-BDCE-1C7687EFB40B}"
 	ProjectSection(SolutionItems) = preProject
-		..\docs\docfx.json = ..\docs\docfx.json
-		..\docs\issues.md = ..\docs\issues.md
-		..\LICENSE.txt = ..\LICENSE.txt
-		..\README.md = ..\README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Build", "4. Build", "{2D3181AE-6786-49EE-BDCE-1C7687EFB40B}"
-	ProjectSection(SolutionItems) = preProject
-		FSharp.Common.props = FSharp.Common.props
 		Make.Common.props = Make.Common.props
 		Make.Common.targets = Make.Common.targets
 		Make.Custom.tasks = Make.Custom.tasks
@@ -30,31 +21,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Build", "4. Build", "{2D
 		Narvalo.Common.props = Narvalo.Common.props
 		Narvalo.Common.targets = Narvalo.Common.targets
 		Package.Narvalo.targets = Package.Narvalo.targets
-		Package.StyleCop.targets = Package.StyleCop.targets
 		Package.Xunit.tasks = Package.Xunit.tasks
 		PSakefile.ps1 = PSakefile.ps1
 		Shared.props = Shared.props
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Settings", "2. Settings", "{EC45235E-0AFF-48C1-AC38-41FF5469A638}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Settings", "1. Settings", "{EC45235E-0AFF-48C1-AC38-41FF5469A638}"
 	ProjectSection(SolutionItems) = preProject
 		..\etc\AssemblyInfo.Common.cs = ..\etc\AssemblyInfo.Common.cs
 		..\etc\CodeAnalysisDictionary.xml = ..\etc\CodeAnalysisDictionary.xml
-		..\etc\Empty.SourceAnalysis = ..\etc\Empty.SourceAnalysis
 		..\etc\FrameworkProfiles.props = ..\etc\FrameworkProfiles.props
 		..\etc\gendarme.ignore = ..\etc\gendarme.ignore
 		..\etc\gendarme.xml = ..\etc\gendarme.xml
 		..\etc\GlobalSuppressions.Common.cs = ..\etc\GlobalSuppressions.Common.cs
 		..\etc\Samples.props = ..\etc\Samples.props
 		..\etc\Strict.ruleset = ..\etc\Strict.ruleset
-		..\etc\Strict.SourceAnalysis = ..\etc\Strict.SourceAnalysis
 		..\etc\Tests.props = ..\etc\Tests.props
 		..\etc\Tests.ruleset = ..\etc\Tests.ruleset
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Narvalo.Build", "Narvalo.Build", "{480E9A5C-6E59-44BC-9D25-3A2BC0057B2B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. NuGet", "3. NuGet", "{C951776C-B912-4BB2-95ED-02A5D7A3F4A4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. NuGet", "2. NuGet", "{C951776C-B912-4BB2-95ED-02A5D7A3F4A4}"
 	ProjectSection(SolutionItems) = preProject
 		..\etc\Narvalo.CurrentVersion.props = ..\etc\Narvalo.CurrentVersion.props
 		..\etc\Template.nuspec = ..\etc\Template.nuspec
@@ -65,7 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{3F9AE29F
 		..\src\NuGet\Narvalo.Build\build\Narvalo.Build.tasks = ..\src\NuGet\Narvalo.Build\build\Narvalo.Build.tasks
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Scripts", "5. Scripts", "{E886C15F-0369-4B3A-B2F2-4B7C0000E27D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Scripts", "4. Scripts", "{E886C15F-0369-4B3A-B2F2-4B7C0000E27D}"
 	ProjectSection(SolutionItems) = preProject
 		checkup.ps1 = checkup.ps1
 		fsi.cmd = fsi.cmd

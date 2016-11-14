@@ -45,29 +45,7 @@
   </Target>
 
   <!-- Rebuild target. -->
-  <Target Name="Rebuild" DependsOnTargets="_PatchRebuild;Clean;Build" />
-
-  <!-- _PatchRebuild target. -->
-  <Target Name="_PatchRebuild">
-    <!--
-      StyleCop uses $(RebuildDependsOn) to modify the Build process.
-      Here, we define Rebuild as Clean;Build, which means that StyleCop
-      modifications of the Rebuild process won't apply since we never call
-      the Rebuild target from a project.
-
-      The solution is to copy the original StyleCop modifications
-      to BuildProperties.
-
-      Another solution is to define our Rebuild target so that it calls MSBuild
-      with the Rebuild target. This is exactly what we do if Lean is set to true.
-    -->
-    <PropertyGroup>
-      <BuildProperties>
-        $(BuildProperties);
-        SourceAnalysisForceFullAnalysis=true
-      </BuildProperties>
-    </PropertyGroup>
-  </Target>
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
 
   <!-- Package target. -->
   <Target Name="Package">

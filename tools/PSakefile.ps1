@@ -1,8 +1,6 @@
 # PSakefile script.
 # Requires the module 'Narvalo.ProjectAutomation'.
 #
-# WARNING:
-# - When enabling source analysis, you MUST also build the StyleCop project.
 
 # We force the framework to be sure we use the v12.0 of the build tools.
 # For instance, this is a requirement for the _MyGet-Publish target where
@@ -129,7 +127,7 @@ Task OpenCoverWithDetails `
 }
 
 Task Analyze `
-    -Description 'Build then analyze with StyleCop, FxCop and PEVerify.' `
+    -Description 'Build, analyze, then run PEVerify.' `
     -Depends _CI-InitializeVariables `
 {
     # Perform the following operations:
@@ -138,6 +136,7 @@ Task Analyze `
     # - Verify Portable Executable (PE) format
     # NB: Adding Build to the targets is not necessary, but it makes clearer that
     # we do not just run PEVerify.
+    # NB: Removed '/p:SourceAnalysisEnabled=true' (replaced by StyleCop.Analyzers)
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Build;PEVerify',
         '/p:Configuration=Debug',
@@ -145,7 +144,6 @@ Task Analyze `
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:RunCodeAnalysis=true',
-        '/p:SourceAnalysisEnabled=true',
         '/p:Filter=_Analyze_'
 }
 #Task SourceAnalysis `

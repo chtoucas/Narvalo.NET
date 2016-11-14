@@ -35,15 +35,6 @@
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
-  <!-- Source Analysis. -->
-  <PropertyGroup>
-    <!-- Treat all warnings as errors. -->
-    <SourceAnalysisTreatErrorsAsWarnings>false</SourceAnalysisTreatErrorsAsWarnings>
-
-    <!-- Reports are saved in a custom location. -->
-    <SourceAnalysisOutputFile>$(WorkLogDir)$(AssemblyName).StyleCop.xml</SourceAnalysisOutputFile>
-  </PropertyGroup>
-
   <!-- Code Analysis. -->
   <PropertyGroup>
     <!-- Treat all warnings as errors. -->

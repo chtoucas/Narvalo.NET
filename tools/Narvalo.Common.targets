@@ -21,9 +21,6 @@
   <Import Project="$(CustomBeforeNarvaloCommonTargets)"
           Condition=" '$(CustomBeforeNarvaloCommonTargets)' != '' " />
 
-  <!-- Import StyleCop targets. -->
-  <Import Project="$(MSBuildThisFileDirectory)Package.StyleCop.targets" />
-
   <!-- ### Microsoft Build Process ### -->
   <!--
     To modify the build process, use one of the extension points defined
@@ -44,25 +41,6 @@
   <Target Name="AfterClean" DependsOnTargets="$(AfterCleanDependsOn)" />
 
   <!-- ### Analyzers Hooks ### -->
-
-  <!-- ### Source Analysis Hooks ### -->
-  <!--
-    Below, use $(StyleCopEnabled) not $(SourceAnalysisEnabled) as this is the actual
-    property set after importing StyleCop.targets.
-  -->
-
-  <Target Name="BeforeSourceAnalysis"
-          BeforeTargets="StyleCop"
-          Condition=" '$(StyleCopEnabled)' == 'true' ">
-    <Message Text="Running Source Analysis on $(ProjectName)..." Importance="normal" />
-  </Target>
-
-  <Target Name="AfterSourceAnalysis"
-          AfterTargets="StyleCop"
-          Condition=" '$(StyleCopEnabled)' == 'true' ">
-    <Message Text="Source Analysis Complete for $(ProjectName) -- $(StyleCopViolationCount) violation(s)"
-             Importance="high" />
-  </Target>
 
   <!-- ### Code Analysis Hooks ### -->
   <!--

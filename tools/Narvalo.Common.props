@@ -114,38 +114,6 @@
     <CodeAnalysisDictionary Include="$(RepositorySettingsDir)CodeAnalysisDictionary.xml" />
   </ItemGroup>
 
-  <!-- Source Analysis -->
-  <!--
-    For a complete list of available options, see
-      packages\StyleCop.MSBuild.*\build\StyleCop.MSBuild.Targets.
-  -->
-  <!-- Inside VS, we automatically run StyleCop in Release builds. -->
-  <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' == 'true' ">
-    <SourceAnalysisEnabled Condition=" '$(Configuration)' == 'Release' ">true</SourceAnalysisEnabled>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <SourceAnalysisEnabled Condition=" '$(SourceAnalysisEnabled)' != 'true' ">false</SourceAnalysisEnabled>
-
-    <!-- Right now, we enable all StyleCop rules except the documentation ones. -->
-    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Loosy.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
-
-    <!-- Do not treat warnings as errors. -->
-    <SourceAnalysisTreatErrorsAsWarnings>true</SourceAnalysisTreatErrorsAsWarnings>
-  </PropertyGroup>
-
-  <!-- WARNING: When StyleCop is called from the menu, it only uses the dll in the install directory for StyleCop. -->
-  <ItemGroup>
-    <StyleCopAdditionalAddinPaths Include="$(MSBuildThisFileDirectory)lib\StyleCop" />
-  </ItemGroup>
-
-  <!-- Exclude temporary files from StyleCop. -->
-  <ItemGroup>
-    <ExcludeFromStyleCop Include="$(IntermediateOutputPath)\**\*.cs" >
-      <Visible>False</Visible>
-    </ExcludeFromStyleCop>
-  </ItemGroup>
-
   <!-- Code Analysis -->
   <!--
     For a complete list of available options, see

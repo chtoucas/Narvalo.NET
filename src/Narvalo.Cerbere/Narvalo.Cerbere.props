@@ -4,8 +4,4 @@
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
     <CodeContractsEmitXMLDocs>true</CodeContractsEmitXMLDocs>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <SourceAnalysisOverrideSettingsFile>$(RepositorySettingsDir)Strict.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
-  </PropertyGroup>
 </Project>
