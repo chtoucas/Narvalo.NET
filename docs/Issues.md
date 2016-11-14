@@ -68,15 +68,9 @@ Issues & Roadmap
 - Where it makes sense, add `EditorBrowsableState`, `DebuggerDisplay` and `DebuggerTypeProxy` attributes.
 - Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
 - Review all `IEnumerable` extensions for null-checking and deferred execution.
-- When, Guard & co.
 - IsNullable && HasZero
 - Remove Maybe.None.
 - Maybe and IEquatable<T>.
-
-Narvalo.Cerbere
----------------
-
-- More overloads for Require.Greater...
 
 Narvalo.Fx
 ------------
@@ -87,16 +81,12 @@ Narvalo.Fx
   https://github.com/dotnet/roslyn/issues/347
 - Monad.tt.
   * Split.
-  * Review true argument check for extension methods.
   * SumCore() and CollectCore() assert that they never return null but this is not always true.
   * Use of .Then(): in JoinCore and GroupJoinCore() can return null.
 
 Narvalo.Core
 ------------
 
-- XmlReader
-- ParseTo
-- StringHelper
 - `Range<T>`. Why force struct constraint? Require for "T?" where T is a struct?
 
 Narvalo.Common
@@ -120,15 +110,6 @@ Narvalo.Finance
 - Messages for exceptions!
 - IConvertible?
 - BigMoney and BigMoney<TCurrency>.
-
-Narvalo.Reliability
--------------------
-
-See
-- [Polly](https://github.com/App-vNext/Polly)
-- [kite](https://github.com/williewheeler/kite)
-- jrugged
-- [Hystrix](https://github.com/Netflix/Hystrix)
 
 Narvalo.Web
 -----------
@@ -163,14 +144,6 @@ Narvalo.Mvp
   as cross-presenter communication).
 - Incorporate ideas from MVCSharp (Task) and maybe GWT, Caliburn.Micro, ReactiveUI or MVVM Light?
 - Add support for WPF.
-- For Narvalo.Mvp.Windows.Forms, cross-presenter communication is not functional.
-  Things to work on before it might prove to be useful:
-  * Right now, only controls contained in a MvpForm share the same presenter binder.
-    We need something similar to what is done with ASP.NET (`PageHost`) but the situation
-    is a bit more complicated due to the different execution model. Controls
-    are fully loaded before we reach the `CreateControl` or `Load` events in the form
-    container where we normally perform the binding.
-  * The message coordinator must support unsubscription (automatic or manual).
 - See
   * http://aspiringcraftsman.com/tag/model-view-presenter/
   * http://aspiringcraftsman.com/2007/08/25/interactive-application-architecture/
