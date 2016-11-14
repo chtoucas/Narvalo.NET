@@ -437,7 +437,7 @@ function Invoke-AnalyzeTask {
     param([switch] $NoConfirm)
 
     if ($noConfirm.IsPresent -or (Confirm-Yes 'Analyze C# project files for common problems?')) {
-        Measure-CSharpProjects 'src', 'samples', 'test'
+        Measure-CSharpProjects 'src', 'samples', 'tests'
     }
 }
 
