@@ -51,7 +51,6 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		tests\Narvalo.TestCommon\Narvalo.TestCommon.projitems*{c141265f-95ed-4093-a56c-5991dba96f67}*SharedItemsImports = 13
 		tests\Narvalo.TestCommon\Narvalo.TestCommon.projitems*{d05b40a6-15b6-46d0-abc1-8f8cfc5d02e8}*SharedItemsImports = 4
-		tests\Narvalo.TestCommon\Narvalo.TestCommon.projitems*{e94f4d98-3882-4713-90fd-27c515b68bb0}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeContracts|Any CPU = CodeContracts|Any CPU
