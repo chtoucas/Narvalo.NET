@@ -59,7 +59,7 @@
     Release configuration is optimized for execution speed.
     CodeContracts configuration focuses on Code Contracts!
     This explains why I choose to only check for overflow/underflow
-    in Debug configuration.
+    in Debug configuration (FIXME).
   -->
 
   <!-- Debug configuration -->

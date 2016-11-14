@@ -22,7 +22,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static bool GetBooleanUnchecked(this IDataRecord @this, string name)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.GetBoolean(@this.GetOrdinal(name));
         }
@@ -38,7 +38,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static byte GetByteUnchecked(this IDataRecord @this, string name)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.GetByte(@this.GetOrdinal(name));
         }
@@ -54,7 +54,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static DateTime GetDateTimeUnchecked(this IDataRecord @this, string name)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.GetDateTime(@this.GetOrdinal(name));
         }
@@ -70,7 +70,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal GetDecimalUnchecked(this IDataRecord @this, string name)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.GetDecimal(@this.GetOrdinal(name));
         }
@@ -86,7 +86,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static double GetDoubleUnchecked(this IDataRecord @this, string name)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.GetDouble(@this.GetOrdinal(name));
         }
@@ -102,7 +102,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Guid GetGuidUnchecked(this IDataRecord @this, string name)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.GetGuid(@this.GetOrdinal(name));
         }
@@ -118,7 +118,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static short GetInt16Unchecked(this IDataRecord @this, string name)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.GetInt16(@this.GetOrdinal(name));
         }
@@ -134,7 +134,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static int GetInt32Unchecked(this IDataRecord @this, string name)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.GetInt32(@this.GetOrdinal(name));
         }
@@ -150,7 +150,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static long GetInt64Unchecked(this IDataRecord @this, string name)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.GetInt64(@this.GetOrdinal(name));
         }
@@ -172,7 +172,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetStringUnchecked(this IDataRecord @this, string name)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.GetString(@this.GetOrdinal(name));
         }

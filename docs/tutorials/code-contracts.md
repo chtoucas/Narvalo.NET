@@ -4,34 +4,33 @@ Code Contracts
 Preconditions
 -------------
 
-Preconditions that will survive in Release mode:
-- `Narvalo.Require`: Code Contract + Throws on failure
+### Preconditions that will survive in Release mode:
 
-Preconditions that will not survive in Release mode:
-- `Narvalo.Demand`: Code Contract + Debug.Assert
+`Narvalo.Require`:
+- Code Contract + Throws on failure.
+- To be used when the condition is compulsory.
+
+### Preconditions that will not survive in Release mode:
+
+`Narvalo.Demand`:
+- Code Contract + Debug.Assert
+- **WARNING:** Never use this method to guard a public method.
+- To be used with private/protected/internal methods for which the condition
+  is mandatory.
+
+`Narvalo.Expect`:
+- Code Contract
+- To be used with public methods for which the condition is not compulsory.
+
 
 ```csharp
 public class MyClass {
   public void PublicMethod(string value) {
     Require.NotNull(value, nameof(value));
-
-    // Code that calls at least
-    // - one public/internal method from another object
-    // - or one private/protected/internal method from this object
-    // that requires value not to be null.
-    OtherObject.PublicMethod(value);
-    OtherObject.InternalMethod(value);
-    InternalMethod(value);
-    ProtectedMethod(value);
-    PrivateMethod(value);
   }
 
   public void PublicMethod2(string value) {
-    Demand.NotNull(value);
-
-    // Code that only calls public methods.
-    OtherObject.PublicMethod(value);
-    PublicMethod(value);
+    Expect.NotNull(value);
   }
 
   internal void InternalMethod(string value) {

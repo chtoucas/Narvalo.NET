@@ -187,7 +187,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Demand.True(IsSome);
+                Demand.State(IsSome);
                 Ensures(Result<T>() != null);
 
 #if CONTRACTS_FULL // Helps CCCheck with the object invariance.

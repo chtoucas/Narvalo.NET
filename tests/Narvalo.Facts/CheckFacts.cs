@@ -8,6 +8,17 @@ namespace Narvalo
 
     public static partial class CheckFacts
     {
+        #region AssumeInvariant()
+
+        [Fact]
+        public static void Invariant_DoesNothing()
+        {
+            // Arrange a Act
+            Check.AssumeInvariant(new Object());
+        }
+
+        #endregion
+
         #region Unreachable()
 
         [Fact]

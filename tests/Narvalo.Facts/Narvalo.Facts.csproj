@@ -81,7 +81,6 @@
   <ItemGroup>
     <Compile Include="BinaryEncoderFacts.cs" />
     <Compile Include="CheckFacts.cs" />
-    <Compile Include="ContractHelpersFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="Finance\BicFacts.cs" />
     <Compile Include="Finance\CurrenciesFacts.g.cs">
@@ -208,7 +207,6 @@
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="Narvalo.Facts.props" />
     <None Include="packages.config" />
   </ItemGroup>

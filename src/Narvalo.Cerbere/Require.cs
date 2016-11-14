@@ -26,6 +26,17 @@ namespace Narvalo
     public static class Require
     {
         [ContractArgumentValidator]
+        public static void State(bool testCondition)
+        {
+            if (!testCondition)
+            {
+                throw new InvalidOperationException("XXX");
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
         public static void True(bool testCondition, string parameterName)
         {
             if (!testCondition)
@@ -40,28 +51,6 @@ namespace Narvalo
         public static void True(bool testCondition, string parameterName, string message)
         {
             if (!testCondition)
-            {
-                throw new ArgumentException(message, parameterName);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [ContractArgumentValidator]
-        public static void False(bool testCondition, string parameterName)
-        {
-            if (testCondition)
-            {
-                throw new ArgumentException(Strings_Cerbere.Argument_FailedCondition, parameterName);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        [ContractArgumentValidator]
-        public static void False(bool testCondition, string parameterName, string message)
-        {
-            if (testCondition)
             {
                 throw new ArgumentException(message, parameterName);
             }
@@ -173,6 +162,17 @@ namespace Narvalo
             if (@this == null)
             {
                 throw new ArgumentNullException("this", Strings_Cerbere.ArgumentNull_Object);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        public static void Property(bool testCondition)
+        {
+            if (!testCondition)
+            {
+                throw new ArgumentException("value", "XXX");
             }
 
             Contract.EndContractBlock();

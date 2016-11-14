@@ -48,9 +48,9 @@ namespace Narvalo
 
         public static string Substring(string value, int startIndex, int length)
         {
-            Demand.NotNull(value);
-            Demand.True(startIndex >= 0);
-            Demand.True(length >= 1);
+            Expect.NotNull(value);
+            Expect.True(startIndex >= 0);
+            Expect.True(length >= 1);
             Ensures(Result<string>() != null);
 
             return Substring(value, startIndex, length, "...");

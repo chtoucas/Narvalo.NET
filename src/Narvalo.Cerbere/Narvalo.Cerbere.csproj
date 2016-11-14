@@ -61,8 +61,8 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ContractHelpers.cs" />
     <Compile Include="Check.cs" />
+    <Compile Include="Expect.cs" />
     <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
     <Compile Include="Format.cs" />
     <Compile Include="NamespaceDoc.cs" />

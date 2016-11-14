@@ -11,8 +11,9 @@ namespace Narvalo.Finance.Internal
     {
         [DebuggerHidden]
         [ContractAbbreviator]
+        [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void CurrencyCode(string code)
+        public static void CurrencyCodeDebug(string code)
         {
             Demand.NotNull(code);
 
@@ -21,6 +22,20 @@ namespace Narvalo.Finance.Internal
 
             // A currency code MUST be composed of exactly 3 letters.
             Demand.True(code.Length == 3);
+        }
+
+        [DebuggerHidden]
+        [ContractAbbreviator]
+        [Conditional("CONTRACTS_FULL")]
+        public static void CurrencyCode(string code)
+        {
+            Expect.NotNull(code);
+
+            // A currency code MUST only contain uppercase ASCII letters.
+            Expect.True(IsUpperLetter(code));
+
+            // A currency code MUST be composed of exactly 3 letters.
+            Expect.True(code.Length == 3);
         }
     }
 }
