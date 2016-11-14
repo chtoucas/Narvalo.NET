@@ -1,7 +1,7 @@
 ChangeLog
 =========
 
-XXXX-XX-XX - 
+XXXX-XX-XX -
 -----------------------------------------------------------------------
 
 #### Bugfixes
@@ -182,32 +182,16 @@ _New currency types_
   We simply replaced the SolutionFile property used by Make.proj by CustomSolution.
 
 #### Enhancements
-- Added classes to represent a currency defined by ISO 4217.
-- Created a PowerShell scripts for all maintenance tasks.
-- Added git commit hash to assembly informations.
 - Do not change the content of the NuGet package depending on the configuration:
   always add the CC reference assembly and the assembly documentation.
 - Unless explicitely requested, always build the Code
   Contracts reference assembly and the assembly documentation.
-- If necessary, automatically donwload and install
-  nuget.exe and PSake when running make.ps1 or publish.ps1.
 
 #### Improvements
-- Prevent creation of retail packages if there are uncommitted changes.
-- Created a shared properties file for F# projects.
-- New project to check the installation of retail packages after they are
-  published to the official NuGet server.
-- Added missing copyright headers.
-- Moved private settings to a single folder.
-- Replace the build script for MyGet by a PSake task
 - Do not set VisualStudioVersion when building inside Visual Studio...
-- Made NuGet projects self-contained: the copyright tag is automatically
-  initialized.
 - Changed the way we override properties for sample and test projects. We no
   longer use extensions to Narvalo.Common.props but rather use the new facility
   offered by $(AssemblyName).props.
-- Better validation of version properties and NuGet project properties.
-  Simplified Make.CustomAfter.*.
 - Using a MSBuild response file, allowed to try out the build system without
   actually committing your personal settings.
 - Made sure a build fails if a custom import does not exist. Moved the content
@@ -232,7 +216,6 @@ _New currency types_
   hardcoding the path to the directory to be created, use the parent directory
   of AssemblyVersionFile.
 - Cleaned up Make.CustomAfter.props and Make.CustomAfter.targets
-- Renamed DocuMaker to Prose.
 - Replaced all initial targets used to signal temporary overridden settings
   by a target automatically run before a Build.
 - Moved properties relevant to the Code
@@ -264,8 +247,6 @@ _No API changes. Correct a problem with NuGet and Code Contracts_
   have to use the section "references" in the nuspec files.
 
 #### Enhancements
-- Created a solution solely for project management, MSBuild and documentation.
-- Created a local NuGet server to test the creation of NuGet packages.
 - Allowed for local customization of the build process. If we find a file
   named {AssemblyName}.props in the project root, it will be loaded at the very
   end of Narvalo.Common.props. The same holds true for {AssemblyName}.targets
@@ -274,8 +255,6 @@ _No API changes. Correct a problem with NuGet and Code Contracts_
   raised when it is the case, so that we don't forget to fix this later on.
 
 #### Improvements
-- Packages not for retail get a completely different ID.
-  For instance, Narvalo.Core becomes Narvalo.Core.EDGE.
 - It is now possible to unconditionally hide internal classes and methods of an
   assembly. On the way, we fixed CA issues that appear when this is turned on.
 
@@ -288,7 +267,6 @@ _No API changes. Correct a problem with NuGet and Code Contracts_
 _New Code Contracts assemblies. Plenty of small bugfixes_
 
 #### Bugfixes
-- Lot of small bugfixes needed after enabling Code Contracts analysis.
 - When building a PCL project _from the command line_, MSBuild generates output inside a subdirectory
   of `$(OutDir)`. To correct this, we instruct MSBuild to not change the default behaviour:
   `$(GenerateProjectSpecificOutputFolder) = false`.
@@ -301,12 +279,3 @@ _New Code Contracts assemblies. Plenty of small bugfixes_
   by the one in Narvalo.Common. The solution was to use different names for
   both resources.
 
-#### Enhancements
-- PSake script for the most common build configurations.
-- Preliminary support for Code Contracts.
-- New portable class library Narvalo.Core which becomes the new base instead of Narvalo.Common.
-
-#### Improvements
-- Brand new MSBuild infrastructure. Extracted all targets and properties not required by VS.
-- Implemented Semantic Versioning rules for assembly versions.
-- Narvalo.Facts becomes a true Visual Studio test project.

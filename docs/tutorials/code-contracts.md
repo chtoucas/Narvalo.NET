@@ -6,11 +6,9 @@ Preconditions
 
 Preconditions that will survive in Release mode:
 - `Narvalo.Require`: Code Contract + Throws on failure
-- `Narvalo.Require.Unproven`: Throws on failure (if CC can't handle the situation)
 
 Preconditions that will not survive in Release mode:
 - `Narvalo.Demand`: Code Contract + Debug.Assert
-- `Narvalo.Demand.Unproven`: Debug.Assert (if CC can't handle the situation)
 
 ```csharp
 public class MyClass {
@@ -76,9 +74,8 @@ Ensures(Result<string>() != null);
 Check points
 ------------
 
-None of these assertions that will not survive in Release mode:
+None of these assertions will survive in Release mode:
 - `Narvalo.Check`: Code Contract + Debug.Assert
-- `Narvalo.Check.Unproven` Debug.Assert (if CC can't handle the situation)
 
 Invariants
 ----------

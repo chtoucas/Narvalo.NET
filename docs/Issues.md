@@ -38,7 +38,7 @@ Current works
 - C#
   * use `nameof` everywhere.
   * rules to explain when to use the new `=>` syntax for methods.
-  * review the use of `var`.
+  * rules for using of `var`.
 - **Bug:** in the MvpWebForms sample project, `OutputPath` is wrong (temporary fix: override `OutputPath`
   property in project file). Other strange thing, `MvpWebForms.dll.config` is created.
   The database requires [SQL Server 2012 Express LocalDB](https://www.microsoft.com/en-us/download/details.aspx?id=29062).
@@ -68,13 +68,13 @@ Issues & Roadmap
 - Where it makes sense, add `EditorBrowsableState`, `DebuggerDisplay` and `DebuggerTypeProxy` attributes.
 - Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
 - Review all `IEnumerable` extensions for null-checking and deferred execution.
-- IsNullable && HasZero
-- Remove Maybe.None.
-- Maybe and IEquatable<T>.
 
 Narvalo.Fx
 ------------
 
+- Remove Maybe.None.
+- Maybe and IEquatable<T>.
+- IsNullable && HasZero
 - Update Maybe<T> documentation.
   https://msdn.microsoft.com/en-us/magazine/dd942829.aspx
   http://stackoverflow.com/questions/2410710/why-is-the-new-tuple-type-in-net-4-0-a-reference-type-class-and-not-a-value-t
@@ -92,11 +92,12 @@ Narvalo.Core
 Narvalo.Common
 --------------
 
-- Complete unchecked alternates for SqlDataReader.
+- Complete unchecked alternatives for SqlDataReader.
 
 Narvalo.Finance
 ---------------
 
+- Use SnvCurrencyXmlReader
 - See https://github.com/JodaOrg/joda-money,
   http://www.ibancalculator.com/
   https://www.theswiftcodes.com/
@@ -107,14 +108,12 @@ Narvalo.Finance
 - Decimal overloads.
 - Handle overflows.
 - Comparisons between `Money` and `Money<T>`. Or simply remove `Money`?
-- Messages for exceptions!
 - IConvertible?
 - BigMoney and BigMoney<TCurrency>.
 
 Narvalo.Web
 -----------
 
-- Finish refactoring.
 - Strengthen handling of paths
   * http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
   * http://weblog.west-wind.com/posts/2009/Dec/21/Making-Sense-of-ASPNET-Paths
@@ -128,11 +127,6 @@ Narvalo.Facts
 
 - Explore SpecFlow.
 - Write a T4 template for Monad tests.
-
-Narvalo.T4
-----------
-
-- Use SnvCurrencyXmlReader
 
 Narvalo.Mvp
 -----------
@@ -152,7 +146,6 @@ Infrastructure
 --------------
 
 - Publishing Narvalo.Mvp should fail if we do not publish Narvalo.Core?
-- CodeAnalysisDictionary does not seem to be understood.
 
 ### Continuous Integration
 
