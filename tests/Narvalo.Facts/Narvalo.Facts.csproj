@@ -82,6 +82,7 @@
     <Compile Include="BinaryEncoderFacts.cs" />
     <Compile Include="CheckFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
+    <Compile Include="ExpectFacts.cs" />
     <Compile Include="Finance\BicFacts.cs" />
     <Compile Include="Finance\CurrenciesFacts.g.cs">
       <AutoGen>True</AutoGen>
