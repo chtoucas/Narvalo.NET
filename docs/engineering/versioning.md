@@ -39,11 +39,8 @@ Narvalo.Common            | Cerbere, Fx
 Narvalo.Core              | Cerbere, Fx
 Narvalo.Finance           | Cerbere
 Narvalo.Fx                | Cerbere
-Narvalo.Ghostscript       | Cerbere
 Narvalo.Mvp               | Cerbere
 Narvalo.Mvp.Web           | Cerbere, Mvp
-Narvalo.Mvp.Windows.Forms | Cerbere, Mvp
-Narvalo.Reliability       | Cerbere
 Narvalo.Web               | Cerbere, Core, Common, Fx
 
 TODO: Explain package versioning and the consequences on major, minor and patch upgrades.
