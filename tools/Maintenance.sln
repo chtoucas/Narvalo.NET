@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E60806
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Build", "3. Build", "{2D3181AE-6786-49EE-BDCE-1C7687EFB40B}"
 	ProjectSection(SolutionItems) = preProject
+		FSharp.Common.props = FSharp.Common.props
 		Make.Common.props = Make.Common.props
 		Make.Common.targets = Make.Common.targets
 		Make.Custom.tasks = Make.Custom.tasks
