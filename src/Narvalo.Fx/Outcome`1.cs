@@ -354,7 +354,7 @@ namespace Narvalo.Fx
             {
                 Ensures(Result<string>() != null);
 
-                return Format.CurrentCulture("Success({0})", Value);
+                return Format.Current("Success({0})", Value);
             }
         }
 
@@ -413,7 +413,7 @@ namespace Narvalo.Fx
             {
                 Ensures(Result<string>() != null);
 
-                return Format.CurrentCulture("Failure({0})", ExceptionInfo);
+                return Format.Current("Failure({0})", ExceptionInfo);
             }
         }
     }

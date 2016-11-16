@@ -8,86 +8,58 @@ namespace Narvalo
 
     public static class FormatFacts
     {
-        #region CurrentCulture()
+        #region Current()
 
         [Fact]
         public static void CurrentCulture_ThrowsArgumentNullException_ForNullFormat()
         {
-            Assert.Throws<ArgumentNullException>(() => Format.CurrentCulture(null));
+            Assert.Throws<ArgumentNullException>(() => Format.Current(null));
         }
 
         [Fact]
         public static void CurrentCulture_ThrowsArgumentNullException_ForNullArgs()
         {
-            Assert.Throws<ArgumentNullException>(() => Format.CurrentCulture(String.Empty, null));
+            Assert.Throws<ArgumentNullException>(() => Format.Current(String.Empty, null));
         }
 
         [Fact]
         public static void CurrentCulture_ThrowsFormatException_ForInvalidFormat()
         {
-            Assert.Throws<FormatException>(() => Format.CurrentCulture("{0}"));
+            Assert.Throws<FormatException>(() => Format.Current("{0}"));
         }
 
         [Fact]
         public static void CurrentCulture_ReturnsNonNull()
         {
-            Assert.NotNull(Format.CurrentCulture(String.Empty));
+            Assert.NotNull(Format.Current(String.Empty));
         }
 
         #endregion
 
-        #region InvariantCulture()
+        #region Invariant()
 
         [Fact]
         public static void InvariantCulture_ThrowsArgumentNullException_ForNullFormat()
         {
-            Assert.Throws<ArgumentNullException>(() => Format.InvariantCulture(null));
+            Assert.Throws<ArgumentNullException>(() => Format.Invariant(null));
         }
 
         [Fact]
         public static void InvariantCulture_ThrowsArgumentNullException_ForNullArgs()
         {
-            Assert.Throws<ArgumentNullException>(() => Format.InvariantCulture(String.Empty, null));
+            Assert.Throws<ArgumentNullException>(() => Format.Invariant(String.Empty, null));
         }
 
         [Fact]
         public static void InvariantCulture_ThrowsFormatException_ForInvalidFormat()
         {
-            Assert.Throws<FormatException>(() => Format.InvariantCulture("{0}"));
+            Assert.Throws<FormatException>(() => Format.Invariant("{0}"));
         }
 
         [Fact]
         public static void InvariantCulture_ReturnsNonNull()
         {
-            Assert.NotNull(Format.InvariantCulture(String.Empty));
-        }
-
-        #endregion
-
-        #region Resource()
-
-        [Fact]
-        public static void Resource_ThrowsArgumentNullException_ForNullFormat()
-        {
-            Assert.Throws<ArgumentNullException>(() => Format.Resource(null));
-        }
-
-        [Fact]
-        public static void Resource_ThrowsArgumentNullException_ForNullArgs()
-        {
-            Assert.Throws<ArgumentNullException>(() => Format.Resource(String.Empty, null));
-        }
-
-        [Fact]
-        public static void Resource_ThrowsFormatException_ForInvalidFormat()
-        {
-            Assert.Throws<FormatException>(() => Format.Resource("{0}"));
-        }
-
-        [Fact]
-        public static void Resource_ReturnsNonNull()
-        {
-            Assert.NotNull(Format.Resource(String.Empty));
+            Assert.NotNull(Format.Invariant(String.Empty));
         }
 
         #endregion

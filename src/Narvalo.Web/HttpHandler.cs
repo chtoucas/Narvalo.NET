@@ -81,7 +81,7 @@ namespace Narvalo.Web
             // TODO: Check the error message.
             response.SetStatusCode(HttpStatusCode.MethodNotAllowed);
             response.Write(
-                Format.Resource(
+                Format.Current(
                     Strings.HttpHandlerBase_InvalidHttpMethod_Format,
                     context.Request.HttpMethod,
                     AcceptedVerbs.ToString()));

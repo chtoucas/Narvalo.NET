@@ -80,7 +80,7 @@ namespace Narvalo.Fx
                 Exception exception = _exceptionInfo.SourceException;
                 Assume(exception != null);
 
-                return Format.CurrentCulture("Error({0})", exception.Message);
+                return Format.Current("Error({0})", exception.Message);
             }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

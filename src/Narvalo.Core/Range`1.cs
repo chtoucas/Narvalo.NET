@@ -60,7 +60,7 @@ namespace Narvalo
         {
             Ensures(Result<string>() != null);
 
-            return Format.CurrentCulture("LowerEnd({0}) - UpperEnd({1})", LowerEnd, UpperEnd);
+            return Format.Current("LowerEnd({0}) - UpperEnd({1})", LowerEnd, UpperEnd);
         }
     }
 

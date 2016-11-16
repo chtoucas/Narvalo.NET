@@ -104,7 +104,7 @@ namespace Narvalo.Fx
             {
                 Ensures(Result<string>() != null);
 
-                return Format.CurrentCulture("Left({0})", _value);
+                return Format.Current("Left({0})", _value);
             }
         }
 
@@ -159,7 +159,7 @@ namespace Narvalo.Fx
             {
                 Ensures(Result<string>() != null);
 
-                return Format.CurrentCulture("Right({0})", _value);
+                return Format.Current("Right({0})", _value);
             }
         }
     }

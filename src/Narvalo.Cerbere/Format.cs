@@ -35,7 +35,7 @@ namespace Narvalo
         /// representation of the corresponding objects in args.</returns>
         [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string CurrentCulture(string format, params object[] args)
+        public static string Current(string format, params object[] args)
         {
             Expect.NotNull(format);
             Expect.NotNull(args);
@@ -54,35 +54,13 @@ namespace Narvalo
         /// representation of the corresponding objects in args.</returns>
         [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string InvariantCulture(string format, params object[] args)
+        public static string Invariant(string format, params object[] args)
         {
             Expect.NotNull(format);
             Expect.NotNull(args);
             Ensures(Result<string>() != null);
 
             return String.Format(CultureInfo.InvariantCulture, format, args);
-        }
-
-        /// <summary>
-        /// Replaces the format items in a specified string with the string representations
-        /// of corresponding objects in a specified array. Actual formatting is done with
-        /// the culture used by the current thread.
-        /// </summary>
-        /// <remarks>Same as <see cref="Format.CurrentCulture"/>, but makes it clear that the format is coming
-        /// from a localized resource.</remarks>
-        /// <param name="localizedResource">A composite format string obtained from a localized resource.</param>
-        /// <param name="args">An object array that contains zero or more objects to format.</param>
-        /// <returns>A copy of format in which the format items have been replaced by the string
-        /// representation of the corresponding objects in args.</returns>
-        [Pure]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string Resource(string localizedResource, params object[] args)
-        {
-            Expect.NotNull(localizedResource);
-            Expect.NotNull(args);
-            Ensures(Result<string>() != null);
-
-            return String.Format(CultureInfo.CurrentCulture, localizedResource, args);
         }
     }
 }

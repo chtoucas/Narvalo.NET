@@ -31,7 +31,7 @@ namespace Narvalo.Configuration
             if (section == null)
             {
                 throw new ConfigurationErrorsException(
-                    Format.Resource(Strings_Common.Configuration_MissingSection_Format, sectionName));
+                    Format.Current(Strings_Common.Configuration_MissingSection_Format, sectionName));
             }
 
             return section;
@@ -71,7 +71,7 @@ namespace Narvalo.Configuration
             if (section == null)
             {
                 throw new ConfigurationErrorsException(
-                    Format.Resource(Strings_Common.Configuration_MissingSection_Format, sectionName));
+                    Format.Current(Strings_Common.Configuration_MissingSection_Format, sectionName));
             }
 
             return section;

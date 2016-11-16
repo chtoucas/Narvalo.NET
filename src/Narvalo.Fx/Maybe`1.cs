@@ -305,7 +305,7 @@ namespace Narvalo.Fx
         {
             Ensures(Result<string>() != null);
 
-            return IsSome ? Format.CurrentCulture("Maybe({0})", Value) : "Maybe(None)";
+            return IsSome ? Format.Current("Maybe({0})", Value) : "Maybe(None)";
         }
 
         #region Overrides for auto-generated (extension) methods

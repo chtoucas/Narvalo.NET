@@ -92,7 +92,7 @@ namespace Narvalo.Fx
             {
                 Ensures(Result<string>() != null);
 
-                return Format.CurrentCulture("Break({0})", _reason);
+                return Format.Current("Break({0})", _reason);
             }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

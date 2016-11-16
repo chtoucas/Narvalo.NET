@@ -10,7 +10,7 @@ namespace Narvalo.Finance.Internal
         {
             Demand.NotNull(currency);
 
-            return Narvalo.Format.CurrentCulture("{0} {1:F2}", currency.Code, amount);
+            return Narvalo.Format.Current("{0} {1:F2}", currency.Code, amount);
         }
 
         public static string Format(decimal amount, string format, IFormatProvider formatProvider)

@@ -107,7 +107,7 @@ namespace Narvalo.Web.UI
                 if (!String.IsNullOrEmpty(key))
                 {
                     throw new ProviderException(
-                        Format.Resource(Strings.AssetProvider_UnknownConfigurationKey_Format, key));
+                        Format.Current(Strings.AssetProvider_UnknownConfigurationKey_Format, key));
                 }
             }
 

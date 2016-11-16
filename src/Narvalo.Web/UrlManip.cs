@@ -40,7 +40,7 @@ namespace Narvalo.Web
             else
             {
                 throw new NotSupportedException(
-                    Format.Resource(Strings.UriExtensions_ProtocolRelativeUnsupportedScheme_Format, scheme));
+                    Format.Current(Strings.UriExtensions_ProtocolRelativeUnsupportedScheme_Format, scheme));
             }
         }
     }
