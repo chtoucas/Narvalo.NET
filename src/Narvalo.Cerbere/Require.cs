@@ -242,52 +242,5 @@ namespace Narvalo
 
             Contract.EndContractBlock();
         }
-
-        /// <summary>
-        /// Provides helper methods to perform argument validation.
-        /// </summary>
-        /// <remarks>
-        /// <para>The methods will be recognized as parameter validators by FxCop.</para>
-        /// <para>The methods MUST appear after all Code Contracts.</para>
-        /// <para>If a condition does not hold, an <see cref="ArgumentException"/> is thrown.</para>
-        /// <para>This class exists because CCCheck does not seem to be able to comprehend a precondition
-        /// used in conjunction with <see cref="IComparable{T}"/>; otherwise these helpers would have
-        /// been alongside the others in <see cref="Require"/>.</para>
-        /// <para>This class only accept generics of value type. Adding reference types would make
-        /// each method check too many things at a time (null-checks).</para>
-        /// </remarks>
-        /// <seealso cref="Require"/>
-        /// <seealso cref="Demand"/>
-        [Obsolete]
-        public static class Unproven
-        {
-            public static void True(bool testCondition, string parameterName)
-                => True(testCondition, parameterName, Strings_Cerbere.Argument_FailedCondition);
-
-            public static void True(bool testCondition, string parameterName, string message)
-            {
-                if (!testCondition)
-                {
-                    throw new ArgumentException(message, parameterName);
-                }
-            }
-
-            public static void False(bool testCondition, string parameterName)
-                => True(!testCondition, parameterName);
-
-            public static void False(bool testCondition, string parameterName, string message)
-                => True(!testCondition, parameterName, message);
-
-            public static void Range(bool rangeCondition, string parameterName)
-                => Range(rangeCondition, parameterName, Strings_Cerbere.ArgumentOutOfRange_FailedCondition);
-
-            public static void Range(bool rangeCondition, string parameterName, string message)
-            {
-                if (!rangeCondition)
-                {
-                    throw new ArgumentOutOfRangeException(parameterName, message);
-                }
-            }
-        }
     }
 }

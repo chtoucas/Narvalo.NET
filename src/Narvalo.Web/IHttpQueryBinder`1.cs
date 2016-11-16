@@ -16,7 +16,7 @@ namespace Narvalo.Web
 }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
-    
+
 namespace Narvalo.Web
 {
     using System.Collections.Generic;

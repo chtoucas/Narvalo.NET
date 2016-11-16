@@ -86,18 +86,5 @@ namespace Narvalo
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         public static void PropertyNotWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
-
-        [Obsolete]
-        public static class Unproven
-        {
-            [Conditional("DEBUG")]
-            public static void True(bool testCondition) => Debug.Assert(testCondition);
-
-            [Conditional("DEBUG")]
-            public static void False(bool testCondition) => True(!testCondition);
-
-            [Conditional("DEBUG")]
-            public static void Range(bool rangeCondition) => True(rangeCondition);
-        }
     }
 }
