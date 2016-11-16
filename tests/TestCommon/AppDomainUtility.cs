@@ -6,7 +6,7 @@ using global::System.Diagnostics.CodeAnalysis;
     Justification = "[Ignore] Microsoft source file.")]
 
 // Adapted from aspnetwebstack\test\Microsoft.TestCommon\AppDomainUtils.cs
-namespace Narvalo.TestCommon
+namespace Narvalo
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.TestCommon
+namespace Narvalo
 {
     using System;
     using System.Globalization;
 
     internal static class My
     {
-        public enum SimpleEnum
+        public enum SimpleEnumeration
         {
             None = 0,
             ActualValue = 1,
@@ -15,7 +15,7 @@ namespace Narvalo.TestCommon
         }
 
         [Flags]
-        public enum BitwiseEnum
+        public enum BitwiseEnumeration
         {
             None = 0,
             ActualValue1 = 1 << 0,

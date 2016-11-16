@@ -4,7 +4,6 @@ namespace Narvalo
 {
     using System;
 
-    using Narvalo.TestCommon;
     using Xunit;
 
     public static partial class ConvertToFacts
@@ -29,14 +28,14 @@ namespace Narvalo
         public static void Enum_ThrowsArgumentException_ForBitwiseEnum()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<My.BitwiseEnum>(1));
+            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<My.BitwiseEnumeration>(1));
         }
 
         [Fact]
         public static void Enum_ReturnsNull_ForInvalidValue()
         {
             // Act
-            var result = ConvertTo.Enum<My.SimpleEnum>(2);
+            var result = ConvertTo.Enum<My.SimpleEnumeration>(2);
 
             // Assert
             Assert.False(result.HasValue);
@@ -46,11 +45,11 @@ namespace Narvalo
         public static void Enum_ReturnsExpectedValue_ForActualValue()
         {
             // Act
-            var result = ConvertTo.Enum<My.SimpleEnum>(1);
+            var result = ConvertTo.Enum<My.SimpleEnumeration>(1);
 
             // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(My.SimpleEnum.ActualValue, result.Value);
+            Assert.Equal(My.SimpleEnumeration.ActualValue, result.Value);
         }
 
         #endregion

@@ -6,7 +6,7 @@ using global::System.Diagnostics.CodeAnalysis;
     Justification = "[Ignore] Microsoft source file.")]
 
 // Adapted from aspnetwebstack\src\System.Web.WebPages\Common\DisposableAction.cs
-namespace Narvalo.TestCommon
+namespace Narvalo
 {
     using System;
 

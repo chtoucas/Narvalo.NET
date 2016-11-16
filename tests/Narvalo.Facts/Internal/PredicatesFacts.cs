@@ -7,7 +7,6 @@ namespace Narvalo.Internal
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo.TestCommon;
     using Xunit;
 
     public static partial class PredicatesFacts
@@ -32,7 +31,7 @@ namespace Narvalo.Internal
         public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnumInput()
         {
             // Arrange
-            var type = typeof(My.BitwiseEnum);
+            var type = typeof(My.BitwiseEnumeration);
 
             // Act & Assert
             Assert.True(Predicates.IsFlagsEnum(type));
@@ -44,7 +43,7 @@ namespace Narvalo.Internal
         public static void IsFlagsEnum_ReturnsFalse_ForNonFlagsEnumInput()
         {
             // Arrange
-            var type = typeof(My.SimpleEnum);
+            var type = typeof(My.SimpleEnumeration);
 
             // Act & Assert
             Assert.False(Predicates.IsFlagsEnum(type));

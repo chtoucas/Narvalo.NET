@@ -5,7 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Runtime.ExceptionServices;
 
-    using Narvalo.TestCommon;
     using Xunit;
 
     public static partial class VoidOrErrorFacts

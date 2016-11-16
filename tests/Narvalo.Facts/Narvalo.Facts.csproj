@@ -241,7 +241,7 @@
       <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Narvalo.TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
+  <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

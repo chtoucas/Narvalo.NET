@@ -6,7 +6,6 @@ namespace Narvalo.Web.UI
     using System.Collections.Specialized;
     using System.Configuration.Provider;
 
-    using Narvalo.TestCommon;
     using Narvalo.Web.Properties;
     using Xunit;
 

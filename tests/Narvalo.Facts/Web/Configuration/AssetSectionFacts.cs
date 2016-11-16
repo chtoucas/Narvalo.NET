@@ -4,7 +4,6 @@ namespace Narvalo.Web.Configuration
 {
     using System;
 
-    using Narvalo.TestCommon;
     using Xunit;
 
     public static partial class AssetSectionFacts
