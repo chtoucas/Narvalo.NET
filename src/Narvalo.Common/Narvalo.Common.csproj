@@ -3,8 +3,6 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ProjectGuid>{85E2C826-BF5C-4CDD-A90A-56D3D7F9CE25}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo</RootNamespace>
     <AssemblyName>Narvalo.Common</AssemblyName>
     <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>

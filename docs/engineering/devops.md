@@ -22,8 +22,10 @@ After upgrading Visual Studio or MSBuild, do not forget to update the
 We might also need to update the `SDK40ToolsPath` property.
 
 Other places to look at:
+- `Framework` in PSakefile.ps1
 - fsci.cmd (for F# updates)
 - `TargetFrameworkVersion` in Narvalo.Common.props
+- For NuGet packaging check the target lib.
 
 ### Copyright Year Update
 

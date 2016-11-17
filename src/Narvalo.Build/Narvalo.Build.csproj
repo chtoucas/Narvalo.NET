@@ -2,8 +2,6 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{AE69E1DD-A499-48E9-8BAA-B279E07F7DC7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Narvalo.Build</RootNamespace>
     <AssemblyName>Narvalo.Build</AssemblyName>
     <TargetFrameworkProfile />

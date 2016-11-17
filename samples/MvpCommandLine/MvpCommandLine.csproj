@@ -4,9 +4,11 @@
   <PropertyGroup>
     <ProjectGuid>{22F5819B-94C5-47B5-A83D-2F807BAC8130}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MvpCommandLine</RootNamespace>
     <AssemblyName>MvpCommandLine</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>MvpCommandLine.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

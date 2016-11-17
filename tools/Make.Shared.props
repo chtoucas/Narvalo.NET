@@ -10,7 +10,9 @@
   <PropertyGroup>
     <!-- Right now, I don't see any circumstances under which we would need
          to override the default value. Does not have any effect on some projects
-         (e.g. test projects override this property). -->
+         (e.g. test projects override this property).
+         Actually, we DO use this property for the Narvalo.T4 assembly,
+         but this is of no importance for a command-line script. -->
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">14.0</VisualStudioVersion>
   </PropertyGroup>
 

@@ -9,6 +9,7 @@ Current works
   * Icons in Wiki
   * GitHub projects.
 - Build scripts:
+  * Psake: use `'4.6.1x64'` in `Framework '4.5.1x64'`?
   * OpenCover & Gendarme: move the core logic from PSake to MSBuild.
   * Should I call Rebuild before Package?
   * Should I call Rebuild before the analysis tasks?
