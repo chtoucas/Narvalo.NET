@@ -14,17 +14,15 @@ namespace Narvalo
         /// <param name="value">The string to reverse.</param>
         /// <returns>The reversed string.</returns>
         /// <remarks>
-        /// This method does work for strings containing surrogate pairs or combining character sequences.
+        /// Does this method work for strings containing surrogate pairs or combining character
+        /// sequences? I don't think so.
         /// </remarks>
         public static string Reverse(string value)
         {
             Require.NotNull(value, nameof(value));
             Ensures(Result<string>() != null);
 
-            if (value.Length == 0)
-            {
-                return String.Empty;
-            }
+            if (value.Length == 0) { return String.Empty; }
 
             char[] arr = value.ToCharArray();
             Array.Reverse(arr);
@@ -37,10 +35,7 @@ namespace Narvalo
             Require.NotNull(value, nameof(value));
             Ensures(Result<string>() != null);
 
-            if (value.Length == 0)
-            {
-                return String.Empty;
-            }
+            if (value.Length == 0) { return String.Empty; }
 
             // TODO: There is clearly a more performant way of doing this.
             return value.Replace("\n", String.Empty).Replace("\r", String.Empty);
