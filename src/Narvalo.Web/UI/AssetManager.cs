@@ -119,7 +119,7 @@ namespace Narvalo.Web.UI
         }
 
         // Internal-only method for testing.
-        // We use temporary objects to achieve exception-neutral code. 
+        // We use temporary objects to achieve exception-neutral code.
         internal static void InitializeCore(AssetSection section)
         {
             Contract.Requires(section != null);

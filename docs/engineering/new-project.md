@@ -120,23 +120,42 @@ Special Cases
 
 We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
 - **Profile111** (.NET Framework 4.5, Windows 8, Windows Phone 8.1):
+  * NuGet PCL: `portable-net45+netcore45+wpa81`
   * For MSBuild: `TargetFrameworkVersion=v4.5`.
-  * Use this profile if you need `System.Collections.Concurrent.ConcurrentDictionary`.
+  * Supported by .NET Standard 1.1.
 - **Profile151** (.NET Framework 4.5.1, Windows 8.1, Windows Phone 8.1):
+  * NuGet PCL: `portable-net451+netcore451+wpa81`
   * For MSBuild: `TargetFrameworkVersion=v4.6`.
-  * Use this profile if you need `System.Threading.Timer`.
+  * Supported by .NET Standard 1.2.
 - **Profile259** (.NET Framework 4.5, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8):
+  * NuGet PCL: `portable-net45+netcore45+wpa81+wp8`
   * For MSBuild: `TargetFrameworkVersion=v4.5`.
+  * Supported by .NET Standard 1.0.
+
+NB:
+- .Net Standard 1.1 (Profile111) vs 1.0 (Profile259):
+  * `System.Collections.Concurrent.ConcurrentDictionary`.
+- .Net Standard 1.2 (Profile151) vs 1.1 (Profile111):
+  * `System.Threading.Timer`.
 
 When creating the project we should add it to the list of PCL projects used by SecAnnotate
 (see Make.CustomAfter.targets).
 
 See
 - Profiles used by the project: `etc/FrameworkProfiles.props`.
-- Locally available profiles: `C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\`.
+- Locally available profiles:
+  `C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\`.
+- [NuGet Tools](http://nugettoolsdev.azurewebsites.net/3.5.0-rc1-final)
+- [Reverse Package Search](http://packagesearch.azurewebsites.net/)
+- [Introducing .NET Standard](https://blogs.msdn.microsoft.com/dotnet/2016/09/26/introducing-net-standard/)
+- [.NET Standard Library](https://docs.microsoft.com/en-us/dotnet/articles/standard/library)
+- [.NET Standard Versions](https://github.com/dotnet/standard/blob/master/docs/versions.md)
+- [Frameworks and Targets](https://docs.microsoft.com/en-us/dotnet/articles/standard/frameworks)
+- [NuGet Target Frameworks](https://docs.nuget.org/ndocs/schema/target-frameworks)
 - Stephen Cleary's [blog post](http://blog.stephencleary.com/2012/05/framework-profiles-in-net.html),
   the list of [Portable Class Library profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview),
-  the [tool](https://github.com/StephenCleary/PortableLibraryProfiles).
+  the [tool](https://github.com/StephenCleary/PortableLibraryProfiles),
+  [app](http://portablelibraryprofiles.apps.stephencleary.com/)
 
 ### Desktop application
 

@@ -38,7 +38,7 @@ namespace Narvalo.IO
 
                 if (directory == null)
                 {
-                    // XXX: Fix the message 
+                    // XXX: Fix the message
                     throw new InvalidOperationException();
                 }
 

@@ -8,7 +8,7 @@ Overview
 Status
 ------
 
-Library                   | Version     | PCL/Platform     | Security (*) | SA | CC | TC
+Library                   | Version     | PCL/Framework    | Security (*) | SA | CC | TC
 --------------------------|-------------|------------------|--------------|----|----|-----
 Narvalo.Build             | 1.1.0       | .NET 4.5         |              |    |    |
 Narvalo.Cerbere           | 1.0.0       | Profile259       | Transparent  |    | OK | 100%
@@ -20,7 +20,7 @@ Narvalo.Mvp               | 0.99.0      | .NET 4.5         |              |    |
 Narvalo.Mvp.Web           | 0.99.0      | .NET 4.5         |              |    |    |
 Narvalo.Web               | 0.24.0      | .NET 4.5         |              |    | OK |
 
-(*) Security attributes are not present in the assemblies distributed via NuGet.
+(*) Security attributes are not applied to the assemblies distributed via NuGet.
 
 Explanations:
 - SA: Static Analysis with:

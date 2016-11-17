@@ -49,7 +49,7 @@ namespace Narvalo.IO
                 if (!stack.TryPop(out directory))
                 {
                     // REVIEW: What are the conditions that might cause TryPop to fail?
-                    // Corollary: is it safe to use stack.TryPop directly to update a "shared" 
+                    // Corollary: is it safe to use stack.TryPop directly to update a "shared"
                     // directory variable?
                     yield break;
                 }
