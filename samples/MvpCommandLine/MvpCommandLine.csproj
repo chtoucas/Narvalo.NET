@@ -6,6 +6,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>MvpCommandLine</RootNamespace>
     <AssemblyName>MvpCommandLine</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>MvpCommandLine.Program</StartupObject>
