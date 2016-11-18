@@ -4,5 +4,8 @@
     <Profile111>portable-net45+netcore45+wpa81</Profile111>
     <Profile151>portable-net451+netcore451+wpa81</Profile151>
     <Profile259>portable-net45+netcore45+wpa81+wp8</Profile259>
+    <NetStandard10>netstandard1.0</NetStandard10>
+    <NetStandard11>netstandard1.1</NetStandard11>
+    <NetStandard12>netstandard1.2</NetStandard12>
   </PropertyGroup>
 </Project>

@@ -6,7 +6,7 @@
     <NuId>Narvalo.Finance</NuId>
     <NuDescription>
       <![CDATA[
-Provides various financial utilities: Currency (ISO 4217), Money types, BIC (ISO 9362), IBAN &amp; BBAN.
+Provides various financial utilities: Currency (ISO 4217), Money types, BIC (ISO 9362), IBAN.
       ]]>
     </NuDescription>
     <NuTags>Currency, Money, BIC, IBAN, BBAN</NuTags>
@@ -25,18 +25,24 @@ Provides various financial utilities: Currency (ISO 4217), Money types, BIC (ISO
 <file src="Narvalo.Finance.pdb" target="lib\$(Profile111)\" />
 <file src="Narvalo.Finance.xml" target="lib\$(Profile111)\" />
 <file src="fr\Narvalo.Finance.resources.dll" target="lib\$(Profile111)\fr\" />
+<file src="Narvalo.Finance.dll" target="lib\$(NetStandard11)\" />
+<file src="Narvalo.Finance.pdb" target="lib\$(NetStandard11)\" />
+<file src="Narvalo.Finance.xml" target="lib\$(NetStandard11)\" />
+<file src="fr\Narvalo.Finance.resources.dll" target="lib\$(NetStandard11)\fr\" />
       ]]>
     </NuFiles>
     <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
       <![CDATA[
 $(NuFiles)
 <file src="CodeContracts\Narvalo.Finance.Contracts.dll" target="lib\$(Profile111)\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Finance.Contracts.dll" target="lib\$(NetStandard11)\CodeContracts\" />
       ]]>
     </NuFiles>
     <NuFiles Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
       <![CDATA[
 $(NuFiles)
 <file src="CodeContracts\Narvalo.Finance.Contracts.xml" target="lib\$(Profile111)\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Finance.Contracts.xml" target="lib\$(NetStandard11)\CodeContracts\" />
       ]]>
     </NuFiles>
   </PropertyGroup>

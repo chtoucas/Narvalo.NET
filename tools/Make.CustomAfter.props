@@ -100,7 +100,7 @@
     <DefineConstants>$(DefineConstants);NO_INTERNALS_VISIBLE_TO</DefineConstants>
   </PropertyGroup>
 
-  <!-- Semantic versioning. -->
+  <!-- (Kind of) Semantic versioning. -->
   <PropertyGroup>
     <VersionFile>$(MSBuildProjectDirectory)\$(AssemblyName).Version.props</VersionFile>
 
@@ -174,12 +174,13 @@
   <PropertyGroup Condition=" '$(NuProjectExists)' == 'true' ">
     <NuTitle Condition=" $(NuTitle) == '' ">$(NuId)</NuTitle>
     <NuDescription Condition=" '$(NuDescription)' == '' ">$(NuSummary)</NuDescription>
+    <!-- REVIEW: Should we enable this or let the consumer discover this during the installation?
     <NuDescription Condition=" '$(TargetFrameworkProfile)' != '' ">
       <![CDATA[
 $(NuDescription)
 This is a portable class library targeting $(TargetFrameworkProfile).
       ]]>
-    </NuDescription>
+    </NuDescription>-->
     <NuDescription Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' And $(CodeContractsReferenceAssembly) == 'Build' ">
       <![CDATA[
 $(NuDescription)

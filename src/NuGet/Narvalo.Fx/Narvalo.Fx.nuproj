@@ -30,18 +30,24 @@ Features implementations of some of the usual suspects from functional programmi
 <file src="Narvalo.Fx.pdb" target="lib\$(Profile259)\" />
 <file src="Narvalo.Fx.xml" target="lib\$(Profile259)\" />
 <file src="fr\Narvalo.Fx.resources.dll" target="lib\$(Profile259)\fr\" />
+<file src="Narvalo.Fx.dll" target="lib\$(NetStandard10)\" />
+<file src="Narvalo.Fx.pdb" target="lib\$(NetStandard10)\" />
+<file src="Narvalo.Fx.xml" target="lib\$(NetStandard10)\" />
+<file src="fr\Narvalo.Fx.resources.dll" target="lib\$(NetStandard10)\fr\" />
       ]]>
     </NuFiles>
     <NuFiles Condition=" '$(SkipCodeContractsReferenceAssembly)' != 'true' ">
       <![CDATA[
 $(NuFiles)
 <file src="CodeContracts\Narvalo.Fx.Contracts.dll" target="lib\$(Profile259)\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Fx.Contracts.dll" target="lib\$(NetStandard10)\CodeContracts\" />
       ]]>
     </NuFiles>
     <NuFiles Condition=" '$(CodeContractsEmitXMLDocs)' == 'true' ">
       <![CDATA[
 $(NuFiles)
 <file src="CodeContracts\Narvalo.Fx.Contracts.xml" target="lib\$(Profile259)\CodeContracts\" />
+<file src="CodeContracts\Narvalo.Fx.Contracts.xml" target="lib\$(NetStandard10)\CodeContracts\" />
       ]]>
     </NuFiles>
   </PropertyGroup>
