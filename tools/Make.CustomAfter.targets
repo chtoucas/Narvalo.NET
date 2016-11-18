@@ -354,6 +354,7 @@ using System.Reflection;
                  ReleaseNotes="$(NuReleaseNotes)"
                  Copyright="$(NuCopyright)"
                  Tags="$(NuTags)"
+                 FrameworkAssemblies="$(NuFrameworkAssemblies)"
                  Dependencies="$(ProjectDependencies)$(NuGetDependencies)"
                  References="$(NuReferences)" />
   </Target>

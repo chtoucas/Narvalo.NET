@@ -15,6 +15,14 @@ Samples are available on the project web site.
     </NuDescription>
     <NuTags>MVP, ASP.NET, WebForms</NuTags>
 
+    <NuFrameworkAssemblies>
+      <![CDATA[
+      <frameworkAssemblies>
+        <frameworkAssembly assemblyName="System.Web"  />
+      </frameworkAssemblies>
+      ]]>
+    </NuFrameworkAssemblies>
+
     <NuFiles>
       <![CDATA[
 <file src="Narvalo.Mvp.Web.dll" target="lib\net45\" />

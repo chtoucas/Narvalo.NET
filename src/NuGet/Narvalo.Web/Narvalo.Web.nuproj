@@ -9,6 +9,17 @@ Provides types that might prove useful for Web development: generic HttpHandler 
     </NuDescription>
     <NuTags>ASP.NET, MVC, WebForms, Razor, Optimization</NuTags>
 
+    <NuFrameworkAssemblies>
+      <![CDATA[
+      <frameworkAssemblies>
+        <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations"  />
+        <frameworkAssembly assemblyName="System.Configuration"  />
+        <frameworkAssembly assemblyName="System.Web"  />
+        <frameworkAssembly assemblyName="System.Xml"  />
+      </frameworkAssemblies>
+      ]]>
+    </NuFrameworkAssemblies>
+
     <NuReferences>
       <![CDATA[
       <references>

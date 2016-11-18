@@ -25,6 +25,7 @@
       <ReleaseNotes ParameterType="System.String" />
       <Copyright ParameterType="System.String" />
       <Tags ParameterType="System.String" />
+      <FrameworkAssemblies ParameterType="System.String" />
       <Dependencies ParameterType="System.String" />
       <References ParameterType="System.String" />
     </ParameterGroup>
@@ -45,6 +46,7 @@ try {
       .Replace("$tags$", String.IsNullOrWhiteSpace(Tags) ? String.Empty : "<tags>" + Tags + "</tags>")
       .Replace("$dependencies$", String.IsNullOrWhiteSpace(Dependencies) ? String.Empty : "<dependencies>" + Dependencies + "</dependencies>")
       .Replace("$references$", String.IsNullOrWhiteSpace(References) ? String.Empty : References)
+      .Replace("$frameworkAssemblies$", String.IsNullOrWhiteSpace(FrameworkAssemblies) ? String.Empty : FrameworkAssemblies)
       ;
 
     File.WriteAllText(OutFile, nuspec);

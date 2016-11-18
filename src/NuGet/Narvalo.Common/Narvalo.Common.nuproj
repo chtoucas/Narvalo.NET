@@ -9,6 +9,17 @@ Provides various utilities and extension methods: directory walker, extension me
     </NuDescription>
     <NuTags>Utilities, Extensions</NuTags>
 
+    <NuFrameworkAssemblies>
+      <![CDATA[
+      <frameworkAssemblies>
+        <frameworkAssembly assemblyName="System.Configuration"  />
+        <frameworkAssembly assemblyName="System.Data"  />
+        <frameworkAssembly assemblyName="System.Xml"  />
+        <frameworkAssembly assemblyName="System.Xml.Linq"  />
+      </frameworkAssemblies>
+      ]]>
+    </NuFrameworkAssemblies>
+
     <NuReferences>
       <![CDATA[
       <references>
