@@ -107,7 +107,6 @@
     <None Include="Narvalo.Core.Version.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Strings_Core.fr.resx">
