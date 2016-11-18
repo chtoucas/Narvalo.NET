@@ -7,10 +7,15 @@ XXXX-XX-XX -
 #### Bugfixes
 
 #### Breaking changes
+- Narvalo.Cerbere largely rewritten and simplified.
 
 #### Enhancements
+- [NuGet] Added support for .NET Standard wherever it makes sense.
+- [NuGet] Automatically add required GAC assemblies upon installation.
 
 #### Improvements
+- Micro-optimization for `Int64Encoder.Encode()`.
+- More Code Contracts.
 
 2016-11-04 - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------

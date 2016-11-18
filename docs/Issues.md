@@ -9,7 +9,6 @@ Current works
   * Icons in Wiki
   * GitHub projects.
 - Build scripts:
-  * Psake: use `'4.6.1x64'` in `Framework '4.5.1x64'`?
   * OpenCover & Gendarme: move the core logic from PSake to MSBuild.
   * Should I call Rebuild before Package?
   * Should I call Rebuild before the analysis tasks?
@@ -20,7 +19,7 @@ Current works
      We need also to filter on target.
   * Nuspec: handle automatically PCL, `FrameworkProfiles.props` import
     and files to be added (we certainly can do this for all packages, non-PCL).
-  * Nuspec: In `Make.CustomAfter.props`, we use $(TargetFrameworkProfile) to
+  * Nuspec (oboslete): In `Make.CustomAfter.props`, we use $(TargetFrameworkProfile) to
     patch the description $(NuDescription) for PCL libraries, is it the right way
     to do this (In `Make.CustomAfter.targets`, we use
     `'$(TargetFrameworkProfile.StartsWith(Profile))' == 'true'`).
