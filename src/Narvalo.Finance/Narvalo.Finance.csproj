@@ -70,6 +70,7 @@
     <None Include="Narvalo.Finance.Version.props">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Resources\ISO4217\schema.xsd">
       <SubType>Designer</SubType>
     </None>
