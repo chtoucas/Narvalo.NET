@@ -31,11 +31,8 @@
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Ghostscript\Narvalo.Ghostscript.csproj" />-->
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />-->
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />-->
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Windows.Forms\Narvalo.Mvp.Windows.Forms.csproj" />-->
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Reliability\Narvalo.Reliability.csproj" />-->
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
       </ItemGroup>
     </When>
@@ -48,11 +45,8 @@
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Ghostscript\Narvalo.Ghostscript.csproj" />-->
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />-->
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />-->
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Windows.Forms\Narvalo.Mvp.Windows.Forms.csproj" />-->
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Reliability\Narvalo.Reliability.csproj" />-->
         <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
 
       </ItemGroup>
@@ -66,11 +60,9 @@
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Reliability\Narvalo.Reliability.csproj" />-->
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
 
         <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
-        <!--<ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Reliability.Facts\Narvalo.Reliability.Facts.csproj" />-->
       </ItemGroup>
 
       <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Mvp_))' == 'true' ">

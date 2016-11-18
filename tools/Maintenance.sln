@@ -45,6 +45,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. NuGet", "2. NuGet", "{C951776C-B912-4BB2-95ED-02A5D7A3F4A4}"
 	ProjectSection(SolutionItems) = preProject
 		..\etc\Narvalo.CurrentVersion.props = ..\etc\Narvalo.CurrentVersion.props
+		..\etc\Narvalo.Mvp.CurrentVersion.props = ..\etc\Narvalo.Mvp.CurrentVersion.props
 		..\etc\Template.nuspec = ..\etc\Template.nuspec
 	EndProjectSection
 EndProject

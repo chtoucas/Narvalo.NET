@@ -813,7 +813,7 @@ function Invoke-OpenCover {
     $coverageFilter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
     $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;Narvalo.ExcludeFromCodeCoverageAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
 
-    # TODO: Add Narvalo.Reliability.Facts.
+    # TODO: Add Narvalo.Mvp.Facts.
     $testAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
 
     # Be careful with arguments containing spaces.
