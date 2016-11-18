@@ -119,6 +119,10 @@ Special Cases
 ### Portable Class Library
 
 We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
+- **Profile259** (.NET Framework 4.5, ASP.NET Core 1.0, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8):
+  * NuGet PCL: `portable-net45+netcore45+wpa81+wp8`
+  * For MSBuild: `TargetFrameworkVersion=v4.5`.
+  * Supported by .NET Standard 1.0.
 - **Profile111** (.NET Framework 4.5, ASP.NET Core 1.0, Windows 8, Windows Phone 8.1):
   * NuGet PCL: `portable-net45+netcore45+wpa81`
   * For MSBuild: `TargetFrameworkVersion=v4.5`.
@@ -127,10 +131,6 @@ We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
   * NuGet PCL: `portable-net451+netcore451+wpa81`
   * For MSBuild: `TargetFrameworkVersion=v4.6`.
   * Supported by .NET Standard 1.2.
-- **Profile259** (.NET Framework 4.5, ASP.NET Core 1.0, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8):
-  * NuGet PCL: `portable-net45+netcore45+wpa81+wp8`
-  * For MSBuild: `TargetFrameworkVersion=v4.5`.
-  * Supported by .NET Standard 1.0.
 
 NB:
 - .Net Standard 1.1 (Profile111) vs 1.0 (Profile259):

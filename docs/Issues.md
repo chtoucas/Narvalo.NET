@@ -15,12 +15,16 @@ Current works
   * Should I call Rebuild before the analysis tasks?
   * In addition to `$(SkipCodeContractsReferenceAssembly)`, should we check
     `$(SkipCodeContractsReferenceAssembly)` too?
+  * `ReadDependenciesFromPackagesConfig` should exclude dev dependencies. They
+     sould be marked with `developmentDependency="true"`.
+     We need also to filter on target.
   * Nuspec: handle automatically PCL, `FrameworkProfiles.props` import
     and files to be added (we certainly can do this for all packages, non-PCL).
   * Nuspec: In `Make.CustomAfter.props`, we use $(TargetFrameworkProfile) to
     patch the description $(NuDescription) for PCL libraries, is it the right way
     to do this (In `Make.CustomAfter.targets`, we use
     `'$(TargetFrameworkProfile.StartsWith(Profile))' == 'true'`).
+  * Nuspec: add `frameworkAssemblies` when useful (for instance `System.Web`).
 - DocFX:
   * External links via `<see cref="!:" />` are not understood by docfx.
   * NamespaceDocs are not understood by docfx, rewrite needed.
