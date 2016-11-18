@@ -25,10 +25,10 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void Enum_ThrowsArgumentException_ForBitwiseEnum()
+        public static void Enum_ThrowsNotSupportedException_FoFlagEnum()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<My.BitwiseEnumeration>(1));
+            Assert.Throws<NotSupportedException>(() => ConvertTo.Enum<My.BitwiseEnumeration>(1));
         }
 
         [Fact]
