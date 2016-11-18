@@ -23,7 +23,8 @@ namespace Narvalo.Configuration
         {
             string uriString = (string)value;
 
-            if (!Uri.IsWellFormedUriString(uriString, UriKind.Absolute)) {
+            if (!Uri.IsWellFormedUriString(uriString, UriKind.Absolute))
+            {
                 throw new ConfigurationErrorsException(
                     Format.Current(Strings_Common.AbsoluteUriValidator_UriIsNotAbsolute_Format, uriString));
             }

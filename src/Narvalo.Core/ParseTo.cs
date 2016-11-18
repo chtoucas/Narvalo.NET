@@ -76,7 +76,8 @@ namespace Narvalo
 
         public static double? Double(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<double> parser = (string _, out double result) => double.TryParse(_, style, provider, out result);
+            TryParser<double> parser = (string _, out double result)
+                => double.TryParse(_, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
@@ -152,7 +153,8 @@ namespace Narvalo
         [CLSCompliant(false)]
         public static ushort? UInt16(string value, NumberStyles style, IFormatProvider provider)
         {
-            TryParser<ushort> parser = (string _, out ushort result) => ushort.TryParse(_, style, provider, out result);
+            TryParser<ushort> parser = (string _, out ushort result)
+                => ushort.TryParse(_, style, provider, out result);
 
             return parser.NullInvoke(value);
         }
