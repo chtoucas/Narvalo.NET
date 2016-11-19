@@ -10,8 +10,6 @@ Current works
   * GitHub projects.
 - Build scripts:
   * OpenCover & Gendarme: move the core logic from PSake to MSBuild.
-  * Should I call Rebuild before Package?
-  * Should I call Rebuild before the analysis tasks?
   * In addition to `$(SkipCodeContractsReferenceAssembly)`, should we check
     `$(SkipCodeContractsReferenceAssembly)` too?
   * `ReadDependenciesFromPackagesConfig` should exclude dev dependencies. They
@@ -23,7 +21,8 @@ Current works
     patch the description $(NuDescription) for PCL libraries, is it the right way
     to do this (In `Make.CustomAfter.targets`, we use
     `'$(TargetFrameworkProfile.StartsWith(Profile))' == 'true'`).
-  * Nuspec: add `frameworkAssemblies` when useful (for instance `System.Web`).
+  * Should I call Rebuild before Package?
+  * Should I call Rebuild before the analysis tasks?
 - DocFX:
   * External links via `<see cref="!:" />` are not understood by docfx.
   * NamespaceDocs are not understood by docfx, rewrite needed.
@@ -114,6 +113,29 @@ Narvalo.Finance
 - Comparisons between `Money` and `Money<T>`. Or simply remove `Money`?
 - IConvertible?
 - BigMoney and BigMoney<TCurrency>.
+- Represents a monetary value.
+  http://martinfowler.com/eaaCatalog/money.html
+- Microsoft SQL Server implementation:
+  Int32 or Int64, and designate the lower four digits (or possibly even 2) as
+  "right of the decimal point". So "on the edges" you'll need some "* 10000"
+  on the way in and some "/ 10000" on the way out. The nicity of this is that
+  all your summation can be done using (fast) integer arithmetic.
+  https://msdn.microsoft.com/en-au/library/ms179882.aspx
+ - Implementation in .NET:
+  * http://www.codeproject.com/Articles/28244/A-Money-type-for-the-CLR
+  * https://bitbucket.org/rplaire/money-type-for-the-clr
+  * https://github.com/danielcrenna/webstack/blob/master/money/Money/
+  * https://csharpmoney.codeplex.com/
+  * https://code.google.com/p/nmoneys/
+  * http://www.xe.com/iso4217.php/
+- Standards:
+  * http://en.wikipedia.org/wiki/ISO_4217
+  * http://www.currency-iso.org/
+  * http://en.wikipedia.org/wiki/Currency_symbol
+- JodaMoney & NodaMoney
+  * https://github.com/JodaOrg/joda-money/blob/master/src/main/java/org/joda/money/BigMoney.java
+  * https://github.com/remyvd/NodaMoney/tree/develop/NodaMoney
+
 
 Narvalo.Web
 -----------

@@ -27,7 +27,7 @@
 :NotFound
 
 @echo.
-@echo *** Looks like fsi.exe v4.0 is not installed on your system ***
+@echo *** Looks like fsi.exe v%FsiVersion% is not installed on your system ***
 @echo.
 
 @endlocal

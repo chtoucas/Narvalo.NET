@@ -118,6 +118,9 @@ Special Cases
 
 ### Portable Class Library
 
+The "long" term goal is that PCL projects do not reference a PCL profile but
+rather a .NET Standard.
+
 We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
 - **Profile259** (.NET Framework 4.5, ASP.NET Core 1.0, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8):
   * NuGet PCL: `portable-net45+netcore45+wpa81+wp8`
@@ -132,10 +135,10 @@ We target at least .NET 4.5, Windows 8 and Windows Phone 8.1:
   * For MSBuild: `TargetFrameworkVersion=v4.6`.
   * Supported by .NET Standard 1.2.
 
-NB:
-- .Net Standard 1.1 (Profile111) vs 1.0 (Profile259):
+Notable additions:
+- .NET Standard 1.1 (Profile111) vs 1.0 (Profile259):
   * `System.Collections.Concurrent.ConcurrentDictionary`.
-- .Net Standard 1.2 (Profile151) vs 1.1 (Profile111):
+- .NET Standard 1.2 (Profile151) vs 1.1 (Profile111):
   * `System.Threading.Timer`.
 
 When creating the project we should add it to the list of PCL projects used by SecAnnotate
@@ -156,6 +159,11 @@ See
   the list of [Portable Class Library profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview),
   the [tool](https://github.com/StephenCleary/PortableLibraryProfiles),
   [app](http://portablelibraryprofiles.apps.stephencleary.com/)
+
+.NET Core:
+- [Project.json](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/project-json)
+- [Project.json & NuGet](https://docs.nuget.org/ndocs/schema/project.json)
+- [Using MSBuild to build .NET Core projects](https://docs.microsoft.com/en-us/dotnet/articles/core/tutorials/target-dotnetcore-with-msbuild)
 
 ### Desktop application
 
