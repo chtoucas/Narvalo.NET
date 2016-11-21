@@ -32,7 +32,7 @@ namespace Narvalo
         public static void Unreachable_ThrowsInvalidOperationException_ForIncompleteSwitch()
         {
             // Act & Assert
-            Assert.Throws<NotSupportedException>(() => IncompleteSwitch(MyEnum_.Two));
+            Assert.Throws<ControlFlowException>(() => IncompleteSwitch(MyEnum_.Two));
         }
 
         [Fact]

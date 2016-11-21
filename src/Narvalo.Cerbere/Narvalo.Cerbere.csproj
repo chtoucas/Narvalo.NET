@@ -59,13 +59,16 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ControlFlowException.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="Expect.cs" />
     <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
     <Compile Include="Format.cs" />
+    <Compile Include="Internal\ProgrammingException.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Internal\Predicates.cs" />
     <Compile Include="Demand.cs" />
+    <Compile Include="Always.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Strings_Cerbere.fr.Designer.cs">
       <AutoGen>True</AutoGen>
