@@ -78,14 +78,14 @@ namespace Narvalo.Fx.Advanced
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        public static Outcome<TSource> Catch<TSource, TException>(this Func<TSource> @this) where TException : Exception
+        public static Outcome<TResult> Catch<TResult, TException>(this Func<TResult> @this) where TException : Exception
         {
             Require.Object(@this);
-            Ensures(Result<Outcome<TSource>>() != null);
+            Ensures(Result<Outcome<TResult>>() != null);
 
             try
             {
-                TSource value = @this.Invoke();
+                TResult value = @this.Invoke();
 
                 return Outcome.Success(value);
             }
@@ -93,7 +93,7 @@ namespace Narvalo.Fx.Advanced
             {
                 var edi = ExceptionDispatchInfo.Capture(ex);
 
-                return Outcome.Failure<TSource>(edi);
+                return Outcome.Failure<TResult>(edi);
             }
         }
 
@@ -101,44 +101,44 @@ namespace Narvalo.Fx.Advanced
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-20-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public static Outcome<TSource> Catch<TSource, T1Exception, T2Exception>(this Func<TSource> @this)
+        public static Outcome<TResult> Catch<TResult, T1Exception, T2Exception>(this Func<TResult> @this)
             where T1Exception : Exception
             where T2Exception : Exception
         {
             Require.Object(@this);
-            Ensures(Result<Outcome<TSource>>() != null);
+            Ensures(Result<Outcome<TResult>>() != null);
 
             ExceptionDispatchInfo edi;
 
             try
             {
-                TSource value = @this.Invoke();
+                TResult value = @this.Invoke();
 
                 return Outcome.Success(value);
             }
             catch (T1Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.Failure<TSource>(edi);
+            return Outcome.Failure<TResult>(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-20-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public static Outcome<TSource> Catch<TSource, T1Exception, T2Exception, T3Exception>(this Func<TSource> @this)
+        public static Outcome<TResult> Catch<TResult, T1Exception, T2Exception, T3Exception>(this Func<TResult> @this)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
         {
             Require.Object(@this);
-            Ensures(Result<Outcome<TSource>>() != null);
+            Ensures(Result<Outcome<TResult>>() != null);
 
             ExceptionDispatchInfo edi;
 
             try
             {
-                TSource value = @this.Invoke();
+                TResult value = @this.Invoke();
 
                 return Outcome.Success(value);
             }
@@ -146,28 +146,28 @@ namespace Narvalo.Fx.Advanced
             catch (T2Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.Failure<TSource>(edi);
+            return Outcome.Failure<TResult>(edi);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         [SuppressMessage("Microsoft.Contracts", "Suggestion-20-0",
             Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
-        public static Outcome<TSource> Catch<TSource, T1Exception, T2Exception, T3Exception, T4Exception>(
-            this Func<TSource> @this)
+        public static Outcome<TResult> Catch<TResult, T1Exception, T2Exception, T3Exception, T4Exception>(
+            this Func<TResult> @this)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
             where T4Exception : Exception
         {
             Require.Object(@this);
-            Ensures(Result<Outcome<TSource>>() != null);
+            Ensures(Result<Outcome<TResult>>() != null);
 
             ExceptionDispatchInfo edi;
 
             try
             {
-                TSource value = @this.Invoke();
+                TResult value = @this.Invoke();
 
                 return Outcome.Success(value);
             }
@@ -176,7 +176,7 @@ namespace Narvalo.Fx.Advanced
             catch (T3Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
             catch (T4Exception ex) { edi = ExceptionDispatchInfo.Capture(ex); }
 
-            return Outcome.Failure<TSource>(edi);
+            return Outcome.Failure<TResult>(edi);
         }
 
         #endregion
