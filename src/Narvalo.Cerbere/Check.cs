@@ -9,12 +9,20 @@ namespace Narvalo
     /// <summary>
     /// Provides Code Contracts abbreviators and helpers.
     /// </summary>
-    // To be used instead of
-    //      Contract.Assert(testCondition);
-    //      Debug.Assert(testCondition);
     [DebuggerStepThrough]
     public static class Check
     {
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="testCondition"></param>
+        /// <remarks>
+        /// To be used instead of
+        /// <code>
+        ///     Contract.Assert(testCondition);
+        ///     Debug.Assert(testCondition);
+        /// </code>
+        /// </remarks>
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         public static void True(bool testCondition) => Demand.True(testCondition);
@@ -36,30 +44,13 @@ namespace Narvalo
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void AssumeInvariant<T>(T obj) { }
 
-        /// <summary>
-        /// Asserts that a point of execution is unreachable.
-        /// </summary>
-        /// <remarks>Adapted from <see cref="!:https://blogs.msdn.microsoft.com/francesco/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten/"/>.</remarks>
-        /// <example>
-        /// <code>
-        /// switch (myEnum)
-        /// {
-        ///     case MyEnum.DefinedValue:
-        ///         return "DefinedValue";
-        ///     default:
-        ///         throw Acknowledge.Unreachable("Found a missing case in the switch.");
-        /// }
-        /// </code>
-        /// </example>
-        /// <param name="reason">The error message to use if the point of execution is reached.</param>
-        /// <returns>A new instance of the <see cref="NotSupportedException"/> class with the specified error message.</returns>
         [DebuggerHidden]
         [ContractVerification(false)]
-        public static NotSupportedException Unreachable(string reason)
+        public static ControlFlowException Unreachable()
         {
             Contract.Requires(false);
 
-            return new NotSupportedException(reason);
+            return new ControlFlowException();
         }
 
         /// <summary>
@@ -73,7 +64,33 @@ namespace Narvalo
         ///     case MyEnum.DefinedValue:
         ///         return "DefinedValue";
         ///     default:
-        ///         throw Acknowledge.Unreachable(new MyException("Found a missing case in the switch."));
+        ///         throw Check.Unreachable("Found a missing case in a switch.");
+        /// }
+        /// </code>
+        /// </example>
+        /// <param name="rationale">The error message to use if the point of execution is reached.</param>
+        /// <returns>A new instance of the <see cref="ControlFlowException"/> class with the specified error message.</returns>
+        [DebuggerHidden]
+        [ContractVerification(false)]
+        public static ControlFlowException Unreachable(string rationale)
+        {
+            Contract.Requires(false);
+
+            return new ControlFlowException(rationale);
+        }
+
+        /// <summary>
+        /// Asserts that a point of execution is unreachable.
+        /// </summary>
+        /// <remarks>Adapted from <see cref="!:https://blogs.msdn.microsoft.com/francesco/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten/"/>.</remarks>
+        /// <example>
+        /// <code>
+        /// switch (myEnum)
+        /// {
+        ///     case MyEnum.DefinedValue:
+        ///         return "DefinedValue";
+        ///     default:
+        ///         throw Check.Unreachable(new MyException("Found a missing case in a switch."));
         /// }
         /// </code>
         /// </example>
