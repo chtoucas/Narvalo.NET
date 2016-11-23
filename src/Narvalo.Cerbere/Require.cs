@@ -30,7 +30,7 @@ namespace Narvalo
         {
             if (!testCondition)
             {
-                throw new InvalidOperationException("XXX");
+                throw new InvalidOperationException();
             }
 
             Contract.EndContractBlock();
