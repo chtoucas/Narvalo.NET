@@ -139,7 +139,7 @@ namespace Narvalo.Fx
      * ]]>
      * </content>
      */
-    [DebuggerDisplay("IsSome={IsSome}")]
+    [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
         Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]

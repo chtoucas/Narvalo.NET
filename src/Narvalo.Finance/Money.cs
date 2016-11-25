@@ -3,7 +3,6 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;
 
@@ -15,7 +14,6 @@ namespace Narvalo.Finance
     // FIXME: Use int's to represent the amount and, later on, create a BigMoney struct based
     // on BigRational (BigDecimal?) for arbitrary-precision calculations.
     [StructLayout(LayoutKind.Auto)]
-    [DebuggerDisplay("{{ToString()}}")]
     public partial struct Money
         : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
     {

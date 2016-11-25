@@ -9,7 +9,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
-    [DebuggerDisplay("{{ToString()}}")]
     public partial struct Money<TCurrency>
         : IEquatable<Money<TCurrency>>, IComparable<Money<TCurrency>>, IComparable, IFormattable
         where TCurrency : Currency
