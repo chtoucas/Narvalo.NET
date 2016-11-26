@@ -19,19 +19,19 @@ namespace Narvalo.Build.Internal
         /// of corresponding objects in a specified array. Actual formatting is done with
         /// the culture used by the current thread.
         /// </summary>
-        /// <param name="localizedResource">A composite format string obtained from a localized resource.</param>
+        /// <param name="format">A composite format string.</param>
         /// <param name="args">An object array that contains zero or more objects to format.</param>
         /// <returns>A copy of format in which the format items have been replaced by the string
         /// representation of the corresponding objects in args.</returns>
         [Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string Resource(string localizedResource, params object[] args)
+        public static string Current(string format, params object[] args)
         {
-            Contract.Requires(localizedResource != null);
+            Contract.Requires(format != null);
             Contract.Requires(args != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return String.Format(CultureInfo.CurrentCulture, localizedResource, args);
+            return String.Format(CultureInfo.CurrentCulture, format, args);
         }
     }
 }

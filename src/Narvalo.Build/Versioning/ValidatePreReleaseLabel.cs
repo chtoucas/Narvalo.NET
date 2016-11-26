@@ -34,7 +34,7 @@ namespace Narvalo.Build.Versioning
             if (!Regex.IsMatch(Value, @"^[a-z][\-0-9a-z]*$", RegexOptions.IgnoreCase))
             {
                 Log.LogError(
-                    Format.Resource(
+                    Format.Current(
                         Strings.ValidatePrereleaseLabel_ValueIsNotValid_Format,
                         Value));
             }

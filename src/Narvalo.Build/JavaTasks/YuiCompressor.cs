@@ -100,7 +100,7 @@ namespace Narvalo.Build.JavaTasks
 
                 if (!File.Exists(inFile))
                 {
-                    Log.LogError(Format.Resource(Strings.FileNotFound_Format, inFile));
+                    Log.LogError(Format.Current(Strings.FileNotFound_Format, inFile));
                     break;
                 }
 
@@ -108,7 +108,7 @@ namespace Narvalo.Build.JavaTasks
 
                 Log.LogMessage(
                     MessageImportance.Normal,
-                    Format.Resource(Strings.YuiCompressorBase_Processing_Format, new FileInfo(inFile).Name));
+                    Format.Current(Strings.YuiCompressorBase_Processing_Format, new FileInfo(inFile).Name));
 
                 if (File.Exists(outFile))
                 {
@@ -162,12 +162,12 @@ namespace Narvalo.Build.JavaTasks
         {
             if (fileName == null)
             {
-                throw new ArgumentNullException("fileName", Format.Resource(Strings.ArgumentNull_Format, "fileName"));
+                throw new ArgumentNullException("fileName", Format.Current(Strings.ArgumentNull_Format, "fileName"));
             }
 
             if (String.IsNullOrWhiteSpace(fileName))
             {
-                throw new ArgumentException(Format.Resource(Strings.ArgumentWhiteSpace_Format, "fileName"), "fileName");
+                throw new ArgumentException(Format.Current(Strings.ArgumentWhiteSpace_Format, "fileName"), "fileName");
             }
 
             string name = fileName.Replace("." + FileExtension, ".min." + FileExtension);

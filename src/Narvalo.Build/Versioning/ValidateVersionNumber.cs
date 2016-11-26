@@ -45,7 +45,7 @@ namespace Narvalo.Build.Versioning
             {
                 // Semantic versioning requirement.
                 Log.LogError(
-                    Format.Resource(
+                    Format.Current(
                         Strings.ValidateVersionNumber_ValueMustNotStartWithZero_Format,
                         Name,
                         Value));
@@ -60,7 +60,7 @@ namespace Narvalo.Build.Versioning
             catch (FormatException ex)
             {
                 Log.LogWarning(
-                    Format.Resource(
+                    Format.Current(
                         Strings.ValidateVersionNumber_ValueIsNotValid_Format,
                         Name,
                         Value));
@@ -69,7 +69,7 @@ namespace Narvalo.Build.Versioning
             catch (OverflowException ex)
             {
                 Log.LogWarning(
-                    Format.Resource(
+                    Format.Current(
                         Strings.ValidateVersionNumber_ValueIsNotValid_Format,
                         Name,
                         Value));

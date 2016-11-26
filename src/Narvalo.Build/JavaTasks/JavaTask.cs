@@ -73,12 +73,12 @@ namespace Narvalo.Build.JavaTasks
 
             if (javaPath == null)
             {
-                throw new PlatformNotSupportedException(Format.Resource(Strings.JavaTaskBase_JavaNotFound));
+                throw new PlatformNotSupportedException(Format.Current(Strings.JavaTaskBase_JavaNotFound));
             }
 
             Log.LogMessage(
                 MessageImportance.Low,
-                Format.Resource(Strings.JavaTaskBase_JavaPath_Format, javaPath));
+                Format.Current(Strings.JavaTaskBase_JavaPath_Format, javaPath));
 
             return javaPath;
         }
@@ -91,7 +91,7 @@ namespace Narvalo.Build.JavaTasks
         {
             if (process == null)
             {
-                throw new ArgumentNullException("process", Format.Resource(Strings.ArgumentNull_Format, "process"));
+                throw new ArgumentNullException("process", Format.Current(Strings.ArgumentNull_Format, "process"));
             }
 
             string[] errors = process.StandardError.ReadToEnd()
@@ -105,7 +105,7 @@ namespace Narvalo.Build.JavaTasks
                     error.Trim().Replace("[WARNING] ", String.Empty));
             }
 
-            Log.LogError(Format.Resource(Strings.JavaTaskBase_Error_Format, process.ExitCode));
+            Log.LogError(Format.Current(Strings.JavaTaskBase_Error_Format, process.ExitCode));
         }
 
         /// <summary>

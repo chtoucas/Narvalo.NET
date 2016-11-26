@@ -87,7 +87,7 @@ namespace Narvalo.Build
                     {
                         if (!File.Exists(file.ItemSpec))
                         {
-                            Log.LogError(Format.Resource(Strings.FileNotFound_Format, file.ItemSpec));
+                            Log.LogError(Format.Current(Strings.FileNotFound_Format, file.ItemSpec));
                             break;
                         }
 

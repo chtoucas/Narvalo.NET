@@ -95,7 +95,7 @@ namespace Narvalo.Build.JavaTasks
 
                 if (!File.Exists(inFile))
                 {
-                    Log.LogError(Format.Resource(Strings.FileNotFound_Format, inFile));
+                    Log.LogError(Format.Current(Strings.FileNotFound_Format, inFile));
                     break;
                 }
 
@@ -103,7 +103,7 @@ namespace Narvalo.Build.JavaTasks
 
                 Log.LogMessage(
                     MessageImportance.Normal,
-                    Format.Resource(Strings.ClosureCompiler_Processing_Format, new FileInfo(inFile).Name));
+                    Format.Current(Strings.ClosureCompiler_Processing_Format, new FileInfo(inFile).Name));
 
                 if (File.Exists(outFile))
                 {
