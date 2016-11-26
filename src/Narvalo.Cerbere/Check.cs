@@ -56,7 +56,14 @@ namespace Narvalo
         /// <summary>
         /// Asserts that a point of execution is unreachable.
         /// </summary>
-        /// <remarks>Adapted from <see cref="!:https://blogs.msdn.microsoft.com/francesco/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten/"/>.</remarks>
+        /// <remarks>
+        /// Adapted from <see cref="!:https://blogs.msdn.microsoft.com/francesco/2014/09/12/how-to-use-cccheck-to-prove-no-case-is-forgotten/"/>.
+        ///
+        /// Unfortunately, CCCheck will still complains with 'CodeContracts: requires unreachable'.
+        /// You can safely suppress this warning and, later on, if you reach the "unreachable"
+        /// point, CCCheck will still produce a different warning:
+        /// 'This requires, always leading to an error, may be reachable. Are you missing an enum case?'
+        /// </remarks>
         /// <example>
         /// <code>
         /// switch (myEnum)

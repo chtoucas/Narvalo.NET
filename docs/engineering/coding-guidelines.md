@@ -42,6 +42,7 @@ We mostly follow the guidelines produced by the .NET team:
 - Consider putting other resources in a `Resources` folder.
 - Consider using tasks:
   * FIXME
+  * HACK
   * TODO
   * REVIEW
   For temporary strings, use `"XXX"`.
