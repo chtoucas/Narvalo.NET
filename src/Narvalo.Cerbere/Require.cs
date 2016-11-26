@@ -8,8 +8,6 @@ namespace Narvalo
 
     using Narvalo.Properties;
 
-    using static Narvalo.Internal.Predicates;
-
     /// <summary>
     /// Provides helper methods to perform argument validation in the form
     /// of if-then-throw code and Code Contracts preconditions.
@@ -124,30 +122,6 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Validates that the specified argument is not <see langword="null"/> or empty,
-        /// and does not consist only of white-space characters.
-        /// </summary>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>
-        /// or empty, or does not consist only of white-space characters.</exception>
-        [ContractArgumentValidator]
-        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
-        {
-            NotNull(value, parameterName);
-
-            if (IsEmptyOrWhiteSpace(value))
-            {
-                throw new ArgumentException(Strings_Cerbere.Argument_EmptyOrWhiteSpaceString, parameterName);
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
         /// Validates that the specified object is not <see langword="null"/>.
         /// Meant to be used inside an extension method to validate the first parameter which
         /// specifies which type the method operates on.
@@ -214,30 +188,6 @@ namespace Narvalo
             if (value.Length == 0)
             {
                 throw new ArgumentException(Strings_Cerbere.Argument_EmptyString, "value");
-            }
-
-            Contract.EndContractBlock();
-        }
-
-        /// <summary>
-        /// Validates that the specified property value is not <see langword="null"/> or empty,
-        /// or does not consist only of white-space characters.
-        /// Meant to be used inside a property setter to validate the new value.
-        /// </summary>
-        /// <param name="value">The property value to check.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>
-        /// or empty, or does not consist only of white-space characters.</exception>
-        [ContractArgumentValidator]
-        public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
-        {
-            Property(value);
-
-            if (IsEmptyOrWhiteSpace(value))
-            {
-                throw new ArgumentException(Strings_Cerbere.Argument_EmptyOrWhiteSpaceString, "value");
             }
 
             Contract.EndContractBlock();

@@ -69,38 +69,6 @@ namespace Narvalo
 
         #endregion
 
-        #region PropertyNotWhiteSpace()
-
-        [Fact]
-        public static void PropertyNotWhiteSpace_DoesNotThrow_ForNonNullOrWhiteSpaceString()
-        {
-            // Act
-            Require.PropertyNotWhiteSpace("value");
-        }
-
-        [Fact]
-        public static void PropertyNotWhiteSpace_ThrowsArgumentNullException_ForNull()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.PropertyNotWhiteSpace(Constants.NullString));
-        }
-
-        [Fact]
-        public static void PropertyNotWhiteSpace_ThrowsArgumentException_ForEmptyString()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.PropertyNotWhiteSpace(String.Empty));
-        }
-
-        [Fact]
-        public static void PropertyNotWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.PropertyNotWhiteSpace(Constants.WhiteSpaceOnlyString));
-        }
-
-        #endregion
-
         #region NotNull()
 
         [Fact]
@@ -140,39 +108,6 @@ namespace Narvalo
         {
             // Act & Assert
             Assert.Throws<ArgumentException>(() => Require.NotNullOrEmpty(String.Empty, "parameter"));
-        }
-
-        #endregion
-
-        #region NotNullOrWhiteSpace()
-
-        [Fact]
-        public static void NotNullOrWhiteSpace_DoesNotThrow_ForNonNullOrWhiteSpaceString()
-        {
-            // Act
-            Require.NotNullOrWhiteSpace("value", "parameter");
-        }
-
-        [Fact]
-        public static void NotNullOrWhiteSpace_ThrowsArgumentNullException_ForNull()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.NotNullOrWhiteSpace(Constants.NullString, "parameter"));
-        }
-
-        [Fact]
-        public static void NotNullOrWhiteSpace_ThrowsArgumentException_ForEmptyString()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.NotNullOrWhiteSpace(String.Empty, "parameter"));
-        }
-
-        [Fact]
-        public static void NotNullOrWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentException>(
-                () => Require.NotNullOrWhiteSpace(Constants.WhiteSpaceOnlyString, "parameter"));
         }
 
         #endregion

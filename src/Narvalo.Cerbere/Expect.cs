@@ -50,13 +50,6 @@ namespace Narvalo
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void NotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
 
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void NotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
-
         /// <summary>
         /// Checks that the specified object parameter is not <see langword="null"/>.
         /// </summary>
@@ -89,12 +82,5 @@ namespace Narvalo
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void PropertyNotEmpty(string value) => True(!String.IsNullOrEmpty(value));
-
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void PropertyNotWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
     }
 }

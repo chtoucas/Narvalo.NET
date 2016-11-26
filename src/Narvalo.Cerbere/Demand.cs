@@ -60,11 +60,6 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void NotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
         public static void Object<T>(T @this) where T : class => True(@this != null);
 
         [ContractAbbreviator]
@@ -81,10 +76,5 @@ namespace Narvalo
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         public static void PropertyNotEmpty(string value) => True(!String.IsNullOrEmpty(value));
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void PropertyNotWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
     }
 }

@@ -51,7 +51,8 @@ namespace Narvalo.Web.Configuration
 
             set
             {
-                Require.PropertyNotWhiteSpace(value);
+                // FIXME: Should also guard against whitespace only values.
+                Require.PropertyNotEmpty(value);
 
                 _defaultProvider = value;
             }

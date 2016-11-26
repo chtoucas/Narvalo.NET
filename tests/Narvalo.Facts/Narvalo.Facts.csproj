@@ -148,7 +148,6 @@
     <Compile Include="Fx\VoidOrBreakFacts.cs" />
     <Compile Include="Fx\VoidOrErrorFacts.cs" />
     <Compile Include="Int64EncoderFacts.cs" />
-    <Compile Include="Internal\PredicatesFacts.cs" />
     <Compile Include="ParseToFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequireFacts.cs" />
@@ -239,6 +238,7 @@
       <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
