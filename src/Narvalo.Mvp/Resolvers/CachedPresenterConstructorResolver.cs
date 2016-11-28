@@ -4,6 +4,9 @@ namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Reflection.Emit;
 
     public sealed class CachedPresenterConstructorResolver : IPresenterConstructorResolver
@@ -24,7 +27,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public CachedPresenterConstructorResolver(IPresenterConstructorResolver inner)
         {
-            Require.NotNull(inner, "inner");
+            Require.NotNull(inner, nameof(inner));
 
             _inner = inner;
         }
@@ -33,5 +36,15 @@ namespace Narvalo.Mvp.Resolvers
         {
             return _cache.GetOrAdd(Tuple.Create(presenterType, viewType), _ => _inner.Resolve(_.Item1, _.Item2));
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_inner != null);
+        }
+
+#endif
     }
 }

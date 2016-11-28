@@ -45,9 +45,7 @@ namespace Narvalo.Mvp.CommandLine
             _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
         }
 
-        public PresenterDiscoveryResult FindBindings(
-            IEnumerable<object> hosts,
-            IEnumerable<IView> views)
+        public PresenterDiscoveryResult FindBindings(IEnumerable<object> hosts, IEnumerable<IView> views)
         {
             return _inner.FindBindings(hosts, views);
         }

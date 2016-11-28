@@ -2,8 +2,31 @@
 
 namespace Narvalo.Mvp
 {
-    public interface IPresenter
+    public partial interface IPresenter
     {
         IMessageCoordinator Messages { get; }
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Mvp
+{
+    using System.Diagnostics.Contracts;
+
+    using static System.Diagnostics.Contracts.Contract;
+
+    [ContractClass(typeof(IPresenterContract))]
+    public partial interface IPresenter { }
+
+    [ContractClassFor(typeof(IPresenter))]
+    internal abstract class IPresenterContract : IPresenter
+    {
+        IMessageCoordinator IPresenter.Messages
+        {
+            get { Ensures(Result<IMessageCoordinator>() != null); return default(IMessageCoordinator); }
+        }
+    }
+}
+
+#endif

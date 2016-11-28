@@ -4,7 +4,7 @@ namespace Narvalo.Mvp.Platforms
 {
     using Narvalo.Mvp.PresenterBinding;
 
-    public interface IPlatformServices
+    public partial interface IPlatformServices
     {
         ICompositeViewFactory CompositeViewFactory { get; }
 
@@ -15,3 +15,42 @@ namespace Narvalo.Mvp.Platforms
         IPresenterFactory PresenterFactory { get; }
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Mvp.Platforms
+{
+    using System.Diagnostics.Contracts;
+    using PresenterBinding;
+
+    using static System.Diagnostics.Contracts.Contract;
+
+    [ContractClass(typeof(IPlatformServicesContract))]
+    public partial interface IPlatformServices { }
+
+    [ContractClassFor(typeof(IPlatformServices))]
+    internal abstract class IPlatformServicesContract : IPlatformServices
+    {
+        ICompositeViewFactory IPlatformServices.CompositeViewFactory
+        {
+            get { Ensures(Result<ICompositeViewFactory>() != null); return default(ICompositeViewFactory); }
+        }
+
+        IMessageCoordinatorFactory IPlatformServices.MessageCoordinatorFactory
+        {
+            get { Ensures(Result<IMessageCoordinatorFactory>() != null); return default(IMessageCoordinatorFactory); }
+        }
+
+        IPresenterDiscoveryStrategy IPlatformServices.PresenterDiscoveryStrategy
+        {
+            get { Ensures(Result<IPresenterDiscoveryStrategy>() != null); return default(IPresenterDiscoveryStrategy); }
+        }
+
+        IPresenterFactory IPlatformServices.PresenterFactory
+        {
+            get { Ensures(Result<IPresenterFactory>() != null); return default(IPresenterFactory); }
+        }
+    }
+}
+
+#endif

@@ -3,9 +3,12 @@
 namespace Narvalo.Mvp.CommandLine
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     using Narvalo.Mvp.CommandLine.Internal;
     using Narvalo.Mvp.PresenterBinding;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public class MvpCommand : IView, ICommand
     {
@@ -22,18 +25,11 @@ namespace Narvalo.Mvp.CommandLine
         }
 
         public event EventHandler Completed;
-
         public event EventHandler Load;
 
-        public bool ThrowIfNoPresenterBound
-        {
-            get { return _throwIfNoPresenterBound; }
-        }
+        public bool ThrowIfNoPresenterBound => _throwIfNoPresenterBound;
 
-        public void Init()
-        {
-            Init(true);
-        }
+        public void Init() => Init(true);
 
         public void Run()
         {
@@ -60,24 +56,8 @@ namespace Narvalo.Mvp.CommandLine
             }
         }
 
-        protected virtual void OnCompleted(EventArgs e)
-        {
-            var localHandler = Completed;
+        protected virtual void OnCompleted(EventArgs e) => Completed?.Invoke(this, e);
 
-            if (localHandler != null)
-            {
-                localHandler(this, e);
-            }
-        }
-
-        protected virtual void OnLoad(EventArgs e)
-        {
-            var localHandler = Load;
-
-            if (localHandler != null)
-            {
-                localHandler(this, e);
-            }
-        }
+        protected virtual void OnLoad(EventArgs e) => Load?.Invoke(this, e);
     }
 }

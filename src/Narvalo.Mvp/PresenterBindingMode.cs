@@ -8,8 +8,8 @@ namespace Narvalo.Mvp
 
         /// <remarks>
         /// WARNING: This mode can only be used if the underlying view interface
-        /// only defines properties and events. This mandates the use of "Passive View" 
-        /// style of MVP. Also only applies to views that use the 
+        /// only defines properties and events. This mandates the use of "Passive View"
+        /// style of MVP. Also only applies to views that use the
         /// "AttributeBasedPresenterDiscoveryStrategy" strategy.
         /// </remarks>
         SharedPresenter

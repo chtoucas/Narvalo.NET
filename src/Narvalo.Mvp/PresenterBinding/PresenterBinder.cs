@@ -5,6 +5,9 @@ namespace Narvalo.Mvp.PresenterBinding
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Globalization;
     using System.Linq;
 
@@ -119,14 +122,21 @@ namespace Narvalo.Mvp.PresenterBinding
         }
 
         protected virtual void OnPresenterCreated(PresenterEventArgs args)
-        {
-            EventHandler<PresenterEventArgs> localHandler = PresenterCreated;
+            => PresenterCreated?.Invoke(this, args);
 
-            if (localHandler != null)
-            {
-                localHandler(this, args);
-            }
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_hosts != null);
+            Contract.Invariant(_presenterDiscoveryStrategy != null);
+            Contract.Invariant(_presenterFactory != null);
+            Contract.Invariant(_compositeViewFactory != null);
+            Contract.Invariant(_messageCoordinator != null);
         }
+
+#endif
 
         private IEnumerable<PresenterBindingParameter> FindBindings(IEnumerable<Object> hosts)
         {

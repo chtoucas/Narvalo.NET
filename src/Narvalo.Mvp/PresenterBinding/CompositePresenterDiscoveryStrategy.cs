@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.PresenterBinding
         {
             Require.NotNull(strategies, "strategies");
 
-            // Force the strategies to be enumerated once, just in case somebody gave us 
+            // Force the strategies to be enumerated once, just in case somebody gave us
             // an expensive and uncached list.
             _strategies = strategies.ToArray();
 
@@ -24,9 +24,7 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-        public PresenterDiscoveryResult FindBindings(
-            IEnumerable<object> hosts,
-            IEnumerable<IView> views)
+        public PresenterDiscoveryResult FindBindings(IEnumerable<object> hosts, IEnumerable<IView> views)
         {
             var bindings = new List<PresenterBindingParameter>();
             var boundViews = new List<IView>();

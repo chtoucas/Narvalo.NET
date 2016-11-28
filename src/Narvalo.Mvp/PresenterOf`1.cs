@@ -2,6 +2,10 @@
 
 namespace Narvalo.Mvp
 {
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
+
     public abstract class PresenterOf<TViewModel>
         : IPresenter<IView<TViewModel>>, Internal.IPresenter
         where TViewModel : class, new()
@@ -10,7 +14,7 @@ namespace Narvalo.Mvp
 
         protected PresenterOf(IView<TViewModel> view)
         {
-            Require.NotNull(view, "view");
+            Require.NotNull(view, nameof(view));
 
             _view = view;
             _view.Model = new TViewModel();
@@ -24,5 +28,15 @@ namespace Narvalo.Mvp
         {
             set { Messages = value; }
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_view != null);
+        }
+
+#endif
     }
 }
