@@ -15,6 +15,14 @@ Samples are available on the project web site.
     </NuDescription>
     <NuTags>MVP</NuTags>
 
+    <NuReferences>
+      <![CDATA[
+      <references>
+        <reference file="Narvalo.Mvp.dll" />
+      </references>
+      ]]>
+    </NuReferences>
+
     <NuFiles>
       <![CDATA[
 <file src="Narvalo.Mvp.dll" target="lib\net45\" />
