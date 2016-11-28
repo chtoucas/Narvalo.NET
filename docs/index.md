@@ -8,17 +8,17 @@ Overview
 Status
 ------
 
-Library                   | Version     | PCL/Framework    | Security (*) | SA | CC | TC
---------------------------|-------------|------------------|--------------|----|----|-----
-Narvalo.Build             | 1.1.0       | .NET 4.5         |              |    |    |
-Narvalo.Cerbere           | 2.0.0       | Profile259 (**)  | Transparent  |    | OK | 100%
-Narvalo.Common            | 0.25.0      | .NET 4.5         | Transparent  |    | OK |
-Narvalo.Core              | 0.25.0      | Profile259 (**)  | Transparent  |    | OK |
-Narvalo.Finance           | 0.25.0      | Profile111 (***) | Transparent  |    | OK |
-Narvalo.Fx                | 0.25.0      | Profile259 (**)  | Transparent  |    | OK |
-Narvalo.Mvp               | 0.99.0      | .NET 4.5         |              |    |    |
-Narvalo.Mvp.Web           | 0.99.0      | .NET 4.5         |              |    |    |
-Narvalo.Web               | 0.25.0      | .NET 4.5         |              |    | OK |
+Library                   | Version     | PCL/Framework    | Security (*) | SA | CC       | TC
+--------------------------|-------------|------------------|--------------|----|----------|-----
+Narvalo.Build             | 1.1.0       | .NET 4.5         |              |    |          |
+Narvalo.Cerbere           | 2.0.0       | Profile259 (**)  | Transparent  |    | Complete |
+Narvalo.Common            | 0.25.0      | .NET 4.5         | Transparent  |    | Complete |
+Narvalo.Core              | 0.25.0      | Profile259 (**)  | Transparent  |    | Complete |
+Narvalo.Finance           | 0.25.0      | Profile111 (***) | Transparent  |    | Complete |
+Narvalo.Fx                | 0.25.0      | Profile259 (**)  | Transparent  |    | Complete |
+Narvalo.Mvp               | 0.99.0      | .NET 4.5         |              |    | Partial  |
+Narvalo.Mvp.Web           | 0.99.0      | .NET 4.5         |              |    |          |
+Narvalo.Web               | 0.25.0      | .NET 4.5         |              |    | Complete |
 
 (*) Security attributes are not applied to the assemblies distributed via NuGet.
 
