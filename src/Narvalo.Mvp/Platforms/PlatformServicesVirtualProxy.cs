@@ -5,6 +5,7 @@ namespace Narvalo.Mvp.Platforms
     using System;
     using System.ComponentModel;
 
+    using Narvalo;
     using Narvalo.Mvp.PresenterBinding;
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -12,7 +13,10 @@ namespace Narvalo.Mvp.Platforms
         : LazyValueHolder<IPlatformServices>, IPlatformServices
     {
         public PlatformServicesVirtualProxy(Func<IPlatformServices> valueFactory)
-            : base(valueFactory) { }
+            : base(valueFactory)
+        {
+            Expect.NotNull(valueFactory);
+        }
 
         public ICompositeViewFactory CompositeViewFactory
         {

@@ -34,6 +34,8 @@ namespace Narvalo.Mvp.CommandLine
 
         public DefaultConventionBasedPresenterDiscoveryStrategy(Assembly[] assemblies)
         {
+            Expect.NotNull(assemblies);
+
             var typeResolver = new PresenterTypeResolver(
                    new BuildManager(assemblies),
                    assemblies.Select(_ => new AssemblyName(_.FullName).Name),

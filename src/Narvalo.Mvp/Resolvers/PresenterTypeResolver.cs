@@ -6,6 +6,9 @@ namespace Narvalo.Mvp.Resolvers
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Linq;
     using System.Reflection;
 
@@ -46,8 +49,7 @@ namespace Narvalo.Mvp.Resolvers
             var candidatePrefixes = GetCandidatePrefixesFromInterfaces(viewType)
                 .Append(GetCandidatePrefixFromViewName(viewType.Name));
 
-            // We also look into the view namespace 
-            // and into the assembly where the view is defined.
+            // We also look into the view namespace and into the assembly where the view is defined.
             var nameSpaces = _defaultNamespaces
                 .Append(viewType.Namespace)
                 .Append(new AssemblyName(viewType.Assembly.FullName).Name);
@@ -102,5 +104,18 @@ namespace Narvalo.Mvp.Resolvers
 
             return String.IsNullOrEmpty(name) ? viewName : name;
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_buildManager != null);
+            Contract.Invariant(_defaultNamespaces != null);
+            Contract.Invariant(_viewSuffixes != null);
+            Contract.Invariant(_presenterNameTemplates != null);
+        }
+
+#endif
     }
 }

@@ -22,7 +22,10 @@ namespace Narvalo.Mvp.PresenterBinding
             : this(new PresenterConstructorResolver()) { }
 
         public PresenterFactory(IPresenterConstructorResolver constructorResolver)
-            : this(constructorResolver, true) { }
+            : this(constructorResolver, true)
+        {
+            Expect.NotNull(constructorResolver);
+        }
 
         public PresenterFactory(
             IPresenterConstructorResolver constructorResolver,

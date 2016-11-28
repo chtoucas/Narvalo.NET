@@ -4,6 +4,7 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
 
@@ -148,6 +149,7 @@ namespace Narvalo.Mvp.PresenterBinding
             return result.Bindings;
         }
 
+        [SuppressMessage("Microsoft.Contracts", "Requires-7-65", Justification = "[Intentionally] Requires unreachable but CCCheck still proves no case is forgotten.")]
         private IEnumerable<IView> GetViews(PresenterBindingParameter binding)
         {
             IEnumerable<IView> views;
@@ -166,10 +168,7 @@ namespace Narvalo.Mvp.PresenterBinding
                     break;
 
                 default:
-                    throw new PresenterBindingException(String.Format(
-                        CultureInfo.InvariantCulture,
-                        "Binding mode {0} is not supported.",
-                        binding.BindingMode));
+                    throw Check.Unreachable("A case in a switch has been forgotten.");
             }
 
             return views;

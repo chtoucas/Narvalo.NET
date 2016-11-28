@@ -14,7 +14,10 @@ namespace Narvalo.Mvp.PresenterBinding
         private readonly IPresenterTypeResolver _typeResolver;
 
         public ConventionBasedPresenterDiscoveryStrategy(IPresenterTypeResolver typeResolver)
-            : this(typeResolver, true) { }
+            : this(typeResolver, true)
+        {
+            Expect.NotNull(typeResolver);
+        }
 
         public ConventionBasedPresenterDiscoveryStrategy(
             IPresenterTypeResolver typeResolver,

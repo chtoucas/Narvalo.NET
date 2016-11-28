@@ -5,7 +5,7 @@ namespace Narvalo.Mvp.PresenterBinding
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Globalization;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using Narvalo;
@@ -20,7 +20,10 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public AttributeBasedPresenterDiscoveryStrategy(
             IPresenterBindingAttributesResolver attributesResolver)
-            : this(attributesResolver, true) { }
+            : this(attributesResolver, true)
+        {
+            Expect.NotNull(attributesResolver);
+        }
 
         public AttributeBasedPresenterDiscoveryStrategy(
             IPresenterBindingAttributesResolver attributesResolver,
@@ -70,7 +73,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
                 boundViews.AddRange(boundViewsThisRound);
 
-                // In case "boundViewsThisRound" is empty, we always add the currently 
+                // In case "boundViewsThisRound" is empty, we always add the currently
                 // inspected view to the list of views to remove.
                 pendingViews = pendingViews.Except(boundViewsThisRound.Concat(new[] { view }));
             }
@@ -78,6 +81,7 @@ namespace Narvalo.Mvp.PresenterBinding
             return new PresenterDiscoveryResult(boundViews, bindings);
         }
 
+        [SuppressMessage("Microsoft.Contracts", "Requires-7-138", Justification = "[Intentionally] Requires unreachable but CCCheck still proves no case is forgotten.")]
         private static IEnumerable<IView> GetViewsToBind(
             PresenterBindingAttribute attribute,
             IView view,
@@ -99,10 +103,7 @@ namespace Narvalo.Mvp.PresenterBinding
                     return pendingViews.Where(attribute.ViewType.IsInstanceOfType);
 
                 default:
-                    throw new PresenterBindingException(String.Format(
-                        CultureInfo.InvariantCulture,
-                        "Binding mode {0} is not supported.",
-                        attribute.BindingMode));
+                    throw Check.Unreachable("A case in a switch has been forgotten.");
             }
         }
     }

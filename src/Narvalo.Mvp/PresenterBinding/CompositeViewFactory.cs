@@ -16,7 +16,10 @@ namespace Narvalo.Mvp.PresenterBinding
             : this(new CompositeViewTypeResolver()) { }
 
         public CompositeViewFactory(ICompositeViewTypeResolver typeResolver)
-            : this(typeResolver, true) { }
+            : this(typeResolver, true)
+        {
+            Expect.NotNull(typeResolver);
+        }
 
         public CompositeViewFactory(
             ICompositeViewTypeResolver typeResolver,

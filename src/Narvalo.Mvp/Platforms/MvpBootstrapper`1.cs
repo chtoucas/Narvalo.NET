@@ -90,7 +90,7 @@ namespace Narvalo.Mvp.Platforms
             {
                 retval.PresenterDiscoveryStrategy = strategies.First();
             }
-            else if (count > 1)
+            else
             {
                 retval.PresenterDiscoveryStrategy
                     = new CompositePresenterDiscoveryStrategy(strategies);
