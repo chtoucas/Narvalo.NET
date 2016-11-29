@@ -4,9 +4,14 @@ namespace Narvalo.Mvp.Platforms
 {
     using System.Collections.Generic;
     using System.ComponentModel;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Linq;
 
     using Narvalo.Mvp.PresenterBinding;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public abstract class MvpBootstrapper<T> where T : MvpBootstrapper<T>
     {
@@ -21,7 +26,7 @@ namespace Narvalo.Mvp.Platforms
 
         protected MvpBootstrapper(IPlatformServices defaultServices)
         {
-            Require.NotNull(defaultServices, "defaultServices");
+            Require.NotNull(defaultServices, nameof(defaultServices));
 
             _defaultServices = defaultServices;
         }
@@ -30,6 +35,8 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
+                Ensures(Result<Setter<T, ICompositeViewFactory>>() != null);
+
                 return new Setter<T, ICompositeViewFactory>(
                     (T)this, _ => _compositeViewFactory = _);
             }
@@ -39,6 +46,8 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
+                Ensures(Result<Appender<T, IPresenterDiscoveryStrategy>>() != null);
+
                 return new Appender<T, IPresenterDiscoveryStrategy>(
                     (T)this, _ => _presenterDiscoveryStrategies.Add(_));
             }
@@ -48,6 +57,8 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
+                Ensures(Result<Setter<T, IMessageCoordinatorFactory>>() != null);
+
                 return new Setter<T, IMessageCoordinatorFactory>(
                     (T)this, _ => _messageCoordinatorFactory = _);
             }
@@ -57,6 +68,8 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
+                Ensures(Result<Setter<T, IPresenterFactory>>() != null);
+
                 return new Setter<T, IPresenterFactory>(
                     (T)this, _ => _presenterFactory = _);
             }
@@ -65,17 +78,19 @@ namespace Narvalo.Mvp.Platforms
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IPlatformServices CreatePlatformServices()
         {
-            var retval = new PlatformServices_();
+            Ensures(Result<IPlatformServices>() != null);
 
-            retval.CompositeViewFactory = _compositeViewFactory != null
+            var platformServices = new PlatformServices_();
+
+            platformServices.CompositeViewFactory = _compositeViewFactory != null
                 ? _compositeViewFactory
                 : _defaultServices.CompositeViewFactory;
 
-            retval.MessageCoordinatorFactory = _messageCoordinatorFactory != null
+            platformServices.MessageCoordinatorFactory = _messageCoordinatorFactory != null
                 ? _messageCoordinatorFactory
                 : _defaultServices.MessageCoordinatorFactory;
 
-            retval.PresenterFactory = _presenterFactory != null
+            platformServices.PresenterFactory = _presenterFactory != null
                 ? _presenterFactory
                 : _defaultServices.PresenterFactory;
 
@@ -84,19 +99,19 @@ namespace Narvalo.Mvp.Platforms
 
             if (count == 0)
             {
-                retval.PresenterDiscoveryStrategy = _defaultServices.PresenterDiscoveryStrategy;
+                platformServices.PresenterDiscoveryStrategy = _defaultServices.PresenterDiscoveryStrategy;
             }
             else if (count == 1)
             {
-                retval.PresenterDiscoveryStrategy = strategies.First();
+                platformServices.PresenterDiscoveryStrategy = strategies.First();
             }
             else
             {
-                retval.PresenterDiscoveryStrategy
+                platformServices.PresenterDiscoveryStrategy
                     = new CompositePresenterDiscoveryStrategy(strategies);
             }
 
-            return retval;
+            return platformServices;
         }
 
         private sealed class PlatformServices_ : IPlatformServices

@@ -3,6 +3,11 @@
 namespace Narvalo.Mvp.Platforms
 {
     using System;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public sealed class Setter<TSource, T> where TSource : class
     {
@@ -11,8 +16,8 @@ namespace Narvalo.Mvp.Platforms
 
         public Setter(TSource source, Action<T> set)
         {
-            Require.NotNull(source, "source");
-            Require.NotNull(set, "set");
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(set, nameof(set));
 
             _source = source;
             _set = set;
@@ -20,9 +25,22 @@ namespace Narvalo.Mvp.Platforms
 
         public TSource Is(T value)
         {
-            _set(value);
+            Ensures(Result<TSource>() != null);
+
+            _set.Invoke(value);
 
             return _source;
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_source != null);
+            Contract.Invariant(_set != null);
+        }
+
+#endif
     }
 }

@@ -3,6 +3,11 @@
 namespace Narvalo.Mvp.Platforms
 {
     using System;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public sealed class Appender<TSource, T> where TSource : class
     {
@@ -11,8 +16,8 @@ namespace Narvalo.Mvp.Platforms
 
         public Appender(TSource source, Action<T> append)
         {
-            Require.NotNull(source, "source");
-            Require.NotNull(append, "append");
+            Require.NotNull(source, nameof(source));
+            Require.NotNull(append, nameof(append));
 
             _source = source;
             _append = append;
@@ -20,7 +25,8 @@ namespace Narvalo.Mvp.Platforms
 
         public TSource With(params T[] values)
         {
-            Require.NotNull(values, "values");
+            Require.NotNull(values, nameof(values));
+            Ensures(Result<TSource>() != null);
 
             foreach (var value in values)
             {
@@ -29,5 +35,16 @@ namespace Narvalo.Mvp.Platforms
 
             return _source;
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_source != null);
+            Contract.Invariant(_append != null);
+        }
+
+#endif
     }
 }
