@@ -21,7 +21,7 @@ namespace Narvalo
     /// </remarks>
     /// <seealso cref="Demand"/>
     [DebuggerStepThrough]
-    public static class Require
+    public static partial class Require
     {
         [ContractArgumentValidator]
         public static void State(bool testCondition)
@@ -35,11 +35,22 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        public static void State(bool testCondition, string message)
+        {
+            if (!testCondition)
+            {
+                throw new InvalidOperationException(message);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
         public static void True(bool testCondition, string parameterName)
         {
             if (!testCondition)
             {
-                throw new ArgumentException(Strings_Cerbere.Argument_FailedCondition, parameterName);
+                throw new ArgumentException(Strings_Cerbere.Argument_TestFailed, parameterName);
             }
 
             Contract.EndContractBlock();
@@ -61,9 +72,7 @@ namespace Narvalo
         {
             if (!rangeCondition)
             {
-                throw new ArgumentOutOfRangeException(
-                    parameterName,
-                    Strings_Cerbere.ArgumentOutOfRange_FailedCondition);
+                throw new ArgumentOutOfRangeException(parameterName);
             }
 
             Contract.EndContractBlock();
@@ -93,7 +102,7 @@ namespace Narvalo
         {
             if (value == null)
             {
-                throw new ArgumentNullException(parameterName, Strings_Cerbere.ArgumentNull_Generic);
+                throw new ArgumentNullException(parameterName);
             }
 
             Contract.EndContractBlock();
@@ -146,7 +155,7 @@ namespace Narvalo
         {
             if (!testCondition)
             {
-                throw new ArgumentException("value", "XXX");
+                throw new ArgumentException(Strings_Cerbere.Argument_TestFailed, "value");
             }
 
             Contract.EndContractBlock();

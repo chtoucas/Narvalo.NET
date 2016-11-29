@@ -59,11 +59,20 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Cerbere\ContractHelpers.cs" />
     <Compile Include="ControlFlowException.cs" />
     <Compile Include="Check.cs" />
+    <Compile Include="Enforce.cs" />
     <Compile Include="Expect.cs" />
     <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
+    <Compile Include="Failure.cs" />
     <Compile Include="Format.cs" />
+    <Compile Include="Require.More.cs" />
+    <Compile Include="Require.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Require.tt</DependentUpon>
+    </Compile>
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Demand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,7 +114,12 @@
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Require.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Require.g.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

@@ -129,10 +129,31 @@
   <data name="ArgumentOutOfRange_FailedCondition" xml:space="preserve">
     <value>XXX</value>
   </data>
+  <data name="ArgumentOutOfRange_NotGreaterThan" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas supérieure à '{1}'.</value>
+  </data>
+  <data name="ArgumentOutOfRange_NotGreaterThanOrEqualTo" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas supérieure ou égale à '{1}'.</value>
+  </data>
+  <data name="ArgumentOutOfRange_NotInRange" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas dans l'intervalle [{1} - {2}].</value>
+  </data>
+  <data name="ArgumentOutOfRange_NotLessThan" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas inférieure à '{1}'.</value>
+  </data>
+  <data name="ArgumentOutOfRange_NotLessThanOrEqualTo" xml:space="preserve">
+    <value>La valeur de '{0}' n'est pas inférieure ou égale à '{1}'.</value>
+  </data>
   <data name="Argument_EmptyString" xml:space="preserve">
     <value>La valeur de '{0}' est vide.</value>
   </data>
   <data name="Argument_FailedCondition" xml:space="preserve">
     <value>XXX</value>
+  </data>
+  <data name="Argument_InvalidRange" xml:space="preserve">
+    <value>La valeur du paramètre 'minInclusive' ({0}) doit être supérieure ou égale à celle du paramètre 'maxInclusive' ({1}).</value>
+  </data>
+  <data name="Argument_WhiteSpaceString" xml:space="preserve">
+    <value />
   </data>
 </root>
