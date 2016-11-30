@@ -117,37 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ArgumentNull_Object" xml:space="preserve">
+  <data name="Argument_NullObject" xml:space="preserve">
     <value>The object instance cannot be null.</value>
   </data>
-  <data name="ArgumentNull_Property" xml:space="preserve">
+  <data name="ArgumentProperty_Null" xml:space="preserve">
     <value>The property value cannot be null.</value>
   </data>
   <data name="Argument_TestFailed" xml:space="preserve">
-    <value>XXX</value>
+    <value>Failed precondition for an argument.</value>
   </data>
   <data name="Argument_EmptyString" xml:space="preserve">
     <value>String cannot be empty.</value>
   </data>
-  <data name="ArgumentOutOfRange_NotGreaterThan" xml:space="preserve">
-    <value>The value of '{0}' is not greater than '{1}'.</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotGreaterThanOrEqualTo" xml:space="preserve">
-    <value>The value of '{0}' is not greater than or equal to '{1}'.</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotInRange" xml:space="preserve">
-    <value>The value of '{0}' is not in range [{1} - {2}].</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotLessThan" xml:space="preserve">
-    <value>The value of '{0}' is not less than '{1}'.</value>
-  </data>
-  <data name="ArgumentOutOfRange_NotLessThanOrEqualTo" xml:space="preserve">
-    <value>The value of '{0}' is not less than or equal to '{1}'.</value>
-  </data>
-  <data name="Argument_InvalidRange" xml:space="preserve">
-    <value>The value of the parameter 'minInclusive' ({0}) must be greater than or equal to value of the parameter 'maxInclusive' ({1}).</value>
-  </data>
   <data name="Argument_WhiteSpaceString" xml:space="preserve">
+    <value>String cannot contain only whitespace.</value>
+  </data>
+  <data name="ArgumentProperty_EmptyOrWhiteSpaceString" xml:space="preserve">
+    <value>The property value cannot be empty or contain only whitespace.</value>
+  </data>
+  <data name="ArgumentProperty_EmptyString" xml:space="preserve">
+    <value>The property value cannot be empty.</value>
+  </data>
+  <data name="ArgumentProperty_TestFailed" xml:space="preserve">
+    <value>Failed precondition for a property value.</value>
+  </data>
+  <data name="Argument_EmptyOrWhiteSpaceString" xml:space="preserve">
     <value>String cannot be empty or contain only whitespace.</value>
   </data>
 </root>

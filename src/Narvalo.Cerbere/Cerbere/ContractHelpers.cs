@@ -6,10 +6,6 @@ namespace Narvalo.Cerbere
     using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
 
-    /// <summary>
-    /// Provides helper methods to help the Code Contracts tools recognize that
-    /// certain conditions are met.
-    /// </summary>
     public static class ContractHelpers
     {
         /// <summary>

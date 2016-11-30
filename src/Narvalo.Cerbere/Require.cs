@@ -9,17 +9,17 @@ namespace Narvalo
     using Narvalo.Properties;
 
     /// <summary>
-    /// Provides helper methods to perform argument validation in the form
-    /// of if-then-throw code and Code Contracts preconditions.
+    /// Provides helper methods to specify preconditions on a method.
     /// </summary>
     /// <remarks>
-    /// <para>The methods will be recognized by FxCop as parameter validators
-    /// against <see langword="null"/> value.</para>
-    /// <para>The methods will be recognized as Contract Argument Validator methods.</para>
-    /// <para>If a condition does not hold, a <see cref="ArgumentException"/> is thrown.</para>
+    /// <para>If a condition does not hold, an exception is thrown.</para>
+    /// <para>The methods will be recognized as Code Contracts preconditions.</para>
+    /// <para>The methods will be recognized by FxCop as guards against <see langword="null"/> value.</para>
     /// <para>Only useful if you are using the "Custom Parameter Validation" assembly mode.</para>
     /// </remarks>
     /// <seealso cref="Demand"/>
+    /// <seealso cref="Enforce"/>
+    /// <seealso cref="Expect"/>
     [DebuggerStepThrough]
     public static partial class Require
     {
@@ -44,7 +44,10 @@ namespace Narvalo
 
             Contract.EndContractBlock();
         }
+    }
 
+    public static partial class Require
+    {
         [ContractArgumentValidator]
         public static void True(bool testCondition, string parameterName)
         {
@@ -144,7 +147,7 @@ namespace Narvalo
         {
             if (@this == null)
             {
-                throw new ArgumentNullException("this", Strings_Cerbere.ArgumentNull_Object);
+                throw new ArgumentNullException("this", Strings_Cerbere.Argument_NullObject);
             }
 
             Contract.EndContractBlock();
@@ -155,7 +158,7 @@ namespace Narvalo
         {
             if (!testCondition)
             {
-                throw new ArgumentException(Strings_Cerbere.Argument_TestFailed, "value");
+                throw new ArgumentException(Strings_Cerbere.ArgumentProperty_TestFailed, "value");
             }
 
             Contract.EndContractBlock();
@@ -174,7 +177,7 @@ namespace Narvalo
         {
             if (value == null)
             {
-                throw new ArgumentNullException("value", Strings_Cerbere.ArgumentNull_Property);
+                throw new ArgumentNullException("value", Strings_Cerbere.ArgumentProperty_Null);
             }
 
             Contract.EndContractBlock();
@@ -196,7 +199,7 @@ namespace Narvalo
 
             if (value.Length == 0)
             {
-                throw new ArgumentException(Strings_Cerbere.Argument_EmptyString, "value");
+                throw new ArgumentException(Strings_Cerbere.ArgumentProperty_EmptyString, "value");
             }
 
             Contract.EndContractBlock();

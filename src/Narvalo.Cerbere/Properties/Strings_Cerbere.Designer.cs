@@ -62,6 +62,15 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to String cannot be empty or contain only whitespace..
+        /// </summary>
+        internal static string Argument_EmptyOrWhiteSpaceString {
+            get {
+                return ResourceManager.GetString("Argument_EmptyOrWhiteSpaceString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to String cannot be empty..
         /// </summary>
         internal static string Argument_EmptyString {
@@ -71,16 +80,16 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value of the parameter &apos;minInclusive&apos; ({0}) must be greater than or equal to value of the parameter &apos;maxInclusive&apos; ({1})..
+        ///   Looks up a localized string similar to The object instance cannot be null..
         /// </summary>
-        internal static string Argument_InvalidRange {
+        internal static string Argument_NullObject {
             get {
-                return ResourceManager.GetString("Argument_InvalidRange", resourceCulture);
+                return ResourceManager.GetString("Argument_NullObject", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Failed precondition for an argument..
         /// </summary>
         internal static string Argument_TestFailed {
             get {
@@ -89,7 +98,7 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String cannot be empty or contain only whitespace..
+        ///   Looks up a localized string similar to String cannot contain only whitespace..
         /// </summary>
         internal static string Argument_WhiteSpaceString {
             get {
@@ -98,65 +107,38 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The object instance cannot be null..
+        ///   Looks up a localized string similar to The property value cannot be empty or contain only whitespace..
         /// </summary>
-        internal static string ArgumentNull_Object {
+        internal static string ArgumentProperty_EmptyOrWhiteSpaceString {
             get {
-                return ResourceManager.GetString("ArgumentNull_Object", resourceCulture);
+                return ResourceManager.GetString("ArgumentProperty_EmptyOrWhiteSpaceString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The property value cannot be empty..
+        /// </summary>
+        internal static string ArgumentProperty_EmptyString {
+            get {
+                return ResourceManager.GetString("ArgumentProperty_EmptyString", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The property value cannot be null..
         /// </summary>
-        internal static string ArgumentNull_Property {
+        internal static string ArgumentProperty_Null {
             get {
-                return ResourceManager.GetString("ArgumentNull_Property", resourceCulture);
+                return ResourceManager.GetString("ArgumentProperty_Null", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than &apos;{1}&apos;..
+        ///   Looks up a localized string similar to Failed precondition for a property value..
         /// </summary>
-        internal static string ArgumentOutOfRange_NotGreaterThan {
+        internal static string ArgumentProperty_TestFailed {
             get {
-                return ResourceManager.GetString("ArgumentOutOfRange_NotGreaterThan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not greater than or equal to &apos;{1}&apos;..
-        /// </summary>
-        internal static string ArgumentOutOfRange_NotGreaterThanOrEqualTo {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRange_NotGreaterThanOrEqualTo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not in range [{1} - {2}]..
-        /// </summary>
-        internal static string ArgumentOutOfRange_NotInRange {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRange_NotInRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than &apos;{1}&apos;..
-        /// </summary>
-        internal static string ArgumentOutOfRange_NotLessThan {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRange_NotLessThan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not less than or equal to &apos;{1}&apos;..
-        /// </summary>
-        internal static string ArgumentOutOfRange_NotLessThanOrEqualTo {
-            get {
-                return ResourceManager.GetString("ArgumentOutOfRange_NotLessThanOrEqualTo", resourceCulture);
+                return ResourceManager.GetString("ArgumentProperty_TestFailed", resourceCulture);
             }
         }
     }
