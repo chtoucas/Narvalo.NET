@@ -4,10 +4,9 @@ namespace MvpCommandLine
 {
     using System;
 
-    public static class Program
+    internal static class Program
     {
-        [STAThread]
-        public static void Main()
+        private static void Main()
         {
             ////using (var cmd = new SampleCommand()) { cmd.Run(); }
         }

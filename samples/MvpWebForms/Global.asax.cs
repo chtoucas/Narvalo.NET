@@ -25,7 +25,7 @@ namespace MvpWebForms
             new MvpBootstrapper()
                 .DiscoverPresenter.With(new AttributeBasedPresenterDiscoveryStrategy())
                 .DiscoverPresenter.With(presenterDiscoveryStrategy)
-                .Run();
+                .InitializePlatform();
         }
     }
 }
