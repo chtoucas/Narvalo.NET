@@ -270,7 +270,13 @@ namespace Narvalo.Fx
         /// </summary>
         /// <param name="other">A default value to be used if if there is no underlying value.</param>
         /// <returns>The enclosed value if any; otherwise <paramref name="other"/>.</returns>
-        public T ValueOrElse(T other) => IsSome ? Value : other;
+        public T ValueOrElse(T other)
+        {
+            Require.NotNull(other, nameof(other));
+            Ensures(Result<T>() != null);
+
+            return IsSome ? Value : other;
+        }
 
         public T ValueOrElse(Func<T> valueFactory)
         {
