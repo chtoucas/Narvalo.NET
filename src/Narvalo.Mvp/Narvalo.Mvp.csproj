@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="CommandLine\DefaultConventionBasedPresenterDiscoveryStrategy.cs" />
     <Compile Include="CommandLine\ICommand.cs" />
+    <Compile Include="Platforms\IMvpBootstrapper.cs" />
     <Compile Include="CommandLine\Internal\PresenterBinderFactory.cs" />
     <Compile Include="CommandLine\MvpBootstrapper.cs" />
     <Compile Include="CommandLine\MvpCommand.cs" />

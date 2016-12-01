@@ -7,7 +7,7 @@ namespace Narvalo.Mvp.CommandLine
     /// <summary>
     /// Provides a single entry point to configure Narvalo.Mvp.CommandLine.
     /// </summary>
-    public sealed class MvpBootstrapper : MvpBootstrapper<MvpBootstrapper>
+    public sealed class MvpBootstrapper : MvpBootstrapper<MvpBootstrapper>, IMvpBootstrapper
     {
         public MvpBootstrapper() : base(PlatformServices.Default) { }
 
