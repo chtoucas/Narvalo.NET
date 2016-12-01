@@ -50,7 +50,6 @@ namespace Narvalo
         /// <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/> or empty, or does not consist only of white-space characters.</exception>
-        [ContractArgumentValidator]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
         {
             Require.Property(value);
@@ -59,8 +58,6 @@ namespace Narvalo
             {
                 throw new ArgumentException(Strings_Cerbere.ArgumentProperty_EmptyOrWhiteSpaceString, "value");
             }
-
-            Contract.EndContractBlock();
         }
 
         /// <remarks>
