@@ -37,7 +37,7 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void NotNull<T>(T value) where T : class => True(value != null);
+        public static void NotNull<T>(T value) => True(value != null);
 
         /// <summary>
         /// Checks that the specified object parameter is not <see langword="null"/> or empty.
@@ -60,7 +60,7 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Object<T>(T @this) where T : class => True(@this != null);
+        public static void Object<T>(T @this) => True(@this != null);
 
         [DebuggerHidden]
         [ContractAbbreviator]
@@ -74,7 +74,7 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Property<T>(T value) where T : class => True(value != null);
+        public static void Property<T>(T value) => True(value != null);
 
         [DebuggerHidden]
         [ContractAbbreviator]

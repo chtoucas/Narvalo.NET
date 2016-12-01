@@ -48,7 +48,7 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void NotNull<T>(T value) where T : class => True(value != null);
+        public static void NotNull<T>(T value) => True(value != null);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
@@ -58,7 +58,7 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void Object<T>(T @this) where T : class => True(@this != null);
+        public static void Object<T>(T @this) => True(@this != null);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
@@ -68,7 +68,7 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void Property<T>(T value) where T : class => True(value != null);
+        public static void Property<T>(T value) => True(value != null);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]

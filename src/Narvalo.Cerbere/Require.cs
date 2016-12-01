@@ -101,7 +101,7 @@ namespace Narvalo
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/>.</exception>
         [ContractArgumentValidator]
-        public static void NotNull<T>([ValidatedNotNull]T value, string parameterName) where T : class
+        public static void NotNull<T>([ValidatedNotNull]T value, string parameterName)
         {
             if (value == null)
             {
@@ -143,7 +143,7 @@ namespace Narvalo
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="this"/> is
         /// <see langword="null"/>.</exception>
         [ContractArgumentValidator]
-        public static void Object<T>([ValidatedNotNull]T @this) where T : class
+        public static void Object<T>([ValidatedNotNull]T @this)
         {
             if (@this == null)
             {
@@ -173,7 +173,7 @@ namespace Narvalo
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/>.</exception>
         [ContractArgumentValidator]
-        public static void Property<T>([ValidatedNotNull]T value) where T : class
+        public static void Property<T>([ValidatedNotNull]T value)
         {
             if (value == null)
             {
