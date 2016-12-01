@@ -10,8 +10,6 @@ Preconditions
 - Code Contract + Throws on failure.
 - To be used when the condition is compulsory.
 
-`Narvalo.Guard`:
-
 `Narvalo.Enforce`:
 
 ### Preconditions that will not survive in Release mode:

@@ -59,7 +59,6 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Cerbere\ContractHelpers.cs" />
     <Compile Include="ControlFlowException.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="Enforce.cs" />

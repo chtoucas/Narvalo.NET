@@ -78,7 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryEncoderFacts.cs" />
-    <Compile Include="Cerbere\ContractHelpersFacts.cs" />
     <Compile Include="CheckFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
