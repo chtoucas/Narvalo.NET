@@ -11,7 +11,7 @@ namespace Narvalo.Mvp.CommandLine
     {
         public MvpBootstrapper() : base(PlatformServices.Default) { }
 
-        public void Run()
+        public void InitializePlatform()
         {
             PlatformServices.Current = CreatePlatformServices();
         }

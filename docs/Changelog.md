@@ -8,10 +8,13 @@ XXXX-XX-XX -
 
 #### Breaking changes
 - Narvalo.Cerbere largely rewritten and simplified.
+- `Narvalo.Mvp.MvpBootstrapper.Run()` becomes
+  `Narvalo.Mvp.MvpBootstrapper.InitializePlatform()`.
 
 #### Enhancements
 - [NuGet] Added support for .NET Standard wherever it makes sense.
 - [NuGet] Automatically add required GAC assemblies upon installation.
+- [NuGet] Added to Narvalo.Mvp preliminary support for Code Contracts.
 
 #### Improvements
 - Micro-optimization for `Int64Encoder.Encode()`.
