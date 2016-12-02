@@ -4,8 +4,9 @@ namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Diagnostics;
-    using System.Globalization;
     using System.Reflection.Emit;
+
+    using Narvalo.Mvp.Properties;
 
     public sealed class /*Default*/PresenterConstructorResolver : IPresenterConstructorResolver
     {
@@ -25,7 +26,7 @@ namespace Narvalo.Mvp.Resolvers
             if (presenterType.IsNotPublic)
             {
                 throw new ArgumentException(Format.Current(
-                        "{0} does not meet accessibility requirements. For the framework to be able to call it, it must be public. Make the type public, or use a IPresenterFactory that can access this type.",
+                        Strings.PresenterConstructorResolver_PresenterIsNotPublic,
                         presenterType.FullName),
                     nameof(presenterType));
             }
@@ -34,7 +35,7 @@ namespace Narvalo.Mvp.Resolvers
             if (ctor == null)
             {
                 throw new ArgumentException(Format.Current(
-                        "{0} is missing an expected constructor, or the constructor is not accessible. We tried to execute code equivalent to: new {0}({1} view). Add a public constructor with a compatible signature, or use a IPresenterFactory that can supply constructor dependencies.",
+                        Strings.PresenterConstructorResolver_MissingPublicCtor,
                         presenterType.FullName,
                         viewType.FullName),
                     nameof(presenterType));

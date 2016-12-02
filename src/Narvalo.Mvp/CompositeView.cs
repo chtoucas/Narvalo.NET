@@ -8,9 +8,9 @@ namespace Narvalo.Mvp
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
     using System.Diagnostics.Contracts;
 #endif
-    using System.Globalization;
 
     using Narvalo;
+    using Narvalo.Mvp.Properties;
 
     using static System.Diagnostics.Contracts.Contract;
 
@@ -42,7 +42,7 @@ namespace Narvalo.Mvp
             if (!(view is TView))
             {
                 throw new ArgumentException(Format.Current(
-                        "Expected a view of type {0} but {1} was supplied.",
+                        Strings.CompositeView_TypeMismatch,
                         typeof(TView).FullName,
                         view.GetType().FullName),
                     nameof(view));

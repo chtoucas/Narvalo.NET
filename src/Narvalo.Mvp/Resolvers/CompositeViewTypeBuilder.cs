@@ -8,10 +8,11 @@ namespace Narvalo.Mvp.Resolvers
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
     using System.Diagnostics.Contracts;
 #endif
-    using System.Globalization;
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
+
+    using Narvalo.Mvp.Properties;
 
     /**
      * <content markup="commonmark">
@@ -86,7 +87,7 @@ namespace Narvalo.Mvp.Resolvers
             if (eventInfo.EventHandlerType == null)
             {
                 throw new ArgumentException(Format.Current(
-                        "The supplied event {0} from {1} does not have the event handler type specified.",
+                        Strings.CompositeViewTypeBuilder_EventHandlerTypeMismatch,
                         eventInfo.Name,
                         eventInfo.ReflectedType.Name),
                     nameof(eventInfo));

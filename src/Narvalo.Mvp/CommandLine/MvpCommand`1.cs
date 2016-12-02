@@ -4,6 +4,8 @@ namespace Narvalo.Mvp.CommandLine
 {
     using System;
 
+    using Narvalo.Mvp.Properties;
+
     public class MvpCommand<TViewModel> : MvpCommand, IView<TViewModel>
     {
         private TViewModel _model;
@@ -14,8 +16,7 @@ namespace Narvalo.Mvp.CommandLine
             {
                 if (_model == null)
                 {
-                    throw new InvalidOperationException(
-                        "The Model property is currently null, however it should have been initialized by the presenter.");
+                    throw new InvalidOperationException(Strings.MvpCommand_ModelIsNull);
                 }
 
                 return _model;

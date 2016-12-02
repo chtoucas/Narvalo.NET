@@ -5,9 +5,10 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Globalization;
     using System.Linq;
     using System.Reflection;
+
+    using Narvalo.Mvp.Properties;
 
     public class /*Default*/CompositeViewTypeResolver : ICompositeViewTypeResolver
     {
@@ -46,7 +47,7 @@ namespace Narvalo.Mvp.Resolvers
             if (!viewType.IsInterface)
             {
                 throw new ArgumentException(Format.Current(
-                        "To be used with shared presenters, the view type must be an interface, but {0} was supplied instead.",
+                        Strings.CompositeViewTypeResolver_ViewTypeIsNotInterface,
                         viewType.FullName),
                     nameof(viewType));
             }
@@ -54,7 +55,7 @@ namespace Narvalo.Mvp.Resolvers
             if (!typeof(IView).IsAssignableFrom(viewType))
             {
                 throw new ArgumentException(Format.Current(
-                        "To be used with shared presenters, the view type must inherit from {0}. The supplied type ({1}) does not.",
+                        Strings.CompositeViewTypeResolver_ViewTypeIsNotAssignable,
                         typeof(IView).FullName,
                         viewType.FullName),
                     nameof(viewType));
@@ -63,7 +64,7 @@ namespace Narvalo.Mvp.Resolvers
             if (!viewType.IsPublic && !viewType.IsNestedPublic)
             {
                 throw new ArgumentException(Format.Current(
-                        "To be used with shared presenters, the view type must be public. The supplied type ({0}) is not.",
+                        Strings.CompositeViewTypeResolver_ViewTypeIsNotPublic,
                         viewType.FullName),
                     nameof(viewType));
             }
@@ -71,7 +72,7 @@ namespace Narvalo.Mvp.Resolvers
             if (viewType.GetMethods().Where(_ => !_.IsSpecialName).Any())
             {
                 throw new ArgumentException(Format.Current(
-                        "To be used with shared presenters, the view type must not define public methods. The supplied type ({0}) is not.",
+                        Strings.CompositeViewTypeResolver_ViewTypeContainsPublicMethods,
                         viewType.FullName),
                     nameof(viewType));
             }

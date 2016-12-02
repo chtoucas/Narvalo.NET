@@ -5,8 +5,9 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Globalization;
     using System.Linq;
+
+    using Narvalo.Mvp.Properties;
 
     public class /*Default*/PresenterBindingAttributesResolver : IPresenterBindingAttributesResolver
     {
@@ -27,7 +28,7 @@ namespace Narvalo.Mvp.Resolvers
                     a.BindingMode == PresenterBindingMode.SharedPresenter && a.ViewType == null))
             {
                 throw new PresenterBindingException(Format.Current(
-                    "When shared presenter binding is requested, the view type must be explicitly specified. One of the bindings on '{0}' violates this restriction.",
+                    Strings.PresenterBindingAttributesResolver_MissingViewType,
                     viewType.FullName));
             }
 

@@ -8,10 +8,10 @@ namespace Narvalo.Mvp.PresenterBinding
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
     using System.Diagnostics.Contracts;
 #endif
-    using System.Globalization;
     using System.Linq;
 
     using Narvalo;
+    using Narvalo.Mvp.Properties;
 
     public class PresenterBinder
     {
@@ -151,7 +151,7 @@ namespace Narvalo.Mvp.PresenterBinding
             if (unboundViews.Any())
             {
                 throw new PresenterBindingException(Format.Current(
-                    @"Failed to find presenter for view of type {0}.",
+                   Strings.PresenterBinder_NoPresenterFoundForView,
                     unboundViews.First().GetType().FullName));
             }
 

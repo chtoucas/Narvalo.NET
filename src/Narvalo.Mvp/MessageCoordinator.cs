@@ -6,6 +6,8 @@ namespace Narvalo.Mvp
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
+    using Narvalo.Mvp.Properties;
+
     public class /*Default*/MessageCoordinator : IMessageCoordinator
     {
         private readonly bool _closeable;
@@ -63,8 +65,7 @@ namespace Narvalo.Mvp
         {
             if (_closed)
             {
-                throw new InvalidOperationException(
-                    "Messages can't be published or subscribed to after the message bus has been closed.");
+                throw new InvalidOperationException(Strings.MessageCoordinator_Closed);
             }
         }
 

@@ -6,6 +6,8 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Collections.Generic;
     using System.Linq;
 
+    using Narvalo.Mvp.Properties;
+
     public sealed class CompositePresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         private readonly IEnumerable<IPresenterDiscoveryStrategy> _strategies;
@@ -20,7 +22,9 @@ namespace Narvalo.Mvp.PresenterBinding
 
             if (!strategies.Any())
             {
-                throw new ArgumentException("You must supply at least one strategy.", nameof(strategies));
+                throw new ArgumentException(
+                    Strings.CompositePresenterDiscoveryStrategy_StrategiesArrayIsEmpty,
+                    nameof(strategies));
             }
         }
 

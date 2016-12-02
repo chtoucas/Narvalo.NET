@@ -4,10 +4,10 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Diagnostics;
-    using System.Globalization;
     using System.Reflection;
 
     using Narvalo;
+    using Narvalo.Mvp.Properties;
     using Narvalo.Mvp.Resolvers;
 
     /// <remarks>
@@ -66,7 +66,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 }
 
                 throw new PresenterBindingException(Format.Current(
-                        "An exception was thrown whilst trying to create an instance of {0}. Check the inner exception for more information.",
+                        Strings.PresenterFactory_PresenterCtorFailed,
                         presenterType.FullName),
                     originalException);
             }

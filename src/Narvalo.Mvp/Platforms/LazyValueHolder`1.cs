@@ -5,6 +5,8 @@ namespace Narvalo.Mvp.Platforms
     using System;
     using System.ComponentModel;
 
+    using Narvalo.Mvp.Properties;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class LazyValueHolder<TValue>
     {
@@ -39,8 +41,7 @@ namespace Narvalo.Mvp.Platforms
 
             if (!CanReset)
             {
-                throw new InvalidOperationException(
-                    "Once the value has been accessed, you can no longer change the underlying value factory.");
+                throw new InvalidOperationException(Strings.LazyValueHolder_CannotReset);
             }
 
             // REVIEW: We break thread-safety here, but does it matter for our use case?
