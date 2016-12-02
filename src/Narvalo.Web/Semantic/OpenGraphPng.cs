@@ -10,7 +10,7 @@ namespace Narvalo.Web.Semantic
         public OpenGraphPng(Uri url)
             : base(url, "image/png")
         {
-            Contract.Requires(url != null);
+            Expect.NotNull(url);
         }
     }
 }

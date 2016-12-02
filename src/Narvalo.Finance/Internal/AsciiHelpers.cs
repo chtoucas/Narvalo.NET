@@ -5,6 +5,7 @@ namespace Narvalo.Finance.Internal
     using System;
     using System.Diagnostics.Contracts;
 
+    // REVIEW: Believe this is wrong.
 #if CONTRACTS_FULL
     public
 #else

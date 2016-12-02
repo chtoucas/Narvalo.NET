@@ -59,9 +59,9 @@ namespace Narvalo.Web.UI
 
         private static string Combine(string basePath, string relativePath)
         {
-            Contract.Requires(basePath != null);
-            Contract.Requires(basePath.Length != 0);
-            Contract.Requires(relativePath != null);
+            Demand.NotNull(basePath);
+            Demand.Range(basePath.Length != 0);
+            Demand.NotNull(relativePath);
             Contract.Ensures(Contract.Result<string>() != null);
 
             string retval;
@@ -73,7 +73,7 @@ namespace Narvalo.Web.UI
             else if (relativePath[0] == '/')
             {
                 // FIXME: Message = "relativePath" is not a relative path.
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(relativePath));
             }
             else if (HasTrailingSlash(basePath))
             {
@@ -89,7 +89,7 @@ namespace Narvalo.Web.UI
 
         private static bool HasTrailingSlash(string path)
         {
-            Contract.Requires(path.Length > 0);
+            Demand.Range(path.Length > 0);
 
             return path[path.Length - 1] == '/';
         }
@@ -97,8 +97,8 @@ namespace Narvalo.Web.UI
         private Uri MakeUri(string baseIntermediatePath, string relativePath)
         {
             Require.NotNull(relativePath, "relativePath");
-            Contract.Requires(baseIntermediatePath != null);
-            Contract.Requires(baseIntermediatePath.Length != 0);
+            Demand.NotNull(baseIntermediatePath != null);
+            Demand.Range(baseIntermediatePath.Length != 0);
             Contract.Ensures(Contract.Result<Uri>() != null);
 
             // Here we can be sure that _baseUri is not null and is absolute; otherwise an exception

@@ -10,6 +10,8 @@ namespace Narvalo.Collections
     using Narvalo.Fx;
     using Narvalo.Fx.Advanced;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /// <summary>
     /// Provides extension methods for <see cref="NameValueCollection"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>
@@ -37,6 +39,7 @@ namespace Narvalo.Collections
             Func<string, Maybe<T>> parserM)
         {
             Expect.Object(@this);
+            Ensures(Result<IEnumerable<T>>() != null);
 
             return (from @_ in @this.MayGetValues(name) select @_.MapAny(parserM)).ValueOrElse(Enumerable.Empty<T>());
         }

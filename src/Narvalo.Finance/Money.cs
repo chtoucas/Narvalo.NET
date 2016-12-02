@@ -207,7 +207,7 @@ namespace Narvalo.Finance
     {
         public static Money operator /(Money money, decimal divisor)
         {
-            Contract.Requires(divisor != 0m);
+            Expect.True(divisor != 0m);
 
             return money.Divide(divisor);
         }
@@ -230,7 +230,7 @@ namespace Narvalo.Finance
     {
         public static Money operator %(Money money, decimal divisor)
         {
-            Contract.Requires(divisor != 0m);
+            Expect.True(divisor != 0m);
 
             return money.Remainder(divisor);
         }

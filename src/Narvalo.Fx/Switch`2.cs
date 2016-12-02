@@ -146,7 +146,7 @@ namespace Narvalo.Fx
 
             public Left_(TLeft value)
             {
-                Contract.Requires(value != null);
+                Demand.NotNull(value);
 
                 _value = value;
             }
@@ -237,7 +237,7 @@ namespace Narvalo.Fx
 
             public Right_(TRight value)
             {
-                Contract.Requires(value != null);
+                Demand.NotNull(value);
 
                 _value = value;
             }

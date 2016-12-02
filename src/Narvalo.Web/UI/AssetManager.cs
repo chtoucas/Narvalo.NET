@@ -122,7 +122,7 @@ namespace Narvalo.Web.UI
         // We use temporary objects to achieve exception-neutral code.
         internal static void InitializeCore(AssetSection section)
         {
-            Contract.Requires(section != null);
+            Demand.NotNull(section);
 
             // Initialize the provider collection.
             var tmpProviders = new AssetProviderCollection();

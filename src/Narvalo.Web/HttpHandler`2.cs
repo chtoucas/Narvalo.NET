@@ -39,7 +39,7 @@ namespace Narvalo.Web
 
         private void ProcessBindingFailure(HttpContext context, TBinder binder)
         {
-            Contract.Requires(context != null);
+            Demand.NotNull(context);
 
             var errors = binder.BindingErrors;
             HttpQueryBinderException exception;

@@ -12,8 +12,8 @@ namespace Narvalo.IO
 
         public static string MakeRelativePath(string rootPath, string path)
         {
-            Contract.Requires(rootPath != null);
-            Contract.Requires(path != null);
+            Expect.NotNull(rootPath);
+            Expect.NotNull(path);
             Contract.Ensures(Contract.Result<string>() != null);
 
             return MakeRelativePathCore(new Uri(AppendDirectorySeparator(rootPath)), path);
@@ -22,8 +22,8 @@ namespace Narvalo.IO
         // For this method to work correctly, the "rootUri" string must end with a "/".
         internal static string MakeRelativePathCore(Uri rootUri, string path)
         {
-            Require.NotNull(rootUri, "rootUri");
-            Contract.Requires(path != null);
+            Require.NotNull(rootUri, nameof(rootUri));
+            Expect.NotNull(path);
             Contract.Ensures(Contract.Result<string>() != null);
 
             var relativeUri = rootUri.MakeRelativeUri(new Uri(path));
@@ -35,7 +35,7 @@ namespace Narvalo.IO
         internal static string AppendDirectorySeparator(string path)
         {
             // REVIEW: Require.NotNullOrEmpty(path, "path");
-            Require.NotNull(path, "path");
+            Require.NotNull(path, nameof(path));
 
             bool endsWithSeparator
                 = path.EndsWith(s_DirectorySeparator, StringComparison.OrdinalIgnoreCase);

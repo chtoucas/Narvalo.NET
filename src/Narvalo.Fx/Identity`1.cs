@@ -50,7 +50,7 @@ namespace Narvalo.Fx
 
         public bool Equals(T other, IEqualityComparer<T> comparer)
         {
-            Demand.NotNull(comparer);
+            Expect.NotNull(comparer);
 
             return Equals(η(other), comparer);
         }

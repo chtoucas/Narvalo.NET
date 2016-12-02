@@ -118,7 +118,7 @@ namespace Narvalo.Fx.Advanced
             where TSource : struct
             where TResult : struct
         {
-            Demand.NotNull(predicate);
+            Expect.NotNull(predicate);
 
             return Coalesce(@this, predicate, other, null);
         }
@@ -130,7 +130,7 @@ namespace Narvalo.Fx.Advanced
             where TSource : struct
             where TResult : struct
         {
-            Demand.NotNull(predicate);
+            Expect.NotNull(predicate);
 
             return Coalesce(@this, predicate, null, other);
         }
@@ -204,7 +204,7 @@ namespace Narvalo.Fx.Advanced
         public static void OnValue<TSource>(this TSource? @this, Action<TSource> action)
             where TSource : struct
         {
-            Demand.NotNull(action);
+            Expect.NotNull(action);
 
             @this.Invoke(action);
         }

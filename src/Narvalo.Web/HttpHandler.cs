@@ -89,7 +89,7 @@ namespace Narvalo.Web
 
         private bool ValidateHttpMethod(HttpRequest request)
         {
-            Contract.Requires(request != null);
+            Demand.NotNull(request);
 
             return (from _ in ParseTo.Enum<HttpVerbs>(request.HttpMethod)
                     select AcceptedVerbs.Contains(_)) ?? false;

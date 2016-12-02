@@ -242,6 +242,7 @@ namespace Narvalo.Finance
                 && IsDigitOrUpperLetter(LocationCode)
                 && (BranchCode.Length == 0 ? true : IsDigitOrUpperLetter(BranchCode));
 
+        // REVIEW: Believe this is wrong.
 #if CONTRACTS_FULL
         public
 #else

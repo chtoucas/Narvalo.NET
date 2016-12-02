@@ -15,7 +15,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Css(string relativePath)
         {
-            Demand.NotNullOrEmpty(relativePath);
+            Expect.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
@@ -26,7 +26,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Css(string relativePath, string media)
         {
-            Demand.NotNullOrEmpty(relativePath);
+            Expect.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
@@ -37,7 +37,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Image(string relativePath, string alt)
         {
-            Demand.NotNullOrEmpty(relativePath);
+            Expect.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetImageUri(relativePath);
@@ -48,7 +48,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString JavaScript(string relativePath)
         {
-            Demand.NotNullOrEmpty(relativePath);
+            Expect.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetScriptUri(relativePath);
@@ -59,7 +59,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Less(string relativePath)
         {
-            Demand.NotNullOrEmpty(relativePath);
+            Expect.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetScriptUri(relativePath);
@@ -70,7 +70,7 @@ namespace Narvalo.Web.Html
 
         public static IHtmlString Less(string relativePath, string media)
         {
-            Demand.NotNullOrEmpty(relativePath);
+            Expect.NotNullOrEmpty(relativePath);
             Contract.Ensures(Contract.Result<IHtmlString>() != null);
 
             var assetUri = AssetManager.GetScriptUri(relativePath);

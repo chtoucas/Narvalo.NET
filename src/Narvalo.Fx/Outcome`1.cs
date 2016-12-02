@@ -56,7 +56,7 @@ namespace Narvalo.Fx
 
         public static explicit operator Outcome<T>(ExceptionDispatchInfo exceptionInfo)
         {
-            Contract.Requires(exceptionInfo != null);
+            Expect.NotNull(exceptionInfo);
             Ensures(Result<Outcome<T>>() != null);
 
             return η(exceptionInfo);
@@ -148,7 +148,7 @@ namespace Narvalo.Fx
 
         public void OnSuccess(Action<T> action)
         {
-            Contract.Requires(action != null);
+            Expect.NotNull(action);
 
             if (IsSuccess)
             {
@@ -276,7 +276,7 @@ namespace Narvalo.Fx
         /// </remarks>
         internal T ToValue()
         {
-            Contract.Requires(IsSuccess);
+            Demand.True(IsSuccess);
 
             var success = this as Success_;
             Contract.Assume(success != null);
@@ -293,7 +293,7 @@ namespace Narvalo.Fx
         /// </remarks>
         internal ExceptionDispatchInfo ToExceptionDispatchInfo()
         {
-            Contract.Requires(!IsSuccess);
+            Demand.True(!IsSuccess);
 
             var failure = this as Failure_;
             Contract.Assume(failure != null);
@@ -368,7 +368,7 @@ namespace Narvalo.Fx
             public Failure_(ExceptionDispatchInfo exceptionInfo)
                 : base(false)
             {
-                Contract.Requires(exceptionInfo != null);
+                Demand.NotNull(exceptionInfo);
 
                 _exceptionInfo = exceptionInfo;
             }

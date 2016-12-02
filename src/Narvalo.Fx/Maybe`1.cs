@@ -160,7 +160,7 @@ namespace Narvalo.Fx
         /// <seealso cref="Maybe.Of{T}(T?)"/>
         private Maybe(T value)
         {
-            Contract.Requires(value != null);
+            Demand.NotNull(value);
 
             _value = value;
             _isSome = true;
@@ -254,7 +254,7 @@ namespace Narvalo.Fx
 
         public void OnSome(Action<T> action)
         {
-            Contract.Requires(action != null);
+            Expect.NotNull(action);
 
             Invoke(action);
         }

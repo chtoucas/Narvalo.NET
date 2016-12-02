@@ -39,7 +39,7 @@ namespace Narvalo.Web.Optimization
 
         public static void SetProvider(IWhiteSpaceBusterProvider provider)
         {
-            Contract.Requires(provider != null);
+            Expect.NotNull(provider);
 
             s_Instance.InnerSetProvider(provider);
         }

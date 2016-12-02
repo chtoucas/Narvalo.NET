@@ -2,7 +2,6 @@
 
 namespace Narvalo.Fx
 {
-    using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
     using static System.Diagnostics.Contracts.Contract;
@@ -14,7 +13,7 @@ namespace Narvalo.Fx
     {
         public static Outcome<T> Failure<T>(ExceptionDispatchInfo exceptionInfo)
         {
-            Contract.Requires(exceptionInfo != null);
+            Expect.NotNull(exceptionInfo);
             Ensures(Result<Outcome<T>>() != null);
 
             return Outcome<T>.η(exceptionInfo);

@@ -14,7 +14,7 @@ namespace Narvalo.Web.Optimization
     /// WARNING: Ne pas activer ce filtre en production sans vérifier au préalable le résultat.
     /// </summary>
     /// <remarks>
-    /// De la manière dont on procède, on n'a accès qu'à certains fragments du 
+    /// De la manière dont on procède, on n'a accès qu'à certains fragments du
     /// contenu sans la moindre information contextuelle. On ne peut donc pas prendre
     /// de mesures trop extrèmes.
     /// </remarks>
@@ -50,7 +50,7 @@ namespace Narvalo.Web.Optimization
 
             var section = NarvaloWebConfigurationManager.OptimizationSection;
 
-            // Si le filtre est activé globalement (valeur par défaut), on vérifie la directive locale, sinon on 
+            // Si le filtre est activé globalement (valeur par défaut), on vérifie la directive locale, sinon on
             // considère que le filtre ne doit pas être utilisé quelque soit la directive locale.
             Enabled = section.EnableWhiteSpaceBusting && enabled;
 

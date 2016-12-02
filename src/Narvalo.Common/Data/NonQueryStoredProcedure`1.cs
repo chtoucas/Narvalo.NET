@@ -43,7 +43,7 @@ namespace Narvalo.Data
 
         public int Execute(TParameters values)
         {
-            Contract.Requires(values != null);
+            Expect.NotNull(values);
 
             int retval;
 

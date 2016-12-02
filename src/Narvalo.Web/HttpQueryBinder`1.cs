@@ -29,13 +29,14 @@ namespace Narvalo.Web
 
         public Maybe<TQuery> Bind(HttpRequest request)
         {
-            Require.NotNull(request, "request");
+            Require.NotNull(request, nameof(request));
 
             return from _ in BindCore(request) where Validate(_) select _;
         }
 
         protected abstract Maybe<TQuery> BindCore(HttpRequest request);
 
+        [Pure]
         protected bool Validate(TQuery query)
         {
             return (from prop in TypeDescriptor.GetProperties(query).Cast<PropertyDescriptor>()
@@ -53,7 +54,7 @@ namespace Narvalo.Web
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
     [ContractClass(typeof(HttpQueryBinderContract<>))]
-    public abstract partial class HttpQueryBinder<TQuery> 
+    public abstract partial class HttpQueryBinder<TQuery>
     {
         [ContractInvariantMethod]
         private void ObjectInvariant()

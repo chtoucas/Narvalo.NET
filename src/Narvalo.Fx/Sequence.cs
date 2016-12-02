@@ -34,7 +34,7 @@ namespace Narvalo.Fx
             TSource seed,
             Func<TSource, Iteration<TResult, TSource>> generator)
         {
-            Contract.Requires(generator != null);
+            Expect.NotNull(generator);
             Ensures(Result<IEnumerable<TResult>>() != null);
 
             return Unfold(seed, generator, Stubs<TSource>.AlwaysTrue);
@@ -72,7 +72,7 @@ namespace Narvalo.Fx
             TSource seed,
             Func<TSource, TSource> iterator)
         {
-            Contract.Requires(iterator != null);
+            Expect.NotNull(iterator);
             Ensures(Result<IEnumerable<TSource>>() != null);
 
             return Gather(seed, iterator, Stubs<TSource>.AlwaysTrue);
@@ -111,8 +111,8 @@ namespace Narvalo.Fx
             Func<TSource, TSource> iterator,
             Func<TSource, TResult> resultSelector)
         {
-            Contract.Requires(iterator != null);
-            Contract.Requires(resultSelector != null);
+            Expect.NotNull(iterator);
+            Expect.NotNull(resultSelector);
             Ensures(Result<IEnumerable<TResult>>() != null);
 
             return Gather(seed, iterator, resultSelector, Stubs<TSource>.AlwaysTrue);

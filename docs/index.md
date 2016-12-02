@@ -18,7 +18,7 @@ Narvalo.Finance           | 0.25.0      | Profile111 (***) | Transparent  |    |
 Narvalo.Fx                | 0.25.0      | Profile259 (**)  | Transparent  |    | Complete |
 Narvalo.Mvp               | 0.99.0      | .NET 4.5         |              |    | Partial  |
 Narvalo.Mvp.Web           | 0.99.0      | .NET 4.5         |              |    |          |
-Narvalo.Web               | 0.25.0      | .NET 4.5         |              |    | Complete |
+Narvalo.Web               | 0.25.0      | .NET 4.5         |              |    | Partial  |
 
 (*) Security attributes are not applied to the assemblies distributed via NuGet.
 

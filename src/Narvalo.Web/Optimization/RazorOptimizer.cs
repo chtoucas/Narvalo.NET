@@ -96,7 +96,7 @@ namespace Narvalo.Web.Optimization
             Justification = "[Intentionally] The use of a parameter passed by reference simplifies the algorithm. Only used privately.")]
         private static string RemoveMarkupAndMergeContentAfter(BlockBuilder block, string content, ref int currentIndex)
         {
-            Contract.Requires(block != null);
+            Demand.NotNull(block);
 
             var sb = new StringBuilder(content);
 
@@ -149,7 +149,7 @@ namespace Narvalo.Web.Optimization
 
         private string OptimizeContent(SymbolBase<HtmlSymbolType> sym, HtmlSymbolType previousType)
         {
-            Contract.Requires(sym != null);
+            Demand.NotNull(sym);
 
             string content;
 

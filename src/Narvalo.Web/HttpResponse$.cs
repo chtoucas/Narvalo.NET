@@ -38,28 +38,28 @@ namespace Narvalo.Web
 
         public static void PubliclyCacheFor(this HttpResponse @this, int days, int hours, int minutes)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             @this.PubliclyCacheFor(new TimeSpan(days, hours, minutes, 0));
         }
 
         public static void PubliclyCacheFor(this HttpResponse @this, TimeSpan duration)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             @this.CacheFor(duration, HttpCacheability.Public);
         }
 
         public static void PrivatelyCacheFor(this HttpResponse @this, int days, int hours, int minutes)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             @this.PrivatelyCacheFor(new TimeSpan(days, hours, minutes, 0));
         }
 
         public static void PrivatelyCacheFor(this HttpResponse @this, TimeSpan duration)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             // REVIEW: Utiliser HttpCacheability.ServerAndPrivate ?
             @this.CacheFor(duration, HttpCacheability.Private);
@@ -67,7 +67,7 @@ namespace Narvalo.Web
 
         public static void CacheFor(this HttpResponse @this, TimeSpan duration, HttpCacheability cacheability)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             @this.CacheFor(duration, cacheability, HttpVersions.All);
         }
