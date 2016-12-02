@@ -291,11 +291,11 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (IsNullable) { #>
-            Demand.NotNull(inner);
+            Expect.NotNull(inner);
 <#+ } #>
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
 <#+ if (PostJoinEnsuresSome) { #>
             Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -318,11 +318,11 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (IsNullable) { #>
-            Demand.NotNull(inner);
+            Expect.NotNull(inner);
 <#+ } #>
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
 <#+ if (PostGroupJoinEnsuresSome) { #>
             Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -353,12 +353,12 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
-            Demand.Object(@this);
-            Demand.NotNull(inner);
+            Expect.Object(@this);
+            Expect.NotNull(inner);
 <#+ } #>
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
 <#+ if (PostJoinEnsuresSome) { #>
             Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -382,12 +382,12 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
-            Demand.Object(@this);
-            Demand.NotNull(inner);
+            Expect.Object(@this);
+            Expect.NotNull(inner);
 <#+ } #>
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
 <#+ if (PostGroupJoinEnsuresSome) { #>
             Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>

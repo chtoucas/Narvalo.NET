@@ -456,9 +456,9 @@ namespace Narvalo.Fx.Samples
             where TResult : struct
         {
             /* T4: C# indent */
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
 
             return @this.Join(
                 inner,
@@ -480,9 +480,9 @@ namespace Narvalo.Fx.Samples
             where TResult : struct
         {
             /* T4: C# indent */
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
 
             return @this.GroupJoin(
                 inner,
@@ -510,9 +510,9 @@ namespace Narvalo.Fx.Samples
             where TKey : struct
             where TResult : struct
         {
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
 
             return JoinCore(
                 @this,
@@ -535,9 +535,9 @@ namespace Narvalo.Fx.Samples
             where TKey : struct
             where TResult : struct
         {
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
 
             return GroupJoinCore(
                 @this,
@@ -652,7 +652,7 @@ namespace Narvalo.Fx.Samples
             where TSource : struct
             where TResult : struct
         {
-            Demand.NotNull(predicate);
+            Expect.NotNull(predicate);
 
             return @this.Coalesce(predicate, other, MonadValue<TResult>.None);
         }
@@ -664,7 +664,7 @@ namespace Narvalo.Fx.Samples
             where TSource : struct
             where TResult : struct
         {
-            Demand.NotNull(predicate);
+            Expect.NotNull(predicate);
 
             return @this.Coalesce(predicate, MonadValue<TResult>.None, other);
         }
@@ -690,7 +690,7 @@ namespace Narvalo.Fx.Samples
             Action action)
             where TSource : struct
         {
-            Demand.NotNull(action);
+            Expect.NotNull(action);
 
             return @this.When(!predicate, action);
         }
@@ -752,7 +752,7 @@ namespace Narvalo.Fx.Samples
             where TSource : struct
             where TResult : struct
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
             /* T4: C# indent */
 
             return value.Bind(@this);
@@ -769,7 +769,7 @@ namespace Narvalo.Fx.Samples
             where TResult : struct
         {
             Require.Object(@this);
-            Demand.NotNull(funM);
+            Expect.NotNull(funM);
             Ensures(Result<Func<TSource, MonadValue<TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
@@ -785,7 +785,7 @@ namespace Narvalo.Fx.Samples
             where TMiddle : struct
             where TResult : struct
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
             Require.NotNull(funM, nameof(funM));
             Ensures(Result<Func<TSource, MonadValue<TResult>>>() != null);
 
@@ -824,7 +824,7 @@ namespace Narvalo.Fx.Samples
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             return @this.SumCore();
         }
@@ -865,8 +865,8 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, MonadValue<bool>> predicateM)
             where TSource : struct
         {
-            Demand.Object(@this);
-            Demand.NotNull(predicateM);
+            Expect.Object(@this);
+            Expect.NotNull(predicateM);
             Ensures(Result<IEnumerable<TSource>>() != null);
 
             return @this.FilterCore(predicateM);
@@ -883,8 +883,8 @@ namespace Narvalo.Fx.Samples.Advanced
             where TSource : struct
             where TAccumulate : struct
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -900,8 +900,8 @@ namespace Narvalo.Fx.Samples.Advanced
             where TSource : struct
             where TAccumulate : struct
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -911,8 +911,8 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
 
             return @this.ReduceCore(accumulatorM);
         }
@@ -922,8 +922,8 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -943,9 +943,9 @@ namespace Narvalo.Fx.Samples.Advanced
             where TSource : struct
             where TAccumulate : struct
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
-            Demand.NotNull(predicate);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
+            Expect.NotNull(predicate);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -959,9 +959,9 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<MonadValue<TSource>, bool> predicate)
             where TSource : struct
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
-            Demand.NotNull(predicate);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
+            Expect.NotNull(predicate);
 
             return @this.ReduceCore(accumulatorM, predicate);
         }

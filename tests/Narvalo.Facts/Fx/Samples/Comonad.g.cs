@@ -23,7 +23,7 @@ namespace Narvalo.Fx.Samples
         public static T Extract<T>(Comonad<T> monad)
             /* T4: C# indent */
         {
-            Demand.NotNull(monad);
+            Expect.NotNull(monad);
 
             return Comonad<T>.ε(monad);
         }

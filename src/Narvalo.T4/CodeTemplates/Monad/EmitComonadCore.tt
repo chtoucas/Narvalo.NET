@@ -15,7 +15,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
-            Demand.NotNull(monad);
+            Expect.NotNull(monad);
 <#+ } #>
 
             return <#= Name #><T>.ε(monad);

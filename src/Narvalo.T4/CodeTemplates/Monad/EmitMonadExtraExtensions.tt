@@ -35,9 +35,9 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
-            Demand.Object(@this);
+            Expect.Object(@this);
 <#+ } #>
-            Demand.NotNull(predicate);
+            Expect.NotNull(predicate);
 <#+ if (PostCoalesceEnsuresSome) { #>
             Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -52,9 +52,9 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
-            Demand.Object(@this);
+            Expect.Object(@this);
 <#+ } #>
-            Demand.NotNull(predicate);
+            Expect.NotNull(predicate);
 <#+ if (PostCoalesceEnsuresSome) { #>
             Ensures(Result<<#= Name #><TResult>>() != null);
 <#+ } #>
@@ -88,9 +88,9 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
 <#+ if (IsNullable) { #>
-            Demand.Object(@this);
+            Expect.Object(@this);
 <#+ } #>
-            Demand.NotNull(action);
+            Expect.NotNull(action);
 <#+ if (IsNullable) { #>
             Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>
@@ -138,7 +138,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource"); #>
         {
 <#+ if (IsNullable) { #>
-            Demand.Object(@this);
+            Expect.Object(@this);
 <#+ } #>
             Require.NotNull(action, nameof(action));
             Require.NotNull(case<#= ZeroName #>, nameof(case<#= ZeroName #>));

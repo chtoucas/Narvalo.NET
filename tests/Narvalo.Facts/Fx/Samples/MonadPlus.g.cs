@@ -96,7 +96,7 @@ namespace Narvalo.Fx.Samples
         public static MonadPlus<T> Flatten<T>(MonadPlus<MonadPlus<T>> square)
             /* T4: C# indent */
         {
-            Demand.NotNull(square);
+            Expect.NotNull(square);
             Ensures(Result<MonadPlus<T>>() != null);
 
             return MonadPlus<T>.μ(square);
@@ -450,10 +450,10 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Demand.NotNull(inner);
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.NotNull(inner);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
             Ensures(Result<MonadPlus<TResult>>() != null);
 
             return @this.Join(
@@ -473,10 +473,10 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Demand.NotNull(inner);
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.NotNull(inner);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
             Ensures(Result<MonadPlus<TResult>>() != null);
 
             return @this.GroupJoin(
@@ -502,11 +502,11 @@ namespace Narvalo.Fx.Samples
             IEqualityComparer<TKey> comparer)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(inner);
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.Object(@this);
+            Expect.NotNull(inner);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
             Ensures(Result<MonadPlus<TResult>>() != null);
 
             return JoinCore(
@@ -527,11 +527,11 @@ namespace Narvalo.Fx.Samples
             IEqualityComparer<TKey> comparer)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(inner);
-            Demand.NotNull(outerKeySelector);
-            Demand.NotNull(innerKeySelector);
-            Demand.NotNull(resultSelector);
+            Expect.Object(@this);
+            Expect.NotNull(inner);
+            Expect.NotNull(outerKeySelector);
+            Expect.NotNull(innerKeySelector);
+            Expect.NotNull(resultSelector);
             Ensures(Result<MonadPlus<TResult>>() != null);
 
             return GroupJoinCore(
@@ -642,8 +642,8 @@ namespace Narvalo.Fx.Samples
             MonadPlus<TResult> other)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(predicate);
+            Expect.Object(@this);
+            Expect.NotNull(predicate);
             Ensures(Result<MonadPlus<TResult>>() != null);
 
             return @this.Coalesce(predicate, other, MonadPlus<TResult>.Zero);
@@ -655,8 +655,8 @@ namespace Narvalo.Fx.Samples
             MonadPlus<TResult> other)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(predicate);
+            Expect.Object(@this);
+            Expect.NotNull(predicate);
             Ensures(Result<MonadPlus<TResult>>() != null);
 
             return @this.Coalesce(predicate, MonadPlus<TResult>.Zero, other);
@@ -684,8 +684,8 @@ namespace Narvalo.Fx.Samples
             Action action)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(action);
+            Expect.Object(@this);
+            Expect.NotNull(action);
             Ensures(Result<MonadPlus<TSource>>() != null);
 
             return @this.When(!predicate, action);
@@ -725,7 +725,7 @@ namespace Narvalo.Fx.Samples
             Action caseZero)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
             Require.NotNull(action, nameof(action));
             Require.NotNull(caseZero, nameof(caseZero));
             Ensures(Result<MonadPlus<TSource>>() != null);
@@ -750,8 +750,8 @@ namespace Narvalo.Fx.Samples
             this Func<TSource, MonadPlus<TResult>> @this,
             IEnumerable<TSource> seq)
         {
-            Demand.Object(@this);
-            Demand.NotNull(seq);
+            Expect.Object(@this);
+            Expect.NotNull(seq);
             Ensures(Result<MonadPlus<IEnumerable<TResult>>>() != null);
 
             return seq.ForEachCore(@this);
@@ -766,7 +766,7 @@ namespace Narvalo.Fx.Samples
             MonadPlus<TSource> value)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
             Require.NotNull(value, nameof(value));
             Ensures(Result<MonadPlus<TResult>>() != null);
 
@@ -782,7 +782,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.Object(@this);
-            Demand.NotNull(funM);
+            Expect.NotNull(funM);
             Ensures(Result<Func<TSource, MonadPlus<TResult>>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
@@ -796,7 +796,7 @@ namespace Narvalo.Fx.Samples
             Func<TSource, MonadPlus<TMiddle>> funM)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
             Require.NotNull(funM, nameof(funM));
             Ensures(Result<Func<TSource, MonadPlus<TResult>>>() != null);
 
@@ -829,7 +829,7 @@ namespace Narvalo.Fx.Samples
         public static MonadPlus<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<MonadPlus<TSource>> @this)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
             Ensures(Result<MonadPlus<IEnumerable<TSource>>>() != null);
 
             return @this.CollectCore();
@@ -848,7 +848,7 @@ namespace Narvalo.Fx.Samples
             this IEnumerable<MonadPlus<TSource>> @this)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
             Ensures(Result<MonadPlus<TSource>>() != null);
 
             return @this.SumCore();
@@ -884,8 +884,8 @@ namespace Narvalo.Fx.Samples.Advanced
             this IEnumerable<TSource> @this,
             Func<TSource, MonadPlus<TResult>> funM)
         {
-            Demand.Object(@this);
-            Demand.NotNull(funM);
+            Expect.Object(@this);
+            Expect.NotNull(funM);
             Ensures(Result<MonadPlus<IEnumerable<TResult>>>() != null);
 
             return @this.ForEachCore(funM);
@@ -905,8 +905,8 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, MonadPlus<bool>> predicateM)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(predicateM);
+            Expect.Object(@this);
+            Expect.NotNull(predicateM);
             Ensures(Result<IEnumerable<TSource>>() != null);
 
             return @this.FilterCore(predicateM);
@@ -921,8 +921,8 @@ namespace Narvalo.Fx.Samples.Advanced
             this IEnumerable<TSource> @this,
             Func<TSource, MonadPlus<Tuple<TFirst, TSecond>>> funM)
         {
-            Demand.Object(@this);
-            Demand.NotNull(funM);
+            Expect.Object(@this);
+            Expect.NotNull(funM);
             Ensures(Result<MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
 
             return @this.MapAndUnzipCore(funM);
@@ -936,9 +936,9 @@ namespace Narvalo.Fx.Samples.Advanced
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, MonadPlus<TResult>> resultSelectorM)
         {
-            Demand.Object(@this);
-            Demand.NotNull(second);
-            Demand.NotNull(resultSelectorM);
+            Expect.Object(@this);
+            Expect.NotNull(second);
+            Expect.NotNull(resultSelectorM);
             Ensures(Result<MonadPlus<IEnumerable<TResult>>>() != null);
 
             return @this.ZipCore(second, resultSelectorM);
@@ -954,8 +954,8 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
             Ensures(Result<MonadPlus<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM);
@@ -971,8 +971,8 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TAccumulate, TSource, MonadPlus<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
             Ensures(Result<MonadPlus<TAccumulate>>() != null);
 
             return @this.FoldBackCore(seed, accumulatorM);
@@ -983,8 +983,8 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, TSource, MonadPlus<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
             Ensures(Result<MonadPlus<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM);
@@ -995,8 +995,8 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, TSource, MonadPlus<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
             Ensures(Result<MonadPlus<TSource>>() != null);
 
             return @this.ReduceBackCore(accumulatorM);
@@ -1016,9 +1016,9 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<MonadPlus<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
-            Demand.NotNull(predicate);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
+            Expect.NotNull(predicate);
             Ensures(Result<MonadPlus<TAccumulate>>() != null);
 
             return @this.FoldCore(seed, accumulatorM, predicate);
@@ -1033,9 +1033,9 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<MonadPlus<TSource>, bool> predicate)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
-            Demand.NotNull(accumulatorM);
-            Demand.NotNull(predicate);
+            Expect.Object(@this);
+            Expect.NotNull(accumulatorM);
+            Expect.NotNull(predicate);
             Ensures(Result<MonadPlus<TSource>>() != null);
 
             return @this.ReduceCore(accumulatorM, predicate);
