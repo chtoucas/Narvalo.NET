@@ -64,8 +64,8 @@ namespace Narvalo.Mvp.Resolvers
 
         public CompositeViewTypeBuilder(Type viewType, TypeBuilder typeBuilder)
         {
-            Require.NotNull(viewType, "viewType");
-            Require.NotNull(typeBuilder, "typeBuilder");
+            Require.NotNull(viewType, nameof(viewType));
+            Require.NotNull(typeBuilder, nameof(typeBuilder));
 
             _viewType = viewType;
             _typeBuilder = typeBuilder;
@@ -78,7 +78,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public void AddEvent(EventInfo eventInfo)
         {
-            Require.NotNull(eventInfo, "eventInfo");
+            Require.NotNull(eventInfo, nameof(eventInfo));
 
             if (eventInfo.EventHandlerType == null)
             {
@@ -105,7 +105,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public void AddProperty(PropertyInfo propertyInfo)
         {
-            Require.NotNull(propertyInfo, "propertyInfo");
+            Require.NotNull(propertyInfo, nameof(propertyInfo));
 
             var property = _typeBuilder.DefineProperty(
                 propertyInfo.Name,

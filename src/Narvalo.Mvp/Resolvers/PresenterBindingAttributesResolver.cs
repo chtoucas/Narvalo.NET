@@ -12,7 +12,7 @@ namespace Narvalo.Mvp.Resolvers
     {
         public IEnumerable<PresenterBindingAttribute> Resolve(Type viewType)
         {
-            Require.NotNull(viewType, "viewType");
+            Require.NotNull(viewType, nameof(viewType));
 
             Trace.TraceInformation(
                 "[PresenterBindingAttributesResolver] Attempting to resolve '{0}'.",

@@ -38,7 +38,7 @@ namespace Narvalo.Web.Configuration
 
         public static NarvaloWebSectionGroup GetSectionGroup(Configuration config)
         {
-            Require.NotNull(config, "config");
+            Require.NotNull(config, nameof(config));
 
             return config.SectionGroups[NarvaloWebSectionGroup.GroupName] as NarvaloWebSectionGroup;
         }

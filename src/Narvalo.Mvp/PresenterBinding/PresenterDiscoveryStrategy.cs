@@ -26,7 +26,7 @@ namespace Narvalo.Mvp.PresenterBinding
             IPresenterTypeResolver typeResolver,
             bool enableCache)
         {
-            Require.NotNull(typeResolver, "typeResolver");
+            Require.NotNull(typeResolver, nameof(typeResolver));
 
             _typeResolver = enableCache
                  ? new CachedPresenterTypeResolver(typeResolver)
@@ -35,7 +35,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public PresenterDiscoveryResult FindBindings(IEnumerable<object> hosts, IEnumerable<IView> views)
         {
-            Require.NotNull(views, "views");
+            Require.NotNull(views, nameof(views));
 
             var boundViews = new List<IView>();
             var bindings = new List<PresenterBindingParameter>();

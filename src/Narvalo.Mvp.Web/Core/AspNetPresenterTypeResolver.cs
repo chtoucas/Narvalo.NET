@@ -20,7 +20,7 @@ namespace Narvalo.Mvp.Web.Core
         // REVIEW: Prefers composition over extension?
         public override Type Resolve(Type viewType)
         {
-            Require.NotNull(viewType, "viewType");
+            Require.NotNull(viewType, nameof(viewType));
 
             if (viewType.IsAspNetDynamicType()) {
                 return base.Resolve(viewType.BaseType);

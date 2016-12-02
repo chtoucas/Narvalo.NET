@@ -89,7 +89,7 @@ namespace Narvalo.Web.Optimization
         /// <returns>La chaîne de caractères nettoyée.</returns>
         public string Bust(string value)
         {
-            Require.NotNull(value, "value");
+            Require.NotNull(value, nameof(value));
 
             if (value.Length == 0) {
                 return String.Empty;
@@ -110,7 +110,7 @@ namespace Narvalo.Web.Optimization
             // 2. On supprime les espaces après certains crochets fermants : "XXX>   " -> "XXX>".
             retval = s_SpaceAfterRightAngleBracketRegex.Replace(retval, "$1>");
 
-            // 3. On supprime les espaces avant certains crochets ouvrants : 
+            // 3. On supprime les espaces avant certains crochets ouvrants :
             // "   <XXX" -> "<XXX" ou "   </XXX" -> "</XXX".
             retval = s_SpaceBeforeLeftAngleBracketRegex.Replace(retval, "<$1");
 

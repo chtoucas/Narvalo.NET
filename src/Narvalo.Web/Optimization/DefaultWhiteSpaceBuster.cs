@@ -34,7 +34,7 @@ namespace Narvalo.Web.Optimization
         /// <returns>La chaîne de caractères nettoyée.</returns>
         public string Bust(string value)
         {
-            Require.NotNull(value, "value");
+            Require.NotNull(value, nameof(value));
 
             if (value.Length == 0)
             {

@@ -25,7 +25,7 @@ namespace Narvalo.Mvp.PresenterBinding
             ICompositeViewTypeResolver typeResolver,
             bool enableCache)
         {
-            Require.NotNull(typeResolver, "typeResolver");
+            Require.NotNull(typeResolver, nameof(typeResolver));
 
             _typeResolver = enableCache
                  ? new CachedCompositeViewTypeResolver(typeResolver)
@@ -34,8 +34,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public ICompositeView Create(Type viewType, IEnumerable<IView> views)
         {
-            Require.NotNull(viewType, "viewType");
-            Require.NotNull(views, "views");
+            Require.NotNull(viewType, nameof(viewType));
+            Require.NotNull(views, nameof(views));
 
             var compositeViewType = _typeResolver.Resolve(viewType);
             var view = (ICompositeView)Activator.CreateInstance(compositeViewType);

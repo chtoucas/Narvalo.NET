@@ -17,7 +17,7 @@ namespace Narvalo.Mvp.Web.Core
 
         public PageHost(Page page, HttpContext context)
         {
-            Require.NotNull(page, "page");
+            Require.NotNull(page, nameof(page));
 
             var hosts = FindHosts(page);
 
@@ -44,7 +44,7 @@ namespace Narvalo.Mvp.Web.Core
 
         public static PageHost Register(Page page, HttpContext context)
         {
-            Require.NotNull(page, "page");
+            Require.NotNull(page, nameof(page));
 
             var pageContext = page.Items;
 

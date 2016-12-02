@@ -63,28 +63,28 @@ namespace Narvalo.Mvp.Platforms
 
         protected void SetMessageCoordinatorFactory(Func<IMessageCoordinatorFactory> thunk)
         {
-            Require.NotNull(thunk, "thunk");
+            Require.NotNull(thunk, nameof(thunk));
 
             _messageCoordinatorFactoryThunk = thunk;
         }
 
         protected void SetCompositeViewFactory(Func<ICompositeViewFactory> thunk)
         {
-            Require.NotNull(thunk, "thunk");
+            Require.NotNull(thunk, nameof(thunk));
 
             _compositeViewFactoryThunk = thunk;
         }
 
         protected void SetPresenterDiscoveryStrategy(Func<IPresenterDiscoveryStrategy> thunk)
         {
-            Require.NotNull(thunk, "thunk");
+            Require.NotNull(thunk, nameof(thunk));
 
             _presenterDiscoveryStrategyThunk = thunk;
         }
 
         protected void SetPresenterFactory(Func<IPresenterFactory> thunk)
         {
-            Require.NotNull(thunk, "thunk");
+            Require.NotNull(thunk, nameof(thunk));
 
             _presenterFactoryThunk = thunk;
         }

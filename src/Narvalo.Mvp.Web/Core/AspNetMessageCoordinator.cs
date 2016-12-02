@@ -57,7 +57,7 @@ namespace Narvalo.Mvp.Web.Core
         {
             ThrowIfClosed();
 
-            Require.NotNull(onNext, "onNext");
+            Require.NotNull(onNext, nameof(onNext));
 
             AddHandler(onNext);
             PushPreviousMessages(onNext);

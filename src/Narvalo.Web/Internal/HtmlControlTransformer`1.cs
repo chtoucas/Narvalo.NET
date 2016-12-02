@@ -12,7 +12,7 @@ namespace Narvalo.Web.UI
 
         public void TransformRecursively(ControlBuilder controlBuilder)
         {
-            Require.NotNull(controlBuilder, "controlBuilder");
+            Require.NotNull(controlBuilder, nameof(controlBuilder));
 
             var isControl = controlBuilder.ControlType == typeof(TControl);
 

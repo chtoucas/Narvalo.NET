@@ -19,7 +19,7 @@ namespace Narvalo.Web.UI
 
         public override void Add(ProviderBase provider)
         {
-            Require.NotNull(provider, "provider");
+            Require.NotNull(provider, nameof(provider));
 
             if (!(provider is AssetProvider))
             {

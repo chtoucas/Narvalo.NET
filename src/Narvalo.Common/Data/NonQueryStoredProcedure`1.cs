@@ -14,8 +14,8 @@ namespace Narvalo.Data
 
         protected NonQueryStoredProcedure(string connectionString, string name)
         {
-            Require.NotNullOrEmpty(connectionString, "connectionString");
-            Require.NotNullOrEmpty(name, "name");
+            Require.NotNullOrEmpty(connectionString, nameof(connectionString));
+            Require.NotNullOrEmpty(name, nameof(name));
 
             _connectionString = connectionString;
             _name = name;

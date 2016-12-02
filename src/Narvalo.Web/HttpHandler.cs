@@ -56,7 +56,7 @@ namespace Narvalo.Web
         /// used to service HTTP requests.</param>
         public void ProcessRequest(HttpContext context)
         {
-            Require.NotNull(context, "context");
+            Require.NotNull(context, nameof(context));
 
             context.Response.TrySkipIisCustomErrors = TrySkipIisCustomErrors;
 
@@ -74,7 +74,7 @@ namespace Narvalo.Web
 
         protected virtual void OnInvalidHttpMethod(HttpContext context)
         {
-            Require.NotNull(context, "context");
+            Require.NotNull(context, nameof(context));
 
             var response = context.Response;
 

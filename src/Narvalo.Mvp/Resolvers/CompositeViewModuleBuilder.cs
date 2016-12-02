@@ -15,7 +15,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public CompositeViewModuleBuilder(string assemblyName)
         {
-            Require.NotNullOrEmpty(assemblyName, "assemblyName");
+            Require.NotNullOrEmpty(assemblyName, nameof(assemblyName));
 
             _assemblyName = assemblyName;
             _moduleBuilder = new Lazy<ModuleBuilder>(CreateModuleBuilder);
@@ -23,7 +23,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public TypeBuilder DefineType(Type viewType)
         {
-            Require.NotNull(viewType, "viewType");
+            Require.NotNull(viewType, nameof(viewType));
 
             // Create a generic type of type "CompositeView<ITestView>".
             var parentType = typeof(CompositeView<>).MakeGenericType(viewType);

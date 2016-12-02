@@ -31,7 +31,7 @@ namespace Narvalo.Mvp.PresenterBinding
             IPresenterConstructorResolver constructorResolver,
             bool enableCache)
         {
-            Require.NotNull(constructorResolver, "constructorResolver");
+            Require.NotNull(constructorResolver, nameof(constructorResolver));
 
             _constructorResolver = enableCache
                  ? new CachedPresenterConstructorResolver(constructorResolver)
@@ -40,9 +40,9 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public IPresenter Create(Type presenterType, Type viewType, IView view)
         {
-            Require.NotNull(presenterType, "presenterType");
-            Require.NotNull(viewType, "viewType");
-            Require.NotNull(view, "view");
+            Require.NotNull(presenterType, nameof(presenterType));
+            Require.NotNull(viewType, nameof(viewType));
+            Require.NotNull(view, nameof(view));
 
             var ctor = _constructorResolver.Resolve(presenterType, viewType);
 

@@ -12,8 +12,8 @@ namespace Narvalo.Web.Semantic
 
         public OpenGraphImage(Uri url, string mimeType)
         {
-            Require.NotNull(url, "url");
-            Require.NotNull(mimeType, "mimeType");
+            Require.NotNull(url, nameof(url));
+            Require.NotNull(mimeType, nameof(mimeType));
 
             _url = url;
             _mimeType = mimeType;

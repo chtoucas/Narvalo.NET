@@ -16,14 +16,14 @@ namespace Narvalo.Web.Optimization
 
         public RazorOptimizer(IWhiteSpaceBuster buster)
         {
-            Require.NotNull(buster, "buster");
+            Require.NotNull(buster, nameof(buster));
 
             _buster = buster;
         }
 
         public void OptimizeBlock(BlockBuilder block)
         {
-            Require.NotNull(block, "block");
+            Require.NotNull(block, nameof(block));
 
             for (int i = 0; i < block.Children.Count; i++)
             {
@@ -60,7 +60,7 @@ namespace Narvalo.Web.Optimization
 
         public void OptimizeSpan(Span span)
         {
-            Require.NotNull(span, "span");
+            Require.NotNull(span, nameof(span));
 
             var builder = new SpanBuilder(span);
             builder.ClearSymbols();

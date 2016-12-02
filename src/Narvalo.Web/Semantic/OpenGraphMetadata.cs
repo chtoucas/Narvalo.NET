@@ -17,7 +17,7 @@ namespace Narvalo.Web.Semantic
 
         public OpenGraphMetadata(Ontology ontology)
         {
-            Require.NotNull(ontology, "ontology");
+            Require.NotNull(ontology, nameof(ontology));
 
             _ontology = ontology;
             _locale = new OpenGraphLocale(ontology.Culture);
@@ -80,7 +80,7 @@ namespace Narvalo.Web.Semantic
 
         public void AddAlternativeLocales(IEnumerable<OpenGraphLocale> locales)
         {
-            Require.NotNull(locales, "locales");
+            Require.NotNull(locales, nameof(locales));
 
             foreach (var locale in locales)
             {

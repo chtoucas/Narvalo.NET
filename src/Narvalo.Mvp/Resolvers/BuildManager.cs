@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public BuildManager(Assembly[] assemblies)
         {
-            Require.NotNull(assemblies, "assemblies");
+            Require.NotNull(assemblies, nameof(assemblies));
 
             _assemblies = assemblies;
         }

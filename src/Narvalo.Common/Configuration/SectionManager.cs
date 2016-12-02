@@ -23,7 +23,7 @@ namespace Narvalo.Configuration
         /// <exception cref="System.Configuration.ConfigurationErrorsException">La section n'a pas été trouvée ou n'est pas du type demandée.</exception>>
         public static T GetSection<T>(string sectionName) where T : ConfigurationSection
         {
-            Require.NotNullOrEmpty(sectionName, "sectionName");
+            Require.NotNullOrEmpty(sectionName, nameof(sectionName));
             Contract.Ensures(Contract.Result<T>() != null);
 
             T section = ConfigurationManager.GetSection(sectionName) as T;
@@ -42,8 +42,8 @@ namespace Narvalo.Configuration
             string configFilePath,
             ConfigurationUserLevel userLevel) where T : ConfigurationSection
         {
-            Require.NotNullOrEmpty(sectionName, "sectionName");
-            Require.NotNullOrEmpty(configFilePath, "configFilePath");
+            Require.NotNullOrEmpty(sectionName, nameof(sectionName));
+            Require.NotNullOrEmpty(configFilePath, nameof(configFilePath));
             Contract.Ensures(Contract.Result<T>() != null);
 
             string configFileName;

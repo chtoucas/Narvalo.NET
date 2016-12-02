@@ -46,7 +46,7 @@ namespace Narvalo.Web.Optimization
 
         public void InnerSetProvider(IWhiteSpaceBusterProvider provider)
         {
-            Require.NotNull(provider, "provider");
+            Require.NotNull(provider, nameof(provider));
 
             _current = provider;
         }

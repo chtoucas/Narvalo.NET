@@ -11,7 +11,7 @@ namespace Narvalo.IO
 
         public RelativeDirectoryEventArgs(RelativeDirectory relativeDirectory)
         {
-            Require.NotNull(relativeDirectory, "relativeDirectory");
+            Require.NotNull(relativeDirectory, nameof(relativeDirectory));
 
             _relativeDirectory = relativeDirectory;
         }

@@ -154,7 +154,7 @@ namespace Narvalo.Web.Html
 
         internal static string ImageCore(string path, string alt, IDictionary<string, object> attributes)
         {
-            Require.NotNullOrEmpty(path, "path");
+            Require.NotNullOrEmpty(path, nameof(path));
             Contract.Ensures(Contract.Result<string>() != null);
 
             var tag = new TagBuilder("img");
@@ -185,7 +185,7 @@ namespace Narvalo.Web.Html
             string relation,
             IDictionary<string, object> attributes)
         {
-            Require.NotNullOrEmpty(path, "path");
+            Require.NotNullOrEmpty(path, nameof(path));
             Contract.Ensures(Contract.Result<string>() != null);
 
             var tag = new TagBuilder("link");
@@ -211,7 +211,7 @@ namespace Narvalo.Web.Html
 
         internal static string ScriptCore(string path, string scriptType, IDictionary<string, object> attributes)
         {
-            Require.NotNullOrEmpty(path, "path");
+            Require.NotNullOrEmpty(path, nameof(path));
             Contract.Ensures(Contract.Result<string>() != null);
 
             var tag = new TagBuilder("script");

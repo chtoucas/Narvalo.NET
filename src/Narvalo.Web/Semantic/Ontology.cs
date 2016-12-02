@@ -20,7 +20,7 @@ namespace Narvalo.Web.Semantic
 
         public Ontology(CultureInfo culture)
         {
-            Require.NotNull(culture, "culture");
+            Require.NotNull(culture, nameof(culture));
 
             _culture = culture;
             _openGraph = new OpenGraphMetadata(this);

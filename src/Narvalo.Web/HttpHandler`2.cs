@@ -28,8 +28,8 @@ namespace Narvalo.Web
 
         protected virtual void OnBindingFailure(HttpContext context, HttpQueryBinderException exception)
         {
-            Require.NotNull(context, "context");
-            Require.NotNull(exception, "exception");
+            Require.NotNull(context, nameof(context));
+            Require.NotNull(exception, nameof(exception));
 
             var response = context.Response;
 

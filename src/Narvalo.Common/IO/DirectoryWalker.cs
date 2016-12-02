@@ -17,8 +17,8 @@ namespace Narvalo.IO
             Func<DirectoryInfo, bool> directoryFilter,
             Func<FileInfo, bool> fileFilter)
         {
-            Require.NotNull(directoryFilter, "directoryFilter");
-            Require.NotNull(fileFilter, "fileFilter");
+            Require.NotNull(directoryFilter, nameof(directoryFilter));
+            Require.NotNull(fileFilter, nameof(fileFilter));
 
             _directoryFilter = directoryFilter;
             _fileFilter = fileFilter;
@@ -26,8 +26,8 @@ namespace Narvalo.IO
 
         public void Walk(DirectoryInfo startDirectory, string searchPattern)
         {
-            Require.NotNull(startDirectory, "startDirectory");
-            Require.NotNullOrEmpty(searchPattern, "searchPattern");
+            Require.NotNull(startDirectory, nameof(startDirectory));
+            Require.NotNullOrEmpty(searchPattern, nameof(searchPattern));
 
             var stack = new Stack<DirectoryInfo>();
             stack.Push(startDirectory);

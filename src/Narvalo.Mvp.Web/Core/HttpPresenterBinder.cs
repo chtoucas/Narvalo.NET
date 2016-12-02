@@ -26,14 +26,14 @@ namespace Narvalo.Mvp.Web.Core
                 compositeViewFactory,
                 messageCoordinator)
         {
-            Require.NotNull(context, "context");
+            Require.NotNull(context, nameof(context));
 
             _context = context;
         }
 
         protected override void OnPresenterCreated(PresenterEventArgs args)
         {
-            Require.NotNull(args, "args");
+            Require.NotNull(args, nameof(args));
 
             var presenter = args.Presenter as Internal.IHttpPresenter;
             if (presenter != null) {

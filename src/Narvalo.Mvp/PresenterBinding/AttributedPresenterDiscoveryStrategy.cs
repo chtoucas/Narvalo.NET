@@ -29,7 +29,7 @@ namespace Narvalo.Mvp.PresenterBinding
             IPresenterBindingAttributesResolver attributesResolver,
             bool enableCache)
         {
-            Require.NotNull(attributesResolver, "attributesResolver");
+            Require.NotNull(attributesResolver, nameof(attributesResolver));
 
             _attributesResolver = enableCache
                  ? new CachedPresenterBindingAttributesResolver(attributesResolver)
@@ -40,8 +40,8 @@ namespace Narvalo.Mvp.PresenterBinding
             IEnumerable<object> hosts,
             IEnumerable<IView> views)
         {
-            Require.NotNull(hosts, "hosts");
-            Require.NotNull(views, "views");
+            Require.NotNull(hosts, nameof(hosts));
+            Require.NotNull(views, nameof(views));
 
             var hostAttributes = hosts.Except(views.OfType<Object>())
                 .SelectMany(_ => _attributesResolver.Resolve(_.GetType()))

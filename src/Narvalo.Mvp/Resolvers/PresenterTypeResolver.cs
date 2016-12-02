@@ -28,10 +28,10 @@ namespace Narvalo.Mvp.Resolvers
             IEnumerable<string> viewSuffixes,
             IEnumerable<string> presenterNameTemplates)
         {
-            Require.NotNull(buildManager, "buildManager");
-            Require.NotNull(defaultNamespaces, "defaultNamespaces");
-            Require.NotNull(viewSuffixes, "viewSuffixes");
-            Require.NotNull(presenterNameTemplates, "presenterNameTemplates");
+            Require.NotNull(buildManager, nameof(buildManager));
+            Require.NotNull(defaultNamespaces, nameof(defaultNamespaces));
+            Require.NotNull(viewSuffixes, nameof(viewSuffixes));
+            Require.NotNull(presenterNameTemplates, nameof(presenterNameTemplates));
 
             _buildManager = buildManager;
             _defaultNamespaces = defaultNamespaces;
@@ -42,7 +42,7 @@ namespace Narvalo.Mvp.Resolvers
         // REVIEW: Prefers composition over extension?
         public virtual Type Resolve(Type viewType)
         {
-            Require.NotNull(viewType, "viewType");
+            Require.NotNull(viewType, nameof(viewType));
 
             Trace.TraceInformation("[PresenterTypeResolver] Attempting to resolve '{0}'", viewType.FullName);
 
@@ -76,7 +76,7 @@ namespace Narvalo.Mvp.Resolvers
             Justification = "False positive, MemberInfo does not work.")]
         internal static IEnumerable<string> GetCandidatePrefixesFromInterfaces(Type viewType)
         {
-            Require.NotNull(viewType, "viewType");
+            Require.NotNull(viewType, nameof(viewType));
 
             // Only keep interfaces inheriting IView, except IView and IView<T>, whose
             // name ends with "View".

@@ -13,7 +13,7 @@ namespace Narvalo.Web.UI
 
         public void TransformRecursively(ControlBuilder controlBuilder)
         {
-            Require.NotNull(controlBuilder, "controlBuilder");
+            Require.NotNull(controlBuilder, nameof(controlBuilder));
 
             ArrayList subBuilders = controlBuilder.SubBuilders;
 

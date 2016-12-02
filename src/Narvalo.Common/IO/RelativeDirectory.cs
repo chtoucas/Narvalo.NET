@@ -13,8 +13,8 @@ namespace Narvalo.IO
         // REVIEW: Require.NotEmpty on relativeName?
         public RelativeDirectory(DirectoryInfo directory, string relativeName)
         {
-            Require.NotNull(directory, "directory");
-            Require.NotNull(relativeName, "relativeName");
+            Require.NotNull(directory, nameof(directory));
+            Require.NotNull(relativeName, nameof(relativeName));
 
             _directory = directory;
             _relativeName = relativeName;

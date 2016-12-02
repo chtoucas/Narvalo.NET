@@ -14,7 +14,7 @@ namespace Narvalo.Mvp.Platforms
 
         public LazyValueHolder(Func<TValue> valueFactory)
         {
-            Require.NotNull(valueFactory, "valueFactory");
+            Require.NotNull(valueFactory, nameof(valueFactory));
 
             _valueFactory = valueFactory;
 
@@ -35,7 +35,7 @@ namespace Narvalo.Mvp.Platforms
 
         public void Reset(Func<TValue> valueFactory)
         {
-            Require.NotNull(valueFactory, "valueFactory");
+            Require.NotNull(valueFactory, nameof(valueFactory));
 
             if (!CanReset)
             {

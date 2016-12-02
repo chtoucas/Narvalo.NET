@@ -12,7 +12,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public CompositePresenterDiscoveryStrategy(IEnumerable<IPresenterDiscoveryStrategy> strategies)
         {
-            Require.NotNull(strategies, "strategies");
+            Require.NotNull(strategies, nameof(strategies));
 
             // Force the strategies to be enumerated once, just in case somebody gave us
             // an expensive and uncached list.

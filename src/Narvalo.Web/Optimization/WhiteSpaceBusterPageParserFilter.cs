@@ -35,7 +35,7 @@ namespace Narvalo.Web.Optimization
 
         public override void PreprocessDirective(string directiveName, IDictionary attributes)
         {
-            Require.NotNull(attributes, "attributes");
+            Require.NotNull(attributes, nameof(attributes));
 
             // NB: Si rien n'est précisé, on considère que le filtre est actif localement.
             bool enabled = true;
@@ -59,7 +59,7 @@ namespace Narvalo.Web.Optimization
 
         public override void ParseComplete(ControlBuilder rootBuilder)
         {
-            Require.NotNull(rootBuilder, "rootBuilder");
+            Require.NotNull(rootBuilder, nameof(rootBuilder));
 
             if (Enabled)
             {

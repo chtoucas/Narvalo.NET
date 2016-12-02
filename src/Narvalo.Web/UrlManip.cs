@@ -13,7 +13,7 @@ namespace Narvalo.Web
         // <seealso cref="!:http://tools.ietf.org/html/rfc3986#section-4.2"/>
         public static string ToProtocolRelativeString(Uri uri)
         {
-            Require.NotNull(uri, "uri");
+            Require.NotNull(uri, nameof(uri));
             Contract.Ensures(Contract.Result<string>() != null);
 
             if (!uri.IsAbsoluteUri)

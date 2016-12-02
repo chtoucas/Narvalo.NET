@@ -19,8 +19,8 @@ namespace Narvalo.IO
             Func<DirectoryInfo, bool> directoryFilter,
             Func<FileInfo, bool> fileFilter)
         {
-            Require.NotNull(directoryFilter, "directoryFilter");
-            Require.NotNull(fileFilter, "fileFilter");
+            Require.NotNull(directoryFilter, nameof(directoryFilter));
+            Require.NotNull(fileFilter, nameof(fileFilter));
 
             _directoryFilter = directoryFilter;
             _fileFilter = fileFilter;
@@ -32,8 +32,8 @@ namespace Narvalo.IO
 
         public IEnumerable<RelativeFile> Find(DirectoryInfo startDirectory, string searchPattern)
         {
-            Require.NotNull(startDirectory, "startDirectory");
-            Require.NotNullOrEmpty(searchPattern, "searchPattern");
+            Require.NotNull(startDirectory, nameof(startDirectory));
+            Require.NotNullOrEmpty(searchPattern, nameof(searchPattern));
             Contract.Ensures(Contract.Result<IEnumerable<RelativeFile>>() != null);
 
             var rootPath = PathUtility.AppendDirectorySeparator(startDirectory.FullName);

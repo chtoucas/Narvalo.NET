@@ -16,7 +16,7 @@ namespace Narvalo.Mvp
 
         public PresenterBindingAttribute(Type presenterType)
         {
-            Require.NotNull(presenterType, "presenterType");
+            Require.NotNull(presenterType, nameof(presenterType));
 
             Debug.Assert(
                 typeof(IPresenter<IView>).IsAssignableFrom(presenterType),

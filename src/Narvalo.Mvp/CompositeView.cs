@@ -35,7 +35,7 @@ namespace Narvalo.Mvp
         /// </summary>
         public void Add(IView view)
         {
-            Require.NotNull(view, "view");
+            Require.NotNull(view, nameof(view));
 
             if (!(view is TView))
             {

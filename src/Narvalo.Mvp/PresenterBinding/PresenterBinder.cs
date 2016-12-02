@@ -34,11 +34,11 @@ namespace Narvalo.Mvp.PresenterBinding
             ICompositeViewFactory compositeViewFactory,
             IMessageCoordinator messageCoordinator)
         {
-            Require.NotNull(hosts, "hosts");
-            Require.NotNull(presenterDiscoveryStrategy, "presenterDiscoveryStrategy");
-            Require.NotNull(presenterFactory, "presenterFactory");
-            Require.NotNull(compositeViewFactory, "compositeViewFactory");
-            Require.NotNull(messageCoordinator, "messageCoordinator");
+            Require.NotNull(hosts, nameof(hosts));
+            Require.NotNull(presenterDiscoveryStrategy, nameof(presenterDiscoveryStrategy));
+            Require.NotNull(presenterFactory, nameof(presenterFactory));
+            Require.NotNull(compositeViewFactory, nameof(compositeViewFactory));
+            Require.NotNull(messageCoordinator, nameof(messageCoordinator));
 
             _hosts = hosts;
             _presenterDiscoveryStrategy = presenterDiscoveryStrategy;
@@ -82,7 +82,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public void RegisterView(IView view)
         {
-            Require.NotNull(view, "view");
+            Require.NotNull(view, nameof(view));
 
             _viewsToBind.Add(view);
 
@@ -109,7 +109,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
         protected IPresenter CreatePresenter(PresenterBindingParameter binding, IView view)
         {
-            Require.NotNull(binding, "binding");
+            Require.NotNull(binding, nameof(binding));
 
             var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
 

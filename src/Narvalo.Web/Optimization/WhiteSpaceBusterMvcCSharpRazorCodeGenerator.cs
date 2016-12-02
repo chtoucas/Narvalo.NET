@@ -28,7 +28,7 @@ namespace Narvalo.Web.Optimization
             var mvcHost = host as MvcWebPageRazorHost;
 
             // À la différence de MvcCSharpRazorCodeGenerator, on n'a pas besoin de vérifier
-            // host.IsSpecialPage car on exclut ce type de hôte en amont au niveau de 
+            // host.IsSpecialPage car on exclut ce type de hôte en amont au niveau de
             // WhiteSpaceBusterMvcWebRazorHostFactory.
             if (mvcHost != null)
             {
@@ -38,7 +38,7 @@ namespace Narvalo.Web.Optimization
 
         public override void VisitSpan(Span span)
         {
-            Require.NotNull(span, "span");
+            Require.NotNull(span, nameof(span));
 
             if (span.Kind == SpanKind.Markup)
             {

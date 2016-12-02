@@ -11,8 +11,8 @@ namespace Narvalo.Mvp.Resolvers
     {
         public DynamicMethod Resolve(Type presenterType, Type viewType)
         {
-            Require.NotNull(presenterType, "presenterType");
-            Require.NotNull(viewType, "viewType");
+            Require.NotNull(presenterType, nameof(presenterType));
+            Require.NotNull(viewType, nameof(viewType));
 
             Debug.Assert(
                 typeof(IPresenter<IView>).IsAssignableFrom(presenterType),

@@ -68,8 +68,8 @@ namespace Narvalo.Mvp.PresenterBinding
         /// </summary>
         private static bool SequenceEqual<T>(IEnumerable<T> left, IEnumerable<T> right)
         {
-            Require.NotNull(left, "left");
-            Require.NotNull(right, "right");
+            Require.NotNull(left, nameof(left));
+            Require.NotNull(right, nameof(right));
 
             var leftObjects = left.ToList();
             var rightObjects = right.ToList();

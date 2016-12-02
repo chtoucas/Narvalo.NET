@@ -14,8 +14,8 @@ namespace Narvalo.Web.Optimization
 
         public WhiteSpaceBusterHtmlMarkupParser(ParserBase inner, RazorOptimizer optimizer)
         {
-            Require.NotNull(inner, "inner");
-            Require.NotNull(optimizer, "optimizer");
+            Require.NotNull(inner, nameof(inner));
+            Require.NotNull(optimizer, nameof(optimizer));
 
             _inner = inner;
             _optimizer = optimizer;

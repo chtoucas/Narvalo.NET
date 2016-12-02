@@ -11,7 +11,7 @@ namespace Narvalo.Web.Semantic
 
         public OpenGraphLocale(CultureInfo culture)
         {
-            Require.NotNull(culture, "culture");
+            Require.NotNull(culture, nameof(culture));
 
             _culture = culture;
         }

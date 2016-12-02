@@ -16,7 +16,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public Type Resolve(Type viewType)
         {
-            Require.NotNull(viewType, "viewType");
+            Require.NotNull(viewType, nameof(viewType));
 
             Trace.TraceInformation("[CompositeViewTypeResolver] Attempting to resolve '{0}'", viewType.FullName);
 
@@ -41,7 +41,7 @@ namespace Narvalo.Mvp.Resolvers
 
         internal static void ValidateViewType(Type viewType)
         {
-            Require.NotNull(viewType, "viewType");
+            Require.NotNull(viewType, nameof(viewType));
 
             if (!viewType.IsInterface)
             {
