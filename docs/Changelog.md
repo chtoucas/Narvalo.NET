@@ -11,13 +11,13 @@ XXXX-XX-XX -
 
 Narvalo.Mvp
 - `MvpBootstrapper.Run()` becomes `MvpBootstrapper.InitializePlatform()`.
-- `ConventionBasedPresenterDiscoveryStrategy` becomes `PresenterDiscoveryStrategy`
-- `AttributeBasedPresenterDiscoveryStrategy` becomes `AttributedPresenterDiscoveryStrategy`
-- `DefaultConventionBasedPresenterDiscoveryStrategy` becomes `DefaultPresenterDiscoveryStrategy`
+- `ConventionBasedPresenterDiscoveryStrategy` becomes `PresenterDiscoveryStrategy`.
+- `AttributeBasedPresenterDiscoveryStrategy` becomes `AttributedPresenterDiscoveryStrategy`.
+- `DefaultConventionBasedPresenterDiscoveryStrategy` becomes `DefaultPresenterDiscoveryStrategy`.
 - `MvpCommand.Init()` is no longer available; use the `OnLoad()` event instead.
 
 Narvalo.Mvp.Web
-- `AspNetConventionBasedPresenterDiscoveryStrategy` becomes `AspNetPresenterDiscoveryStrategy`
+- `AspNetConventionBasedPresenterDiscoveryStrategy` becomes `AspNetPresenterDiscoveryStrategy`.
 
 #### Enhancements
 - [NuGet] Added support for .NET Standard wherever it is possible and
