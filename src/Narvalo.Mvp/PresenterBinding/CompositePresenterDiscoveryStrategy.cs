@@ -40,6 +40,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
             foreach (var strategy in _strategies)
             {
+                if (strategy == null) { continue; }
+
                 if (!pendingViews.Any())
                 {
                     break;

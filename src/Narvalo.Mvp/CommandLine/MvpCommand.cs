@@ -3,12 +3,9 @@
 namespace Narvalo.Mvp.CommandLine
 {
     using System;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Mvp.CommandLine.Internal;
     using Narvalo.Mvp.PresenterBinding;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     public class MvpCommand : IView, ICommand
     {

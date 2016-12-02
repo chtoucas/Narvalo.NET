@@ -9,6 +9,10 @@ namespace Narvalo.Mvp.Resolvers
     using System.Diagnostics.Contracts;
 #endif
 
+    using Narvalo.Mvp.Properties;
+
+    using static System.Diagnostics.Contracts.Contract;
+
     [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes",
            Justification = "Using three generic parameters does not seem that much!")]
     public class ResolverCache<TKey, TCacheKey, TValue> where TKey : class
@@ -29,10 +33,18 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(valueFactory, nameof(valueFactory));
             Expect.NotNull(key);
+            Ensures(Result<TValue>() != null);
 
             TCacheKey innerKey = _cacheKeyProvider.Invoke(key);
 
-            return _dictionary.GetOrAdd(innerKey, _ => valueFactory.Invoke(key));
+            var value = _dictionary.GetOrAdd(innerKey, _ => valueFactory.Invoke(key));
+
+            if (value == null)
+            {
+                throw new ArgumentException(Strings.ResolverCache_ValueFactoryReturnsNull, nameof(valueFactory));
+            }
+
+            return value;
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

@@ -46,6 +46,7 @@ namespace Narvalo.Mvp
             }
         }
 
+        // NB: null values are allowed.
         public Type ViewType
         {
             get { return _viewType; }
@@ -55,7 +56,7 @@ namespace Narvalo.Mvp
         internal Type Origin
         {
             get { return _origin; }
-            set { _origin = value; }
+            set { Demand.Property(value); _origin = value; }
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

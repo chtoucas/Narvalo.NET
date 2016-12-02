@@ -32,14 +32,14 @@ namespace Narvalo.Mvp.PresenterBinding
             Requires(presenterType != null);
             Requires(viewType != null);
             Requires(view != null);
-            Ensures(Result<IPresenter>() != null);
+            // NB: no postcondition.
 
             return default(IPresenter);
         }
 
         void IPresenterFactory.Release(IPresenter presenter)
         {
-            // REVIEW: Add a precondition on presenter.
+            Requires(presenter != null);
         }
     }
 }

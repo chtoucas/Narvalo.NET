@@ -45,6 +45,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
             foreach (var item in views)
             {
+                if (item == null) { continue; }
+
                 view.Add(item);
             }
 

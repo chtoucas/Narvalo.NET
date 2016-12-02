@@ -124,6 +124,24 @@ namespace Narvalo.Mvp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to One of the properties has been initialized with a null value..
+        /// </summary>
+        internal static string DefaultPlatformServices_BadPropertyInitialization {
+            get {
+                return ResourceManager.GetString("DefaultPlatformServices_BadPropertyInitialization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value factory must not return a null value..
+        /// </summary>
+        internal static string LazyValueHolder_BadInitialization {
+            get {
+                return ResourceManager.GetString("LazyValueHolder_BadInitialization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Once the value has been accessed, you can no longer change the underlying value factory..
         /// </summary>
         internal static string LazyValueHolder_CannotReset {
@@ -192,6 +210,15 @@ namespace Narvalo.Mvp.Properties {
         internal static string PresenterFactory_PresenterCtorFailed {
             get {
                 return ResourceManager.GetString("PresenterFactory_PresenterCtorFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value factory must not return a null value..
+        /// </summary>
+        internal static string ResolverCache_ValueFactoryReturnsNull {
+            get {
+                return ResourceManager.GetString("ResolverCache_ValueFactoryReturnsNull", resourceCulture);
             }
         }
     }

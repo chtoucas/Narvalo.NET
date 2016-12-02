@@ -29,6 +29,8 @@ namespace Narvalo.Mvp.PresenterBinding
             IEnumerable<object> hosts,
             IEnumerable<IView> views)
         {
+            Requires(hosts != null);
+            Requires(views != null);
             Ensures(Result<PresenterDiscoveryResult>() != null);
 
             return default(PresenterDiscoveryResult);

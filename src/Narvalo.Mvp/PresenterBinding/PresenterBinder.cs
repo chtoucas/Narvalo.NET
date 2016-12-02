@@ -77,6 +77,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
                     foreach (var presenter in presenters)
                     {
+                        if (presenter == null) { continue; }
+
                         _presenters.Add(presenter);
                     }
 
@@ -109,6 +111,8 @@ namespace Narvalo.Mvp.PresenterBinding
             {
                 foreach (var presenter in _presenters)
                 {
+                    if (presenter == null) { continue;  }
+
                     _presenterFactory.Release(presenter);
                 }
 
@@ -119,9 +123,10 @@ namespace Narvalo.Mvp.PresenterBinding
         protected IPresenter CreatePresenter(PresenterBindingParameter binding, IView view)
         {
             Require.NotNull(binding, nameof(binding));
-            Ensures(Result<IPresenter>() != null);
 
             var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
+
+            if (presenter == null) { return null; }
 
             // TODO: Explain this.
             ((Internal.IPresenter)presenter).Messages = _messageCoordinator;

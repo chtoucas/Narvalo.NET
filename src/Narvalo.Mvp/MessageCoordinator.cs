@@ -11,6 +11,8 @@ namespace Narvalo.Mvp
 
     using Narvalo.Mvp.Properties;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     public class /*Default*/MessageCoordinator : IMessageCoordinator
     {
         private readonly bool _closeable;
@@ -25,7 +27,15 @@ namespace Narvalo.Mvp
             _closeable = closeable;
         }
 
-        public static MessageCoordinator BlackHole { get { return BlackHole_.Instance; } }
+        public static MessageCoordinator BlackHole
+        {
+            get
+            {
+                Ensures(Result<MessageCoordinator>() != null);
+
+                return BlackHole_.Instance;
+            }
+        }
 
         public void Close()
         {
@@ -87,7 +97,15 @@ namespace Narvalo.Mvp
             // NB: Since we choose a singleton, we disable the ability to close this message bus.
             private BlackHole_() : base(closeable: false) { }
 
-            public static BlackHole_ Instance { get { return Singleton_.Instance; } }
+            public static BlackHole_ Instance
+            {
+                get
+                {
+                    Ensures(Result<BlackHole_>() != null);
+
+                    return Singleton_.Instance;
+                }
+            }
 
             protected override void PublishCore<T>(T message) { }
 

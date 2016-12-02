@@ -24,8 +24,8 @@ namespace Narvalo.Mvp.Resolvers
                 .OfType<PresenterBindingAttribute>()
                 .ToArray();
 
-            if (attributes.Any(a =>
-                    a.BindingMode == PresenterBindingMode.SharedPresenter && a.ViewType == null))
+            if (attributes.Any(pba =>
+                    pba.BindingMode == PresenterBindingMode.SharedPresenter && pba.ViewType == null))
             {
                 throw new PresenterBindingException(Format.Current(
                     Strings.PresenterBindingAttributesResolver_MissingViewType,

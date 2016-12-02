@@ -9,6 +9,8 @@ namespace Narvalo.Mvp.Resolvers
     using System.Reflection;
     using System.Reflection.Emit;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     public sealed class CompositeViewModuleBuilder
     {
         private const string ASSEMBLY_NAME = "Narvalo.Mvp.CompositeViews";
@@ -27,17 +29,28 @@ namespace Narvalo.Mvp.Resolvers
         public TypeBuilder DefineType(Type viewType)
         {
             Require.NotNull(viewType, nameof(viewType));
+            Ensures(Result<TypeBuilder>() != null);
 
             // Create a generic type of type "CompositeView<ITestView>".
-            var parentType = typeof(CompositeView<>).MakeGenericType(viewType);
+            var type = typeof(CompositeView<>);
+            Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of CompositeView<>.");
+            Assume(type.IsGenericTypeDefinition, "Obvious per definition CompositeView<>.");
+
+            var parentType = type.MakeGenericType(new Type[] { viewType });
 
             var interfaces = new[] { viewType };
 
-            return _moduleBuilder.Value.DefineType(
+            Assume(_moduleBuilder.Value != null, "Extern: BCL.");
+
+            var typeBuilder = _moduleBuilder.Value.DefineType(
                 viewType.FullName + "__@CompositeView",
                 TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Class,
                 parentType,
                 interfaces);
+
+            Assume(typeBuilder != null, "Extern: BCL.");
+
+            return typeBuilder;
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
@@ -45,8 +58,8 @@ namespace Narvalo.Mvp.Resolvers
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(_assemblyName != null);
-            Contract.Invariant(_moduleBuilder != null);
+            Invariant(_assemblyName != null);
+            Invariant(_moduleBuilder != null);
         }
 
 #endif
@@ -66,6 +79,7 @@ namespace Narvalo.Mvp.Resolvers
             var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
                 assemblyName,
                 AssemblyBuilderAccess.Run);
+            Assume(assembly != null, "Extern: BCL.");
 
             return assembly.DefineDynamicModule(assemblyName.Name);
         }

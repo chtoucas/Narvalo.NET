@@ -138,6 +138,12 @@
   <data name="CompositeView_TypeMismatch" xml:space="preserve">
     <value>Expected a view of type {0} but {1} was supplied.</value>
   </data>
+  <data name="DefaultPlatformServices_BadPropertyInitialization" xml:space="preserve">
+    <value>One of the properties has been initialized with a null value.</value>
+  </data>
+  <data name="LazyValueHolder_BadInitialization" xml:space="preserve">
+    <value>The value factory must not return a null value.</value>
+  </data>
   <data name="LazyValueHolder_CannotReset" xml:space="preserve">
     <value>Once the value has been accessed, you can no longer change the underlying value factory.</value>
   </data>
@@ -161,5 +167,8 @@
   </data>
   <data name="PresenterFactory_PresenterCtorFailed" xml:space="preserve">
     <value>An exception was thrown whilst trying to create an instance of {0}. Check the inner exception for more information.</value>
+  </data>
+  <data name="ResolverCache_ValueFactoryReturnsNull" xml:space="preserve">
+    <value>The value factory must not return a null value.</value>
   </data>
 </root>

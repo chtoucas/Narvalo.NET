@@ -45,6 +45,8 @@ namespace Narvalo.Mvp.PresenterBinding
 
             foreach (var view in views)
             {
+                if (view == null) { continue; }
+
                 var viewType = view.GetType();
                 var presenterType = _typeResolver.Resolve(viewType);
 

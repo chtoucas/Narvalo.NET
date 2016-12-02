@@ -8,9 +8,12 @@ namespace Narvalo.Mvp.Platforms
 #endif
 
     using Narvalo.Mvp.PresenterBinding;
+    using Narvalo.Mvp.Properties;
 
     using static System.Diagnostics.Contracts.Contract;
 
+    // FIXME: This whole business to ensure delayed initialization of the properties was
+    // most certainly one of the worst idea I ever had.
     public class DefaultPlatformServices : IPlatformServices
     {
         private Func<ICompositeViewFactory> _compositeViewFactoryThunk
@@ -57,6 +60,12 @@ namespace Narvalo.Mvp.Platforms
                 if (_compositeViewFactory == null)
                 {
                     _compositeViewFactory = _compositeViewFactoryThunk();
+
+                    if (_compositeViewFactory == null)
+                    {
+                        throw new InvalidOperationException(
+                            Strings.DefaultPlatformServices_BadPropertyInitialization);
+                    }
                 }
 
                 return _compositeViewFactory;
@@ -70,6 +79,12 @@ namespace Narvalo.Mvp.Platforms
                 if (_messageCoordinatorFactory == null)
                 {
                     _messageCoordinatorFactory = _messageCoordinatorFactoryThunk();
+
+                    if (_messageCoordinatorFactory == null)
+                    {
+                        throw new InvalidOperationException(
+                            Strings.DefaultPlatformServices_BadPropertyInitialization);
+                    }
                 }
 
                 return _messageCoordinatorFactory;
@@ -83,6 +98,12 @@ namespace Narvalo.Mvp.Platforms
                 if (_presenterDiscoveryStrategy == null)
                 {
                     _presenterDiscoveryStrategy = _presenterDiscoveryStrategyThunk();
+
+                    if (_presenterDiscoveryStrategy == null)
+                    {
+                        throw new InvalidOperationException(
+                            Strings.DefaultPlatformServices_BadPropertyInitialization);
+                    }
                 }
 
                 return _presenterDiscoveryStrategy;
@@ -96,6 +117,12 @@ namespace Narvalo.Mvp.Platforms
                 if (_presenterFactory == null)
                 {
                     _presenterFactory = _presenterFactoryThunk();
+
+                    if (_presenterFactory == null)
+                    {
+                        throw new InvalidOperationException(
+                            Strings.DefaultPlatformServices_BadPropertyInitialization);
+                    }
                 }
 
                 return _presenterFactory;

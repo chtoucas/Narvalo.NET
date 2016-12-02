@@ -31,7 +31,7 @@ namespace Narvalo.Mvp.CommandLine
 
                 return s_Instance;
             }
-            set { s_Instance.Reset(value); }
+            set { Expect.NotNull(value); s_Instance.Reset(value); }
         }
 
         private sealed class DefaultPlatformServices_ : DefaultPlatformServices

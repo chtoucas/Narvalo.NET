@@ -5,6 +5,8 @@ namespace Narvalo.Mvp.Web.Core
     using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.PresenterBinding;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     public static class PlatformServices
     {
         private static readonly IPlatformServices s_Default
@@ -15,13 +17,18 @@ namespace Narvalo.Mvp.Web.Core
 
         public static IPlatformServices Default
         {
-            get { return s_Default; }
+            get
+            {
+                Ensures(Result<IPlatformServices>() != null);
+
+                return s_Default;
+            }
         }
 
         public static IPlatformServices Current
         {
             get { return s_Instance; }
-            set { s_Instance.Reset(value); }
+            set { Expect.NotNull(value); s_Instance.Reset(value); }
         }
 
         private sealed class DefaultPlatformServices_ : DefaultPlatformServices

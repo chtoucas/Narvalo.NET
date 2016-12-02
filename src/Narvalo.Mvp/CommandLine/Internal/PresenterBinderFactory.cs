@@ -14,6 +14,7 @@ namespace Narvalo.Mvp.CommandLine.Internal
     {
         public static PresenterBinder Create(MvpCommand command)
         {
+            Expect.NotNull(command);
             Ensures(Result<PresenterBinder>() != null);
 
             return Create(command, PlatformServices.Current);
@@ -26,12 +27,19 @@ namespace Narvalo.Mvp.CommandLine.Internal
             Require.NotNull(platformServices, nameof(platformServices));
             Ensures(Result<PresenterBinder>() != null);
 
-            return new PresenterBinder(
+            var presenterBinder = new PresenterBinder(
                 new[] { command },
                 platformServices.PresenterDiscoveryStrategy,
                 platformServices.PresenterFactory,
                 platformServices.CompositeViewFactory,
                 MessageCoordinator.BlackHole);
+
+            if (presenterBinder == null)
+            {
+                throw new System.InvalidOperationException();
+            }
+
+            return presenterBinder;
         }
     }
 }

@@ -88,7 +88,7 @@ namespace Narvalo.Mvp.PresenterBinding
             return new PresenterDiscoveryResult(boundViews, bindings);
         }
 
-        [SuppressMessage("Microsoft.Contracts", "Requires-7-138", Justification = "[Intentionally] Requires unreachable but CCCheck still proves no case is forgotten.")]
+        [SuppressMessage("Microsoft.Contracts", "Requires-7-207", Justification = "[Intentionally] Requires unreachable but CCCheck still proves no case is forgotten.")]
         private static IEnumerable<IView> GetViewsToBind(
             PresenterBindingAttribute attribute,
             IView view,
@@ -96,12 +96,13 @@ namespace Narvalo.Mvp.PresenterBinding
         {
             Demand.NotNull(attribute);
             Demand.NotNull(view);
+            Demand.NotNull(pendingViews);
 
             Trace.TraceInformation(
                 "[AttributeBasedPresenterDiscoveryStrategy] Found presenter '{0}' for view '{1}', origin='{2}', binding mode='{3}'.",
                 attribute.PresenterType.FullName,
-                attribute.ViewType.FullName,
-                attribute.Origin.FullName,
+                attribute.ViewType?.FullName,
+                attribute.Origin?.FullName,
                 attribute.BindingMode.ToString());
 
             switch (attribute.BindingMode)
@@ -110,7 +111,7 @@ namespace Narvalo.Mvp.PresenterBinding
                     return new[] { view };
 
                 case PresenterBindingMode.SharedPresenter:
-                    return pendingViews.Where(attribute.ViewType.IsInstanceOfType);
+                    return pendingViews.Where(_ => attribute.ViewType?.IsInstanceOfType(_) ?? false);
 
                 default:
                     throw Check.Unreachable("A case in a switch has been forgotten.");

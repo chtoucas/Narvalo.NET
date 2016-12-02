@@ -68,6 +68,10 @@ namespace Narvalo.Mvp.Resolvers
         private readonly TypeBuilder _typeBuilder;
         private readonly Type _viewType;
 
+        private Type _compositeViewType;
+        private Type _enumerableType;
+        private Type _enumeratorType;
+
         public CompositeViewTypeBuilder(Type viewType, TypeBuilder typeBuilder)
         {
             Require.NotNull(viewType, nameof(viewType));
@@ -77,9 +81,71 @@ namespace Narvalo.Mvp.Resolvers
             _typeBuilder = typeBuilder;
         }
 
+        private Type CompositeViewType
+        {
+            get
+            {
+                Ensures(Result<Type>() != null);
+
+                if (_compositeViewType == null)
+                {
+                    var type = typeof(CompositeView<>);
+                    Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of CompositeView<>.");
+                    Assume(type.IsGenericTypeDefinition, "Obvious per definition of CompositeView<>.");
+
+                    _compositeViewType = type.MakeGenericType(new Type[] { _viewType });
+                }
+
+                return _compositeViewType;
+            }
+        }
+
+        private Type EnumerableType
+        {
+            get
+            {
+                Ensures(Result<Type>() != null);
+
+                if (_enumerableType == null)
+                {
+                    var type = typeof(IEnumerable<>);
+                    Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of IEnumerable<>.");
+                    Assume(type.IsGenericTypeDefinition, "Obvious per definition of IEnumerable<>.");
+
+                    _enumerableType = type.MakeGenericType(new Type[] { _viewType });
+                }
+
+                return _enumerableType;
+            }
+        }
+
+        private Type EnumeratorType
+        {
+            get
+            {
+                Ensures(Result<Type>() != null);
+
+                if (_enumeratorType == null)
+                {
+                    var type = typeof(IEnumerator<>);
+                    Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of IEnumerator<>.");
+                    Assume(type.IsGenericTypeDefinition, "Obvious per definition of IEnumerator<>.");
+
+                    _enumeratorType = type.MakeGenericType(new Type[] { _viewType });
+                }
+
+                return _enumeratorType;
+            }
+        }
+
         public Type Build()
         {
-            return _typeBuilder.CreateType();
+            Ensures(Result<Type>() != null);
+
+            var type = _typeBuilder.CreateType();
+            Assume(type != null, "Extern: BCL.");
+
+            return type;
         }
 
         public void AddEvent(EventInfo eventInfo)
@@ -256,25 +322,20 @@ namespace Narvalo.Mvp.Resolvers
             il.Emit(OpCodes.Ldarg, local.LocalIndex);
 
             // Call CompositeView<IViewType>.get_Views
-            var getViews = typeof(CompositeView<>)
-                .MakeGenericType(_viewType)
-                .GetProperties(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.NonPublic)
-                .First(pi => pi.Name == "Views"
-                    && pi.PropertyType == typeof(IEnumerable<>).MakeGenericType(_viewType))
-                .GetGetMethod(true);
+            var getViews = GetCompositeViewViewsPropertyGetter();
             il.EmitCall(OpCodes.Call, getViews, null);
 
             // Call IEnumerable.First<IViewType>
             var firstView = typeof(Enumerable)
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
                 .Where(mi => mi.Name == "First")
-                .Single(mi =>
+                .SingleOrDefault(mi =>
                 {
                     var parameters = mi.GetParameters();
                     return parameters.Length == 1 &&
                         parameters[0].ParameterType.GUID == typeof(IEnumerable<>).GUID;
                 })
-                .MakeGenericMethod(_viewType);
+                ?.MakeGenericMethod(new Type[] { _viewType });
             il.EmitCall(OpCodes.Call, firstView, null);
 
             // Call the original getter, eg. IViewType.get_SomeProperty
@@ -399,7 +460,7 @@ namespace Narvalo.Mvp.Resolvers
             var viewLocal = il.DeclareLocal(_viewType);
             Assume(viewLocal != null, "Extern: BCL.");
 
-            var enumeratorLocal = il.DeclareLocal(typeof(IEnumerable<>).MakeGenericType(_viewType));
+            var enumeratorLocal = il.DeclareLocal(EnumerableType);
             Assume(enumeratorLocal != null, "Extern: BCL.");
 
             var enumeratorContinueLocal = il.DeclareLocal(typeof(bool));
@@ -409,17 +470,11 @@ namespace Narvalo.Mvp.Resolvers
             il.Emit(OpCodes.Ldarg, viewLocal.LocalIndex);
 
             // Call CompositeView<IViewType>.get_Views
-            var getViews = typeof(CompositeView<>)
-                .MakeGenericType(_viewType)
-                .GetProperties(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.NonPublic)
-                .First(pi => pi.Name == "Views" &&
-                    pi.PropertyType == typeof(IEnumerable<>).MakeGenericType(_viewType))
-                .GetGetMethod(true);
+            var getViews = GetCompositeViewViewsPropertyGetter();
             il.EmitCall(OpCodes.Call, getViews, null);
 
             // Call IEnumerable<>.GetEnumerator
-            var getViewsEnumerator = typeof(IEnumerable<>)
-                .MakeGenericType(_viewType)
+            var getViewsEnumerator = EnumerableType
                 .GetMethod(
                     "GetEnumerator",
                     BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public);
@@ -448,10 +503,7 @@ namespace Narvalo.Mvp.Resolvers
             il.Emit(OpCodes.Ldloc, enumeratorLocal);
 
             // Call IEnumerator<>.get_Current on the enumerator
-            var getCurrent = typeof(IEnumerator<>)
-                .MakeGenericType(_viewType)
-                .GetProperty("Current")
-                .GetGetMethod();
+            var getCurrent = EnumeratorType.GetProperty("Current")?.GetGetMethod();
             il.EmitCall(OpCodes.Callvirt, getCurrent, null);
 
             // Store the output from IEnumerator<>.get_Current into a local
@@ -507,9 +559,7 @@ namespace Narvalo.Mvp.Resolvers
             il.Emit(OpCodes.Ldloc, enumeratorLocal);
 
             // Call IDisposable.Dispose
-            var dispose =
-                typeof(IDisposable)
-                .GetMethod("Dispose");
+            var dispose = typeof(IDisposable).GetMethod("Dispose");
             il.Emit(OpCodes.Callvirt, dispose);
 
             // Mark this point as exit point for our finally block
@@ -520,6 +570,17 @@ namespace Narvalo.Mvp.Resolvers
 
             // Mark this point as our exit point (used to get out of the try block)
             il.MarkLabel(exitLabel);
+        }
+
+        private MethodInfo GetCompositeViewViewsPropertyGetter()
+        {
+            // TODO: Throw on null value?
+            // NB: Our definition of CompositeView<IViewType> ensures that the result is not null,
+            // but we never know, this explains all the ?. below.
+            return CompositeViewType
+                .GetProperties(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.NonPublic)
+                .FirstOrDefault(pi => pi.Name == "Views" && pi.PropertyType == EnumerableType)
+                ?.GetGetMethod(true);
         }
     }
 }

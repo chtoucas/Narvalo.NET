@@ -30,6 +30,8 @@ namespace Narvalo.Mvp.Platforms
 
             foreach (var value in values)
             {
+                if (value == null) { continue; }
+
                 _append(value);
             }
 

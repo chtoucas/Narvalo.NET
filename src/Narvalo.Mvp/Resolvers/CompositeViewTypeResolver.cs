@@ -31,12 +31,16 @@ namespace Narvalo.Mvp.Resolvers
             var properties = FindProperties(viewType);
             foreach (var propertyInfo in properties)
             {
+                if (propertyInfo == null) { continue; }
+
                 typeBuilder.AddProperty(propertyInfo);
             }
 
             var events = FindEvents(viewType);
             foreach (var eventInfo in events)
             {
+                if (eventInfo ==null) { continue; }
+
                 typeBuilder.AddEvent(eventInfo);
             }
 
@@ -83,6 +87,8 @@ namespace Narvalo.Mvp.Resolvers
 
         private static IEnumerable<EventInfo> FindEvents(Type viewType)
         {
+            Demand.NotNull(viewType);
+
             return viewType.GetEvents()
                 .Union(
                     viewType.GetInterfaces()
@@ -91,6 +97,8 @@ namespace Narvalo.Mvp.Resolvers
 
         private static IEnumerable<PropertyInfo> FindProperties(Type viewType)
         {
+            Demand.NotNull(viewType);
+
             return viewType.GetProperties()
                 .Union(
                     viewType.GetInterfaces().SelectMany<Type, PropertyInfo>(FindProperties))

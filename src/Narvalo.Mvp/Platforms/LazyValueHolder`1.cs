@@ -10,6 +10,8 @@ namespace Narvalo.Mvp.Platforms
 
     using Narvalo.Mvp.Properties;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class LazyValueHolder<TValue>
     {
@@ -29,12 +31,29 @@ namespace Narvalo.Mvp.Platforms
             _lazyValue = new Lazy<TValue>(() => _valueFactory.Invoke());
         }
 
-        public TValue Value { get { return _lazyValue.Value; } }
+        public TValue Value
+        {
+            get
+            {
+                Ensures(Result<TValue>() != null);
+
+                var value = _lazyValue.Value;
+
+                if (value == null)
+                {
+                    throw new InvalidOperationException(Strings.LazyValueHolder_BadInitialization);
+                }
+
+                return value;
+            }
+        }
 
         public bool CanReset { get { return !_lazyValue.IsValueCreated; } }
 
         public void Reset(TValue value)
         {
+            Require.NotNull(value, nameof(value));
+
             Reset(() => value);
         }
 
@@ -56,7 +75,7 @@ namespace Narvalo.Mvp.Platforms
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(_lazyValue != null);
+            Invariant(_lazyValue != null);
         }
 
 #endif
