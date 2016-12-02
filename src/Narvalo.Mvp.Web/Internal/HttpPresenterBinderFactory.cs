@@ -12,21 +12,26 @@ namespace Narvalo.Mvp.Web.Internal
 
     internal static class HttpPresenterBinderFactory
     {
-        ////public static HttpPresenterBinder Create(
-        ////    MvpHttpHandler httpHandler,
-        ////    HttpContext context)
-        ////{
-        ////    return Create(
-        ////        new[] { httpHandler },
-        ////        context,
-        ////        PlatformServices.Current,
-        ////        MessageCoordinator.BlackHole);
-        ////}
+        public static HttpPresenterBinder Create(
+            MvpHttpHandler httpHandler,
+            HttpContext context)
+        {
+            Expect.NotNull(context);
+
+            return Create(
+                new[] { httpHandler },
+                context,
+                PlatformServices.Current,
+                MessageCoordinator.BlackHole);
+        }
 
         public static HttpPresenterBinder Create(
             IEnumerable<Control> controls,
             HttpContext context)
         {
+            Expect.NotNull(controls);
+            Expect.NotNull(context);
+
             return Create(
                 controls,
                 context,
@@ -41,6 +46,8 @@ namespace Narvalo.Mvp.Web.Internal
             IMessageCoordinator messageCoordinator)
         {
             Require.NotNull(platformServices, nameof(platformServices));
+            Expect.NotNull(hosts);
+            Expect.NotNull(context);
 
             return new HttpPresenterBinder(
                 hosts,

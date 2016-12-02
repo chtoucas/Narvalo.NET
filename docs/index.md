@@ -8,17 +8,17 @@ Overview
 Status
 ------
 
-Library                   | Version     | Target (.NET Standard) | Security (*)
---------------------------|-------------|------------------------|--------------
-Narvalo.Build             | 1.1.0       | .NET 4.5               |
-Narvalo.Cerbere           | 2.0.0       | Profile259 (v1.0)      | Transparent
-Narvalo.Common            | 0.25.0      | .NET 4.5               | Transparent
-Narvalo.Core              | 0.25.0      | Profile259 (v1.0)      | Transparent
-Narvalo.Finance           | 0.25.0      | Profile111 (v1.1)      | Transparent
-Narvalo.Fx                | 0.25.0      | Profile259 (v1.0)      | Transparent
-Narvalo.Mvp               | 0.99.1      | .NET 4.5               |
-Narvalo.Mvp.Web           | 0.99.1      | .NET 4.5               |
-Narvalo.Web               | 0.25.0      | .NET 4.5               |
+Library                   | Version     | Target     | .NETStd | Security (*)
+--------------------------|-------------|------------|---------|--------------
+Narvalo.Build             | 1.1.0       | .NET 4.5   |         |
+Narvalo.Cerbere           | 2.0.0       | Profile259 | 1.0     | Transparent
+Narvalo.Common            | 0.25.0      | .NET 4.5   |         | Transparent
+Narvalo.Core              | 0.25.0      | Profile259 | 1.0     | Transparent
+Narvalo.Finance           | 0.25.0      | Profile111 | 1.1     | Transparent
+Narvalo.Fx                | 0.25.0      | Profile259 | 1.0     | Transparent
+Narvalo.Mvp               | 1.0.0       | .NET 4.5   |         |
+Narvalo.Mvp.Web           | 1.0.0       | .NET 4.5   |         |
+Narvalo.Web               | 0.25.0      | .NET 4.5   |         |
 
 (*) Security attributes are not applied to the assemblies distributed via NuGet.
 
@@ -31,9 +31,8 @@ Narvalo.Core              | Complete    | Complete |
 Narvalo.Finance           | Complete    | Complete |
 Narvalo.Fx                | Complete    | Complete |
 Narvalo.Mvp               | Complete    | Complete |
-Narvalo.Mvp.Web           | Complete    |          |
+Narvalo.Mvp.Web           | Complete    | Complete |
 Narvalo.Web               | Pretty good | Minimal  |
-
 
 Explanations:
 - SA: Static Analysis with the analyzers shipped with VS

@@ -8,6 +8,8 @@ namespace Narvalo.Mvp.Web.Core
     using Narvalo.Mvp.Resolvers;
     using Narvalo.Mvp.Web.Internal;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     public sealed class AspNetPresenterTypeResolver : PresenterTypeResolver
     {
         public AspNetPresenterTypeResolver(
@@ -15,7 +17,13 @@ namespace Narvalo.Mvp.Web.Core
             IEnumerable<string> defaultNamespaces,
             IEnumerable<string> viewSuffixes,
             IEnumerable<string> presenterNameTemplates)
-            : base(buildManager, defaultNamespaces, viewSuffixes, presenterNameTemplates) { }
+            : base(buildManager, defaultNamespaces, viewSuffixes, presenterNameTemplates)
+        {
+            Expect.NotNull(buildManager);
+            Expect.NotNull(defaultNamespaces);
+            Expect.NotNull(viewSuffixes);
+            Expect.NotNull(presenterNameTemplates);
+        }
 
         // REVIEW: Prefers composition over extension?
         public override Type Resolve(Type viewType)
@@ -24,6 +32,7 @@ namespace Narvalo.Mvp.Web.Core
 
             if (viewType.IsAspNetDynamicType())
             {
+                Assume(viewType.BaseType != null);
                 return base.Resolve(viewType.BaseType);
             }
             else

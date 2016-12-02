@@ -8,9 +8,14 @@ namespace Narvalo.Mvp.Web.Core
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Linq;
 
     using Narvalo.Mvp;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     // Only views bound by the same "HttpPresenteBinder" will share this message bus.
     // In practice, cross-presenter communication is applicable to all presenters
@@ -55,9 +60,9 @@ namespace Narvalo.Mvp.Web.Core
 
         public void Subscribe<T>(Action<T> onNext)
         {
-            ThrowIfClosed();
-
             Require.NotNull(onNext, nameof(onNext));
+
+            ThrowIfClosed();
 
             AddHandler(onNext);
             PushPreviousMessages(onNext);
@@ -66,6 +71,7 @@ namespace Narvalo.Mvp.Web.Core
         private void AddMessage<T>(T message)
         {
             var messagesOfT = _messages.GetOrAdd(typeof(T), _ => new List<T>());
+            Assume(messagesOfT != null, "Extern: BCL.");
 
             lock (messagesOfT)
             {
@@ -75,11 +81,14 @@ namespace Narvalo.Mvp.Web.Core
 
         private void AddHandler<T>(Action<T> onNext)
         {
+            Demand.NotNull(onNext);
+
             var handlersOfT = _handlers.GetOrAdd(typeof(T), _ => new List<Action<object>>());
+            Assume(handlersOfT != null, "Extern: BCL.");
 
             lock (handlersOfT)
             {
-                handlersOfT.Add(_ => onNext((T)_));
+                handlersOfT.Add(_ => onNext.Invoke((T)_));
             }
         }
 
@@ -94,12 +103,17 @@ namespace Narvalo.Mvp.Web.Core
 
             foreach (var handler in handlersOfT)
             {
-                handler(message);
+                // A fortiori, this is not possible, anyway...
+                if (handler == null) { continue; }
+
+                handler.Invoke(message);
             }
         }
 
         private void PushPreviousMessages<T>(Action<T> onNext)
         {
+            Demand.NotNull(onNext);
+
             var messageType = typeof(T);
 
             var messagesOfT = from t in _messages.Keys
@@ -109,7 +123,7 @@ namespace Narvalo.Mvp.Web.Core
 
             foreach (var message in messagesOfT)
             {
-                onNext(message);
+                onNext.Invoke(message);
             }
         }
 
@@ -120,6 +134,8 @@ namespace Narvalo.Mvp.Web.Core
 
             foreach (var type in neverReceivedMessages)
             {
+                if (type == null) { continue; }
+
                 Trace.TraceWarning(
                     "[AspNetMessageCoordinator] You published a message of type '{0}' but you did not registered any handler for it.",
                     type.FullName);
@@ -137,5 +153,17 @@ namespace Narvalo.Mvp.Web.Core
                     "Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during 'PreRenderComplete'.");
             }
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_handlers != null);
+            Contract.Invariant(_lock != null);
+            Contract.Invariant(_messages != null);
+        }
+
+#endif
     }
 }

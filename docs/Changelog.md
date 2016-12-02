@@ -21,12 +21,12 @@ Narvalo.Mvp.Web
 
 #### Enhancements
 - [NuGet] Added support for .NET Standard wherever it is possible and
-  Automatically add required GAC assemblies upon installation.
-- [Narvalo.Mvp] Added preliminary support for Code Contracts.
+  automatically add required GAC assemblies upon installation.
+- [Narvalo.Mvp] Full support for Code Contracts.
+- [Narvalo.Mvp.Web] Full support for Code Contracts.
 
 #### Improvements
 - Micro-optimization for `Int64Encoder.Encode()`.
-- More Code Contracts.
 
 2016-11-04 - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------

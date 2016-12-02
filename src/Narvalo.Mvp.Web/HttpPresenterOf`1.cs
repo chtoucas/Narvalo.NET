@@ -2,32 +2,111 @@
 
 namespace Narvalo.Mvp.Web
 {
+    using System.Diagnostics.Contracts;
     using System.Web;
     using System.Web.Caching;
 
     using Narvalo.Mvp;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     public abstract class HttpPresenterOf<TViewModel>
         : PresenterOf<TViewModel>, IHttpPresenter, Internal.IHttpPresenter
         where TViewModel : class, new()
     {
-        protected HttpPresenterOf(IView<TViewModel> view) : base(view) { }
+        private IAsyncTaskManager _asyncManager;
+        private HttpContextBase _httpContext;
 
-        public IAsyncTaskManager AsyncManager { get; private set; }
+        protected HttpPresenterOf(IView<TViewModel> view) : base(view)
+        {
+            Expect.NotNull(view);
+        }
 
-        public HttpContextBase HttpContext { get; private set; }
+        [ContractVerification(false)]  // Cf. HttpPresenter<TView>
+        public IAsyncTaskManager AsyncManager
+        {
+            get
+            {
+                Ensures(Result<IAsyncTaskManager>() != null);
 
-        public HttpApplicationStateBase Application { get { return HttpContext.Application; } }
+                return _asyncManager;
+            }
+            private set
+            {
+                Demand.NotNull(value);
+
+                _asyncManager = value;
+            }
+        }
+
+        [ContractVerification(false)]  // Cf. HttpPresenter<TView>
+        public HttpContextBase HttpContext
+        {
+            get
+            {
+                Ensures(Result<HttpContextBase>() != null);
+
+                return _httpContext;
+            }
+            private set
+            {
+                Demand.NotNull(value);
+
+                _httpContext = value;
+            }
+        }
+
+        public HttpApplicationStateBase Application
+        {
+            get
+            {
+                Ensures(Result<HttpApplicationStateBase>() != null);
+
+                return HttpContext.Application;
+            }
+        }
 
         public Cache Cache { get { return HttpContext.Cache; } }
 
-        public HttpRequestBase Request { get { return HttpContext.Request; } }
+        public HttpRequestBase Request
+        {
+            get
+            {
+                Ensures(Result<HttpRequestBase>() != null);
 
-        public HttpResponseBase Response { get { return HttpContext.Response; } }
+                return HttpContext.Request;
+            }
+        }
 
-        public HttpServerUtilityBase Server { get { return HttpContext.Server; } }
+        public HttpResponseBase Response
+        {
+            get
+            {
+                Ensures(Result<HttpResponseBase>() != null);
 
-        public HttpSessionStateBase Session { get { return HttpContext.Session; } }
+                return HttpContext.Response;
+            }
+        }
+
+        public HttpServerUtilityBase Server
+        {
+            get
+            {
+                Ensures(Result<HttpServerUtilityBase>() != null);
+
+                return HttpContext.Server;
+            }
+        }
+
+        public HttpSessionStateBase Session
+        {
+            get
+            {
+                Ensures(Result<HttpSessionStateBase>() != null);
+
+                return HttpContext.Session;
+            }
+        }
 
         IAsyncTaskManager Internal.IHttpPresenter.AsyncManager
         {

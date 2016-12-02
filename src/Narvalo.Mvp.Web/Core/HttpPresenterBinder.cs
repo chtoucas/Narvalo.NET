@@ -3,6 +3,9 @@
 namespace Narvalo.Mvp.Web.Core
 {
     using System.Collections.Generic;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Web;
 
     using Narvalo.Mvp;
@@ -27,6 +30,11 @@ namespace Narvalo.Mvp.Web.Core
                 messageCoordinator)
         {
             Require.NotNull(context, nameof(context));
+            Expect.NotNull(hosts);
+            Expect.NotNull(presenterDiscoveryStrategy);
+            Expect.NotNull(presenterFactory);
+            Expect.NotNull(compositeViewFactory);
+            Expect.NotNull(messageCoordinator);
 
             _context = context;
         }
@@ -43,5 +51,15 @@ namespace Narvalo.Mvp.Web.Core
 
             base.OnPresenterCreated(args);
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_context != null);
+        }
+
+#endif
     }
 }
