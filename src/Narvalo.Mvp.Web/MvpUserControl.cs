@@ -60,8 +60,6 @@ namespace Narvalo.Mvp.Web
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "FIXME")]
         protected string DataValue<T>(string format)
-        {
-            return String.Format(CultureInfo.CurrentCulture, format, (T)Page.GetDataItem());
-        }
+            => Format.Current(format, (T)Page.GetDataItem());
     }
 }

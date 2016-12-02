@@ -85,9 +85,7 @@ namespace Narvalo.Mvp.Resolvers
 
             if (eventInfo.EventHandlerType == null)
             {
-                throw new ArgumentException(
-                    String.Format(
-                        CultureInfo.InvariantCulture,
+                throw new ArgumentException(Format.Current(
                         "The supplied event {0} from {1} does not have the event handler type specified.",
                         eventInfo.Name,
                         eventInfo.ReflectedType.Name),

@@ -26,11 +26,9 @@ namespace Narvalo.Mvp.Resolvers
             if (attributes.Any(a =>
                     a.BindingMode == PresenterBindingMode.SharedPresenter && a.ViewType == null))
             {
-                throw new PresenterBindingException(
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "When shared presenter binding is requested, the view type must be explicitly specified. One of the bindings on '{0}' violates this restriction.",
-                        viewType.FullName));
+                throw new PresenterBindingException(Format.Current(
+                    "When shared presenter binding is requested, the view type must be explicitly specified. One of the bindings on '{0}' violates this restriction.",
+                    viewType.FullName));
             }
 
             return attributes

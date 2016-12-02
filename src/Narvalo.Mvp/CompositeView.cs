@@ -41,9 +41,7 @@ namespace Narvalo.Mvp
 
             if (!(view is TView))
             {
-                throw new ArgumentException(
-                    String.Format(
-                        CultureInfo.InvariantCulture,
+                throw new ArgumentException(Format.Current(
                         "Expected a view of type {0} but {1} was supplied.",
                         typeof(TView).FullName,
                         view.GetType().FullName),
