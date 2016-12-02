@@ -168,6 +168,9 @@
   <data name="PresenterFactory_PresenterCtorFailed" xml:space="preserve">
     <value>An exception was thrown whilst trying to create an instance of {0}. Check the inner exception for more information.</value>
   </data>
+  <data name="ResolverCache_BadInitialization" xml:space="preserve">
+    <value>The key factory must not return a null value.</value>
+  </data>
   <data name="ResolverCache_ValueFactoryReturnsNull" xml:space="preserve">
     <value>The value factory must not return a null value.</value>
   </data>

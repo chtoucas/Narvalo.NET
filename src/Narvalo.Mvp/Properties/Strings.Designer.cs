@@ -214,6 +214,15 @@ namespace Narvalo.Mvp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The key factory must not return a null value..
+        /// </summary>
+        internal static string ResolverCache_BadInitialization {
+            get {
+                return ResourceManager.GetString("ResolverCache_BadInitialization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value factory must not return a null value..
         /// </summary>
         internal static string ResolverCache_ValueFactoryReturnsNull {

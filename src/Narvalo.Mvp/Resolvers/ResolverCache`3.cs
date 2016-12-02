@@ -37,6 +37,11 @@ namespace Narvalo.Mvp.Resolvers
 
             TCacheKey innerKey = _cacheKeyProvider.Invoke(key);
 
+            if (innerKey == null)
+            {
+                throw new InvalidOperationException(Strings.ResolverCache_BadInitialization);
+            }
+
             var value = _dictionary.GetOrAdd(innerKey, _ => valueFactory.Invoke(key));
 
             if (value == null)

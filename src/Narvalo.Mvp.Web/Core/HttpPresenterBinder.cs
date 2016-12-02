@@ -36,7 +36,8 @@ namespace Narvalo.Mvp.Web.Core
             Require.NotNull(args, nameof(args));
 
             var presenter = args.Presenter as Internal.IHttpPresenter;
-            if (presenter != null) {
+            if (presenter != null)
+            {
                 presenter.HttpContext = new HttpContextWrapper(_context);
             }
 

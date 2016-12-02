@@ -41,7 +41,8 @@ namespace Narvalo.Mvp.Web
 
         protected override void OnPreRenderComplete(EventArgs e)
         {
-            if (AutoDataBind) {
+            if (AutoDataBind)
+            {
                 DataBind();
             }
 

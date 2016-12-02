@@ -22,10 +22,12 @@ namespace Narvalo.Mvp.Web.Core
         {
             Require.NotNull(viewType, nameof(viewType));
 
-            if (viewType.IsAspNetDynamicType()) {
+            if (viewType.IsAspNetDynamicType())
+            {
                 return base.Resolve(viewType.BaseType);
             }
-            else {
+            else
+            {
                 return base.Resolve(viewType);
             }
         }

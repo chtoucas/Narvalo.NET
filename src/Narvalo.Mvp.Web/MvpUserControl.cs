@@ -38,7 +38,8 @@ namespace Narvalo.Mvp.Web
         {
             PageHost.Register(Page, Context).RegisterView(this);
 
-            if (AutoDataBind) {
+            if (AutoDataBind)
+            {
                 Page.PreRenderComplete += (sender, args) => DataBind();
             }
 
@@ -58,8 +59,7 @@ namespace Narvalo.Mvp.Web
         }
 
         [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "FIXME")]
-        protected string DataValue<T>(string format)
-            => Format.Current(format, (T)Page.GetDataItem());
+            Justification = "XXX")]
+        protected string DataValue<T>(string format) => Format.Current(format, (T)Page.GetDataItem());
     }
 }

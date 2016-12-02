@@ -34,7 +34,7 @@ namespace Narvalo.Mvp.Resolvers
             // Create a generic type of type "CompositeView<ITestView>".
             var type = typeof(CompositeView<>);
             Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of CompositeView<>.");
-            Assume(type.IsGenericTypeDefinition, "Obvious per definition CompositeView<>.");
+            Assume(type.IsGenericTypeDefinition, "Obvious per definition of CompositeView<>.");
 
             var parentType = type.MakeGenericType(new Type[] { viewType });
 
