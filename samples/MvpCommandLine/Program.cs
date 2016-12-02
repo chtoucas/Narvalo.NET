@@ -8,7 +8,10 @@ namespace MvpCommandLine
     {
         private static void Main()
         {
-            ////using (var cmd = new SampleCommand()) { cmd.Run(); }
+            var cmd = new SampleCommand();
+            cmd.Run();
+            cmd.Run();
+            cmd.Run();
         }
     }
 }

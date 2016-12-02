@@ -22,17 +22,17 @@ Narvalo.Web               | 0.25.0      | .NET 4.5               |
 
 (*) Security attributes are not applied to the assemblies distributed via NuGet.
 
-Library                   | SA          | CC          | TC
---------------------------|-------------|-------------|-----
-Narvalo.Build             | Complete    |             |
-Narvalo.Cerbere           | Complete    | Complete    |
-Narvalo.Common            | Complete    | Complete    |
-Narvalo.Core              | Complete    | Complete    |
-Narvalo.Finance           | Complete    | Complete    |
-Narvalo.Fx                | Complete    | Complete    |
-Narvalo.Mvp               | Complete    | Pretty good |
-Narvalo.Mvp.Web           | Complete    |             |
-Narvalo.Web               | Pretty good | Minimal     |
+Library                   | SA          | CC       | TC
+--------------------------|-------------|----------|-----
+Narvalo.Build             | Complete    |          |
+Narvalo.Cerbere           | Complete    | Complete |
+Narvalo.Common            | Complete    | Complete |
+Narvalo.Core              | Complete    | Complete |
+Narvalo.Finance           | Complete    | Complete |
+Narvalo.Fx                | Complete    | Complete |
+Narvalo.Mvp               | Complete    | Complete |
+Narvalo.Mvp.Web           | Complete    |          |
+Narvalo.Web               | Pretty good | Minimal  |
 
 
 Explanations:

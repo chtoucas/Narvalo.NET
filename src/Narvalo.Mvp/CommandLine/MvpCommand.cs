@@ -3,6 +3,9 @@
 namespace Narvalo.Mvp.CommandLine
 {
     using System;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
 
     using Narvalo.Mvp.CommandLine.Internal;
     using Narvalo.Mvp.PresenterBinding;
@@ -10,15 +13,14 @@ namespace Narvalo.Mvp.CommandLine
     public class MvpCommand : IView, ICommand
     {
         private readonly bool _throwIfNoPresenterBound;
-
-        private bool _initialized = false;
-        private PresenterBinder _presenterBinder;
+        private readonly PresenterBinder _presenterBinder;
 
         protected MvpCommand() : this(true) { }
 
         protected MvpCommand(bool throwIfNoPresenterBound)
         {
             _throwIfNoPresenterBound = throwIfNoPresenterBound;
+            _presenterBinder = PresenterBinderFactory.Create(this);
         }
 
         public event EventHandler Completed;
@@ -26,11 +28,9 @@ namespace Narvalo.Mvp.CommandLine
 
         public bool ThrowIfNoPresenterBound => _throwIfNoPresenterBound;
 
-        public void Init() => Init(true);
-
         public void Run()
         {
-            Init();
+            _presenterBinder.PerformBinding();
 
             OnLoad(EventArgs.Empty);
 
@@ -39,22 +39,18 @@ namespace Narvalo.Mvp.CommandLine
             OnCompleted(EventArgs.Empty);
         }
 
-        protected virtual void Init(bool initializing)
-        {
-            if (!_initialized)
-            {
-                if (initializing)
-                {
-                    _presenterBinder = PresenterBinderFactory.Create(this);
-                    _presenterBinder.PerformBinding();
-                }
-
-                _initialized = true;
-            }
-        }
-
         protected virtual void OnCompleted(EventArgs e) => Completed?.Invoke(this, e);
 
         protected virtual void OnLoad(EventArgs e) => Load?.Invoke(this, e);
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_presenterBinder != null);
+        }
+
+#endif
     }
 }

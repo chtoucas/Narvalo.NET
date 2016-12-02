@@ -2,6 +2,8 @@
 
 namespace Narvalo.Mvp.CommandLine.Internal
 {
+    using System.Diagnostics.Contracts;
+
     using Narvalo;
     using Narvalo.Mvp;
     using Narvalo.Mvp.CommandLine;
@@ -20,6 +22,8 @@ namespace Narvalo.Mvp.CommandLine.Internal
             return Create(command, PlatformServices.Current);
         }
 
+        [ContractVerification(false)]   // Strange CCCheck complains with "ensures unreachable".
+        // Even a SuppressMessage won't work here, the problem will propagate to MvpCommand.
         public static PresenterBinder Create(
             ICommand command,
             IPlatformServices platformServices)
