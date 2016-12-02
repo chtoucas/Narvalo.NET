@@ -86,10 +86,10 @@
     <Compile Include="PresenterBindingAttribute.cs" />
     <Compile Include="PresenterBindingException.cs" />
     <Compile Include="PresenterBindingMode.cs" />
-    <Compile Include="PresenterBinding\AttributeBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="PresenterBinding\AttributedPresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\CompositePresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\CompositeViewFactory.cs" />
-    <Compile Include="PresenterBinding\ConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="PresenterBinding\PresenterDiscoveryStrategy.cs" />
     <Compile Include="PresenterBinding\ICompositeViewFactory.cs" />
     <Compile Include="PresenterBinding\IMessageCoordinatorFactory.cs" />
     <Compile Include="PresenterBinding\IPresenterDiscoveryStrategy.cs" />

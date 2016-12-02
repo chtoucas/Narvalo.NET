@@ -11,21 +11,21 @@ namespace Narvalo.Mvp.PresenterBinding
     using Narvalo;
     using Narvalo.Mvp.Resolvers;
 
-    public sealed class AttributeBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed class AttributedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         private readonly IPresenterBindingAttributesResolver _attributesResolver;
 
-        public AttributeBasedPresenterDiscoveryStrategy()
+        public AttributedPresenterDiscoveryStrategy()
             : this(new PresenterBindingAttributesResolver()) { }
 
-        public AttributeBasedPresenterDiscoveryStrategy(
+        public AttributedPresenterDiscoveryStrategy(
             IPresenterBindingAttributesResolver attributesResolver)
             : this(attributesResolver, true)
         {
             Expect.NotNull(attributesResolver);
         }
 
-        public AttributeBasedPresenterDiscoveryStrategy(
+        public AttributedPresenterDiscoveryStrategy(
             IPresenterBindingAttributesResolver attributesResolver,
             bool enableCache)
         {

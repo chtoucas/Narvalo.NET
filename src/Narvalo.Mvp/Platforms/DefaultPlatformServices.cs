@@ -15,7 +15,7 @@ namespace Narvalo.Mvp.Platforms
            = () => new MessageCoordinatorFactory();
 
         private Func<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategyThunk
-           = () => new AttributeBasedPresenterDiscoveryStrategy();
+           = () => new AttributedPresenterDiscoveryStrategy();
 
         private Func<IPresenterFactory> _presenterFactoryThunk
            = () => new PresenterFactory();

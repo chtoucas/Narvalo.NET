@@ -9,17 +9,20 @@ namespace Narvalo.Mvp.PresenterBinding
     using Narvalo.Mvp;
     using Narvalo.Mvp.Resolvers;
 
-    public sealed class ConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    /// <summary>
+    /// Convention-based presenter discovery strategy.
+    /// </summary>
+    public sealed class PresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         private readonly IPresenterTypeResolver _typeResolver;
 
-        public ConventionBasedPresenterDiscoveryStrategy(IPresenterTypeResolver typeResolver)
+        public PresenterDiscoveryStrategy(IPresenterTypeResolver typeResolver)
             : this(typeResolver, true)
         {
             Expect.NotNull(typeResolver);
         }
 
-        public ConventionBasedPresenterDiscoveryStrategy(
+        public PresenterDiscoveryStrategy(
             IPresenterTypeResolver typeResolver,
             bool enableCache)
         {
@@ -30,9 +33,7 @@ namespace Narvalo.Mvp.PresenterBinding
                  : typeResolver;
         }
 
-        public PresenterDiscoveryResult FindBindings(
-            IEnumerable<object> hosts,
-            IEnumerable<IView> views)
+        public PresenterDiscoveryResult FindBindings(IEnumerable<object> hosts, IEnumerable<IView> views)
         {
             Require.NotNull(views, "views");
 

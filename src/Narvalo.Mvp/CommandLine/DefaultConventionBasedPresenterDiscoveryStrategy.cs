@@ -42,7 +42,7 @@ namespace Narvalo.Mvp.CommandLine
                    s_ViewSuffixes,
                    s_PresenterNameTemplates);
 
-            _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver);
+            _inner = new PresenterDiscoveryStrategy(typeResolver);
         }
 
         public PresenterDiscoveryResult FindBindings(IEnumerable<object> hosts, IEnumerable<IView> views)

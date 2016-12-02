@@ -49,7 +49,7 @@ namespace Narvalo.Mvp.Web.Core
                 viewSuffixes,
                 presenterNameTemplates);
 
-            _inner = new ConventionBasedPresenterDiscoveryStrategy(typeResolver, enableCache);
+            _inner = new PresenterDiscoveryStrategy(typeResolver, enableCache);
         }
 
         public static IEnumerable<string> DefaultPresenterNameTemplates
