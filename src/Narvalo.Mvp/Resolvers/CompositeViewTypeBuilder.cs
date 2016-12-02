@@ -5,6 +5,9 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Collections;
     using System.Collections.Generic;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
@@ -88,7 +91,7 @@ namespace Narvalo.Mvp.Resolvers
                         "The supplied event {0} from {1} does not have the event handler type specified.",
                         eventInfo.Name,
                         eventInfo.ReflectedType.Name),
-                    "eventInfo");
+                    nameof(eventInfo));
             }
 
             var addMethod = DefineAddMethod(eventInfo);
@@ -125,6 +128,17 @@ namespace Narvalo.Mvp.Resolvers
                 property.SetSetMethod(setter);
             }
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_viewType != null);
+            Contract.Invariant(_typeBuilder != null);
+        }
+
+#endif
 
         private MethodBuilder DefineAddMethod(EventInfo eventInfo)
         {

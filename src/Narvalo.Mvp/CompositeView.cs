@@ -5,29 +5,31 @@ namespace Narvalo.Mvp
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Globalization;
 
     using Narvalo;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     // NB: Must stay public for "CompositeViewTypeBuilder" to work.
-    [EditorBrowsableAttribute(EditorBrowsableState.Never)]
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class CompositeView<TView> : ICompositeView where TView : IView
     {
         private readonly IList<TView> _views = new List<TView>();
 
         public abstract event EventHandler Load;
 
-        public bool ThrowIfNoPresenterBound
-        {
-            get { return true; }
-        }
+        public bool ThrowIfNoPresenterBound => true;
 
         /// <summary>
         /// Gets the list of individual views represented by this composite view.
         /// </summary>
         protected internal IEnumerable<TView> Views
         {
-            get { return _views; }
+            get { Ensures(Result<IEnumerable<TView>>() != null); return _views; }
         }
 
         /// <summary>
@@ -45,10 +47,20 @@ namespace Narvalo.Mvp
                         "Expected a view of type {0} but {1} was supplied.",
                         typeof(TView).FullName,
                         view.GetType().FullName),
-                    "view");
+                    nameof(view));
             }
 
             _views.Add((TView)view);
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Invariant(_views != null);
+        }
+
+#endif
     }
 }

@@ -3,6 +3,9 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Reflection;
     using System.Reflection.Emit;
 
@@ -36,6 +39,17 @@ namespace Narvalo.Mvp.Resolvers
                 parentType,
                 interfaces);
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_assemblyName != null);
+            Contract.Invariant(_moduleBuilder != null);
+        }
+
+#endif
 
         private ModuleBuilder CreateModuleBuilder()
         {
