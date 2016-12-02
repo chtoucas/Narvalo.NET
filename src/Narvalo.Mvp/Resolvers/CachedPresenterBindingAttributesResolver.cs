@@ -33,6 +33,7 @@ namespace Narvalo.Mvp.Resolvers
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
+            Contract.Invariant(_cache != null);
             Contract.Invariant(_inner != null);
         }
 

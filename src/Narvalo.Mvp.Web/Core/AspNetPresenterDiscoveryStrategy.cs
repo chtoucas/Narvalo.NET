@@ -8,7 +8,8 @@ namespace Narvalo.Mvp.Web.Core
     using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
 
-    public class AspNetConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    // Convention based presenter discovery strategy.
+    public class AspNetPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         private static readonly string[] s_DefaultPresenterNameTemplates = new[]
         {
@@ -34,10 +35,10 @@ namespace Narvalo.Mvp.Web.Core
 
         private readonly IPresenterDiscoveryStrategy _inner;
 
-        public AspNetConventionBasedPresenterDiscoveryStrategy()
+        public AspNetPresenterDiscoveryStrategy()
             : this(s_DefaultViewSuffixes, s_DefaultPresenterNameTemplates, enableCache: true) { }
 
-        public AspNetConventionBasedPresenterDiscoveryStrategy(
+        public AspNetPresenterDiscoveryStrategy(
             IEnumerable<string> viewSuffixes,
             IEnumerable<string> presenterNameTemplates,
             bool enableCache)

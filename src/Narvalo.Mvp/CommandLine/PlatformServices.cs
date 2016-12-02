@@ -4,22 +4,33 @@ namespace Narvalo.Mvp.CommandLine
 {
     using Narvalo.Mvp.Platforms;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     public static class PlatformServices
     {
-        private static readonly IPlatformServices s_Default
-            = new DefaultPlatformServices_();
+        private static readonly IPlatformServices s_Default = new DefaultPlatformServices_();
 
         private static readonly PlatformServicesVirtualProxy s_Instance
             = new PlatformServicesVirtualProxy(() => s_Default);
 
         public static IPlatformServices Default
         {
-            get { return s_Default; }
+            get
+            {
+                Ensures(Result<IPlatformServices>() != null);
+
+                return s_Default;
+            }
         }
 
         public static IPlatformServices Current
         {
-            get { return s_Instance; }
+            get
+            {
+                Ensures(Result<IPlatformServices>() != null);
+
+                return s_Instance;
+            }
             set { s_Instance.Reset(value); }
         }
 
@@ -28,7 +39,7 @@ namespace Narvalo.Mvp.CommandLine
             public DefaultPlatformServices_()
             {
                 SetPresenterDiscoveryStrategy(
-                    () => new DefaultConventionBasedPresenterDiscoveryStrategy());
+                    () => new DefaultPresenterDiscoveryStrategy());
             }
         }
     }

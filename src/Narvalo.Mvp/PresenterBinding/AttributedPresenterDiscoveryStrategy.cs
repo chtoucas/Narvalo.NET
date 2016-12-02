@@ -6,10 +6,15 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Linq;
 
     using Narvalo;
     using Narvalo.Mvp.Resolvers;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public sealed class AttributedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
@@ -55,6 +60,8 @@ namespace Narvalo.Mvp.PresenterBinding
             while (pendingViews.Any())
             {
                 var view = pendingViews.First();
+                Assume(view != null, "At this point, we know for sure that there is a pending view.");
+
                 var viewType = view.GetType();
 
                 var bindingsThisRound
@@ -87,6 +94,9 @@ namespace Narvalo.Mvp.PresenterBinding
             IView view,
             IEnumerable<IView> pendingViews)
         {
+            Demand.NotNull(attribute);
+            Demand.NotNull(view);
+
             Trace.TraceInformation(
                 "[AttributeBasedPresenterDiscoveryStrategy] Found presenter '{0}' for view '{1}', origin='{2}', binding mode='{3}'.",
                 attribute.PresenterType.FullName,
@@ -106,5 +116,15 @@ namespace Narvalo.Mvp.PresenterBinding
                     throw Check.Unreachable("A case in a switch has been forgotten.");
             }
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_attributesResolver != null);
+        }
+
+#endif
     }
 }

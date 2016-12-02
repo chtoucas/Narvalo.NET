@@ -30,13 +30,13 @@ namespace Narvalo.Mvp.Web.Core
             {
                 SetMessageCoordinatorFactory(() => new AspNetMessageCoordinatorFactory());
 
-                // Since "AttributeBasedPresenterDiscoveryStrategy" provides the most complete 
+                // Since "AttributedPresenterDiscoveryStrategy" provides the most complete
                 // implementation of "IPresenterDiscoveryStrategy", we keep it on top the list.
                 SetPresenterDiscoveryStrategy(
                     () => new CompositePresenterDiscoveryStrategy(
                         new IPresenterDiscoveryStrategy[] {
                             new AttributedPresenterDiscoveryStrategy(),
-                            new AspNetConventionBasedPresenterDiscoveryStrategy() }));
+                            new AspNetPresenterDiscoveryStrategy() }));
             }
         }
     }

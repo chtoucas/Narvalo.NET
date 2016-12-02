@@ -4,6 +4,9 @@ namespace Narvalo.Mvp.Platforms
 {
     using System;
     using System.ComponentModel;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
 
     using Narvalo.Mvp.Properties;
 
@@ -47,5 +50,15 @@ namespace Narvalo.Mvp.Platforms
             // REVIEW: We break thread-safety here, but does it matter for our use case?
             _valueFactory = valueFactory;
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_lazyValue != null);
+        }
+
+#endif
     }
 }

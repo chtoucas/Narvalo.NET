@@ -13,14 +13,15 @@ namespace Narvalo.Mvp.PresenterBinding
     using Narvalo;
     using Narvalo.Mvp.Properties;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     public class PresenterBinder
     {
         private readonly IList<IPresenter> _presenters = new List<IPresenter>();
         private readonly IList<IView> _viewsToBind = new List<IView>();
 
-        private readonly IEnumerable<object> _hosts;
-
         private readonly ICompositeViewFactory _compositeViewFactory;
+        private readonly IEnumerable<object> _hosts;
         private readonly IMessageCoordinator _messageCoordinator;
         private readonly IPresenterDiscoveryStrategy _presenterDiscoveryStrategy;
         private readonly IPresenterFactory _presenterFactory;
@@ -54,7 +55,15 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public event EventHandler<PresenterEventArgs> PresenterCreated;
 
-        public IMessageCoordinator MessageCoordinator { get { return _messageCoordinator; } }
+        public IMessageCoordinator MessageCoordinator
+        {
+            get
+            {
+                Ensures(Result<IMessageCoordinator>() != null);
+
+                return _messageCoordinator;
+            }
+        }
 
         public void PerformBinding()
         {
@@ -110,6 +119,7 @@ namespace Narvalo.Mvp.PresenterBinding
         protected IPresenter CreatePresenter(PresenterBindingParameter binding, IView view)
         {
             Require.NotNull(binding, nameof(binding));
+            Ensures(Result<IPresenter>() != null);
 
             var presenter = _presenterFactory.Create(binding.PresenterType, binding.ViewType, view);
 
@@ -129,17 +139,21 @@ namespace Narvalo.Mvp.PresenterBinding
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(_hosts != null);
-            Contract.Invariant(_presenterDiscoveryStrategy != null);
-            Contract.Invariant(_presenterFactory != null);
-            Contract.Invariant(_compositeViewFactory != null);
-            Contract.Invariant(_messageCoordinator != null);
+            Invariant(_compositeViewFactory != null);
+            Invariant(_hosts != null);
+            Invariant(_presenterDiscoveryStrategy != null);
+            Invariant(_presenterFactory != null);
+            Invariant(_presenters != null);
+            Invariant(_messageCoordinator != null);
+            Invariant(_viewsToBind != null);
         }
 
 #endif
 
         private IEnumerable<PresenterBindingParameter> FindBindings(IEnumerable<Object> hosts)
         {
+            Ensures(Result<IEnumerable<PresenterBindingParameter>>() != null);
+
             var viewsToBind = _viewsToBind.Distinct();
 
             var result = _presenterDiscoveryStrategy.FindBindings(hosts, viewsToBind);
@@ -150,6 +164,9 @@ namespace Narvalo.Mvp.PresenterBinding
 
             if (unboundViews.Any())
             {
+                var unboundView = unboundViews.First();
+                Assume(unboundView != null, "At this point, we know for sure that there is an unbound view.");
+
                 throw new PresenterBindingException(Format.Current(
                    Strings.PresenterBinder_NoPresenterFoundForView,
                     unboundViews.First().GetType().FullName));
@@ -158,9 +175,11 @@ namespace Narvalo.Mvp.PresenterBinding
             return result.Bindings;
         }
 
-        [SuppressMessage("Microsoft.Contracts", "Requires-7-65", Justification = "[Intentionally] Requires unreachable but CCCheck still proves no case is forgotten.")]
+        [SuppressMessage("Microsoft.Contracts", "Requires-7-71", Justification = "[Intentionally] Requires unreachable but CCCheck still proves no case is forgotten.")]
         private IEnumerable<IView> GetViews(PresenterBindingParameter binding)
         {
+            Demand.NotNull(binding);
+
             IEnumerable<IView> views;
 
             switch (binding.BindingMode)

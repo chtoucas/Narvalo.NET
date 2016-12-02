@@ -4,15 +4,18 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
 
     using Narvalo;
     using Narvalo.Mvp;
     using Narvalo.Mvp.Resolvers;
 
     /// <summary>
-    /// Convention-based presenter discovery strategy.
+    /// Convention based presenter discovery strategy.
     /// </summary>
-    public sealed class PresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed class /*Default*/PresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         private readonly IPresenterTypeResolver _typeResolver;
 
@@ -48,7 +51,7 @@ namespace Narvalo.Mvp.PresenterBinding
                 if (presenterType != null)
                 {
                     Trace.TraceInformation(
-                        "[ConventionBasedPresenterDiscoveryStrategy] Found presenter '{0}' for view '{1}'.",
+                        "[PresenterDiscoveryStrategy] Found presenter '{0}' for view '{1}'.",
                         presenterType.FullName,
                         viewType.FullName);
 
@@ -64,12 +67,22 @@ namespace Narvalo.Mvp.PresenterBinding
                 else
                 {
                     Trace.TraceInformation(
-                        "[ConventionBasedPresenterDiscoveryStrategy] No presenter found for view '{0}'",
+                        "[PresenterDiscoveryStrategy] No presenter found for view '{0}'",
                         viewType.FullName);
                 }
             }
 
             return new PresenterDiscoveryResult(boundViews, bindings);
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_typeResolver != null);
+        }
+
+#endif
     }
 }

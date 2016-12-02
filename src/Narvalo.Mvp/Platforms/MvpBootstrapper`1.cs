@@ -114,6 +114,17 @@ namespace Narvalo.Mvp.Platforms
             return platformServices;
         }
 
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Invariant(_defaultServices != null);
+            Invariant(_presenterDiscoveryStrategies != null);
+        }
+
+#endif
+
         private sealed class PlatformServices_ : IPlatformServices
         {
             public ICompositeViewFactory CompositeViewFactory { get; set; }

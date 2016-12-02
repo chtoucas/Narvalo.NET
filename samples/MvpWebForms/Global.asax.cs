@@ -17,8 +17,8 @@ namespace MvpWebForms
             Trace.Listeners.Add(new WebPageTraceListener());
 
             var presenterDiscoveryStrategy
-                = new AspNetConventionBasedPresenterDiscoveryStrategy(
-                    AspNetConventionBasedPresenterDiscoveryStrategy.DefaultViewSuffixes,
+                = new AspNetPresenterDiscoveryStrategy(
+                    AspNetPresenterDiscoveryStrategy.DefaultViewSuffixes,
                     new[] { "MvpWebForms.Presenters.{presenter}" },
                     enableCache: true);
 

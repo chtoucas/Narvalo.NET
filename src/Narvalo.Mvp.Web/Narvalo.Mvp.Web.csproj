@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AspNetBuildManager.cs" />
-    <Compile Include="Core\AspNetConventionBasedPresenterDiscoveryStrategy.cs" />
+    <Compile Include="Core\AspNetPresenterDiscoveryStrategy.cs" />
     <Compile Include="Core\AspNetMessageCoordinator.cs" />
     <Compile Include="Core\AspNetMessageCoordinatorFactory.cs" />
     <Compile Include="Core\AspNetPresenterTypeResolver.cs" />

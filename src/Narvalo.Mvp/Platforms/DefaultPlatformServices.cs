@@ -3,22 +3,47 @@
 namespace Narvalo.Mvp.Platforms
 {
     using System;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
 
     using Narvalo.Mvp.PresenterBinding;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public class DefaultPlatformServices : IPlatformServices
     {
         private Func<ICompositeViewFactory> _compositeViewFactoryThunk
-           = () => new CompositeViewFactory();
+           = () =>
+           {
+               Ensures(Result<ICompositeViewFactory>() != null);
+
+               return new CompositeViewFactory();
+           };
 
         private Func<IMessageCoordinatorFactory> _messageCoordinatorFactoryThunk
-           = () => new MessageCoordinatorFactory();
+           = () =>
+           {
+               Ensures(Result<IMessageCoordinatorFactory>() != null);
+
+               return new MessageCoordinatorFactory();
+           };
 
         private Func<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategyThunk
-           = () => new AttributedPresenterDiscoveryStrategy();
+           = () =>
+           {
+               Ensures(Result<IPresenterDiscoveryStrategy>() != null);
+
+               return new AttributedPresenterDiscoveryStrategy();
+           };
 
         private Func<IPresenterFactory> _presenterFactoryThunk
-           = () => new PresenterFactory();
+           = () =>
+           {
+               Ensures(Result<IPresenterFactory>() != null);
+
+               return new PresenterFactory();
+           };
 
         private ICompositeViewFactory _compositeViewFactory;
         private IMessageCoordinatorFactory _messageCoordinatorFactory;
@@ -29,8 +54,12 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
-                return _compositeViewFactory
-                    ?? (_compositeViewFactory = _compositeViewFactoryThunk());
+                if (_compositeViewFactory == null)
+                {
+                    _compositeViewFactory = _compositeViewFactoryThunk();
+                }
+
+                return _compositeViewFactory;
             }
         }
 
@@ -38,8 +67,12 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
-                return _messageCoordinatorFactory
-                    ?? (_messageCoordinatorFactory = _messageCoordinatorFactoryThunk());
+                if (_messageCoordinatorFactory == null)
+                {
+                    _messageCoordinatorFactory = _messageCoordinatorFactoryThunk();
+                }
+
+                return _messageCoordinatorFactory;
             }
         }
 
@@ -47,8 +80,12 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
-                return _presenterDiscoveryStrategy
-                    ?? (_presenterDiscoveryStrategy = _presenterDiscoveryStrategyThunk());
+                if (_presenterDiscoveryStrategy == null)
+                {
+                    _presenterDiscoveryStrategy = _presenterDiscoveryStrategyThunk();
+                }
+
+                return _presenterDiscoveryStrategy;
             }
         }
 
@@ -56,8 +93,12 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
-                return _presenterFactory
-                    ?? (_presenterFactory = _presenterFactoryThunk());
+                if (_presenterFactory == null)
+                {
+                    _presenterFactory = _presenterFactoryThunk();
+                }
+
+                return _presenterFactory;
             }
         }
 
@@ -88,5 +129,18 @@ namespace Narvalo.Mvp.Platforms
 
             _presenterFactoryThunk = thunk;
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Invariant(_compositeViewFactoryThunk != null);
+            Invariant(_messageCoordinatorFactoryThunk != null);
+            Invariant(_presenterDiscoveryStrategyThunk != null);
+            Invariant(_presenterFactoryThunk != null);
+        }
+
+#endif
     }
 }

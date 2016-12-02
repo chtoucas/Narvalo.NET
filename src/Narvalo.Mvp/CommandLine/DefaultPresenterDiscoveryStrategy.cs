@@ -3,6 +3,9 @@
 namespace Narvalo.Mvp.CommandLine
 {
     using System.Collections.Generic;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Linq;
     using System.Reflection;
 
@@ -10,7 +13,8 @@ namespace Narvalo.Mvp.CommandLine
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Resolvers;
 
-    public sealed class DefaultConventionBasedPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    // Convention based presenter discovery strategy.
+    public sealed class DefaultPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         private static readonly string[] s_ViewSuffixes = new[]
         {
@@ -26,13 +30,13 @@ namespace Narvalo.Mvp.CommandLine
 
         private readonly IPresenterDiscoveryStrategy _inner;
 
-        public DefaultConventionBasedPresenterDiscoveryStrategy()
+        public DefaultPresenterDiscoveryStrategy()
             : this(Assembly.GetEntryAssembly()) { }
 
-        public DefaultConventionBasedPresenterDiscoveryStrategy(Assembly assembly)
+        public DefaultPresenterDiscoveryStrategy(Assembly assembly)
             : this(new[] { assembly }) { }
 
-        public DefaultConventionBasedPresenterDiscoveryStrategy(Assembly[] assemblies)
+        public DefaultPresenterDiscoveryStrategy(Assembly[] assemblies)
         {
             Expect.NotNull(assemblies);
 
@@ -49,5 +53,15 @@ namespace Narvalo.Mvp.CommandLine
         {
             return _inner.FindBindings(hosts, views);
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_inner != null);
+        }
+
+#endif
     }
 }

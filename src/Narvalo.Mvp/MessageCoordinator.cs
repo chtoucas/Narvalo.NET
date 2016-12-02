@@ -5,6 +5,9 @@ namespace Narvalo.Mvp
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
 
     using Narvalo.Mvp.Properties;
 
@@ -60,6 +63,16 @@ namespace Narvalo.Mvp
             Trace.TraceWarning(
                 "[MessageCoordinator] Even if subscription is allowed, no messages will ever be received.");
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_lock != null);
+        }
+
+#endif
 
         private void ThrowIfClosed()
         {

@@ -41,6 +41,7 @@ namespace Narvalo.Mvp.Resolvers
         private void ObjectInvariant()
         {
             Contract.Invariant(_cacheKeyProvider != null);
+            Contract.Invariant(_dictionary != null);
         }
 
 #endif

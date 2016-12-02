@@ -8,6 +8,8 @@ namespace Narvalo.Mvp.Resolvers
 
     using Narvalo.Mvp.Properties;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     public sealed class /*Default*/PresenterConstructorResolver : IPresenterConstructorResolver
     {
         public DynamicMethod Resolve(Type presenterType, Type viewType)
@@ -54,6 +56,7 @@ namespace Narvalo.Mvp.Resolvers
                 skipVisibility: false);
 
             var il = dynamicMethod.GetILGenerator();
+            Assume(il != null, "Extern: BCL.");
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Ldarg_0);
             il.Emit(OpCodes.Newobj, ctor);

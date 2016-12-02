@@ -4,6 +4,11 @@ namespace Narvalo.Mvp
 {
     using System;
     using System.Diagnostics;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
+
+    using static System.Diagnostics.Contracts.Contract;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class PresenterBindingAttribute : Attribute
@@ -31,7 +36,15 @@ namespace Narvalo.Mvp
             set { _bindingMode = value; }
         }
 
-        public Type PresenterType { get { return _presenterType; } }
+        public Type PresenterType
+        {
+            get
+            {
+                Ensures(Result<Type>() != null);
+
+                return _presenterType;
+            }
+        }
 
         public Type ViewType
         {
@@ -44,5 +57,15 @@ namespace Narvalo.Mvp
             get { return _origin; }
             set { _origin = value; }
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Invariant(_presenterType != null);
+        }
+
+#endif
     }
 }

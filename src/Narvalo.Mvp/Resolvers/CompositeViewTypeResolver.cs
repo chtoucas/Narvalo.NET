@@ -5,6 +5,9 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Linq;
     using System.Reflection;
 
@@ -103,5 +106,15 @@ namespace Narvalo.Mvp.Resolvers
                         && p.PropertyInfoFromCompositeViewBase.GetSetMethod() == null))
                 .Select(p => p.PropertyInfo);
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_moduleBuilder != null);
+        }
+
+#endif
     }
 }

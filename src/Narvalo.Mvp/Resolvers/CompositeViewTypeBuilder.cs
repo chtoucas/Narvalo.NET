@@ -14,6 +14,8 @@ namespace Narvalo.Mvp.Resolvers
 
     using Narvalo.Mvp.Properties;
 
+    using static System.Diagnostics.Contracts.Contract;
+
     /**
      * <content markup="commonmark">
      * <![CDATA[
@@ -100,6 +102,7 @@ namespace Narvalo.Mvp.Resolvers
                 eventInfo.Name,
                 eventInfo.Attributes,
                 eventInfo.EventHandlerType);
+            Assume(@event != null, "Extern: BCL.");
 
             @event.SetAddOnMethod(addMethod);
             @event.SetRemoveOnMethod(removeMethod);
@@ -114,6 +117,7 @@ namespace Narvalo.Mvp.Resolvers
                 propertyInfo.Attributes,
                 propertyInfo.PropertyType,
                 Type.EmptyTypes);
+            Assume(property != null, "Extern: BCL.");
 
             if (propertyInfo.CanRead)
             {
@@ -133,21 +137,25 @@ namespace Narvalo.Mvp.Resolvers
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(_viewType != null);
-            Contract.Invariant(_typeBuilder != null);
+            Invariant(_viewType != null);
+            Invariant(_typeBuilder != null);
         }
 
 #endif
 
         private MethodBuilder DefineAddMethod(EventInfo eventInfo)
         {
+            Demand.NotNull(eventInfo);
+
             var addBuilder = _typeBuilder.DefineMethod(
                 "add" + "_" + eventInfo.Name,
                 s_MethodAttributes,
                 typeof(void),
                 new[] { eventInfo.EventHandlerType });
+            Assume(addBuilder != null, "Extern: BCL.");
 
             var il = addBuilder.GetILGenerator();
+            Assume(il != null, "Extern: BCL.");
 
             EmitILForEachView(
                 il,
@@ -166,13 +174,17 @@ namespace Narvalo.Mvp.Resolvers
 
         private MethodBuilder DefineRemoveMethod(EventInfo eventInfo)
         {
+            Demand.NotNull(eventInfo);
+
             var removeBuilder = _typeBuilder.DefineMethod(
                 "remove" + "_" + eventInfo.Name,
                 s_MethodAttributes,
                 typeof(void),
                 new[] { eventInfo.EventHandlerType });
+            Assume(removeBuilder != null, "Extern: BCL.");
 
             var il = removeBuilder.GetILGenerator();
+            Assume(il != null, "Extern: BCL.");
 
             EmitILForEachView(
                 il,
@@ -224,16 +236,21 @@ namespace Narvalo.Mvp.Resolvers
          */
         private MethodBuilder DefineGetter(PropertyInfo propertyInfo)
         {
+            Demand.NotNull(propertyInfo);
+
             var getBuilder = _typeBuilder.DefineMethod(
                 "get" + "_" + propertyInfo.Name,
                 s_MethodAttributes,
                 propertyInfo.PropertyType,
                 Type.EmptyTypes);
+            Assume(getBuilder != null, "Extern: BCL.");
 
             var il = getBuilder.GetILGenerator();
+            Assume(il != null, "Extern: BCL.");
 
             // Declare a local to store the return value in
             var local = il.DeclareLocal(propertyInfo.PropertyType);
+            Assume(local != null, "Extern: BCL.");
 
             // Load the view instance on to the evaluation stack
             il.Emit(OpCodes.Ldarg, local.LocalIndex);
@@ -346,13 +363,17 @@ namespace Narvalo.Mvp.Resolvers
          */
         private MethodBuilder DefineSetter(PropertyInfo propertyInfo)
         {
+            Demand.NotNull(propertyInfo);
+
             var setBuilder = _typeBuilder.DefineMethod(
                 "set" + "_" + propertyInfo.Name,
                 s_MethodAttributes,
                 typeof(void),
                 new[] { propertyInfo.PropertyType });
+            Assume(setBuilder != null, "Extern: BCL.");
 
             var il = setBuilder.GetILGenerator();
+            Assume(il != null, "Extern: BCL.");
 
             EmitILForEachView(
                 il,
@@ -371,10 +392,18 @@ namespace Narvalo.Mvp.Resolvers
 
         private void EmitILForEachView(ILGenerator il, Action forEachAction)
         {
+            Demand.NotNull(il);
+            Demand.NotNull(forEachAction);
+
             // Declare the locals we need
             var viewLocal = il.DeclareLocal(_viewType);
+            Assume(viewLocal != null, "Extern: BCL.");
+
             var enumeratorLocal = il.DeclareLocal(typeof(IEnumerable<>).MakeGenericType(_viewType));
+            Assume(enumeratorLocal != null, "Extern: BCL.");
+
             var enumeratorContinueLocal = il.DeclareLocal(typeof(bool));
+            Assume(enumeratorContinueLocal != null, "Extern: BCL.");
 
             // Load the view instance on to the evaluation stack
             il.Emit(OpCodes.Ldarg, viewLocal.LocalIndex);

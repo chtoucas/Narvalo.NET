@@ -4,6 +4,9 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Collections.Generic;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
 
     using Narvalo;
     using Narvalo.Mvp.Resolvers;
@@ -47,5 +50,15 @@ namespace Narvalo.Mvp.PresenterBinding
 
             return view;
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_typeResolver != null);
+        }
+
+#endif
     }
 }

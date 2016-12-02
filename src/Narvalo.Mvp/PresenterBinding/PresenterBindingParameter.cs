@@ -4,10 +4,15 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Collections.Generic;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Linq;
 
     using Narvalo;
     using Narvalo.Mvp.Internal;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public sealed class PresenterBindingParameter
     {
@@ -22,6 +27,10 @@ namespace Narvalo.Mvp.PresenterBinding
             PresenterBindingMode bindingMode,
             IEnumerable<IView> views)
         {
+            Require.NotNull(presenterType, nameof(presenterType));
+            Require.NotNull(viewType, nameof(viewType));
+            Require.NotNull(views, nameof(views));
+
             _presenterType = presenterType;
             _viewType = viewType;
             _bindingMode = bindingMode;
@@ -30,11 +39,35 @@ namespace Narvalo.Mvp.PresenterBinding
 
         public PresenterBindingMode BindingMode { get { return _bindingMode; } }
 
-        public Type PresenterType { get { return _presenterType; } }
+        public Type PresenterType
+        {
+            get
+            {
+                Ensures(Result<Type>() != null);
 
-        public IEnumerable<IView> Views { get { return _views; } }
+                return _presenterType;
+            }
+        }
 
-        public Type ViewType { get { return _viewType; } }
+        public IEnumerable<IView> Views
+        {
+            get
+            {
+                Ensures(Result<IEnumerable<IView>>() != null);
+
+                return _views;
+            }
+        }
+
+        public Type ViewType
+        {
+            get
+            {
+                Ensures(Result<Type>() != null);
+
+                return _viewType;
+            }
+        }
 
         public override bool Equals(object obj)
         {
@@ -91,5 +124,17 @@ namespace Narvalo.Mvp.PresenterBinding
 
             return leftObjects.IsEmpty();
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Invariant(_presenterType != null);
+            Invariant(_views != null);
+            Invariant(_viewType != null);
+        }
+
+#endif
     }
 }
