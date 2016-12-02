@@ -17,6 +17,7 @@ namespace Narvalo.Web.Internal
 
         public WhiteSpaceControlTransformer(IWhiteSpaceBuster buster)
         {
+            Demand.NotNull(buster);
 
             _buster = buster;
         }
