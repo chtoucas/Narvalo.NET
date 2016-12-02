@@ -135,7 +135,7 @@ namespace Narvalo.Finance
 
             if (!(obj is Money))
             {
-                throw new ArgumentException(Strings.Money_ArgIsNotMoney);
+                throw new ArgumentException(Strings.Money_ArgIsNotMoney, nameof(obj));
             }
 
             return CompareTo((Money)obj);

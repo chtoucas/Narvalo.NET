@@ -20,7 +20,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
             if (!strategies.Any())
             {
-                throw new ArgumentException("You must supply at least one strategy.", "strategies");
+                throw new ArgumentException("You must supply at least one strategy.", nameof(strategies));
             }
         }
 
