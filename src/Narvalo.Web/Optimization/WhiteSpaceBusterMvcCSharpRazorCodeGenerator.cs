@@ -6,6 +6,9 @@
 namespace Narvalo.Web.Optimization
 {
     using System.CodeDom;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Web.Mvc.Razor;
     using System.Web.Razor;
     using System.Web.Razor.Generator;
@@ -23,6 +26,8 @@ namespace Narvalo.Web.Optimization
             RazorOptimizer optimizer)
             : base(className, rootNamespaceName, sourceFileName, host)
         {
+            Require.NotNull(optimizer, nameof(optimizer));
+
             _optimizer = optimizer;
 
             var mvcHost = host as MvcWebPageRazorHost;
@@ -47,6 +52,16 @@ namespace Narvalo.Web.Optimization
 
             base.VisitSpan(span);
         }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_optimizer != null);
+        }
+
+#endif
 
         private void SetBaseType(string modelTypeName)
         {
