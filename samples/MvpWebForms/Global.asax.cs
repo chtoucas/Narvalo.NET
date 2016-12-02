@@ -23,7 +23,7 @@ namespace MvpWebForms
                     enableCache: true);
 
             new MvpBootstrapper()
-                .DiscoverPresenter.With(new AttributeBasedPresenterDiscoveryStrategy())
+                .DiscoverPresenter.With(new AttributedPresenterDiscoveryStrategy())
                 .DiscoverPresenter.With(presenterDiscoveryStrategy)
                 .InitializePlatform();
         }
