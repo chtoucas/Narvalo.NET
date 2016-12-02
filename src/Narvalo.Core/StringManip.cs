@@ -79,8 +79,8 @@ namespace Narvalo
 
         public static string Truncate(string value, int length)
         {
-            Demand.NotNull(value);
-            Demand.True(length >= 1);
+            Expect.NotNull(value);
+            Expect.True(length >= 1);
             Ensures(Result<string>() != null);
 
             return Truncate(value, length, "..." /* postfix */);

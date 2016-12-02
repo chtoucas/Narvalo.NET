@@ -14,16 +14,17 @@ Preconditions
 
 ### Preconditions that will not survive in Release mode:
 
+`Narvalo.Expect`:
+- Code Contract
+- To be used with public methods for which the condition is not compulsory.
+
 `Narvalo.Demand`:
 - Code Contract + Debug.Assert
 - **WARNING:** Never use this method to guard a public method.
 - To be used with private/protected/internal methods for which the condition
   is mandatory.
 
-`Narvalo.Expect`:
-- Code Contract
-- To be used with public methods for which the condition is not compulsory.
-
+In case of doubt, use `Expect`.
 
 ```csharp
 public class MyClass {

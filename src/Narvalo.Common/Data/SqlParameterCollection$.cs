@@ -32,7 +32,7 @@ namespace Narvalo.Data
             SqlDbType parameterType,
             object value)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             var parameter = @this.Add(parameterName, parameterType);
             Contract.Assume(parameter != null);
@@ -61,7 +61,7 @@ namespace Narvalo.Data
             T? value)
             where T : struct
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             var parameter = @this.Add(parameterName, parameterType);
             Contract.Assume(parameter != null);
@@ -97,7 +97,7 @@ namespace Narvalo.Data
             T value)
             where T : class
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             @this.AddParameterOrNullUnchecked(parameterName, parameterType, value, value != null);
         }
@@ -123,7 +123,7 @@ namespace Narvalo.Data
             T value,
             bool condition)
         {
-            Demand.Object(@this);
+            Expect.Object(@this);
 
             var parameter = @this.Add(parameterName, parameterType);
             Contract.Assume(parameter != null);

@@ -32,7 +32,7 @@ namespace Narvalo.Xml
         public static XAttribute NextAttributeOrThrow(this XAttribute @this, Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Demand.Object(@this);
+            Expect.Object(@this);
             Ensures(Result<XAttribute>() != null);
 
             return NextAttributeOrThrow(@this, () => exception);
@@ -63,7 +63,7 @@ namespace Narvalo.Xml
         public static XAttribute PreviousAttributeOrThrow(this XAttribute @this, Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Demand.Object(@this);
+            Expect.Object(@this);
             Ensures(Result<XAttribute>() != null);
 
             return PreviousAttributeOrThrow(@this, () => exception);
