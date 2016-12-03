@@ -8,8 +8,9 @@ namespace Narvalo.Xml
     using Narvalo.Fx;
 
     /// <summary>
-    /// Provides extension methods for <see cref="Maybe{XElement}"/>.
+    /// Provides extension methods for <see cref="Maybe{XElement}"/> and <see cref="Maybe{XAttribute}"/>.
     /// </summary>
+    // Extensions methods for Maybe<XElement>.
     public static partial class MaybeExtensions
     {
         public static Maybe<T> MapValue<T>(this Maybe<XElement> @this, Func<string, T> selector)
@@ -23,9 +24,7 @@ namespace Narvalo.Xml
             => from _ in @this select _.Value;
     }
 
-    /// <content>
-    /// Provides extension methods for <see cref="Maybe{XAttribute}"/>.
-    /// </content>
+    // Extensions methods for Maybe<XAttribute>.
     public static partial class MaybeExtensions
     {
         public static Maybe<T> MapValue<T>(this Maybe<XAttribute> @this, Func<string, T> selector)

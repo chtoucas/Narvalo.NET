@@ -64,9 +64,7 @@ namespace Narvalo
         }
     }
 
-    /// <content>
-    /// Implements the <c>IEquatable&lt;Range&lt;T&gt;&gt;</c> interface.
-    /// </content>
+    // Implements the IEquatable<Range<T>> interface.
     public partial struct Range<T>
     {
         public static bool operator ==(Range<T> left, Range<T> right)

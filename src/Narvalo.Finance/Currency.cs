@@ -108,9 +108,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Provides aliases for the most commonly used currencies.
-    /// </content>
+    // Aliases for the most commonly used currencies.
     public partial class Currency
     {
         /// <summary>
@@ -276,9 +274,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Implements the <see cref="IEquatable{Currency}"/> interface.
-    /// </content>
+    // IEquatable<Currency> interface.
     public partial class Currency
     {
         public static bool operator ==(Currency left, Currency right)

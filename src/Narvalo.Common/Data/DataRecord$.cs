@@ -156,9 +156,7 @@ namespace Narvalo.Data
         }
     }
 
-    /// <content>
-    /// Implements extensions for reference types.
-    /// </content>
+    // Extensions for reference types.
     public static partial class DataRecordExtensions
     {
         public static string GetString(this IDataRecord @this, string name)

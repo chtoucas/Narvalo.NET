@@ -68,9 +68,7 @@ namespace Narvalo.Data
         }
     }
 
-    /// <content>
-    /// Implements extension methods to convert native SQL server data types to CLR reference types.
-    /// </content>
+    // Extension methods to convert native SQL server data types to CLR reference types.
     public static partial class SqlTypesExtensions
     {
         public static Maybe<byte[]> ToMaybe(this SqlBinary @this)

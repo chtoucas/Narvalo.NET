@@ -346,9 +346,7 @@ namespace Narvalo.Data
         }
     }
 
-    /// <content>
-    /// Implements extensions for reference types.
-    /// </content>
+    // Extensions for reference types.
     public static partial class SqlDataReaderExtensions
     {
         public static Maybe<byte[]> MayGetBytes(this SqlDataReader @this, int ordinal)
