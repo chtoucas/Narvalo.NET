@@ -187,7 +187,7 @@ $(NuDescription)
 A code contracts reference assembly is included if you ever need it.
       ]]>
     </NuDescription>
-    <NuReleaseNotes Condition=" $(NuReleaseNotes) == '' ">See https://github.com/chtoucas/Narvalo.NET/blob/master/docs/Changelog.md</NuReleaseNotes>
+    <NuReleaseNotes Condition=" $(NuReleaseNotes) == '' ">See https://github.com/chtoucas/Narvalo.NET/blob/master/docs/changelogs/index.md</NuReleaseNotes>
     <NuCopyright Condition=" $(NuCopyright) == '' ">Copyright 2013-$([System.DateTime]::Now.Year)</NuCopyright>
   </PropertyGroup>
 

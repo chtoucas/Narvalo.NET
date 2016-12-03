@@ -2,7 +2,7 @@ Overview
 ========
 
 - [User Documentation](userdocs/index.md)
-- [Project Changelog](Changelog.md)
+- [Project Changelog](changelogs/index.md)
 - [Issues and Roadmap](Issues.md)
 - [Engineering Guides](engineering/index.md)
 
