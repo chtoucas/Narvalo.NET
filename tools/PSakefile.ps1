@@ -92,8 +92,6 @@ Task OpenCover `
     -Depends _CI-InitializeVariables `
     -Alias Cover `
 {
-    Write-Host "** WARNING ** Only core packages are included." -ForegroundColor Yellow
-
     # Use debug build to also cover debug-only tests.
     # For static analysis, we hide internals, otherwise we might not truly
     # analyze the public API.
@@ -103,7 +101,7 @@ Task OpenCover `
         '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
-        '/p:Filter=_Core_'
+        '/p:Filter="_Core_;_Mvp_"'
 
     Invoke-OpenCover 'Debug+Closed' -Summary
 }
@@ -815,8 +813,9 @@ function Invoke-OpenCover {
     $coverageFilter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
     $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;Narvalo.ExcludeFromCodeCoverageAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
 
-    # TODO: Add Narvalo.Mvp.Facts.
-    $testAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
+    $coreTestAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
+    $mvpTestAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Mvp.Facts.dll" -Resolve
+    $testAssembly = "$coreTestAssembly $mvpTestAssembly"
 
     # Be careful with arguments containing spaces.
     . $openCover `

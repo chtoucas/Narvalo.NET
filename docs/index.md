@@ -28,13 +28,13 @@ Status
 Library                   | Static Analysis | Code Contracts | Code Coverage
 --------------------------|-----------------|----------------|---------------
 Narvalo.Build             | Complete        |                |
-Narvalo.Cerbere           | Complete        | Complete       | 55%
+Narvalo.Cerbere           | Complete        | Complete       | 55.2%
 Narvalo.Common            | Complete        | Complete       |
 Narvalo.Core              | Complete        | Complete       | 46%
-Narvalo.Finance           | Complete        | Complete       | 21%
-Narvalo.Fx                | Complete        | Complete       | 12%
-Narvalo.Mvp               | Complete        | Complete       |
-Narvalo.Mvp.Web           | Complete        | Complete       |
-Narvalo.Web               | Pretty good     | Minimal        | 18%
+Narvalo.Finance           | Complete        | Complete       | 22.7%
+Narvalo.Fx                | Complete        | Complete       | 11.7%
+Narvalo.Mvp               | Complete        | Complete       |  6.5%
+Narvalo.Mvp.Web           | Complete        | Complete       | 15.7%
+Narvalo.Web               | Pretty good     | Minimal        | 17.9%
 
 NB: Static Analysis is done with the analyzers shipped with VS.
