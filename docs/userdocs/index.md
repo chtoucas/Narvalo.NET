@@ -3,10 +3,8 @@ Usage guidelines
 
 - [Narvalo.Cerbere](narvalo-cerbere.md)
 
-Narvalo.Mvp
------------
+### Samples
 
-Samples:
 - [Command-Line MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpCommandLine)
 - [WebForms MVP sample](https://github.com/chtoucas/Narvalo.NET/tree/master/samples/MvpWebForms)
 

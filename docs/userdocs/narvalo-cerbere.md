@@ -23,11 +23,12 @@ If you verify your code with the Code Contracts tool,
   a condition is compulsory, use `Expect` otherwise,
 - for private methods, use `Demand` when a condition is compulsory, use `Expect`
   otherwise.
+
 If you do not, you only care about mandatory preconditions, then use `Require`
 or `Enforce` for public/protected/internal methods and `Demand` otherwise.
 You should also use Code Analysis to check that you did not forget any precondition.
 
-In any case, never use `Demand` to guard a public method.
+In any case, **never** use `Demand` to guard a public method.
 
 When you are comfortable with the library, our recommendations above can be
 improved. Indeed, for protected or internal methods, **when** you have

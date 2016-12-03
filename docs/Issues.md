@@ -24,7 +24,7 @@ Current works
      We need also to filter on target.
   * Nuspec: handle automatically PCL, `FrameworkProfiles.props` import
     and files to be added (we certainly can do this for all packages, non-PCL).
-  * Nuspec (oboslete): In `Make.CustomAfter.props`, we use $(TargetFrameworkProfile) to
+  * Nuspec (obsolete): In `Make.CustomAfter.props`, we use $(TargetFrameworkProfile) to
     patch the description $(NuDescription) for PCL libraries, is it the right way
     to do this (In `Make.CustomAfter.targets`, we use
     `'$(TargetFrameworkProfile.StartsWith(Profile))' == 'true'`).
@@ -216,13 +216,9 @@ MSBuild and `PSakefile`:
   `CodeAnalysisSucceededFile` disables incremental building. Currently, Code Analysis hooks
   are disabled in `Narvalo.Common.targets`.
 - **Bug:** Make sure PSake reports failure whenever an error occurs.
-- Complete common settings for F# projects.
 - Enable T4-regeneration outside VS since, currently it does not work when building from the command-line.
 - What's going on when the `Package` target is also defined?
 - Verify that `SkipDocumentation` is true when building Code Contracts documentation.
-
-`publish-*.fsx`
-- **Bug:** Fails to push to the official NuGet server but works otherwise.
 
 `checkup.ps1`:
 - Find projects not using `Narvalo.Common.props`.
@@ -230,7 +226,6 @@ MSBuild and `PSakefile`:
 - Find `DependentUpon` without `SubType` files.
 - Find hidden Visual Studio files.
 - Find files ignored by git: `git status -u --ignored`.
-- Repair StyleCop settings.
 
 New script or T4 template to create tests from code contracts.
 
