@@ -103,7 +103,7 @@
 
   <!-- __InitializeMakeCommonProps target. -->
   <Target Name="__InitializeMakeCommonProps">
-    <Error Text="Each master project (e.g. Make.proj) MUST create its own instance of @(ProjectsToBuild)."
+    <Error Text="Each master project (e.g. Make.proj) MUST create its own instance of %40(ProjectsToBuild)."
            Condition=" '@(ProjectsToBuild)' == '' " />
   </Target>
 </Project>
