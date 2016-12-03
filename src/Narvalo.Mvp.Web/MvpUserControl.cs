@@ -51,7 +51,8 @@ namespace Narvalo.Mvp.Web
             Demand.NotNull(Page);
 
             // NB: WebFormsMvp does not add a type constraint and use a direct cast
-            // (T)Page.GetDataItem() but it seems a bit dangerous to me (InvalidCastException).
+            // (T)Page.GetDataItem() but I prefer to avoid boxing/unboxing and the risk
+            // of an InvalidCastException.
             return Page.GetDataItem() as T;
         }
 
@@ -63,7 +64,8 @@ namespace Narvalo.Mvp.Web
             Ensures(Result<string>() != null);
 
             // NB: WebFormsMvp does not add a type constraint and use a direct cast
-            // (T)Page.GetDataItem() but it seems a bit dangerous to me (InvalidCastException).
+            // (T)Page.GetDataItem() but I prefer to avoid boxing/unboxing and the risk
+            // of an InvalidCastException.
             return Format.Current(format, Page.GetDataItem() as T);
         }
     }

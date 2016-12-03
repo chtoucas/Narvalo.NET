@@ -75,7 +75,6 @@
     <Compile Include="Internal\IHttpPresenter.cs" />
     <Compile Include="Internal\Type%24.cs" />
     <Compile Include="MvpBootstrapper.cs" />
-    <Compile Include="MvpHttpHandler.cs" />
     <Compile Include="MvpPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

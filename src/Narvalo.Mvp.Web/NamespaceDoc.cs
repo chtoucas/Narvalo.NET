@@ -22,7 +22,7 @@ namespace Narvalo.Mvp.Web
      * ### Changes from WebFormsMvp
      *
      * Since I don't see any value in `MvpHttpHandler` and `MvpWebService`, I dropped both.
-     * Actually, `MvpHttpHandler` is still there but usage is discouraged.
+     *
      * ]]>
      * </content>
      */
