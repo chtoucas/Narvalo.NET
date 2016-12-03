@@ -233,3 +233,18 @@ with the current version of the CC tools).
 
 You MUST also configure VS to build the project when selecting the Code Contracts
 configuration.
+
+WARNING
+-------
+
+Bad things might happen if we use references to NuGet packages of Narvalo.Core
+& Narvalo.Common instead of simple project references of the same
+assemblies. Tests run from MSBuild command-line might fail
+for obscure reasons. Worst, they might as well succeed even if nothing had
+changed. In fact, it truly depended on the order of builds decided by MSBuild
+at that time; parallel build in action. The problem is that a project carries
+its own versions of Narvalo.Core and Narvalo.Common, albeit the NuGet ones,
+and, when built, it overrides the freshly compiled versions of the same
+assemblies. Follows version and API missmatchs. The bottom line is to never
+add references to one of our NuGet packages or be sure not to include
+the project in any MSBuild project.
