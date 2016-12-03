@@ -1,25 +1,12 @@
 ChangeLog
 =========
 
-XXXX-XX-XX -
------------------------------------------------------------------------
+### 2016-12-03
 
-#### Highlights
-
-#### Bugfixes
-
-#### Breaking changes
-
-#### Enhancements
-
-#### Improvements
-
-2016-12-03
------------------------------------------------------------------------
-
-#### Highlights
-- New major release of Narvalo.Cerbere.
-- First stable versions of Narvalo.Mvp and Narvalo.Mvp.Web.
+- New major (and incompatible) release of Narvalo.Cerbere with hopefully a better
+  and simpler API.
+- First stable versions of Narvalo.Mvp and Narvalo.Mvp.Web fully verified
+  with the Code Contracts tools.
 
 Package                   | Version
 --------------------------|---------
@@ -32,79 +19,21 @@ Narvalo.Mvp               | 1.0.0
 Narvalo.Mvp.Web           | 1.0.0
 Narvalo.Web               | 0.25.0
 
-#### Breaking changes
-Narvalo.Cerbere
-- The library has been largely rewritten and simplified.
+[Details](changelogs/2016-12-03.md)
 
-Narvalo.Mvp
-- `MvpBootstrapper.Run()` becomes `MvpBootstrapper.InitializePlatform()`.
-- `ConventionBasedPresenterDiscoveryStrategy` becomes `PresenterDiscoveryStrategy`.
-- `AttributeBasedPresenterDiscoveryStrategy` becomes `AttributedPresenterDiscoveryStrategy`.
-- `DefaultConventionBasedPresenterDiscoveryStrategy` becomes `DefaultPresenterDiscoveryStrategy`.
-- `MvpCommand.Init()` is no longer available; use the `OnLoad()` event instead.
+### 2016-11-04
 
-Narvalo.Mvp.Web
-- `AspNetConventionBasedPresenterDiscoveryStrategy` becomes `AspNetPresenterDiscoveryStrategy`.
+- Focus on API and code quality for Narvalo.Web.
+- Better test coverage for Narvalo.Core & Narvalo.Web.
+- Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
 
-#### Enhancements
-- NuGet: Added support for .NET Standard wherever it is possible and
-  automatically add required GAC assemblies upon installation.
-- The Narvalo.Mvp package ships now with a Code Contracts library.
-- The Narvalo.Mvp.Web package ships now with a Code Contracts library.
+[Details](changelogs/2016-11-04)
 
-#### Improvements
-- Micro-optimization for `Int64Encoder.Encode()`.
-- Narvalo.Mvp fully verified with the Code Contracts tool.
-- Narvalo.Mvp.Web fully verified with the Code Contracts tool.
+2015-04-25
+----------
 
-2016-11-04 - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
------------------------------------------------------------------------
-
-_Focus on API and code quality of Narvalo.Web_
-_Better test coverage for Narvalo.Core & Narvalo.Web_
-
-#### Bugfixes
-- At start of `Require.InRange()`, we did not validate the range before using it.
-- Fixed uncorrect and inefficient initialization of `AssetManager`.
-
-#### Breaking changes
-- Moved all money-related classes to the newly created Narvalo.Finance namespace.
-- Moved the `IsMetaCurrency` property from `CurrencyInfo` to `Currency`.
-- Renamed the Narvalo.Fx.Extensions namespace to Narvalo.Fx.Advanced.
-- Merged Narvalo.Web.UI.Assets with Narvalo.Web.UI.
-- Renamed `UriExtensions.ToProtocolLessString()` to `UriExtensions.ToProtocolRelativeString()`.
-  Protocol-relative URL appears to be the accepted name, not protocol-less URL.
-- `HttpHandlerBase.AcceptedVerbs` is now public.
-  `HttpHandlerBase.IsReusable` and `HttpHandlerBase.TrySkipIisCustomErrors` are
-   no longer virtual.
-- Refactored the asset providers in an attempt to make them more robust and configurable.
-- Refactored the HTML helpers into "purely" static methods.
-- Renamed "unsafe" methods to "unchecked" methods.
-- Renamed `Predicate` to `Predicates`.
-
-### Enhancements
-- Added localized resources for the french language.
-- Applied the `SecurityTransparent` attribute to Narvalo.Core.
-- New helpers for parameter validation or Code Contracts:
-  `Acknowledge`, `Check` and `ValidatedNotNull`.
-
-#### Improvements
-- Use the new `Format.Resource()` instead of `Format.CurrentCulture()` for resource formatting.
-- Improved the error messages. Whenever it is possible, we give an hint on how to fix the problem.
-- Rollback on `Require` methods not throwing an `ArgumentNullException`. Throwing a more specific
-  exception is certainly better.
-- For `Require` and `Enforce`, throw an `ArgumentException` if the specified range is invalid.
-- In `StringManip`, use direct concatenation instead of `String.Format()`.
-- Use "en" instead of "en-US" as the default resource language.
-- Added more tests.
-- Clearly shows skipped tests. This includes debug or release only tests and white-box tests.
-- Use traits to mark slow or unsafe tests.
-- Integration of OpenCover.
-
-2015-04-25 - Version 1.1.0 of Narvalo.Build
--------------------------------------------
-
-_New tasks_
+#### Highlights
+- Version 1.1.0 of Narvalo.Build
 
 #### Breaking changes
 - All Java tasks are put into the Narvalo.Build.JavaTasks namespace.
@@ -113,10 +42,12 @@ _New tasks_
 - New tasks related to semantic versioning.
 - New task to download a file from internet.
 
-2015-03-26 - Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web
------------------------------------------------------------------------
+2015-03-26
+----------
 
-_Aiming for API stability of Narvalo.Core_
+#### Highlights
+- Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
+- Aiming for API stability of Narvalo.Core.
 
 #### Breaking changes
 - Renamed `VoidOrBreak.Abort()` to `VoidOrBreak.Break()`, `VoidOrBreak.Aborted` to `VoidOrBreak.IsBreak`
@@ -141,10 +72,12 @@ _Aiming for API stability of Narvalo.Core_
 - Changed a few parameter names to ensure a CA1303 error is triggered whenever
   a string should be localized.
 
-2015-03-24 - Version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web
--------------------------------------------------------------------------
+2015-03-24
+----------
 
-_Correct a problem with NuGet and Code Contracts_
+#### Highlights
+- Correct a problem with NuGet and Code Contracts.
+- Version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
 
 #### Bugfixes
 - For Narvalo.Web, the Code Contracts library was wrongly added to the project references.
@@ -153,10 +86,12 @@ _Correct a problem with NuGet and Code Contracts_
 - More meaningful description of the NuGet packages.
 - Replaced all calls to Enum.HasFlag by a specialized extension method that should be more efficient.
 
-2015-03-23 - Version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web
------------------------------------------------------------------------
+2015-03-23
+----------
 
-_Focus on API and code quality of Narvalo.Core_
+#### Highlights
+- Focus on API and code quality of Narvalo.Core.
+- Version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
 
 #### Breaking changes
 - To improve usability, merged most of the `Narvalo.Collections` namespace with
@@ -179,10 +114,12 @@ _Focus on API and code quality of Narvalo.Core_
 - Made the `Maybe<T>.IsSome` property public; there was no compelling reason to continue hiding it.
 - Follow more closely the coding style recommandations by the .NET team.
 
-2015-02-20 - Version 0.21 of Narvalo.Core & Narvalo.Common
-----------------------------------------------------------
+2015-02-20
+----------
 
-_Bugfix for currency types_
+#### Highlights
+- Bugfix for currency types.
+- Version 0.21 of Narvalo.Core & Narvalo.Common
 
 #### Bugfixes
 - Use 0 for the numeric code for a currency when none is defined. Before that, we  registered the
@@ -192,10 +129,12 @@ _Bugfix for currency types_
 - Removed from the currency classes anything related to culture, namely the currency symbol methods.
   We need a better way of handling localization problems. Unicode CLDR seems the way to go.
 
-2015-02-19 - Version 0.20 of Narvalo.Core & Narvalo.Common
-----------------------------------------------------------
+2015-02-19
+----------
 
-_New currency types_
+#### Highlights
+- New currency types.
+- Version 0.20 of Narvalo.Core & Narvalo.Common.
 
 #### Bugfixes
 - In non-retail mode, when resolving project references, we should not include
