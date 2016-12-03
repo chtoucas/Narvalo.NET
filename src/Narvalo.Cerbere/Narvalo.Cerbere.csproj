@@ -65,6 +65,7 @@
     <Compile Include="Expect.cs" />
     <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
     <Compile Include="Format.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Demand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

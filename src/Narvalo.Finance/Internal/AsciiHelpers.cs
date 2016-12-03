@@ -30,22 +30,22 @@ namespace Narvalo.Finance.Internal
             return true;
         }
 
-        [Pure]
-        public static bool IsDigit(string value)
-        {
-            // Prove that any call to this internal method is guarded upstream.
-            Demand.NotNull(value);
+        //[Pure]
+        //public static bool IsDigit(string value)
+        //{
+        //    // Prove that any call to this internal method is guarded upstream.
+        //    Demand.NotNull(value);
 
-            for (int i = 0; i < value.Length; i++)
-            {
-                if (!IsDigit(value[i]))
-                {
-                    return false;
-                }
-            }
+        //    for (int i = 0; i < value.Length; i++)
+        //    {
+        //        if (!IsDigit(value[i]))
+        //        {
+        //            return false;
+        //        }
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         [Pure]
         public static bool IsUpperLetter(string value)

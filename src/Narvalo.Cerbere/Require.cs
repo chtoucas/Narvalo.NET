@@ -5,6 +5,7 @@ namespace Narvalo
     using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
+    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Properties;
 
@@ -153,6 +154,7 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly", Justification ="[Ignore] This is an alias, as such, the parameter name is correct.")]
         [ContractArgumentValidator]
         public static void Property(bool testCondition)
         {

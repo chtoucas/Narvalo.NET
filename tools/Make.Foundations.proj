@@ -3,7 +3,7 @@
   <!--
     Available filters:
     - Empty or '_None_', include all projects (default)
-    - '_Analyze_', only include libraries ready for standard analysis
+    - '_Analyze_', only include libraries ready for standard code analysis
     - '_CodeContracts_', only include libraries ready for CC analysis
     - '_Security_', only include libraries ready for security analysis
     - '_Core_', include Core projects
@@ -16,13 +16,25 @@
 
   <PropertyGroup>
     <Filter Condition=" '$(Filter)' == '' ">_None_</Filter>
-    <!-- TODO: Only core packages are analyzed for the moment. -->
-    <Filter Condition=" '$(Filter)' == '_Analyze_' ">_Core_</Filter>
   </PropertyGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)Make.Common.props" />
 
   <Choose>
+    <!-- Only include projects that have been configured for Code Analysis. -->
+    <When Condition=" '$(Filter)' == '_Analyze_' ">
+      <ItemGroup>
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Cerbere.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
+      </ItemGroup>
+    </When>
+
     <!-- Only include projects that have been configured for Code Contracts. -->
     <When Condition=" '$(Filter)' == '_CodeContracts_' ">
       <ItemGroup>
@@ -33,7 +45,7 @@
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp\Narvalo.Mvp.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Mvp.Web\Narvalo.Mvp.Web.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
+        <!--<ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />-->
       </ItemGroup>
     </When>
 

@@ -66,6 +66,7 @@
     <Compile Include="Collections\Dictionary%24.cs" />
     <Compile Include="Collections\Enumerator%24.cs" />
     <Compile Include="ConvertTo.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
     <Compile Include="Internal\PredicateFor.cs" />
     <Compile Include="Internal\TryParser%24.cs" />

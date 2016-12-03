@@ -72,6 +72,7 @@
     <Compile Include="Data\SqlParameterCollection%24.cs" />
     <Compile Include="Data\SqlTypes%24.cs" />
     <Compile Include="Data\StoredProcedure`1.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IO\ConcurrentFileFinder.cs" />
     <Compile Include="IO\DirectoryWalker.cs" />
     <Compile Include="IO\FileFinder.cs" />
