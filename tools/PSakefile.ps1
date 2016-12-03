@@ -608,7 +608,7 @@ Task Environment `
     # The output of running "MSBuild /version" looks like:
     # >   Microsoft (R) Build Engine, version 12.0.31101.0
     # >   [Microsoft .NET Framework, Version 4.0.30319.34209]
-    # >   Copyright (C) Microsoft Corporation. Tous droits réservés.
+    # >   Copyright (C) Microsoft Corporation. Tous droits rÃ©servÃ©s.
     # >
     # >   12.0.31101.0
     # Since VS 2015, we no longer get the framework version.
