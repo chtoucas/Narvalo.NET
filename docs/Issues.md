@@ -1,6 +1,11 @@
 Current works
 =============
 
+- Build script
+  * It outputs only one xunit report (xunit.html and xunit.xml),
+    it should depend on the library.
+  * Add test coverage for Narvalo.Mvp & co.
+  * Save the reports: cc, sa, test coverage?
 - Check contract visibility: Bic, Iban, PredicateFor and ContractFor.
 - Localize all libraries (verif).
 - Put the private key in the repository
