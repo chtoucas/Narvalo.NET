@@ -1,12 +1,7 @@
 ChangeLog
 =========
 
-### 2016-12-03
-
-- New major (and incompatible) release of Narvalo.Cerbere with hopefully a better
-  and simpler API.
-- First stable versions of Narvalo.Mvp and Narvalo.Mvp.Web fully verified
-  with the Code Contracts tools.
+### 2016-12-03 ([Details](changelogs/2016-12-03.md))
 
 Package                   | Version
 --------------------------|---------
@@ -19,206 +14,54 @@ Narvalo.Mvp               | 1.0.0
 Narvalo.Mvp.Web           | 1.0.0
 Narvalo.Web               | 0.25.0
 
-[Details](changelogs/2016-12-03.md)
+- New major (and incompatible) release of Narvalo.Cerbere with hopefully a better
+  and simpler API.
+- First stable versions of Narvalo.Mvp and Narvalo.Mvp.Web fully verified
+  with the Code Contracts tools.
 
-### 2016-11-04
+### 2016-11-04 ([Details](changelogs/2016-11-04.md))
+
+_Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 
 - Focus on API and code quality for Narvalo.Web.
 - Better test coverage for Narvalo.Core & Narvalo.Web.
-- Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
 
-[Details](changelogs/2016-11-04)
+### 2015-04-25 ([Details](changelogs/2015-04-25.md))
 
-2015-04-25
-----------
+_Version 1.1.0 of Narvalo.Build_
 
-#### Highlights
-- Version 1.1.0 of Narvalo.Build
-
-#### Breaking changes
-- All Java tasks are put into the Narvalo.Build.JavaTasks namespace.
-
-### Enhancements
 - New tasks related to semantic versioning.
 - New task to download a file from internet.
 
-2015-03-26
-----------
+### 2015-03-26 ([Details](changelogs/2015-03-26.md))
 
-#### Highlights
-- Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
+_Version 0.23 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
+
 - Aiming for API stability of Narvalo.Core.
 
-#### Breaking changes
-- Renamed `VoidOrBreak.Abort()` to `VoidOrBreak.Break()`, `VoidOrBreak.Aborted` to `VoidOrBreak.IsBreak`
-  and `VoidOrBreak.Success` to `VoidOrBreak.Void`.
-- Renamed `VoidOrError.Failure()` to `VoidOrError.Error()` and `VoidOrError.Success` to `VoidOrError.Void`.
-- Renamed `Sequence.Create()` to `Sequence.Generate()`.
+### 2015-03-24 ([Details](changelogs/2015-03-24.md))
 
-#### Enhancements
-- New `Promise` class to make promises and check them.
-- New `Assume` class to help the Code Contracts tools recognize that certain conditions are met.
-- Provides unsafe alternates to some extension methods for `SqlParameterCollection` and `SqlCommand`.
-  These unsafe methods delegate parameter validation to the caller.
-- New validation method: `Require.PropertyNotWhiteSpace()`.
+_Version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 
-#### Improvements
-- `Require.PropertyNotEmpty()` no longer throws an `ArgumentNullException`.
-- Whenever it was possible, moved `SqlDataReader` extensions to `IDataRecord` extensions.
-- We no longer patch the documentation with Code Contracts annotations; this created too
-  much noise and annoying duplicates of descriptions for exceptions. The patched documentation
-  is still available in the NuGet package alongside the contract assemblies.
-- Added more Code Contracts.
-- Changed a few parameter names to ensure a CA1303 error is triggered whenever
-  a string should be localized.
-
-2015-03-24
-----------
-
-#### Highlights
 - Correct a problem with NuGet and Code Contracts.
-- Version 0.22.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
 
-#### Bugfixes
-- For Narvalo.Web, the Code Contracts library was wrongly added to the project references.
+### 2015-03-23 ([Details](changelogs/2015-03-23.md))
 
-#### Improvements
-- More meaningful description of the NuGet packages.
-- Replaced all calls to Enum.HasFlag by a specialized extension method that should be more efficient.
+_Version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web_
 
-2015-03-23
-----------
-
-#### Highlights
 - Focus on API and code quality of Narvalo.Core.
-- Version 0.22 of Narvalo.Core, Narvalo.Common & Narvalo.Web.
 
-#### Breaking changes
-- To improve usability, merged most of the `Narvalo.Collections` namespace with
-  `Narvalo.Fx` and moved almost all others classes to Narvalo.Common.
-  Narvalo.Core is now focused on implementing functional patterns and a minimal set
-  of helpers, namely what is necessary to perform argument validation.
-- Moved from `Require` to `Enforce` all methods that do not play well with Code Contracts.
-- Renamed `Maybe.Create()` to `Maybe.Of()` and `Range.Create()` to `Range.Of()`.
-- Apply to all monads: renamed `Apply()` to `Invoke()`, `Match()` to `Map()` and
-  changed the signature of `When()` and `Then()`.
-- Moved the `UriExtensions` class to Narvalo.Web as it is only useful there.
+### 2015-02-20 ([Details](changelogs/2015-02-20.md))
 
-#### Enhancements
-- New types inspired by functional programming: `Output<T>`, `Either<T1, T2>`, `Switch<T1, T2>`...
-- New types to help writing naïve benchmarks.
+_Version 0.21 of Narvalo.Core & Narvalo.Common_
 
-#### Improvements
-- Narvalo.Core fully passes FxCop, Gendarme and Code Contracts static analysis.
-- Added more C# documentation.
-- Made the `Maybe<T>.IsSome` property public; there was no compelling reason to continue hiding it.
-- Follow more closely the coding style recommandations by the .NET team.
-
-2015-02-20
-----------
-
-#### Highlights
 - Bugfix for currency types.
-- Version 0.21 of Narvalo.Core & Narvalo.Common
 
-#### Bugfixes
-- Use 0 for the numeric code for a currency when none is defined. Before that, we  registered the
-  alphabetic code but not the currency info since we didn't have a numeric code.
+### 2015-02-19 ([Details](changelogs/2015-02-19.md))
 
-#### Improvements
-- Removed from the currency classes anything related to culture, namely the currency symbol methods.
-  We need a better way of handling localization problems. Unicode CLDR seems the way to go.
+_Version 0.20 of Narvalo.Core & Narvalo.Common_
 
-2015-02-19
-----------
-
-#### Highlights
 - New currency types.
-- Version 0.20 of Narvalo.Core & Narvalo.Common.
-
-#### Bugfixes
-- In non-retail mode, when resolving project references, we should not include
-  the prerelease label; otherwise, later on, nuget won't be able to resolve the
-  dependency.
-- NuGet.Server require `runAllManagedModulesForAllRequests` to be true, otherwise
-  API calls will fail.
-- Only enable white-box tests in `PresenterTypeResolverFacts` when internals
-  are visible.
-- In Prose, replaced references to NuGet packages of Narvalo.Core
-  & Narvalo.Common by simple project references of the same
-  assemblies. Before that, tests run from MSBuild command-line might fail
-  for obscure reasons. Worst, they might as well succeed even if nothing had
-  changed. In fact, it truly depended on the order of builds decided by MSBuild
-  at that time; parallel build in action. The problem was that Prose carried
-  its own versions of Narvalo.Core and Narvalo.Common, albeit the NuGet ones,
-  and, when built, it overrided the freshly compiled versions of the same
-  assemblies. Followed version and API missmatchs. The bottom line is to never
-  again add references to one of our NuGet packages or be sure not to include
-  the project in any MSBuild project.
-- Building test and sample projects raised a warning for
-  an unknown semantic version. We just needed to check the context. Also
-  removed the creation of a fake version when the version was not complete.
-- Using the same property (SolutionFile) for NuGet
-  packages restore and for the selection of a custom solution to build
-  made it easy to break the build system. In Make.proj, if we imported
-  Make.Common.props before defining the ProjectsToBuild property, the path
-  of SolutionFile would be absolute but Make.proj expects it to be relative.
-  We simply replaced the SolutionFile property used by Make.proj by CustomSolution.
-
-#### Enhancements
-- Do not change the content of the NuGet package depending on the configuration:
-  always add the CC reference assembly and the assembly documentation.
-- Unless explicitely requested, always build the Code
-  Contracts reference assembly and the assembly documentation.
-
-#### Improvements
-- Do not set VisualStudioVersion when building inside Visual Studio...
-- Changed the way we override properties for sample and test projects. We no
-  longer use extensions to Narvalo.Common.props but rather use the new facility
-  offered by $(AssemblyName).props.
-- Using a MSBuild response file, allowed to try out the build system without
-  actually committing your personal settings.
-- Made sure a build fails if a custom import does not exist. Moved the content
-  of Narvalo.CustomBefore.props & Narvalo.CustomBefore.targets to CustomAfter
-  props & targets and removed them.
-- Cleaner separation between optional properties and
-  other properties. Move the PEVerify & SecAnnotate targets from Make.Common
-  to Narvalo.Custom. This makes possible to generate individual reports per
-  assemblies.
-- Entirely removed from Make.Common.props &
-  Make.Common.targets the `Lean` property which did not bring anything. It was
-  supposed to help mimicking a Visual Studio build but MSBuild can just do it.
-- Only define the `CODE_ANALYSIS` symbol if Code Analysis is requested.
-- Only display MSBuild warnings for local CA or SA
-  overrides when CA or SA is actually requested.
-- Upgraded NSubstitute to v1.8.1.
-- Fully documented the PSake script file. It is now
-  possible to specify the MSBuild verbosity level from the command-line.
-  In Make.Foundations.proj, added the ability to select a subset of the list
-  of projects to build.
-- In the CreateAssemblyVersionFile target, instead of
-  hardcoding the path to the directory to be created, use the parent directory
-  of AssemblyVersionFile.
-- Cleaned up Make.CustomAfter.props and Make.CustomAfter.targets
-- Replaced all initial targets used to signal temporary overridden settings
-  by a target automatically run before a Build.
-- Moved properties relevant to the Code
-  Contracts reference assembly to {AssemblyName}.props. Along the way we
-  disabled the creation of a CC reference library when working inside Visual
-  Studio. This should grealty reduce the build time in Release configuration.
-- Added missing {AssemblyName}.Version.props.
-- Use the BuildingInsideVisualStudio property
-  to only enable some properties when not running inside Visual Studio.
-- Created a Make.Public.proj that replaces the SkipPrivateProjects option
-  from Make.proj. Moved Make.proj to the tools directory.
-- Retired the custom CA ruleset for Samples.
-- Moved the DummyGeneratedVersion property to Make.CustomAfter.props. Now,
-  inside Visual Studio, versioning for test and sample assemblies works exactly
-  the same way as for the other assemblies.
-- Using partial classes we artificially separate whitebox tests from blackbox tests.
-- Moved IssueAttribute.cs and IssueSeverity.cs to a shared directory then added
-  them as linked files to test projects.
-- Much needed rewriting of ChangeLog.md and Issues.md.
 
 2014-12-17 - Version 0.19.1 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 ----------------------------------------------------------------------------
