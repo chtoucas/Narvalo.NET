@@ -1,6 +1,7 @@
 Current works
 =============
 
+- Localize all libraries (verif).
 - Put the private key in the repository
   See: https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx
 - Documentation:
@@ -39,7 +40,6 @@ Current works
     [Format](https://github.com/dotnet/roslyn/blob/master/docs/compilers/Rule%20Set%20Format.md)
     and [Schema](https://github.com/dotnet/roslyn/blob/master/src/Compilers/Core/Portable/RuleSet/RuleSetSchema.xsd)
 - C#
-  * use `nameof` everywhere.
   * rules to explain when to use the new `=>` syntax for methods.
   * rules for using of `var`.
 - **Bug:** in the MvpWebForms sample project, `OutputPath` is wrong (temporary fix: override `OutputPath`
