@@ -1,10 +1,7 @@
-Tutorials
-=========
+Usage guidelines
+================
 
-Narvalo.Cerbere
----------------
-
-- Usage guidelines of [Code Contracts](code-contracts.md)
+- [Narvalo.Cerbere](narvalo-cerbere.md)
 
 Narvalo.Mvp
 -----------
