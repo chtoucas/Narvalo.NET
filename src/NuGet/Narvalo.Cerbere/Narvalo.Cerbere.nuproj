@@ -7,6 +7,8 @@
     <NuDescription>
       <![CDATA[
 Provides argument validation methods and Code Contracts helpers.
+
+** WARNING ** Version 2.0.0 is a complete rewrite largely incompatible with the previous versions.
       ]]>
     </NuDescription>
     <NuTags>Require, Assert, Guard, Check, Validate, CodeContracts, Contracts</NuTags>

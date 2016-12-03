@@ -4,10 +4,37 @@ ChangeLog
 XXXX-XX-XX -
 -----------------------------------------------------------------------
 
+#### Highlights
+
 #### Bugfixes
 
 #### Breaking changes
-- Narvalo.Cerbere largely rewritten and simplified.
+
+#### Enhancements
+
+#### Improvements
+
+2016-12-03
+-----------------------------------------------------------------------
+
+#### Highlights
+- New major release of Narvalo.Cerbere.
+- First stable versions of Narvalo.Mvp and Narvalo.Mvp.Web.
+
+Package                   | Version
+--------------------------|---------
+Narvalo.Cerbere           | 2.0.0
+Narvalo.Common            | 0.25.0
+Narvalo.Core              | 0.25.0
+Narvalo.Finance           | 0.25.0
+Narvalo.Fx                | 0.25.0
+Narvalo.Mvp               | 1.0.0
+Narvalo.Mvp.Web           | 1.0.0
+Narvalo.Web               | 0.25.0
+
+#### Breaking changes
+Narvalo.Cerbere
+- The library has been largely rewritten and simplified.
 
 Narvalo.Mvp
 - `MvpBootstrapper.Run()` becomes `MvpBootstrapper.InitializePlatform()`.
@@ -20,13 +47,15 @@ Narvalo.Mvp.Web
 - `AspNetConventionBasedPresenterDiscoveryStrategy` becomes `AspNetPresenterDiscoveryStrategy`.
 
 #### Enhancements
-- [NuGet] Added support for .NET Standard wherever it is possible and
+- NuGet: Added support for .NET Standard wherever it is possible and
   automatically add required GAC assemblies upon installation.
-- [Narvalo.Mvp] Full support for Code Contracts.
-- [Narvalo.Mvp.Web] Full support for Code Contracts.
+- The Narvalo.Mvp package ships now with a Code Contracts library.
+- The Narvalo.Mvp.Web package ships now with a Code Contracts library.
 
 #### Improvements
 - Micro-optimization for `Int64Encoder.Encode()`.
+- Narvalo.Mvp fully verified with the Code Contracts tool.
+- Narvalo.Mvp.Web fully verified with the Code Contracts tool.
 
 2016-11-04 - Version 0.24 of Narvalo.Core, Narvalo.Common & Narvalo.Web
 -----------------------------------------------------------------------

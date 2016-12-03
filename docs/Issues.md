@@ -1,6 +1,7 @@
 Current works
 =============
 
+- Check contract visibility: Bic, Iban, PredicateFor and ContractFor.
 - Localize all libraries (verif).
 - Put the private key in the repository
   See: https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx
