@@ -3,8 +3,9 @@ Overview
 
 - [User Documentation](userdocs/index.md)
 - [Project Changelog](changelogs/index.md)
-- [Issues and Roadmap](Issues.md)
+- [Near Future Plans](changelogs/vNext.md)
 - [Engineering Guides](engineering/index.md)
+- [Issues, TODOs & Ideas](Issues.md)
 
 Library                   | Version | vNext  | Target               | Security (*)
 --------------------------|---------|--------|----------------------|--------------

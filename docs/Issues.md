@@ -1,51 +1,17 @@
-Current works
-=============
+Issues, TODOs & Ideas
+=====================
 
-- Build script
-  * It outputs only one xunit report (xunit.html and xunit.xml),
-    it should depend on the library.
-  * Save the reports: cc, sa, test coverage?
+TODO
+----
+
+- Provide better assembly descriptions.
+- Thread-safety: statics (always) and read-only properties (?).
+- Change `retval` for a more meaningful name.
+- Review all `Format` and boxing
+- Where it makes sense, add `EditorBrowsableState`, `DebuggerDisplay` and `DebuggerTypeProxy` attributes.
+- Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
+- Review all `IEnumerable` extensions for null-checking and deferred execution.
 - Check contract visibility: Bic, Iban, PredicateFor and ContractFor.
-- Localize all libraries (verif).
-- Put the private key in the repository
-  See: https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx
-- Documentation:
-  * Version & dependencies.
-  * Changelog
-  * Icons in Wiki
-  * GitHub projects.
-- Build scripts:
-  * OpenCover & Gendarme: move the core logic from PSake to MSBuild.
-    See [OpenCover](https://github.com/OpenCover/opencover/wiki/MSBuild-Support)
-  * In addition to `$(SkipCodeContractsReferenceAssembly)`, should we check
-    `$(SkipCodeContractsReferenceAssembly)` too?
-  * `ReadDependenciesFromPackagesConfig` should exclude dev dependencies. They
-     sould be marked with `developmentDependency="true"`.
-     We need also to filter on target.
-  * Nuspec: handle automatically PCL, `FrameworkProfiles.props` import
-    and files to be added (we certainly can do this for all packages, non-PCL).
-  * Nuspec (obsolete): In `Make.CustomAfter.props`, we use $(TargetFrameworkProfile) to
-    patch the description $(NuDescription) for PCL libraries, is it the right way
-    to do this (In `Make.CustomAfter.targets`, we use
-    `'$(TargetFrameworkProfile.StartsWith(Profile))' == 'true'`).
-  * Should I call Rebuild before Package?
-  * Should I call Rebuild before the analysis tasks?
-- DocFX:
-  * External links via `<see cref="!:" />` are not understood by docfx.
-  * NamespaceDocs are not understood by docfx, rewrite needed.
-  * `<content markup="commonmark">` is not understood, rewrite needed.
-  * Reference the MSDN package without version attached.
-  * Build tasks (clean, build)
-- Migrate from StyleCop to StyleCop.Analyzers.
-  * Move to CodeFormatter.
-  * Disable StyleCop: set `StyleCopEnabled` to `false` (see `Package.StyleCop.targets`).
-  * When migration is done, update the README to detail the new static analysis results
-    and the documentation: Overview.md and Guidelines.md.
-  * Create `tools\src\Narvalo.ProjectAnalyzers` replacement of `Narvalo.StyleCop`.
-  * Create `src\Narvalo.Analyzers`.
-  * RuleSet Schema:
-    [Format](https://github.com/dotnet/roslyn/blob/master/docs/compilers/Rule%20Set%20Format.md)
-    and [Schema](https://github.com/dotnet/roslyn/blob/master/src/Compilers/Core/Portable/RuleSet/RuleSetSchema.xsd)
 - C#
   * rules to explain when to use the new `=>` syntax for methods.
   * rules for using of `var`.
@@ -65,19 +31,6 @@ Current works
   we still need an update task.
   * [GitHub Issue](https://github.com/NuGet/Home/issues/522)
   * [Bring back solution level packages](https://github.com/NuGet/Home/issues/1521)
-
-
-Issues & Roadmap
-================
-
-- Provide better assembly descriptions.
-- Thread-safety: statics (always) and read-only properties (?).
-- Prefer `for` to `foreach` with arrays.
-- Change `retval` for a more meaningful name.
-- Review all `Format` and boxing
-- Where it makes sense, add `EditorBrowsableState`, `DebuggerDisplay` and `DebuggerTypeProxy` attributes.
-- Review `IList<T>`, `IEnumerable<T>` and so on in APIs. Document behaviour regarding infinite sequences.
-- Review all `IEnumerable` extensions for null-checking and deferred execution.
 
 Narvalo.Fx
 ------------
@@ -107,7 +60,15 @@ Narvalo.Common
 Narvalo.Finance
 ---------------
 
-- Use SnvCurrencyXmlReader
+- BigMoney and BigMoney<TCurrency>. This requires BigDecimal or BigInteger.
+- Microsoft SQL Server implementation:
+  Int32 or Int64, and designate the lower four digits (or possibly even 2) as
+  "right of the decimal point". So "on the edges" you'll need some "* 10000"
+  on the way in and some "/ 10000" on the way out. The nicity of this is that
+  all your summation can be done using (fast) integer arithmetic.
+  https://msdn.microsoft.com/en-au/library/ms179882.aspx
+- IConvertible? that is conversion between currencies.
+
 - See https://github.com/JodaOrg/joda-money,
   http://www.ibancalculator.com/
   https://www.theswiftcodes.com/
@@ -117,17 +78,8 @@ Narvalo.Finance
   See http://www.iso.org/iso/home/standards/currency_codes.htm
 - Decimal overloads.
 - Handle overflows.
-- Comparisons between `Money` and `Money<T>`. Or simply remove `Money`?
-- IConvertible?
-- BigMoney and BigMoney<TCurrency>.
 - Represents a monetary value.
   http://martinfowler.com/eaaCatalog/money.html
-- Microsoft SQL Server implementation:
-  Int32 or Int64, and designate the lower four digits (or possibly even 2) as
-  "right of the decimal point". So "on the edges" you'll need some "* 10000"
-  on the way in and some "/ 10000" on the way out. The nicity of this is that
-  all your summation can be done using (fast) integer arithmetic.
-  https://msdn.microsoft.com/en-au/library/ms179882.aspx
  - Implementation in .NET:
   * http://www.codeproject.com/Articles/28244/A-Money-type-for-the-CLR
   * https://bitbucket.org/rplaire/money-type-for-the-clr
@@ -167,8 +119,7 @@ Narvalo.Mvp
 - Review `ThrowIfNoPresenterBound`, `Load` event, `PresenterBinder.Release`.
 - Review the use of custom presenter types per platform prevents the reuse of
   presenters across different platforms. Maybe is it a necessary evil?
-- Add support for Application Controller, Navigator, EventAggregator (not the same
-  as cross-presenter communication).
+- Add support for EventAggregator (not the same as cross-presenter communication).
 - Incorporate ideas from MVCSharp (Task) and maybe GWT, Caliburn.Micro, ReactiveUI or MVVM Light?
 - Add support for WPF.
 - See
@@ -190,6 +141,21 @@ Infrastructure
 - Create symbol packages (or use GitLink?).
 - Apply security attributes?
 
+### Documentation with docfx
+
+- Documentation:
+  * Version & dependencies.
+  * Changelog
+  * Icons in Wiki
+  * GitHub projects.
+
+* Provide a better style.
+* External links via `<see cref="!:" />` are not understood by docfx.
+* NamespaceDocs are not understood by docfx, rewrite needed.
+* `<content markup="commonmark">` is not understood, rewrite needed.
+* Reference the MSDN package without version attached.
+* Build tasks (clean, build)
+
 ### Security
 
 - Review the (usefulness)[https://github.com/dotnet/corefx/issues/12592] of the security attributes:
@@ -207,6 +173,26 @@ Infrastructure
 - What about permcalc?
 
 ### Scripts
+
+- Build script
+  * It outputs only one xunit report (xunit.html and xunit.xml),
+    it should depend on the library.
+  * Save the reports: cc, sa, test coverage?
+* OpenCover & Gendarme: move the core logic from PSake to MSBuild.
+  See [OpenCover](https://github.com/OpenCover/opencover/wiki/MSBuild-Support)
+* In addition to `$(SkipCodeContractsReferenceAssembly)`, should we check
+  `$(SkipCodeContractsReferenceAssembly)` too?
+* `ReadDependenciesFromPackagesConfig` should exclude dev dependencies. They
+   sould be marked with `developmentDependency="true"`.
+   We need also to filter on target.
+* Nuspec: handle automatically PCL, `FrameworkProfiles.props` import
+  and files to be added (we certainly can do this for all packages, non-PCL).
+* Nuspec (obsolete): In `Make.CustomAfter.props`, we use $(TargetFrameworkProfile) to
+  patch the description $(NuDescription) for PCL libraries, is it the right way
+  to do this (In `Make.CustomAfter.targets`, we use
+  `'$(TargetFrameworkProfile.StartsWith(Profile))' == 'true'`).
+* Should I call Rebuild before Package?
+* Should I call Rebuild before the analysis tasks?
 
 MSBuild and `PSakefile`:
 - **Bug:** Build target is broken. Add all proj to FullBuild.
@@ -230,3 +216,15 @@ MSBuild and `PSakefile`:
 New script or T4 template to create tests from code contracts.
 
 New script to check for completeness of resources.
+
+### StyleCop
+
+Migrate from StyleCop to StyleCop.Analyzers.
+* Disable StyleCop: set `StyleCopEnabled` to `false` (see `Package.StyleCop.targets`).
+* When migration is done, update the README to detail the new static analysis results
+  and the documentation: Overview.md and Guidelines.md.
+* Create `tools\src\Narvalo.ProjectAnalyzers` replacement of `Narvalo.StyleCop`.
+* Create `src\Narvalo.Analyzers`.
+* RuleSet Schema:
+  [Format](https://github.com/dotnet/roslyn/blob/master/docs/compilers/Rule%20Set%20Format.md)
+  and [Schema](https://github.com/dotnet/roslyn/blob/master/src/Compilers/Core/Portable/RuleSet/RuleSetSchema.xsd)

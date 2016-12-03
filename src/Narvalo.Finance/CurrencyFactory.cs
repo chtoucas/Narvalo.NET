@@ -27,7 +27,7 @@ namespace Narvalo.Finance
 
             if (!Validate(code))
             {
-                throw new CurrencyNotFoundException("Unknown currency: " + code + ".");
+                throw new CurrencyNotFoundException($"Unknown currency: {code}.");
             }
 
             return new Currency(code);

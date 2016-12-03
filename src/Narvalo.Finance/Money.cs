@@ -61,9 +61,7 @@ namespace Narvalo.Finance
 #endif
     }
 
-    /// <content>
-    /// Implements the <see cref="IEquatable{Money}"/> interface.
-    /// </content>
+    // Implements the IEquatable<Money> interface.
     public partial struct Money
     {
         public static bool operator ==(Money left, Money right) => left.Equals(right);
@@ -94,9 +92,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Implements the <see cref="IFormattable"/> interface.
-    /// </content>
+    // Implements the IFormattable interface.
     public partial struct Money
     {
         /// <inheritdoc cref="Object.ToString" />
@@ -106,9 +102,7 @@ namespace Narvalo.Finance
             => MoneyFormatter.Format(Amount, format, formatProvider);
     }
 
-    /// <content>
-    /// Implements the <see cref="IComparable"/> and <see cref="IComparable{Money}"/> interfaces.
-    /// </content>
+    // Implements the IComparable and IComparable<Money> interfaces.
     public partial struct Money
     {
         public static bool operator <(Money left, Money right) => left.CompareTo(right) < 0;
