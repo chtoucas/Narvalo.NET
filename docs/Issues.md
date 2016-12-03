@@ -17,6 +17,7 @@ Current works
   * GitHub projects.
 - Build scripts:
   * OpenCover & Gendarme: move the core logic from PSake to MSBuild.
+    See [OpenCover](https://github.com/OpenCover/opencover/wiki/MSBuild-Support)
   * In addition to `$(SkipCodeContractsReferenceAssembly)`, should we check
     `$(SkipCodeContractsReferenceAssembly)` too?
   * `ReadDependenciesFromPackagesConfig` should exclude dev dependencies. They
@@ -37,6 +38,7 @@ Current works
   * Reference the MSDN package without version attached.
   * Build tasks (clean, build)
 - Migrate from StyleCop to StyleCop.Analyzers.
+  * Move to CodeFormatter.
   * Disable StyleCop: set `StyleCopEnabled` to `false` (see `Package.StyleCop.targets`).
   * When migration is done, update the README to detail the new static analysis results
     and the documentation: Overview.md and Guidelines.md.
