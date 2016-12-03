@@ -9,7 +9,7 @@ namespace Narvalo.Mvp.Web.Internal
     {
         public static bool IsAspNetDynamicType(this Type @this)
         {
-            Require.Object(@this);
+            Demand.Object(@this);
 
             // REVIEW: The following remarks are taken from the original WebFormsMvp code.
             // Use the base type for pages & user controls as that is the code-behind file.

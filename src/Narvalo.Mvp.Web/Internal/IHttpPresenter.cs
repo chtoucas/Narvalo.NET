@@ -38,18 +38,12 @@ namespace Narvalo.Mvp.Web.Internal
     {
         IAsyncTaskManager IHttpPresenter.AsyncManager
         {
-            set
-            {
-                Contract.Requires(value != null);
-            }
+            set { Contract.Requires(value != null); }
         }
 
         HttpContextBase IHttpPresenter.HttpContext
         {
-            set
-            {
-                Contract.Requires(value != null);
-            }
+            set { Contract.Requires(value != null); }
         }
 
         IMessageCoordinator IPresenter.Messages

@@ -5,6 +5,9 @@ namespace Narvalo.Mvp.Web
     using System;
 
     using Narvalo.Mvp;
+    using Narvalo.Mvp.Web.Properties;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public class MvpUserControl<TViewModel> : MvpUserControl, IView<TViewModel>
     {
@@ -18,10 +21,11 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
+                Ensures(Result<TViewModel>() != null);
+
                 if (_model == null)
                 {
-                    throw new InvalidOperationException(
-                        "The Model property is currently null, however it should have been automatically initialized by the presenter. This most likely indicates that no presenter was bound to the control. Check your presenter bindings.");
+                    throw new InvalidOperationException(Strings.MvpUserControl_ModelPropertyIsNull);
                 }
 
                 return _model;
@@ -29,6 +33,8 @@ namespace Narvalo.Mvp.Web
 
             set
             {
+                Require.Property(value);
+
                 _model = value;
             }
         }

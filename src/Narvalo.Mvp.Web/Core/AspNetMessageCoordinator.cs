@@ -7,13 +7,13 @@ namespace Narvalo.Mvp.Web.Core
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
     using System.Diagnostics.Contracts;
 #endif
     using System.Linq;
 
     using Narvalo.Mvp;
+    using Narvalo.Mvp.Web.Properties;
 
     using static System.Diagnostics.Contracts.Contract;
 
@@ -142,15 +142,11 @@ namespace Narvalo.Mvp.Web.Core
             }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly",
-            MessageId = "PreRenderComplete",
-            Justification = "ASP.NET method name.")]
         private void ThrowIfClosed()
         {
             if (_closed)
             {
-                throw new InvalidOperationException(
-                    "Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during 'PreRenderComplete'.");
+                throw new InvalidOperationException(Strings.AspNetMessageCoordinator_Closed);
             }
         }
 

@@ -6,10 +6,52 @@ namespace Narvalo.Mvp.Web
 
     using Narvalo.Mvp;
 
-    public interface IHttpPresenter : IPresenter
+    public partial interface IHttpPresenter : IPresenter
     {
         HttpContextBase HttpContext { get; }
 
         IAsyncTaskManager AsyncManager { get; }
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Mvp.Web
+{
+    using System.Diagnostics.Contracts;
+    using System.Web;
+
+    using static System.Diagnostics.Contracts.Contract;
+
+    [ContractClass(typeof(IHttpPresenterContract))]
+    public partial interface IHttpPresenter { }
+
+    [ContractClassFor(typeof(IHttpPresenter))]
+    internal abstract class IHttpPresenterContract : IHttpPresenter
+    {
+        IAsyncTaskManager IHttpPresenter.AsyncManager
+        {
+            get
+            {
+                Ensures(Result<IAsyncTaskManager>() != null);
+                return default(IAsyncTaskManager);
+            }
+        }
+
+        HttpContextBase IHttpPresenter.HttpContext
+        {
+            get
+            {
+                Ensures(Result<HttpContextBase>() != null);
+                return default(HttpContextBase);
+            }
+        }
+
+        IMessageCoordinator IPresenter.Messages
+        {
+            get { return default(IMessageCoordinator); }
+        }
+    }
+}
+
+#endif

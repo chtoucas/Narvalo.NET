@@ -117,70 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CompositePresenterDiscoveryStrategy_StrategiesArrayIsEmpty" xml:space="preserve">
-    <value>You must supply at least one strategy.</value>
+  <data name="AspNetMessageCoordinator_Closed" xml:space="preserve">
+    <value>Messages can't be published or subscribed to after the message bus has been closed. In a typical page lifecycle, this happens during 'PreRenderComplete'.</value>
   </data>
-  <data name="CompositeViewTypeBuilder_EventHandlerTypeMismatch" xml:space="preserve">
-    <value>The supplied event {0} from {1} does not have the event handler type specified.</value>
+  <data name="HttpPresenter_AsyncManagerPropertyIsNull" xml:space="preserve">
+    <value>The AsyncManager property is currently null, however it should have been automatically initialized. This most likely indicates that your control does not inherit from MvpPage or MvpControl.</value>
   </data>
-  <data name="CompositeViewTypeResolver_ViewTypeContainsPublicMethods" xml:space="preserve">
-    <value>To be used with shared presenters, the view type must not define public methods. The supplied type ({0}) is not.</value>
+  <data name="HttpPresenter_HttpContextIsNull" xml:space="preserve">
+    <value>The HttpContext property is currently null, however it should have been automatically initialized by the HTTP presenter. This most likely indicates that no presenter was bound to the control. Check your presenter bindings.</value>
   </data>
-  <data name="CompositeViewTypeResolver_ViewTypeIsNotAssignable" xml:space="preserve">
-    <value>To be used with shared presenters, the view type must inherit from {0}. The supplied type ({1}) does not.</value>
-  </data>
-  <data name="CompositeViewTypeResolver_ViewTypeIsNotInterface" xml:space="preserve">
-    <value>To be used with shared presenters, the view type must be an interface, but {0} was supplied instead.</value>
-  </data>
-  <data name="CompositeViewTypeResolver_ViewTypeIsNotPublic" xml:space="preserve">
-    <value>To be used with shared presenters, the view type must be public. The supplied type ({0}) is not.</value>
-  </data>
-  <data name="CompositeView_TypeMismatch" xml:space="preserve">
-    <value>Expected a view of type {0} but {1} was supplied.</value>
-  </data>
-  <data name="DefaultPlatformServices_InvalidCompositeViewFactoryThunk" xml:space="preserve">
-    <value>The CompositeViewFactory property cannot be null. Check that the underlying property factory does not return null.</value>
-  </data>
-  <data name="DefaultPlatformServices_InvalidMessageCoordinatorFactoryThunk" xml:space="preserve">
-    <value>The MessageCoordinatorFactory property cannot be null. Check that the underlying property factory does not return null.</value>
-  </data>
-  <data name="DefaultPlatformServices_InvalidPresenterDiscoveryStrategyThunk" xml:space="preserve">
-    <value>The PresenterDiscoveryStrategy property cannot be null. Check that the underlying property factory does not return null.</value>
-  </data>
-  <data name="DefaultPlatformServices_InvalidPresenterFactoryThunk" xml:space="preserve">
-    <value>The PresenterFactory property cannot be null. Check that the underlying property factory does not return null.</value>
-  </data>
-  <data name="LazyValueHolder_CannotReset" xml:space="preserve">
-    <value>Once the value has been accessed, you can no longer change the underlying value factory.</value>
-  </data>
-  <data name="LazyValueHolder_ValueFactoryReturnsNull" xml:space="preserve">
-    <value>The value factory must not return a null value.</value>
-  </data>
-  <data name="MessageCoordinator_Closed" xml:space="preserve">
-    <value>Messages can't be published or subscribed to after the message bus has been closed.</value>
-  </data>
-  <data name="MvpCommand_ModelPropertyIsNull" xml:space="preserve">
+  <data name="MvpUserControl_ModelPropertyIsNull" xml:space="preserve">
     <value>The Model property is currently null, however it should have been automatically initialized by the presenter. This most likely indicates that no presenter was bound to the control. Check your presenter bindings.</value>
-  </data>
-  <data name="PresenterBinder_NoPresenterFoundForView" xml:space="preserve">
-    <value>Failed to find presenter for view of type {0}.</value>
-  </data>
-  <data name="PresenterBindingAttributesResolver_MissingViewType" xml:space="preserve">
-    <value>When shared presenter binding is requested, the view type must be explicitly specified. One of the bindings on '{0}' violates this restriction.</value>
-  </data>
-  <data name="PresenterConstructorResolver_MissingPublicCtor" xml:space="preserve">
-    <value>{0} is missing an expected constructor, or the constructor is not accessible. We tried to execute code equivalent to: new {0}({1} view). Add a public constructor with a compatible signature, or use a IPresenterFactory that can supply constructor dependencies.</value>
-  </data>
-  <data name="PresenterConstructorResolver_PresenterIsNotPublic" xml:space="preserve">
-    <value>{0} does not meet accessibility requirements. For the framework to be able to call it, it must be public. Make the type public, or use a IPresenterFactory that can access this type.</value>
-  </data>
-  <data name="PresenterFactory_PresenterCtorFailed" xml:space="preserve">
-    <value>An exception was thrown whilst trying to create an instance of {0}. Check the inner exception for more information.</value>
-  </data>
-  <data name="ResolverCache_KeyFactoryReturnsNull" xml:space="preserve">
-    <value>The key factory must not return a null value.</value>
-  </data>
-  <data name="ResolverCache_ValueFactoryReturnsNull" xml:space="preserve">
-    <value>The value factory must not return a null value.</value>
   </data>
 </root>

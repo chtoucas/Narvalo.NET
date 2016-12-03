@@ -64,7 +64,7 @@ namespace Narvalo.Mvp.Platforms
                     if (_compositeViewFactory == null)
                     {
                         throw new InvalidOperationException(
-                            Strings.DefaultPlatformServices_BadPropertyInitialization);
+                            Strings.DefaultPlatformServices_InvalidCompositeViewFactoryThunk);
                     }
                 }
 
@@ -83,7 +83,7 @@ namespace Narvalo.Mvp.Platforms
                     if (_messageCoordinatorFactory == null)
                     {
                         throw new InvalidOperationException(
-                            Strings.DefaultPlatformServices_BadPropertyInitialization);
+                            Strings.DefaultPlatformServices_InvalidMessageCoordinatorFactoryThunk);
                     }
                 }
 
@@ -102,7 +102,7 @@ namespace Narvalo.Mvp.Platforms
                     if (_presenterDiscoveryStrategy == null)
                     {
                         throw new InvalidOperationException(
-                            Strings.DefaultPlatformServices_BadPropertyInitialization);
+                            Strings.DefaultPlatformServices_InvalidPresenterDiscoveryStrategyThunk);
                     }
                 }
 
@@ -121,7 +121,7 @@ namespace Narvalo.Mvp.Platforms
                     if (_presenterFactory == null)
                     {
                         throw new InvalidOperationException(
-                            Strings.DefaultPlatformServices_BadPropertyInitialization);
+                            Strings.DefaultPlatformServices_InvalidPresenterFactoryThunk);
                     }
                 }
 

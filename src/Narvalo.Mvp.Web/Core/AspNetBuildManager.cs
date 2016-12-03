@@ -11,8 +11,6 @@ namespace Narvalo.Mvp.Web.Core
     public sealed class AspNetBuildManager : IBuildManager
     {
         public Type GetType(string typeName, bool throwOnError, bool ignoreCase)
-        {
-            return Compilation.BuildManager.GetType(typeName, throwOnError, ignoreCase);
-        }
+            => Compilation.BuildManager.GetType(typeName, throwOnError, ignoreCase);
     }
 }

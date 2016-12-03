@@ -39,7 +39,7 @@ namespace Narvalo.Mvp.Resolvers
 
             if (innerKey == null)
             {
-                throw new InvalidOperationException(Strings.ResolverCache_BadInitialization);
+                throw new InvalidOperationException(Strings.ResolverCache_KeyFactoryReturnsNull);
             }
 
             var value = _dictionary.GetOrAdd(innerKey, _ => valueFactory.Invoke(key));

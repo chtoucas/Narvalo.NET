@@ -27,7 +27,7 @@ namespace Narvalo.Mvp.Platforms
 
             // WARNING: Do not change the following line for:
             // _lazyValue = new Lazy<TValue>(_valueFactory);
-            // as it will fail to capture the variable "_valueFactory".
+            // it will fail to capture the variable "_valueFactory".
             _lazyValue = new Lazy<TValue>(() => _valueFactory.Invoke());
         }
 
@@ -41,7 +41,7 @@ namespace Narvalo.Mvp.Platforms
 
                 if (value == null)
                 {
-                    throw new InvalidOperationException(Strings.LazyValueHolder_BadInitialization);
+                    throw new InvalidOperationException(Strings.LazyValueHolder_ValueFactoryReturnsNull);
                 }
 
                 return value;

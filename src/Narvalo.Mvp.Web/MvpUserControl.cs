@@ -13,19 +13,14 @@ namespace Narvalo.Mvp.Web
 
     public abstract class MvpUserControl : UserControl, IView
     {
-        private readonly bool _throwIfNoPresenterBound;
-
         protected MvpUserControl() : this(true) { }
 
         protected MvpUserControl(bool throwIfNoPresenterBound)
         {
-            _throwIfNoPresenterBound = throwIfNoPresenterBound;
+            ThrowIfNoPresenterBound = throwIfNoPresenterBound;
         }
 
-        public bool ThrowIfNoPresenterBound
-        {
-            get { return _throwIfNoPresenterBound; }
-        }
+        public bool ThrowIfNoPresenterBound { get; }
 
         protected bool AutoDataBind { get; set; } = true;
 
@@ -55,7 +50,7 @@ namespace Narvalo.Mvp.Web
         {
             Demand.NotNull(Page);
 
-            // NB: Originally WebFormsMvp does not add a type constraint and use a direct cast:
+            // NB: WebFormsMvp does not add a type constraint and use a direct cast
             // (T)Page.GetDataItem() but it seems a bit dangerous to me (InvalidCastException).
             return Page.GetDataItem() as T;
         }
@@ -67,7 +62,7 @@ namespace Narvalo.Mvp.Web
             Demand.NotNull(Page);
             Ensures(Result<string>() != null);
 
-            // NB: Originally WebFormsMvp does not add a type constraint and use a direct cast:
+            // NB: WebFormsMvp does not add a type constraint and use a direct cast
             // (T)Page.GetDataItem() but it seems a bit dangerous to me (InvalidCastException).
             return Format.Current(format, Page.GetDataItem() as T);
         }

@@ -8,15 +8,14 @@ namespace Narvalo.Mvp.Web
 
     using static System.Diagnostics.Contracts.Contract;
 
+    [Obsolete("Using MVP for an HTTP Handler is supported but discouraged.")]
     public abstract class MvpHttpHandler : IHttpHandler, IView
     {
-        readonly bool _throwIfNoPresenterBound;
-
         protected MvpHttpHandler() : this(true) { }
 
         protected MvpHttpHandler(bool throwIfNoPresenterBound)
         {
-            _throwIfNoPresenterBound = throwIfNoPresenterBound;
+            ThrowIfNoPresenterBound = throwIfNoPresenterBound;
         }
 
         public event EventHandler Load;
@@ -31,7 +30,7 @@ namespace Narvalo.Mvp.Web
             }
         }
 
-        public bool ThrowIfNoPresenterBound => _throwIfNoPresenterBound;
+        public bool ThrowIfNoPresenterBound { get; }
 
         public void ProcessRequest(HttpContext context)
         {

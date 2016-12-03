@@ -2,11 +2,12 @@
 
 namespace Narvalo.Mvp.Web
 {
-    using System.Diagnostics.Contracts;
+    using System;
     using System.Web;
     using System.Web.Caching;
 
     using Narvalo.Mvp;
+    using Narvalo.Mvp.Web.Properties;
 
     using static System.Diagnostics.Contracts.Contract;
 
@@ -22,12 +23,16 @@ namespace Narvalo.Mvp.Web
             Expect.NotNull(view);
         }
 
-        [ContractVerification(false)]  // AsyncManager is initalized upon construction in PageHost.
         public IAsyncTaskManager AsyncManager
         {
             get
             {
                 Ensures(Result<IAsyncTaskManager>() != null);
+
+                if (_asyncManager == null)
+                {
+                    throw new InvalidOperationException(Strings.HttpPresenter_AsyncManagerPropertyIsNull);
+                }
 
                 return _asyncManager;
             }
@@ -39,12 +44,16 @@ namespace Narvalo.Mvp.Web
             }
         }
 
-        [ContractVerification(false)]  // AsyncManager is initalized upon construction in HttpPresenterBinder.
         public HttpContextBase HttpContext
         {
             get
             {
                 Ensures(Result<HttpContextBase>() != null);
+
+                if (_httpContext == null)
+                {
+                    throw new InvalidOperationException(Strings.HttpPresenter_HttpContextIsNull);
+                }
 
                 return _httpContext;
             }
@@ -66,7 +75,7 @@ namespace Narvalo.Mvp.Web
             }
         }
 
-        public Cache Cache { get { return HttpContext.Cache; } }
+        public Cache Cache => HttpContext.Cache;
 
         public HttpRequestBase Request
         {

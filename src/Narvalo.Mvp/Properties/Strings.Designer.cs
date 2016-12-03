@@ -124,20 +124,38 @@ namespace Narvalo.Mvp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to One of the properties has been initialized with a null value..
+        ///   Looks up a localized string similar to The CompositeViewFactory property cannot be null. Check that the underlying property factory does not return null..
         /// </summary>
-        internal static string DefaultPlatformServices_BadPropertyInitialization {
+        internal static string DefaultPlatformServices_InvalidCompositeViewFactoryThunk {
             get {
-                return ResourceManager.GetString("DefaultPlatformServices_BadPropertyInitialization", resourceCulture);
+                return ResourceManager.GetString("DefaultPlatformServices_InvalidCompositeViewFactoryThunk", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value factory must not return a null value..
+        ///   Looks up a localized string similar to The MessageCoordinatorFactory property cannot be null. Check that the underlying property factory does not return null..
         /// </summary>
-        internal static string LazyValueHolder_BadInitialization {
+        internal static string DefaultPlatformServices_InvalidMessageCoordinatorFactoryThunk {
             get {
-                return ResourceManager.GetString("LazyValueHolder_BadInitialization", resourceCulture);
+                return ResourceManager.GetString("DefaultPlatformServices_InvalidMessageCoordinatorFactoryThunk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The PresenterDiscoveryStrategy property cannot be null. Check that the underlying property factory does not return null..
+        /// </summary>
+        internal static string DefaultPlatformServices_InvalidPresenterDiscoveryStrategyThunk {
+            get {
+                return ResourceManager.GetString("DefaultPlatformServices_InvalidPresenterDiscoveryStrategyThunk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The PresenterFactory property cannot be null. Check that the underlying property factory does not return null..
+        /// </summary>
+        internal static string DefaultPlatformServices_InvalidPresenterFactoryThunk {
+            get {
+                return ResourceManager.GetString("DefaultPlatformServices_InvalidPresenterFactoryThunk", resourceCulture);
             }
         }
         
@@ -151,6 +169,15 @@ namespace Narvalo.Mvp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value factory must not return a null value..
+        /// </summary>
+        internal static string LazyValueHolder_ValueFactoryReturnsNull {
+            get {
+                return ResourceManager.GetString("LazyValueHolder_ValueFactoryReturnsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Messages can&apos;t be published or subscribed to after the message bus has been closed..
         /// </summary>
         internal static string MessageCoordinator_Closed {
@@ -160,11 +187,11 @@ namespace Narvalo.Mvp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Model property is currently null, however it should have been initialized by the presenter..
+        ///   Looks up a localized string similar to The Model property is currently null, however it should have been automatically initialized by the presenter. This most likely indicates that no presenter was bound to the control. Check your presenter bindings..
         /// </summary>
-        internal static string MvpCommand_ModelIsNull {
+        internal static string MvpCommand_ModelPropertyIsNull {
             get {
-                return ResourceManager.GetString("MvpCommand_ModelIsNull", resourceCulture);
+                return ResourceManager.GetString("MvpCommand_ModelPropertyIsNull", resourceCulture);
             }
         }
         
@@ -216,9 +243,9 @@ namespace Narvalo.Mvp.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The key factory must not return a null value..
         /// </summary>
-        internal static string ResolverCache_BadInitialization {
+        internal static string ResolverCache_KeyFactoryReturnsNull {
             get {
-                return ResourceManager.GetString("ResolverCache_BadInitialization", resourceCulture);
+                return ResourceManager.GetString("ResolverCache_KeyFactoryReturnsNull", resourceCulture);
             }
         }
         

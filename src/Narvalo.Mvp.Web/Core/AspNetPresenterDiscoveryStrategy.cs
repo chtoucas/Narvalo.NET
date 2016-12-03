@@ -81,9 +81,7 @@ namespace Narvalo.Mvp.Web.Core
         public PresenterDiscoveryResult FindBindings(
             IEnumerable<object> hosts,
             IEnumerable<IView> views)
-        {
-            return _inner.FindBindings(hosts, views);
-        }
+            => _inner.FindBindings(hosts, views);
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 

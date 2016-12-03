@@ -10,27 +10,16 @@ namespace Narvalo.Mvp.Web
 
     public abstract class MvpPage : Page, IView
     {
-        private readonly bool _throwIfNoPresenterBound;
-
-        private bool _autoDataBind = true;
-
         protected MvpPage() : this(true) { }
 
         protected MvpPage(bool throwIfNoPresenterBound)
         {
-            _throwIfNoPresenterBound = throwIfNoPresenterBound;
+            ThrowIfNoPresenterBound = throwIfNoPresenterBound;
         }
 
-        public bool ThrowIfNoPresenterBound
-        {
-            get { return _throwIfNoPresenterBound; }
-        }
+        public bool ThrowIfNoPresenterBound { get; }
 
-        protected bool AutoDataBind
-        {
-            get { return _autoDataBind; }
-            set { _autoDataBind = value; }
-        }
+        protected bool AutoDataBind { get; set; } = true;
 
         protected override void OnInit(EventArgs e)
         {

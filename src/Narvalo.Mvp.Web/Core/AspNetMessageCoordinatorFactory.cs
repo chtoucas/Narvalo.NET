@@ -7,9 +7,6 @@ namespace Narvalo.Mvp.Web.Core
 
     public sealed class AspNetMessageCoordinatorFactory : IMessageCoordinatorFactory
     {
-        public IMessageCoordinator Create()
-        {
-            return new AspNetMessageCoordinator();
-        }
+        public IMessageCoordinator Create() => new AspNetMessageCoordinator();
     }
 }

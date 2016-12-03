@@ -32,7 +32,7 @@ namespace Narvalo.Mvp.Web.Core
 
             if (viewType.IsAspNetDynamicType())
             {
-                Assume(viewType.BaseType != null);
+                Assume(viewType.BaseType != null, "Extern: BCL.");
                 return base.Resolve(viewType.BaseType);
             }
             else

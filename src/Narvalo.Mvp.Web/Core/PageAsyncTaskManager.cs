@@ -25,38 +25,28 @@ namespace Narvalo.Mvp.Web.Core
         }
 
         public void ExecuteRegisteredAsyncTasks()
-        {
-            _page.ExecuteRegisteredAsyncTasks();
-        }
+           => _page.ExecuteRegisteredAsyncTasks();
 
         public void RegisterAsyncTask(Func<CancellationToken, Task> handler)
-        {
-            _page.RegisterAsyncTask(new PageAsyncTask(handler));
-        }
+            => _page.RegisterAsyncTask(new PageAsyncTask(handler));
 
         public void RegisterAsyncTask(Func<Task> handler)
-        {
-            _page.RegisterAsyncTask(new PageAsyncTask(handler));
-        }
+            => _page.RegisterAsyncTask(new PageAsyncTask(handler));
 
         public void RegisterAsyncTask(
             BeginEventHandler beginHandler,
             EndEventHandler endHandler,
             object state)
-        {
-            _page.RegisterAsyncTask(
+            => _page.RegisterAsyncTask(
                 new PageAsyncTask(beginHandler, endHandler, null, state, executeInParallel: false));
-        }
 
         public void RegisterAsyncTask(
             BeginEventHandler beginHandler,
             EndEventHandler endHandler,
             EndEventHandler timeoutHandler,
             object state)
-        {
-            _page.RegisterAsyncTask(
+            => _page.RegisterAsyncTask(
                 new PageAsyncTask(beginHandler, endHandler, timeoutHandler, state));
-        }
 
         public void RegisterAsyncTask(
             BeginEventHandler beginHandler,
@@ -64,10 +54,8 @@ namespace Narvalo.Mvp.Web.Core
             EndEventHandler timeoutHandler,
             object state,
             bool executeInParallel)
-        {
-            _page.RegisterAsyncTask(
+            => _page.RegisterAsyncTask(
                 new PageAsyncTask(beginHandler, endHandler, timeoutHandler, state, executeInParallel));
-        }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 

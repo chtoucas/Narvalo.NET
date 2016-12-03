@@ -24,7 +24,7 @@ namespace Narvalo.Mvp.CommandLine
 
                 if (_model == null)
                 {
-                    throw new InvalidOperationException(Strings.MvpCommand_ModelIsNull);
+                    throw new InvalidOperationException(Strings.MvpCommand_ModelPropertyIsNull);
                 }
 
                 return _model;
