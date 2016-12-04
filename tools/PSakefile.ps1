@@ -844,9 +844,6 @@ function Invoke-OpenCover {
           -filters:$summaryFilters `
           -reports:$coverageFile `
           -targetdir:$summaryDirectory
-
-        Copy-Item -Path (Get-LocalPath 'work\log\summary.htm') `
-            -Destination (Get-LocalPath 'docs\code-coverage.html') -Force
     }
     else {
         $reportDirectory = Get-LocalPath 'work\log\opencover'

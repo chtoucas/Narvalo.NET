@@ -1,7 +1,8 @@
 ChangeLog (XXXX-XX-XX)
 ======================
 
-## Objectives
+Objectives
+----------
 The plan is to improve the overall quality & usability of Narvalo.Cerbere
 and Narvalo.Finance.
 
@@ -12,14 +13,14 @@ Documentation & Tests (Narvalo.Cerbere & Narvalo.Finance):
 
 Library Enhancements & Improvements:
 - Narvalo.Finance (still no big money for accurate computations, next time...)
-  * Finish localization.
+  * localization.
   * BBAN implementation.
   * strong/weak validation of Bic, Iban & Bban (check digits).
   * provide an alternate live Currency provider (see SnvCurrencyXmlReader).
   * currency info with implementation from BCL.
   * money & currency formatting.
 - Narvalo.Mvp and Narvalo.Mvp.Web.
-  * Add localized message in french for Narvalo.Mvp and Narvalo.Mvp.Web.
+  * add localized messages in french for Narvalo.Mvp and Narvalo.Mvp.Web.
   * Application Controller and Navigator.
 
 Other tasks:
@@ -27,23 +28,30 @@ Other tasks:
 - Put the private key in the repository.
   See [here](https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx)
 
-## Highlights
+Highlights
+----------
 
-## Bugfixes
+Bugfixes
+--------
 
-## Breaking Changes
-
+Breaking Changes
+----------------
 ### Narvalo.Core
-- `Enforce.IsWhiteSpace` now throws an `ArgumentOutOfRangeException` if the input
-  is an empty string.
+- `Enforce.IsWhiteSpace()` now throws an `ArgumentOutOfRangeException`
+  if the input is an empty string.
 
-## API Changes
+### Narvalo.Web.Configuration
+- `AssetSection.DefaultProvider` setter now throws an `ArgumentException`
+  if the input contains only whitespaces.
 
+API Changes
+-----------
 ### Narvalo.Core
 - `BooleanStyles.EmptyIsFalse` is declared obsolete;
   use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is to better
   emphasize that whitespace-only strings are treated as empty strings by
-  `ParseTo.Boolean()`
+  `ParseTo.Boolean()`.
 
-## Enhancements
+Enhancements
+------------
 - Full test coverage for Narvalo.Cerbere.

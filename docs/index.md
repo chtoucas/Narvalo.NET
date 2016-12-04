@@ -23,21 +23,25 @@ Narvalo.Web               | 0.25.0  |        | .NET 4.5             |
 
 In general, we provide localized messages in English and French.
 
-Status
-------
+Status (2016/12/04)
+-------------------
 
-[Code Coverage Output](code-coverage.html)
+Library                   | Code Analysis | Code Contracts | Code Coverage
+--------------------------|---------------|----------------|---------------
+Narvalo.Build             | Excellent     |                |
+Narvalo.Cerbere           | Excellent     | Excellent      | Excellent
+Narvalo.Common            | Excellent     | Excellent      |
+Narvalo.Core              | Excellent     | Excellent      |
+Narvalo.Finance           | Excellent     | Excellent      |
+Narvalo.Fx                | Excellent     | Excellent      |
+Narvalo.Mvp               | Excellent     | Excellent      |
+Narvalo.Mvp.Web           | Excellent     | Excellent      |
+Narvalo.Web               | Pretty good   | Minimal        |
 
-Library                   | Code Analysis | Code Contracts
---------------------------|---------------|----------------
-Narvalo.Build             | Complete      |
-Narvalo.Cerbere           | Complete      | Complete
-Narvalo.Common            | Complete      | Complete
-Narvalo.Core              | Complete      | Complete
-Narvalo.Finance           | Complete      | Complete
-Narvalo.Fx                | Complete      | Complete
-Narvalo.Mvp               | Complete      | Complete
-Narvalo.Mvp.Web           | Complete      | Complete
-Narvalo.Web               | Pretty good   | Minimal
-
-Notes: Code Analysis is done with the default VS analyzers.
+Notes:
+- Code Analysis is done with the default VS analyzers
+- Code Analysis: excellent means no error or warning found,
+  all `SuppressMessage` fully justified.
+- Code Contracts: excellent means 100% verified, no error or warning found,
+  all `SuppressMessage` fully justified.
+- Code Coverage: excellent means 100% line and branch coverages.
