@@ -1,17 +1,17 @@
 ChangeLog (Infrastructure)
 ==========================
 
-#### 2016-12-03
+## 2016-12-03
 - Migration to VS 2015. As part of the process we delete any reference to
   StyleCop and remove any orphan code.
 - [Improvement] Add Narvalo.Mvp.Facts to the test coverage.
 
-#### 2016-11-04
+## 2016-11-04
 - [Improvement] Clearly shows skipped tests. This includes debug or release only tests and white-box tests.
 - [Improvement] Use traits to mark slow or unsafe tests.
 - [Improvement] Integration of OpenCover.
 
-#### 2015-02-19
+## 2015-02-19
 - [Bugfix] In non-retail mode, when resolving project references, we should not include
   the prerelease label; otherwise, later on, nuget won't be able to resolve the
   dependency.
@@ -77,7 +77,7 @@ ChangeLog (Infrastructure)
 - [Improvement] Moved IssueAttribute.cs and IssueSeverity.cs to a shared directory then added
   them as linked files to test projects.
 
-#### 2014-12-17
+## 2014-12-17
 - [Bugfix] When adding a NuGet package, the Code Contracts library was incorrectly added
   to the project references. To help NuGet identify _true_ references, we just
   have to use the section "references" in the nuspec files.
@@ -90,7 +90,7 @@ ChangeLog (Infrastructure)
 - [Improvement] It is now possible to unconditionally hide internal classes and methods of an
   assembly. On the way, we fixed CA issues that appear when this is turned on.
 
-#### 2014-12-13
+## 2014-12-13
 - [Bugfix] When building a PCL project _from the command line_, MSBuild generates output inside a subdirectory
   of `$(OutDir)`. To correct this, we instruct MSBuild to not change the default behaviour:
   `$(GenerateProjectSpecificOutputFolder) = false`.

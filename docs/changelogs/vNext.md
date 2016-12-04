@@ -1,7 +1,7 @@
 ChangeLog (XXXX-XX-XX)
 ======================
 
-### Plan
+## The plan
 The plan is to improve the overall quality & usability of Narvalo.Cerbere
 and Narvalo.Finance.
 
@@ -28,12 +28,12 @@ Other tasks:
 - Put the private key in the repository.
   See [here](https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx)
 
-### Highlights
+## Highlights
 
-### Bugfixes
+## Bugfixes
 
-### Breaking changes
+## Breaking Changes
 
-### Enhancements
+## Enhancements
 
-### Improvements
+## Improvements

@@ -1,12 +1,12 @@
 ChangeLog (XXXX-XX-XX)
 ======================
 
-#### Highlights
+## Highlights
 
-#### Bugfixes
+## Bugfixes
 
-#### Breaking changes
+## Breaking Changes
 
-#### Enhancements
+## Enhancements
 
-#### Improvements
+## Improvements
