@@ -11,7 +11,7 @@ namespace Narvalo
         #region Ctor
 
         [Fact]
-        public static void Ctor_DefaultConstructor()
+        public static void Ctor_DefaultCtor()
         {
             var ex = new ControlFlowException();
 
@@ -19,7 +19,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void Ctor_MessageConstructor()
+        public static void Ctor_MessageCtor()
         {
             var message = "My message";
             var ex = new ControlFlowException(message);
@@ -28,7 +28,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void Ctor_MessageInnerExceptionConstructor()
+        public static void Ctor_MessageInnerExceptionCtor()
         {
             var message = "My message";
             var innerException = new Exception();

@@ -201,7 +201,7 @@ namespace Narvalo
         #region Object()
 
         [Fact]
-        public static void Object_DoesNotThrow_ForNonNull() => Require.Object("this");
+        public static void Object_DoesNotThrow_ForNonNull() => Require.Object(new Object());
 
         [Fact]
         public static void Object_ThrowsArgumentNullException_ForNull()
@@ -243,11 +243,15 @@ namespace Narvalo
             Assert.Equal("value", argex.ParamName);
         }
 
-        [Fact]
-        public static void Property_DoesNotThrow_ForNonNull() => Require.Property(new Object());
+        #endregion
+
+        #region Property<T>()
 
         [Fact]
-        public static void Property_ThrowsArgumentNullException_ForNull()
+        public static void PropertyT_DoesNotThrow_ForNonNull() => Require.Property(new Object());
+
+        [Fact]
+        public static void PropertyT_ThrowsArgumentNullException_ForNull()
         {
             // Arrange
             Object obj = null;

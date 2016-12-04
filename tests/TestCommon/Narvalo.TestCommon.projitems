@@ -6,15 +6,19 @@
     <SharedGUID>c141265f-95ed-4093-a56c-5991dba96f67</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Narvalo.TestCommon</Import_RootNamespace>
+    <Import_RootNamespace>Narvalo</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppDomainUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssertExt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssertFailedException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DebugOnlyFactAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DisposableAction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EnvironmentFacts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IssueAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)My.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReleaseOnlyFactAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SimpleException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UnitTestTraceListener.cs" />
   </ItemGroup>
 </Project>

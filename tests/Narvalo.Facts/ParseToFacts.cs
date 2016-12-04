@@ -175,7 +175,7 @@ namespace Narvalo
         [InlineData(" 4")]
         [InlineData(" 4 ")]
         [CLSCompliant(false)]
-        // That's a strnage behaviour but passing any integer value will succeed.
+        // Weird but passing any integer value will succeed.
         public static void Enum_Succeeds_ForInvalidIntegerInput(string value)
         {
             var result = ParseTo.Enum<My.Enum012>(value);

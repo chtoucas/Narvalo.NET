@@ -1,4 +1,1 @@
-ChangeLog
-=========
-
-This file is [here](changelogs/index.md) now.
+This file has moved. See [here](changelogs/index.md).

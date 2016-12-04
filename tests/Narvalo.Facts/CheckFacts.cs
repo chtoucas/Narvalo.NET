@@ -6,53 +6,40 @@ namespace Narvalo
 
     using Xunit;
 
-    // TODO: Add tests for debug configuration.
-    // See http://stackoverflow.com/questions/9230065/how-to-ensure-a-debug-assert-fires-correctly-using-nunit.
-    public static partial class CheckFacts
+    public partial class CheckFacts
     {
         #region True()
 
         [Fact]
-        public static void True_DoesNothing_ForTrue()
-        {
-            Check.True(true);
-        }
+        public static void True_DoesNothing_ForTrue() => Check.True(true);
 
-        [Fact]
-        public static void True_DoesNothing_ForFalse_NonDebugConfiguration()
-        {
-#if !DEBUG
-            Check.True(false);
-#endif
-        }
+        [DebugOnlyFact]
+        public static void True_Fails_ForFalse()
+            => Assert.Throws<AssertFailedException>(() => Check.True(false));
+
+        [ReleaseOnlyFact]
+        public static void True_DoesNothing_ForFalse() => Check.True(false);
 
         #endregion
 
         #region False()
 
         [Fact]
-        public static void False_DoesNothing_ForFalse()
-        {
-            Check.False(false);
-        }
+        public static void False_DoesNothing_ForFalse() => Check.False(false);
 
-        [Fact]
-        public static void False_DoesNothing_ForTrue_NonDebugConfiguration()
-        {
-#if !DEBUG
-            Check.False(true);
-#endif
-        }
+        [DebugOnlyFact]
+        public static void False_Fails_ForTrue()
+            => Assert.Throws<AssertFailedException>(() => Check.False(true));
+
+        [ReleaseOnlyFact]
+        public static void False_DoesNothing_ForTrue() => Check.False(true);
 
         #endregion
 
         #region AssumeInvariant()
 
         [Fact]
-        public static void AssumeInvariant_DoesNothing()
-        {
-            Check.AssumeInvariant(new Object());
-        }
+        public static void AssumeInvariant_DoesNothing() => Check.AssumeInvariant(new Object());
 
         #endregion
 
@@ -104,7 +91,7 @@ namespace Narvalo
     }
 
     // Helpers
-    public static partial class CheckFacts
+    public partial class CheckFacts
     {
         private const string ExceptionMessage = "Found a missing case in the switch.";
 

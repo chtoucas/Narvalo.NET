@@ -207,6 +207,7 @@
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Narvalo.Facts.props" />
     <None Include="packages.config" />
   </ItemGroup>

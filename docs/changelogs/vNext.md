@@ -1,7 +1,7 @@
 ChangeLog (XXXX-XX-XX)
 ======================
 
-## The plan
+## Objectives
 The plan is to improve the overall quality & usability of Narvalo.Cerbere
 and Narvalo.Finance.
 
@@ -33,15 +33,15 @@ Other tasks:
 
 ## Breaking Changes
 
-## API Changes
-
-### Narvalo.Cerbere
+### Narvalo.Core
 - `Enforce.IsWhiteSpace` now throws an `ArgumentOutOfRangeException` if the input
   is an empty string.
 
+## API Changes
+
 ### Narvalo.Core
 - `BooleanStyles.EmptyIsFalse` is declared obsolete;
-  use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is done to better
+  use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is to better
   emphasize that whitespace-only strings are treated as empty strings by
   `ParseTo.Boolean()`
 
