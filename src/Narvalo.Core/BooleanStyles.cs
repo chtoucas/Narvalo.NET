@@ -11,12 +11,14 @@ namespace Narvalo
 
         ZeroOrOne = 1 << 1,
 
-        EmptyIsFalse = 1 << 2,
+        EmptyOrWhiteSpaceIsFalse = 1 << 2,
+        [Obsolete("Use EmptyOrWhiteSpaceIsFalse instead.")]
+        EmptyIsFalse = EmptyOrWhiteSpaceIsFalse,
 
         HtmlInput = 1 << 3,
 
         Default = Literal | ZeroOrOne,
 
-        Any = Literal | ZeroOrOne | EmptyIsFalse | HtmlInput,
+        Any = Literal | ZeroOrOne | EmptyOrWhiteSpaceIsFalse | HtmlInput,
     }
 }

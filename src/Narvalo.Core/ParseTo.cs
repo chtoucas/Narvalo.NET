@@ -23,7 +23,7 @@ namespace Narvalo
 
             if (val.Length == 0)
             {
-                return style.Contains(BooleanStyles.EmptyIsFalse) ? (bool?)false : null;
+                return style.Contains(BooleanStyles.EmptyOrWhiteSpaceIsFalse) ? (bool?)false : null;
             }
 
             if (style.Contains(BooleanStyles.Literal))
@@ -182,12 +182,18 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
+    }
 
-        #region Implements parsers for value types that are not simple types
-
+    // Implements parsers for value types that are not simple types.
+    public static partial class ParseTo
+    {
         public static TEnum? Enum<TEnum>(string value) where TEnum : struct
             => Enum<TEnum>(value, ignoreCase: true);
 
+        // TODO: Explain that this method exhibits the same behaviour as Enum.TryParse, in the sense
+        // that parsing any literal integer value will succeed even if it is not a valid value
+        // for the enumeration.
+        // See http://stackoverflow.com/questions/2191037/why-can-i-parse-invalid-values-to-an-enum-in-net
         public static TEnum? Enum<TEnum>(string value, bool ignoreCase) where TEnum : struct
         {
             TryParser<TEnum> parser =
@@ -212,11 +218,11 @@ namespace Narvalo
 
             return parser.NullInvoke(value);
         }
+    }
 
-        #endregion
-
-        #region Implements parsers for reference types
-
+    // Implements parsers for reference types.
+    public static partial class ParseTo
+    {
         public static Maybe<Uri> Uri(string value, UriKind uriKind)
         {
             // REVIEW: Uri.TryCreate accepts empty strings.
@@ -229,7 +235,5 @@ namespace Narvalo
 
             return parser.MayInvoke(value);
         }
-
-        #endregion
     }
 }
