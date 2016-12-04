@@ -8,63 +8,125 @@ namespace Narvalo
 
     public static partial class RequireFacts
     {
-        #region Object()
+        #region State()
 
         [Fact]
-        public static void Object_DoesNotThrow_ForNonNull()
+        public static void State_DoesNotThrow_ForTrue_1() => Require.State(true);
+
+        [Fact]
+        public static void State_DoesNotThrow_ForTrue_2() => Require.State(true, "My message");
+
+        [Fact]
+        public static void State_ThrowsInvalidOperationException_ForFalse_1()
+            => Assert.Throws<InvalidOperationException>(() => Require.State(false));
+
+        [Fact]
+        public static void State_ThrowsInvalidOperationException_ForFalse_2()
         {
+            // Arrange
+            var message = "My message";
+            Action act = () => Require.State(false, message);
+
             // Act
-            Require.Object("this");
-        }
+            var ex = Record.Exception(act);
 
-        [Fact]
-        public static void Object_ThrowsArgumentNullException_ForNull()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.Object(My.NullString));
+            // Assert
+            Assert.NotNull(ex);
+            Assert.IsType<InvalidOperationException>(ex);
+            Assert.Equal(message, ex.Message);
         }
 
         #endregion
 
-        #region Property()
+        #region True()
 
         [Fact]
-        public static void Property_DoesNotThrow_ForNonNull()
+        public static void True_DoesNotThrow_ForTrue_1() => Require.True(true, "paramName");
+
+        [Fact]
+        public static void True_DoesNotThrow_ForTrue_2() => Require.True(true, "paramName", "My message");
+
+        [Fact]
+        public static void True_ThrowsArgumentException_ForFalse_1()
         {
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.True(false, paramName);
+
             // Act
-            Require.Property("value");
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
         }
 
         [Fact]
-        public static void Property_ThrowsArgumentNullException_ForNull()
+        public static void True_ThrowsArgumentException_ForFalse_2()
         {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.Property(My.NullString));
+            // Arrange
+            var paramName = "paramName";
+            var message = "My message";
+            Action act = () => Require.True(false, paramName, message);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
+            // ArgumentException appends some info to our message.
+            Assert.StartsWith(message, ex.Message);
         }
 
         #endregion
 
-        #region PropertyNotEmpty()
+        #region Range()
 
         [Fact]
-        public static void PropertyNotEmpty_DoesNotThrow_ForNonNullOrEmptyString()
+        public static void Range_DoesNotThrow_ForTrue_1() => Require.Range(true, "paramName");
+
+        [Fact]
+        public static void Range_DoesNotThrow_ForTrue_2() => Require.Range(true, "paramName", "My message");
+
+        [Fact]
+        public static void Range_ThrowsArgumentOutOfRangeException_ForFalse_1()
         {
+            Assert.Throws<ArgumentOutOfRangeException>(() => Require.Range(false, "paramName"));
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.Range(false, paramName);
+
             // Act
-            Require.PropertyNotEmpty("value");
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentOutOfRangeException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
         }
 
         [Fact]
-        public static void PropertyNotEmpty_ThrowsArgumentNullException_ForNull()
+        public static void Range_ThrowsArgumentOutOfRangeException_ForFalse_2()
         {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.PropertyNotEmpty(null));
-        }
+            // Arrange
+            var paramName = "paramName";
+            var message = "My message";
+            Action act = () => Require.Range(false, paramName, message);
 
-        [Fact]
-        public static void PropertyNotEmpty_ThrowsArgumentException_ForEmptyString()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.PropertyNotEmpty(String.Empty));
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            var argex = Assert.IsType<ArgumentOutOfRangeException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
+            // ArgumentOutOfRangeException appends some info to our message.
+            Assert.StartsWith(message, ex.Message);
         }
 
         #endregion
@@ -72,17 +134,41 @@ namespace Narvalo
         #region NotNull()
 
         [Fact]
-        public static void NotNull_DoesNotThrow_ForNonNull()
+        public static void NotNull_DoesNotThrow_ForNonNull() => Require.NotNull("value", "paramName");
+
+        [Fact]
+        public static void NotNull_ThrowsArgumentNullException_ForNull_1()
         {
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.NotNull(My.NullString, paramName);
+
             // Act
-            Require.NotNull("value", "parameter");
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
         }
 
         [Fact]
-        public static void NotNull_ThrowsArgumentNullException_ForNull()
+        public static void NotNull_ThrowsArgumentNullException_ForNull_2()
         {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.NotNull(My.NullString, "parameter"));
+            // Arrange
+            Object obj = null;
+            var paramName = "paramName";
+            Action act = () => Require.NotNull(obj, paramName);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
         }
 
         #endregion
@@ -91,23 +177,179 @@ namespace Narvalo
 
         [Fact]
         public static void NotNullOrEmpty_DoesNotThrow_ForNonNullOrEmptyString()
-        {
-            // Act
-            Require.NotNullOrEmpty("value", "parameter");
-        }
+            => Require.NotNullOrEmpty("value", "paramName");
 
         [Fact]
         public static void NotNullOrEmpty_ThrowsArgumentNullException_ForNull()
         {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.NotNullOrEmpty(null, "parameter"));
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.NotNullOrEmpty(null, paramName);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
         }
 
         [Fact]
         public static void NotNullOrEmpty_ThrowsArgumentException_ForEmptyString()
         {
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => Require.NotNullOrEmpty(String.Empty, "parameter"));
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.NotNullOrEmpty(String.Empty, paramName);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
+        }
+
+        #endregion
+
+        #region Object()
+
+        [Fact]
+        public static void Object_DoesNotThrow_ForNonNull() => Require.Object("this");
+
+        [Fact]
+        public static void Object_ThrowsArgumentNullException_ForNull_1()
+        {
+            // Arrange
+            Action act = () => Require.Object(My.NullString);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal("this", argex.ParamName);
+        }
+
+        [Fact]
+        public static void Object_ThrowsArgumentNullException_ForNull_2()
+        {
+            // Arrange
+            Object obj = null;
+            Action act = () => Require.Object(obj);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal("this", argex.ParamName);
+        }
+
+        #endregion
+
+        #region Property()
+
+        [Fact]
+        public static void Property_DoesNotThrow_ForTrue() => Require.Property(true);
+
+        [Fact]
+        public static void Property_ThrowsArgumentException_ForFalse()
+        {
+            // Arrange
+            Action act = () => Require.Property(false);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal("value", argex.ParamName);
+        }
+
+        [Fact]
+        public static void Property_DoesNotThrow_ForNonNull() => Require.Property("value");
+
+        [Fact]
+        public static void Property_ThrowsArgumentNullException_ForNull_1()
+        {
+            // Arrange
+            Action act = () => Require.Property(My.NullString);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal("value", argex.ParamName);
+        }
+
+        [Fact]
+        public static void Property_ThrowsArgumentNullException_ForNull_2()
+        {
+            // Arrange
+            Object obj = null;
+            Action act = () => Require.Property(obj);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal("value", argex.ParamName);
+        }
+
+        #endregion
+
+        #region PropertyNotEmpty()
+
+        [Fact]
+        public static void PropertyNotEmpty_DoesNotThrow_ForNonNullOrEmptyString()
+            => Require.PropertyNotEmpty("value");
+
+        [Fact]
+        public static void PropertyNotEmpty_ThrowsArgumentNullException_ForNull()
+        {
+            // Arrange
+            Action act = () => Require.PropertyNotEmpty(null);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal("value", argex.ParamName);
+        }
+
+        [Fact]
+        public static void PropertyNotEmpty_ThrowsArgumentException_ForEmptyString()
+        {
+            // Arrange
+            Action act = () => Require.PropertyNotEmpty(String.Empty);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal("value", argex.ParamName);
         }
 
         #endregion

@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckFacts.cs" />
+    <Compile Include="ControlFlowExceptionFacts.cs" />
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="ExpectFacts.cs" />

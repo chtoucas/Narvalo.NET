@@ -109,6 +109,7 @@ Task OpenCover `
 Task OpenCoverWithDetails `
     -Description 'Run OpenCover (full details).' `
     -Depends _CI-InitializeVariables `
+    -Alias CoverMore `
 {
     Write-Host "** WARNING ** Only core packages are included. Excluding some assemblies from the report." -ForegroundColor Yellow
 
@@ -839,8 +840,9 @@ function Invoke-OpenCover {
     }
     else {
         $reportDirectory = Get-LocalPath 'work\log\opencover'
-        # We filter out Narvalo.Finance which includes too many classes.
-        $reportFilters = '-Narvalo.Common;-Narvalo.Web;-Narvalo.Finance'
+        # TODO: Add a commandline filter
+        # We filter out most assemblies (beware Narvalo.Finance includes many classes)
+        $reportFilters = '-Narvalo.Common;-Narvalo.Core;-Narvalo.Finance;-Narvalo.Fx;-Narvalo.Mvp;-Narvalo.Mvp.Web;-Narvalo.Web'
 
         . $reportGenerator `
           -verbosity:Info `

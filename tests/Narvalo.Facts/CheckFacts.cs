@@ -58,39 +58,45 @@ namespace Narvalo
         #region Unreachable()
 
         [Fact]
-        public static void Unreachable_DoesNotThrow_ComprehensiveSwitch1()
+        public static void Unreachable_DoesNotThrow_ComprehensiveSwitch_1()
             => ComprehensiveSwitch1(My.Enum012.One);
 
         [Fact]
-        public static void Unreachable_DoesNotThrow_ComprehensiveSwitch2()
+        public static void Unreachable_DoesNotThrow_ComprehensiveSwitch_2()
             => ComprehensiveSwitch2(My.Enum012.One);
 
         [Fact]
-        public static void Unreachable_DoesNotThrow_ComprehensiveSwitch3()
+        public static void Unreachable_DoesNotThrow_ComprehensiveSwitch_3()
             => ComprehensiveSwitch3(My.Enum012.One);
 
         [Fact]
-        public static void Unreachable_DoesNotThrow_GoodValueAndIncompleteSwitch1()
+        public static void Unreachable_DoesNotThrow_IncompleteSwitch_1()
              => IncompleteSwitch1(My.Enum012.One);
 
         [Fact]
-        public static void Unreachable_DoesNotThrow_GoodValueAndIncompleteSwitch2()
+        public static void Unreachable_DoesNotThrow_IncompleteSwitch_2()
              => IncompleteSwitch2(My.Enum012.One);
 
         [Fact]
-        public static void Unreachable_DoesNotThrow_GoodValueAndIncompleteSwitch3()
+        public static void Unreachable_DoesNotThrow_IncompleteSwitch_3()
              => IncompleteSwitch3(My.Enum012.One);
 
         [Fact]
-        public static void Unreachable_ThrowsControlFlowException_IncompleteSwitch1()
+        public static void Unreachable_ThrowsControlFlowException_ForMissingValue_IncompleteSwitch_1()
              => Assert.Throws<ControlFlowException>(() => IncompleteSwitch1(My.Enum012.Two));
 
         [Fact]
-        public static void Unreachable_ThrowsControlFlowException_IncompleteSwitch2()
-             => Assert.Throws<ControlFlowException>(() => IncompleteSwitch2(My.Enum012.Two));
+        public static void Unreachable_ThrowsControlFlowException_ForMissingValue_IncompleteSwitch_2()
+        {
+            var ex = Record.Exception(() => IncompleteSwitch2(My.Enum012.Two));
+
+            Assert.NotNull(ex);
+            Assert.IsType<ControlFlowException>(ex);
+            Assert.Equal(ExceptionMessage, ex.Message);
+        }
 
         [Fact]
-        public static void Unreachable_ThrowsCustomException_IncompleteSwitch3()
+        public static void Unreachable_ThrowsCustomException_ForMissingValue_IncompleteSwitch_3()
              => Assert.Throws<InvalidOperationException>(() => IncompleteSwitch3(My.Enum012.Two));
 
         #endregion
@@ -99,6 +105,8 @@ namespace Narvalo
     // Helpers
     public static partial class CheckFacts
     {
+        private const string ExceptionMessage = "Found a missing case in the switch.";
+
         private static void ComprehensiveSwitch1(My.Enum012 value)
         {
             switch (value)
@@ -116,7 +124,7 @@ namespace Narvalo
                 case My.Enum012.One:
                 case My.Enum012.Two:
                 case My.Enum012.Zero: break;
-                default: throw Check.Unreachable("Found a missing case in the switch.");
+                default: throw Check.Unreachable(ExceptionMessage);
             }
         }
         private static void ComprehensiveSwitch3(My.Enum012 value)
@@ -143,7 +151,7 @@ namespace Narvalo
             switch (value)
             {
                 case My.Enum012.One: break;
-                default: throw Check.Unreachable("Found a missing case in the switch.");
+                default: throw Check.Unreachable(ExceptionMessage);
             }
         }
         private static void IncompleteSwitch3(My.Enum012 value)
