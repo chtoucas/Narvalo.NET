@@ -8,6 +8,8 @@
 <#@ import namespace="Narvalo.T4" #>
 <#
 
+bool firstCurrency = true;
+
 var currentCurrencies = ParseCurrent(@"..\Resources\ISO4217\A1.xml");
 var legacyCurrencies = ParseLegacy(@"..\Resources\ISO4217\A3.xml");
 var currencies = currentCurrencies.Concat(legacyCurrencies);
@@ -41,6 +43,18 @@ namespace <#= Namespace #>
     /// Represents the currency unit for the "<#= currency.EnglishName #>".
     /// </summary>
     <# WriteCompilerAttributes(); #>
+<#
+        if (firstCurrency)
+        {
+            firstCurrency = false;
+        }
+        else
+        {
+#>
+    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+<#
+        }
+#>
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class <#= currency.Code #> : Currency
