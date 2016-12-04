@@ -5,11 +5,10 @@ ChangeLog (XXXX-XX-XX)
 The plan is to improve the overall quality & usability of Narvalo.Cerbere
 and Narvalo.Finance.
 
-Documentation & Tests:
-- Fully document the API of Narvalo.Cerbere and Narvalo.Finance.
-- Usage guidelines for Narvalo.Cerbere and Narvalo.Finance.
-- Build the documentation website.
-- Good test coverage for Narvalo.Cerbere and Narvalo.Finance.
+Documentation & Tests (Narvalo.Cerbere & Narvalo.Finance):
+- Fully documented API.
+- Usage guidelines.
+- Good test coverage.
 
 Library Enhancements & Improvements:
 - Narvalo.Finance (still no big money for accurate computations, next time...)
@@ -35,5 +34,9 @@ Other tasks:
 ## Breaking Changes
 
 ## Enhancements
+- `BooleanStyles.EmptyIsFalse` is declared obsolete;
+  use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is done to better
+  emphasize that whitespace-only strings are treated as empty strings by
+  `ParseTo.Boolean()`
 
 ## Improvements

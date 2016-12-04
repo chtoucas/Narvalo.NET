@@ -5,24 +5,30 @@ namespace Narvalo
     using System;
     using System.Globalization;
 
-    internal static class My
+    public static class My
     {
-        public enum SimpleEnumeration
+        // To be used only when we need a strongly-typed null-string.
+        public const string NullString = null;
+
+        public const string WhiteSpaceOnlyString = "     ";
+
+        public enum Enum012
         {
-            None = 0,
-            ActualValue = 1,
-            AliasValue = ActualValue,
+            Zero = 0,
+            One = 1,
+            Two = 2,
+            Alias1 = One,
         }
 
         [Flags]
-        public enum BitwiseEnumeration
+        public enum EnumBits
         {
-            None = 0,
-            ActualValue1 = 1 << 0,
-            ActualValue2 = 1 << 1,
-            ActualValue3 = 1 << 2,
-            CompositeValue1 = ActualValue1 | ActualValue2,
-            CompositeValue2 = ActualValue1 | ActualValue2 | ActualValue3
+            Zero = 0,
+            One = 1 << 0,
+            Two = 1 << 1,
+            Four = 1 << 2,
+            OneTwo = One | Two,
+            OneTwoFour = One | Two | Four
         }
 
         public struct EmptyStruct { }
@@ -36,27 +42,19 @@ namespace Narvalo
                 _value = value;
             }
 
-            public int CompareTo(ComparableStruct other)
-            {
-                return _value.CompareTo(other._value);
-            }
+            public int CompareTo(ComparableStruct other) => _value.CompareTo(other._value);
 
-            public override string ToString()
-            {
-                return _value.ToString(CultureInfo.CurrentCulture);
-            }
+            public override string ToString() => _value.ToString(CultureInfo.CurrentCulture);
         }
 
-        ////public sealed class SimpleValue
-        ////{
-        ////    private readonly int _value;
+        //public sealed class SimpleValue
+        //{
+        //    public SimpleValue(int value)
+        //    {
+        //        Value = value;
+        //    }
 
-        ////    public SimpleValue(int value)
-        ////    {
-        ////        _value = value;
-        ////    }
-
-        ////    public int Value { get { return _value; } }
-        ////}
+        //    public int Value { get; }
+        //}
     }
 }

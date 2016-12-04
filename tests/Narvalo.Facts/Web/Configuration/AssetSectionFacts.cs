@@ -47,7 +47,7 @@ namespace Narvalo.Web.Configuration
             var section = new AssetSection();
 
             // Assert
-            Assert.Throws<ArgumentException>(() => section.DefaultProvider = Constants.WhiteSpaceOnlyString);
+            Assert.Throws<ArgumentException>(() => section.DefaultProvider = My.WhiteSpaceOnlyString);
         }
 
         #endregion

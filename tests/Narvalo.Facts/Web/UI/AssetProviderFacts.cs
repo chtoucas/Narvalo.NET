@@ -120,7 +120,7 @@ namespace Narvalo.Web.UI
             // Arrange
             var provider = new MyAssetProvider_();
             var config = new NameValueCollection(1);
-            config.Add("description", Constants.WhiteSpaceOnlyString);
+            config.Add("description", My.WhiteSpaceOnlyString);
 
             // Act
             provider.Initialize(null, config);
@@ -195,7 +195,7 @@ namespace Narvalo.Web.UI
             var provider = new MyAssetProvider_();
 
             // Act
-            provider.Initialize(Constants.WhiteSpaceOnlyString, null);
+            provider.Initialize(My.WhiteSpaceOnlyString, null);
 
             // Assert
             Assert.Equal(MyAssetProvider_.MyDefaultName, provider.Name);

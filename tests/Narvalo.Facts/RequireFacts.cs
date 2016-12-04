@@ -21,7 +21,7 @@ namespace Narvalo
         public static void Object_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.Object(Constants.NullString));
+            Assert.Throws<ArgumentNullException>(() => Require.Object(My.NullString));
         }
 
         #endregion
@@ -39,7 +39,7 @@ namespace Narvalo
         public static void Property_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.Property(Constants.NullString));
+            Assert.Throws<ArgumentNullException>(() => Require.Property(My.NullString));
         }
 
         #endregion
@@ -57,7 +57,7 @@ namespace Narvalo
         public static void PropertyNotEmpty_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.PropertyNotEmpty(Constants.NullString));
+            Assert.Throws<ArgumentNullException>(() => Require.PropertyNotEmpty(null));
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace Narvalo
         public static void NotNull_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.NotNull(Constants.NullString, "parameter"));
+            Assert.Throws<ArgumentNullException>(() => Require.NotNull(My.NullString, "parameter"));
         }
 
         #endregion
@@ -100,7 +100,7 @@ namespace Narvalo
         public static void NotNullOrEmpty_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Require.NotNullOrEmpty(Constants.NullString, "parameter"));
+            Assert.Throws<ArgumentNullException>(() => Require.NotNullOrEmpty(null, "parameter"));
         }
 
         [Fact]

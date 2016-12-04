@@ -12,44 +12,35 @@ namespace Narvalo
 
         [Fact]
         public static void Enum_ThrowsArgumentException_ForInt32()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<int>(1));
-        }
+            => Assert.Throws<ArgumentException>(() => ConvertTo.Enum<int>(1));
 
         [Fact]
         public static void Enum_ThrowsArgumentException_ForNonEnumerationStruct()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => ConvertTo.Enum<My.EmptyStruct>(1));
-        }
+            => Assert.Throws<ArgumentException>(() => ConvertTo.Enum<My.EmptyStruct>(1));
 
         [Fact]
-        public static void Enum_ThrowsNotSupportedException_FoFlagEnum()
-        {
-            // Act & Assert
-            Assert.Throws<NotSupportedException>(() => ConvertTo.Enum<My.BitwiseEnumeration>(1));
-        }
+        public static void Enum_ThrowsNotSupportedException_FoBitFlagsEnum()
+            => Assert.Throws<NotSupportedException>(() => ConvertTo.Enum<My.EnumBits>(1));
 
         [Fact]
-        public static void Enum_ReturnsNull_ForInvalidValue()
+        public static void Enum_ReturnsNull_ForInvalidInput()
         {
-            // Act
-            var result = ConvertTo.Enum<My.SimpleEnumeration>(2);
+            var result = ConvertTo.Enum<My.Enum012>(3);
 
-            // Assert
             Assert.False(result.HasValue);
         }
 
-        [Fact]
-        public static void Enum_ReturnsExpectedValue_ForActualValue()
+        [Theory]
+        [InlineData(0, My.Enum012.Zero)]
+        [InlineData(1, My.Enum012.One)]
+        [InlineData(2, My.Enum012.Two)]
+        [CLSCompliant(false)]
+        public static void Enum_Succeeds_ForValidInput(int value, My.Enum012 expectedValue)
         {
-            // Act
-            var result = ConvertTo.Enum<My.SimpleEnumeration>(1);
+            var result = ConvertTo.Enum<My.Enum012>(value);
 
-            // Assert
             Assert.True(result.HasValue);
-            Assert.Equal(My.SimpleEnumeration.ActualValue, result.Value);
+            Assert.Equal(expectedValue, result.Value);
         }
 
         #endregion

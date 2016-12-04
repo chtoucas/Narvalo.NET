@@ -21,7 +21,7 @@ namespace Narvalo
         public static void NotNullOrWhiteSpace_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Enforce.NotNullOrWhiteSpace(Constants.NullString, "parameter"));
+            Assert.Throws<ArgumentNullException>(() => Enforce.NotNullOrWhiteSpace(null, "parameter"));
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace Narvalo
         {
             // Act & Assert
             Assert.Throws<ArgumentException>(
-                () => Enforce.NotNullOrWhiteSpace(Constants.WhiteSpaceOnlyString, "parameter"));
+                () => Enforce.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString, "parameter"));
         }
 
         #endregion
@@ -54,7 +54,7 @@ namespace Narvalo
         public static void PropertyNotWhiteSpace_ThrowsArgumentNullException_ForNull()
         {
             // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Enforce.PropertyNotWhiteSpace(Constants.NullString));
+            Assert.Throws<ArgumentNullException>(() => Enforce.PropertyNotWhiteSpace(null));
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace Narvalo
         public static void PropertyNotWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
         {
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => Enforce.PropertyNotWhiteSpace(Constants.WhiteSpaceOnlyString));
+            Assert.Throws<ArgumentException>(() => Enforce.PropertyNotWhiteSpace(My.WhiteSpaceOnlyString));
         }
 
         #endregion

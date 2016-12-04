@@ -11,7 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppDomainUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssertExt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DisposableAction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EnvironmentFacts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IssueAttribute.cs" />
