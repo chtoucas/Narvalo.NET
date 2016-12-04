@@ -33,10 +33,10 @@ Other tasks:
 
 ## Breaking Changes
 
-## Enhancements
+## API Changes
 - `BooleanStyles.EmptyIsFalse` is declared obsolete;
   use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is done to better
   emphasize that whitespace-only strings are treated as empty strings by
   `ParseTo.Boolean()`
 
-## Improvements
+## Enhancements

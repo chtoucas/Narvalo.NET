@@ -7,6 +7,6 @@ ChangeLog (XXXX-XX-XX)
 
 ## Breaking Changes
 
-## Enhancements
+## API Changes
 
-## Improvements
+## Enhancements
