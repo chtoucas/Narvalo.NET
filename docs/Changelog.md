@@ -1,1 +1,1 @@
-This file has moved. See [here](changelogs/index.md).
+This file has been moved. See [here](changelogs/index.md).
