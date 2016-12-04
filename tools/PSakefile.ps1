@@ -106,10 +106,10 @@ Task OpenCover `
     Invoke-OpenCover 'Debug+Closed' -Summary
 }
 
-Task OpenCoverWithDetails `
+Task OpenCoverVerbose `
     -Description 'Run OpenCover (full details).' `
     -Depends _CI-InitializeVariables `
-    -Alias CoverMore `
+    -Alias CoverVerbose `
 {
     Write-Host "** WARNING ** Only core packages are included. Excluding some assemblies from the report." -ForegroundColor Yellow
 
@@ -131,21 +131,24 @@ Task Analyze `
     -Description 'Build, analyze, then run PEVerify.' `
     -Depends _CI-InitializeVariables `
 {
+    $output = Get-LocalPath 'docs\code-analysis.txt'
+
     # Perform the following operations:
     # - Build all projects
     # - Run Source Analysis
     # - Verify Portable Executable (PE) format
     # NB: Adding Build to the targets is not necessary, but it makes clearer that
-    # we do not just run PEVerify.
+    # we do not just run PEVerify. In fact, we need to rebuild otherwise CA may
+    # fail.
     # NB: Removed '/p:SourceAnalysisEnabled=true' (replaced by StyleCop.Analyzers)
     MSBuild $Foundations $Opts $CI_Props `
-        '/t:Build;PEVerify',
+        '/t:Rebuild;PEVerify',
         '/p:Configuration=Debug',
         '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:RunCodeAnalysis=true',
-        '/p:Filter=_Analyze_'
+        '/p:Filter=_Analyze_' | Tee-Object -file $output
 }
 #Task SourceAnalysis `
 #    -Description 'Run source analysis.' `
@@ -199,13 +202,15 @@ Task CodeContractsAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias CC `
 {
+    $output = Get-LocalPath 'docs\code-contracts.txt'
+
     # For static analysis, we hide internals, otherwise we might not truly
     # analyze the public API.
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Build',
         '/p:VisibleInternals=false',
         '/p:Configuration=CodeContracts',
-        '/p:Filter=_CodeContracts_'
+        '/p:Filter=_CodeContracts_' | Tee-Object -file $output
 }
 
 Task SecurityAnalysis `
@@ -802,9 +807,9 @@ function Invoke-OpenCover {
     )
 
     # TODO: Make it survive NuGet updates.
-    $openCoverVersion = '4.6.519'
-    $reportGeneratorVersion = '2.4.5.0'
-    $xunitVersion = '2.1.0'
+    $openCoverVersion       = '4.6.519'
+    $reportGeneratorVersion = '2.5.1'
+    $xunitVersion           = '2.1.0'
 
     $openCover = Get-LocalPath "packages\OpenCover.$openCoverVersion\tools\OpenCover.Console.exe" -Resolve
     $reportGenerator = Get-LocalPath "packages\ReportGenerator.$reportGeneratorVersion\tools\ReportGenerator.exe" -Resolve
@@ -815,17 +820,17 @@ function Invoke-OpenCover {
     $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;Narvalo.ExcludeFromCodeCoverageAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
 
     $coreTestAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
-    $mvpTestAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Mvp.Facts.dll" -Resolve
-    $testAssembly = "$coreTestAssembly $mvpTestAssembly"
+    $mvpTestAssembly  = Get-LocalPath "work\bin\$Configuration\Narvalo.Mvp.Facts.dll" -Resolve
+    $testsAssembly = "$coreTestAssembly $mvpTestAssembly"
 
-    # Be careful with arguments containing spaces.
+    # Be very careful with arguments containing spaces.
     . $openCover `
       -register:user `
       "-filter:$coverageFilter" `
       "-excludebyattribute:$coverageExcludeByAttribute" `
       "-output:$coverageFile" `
       "-target:$xunit"  `
-      "-targetargs:$testAssembly -nologo -noshadow"
+      "-targetargs:$testsAssembly -nologo -noshadow"
 
     if ($summary.IsPresent) {
         $summaryDirectory = Get-LocalPath 'work\log'
@@ -837,12 +842,14 @@ function Invoke-OpenCover {
           -filters:$summaryFilters `
           -reports:$coverageFile `
           -targetdir:$summaryDirectory
+
+        Copy-Item -Path (Get-LocalPath 'work\log\summary.htm') -Destination (Get-LocalPath 'docs\code-coverage.html') -Force
     }
     else {
         $reportDirectory = Get-LocalPath 'work\log\opencover'
-        # TODO: Add a commandline filter
-        # We filter out most assemblies (beware Narvalo.Finance includes many classes)
-        $reportFilters = '-Narvalo.Common;-Narvalo.Core;-Narvalo.Finance;-Narvalo.Fx;-Narvalo.Mvp;-Narvalo.Mvp.Web;-Narvalo.Web'
+        # REVIEW: Add a commandline filter
+        $reportFilters = '-Narvalo.Common;-Narvalo.Core;-Narvalo.Fx;-Narvalo.Mvp;-Narvalo.Mvp.Web;-Narvalo.Web'
+        #$reportFilters = '-*;+Narvalo.Core'  # Does not work.
 
         . $reportGenerator `
           -verbosity:Info `
