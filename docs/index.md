@@ -29,7 +29,7 @@ Status (2016/12/04)
 Library                   | Static Analysis | Code Contracts | LC    | BC
 --------------------------|-----------------|----------------|-------|-------
 Narvalo.Build             | Complete        |                |       |
-Narvalo.Cerbere           | Complete        | Complete       | 62.5% | 55.2%
+Narvalo.Cerbere           | Complete        | Complete       | 100%  | 100%
 Narvalo.Common            | Complete        | Complete       | 1.1%  | 0%
 Narvalo.Core              | Complete        | Complete       | 29%   | 46%
 Narvalo.Finance           | Complete        | Complete       | 83.2% | 22.7%

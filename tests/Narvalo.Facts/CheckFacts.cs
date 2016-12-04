@@ -7,6 +7,7 @@ namespace Narvalo
     using Xunit;
 
     // TODO: Add tests for debug configuration.
+    // See http://stackoverflow.com/questions/9230065/how-to-ensure-a-debug-assert-fires-correctly-using-nunit.
     public static partial class CheckFacts
     {
         #region True()
@@ -18,7 +19,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void True_DoesNothing_ForFalse_ReleaseConfiguration()
+        public static void True_DoesNothing_ForFalse_NonDebugConfiguration()
         {
 #if !DEBUG
             Check.True(false);
@@ -36,7 +37,7 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void False_DoesNothing_ForTrue_ReleaseConfiguration()
+        public static void False_DoesNothing_ForTrue_NonDebugConfiguration()
         {
 #if !DEBUG
             Check.False(true);

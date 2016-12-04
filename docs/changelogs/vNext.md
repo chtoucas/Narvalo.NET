@@ -34,9 +34,16 @@ Other tasks:
 ## Breaking Changes
 
 ## API Changes
+
+### Narvalo.Cerbere
+- `Enforce.IsWhiteSpace` now throws an `ArgumentOutOfRangeException` if the input
+  is an empty string.
+
+### Narvalo.Core
 - `BooleanStyles.EmptyIsFalse` is declared obsolete;
   use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is done to better
   emphasize that whitespace-only strings are treated as empty strings by
   `ParseTo.Boolean()`
 
 ## Enhancements
+- Full test coverage for Narvalo.Cerbere.

@@ -79,13 +79,13 @@ namespace Narvalo
         /// n'est constituée que d'espaces blancs, sinon <see langword="false"/>.
         /// </summary>
         /// <remarks>
-        /// Cette méthode n'est doit être utilisée qu'après une vérification String.IsNullOrEmpty().
+        /// Cette méthode n'est doit être utilisée qu'après une vérification !String.IsNullOrEmpty().
         /// </remarks>
         [Pure]
         public static bool IsWhiteSpace(string value)
         {
             Require.NotNull(value, nameof(value));
-            Expect.True(value.Length != 0);
+            Require.Range(value.Length != 0, nameof(value));
 
             for (int i = 0; i < value.Length; i++)
             {
