@@ -6,7 +6,7 @@ namespace Narvalo
     using System.Runtime.Serialization;
 
     [Serializable]
-    public class AssertFailedException : Exception
+    public sealed class AssertFailedException : Exception
     {
         public AssertFailedException() { }
 
@@ -15,7 +15,7 @@ namespace Narvalo
         public AssertFailedException(string message, Exception inner)
             : base(message, inner) { }
 
-        protected AssertFailedException(SerializationInfo info, StreamingContext context)
+        private AssertFailedException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
     }
 }

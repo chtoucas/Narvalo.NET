@@ -4,7 +4,6 @@ namespace Narvalo.Web.UI
 {
     using System;
 
-    using Narvalo.TestCommon;
     using Xunit;
 
     // TODO: Test absolute, relative and bad paths.

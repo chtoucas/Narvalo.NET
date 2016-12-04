@@ -61,7 +61,8 @@ namespace Narvalo
         }
 
         /// <remarks>
-        /// Cette méthode ne doit être utilisée qu'après une vérification Require.NotNullOrEmpty().
+        /// Cette méthode ne doit être utilisée qu'après une vérification Require.NotNullOrEmpty()
+        /// or Property.NotNullOrEmpty().
         /// </remarks>
         public static void NotWhiteSpace(string value, string parameterName)
         {

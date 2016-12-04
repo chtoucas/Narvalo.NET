@@ -4,8 +4,9 @@ namespace Narvalo
 {
     using System;
     using System.Globalization;
+    using System.Runtime.Serialization;
 
-    public static class My
+    public static partial class My
     {
         // To be used only when we need a strongly-typed null-string.
         public const string NullString = null;
@@ -47,14 +48,18 @@ namespace Narvalo
             public override string ToString() => _value.ToString(CultureInfo.CurrentCulture);
         }
 
-        //public sealed class SimpleValue
-        //{
-        //    public SimpleValue(int value)
-        //    {
-        //        Value = value;
-        //    }
+        [Serializable]
+        public sealed class SimpleException : Exception
+        {
+            public SimpleException() : base() { }
 
-        //    public int Value { get; }
-        //}
+            public SimpleException(string message) : base(message) { }
+
+            public SimpleException(string message, Exception innerException)
+                : base(message, innerException) { }
+
+            private SimpleException(SerializationInfo info, StreamingContext context)
+                : base(info, context) { }
+        }
     }
 }

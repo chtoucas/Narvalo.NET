@@ -10,15 +10,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppDomainUtility.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AssertExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssertFailedException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DebugOnlyFactAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DisposableAction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EnvironmentFacts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IssueAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)My.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ReleaseOnlyFactAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SimpleException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UnitTestTraceListener.cs" />
   </ItemGroup>
 </Project>

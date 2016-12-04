@@ -13,40 +13,32 @@ namespace Narvalo.Web.Configuration
         [Fact]
         public static void DefaultProvider_DefaultValueIsNotNull()
         {
-            // Arrange
             var section = new AssetSection();
 
-            // Assert
             Assert.NotNull(section.DefaultProvider);
         }
 
         [Fact]
         public static void DefaultProvider_ThrowsArgumentNullException_ForNullInput()
         {
-            // Arrange
             var section = new AssetSection();
 
-            // Assert
             Assert.Throws<ArgumentNullException>(() => section.DefaultProvider = null);
         }
 
         [Fact]
         public static void DefaultProvider_ThrowsArgumentException_ForEmptyInput()
         {
-            // Arrange
             var section = new AssetSection();
 
-            // Assert
             Assert.Throws<ArgumentException>(() => section.DefaultProvider = String.Empty);
         }
 
-        [Fact(Skip = "Guards against whitespace only strings are currently disabled.")]
+        [Fact]
         public static void DefaultProvider_ThrowsArgumentException_ForWhiteSpaceInput()
         {
-            // Arrange
             var section = new AssetSection();
 
-            // Assert
             Assert.Throws<ArgumentException>(() => section.DefaultProvider = My.WhiteSpaceOnlyString);
         }
 

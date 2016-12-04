@@ -131,7 +131,7 @@ Task Analyze `
     -Description 'Build, analyze, then run PEVerify.' `
     -Depends _CI-InitializeVariables `
 {
-    $output = Get-LocalPath 'docs\engineering\code-analysis.txt'
+    $output = Get-LocalPath 'work\log\code-analysis.log'
 
     # Perform the following operations:
     # - Build all projects
@@ -202,7 +202,7 @@ Task CodeContractsAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias CC `
 {
-    $output = Get-LocalPath 'docs\engineering\code-contracts.txt'
+    $output = Get-LocalPath 'work\log\code-contracts.log'
 
     # For static analysis, we hide internals, otherwise we might not truly
     # analyze the public API.
@@ -214,10 +214,12 @@ Task CodeContractsAnalysis `
 }
 
 Task SecurityAnalysis `
-    -Description 'Run Secuirty Analysis.' `
+    -Description 'Run Security Analysis.' `
     -Depends _CI-InitializeVariables `
     -Alias SA `
 {
+    $output = Get-LocalPath 'work\log\security-analysis.log'
+
     # Keep the PEVerify target (see the comments in the MSBuild target _PEVerify).
     MSBuild $Foundations $Opts $CI_Props `
         '/t:SecAnnotate;PEVerify',
@@ -228,7 +230,7 @@ Task SecurityAnalysis `
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:EnableSecurityAnnotations=true',
-        '/p:Filter=_Security_'
+        '/p:Filter=_Security_' | Tee-Object -file $output
 }
 
 Task _CI-InitializeVariables `
@@ -843,7 +845,8 @@ function Invoke-OpenCover {
           -reports:$coverageFile `
           -targetdir:$summaryDirectory
 
-        Copy-Item -Path (Get-LocalPath 'work\log\summary.htm') -Destination (Get-LocalPath 'docs\engineering\code-coverage.html') -Force
+        Copy-Item -Path (Get-LocalPath 'work\log\summary.htm') `
+            -Destination (Get-LocalPath 'docs\code-coverage.html') -Force
     }
     else {
         $reportDirectory = Get-LocalPath 'work\log\opencover'

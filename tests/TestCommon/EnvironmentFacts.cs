@@ -2,7 +2,7 @@
 
 namespace Narvalo
 {
-    public static class EnvironmentFacts
+    public static partial class EnvironmentFacts
     {
 #if NO_INTERNALS_VISIBLE_TO // White-box tests.
 

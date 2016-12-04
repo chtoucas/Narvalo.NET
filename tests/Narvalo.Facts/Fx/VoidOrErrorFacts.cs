@@ -77,11 +77,11 @@ namespace Narvalo.Fx
         public static void ThrowIfError_ThrowsOriginalException_WhenError()
         {
             // Arrange
-            var edi = CreateEdiFrom(new SimpleException());
+            var edi = CreateEdiFrom(new My.SimpleException());
             var voe = VoidOrError.Error(edi);
 
             // Act & Assert
-            Assert.Throws<SimpleException>(() => voe.ThrowIfError());
+            Assert.Throws<My.SimpleException>(() => voe.ThrowIfError());
         }
 
         #endregion
@@ -111,7 +111,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var message = "My exception message.";
-            var edi = CreateEdiFrom(new SimpleException(message));
+            var edi = CreateEdiFrom(new My.SimpleException(message));
             var voe = VoidOrError.Error(edi);
 
             // Act & Assert
@@ -125,7 +125,7 @@ namespace Narvalo.Fx
     {
         private static ExceptionDispatchInfo CreateEdi()
         {
-            return CreateEdiFrom(new SimpleException());
+            return CreateEdiFrom(new My.SimpleException());
         }
 
         private static ExceptionDispatchInfo CreateEdiFrom(Exception exception)
@@ -136,7 +136,7 @@ namespace Narvalo.Fx
             {
                 throw exception;
             }
-            catch (SimpleException ex)
+            catch (My.SimpleException ex)
             {
                 edi = ExceptionDispatchInfo.Capture(ex);
             }

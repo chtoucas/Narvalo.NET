@@ -12,7 +12,7 @@ namespace Narvalo
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
 
-    internal static class AppDomainUtility
+    public static class AppDomainUtility
     {
         // Allow a test to modify static fields in an independent appdomain so that
         // other tests will not be affected.

@@ -26,9 +26,7 @@ In general, we provide localized messages in English and French.
 Status
 ------
 
-- [Code Analysis Output](engineering/code-analysis.txt)
-- [Code Contracts Output](engineering/code-contracts.txt)
-- [Code Coverage Output](engineering/code-coverage.html)
+[Code Coverage Output](code-coverage.html)
 
 Library                   | Code Analysis | Code Contracts
 --------------------------|---------------|----------------
