@@ -3,6 +3,7 @@
 namespace Narvalo.Finance
 {
     using Narvalo.Finance.Internal;
+    using Narvalo.Finance.Properties;
 
     using static System.Diagnostics.Contracts.Contract;
 
@@ -27,7 +28,8 @@ namespace Narvalo.Finance
 
             if (!Validate(code))
             {
-                throw new CurrencyNotFoundException($"Unknown currency: {code}.");
+                throw new CurrencyNotFoundException(
+                    Format.Current(Strings.CurrencyFactory_UnknownCurrency, code));
             }
 
             return new Currency(code);
