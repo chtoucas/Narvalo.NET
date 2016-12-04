@@ -4,9 +4,11 @@ namespace Narvalo
 {
     using System;
 
+    using Narvalo.Properties;
+
     public class ControlFlowException : Exception
     {
-        public ControlFlowException() { }
+        public ControlFlowException() : base(Strings_Cerbere.ControlFlowException_DefaultMessage) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ControlFlowException"/> class with

@@ -144,4 +144,7 @@
   <data name="Argument_WhiteSpaceString" xml:space="preserve">
     <value>La chaîne de caractères ne peut pas contenir que des espaces blancs.</value>
   </data>
+  <data name="ControlFlowException_DefaultMessage" xml:space="preserve">
+    <value>Le flot d'exécution du programme a atteint une section du code qu'il n'aurait jamais dû atteindre.</value>
+  </data>
 </root>

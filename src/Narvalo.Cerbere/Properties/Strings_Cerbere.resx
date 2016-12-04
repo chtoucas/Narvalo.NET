@@ -144,4 +144,7 @@
   <data name="Argument_EmptyOrWhiteSpaceString" xml:space="preserve">
     <value>String cannot be empty or contain only whitespace.</value>
   </data>
+  <data name="ControlFlowException_DefaultMessage" xml:space="preserve">
+    <value>The control flow path reached a section of the code that should have been unreachable under any circumstances.</value>
+  </data>
 </root>

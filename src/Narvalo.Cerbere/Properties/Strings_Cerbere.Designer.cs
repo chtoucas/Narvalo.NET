@@ -141,5 +141,14 @@ namespace Narvalo.Properties {
                 return ResourceManager.GetString("ArgumentProperty_TestFailed", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The control flow path reached a section of the code that should have been unreachable under any circumstances..
+        /// </summary>
+        internal static string ControlFlowException_DefaultMessage {
+            get {
+                return ResourceManager.GetString("ControlFlowException_DefaultMessage", resourceCulture);
+            }
+        }
     }
 }
