@@ -4,6 +4,7 @@ namespace Narvalo
 {
     using Xunit;
 
+    // NB: Release must be understood as follows: the DEBUG symbol is not defined.
     public sealed class ReleaseOnlyFactAttribute : FactAttribute
     {
         public ReleaseOnlyFactAttribute() : base()

@@ -11,40 +11,40 @@ namespace Narvalo
         #region State()
 
         [Fact]
-        public static void State_DoesNothing_ForTrue() => Expect.State(true);
+        public static void State_Passes_ForTrue() => Expect.State(true);
 
         [Fact]
-        public static void State_DoesNothing_ForFalse() => Expect.State(false);
+        public static void State_Passes_ForFalse() => Expect.State(false);
 
         #endregion
 
         #region True()
 
         [Fact]
-        public static void True_DoesNothing_ForTrue() => Expect.True(true);
+        public static void True_Passes_ForTrue() => Expect.True(true);
 
         [Fact]
-        public static void True_DoesNothing_ForFalse() => Expect.True(false);
+        public static void True_Passes_ForFalse() => Expect.True(false);
 
         #endregion
 
         #region Range()
 
         [Fact]
-        public static void Range_DoesNothing_ForTrue() => Expect.Range(true);
+        public static void Range_Passes_ForTrue() => Expect.Range(true);
 
         [Fact]
-        public static void Range_DoesNothing_ForFalse() => Expect.Range(false);
+        public static void Range_Passes_ForFalse() => Expect.Range(false);
 
         #endregion
 
         #region NotNull()
 
         [Fact]
-        public static void NotNull_DoesNothing_ForNonNull() => Expect.NotNull(new Object());
+        public static void NotNull_Passes_ForNonNull() => Expect.NotNull(new Object());
 
         [Fact]
-        public static void NotNull_DoesNothing_ForNull()
+        public static void NotNull_Passes_ForNull()
         {
             Object obj = null;
             Expect.NotNull(obj);
@@ -55,11 +55,11 @@ namespace Narvalo
         #region NotNullOrEmpty()
 
         [Fact]
-        public static void NotNullOrEmpty_DoesNothing_ForNonNullOrEmptyString()
+        public static void NotNullOrEmpty_Passes_ForNonNullOrEmptyString()
             => Expect.NotNullOrEmpty("value");
 
         [Fact]
-        public static void NotNullOrEmpty_DoesNothing_ForNullOrEmptyString()
+        public static void NotNullOrEmpty_Passes_ForNullOrEmptyString()
         {
             Expect.NotNullOrEmpty(null);
             Expect.NotNullOrEmpty(String.Empty);
@@ -70,10 +70,10 @@ namespace Narvalo
         #region Object()
 
         [Fact]
-        public static void Object_DoesNothing_ForNonNull() => Expect.Object(new Object());
+        public static void Object_Passes_ForNonNull() => Expect.Object(new Object());
 
         [Fact]
-        public static void Object_DoesNothing_ForNull()
+        public static void Object_Passes_ForNull()
         {
             Object obj = null;
             Expect.Object(obj);
@@ -84,20 +84,20 @@ namespace Narvalo
         #region Property()
 
         [Fact]
-        public static void Property_DoesNothing_ForTrue() => Expect.Property(true);
+        public static void Property_Passes_ForTrue() => Expect.Property(true);
 
         [Fact]
-        public static void Property_DoesNothing_ForFalse() => Expect.Property(false);
+        public static void Property_Passes_ForFalse() => Expect.Property(false);
 
         #endregion
 
         #region Property<T>()
 
         [Fact]
-        public static void PropertyT_DoesNothing_ForNonNull() => Expect.Property(new Object());
+        public static void PropertyT_Passes_ForNonNull() => Expect.Property(new Object());
 
         [Fact]
-        public static void PropertyT_DoesNothing_ForNull()
+        public static void PropertyT_Passes_ForNull()
         {
             Object obj = null;
             Expect.Property(obj);
@@ -108,11 +108,11 @@ namespace Narvalo
         #region PropertyNotEmpty()
 
         [Fact]
-        public static void PropertyNotEmpty_DoesNothing_ForNonNullOrEmptyString()
+        public static void PropertyNotEmpty_Passes_ForNonNullOrEmptyString()
             => Expect.PropertyNotEmpty("value");
 
         [Fact]
-        public static void PropertyNotEmpty_DoesNothing_ForNullOrEmptyString()
+        public static void PropertyNotEmpty_Passes_ForNullOrEmptyString()
         {
             Expect.PropertyNotEmpty(null);
             Expect.PropertyNotEmpty(String.Empty);

@@ -11,28 +11,28 @@ namespace Narvalo
         #region True()
 
         [Fact]
-        public static void True_DoesNothing_ForTrue() => Check.True(true);
+        public static void True_Passes_ForTrue() => Check.True(true);
 
         [DebugOnlyFact]
         public static void True_Fails_ForFalse()
             => Assert.Throws<AssertFailedException>(() => Check.True(false));
 
         [ReleaseOnlyFact]
-        public static void True_DoesNothing_ForFalse() => Check.True(false);
+        public static void True_Passes_ForFalse() => Check.True(false);
 
         #endregion
 
         #region False()
 
         [Fact]
-        public static void False_DoesNothing_ForFalse() => Check.False(false);
+        public static void False_Passes_ForFalse() => Check.False(false);
 
         [DebugOnlyFact]
         public static void False_Fails_ForTrue()
             => Assert.Throws<AssertFailedException>(() => Check.False(true));
 
         [ReleaseOnlyFact]
-        public static void False_DoesNothing_ForTrue() => Check.False(true);
+        public static void False_Passes_ForTrue() => Check.False(true);
 
         #endregion
 
