@@ -111,7 +111,7 @@ Task OpenCoverVerbose `
     -Depends _CI-InitializeVariables `
     -Alias CoverVerbose `
 {
-    Write-Host "** WARNING ** Only core packages are included. Excluding some assemblies from the report." -ForegroundColor Yellow
+    Write-Host "** WARNING ** Excluding some assemblies from the report." -ForegroundColor Yellow
 
     # Use debug build to also cover debug-only tests.
     # For static analysis, we hide internals, otherwise we might not truly
@@ -131,7 +131,7 @@ Task Analyze `
     -Description 'Build, analyze, then run PEVerify.' `
     -Depends _CI-InitializeVariables `
 {
-    $output = Get-LocalPath 'docs\code-analysis.txt'
+    $output = Get-LocalPath 'docs\engineering\code-analysis.txt'
 
     # Perform the following operations:
     # - Build all projects
@@ -202,7 +202,7 @@ Task CodeContractsAnalysis `
     -Depends _CI-InitializeVariables `
     -Alias CC `
 {
-    $output = Get-LocalPath 'docs\code-contracts.txt'
+    $output = Get-LocalPath 'docs\engineering\code-contracts.txt'
 
     # For static analysis, we hide internals, otherwise we might not truly
     # analyze the public API.
@@ -843,7 +843,7 @@ function Invoke-OpenCover {
           -reports:$coverageFile `
           -targetdir:$summaryDirectory
 
-        Copy-Item -Path (Get-LocalPath 'work\log\summary.htm') -Destination (Get-LocalPath 'docs\code-coverage.html') -Force
+        Copy-Item -Path (Get-LocalPath 'work\log\summary.htm') -Destination (Get-LocalPath 'docs\engineering\code-coverage.html') -Force
     }
     else {
         $reportDirectory = Get-LocalPath 'work\log\opencover'

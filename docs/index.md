@@ -5,7 +5,7 @@ Overview
 - [Project Changelog](changelogs/index.md)
 - [Near Future Plans](changelogs/vNext.md)
 - [Engineering Guides](engineering/index.md)
-- [Issues, TODOs & Ideas](Issues.md)
+- [Issues, TODOs & Ideas](engineering/issues.md)
 
 Library                   | Version | vNext  | Target               | Security (*)
 --------------------------|---------|--------|----------------------|--------------
@@ -26,9 +26,9 @@ In general, we provide localized messages in English and French.
 Status
 ------
 
-- [Code Analysis Output](code-analysis.log)
-- [Code Contracts Output](code-contracts.log)
-- [Code Coverage Output](code-coverage.html)
+- [Code Analysis Output](engineering/code-analysis.txt)
+- [Code Contracts Output](engineering/code-contracts.txt)
+- [Code Coverage Output](engineering/code-coverage.html)
 
 Library                   | Code Analysis | Code Contracts
 --------------------------|---------------|----------------
