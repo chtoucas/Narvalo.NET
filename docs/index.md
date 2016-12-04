@@ -23,21 +23,23 @@ Narvalo.Web               | 0.25.0  |        | .NET 4.5             |
 
 In general, we provide localized messages in English and French.
 
-Status (2016/12/04)
--------------------
+Status
+------
 
-Library                   | Static Analysis | Code Contracts | LC    | BC
---------------------------|-----------------|----------------|-------|-------
-Narvalo.Build             | Complete        |                |       |
-Narvalo.Cerbere           | Complete        | Complete       | 100%  | 100%
-Narvalo.Common            | Complete        | Complete       | 1.1%  | 0%
-Narvalo.Core              | Complete        | Complete       | 29%   | 46%
-Narvalo.Finance           | Complete        | Complete       | 83.2% | 22.7%
-Narvalo.Fx                | Complete        | Complete       | 15.1% | 11.7%
-Narvalo.Mvp               | Complete        | Complete       | 14.6% | 6.5%
-Narvalo.Mvp.Web           | Complete        | Complete       | 23.1% | 15.7%
-Narvalo.Web               | Pretty good     | Minimal        | 17%   | 17.9%
+- [Code Analysis Output](code-analysis.log)
+- [Code Contracts Output](code-contracts.log)
+- [Code Coverage Output](code-coverage.html)
 
-Notes:
-- Static Analysis is done with the analyzers shipped with VS.
-- LC = Line Coverage, BC = Branch Coverage.
+Library                   | Code Analysis | Code Contracts
+--------------------------|---------------|----------------
+Narvalo.Build             | Complete      |
+Narvalo.Cerbere           | Complete      | Complete
+Narvalo.Common            | Complete      | Complete
+Narvalo.Core              | Complete      | Complete
+Narvalo.Finance           | Complete      | Complete
+Narvalo.Fx                | Complete      | Complete
+Narvalo.Mvp               | Complete      | Complete
+Narvalo.Mvp.Web           | Complete      | Complete
+Narvalo.Web               | Pretty good   | Minimal
+
+Notes: Code Analysis is done with the default VS analyzers.
