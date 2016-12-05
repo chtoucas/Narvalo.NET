@@ -1,9 +1,12 @@
 Issues
 ======
 
-Reviews:
+Quick tasks:
 - `IEnumerable` extensions for `null`-checking and deferred execution.
 - Contract visibility of `Bic`, `Iban`, `PredicateFor` and `ContractFor`.
+- Put all `ObjectInvariant()` at the end.
+- Strange thing, CC reports that there are two remaining code fixes but does
+  not give any details about them.
 
 Narvalo.Fx
 ------------
