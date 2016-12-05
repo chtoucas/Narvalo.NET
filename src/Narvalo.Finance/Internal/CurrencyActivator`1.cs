@@ -26,8 +26,7 @@ namespace Narvalo.Finance.Internal
 
             if (ctorInfo == null)
             {
-                // TODO: Throw an internal exception.
-                throw new MissingMemberException();
+                throw new MissingMemberException("XXX");
             }
 
             return ctorInfo.Invoke(new Object[] { }) as TCurrency;

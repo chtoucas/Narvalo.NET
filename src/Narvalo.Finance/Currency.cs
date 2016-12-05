@@ -274,7 +274,7 @@ namespace Narvalo.Finance
         }
     }
 
-    // IEquatable<Currency> interface.
+    // Interface IEquatable<Currency>.
     public partial class Currency
     {
         public static bool operator ==(Currency left, Currency right)
