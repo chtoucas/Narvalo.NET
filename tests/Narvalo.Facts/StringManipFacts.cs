@@ -12,10 +12,7 @@ namespace Narvalo
 
         [Fact]
         public static void Reverse_ThrowsArgumentNullException_ForNullString()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => { StringManip.Reverse(null); });
-        }
+            => Assert.Throws<ArgumentNullException>(() => { StringManip.Reverse(null); });
 
         [Theory]
         [InlineData("", "")]
@@ -23,10 +20,7 @@ namespace Narvalo
         [InlineData("éçàè$£ö", "ö£$èàçé")]
         [CLSCompliant(false)]
         public static void Reverse_ReturnsExpectedString(string value, string expectedValue)
-        {
-            // Act & Assert
-            Assert.Equal(expectedValue, StringManip.Reverse(value));
-        }
+            => Assert.Equal(expectedValue, StringManip.Reverse(value));
 
         #endregion
     }

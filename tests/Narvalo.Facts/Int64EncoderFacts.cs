@@ -554,20 +554,16 @@ namespace Narvalo
         [Fact]
         public static void RoundTrippingBase58Encoding_IsInvariant()
         {
-            // Arrange
             long value = 3471391110;
 
-            // Act & Assert
             Assert.Equal(value, Int64Encoder.FromBase58String(Int64Encoder.ToBase58String(value)));
         }
 
         [Fact]
         public static void RoundTrippingFlickrBase58Encoding_IsInvariant()
         {
-            // Arrange
             long value = 3471391110;
 
-            // Act & Assert
             Assert.Equal(value, Int64Encoder.FromFlickrBase58String(Int64Encoder.ToFlickrBase58String(value)));
         }
 
@@ -577,19 +573,13 @@ namespace Narvalo
 
         [Fact]
         public static void FromBase58String_ThrowsArgumentNullException_ForNullString()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(() => Int64Encoder.FromBase58String(null));
-        }
+            => Assert.Throws<ArgumentNullException>(() => Int64Encoder.FromBase58String(null));
 
         [Theory]
         [MemberData(nameof(Base58TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void FromBase58String_ReturnsExpectedString(string value, long expectedValue)
-        {
-            // Act & Assert
-            Assert.Equal(expectedValue, Int64Encoder.FromBase58String(value));
-        }
+            => Assert.Equal(expectedValue, Int64Encoder.FromBase58String(value));
 
         #endregion
 
@@ -597,20 +587,14 @@ namespace Narvalo
 
         [Fact]
         public static void FromFlickrBase58String_ThrowsArgumentNullException_ForNullString()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentNullException>(delegate { Int64Encoder.FromFlickrBase58String(null); });
-        }
+            => Assert.Throws<ArgumentNullException>(() => Int64Encoder.FromFlickrBase58String(null));
 
         [Theory]
         [MemberData(nameof(FlickrBase58TestData), DisableDiscoveryEnumeration = true)]
         [Trait("Slow", "Sample")]
         [CLSCompliant(false)]
         public static void FromFlickrBase58String_TestSuite(string value, long expectedValue)
-        {
-            // Act & Assert
-            Assert.Equal(expectedValue, Int64Encoder.FromFlickrBase58String(value));
-        }
+            => Assert.Equal(expectedValue, Int64Encoder.FromFlickrBase58String(value));
 
         #endregion
 
@@ -618,19 +602,13 @@ namespace Narvalo
 
         [Fact]
         public static void ToBase58String_ThrowsArgumentOutOfRangeException_ForNegativeInt64()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => Int64Encoder.ToBase58String(-1));
-        }
+            => Assert.Throws<ArgumentOutOfRangeException>(() => Int64Encoder.ToBase58String(-1));
 
         [Theory]
         [MemberData(nameof(Base58TestData), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void ToBase58String_TestSuite(string expectedValue, long value)
-        {
-            // Act & Assert
-            Assert.Equal(expectedValue, Int64Encoder.ToBase58String(value));
-        }
+            => Assert.Equal(expectedValue, Int64Encoder.ToBase58String(value));
 
         #endregion
 
@@ -638,20 +616,14 @@ namespace Narvalo
 
         [Fact]
         public static void ToFlickrBase58String_ThrowsArgumentOutOfRangeException_ForNegativeInt64()
-        {
-            // Act & Assert
-            Assert.Throws<ArgumentOutOfRangeException>(delegate { Int64Encoder.ToFlickrBase58String(-1); });
-        }
+            => Assert.Throws<ArgumentOutOfRangeException>(() => Int64Encoder.ToFlickrBase58String(-1));
 
         [Theory]
         [MemberData(nameof(FlickrBase58TestData), DisableDiscoveryEnumeration = true)]
         [Trait("Slow", "Sample")]
         [CLSCompliant(false)]
         public static void ToFlickrBase58String_ReturnsExpectedString(string expectedValue, long value)
-        {
-            // Act & Assert
-            Assert.Equal(expectedValue, Int64Encoder.ToFlickrBase58String(value));
-        }
+            => Assert.Equal(expectedValue, Int64Encoder.ToFlickrBase58String(value));
 
         #endregion
     }

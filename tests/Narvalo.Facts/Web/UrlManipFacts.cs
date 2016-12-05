@@ -13,20 +13,16 @@ namespace Narvalo.Web
         [Fact]
         public static void ToProtocolRelativeString_ThrowsArgumentNullException_ForNullInput()
         {
-            // Arrange
             Uri uri = null;
 
-            // Act & Assert
             Assert.Throws<ArgumentNullException>(() => UrlManip.ToProtocolRelativeString(uri));
         }
 
         [Fact]
         public static void ToProtocolRelativeString_ThrowsNotSupportedException_ForUnsupportedScheme()
         {
-            // Arrange
             Uri uri = new Uri("mailto:nobody@tempuri.org");
 
-            // Act & Assert
             Assert.Throws<NotSupportedException>(() => UrlManip.ToProtocolRelativeString(uri));
         }
 
