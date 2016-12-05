@@ -25,10 +25,7 @@
           "*.{md,yml}",
           "changelogs/**/*.{md,yml}",
           "engineering/**/*.{md,yml}",
-          "userdocs/**/*.{md,yml}",
-          "code-analysis.txt",
-          "code-contracts.txt",
-          "code-coverage.html",
+          "userdocs/**/*.{md,yml}"
         ]
       }
     ],
