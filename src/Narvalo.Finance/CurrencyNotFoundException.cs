@@ -4,6 +4,8 @@ namespace Narvalo.Finance
 {
     using System;
 
+    using Narvalo.Finance.Properties;
+
     /// <summary>
     /// The exception thrown when a method is invoked which attempts to construct
     /// a currency that is not available.
@@ -14,7 +16,7 @@ namespace Narvalo.Finance
         /// Initializes a new instance of the <see cref="CurrencyNotFoundException"/>
         /// class with its message string set to a system-supplied message.
         /// </summary>
-        public CurrencyNotFoundException() { }
+        public CurrencyNotFoundException() : base(Strings.CurrencyNotFoundException_DefaultMessage) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyNotFoundException"/>
