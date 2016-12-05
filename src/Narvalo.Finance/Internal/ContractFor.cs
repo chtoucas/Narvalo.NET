@@ -11,22 +11,9 @@ namespace Narvalo.Finance.Internal
     {
         [DebuggerHidden]
         [ContractAbbreviator]
-        [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void CurrencyCodeDebug(string code)
-        {
-            Demand.NotNull(code);
-
-            // A currency code MUST only contain uppercase ASCII letters.
-            Demand.True(IsUpperLetter(code));
-
-            // A currency code MUST be composed of exactly 3 letters.
-            Demand.True(code.Length == 3);
-        }
-
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void CurrencyCode(string code)
         {
             Expect.NotNull(code);

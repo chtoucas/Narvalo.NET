@@ -5,8 +5,7 @@ namespace Narvalo.Finance.Internal
     using System;
     using System.Diagnostics.Contracts;
 
-    // REVIEW: Believe this is wrong.
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL // FIXME: This is wrong. Update tests.
     public
 #else
     internal
@@ -16,8 +15,7 @@ namespace Narvalo.Finance.Internal
         [Pure]
         public static bool IsDigitOrUpperLetter(string value)
         {
-            // Prove that any call to this internal method is guarded upstream.
-            Demand.NotNull(value);
+            Demand.NotNullOrEmpty(value);
 
             for (int i = 0; i < value.Length; i++)
             {
@@ -30,28 +28,10 @@ namespace Narvalo.Finance.Internal
             return true;
         }
 
-        //[Pure]
-        //public static bool IsDigit(string value)
-        //{
-        //    // Prove that any call to this internal method is guarded upstream.
-        //    Demand.NotNull(value);
-
-        //    for (int i = 0; i < value.Length; i++)
-        //    {
-        //        if (!IsDigit(value[i]))
-        //        {
-        //            return false;
-        //        }
-        //    }
-
-        //    return true;
-        //}
-
         [Pure]
         public static bool IsUpperLetter(string value)
         {
-            // Prove that any call to this internal method is guarded upstream.
-            Demand.NotNull(value);
+            Demand.NotNullOrEmpty(value);
 
             for (int i = 0; i < value.Length; i++)
             {
