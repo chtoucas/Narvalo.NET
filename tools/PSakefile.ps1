@@ -32,6 +32,14 @@ Properties {
     # Main MSBuild projects.
     $Everything  = Get-LocalPath 'tools\Make.proj'
     $Foundations = Get-LocalPath 'tools\Make.Foundations.proj'
+
+    # NuGet packages.
+    # TODO: Make it survive NuGet updates.
+    $OpenCoverVersion       = '4.6.519'
+    $ReportGeneratorVersion = '2.5.1'
+    $XunitVersion           = '2.1.0'
+
+    $OpenCoverXml = Get-LocalPath 'work\log\opencover.xml'
 }
 
 FormatTaskName {
@@ -103,7 +111,9 @@ Task OpenCover `
         '/p:SkipDocumentation=true',
         '/p:Filter="_Core_;_Mvp_"'
 
-    Invoke-OpenCover 'Debug+Closed' -Summary
+    Invoke-OpenCover 'Debug+Closed'
+    Invoke-ReportGenerator -Summary
+
 }
 
 Task OpenCoverVerbose `
@@ -111,8 +121,6 @@ Task OpenCoverVerbose `
     -Depends _CI-InitializeVariables `
     -Alias CoverVerbose `
 {
-    Write-Host "** WARNING ** Excluding some assemblies from the report." -ForegroundColor Yellow
-
     # Use debug build to also cover debug-only tests.
     # For static analysis, we hide internals, otherwise we might not truly
     # analyze the public API.
@@ -125,11 +133,13 @@ Task OpenCoverVerbose `
         '/p:Filter=_Core_'
 
     Invoke-OpenCover 'Debug+Closed'
+    Invoke-ReportGenerator
 }
 
-Task Analyze `
+Task CodeAnalysis `
     -Description 'Build, analyze, then run PEVerify.' `
     -Depends _CI-InitializeVariables `
+    -Alias CA `
 {
     $output = Get-LocalPath 'work\log\code-analysis.log'
 
@@ -149,52 +159,6 @@ Task Analyze `
         '/p:SkipDocumentation=true',
         '/p:RunCodeAnalysis=true',
         '/p:Filter=_Analyze_' | Tee-Object -file $output
-}
-#Task SourceAnalysis `
-#    -Description 'Run source analysis.' `
-#    -Depends _CI-InitializeVariables `
-#{
-#    MSBuild $Foundations $Opts $CI_Props `
-#        '/t:Build',
-#        '/p:Configuration=Debug',
-#        '/p:SkipCodeContractsReferenceAssembly=true',
-#        '/p:SkipDocumentation=true',
-#        '/p:SourceAnalysisEnabled=true',
-#        '/p:Filter=_Analyze_'
-#}
-#Task CodeAnalysis `
-#    -Description 'Run Code Analysis.' `
-#    -Depends _CI-InitializeVariables `
-#{
-#    # For static analysis, we hide internals, otherwise we might not truly
-#    # analyze the public API.
-#    MSBuild $Foundations $Opts $CI_Props `
-#        '/t:Build',
-#        '/p:VisibleInternals=false',
-#        '/p:RunCodeAnalysis=true',
-#        '/p:SkipCodeContractsReferenceAssembly=true',
-#        '/p:SkipDocumentation=true',
-#        '/p:Filter=_Analyze_'
-#}
-
-Task GendarmeAnalysis `
-    -Description '** Disabled ** Run Mono.Gendarme.' `
-    -Depends _CI-InitializeVariables `
-    -Alias Keuf `
-{
-    Exit-Gracefully -ExitCode 1 ` 'Gendarme does not work with the binaries produced by VS 2015.'
-
-    # For static analysis, we hide internals, otherwise we might not truly
-    # analyze the public API.
-    MSBuild $Foundations $Opts $CI_Props `
-        '/t:Build',
-        '/p:EnableGendarme=true',
-        '/p:VisibleInternals=false',
-        '/p:SkipCodeContractsReferenceAssembly=true',
-        '/p:SkipDocumentation=true',
-        '/p:Filter=_Analyze_'
-
-    Invoke-Gendarme 'Release+Closed'
 }
 
 Task CodeContractsAnalysis `
@@ -340,88 +304,6 @@ Task _Package-CheckVariablesForRetail `
 }
 
 # ------------------------------------------------------------------------------
-# Publication tasks
-# ------------------------------------------------------------------------------
-
-Task Publish-All `
-    -Description 'Publish everything.' `
-    -Depends Publish-Core, Publish-Mvp, Publish-Build `
-    -Alias Push
-
-Task Publish-Core `
-    -Description 'Publish the core packages.' `
-    -Depends _Publish-DependsOn, Package-Core `
-    -RequiredVariables Retail `
-    -Alias PushCore `
-{
-    Invoke-NuGetAgent $Publish_StagingDirectory -Retail:$Retail
-}
-
-Task Publish-Mvp `
-    -Description 'Publish the MVP-related packages.' `
-    -Depends _Publish-DependsOn, Package-Mvp `
-    -RequiredVariables Retail `
-    -Alias PushMvp `
-{
-    Invoke-NuGetAgent $Publish_StagingDirectory -Retail:$Retail
-}
-
-Task Publish-Build `
-    -Description 'Publish the Narvalo.Build package.' `
-    -Depends _Publish-DependsOn, Package-Build `
-    -RequiredVariables Retail `
-    -Alias PushBuild `
-{
-    Invoke-NuGetAgent $Publish_StagingDirectory -Retail:$Retail
-}
-
-Task _Publish-DependsOn `
-    -Description 'Dependencies shared among the Publish-* tasks.' `
-    -Depends _Publish-InitializeVariables, _Publish-Clean, NuGetAgent-Build
-
-Task _Publish-Clean `
-    -Description 'Remove the staging directory for packages.' `
-    -Depends _Publish-InitializeVariables `
-{
-    Remove-LocalItem -Path $Publish_StagingDirectory -Recurse
-}
-
-Task _Publish-InitializeVariables `
-    -Description 'Initialize variables only used by the Publish-* tasks.' `
-{
-    $script:Publish_StagingDirectory = Get-LocalPath 'work\packages'
-}
-
-# ------------------------------------------------------------------------------
-# NuGetAgent project
-# ------------------------------------------------------------------------------
-
-Task NuGetAgent-Build `
-    -Description 'Build the project NuGetAgent.' `
-    -Depends _NuGetAgent-InitializeVariables, _NuGetAgent-RestorePackages `
-    -Alias NuGetAgent `
-{
-    MSBuild $NuGetAgent_Project $Opts '/p:Configuration=Release', '/t:Build'
-}
-
-Task _NuGetAgent-RestorePackages `
-    -Description 'Restore packages for the project NuGetAgent.' `
-    -Depends _NuGetAgent-InitializeVariables, _Tools-InitializeVariables `
-{
-    Restore-Packages -Source $NuGetAgent_PackagesConfig `
-        -PackagesDirectory $Tools_PackagesDirectory `
-        -ConfigFile $Tools_NuGetConfig `
-        -Verbosity $NuGetVerbosity
-}
-
-Task _NuGetAgent-InitializeVariables `
-    -Description 'Initialize variables only used by the NuGetAgent-* tasks.' `
-{
-    $script:NuGetAgent_Project        = Get-LocalPath 'tools\src\NuGetAgent\NuGetAgent.fsproj'
-    $script:NuGetAgent_PackagesConfig = Get-LocalPath 'tools\src\NuGetAgent\packages.config'
-}
-
-# ------------------------------------------------------------------------------
 # MyGet project
 # ------------------------------------------------------------------------------
 
@@ -495,106 +377,6 @@ Task _MyGet-InitializeVariables `
     $script:MyGet_ZipFile          = Get-LocalPath 'work\myget.7z'
 }
 
-# ------------------------------------------------------------------------------
-# Edge solution
-# ------------------------------------------------------------------------------
-#
-#Task Edge-FullBuild `
-#    -Description 'Update then re-build the solution Edge.' `
-#    -Depends _Edge-Update, _Edge-Rebuild
-#
-#Task _Edge-Rebuild `
-#    -Description 'Re-build the solution Edge.' `
-#    -Depends _Edge-InitializeVariables, _Edge-RestorePackages `
-#{
-#    MSBuild $Edge_Solution $Opts '/p:Configuration=Release', '/t:Rebuild'
-#}
-#
-#Task _Edge-RestorePackages `
-#    -Description 'Restore packages for the solution Edge.' `
-#    -Depends _Edge-InitializeVariables `
-#{
-#    Restore-Packages -Source $Edge_Solution `
-#        -PackagesDirectory $Edge_PackagesDirectory `
-#        -ConfigFile $Edge_NuGetConfig `
-#        -Verbosity $NuGetVerbosity
-#}
-#
-#Task _Edge-Update `
-#    -Description 'Safely update NuGet packages for the solution Edge.' `
-#    -Depends _Edge-InitializeVariables `
-#{
-#    $nuget = Get-NuGet -Install
-#
-#    try {
-#        . $nuget update $Edge_Solution `
-#            -Safe `
-#            -RepositoryPath $Edge_PackagesDirectory `
-#            -ConfigFile $Edge_NuGetConfig `
-#            -Verbosity $NuGetVerbosity
-#    } catch {
-#        Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
-#    }
-#}
-#
-#Task _Edge-InitializeVariables `
-#    -Description 'Initialize variables only used by the Edge-* tasks.' `
-#{
-#    $script:Edge_Solution          = Get-LocalPath 'tools\src\MyPackages\Edge\Edge.sln'
-#    $script:Edge_NuGetConfig       = Get-LocalPath 'tools\src\MyPackages\Edge\.nuget\NuGet.Config'
-#    $script:Edge_PackagesDirectory = Get-LocalPath 'tools\src\MyPackages\Edge\packages'
-#}
-#
-# ------------------------------------------------------------------------------
-# Retail solution
-# ------------------------------------------------------------------------------
-#
-#Task Retail-FullBuild `
-#    -Description 'Update then re-build the solution Retail.' `
-#    -Depends _Retail-Update, _Retail-Rebuild
-#
-#Task _Retail-Rebuild `
-#    -Description 'Re-build the solution Retail.' `
-#    -Depends _Retail-InitializeVariables, _Retail-RestorePackages `
-#{
-#    MSBuild $Retail_Solution $Opts '/p:Configuration=Release', '/t:Rebuild'
-#}
-#
-#Task _Retail-RestorePackages `
-#    -Description 'Restore packages for the solution Retail.' `
-#    -Depends _Retail-InitializeVariables `
-#{
-#    Restore-Packages -Source $Retail_Solution `
-#        -PackagesDirectory $Retail_PackagesDirectory `
-#        -ConfigFile $Retail_NuGetConfig `
-#        -Verbosity $NuGetVerbosity
-#}
-#
-#Task _Retail-Update `
-#    -Description 'Safely update NuGet packages for the solution Retail.' `
-#    -Depends _Retail-InitializeVariables `
-#{
-#    $nuget = Get-NuGet -Install
-#
-#    try {
-#        . $nuget update $Retail_Solution `
-#            -Safe `
-#            -RepositoryPath $Retail_PackagesDirectory `
-#            -ConfigFile $Retail_NuGetConfig `
-#            -Verbosity $NuGetVerbosity
-#    } catch {
-#        Exit-Gracefully -ExitCode 1 "'nuget.exe update' failed: $_"
-#    }
-#}
-#
-#Task _Retail-InitializeVariables `
-#    -Description 'Initialize variables only used by the Retail-* tasks.' `
-#{
-#    $script:Retail_Solution          = Get-LocalPath 'tools\src\MyPackages\Retail\Retail.sln'
-#    $script:Retail_NuGetConfig       = Get-LocalPath 'tools\src\MyPackages\Retail\.nuget\NuGet.Config'
-#    $script:Retail_PackagesDirectory = Get-LocalPath 'tools\src\MyPackages\Retail\packages'
-#}
-#
 # ------------------------------------------------------------------------------
 # Miscs
 # ------------------------------------------------------------------------------
@@ -736,128 +518,58 @@ function ConvertTo-NuGetVerbosity {
     }
 }
 
-function Invoke-NuGetAgent {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0)] [string] $Path,
-
-        [Parameter(Mandatory = $false, Position = 1)] [string] $Configuration = 'Release',
-
-        [switch] $Retail
-    )
-
-    try {
-        $cmd = Get-LocalPath "tools\src\NuGetAgent\bin\$Configuration\nuget-agent.exe" -Resolve
-
-        if ($Retail) {
-            . $cmd --path $path --retail 2>&1
-        } else {
-            . $cmd --path $path 2>&1
-        }
-    } catch {
-        Exit-Gracefully -ExitCode 1 "'nuget-agent.exe' failed: $_"
-    }
-}
-
-# TODO: Quick and dirty function!
-function Invoke-Gendarme {
-    [CmdletBinding()]
-    param(
-        [Parameter(Mandatory = $true, Position = 0)]
-        [string] $Configuration,
-
-        [Parameter(Mandatory = $false, Position = 1)]
-        [int] $Limit = 100,
-
-        [Parameter(Mandatory = $false, Position = 2)]
-        [string] $RuleSet = 'narvalo-strict'
-    )
-
-    # TODO: Make it survive NuGet updates.
-    $gendarmeVersion = '2.11.0.20121120'
-
-    $gendarme = Get-LocalPath "packages\Mono.Gendarme.$gendarmeVersion\tools\gendarme.exe" -Resolve
-
-    $configFile = Get-LocalPath 'etc\gendarme.xml' -Resolve
-    $ignoreFile = Get-LocalPath 'etc\gendarme.ignore' -Resolve
-    $logFile    = Get-LocalPath 'work\log\gendarme.log'
-
-    . $gendarme `
-      --v `
-      --console `
-      --limit $limit `
-      --config $configFile `
-      --set $ruleSet `
-      --severity all `
-      --confidence all `
-      --ignore "$ignoreFile" `
-      --log "$logFile" `
-      (Get-LocalPath "work\bin\$Configuration\Narvalo.Cerbere.dll") `
-      (Get-LocalPath "work\bin\$Configuration\Narvalo.Fx.dll") `
-      (Get-LocalPath "work\bin\$Configuration\Narvalo.Core.dll") `
-      (Get-LocalPath "work\bin\$Configuration\Narvalo.Common.dll") `
-      (Get-LocalPath "work\bin\$Configuration\Narvalo.Finance.dll")
-}
-
-# TODO: Quick and dirty function!
 function Invoke-OpenCover {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0)]
-        [string] $Configuration,
+        [string] $Configuration
+    )
+
+    $opencover = Get-LocalPath "packages\OpenCover.$OpenCoverVersion\tools\OpenCover.Console.exe" -Resolve
+    $xunit     = Get-LocalPath "packages\xunit.runner.console.$XunitVersion\tools\xunit.console.exe" -Resolve
+
+    $filter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
+    $excludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;Narvalo.ExcludeFromCodeCoverageAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
+
+    $asm1 = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
+    $asm2  = Get-LocalPath "work\bin\$Configuration\Narvalo.Mvp.Facts.dll" -Resolve
+    $asms = "$asm1 $asm2"
+
+    # Be very careful with arguments containing spaces.
+    . $opencover `
+      -register:user `
+      "-filter:$filter" `
+      "-excludebyattribute:$excludeByAttribute" `
+      "-output:$OpenCoverXml" `
+      "-target:$xunit"  `
+      "-targetargs:$asms -nologo -noshadow"
+}
+
+function Invoke-ReportGenerator {
+    [CmdletBinding()]
+    param(
         [switch] $Summary
     )
 
-    # TODO: Make it survive NuGet updates.
-    $openCoverVersion       = '4.6.519'
-    $reportGeneratorVersion = '2.5.1'
-    $xunitVersion           = '2.1.0'
-
-    $openCover = Get-LocalPath "packages\OpenCover.$openCoverVersion\tools\OpenCover.Console.exe" -Resolve
-    $reportGenerator = Get-LocalPath "packages\ReportGenerator.$reportGeneratorVersion\tools\ReportGenerator.exe" -Resolve
-    $xunit = Get-LocalPath "packages\xunit.runner.console.$xunitVersion\tools\xunit.console.exe" -Resolve
-
-    $coverageFile = Get-LocalPath 'work\log\opencover.xml'
-    $coverageFilter = '+[Narvalo*]* -[*Facts]* -[Xunit.*]*'
-    $coverageExcludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;Narvalo.ExcludeFromCodeCoverageAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
-
-    $coreTestAssembly = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
-    $mvpTestAssembly  = Get-LocalPath "work\bin\$Configuration\Narvalo.Mvp.Facts.dll" -Resolve
-    $testsAssembly = "$coreTestAssembly $mvpTestAssembly"
-
-    # Be very careful with arguments containing spaces.
-    . $openCover `
-      -register:user `
-      "-filter:$coverageFilter" `
-      "-excludebyattribute:$coverageExcludeByAttribute" `
-      "-output:$coverageFile" `
-      "-target:$xunit"  `
-      "-targetargs:$testsAssembly -nologo -noshadow"
+    $reportgenerator = Get-LocalPath "packages\ReportGenerator.$ReportGeneratorVersion\tools\ReportGenerator.exe" -Resolve
 
     if ($summary.IsPresent) {
-        $summaryDirectory = Get-LocalPath 'work\log'
-        $summaryFilters = '+*'
-
-        . $reportGenerator `
-          -verbosity:Info `
-          -reporttypes:HtmlSummary `
-          -filters:$summaryFilters `
-          -reports:$coverageFile `
-          -targetdir:$summaryDirectory
+        $targetdir   = Get-LocalPath 'work\log'
+        $filters     = '+*'
+        $reporttypes = 'HtmlSummary'
     }
     else {
-        $reportDirectory = Get-LocalPath 'work\log\opencover'
-        # REVIEW: Add a commandline filter
-        $reportFilters = '-Narvalo.Common;-Narvalo.Core;-Narvalo.Fx;-Narvalo.Mvp;-Narvalo.Mvp.Web;-Narvalo.Web'
-        #$reportFilters = '-*;+Narvalo.Core'  # Does not work.
-
-        . $reportGenerator `
-          -verbosity:Info `
-          -reporttypes:Html `
-          "-filters:$reportFilters" `
-          -reports:$coverageFile `
-          -targetdir:$reportDirectory
+        $targetdir   = Get-LocalPath 'work\log\opencover'
+        $filters     = '-Narvalo.Common;-Narvalo.Core;-Narvalo.Fx;-Narvalo.Mvp;-Narvalo.Mvp.Web;-Narvalo.Web'
+        $reporttypes = 'Html'
     }
+
+    . $reportgenerator `
+        -verbosity:Info `
+        -reporttypes:$reporttypes `
+        "-filters:$filters" `
+        -reports:$OpenCoverXml `
+        -targetdir:$targetdir
 }
 
 # ------------------------------------------------------------------------------
