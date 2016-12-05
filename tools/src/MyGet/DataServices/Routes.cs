@@ -8,19 +8,15 @@ using RouteMagic;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyGet.NuGetRoutes), "Start")]
 
-namespace MyGet
-{
-    public static class NuGetRoutes
-    {
-        public static void Start()
-        {
-            ServiceResolver.SetServiceResolver(new DefaultServiceResolver());
+namespace MyGet {
+    public static class NuGetRoutes {
+        public static void Start() {
+			ServiceResolver.SetServiceResolver(new DefaultServiceResolver());
 
             MapRoutes(RouteTable.Routes);
         }
 
-        private static void MapRoutes(RouteCollection routes)
-        {
+        private static void MapRoutes(RouteCollection routes) {
             // Route to create a new package(http://{root}/nuget)
             routes.MapDelegate("CreatePackageNuGet",
                                "nuget",
