@@ -16,7 +16,8 @@ We mostly follow the guidelines produced by the .NET team:
   for object creations and when used with `typeof`.
 - Do not use PascalCasing to name private constants, prefer `MY_PRIVATE_CONSTANT` over
   `MyPrivateConstant`.
-- Do not put more than one public class per file. The only exception is for Code Contracts classes.
+- Do not put more than one public class per file. The only exceptions are for Code Contracts
+  classes and enum extensions.
 - Do not write extension methods on core types.
 - Do not use reserved words unless they are used in their intended sense:
   * `Current`
@@ -24,7 +25,7 @@ We mostly follow the guidelines produced by the .NET team:
   * `Add`, collection initializer
 - All static members must be thread-safe.
 - Portable Class Libraries: the behaviour must be 100% identical across all supported platforms
-  without  to the [bait and switch PCL trick](http://log.paulbetts.org/the-bait-and-switch-pcl-trick/).
+  without resorting to the [bait and switch PCL trick](http://log.paulbetts.org/the-bait-and-switch-pcl-trick/).
 
 ### Optional Rules
 - Projects should use a minimal set of references.
@@ -47,27 +48,14 @@ We mostly follow the guidelines produced by the .NET team:
   * REVIEW
   For temporary strings, use `"XXX"`.
 
-StyleCop (Obsolete)
--------------------
-
-All rules (included a few custom ones) are checked by StyleCop.
-
-For a detailed description of each rule, check out the official
-[documentation](http://www.stylecop.com/docs/).
-
-To suppress a StyleCop warning for a Narvalo.StyleCop rule, use:
-```csharp
-[SuppressMessage("Narvalo.CSharpRules", "NA1006:InternalMethodsMustNotEndWithInternal",
-    Justification = "...")]
-```
-
 Code Analysis
 -------------
 
 ### Suppressions
 All suppressions must be justified and tagged:
-- `[Ignore]` Only use this to tag a false positive and for unrecognized
-  Code Contracts postconditions; if they are no longer necessary CCCheck will tell us.
+- `[Ignore]` Only use this one to tag a false positive and for unrecognized
+  Code Contracts postconditions; by the way, if they are no longer necessary
+  CCCheck will tell us.
 - `[GeneratedCode]` Used to mark a suppression related to generated code.
 - `[Intentionally]` Used in all other cases.
 
@@ -75,70 +63,25 @@ Consider putting the justification on its own line. This helps to quickly see th
 
 ### FxCop
 Except for test projects we use a strict ruleset;
-only one rule is disabled: _[CA1006] Do not nest generic types in member signatures_.
-Nevertheless, we will test the equivalent rule with Gendarme which has the ability
-to disable a rule at assembly level.
-
-Test projects use a relaxed ruleset. Roughly, you don't have to create C# documentation.
+only two rules are disabled: CA1006 and IDE0001.
 
 ### Dictionary
 Every project already load the dictionary `etc\CodeAnalysisDictionary.xml`.
 If needed, consider adding a local dictionary `CustomDictionary.xml` in the
 directory `Properties` rather than modifying the global one.
 
-### Gendarme
-For Gendarme, we use a global suppression file `etc\gendarme.ignore` shared across
-all projects. This file is used exclusively for defects that can not be masked
-with a `SuppressMessage` attribute and for suppressions at assembly-level or at namespace-level.
-
 Code Contracts
 --------------
 
 The target is full CC coverage: we enable all options of the static contract checker
 except "Check redundant assume".
-```
--outputwarnmasks -show unreached
-```
 
 Remember that you can mark a type/member with the attribute `[ContractVerification(false)]`.
 If this is expected to be permanent, justify it.
 
 ### Object Invariants
 
-Wrap any object invariants method and contract class with a compiler conditional clause:
-```csharp
-    public class MyType
-    {
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-        [System.Diagnostics.Contracts.ContractInvariantMethod]
-        void ObjectInvariant()
-        {
-            // Contract invariants directives.
-        }
-
-#endif
-    }
-
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-    [ContractClass(typeof(IMyTypeContract))]
-    public partial interface IMyType
-    {
-        [ContractInvariantMethod]
-        void ObjectInvariant()
-        {
-            // Contract invariants directives.
-        }
-    }
-
-    [ContractClassFor(typeof(IMyType))]
-    internal abstract class IMyTypeContract : IMyType
-    {
-    }
-
-#endif
-```
+Wrap any object invariants method and contract class with a compiler conditional clause.
 
 Compilation Symbols and Conditional Attributes
 ----------------------------------------------
@@ -205,69 +148,41 @@ Instead of literal true, false, null, use `<see langword="true"/>`...
 
 Non-standard tags:
 - `<inheritdoc cref=""/>`
-- `<content></content>` used for documenting partial classes.
 - `<internalonly/>` for internal members or types.
 
 Tests
 -----
 
-Test projects are first-class citizens; translate: they must pass all static analysis.
+Test projects are first-class citizens; translate: they must pass static analysis.
 
 ### Mandatory Rules
 - Use the same directory hierarchy that the one used by the libraries.
-- Name `[TypeUnderTest]Facts` a test class.
-- Name `[UnitOfWork]_[ExpectedOutcomeOrBehaviour]_[Context]` a unit test.
+- Name `[Type]Facts` a test class.
+- Name `[UnitOfWork]_[OutcomeOrBehaviour]_[Context]` a unit test.
 - After a bugfix, create a unit test, decorate it with the `Issue` attribute
   and add a detailed summary of the bug.
 - Always justify a skipped test.
-- Do not run a different set of tests depending on the build configuration.
-
-Example:
-```csharp
-public static class MyTypeFacts
-{
-    public static void MyMethod_ReturnsTrue_ForEmptyInput() { }
-
-    public static void MyType_IsImmutable() { }
-}
-```
 
 ### Optional Rules
-- Consider adding a suffix `_For{WhichArgument}` to describe the arguments used.
-- When testing for exceptions use: `_Throws[ExpectedException]` or `_DoesNotThrow`.
+- Consider adding a suffix `For{Argument}` to describe the arguments used.
+- When testing for exceptions use: `Throws[Exception]` or `DoesNotThrow`.
 - Consider using the same ordering for tests than the one used inside classes.
 - Consider wrapping each set of tests with `#region ... #endregion`.
 - Consider using traits:
   * "Slow" for slow tests.
-
-### White-Box Tests
-
-Wrap white-box tests as follow:
-```csharp
-    public static partial class Facts
-    {
-         // Black-box tests.
-    }
-
-#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
-
-    public static partial class Facts
-    {
-         // White-box tests
-    }
-
-#endif
-```
+  * "Unsafe" for unsafe tests (`AppDomain` for instance).
 
 Useful attributes
 -----------------
 
 ### Usability attributes
 - `EditorBrowsableAttribute`
+- `EditorBrowsableState`
 
-- `DebuggerHidden` means that the method won't appear in the call stack. NB: Can not be set
-  on a class.
-- `DebuggerStepThrough` means that the code will be marked as _external_ in the call stack.
+- `DebuggerHidden` means that the method won't appear in the call stack.
+  This attribute CAN NOT be set on a class.
+- `DebuggerStepThrough` means that the code will be marked as _external_
+  in the call stack. This attribute can be set on a class.
 - `DebuggerBrowsable`
 - `DebuggerDisplay`
 - `DebuggerTypeProxy`
@@ -290,7 +205,7 @@ via NuGet, therefore they use the default policy (security critical).
 
 Consider applying the `SecurityTransparent` attribute or the `AllowPartiallyTrustedCallers`
 attribute to the assembly. If you do so, verify the assembly with the `SecAnnotate` tool (done
-automatically if we use the SecurityAnalysis task from the PSake file).
+automatically if you use the SecurityAnalysis task from the PSake file).
 
 Remark:
 All methods in ASP.NET MVC v5 default to security critical, our only choice would
@@ -305,6 +220,5 @@ References:
 - [SecAnnotate](http://blogs.msdn.com/b/shawnfa/archive/2009/11/18/using-secannotate-to-analyze-your-assemblies-for-transparency-violations-an-example.aspx)
 - [SecAnnotate and PCL](http://stackoverflow.com/questions/12360534/how-can-i-successfully-run-secannotate-exe-on-a-library-that-depends-on-a-portab)
 - [Simple Talk Tutorial](https://www.simple-talk.com/dotnet/net-framework/whats-new-in-code-access-security-in-net-framework-4-0-part-i/)
-- http://stackoverflow.com/questions/5055632/net-4-allowpartiallytrustedcallers-attribute-and-security-markings-like-secur
-- https://msdn.microsoft.com/en-us/magazine/ee336023.aspx
-
+- [Stackoverflow](http://stackoverflow.com/questions/5055632/net-4-allowpartiallytrustedcallers-attribute-and-security-markings-like-secur)
+- [Migrating an APTCA Assembly to the .NET Framework 4](https://msdn.microsoft.com/en-us/magazine/ee336023.aspx)
