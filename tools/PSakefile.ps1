@@ -101,19 +101,15 @@ Task OpenCover `
     -Alias Cover `
 {
     # Use debug build to also cover debug-only tests.
-    # For static analysis, we hide internals, otherwise we might not truly
-    # analyze the public API.
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Build',
         '/p:Configuration=Debug',
-        '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:Filter="_Core_;_Mvp_"'
 
-    Invoke-OpenCover 'Debug+Closed'
+    Invoke-OpenCover 'Debug'
     Invoke-ReportGenerator -Summary
-
 }
 
 Task OpenCoverVerbose `
@@ -122,17 +118,14 @@ Task OpenCoverVerbose `
     -Alias CoverVerbose `
 {
     # Use debug build to also cover debug-only tests.
-    # For static analysis, we hide internals, otherwise we might not truly
-    # analyze the public API.
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Build',
         '/p:Configuration=Debug',
-        '/p:VisibleInternals=false',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
         '/p:Filter=_Core_'
 
-    Invoke-OpenCover 'Debug+Closed'
+    Invoke-OpenCover 'Debug'
     Invoke-ReportGenerator
 }
 
@@ -147,9 +140,10 @@ Task CodeAnalysis `
     # - Build all projects
     # - Run Source Analysis
     # - Verify Portable Executable (PE) format
+    # NB: For static analysis, we hide internals, otherwise we might not truly
+    # analyze the public API.
     # NB: Adding Build to the targets is not necessary, but it makes clearer that
-    # we do not just run PEVerify. In fact, we need to rebuild otherwise CA may
-    # fail.
+    # we do not just run PEVerify. In fact, we need to rebuild otherwise CA might fail.
     # NB: Removed '/p:SourceAnalysisEnabled=true' (replaced by StyleCop.Analyzers)
     MSBuild $Foundations $Opts $CI_Props `
         '/t:Rebuild;PEVerify',
@@ -518,6 +512,7 @@ function ConvertTo-NuGetVerbosity {
     }
 }
 
+# TODO: Should be a task.
 function Invoke-OpenCover {
     [CmdletBinding()]
     param(
@@ -545,6 +540,7 @@ function Invoke-OpenCover {
       "-targetargs:$asms -nologo -noshadow"
 }
 
+# TODO: Should be a task.
 function Invoke-ReportGenerator {
     [CmdletBinding()]
     param(
