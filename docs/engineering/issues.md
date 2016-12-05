@@ -48,7 +48,7 @@ Narvalo.Finance
   * [ISO 4217 - xe](http://www.xe.com/iso4217.php/)
   * [ISO 4217 - Wikipedia](http://en.wikipedia.org/wiki/ISO_4217)
   * [Currency Symbol - Wikipedia](http://en.wikipedia.org/wiki/Currency_symbol)
- - Implementations:
+- Implementations:
   * JodaMoney
   * [NodaMoney](https://github.com/remyvd/NodaMoney/)
   * [Money Type for the CLR](https://bitbucket.org/rplaire/money-type-for-the-clr)
@@ -74,25 +74,8 @@ Narvalo.Mvp
   See [here](http://aspiringcraftsman.com/tag/model-view-presenter/)
   and [here](http://aspiringcraftsman.com/2007/08/25/interactive-application-architecture/)
 
-Narvalo.Facts
--------------
-
-- Explore SpecFlow.
-
-Infrastructure
---------------
-
-- Solution-level packages are no longer supported. Currently, we use
-  `make.ps1 restore`, it works but updates require manual editing.
-  * [GitHub Issue](https://github.com/NuGet/Home/issues/522)
-  * [Bring back solution level packages](https://github.com/NuGet/Home/issues/1521)
-- Move to .NET Standard
-  * [CoreFX](https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/porting.md#unsupported-technologies)
-  * [Porting to .NET Core](https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/)
-- Enable Continuous Integration (AppVeyor?).
-- Create symbol packages (GitLink?).
-- Create a Retail solution to test the installation of our NuGet packages. Maybe,
-  we could also run the tests against the production packages?
+Code Infrastructure
+-------------------
 
 ### Code Style
 - CodeFormatter.
@@ -123,6 +106,21 @@ Infrastructure
   `$(_ForceTransparency)` looks a bit fragile to have to explicitly list the PCL
   librairies, better, we could use a rsp file.
 - What about permcalc?
+
+Infrastructure
+--------------
+
+- Solution-level packages are no longer supported. Currently, we use
+  `make.ps1 restore`, it works but updates require manual editing.
+  * [GitHub Issue](https://github.com/NuGet/Home/issues/522)
+  * [Bring back solution level packages](https://github.com/NuGet/Home/issues/1521)
+- Move to .NET Standard
+  * [CoreFX](https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/porting.md#unsupported-technologies)
+  * [Porting to .NET Core](https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/)
+- Enable Continuous Integration (AppVeyor?).
+- Create symbol packages (GitLink?).
+- Create a Retail solution to test the installation of our NuGet packages. Maybe,
+  we could also run the tests against the production packages?
 
 ### Scripts
 MSBuild and `PSakefile`:
