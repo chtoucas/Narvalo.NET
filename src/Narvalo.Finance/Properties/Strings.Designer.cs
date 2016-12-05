@@ -71,6 +71,15 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown currency..
+        /// </summary>
+        internal static string CurrencyNotFoundException_DefaultMessage {
+            get {
+                return ResourceManager.GetString("CurrencyNotFoundException_DefaultMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified argument must be of Money type..
         /// </summary>
         internal static string Money_ArgIsNotMoney {

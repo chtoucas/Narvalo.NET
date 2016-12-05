@@ -120,6 +120,9 @@
   <data name="CurrencyFactory_UnknownCurrency" xml:space="preserve">
     <value>Unknown currency: {0}.</value>
   </data>
+  <data name="CurrencyNotFoundException_DefaultMessage" xml:space="preserve">
+    <value>Unknown currency.</value>
+  </data>
   <data name="Money_ArgIsNotMoney" xml:space="preserve">
     <value>The specified argument must be of Money type.</value>
   </data>
