@@ -17,7 +17,7 @@ Library Enhancements & Improvements:
   * BBAN implementation.
   * strong/weak validation of Bic, Iban & Bban (check digits).
   * provide an alternate live Currency provider (see SnvCurrencyXmlReader).
-  * currency info with implementation from BCL.
+  * currency info with implementation from the BCL.
   * money & currency formatting.
 - Narvalo.Mvp and Narvalo.Mvp.Web.
   * add localized messages in french for Narvalo.Mvp and Narvalo.Mvp.Web.
@@ -28,6 +28,18 @@ Other tasks:
 - Put the private key in the repository.
   See [here](https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx)
 
+Library                   | vNext
+--------------------------|----------
+Narvalo.Build             | -
+Narvalo.Cerbere           | 2.0.1
+Narvalo.Common            |
+Narvalo.Core              | 0.26.0
+Narvalo.Finance           | 0.26.0
+Narvalo.Fx                | 0.26.0
+Narvalo.Mvp               | 1.1.0
+Narvalo.Mvp.Web           |
+Narvalo.Web               | 0.26.0
+
 Highlights
 ----------
 
@@ -36,7 +48,7 @@ Bugfixes
 
 Breaking Changes
 ----------------
-### Narvalo.Core
+### Narvalo.Cerbere
 - `Enforce.IsWhiteSpace()` now throws an `ArgumentOutOfRangeException`
   if the input is an empty string.
 
