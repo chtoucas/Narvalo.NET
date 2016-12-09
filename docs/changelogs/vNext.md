@@ -69,3 +69,8 @@ API Changes
 Enhancements
 ------------
 - Full test coverage for Narvalo.Cerbere.
+
+### Narvalo.Cerbere
+- `Enforce.NotNullOrWhiteSpace()` and `Enforce.PropertyNotWhiteSpace()`
+  specifies a stronger code contract: "the input must not be null or empty"
+  (not empty is what has been added).

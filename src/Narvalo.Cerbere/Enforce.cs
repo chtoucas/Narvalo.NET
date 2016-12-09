@@ -32,12 +32,9 @@ namespace Narvalo
         /// <see langword="null"/> or empty, or does not only consist of white-space characters.</exception>
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
-            Require.NotNull(value, parameterName);
+            Require.NotNullOrEmpty(value, parameterName);
 
-            if (IsEmptyOrWhiteSpace(value))
-            {
-                throw new ArgumentException(Strings_Cerbere.Argument_EmptyOrWhiteSpaceString, parameterName);
-            }
+            NotWhiteSpace(value, parameterName);
         }
 
         /// <summary>
@@ -52,17 +49,14 @@ namespace Narvalo
         /// <see langword="null"/> or empty, or does not only consist of white-space characters.</exception>
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
         {
-            Require.Property(value);
+            Require.PropertyNotEmpty(value);
 
-            if (IsEmptyOrWhiteSpace(value))
-            {
-                throw new ArgumentException(Strings_Cerbere.ArgumentProperty_EmptyOrWhiteSpaceString, "value");
-            }
+            NotWhiteSpace(value, "value");
         }
 
         /// <remarks>
         /// Cette méthode est normalement utilisée après une vérification Require.NotNullOrEmpty()
-        /// ou Property.NotNullOrEmpty().
+        /// ou Require.PropertyNotEmpty().
         /// </remarks>
         public static void NotWhiteSpace(string value, string parameterName)
         {
@@ -76,33 +70,11 @@ namespace Narvalo
         /// Retourne <see langword="true"/> si une chaîne de caractères
         /// n'est constituée que d'espaces blancs, sinon <see langword="false"/>.
         /// </summary>
+        /// <remarks>Une chaîne vide n'est pas une chaîne consitutée que d'espaces blancs.</remarks>
         [Pure]
         public static bool IsWhiteSpace(string value)
         {
             if (value == null || value.Length == 0) { return false; }
-
-            for (int i = 0; i < value.Length; i++)
-            {
-                if (!Char.IsWhiteSpace(value[i]))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Returns a value indicating whether the specified value is empty or consists only
-        /// of white-space characters.
-        /// </summary>
-        /// <param name="value">The string to test.</param>
-        /// <returns><see langword="true"/> if the specified value is empty or consists only
-        /// of white-space characters; otherwise <see langword="false"/>.</returns>
-        [Pure]
-        private static bool IsEmptyOrWhiteSpace(string value)
-        {
-            Demand.NotNull(value);
 
             for (int i = 0; i < value.Length; i++)
             {

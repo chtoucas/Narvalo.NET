@@ -51,8 +51,7 @@ namespace Narvalo.Web.Configuration
 
             set
             {
-                Require.PropertyNotEmpty(value);
-                Enforce.NotWhiteSpace(value, nameof(value));
+                Enforce.PropertyNotWhiteSpace(value);
 
                 _defaultProvider = value;
             }

@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ArgumentProperty_EmptyOrWhiteSpaceString" xml:space="preserve">
-    <value>La valeur de la propriété ne peut pas être vide ou ne contenir que des espaces blancs.</value>
-  </data>
   <data name="ArgumentProperty_EmptyString" xml:space="preserve">
     <value>La valeur de la propriété ne peut pas être une chaîne vide.</value>
   </data>
@@ -128,9 +125,6 @@
   </data>
   <data name="ArgumentProperty_TestFailed" xml:space="preserve">
     <value>Un test sur la valeur à donner à une propriété a échoué.</value>
-  </data>
-  <data name="Argument_EmptyOrWhiteSpaceString" xml:space="preserve">
-    <value>La chaîne de caractères ne peut pas être vide ou ne contenir que des espaces blancs.</value>
   </data>
   <data name="Argument_EmptyString" xml:space="preserve">
     <value>La chaîne de caractères ne peut pas être vide.</value>

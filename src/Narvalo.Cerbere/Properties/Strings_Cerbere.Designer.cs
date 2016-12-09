@@ -62,15 +62,6 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String cannot be empty or contain only whitespace..
-        /// </summary>
-        internal static string Argument_EmptyOrWhiteSpaceString {
-            get {
-                return ResourceManager.GetString("Argument_EmptyOrWhiteSpaceString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to String cannot be empty..
         /// </summary>
         internal static string Argument_EmptyString {
@@ -103,15 +94,6 @@ namespace Narvalo.Properties {
         internal static string Argument_WhiteSpaceString {
             get {
                 return ResourceManager.GetString("Argument_WhiteSpaceString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The property value cannot be empty or contain only whitespace..
-        /// </summary>
-        internal static string ArgumentProperty_EmptyOrWhiteSpaceString {
-            get {
-                return ResourceManager.GetString("ArgumentProperty_EmptyOrWhiteSpaceString", resourceCulture);
             }
         }
         
