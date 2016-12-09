@@ -13,8 +13,6 @@ appear. Failing to do so will produce a CC1038 error. One workaround could be to
 visibility depending on the CONTRACTS_FULL compiler flag. This works fine if the CC is
 used in source form in the target assembly, but it doe not work if this very CC
 is imported from another compiled assembly.
-- `Enforce.IsWhiteSpace()`: rollback on `ArgumentOutOfRangeException`.
-  `Enforce.IsWhiteSpace()` and `Enforce.NotWhiteSpace()` should never throw.
 
 Narvalo.Fx
 ------------

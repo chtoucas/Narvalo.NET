@@ -130,7 +130,7 @@
     <value>String cannot be empty.</value>
   </data>
   <data name="Argument_WhiteSpaceString" xml:space="preserve">
-    <value>String cannot contain only whitespace.</value>
+    <value>String cannot contain only white spaces.</value>
   </data>
   <data name="ArgumentProperty_EmptyString" xml:space="preserve">
     <value>The property value cannot be empty.</value>

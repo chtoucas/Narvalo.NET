@@ -89,7 +89,7 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String cannot contain only whitespace..
+        ///   Looks up a localized string similar to String cannot contain only white spaces..
         /// </summary>
         internal static string Argument_WhiteSpaceString {
             get {
