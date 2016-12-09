@@ -32,14 +32,14 @@ Other tasks:
 Library                   | vNext
 --------------------------|----------
 Narvalo.Build             | -
-Narvalo.Cerbere           | 2.1.0
-Narvalo.Common            |
-Narvalo.Core              | 0.26.0
+Narvalo.Cerbere           | **2.1.0**
+Narvalo.Common            | 0.26.0
+Narvalo.Core              | **0.26.0**
 Narvalo.Finance           | 0.26.0
 Narvalo.Fx                | 0.26.0
 Narvalo.Mvp               | 1.1.0
-Narvalo.Mvp.Web           |
-Narvalo.Web               | 0.26.0
+Narvalo.Mvp.Web           | 1.1.0
+Narvalo.Web               | **0.26.0**
 
 Highlights
 ----------
