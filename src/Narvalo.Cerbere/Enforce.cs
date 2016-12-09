@@ -30,6 +30,7 @@ namespace Narvalo
         /// <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/> or empty, or does not only consist of white-space characters.</exception>
+        [ContractArgumentValidator]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
             Require.NotNullOrEmpty(value, parameterName);
@@ -47,6 +48,7 @@ namespace Narvalo
         /// <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/> or empty, or does not only consist of white-space characters.</exception>
+        [ContractArgumentValidator]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
         {
             Require.PropertyNotEmpty(value);

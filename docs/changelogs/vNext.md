@@ -50,7 +50,7 @@ Bugfixes
 Breaking Changes
 ----------------
 ### Narvalo.Cerbere
-- `Enforce.IsWhiteSpace()` does not throw when the input is null, but rather
+- `Enforce.IsWhiteSpace()` not longer throws when the input is null, but rather
   returns `false`. The method also returns `false` instead of `true`
   for an empty string.
 
