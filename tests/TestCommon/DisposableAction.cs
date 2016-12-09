@@ -10,7 +10,7 @@ namespace Narvalo
 {
     using System;
 
-    public class DisposableAction : IDisposable
+    internal class DisposableAction : IDisposable
     {
         private Action _action;
         private bool _hasDisposed;
@@ -21,7 +21,6 @@ namespace Narvalo
             {
                 throw new ArgumentNullException("action");
             }
-
             _action = action;
         }
 

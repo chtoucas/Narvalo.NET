@@ -9,11 +9,14 @@ using global::System.Diagnostics.CodeAnalysis;
 namespace Narvalo
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.IO;
+    using System.Reflection;
+    using System.Web.Compilation;
+    using System.Web.Hosting;
 
-    public static class AppDomainUtility
+    internal static class AppDomainUtils
     {
+
         // Allow a test to modify static fields in an independent appdomain so that
         // other tests will not be affected.
         public static void RunInSeparateAppDomain(Action action)
@@ -23,8 +26,7 @@ namespace Narvalo
 
         public static void RunInSeparateAppDomain(AppDomainSetup setup, Action action)
         {
-            var dir = Path.GetDirectoryName(typeof(AppDomainUtility).Assembly.CodeBase)
-                .Replace("file:\\", String.Empty);
+            var dir = Path.GetDirectoryName(typeof(AppDomainUtils).Assembly.CodeBase).Replace("file:\\", "");
             setup.PrivateBinPath = dir;
             setup.ApplicationBase = dir;
             setup.ApplicationName = Guid.NewGuid().ToString();
@@ -36,10 +38,7 @@ namespace Narvalo
             try
             {
                 appDomain = AppDomain.CreateDomain(setup.ApplicationName, null, setup);
-                AppDomainHelper helper =
-                    appDomain.CreateInstanceAndUnwrap(
-                        typeof(AppDomainUtility).Assembly.FullName,
-                        typeof(AppDomainHelper).FullName) as AppDomainHelper;
+                AppDomainHelper helper = appDomain.CreateInstanceAndUnwrap(typeof(AppDomainUtils).Assembly.FullName, typeof(AppDomainHelper).FullName) as AppDomainHelper;
                 helper.Run(action);
             }
             finally
@@ -53,12 +52,30 @@ namespace Narvalo
 
         public class AppDomainHelper : MarshalByRefObject
         {
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic",
-                Justification = "[Ignore] Microsoft source file.")]
             public void Run(Action action)
             {
                 action();
             }
+        }
+
+        public static void SetPreAppStartStage()
+        {
+            var stage = typeof(BuildManager).GetProperty("PreStartInitStage", BindingFlags.Static | BindingFlags.NonPublic);
+            var value = ((FieldInfo)typeof(BuildManager).Assembly.GetType("System.Web.Compilation.PreStartInitStage").GetMember("DuringPreStartInit")[0]).GetValue(null);
+            stage.SetValue(null, value, new object[] { });
+            SetAppData();
+            var env = new HostingEnvironment();
+        }
+
+        public static void SetAppData()
+        {
+            var appdomain = AppDomain.CurrentDomain;
+            // Set some dummy values to make the appdomain seem more like a ASP.NET hosted one
+            appdomain.SetData(".appDomain", "*");
+            appdomain.SetData(".appId", "appId");
+            appdomain.SetData(".appPath", "appPath");
+            appdomain.SetData(".appVPath", "/WebSite1");
+            appdomain.SetData(".domainId", "1");
         }
     }
 }

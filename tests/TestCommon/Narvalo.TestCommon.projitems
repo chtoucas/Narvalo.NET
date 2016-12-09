@@ -9,7 +9,7 @@
     <Import_RootNamespace>Narvalo</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AppDomainUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AppDomainUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssertFailedException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DisposableAction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EnvironmentFacts.cs" />
