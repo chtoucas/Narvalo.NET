@@ -126,16 +126,16 @@ namespace Narvalo
         #region NotWhiteSpace()
 
         [Fact]
-        public static void NotWhiteSpace_ThrowsArgumentNullException_ForNull()
-            => Assert.Throws<ArgumentNullException>(() => Enforce.NotWhiteSpace(null, "paramName"));
-
-        [Fact]
-        public static void NotWhiteSpaceThrowsArgumentOutOfRangeException_ForEmptyString()
-            => Assert.Throws<ArgumentOutOfRangeException>(() => Enforce.NotWhiteSpace(String.Empty, "paramName"));
-
-        [Fact]
         public static void NotWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
             => Assert.Throws<ArgumentException>(() => Enforce.NotWhiteSpace(My.WhiteSpaceOnlyString, "paramName"));
+
+        [Fact]
+        public static void NotWhiteSpace_DoesNotThrow_ForNull()
+            => Enforce.NotWhiteSpace(null, "paramName");
+
+        [Fact]
+        public static void NotWhiteSpace_DoesNotThrow_ForEmptyString()
+            => Enforce.NotWhiteSpace(String.Empty, "paramName");
 
         [Fact]
         public static void NotWhiteSpace_DoesNotThrow_ForNonWhiteSpaceString()
@@ -146,12 +146,12 @@ namespace Narvalo
         #region IsWhiteSpace()
 
         [Fact]
-        public static void IsWhiteSpace_ThrowsArgumentNullException_ForNull()
-                => Assert.Throws<ArgumentNullException>(() => Enforce.IsWhiteSpace(null));
+        public static void IsWhiteSpace_ReturnsFalse_ForNull()
+                => Assert.False(Enforce.IsWhiteSpace(null));
 
         [Fact]
-        public static void IsWhiteSpace_DoesNotThrow_ForEmptyString()
-            => Assert.Throws<ArgumentOutOfRangeException>(() => Enforce.IsWhiteSpace(String.Empty));
+        public static void IsWhiteSpace_ReturnsFalse_ForEmptyString()
+            => Assert.False(Enforce.IsWhiteSpace(String.Empty));
 
         [Fact]
         public static void IsWhiteSpace_ReturnsFalse_ForNonWhiteSpaceOnlyString()

@@ -22,14 +22,14 @@ namespace Narvalo
     {
         /// <summary>
         /// Validates that the specified argument is not <see langword="null"/> or empty,
-        /// and does not consist only of white-space characters.
+        /// and does not only consist of white-space characters.
         /// </summary>
         /// <param name="value">The argument to check.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/> or empty, or does not consist only of white-space characters.</exception>
+        /// <see langword="null"/> or empty, or does not only consist of white-space characters.</exception>
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
             Require.NotNull(value, parameterName);
@@ -42,14 +42,14 @@ namespace Narvalo
 
         /// <summary>
         /// Validates that the specified property value is not <see langword="null"/> or empty,
-        /// or does not consist only of white-space characters.
+        /// or does not only consist of white-space characters.
         /// Meant to be used inside a property setter to validate the new value.
         /// </summary>
         /// <param name="value">The property value to check.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/> or empty, or does not consist only of white-space characters.</exception>
+        /// <see langword="null"/> or empty, or does not only consist of white-space characters.</exception>
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
         {
             Require.Property(value);
@@ -61,14 +61,11 @@ namespace Narvalo
         }
 
         /// <remarks>
-        /// Cette méthode ne doit être utilisée qu'après une vérification Require.NotNullOrEmpty()
-        /// or Property.NotNullOrEmpty().
+        /// Cette méthode est normalement utilisée après une vérification Require.NotNullOrEmpty()
+        /// ou Property.NotNullOrEmpty().
         /// </remarks>
         public static void NotWhiteSpace(string value, string parameterName)
         {
-            Expect.NotNull(value);
-            Expect.True(value.Length != 0);
-
             if (IsWhiteSpace(value))
             {
                 throw new ArgumentException(Strings_Cerbere.Argument_WhiteSpaceString, parameterName);
@@ -76,17 +73,13 @@ namespace Narvalo
         }
 
         /// <summary>
-        /// Retourne <see langword="true"/> si une chaîne de caractères est vide ou
+        /// Retourne <see langword="true"/> si une chaîne de caractères
         /// n'est constituée que d'espaces blancs, sinon <see langword="false"/>.
         /// </summary>
-        /// <remarks>
-        /// Cette méthode n'est doit être utilisée qu'après une vérification !String.IsNullOrEmpty().
-        /// </remarks>
         [Pure]
         public static bool IsWhiteSpace(string value)
         {
-            Require.NotNull(value, nameof(value));
-            Require.Range(value.Length != 0, nameof(value));
+            if (value == null || value.Length == 0) { return false; }
 
             for (int i = 0; i < value.Length; i++)
             {

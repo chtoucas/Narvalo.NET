@@ -27,11 +27,12 @@ Other tasks:
 - Automatic code formatting with CodeFormatter.
 - Put the private key in the repository.
   See [here](https://msdn.microsoft.com/en-us/library/wd40t7ad(v=vs.110).aspx)
+- Remove .nuget directory.
 
 Library                   | vNext
 --------------------------|----------
 Narvalo.Build             | -
-Narvalo.Cerbere           | 2.0.1
+Narvalo.Cerbere           | 2.1.0
 Narvalo.Common            |
 Narvalo.Core              | 0.26.0
 Narvalo.Finance           | 0.26.0
@@ -49,12 +50,13 @@ Bugfixes
 Breaking Changes
 ----------------
 ### Narvalo.Cerbere
-- `Enforce.IsWhiteSpace()` now throws an `ArgumentOutOfRangeException`
-  if the input is an empty string.
+- `Enforce.IsWhiteSpace()` does not throw when the input is null, but rather
+  returns `false`. The method also returns `false` instead of `true`
+  for an empty string.
 
 ### Narvalo.Web.Configuration
 - `AssetSection.DefaultProvider` setter now throws an `ArgumentException`
-  if the input contains only whitespaces.
+  if the input consists of only whitespaces.
 
 API Changes
 -----------
