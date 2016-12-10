@@ -62,7 +62,12 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void NotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
+        public static void NotNullOrWhiteSpace(string value)
+        {
+            // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
+            True(!String.IsNullOrEmpty(value));
+            True(!Enforce.IsWhiteSpace(value));
+        }
 
         /// <summary>
         /// Checks that the specified object parameter is not <see langword="null"/>.
@@ -124,6 +129,11 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void PropertyNotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
+        public static void PropertyNotNullOrWhiteSpace(string value)
+        {
+            // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
+            True(!String.IsNullOrEmpty(value));
+            True(!Enforce.IsWhiteSpace(value));
+        }
     }
 }

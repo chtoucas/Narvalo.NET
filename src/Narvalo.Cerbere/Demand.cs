@@ -63,7 +63,12 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void NotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
+        public static void NotNullOrWhiteSpace(string value)
+        {
+            // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
+            True(!String.IsNullOrEmpty(value));
+            True(!Enforce.IsWhiteSpace(value));
+        }
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
@@ -104,6 +109,11 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void PropertyNotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
+        public static void PropertyNotNullOrWhiteSpace(string value)
+        {
+            // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
+            True(!String.IsNullOrEmpty(value));
+            True(!Enforce.IsWhiteSpace(value));
+        }
     }
 }
