@@ -461,7 +461,7 @@ namespace Narvalo.Fx
             this Func<TSource, Identity<TResult>> @this,
             IEnumerable<TSource> seq)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(seq);
 
             return seq.ForEachCore(@this);
@@ -476,7 +476,7 @@ namespace Narvalo.Fx
             Identity<TSource> value)
             /* T4: C# indent */
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             /* T4: C# indent */
 
             return value.Bind(@this);
@@ -490,7 +490,7 @@ namespace Narvalo.Fx
             Func<TMiddle, Identity<TResult>> funM)
             /* T4: C# indent */
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.NotNull(funM);
             Ensures(Result<Func<TSource, Identity<TResult>>>() != null);
 
@@ -505,7 +505,7 @@ namespace Narvalo.Fx
             Func<TSource, Identity<TMiddle>> funM)
             /* T4: C# indent */
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Require.NotNull(funM, nameof(funM));
             Ensures(Result<Func<TSource, Identity<TResult>>>() != null);
 
@@ -567,7 +567,7 @@ namespace Narvalo.Fx
         public static Identity<IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<Identity<TSource>> @this)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.CollectCore();
         }
@@ -603,7 +603,7 @@ namespace Narvalo.Fx.Advanced
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<TResult>> funM)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(funM);
 
             return @this.ForEachCore(funM);
@@ -623,7 +623,7 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, Identity<bool>> predicateM)
             /* T4: C# indent */
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(predicateM);
             Ensures(Result<IEnumerable<TSource>>() != null);
 
@@ -639,7 +639,7 @@ namespace Narvalo.Fx.Advanced
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(funM);
 
             return @this.MapAndUnzipCore(funM);
@@ -653,7 +653,7 @@ namespace Narvalo.Fx.Advanced
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, Identity<TResult>> resultSelectorM)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(second);
             Expect.NotNull(resultSelectorM);
 
@@ -670,7 +670,7 @@ namespace Narvalo.Fx.Advanced
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
             return @this.FoldCore(seed, accumulatorM);
@@ -686,7 +686,7 @@ namespace Narvalo.Fx.Advanced
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
             return @this.FoldBackCore(seed, accumulatorM);
@@ -697,7 +697,7 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
             return @this.ReduceCore(accumulatorM);
@@ -708,7 +708,7 @@ namespace Narvalo.Fx.Advanced
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
             return @this.ReduceBackCore(accumulatorM);
@@ -728,7 +728,7 @@ namespace Narvalo.Fx.Advanced
             Func<Identity<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
 
@@ -744,7 +744,7 @@ namespace Narvalo.Fx.Advanced
             Func<Identity<TSource>, bool> predicate)
             /* T4: C# indent */
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
 
@@ -781,7 +781,7 @@ namespace Narvalo.Fx.Internal
         internal static Identity<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Identity<TSource>> @this)
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
 
             var seed = Identity.Return(Enumerable.Empty<TSource>());
             Func<Identity<IEnumerable<TSource>>, Identity<TSource>, Identity<IEnumerable<TSource>>> fun
@@ -816,7 +816,7 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<TResult>> funM)
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(funM);
 
             return @this.Select(funM).EmptyIfNull().Collect();
@@ -830,7 +830,7 @@ namespace Narvalo.Fx.Internal
             Func<TSource, Identity<bool>> predicateM)
             /* T4: C# indent */
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicateM, nameof(predicateM));
             Ensures(Result<IEnumerable<TSource>>() != null);
 
@@ -862,7 +862,7 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<TSource> @this,
             Func<TSource, Identity<Tuple<TFirst, TSecond>>> funM)
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(funM);
 
             var m = @this.Select(funM).EmptyIfNull().Collect();
@@ -886,7 +886,7 @@ namespace Narvalo.Fx.Internal
         {
             Require.NotNull(resultSelectorM, nameof(resultSelectorM));
 
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(second);
 
             Func<TFirst, TSecond, Identity<TResult>> resultSelector
@@ -906,7 +906,7 @@ namespace Narvalo.Fx.Internal
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
 
             Identity<TAccumulate> retval = Identity.Return(seed);
@@ -927,7 +927,7 @@ namespace Narvalo.Fx.Internal
             Func<TAccumulate, TSource, Identity<TAccumulate>> accumulatorM)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
@@ -940,7 +940,7 @@ namespace Narvalo.Fx.Internal
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
 
             using (var iter = @this.GetEnumerator())
@@ -968,7 +968,7 @@ namespace Narvalo.Fx.Internal
             Func<TSource, TSource, Identity<TSource>> accumulatorM)
             /* T4: C# indent */
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
@@ -983,7 +983,7 @@ namespace Narvalo.Fx.Internal
             Func<Identity<TAccumulate>, bool> predicate)
             /* T4: C# indent */
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
 
@@ -1008,7 +1008,7 @@ namespace Narvalo.Fx.Internal
             Func<Identity<TSource>, bool> predicate)
             /* T4: C# indent */
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
 

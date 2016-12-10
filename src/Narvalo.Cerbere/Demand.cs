@@ -24,7 +24,7 @@ namespace Narvalo
     ///// </para>
     ///// </remarks>
     [DebuggerStepThrough]
-    public static class Demand
+    public static partial class Demand
     {
         [ContractAbbreviator]
         [Conditional("DEBUG")]
@@ -69,18 +69,31 @@ namespace Narvalo
             True(!String.IsNullOrEmpty(value));
             True(!Enforce.IsWhiteSpace(value));
         }
+    }
 
+    // Obsolete methods.
+    public static partial class Demand
+    {
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void Object<T>(T @this) where T : class => True(@this != null);
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Demand.NotNull() or Demand.NotNullUnconstrained() instead.", true)]
+        public static void Object<T>(T @this) => NotNullUnconstrained(@this);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Demand.NotNullUnconstrained() instead.", true)]
+        [Obsolete("Use Demand.NotNull() or Demand.NotNullUnconstrained() instead.", true)]
         public static void Property<T>(T value) => NotNullUnconstrained(value);
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Demand.True() instead.", true)]
+        public static void Property(bool testCondition) => True(testCondition);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]

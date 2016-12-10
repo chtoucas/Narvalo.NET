@@ -21,7 +21,7 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(funM);
 <#+ if (IsNullable) { #>
             Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
@@ -45,7 +45,7 @@ public partial class MonadTemplate
             Func<TSource, <#= Name #><bool>> predicateM)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(predicateM);
             Ensures(Result<IEnumerable<TSource>>() != null);
 
@@ -62,7 +62,7 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(funM);
 <#+ if (IsNullable && HasZero) { #>
             Ensures(Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
@@ -79,7 +79,7 @@ public partial class MonadTemplate
             IEnumerable<TSecond> second,
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelectorM)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(second);
             Expect.NotNull(resultSelectorM);
 <#+ if (IsNullable) { #>
@@ -100,7 +100,7 @@ public partial class MonadTemplate
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
             Ensures(Result<<#= Name #><TAccumulate>>() != null);
@@ -119,7 +119,7 @@ public partial class MonadTemplate
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
             Ensures(Result<<#= Name #><TAccumulate>>() != null);
@@ -133,7 +133,7 @@ public partial class MonadTemplate
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
             Ensures(Result<<#= Name #><TSource>>() != null);
@@ -147,7 +147,7 @@ public partial class MonadTemplate
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
             Ensures(Result<<#= Name #><TSource>>() != null);
@@ -170,7 +170,7 @@ public partial class MonadTemplate
             Func<<#= Name #><TAccumulate>, bool> predicate)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
 <#+ if (IsNullable && HasZero) { #>
@@ -189,7 +189,7 @@ public partial class MonadTemplate
             Func<<#= Name #><TSource>, bool> predicate)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
 <#+ if (IsNullable && HasZero) { #>

@@ -14,7 +14,7 @@ namespace Narvalo.Collections
     {
         public static Collection<T> ToCollection<T>(this IEnumerator<T> @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<Collection<T>>() != null);
 
             var coll = new Collection<T>();

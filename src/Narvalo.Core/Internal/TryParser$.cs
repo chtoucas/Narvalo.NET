@@ -8,7 +8,7 @@ namespace Narvalo.Internal
     {
         public static T? NullInvoke<T>(this TryParser<T> @this, string value) where T : struct
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             if (value == null) { return null; }
 
@@ -18,7 +18,7 @@ namespace Narvalo.Internal
 
         public static Maybe<T> MayInvoke<T>(this TryParser<T> @this, string value) where T : class
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             if (value == null) { return Maybe<T>.None; }
 

@@ -23,7 +23,7 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><TResult>> funM)
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(funM);
 <#+ if (IsNullable) { #>
             Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
@@ -88,7 +88,7 @@ public partial class MonadTemplate
             this IEnumerable<TSource> @this,
             Func<TSource, <#= Name #><Tuple<TFirst, TSecond>>> funM)
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(funM);
 <#+ if (PostMapEnsuresSome) { #>
             Ensures(Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
@@ -115,7 +115,7 @@ public partial class MonadTemplate
         {
             Require.NotNull(resultSelectorM, nameof(resultSelectorM));
 
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(second);
 <#+ if (IsNullable) { #>
             Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
@@ -170,7 +170,7 @@ public partial class MonadTemplate
             Func<TAccumulate, TSource, <#= Name #><TAccumulate>> accumulatorM)
             <#+ WriteTypeConstraints("TSource", "TAccumulate"); #>
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
 <#+ // "Fold" can not guarantee non null return value. #>
 <#+ if (IsNullable && HasZero) { #>
@@ -225,7 +225,7 @@ public partial class MonadTemplate
             Func<TSource, TSource, <#= Name #><TSource>> accumulatorM)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
             Ensures(Result<<#= Name #><TSource>>() != null);

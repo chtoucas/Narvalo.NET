@@ -15,7 +15,7 @@ namespace Narvalo
 
         [DebugOnlyFact]
         public static void True_Fails_ForFalse()
-            => Assert.Throws<AssertFailedException>(() => Check.True(false));
+            => Assert.Throws<DebugAssertFailedException>(() => Check.True(false));
 
         [ReleaseOnlyFact]
         public static void True_Passes_ForFalse() => Check.True(false);
@@ -29,7 +29,7 @@ namespace Narvalo
 
         [DebugOnlyFact]
         public static void False_Fails_ForTrue()
-            => Assert.Throws<AssertFailedException>(() => Check.False(true));
+            => Assert.Throws<DebugAssertFailedException>(() => Check.False(true));
 
         [ReleaseOnlyFact]
         public static void False_Passes_ForTrue() => Check.False(true);

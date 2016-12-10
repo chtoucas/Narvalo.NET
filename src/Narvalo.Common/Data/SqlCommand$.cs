@@ -18,7 +18,7 @@ namespace Narvalo.Data
             SqlDbType parameterType,
             object value)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
@@ -34,7 +34,7 @@ namespace Narvalo.Data
             SqlDbType parameterType,
             object value)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
@@ -49,7 +49,7 @@ namespace Narvalo.Data
             T? value)
             where T : struct
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
@@ -66,7 +66,7 @@ namespace Narvalo.Data
             T? value)
             where T : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
@@ -80,7 +80,7 @@ namespace Narvalo.Data
             SqlDbType parameterType,
             T value)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
@@ -96,7 +96,7 @@ namespace Narvalo.Data
             SqlDbType parameterType,
             T value)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
@@ -111,7 +111,7 @@ namespace Narvalo.Data
             T value,
             bool condition)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);
@@ -128,7 +128,7 @@ namespace Narvalo.Data
             T value,
             bool condition)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             var parameters = @this.Parameters;
             Contract.Assume(parameters != null);

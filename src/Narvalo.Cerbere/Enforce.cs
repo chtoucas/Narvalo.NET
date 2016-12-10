@@ -20,17 +20,6 @@ namespace Narvalo
     /// <seealso cref="Require"/>
     public static partial class Enforce
     {
-        [ContractArgumentValidator]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Require.NotNullOrWhiteSpace() instead.", true)]
-        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
-            => Require.NotNullOrWhiteSpace(value, parameterName);
-
-        [ContractArgumentValidator]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Require.NotNullOrWhiteSpace() instead.", true)]
-        public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
-            => Require.NotNullOrWhiteSpace(value, "value");
 
         /// <seealso cref="Require.NotNullOrWhiteSpace(string, string)"/>
         public static void NotWhiteSpace(string value, string parameterName)
@@ -62,5 +51,21 @@ namespace Narvalo
 
             return true;
         }
+    }
+
+    // Obsolete methods.
+    public static partial class Enforce
+    {
+        [ContractArgumentValidator]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Require.NotNullOrWhiteSpace() instead.", true)]
+        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
+            => Require.NotNullOrWhiteSpace(value, parameterName);
+
+        [ContractArgumentValidator]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Require.NotNullOrWhiteSpace() instead.", true)]
+        public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
+            => Require.NotNullOrWhiteSpace(value, "value");
     }
 }

@@ -14,11 +14,11 @@ namespace Narvalo.Finance.Internal
 
         [Fact]
         public static void IsDigitOrUpperLetter_Fails_ForNullString()
-            => Assert.Throws<AssertFailedException>(() => AsciiHelpers.IsDigitOrUpperLetter(null));
+            => Assert.Throws<DebugAssertFailedException>(() => AsciiHelpers.IsDigitOrUpperLetter(null));
 
         [Fact]
         public static void IsDigitOrUpperLetter_Fails_ForEmptyString()
-            => Assert.Throws<AssertFailedException>(() => AsciiHelpers.IsDigitOrUpperLetter(String.Empty));
+            => Assert.Throws<DebugAssertFailedException>(() => AsciiHelpers.IsDigitOrUpperLetter(String.Empty));
 
         [Theory]
         [InlineData("1")]
@@ -54,11 +54,11 @@ namespace Narvalo.Finance.Internal
 
         [Fact]
         public static void IsUpperLetter_Fails_ForNullString()
-            => Assert.Throws<AssertFailedException>(() => AsciiHelpers.IsUpperLetter(null));
+            => Assert.Throws<DebugAssertFailedException>(() => AsciiHelpers.IsUpperLetter(null));
 
         [Fact]
         public static void IsUpperLetter_Fails_ForEmptyString()
-            => Assert.Throws<AssertFailedException>(() => AsciiHelpers.IsUpperLetter(String.Empty));
+            => Assert.Throws<DebugAssertFailedException>(() => AsciiHelpers.IsUpperLetter(String.Empty));
 
         [Theory]
         [InlineData("A")]

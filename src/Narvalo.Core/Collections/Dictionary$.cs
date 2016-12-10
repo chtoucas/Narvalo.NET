@@ -23,7 +23,7 @@ namespace Narvalo.Collections
             this IDictionary<TKey, TValue> @this,
             TKey key)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             if (key == null) { return Maybe<TValue>.None; }
 

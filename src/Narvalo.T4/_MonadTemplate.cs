@@ -380,7 +380,7 @@ namespace Narvalo.T4
         {
             if (force || IsNullable)
             {
-                WriteLine(@"Require.Object(@this);");
+                WriteLine(@"Require.NotNull(@this, nameof(@this));");
             }
             else
             {

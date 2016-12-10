@@ -16,7 +16,7 @@ namespace Narvalo.Xml
     {
         public static T Value<T>(this XAttribute @this, Func<string, T> selector)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
             return selector.Invoke(@this.Value);
@@ -24,7 +24,7 @@ namespace Narvalo.Xml
 
         public static Maybe<XAttribute> NextAttributeOrNone(this XAttribute @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return Maybe.Of(@this.NextAttribute);
         }
@@ -32,7 +32,7 @@ namespace Narvalo.Xml
         public static XAttribute NextAttributeOrThrow(this XAttribute @this, Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Ensures(Result<XAttribute>() != null);
 
             return NextAttributeOrThrow(@this, () => exception);
@@ -40,7 +40,7 @@ namespace Narvalo.Xml
 
         public static XAttribute NextAttributeOrThrow(this XAttribute @this, Func<Exception> exceptionFactory)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
             Ensures(Result<XAttribute>() != null);
 
@@ -55,7 +55,7 @@ namespace Narvalo.Xml
 
         public static Maybe<XAttribute> PreviousAttributeOrNone(this XAttribute @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return Maybe.Of(@this.PreviousAttribute);
         }
@@ -63,7 +63,7 @@ namespace Narvalo.Xml
         public static XAttribute PreviousAttributeOrThrow(this XAttribute @this, Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Ensures(Result<XAttribute>() != null);
 
             return PreviousAttributeOrThrow(@this, () => exception);
@@ -71,7 +71,7 @@ namespace Narvalo.Xml
 
         public static XAttribute PreviousAttributeOrThrow(this XAttribute @this, Func<Exception> exceptionFactory)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
             Ensures(Result<XAttribute>() != null);
 

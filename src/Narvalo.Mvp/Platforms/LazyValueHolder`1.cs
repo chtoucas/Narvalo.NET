@@ -13,7 +13,7 @@ namespace Narvalo.Mvp.Platforms
     using static System.Diagnostics.Contracts.Contract;
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class LazyValueHolder<TValue>
+    public class LazyValueHolder<TValue> where TValue : class
     {
         private readonly Lazy<TValue> _lazyValue;
 
@@ -52,7 +52,7 @@ namespace Narvalo.Mvp.Platforms
 
         public void Reset(TValue value)
         {
-            Require.NotNullUnconstrained(value, nameof(value));
+            Require.NotNull(value, nameof(value));
 
             Reset(() => value);
         }

@@ -178,33 +178,28 @@ namespace Narvalo
 
             Enforce.NotWhiteSpace(value, parameterName);
         }
+    }
 
-        /// <summary>
-        /// Validates that the specified object is not <see langword="null"/>.
-        /// Meant to be used inside an extension method to validate the first parameter which
-        /// specifies which type the method operates on.
-        /// </summary>
-        /// <typeparam name="T">The type of <paramref name="this"/>.</typeparam>
-        /// <param name="this">The object to check.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="this"/> is
-        /// <see langword="null"/>.</exception>
+    // Obsolete methods.
+    public static partial class Require
+    {
         [ContractArgumentValidator]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Require.NotNull() or Require.NotNullUnconstrained() instead.", true)]
         public static void Object<T>([ValidatedNotNull]T @this)
-            where T : class
-        {
-            if (@this == null)
-            {
-                throw new ArgumentNullException("this", Strings_Cerbere.Argument_NullObject);
-            }
-
-            Contract.EndContractBlock();
-        }
+            => NotNullUnconstrained(@this, "this");
 
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Require.NotNullUnconstrained() instead.", true)]
+        [Obsolete("Use Require.NotNull() or Require.NotNullUnconstrained() instead.", true)]
         public static void Property<T>([ValidatedNotNull]T value)
-            => NotNullUnconstrained(value, nameof(value));
+            => NotNullUnconstrained(value, "value");
+
+        [ContractArgumentValidator]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Require.True() instead.", true)]
+        public static void Property(bool testCondition)
+            => True(testCondition, "value");
 
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]

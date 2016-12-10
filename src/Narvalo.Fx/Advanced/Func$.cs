@@ -17,7 +17,7 @@ namespace Narvalo.Fx.Advanced
             this Func<TSource> @this,
             Func<TSource, Func<TResult>> selector)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
             return selector.Invoke(@this.Invoke());
@@ -25,7 +25,7 @@ namespace Narvalo.Fx.Advanced
 
         public static Func<TResult> Select<TSource, TResult>(this Func<TSource> @this, Func<TSource, TResult> selector)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
             Ensures(Result<Func<TResult>>() != null);
 
@@ -40,7 +40,7 @@ namespace Narvalo.Fx.Advanced
             where TSource : struct
             where TResult : struct
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
 
             return value.Bind(@this);
         }
@@ -52,7 +52,7 @@ namespace Narvalo.Fx.Advanced
             where TMiddle : struct
             where TResult : struct
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<Func<TSource, TResult?>>() != null);
 
             return _ => @this.Invoke(_).Bind(funM);
@@ -65,7 +65,7 @@ namespace Narvalo.Fx.Advanced
             where TMiddle : struct
             where TResult : struct
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(funM, nameof(funM));
             Ensures(Result<Func<TSource, TResult?>>() != null);
 
@@ -80,7 +80,7 @@ namespace Narvalo.Fx.Advanced
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static Outcome<TResult> Catch<TResult, TException>(this Func<TResult> @this) where TException : Exception
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<Outcome<TResult>>() != null);
 
             try
@@ -105,7 +105,7 @@ namespace Narvalo.Fx.Advanced
             where T1Exception : Exception
             where T2Exception : Exception
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<Outcome<TResult>>() != null);
 
             ExceptionDispatchInfo edi;
@@ -131,7 +131,7 @@ namespace Narvalo.Fx.Advanced
             where T2Exception : Exception
             where T3Exception : Exception
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<Outcome<TResult>>() != null);
 
             ExceptionDispatchInfo edi;
@@ -160,7 +160,7 @@ namespace Narvalo.Fx.Advanced
             where T3Exception : Exception
             where T4Exception : Exception
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<Outcome<TResult>>() != null);
 
             ExceptionDispatchInfo edi;

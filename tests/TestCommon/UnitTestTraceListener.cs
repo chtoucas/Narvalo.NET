@@ -8,12 +8,12 @@ namespace Narvalo
     {
         public override void Fail(string message)
         {
-            throw new AssertFailedException();
+            throw new DebugAssertFailedException();
         }
 
         public override void Fail(string message, string detailMessage)
         {
-            throw new AssertFailedException();
+            throw new DebugAssertFailedException();
         }
     }
 }

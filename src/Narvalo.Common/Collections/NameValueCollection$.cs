@@ -19,7 +19,7 @@ namespace Narvalo.Collections
     {
         public static Maybe<string> MayGetSingle(this NameValueCollection @this, string name)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return from values in @this.MayGetValues(name)
                    where values.Length == 1
@@ -28,7 +28,7 @@ namespace Narvalo.Collections
 
         public static Maybe<string[]> MayGetValues(this NameValueCollection @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return Maybe.Of(@this.GetValues(name));
         }
@@ -38,7 +38,7 @@ namespace Narvalo.Collections
             string name,
             Func<string, Maybe<T>> parserM)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Ensures(Result<IEnumerable<T>>() != null);
 
             return (from @_ in @this.MayGetValues(name) select @_.MapAny(parserM)).ValueOrElse(Enumerable.Empty<T>());
@@ -49,7 +49,7 @@ namespace Narvalo.Collections
             string name,
             Func<string, Maybe<T>> parserM)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.MayGetValues(name).Bind(@_ => @_.ForEach(parserM));
         }

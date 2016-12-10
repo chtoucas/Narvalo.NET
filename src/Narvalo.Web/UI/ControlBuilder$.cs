@@ -37,7 +37,7 @@ namespace Narvalo.Web.UI
 
         public static ControlBuilder GetDefaultPropertyBuilder(this ControlBuilder @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             PropertyInfo pi = null;
             Type type = @this.GetType();
@@ -53,7 +53,7 @@ namespace Narvalo.Web.UI
 
         public static ControlBuilder GetParentBuilder(this ControlBuilder @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return (ControlBuilder)@this
                 .GetType()
@@ -63,7 +63,7 @@ namespace Narvalo.Web.UI
 
         public static ControlBuilder GetRootBuilder(this ControlBuilder @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             ControlBuilder retval = null;
 
@@ -83,7 +83,7 @@ namespace Narvalo.Web.UI
 
         public static ICollection GetSimplePropertyEntries(this ControlBuilder @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return (ICollection)@this
                 .GetType()

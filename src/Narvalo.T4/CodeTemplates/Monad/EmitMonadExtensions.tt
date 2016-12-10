@@ -353,7 +353,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(inner);
 <#+ } #>
             Expect.NotNull(outerKeySelector);
@@ -382,7 +382,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("TSource", "TInner", "TKey", "TResult"); #>
         {
 <#+ if (IsNullable) { #>
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(inner);
 <#+ } #>
             Expect.NotNull(outerKeySelector);

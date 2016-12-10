@@ -752,7 +752,7 @@ namespace Narvalo.Fx.Samples
             where TSource : struct
             where TResult : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             /* T4: C# indent */
 
             return value.Bind(@this);
@@ -768,7 +768,7 @@ namespace Narvalo.Fx.Samples
             where TMiddle : struct
             where TResult : struct
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.NotNull(funM);
             Ensures(Result<Func<TSource, MonadValue<TResult>>>() != null);
 
@@ -785,7 +785,7 @@ namespace Narvalo.Fx.Samples
             where TMiddle : struct
             where TResult : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Require.NotNull(funM, nameof(funM));
             Ensures(Result<Func<TSource, MonadValue<TResult>>>() != null);
 
@@ -824,7 +824,7 @@ namespace Narvalo.Fx.Samples
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.SumCore();
         }
@@ -865,7 +865,7 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, MonadValue<bool>> predicateM)
             where TSource : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(predicateM);
             Ensures(Result<IEnumerable<TSource>>() != null);
 
@@ -883,7 +883,7 @@ namespace Narvalo.Fx.Samples.Advanced
             where TSource : struct
             where TAccumulate : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
             return @this.FoldCore(seed, accumulatorM);
@@ -900,7 +900,7 @@ namespace Narvalo.Fx.Samples.Advanced
             where TSource : struct
             where TAccumulate : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
             return @this.FoldBackCore(seed, accumulatorM);
@@ -911,7 +911,7 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
             return @this.ReduceCore(accumulatorM);
@@ -922,7 +922,7 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
 
             return @this.ReduceBackCore(accumulatorM);
@@ -943,7 +943,7 @@ namespace Narvalo.Fx.Samples.Advanced
             where TSource : struct
             where TAccumulate : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
 
@@ -959,7 +959,7 @@ namespace Narvalo.Fx.Samples.Advanced
             Func<MonadValue<TSource>, bool> predicate)
             where TSource : struct
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
 
@@ -998,7 +998,7 @@ namespace Narvalo.Fx.Samples.Internal
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
 
             var retval = @this.Aggregate(MonadValue<TSource>.None, (m, n) => m.OrElse(n));
 
@@ -1021,7 +1021,7 @@ namespace Narvalo.Fx.Samples.Internal
             Func<TSource, MonadValue<bool>> predicateM)
             where TSource : struct
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicateM, nameof(predicateM));
             Ensures(Result<IEnumerable<TSource>>() != null);
 
@@ -1055,7 +1055,7 @@ namespace Narvalo.Fx.Samples.Internal
             where TSource : struct
             where TAccumulate : struct
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
 
             MonadValue<TAccumulate> retval = MonadValue.Return(seed);
@@ -1077,7 +1077,7 @@ namespace Narvalo.Fx.Samples.Internal
             where TSource : struct
             where TAccumulate : struct
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
@@ -1090,7 +1090,7 @@ namespace Narvalo.Fx.Samples.Internal
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
 
             using (var iter = @this.GetEnumerator())
@@ -1118,7 +1118,7 @@ namespace Narvalo.Fx.Samples.Internal
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
             where TSource : struct
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
@@ -1134,7 +1134,7 @@ namespace Narvalo.Fx.Samples.Internal
             where TSource : struct
             where TAccumulate : struct
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
 
@@ -1159,7 +1159,7 @@ namespace Narvalo.Fx.Samples.Internal
             Func<MonadValue<TSource>, bool> predicate)
             where TSource : struct
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
 

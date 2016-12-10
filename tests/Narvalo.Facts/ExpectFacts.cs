@@ -101,19 +101,5 @@ namespace Narvalo
         }
 
         #endregion
-
-        #region Object()
-
-        [Fact]
-        public static void Object_Passes_ForNonNull() => Expect.Object(new Object());
-
-        [Fact]
-        public static void Object_Passes_ForNull()
-        {
-            Object obj = null;
-            Expect.Object(obj);
-        }
-
-        #endregion
     }
 }

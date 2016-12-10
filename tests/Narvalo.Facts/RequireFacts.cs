@@ -286,29 +286,5 @@ namespace Narvalo
         }
 
         #endregion
-
-        #region Object()
-
-        [Fact]
-        public static void Object_DoesNotThrow_ForNonNull() => Require.Object(new Object());
-
-        [Fact]
-        public static void Object_ThrowsArgumentNullException_ForNull()
-        {
-            // Arrange
-            Object obj = null;
-            Action act = () => Require.Object(obj);
-
-            // Act
-            var ex = Record.Exception(act);
-
-            // Assert
-            Assert.NotNull(ex);
-            Assert.NotNull(ex.Message);
-            var argex = Assert.IsType<ArgumentNullException>(ex);
-            Assert.Equal("this", argex.ParamName);
-        }
-
-        #endregion
     }
 }

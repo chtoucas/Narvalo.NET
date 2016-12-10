@@ -17,7 +17,7 @@ namespace Narvalo.Fx.Advanced
             Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static VoidOrError Catch<TException>(this Action @this) where TException : Exception
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<VoidOrError>() != null);
 
             try
@@ -42,7 +42,7 @@ namespace Narvalo.Fx.Advanced
             where T1Exception : Exception
             where T2Exception : Exception
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
@@ -68,7 +68,7 @@ namespace Narvalo.Fx.Advanced
             where T2Exception : Exception
             where T3Exception : Exception
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;
@@ -96,7 +96,7 @@ namespace Narvalo.Fx.Advanced
             where T3Exception : Exception
             where T4Exception : Exception
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<VoidOrError>() != null);
 
             ExceptionDispatchInfo edi;

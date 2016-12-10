@@ -13,7 +13,7 @@ namespace Narvalo.Web
     {
         public static void SendPlainText(this HttpResponse @this, string content)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             @this.ContentType = "text/plain";
             @this.Write(content);
@@ -21,7 +21,7 @@ namespace Narvalo.Web
 
         public static void SetStatusCode(this HttpResponse @this, HttpStatusCode statusCode)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             @this.StatusCode = (int)statusCode;
         }
@@ -31,35 +31,35 @@ namespace Narvalo.Web
     {
         public static void NoCache(this HttpResponse @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             @this.Cache.SetCacheability(HttpCacheability.NoCache);
         }
 
         public static void PubliclyCacheFor(this HttpResponse @this, int days, int hours, int minutes)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             @this.PubliclyCacheFor(new TimeSpan(days, hours, minutes, 0));
         }
 
         public static void PubliclyCacheFor(this HttpResponse @this, TimeSpan duration)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             @this.CacheFor(duration, HttpCacheability.Public);
         }
 
         public static void PrivatelyCacheFor(this HttpResponse @this, int days, int hours, int minutes)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             @this.PrivatelyCacheFor(new TimeSpan(days, hours, minutes, 0));
         }
 
         public static void PrivatelyCacheFor(this HttpResponse @this, TimeSpan duration)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             // REVIEW: Utiliser HttpCacheability.ServerAndPrivate ?
             @this.CacheFor(duration, HttpCacheability.Private);
@@ -67,7 +67,7 @@ namespace Narvalo.Web
 
         public static void CacheFor(this HttpResponse @this, TimeSpan duration, HttpCacheability cacheability)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             @this.CacheFor(duration, cacheability, HttpVersions.All);
         }
@@ -78,7 +78,7 @@ namespace Narvalo.Web
             HttpCacheability cacheability,
             HttpVersions versions)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             @this.Cache.SetCacheability(cacheability);
 

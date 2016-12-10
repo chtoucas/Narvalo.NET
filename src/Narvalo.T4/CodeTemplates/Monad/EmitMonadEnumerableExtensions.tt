@@ -20,7 +20,7 @@ public partial class MonadTemplate
         public static <#= Name #><IEnumerable<TSource>> Collect<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 <#+ if (IsNullable) { #>
             Ensures(Result<<#= Name #><IEnumerable<TSource>>>() != null);
 <#+ } #>
@@ -43,7 +43,7 @@ public partial class MonadTemplate
             this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 <#+ if (IsNullable) { #>
             Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>

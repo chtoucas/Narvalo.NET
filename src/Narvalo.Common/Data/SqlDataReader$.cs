@@ -50,7 +50,7 @@ namespace Narvalo.Data
     {
         public static bool GetBoolean(this SqlDataReader @this, int ordinal, bool defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlBoolean(ordinal);
@@ -59,14 +59,14 @@ namespace Narvalo.Data
 
         public static bool GetBoolean(this SqlDataReader @this, string name, bool defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetBoolean(@this.GetOrdinal(name), defaultValue);
         }
 
         public static bool? GetNullableBoolean(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlBoolean(ordinal);
@@ -76,14 +76,14 @@ namespace Narvalo.Data
 
         public static bool? GetNullableBoolean(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetNullableBoolean(@this.GetOrdinal(name));
         }
 
         public static byte GetByte(this SqlDataReader @this, int ordinal, byte defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlByte(ordinal);
@@ -92,14 +92,14 @@ namespace Narvalo.Data
 
         public static byte GetByte(this SqlDataReader @this, string name, byte defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetByte(@this.GetOrdinal(name), defaultValue);
         }
 
         public static byte? GetNullableByte(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlByte(ordinal);
@@ -109,14 +109,14 @@ namespace Narvalo.Data
 
         public static byte? GetNullableByte(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetNullableByte(@this.GetOrdinal(name));
         }
 
         public static DateTime GetDateTime(this SqlDataReader @this, int ordinal, DateTime defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlDateTime(ordinal);
@@ -125,14 +125,14 @@ namespace Narvalo.Data
 
         public static DateTime GetDateTime(this SqlDataReader @this, string name, DateTime defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetDateTime(@this.GetOrdinal(name), defaultValue);
         }
 
         public static DateTime? GetNullableDateTime(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlDateTime(ordinal);
@@ -142,14 +142,14 @@ namespace Narvalo.Data
 
         public static DateTime? GetNullableDateTime(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetNullableDateTime(@this.GetOrdinal(name));
         }
 
         public static decimal GetDecimal(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlDecimal(ordinal);
@@ -158,14 +158,14 @@ namespace Narvalo.Data
 
         public static decimal GetDecimal(this SqlDataReader @this, string name, decimal defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetDecimal(@this.GetOrdinal(name), defaultValue);
         }
 
         public static decimal? GetNullableDecimal(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlDecimal(ordinal);
@@ -175,14 +175,14 @@ namespace Narvalo.Data
 
         public static decimal? GetNullableDecimal(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetNullableDecimal(@this.GetOrdinal(name));
         }
 
         public static double GetDouble(this SqlDataReader @this, int ordinal, double defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlDouble(ordinal);
@@ -191,14 +191,14 @@ namespace Narvalo.Data
 
         public static double GetDouble(this SqlDataReader @this, string name, double defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetDouble(@this.GetOrdinal(name), defaultValue);
         }
 
         public static double? GetNullableDouble(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlDouble(ordinal);
@@ -208,14 +208,14 @@ namespace Narvalo.Data
 
         public static double? GetNullableDouble(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetNullableDouble(@this.GetOrdinal(name));
         }
 
         public static Guid GetGuid(this SqlDataReader @this, int ordinal, Guid defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlGuid(ordinal);
@@ -224,14 +224,14 @@ namespace Narvalo.Data
 
         public static Guid GetGuid(this SqlDataReader @this, string name, Guid defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetGuid(@this.GetOrdinal(name), defaultValue);
         }
 
         public static Guid? GetNullableGuid(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlGuid(ordinal);
@@ -241,14 +241,14 @@ namespace Narvalo.Data
 
         public static Guid? GetNullableGuid(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetNullableGuid(@this.GetOrdinal(name));
         }
 
         public static short GetInt16(this SqlDataReader @this, int ordinal, short defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlInt16(ordinal);
@@ -257,14 +257,14 @@ namespace Narvalo.Data
 
         public static short GetInt16(this SqlDataReader @this, string name, short defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetInt16(@this.GetOrdinal(name), defaultValue);
         }
 
         public static short? GetNullableInt16(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlInt16(ordinal);
@@ -274,14 +274,14 @@ namespace Narvalo.Data
 
         public static short? GetNullableInt16(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetNullableInt16(@this.GetOrdinal(name));
         }
 
         public static int GetInt32(this SqlDataReader @this, int ordinal, int defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlInt32(ordinal);
@@ -290,14 +290,14 @@ namespace Narvalo.Data
 
         public static int GetInt32(this SqlDataReader @this, string name, int defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetInt32(@this.GetOrdinal(name), defaultValue);
         }
 
         public static int? GetNullableInt32(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlInt32(ordinal);
@@ -307,14 +307,14 @@ namespace Narvalo.Data
 
         public static int? GetNullableInt32(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetNullableInt32(@this.GetOrdinal(name));
         }
 
         public static long GetInt64(this SqlDataReader @this, int ordinal, long defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlInt64(ordinal);
@@ -323,14 +323,14 @@ namespace Narvalo.Data
 
         public static long GetInt64(this SqlDataReader @this, string name, long defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetInt64(@this.GetOrdinal(name), defaultValue);
         }
 
         public static long? GetNullableInt64(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlInt64(ordinal);
@@ -340,7 +340,7 @@ namespace Narvalo.Data
 
         public static long? GetNullableInt64(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetNullableInt64(@this.GetOrdinal(name));
         }
@@ -351,7 +351,7 @@ namespace Narvalo.Data
     {
         public static Maybe<byte[]> MayGetBytes(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             return @this.MayGetBytesUnchecked(ordinal);
@@ -361,7 +361,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBytesUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.Range(ordinal >= 0);
 
             return @this.GetSqlBytes(ordinal).ToMaybe();
@@ -369,7 +369,7 @@ namespace Narvalo.Data
 
         public static Maybe<byte[]> MayGetBytes(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.MayGetBytesUnchecked(name);
         }
@@ -378,14 +378,14 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBytesUnchecked(this SqlDataReader @this, string name)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.MayGetBytes(@this.GetOrdinal(name));
         }
 
         public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             return @this.MayGetBinaryUnchecked(ordinal);
@@ -395,7 +395,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBinaryUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.Range(ordinal >= 0);
 
             return @this.GetSqlBinary(ordinal).ToMaybe();
@@ -403,7 +403,7 @@ namespace Narvalo.Data
 
         public static Maybe<byte[]> MayGetBinary(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.MayGetBinaryUnchecked(name);
         }
@@ -412,14 +412,14 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<byte[]> MayGetBinaryUnchecked(this SqlDataReader @this, string name)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.MayGetBinary(@this.GetOrdinal(name));
         }
 
         public static Maybe<char[]> MayGetChars(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             return @this.MayGetCharsUnchecked(ordinal);
@@ -429,7 +429,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<char[]> MayGetCharsUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.Range(ordinal >= 0);
 
             return @this.GetSqlChars(ordinal).ToMaybe();
@@ -437,7 +437,7 @@ namespace Narvalo.Data
 
         public static Maybe<char[]> MayGetChars(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.MayGetCharsUnchecked(name);
         }
@@ -446,14 +446,14 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<char[]> MayGetCharsUnchecked(this SqlDataReader @this, string name)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.MayGetChars(@this.GetOrdinal(name));
         }
 
         public static string GetString(this SqlDataReader @this, int ordinal, string defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             return @this.GetStringUnchecked(ordinal, defaultValue);
@@ -463,7 +463,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetStringUnchecked(this SqlDataReader @this, int ordinal, string defaultValue)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlString(ordinal);
@@ -472,7 +472,7 @@ namespace Narvalo.Data
 
         public static string GetString(this SqlDataReader @this, string name, string defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetStringUnchecked(name, defaultValue);
         }
@@ -481,14 +481,14 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetStringUnchecked(this SqlDataReader @this, string name, string defaultValue)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.GetString(@this.GetOrdinal(name), defaultValue);
         }
 
         public static Maybe<string> MayGetString(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             return @this.MayGetStringUnchecked(ordinal);
@@ -498,7 +498,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetStringUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.Range(ordinal >= 0);
 
             return @this.GetSqlString(ordinal).ToMaybe();
@@ -506,7 +506,7 @@ namespace Narvalo.Data
 
         public static Maybe<string> MayGetString(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.MayGetStringUnchecked(name);
         }
@@ -515,14 +515,14 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetStringUnchecked(this SqlDataReader @this, string name)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.MayGetString(@this.GetOrdinal(name));
         }
 
         public static decimal GetMoney(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             return @this.GetMoneyUnchecked(ordinal, defaultValue);
@@ -532,7 +532,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal GetMoneyUnchecked(this SqlDataReader @this, int ordinal, decimal defaultValue)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlMoney(ordinal);
@@ -541,7 +541,7 @@ namespace Narvalo.Data
 
         public static decimal GetMoney(this SqlDataReader @this, string name, decimal defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetMoneyUnchecked(name, defaultValue);
         }
@@ -550,14 +550,14 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal GetMoneyUnchecked(this SqlDataReader @this, string name, decimal defaultValue)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.GetMoney(@this.GetOrdinal(name), defaultValue);
         }
 
         public static decimal? GetNullableMoney(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             return @this.GetNullableMoneyUnchecked(ordinal);
@@ -567,7 +567,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal? GetNullableMoneyUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlMoney(ordinal);
@@ -577,7 +577,7 @@ namespace Narvalo.Data
 
         public static decimal? GetNullableMoney(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetNullableMoneyUnchecked(name);
         }
@@ -586,14 +586,14 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static decimal? GetNullableMoneyUnchecked(this SqlDataReader @this, string name)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.GetNullableMoney(@this.GetOrdinal(name));
         }
 
         public static string GetXml(this SqlDataReader @this, int ordinal, string defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             return @this.GetXmlUnchecked(ordinal, defaultValue);
@@ -603,7 +603,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetXmlUnchecked(this SqlDataReader @this, int ordinal, string defaultValue)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.Range(ordinal >= 0);
 
             var value = @this.GetSqlXml(ordinal);
@@ -614,7 +614,7 @@ namespace Narvalo.Data
 
         public static string GetXml(this SqlDataReader @this, string name, string defaultValue)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.GetXmlUnchecked(name, defaultValue);
         }
@@ -623,14 +623,14 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static string GetXmlUnchecked(this SqlDataReader @this, string name, string defaultValue)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.GetXml(@this.GetOrdinal(name), defaultValue);
         }
 
         public static Maybe<string> MayGetXml(this SqlDataReader @this, int ordinal)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Expect.Range(ordinal >= 0);
 
             return @this.MayGetXmlUnchecked(ordinal);
@@ -640,7 +640,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetXmlUnchecked(this SqlDataReader @this, int ordinal)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.Range(ordinal >= 0);
 
             return @this.GetSqlXml(ordinal).ToMaybe();
@@ -648,7 +648,7 @@ namespace Narvalo.Data
 
         public static Maybe<string> MayGetXml(this SqlDataReader @this, string name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.MayGetXmlUnchecked(name);
         }
@@ -657,7 +657,7 @@ namespace Narvalo.Data
             Justification = "[Intentionally] This method clearly states that the responsibility for null-checks is on the callers.")]
         public static Maybe<string> MayGetXmlUnchecked(this SqlDataReader @this, string name)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return @this.MayGetXml(@this.GetOrdinal(name));
         }

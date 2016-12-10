@@ -12,7 +12,7 @@ namespace Narvalo
         ZeroOrOne = 1 << 1,
 
         EmptyOrWhiteSpaceIsFalse = 1 << 2,
-        [Obsolete("Use EmptyOrWhiteSpaceIsFalse instead.", true)]
+        [Obsolete("Use EmptyOrWhiteSpaceIsFalse instead.")]
         EmptyIsFalse = EmptyOrWhiteSpaceIsFalse,
 
         HtmlInput = 1 << 3,
@@ -20,5 +20,13 @@ namespace Narvalo
         Default = Literal | ZeroOrOne,
 
         Any = Literal | ZeroOrOne | EmptyOrWhiteSpaceIsFalse | HtmlInput,
+    }
+
+    public static class BooleanStylesExtensions
+    {
+        public static bool Contains(this BooleanStyles @this, BooleanStyles value)
+        {
+            return (@this & value) != 0;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace Narvalo
     /// <summary>
     /// Provides Code Contracts abbreviators.
     /// </summary>
-    public static class Expect
+    public static partial class Expect
     {
         [DebuggerHidden]
         [ContractAbbreviator]
@@ -68,25 +68,31 @@ namespace Narvalo
             True(!String.IsNullOrEmpty(value));
             True(!Enforce.IsWhiteSpace(value));
         }
+    }
 
-        /// <summary>
-        /// Checks that the specified object parameter is not <see langword="null"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of <paramref name="this"/>.</typeparam>
-        /// <param name="this">The object to check.</param>
+    // Obsolete methods.
+    public static partial class Expect
+    {
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Object<T>(T @this) where T : class => True(@this != null);
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Expect.NotNull() or Expect.NotNullUnconstrained() instead.", true)]
+        public static void Object<T>(T @this) => NotNullUnconstrained(@this);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Expect.NotNullUnconstrained() instead.", true)]
+        [Obsolete("Use Expect.NotNull() or Expect.NotNullUnconstrained() instead.", true)]
         public static void Property<T>(T value) => NotNullUnconstrained(value);
+
+        [DebuggerHidden]
+        [ContractAbbreviator]
+        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Expect.True() instead.", true)]
+        public static void Property(bool testCondition) => True(testCondition);
 
         [DebuggerHidden]
         [ContractAbbreviator]

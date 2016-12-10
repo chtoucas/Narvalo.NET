@@ -17,7 +17,7 @@ namespace Narvalo.Xml
     {
         public static T Value<T>(this XElement @this, Func<string, T> selector)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
 
             return selector.Invoke(@this.Value);
@@ -25,7 +25,7 @@ namespace Narvalo.Xml
 
         public static Maybe<XAttribute> AttributeOrNone(this XElement @this, XName name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return Maybe.Of(@this.Attribute(name));
         }
@@ -33,7 +33,7 @@ namespace Narvalo.Xml
         public static XAttribute AttributeOrThrow(this XElement @this, XName name, Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Ensures(Result<XAttribute>() != null);
 
             return AttributeOrThrow(@this, name, () => exception);
@@ -41,7 +41,7 @@ namespace Narvalo.Xml
 
         public static XAttribute AttributeOrThrow(this XElement @this, XName name, Func<Exception> exceptionFactory)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
             Ensures(Result<XAttribute>() != null);
 
@@ -56,7 +56,7 @@ namespace Narvalo.Xml
 
         public static Maybe<XElement> ElementOrNone(this XElement @this, XName name)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return Maybe.Of(@this.Element(name));
         }
@@ -64,7 +64,7 @@ namespace Narvalo.Xml
         public static XElement ElementOrThrow(this XElement @this, XName name, Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Ensures(Result<XElement>() != null);
 
             return ElementOrThrow(@this, name, () => exception);
@@ -72,7 +72,7 @@ namespace Narvalo.Xml
 
         public static XElement ElementOrThrow(this XElement @this, XName name, Func<Exception> exceptionFactory)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
             Ensures(Result<XElement>() != null);
 
@@ -87,7 +87,7 @@ namespace Narvalo.Xml
 
         public static XElement NextElement(this XElement @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             XNode nextElement = @this.NextNode;
             while (nextElement != null && nextElement.NodeType != XmlNodeType.Element)
@@ -100,7 +100,7 @@ namespace Narvalo.Xml
 
         public static Maybe<XElement> NextElementOrNone(this XElement @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return Maybe.Of(NextElement(@this));
         }
@@ -108,7 +108,7 @@ namespace Narvalo.Xml
         public static XElement NextElementOrThrow(this XElement @this, Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Ensures(Result<XElement>() != null);
 
             return NextElementOrThrow(@this, () => exception);
@@ -116,7 +116,7 @@ namespace Narvalo.Xml
 
         public static XElement NextElementOrThrow(this XElement @this, Func<Exception> exceptionFactory)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
             Ensures(Result<XElement>() != null);
 

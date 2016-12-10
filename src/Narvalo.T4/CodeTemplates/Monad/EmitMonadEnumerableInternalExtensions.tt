@@ -18,7 +18,7 @@ public partial class MonadTemplate
         internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
 <#+ if (IsNullable) { #>
             Ensures(Result<<#= Name #><IEnumerable<TSource>>>() != null);
 <#+ } #>
@@ -57,7 +57,7 @@ public partial class MonadTemplate
             this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
         {
-            Demand.Object(@this);
+            Demand.NotNull(@this);
 <#+ if (IsNullable) { #>
             Ensures(Result<<#= Name #><TSource>>() != null);
 <#+ } #>

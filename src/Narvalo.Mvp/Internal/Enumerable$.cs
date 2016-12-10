@@ -12,14 +12,14 @@ namespace Narvalo.Mvp.Internal
     {
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return !@this.Any();
         }
 
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             return @this.Concat(Enumerable.Repeat(element, 1));
         }

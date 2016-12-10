@@ -15,7 +15,7 @@ namespace Narvalo
 
         [DebugOnlyFact]
         public static void State_Fails_ForFalse()
-            => Assert.Throws<AssertFailedException>(() => Demand.State(false));
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.State(false));
 
         [ReleaseOnlyFact]
         public static void State_Passes_ForFalse() => Demand.State(false);
@@ -29,7 +29,7 @@ namespace Narvalo
 
         [DebugOnlyFact]
         public static void True_Fails_ForFalse()
-            => Assert.Throws<AssertFailedException>(() => Demand.State(false));
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.State(false));
 
         [ReleaseOnlyFact]
         public static void True_Passes_ForFalse() => Demand.State(false);
@@ -43,7 +43,7 @@ namespace Narvalo
 
         [DebugOnlyFact]
         public static void Range_Fails_ForFalse()
-            => Assert.Throws<AssertFailedException>(() => Demand.Range(false));
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.Range(false));
 
         [ReleaseOnlyFact]
         public static void Range_Passes_ForFalse() => Demand.Range(false);
@@ -59,7 +59,7 @@ namespace Narvalo
         public static void NotNull_Fails_ForNull()
         {
             Object obj = null;
-            Assert.Throws<AssertFailedException>(() => Demand.NotNull(obj));
+            Assert.Throws<DebugAssertFailedException>(() => Demand.NotNull(obj));
         }
 
         [ReleaseOnlyFact]
@@ -85,7 +85,7 @@ namespace Narvalo
         public static void NotNullUnconstrained_Fails_ForNull()
         {
             Object obj = null;
-            Assert.Throws<AssertFailedException>(() => Demand.NotNullUnconstrained(obj));
+            Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullUnconstrained(obj));
         }
 
         [ReleaseOnlyFact]
@@ -105,14 +105,14 @@ namespace Narvalo
 
         [DebugOnlyFact]
         public static void NotNullOrEmpty_Fails_ForNullString()
-            => Assert.Throws<AssertFailedException>(() => Demand.NotNullOrEmpty(null));
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrEmpty(null));
 
         [ReleaseOnlyFact]
         public static void NotNullOrEmpty_Passes_ForNullString() => Demand.NotNullOrEmpty(null);
 
         [DebugOnlyFact]
         public static void NotNullOrEmpty_Fails_ForEmptyString()
-            => Assert.Throws<AssertFailedException>(() => Demand.NotNullOrEmpty(String.Empty));
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrEmpty(String.Empty));
 
         [ReleaseOnlyFact]
         public static void NotNullOrEmpty_Passes_ForEmptyString() => Demand.NotNullOrEmpty(String.Empty);
@@ -127,46 +127,25 @@ namespace Narvalo
 
         [DebugOnlyFact]
         public static void NotNullOrWhiteSpace_Fails_ForNullString()
-            => Assert.Throws<AssertFailedException>(() => Demand.NotNullOrWhiteSpace(null));
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrWhiteSpace(null));
 
         [ReleaseOnlyFact]
         public static void NotNullOrWhiteSpace_Passes_ForNullString() => Demand.NotNullOrWhiteSpace(null);
 
         [DebugOnlyFact]
         public static void NotNullOrWhiteSpace_Fails_ForEmptyString()
-            => Assert.Throws<AssertFailedException>(() => Demand.NotNullOrWhiteSpace(String.Empty));
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrWhiteSpace(String.Empty));
 
         [ReleaseOnlyFact]
         public static void NotNullOrWhiteSpace_Passes_ForEmptyString() => Demand.NotNullOrWhiteSpace(String.Empty);
 
         [DebugOnlyFact]
         public static void NotNullOrWhiteSpace_Fails_ForWhiteSpaceOnlyString()
-            => Assert.Throws<AssertFailedException>(() => Demand.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString));
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString));
 
         [ReleaseOnlyFact]
         public static void NotNullOrWhiteSpace_Passes_ForWhiteSpaceOnlyString()
             => Demand.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString);
-
-        #endregion
-
-        #region Object()
-
-        [Fact]
-        public static void Object_Passes_ForNonNull() => Demand.Object(new Object());
-
-        [DebugOnlyFact]
-        public static void Object_Fails_ForNull()
-        {
-            Object obj = null;
-            Assert.Throws<AssertFailedException>(() => Demand.Object(obj));
-        }
-
-        [ReleaseOnlyFact]
-        public static void Object_Passes_ForNull()
-        {
-            Object obj = null;
-            Demand.Object(obj);
-        }
 
         #endregion
     }

@@ -15,7 +15,7 @@ namespace Narvalo.Web
     {
         public static string Current(this UrlHelper @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             var requestContext = @this.RequestContext;
             Contract.Assume(requestContext != null);
@@ -32,7 +32,7 @@ namespace Narvalo.Web
             string controllerName,
             object routeValues)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             var requestContext = @this.RequestContext;
             Contract.Assume(requestContext != null);
@@ -50,7 +50,7 @@ namespace Narvalo.Web
             string controllerName,
             RouteValueDictionary routeValues)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             var requestContext = @this.RequestContext;
             Contract.Assume(requestContext != null);
@@ -65,7 +65,7 @@ namespace Narvalo.Web
         // Cf. http://weblog.west-wind.com/posts/2007/Sep/18/ResolveUrl-without-Page
         public static string AbsoluteContent(this UrlHelper @this, string path)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Contract.Ensures(Contract.Result<string>() != null);
 
             Uri uri = new Uri(path, UriKind.RelativeOrAbsolute);

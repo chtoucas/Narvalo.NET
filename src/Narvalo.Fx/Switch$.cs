@@ -11,7 +11,7 @@ namespace Narvalo.Fx
                this Switch<TLeft, TRight> @this,
                Func<TLeft, bool> leftPredicate)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(leftPredicate, nameof(leftPredicate));
 
             return @this.Bind(_ => leftPredicate.Invoke(_) ? @this : Switch<TLeft, TRight>.Empty);
@@ -22,7 +22,7 @@ namespace Narvalo.Fx
                this Switch<TLeft, TRight> @this,
                Func<TRight, bool> rightPredicate)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(rightPredicate, nameof(rightPredicate));
 
             return @this.Bind(_ => rightPredicate.Invoke(_) ? @this : Switch<TLeft, TRight>.Empty);

@@ -30,7 +30,7 @@ namespace Narvalo.Fx
 
         public static bool IsEmpty<TSource>(this IEnumerable<TSource> @this)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return !@this.Any();
         }
@@ -39,7 +39,7 @@ namespace Narvalo.Fx
 
         public static Maybe<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return FirstOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -48,7 +48,7 @@ namespace Narvalo.Fx
             this IEnumerable<TSource> @this,
             Func<TSource, bool> predicate)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
             IEnumerable<Maybe<TSource>> seq
@@ -64,14 +64,14 @@ namespace Narvalo.Fx
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return LastOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
 
         public static Maybe<TSource> LastOrNone<TSource>(this IEnumerable<TSource> @this, Func<TSource, bool> predicate)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
             return @this.Reverse().EmptyIfNull().FirstOrNone();
@@ -79,7 +79,7 @@ namespace Narvalo.Fx
 
         public static Maybe<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> @this)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
 
             return SingleOrNone(@this, Stubs<TSource>.AlwaysTrue);
         }
@@ -88,7 +88,7 @@ namespace Narvalo.Fx
             this IEnumerable<TSource> @this,
             Func<TSource, bool> predicate)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
 
             IEnumerable<Maybe<TSource>> seq
@@ -111,7 +111,7 @@ namespace Narvalo.Fx
 
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Ensures(Result<IEnumerable<TSource>>() != null);
 
             return @this.Concat(Sequence.Pure(element)).EmptyIfNull();
@@ -119,7 +119,7 @@ namespace Narvalo.Fx
 
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Ensures(Result<IEnumerable<TSource>>() != null);
 
             return Sequence.Pure(element).Concat(@this).EmptyIfNull();
@@ -131,7 +131,7 @@ namespace Narvalo.Fx
 
         public static ICollection<TSource> ToCollection<TSource>(this IEnumerable<TSource> @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<ICollection<TSource>>() != null);
 
             var retval = new Collection<TSource>();
@@ -153,7 +153,7 @@ namespace Narvalo.Fx
             TAccumulate seed,
             Func<TAccumulate, TSource, TAccumulate> accumulator)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulator);
 
             return @this.Reverse().Aggregate(seed, accumulator);
@@ -163,7 +163,7 @@ namespace Narvalo.Fx
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, TSource> accumulator)
         {
-            Expect.Object(@this);
+            Expect.NotNull(@this);
             Expect.NotNull(accumulator);
 
             return @this.Reverse().Aggregate(accumulator);
@@ -179,7 +179,7 @@ namespace Narvalo.Fx
             Func<TAccumulate, TSource, TAccumulate> accumulator,
             Func<TAccumulate, bool> predicate)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
@@ -201,7 +201,7 @@ namespace Narvalo.Fx
             Func<TSource, TSource, TSource> accumulator,
             Func<TSource, bool> predicate)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulator, nameof(accumulator));
             Require.NotNull(predicate, nameof(predicate));
 
@@ -230,7 +230,7 @@ namespace Narvalo.Fx
         // Custom version of CollectCore.
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Maybe<TSource>> @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
 
             var list = new List<TSource>();
 
@@ -254,7 +254,7 @@ namespace Narvalo.Fx
         // Custom version of CollectCore.
         internal static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
-            Require.Object(@this);
+            Require.NotNull(@this, nameof(@this));
             Ensures(Result<Outcome<IEnumerable<TSource>>>() != null);
 
             var list = new List<TSource>();
