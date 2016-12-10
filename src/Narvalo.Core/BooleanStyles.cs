@@ -12,7 +12,7 @@ namespace Narvalo
         ZeroOrOne = 1 << 1,
 
         EmptyOrWhiteSpaceIsFalse = 1 << 2,
-        [Obsolete("Use EmptyOrWhiteSpaceIsFalse instead.")]
+        [Obsolete("Use EmptyOrWhiteSpaceIsFalse instead.", true)]
         EmptyIsFalse = EmptyOrWhiteSpaceIsFalse,
 
         HtmlInput = 1 << 3,

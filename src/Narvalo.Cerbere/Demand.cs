@@ -78,43 +78,15 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void ObjectNotNull<T>(T @this) => True(@this != null);
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void Property(bool testCondition) => True(testCondition);
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void Property<T>(T value) where T : class => True(value != null);
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void PropertyNotNull<T>(T value) => True(value != null);
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Demand.NotNullUnconstrained() instead.", true)]
+        public static void Property<T>(T value) => NotNullUnconstrained(value);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Demand.PropertyNotNullOrEmpty() instead.")]
+        [Obsolete("Use Demand.NotNullOrEmpty() instead.", true)]
         public static void PropertyNotEmpty(string value) => True(!String.IsNullOrEmpty(value));
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void PropertyNotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
-
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void PropertyNotNullOrWhiteSpace(string value)
-        {
-            // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
-            True(!String.IsNullOrEmpty(value));
-            True(!Enforce.IsWhiteSpace(value));
-        }
     }
 }

@@ -15,7 +15,7 @@ namespace Narvalo.Web.Semantic
 
             set
             {
-                Require.PropertyNotNullOrEmpty(value);
+                Require.NotNullOrEmpty(value, nameof(value));
 
                 _itemType = value;
             }

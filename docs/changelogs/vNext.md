@@ -53,9 +53,8 @@ Breaking Changes
 - `Enforce.IsWhiteSpace()` no longer throws when the input is `null`, but rather
   returns `false`. More importantly, the method returns `false` instead of
   `true` for an empty string.
-- New class constraint added to `Require.NotNull<T>()`, `Require.Object<T>()`
-  and `Require.Property<T>()` (idem for `Demand` and `Expect`).
-  See below for unconstrained alternatives.
+- New class constraint added to `Require.NotNull<T>()` (idem with `Demand`
+  and `Expect`). See below for unconstrained alternatives.
 
 ### Narvalo.Web.Configuration
 - `AssetSection.DefaultProvider` setter now throws an `ArgumentException`
@@ -65,24 +64,23 @@ API Changes
 -----------
 ### Narvalo.Cerbere
 - Methods marked as obsolete and their replacements:
-  * `Enforce.NotNullOrWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
-  * `Enforce.PropertyNotWhiteSpace()` -> `Require.PropertyNotNullOrWhiteSpace()`
   * `Require.NotEmpty()` -> `Require.NotNullOrEmpty()`
+  * `Require.Object<T>()` -> `Require.NotNullUnconstrained()`
+  * `Require.Property<T>()` -> `Require.NotNullUnconstrained()`
+  * `Require.Property(bool)` -> `Require.True()`
+  * `Require.PropertyNotEmpty(bool)` -> `Require.NotNullOrEmpty()`
   * `Demand.NotEmpty()` -> `Demand.NotNullOrEmpty()`
   * `Expect.NotEmpty()` -> `Expect.NotNullOrEmpty()`
-- The new methods `Require.NotNullOrWhiteSpace()` and
-  `Require.PropertyNotNullOrWhiteSpace()` have the `ContractArgumentValidator`
+  * `Enforce.NotNullOrWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
+  * `Enforce.PropertyNotWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
+- The new methods `Require.NotNullOrWhiteSpace()` has the `ContractArgumentValidator`
   attribute and specifies a stronger code contract: "the input must not be
   `null` or empty" (not empty is what has been added).
-- `Require.NotNullUnconstrained<T>()`, `Require.ObjectNotNull<T>()`
-  and `Require.PropertyNotNull<T>()` complement existing (constrained)
-  methods by not requiring any constraint on the generic parameter.
-- New methods for `Demand` and `Expect`:
+- `Require.NotNullUnconstrained<T>()` complements `Require.NotNull<T>()`
+  by not requiring any constraint on the generic parameter.
+- As for `Require`, we add to `Demand` and `Expect` the methods:
   * `NotNullOrWhiteSpace()`
-  * `PropertyNotNullOrWhiteSpace()`
   * `NotNullUnconstrained()`
-  * `ObjectNotNull()`
-  * `PropertyNotNull()`
 
 ### Narvalo.Core
 - `BooleanStyles.EmptyIsFalse` is declared obsolete;

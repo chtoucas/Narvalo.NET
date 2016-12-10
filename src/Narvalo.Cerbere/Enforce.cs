@@ -22,26 +22,17 @@ namespace Narvalo
     {
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Require.NotNullOrWhiteSpace() instead.")]
+        [Obsolete("Use Require.NotNullOrWhiteSpace() instead.", true)]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
-        {
-            Require.NotNullOrEmpty(value, parameterName);
-
-            NotWhiteSpace(value, parameterName);
-        }
+            => Require.NotNullOrWhiteSpace(value, parameterName);
 
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Require.PropertyNotNullOrWhiteSpace() instead.")]
+        [Obsolete("Use Require.NotNullOrWhiteSpace() instead.", true)]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
-        {
-            Require.PropertyNotEmpty(value);
-
-            NotWhiteSpace(value, "value");
-        }
+            => Require.NotNullOrWhiteSpace(value, "value");
 
         /// <seealso cref="Require.NotNullOrWhiteSpace(string, string)"/>
-        /// <seealso cref="Require.PropertyNotNullOrWhiteSpace(string)"/>
         public static void NotWhiteSpace(string value, string parameterName)
         {
             if (IsWhiteSpace(value))

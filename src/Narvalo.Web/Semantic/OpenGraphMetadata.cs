@@ -32,7 +32,7 @@ namespace Narvalo.Web.Semantic
 
             set
             {
-                Require.Property(value);
+                Require.NotNull(value, nameof(value));
 
                 _image = value;
             }
@@ -49,7 +49,7 @@ namespace Narvalo.Web.Semantic
 
             set
             {
-                Require.Property(value);
+                Require.NotNull(value, nameof(value));
 
                 _type = value;
             }

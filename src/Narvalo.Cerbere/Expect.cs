@@ -84,55 +84,15 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void ObjectNotNull<T>(T @this) => True(@this != null);
-
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Property(bool testCondition) => True(testCondition);
-
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Property<T>(T value) where T : class => True(value != null);
-
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void PropertyNotNull<T>(T value) => True(value != null);
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Expect.NotNullUnconstrained() instead.", true)]
+        public static void Property<T>(T value) => NotNullUnconstrained(value);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Expect.PropertyNotNullOrEmpty() instead.")]
-        public static void PropertyNotEmpty(string value) => True(!String.IsNullOrEmpty(value));
-
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void PropertyNotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
-
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void PropertyNotNullOrWhiteSpace(string value)
-        {
-            // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
-            True(!String.IsNullOrEmpty(value));
-            True(!Enforce.IsWhiteSpace(value));
-        }
+        [Obsolete("Use Expect.NotNullOrEmpty() instead.", true)]
+        public static void PropertyNotEmpty(string value) => NotNullOrEmpty(value);
     }
 }

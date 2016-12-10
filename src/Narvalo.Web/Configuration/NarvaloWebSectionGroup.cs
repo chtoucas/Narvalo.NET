@@ -20,7 +20,7 @@ namespace Narvalo.Web.Configuration
 
             set
             {
-                Require.Property(value);
+                Require.NotNull(value, nameof(value));
 
                 _asset = value;
             }
@@ -35,7 +35,7 @@ namespace Narvalo.Web.Configuration
 
             set
             {
-                Require.Property(value);
+                Require.NotNull(value, nameof(value));
 
                 _optimization = value;
             }

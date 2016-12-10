@@ -56,7 +56,7 @@ namespace Narvalo.Mvp
         internal Type Origin
         {
             get { return _origin; }
-            set { Demand.Property(value); _origin = value; }
+            set { Demand.NotNull(value); _origin = value; }
         }
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.

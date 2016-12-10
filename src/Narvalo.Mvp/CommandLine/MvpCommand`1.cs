@@ -32,7 +32,7 @@ namespace Narvalo.Mvp.CommandLine
 
             set
             {
-                Require.PropertyNotNull(value);
+                Require.NotNullUnconstrained(value, nameof(value));
 
                 _model = value;
             }
