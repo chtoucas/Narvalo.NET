@@ -272,7 +272,7 @@ namespace Narvalo.Fx
         /// <returns>The enclosed value if any; otherwise <paramref name="other"/>.</returns>
         public T ValueOrElse(T other)
         {
-            Require.NotNull(other, nameof(other));
+            Require.NotNullUnconstrained(other, nameof(other));
             Ensures(Result<T>() != null);
 
             return IsSome ? Value : other;

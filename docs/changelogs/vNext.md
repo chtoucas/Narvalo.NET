@@ -32,14 +32,14 @@ Other tasks:
 Library                   | vNext
 --------------------------|----------
 Narvalo.Build             | -
-Narvalo.Cerbere           | **2.1.0**
+Narvalo.Cerbere           | 2.1.0
 Narvalo.Common            | 0.26.0
-Narvalo.Core              | **0.26.0**
+Narvalo.Core              | 0.26.0
 Narvalo.Finance           | 0.26.0
 Narvalo.Fx                | 0.26.0
 Narvalo.Mvp               | 1.1.0
 Narvalo.Mvp.Web           | 1.1.0
-Narvalo.Web               | **0.26.0**
+Narvalo.Web               | 0.26.0
 
 Highlights
 ----------
@@ -50,16 +50,28 @@ Bugfixes
 Breaking Changes
 ----------------
 ### Narvalo.Cerbere
-- `Enforce.IsWhiteSpace()` not longer throws when the input is null, but rather
-  returns `false`. The method also returns `false` instead of `true`
-  for an empty string.
+- `Enforce.IsWhiteSpace()` no longer throws when the input is `null`, but rather
+  returns `false`. More importantly, the method returns `false` instead of
+  `true` for an empty string.
+- New class constraint added to `Require.NotNull<T>()`, `Require.Object<T>()`
+  and `Require.Property<T>()`. See below for unconstrained alternatives.
 
 ### Narvalo.Web.Configuration
 - `AssetSection.DefaultProvider` setter now throws an `ArgumentException`
-  if the input consists of only whitespaces.
+  if the input consists of only white spaces.
 
 API Changes
 -----------
+### Narvalo.Cerbere
+- `Require.NotNullOrWhiteSpace()` and `Require.PropertyNotWhiteSpace()` resp.
+  replace `Enforce.NotNullOrWhiteSpace()` and `Enforce.PropertyNotWhiteSpace()`
+  which are declared obsolete. The new methods have the `ContractArgumentValidator`
+  attribute and specifies a stronger code contract: "the input must not be `null`
+  or empty" (not empty is what has been added).
+- `Require.NotNullUnconstrained<T>()`, `Require.ObjectUnconstrained<T>()`
+  and `Require.PropertyUnconstrained<T>()` complement existing (constrained)
+  methods by not requiring any constraint on the generic parameter.
+
 ### Narvalo.Core
 - `BooleanStyles.EmptyIsFalse` is declared obsolete;
   use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is to better
@@ -69,8 +81,3 @@ API Changes
 Enhancements
 ------------
 - Full test coverage for Narvalo.Cerbere.
-
-### Narvalo.Cerbere
-- `Enforce.NotNullOrWhiteSpace()` and `Enforce.PropertyNotWhiteSpace()`
-  specifies a stronger code contract: "the input must not be null or empty"
-  (not empty is what has been added).

@@ -101,8 +101,30 @@ namespace Narvalo
         /// <param name="parameterName">The name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/>.</exception>
+        /// <seealso cref="Require.NotNullUnconstrained{T}(T, string)"/>
         [ContractArgumentValidator]
         public static void NotNull<T>([ValidatedNotNull]T value, string parameterName)
+            where T : class
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(parameterName);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        /// <summary>
+        /// Validates that the specified argument is not <see langword="null"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
+        /// <param name="value">The argument to check.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        /// <seealso cref="Require.NotNull{T}(T, string)"/>
+        [ContractArgumentValidator]
+        public static void NotNullUnconstrained<T>([ValidatedNotNull]T value, string parameterName)
         {
             if (value == null)
             {
@@ -135,6 +157,28 @@ namespace Narvalo
         }
 
         /// <summary>
+        /// Validates that the specified argument is not <see langword="null"/> or empty,
+        /// and does not only consist of white-space characters.
+        /// </summary>
+        /// <remarks>
+        /// This method specifies a weaker contract: the <paramref name="value"/> must not be
+        /// <see langword="null"/> or empty.
+        /// </remarks>
+        /// <param name="value">The argument to check.</param>
+        /// <param name="parameterName">The name of the parameter.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/> or empty, or does not only consist of white-space characters.</exception>
+        [ContractArgumentValidator]
+        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
+        {
+            NotNullOrEmpty(value, parameterName);
+
+            Enforce.NotWhiteSpace(value, parameterName);
+        }
+
+        /// <summary>
         /// Validates that the specified object is not <see langword="null"/>.
         /// Meant to be used inside an extension method to validate the first parameter which
         /// specifies which type the method operates on.
@@ -143,8 +187,10 @@ namespace Narvalo
         /// <param name="this">The object to check.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="this"/> is
         /// <see langword="null"/>.</exception>
+        /// <seealso cref="Require.ObjectUnconstrained{T}(T)"/>
         [ContractArgumentValidator]
         public static void Object<T>([ValidatedNotNull]T @this)
+            where T : class
         {
             if (@this == null)
             {
@@ -154,7 +200,28 @@ namespace Narvalo
             Contract.EndContractBlock();
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly", Justification ="[Ignore] This is an alias, as such, the parameter name is correct.")]
+        /// <summary>
+        /// Validates that the specified object is not <see langword="null"/>.
+        /// Meant to be used inside an extension method to validate the first parameter which
+        /// specifies which type the method operates on.
+        /// </summary>
+        /// <typeparam name="T">The type of <paramref name="this"/>.</typeparam>
+        /// <param name="this">The object to check.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="this"/> is
+        /// <see langword="null"/>.</exception>*
+        /// <seealso cref="Require.Object{T}(T)"/>
+        [ContractArgumentValidator]
+        public static void ObjectUnconstrained<T>([ValidatedNotNull]T @this)
+        {
+            if (@this == null)
+            {
+                throw new ArgumentNullException("this", Strings_Cerbere.Argument_NullObject);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly", Justification = "[Ignore] This is an alias, as such, the parameter name is correct.")]
         [ContractArgumentValidator]
         public static void Property(bool testCondition)
         {
@@ -174,8 +241,30 @@ namespace Narvalo
         /// <param name="value">The property value to check.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/>.</exception>
+        /// <seealso cref="Require.PropertyUnconstrained{T}(T)"/>
         [ContractArgumentValidator]
         public static void Property<T>([ValidatedNotNull]T value)
+            where T : class
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("value", Strings_Cerbere.ArgumentProperty_Null);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        /// <summary>
+        /// Validates that the specified property value is not <see langword="null"/>.
+        /// Meant to be used inside a property setter to validate the new value.
+        /// </summary>
+        /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
+        /// <param name="value">The property value to check.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        /// <seealso cref="Require.Property{T}(T)"/>
+        [ContractArgumentValidator]
+        public static void PropertyUnconstrained<T>([ValidatedNotNull]T value)
         {
             if (value == null)
             {
@@ -205,6 +294,28 @@ namespace Narvalo
             }
 
             Contract.EndContractBlock();
+        }
+
+        /// <summary>
+        /// Validates that the specified property value is not <see langword="null"/> or empty,
+        /// or does not only consist of white-space characters.
+        /// Meant to be used inside a property setter to validate the new value.
+        /// </summary>
+        /// <remarks>
+        /// This method specifies a weaker contract: the <paramref name="value"/> must not be
+        /// <see langword="null"/> or empty.
+        /// </remarks>
+        /// <param name="value">The property value to check.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
+        /// <see langword="null"/> or empty, or does not only consist of white-space characters.</exception>
+        [ContractArgumentValidator]
+        public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
+        {
+            PropertyNotEmpty(value);
+
+            Enforce.NotWhiteSpace(value, "value");
         }
     }
 }

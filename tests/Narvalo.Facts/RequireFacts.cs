@@ -156,6 +156,36 @@ namespace Narvalo
 
         #endregion
 
+        #region NotNullUnconstrained()
+
+        [Fact]
+        public static void NotNullUnconstrained_DoesNotThrow_ForStruct()
+            => Require.NotNullUnconstrained(new My.EmptyStruct(), "paramName");
+
+        [Fact]
+        public static void NotNullUnconstrained_DoesNotThrow_ForNonNull()
+            => Require.NotNullUnconstrained(new Object(), "paramName");
+
+        [Fact]
+        public static void NotNullUnconstrained_ThrowsArgumentNullException_ForNull()
+        {
+            // Arrange
+            Object obj = null;
+            var paramName = "paramName";
+            Action act = () => Require.NotNullUnconstrained(obj, paramName);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
+        }
+
+        #endregion
+
         #region NotNullOrEmpty()
 
         [Fact]
@@ -198,6 +228,65 @@ namespace Narvalo
 
         #endregion
 
+        #region NotNullOrWhiteSpace()
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_DoesNotThrow_ForNonNullOrWhiteSpaceString()
+            => Require.NotNullOrWhiteSpace("value", "paramName");
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_ThrowsArgumentNullException_ForNull()
+        {
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.NotNullOrWhiteSpace(null, paramName);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
+        }
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_ThrowsArgumentException_ForEmptyString()
+        {
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.NotNullOrWhiteSpace(String.Empty, paramName);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
+        }
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
+        {
+            // Arrange
+            var paramName = "paramName";
+            Action act = () => Require.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString, paramName);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal(paramName, argex.ParamName);
+        }
+
+        #endregion
+
         #region Object()
 
         [Fact]
@@ -209,6 +298,35 @@ namespace Narvalo
             // Arrange
             Object obj = null;
             Action act = () => Require.Object(obj);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal("this", argex.ParamName);
+        }
+
+        #endregion
+
+        #region ObjectUnconstrained()
+
+        [Fact]
+        public static void ObjectUnconstrained_DoesNotThrow_ForStruct()
+            => Require.ObjectUnconstrained(new My.EmptyStruct());
+
+        [Fact]
+        public static void ObjectUnconstrained_DoesNotThrow_ForNonNull()
+            => Require.ObjectUnconstrained(new Object());
+
+        [Fact]
+        public static void ObjectUnconstrained_ThrowsArgumentNullException_ForNull()
+        {
+            // Arrange
+            Object obj = null;
+            Action act = () => Require.ObjectUnconstrained(obj);
 
             // Act
             var ex = Record.Exception(act);
@@ -269,6 +387,35 @@ namespace Narvalo
 
         #endregion
 
+        #region PropertyUnconstrained<T>()
+
+        [Fact]
+        public static void PropertyUnconstrained_DoesNotThrow_ForStruct()
+            => Require.PropertyUnconstrained(new My.EmptyStruct());
+
+        [Fact]
+        public static void PropertyUnconstrained_DoesNotThrow_ForNonNull()
+            => Require.PropertyUnconstrained(new Object());
+
+        [Fact]
+        public static void PropertyUnconstrained_ThrowsArgumentNullException_ForNull()
+        {
+            // Arrange
+            Object obj = null;
+            Action act = () => Require.PropertyUnconstrained(obj);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal("value", argex.ParamName);
+        }
+
+        #endregion
+
         #region PropertyNotEmpty()
 
         [Fact]
@@ -296,6 +443,62 @@ namespace Narvalo
         {
             // Arrange
             Action act = () => Require.PropertyNotEmpty(String.Empty);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal("value", argex.ParamName);
+        }
+
+        #endregion
+
+        #region PropertyNotWhiteSpace()
+
+        [Fact]
+        public static void PropertyNotWhiteSpace_DoesNotThrow_ForNonNullOrWhiteSpaceString()
+                => Require.PropertyNotWhiteSpace("value");
+
+        [Fact]
+        public static void PropertyNotWhiteSpace_ThrowsArgumentNullException_ForNull()
+        {
+            // Arrange
+            Action act = () => Require.PropertyNotWhiteSpace(null);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentNullException>(ex);
+            Assert.Equal("value", argex.ParamName);
+        }
+
+        [Fact]
+        public static void PropertyNotWhiteSpace_ThrowsArgumentException_ForEmptyString()
+        {
+            // Arrange
+            Action act = () => Require.PropertyNotWhiteSpace(String.Empty);
+
+            // Act
+            var ex = Record.Exception(act);
+
+            // Assert
+            Assert.NotNull(ex);
+            Assert.NotNull(ex.Message);
+            var argex = Assert.IsType<ArgumentException>(ex);
+            Assert.Equal("value", argex.ParamName);
+        }
+
+        [Fact]
+        public static void PropertyNotWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
+        {
+            // Arrange
+            Action act = () => Require.PropertyNotWhiteSpace(My.WhiteSpaceOnlyString);
 
             // Act
             var ex = Record.Exception(act);

@@ -52,7 +52,7 @@ namespace Narvalo.Mvp.Platforms
 
         public void Reset(TValue value)
         {
-            Require.NotNull(value, nameof(value));
+            Require.NotNullUnconstrained(value, nameof(value));
 
             Reset(() => value);
         }
