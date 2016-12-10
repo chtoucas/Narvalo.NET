@@ -98,6 +98,7 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
         [Obsolete("Use Demand.PropertyNotNullOrEmpty() instead.")]
         public static void PropertyNotEmpty(string value) => True(!String.IsNullOrEmpty(value));
 

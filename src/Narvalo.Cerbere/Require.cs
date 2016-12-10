@@ -275,6 +275,7 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
         [Obsolete("Use Require.PropertyNotNullOrEmpty() instead.")]
         public static void PropertyNotEmpty([ValidatedNotNull]string value)
         {

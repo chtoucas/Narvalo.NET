@@ -112,8 +112,7 @@ namespace Narvalo
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
         [Obsolete("Use Expect.PropertyNotNullOrEmpty() instead.")]
         public static void PropertyNotEmpty(string value) => True(!String.IsNullOrEmpty(value));
 

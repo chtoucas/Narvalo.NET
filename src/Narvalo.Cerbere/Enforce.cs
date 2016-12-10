@@ -21,6 +21,7 @@ namespace Narvalo
     public static partial class Enforce
     {
         [ContractArgumentValidator]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
         [Obsolete("Use Require.NotNullOrWhiteSpace() instead.")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
@@ -30,6 +31,7 @@ namespace Narvalo
         }
 
         [ContractArgumentValidator]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
         [Obsolete("Use Require.PropertyNotNullOrWhiteSpace() instead.")]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
         {
