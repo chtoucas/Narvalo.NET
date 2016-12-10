@@ -52,6 +52,25 @@ namespace Narvalo
 
         #endregion
 
+        #region NotNullUnconstrained()
+
+        [Fact]
+        public static void NotNullUnconstrained_Passes_ForStruct()
+            => Expect.NotNullUnconstrained(new My.EmptyStruct());
+
+        [Fact]
+        public static void NotNullUnconstrained_Passes_ForNonNull()
+            => Expect.NotNullUnconstrained(new Object());
+
+        [Fact]
+        public static void NotNullUnconstrained_Passes_ForNull()
+        {
+            Object obj = null;
+            Expect.NotNull(obj);
+        }
+
+        #endregion
+
         #region NotNullOrEmpty()
 
         [Fact]
@@ -67,6 +86,22 @@ namespace Narvalo
 
         #endregion
 
+        #region NotNullOrWhiteSpace()
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_Passes_ForNonNullOrWhiteSpaceString()
+            => Expect.NotNullOrWhiteSpace("value");
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_Passes_ForNullOrWhiteSpaceString()
+        {
+            Expect.NotNullOrWhiteSpace(null);
+            Expect.NotNullOrWhiteSpace(String.Empty);
+            Expect.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString);
+        }
+
+        #endregion
+
         #region Object()
 
         [Fact]
@@ -74,6 +109,23 @@ namespace Narvalo
 
         [Fact]
         public static void Object_Passes_ForNull()
+        {
+            Object obj = null;
+            Expect.Object(obj);
+        }
+
+        #endregion
+
+        #region ObjectNotNull()
+
+        [Fact]
+        public static void ObjectNotNull_Passes_ForStruct() => Expect.ObjectNotNull(new My.EmptyStruct());
+
+        [Fact]
+        public static void ObjectNotNull_Passes_ForNonNull() => Expect.ObjectNotNull(new Object());
+
+        [Fact]
+        public static void ObjectNotNull_Passes_ForNull()
         {
             Object obj = null;
             Expect.Object(obj);
@@ -105,17 +157,50 @@ namespace Narvalo
 
         #endregion
 
-        #region PropertyNotEmpty()
+        #region PropertyNotNull<T>()
 
         [Fact]
-        public static void PropertyNotEmpty_Passes_ForNonNullOrEmptyString()
-            => Expect.PropertyNotEmpty("value");
+        public static void PropertyNotNull_Passes_ForStruct() => Expect.PropertyNotNull(new My.EmptyStruct());
 
         [Fact]
-        public static void PropertyNotEmpty_Passes_ForNullOrEmptyString()
+        public static void PropertyNotNull_Passes_ForNonNull() => Expect.PropertyNotNull(new Object());
+
+        [Fact]
+        public static void PropertyNotNull_Passes_ForNull()
         {
-            Expect.PropertyNotEmpty(null);
-            Expect.PropertyNotEmpty(String.Empty);
+            Object obj = null;
+            Expect.PropertyNotNull(obj);
+        }
+
+        #endregion
+
+        #region PropertyNotNullOrEmpty()
+
+        [Fact]
+        public static void PropertyNotNullOrEmpty_Passes_ForNonNullOrEmptyString()
+            => Expect.PropertyNotNullOrEmpty("value");
+
+        [Fact]
+        public static void PropertyNotNullOrEmpty_Passes_ForNullOrEmptyString()
+        {
+            Expect.PropertyNotNullOrEmpty(null);
+            Expect.PropertyNotNullOrEmpty(String.Empty);
+        }
+
+        #endregion
+
+        #region PropertyNotNullOrWhiteSpace()
+
+        [Fact]
+        public static void PropertyNotNullOrWhiteSpace_Passes_ForNonNullOrWhiteSpaceString()
+            => Expect.PropertyNotNullOrWhiteSpace("value");
+
+        [Fact]
+        public static void PropertyNotNullOrWhiteSpace_Passes_ForNullOrWhiteSpaceString()
+        {
+            Expect.PropertyNotNullOrWhiteSpace(null);
+            Expect.PropertyNotNullOrWhiteSpace(String.Empty);
+            Expect.PropertyNotNullOrWhiteSpace(My.WhiteSpaceOnlyString);
         }
 
         #endregion

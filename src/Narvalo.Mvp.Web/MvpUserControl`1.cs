@@ -33,7 +33,7 @@ namespace Narvalo.Mvp.Web
 
             set
             {
-                Require.PropertyUnconstrained(value);
+                Require.PropertyNotNull(value);
 
                 _model = value;
             }

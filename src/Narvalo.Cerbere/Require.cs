@@ -187,7 +187,7 @@ namespace Narvalo
         /// <param name="this">The object to check.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="this"/> is
         /// <see langword="null"/>.</exception>
-        /// <seealso cref="Require.ObjectUnconstrained{T}(T)"/>
+        /// <seealso cref="Require.ObjectNotNull{T}(T)"/>
         [ContractArgumentValidator]
         public static void Object<T>([ValidatedNotNull]T @this)
             where T : class
@@ -211,7 +211,7 @@ namespace Narvalo
         /// <see langword="null"/>.</exception>*
         /// <seealso cref="Require.Object{T}(T)"/>
         [ContractArgumentValidator]
-        public static void ObjectUnconstrained<T>([ValidatedNotNull]T @this)
+        public static void ObjectNotNull<T>([ValidatedNotNull]T @this)
         {
             if (@this == null)
             {
@@ -241,7 +241,7 @@ namespace Narvalo
         /// <param name="value">The property value to check.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/>.</exception>
-        /// <seealso cref="Require.PropertyUnconstrained{T}(T)"/>
+        /// <seealso cref="Require.PropertyNotNull{T}(T)"/>
         [ContractArgumentValidator]
         public static void Property<T>([ValidatedNotNull]T value)
             where T : class
@@ -264,11 +264,25 @@ namespace Narvalo
         /// <see langword="null"/>.</exception>
         /// <seealso cref="Require.Property{T}(T)"/>
         [ContractArgumentValidator]
-        public static void PropertyUnconstrained<T>([ValidatedNotNull]T value)
+        public static void PropertyNotNull<T>([ValidatedNotNull]T value)
         {
             if (value == null)
             {
                 throw new ArgumentNullException("value", Strings_Cerbere.ArgumentProperty_Null);
+            }
+
+            Contract.EndContractBlock();
+        }
+
+        [ContractArgumentValidator]
+        [Obsolete("Use Require.PropertyNotNullOrEmpty() instead.")]
+        public static void PropertyNotEmpty([ValidatedNotNull]string value)
+        {
+            Property(value);
+
+            if (value.Length == 0)
+            {
+                throw new ArgumentException(Strings_Cerbere.ArgumentProperty_EmptyString, "value");
             }
 
             Contract.EndContractBlock();
@@ -284,7 +298,7 @@ namespace Narvalo
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/> or empty.</exception>
         [ContractArgumentValidator]
-        public static void PropertyNotEmpty([ValidatedNotNull]string value)
+        public static void PropertyNotNullOrEmpty([ValidatedNotNull]string value)
         {
             Property(value);
 
@@ -311,9 +325,9 @@ namespace Narvalo
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
         /// <see langword="null"/> or empty, or does not only consist of white-space characters.</exception>
         [ContractArgumentValidator]
-        public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
+        public static void PropertyNotNullOrWhiteSpace([ValidatedNotNull]string value)
         {
-            PropertyNotEmpty(value);
+            PropertyNotNullOrEmpty(value);
 
             Enforce.NotWhiteSpace(value, "value");
         }

@@ -43,7 +43,7 @@ namespace Narvalo.Data
 
         public int Execute(TParameters values)
         {
-            Expect.NotNull(values);
+            Expect.NotNullUnconstrained(values);
 
             int retval;
 

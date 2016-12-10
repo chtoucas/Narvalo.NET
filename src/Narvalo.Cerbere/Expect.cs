@@ -37,7 +37,14 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void NotNull<T>(T value) => True(value != null);
+        public static void NotNull<T>(T value) where T : class => True(value != null);
+
+        [DebuggerHidden]
+        [ContractAbbreviator]
+        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        public static void NotNullUnconstrained<T>(T value) => True(value != null);
 
         /// <summary>
         /// Checks that the specified object parameter is not <see langword="null"/> or empty.
@@ -50,6 +57,13 @@ namespace Narvalo
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void NotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
 
+        [DebuggerHidden]
+        [ContractAbbreviator]
+        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        public static void NotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
+
         /// <summary>
         /// Checks that the specified object parameter is not <see langword="null"/>.
         /// </summary>
@@ -60,7 +74,14 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Object<T>(T @this) => True(@this != null);
+        public static void Object<T>(T @this) where T : class => True(@this != null);
+
+        [DebuggerHidden]
+        [ContractAbbreviator]
+        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        public static void ObjectNotNull<T>(T @this) => True(@this != null);
 
         [DebuggerHidden]
         [ContractAbbreviator]
@@ -74,13 +95,35 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Property<T>(T value) => True(value != null);
+        public static void Property<T>(T value) where T : class => True(value != null);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        public static void PropertyNotNull<T>(T value) => True(value != null);
+
+        [DebuggerHidden]
+        [ContractAbbreviator]
+        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [Obsolete("Use Expect.PropertyNotNullOrEmpty() instead.")]
         public static void PropertyNotEmpty(string value) => True(!String.IsNullOrEmpty(value));
+
+        [DebuggerHidden]
+        [ContractAbbreviator]
+        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        public static void PropertyNotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
+
+        [DebuggerHidden]
+        [ContractAbbreviator]
+        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        public static void PropertyNotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
     }
 }

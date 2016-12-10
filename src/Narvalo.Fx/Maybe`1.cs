@@ -160,7 +160,7 @@ namespace Narvalo.Fx
         /// <seealso cref="Maybe.Of{T}(T?)"/>
         private Maybe(T value)
         {
-            Demand.NotNull(value);
+            Demand.NotNullUnconstrained(value);
 
             _value = value;
             _isSome = true;

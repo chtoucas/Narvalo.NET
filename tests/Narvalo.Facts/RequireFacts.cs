@@ -311,22 +311,22 @@ namespace Narvalo
 
         #endregion
 
-        #region ObjectUnconstrained()
+        #region ObjectNotNull()
 
         [Fact]
-        public static void ObjectUnconstrained_DoesNotThrow_ForStruct()
-            => Require.ObjectUnconstrained(new My.EmptyStruct());
+        public static void ObjectNotNull_DoesNotThrow_ForStruct()
+            => Require.ObjectNotNull(new My.EmptyStruct());
 
         [Fact]
-        public static void ObjectUnconstrained_DoesNotThrow_ForNonNull()
-            => Require.ObjectUnconstrained(new Object());
+        public static void ObjectNotNull_DoesNotThrow_ForNonNull()
+            => Require.ObjectNotNull(new Object());
 
         [Fact]
-        public static void ObjectUnconstrained_ThrowsArgumentNullException_ForNull()
+        public static void ObjectNotNull_ThrowsArgumentNullException_ForNull()
         {
             // Arrange
             Object obj = null;
-            Action act = () => Require.ObjectUnconstrained(obj);
+            Action act = () => Require.ObjectNotNull(obj);
 
             // Act
             var ex = Record.Exception(act);
@@ -387,22 +387,22 @@ namespace Narvalo
 
         #endregion
 
-        #region PropertyUnconstrained<T>()
+        #region PropertyNotNull<T>()
 
         [Fact]
-        public static void PropertyUnconstrained_DoesNotThrow_ForStruct()
-            => Require.PropertyUnconstrained(new My.EmptyStruct());
+        public static void PropertyNotNull_DoesNotThrow_ForStruct()
+            => Require.PropertyNotNull(new My.EmptyStruct());
 
         [Fact]
-        public static void PropertyUnconstrained_DoesNotThrow_ForNonNull()
-            => Require.PropertyUnconstrained(new Object());
+        public static void PropertyNotNull_DoesNotThrow_ForNonNull()
+            => Require.PropertyNotNull(new Object());
 
         [Fact]
-        public static void PropertyUnconstrained_ThrowsArgumentNullException_ForNull()
+        public static void PropertyNotNull_ThrowsArgumentNullException_ForNull()
         {
             // Arrange
             Object obj = null;
-            Action act = () => Require.PropertyUnconstrained(obj);
+            Action act = () => Require.PropertyNotNull(obj);
 
             // Act
             var ex = Record.Exception(act);
@@ -416,17 +416,17 @@ namespace Narvalo
 
         #endregion
 
-        #region PropertyNotEmpty()
+        #region PropertyNotNullOrEmpty()
 
         [Fact]
-        public static void PropertyNotEmpty_DoesNotThrow_ForNonNullOrEmptyString()
-            => Require.PropertyNotEmpty("value");
+        public static void PropertyNotNullOrEmpty_DoesNotThrow_ForNonNullOrEmptyString()
+            => Require.PropertyNotNullOrEmpty("value");
 
         [Fact]
-        public static void PropertyNotEmpty_ThrowsArgumentNullException_ForNull()
+        public static void PropertyNotNullOrEmpty_ThrowsArgumentNullException_ForNull()
         {
             // Arrange
-            Action act = () => Require.PropertyNotEmpty(null);
+            Action act = () => Require.PropertyNotNullOrEmpty(null);
 
             // Act
             var ex = Record.Exception(act);
@@ -439,10 +439,10 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void PropertyNotEmpty_ThrowsArgumentException_ForEmptyString()
+        public static void PropertyNotNullOrEmpty_ThrowsArgumentException_ForEmptyString()
         {
             // Arrange
-            Action act = () => Require.PropertyNotEmpty(String.Empty);
+            Action act = () => Require.PropertyNotNullOrEmpty(String.Empty);
 
             // Act
             var ex = Record.Exception(act);
@@ -456,17 +456,17 @@ namespace Narvalo
 
         #endregion
 
-        #region PropertyNotWhiteSpace()
+        #region PropertyNotNullOrWhiteSpace()
 
         [Fact]
-        public static void PropertyNotWhiteSpace_DoesNotThrow_ForNonNullOrWhiteSpaceString()
-                => Require.PropertyNotWhiteSpace("value");
+        public static void PropertyNotNullOrWhiteSpace_DoesNotThrow_ForNonNullOrWhiteSpaceString()
+                => Require.PropertyNotNullOrWhiteSpace("value");
 
         [Fact]
-        public static void PropertyNotWhiteSpace_ThrowsArgumentNullException_ForNull()
+        public static void PropertyNotNullOrWhiteSpace_ThrowsArgumentNullException_ForNull()
         {
             // Arrange
-            Action act = () => Require.PropertyNotWhiteSpace(null);
+            Action act = () => Require.PropertyNotNullOrWhiteSpace(null);
 
             // Act
             var ex = Record.Exception(act);
@@ -479,10 +479,10 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void PropertyNotWhiteSpace_ThrowsArgumentException_ForEmptyString()
+        public static void PropertyNotNullOrWhiteSpace_ThrowsArgumentException_ForEmptyString()
         {
             // Arrange
-            Action act = () => Require.PropertyNotWhiteSpace(String.Empty);
+            Action act = () => Require.PropertyNotNullOrWhiteSpace(String.Empty);
 
             // Act
             var ex = Record.Exception(act);
@@ -495,10 +495,10 @@ namespace Narvalo
         }
 
         [Fact]
-        public static void PropertyNotWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
+        public static void PropertyNotNullOrWhiteSpace_ThrowsArgumentException_ForWhiteSpaceOnlyString()
         {
             // Arrange
-            Action act = () => Require.PropertyNotWhiteSpace(My.WhiteSpaceOnlyString);
+            Action act = () => Require.PropertyNotNullOrWhiteSpace(My.WhiteSpaceOnlyString);
 
             // Act
             var ex = Record.Exception(act);

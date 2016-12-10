@@ -146,7 +146,7 @@ namespace Narvalo.Fx
 
             public Left_(TLeft value)
             {
-                Demand.NotNull(value);
+                Demand.NotNullUnconstrained(value);
 
                 _value = value;
             }
@@ -237,7 +237,7 @@ namespace Narvalo.Fx
 
             public Right_(TRight value)
             {
-                Demand.NotNull(value);
+                Demand.NotNullUnconstrained(value);
 
                 _value = value;
             }

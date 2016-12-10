@@ -20,8 +20,8 @@ namespace Narvalo
     /// <seealso cref="Require"/>
     public static partial class Enforce
     {
-        [Obsolete("Use Require.NotNullOrWhiteSpace() instead.")]
         [ContractArgumentValidator]
+        [Obsolete("Use Require.NotNullOrWhiteSpace() instead.")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
             Require.NotNullOrEmpty(value, parameterName);
@@ -29,8 +29,8 @@ namespace Narvalo
             NotWhiteSpace(value, parameterName);
         }
 
-        [Obsolete("Use Require.PropertyNotWhiteSpace() instead.")]
         [ContractArgumentValidator]
+        [Obsolete("Use Require.PropertyNotNullOrWhiteSpace() instead.")]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
         {
             Require.PropertyNotEmpty(value);
@@ -39,7 +39,7 @@ namespace Narvalo
         }
 
         /// <seealso cref="Require.NotNullOrWhiteSpace(string, string)"/>
-        /// <seealso cref="Require.PropertyNotWhiteSpace(string)"/>
+        /// <seealso cref="Require.PropertyNotNullOrWhiteSpace(string)"/>
         public static void NotWhiteSpace(string value, string parameterName)
         {
             if (IsWhiteSpace(value))

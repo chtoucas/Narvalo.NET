@@ -71,6 +71,32 @@ namespace Narvalo
 
         #endregion
 
+        #region NotNullUnconstrained()
+
+        [Fact]
+        public static void NotNullUnconstrained_Passes_ForStruct()
+            => Demand.NotNullUnconstrained(new My.EmptyStruct());
+
+        [Fact]
+        public static void NotNullUnconstrained_Passes_ForNonNull()
+            => Demand.NotNullUnconstrained(new Object());
+
+        [DebugOnlyFact]
+        public static void NotNullUnconstrained_Fails_ForNull()
+        {
+            Object obj = null;
+            Assert.Throws<AssertFailedException>(() => Demand.NotNullUnconstrained(obj));
+        }
+
+        [ReleaseOnlyFact]
+        public static void NotNullUnconstrained_Passes_ForNull()
+        {
+            Object obj = null;
+            Demand.NotNullUnconstrained(obj);
+        }
+
+        #endregion
+
         #region NotNullOrEmpty()
 
         [Fact]
@@ -93,6 +119,36 @@ namespace Narvalo
 
         #endregion
 
+        #region NotNullOrWhiteSpace()
+
+        [Fact]
+        public static void NotNullOrWhiteSpace_Passes_ForNonNullOrWhiteSpace()
+            => Demand.NotNullOrWhiteSpace("value");
+
+        [DebugOnlyFact]
+        public static void NotNullOrWhiteSpace_Fails_ForNullString()
+            => Assert.Throws<AssertFailedException>(() => Demand.NotNullOrWhiteSpace(null));
+
+        [ReleaseOnlyFact]
+        public static void NotNullOrWhiteSpace_Passes_ForNullString() => Demand.NotNullOrWhiteSpace(null);
+
+        [DebugOnlyFact]
+        public static void NotNullOrWhiteSpace_Fails_ForEmptyString()
+            => Assert.Throws<AssertFailedException>(() => Demand.NotNullOrWhiteSpace(String.Empty));
+
+        [ReleaseOnlyFact]
+        public static void NotNullOrWhiteSpace_Passes_ForEmptyString() => Demand.NotNullOrWhiteSpace(String.Empty);
+
+        [DebugOnlyFact]
+        public static void NotNullOrWhiteSpace_Fails_ForWhiteSpaceOnlyString()
+            => Assert.Throws<AssertFailedException>(() => Demand.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString));
+
+        [ReleaseOnlyFact]
+        public static void NotNullOrWhiteSpace_Passes_ForWhiteSpaceOnlyString()
+            => Demand.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString);
+
+        #endregion
+
         #region Object()
 
         [Fact]
@@ -110,6 +166,30 @@ namespace Narvalo
         {
             Object obj = null;
             Demand.Object(obj);
+        }
+
+        #endregion
+
+        #region ObjectNotNull()
+
+        [Fact]
+        public static void ObjectNotNull_Passes_ForStruct() => Demand.ObjectNotNull(new My.EmptyStruct());
+
+        [Fact]
+        public static void ObjectNotNull_Passes_ForNonNull() => Demand.ObjectNotNull(new Object());
+
+        [DebugOnlyFact]
+        public static void ObjectNotNull_Fails_ForNull()
+        {
+            Object obj = null;
+            Assert.Throws<AssertFailedException>(() => Demand.ObjectNotNull(obj));
+        }
+
+        [ReleaseOnlyFact]
+        public static void ObjectNotNull_Passes_ForNull()
+        {
+            Object obj = null;
+            Demand.ObjectNotNull(obj);
         }
 
         #endregion
@@ -149,27 +229,84 @@ namespace Narvalo
 
         #endregion
 
-        #region PropertyNotEmpty()
+        #region PropertyNotNull<T>()
 
         [Fact]
-        public static void PropertyNotEmptyy_Passes_ForNonNullorEmptyString()
-            => Demand.PropertyNotEmpty("value");
+        public static void PropertyNotNull_Passes_ForStruct() => Demand.PropertyNotNull(new My.EmptyStruct());
+
+        [Fact]
+        public static void PropertyNotNull_Passes_ForNonNull() => Demand.PropertyNotNull(new Object());
 
         [DebugOnlyFact]
-        public static void PropertyNotEmpty_Fails_ForNullString()
-            => Assert.Throws<AssertFailedException>(() => Demand.PropertyNotEmpty(null));
+        public static void PropertyNotNull_Fails_ForNull()
+        {
+            Object obj = null;
+            Assert.Throws<AssertFailedException>(() => Demand.PropertyNotNull(obj));
+        }
+
+        [ReleaseOnlyFact]
+        public static void PropertyNotNull_Passes_ForNull()
+        {
+            Object obj = null;
+            Demand.PropertyNotNull(obj);
+        }
+
+        #endregion
+
+        #region PropertyNotNullOrEmpty()
+
+        [Fact]
+        public static void PropertyNotNullOrEmpty_Passes_ForNonNullorEmptyString()
+            => Demand.PropertyNotNullOrEmpty("value");
 
         [DebugOnlyFact]
-        public static void PropertyNotEmpty_Fails_ForEmptyString()
-            => Assert.Throws<AssertFailedException>(() => Demand.PropertyNotEmpty(String.Empty));
+        public static void PropertyNotNullOrEmpty_Fails_ForNullString()
+            => Assert.Throws<AssertFailedException>(() => Demand.PropertyNotNullOrEmpty(null));
 
         [ReleaseOnlyFact]
-        public static void PropertyNotEmpty_Passes_ForNullString()
-            => Demand.PropertyNotEmpty(null);
+        public static void PropertyNotNullOrEmpty_Passes_ForNullString()
+            => Demand.PropertyNotNullOrEmpty(null);
+
+        [DebugOnlyFact]
+        public static void PropertyNotNullOrEmpty_Fails_ForEmptyString()
+            => Assert.Throws<AssertFailedException>(() => Demand.PropertyNotNullOrEmpty(String.Empty));
 
         [ReleaseOnlyFact]
-        public static void PropertyNotEmpty_Passes_ForEmptyString()
-            => Demand.PropertyNotEmpty(String.Empty);
+        public static void PropertyNotNullOrEmpty_Passes_ForEmptyString()
+            => Demand.PropertyNotNullOrEmpty(String.Empty);
+
+        #endregion
+
+        #region PropertyNotNullOrWhiteSpace()
+
+        [Fact]
+        public static void PropertyNotNullOrWhiteSpace_Passes_ForNonNullorEmptyString()
+            => Demand.PropertyNotNullOrWhiteSpace("value");
+
+        [DebugOnlyFact]
+        public static void PropertyNotNullOrWhiteSpace_Fails_ForNullString()
+            => Assert.Throws<AssertFailedException>(() => Demand.PropertyNotNullOrWhiteSpace(null));
+
+        [ReleaseOnlyFact]
+        public static void PropertyNotNullOrWhiteSpace_Passes_ForNullString()
+            => Demand.PropertyNotNullOrWhiteSpace(null);
+
+        [DebugOnlyFact]
+        public static void PropertyNotNullOrWhiteSpace_Fails_ForEmptyString()
+            => Assert.Throws<AssertFailedException>(() => Demand.PropertyNotNullOrWhiteSpace(String.Empty));
+
+        [ReleaseOnlyFact]
+        public static void PropertyNotNullOrWhiteSpace_Passes_ForEmptyString()
+            => Demand.PropertyNotNullOrWhiteSpace(String.Empty);
+
+        [DebugOnlyFact]
+        public static void PropertyNotNullOrWhiteSpace_Fails_ForWhiteSpaceOnlyString()
+            => Assert.Throws<AssertFailedException>(()
+                => Demand.PropertyNotNullOrWhiteSpace(My.WhiteSpaceOnlyString));
+
+        [ReleaseOnlyFact]
+        public static void PropertyNotNullOrWhiteSpace_Passes_ForWhiteSpaceOnlyString()
+            => Demand.PropertyNotNullOrWhiteSpace(My.WhiteSpaceOnlyString);
 
         #endregion
     }

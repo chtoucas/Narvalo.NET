@@ -48,7 +48,12 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void NotNull<T>(T value) => True(value != null);
+        public static void NotNull<T>(T value) where T : class => True(value != null);
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void NotNullUnconstrained<T>(T value) => True(value != null);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
@@ -58,7 +63,17 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void Object<T>(T @this) => True(@this != null);
+        public static void NotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void Object<T>(T @this) where T : class => True(@this != null);
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void ObjectNotNull<T>(T @this) => True(@this != null);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
@@ -68,11 +83,27 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
-        public static void Property<T>(T value) => True(value != null);
+        public static void Property<T>(T value) where T : class => True(value != null);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
+        public static void PropertyNotNull<T>(T value) => True(value != null);
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        [Obsolete("Use Demand.PropertyNotNullOrEmpty() instead.")]
         public static void PropertyNotEmpty(string value) => True(!String.IsNullOrEmpty(value));
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void PropertyNotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
+
+        [ContractAbbreviator]
+        [Conditional("DEBUG")]
+        [Conditional("CONTRACTS_FULL")]
+        public static void PropertyNotNullOrWhiteSpace(string value) => True(!String.IsNullOrWhiteSpace(value));
     }
 }
