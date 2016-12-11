@@ -141,8 +141,7 @@ namespace Narvalo.Fx
      */
     [DebuggerDisplay("IsSome = {IsSome}")]
     [DebuggerTypeProxy(typeof(Maybe<>.DebugView))]
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
-        Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
+    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "[Intentionally] Maybe<T> only pretends to be a collection.")]
     public partial struct Maybe<T> : IEnumerable<T>, IEquatable<Maybe<T>>
     {
         private readonly bool _isSome;
@@ -227,12 +226,10 @@ namespace Narvalo.Fx
             return value.Value;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
-            Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
         public static bool operator true(Maybe<T> value) => value.IsSome;
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates",
-            Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] IsSome provides the alternate name for the 'true' operator overload.")]
         public static bool operator false(Maybe<T> value) => !value.IsSome;
 
         #endregion
@@ -494,8 +491,7 @@ namespace Narvalo.Fx
     /// </content>
     public partial struct Maybe<T>
     {
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-14-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-14-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public IEnumerable<T> ToEnumerable()
         {
             Ensures(Result<IEnumerable<T>>() != null);
@@ -582,14 +578,12 @@ namespace Narvalo.Fx
             return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
         internal static Maybe<T> η(T value)
             => value != null ? new Maybe<T>(value) : Maybe<T>.None;
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
             => square.IsSome ? square.Value : Maybe<T>.None;
@@ -603,8 +597,7 @@ namespace Narvalo.Fx
         /// <summary>
         /// An instance of <see cref="Maybe{T}" /> that does not enclose any value.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
         public static readonly Maybe<T> None = new Maybe<T>();
 
         public Maybe<T> OrElse(Maybe<T> other) => !IsSome ? other : this;

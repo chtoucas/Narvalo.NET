@@ -37,26 +37,22 @@ namespace Narvalo.Finance.Internal
     // Helpers.
     public static partial class CurrencyActivatorFacts
     {
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
-            Justification = "[Intentionally] Testing dynamic contruction of a class.")]
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Intentionally] Testing dynamic contruction of a class.")]
         private class MyCurrency_ : Currency
         {
             public MyCurrency_() : base("YYY") { }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
-            Justification = "[Intentionally] Testing dynamic contruction of a class.")]
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Intentionally] Testing dynamic contruction of a class.")]
         private class MyCurrencyWithPrivateCtor_ : Currency
         {
             private MyCurrencyWithPrivateCtor_() : base("YYY") { }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
-            Justification = "[Intentionally] Testing dynamic contruction of a class.")]
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Intentionally] Testing dynamic contruction of a class.")]
         private class MyCurrencyWithoutDefaultCtor_ : Currency
         {
-            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
-                Justification = "[Intentionally] Testing a class without public ctor.")]
+            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Testing a class without public ctor.")]
             private MyCurrencyWithoutDefaultCtor_(string value) : base("YYY") { }
         }
     }

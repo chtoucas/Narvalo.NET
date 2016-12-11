@@ -282,8 +282,7 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "[Intentionally] This method always returns the same result.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
         public static MonadZero<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadZero<TSource> @this)
             /* T4: C# indent */
         {

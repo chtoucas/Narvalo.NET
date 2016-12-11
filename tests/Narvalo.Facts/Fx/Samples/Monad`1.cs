@@ -14,16 +14,14 @@ namespace Narvalo.Fx.Samples
         }
 
         // [Haskell] return
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Educational] Standard naming convention from mathematics.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static Monad<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Educational] Standard naming convention from mathematics.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static Monad<T> μ(Monad<Monad<T>> square)
         {
             // REVIEW: Why can't I use "_ => _" as with C# 5?

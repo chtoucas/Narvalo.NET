@@ -8,8 +8,7 @@ namespace Narvalo.Fx.Samples
     public sealed class MonadOr<T>
     {
         // [Haskell] mzero
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "[Educational] This code is not meant to be used.")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public static MonadOr<T> None { get { throw new NotImplementedException(); } }
 
         // [Haskell] mplus
@@ -25,16 +24,14 @@ namespace Narvalo.Fx.Samples
         }
 
         // [Haskell] return
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Educational] Standard naming convention from mathematics.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static MonadOr<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Educational] Standard naming convention from mathematics.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static MonadOr<T> μ(MonadOr<MonadOr<T>> square)
         {
             return square.Bind(Stubs<MonadOr<T>>.Identity);

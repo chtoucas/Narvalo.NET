@@ -9,19 +9,16 @@ namespace Narvalo.Fx.Samples
         where T : struct
     {
         // [Haskell] mzero
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "[Educational] This code is not meant to be used.")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public static MonadValue<T> None { get { throw new NotImplementedException(); } }
 
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "[Educational] This code is not meant to be used.")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public static bool operator ==(MonadValue<T> left, MonadValue<T> right)
         {
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "[Educational] This code is not meant to be used.")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public static bool operator !=(MonadValue<T> left, MonadValue<T> right)
         {
             throw new NotImplementedException();
@@ -40,38 +37,33 @@ namespace Narvalo.Fx.Samples
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "[Educational] This code is not meant to be used.")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public bool Equals(MonadValue<T> other)
         {
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "[Educational] This code is not meant to be used.")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public override bool Equals(object obj)
         {
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations",
-            Justification = "[Educational] This code is not meant to be used.")]
+        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public override int GetHashCode()
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] return
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Educational] Standard naming convention from mathematics.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static MonadValue<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Educational] Standard naming convention from mathematics.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static MonadValue<T> μ(MonadValue<MonadValue<T>> square)
         {
             return square.Bind(Stubs<MonadValue<T>>.Identity);

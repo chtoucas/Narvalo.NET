@@ -291,8 +291,7 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this",
-            Justification = "[Intentionally] This method always returns the same result.")]
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
         public static MonadValue<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadValue<TSource> @this)
             where TSource : struct
         {
