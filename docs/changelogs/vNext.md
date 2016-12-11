@@ -69,7 +69,14 @@ Methods marked as obsolete and their replacements:
 - `Require.Property<T>()` -> `Require.NotNullUnconstrained()`
 - `Require.Property(bool)` -> `Require.True()`
 - `Require.PropertyNotEmpty(bool)` -> `Require.NotNullOrEmpty()`
-- Idem for `Demand` and `Expect`
+- `Demand.Object<T>()` -> `Demand.NotNullUnconstrained()`
+- `Demand.Property<T>()` -> `Demand.NotNullUnconstrained()`
+- `Demand.Property(bool)` -> `Demand.True()`
+- `Demand.PropertyNotEmpty(bool)` -> `Demand.NotNullOrEmpty()`
+- `Expect.Object<T>()` -> `Expect.NotNullUnconstrained()`
+- `Expect.Property<T>()` -> `Expect.NotNullUnconstrained()`
+- `Expect.Property(bool)` -> `Expect.True()`
+- `Expect.PropertyNotEmpty(bool)` -> `Expect.NotNullOrEmpty()`
 - `Enforce.NotNullOrWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
 - `Enforce.PropertyNotWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
 - `Enforce.IsWhiteSpace()` -> `Check.IsWhiteSpace()`
@@ -79,12 +86,13 @@ Methods marked as obsolete and their replacements:
 
 New classes and new methods:
 - `Require.NotNullOrWhiteSpace()` guards agains `null`, empty or white-space
-  only strings. **WARNING:** The mehod specifies a weaker contract: "the input
+  only strings. **WARNING:** The method specifies a weaker contract: "the input
   must not be `null` or empty". Idem for `Demand` and `Expect`.
 - `Require.NotNullUnconstrained<T>()` complements `Require.NotNull<T>()`
-  by not requiring any constraint on the generic parameter. Idem for
-  `Demand` and `Expect`.
+  by not requiring any constraint on the generic parameter.
 - `Demand.NotNullOrWhiteSpace()`
+- `Demand.NotNullUnconstrained<T>()` same as `Require.NotNullUnconstrained<T>()`.
+- `Expect.NotNullUnconstrained<T>()` same as `Require.NotNullUnconstrained<T>()`.
 - `Check.IsEmptyOrWhiteSpace()`
 - `Check.IsFlagsEnum()`
 - `Warrant` a new helper class to write postconditions.

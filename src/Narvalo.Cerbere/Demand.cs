@@ -60,6 +60,10 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         public static void NotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
 
+        /// <remarks>
+        /// This method uses a weaker contract: the <paramref name="value"/> must not be
+        /// <see langword="null"/> or empty.
+        /// </remarks>
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
