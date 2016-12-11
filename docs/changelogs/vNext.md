@@ -64,25 +64,33 @@ Breaking Changes
 API Changes
 -----------
 ### Narvalo.Cerbere
-- Methods marked as obsolete and their replacements:
-  * `Require.Object<T>()` -> `Require.NotNullUnconstrained()`
-  * `Require.Property<T>()` -> `Require.NotNullUnconstrained()`
-  * `Require.Property(bool)` -> `Require.True()`
-  * `Require.PropertyNotEmpty(bool)` -> `Require.NotNullOrEmpty()`
-  * Idem for `Demand` and `Expect`
-  * `Enforce.NotNullOrWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
-  * `Enforce.PropertyNotWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
-  * `Enforce.IsWhiteSpace()` -> `Check.IsWhiteSpace()`
-- `Require.NotNullOrWhiteSpace()` guards agains `null`, empty string
-  or white-space only strings. **WARNING:** The mehod specifies a weaker
-  contract: "the input must not be `null` or empty". Idem for
-  `Demand` and `Expect`.
+Methods marked as obsolete and their replacements:
+- `Require.Object<T>()` -> `Require.NotNullUnconstrained()`
+- `Require.Property<T>()` -> `Require.NotNullUnconstrained()`
+- `Require.Property(bool)` -> `Require.True()`
+- `Require.PropertyNotEmpty(bool)` -> `Require.NotNullOrEmpty()`
+- Idem for `Demand` and `Expect`
+- `Enforce.NotNullOrWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
+- `Enforce.PropertyNotWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
+- `Enforce.IsWhiteSpace()` -> `Check.IsWhiteSpace()`
+- `Enforce.NotWhiteSpace()`, no direct replacement, nevertheless
+  `Require.NotNullOrWhiteSpace()` should cover all situations where this
+  method was previously used.
+
+New classes and new methods:
+- `Require.NotNullOrWhiteSpace()` guards agains `null`, empty or white-space
+  only strings. **WARNING:** The mehod specifies a weaker contract: "the input
+  must not be `null` or empty". Idem for `Demand` and `Expect`.
 - `Require.NotNullUnconstrained<T>()` complements `Require.NotNull<T>()`
   by not requiring any constraint on the generic parameter. Idem for
   `Demand` and `Expect`.
-- New class `Warrant` for writing postconditions.
+- `Demand.NotNullOrWhiteSpace()`
+- `Check.IsEmptyOrWhiteSpace()`
+- `Check.IsFlagsEnum()`
+- `Warrant` a new helper class to write postconditions.
 
 ### Narvalo.Core
+Methods marked as obsolete and their replacements:
 - `BooleanStyles.EmptyIsFalse` is declared obsolete;
   use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is to better
   emphasize that white-space only strings are treated as empty strings by

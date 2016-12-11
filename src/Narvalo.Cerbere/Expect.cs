@@ -56,18 +56,6 @@ namespace Narvalo
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void NotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
-
-        [DebuggerHidden]
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void NotNullOrWhiteSpace(string value)
-        {
-            // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
-            True(!String.IsNullOrEmpty(value));
-            True(!Check.IsWhiteSpace(value));
-        }
     }
 
     // Obsolete methods.

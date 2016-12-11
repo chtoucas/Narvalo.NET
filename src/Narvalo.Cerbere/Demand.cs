@@ -67,7 +67,9 @@ namespace Narvalo
         {
             // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
             True(!String.IsNullOrEmpty(value));
-            True(!Check.IsWhiteSpace(value));
+
+            // WARNING: No code contract.
+            Debug.Assert(!Check.IsWhiteSpace(value));
         }
     }
 

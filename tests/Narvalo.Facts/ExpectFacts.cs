@@ -85,21 +85,5 @@ namespace Narvalo
         }
 
         #endregion
-
-        #region NotNullOrWhiteSpace()
-
-        [Fact]
-        public static void NotNullOrWhiteSpace_Passes_ForNonNullOrWhiteSpaceString()
-            => Expect.NotNullOrWhiteSpace("value");
-
-        [Fact]
-        public static void NotNullOrWhiteSpace_Passes_ForNullOrWhiteSpaceString()
-        {
-            Expect.NotNullOrWhiteSpace(null);
-            Expect.NotNullOrWhiteSpace(String.Empty);
-            Expect.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString);
-        }
-
-        #endregion
     }
 }

@@ -174,14 +174,14 @@ namespace Narvalo
         [ContractArgumentValidator]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
+            // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
             NotNullOrEmpty(value, parameterName);
 
+            // Do not add Contract.EndContractBlock(), it does not work with CCCheck.
             if (Check.IsWhiteSpace(value))
             {
                 throw new ArgumentException(Strings_Cerbere.Argument_WhiteSpaceString, parameterName);
             }
-
-            Contract.EndContractBlock();
         }
     }
 
