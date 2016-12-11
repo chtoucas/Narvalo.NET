@@ -3,6 +3,9 @@
 namespace Narvalo
 {
 #if DEBUG
+    using System;
+
+    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
     public sealed class ReleaseOnlyFactAttribute : System.Attribute { }
 #else
     public sealed class ReleaseOnlyFactAttribute : Xunit.FactAttribute { }
