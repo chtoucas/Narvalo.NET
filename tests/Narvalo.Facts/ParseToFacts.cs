@@ -96,7 +96,6 @@ namespace Narvalo
         [Theory]
         [InlineData("true")]
         [InlineData("TrUe")]
-        [InlineData("true")]
         [InlineData(" true")]
         [InlineData(" TrUe")]
         [InlineData("true ")]
