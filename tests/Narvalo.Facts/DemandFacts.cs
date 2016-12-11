@@ -118,35 +118,5 @@ namespace Narvalo
         public static void NotNullOrEmpty_Passes_ForEmptyString() => Demand.NotNullOrEmpty(String.Empty);
 
         #endregion
-
-        #region NotNullOrWhiteSpace()
-
-        [Fact]
-        public static void NotNullOrWhiteSpace_Passes_ForNonNullOrWhiteSpace()
-            => Demand.NotNullOrWhiteSpace("value");
-
-        [DebugOnlyFact]
-        public static void NotNullOrWhiteSpace_Fails_ForNullString()
-            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrWhiteSpace(null));
-
-        [ReleaseOnlyFact]
-        public static void NotNullOrWhiteSpace_Passes_ForNullString() => Demand.NotNullOrWhiteSpace(null);
-
-        [DebugOnlyFact]
-        public static void NotNullOrWhiteSpace_Fails_ForEmptyString()
-            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrWhiteSpace(String.Empty));
-
-        [ReleaseOnlyFact]
-        public static void NotNullOrWhiteSpace_Passes_ForEmptyString() => Demand.NotNullOrWhiteSpace(String.Empty);
-
-        [DebugOnlyFact]
-        public static void NotNullOrWhiteSpace_Fails_ForWhiteSpaceOnlyString()
-            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString));
-
-        [ReleaseOnlyFact]
-        public static void NotNullOrWhiteSpace_Passes_ForWhiteSpaceOnlyString()
-            => Demand.NotNullOrWhiteSpace(My.WhiteSpaceOnlyString);
-
-        #endregion
     }
 }

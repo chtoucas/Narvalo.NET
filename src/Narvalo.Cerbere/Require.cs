@@ -156,33 +156,6 @@ namespace Narvalo
 
             Contract.EndContractBlock();
         }
-
-        /// <summary>
-        /// Validates that the specified argument is not <see langword="null"/> or empty,
-        /// and does not only consist of white-space characters.
-        /// </summary>
-        /// <remarks>
-        /// This method specifies a weaker contract: the <paramref name="value"/> must not be
-        /// <see langword="null"/> or empty.
-        /// </remarks>
-        /// <param name="value">The argument to check.</param>
-        /// <param name="parameterName">The name of the parameter.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is
-        /// <see langword="null"/> or empty, or does not only consist of white-space characters.</exception>
-        [ContractArgumentValidator]
-        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
-        {
-            // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
-            NotNullOrEmpty(value, parameterName);
-
-            // Do not add Contract.EndContractBlock(), it does not work with CCCheck.
-            if (Check.IsWhiteSpace(value))
-            {
-                throw new ArgumentException(Strings_Cerbere.Argument_WhiteSpaceString, parameterName);
-            }
-        }
     }
 
     // Obsolete methods.
@@ -190,26 +163,24 @@ namespace Narvalo
     {
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        // NB: Using this will cause a compilation error;
+        // the chosen parameter name ("this") was wrong most of the time.
         [Obsolete("Use Require.NotNull() or Require.NotNullUnconstrained() instead.", true)]
-        public static void Object<T>([ValidatedNotNull]T @this)
-            => NotNullUnconstrained(@this, "this");
+        public static void Object<T>([ValidatedNotNull]T @this) => NotNullUnconstrained(@this, "this");
 
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Require.NotNull() or Require.NotNullUnconstrained() instead.", true)]
-        public static void Property<T>([ValidatedNotNull]T value)
-            => NotNullUnconstrained(value, "value");
+        [Obsolete("Use Require.NotNull() or Require.NotNullUnconstrained() instead.")]
+        public static void Property<T>([ValidatedNotNull]T value) => NotNullUnconstrained(value, "value");
 
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Require.True() instead.", true)]
-        public static void Property(bool testCondition)
-            => True(testCondition, "value");
+        [Obsolete("Use Require.True() instead.")]
+        public static void Property(bool testCondition) => True(testCondition, "value");
 
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Require.NotNullOrEmpty() instead.", true)]
-        public static void PropertyNotEmpty([ValidatedNotNull]string value)
-            => NotNullOrEmpty(value, "value");
+        [Obsolete("Use Require.NotNullOrEmpty() instead.")]
+        public static void PropertyNotEmpty([ValidatedNotNull]string value) => NotNullOrEmpty(value, "value");
     }
 }

@@ -65,28 +65,28 @@ namespace Narvalo
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Expect.NotNull() or Expect.NotNullUnconstrained() instead.", true)]
+        [Obsolete("Use Expect.NotNull() or Expect.NotNullUnconstrained() instead.")]
         public static void Object<T>(T @this) => NotNullUnconstrained(@this);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Expect.NotNull() or Expect.NotNullUnconstrained() instead.", true)]
+        [Obsolete("Use Expect.NotNull() or Expect.NotNullUnconstrained() instead.")]
         public static void Property<T>(T value) => NotNullUnconstrained(value);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Expect.True() instead.", true)]
+        [Obsolete("Use Expect.True() instead.")]
         public static void Property(bool testCondition) => True(testCondition);
 
         [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Expect.NotNullOrEmpty() instead.", true)]
+        [Obsolete("Use Expect.NotNullOrEmpty() instead.")]
         public static void PropertyNotEmpty(string value) => NotNullOrEmpty(value);
     }
 }

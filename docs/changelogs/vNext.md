@@ -77,22 +77,17 @@ Methods marked as obsolete and their replacements:
 - `Expect.Property<T>()` -> `Expect.NotNullUnconstrained()`
 - `Expect.Property(bool)` -> `Expect.True()`
 - `Expect.PropertyNotEmpty(bool)` -> `Expect.NotNullOrEmpty()`
-- `Enforce.NotNullOrWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
-- `Enforce.PropertyNotWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
+- `Enforce.NotNullOrWhiteSpace()` -> use `Require.NotNullOrEmpty()` and
+  `Enforce.NotWhiteSpace()`
+- `Enforce.PropertyNotWhiteSpace()` -> use `Require.NotNullOrEmpty()` and
+  `Enforce.NotWhiteSpace()`
 - `Enforce.IsWhiteSpace()` -> `Check.IsWhiteSpace()`
-- `Enforce.NotWhiteSpace()`, no direct replacement, nevertheless
-  `Require.NotNullOrWhiteSpace()` should cover all situations where this
-  method was previously used.
 
 New classes and new methods:
-- `Require.NotNullOrWhiteSpace()` guards agains `null`, empty or white-space
-  only strings. **WARNING:** The method specifies a weaker contract: "the input
-  must not be `null` or empty". Idem for `Demand` and `Expect`.
 - `Require.NotNullUnconstrained<T>()` complements `Require.NotNull<T>()`
   by not requiring any constraint on the generic parameter.
-- `Demand.NotNullOrWhiteSpace()`
-- `Demand.NotNullUnconstrained<T>()` same as `Require.NotNullUnconstrained<T>()`.
-- `Expect.NotNullUnconstrained<T>()` same as `Require.NotNullUnconstrained<T>()`.
+- `Demand.NotNullUnconstrained<T>()` complements `Demand.NotNull<T>()`.
+- `Expect.NotNullUnconstrained<T>()` complements `Expect.NotNull<T>()`.
 - `Check.IsEmptyOrWhiteSpace()`
 - `Check.IsFlagsEnum()`
 - `Warrant` a new helper class to write postconditions.

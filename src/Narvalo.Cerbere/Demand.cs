@@ -59,22 +59,6 @@ namespace Narvalo
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         public static void NotNullOrEmpty(string value) => True(!String.IsNullOrEmpty(value));
-
-        /// <remarks>
-        /// This method uses a weaker contract: the <paramref name="value"/> must not be
-        /// <see langword="null"/> or empty.
-        /// </remarks>
-        [ContractAbbreviator]
-        [Conditional("DEBUG")]
-        [Conditional("CONTRACTS_FULL")]
-        public static void NotNullOrWhiteSpace(string value)
-        {
-            // Do not use String.IsNullOrWhiteSpace(), it does not work with CCCheck.
-            True(!String.IsNullOrEmpty(value));
-
-            // WARNING: No code contract.
-            Debug.Assert(!Check.IsWhiteSpace(value));
-        }
     }
 
     // Obsolete methods.
@@ -84,28 +68,28 @@ namespace Narvalo
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Demand.NotNull() or Demand.NotNullUnconstrained() instead.", true)]
+        [Obsolete("Use Demand.NotNull() or Demand.NotNullUnconstrained() instead.")]
         public static void Object<T>(T @this) => NotNullUnconstrained(@this);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Demand.NotNull() or Demand.NotNullUnconstrained() instead.", true)]
+        [Obsolete("Use Demand.NotNull() or Demand.NotNullUnconstrained() instead.")]
         public static void Property<T>(T value) => NotNullUnconstrained(value);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Demand.True() instead.", true)]
+        [Obsolete("Use Demand.True() instead.")]
         public static void Property(bool testCondition) => True(testCondition);
 
         [ContractAbbreviator]
         [Conditional("DEBUG")]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Demand.NotNullOrEmpty() instead.", true)]
-        public static void PropertyNotEmpty(string value) => True(!String.IsNullOrEmpty(value));
+        [Obsolete("Use Demand.NotNullOrEmpty() instead.")]
+        public static void PropertyNotEmpty(string value) => NotNullOrEmpty(value);
     }
 }
