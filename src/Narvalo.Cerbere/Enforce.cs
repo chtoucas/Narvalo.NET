@@ -14,8 +14,13 @@ namespace Narvalo
     /// <para>If a condition does not hold, an <see cref="ArgumentException"/> is thrown.</para>
     /// <para>The methods MUST appear AFTER all Code Contracts.</para>
     /// </remarks>
+    public static partial class Enforce { }
+
+    // Obsolete methods.
     public static partial class Enforce
     {
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("No direct replacement, nevertheless see Require.NotNullOrWhiteSpace().", true)]
         public static void NotWhiteSpace(string value, string parameterName)
         {
             if (Check.IsWhiteSpace(value))
@@ -23,11 +28,7 @@ namespace Narvalo
                 throw new ArgumentException(Strings_Cerbere.Argument_WhiteSpaceString, parameterName);
             }
         }
-    }
 
-    // Obsolete methods.
-    public static partial class Enforce
-    {
         [Pure]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
         [Obsolete("Use Check.IsWhiteSpace() instead.", true)]

@@ -176,7 +176,12 @@ namespace Narvalo
         {
             NotNullOrEmpty(value, parameterName);
 
-            Enforce.NotWhiteSpace(value, parameterName);
+            if (Check.IsWhiteSpace(value))
+            {
+                throw new ArgumentException(Strings_Cerbere.Argument_WhiteSpaceString, parameterName);
+            }
+
+            Contract.EndContractBlock();
         }
     }
 
