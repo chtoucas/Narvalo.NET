@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     public static class Warrant
@@ -25,6 +26,7 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] Abbreviator for Contract.Result<T>().")]
         public static void NotNull<T>() where T : class
             => Contract.Ensures(Contract.Result<T>() != null);
 

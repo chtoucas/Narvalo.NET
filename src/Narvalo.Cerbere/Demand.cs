@@ -7,7 +7,7 @@ namespace Narvalo
     using System.Diagnostics.Contracts;
 
     ///// <summary>
-    ///// Provides helper methods to specify preconditions on a method.
+    ///// Provides helper methods to specify preconditions.
     ///// </summary>
     ///// <remarks>
     ///// <para>The methods WON'T be recognized by FxCop as guards against <see langword="null"/> value.</para>
