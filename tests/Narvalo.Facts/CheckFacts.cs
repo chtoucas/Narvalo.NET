@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Xunit;
 
@@ -53,6 +54,78 @@ namespace Narvalo
         [Fact]
         public static void IsWhiteSpace_ReturnsTrue_ForWhiteSpaceOnlyString()
             => Assert.True(Check.IsWhiteSpace(My.WhiteSpaceOnlyString));
+
+        #endregion
+
+        #region IsEmptyOrWhiteSpace()
+
+        [Fact]
+        public static void IsEmptyOrWhiteSpace_ReturnsTrue_ForEmptyString()
+            => Assert.True(Check.IsEmptyOrWhiteSpace(String.Empty));
+
+        [Fact]
+        public static void IsEmptyOrWhiteSpace_ReturnsTrue_ForWhiteSpaceOnlyString()
+            => Assert.True(Check.IsEmptyOrWhiteSpace(My.WhiteSpaceOnlyString));
+
+        [Fact]
+        public static void IsEmptyOrWhiteSpace_ReturnsFalse_ForNullString()
+            => Assert.False(Check.IsEmptyOrWhiteSpace(null));
+
+        [Fact]
+        public static void IsEmptyOrWhiteSpace_ReturnsFalse_ForNonEmptyOrWhiteSpaceString()
+        {
+            Assert.False(Check.IsEmptyOrWhiteSpace("value"));
+            Assert.False(Check.IsEmptyOrWhiteSpace("value with white spaces"));
+        }
+
+        #endregion
+
+        #region IsFlagsEnum()
+
+        [Fact]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
+        public static void IsFlagsEnum_ReturnsFalse_ForNullInput()
+        {
+            Type type = null;
+
+            Assert.False(Check.IsFlagsEnum(type));
+        }
+
+        [Fact]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
+        public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnumInput()
+        {
+            var type = typeof(My.EnumBits);
+
+            Assert.True(Check.IsFlagsEnum(type));
+        }
+
+        [Fact]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
+        public static void IsFlagsEnum_ReturnsFalse_ForNonFlagsEnumInput()
+        {
+            var type = typeof(My.Enum012);
+
+            Assert.False(Check.IsFlagsEnum(type));
+        }
+
+        [Fact]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
+        public static void IsFlagsEnum_ReturnsFalse_ForSimpleTypeInput()
+        {
+            var type = typeof(Int32);
+
+            Assert.False(Check.IsFlagsEnum(type));
+        }
+
+        [Fact]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
+        public static void IsFlagsEnum_ReturnsFalse_ForNonEnumerationStructInput()
+        {
+            var type = typeof(My.EmptyStruct);
+
+            Assert.False(Check.IsFlagsEnum(type));
+        }
 
         #endregion
 
