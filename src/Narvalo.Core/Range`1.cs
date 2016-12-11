@@ -19,29 +19,35 @@ namespace Narvalo
 
         public Range(T lowerEnd, T upperEnd)
         {
-            // REVIEW: Strict range? Do we allow for equality?
             Require.Range(PredicateFor.Range(lowerEnd, upperEnd), nameof(lowerEnd));
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;
         }
 
-        public T LowerEnd { get { return _lowerEnd; } }
+        public T LowerEnd => _lowerEnd;
 
-        public T UpperEnd { get { return _upperEnd; } }
+        public T UpperEnd => _upperEnd;
+
+        public bool IsDegenerate => LowerEnd.Equals(UpperEnd);
 
         /// <summary>
-        /// Returns <see langword="true"/> if the value is included in the range.
+        /// Returns <see langword="true"/> if the value is contained in the range.
         /// </summary>
         /// <remarks>Range borders are included in the comparison.</remarks>
         /// <param name="value"></param>
         /// <returns></returns>
         [Pure]
-        public bool Includes(T value)
+        public bool Contains(T value)
         {
             return value.CompareTo(LowerEnd) >= 0
                 && value.CompareTo(UpperEnd) <= 0;
         }
+
+        [Pure]
+        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
+        [Obsolete("Use Range<T>.Contains() instead.")]
+        public bool Includes(T value) => Contains(value);
 
         /// <summary>
         /// Returns <see langword="true"/> if the value is included in the range.

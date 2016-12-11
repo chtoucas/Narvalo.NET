@@ -9,7 +9,7 @@ namespace Narvalo
         public static Range<T> Of<T>(T lowerEnd, T upperEnd)
             where T : struct, IEquatable<T>, IComparable<T>
         {
-            Expect.True(PredicateFor.Range(lowerEnd, upperEnd));
+            Expect.Range(PredicateFor.Range(lowerEnd, upperEnd));
 
             return new Range<T>(lowerEnd, upperEnd);
         }

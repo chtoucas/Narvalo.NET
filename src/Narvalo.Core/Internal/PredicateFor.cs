@@ -5,10 +5,10 @@ namespace Narvalo
     using System;
     using System.Diagnostics.Contracts;
 
-#if CONTRACTS_FULL
+#if CONTRACTS_FULL // FIXME: Contract visibility.
     public
 #else
-        internal
+    internal
 #endif
         static class PredicateFor
     {
