@@ -44,6 +44,28 @@ namespace Narvalo
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void AssumeInvariant<T>(T obj) { }
 
+        /// <summary>
+        /// Returns <see langword="true"/> if the input only consists of white-space characters;
+        /// otherwise <see langword="false"/>.
+        /// </summary>
+        /// <remarks>This method returns <see langword="false"/> if <paramref name="value"/>
+        /// is null or empty.</remarks>
+        [Pure]
+        public static bool IsWhiteSpace(string value)
+        {
+            if (value == null || value.Length == 0) { return false; }
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (!Char.IsWhiteSpace(value[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         [DebuggerHidden]
         [ContractVerification(false)]
         public static ControlFlowException Unreachable()

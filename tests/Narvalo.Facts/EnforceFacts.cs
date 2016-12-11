@@ -27,25 +27,5 @@ namespace Narvalo
             => Enforce.NotWhiteSpace("Whatever", "paramName");
 
         #endregion
-
-        #region IsWhiteSpace()
-
-        [Fact]
-        public static void IsWhiteSpace_ReturnsFalse_ForNull()
-                => Assert.False(Enforce.IsWhiteSpace(null));
-
-        [Fact]
-        public static void IsWhiteSpace_ReturnsFalse_ForEmptyString()
-            => Assert.False(Enforce.IsWhiteSpace(String.Empty));
-
-        [Fact]
-        public static void IsWhiteSpace_ReturnsFalse_ForNonWhiteSpaceOnlyString()
-            => Assert.False(Enforce.IsWhiteSpace("Whatever"));
-
-        [Fact]
-        public static void IsWhiteSpace_ReturnsTrue_ForWhiteSpaceOnlyString()
-            => Assert.True(Enforce.IsWhiteSpace(My.WhiteSpaceOnlyString));
-
-        #endregion
     }
 }

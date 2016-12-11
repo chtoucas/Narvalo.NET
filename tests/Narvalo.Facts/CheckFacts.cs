@@ -36,6 +36,26 @@ namespace Narvalo
 
         #endregion
 
+        #region IsWhiteSpace()
+
+        [Fact]
+        public static void IsWhiteSpace_ReturnsFalse_ForNull()
+                => Assert.False(Check.IsWhiteSpace(null));
+
+        [Fact]
+        public static void IsWhiteSpace_ReturnsFalse_ForEmptyString()
+            => Assert.False(Check.IsWhiteSpace(String.Empty));
+
+        [Fact]
+        public static void IsWhiteSpace_ReturnsFalse_ForNonWhiteSpaceOnlyString()
+            => Assert.False(Check.IsWhiteSpace("Whatever"));
+
+        [Fact]
+        public static void IsWhiteSpace_ReturnsTrue_ForWhiteSpaceOnlyString()
+            => Assert.True(Check.IsWhiteSpace(My.WhiteSpaceOnlyString));
+
+        #endregion
+
         #region AssumeInvariant()
 
         [Fact]

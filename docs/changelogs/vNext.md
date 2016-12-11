@@ -50,7 +50,8 @@ Bugfixes
 Breaking Changes
 ----------------
 ### Narvalo.Cerbere
-- `Enforce.IsWhiteSpace()` no longer throws when the input is `null`, but rather
+- `Enforce.IsWhiteSpace()` has been replaced by `Check.IsWhiteSpace()` and
+  no longer throws when the input is `null`, but rather
   returns `false`. More importantly, the method returns `false` instead of
   `true` for an empty string.
 - New class constraint added to `Require.NotNull<T>()` (idem with `Demand`
@@ -71,18 +72,20 @@ API Changes
   * Idem for `Demand` and `Expect`
   * `Enforce.NotNullOrWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
   * `Enforce.PropertyNotWhiteSpace()` -> `Require.NotNullOrWhiteSpace()`
+  * `Enforce.IsWhiteSpace()` -> `Check.IsWhiteSpace()`
 - `Require.NotNullOrWhiteSpace()` guards agains `null`, empty string
-  or white-space only strings. **WARNING** The mehod specifies a stronger
-  code contract: "the input must not be `null` or empty". Idem for
+  or white-space only strings. **WARNING:** The mehod specifies a weaker
+  contract: "the input must not be `null` or empty". Idem for
   `Demand` and `Expect`.
 - `Require.NotNullUnconstrained<T>()` complements `Require.NotNull<T>()`
   by not requiring any constraint on the generic parameter. Idem for
   `Demand` and `Expect`.
+- New class `Warrant` for writing postconditions.
 
 ### Narvalo.Core
 - `BooleanStyles.EmptyIsFalse` is declared obsolete;
   use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is to better
-  emphasize that whitespace-only strings are treated as empty strings by
+  emphasize that white-space only strings are treated as empty strings by
   `ParseTo.Boolean()`.
 
 Enhancements
