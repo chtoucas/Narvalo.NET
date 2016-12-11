@@ -3,6 +3,7 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Properties;
@@ -11,7 +12,8 @@ namespace Narvalo
     /// Provides helper methods to specify preconditions which proved to be too complicated
     /// for the Code Contracts tools.
     /// </summary>
-    /// <remarks>The methods MUST appear AFTER all preconditions with Code Contracts.</remarks>
+    /// <remarks>These methods MUST appear after all preconditions using Code Contracts.
+    /// Failing to do so would result in a compilation error (CC1027).</remarks>
     public static partial class Enforce
     {
         public static void State(bool testCondition)
@@ -124,8 +126,9 @@ namespace Narvalo
 
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        // NB: Using this will cause a compilation error; creating this method was an error.
+        // NB: Using this method will cause a compilation error; creating this method was an error.
         [Obsolete("Use Require.NotNullOrEmpty() and Enforce.NotWhiteSpace() instead.", true)]
+        [SuppressMessage("Microsoft.Contracts", "MissingPrecondition-9-0", Justification = "[Ignore] We can not have a precondition and ContractArgumentValidator both at the same time; error CC1054.")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
             Require.NotNullOrEmpty(value, parameterName);
@@ -135,7 +138,7 @@ namespace Narvalo
 
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        // NB: Using this will cause a compilation error; creating this method was an error.
+        // NB: Using this method will cause a compilation error; creating this method was an error.
         [Obsolete("Use Require.NotNullOrEmpty() and Enforce.NotWhiteSpace() instead.", true)]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
         {
