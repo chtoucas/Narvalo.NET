@@ -7,7 +7,7 @@ namespace Narvalo
 
     using Xunit;
 
-    public partial class CheckFacts
+    public static partial class CheckFacts
     {
         #region True()
 
@@ -83,7 +83,6 @@ namespace Narvalo
         #region IsFlagsEnum()
 
         [Fact]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
         public static void IsFlagsEnum_ReturnsFalse_ForNullInput()
         {
             Type type = null;
@@ -92,7 +91,6 @@ namespace Narvalo
         }
 
         [Fact]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
         public static void IsFlagsEnum_ReturnsTrue_ForFlagsEnumInput()
         {
             var type = typeof(My.EnumBits);
@@ -101,7 +99,6 @@ namespace Narvalo
         }
 
         [Fact]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
         public static void IsFlagsEnum_ReturnsFalse_ForNonFlagsEnumInput()
         {
             var type = typeof(My.Enum012);
@@ -110,7 +107,6 @@ namespace Narvalo
         }
 
         [Fact]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
         public static void IsFlagsEnum_ReturnsFalse_ForSimpleTypeInput()
         {
             var type = typeof(Int32);
@@ -119,7 +115,6 @@ namespace Narvalo
         }
 
         [Fact]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
         public static void IsFlagsEnum_ReturnsFalse_ForNonEnumerationStructInput()
         {
             var type = typeof(My.EmptyStruct);

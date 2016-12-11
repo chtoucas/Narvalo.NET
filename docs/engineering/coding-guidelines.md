@@ -183,9 +183,12 @@ Useful attributes
   This attribute CAN NOT be set on a class.
 - `DebuggerStepThrough` means that the code will be marked as _external_
   in the call stack. This attribute can be set on a class.
+- `DebuggerNonUserCode`
 - `DebuggerBrowsable`
 - `DebuggerDisplay`
 - `DebuggerTypeProxy`
+
+See http://geekswithblogs.net/terje/archive/2008/11/10/hiding-generated-code-from-code-analysis-metrics-and-test-coverage.aspx
 
 ### Performance attributes
 - `MethodImpl`

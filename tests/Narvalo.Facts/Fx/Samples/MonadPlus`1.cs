@@ -8,7 +8,6 @@ namespace Narvalo.Fx.Samples
     public sealed class MonadPlus<T>
     {
         // [Haskell] mzero
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public static MonadPlus<T> Zero { get { throw new NotImplementedException(); } }
 
         // [Haskell] mplus

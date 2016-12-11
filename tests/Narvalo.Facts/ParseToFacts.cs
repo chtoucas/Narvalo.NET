@@ -331,7 +331,7 @@ namespace Narvalo
         [InlineData(" one, two")]
         [InlineData(" one, two ")]
         [CLSCompliant(false)]
-        public static void Enum_ReturnsNull_ForCompositeValue_BitFlagsEnum_DoNotignoreCase(string value)
+        public static void Enum_ReturnsNull_ForCompositeValue_BitFlagsEnum_DoNotIgnoreCase(string value)
         {
             var result = ParseTo.Enum<My.EnumBits>(value, ignoreCase: false);
 

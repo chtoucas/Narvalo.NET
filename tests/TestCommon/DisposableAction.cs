@@ -2,15 +2,14 @@
 
 using global::System.Diagnostics.CodeAnalysis;
 
-[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText",
-    Justification = "[Ignore] Microsoft source file.")]
+[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText", Justification = "[Ignore] Microsoft source file.")]
 
 // Adapted from aspnetwebstack\src\System.Web.WebPages\Common\DisposableAction.cs
 namespace Narvalo
 {
     using System;
 
-    internal class DisposableAction : IDisposable
+    public class DisposableAction : IDisposable
     {
         private Action _action;
         private bool _hasDisposed;

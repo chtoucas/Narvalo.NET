@@ -2,8 +2,7 @@
 
 using global::System.Diagnostics.CodeAnalysis;
 
-[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText",
-    Justification = "[Ignore] Microsoft source file.")]
+[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText", Justification = "[Ignore] Microsoft source file.")]
 
 // Adapted from aspnetwebstack\test\System.Web.Mvc.Test\Util\MvcHelper.cs
 namespace Narvalo
@@ -17,7 +16,7 @@ namespace Narvalo
     using System.Web.Routing;
     using Moq;
 
-    public static class MvcUtility
+    public static class MvcHelper
     {
         public const string AppPathModifier = "/$(SESSION)";
 

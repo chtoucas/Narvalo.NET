@@ -6,6 +6,9 @@
       <Word>Abelian</Word>
       <Word>Monoid</Word>
 
+      <Word>Monad</Word>
+      <Word>Comonad</Word>
+
       <Word>Ctor</Word>
     </Recognized>
 

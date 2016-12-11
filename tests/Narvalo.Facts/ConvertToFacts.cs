@@ -19,7 +19,7 @@ namespace Narvalo
             => Assert.Throws<ArgumentException>(() => ConvertTo.Enum<My.EmptyStruct>(1));
 
         [Fact]
-        public static void Enum_ThrowsNotSupportedException_FoBitFlagsEnum()
+        public static void Enum_ThrowsNotSupportedException_ForBitFlagsEnum()
             => Assert.Throws<NotSupportedException>(() => ConvertTo.Enum<My.EnumBits>(1));
 
         [Fact]

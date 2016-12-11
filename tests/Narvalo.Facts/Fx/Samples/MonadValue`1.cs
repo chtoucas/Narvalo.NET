@@ -9,16 +9,13 @@ namespace Narvalo.Fx.Samples
         where T : struct
     {
         // [Haskell] mzero
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public static MonadValue<T> None { get { throw new NotImplementedException(); } }
 
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public static bool operator ==(MonadValue<T> left, MonadValue<T> right)
         {
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public static bool operator !=(MonadValue<T> left, MonadValue<T> right)
         {
             throw new NotImplementedException();
@@ -37,19 +34,16 @@ namespace Narvalo.Fx.Samples
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public bool Equals(MonadValue<T> other)
         {
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public override bool Equals(object obj)
         {
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations", Justification = "[Intentionally] This code is not meant to be used.")]
         public override int GetHashCode()
         {
             throw new NotImplementedException();

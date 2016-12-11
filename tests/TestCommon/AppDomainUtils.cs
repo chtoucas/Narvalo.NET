@@ -2,8 +2,7 @@
 
 using global::System.Diagnostics.CodeAnalysis;
 
-[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText",
-    Justification = "[Ignore] Microsoft source file.")]
+[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText", Justification = "[Ignore] Microsoft source file.")]
 
 // Adapted from aspnetwebstack\test\Microsoft.TestCommon\AppDomainUtils.cs
 namespace Narvalo
@@ -14,7 +13,7 @@ namespace Narvalo
     using System.Web.Compilation;
     using System.Web.Hosting;
 
-    internal static class AppDomainUtils
+    public static class AppDomainUtils
     {
 
         // Allow a test to modify static fields in an independent appdomain so that

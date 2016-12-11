@@ -100,7 +100,7 @@ namespace Narvalo
         #region NotNullOrEmpty()
 
         [Fact]
-        public static void NotNullOrEmpty_Passes_ForNonNullorEmptyString()
+        public static void NotNullOrEmpty_Passes_ForNonNullOrEmptyString()
             => Demand.NotNullOrEmpty("value");
 
         [DebugOnlyFact]

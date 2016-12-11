@@ -46,8 +46,7 @@ namespace Narvalo
         [Fact]
         public static void NotNull_Passes_ForNull()
         {
-            Object obj = null;
-            Expect.NotNull(obj);
+            Expect.NotNull((Object)null);
         }
 
         #endregion
@@ -65,8 +64,7 @@ namespace Narvalo
         [Fact]
         public static void NotNullUnconstrained_Passes_ForNull()
         {
-            Object obj = null;
-            Expect.NotNull(obj);
+            Expect.NotNull((Object)null);
         }
 
         #endregion
