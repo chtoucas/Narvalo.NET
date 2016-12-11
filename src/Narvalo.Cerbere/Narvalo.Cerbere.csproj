@@ -79,6 +79,7 @@
       <DependentUpon>Strings_Cerbere.resx</DependentUpon>
     </Compile>
     <Compile Include="ValidatedNotNullAttribute.cs" />
+    <Compile Include="Warrant.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Narvalo.Cerbere.props">
