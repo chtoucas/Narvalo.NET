@@ -18,6 +18,8 @@ namespace Narvalo
     {
         public static void NotWhiteSpace(string value, string parameterName)
         {
+            Expect.NotNull(parameterName);
+
             if (Check.IsWhiteSpace(value))
             {
                 throw new ArgumentException(Strings_Cerbere.Argument_WhiteSpaceString, parameterName);

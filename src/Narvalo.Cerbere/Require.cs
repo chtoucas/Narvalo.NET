@@ -5,7 +5,6 @@ namespace Narvalo
     using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
-    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Properties;
 
