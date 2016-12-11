@@ -88,6 +88,10 @@ New classes and new methods:
   by not requiring any constraint on the generic parameter.
 - `Demand.NotNullUnconstrained<T>()` complements `Demand.NotNull<T>()`.
 - `Expect.NotNullUnconstrained<T>()` complements `Expect.NotNull<T>()`.
+- `Enforce.State()`
+- `Enforce.True()`
+- `Enforce.Range()`
+- `Enforce.Range<T>()`
 - `Check.IsEmptyOrWhiteSpace()`
 - `Check.IsFlagsEnum()`
 - `Warrant` a new helper class to write postconditions.
@@ -98,6 +102,10 @@ Methods marked as obsolete and their replacements:
   use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is to better
   emphasize that white-space only strings are treated as empty strings by
   `ParseTo.Boolean()`.
+- `Range<T>.Includes(T)` -> `Range<T>.Contains(T)`
+
+New classes and new methods:
+- `Range<T>.IsDegenerate`
 
 Enhancements
 ------------

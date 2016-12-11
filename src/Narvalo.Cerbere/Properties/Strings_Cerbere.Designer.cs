@@ -98,6 +98,15 @@ namespace Narvalo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value of &apos;{0}&apos; is not in range [{1} - {2}]..
+        /// </summary>
+        internal static string ArgumentOutOfRange {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The property value cannot be empty..
         /// </summary>
         internal static string ArgumentProperty_EmptyString {
