@@ -4,7 +4,7 @@ namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Collections.Generic;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
 
@@ -28,7 +28,7 @@ namespace Narvalo.Mvp.Resolvers
             return _cache.GetOrAdd(viewType, _inner.Resolve);
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
         private void ObjectInvariant()

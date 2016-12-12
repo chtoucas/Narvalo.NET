@@ -4,7 +4,7 @@ namespace Narvalo.Mvp.Platforms
 {
     using System;
     using System.ComponentModel;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
 
@@ -68,7 +68,7 @@ namespace Narvalo.Mvp.Platforms
             _valueFactory = valueFactory;
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
         private void ObjectInvariant()

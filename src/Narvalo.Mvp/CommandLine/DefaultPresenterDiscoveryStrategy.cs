@@ -3,7 +3,7 @@
 namespace Narvalo.Mvp.CommandLine
 {
     using System.Collections.Generic;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
     using System.Linq;
@@ -54,7 +54,7 @@ namespace Narvalo.Mvp.CommandLine
             return _inner.FindBindings(hosts, views);
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
         private void ObjectInvariant()

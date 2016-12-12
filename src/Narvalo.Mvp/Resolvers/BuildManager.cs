@@ -3,7 +3,7 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
     using System.Linq;
@@ -29,7 +29,7 @@ namespace Narvalo.Mvp.Resolvers
                 .FirstOrDefault();
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
         private void ObjectInvariant()

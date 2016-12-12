@@ -116,7 +116,7 @@ namespace Narvalo.Fx
     }
 }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
 namespace Narvalo.Fx
 {

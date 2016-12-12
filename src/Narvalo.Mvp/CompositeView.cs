@@ -5,7 +5,7 @@ namespace Narvalo.Mvp
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
 
@@ -49,7 +49,7 @@ namespace Narvalo.Mvp
             _views.Add((TView)view);
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
         private void ObjectInvariant()

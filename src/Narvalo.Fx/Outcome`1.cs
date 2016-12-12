@@ -413,7 +413,7 @@ namespace Narvalo.Fx
         }
     }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
     // In real world, only Success_ and Failure_ can inherit from Outcome.
     // Adding the following object invariants on Outcome<T>:

@@ -3,7 +3,7 @@
 namespace Narvalo.Mvp.CommandLine
 {
     using System;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
 
@@ -43,7 +43,7 @@ namespace Narvalo.Mvp.CommandLine
 
         protected virtual void OnLoad(EventArgs e) => Load?.Invoke(this, e);
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
         private void ObjectInvariant()

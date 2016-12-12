@@ -4,7 +4,7 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Diagnostics;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
     using System.Reflection;
@@ -86,7 +86,7 @@ namespace Narvalo.Mvp.PresenterBinding
             }
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
         private void ObjectInvariant()

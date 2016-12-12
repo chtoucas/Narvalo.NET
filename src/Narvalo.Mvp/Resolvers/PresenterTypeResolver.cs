@@ -6,7 +6,7 @@ namespace Narvalo.Mvp.Resolvers
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
     using System.Linq;
@@ -105,7 +105,7 @@ namespace Narvalo.Mvp.Resolvers
             return String.IsNullOrEmpty(name) ? viewName : name;
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
         private void ObjectInvariant()

@@ -5,7 +5,7 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Collections.Concurrent;
     using System.Diagnostics.CodeAnalysis;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
 
@@ -50,7 +50,7 @@ namespace Narvalo.Mvp.Resolvers
             return value;
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
         private void ObjectInvariant()

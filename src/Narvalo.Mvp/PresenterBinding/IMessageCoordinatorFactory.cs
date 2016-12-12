@@ -8,7 +8,7 @@ namespace Narvalo.Mvp.PresenterBinding
     }
 }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
 namespace Narvalo.Mvp.PresenterBinding
 {

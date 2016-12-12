@@ -2,7 +2,7 @@
 
 namespace Narvalo.Mvp
 {
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
 #endif
 
@@ -27,7 +27,7 @@ namespace Narvalo.Mvp
             set { Messages = value; }
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
+#if CONTRACTS_FULL
 
         [ContractInvariantMethod]
         private void ObjectInvariant()
