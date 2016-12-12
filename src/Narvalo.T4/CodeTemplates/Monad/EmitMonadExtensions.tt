@@ -23,7 +23,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(selector, nameof(selector));
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.Bind(_ => <#= Name #>.<#= ReturnName #>(selector.Invoke(_)));
@@ -39,7 +39,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.Bind(_ => other);
@@ -56,7 +56,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (PostThenEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
@@ -75,7 +75,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+            Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
 <#+ } #>
 
             return <#= Name #>.Unit;
@@ -98,7 +98,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(predicate, nameof(predicate));
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             return @this.Bind(
@@ -119,7 +119,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.Range(count >= 1, nameof(count));
 <#+ if (PostMapEnsuresSome) { #>
-            Ensures(Result<<#= Name #><IEnumerable<TSource>>>() != null);
+            Warrant.NotNull<<#= Name #><IEnumerable<TSource>>>();
 <#+ } #>
 
             return @this.<#= MapName #>(_ => Enumerable.Repeat(_, count));
@@ -142,7 +142,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.Bind(v1 => second.<#= MapName #>(v2 => resultSelector.Invoke(v1, v2)));
@@ -160,7 +160,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             Func<T1, <#= Name #><TResult>> g
@@ -182,7 +182,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             Func<T1, <#= Name #><TResult>> g
@@ -208,7 +208,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull("second"); #>
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             Func<T1, <#= Name #><TResult>> g
@@ -236,7 +236,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (PostFilterEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             return @this.<#= FilterName #>(predicate);
@@ -251,7 +251,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(); #>
 <#+ if (PostMapEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.<#= MapName #>(selector);
@@ -272,7 +272,7 @@ public partial class MonadTemplate
             Require.NotNull(valueSelectorM, nameof(valueSelectorM));
             Require.NotNull(resultSelector, nameof(resultSelector));
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.Bind(
@@ -298,7 +298,7 @@ public partial class MonadTemplate
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
 <#+ if (PostJoinEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.Join(
@@ -325,7 +325,7 @@ public partial class MonadTemplate
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
 <#+ if (PostGroupJoinEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.GroupJoin(
@@ -361,7 +361,7 @@ public partial class MonadTemplate
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
 <#+ if (PostJoinEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return JoinCore(
@@ -390,7 +390,7 @@ public partial class MonadTemplate
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
 <#+ if (PostGroupJoinEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return GroupJoinCore(
@@ -421,7 +421,7 @@ public partial class MonadTemplate
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
 <#+ if (PostMapEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
@@ -449,7 +449,7 @@ public partial class MonadTemplate
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
 <#+ if (PostMapEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
@@ -469,7 +469,7 @@ public partial class MonadTemplate
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
             Demand.NotNull(innerKeySelector);
-            Ensures(Result<Func<TSource, <#= Name #><TKey>>>() != null);
+            Warrant.NotNull<Func<TSource, <#= Name #><TKey>>>();
 
             return source =>
             {

@@ -2,20 +2,18 @@
 
 namespace Narvalo.Fx
 {
-    using static System.Diagnostics.Contracts.Contract;
-
     public static class Switch
     {
         public static Switch<TLeft, TRight> Left<TLeft, TRight>(TLeft value)
         {
-            Ensures(Result<Switch<TLeft, TRight>>() != null);
+            Warrant.NotNull<Switch<TLeft, TRight>>();
 
             return Switch<TLeft, TRight>.η(value);
         }
 
         public static Switch<TLeft, TRight> Right<TLeft, TRight>(TRight value)
         {
-            Ensures(Result<Switch<TLeft, TRight>>() != null);
+            Warrant.NotNull<Switch<TLeft, TRight>>();
 
             return Switch<TLeft, TRight>.η(value);
         }

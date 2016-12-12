@@ -66,7 +66,7 @@ namespace Narvalo.Web
         public static string AbsoluteContent(this UrlHelper @this, string path)
         {
             Require.NotNull(@this, nameof(@this));
-            Contract.Ensures(Contract.Result<string>() != null);
+            Warrant.NotNull<string>();
 
             Uri uri = new Uri(path, UriKind.RelativeOrAbsolute);
 

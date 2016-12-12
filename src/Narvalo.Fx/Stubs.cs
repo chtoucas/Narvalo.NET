@@ -4,8 +4,6 @@ namespace Narvalo.Fx
 {
     using System;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides helper methods pertaining to <see cref="Action"/> instances.
     /// </summary>
@@ -21,7 +19,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<Action>() != null);
+                Warrant.NotNull<Action>();
 
                 return s_Noop;
             }

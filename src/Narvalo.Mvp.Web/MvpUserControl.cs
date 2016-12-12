@@ -40,7 +40,7 @@ namespace Narvalo.Mvp.Web
         protected T DataItem<T>() where T : class, new()
         {
             Demand.NotNull(Page);
-            Ensures(Result<T>() != null);
+            Warrant.NotNull<T>();
 
             var t = Page.GetDataItem() as T;
             return t ?? new T();
@@ -61,7 +61,7 @@ namespace Narvalo.Mvp.Web
         protected string DataValue<T>(string format) where T : class
         {
             Demand.NotNull(Page);
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             // NB: WebFormsMvp does not add a type constraint and use a direct cast
             // (T)Page.GetDataItem() but I prefer to avoid boxing/unboxing and the risk

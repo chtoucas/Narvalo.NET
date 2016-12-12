@@ -13,7 +13,7 @@ namespace Narvalo.Web.Configuration
     {
         public static T GetSection<T>(string sectionName) where T : ConfigurationSection
         {
-            Contract.Ensures(Contract.Result<T>() != null);
+            Warrant.NotNull<T>();
 
             T section = WebConfigurationManager.GetSection(sectionName) as T;
 
@@ -28,7 +28,7 @@ namespace Narvalo.Web.Configuration
 
         public static T GetSection<T>(string sectionName, string virtualPath) where T : ConfigurationSection
         {
-            Contract.Ensures(Contract.Result<T>() != null);
+            Warrant.NotNull<T>();
 
             T section = WebConfigurationManager.GetSection(sectionName, virtualPath) as T;
 

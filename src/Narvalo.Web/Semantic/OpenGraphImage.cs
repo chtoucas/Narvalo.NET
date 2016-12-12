@@ -23,7 +23,7 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Contract.Ensures(Contract.Result<Uri>() != null);
+                Warrant.NotNull<Uri>();
 
                 return _url;
             }
@@ -33,7 +33,7 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return _mimeType;
             }

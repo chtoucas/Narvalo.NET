@@ -4,9 +4,6 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     public static class Sequence
     {
@@ -19,7 +16,7 @@ namespace Narvalo.Fx
         /// <returns>An <see cref="IEnumerable{T}"/> that contains a single element.</returns>
         public static IEnumerable<TSource> Pure<TSource>(TSource value)
         {
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             // Enumerable.Repeat(value, 1) would work too, but is less readable.
             yield return value;
@@ -35,7 +32,7 @@ namespace Narvalo.Fx
             Func<TSource, Iteration<TResult, TSource>> generator)
         {
             Expect.NotNull(generator);
-            Ensures(Result<IEnumerable<TResult>>() != null);
+            Warrant.NotNull<IEnumerable<TResult>>();
 
             return Unfold(seed, generator, Stubs<TSource>.AlwaysTrue);
         }
@@ -47,7 +44,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(generator, nameof(generator));
             Require.NotNull(predicate, nameof(predicate));
-            Ensures(Result<IEnumerable<TResult>>() != null);
+            Warrant.NotNull<IEnumerable<TResult>>();
 
             TSource current = seed;
 
@@ -73,7 +70,7 @@ namespace Narvalo.Fx
             Func<TSource, TSource> iterator)
         {
             Expect.NotNull(iterator);
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             return Gather(seed, iterator, Stubs<TSource>.AlwaysTrue);
         }
@@ -85,7 +82,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(iterator, nameof(iterator));
             Require.NotNull(predicate, nameof(predicate));
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             TSource current = seed;
 
@@ -113,7 +110,7 @@ namespace Narvalo.Fx
         {
             Expect.NotNull(iterator);
             Expect.NotNull(resultSelector);
-            Ensures(Result<IEnumerable<TResult>>() != null);
+            Warrant.NotNull<IEnumerable<TResult>>();
 
             return Gather(seed, iterator, resultSelector, Stubs<TSource>.AlwaysTrue);
         }
@@ -133,7 +130,7 @@ namespace Narvalo.Fx
             Require.NotNull(iterator, nameof(iterator));
             Require.NotNull(resultSelector, nameof(resultSelector));
             Require.NotNull(predicate, nameof(predicate));
-            Ensures(Result<IEnumerable<TResult>>() != null);
+            Warrant.NotNull<IEnumerable<TResult>>();
 
             TSource current = seed;
 

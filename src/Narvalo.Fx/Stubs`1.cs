@@ -5,8 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides helper methods pertaining to <see cref="Func{T}"/> and <see cref="Action{T}"/> instances.
     /// </summary>
@@ -33,7 +31,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<Func<T>>() != null);
+                Warrant.NotNull<Func<T>>();
 
                 return s_AlwaysDefault;
             }
@@ -49,7 +47,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<Func<T, bool>>() != null);
+                Warrant.NotNull<Func<T, bool>>();
 
                 return s_AlwaysFalse;
             }
@@ -65,7 +63,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<Func<T, bool>>() != null);
+                Warrant.NotNull<Func<T, bool>>();
 
                 return s_AlwaysTrue;
             }
@@ -81,7 +79,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<Func<T, T>>() != null);
+                Warrant.NotNull<Func<T, T>>();
 
                 return s_Identity;
             }
@@ -97,7 +95,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<Action<T>>() != null);
+                Warrant.NotNull<Action<T>>();
 
                 return s_Ignore;
             }

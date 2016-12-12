@@ -27,7 +27,7 @@ public partial class MonadTemplate
             get
             {
 <#+ if (IsNullable) { #>
-                Ensures(Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+                Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
 <#+ } #>
 
                 return s_Unit;
@@ -48,7 +48,7 @@ public partial class MonadTemplate
             get
             {
 <#+ if (IsNullable) { #>
-                Ensures(Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+                Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
 <#+ } #>
 
                 return <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
@@ -70,7 +70,7 @@ public partial class MonadTemplate
             <#+ WriteTypeConstraints("T"); #>
         {
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><T>>() != null);
+            Warrant.NotNull<<#= Name #><T>>();
 <#+ } #>
 
             return <#= Name #><T>.η(value);
@@ -91,7 +91,7 @@ public partial class MonadTemplate
             Expect.NotNull(square);
 <#+ } #>
 <#+ if (PostMultiplicationEnsuresSome) { #>
-            Ensures(Result<<#= Name #><T>>() != null);
+            Warrant.NotNull<<#= Name #><T>>();
 <#+ } #>
 
             return <#= Name #><T>.μ(square);
@@ -109,7 +109,7 @@ public partial class MonadTemplate
         public static <#= Name #><global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><global::Narvalo.Fx.Unit>>() != null);
+            Warrant.NotNull<<#= Name #><global::Narvalo.Fx.Unit>>();
 <#+ } #>
 
             return predicate ? <#= Name #>.Unit : <#= Name #><global::Narvalo.Fx.Unit>.<#= ZeroName #>;
@@ -131,7 +131,7 @@ public partial class MonadTemplate
             Func<T, TResult> fun)
             <#+ WriteTypeConstraints("T", "TResult"); #>
         {
-            Ensures(Result<Func<<#= Name #><T>, <#= Name #><TResult>>>() != null);
+            Warrant.NotNull<Func<<#= Name #><T>, <#= Name #><TResult>>>();
 
             return m =>
             {
@@ -151,7 +151,7 @@ public partial class MonadTemplate
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             <#+ WriteTypeConstraints("T1", "T2", "TResult"); #>
         {
-            Ensures(Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>() != null);
+            Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><TResult>>>();
 
             return (m1, m2) =>
             {
@@ -171,7 +171,7 @@ public partial class MonadTemplate
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "TResult"); #>
         {
-            Ensures(Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>() != null);
+            Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><TResult>>>();
 
             return (m1, m2, m3) =>
             {
@@ -192,7 +192,7 @@ public partial class MonadTemplate
             Func<T1, T2, T3, T4, TResult> fun)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "TResult"); #>
         {
-            Ensures(Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>() != null);
+            Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><TResult>>>();
 
             return (m1, m2, m3, m4) =>
             {
@@ -213,7 +213,7 @@ public partial class MonadTemplate
             Func<T1, T2, T3, T4, T5, TResult> fun)
             <#+ WriteTypeConstraints("T1", "T2", "T3", "T4", "T5", "TResult"); #>
         {
-            Ensures(Result<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>() != null);
+            Warrant.NotNull<Func<<#= Name #><T1>, <#= Name #><T2>, <#= Name #><T3>, <#= Name #><T4>, <#= Name #><T5>, <#= Name #><TResult>>>();
 
             return (m1, m2, m3, m4, m5) =>
             {

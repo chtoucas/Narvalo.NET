@@ -20,7 +20,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(predicate, nameof(predicate));
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
@@ -39,7 +39,7 @@ public partial class MonadTemplate
 <#+ } #>
             Expect.NotNull(predicate);
 <#+ if (PostCoalesceEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.Coalesce(predicate, other, <#= Name #><TResult>.<#= ZeroName #>);
@@ -56,7 +56,7 @@ public partial class MonadTemplate
 <#+ } #>
             Expect.NotNull(predicate);
 <#+ if (PostCoalesceEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return @this.Coalesce(predicate, <#= Name #><TResult>.<#= ZeroName #>, other);
@@ -73,7 +73,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(action, nameof(action));
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             if (predicate) { action.Invoke(); }
@@ -92,7 +92,7 @@ public partial class MonadTemplate
 <#+ } #>
             Expect.NotNull(action);
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             return @this.When(!predicate, action);
@@ -106,7 +106,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(action, nameof(action));
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
@@ -122,7 +122,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(); #>
             Require.NotNull(action, nameof(action));
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             // FIXME
@@ -143,7 +143,7 @@ public partial class MonadTemplate
             Require.NotNull(action, nameof(action));
             Require.NotNull(case<#= ZeroName #>, nameof(case<#= ZeroName #>));
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             return @this.Invoke(action).On<#= ZeroName #>(case<#= ZeroName #>);

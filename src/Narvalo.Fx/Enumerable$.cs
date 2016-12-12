@@ -7,8 +7,6 @@ namespace Narvalo.Fx
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
@@ -18,7 +16,7 @@ namespace Narvalo.Fx
         // I think that all LINQ operators never return a null but rather an empty sequence if needed.
         public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
         {
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             if (@this == null)
             {
@@ -112,7 +110,7 @@ namespace Narvalo.Fx
         public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Expect.NotNull(@this);
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             return @this.Concat(Sequence.Pure(element)).EmptyIfNull();
         }
@@ -120,7 +118,7 @@ namespace Narvalo.Fx
         public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> @this, TSource element)
         {
             Expect.NotNull(@this);
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             return Sequence.Pure(element).Concat(@this).EmptyIfNull();
         }
@@ -132,7 +130,7 @@ namespace Narvalo.Fx
         public static ICollection<TSource> ToCollection<TSource>(this IEnumerable<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<ICollection<TSource>>() != null);
+            Warrant.NotNull<ICollection<TSource>>();
 
             var retval = new Collection<TSource>();
 
@@ -255,7 +253,7 @@ namespace Narvalo.Fx
         internal static Outcome<IEnumerable<TSource>> CollectCore<TSource>(this IEnumerable<Outcome<TSource>> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<Outcome<IEnumerable<TSource>>>() != null);
+            Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
 
             var list = new List<TSource>();
 

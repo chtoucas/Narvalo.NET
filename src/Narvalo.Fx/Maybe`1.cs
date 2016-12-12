@@ -11,8 +11,6 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Represents an object that is either a single value of type T, or no value at all.
     /// </summary>
@@ -187,7 +185,7 @@ namespace Narvalo.Fx
             get
             {
                 Demand.State(IsSome);
-                Ensures(Result<T>() != null);
+                Warrant.NotNullUnconstrained<T>();
 
 #if CONTRACTS_FULL // Helps CCCheck with the object invariance.
 
@@ -216,7 +214,7 @@ namespace Narvalo.Fx
 
         public static explicit operator T(Maybe<T> value)
         {
-            Ensures(Result<T>() != null);
+            Warrant.NotNullUnconstrained<T>();
 
             if (!value.IsSome)
             {
@@ -270,7 +268,7 @@ namespace Narvalo.Fx
         public T ValueOrElse(T other)
         {
             Require.NotNullUnconstrained(other, nameof(other));
-            Ensures(Result<T>() != null);
+            Warrant.NotNullUnconstrained<T>();
 
             return IsSome ? Value : other;
         }
@@ -285,7 +283,7 @@ namespace Narvalo.Fx
         public T ValueOrThrow(Exception exception)
         {
             Require.NotNull(exception, nameof(exception));
-            Ensures(Result<T>() != null);
+            Warrant.NotNullUnconstrained<T>();
 
             return ValueOrThrow(() => exception);
         }
@@ -293,7 +291,7 @@ namespace Narvalo.Fx
         public T ValueOrThrow(Func<Exception> exceptionFactory)
         {
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-            Ensures(Result<T>() != null);
+            Warrant.NotNullUnconstrained<T>();
 
             if (!IsSome)
             {
@@ -306,7 +304,7 @@ namespace Narvalo.Fx
         /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return IsSome ? Format.Current("Maybe({0})", Value) : "Maybe(None)";
         }
@@ -491,10 +489,10 @@ namespace Narvalo.Fx
     /// </content>
     public partial struct Maybe<T>
     {
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-14-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-6-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public IEnumerable<T> ToEnumerable()
         {
-            Ensures(Result<IEnumerable<T>>() != null);
+            Warrant.NotNull<IEnumerable<T>>();
 
             return IsSome ? Sequence.Pure(Value) : Sequence<T>.Empty;
         }
@@ -502,7 +500,7 @@ namespace Narvalo.Fx
         /// <inheritdoc cref="IEnumerable{T}.GetEnumerator" />
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            Ensures(Result<IEnumerator<T>>() != null);
+            Warrant.NotNull<IEnumerator<T>>();
 
             return ToEnumerable().GetEnumerator();
         }
@@ -510,7 +508,7 @@ namespace Narvalo.Fx
         /// <inheritdoc cref="IEnumerable.GetEnumerator" />
         IEnumerator IEnumerable.GetEnumerator()
         {
-            Ensures(Result<IEnumerator>() != null);
+            Warrant.NotNull<IEnumerator>();
 
             return ToEnumerable().GetEnumerator();
         }

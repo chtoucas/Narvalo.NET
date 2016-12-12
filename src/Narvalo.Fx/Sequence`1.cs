@@ -6,8 +6,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Linq;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public static class Sequence<TElement>
     {
         /// <summary>
@@ -21,7 +19,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<IEnumerable<TElement>>() != null);
+                Warrant.NotNull<IEnumerable<TElement>>();
 
                 // We could use "yield break", but Enumerable.Empty<T> is more readable
                 // with the additional benefit of returning a singleton.

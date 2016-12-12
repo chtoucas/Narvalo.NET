@@ -43,7 +43,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<Outcome<global::Narvalo.Fx.Unit>>() != null);
+                Warrant.NotNull<Outcome<global::Narvalo.Fx.Unit>>();
 
                 return s_Unit;
             }
@@ -62,7 +62,7 @@ namespace Narvalo.Fx
         public static Outcome<T> Success<T>(T value)
             /* T4: C# indent */
         {
-            Ensures(Result<Outcome<T>>() != null);
+            Warrant.NotNull<Outcome<T>>();
 
             return Outcome<T>.η(value);
         }
@@ -102,7 +102,7 @@ namespace Narvalo.Fx
             Func<T, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Outcome<T>, Outcome<TResult>>>() != null);
+            Warrant.NotNull<Func<Outcome<T>, Outcome<TResult>>>();
 
             return m =>
             {
@@ -122,7 +122,7 @@ namespace Narvalo.Fx
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Outcome<T1>, Outcome<T2>, Outcome<TResult>>>() != null);
+            Warrant.NotNull<Func<Outcome<T1>, Outcome<T2>, Outcome<TResult>>>();
 
             return (m1, m2) =>
             {
@@ -142,7 +142,7 @@ namespace Narvalo.Fx
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<TResult>>>() != null);
+            Warrant.NotNull<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<TResult>>>();
 
             return (m1, m2, m3) =>
             {
@@ -163,7 +163,7 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<TResult>>>() != null);
+            Warrant.NotNull<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<TResult>>>();
 
             return (m1, m2, m3, m4) =>
             {
@@ -184,7 +184,7 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, T5, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<T5>, Outcome<TResult>>>() != null);
+            Warrant.NotNull<Func<Outcome<T1>, Outcome<T2>, Outcome<T3>, Outcome<T4>, Outcome<T5>, Outcome<TResult>>>();
 
             return (m1, m2, m3, m4, m5) =>
             {
@@ -254,7 +254,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<Outcome<global::Narvalo.Fx.Unit>>() != null);
+            Warrant.NotNull<Outcome<global::Narvalo.Fx.Unit>>();
 
             return Outcome.Unit;
         }
@@ -419,7 +419,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
-            Ensures(Result<Outcome<TSource>>() != null);
+            Warrant.NotNull<Outcome<TSource>>();
 
             if (predicate) { action.Invoke(); }
 
@@ -434,7 +434,7 @@ namespace Narvalo.Fx
         {
             Expect.NotNull(@this);
             Expect.NotNull(action);
-            Ensures(Result<Outcome<TSource>>() != null);
+            Warrant.NotNull<Outcome<TSource>>();
 
             return @this.When(!predicate, action);
         }
@@ -469,7 +469,7 @@ namespace Narvalo.Fx
         {
             Expect.NotNull(@this);
             Expect.NotNull(seq);
-            Ensures(Result<Outcome<IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
             return seq.ForEachCore(@this);
         }
@@ -499,7 +499,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
             Expect.NotNull(funM);
-            Ensures(Result<Func<TSource, Outcome<TResult>>>() != null);
+            Warrant.NotNull<Func<TSource, Outcome<TResult>>>();
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -514,7 +514,7 @@ namespace Narvalo.Fx
         {
             Expect.NotNull(@this);
             Require.NotNull(funM, nameof(funM));
-            Ensures(Result<Func<TSource, Outcome<TResult>>>() != null);
+            Warrant.NotNull<Func<TSource, Outcome<TResult>>>();
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -546,7 +546,7 @@ namespace Narvalo.Fx
             this IEnumerable<Outcome<TSource>> @this)
         {
             Expect.NotNull(@this);
-            Ensures(Result<Outcome<IEnumerable<TSource>>>() != null);
+            Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
 
             return @this.CollectCore();
         }
@@ -584,7 +584,7 @@ namespace Narvalo.Fx.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(funM);
-            Ensures(Result<Outcome<IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
             return @this.ForEachCore(funM);
         }
@@ -605,7 +605,7 @@ namespace Narvalo.Fx.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(predicateM);
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             return @this.FilterCore(predicateM);
         }
@@ -636,7 +636,7 @@ namespace Narvalo.Fx.Advanced
             Expect.NotNull(@this);
             Expect.NotNull(second);
             Expect.NotNull(resultSelectorM);
-            Ensures(Result<Outcome<IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -761,7 +761,7 @@ namespace Narvalo.Fx.Internal
             this IEnumerable<Outcome<TSource>> @this)
         {
             Demand.NotNull(@this);
-            Ensures(Result<Outcome<IEnumerable<TSource>>>() != null);
+            Warrant.NotNull<Outcome<IEnumerable<TSource>>>();
 
             var seed = Outcome.Success(Enumerable.Empty<TSource>());
             Func<Outcome<IEnumerable<TSource>>, Outcome<TSource>, Outcome<IEnumerable<TSource>>> fun
@@ -798,7 +798,7 @@ namespace Narvalo.Fx.Internal
         {
             Demand.NotNull(@this);
             Demand.NotNull(funM);
-            Ensures(Result<Outcome<IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
             return @this.Select(funM).EmptyIfNull().Collect();
         }
@@ -811,7 +811,7 @@ namespace Narvalo.Fx.Internal
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicateM, nameof(predicateM));
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -867,7 +867,7 @@ namespace Narvalo.Fx.Internal
 
             Demand.NotNull(@this);
             Demand.NotNull(second);
-            Ensures(Result<Outcome<IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<Outcome<IEnumerable<TResult>>>();
 
             Func<TFirst, TSecond, Outcome<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);

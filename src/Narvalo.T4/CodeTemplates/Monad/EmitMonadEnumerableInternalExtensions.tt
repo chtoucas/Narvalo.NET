@@ -21,7 +21,7 @@ public partial class MonadTemplate
         {
             Demand.NotNull(@this);
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><IEnumerable<TSource>>>() != null);
+            Warrant.NotNull<<#= Name #><IEnumerable<TSource>>>();
 <#+ } #>
 
             var seed = <#= Name #>.<#= ReturnName #>(Enumerable.Empty<TSource>());
@@ -61,7 +61,7 @@ public partial class MonadTemplate
         {
             Demand.NotNull(@this);
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             var retval = @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));

@@ -29,7 +29,7 @@ namespace Narvalo.Mvp.PresenterBinding
         {
             get
             {
-                Ensures(Result<IEnumerable<IView>>() != null);
+                Warrant.NotNull<IEnumerable<IView>>();
 
                 return _boundViews;
             }
@@ -39,7 +39,7 @@ namespace Narvalo.Mvp.PresenterBinding
         {
             get
             {
-                Ensures(Result<IEnumerable<PresenterBindingParameter>>() != null);
+                Warrant.NotNull<IEnumerable<PresenterBindingParameter>>();
 
                 return _bindings;
             }

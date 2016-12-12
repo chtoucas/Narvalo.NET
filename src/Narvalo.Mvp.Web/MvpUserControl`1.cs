@@ -21,7 +21,7 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
-                Ensures(Result<TViewModel>() != null);
+                Warrant.NotNullUnconstrained<TViewModel>();
 
                 if (_model == null)
                 {

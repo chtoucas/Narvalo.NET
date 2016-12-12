@@ -29,7 +29,7 @@ namespace Narvalo.Mvp
         /// </summary>
         protected internal IEnumerable<TView> Views
         {
-            get { Ensures(Result<IEnumerable<TView>>() != null); return _views; }
+            get { Warrant.NotNull<IEnumerable<TView>>(); return _views; }
         }
 
         /// <summary>

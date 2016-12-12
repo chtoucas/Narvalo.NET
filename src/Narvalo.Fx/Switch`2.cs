@@ -5,9 +5,9 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
     using System.Diagnostics.Contracts;
-
-    using static System.Diagnostics.Contracts.Contract;
+#endif
 
     /// <summary>
     /// Represents the (possibly empty) sum of two types. An instance of the
@@ -37,7 +37,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<Switch<TLeft, TRight>>() != null);
+                Warrant.NotNull<Switch<TLeft, TRight>>();
 
                 return s_Empty;
             }
@@ -71,7 +71,7 @@ namespace Narvalo.Fx
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Switch<TLeft, TRight> η(TLeft value)
         {
-            Ensures(Result<Switch<TLeft, TRight>>() != null);
+            Warrant.NotNull<Switch<TLeft, TRight>>();
 
             return value != null ? new Left_(value) : Switch<TLeft, TRight>.Empty;
         }
@@ -79,7 +79,7 @@ namespace Narvalo.Fx
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Switch<TLeft, TRight> η(TRight value)
         {
-            Ensures(Result<Switch<TLeft, TRight>>() != null);
+            Warrant.NotNull<Switch<TLeft, TRight>>();
 
             return value != null ? new Right_(value) : Switch<TLeft, TRight>.Empty;
         }
@@ -123,7 +123,7 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return "Either(Empty)";
             }
@@ -220,7 +220,7 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return Format.Current("Left({0})", _value);
             }
@@ -311,7 +311,7 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return Format.Current("Right({0})", _value);
             }
@@ -394,7 +394,7 @@ namespace Narvalo.Fx
 
         public override Switch<TRight, TLeft> Swap()
         {
-            Ensures(Result<Switch<TRight, TLeft>>() != null);
+            Contract.Ensures(Contract.Result<Switch<TRight, TLeft>>() != null);
 
             return default(Switch<TRight, TLeft>);
         }

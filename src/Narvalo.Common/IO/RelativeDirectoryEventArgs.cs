@@ -20,7 +20,7 @@ namespace Narvalo.IO
         {
             get
             {
-                Contract.Ensures(Contract.Result<RelativeDirectory>() != null);
+                Warrant.NotNull<RelativeDirectory>();
 
                 return _relativeDirectory;
             }

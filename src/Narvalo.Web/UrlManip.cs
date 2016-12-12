@@ -14,7 +14,7 @@ namespace Narvalo.Web
         public static string ToProtocolRelativeString(Uri uri)
         {
             Require.NotNull(uri, nameof(uri));
-            Contract.Ensures(Contract.Result<string>() != null);
+            Warrant.NotNull<string>();
 
             if (!uri.IsAbsoluteUri)
             {

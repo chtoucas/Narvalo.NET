@@ -20,7 +20,7 @@ namespace Narvalo.Mvp.CommandLine
         {
             get
             {
-                Ensures(Result<TViewModel>() != null);
+                Warrant.NotNullUnconstrained<TViewModel>();
 
                 if (_model == null)
                 {

@@ -27,7 +27,7 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
-                Ensures(Result<IAsyncTaskManager>() != null);
+                Warrant.NotNull<IAsyncTaskManager>();
 
                 if (_asyncManager == null)
                 {
@@ -48,7 +48,7 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
-                Ensures(Result<HttpContextBase>() != null);
+                Warrant.NotNull<HttpContextBase>();
 
                 if (_httpContext == null)
                 {
@@ -69,7 +69,7 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
-                Ensures(Result<HttpApplicationStateBase>() != null);
+                Warrant.NotNull<HttpApplicationStateBase>();
 
                 return HttpContext.Application;
             }
@@ -81,7 +81,7 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
-                Ensures(Result<HttpRequestBase>() != null);
+                Warrant.NotNull<HttpRequestBase>();
 
                 return HttpContext.Request;
             }
@@ -91,7 +91,7 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
-                Ensures(Result<HttpResponseBase>() != null);
+                Warrant.NotNull<HttpResponseBase>();
 
                 return HttpContext.Response;
             }
@@ -101,7 +101,7 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
-                Ensures(Result<HttpServerUtilityBase>() != null);
+                Warrant.NotNull<HttpServerUtilityBase>();
 
                 return HttpContext.Server;
             }
@@ -111,7 +111,7 @@ namespace Narvalo.Mvp.Web
         {
             get
             {
-                Ensures(Result<HttpSessionStateBase>() != null);
+                Warrant.NotNull<HttpSessionStateBase>();
 
                 return HttpContext.Session;
             }

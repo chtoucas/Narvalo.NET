@@ -35,7 +35,7 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
-                Ensures(Result<TValue>() != null);
+                Warrant.NotNull<TValue>();
 
                 var value = _lazyValue.Value;
 

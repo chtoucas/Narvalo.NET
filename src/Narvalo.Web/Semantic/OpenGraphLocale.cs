@@ -20,7 +20,7 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Contract.Ensures(Contract.Result<CultureInfo>() != null);
+                Warrant.NotNull<CultureInfo>();
 
                 return _culture;
             }

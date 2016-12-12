@@ -26,7 +26,7 @@ namespace Narvalo.Mvp.Platforms
         public TSource With(params T[] values)
         {
             Require.NotNull(values, nameof(values));
-            Ensures(Result<TSource>() != null);
+            Warrant.NotNull<TSource>();
 
             foreach (var value in values)
             {

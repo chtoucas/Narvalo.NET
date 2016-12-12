@@ -21,7 +21,7 @@ namespace Narvalo.Web.Optimization
         {
             get
             {
-                Contract.Ensures(Contract.Result<IWhiteSpaceBusterProvider>() != null);
+                Warrant.NotNull<IWhiteSpaceBusterProvider>();
 
                 return s_Instance.InnerCurrent;
             }
@@ -31,7 +31,7 @@ namespace Narvalo.Web.Optimization
         {
             get
             {
-                Contract.Ensures(Contract.Result<IWhiteSpaceBusterProvider>() != null);
+                Warrant.NotNull<IWhiteSpaceBusterProvider>();
 
                 return _current;
             }

@@ -25,7 +25,7 @@ namespace Narvalo.Data
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return _connectionString;
             }
@@ -35,7 +35,7 @@ namespace Narvalo.Data
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return _name;
             }
@@ -71,7 +71,7 @@ namespace Narvalo.Data
         private SqlCommand CreateCommand(SqlConnection connection)
         {
             Demand.NotNull(connection);
-            Contract.Ensures(Contract.Result<SqlCommand>() != null);
+            Warrant.NotNull<SqlCommand>();
 
             SqlCommand tmpCmd = null;
             SqlCommand cmd = null;

@@ -24,7 +24,7 @@ public partial class MonadTemplate
             Expect.NotNull(@this);
             Expect.NotNull(seq);
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
             return seq.ForEachCore(@this);
@@ -43,7 +43,7 @@ public partial class MonadTemplate
             Expect.NotNull(@this);
             <#+ WriteNotNull("value"); #>
 <#+ if (PostBindEnsuresSome) { #>
-            Ensures(Result<<#= Name #><TResult>>() != null);
+            Warrant.NotNull<<#= Name #><TResult>>();
 <#+ } #>
 
             return value.Bind(@this);
@@ -59,7 +59,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(true); #>
             Expect.NotNull(funM);
-            Ensures(Result<Func<TSource, <#= Name #><TResult>>>() != null);
+            Warrant.NotNull<Func<TSource, <#= Name #><TResult>>>();
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -74,7 +74,7 @@ public partial class MonadTemplate
         {
             Expect.NotNull(@this);
             Require.NotNull(funM, nameof(funM));
-            Ensures(Result<Func<TSource, <#= Name #><TResult>>>() != null);
+            Warrant.NotNull<Func<TSource, <#= Name #><TResult>>>();
 
             return _ => funM.Invoke(_).Bind(@this);
         }

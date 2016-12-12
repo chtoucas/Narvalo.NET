@@ -4,8 +4,6 @@ namespace Narvalo.Fx
 {
     using System.Runtime.ExceptionServices;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides a set of static and extension methods for <see cref="Outcome{T}"/>.
     /// </summary>
@@ -14,7 +12,7 @@ namespace Narvalo.Fx
         public static Outcome<T> Failure<T>(ExceptionDispatchInfo exceptionInfo)
         {
             Expect.NotNull(exceptionInfo);
-            Ensures(Result<Outcome<T>>() != null);
+            Warrant.NotNull<Outcome<T>>();
 
             return Outcome<T>.η(exceptionInfo);
         }

@@ -42,7 +42,7 @@ namespace Narvalo.Fx.Samples
         {
             get
             {
-                Ensures(Result<MonadPlus<global::Narvalo.Fx.Unit>>() != null);
+                Warrant.NotNull<MonadPlus<global::Narvalo.Fx.Unit>>();
 
                 return s_Unit;
             }
@@ -60,7 +60,7 @@ namespace Narvalo.Fx.Samples
         {
             get
             {
-                Ensures(Result<MonadPlus<global::Narvalo.Fx.Unit>>() != null);
+                Warrant.NotNull<MonadPlus<global::Narvalo.Fx.Unit>>();
 
                 return MonadPlus<global::Narvalo.Fx.Unit>.Zero;
             }
@@ -79,7 +79,7 @@ namespace Narvalo.Fx.Samples
         public static MonadPlus<T> Return<T>(T value)
             /* T4: C# indent */
         {
-            Ensures(Result<MonadPlus<T>>() != null);
+            Warrant.NotNull<MonadPlus<T>>();
 
             return MonadPlus<T>.η(value);
         }
@@ -96,7 +96,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Expect.NotNull(square);
-            Ensures(Result<MonadPlus<T>>() != null);
+            Warrant.NotNull<MonadPlus<T>>();
 
             return MonadPlus<T>.μ(square);
         }
@@ -111,7 +111,7 @@ namespace Narvalo.Fx.Samples
         /// </remarks>
         public static MonadPlus<global::Narvalo.Fx.Unit> Guard(bool predicate)
         {
-            Ensures(Result<MonadPlus<global::Narvalo.Fx.Unit>>() != null);
+            Warrant.NotNull<MonadPlus<global::Narvalo.Fx.Unit>>();
 
             return predicate ? MonadPlus.Unit : MonadPlus<global::Narvalo.Fx.Unit>.Zero;
         }
@@ -131,7 +131,7 @@ namespace Narvalo.Fx.Samples
             Func<T, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<MonadPlus<T>, MonadPlus<TResult>>>() != null);
+            Warrant.NotNull<Func<MonadPlus<T>, MonadPlus<TResult>>>();
 
             return m =>
             {
@@ -151,7 +151,7 @@ namespace Narvalo.Fx.Samples
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>>() != null);
+            Warrant.NotNull<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<TResult>>>();
 
             return (m1, m2) =>
             {
@@ -171,7 +171,7 @@ namespace Narvalo.Fx.Samples
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>>() != null);
+            Warrant.NotNull<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<TResult>>>();
 
             return (m1, m2, m3) =>
             {
@@ -192,7 +192,7 @@ namespace Narvalo.Fx.Samples
             Func<T1, T2, T3, T4, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>>() != null);
+            Warrant.NotNull<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<TResult>>>();
 
             return (m1, m2, m3, m4) =>
             {
@@ -213,7 +213,7 @@ namespace Narvalo.Fx.Samples
             Func<T1, T2, T3, T4, T5, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>>() != null);
+            Warrant.NotNull<Func<MonadPlus<T1>, MonadPlus<T2>, MonadPlus<T3>, MonadPlus<T4>, MonadPlus<T5>, MonadPlus<TResult>>>();
 
             return (m1, m2, m3, m4, m5) =>
             {
@@ -242,7 +242,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.Bind(_ => MonadPlus.Return(selector.Invoke(_)));
         }
@@ -256,7 +256,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.Bind(_ => other);
         }
@@ -271,7 +271,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             // http://stackoverflow.com/questions/24042977/how-does-forever-monad-work
 
@@ -285,7 +285,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<MonadPlus<global::Narvalo.Fx.Unit>>() != null);
+            Warrant.NotNull<MonadPlus<global::Narvalo.Fx.Unit>>();
 
             return MonadPlus.Unit;
         }
@@ -305,7 +305,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             return @this.Bind(
                 _ => predicate.Invoke(_) ? @this : MonadPlus<TSource>.Zero);
@@ -321,7 +321,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.NotNull(@this, nameof(@this));
             Require.Range(count >= 1, nameof(count));
-            Ensures(Result<MonadPlus<IEnumerable<TSource>>>() != null);
+            Warrant.NotNull<MonadPlus<IEnumerable<TSource>>>();
 
             return @this.Select(_ => Enumerable.Repeat(_, count));
         }
@@ -341,7 +341,7 @@ namespace Narvalo.Fx.Samples
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.Bind(v1 => second.Select(v2 => resultSelector.Invoke(v1, v2)));
         }
@@ -357,7 +357,7 @@ namespace Narvalo.Fx.Samples
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             Func<T1, MonadPlus<TResult>> g
                 = t1 => second.Zip(third, (t2, t3) => resultSelector.Invoke(t1, t2, t3));
@@ -377,7 +377,7 @@ namespace Narvalo.Fx.Samples
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             Func<T1, MonadPlus<TResult>> g
                 = t1 => second.Zip(
@@ -401,7 +401,7 @@ namespace Narvalo.Fx.Samples
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(second, nameof(second));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             Func<T1, MonadPlus<TResult>> g
                 = t1 => second.Zip(
@@ -430,7 +430,7 @@ namespace Narvalo.Fx.Samples
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(valueSelectorM, nameof(valueSelectorM));
             Require.NotNull(resultSelector, nameof(resultSelector));
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.Bind(
                 _ => valueSelectorM.Invoke(_).Select(
@@ -451,7 +451,7 @@ namespace Narvalo.Fx.Samples
             Expect.NotNull(outerKeySelector);
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.Join(
                 inner,
@@ -474,7 +474,7 @@ namespace Narvalo.Fx.Samples
             Expect.NotNull(outerKeySelector);
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.GroupJoin(
                 inner,
@@ -504,7 +504,7 @@ namespace Narvalo.Fx.Samples
             Expect.NotNull(outerKeySelector);
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return JoinCore(
                 @this,
@@ -529,7 +529,7 @@ namespace Narvalo.Fx.Samples
             Expect.NotNull(outerKeySelector);
             Expect.NotNull(innerKeySelector);
             Expect.NotNull(resultSelector);
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return GroupJoinCore(
                 @this,
@@ -556,7 +556,7 @@ namespace Narvalo.Fx.Samples
             Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -580,7 +580,7 @@ namespace Narvalo.Fx.Samples
             Demand.NotNull(outerKeySelector);
             Demand.NotNull(innerKeySelector);
             Demand.NotNull(comparer);
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             var keyLookupM = GetKeyLookup(inner, outerKeySelector, innerKeySelector, comparer);
 
@@ -599,7 +599,7 @@ namespace Narvalo.Fx.Samples
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
             Demand.NotNull(innerKeySelector);
-            Ensures(Result<Func<TSource, MonadPlus<TKey>>>() != null);
+            Warrant.NotNull<Func<TSource, MonadPlus<TKey>>>();
 
             return source =>
             {
@@ -627,7 +627,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicate, nameof(predicate));
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.Bind(_ => predicate.Invoke(_) ? then : otherwise);
         }
@@ -641,7 +641,7 @@ namespace Narvalo.Fx.Samples
         {
             Expect.NotNull(@this);
             Expect.NotNull(predicate);
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.Coalesce(predicate, other, MonadPlus<TResult>.Zero);
         }
@@ -654,7 +654,7 @@ namespace Narvalo.Fx.Samples
         {
             Expect.NotNull(@this);
             Expect.NotNull(predicate);
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return @this.Coalesce(predicate, MonadPlus<TResult>.Zero, other);
         }
@@ -668,7 +668,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             if (predicate) { action.Invoke(); }
 
@@ -683,7 +683,7 @@ namespace Narvalo.Fx.Samples
         {
             Expect.NotNull(@this);
             Expect.NotNull(action);
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             return @this.When(!predicate, action);
         }
@@ -695,7 +695,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
@@ -708,7 +708,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(action, nameof(action));
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             // FIXME
             //@this.PlusName(MonadPlus.Unit).Invoke(_ => action.Invoke());
@@ -725,7 +725,7 @@ namespace Narvalo.Fx.Samples
             Expect.NotNull(@this);
             Require.NotNull(action, nameof(action));
             Require.NotNull(caseZero, nameof(caseZero));
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             return @this.Invoke(action).OnZero(caseZero);
         }
@@ -749,7 +749,7 @@ namespace Narvalo.Fx.Samples
         {
             Expect.NotNull(@this);
             Expect.NotNull(seq);
-            Ensures(Result<MonadPlus<IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<MonadPlus<IEnumerable<TResult>>>();
 
             return seq.ForEachCore(@this);
         }
@@ -765,7 +765,7 @@ namespace Narvalo.Fx.Samples
         {
             Expect.NotNull(@this);
             Require.NotNull(value, nameof(value));
-            Ensures(Result<MonadPlus<TResult>>() != null);
+            Warrant.NotNull<MonadPlus<TResult>>();
 
             return value.Bind(@this);
         }
@@ -780,7 +780,7 @@ namespace Narvalo.Fx.Samples
         {
             Require.NotNull(@this, nameof(@this));
             Expect.NotNull(funM);
-            Ensures(Result<Func<TSource, MonadPlus<TResult>>>() != null);
+            Warrant.NotNull<Func<TSource, MonadPlus<TResult>>>();
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -795,7 +795,7 @@ namespace Narvalo.Fx.Samples
         {
             Expect.NotNull(@this);
             Require.NotNull(funM, nameof(funM));
-            Ensures(Result<Func<TSource, MonadPlus<TResult>>>() != null);
+            Warrant.NotNull<Func<TSource, MonadPlus<TResult>>>();
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -827,7 +827,7 @@ namespace Narvalo.Fx.Samples
             this IEnumerable<MonadPlus<TSource>> @this)
         {
             Expect.NotNull(@this);
-            Ensures(Result<MonadPlus<IEnumerable<TSource>>>() != null);
+            Warrant.NotNull<MonadPlus<IEnumerable<TSource>>>();
 
             return @this.CollectCore();
         }
@@ -846,7 +846,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
         {
             Expect.NotNull(@this);
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             return @this.SumCore();
         }
@@ -883,7 +883,7 @@ namespace Narvalo.Fx.Samples.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(funM);
-            Ensures(Result<MonadPlus<IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<MonadPlus<IEnumerable<TResult>>>();
 
             return @this.ForEachCore(funM);
         }
@@ -904,7 +904,7 @@ namespace Narvalo.Fx.Samples.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(predicateM);
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             return @this.FilterCore(predicateM);
         }
@@ -920,7 +920,7 @@ namespace Narvalo.Fx.Samples.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(funM);
-            Ensures(Result<MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+            Warrant.NotNull<MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 
             return @this.MapAndUnzipCore(funM);
         }
@@ -936,7 +936,7 @@ namespace Narvalo.Fx.Samples.Advanced
             Expect.NotNull(@this);
             Expect.NotNull(second);
             Expect.NotNull(resultSelectorM);
-            Ensures(Result<MonadPlus<IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<MonadPlus<IEnumerable<TResult>>>();
 
             return @this.ZipCore(second, resultSelectorM);
         }
@@ -953,7 +953,7 @@ namespace Narvalo.Fx.Samples.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
-            Ensures(Result<MonadPlus<TAccumulate>>() != null);
+            Warrant.NotNull<MonadPlus<TAccumulate>>();
 
             return @this.FoldCore(seed, accumulatorM);
         }
@@ -970,7 +970,7 @@ namespace Narvalo.Fx.Samples.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
-            Ensures(Result<MonadPlus<TAccumulate>>() != null);
+            Warrant.NotNull<MonadPlus<TAccumulate>>();
 
             return @this.FoldBackCore(seed, accumulatorM);
         }
@@ -982,7 +982,7 @@ namespace Narvalo.Fx.Samples.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             return @this.ReduceCore(accumulatorM);
         }
@@ -994,7 +994,7 @@ namespace Narvalo.Fx.Samples.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             return @this.ReduceBackCore(accumulatorM);
         }
@@ -1016,7 +1016,7 @@ namespace Narvalo.Fx.Samples.Advanced
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
-            Ensures(Result<MonadPlus<TAccumulate>>() != null);
+            Warrant.NotNull<MonadPlus<TAccumulate>>();
 
             return @this.FoldCore(seed, accumulatorM, predicate);
         }
@@ -1033,7 +1033,7 @@ namespace Narvalo.Fx.Samples.Advanced
             Expect.NotNull(@this);
             Expect.NotNull(accumulatorM);
             Expect.NotNull(predicate);
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             return @this.ReduceCore(accumulatorM, predicate);
         }
@@ -1066,7 +1066,7 @@ namespace Narvalo.Fx.Samples.Internal
             this IEnumerable<MonadPlus<TSource>> @this)
         {
             Demand.NotNull(@this);
-            Ensures(Result<MonadPlus<IEnumerable<TSource>>>() != null);
+            Warrant.NotNull<MonadPlus<IEnumerable<TSource>>>();
 
             var seed = MonadPlus.Return(Enumerable.Empty<TSource>());
             Func<MonadPlus<IEnumerable<TSource>>, MonadPlus<TSource>, MonadPlus<IEnumerable<TSource>>> fun
@@ -1093,7 +1093,7 @@ namespace Narvalo.Fx.Samples.Internal
             /* T4: C# indent */
         {
             Demand.NotNull(@this);
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             var retval = @this.Aggregate(MonadPlus<TSource>.Zero, (m, n) => m.Plus(n));
             Contract.Assume(retval != null);
@@ -1115,7 +1115,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Demand.NotNull(@this);
             Demand.NotNull(funM);
-            Ensures(Result<MonadPlus<IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<MonadPlus<IEnumerable<TResult>>>();
 
             return @this.Select(funM).EmptyIfNull().Collect();
         }
@@ -1127,7 +1127,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicateM, nameof(predicateM));
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -1159,7 +1159,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Demand.NotNull(@this);
             Demand.NotNull(funM);
-            Ensures(Result<MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+            Warrant.NotNull<MonadPlus<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 
             var m = @this.Select(funM).EmptyIfNull().Collect();
 
@@ -1182,7 +1182,7 @@ namespace Narvalo.Fx.Samples.Internal
 
             Demand.NotNull(@this);
             Demand.NotNull(second);
-            Ensures(Result<MonadPlus<IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<MonadPlus<IEnumerable<TResult>>>();
 
             Func<TFirst, TSecond, MonadPlus<TResult>> resultSelector
                 = (v1, v2) => resultSelectorM.Invoke(v1, v2);
@@ -1200,7 +1200,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
-            Ensures(Result<MonadPlus<TAccumulate>>() != null);
+            Warrant.NotNull<MonadPlus<TAccumulate>>();
 
             MonadPlus<TAccumulate> retval = MonadPlus.Return(seed);
 
@@ -1220,7 +1220,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
-            Ensures(Result<MonadPlus<TAccumulate>>() != null);
+            Warrant.NotNull<MonadPlus<TAccumulate>>();
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
@@ -1232,7 +1232,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             using (var iter = @this.GetEnumerator())
             {
@@ -1259,7 +1259,7 @@ namespace Narvalo.Fx.Samples.Internal
         {
             Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
@@ -1274,7 +1274,7 @@ namespace Narvalo.Fx.Samples.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
-            Ensures(Result<MonadPlus<TAccumulate>>() != null);
+            Warrant.NotNull<MonadPlus<TAccumulate>>();
 
             MonadPlus<TAccumulate> retval = MonadPlus.Return(seed);
 
@@ -1298,7 +1298,7 @@ namespace Narvalo.Fx.Samples.Internal
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
-            Ensures(Result<MonadPlus<TSource>>() != null);
+            Warrant.NotNull<MonadPlus<TSource>>();
 
             using (var iter = @this.GetEnumerator())
             {

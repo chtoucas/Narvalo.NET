@@ -64,7 +64,7 @@ namespace Narvalo
 
         public override string ToString()
         {
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return Format.Current("LowerEnd({0}) - UpperEnd({1})", LowerEnd, UpperEnd);
         }

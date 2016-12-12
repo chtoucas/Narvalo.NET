@@ -8,8 +8,6 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <seealso cref="Outcome{T}"/>
     /// <seealso cref="Either{T1, T2}"/>
     /// <seealso cref="Switch{T1, T2}"/>
@@ -33,7 +31,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<VoidOrBreak>() != null);
+                Warrant.NotNull<VoidOrBreak>();
 
                 return s_Void;
             }
@@ -52,14 +50,14 @@ namespace Narvalo.Fx
         public static VoidOrBreak Break(string message)
         {
             Require.NotNullOrEmpty(message, nameof(message));
-            Ensures(Result<VoidOrBreak>() != null);
+            Warrant.NotNull<VoidOrBreak>();
 
             return new VoidOrBreak.Break_(message);
         }
 
         public override string ToString()
         {
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return "Void";
         }
@@ -82,7 +80,7 @@ namespace Narvalo.Fx
             {
                 get
                 {
-                    Ensures(Result<string>() != null);
+                    Warrant.NotNull<string>();
 
                     return _reason;
                 }
@@ -90,7 +88,7 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return Format.Current("Break({0})", _reason);
             }
@@ -100,8 +98,8 @@ namespace Narvalo.Fx
             [ContractInvariantMethod]
             private void ObjectInvariant()
             {
-                Invariant(_reason != null);
-                Invariant(_isBreak);
+                Contract.Invariant(_reason != null);
+                Contract.Invariant(_isBreak);
             }
 
 #endif

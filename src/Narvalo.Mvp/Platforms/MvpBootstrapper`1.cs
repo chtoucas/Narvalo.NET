@@ -35,7 +35,7 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
-                Ensures(Result<Setter<T, ICompositeViewFactory>>() != null);
+                Warrant.NotNull<Setter<T, ICompositeViewFactory>>();
 
                 return new Setter<T, ICompositeViewFactory>(
                     (T)this, _ => _compositeViewFactory = _);
@@ -46,7 +46,7 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
-                Ensures(Result<Appender<T, IPresenterDiscoveryStrategy>>() != null);
+                Warrant.NotNull<Appender<T, IPresenterDiscoveryStrategy>>();
 
                 return new Appender<T, IPresenterDiscoveryStrategy>(
                     (T)this, _ => _presenterDiscoveryStrategies.Add(_));
@@ -57,7 +57,7 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
-                Ensures(Result<Setter<T, IMessageCoordinatorFactory>>() != null);
+                Warrant.NotNull<Setter<T, IMessageCoordinatorFactory>>();
 
                 return new Setter<T, IMessageCoordinatorFactory>(
                     (T)this, _ => _messageCoordinatorFactory = _);
@@ -68,7 +68,7 @@ namespace Narvalo.Mvp.Platforms
         {
             get
             {
-                Ensures(Result<Setter<T, IPresenterFactory>>() != null);
+                Warrant.NotNull<Setter<T, IPresenterFactory>>();
 
                 return new Setter<T, IPresenterFactory>(
                     (T)this, _ => _presenterFactory = _);
@@ -78,7 +78,7 @@ namespace Narvalo.Mvp.Platforms
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IPlatformServices CreatePlatformServices()
         {
-            Ensures(Result<IPlatformServices>() != null);
+            Warrant.NotNull<IPlatformServices>();
 
             var platformServices = new PlatformServices_();
 

@@ -25,7 +25,7 @@ namespace Narvalo.Mvp.Platforms
 
         public TSource Is(T value)
         {
-            Ensures(Result<TSource>() != null);
+            Warrant.NotNull<TSource>();
 
             _set.Invoke(value);
 

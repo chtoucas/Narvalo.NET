@@ -52,7 +52,7 @@ namespace Narvalo.Mvp.Web.Core
         {
             Require.NotNull(page, nameof(page));
             Expect.NotNull(context);
-            Ensures(Result<PageHost>() != null);
+            Warrant.NotNull<PageHost>();
 
             var pageContext = page.Items;
 
@@ -80,7 +80,7 @@ namespace Narvalo.Mvp.Web.Core
 
         private static IEnumerable<Control> FindHosts(Page page)
         {
-            Ensures(Result<IEnumerable<Control>>() != null);
+            Warrant.NotNull<IEnumerable<Control>>();
 
             yield return page;
 

@@ -11,8 +11,6 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Represents the outcome of a computation which may throw exceptions.
     /// An instance of the <see cref="Outcome{T}"/> class contains either a <c>T</c>
@@ -49,7 +47,7 @@ namespace Narvalo.Fx
 
         public static explicit operator Outcome<T>(T value)
         {
-            Ensures(Result<Outcome<T>>() != null);
+            Warrant.NotNull<Outcome<T>>();
 
             return η(value);
         }
@@ -57,7 +55,7 @@ namespace Narvalo.Fx
         public static explicit operator Outcome<T>(ExceptionDispatchInfo exceptionInfo)
         {
             Expect.NotNull(exceptionInfo);
-            Ensures(Result<Outcome<T>>() != null);
+            Warrant.NotNull<Outcome<T>>();
 
             return η(exceptionInfo);
         }
@@ -86,7 +84,7 @@ namespace Narvalo.Fx
         public static explicit operator ExceptionDispatchInfo(Outcome<T> value)
         {
             Require.NotNull(value, nameof(value));
-            Ensures(Result<ExceptionDispatchInfo>() != null);
+            Warrant.NotNull<ExceptionDispatchInfo>();
 
             // We check the value of the property IsSuccess even if this is not really necessary
             // since a direct cast would have worked too:
@@ -349,7 +347,7 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return Format.Current("Success({0})", Value);
             }
@@ -374,7 +372,7 @@ namespace Narvalo.Fx
             {
                 get
                 {
-                    Ensures(Result<ExceptionDispatchInfo>() != null);
+                    Warrant.NotNull<ExceptionDispatchInfo>();
 
                     return _exceptionInfo;
                 }
@@ -408,7 +406,7 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return Format.Current("Failure({0})", ExceptionInfo);
             }

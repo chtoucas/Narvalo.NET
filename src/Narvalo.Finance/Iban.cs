@@ -51,7 +51,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
                 Ensures(Result<string>().Length >= BBAN_MIN_LENGTH || Result<string>().Length <= BBAN_MAX_LENGTH);
 
                 return _bban;
@@ -65,7 +65,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
                 Ensures(Result<string>().Length == CHECKDIGIT_LENGTH);
 
                 return _checkDigit;
@@ -79,7 +79,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
                 Ensures(Result<string>().Length == COUNTRY_LENGTH);
 
                 return _countryCode;
@@ -125,7 +125,7 @@ namespace Narvalo.Finance
 
         public override string ToString()
         {
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return _innerValue;
         }

@@ -24,7 +24,7 @@ namespace Narvalo.Finance
         public Currency GetCurrency(string code)
         {
             ContractFor.CurrencyCode(code);
-            Ensures(Result<Currency>() != null);
+            Warrant.NotNull<Currency>();
 
             if (!Validate(code))
             {

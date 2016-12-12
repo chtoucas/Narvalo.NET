@@ -21,7 +21,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<CurrencyFactory>() != null);
+                Warrant.NotNull<CurrencyFactory>();
 
                 return s_Instance.InnerCurrent;
             }
@@ -31,7 +31,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<CurrencyFactory>() != null);
+                Warrant.NotNull<CurrencyFactory>();
 
                 return _factory;
             }

@@ -16,7 +16,7 @@ namespace Narvalo.Web.Html
         public static IHtmlString Css(string relativePath)
         {
             Expect.NotNullOrEmpty(relativePath);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+            Warrant.NotNull<IHtmlString>();
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
             var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
@@ -27,7 +27,7 @@ namespace Narvalo.Web.Html
         public static IHtmlString Css(string relativePath, string media)
         {
             Expect.NotNullOrEmpty(relativePath);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+            Warrant.NotNull<IHtmlString>();
 
             var assetUri = AssetManager.GetStyleUri(relativePath);
             var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
@@ -38,7 +38,7 @@ namespace Narvalo.Web.Html
         public static IHtmlString Image(string relativePath, string alt)
         {
             Expect.NotNullOrEmpty(relativePath);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+            Warrant.NotNull<IHtmlString>();
 
             var assetUri = AssetManager.GetImageUri(relativePath);
             var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
@@ -49,7 +49,7 @@ namespace Narvalo.Web.Html
         public static IHtmlString JavaScript(string relativePath)
         {
             Expect.NotNullOrEmpty(relativePath);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+            Warrant.NotNull<IHtmlString>();
 
             var assetUri = AssetManager.GetScriptUri(relativePath);
             var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
@@ -60,7 +60,7 @@ namespace Narvalo.Web.Html
         public static IHtmlString Less(string relativePath)
         {
             Expect.NotNullOrEmpty(relativePath);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+            Warrant.NotNull<IHtmlString>();
 
             var assetUri = AssetManager.GetScriptUri(relativePath);
             var assetPath = UrlManip.ToProtocolRelativeString(assetUri);
@@ -71,7 +71,7 @@ namespace Narvalo.Web.Html
         public static IHtmlString Less(string relativePath, string media)
         {
             Expect.NotNullOrEmpty(relativePath);
-            Contract.Ensures(Contract.Result<IHtmlString>() != null);
+            Warrant.NotNull<IHtmlString>();
 
             var assetUri = AssetManager.GetScriptUri(relativePath);
             var assetPath = UrlManip.ToProtocolRelativeString(assetUri);

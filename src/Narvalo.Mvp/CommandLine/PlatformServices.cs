@@ -17,7 +17,7 @@ namespace Narvalo.Mvp.CommandLine
         {
             get
             {
-                Ensures(Result<IPlatformServices>() != null);
+                Warrant.NotNull<IPlatformServices>();
 
                 return s_Default;
             }
@@ -27,7 +27,7 @@ namespace Narvalo.Mvp.CommandLine
         {
             get
             {
-                Ensures(Result<IPlatformServices>() != null);
+                Warrant.NotNull<IPlatformServices>();
 
                 return s_Instance;
             }

@@ -65,7 +65,7 @@ namespace Narvalo.Web.Configuration
         {
             get
             {
-                Contract.Ensures(Contract.Result<ConfigurationPropertyCollection>() != null);
+                Warrant.NotNull<ConfigurationPropertyCollection>();
 
                 return s_Properties;
             }

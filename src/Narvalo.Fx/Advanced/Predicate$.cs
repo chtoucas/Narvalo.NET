@@ -4,8 +4,6 @@ namespace Narvalo.Fx.Advanced
 {
     using System;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides extension methods for <see cref="Func{T, Boolean}"/> and <see cref="Predicate{T}"/>.
     /// </summary>
@@ -14,7 +12,7 @@ namespace Narvalo.Fx.Advanced
         public static Predicate<TSource> Negate<TSource>(this Predicate<TSource> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<Predicate<TSource>>() != null);
+            Warrant.NotNull<Predicate<TSource>>();
 
             return _ => !@this.Invoke(_);
         }
@@ -22,7 +20,7 @@ namespace Narvalo.Fx.Advanced
         public static Func<TSource, bool> Negate<TSource>(this Func<TSource, bool> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<Func<TSource, bool>>() != null);
+            Warrant.NotNull<Func<TSource, bool>>();
 
             return _ => !@this.Invoke(_);
         }

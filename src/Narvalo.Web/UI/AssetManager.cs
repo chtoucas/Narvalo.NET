@@ -28,7 +28,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Contract.Ensures(Contract.Result<AssetProvider>() != null);
+                Warrant.NotNull<AssetProvider>();
 
                 Initialize();
                 return s_Provider;
@@ -39,7 +39,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Contract.Ensures(Contract.Result<AssetProviderCollection>() != null);
+                Warrant.NotNull<AssetProviderCollection>();
 
                 Initialize();
                 return s_Providers;
@@ -50,7 +50,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Contract.Ensures(Contract.Result<Uri>() != null);
+                Warrant.NotNull<Uri>();
 
                 return Provider.GetFontUri(String.Empty);
             }
@@ -60,7 +60,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Contract.Ensures(Contract.Result<Uri>() != null);
+                Warrant.NotNull<Uri>();
 
                 return Provider.GetImageUri(String.Empty);
             }
@@ -70,7 +70,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Contract.Ensures(Contract.Result<Uri>() != null);
+                Warrant.NotNull<Uri>();
 
                 return Provider.GetScriptUri(String.Empty);
             }
@@ -80,7 +80,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Contract.Ensures(Contract.Result<Uri>() != null);
+                Warrant.NotNull<Uri>();
 
                 return Provider.GetStyleUri(String.Empty);
             }
@@ -89,7 +89,7 @@ namespace Narvalo.Web.UI
         public static Uri GetFontUri(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, nameof(relativePath));
-            Contract.Ensures(Contract.Result<Uri>() != null);
+            Warrant.NotNull<Uri>();
 
             return Provider.GetFontUri(relativePath);
         }
@@ -97,7 +97,7 @@ namespace Narvalo.Web.UI
         public static Uri GetImageUri(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, nameof(relativePath));
-            Contract.Ensures(Contract.Result<Uri>() != null);
+            Warrant.NotNull<Uri>();
 
             return Provider.GetImageUri(relativePath);
         }
@@ -105,7 +105,7 @@ namespace Narvalo.Web.UI
         public static Uri GetScriptUri(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, nameof(relativePath));
-            Contract.Ensures(Contract.Result<Uri>() != null);
+            Warrant.NotNull<Uri>();
 
             return Provider.GetScriptUri(relativePath);
         }
@@ -113,7 +113,7 @@ namespace Narvalo.Web.UI
         public static Uri GetStyleUri(string relativePath)
         {
             Require.NotNullOrEmpty(relativePath, nameof(relativePath));
-            Contract.Ensures(Contract.Result<Uri>() != null);
+            Warrant.NotNull<Uri>();
 
             return Provider.GetStyleUri(relativePath);
         }

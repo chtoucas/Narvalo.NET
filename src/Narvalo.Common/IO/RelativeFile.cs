@@ -24,7 +24,7 @@ namespace Narvalo.IO
         {
             get
             {
-                Contract.Ensures(Contract.Result<FileInfo>() != null);
+                Warrant.NotNull<FileInfo>();
 
                 return _file;
             }
@@ -34,7 +34,7 @@ namespace Narvalo.IO
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return Path.Combine(_relativeDirectoryName, _file.Name);
             }

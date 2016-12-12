@@ -34,7 +34,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Warrant.NotNull<Currency>();
 
                 return _currency;
             }

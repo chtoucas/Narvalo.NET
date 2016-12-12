@@ -21,7 +21,7 @@ namespace Narvalo.Web
         {
             get
             {
-                Contract.Ensures(Contract.Result<IEnumerable<HttpQueryBinderException>>() != null);
+                Warrant.NotNull<IEnumerable<HttpQueryBinderException>>();
 
                 return _errors;
             }

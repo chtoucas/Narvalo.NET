@@ -31,7 +31,7 @@ namespace Narvalo.Mvp
         {
             get
             {
-                Ensures(Result<MessageCoordinator>() != null);
+                Warrant.NotNull<MessageCoordinator>();
 
                 return BlackHole_.Instance;
             }
@@ -101,7 +101,7 @@ namespace Narvalo.Mvp
             {
                 get
                 {
-                    Ensures(Result<BlackHole_>() != null);
+                    Warrant.NotNull<BlackHole_>();
 
                     return Singleton_.Instance;
                 }

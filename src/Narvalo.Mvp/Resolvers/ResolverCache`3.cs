@@ -33,7 +33,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             Require.NotNull(valueFactory, nameof(valueFactory));
             Expect.NotNull(key);
-            Ensures(Result<TValue>() != null);
+            Warrant.NotNullUnconstrained<TValue>();
 
             TCacheKey innerKey = _cacheKeyProvider.Invoke(key);
 

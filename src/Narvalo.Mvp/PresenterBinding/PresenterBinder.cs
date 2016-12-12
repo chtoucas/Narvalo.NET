@@ -59,7 +59,7 @@ namespace Narvalo.Mvp.PresenterBinding
         {
             get
             {
-                Ensures(Result<IMessageCoordinator>() != null);
+                Warrant.NotNull<IMessageCoordinator>();
 
                 return _messageCoordinator;
             }
@@ -157,7 +157,7 @@ namespace Narvalo.Mvp.PresenterBinding
 
         private IEnumerable<PresenterBindingParameter> FindBindings(IEnumerable<Object> hosts)
         {
-            Ensures(Result<IEnumerable<PresenterBindingParameter>>() != null);
+            Warrant.NotNull<IEnumerable<PresenterBindingParameter>>();
 
             var viewsToBind = _viewsToBind.Distinct();
 

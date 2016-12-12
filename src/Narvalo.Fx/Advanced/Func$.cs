@@ -6,8 +6,6 @@ namespace Narvalo.Fx.Advanced
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.ExceptionServices;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides extension methods for <see cref="Func{T}"/>.
     /// </summary>
@@ -27,7 +25,7 @@ namespace Narvalo.Fx.Advanced
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(selector, nameof(selector));
-            Ensures(Result<Func<TResult>>() != null);
+            Warrant.NotNull<Func<TResult>>();
 
             return () => selector.Invoke(@this.Invoke());
         }
@@ -40,7 +38,7 @@ namespace Narvalo.Fx.Advanced
             where TSource : struct
             where TResult : struct
         {
-            Demand.NotNull(@this);
+            Expect.NotNull(@this);
 
             return value.Bind(@this);
         }
@@ -53,7 +51,7 @@ namespace Narvalo.Fx.Advanced
             where TResult : struct
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<Func<TSource, TResult?>>() != null);
+            Warrant.NotNull<Func<TSource, TResult?>>();
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -67,7 +65,7 @@ namespace Narvalo.Fx.Advanced
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(funM, nameof(funM));
-            Ensures(Result<Func<TSource, TResult?>>() != null);
+            Warrant.NotNull<Func<TSource, TResult?>>();
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -76,12 +74,11 @@ namespace Narvalo.Fx.Advanced
 
         #region Extensions for Func<Outcome<T>>
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
         public static Outcome<TResult> Catch<TResult, TException>(this Func<TResult> @this) where TException : Exception
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<Outcome<TResult>>() != null);
+            Warrant.NotNull<Outcome<TResult>>();
 
             try
             {
@@ -97,16 +94,14 @@ namespace Narvalo.Fx.Advanced
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-20-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static Outcome<TResult> Catch<TResult, T1Exception, T2Exception>(this Func<TResult> @this)
             where T1Exception : Exception
             where T2Exception : Exception
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<Outcome<TResult>>() != null);
+            Warrant.NotNull<Outcome<TResult>>();
 
             ExceptionDispatchInfo edi;
 
@@ -122,17 +117,15 @@ namespace Narvalo.Fx.Advanced
             return Outcome.Failure<TResult>(edi);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-20-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static Outcome<TResult> Catch<TResult, T1Exception, T2Exception, T3Exception>(this Func<TResult> @this)
             where T1Exception : Exception
             where T2Exception : Exception
             where T3Exception : Exception
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<Outcome<TResult>>() != null);
+            Warrant.NotNull<Outcome<TResult>>();
 
             ExceptionDispatchInfo edi;
 
@@ -149,10 +142,8 @@ namespace Narvalo.Fx.Advanced
             return Outcome.Failure<TResult>(edi);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
-        [SuppressMessage("Microsoft.Contracts", "Suggestion-20-0",
-            Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
+        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "[Intentionally] There is no way we can achieve the same thing with type parameter inference.")]
+        [SuppressMessage("Microsoft.Contracts", "Suggestion-17-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
         public static Outcome<TResult> Catch<TResult, T1Exception, T2Exception, T3Exception, T4Exception>(
             this Func<TResult> @this)
             where T1Exception : Exception
@@ -161,7 +152,7 @@ namespace Narvalo.Fx.Advanced
             where T4Exception : Exception
         {
             Require.NotNull(@this, nameof(@this));
-            Ensures(Result<Outcome<TResult>>() != null);
+            Warrant.NotNull<Outcome<TResult>>();
 
             ExceptionDispatchInfo edi;
 

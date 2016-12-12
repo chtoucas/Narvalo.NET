@@ -33,7 +33,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
                 return String.IsNullOrWhiteSpace(_defaultDescription)
                     ? Strings.AssetProvider_Description
                     : _defaultDescription;
@@ -54,7 +54,7 @@ namespace Narvalo.Web.UI
         {
             get
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
                 return String.IsNullOrWhiteSpace(_defaultName) ? DefaultDefaultName : _defaultName;
             }
 
@@ -139,7 +139,7 @@ namespace Narvalo.Web.UI
         public override Uri GetFontUri(string relativePath)
         {
             Contract.Requires(relativePath != null);
-            Contract.Ensures(Contract.Result<Uri>() != null);
+            Warrant.NotNull<Uri>();
 
             return default(Uri);
         }
@@ -147,7 +147,7 @@ namespace Narvalo.Web.UI
         public override Uri GetImageUri(string relativePath)
         {
             Contract.Requires(relativePath != null);
-            Contract.Ensures(Contract.Result<Uri>() != null);
+            Warrant.NotNull<Uri>();
 
             return default(Uri);
         }
@@ -155,7 +155,7 @@ namespace Narvalo.Web.UI
         public override Uri GetScriptUri(string relativePath)
         {
             Contract.Requires(relativePath != null);
-            Contract.Ensures(Contract.Result<Uri>() != null);
+            Warrant.NotNull<Uri>();
 
             return default(Uri);
         }
@@ -163,7 +163,7 @@ namespace Narvalo.Web.UI
         public override Uri GetStyleUri(string relativePath)
         {
             Contract.Requires(relativePath != null);
-            Contract.Ensures(Contract.Result<Uri>() != null);
+            Warrant.NotNull<Uri>();
 
             return default(Uri);
         }

@@ -34,7 +34,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(exception, nameof(exception));
             Expect.NotNull(@this);
-            Ensures(Result<XAttribute>() != null);
+            Warrant.NotNull<XAttribute>();
 
             return AttributeOrThrow(@this, name, () => exception);
         }
@@ -43,7 +43,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-            Ensures(Result<XAttribute>() != null);
+            Warrant.NotNull<XAttribute>();
 
             XAttribute attr = @this.Attribute(name);
             if (attr == null)
@@ -65,7 +65,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(exception, nameof(exception));
             Expect.NotNull(@this);
-            Ensures(Result<XElement>() != null);
+            Warrant.NotNull<XElement>();
 
             return ElementOrThrow(@this, name, () => exception);
         }
@@ -74,7 +74,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-            Ensures(Result<XElement>() != null);
+            Warrant.NotNull<XElement>();
 
             XElement child = @this.Element(name);
             if (child == null)
@@ -109,7 +109,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(exception, nameof(exception));
             Expect.NotNull(@this);
-            Ensures(Result<XElement>() != null);
+            Warrant.NotNull<XElement>();
 
             return NextElementOrThrow(@this, () => exception);
         }
@@ -118,7 +118,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-            Ensures(Result<XElement>() != null);
+            Warrant.NotNull<XElement>();
 
             XNode nextElement = @this.NextNode;
             while (nextElement != null && nextElement.NodeType != XmlNodeType.Element)

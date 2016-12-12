@@ -19,7 +19,7 @@ namespace Narvalo.Mvp.Platforms
         private Func<ICompositeViewFactory> _compositeViewFactoryThunk
            = () =>
            {
-               Ensures(Result<ICompositeViewFactory>() != null);
+               Warrant.NotNull<ICompositeViewFactory>();
 
                return new CompositeViewFactory();
            };
@@ -27,7 +27,7 @@ namespace Narvalo.Mvp.Platforms
         private Func<IMessageCoordinatorFactory> _messageCoordinatorFactoryThunk
            = () =>
            {
-               Ensures(Result<IMessageCoordinatorFactory>() != null);
+               Warrant.NotNull<IMessageCoordinatorFactory>();
 
                return new MessageCoordinatorFactory();
            };
@@ -35,7 +35,7 @@ namespace Narvalo.Mvp.Platforms
         private Func<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategyThunk
            = () =>
            {
-               Ensures(Result<IPresenterDiscoveryStrategy>() != null);
+               Warrant.NotNull<IPresenterDiscoveryStrategy>();
 
                return new AttributedPresenterDiscoveryStrategy();
            };
@@ -43,7 +43,7 @@ namespace Narvalo.Mvp.Platforms
         private Func<IPresenterFactory> _presenterFactoryThunk
            = () =>
            {
-               Ensures(Result<IPresenterFactory>() != null);
+               Warrant.NotNull<IPresenterFactory>();
 
                return new PresenterFactory();
            };

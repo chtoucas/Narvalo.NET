@@ -62,7 +62,7 @@ namespace Narvalo.Mvp.Web.Core
         {
             get
             {
-                Ensures(Result<IEnumerable<string>>() != null);
+                Warrant.NotNull<IEnumerable<string>>();
 
                 return s_DefaultPresenterNameTemplates;
             }
@@ -72,7 +72,7 @@ namespace Narvalo.Mvp.Web.Core
         {
             get
             {
-                Ensures(Result<IEnumerable<string>>() != null);
+                Warrant.NotNull<IEnumerable<string>>();
 
                 return s_DefaultViewSuffixes;
             }

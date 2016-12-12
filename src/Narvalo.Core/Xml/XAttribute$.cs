@@ -7,8 +7,6 @@ namespace Narvalo.Xml
 
     using Narvalo.Fx;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides extension methods for <see cref="XAttribute"/>.
     /// </summary>
@@ -33,7 +31,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(exception, nameof(exception));
             Expect.NotNull(@this);
-            Ensures(Result<XAttribute>() != null);
+            Warrant.NotNull<XAttribute>();
 
             return NextAttributeOrThrow(@this, () => exception);
         }
@@ -42,7 +40,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-            Ensures(Result<XAttribute>() != null);
+            Warrant.NotNull<XAttribute>();
 
             XAttribute attr = @this.NextAttribute;
             if (attr == null)
@@ -64,7 +62,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(exception, nameof(exception));
             Expect.NotNull(@this);
-            Ensures(Result<XAttribute>() != null);
+            Warrant.NotNull<XAttribute>();
 
             return PreviousAttributeOrThrow(@this, () => exception);
         }
@@ -73,7 +71,7 @@ namespace Narvalo.Xml
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(exceptionFactory, nameof(exceptionFactory));
-            Ensures(Result<XAttribute>() != null);
+            Warrant.NotNull<XAttribute>();
 
             XAttribute attr = @this.PreviousAttribute;
             if (attr == null)

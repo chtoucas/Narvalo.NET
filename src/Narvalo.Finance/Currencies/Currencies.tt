@@ -77,7 +77,7 @@ namespace <#= Namespace #>
         {
             get
             {
-                Ensures(Result<Currency>() != null);
+                Warrant.NotNull<Currency>();
 
                 return s_Instance;
             }

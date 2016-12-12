@@ -7,8 +7,6 @@ namespace Narvalo.Fx
     using System.Diagnostics.Contracts;
     using System.Runtime.ExceptionServices;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <seealso cref="Outcome{T}"/>
     /// <seealso cref="Either{T1, T2}"/>
     /// <seealso cref="Switch{T1, T2}"/>
@@ -32,7 +30,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<VoidOrError>() != null);
+                Warrant.NotNull<VoidOrError>();
 
                 return s_Void;
             }
@@ -43,7 +41,7 @@ namespace Narvalo.Fx
         public static VoidOrError Error(ExceptionDispatchInfo exceptionInfo)
         {
             Require.NotNull(exceptionInfo, nameof(exceptionInfo));
-            Ensures(Result<VoidOrError>() != null);
+            Warrant.NotNull<VoidOrError>();
 
             return new VoidOrError.Error_(exceptionInfo);
         }
@@ -52,7 +50,7 @@ namespace Narvalo.Fx
 
         public override string ToString()
         {
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return "Void";
         }
@@ -75,10 +73,10 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 Exception exception = _exceptionInfo.SourceException;
-                Assume(exception != null);
+                Contract.Assume(exception != null);
 
                 return Format.Current("Error({0})", exception.Message);
             }
@@ -88,7 +86,7 @@ namespace Narvalo.Fx
             [ContractInvariantMethod]
             private void ObjectInvariant()
             {
-                Invariant(_exceptionInfo != null);
+                Contract.Invariant(_exceptionInfo != null);
             }
 
 #endif

@@ -39,7 +39,7 @@ namespace Narvalo.Collections
             Func<string, Maybe<T>> parserM)
         {
             Expect.NotNull(@this);
-            Ensures(Result<IEnumerable<T>>() != null);
+            Warrant.NotNull<IEnumerable<T>>();
 
             return (from @_ in @this.MayGetValues(name) select @_.MapAny(parserM)).ValueOrElse(Enumerable.Empty<T>());
         }

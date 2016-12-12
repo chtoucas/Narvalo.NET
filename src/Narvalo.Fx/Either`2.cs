@@ -6,8 +6,6 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Represents the sum of two types. An instance of the <see cref="Either{TLeft, TRight}"/> class
     /// contains either a <c>TLeft</c> value or a <c>TRight</c> value but not both.
@@ -38,7 +36,7 @@ namespace Narvalo.Fx
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Either<TLeft, TRight> η(TLeft value)
         {
-            Ensures(Result<Either<TLeft, TRight>>() != null);
+            Warrant.NotNull<Either<TLeft, TRight>>();
 
             return new Left_(value);
         }
@@ -46,7 +44,7 @@ namespace Narvalo.Fx
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Either<TLeft, TRight> η(TRight value)
         {
-            Ensures(Result<Either<TLeft, TRight>>() != null);
+            Warrant.NotNull<Either<TLeft, TRight>>();
 
             return new Right_(value);
         }
@@ -100,7 +98,7 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return Format.Current("Left({0})", _value);
             }
@@ -155,7 +153,7 @@ namespace Narvalo.Fx
 
             public override string ToString()
             {
-                Ensures(Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return Format.Current("Right({0})", _value);
             }

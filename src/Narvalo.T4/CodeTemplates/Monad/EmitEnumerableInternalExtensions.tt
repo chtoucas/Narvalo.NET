@@ -26,7 +26,7 @@ public partial class MonadTemplate
             Demand.NotNull(@this);
             Demand.NotNull(funM);
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
             return @this.Select(funM).EmptyIfNull().Collect();
@@ -44,7 +44,7 @@ public partial class MonadTemplate
         {
             <#+ WriteNotNull(true); #>
             Require.NotNull(predicateM, nameof(predicateM));
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();
@@ -93,7 +93,7 @@ public partial class MonadTemplate
             Demand.NotNull(@this);
             Demand.NotNull(funM);
 <#+ if (PostMapEnsuresSome) { #>
-            Ensures(Result<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>() != null);
+            Warrant.NotNull<<#= Name #><Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>>();
 <#+ } #>
 
             var m = @this.Select(funM).EmptyIfNull().Collect();
@@ -121,7 +121,7 @@ public partial class MonadTemplate
             Demand.NotNull(@this);
             Demand.NotNull(second);
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><IEnumerable<TResult>>>() != null);
+            Warrant.NotNull<<#= Name #><IEnumerable<TResult>>>();
 <#+ } #>
 
             Func<TFirst, TSecond, <#= Name #><TResult>> resultSelector
@@ -146,7 +146,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(true); #>
             Require.NotNull(accumulatorM, nameof(accumulatorM));
 <#+ if (IsNullable && HasZero) { #>
-            Ensures(Result<<#= Name #><TAccumulate>>() != null);
+            Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
 
             <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
@@ -179,7 +179,7 @@ public partial class MonadTemplate
             Demand.NotNull(accumulatorM);
 <#+ // "Fold" can not guarantee non null return value. #>
 <#+ if (IsNullable && HasZero) { #>
-            Ensures(Result<<#= Name #><TAccumulate>>() != null);
+            Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
 
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
@@ -196,7 +196,7 @@ public partial class MonadTemplate
             <#+ WriteNotNull(true); #>
             Require.NotNull(accumulatorM, nameof(accumulatorM));
 <#+ if (IsNullable && HasZero) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             using (var iter = @this.GetEnumerator())
@@ -235,7 +235,7 @@ public partial class MonadTemplate
             Demand.NotNull(@this);
             Demand.NotNull(accumulatorM);
 <#+ if (IsNullable && HasZero) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
@@ -255,7 +255,7 @@ public partial class MonadTemplate
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
 <#+ if (IsNullable && HasZero) { #>
-            Ensures(Result<<#= Name #><TAccumulate>>() != null);
+            Warrant.NotNull<<#= Name #><TAccumulate>>();
 <#+ } #>
 
             <#= Name #><TAccumulate> retval = <#= Name #>.<#= ReturnName #>(seed);
@@ -291,7 +291,7 @@ public partial class MonadTemplate
             Require.NotNull(accumulatorM, nameof(accumulatorM));
             Require.NotNull(predicate, nameof(predicate));
 <#+ if (IsNullable && HasZero) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             using (var iter = @this.GetEnumerator())

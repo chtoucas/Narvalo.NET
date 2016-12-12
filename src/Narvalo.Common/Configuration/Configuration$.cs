@@ -16,7 +16,7 @@ namespace Narvalo.Configuration
         public static T GetSection<T>(this Configuration @this, string sectionName) where T : ConfigurationSection
         {
             Require.NotNull(@this, nameof(@this));
-            Contract.Ensures(Contract.Result<T>() != null);
+            Warrant.NotNull<T>();
 
             T section = @this.GetSection(sectionName) as T;
 

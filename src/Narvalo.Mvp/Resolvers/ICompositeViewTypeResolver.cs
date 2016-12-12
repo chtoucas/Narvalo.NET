@@ -28,7 +28,7 @@ namespace Narvalo.Mvp.Resolvers
         Type ICompositeViewTypeResolver.Resolve(Type viewType)
         {
             Requires(viewType != null);
-            Ensures(Result<Type>() != null);
+            Warrant.NotNull<Type>();
 
             return default(Type);
         }

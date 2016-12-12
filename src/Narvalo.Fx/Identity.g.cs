@@ -99,7 +99,7 @@ namespace Narvalo.Fx
             Func<T, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Identity<T>, Identity<TResult>>>() != null);
+            Warrant.NotNull<Func<Identity<T>, Identity<TResult>>>();
 
             return m =>
             {
@@ -119,7 +119,7 @@ namespace Narvalo.Fx
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Identity<T1>, Identity<T2>, Identity<TResult>>>() != null);
+            Warrant.NotNull<Func<Identity<T1>, Identity<T2>, Identity<TResult>>>();
 
             return (m1, m2) =>
             {
@@ -139,7 +139,7 @@ namespace Narvalo.Fx
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>>() != null);
+            Warrant.NotNull<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<TResult>>>();
 
             return (m1, m2, m3) =>
             {
@@ -160,7 +160,7 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>>() != null);
+            Warrant.NotNull<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<TResult>>>();
 
             return (m1, m2, m3, m4) =>
             {
@@ -181,7 +181,7 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, T5, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>>() != null);
+            Warrant.NotNull<Func<Identity<T1>, Identity<T2>, Identity<T3>, Identity<T4>, Identity<T5>, Identity<TResult>>>();
 
             return (m1, m2, m3, m4, m5) =>
             {
@@ -491,7 +491,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
             Expect.NotNull(funM);
-            Ensures(Result<Func<TSource, Identity<TResult>>>() != null);
+            Warrant.NotNull<Func<TSource, Identity<TResult>>>();
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -506,7 +506,7 @@ namespace Narvalo.Fx
         {
             Expect.NotNull(@this);
             Require.NotNull(funM, nameof(funM));
-            Ensures(Result<Func<TSource, Identity<TResult>>>() != null);
+            Warrant.NotNull<Func<TSource, Identity<TResult>>>();
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -624,7 +624,7 @@ namespace Narvalo.Fx.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(predicateM);
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             return @this.FilterCore(predicateM);
         }
@@ -825,7 +825,7 @@ namespace Narvalo.Fx.Internal
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicateM, nameof(predicateM));
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();

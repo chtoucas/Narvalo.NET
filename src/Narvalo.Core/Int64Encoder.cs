@@ -62,7 +62,7 @@ namespace Narvalo
         public static string ToBase25String(long value)
         {
             Require.Range(value >= 0L, nameof(value));
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return Encode(value, s_Base25Alphabet, BASE25_ALPHABET_LENGTH, BASE25_MAX_LENGTH);
         }
@@ -70,7 +70,7 @@ namespace Narvalo
         public static string ToBase34String(long value)
         {
             Require.Range(value >= 0L, nameof(value));
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return Encode(value, s_Base34Alphabet, BASE34_ALPHABET_LENGTH, BASE34_MAX_LENGTH);
         }
@@ -78,7 +78,7 @@ namespace Narvalo
         public static string ToBase58String(long value)
         {
             Require.Range(value >= 0L, nameof(value));
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return Encode(value, s_Base58Alphabet, BASE58_ALPHABET_LENGTH, BASE58_MAX_LENGTH);
         }
@@ -86,7 +86,7 @@ namespace Narvalo
         public static string ToFlickrBase58String(long value)
         {
             Require.Range(value >= 0L, nameof(value));
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return Encode(value, s_FlickrBase58Alphabet, BASE58_ALPHABET_LENGTH, BASE58_MAX_LENGTH);
         }
@@ -191,7 +191,7 @@ namespace Narvalo
             Demand.Range(value >= 0L);
             Demand.Range(alphabetLength > 0);
             Demand.Range(maxLength >= 0);
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             if (value == 0L) { return String.Empty; }
 

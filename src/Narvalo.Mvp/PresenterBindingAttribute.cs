@@ -40,7 +40,7 @@ namespace Narvalo.Mvp
         {
             get
             {
-                Ensures(Result<Type>() != null);
+                Warrant.NotNull<Type>();
 
                 return _presenterType;
             }

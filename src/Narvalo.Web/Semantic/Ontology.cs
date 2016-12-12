@@ -30,7 +30,7 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Contract.Ensures(Contract.Result<CultureInfo>() != null);
+                Warrant.NotNull<CultureInfo>();
 
                 return _culture;
             }
@@ -40,7 +40,7 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
+                Warrant.NotNull<string>();
 
                 return Culture.TwoLetterISOLanguageName;
             }
@@ -50,7 +50,7 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Contract.Ensures(Contract.Result<IOpenGraphMetadata>() != null);
+                Warrant.NotNull<IOpenGraphMetadata>();
 
                 return _openGraph;
             }
@@ -60,7 +60,7 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Contract.Ensures(Contract.Result<Relationships>() != null);
+                Warrant.NotNull<Relationships>();
 
                 return _relationships;
             }
@@ -70,7 +70,7 @@ namespace Narvalo.Web.Semantic
         {
             get
             {
-                Contract.Ensures(Contract.Result<SchemaOrgVocabulary>() != null);
+                Warrant.NotNull<SchemaOrgVocabulary>();
 
                 return _schemaOrg;
             }

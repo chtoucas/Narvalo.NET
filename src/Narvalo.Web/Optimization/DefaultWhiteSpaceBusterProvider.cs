@@ -12,7 +12,7 @@ namespace Narvalo.Web.Optimization
         {
             get
             {
-                Contract.Ensures(Contract.Result<IWhiteSpaceBuster>() != null);
+                Warrant.NotNull<IWhiteSpaceBuster>();
 
                 return _buster;
             }

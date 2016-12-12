@@ -29,7 +29,7 @@ namespace Narvalo.Mvp.Resolvers
         public TypeBuilder DefineType(Type viewType)
         {
             Require.NotNull(viewType, nameof(viewType));
-            Ensures(Result<TypeBuilder>() != null);
+            Warrant.NotNull<TypeBuilder>();
 
             // Create a generic type of type "CompositeView<ITestView>".
             var type = typeof(CompositeView<>);

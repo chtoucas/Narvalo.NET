@@ -5,8 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides helper methods pertaining to <see cref="Func{T1, T2}"/> instances.
     /// </summary>
@@ -26,7 +24,7 @@ namespace Narvalo.Fx
         {
             get
             {
-                Ensures(Result<Func<T1, T2>>() != null);
+                Warrant.NotNull<Func<T1, T2>>();
 
                 return s_AlwaysDefault;
             }

@@ -20,7 +20,7 @@ namespace Narvalo
         public static string Reverse(string value)
         {
             Require.NotNull(value, nameof(value));
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             if (value.Length == 0) { return String.Empty; }
 
@@ -33,7 +33,7 @@ namespace Narvalo
         public static string StripCrLf(string value)
         {
             Require.NotNull(value, nameof(value));
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             if (value.Length == 0) { return String.Empty; }
 
@@ -46,7 +46,7 @@ namespace Narvalo
             Expect.NotNull(value);
             Expect.True(startIndex >= 0);
             Expect.True(length >= 1);
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return Substring(value, startIndex, length, "...");
         }
@@ -56,7 +56,7 @@ namespace Narvalo
             Require.NotNull(value, nameof(value));
             Require.Range(startIndex >= 0, nameof(startIndex));
             Require.Range(length >= 1, nameof(length));
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             if (value.Length <= length)
             {
@@ -81,7 +81,7 @@ namespace Narvalo
         {
             Expect.NotNull(value);
             Expect.True(length >= 1);
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return Truncate(value, length, "..." /* postfix */);
         }
@@ -90,7 +90,7 @@ namespace Narvalo
         {
             Require.NotNull(value, nameof(value));
             Require.Range(length >= 1, nameof(length));
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             if (value.Length <= length)
             {

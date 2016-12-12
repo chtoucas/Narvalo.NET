@@ -10,14 +10,12 @@ namespace Narvalo.Mvp.CommandLine.Internal
     using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.PresenterBinding;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     internal static class PresenterBinderFactory
     {
         public static PresenterBinder Create(MvpCommand command)
         {
             Expect.NotNull(command);
-            Ensures(Result<PresenterBinder>() != null);
+            Warrant.NotNull<PresenterBinder>();
 
             return Create(command, PlatformServices.Current);
         }
@@ -29,7 +27,7 @@ namespace Narvalo.Mvp.CommandLine.Internal
             IPlatformServices platformServices)
         {
             Require.NotNull(platformServices, nameof(platformServices));
-            Ensures(Result<PresenterBinder>() != null);
+            Warrant.NotNull<PresenterBinder>();
 
             return new PresenterBinder(
                 new[] { command },

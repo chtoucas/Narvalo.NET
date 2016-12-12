@@ -85,7 +85,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             get
             {
-                Ensures(Result<Type>() != null);
+                Warrant.NotNull<Type>();
 
                 if (_compositeViewType == null)
                 {
@@ -104,7 +104,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             get
             {
-                Ensures(Result<Type>() != null);
+                Warrant.NotNull<Type>();
 
                 if (_enumerableType == null)
                 {
@@ -123,7 +123,7 @@ namespace Narvalo.Mvp.Resolvers
         {
             get
             {
-                Ensures(Result<Type>() != null);
+                Warrant.NotNull<Type>();
 
                 if (_enumeratorType == null)
                 {
@@ -140,7 +140,7 @@ namespace Narvalo.Mvp.Resolvers
 
         public Type Build()
         {
-            Ensures(Result<Type>() != null);
+            Warrant.NotNull<Type>();
 
             var type = _typeBuilder.CreateType();
             Assume(type != null, "Extern: BCL.");

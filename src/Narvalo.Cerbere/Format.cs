@@ -39,7 +39,7 @@ namespace Narvalo
         {
             Expect.NotNull(format);
             Expect.NotNull(args);
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return String.Format(CultureInfo.CurrentCulture, format, args);
         }
@@ -58,7 +58,7 @@ namespace Narvalo
         {
             Expect.NotNull(format);
             Expect.NotNull(args);
-            Ensures(Result<string>() != null);
+            Warrant.NotNull<string>();
 
             return String.Format(CultureInfo.InvariantCulture, format, args);
         }

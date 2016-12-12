@@ -16,7 +16,7 @@ namespace Narvalo.Web.Configuration
         {
             get
             {
-                Contract.Ensures(Contract.Result<OptimizationSection>() != null);
+                Warrant.NotNull<OptimizationSection>();
 
                 return s_OptimizationSection.Value;
             }
@@ -45,7 +45,7 @@ namespace Narvalo.Web.Configuration
 
         private static OptimizationSection InitializeOptimizationSection()
         {
-            Contract.Ensures(Contract.Result<OptimizationSection>() != null);
+            Warrant.NotNull<OptimizationSection>();
 
             var section = WebConfigurationManager.GetSection(
                 Narvalo.Web.Configuration.OptimizationSection.SectionName) as OptimizationSection;

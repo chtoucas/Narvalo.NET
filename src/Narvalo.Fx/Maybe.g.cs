@@ -126,7 +126,7 @@ namespace Narvalo.Fx
             Func<T, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Maybe<T>, Maybe<TResult>>>() != null);
+            Warrant.NotNull<Func<Maybe<T>, Maybe<TResult>>>();
 
             return m =>
             {
@@ -146,7 +146,7 @@ namespace Narvalo.Fx
             Lift<T1, T2, TResult>(Func<T1, T2, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>>() != null);
+            Warrant.NotNull<Func<Maybe<T1>, Maybe<T2>, Maybe<TResult>>>();
 
             return (m1, m2) =>
             {
@@ -166,7 +166,7 @@ namespace Narvalo.Fx
             Lift<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>>() != null);
+            Warrant.NotNull<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<TResult>>>();
 
             return (m1, m2, m3) =>
             {
@@ -187,7 +187,7 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>>() != null);
+            Warrant.NotNull<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<TResult>>>();
 
             return (m1, m2, m3, m4) =>
             {
@@ -208,7 +208,7 @@ namespace Narvalo.Fx
             Func<T1, T2, T3, T4, T5, TResult> fun)
             /* T4: C# indent */
         {
-            Ensures(Result<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>>() != null);
+            Warrant.NotNull<Func<Maybe<T1>, Maybe<T2>, Maybe<T3>, Maybe<T4>, Maybe<T5>, Maybe<TResult>>>();
 
             return (m1, m2, m3, m4, m5) =>
             {
@@ -570,7 +570,7 @@ namespace Narvalo.Fx
             Require.NotNull(outerKeySelector, nameof(outerKeySelector));
             Require.NotNull(comparer, nameof(comparer));
             Demand.NotNull(innerKeySelector);
-            Ensures(Result<Func<TSource, Maybe<TKey>>>() != null);
+            Warrant.NotNull<Func<TSource, Maybe<TKey>>>();
 
             return source =>
             {
@@ -737,7 +737,7 @@ namespace Narvalo.Fx
         {
             Require.NotNull(@this, nameof(@this));
             Expect.NotNull(funM);
-            Ensures(Result<Func<TSource, Maybe<TResult>>>() != null);
+            Warrant.NotNull<Func<TSource, Maybe<TResult>>>();
 
             return _ => @this.Invoke(_).Bind(funM);
         }
@@ -752,7 +752,7 @@ namespace Narvalo.Fx
         {
             Expect.NotNull(@this);
             Require.NotNull(funM, nameof(funM));
-            Ensures(Result<Func<TSource, Maybe<TResult>>>() != null);
+            Warrant.NotNull<Func<TSource, Maybe<TResult>>>();
 
             return _ => funM.Invoke(_).Bind(@this);
         }
@@ -858,7 +858,7 @@ namespace Narvalo.Fx.Advanced
         {
             Expect.NotNull(@this);
             Expect.NotNull(predicateM);
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             return @this.FilterCore(predicateM);
         }
@@ -1071,7 +1071,7 @@ namespace Narvalo.Fx.Internal
         {
             Require.NotNull(@this, nameof(@this));
             Require.NotNull(predicateM, nameof(predicateM));
-            Ensures(Result<IEnumerable<TSource>>() != null);
+            Warrant.NotNull<IEnumerable<TSource>>();
 
             // NB: Haskell uses tail recursion, we don't.
             var list = new List<TSource>();

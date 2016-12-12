@@ -22,7 +22,7 @@ public partial class MonadTemplate
         {
             Expect.NotNull(@this);
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><IEnumerable<TSource>>>() != null);
+            Warrant.NotNull<<#= Name #><IEnumerable<TSource>>>();
 <#+ } #>
 
             return @this.CollectCore();
@@ -45,7 +45,7 @@ public partial class MonadTemplate
         {
             Expect.NotNull(@this);
 <#+ if (IsNullable) { #>
-            Ensures(Result<<#= Name #><TSource>>() != null);
+            Warrant.NotNull<<#= Name #><TSource>>();
 <#+ } #>
 
             return @this.SumCore();

@@ -19,7 +19,7 @@ namespace Narvalo.Mvp.Web.Core
         {
             get
             {
-                Ensures(Result<IPlatformServices>() != null);
+                Warrant.NotNull<IPlatformServices>();
 
                 return s_Default;
             }
@@ -27,7 +27,7 @@ namespace Narvalo.Mvp.Web.Core
 
         public static IPlatformServices Current
         {
-            get { Ensures(Result<IPlatformServices>() != null);  return s_Instance; }
+            get { Warrant.NotNull<IPlatformServices>();  return s_Instance; }
             set { Expect.NotNull(value); s_Instance.Reset(value); }
         }
 
