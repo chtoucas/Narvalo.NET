@@ -2,6 +2,10 @@
 
 namespace Narvalo.Web.Optimization
 {
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
+
     public sealed class WhiteSpaceBusterProvider
     {
         private static readonly WhiteSpaceBusterProvider s_Instance = new WhiteSpaceBusterProvider();

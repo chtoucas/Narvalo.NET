@@ -3,6 +3,9 @@
 namespace Narvalo.Web
 {
     using System;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Linq;
     using System.Net;
     using System.Web;

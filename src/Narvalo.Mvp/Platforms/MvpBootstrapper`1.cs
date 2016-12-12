@@ -117,8 +117,8 @@ namespace Narvalo.Mvp.Platforms
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Invariant(_defaultServices != null);
-            Invariant(_presenterDiscoveryStrategies != null);
+            Contract.Invariant(_defaultServices != null);
+            Contract.Invariant(_presenterDiscoveryStrategies != null);
         }
 
 #endif

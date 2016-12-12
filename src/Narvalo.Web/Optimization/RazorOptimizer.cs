@@ -4,6 +4,9 @@ namespace Narvalo.Web.Optimization
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Text;
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;

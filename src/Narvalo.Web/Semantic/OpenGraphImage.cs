@@ -3,6 +3,9 @@
 namespace Narvalo.Web.Semantic
 {
     using System;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
 
     public class OpenGraphImage
     {

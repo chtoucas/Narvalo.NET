@@ -73,7 +73,7 @@ namespace Narvalo.Mvp.Platforms
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Invariant(_lazyValue != null);
+            Contract.Invariant(_lazyValue != null);
         }
 
 #endif

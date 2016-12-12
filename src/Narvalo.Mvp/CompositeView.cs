@@ -54,7 +54,7 @@ namespace Narvalo.Mvp
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Invariant(_views != null);
+            Contract.Invariant(_views != null);
         }
 
 #endif

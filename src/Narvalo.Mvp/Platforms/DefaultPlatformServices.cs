@@ -160,10 +160,10 @@ namespace Narvalo.Mvp.Platforms
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Invariant(_compositeViewFactoryThunk != null);
-            Invariant(_messageCoordinatorFactoryThunk != null);
-            Invariant(_presenterDiscoveryStrategyThunk != null);
-            Invariant(_presenterFactoryThunk != null);
+            Contract.Invariant(_compositeViewFactoryThunk != null);
+            Contract.Invariant(_messageCoordinatorFactoryThunk != null);
+            Contract.Invariant(_presenterDiscoveryStrategyThunk != null);
+            Contract.Invariant(_presenterFactoryThunk != null);
         }
 
 #endif

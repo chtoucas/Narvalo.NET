@@ -2,6 +2,9 @@
 
 namespace Narvalo.Web.Semantic
 {
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Globalization;
 
     public sealed class OpenGraphLocale

@@ -7,7 +7,6 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Diagnostics.Contracts;
 #endif
 
-
     public sealed class PresenterDiscoveryResult
     {
         private readonly IEnumerable<IView> _boundViews;
@@ -49,8 +48,8 @@ namespace Narvalo.Mvp.PresenterBinding
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Invariant(_bindings != null);
-            Invariant(_boundViews != null);
+            Contract.Invariant(_bindings != null);
+            Contract.Invariant(_boundViews != null);
         }
 
 #endif

@@ -8,7 +8,6 @@ namespace Narvalo.Mvp
     using System.Diagnostics.Contracts;
 #endif
 
-
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class PresenterBindingAttribute : Attribute
     {
@@ -63,7 +62,7 @@ namespace Narvalo.Mvp
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Invariant(_presenterType != null);
+            Contract.Invariant(_presenterType != null);
         }
 
 #endif

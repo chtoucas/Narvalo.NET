@@ -128,9 +128,9 @@ namespace Narvalo.Mvp.PresenterBinding
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Invariant(_presenterType != null);
-            Invariant(_views != null);
-            Invariant(_viewType != null);
+            Contract.Invariant(_presenterType != null);
+            Contract.Invariant(_views != null);
+            Contract.Invariant(_viewType != null);
         }
 
 #endif
