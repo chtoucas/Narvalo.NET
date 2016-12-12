@@ -83,7 +83,7 @@
     <Compile Include="DemandFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="Finance\CurrencyNotFoundExceptionFacts.cs" />
-    <Compile Include="Finance\Internal\AsciiHelpersFacts.cs" />
+    <Compile Include="Finance\AsciiHelpersFacts.cs" />
     <Compile Include="Fx\Samples\Internal\EnumerableExtensions.cs" />
     <Compile Include="_TestCommon\DebugOnlyFactAttribute.cs" />
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />

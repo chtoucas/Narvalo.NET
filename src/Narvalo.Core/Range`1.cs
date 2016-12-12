@@ -17,7 +17,7 @@ namespace Narvalo
 
         public Range(T lowerEnd, T upperEnd)
         {
-            Require.Range(PredicateFor.Range(lowerEnd, upperEnd), nameof(lowerEnd));
+            Require.Range(Range.Validate(lowerEnd, upperEnd), nameof(lowerEnd));
 
             _lowerEnd = lowerEnd;
             _upperEnd = upperEnd;

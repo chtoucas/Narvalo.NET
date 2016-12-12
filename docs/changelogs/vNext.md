@@ -111,7 +111,9 @@ Methods marked as obsolete and their replacements:
 - `Range<T>.Includes(T)` -> `Range<T>.Contains(T)`
 
 New classes and new methods:
+- `Range.IsValid<T>()`
 - `Range<T>.IsDegenerate`
+- `AsciiHelpers`
 
 ### Narvalo.Common
 New classes and new methods:

@@ -65,7 +65,6 @@
     <Compile Include="ConvertTo.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />
-    <Compile Include="Internal\PredicateFor.cs" />
     <Compile Include="Internal\TryParser%24.cs" />
     <Compile Include="Internal\TryParser`1.cs" />
     <Compile Include="ParseTo.cs" />

@@ -3,15 +3,21 @@
 namespace Narvalo
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     public static class Range
     {
         public static Range<T> Of<T>(T lowerEnd, T upperEnd)
             where T : struct, IEquatable<T>, IComparable<T>
         {
-            Expect.Range(PredicateFor.Range(lowerEnd, upperEnd));
+            Expect.Range(Validate(lowerEnd, upperEnd));
 
             return new Range<T>(lowerEnd, upperEnd);
         }
+
+        [Pure]
+        public static bool Validate<T>(T lowerEnd, T upperEnd)
+            where T : struct, IComparable<T>
+            => lowerEnd.CompareTo(upperEnd) <= 0;
     }
 }

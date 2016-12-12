@@ -21,7 +21,7 @@ namespace Narvalo.Finance
         /// <returns>The currency for the specified code.</returns>
         public Currency GetCurrency(string code)
         {
-            ContractFor.CurrencyCode(code);
+            Guards.Expect.CurrencyCode(code);
             Warrant.NotNull<Currency>();
 
             if (!Validate(code))

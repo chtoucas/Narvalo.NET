@@ -5,6 +5,8 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Finance.Internal;
+
     using static System.Diagnostics.Contracts.Contract;
 
     /// <summary>
@@ -33,10 +35,10 @@ namespace Narvalo.Finance
             Demand.NotNull(checkDigit);
             Demand.NotNull(bban);
             Demand.NotNull(innerValue);
-            Demand.True(PredicateFor.CountryCode(countryCode));
-            Demand.True(PredicateFor.CheckDigit(checkDigit));
-            Demand.True(PredicateFor.Bban(bban));
-            Demand.True(PredicateFor.InnerValue(innerValue));
+            Demand.True(ValidateCountryCode(countryCode));
+            Demand.True(ValidateCheckDigit(checkDigit));
+            Demand.True(ValidateBban(bban));
+            Demand.True(ValidateInnerValue(innerValue));
 
             _countryCode = countryCode;
             _checkDigit = checkDigit;
@@ -65,8 +67,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Warrant.NotNull<string>();
-                Warrant.Length(CHECKDIGIT_LENGTH);
+                Guards.Warrant.Length(CHECKDIGIT_LENGTH);
 
                 return _checkDigit;
             }
@@ -79,8 +80,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Warrant.NotNull<string>();
-                Warrant.Length(COUNTRY_LENGTH);
+                Guards.Warrant.Length(COUNTRY_LENGTH);
 
                 return _countryCode;
             }
@@ -91,13 +91,13 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(checkDigit, nameof(checkDigit));
             Require.NotNull(bban, nameof(bban));
-            Require.True(PredicateFor.CountryCode(countryCode), nameof(countryCode));
-            Require.True(PredicateFor.CheckDigit(checkDigit), nameof(checkDigit));
-            Require.True(PredicateFor.Bban(bban), nameof(bban));
+            Require.True(ValidateCountryCode(countryCode), nameof(countryCode));
+            Require.True(ValidateCheckDigit(checkDigit), nameof(checkDigit));
+            Require.True(ValidateBban(bban), nameof(bban));
 
             var innerValue = countryCode + checkDigit + bban;
-            Assume(PredicateFor.InnerValue(innerValue));
-            Check.True(PredicateFor.InnerValue(innerValue));
+            Assume(ValidateInnerValue(innerValue));
+            Check.True(ValidateInnerValue(innerValue));
 
             return new Iban(countryCode, checkDigit, bban, innerValue);
         }
@@ -144,8 +144,8 @@ namespace Narvalo.Finance
 
                 return null;
             }
-            Assume(PredicateFor.InnerValue(value));
-            Check.True(PredicateFor.InnerValue(value));
+            Assume(ValidateInnerValue(value));
+            Check.True(ValidateInnerValue(value));
 
             //if (!IsDigitOrUpperLetter(value))
             //{
@@ -160,56 +160,52 @@ namespace Narvalo.Finance
 
             // The first two letters define the ISO 3166-1 alpha-2 country code.
             string countryCode = value.Substring(0, COUNTRY_LENGTH);
-            Check.True(PredicateFor.CountryCode(countryCode));
+            Check.True(ValidateCountryCode(countryCode));
 
             string checkDigit = value.Substring(COUNTRY_LENGTH, CHECKDIGIT_LENGTH);
-            Check.True(PredicateFor.CheckDigit(checkDigit));
+            Check.True(ValidateCheckDigit(checkDigit));
 
             string bban = value.Substring(COUNTRY_LENGTH + CHECKDIGIT_LENGTH);
-            Assume(PredicateFor.Bban(bban));
-            Check.True(PredicateFor.Bban(bban));
+            Assume(ValidateBban(bban));
+            Check.True(ValidateBban(bban));
 
             return new Iban(countryCode, checkDigit, bban, value);
         }
+    }
 
-#if CONTRACTS_FULL
-        public
-#else
-        private
-#endif
-        static class PredicateFor
+    // Validation helpers.
+    public partial struct Iban
+    {
+        [Pure]
+        public static bool ValidateBban(string value)
         {
-            [Pure]
-            public static bool Bban(string bban)
-            {
-                Demand.NotNull(bban);
+            if (value == null) { return false; }
 
-                return bban.Length >= BBAN_MIN_LENGTH && bban.Length <= BBAN_MAX_LENGTH;
-            }
+            return value.Length >= BBAN_MIN_LENGTH && value.Length <= BBAN_MAX_LENGTH;
+        }
 
-            [Pure]
-            public static bool CheckDigit(string checkDigit)
-            {
-                Demand.NotNull(checkDigit);
+        [Pure]
+        public static bool ValidateCheckDigit(string value)
+        {
+            if (value == null) { return false; }
 
-                return checkDigit.Length == CHECKDIGIT_LENGTH;
-            }
+            return value.Length == CHECKDIGIT_LENGTH;
+        }
 
-            [Pure]
-            public static bool CountryCode(string countryCode)
-            {
-                Demand.NotNull(countryCode);
+        [Pure]
+        public static bool ValidateCountryCode(string value)
+        {
+            if (value == null) { return false; }
 
-                return countryCode.Length == COUNTRY_LENGTH;
-            }
+            return value.Length == COUNTRY_LENGTH;
+        }
 
-            [Pure]
-            public static bool InnerValue(string value)
-            {
-                Demand.NotNull(value);
+        [Pure]
+        public static bool ValidateInnerValue(string value)
+        {
+            if (value == null) { return false; }
 
-                return value.Length >= MIN_LENGTH && value.Length <= MAX_LENGTH;
-            }
+            return value.Length >= MIN_LENGTH && value.Length <= MAX_LENGTH;
         }
     }
 
@@ -247,7 +243,7 @@ namespace Narvalo.Finance
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract. Invariant(_bban != null);
+            Contract.Invariant(_bban != null);
             Contract.Invariant(_checkDigit != null);
             Contract.Invariant(_countryCode != null);
             Contract.Invariant(_innerValue != null);

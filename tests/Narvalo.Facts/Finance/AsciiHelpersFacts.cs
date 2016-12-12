@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Internal
+namespace Narvalo.Finance
 {
-#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
-
     using System;
 
     using Xunit;
@@ -14,11 +12,11 @@ namespace Narvalo.Finance.Internal
 
         [Fact]
         public static void IsDigitOrUpperLetter_Fails_ForNullString()
-            => Assert.Throws<DebugAssertFailedException>(() => AsciiHelpers.IsDigitOrUpperLetter(null));
+            => Assert.False(AsciiHelpers.IsDigitOrUpperLetter(null));
 
         [Fact]
         public static void IsDigitOrUpperLetter_Fails_ForEmptyString()
-            => Assert.Throws<DebugAssertFailedException>(() => AsciiHelpers.IsDigitOrUpperLetter(String.Empty));
+            => Assert.False(AsciiHelpers.IsDigitOrUpperLetter(String.Empty));
 
         [Theory]
         [InlineData("1")]
@@ -54,11 +52,11 @@ namespace Narvalo.Finance.Internal
 
         [Fact]
         public static void IsUpperLetter_Fails_ForNullString()
-            => Assert.Throws<DebugAssertFailedException>(() => AsciiHelpers.IsUpperLetter(null));
+            => Assert.False(AsciiHelpers.IsUpperLetter(null));
 
         [Fact]
         public static void IsUpperLetter_Fails_ForEmptyString()
-            => Assert.Throws<DebugAssertFailedException>(() => AsciiHelpers.IsUpperLetter(String.Empty));
+            => Assert.False(AsciiHelpers.IsUpperLetter(String.Empty));
 
         [Theory]
         [InlineData("A")]
@@ -93,6 +91,4 @@ namespace Narvalo.Finance.Internal
 
         #endregion
     }
-
-#endif
 }

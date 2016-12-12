@@ -12,7 +12,7 @@ namespace Narvalo
     /// Provides Code Contracts abbreviators and helpers.
     /// </summary>
     [DebuggerStepThrough]
-    public static class Check
+    public static partial class Check
     {
         /// <summary>
         ///
@@ -45,75 +45,6 @@ namespace Narvalo
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void AssumeInvariant<T>(T obj) { }
-
-        /// <summary>
-        /// Returns a value indicating whether the specified value only consists of white-space
-        /// characters.
-        /// </summary>
-        /// <remarks>This method returns <see langword="false"/> if <paramref name="value"/>
-        /// is <see langword="null"/> or empty.</remarks>
-        /// <param name="value">The string to test.</param>
-        /// <returns><see langword="true"/> if the input only consists of white-space characters;
-        /// otherwise <see langword="false"/>.</returns>
-        [Pure]
-        public static bool IsWhiteSpace(string value)
-        {
-            if (value == null || value.Length == 0) { return false; }
-
-            for (int i = 0; i < value.Length; i++)
-            {
-                if (!Char.IsWhiteSpace(value[i]))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Returns a value indicating whether the specified value is empty or only consists
-        /// of white-space characters.
-        /// </summary>
-        /// <remarks>This method returns <see langword="false"/> if <paramref name="value"/>
-        /// is <see langword="null"/>.</remarks>
-        /// <param name="value">The string to test.</param>
-        /// <returns><see langword="true"/> if the specified value is empty or only consists of
-        /// white-space characters; otherwise <see langword="false"/>.</returns>
-        [Pure]
-        public static bool IsEmptyOrWhiteSpace(string value)
-        {
-            if (value == null) { return false; }
-
-            for (int i = 0; i < value.Length; i++)
-            {
-                if (!Char.IsWhiteSpace(value[i]))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Returns a value indicating whether the specified <paramref name="type"/> is a flags enumeration.
-        /// </summary>
-        /// <param name="type">The type to test.</param>
-        /// <returns><see langword="true"/> if the specified <paramref name="type"/> is a flags enumeration;
-        /// otherwise <see langword="false"/>.</returns>
-        [Pure]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
-        public static bool IsFlagsEnum(Type type)
-        {
-            if (type == null) { return false; }
-
-            TypeInfo typeInfo = type.GetTypeInfo();
-
-            return typeInfo != null
-                && typeInfo.IsEnum
-                && typeInfo.GetCustomAttribute<FlagsAttribute>(inherit: false) != null;
-        }
 
         [DebuggerHidden]
         [ContractVerification(false)]
@@ -183,6 +114,79 @@ namespace Narvalo
             Contract.Requires(false);
 
             return exception;
+        }
+    }
+
+    // Validation helpers.
+    public static partial class Check
+    {
+        /// <summary>
+        /// Returns a value indicating whether the specified value only consists of white-space
+        /// characters.
+        /// </summary>
+        /// <remarks>This method returns <see langword="false"/> if <paramref name="value"/>
+        /// is <see langword="null"/> or empty.</remarks>
+        /// <param name="value">The string to test.</param>
+        /// <returns><see langword="true"/> if the input only consists of white-space characters;
+        /// otherwise <see langword="false"/>.</returns>
+        [Pure]
+        public static bool IsWhiteSpace(string value)
+        {
+            if (value == null || value.Length == 0) { return false; }
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (!Char.IsWhiteSpace(value[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether the specified value is empty or only consists
+        /// of white-space characters.
+        /// </summary>
+        /// <remarks>This method returns <see langword="false"/> if <paramref name="value"/>
+        /// is <see langword="null"/>.</remarks>
+        /// <param name="value">The string to test.</param>
+        /// <returns><see langword="true"/> if the specified value is empty or only consists of
+        /// white-space characters; otherwise <see langword="false"/>.</returns>
+        [Pure]
+        public static bool IsEmptyOrWhiteSpace(string value)
+        {
+            if (value == null) { return false; }
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (!Char.IsWhiteSpace(value[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether the specified <paramref name="type"/> is a flags enumeration.
+        /// </summary>
+        /// <param name="type">The type to test.</param>
+        /// <returns><see langword="true"/> if the specified <paramref name="type"/> is a flags enumeration;
+        /// otherwise <see langword="false"/>.</returns>
+        [Pure]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "[Intentionally] The rule does not apply here.")]
+        public static bool IsFlagsEnum(Type type)
+        {
+            if (type == null) { return false; }
+
+            TypeInfo typeInfo = type.GetTypeInfo();
+
+            return typeInfo != null
+                && typeInfo.IsEnum
+                && typeInfo.GetCustomAttribute<FlagsAttribute>(inherit: false) != null;
         }
     }
 }

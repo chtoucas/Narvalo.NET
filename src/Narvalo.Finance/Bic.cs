@@ -5,8 +5,10 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Finance.Internal;
+
     using static System.Diagnostics.Contracts.Contract;
-    using static Narvalo.Finance.Internal.AsciiHelpers;
+    using static Narvalo.Finance.AsciiHelpers;
 
     /// <summary>
     /// Represents a Business Identifier Code (BIC).
@@ -46,11 +48,11 @@ namespace Narvalo.Finance
             Demand.NotNull(locationCode);
             Demand.NotNull(branchCode);
             Demand.NotNull(innerValue);
-            Demand.True(PredicateFor.InstitutionCode(institutionCode));
-            Demand.True(PredicateFor.CountryCode(countryCode));
-            Demand.True(PredicateFor.LocationCode(locationCode));
-            Demand.True(PredicateFor.BranchCode(branchCode));
-            Demand.True(PredicateFor.InnerValue(innerValue));
+            Demand.True(ValidateInstitutionCode(institutionCode));
+            Demand.True(ValidateCountryCode(countryCode));
+            Demand.True(ValidateLocationCode(locationCode));
+            Demand.True(ValidateBranchCode(branchCode));
+            Demand.True(ValidateInnerValue(innerValue));
 
             _institutionCode = institutionCode;
             _countryCode = countryCode;
@@ -90,8 +92,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Warrant.NotNull<string>();
-                Warrant.Length(COUNTRY_LENGTH);
+                Guards.Warrant.Length(COUNTRY_LENGTH);
 
                 return _countryCode;
             }
@@ -105,8 +106,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Warrant.NotNull<string>();
-                Warrant.Length(PREFIX_LENGTH);
+                Guards.Warrant.Length(PREFIX_LENGTH);
 
                 return _institutionCode;
             }
@@ -124,8 +124,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Warrant.NotNull<string>();
-                Warrant.Length(SUFFIX_LENGTH);
+                Guards.Warrant.Length(SUFFIX_LENGTH);
 
                 return _locationCode;
             }
@@ -137,14 +136,14 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(locationCode, nameof(locationCode));
             Require.NotNull(branchCode, nameof(branchCode));
-            Require.True(PredicateFor.InstitutionCode(institutionCode), nameof(institutionCode));
-            Require.True(PredicateFor.CountryCode(countryCode), nameof(countryCode));
-            Require.True(PredicateFor.LocationCode(locationCode), nameof(locationCode));
-            Require.True(PredicateFor.BranchCode(branchCode), nameof(branchCode));
+            Require.True(ValidateInstitutionCode(institutionCode), nameof(institutionCode));
+            Require.True(ValidateCountryCode(countryCode), nameof(countryCode));
+            Require.True(ValidateLocationCode(locationCode), nameof(locationCode));
+            Require.True(ValidateBranchCode(branchCode), nameof(branchCode));
 
             var innerValue = institutionCode + countryCode + locationCode + branchCode;
-            Assume(PredicateFor.InnerValue(innerValue));
-            Check.True(PredicateFor.InnerValue(innerValue));
+            Assume(ValidateInnerValue(innerValue));
+            Check.True(ValidateInnerValue(innerValue));
 
             return new Bic(institutionCode, countryCode, locationCode, branchCode, innerValue);
         }
@@ -195,28 +194,28 @@ namespace Narvalo.Finance
 
                 return null;
             }
-            Assume(PredicateFor.InnerValue(value));
-            Check.True(PredicateFor.InnerValue(value));
+            Assume(ValidateInnerValue(value));
+            Check.True(ValidateInnerValue(value));
 
             // The first four letters or digits define the institution or bank code.
             // NB: SWIFT is more restrictive than ISO as it only expects letters.
             string institutionCode = value.Substring(0, PREFIX_LENGTH);
-            Check.True(PredicateFor.InstitutionCode(institutionCode));
+            Check.True(ValidateInstitutionCode(institutionCode));
 
             // The next two letters define the ISO 3166-1 alpha-2 country code.
             string countryCode = value.Substring(PREFIX_LENGTH, COUNTRY_LENGTH);
-            Check.True(PredicateFor.CountryCode(countryCode));
+            Check.True(ValidateCountryCode(countryCode));
 
             // The next two letters or digits define the location code.
             string locationCode = value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH, SUFFIX_LENGTH);
-            Check.True(PredicateFor.LocationCode(locationCode));
+            Check.True(ValidateLocationCode(locationCode));
 
             // The next three letters or digits define the branch code (optional).
             string branchCode = value.Length == PARTY_LENGTH
                 ? String.Empty
                 : value.Substring(PREFIX_LENGTH + COUNTRY_LENGTH + SUFFIX_LENGTH, BRANCH_LENGTH);
-            Assume(PredicateFor.BranchCode(branchCode));
-            Check.True(PredicateFor.BranchCode(branchCode));
+            Assume(ValidateBranchCode(branchCode));
+            Check.True(ValidateBranchCode(branchCode));
 
             return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }
@@ -227,54 +226,49 @@ namespace Narvalo.Finance
                 && IsUpperLetter(CountryCode)
                 && IsDigitOrUpperLetter(LocationCode)
                 && (BranchCode.Length == 0 ? true : IsDigitOrUpperLetter(BranchCode));
+    }
 
-        // REVIEW: Believe this is wrong.
-#if CONTRACTS_FULL
-        public
-#else
-        private
-#endif
-        static class PredicateFor
+    // Validation helpers.
+    public partial struct Bic
+    {
+        [Pure]
+        public static bool ValidateBranchCode(string value)
         {
-            [Pure]
-            public static bool BranchCode(string branchCode)
-            {
-                Demand.NotNull(branchCode);
+            if (value == null) { return false; }
 
-                return branchCode.Length == 0 || branchCode.Length == BRANCH_LENGTH;
-            }
+            return value.Length == 0 || value.Length == BRANCH_LENGTH;
+        }
 
-            [Pure]
-            public static bool CountryCode(string countryCode)
-            {
-                Demand.NotNull(countryCode);
+        [Pure]
+        public static bool ValidateCountryCode(string value)
+        {
+            if (value == null) { return false; }
 
-                return countryCode.Length == COUNTRY_LENGTH;
-            }
+            return value.Length == COUNTRY_LENGTH;
+        }
 
-            [Pure]
-            public static bool InnerValue(string value)
-            {
-                Demand.NotNull(value);
+        [Pure]
+        public static bool ValidateInnerValue(string value)
+        {
+            if (value == null) { return false; }
 
-                return value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH;
-            }
+            return value.Length == PARTY_LENGTH || value.Length == BIC_LENGTH;
+        }
 
-            [Pure]
-            public static bool InstitutionCode(string institutionCode)
-            {
-                Demand.NotNull(institutionCode);
+        [Pure]
+        public static bool ValidateInstitutionCode(string value)
+        {
+            if (value == null) { return false; }
 
-                return institutionCode.Length == PREFIX_LENGTH;
-            }
+            return value.Length == PREFIX_LENGTH;
+        }
 
-            [Pure]
-            public static bool LocationCode(string locationCode)
-            {
-                Demand.NotNull(locationCode);
+        [Pure]
+        public static bool ValidateLocationCode(string value)
+        {
+            if (value == null) { return false; }
 
-                return locationCode.Length == SUFFIX_LENGTH;
-            }
+            return value.Length == SUFFIX_LENGTH;
         }
     }
 

@@ -1,25 +1,20 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Internal
+namespace Narvalo.Finance
 {
     using System;
     using System.Diagnostics.Contracts;
 
-#if CONTRACTS_FULL // FIXME: This is wrong. Update tests.
-    public
-#else
-    internal
-#endif
-        static class AsciiHelpers
+    public static class AsciiHelpers
     {
         [Pure]
-        public static bool IsDigitOrUpperLetter(string value)
+        public static bool IsUpperLetter(string value)
         {
-            Demand.NotNullOrEmpty(value);
+            if (value == null || value.Length == 0) { return false; }
 
             for (int i = 0; i < value.Length; i++)
             {
-                if (!IsDigitOrUpperLetter(value[i]))
+                if (!IsUpperLetter(value[i]))
                 {
                     return false;
                 }
@@ -29,13 +24,13 @@ namespace Narvalo.Finance.Internal
         }
 
         [Pure]
-        public static bool IsUpperLetter(string value)
+        public static bool IsDigitOrUpperLetter(string value)
         {
-            Demand.NotNullOrEmpty(value);
+            if (value == null || value.Length == 0) { return false; }
 
             for (int i = 0; i < value.Length; i++)
             {
-                if (!IsUpperLetter(value[i]))
+                if (!IsDigitOrUpperLetter(value[i]))
                 {
                     return false;
                 }
