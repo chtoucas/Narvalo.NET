@@ -3,7 +3,6 @@
 namespace Narvalo
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     using Xunit;
 

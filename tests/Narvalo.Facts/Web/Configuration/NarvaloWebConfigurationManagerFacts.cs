@@ -2,8 +2,6 @@
 
 namespace Narvalo.Web.Configuration
 {
-    using Xunit;
-
     public static class NarvaloWebConfigurationManagerFacts
     {
     }
