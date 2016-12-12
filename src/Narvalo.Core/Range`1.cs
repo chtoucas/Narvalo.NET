@@ -73,21 +73,13 @@ namespace Narvalo
     // Implements the IEquatable<Range<T>> interface.
     public partial struct Range<T>
     {
-        public static bool operator ==(Range<T> left, Range<T> right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(Range<T> left, Range<T> right) => left.Equals(right);
 
-        public static bool operator !=(Range<T> left, Range<T> right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator !=(Range<T> left, Range<T> right) => !left.Equals(right);
 
         public bool Equals(Range<T> other)
-        {
-            return LowerEnd.Equals(other.LowerEnd)
+            => LowerEnd.Equals(other.LowerEnd)
                 && UpperEnd.Equals(other.UpperEnd);
-        }
 
         public override bool Equals(object obj)
         {

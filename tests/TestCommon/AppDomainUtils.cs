@@ -1,9 +1,5 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
-using global::System.Diagnostics.CodeAnalysis;
-
-[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText", Justification = "[Ignore] Microsoft source file.")]
-
 // Adapted from aspnetwebstack\test\Microsoft.TestCommon\AppDomainUtils.cs
 namespace Narvalo
 {
@@ -13,6 +9,7 @@ namespace Narvalo
     using System.Web.Compilation;
     using System.Web.Hosting;
 
+    [global::System.CodeDom.Compiler.GeneratedCode("Extern.Microsoft", "1.0")]
     public static class AppDomainUtils
     {
 

@@ -14,6 +14,7 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Currencies;
     using Xunit;
@@ -23,6 +24,8 @@ namespace Narvalo.Finance
         #region Built-In Currencies
 
         [Fact]
+        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
         public static void BuiltInCurrencies_AreNotNull()
         {
             Assert.True(ADP.Currency != null);
@@ -329,6 +332,8 @@ namespace Narvalo.Finance
         }
 
         [Fact]
+        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
         public static void BuiltInCurrencies_SatisfyStructuralEqualityRules()
         {
             // Act & Assert
@@ -1844,6 +1849,8 @@ namespace Narvalo.Finance
         #region ToString()
 
         [Fact]
+        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
+        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
         public static void ToString_ReturnsNotNull()
         {
             // Act & Assert

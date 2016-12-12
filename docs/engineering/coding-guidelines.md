@@ -59,7 +59,14 @@ All suppressions must be justified and tagged:
 - `[GeneratedCode]` Used to mark a suppression related to generated code.
 - `[Intentionally]` Used in all other cases.
 
-Consider putting the justification on its own line. This helps to quickly see them in search results.
+Consider putting the justification on its own line. This helps to quickly see
+them in search results.
+
+```csharp
+using global::System.Diagnostics.CodeAnalysis;
+
+[module: SuppressMessage("Narvalo.CSharpRules", "NA1201:FilesMustStartWithCopyrightText", Justification = "[Ignore] Microsoft source file.")]
+```
 
 ### FxCop
 Except for test projects we use a strict ruleset;

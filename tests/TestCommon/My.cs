@@ -24,7 +24,7 @@ namespace Narvalo
         [Flags]
         public enum EnumBits
         {
-            Zero = 0,
+            None = 0,
             One = 1 << 0,
             Two = 1 << 1,
             Four = 1 << 2,
@@ -34,7 +34,7 @@ namespace Narvalo
 
         public struct EmptyStruct { }
 
-        public struct ComparableStruct : IComparable<ComparableStruct>
+        public struct ComparableStruct : IEquatable<ComparableStruct>, IComparable<ComparableStruct>
         {
             private readonly int _value;
 
@@ -44,6 +44,32 @@ namespace Narvalo
             }
 
             public int CompareTo(ComparableStruct other) => _value.CompareTo(other._value);
+
+            public static bool operator <(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) < 0;
+
+            public static bool operator <=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) <= 0;
+
+            public static bool operator >(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) > 0;
+
+            public static bool operator >=(ComparableStruct left, ComparableStruct right) => left.CompareTo(right) >= 0;
+
+            public static bool operator ==(ComparableStruct left, ComparableStruct right) => left.Equals(right);
+
+            public static bool operator !=(ComparableStruct left, ComparableStruct right) => !left.Equals(right);
+
+            public bool Equals(ComparableStruct other) => _value == other._value;
+
+            public override bool Equals(object obj)
+            {
+                if (!(obj is ComparableStruct))
+                {
+                    return false;
+                }
+
+                return Equals((ComparableStruct)obj);
+            }
+
+            public override int GetHashCode() => _value.GetHashCode();
 
             public override string ToString() => _value.ToString(CultureInfo.CurrentCulture);
         }
