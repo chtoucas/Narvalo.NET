@@ -80,7 +80,7 @@ namespace Narvalo
             var argex = Assert.IsType<ArgumentException>(ex);
             Assert.Equal(paramName, argex.ParamName);
             // ArgumentException appends some info to our message.
-            Assert.StartsWith(message, ex.Message, StringComparison.InvariantCulture);
+            Assert.StartsWith(message, ex.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         #endregion
@@ -126,8 +126,8 @@ namespace Narvalo
             Assert.NotNull(ex);
             var argex = Assert.IsType<ArgumentOutOfRangeException>(ex);
             Assert.Equal(paramName, argex.ParamName);
-            // ArgumentOutOfRangeException appends some info to our message.
-            Assert.StartsWith(message, ex.Message, StringComparison.InvariantCulture);
+            // NB: ArgumentOutOfRangeException appends some info to our message.
+            Assert.StartsWith(message, ex.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         #endregion
