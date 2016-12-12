@@ -115,7 +115,7 @@ namespace Narvalo.Web.UI
 
         protected virtual void InitializeCustom(NameValueCollection config)
         {
-            Demand.NotNull(config);
+            Expect.NotNull(config);
         }
     }
 }

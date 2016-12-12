@@ -37,7 +37,7 @@ namespace Narvalo.Finance
 
         public static void SetFactory(CurrencyFactory factory)
         {
-            Demand.NotNull(factory);
+            Expect.NotNull(factory);
 
             s_Instance.InnerSetFactory(factory);
         }
