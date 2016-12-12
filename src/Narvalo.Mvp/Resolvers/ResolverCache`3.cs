@@ -5,15 +5,12 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Collections.Concurrent;
     using System.Diagnostics.CodeAnalysis;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
     using Narvalo.Mvp.Properties;
 
     [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes",
            Justification = "Using three generic parameters does not seem that much!")]
-    public class ResolverCache<TKey, TCacheKey, TValue> where TKey : class
+    public partial class ResolverCache<TKey, TCacheKey, TValue> where TKey : class
     {
         private readonly ConcurrentDictionary<TCacheKey, TValue> _dictionary
            = new ConcurrentDictionary<TCacheKey, TValue>();
@@ -49,16 +46,24 @@ namespace Narvalo.Mvp.Resolvers
 
             return value;
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.Resolvers
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class ResolverCache<TKey, TCacheKey, TValue>
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_cacheKeyProvider != null);
             Contract.Invariant(_dictionary != null);
         }
-
-#endif
     }
 }
+
+#endif

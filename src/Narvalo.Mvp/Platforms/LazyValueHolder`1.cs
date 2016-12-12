@@ -4,14 +4,11 @@ namespace Narvalo.Mvp.Platforms
 {
     using System;
     using System.ComponentModel;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
     using Narvalo.Mvp.Properties;
 
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class LazyValueHolder<TValue> where TValue : class
+    public partial class LazyValueHolder<TValue> where TValue : class
     {
         private readonly Lazy<TValue> _lazyValue;
 
@@ -67,15 +64,23 @@ namespace Narvalo.Mvp.Platforms
             // REVIEW: We break thread-safety here, but does it matter for our use case?
             _valueFactory = valueFactory;
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.Platforms
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class LazyValueHolder<TValue>
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_lazyValue != null);
         }
-
-#endif
     }
 }
+
+#endif

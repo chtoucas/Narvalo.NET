@@ -4,14 +4,11 @@ namespace Narvalo.Mvp.Platforms
 {
     using System.Collections.Generic;
     using System.ComponentModel;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
 
     using Narvalo.Mvp.PresenterBinding;
 
-    public abstract class MvpBootstrapper<T> where T : MvpBootstrapper<T>
+    public abstract partial class MvpBootstrapper<T> where T : MvpBootstrapper<T>
     {
         private readonly IList<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategies
             = new List<IPresenterDiscoveryStrategy>();
@@ -112,17 +109,6 @@ namespace Narvalo.Mvp.Platforms
             return platformServices;
         }
 
-#if CONTRACTS_FULL
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_defaultServices != null);
-            Contract.Invariant(_presenterDiscoveryStrategies != null);
-        }
-
-#endif
-
         private sealed class PlatformServices_ : IPlatformServices
         {
             public ICompositeViewFactory CompositeViewFactory { get; set; }
@@ -135,3 +121,22 @@ namespace Narvalo.Mvp.Platforms
         }
     }
 }
+
+#if CONTRACTS_FULL
+
+namespace Narvalo.Mvp.Platforms
+{
+    using System.Diagnostics.Contracts;
+
+    public abstract partial class MvpBootstrapper<T>
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_defaultServices != null);
+            Contract.Invariant(_presenterDiscoveryStrategies != null);
+        }
+    }
+}
+
+#endif

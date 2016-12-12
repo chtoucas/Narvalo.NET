@@ -5,13 +5,10 @@ namespace Narvalo.Mvp
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
     using Narvalo.Mvp.Properties;
 
-    public class /*Default*/MessageCoordinator : IMessageCoordinator
+    public partial class /*Default*/MessageCoordinator : IMessageCoordinator
     {
         private readonly bool _closeable;
         private readonly Object _lock = new Object();
@@ -72,16 +69,6 @@ namespace Narvalo.Mvp
                 "[MessageCoordinator] Even if subscription is allowed, no messages will ever be received.");
         }
 
-#if CONTRACTS_FULL
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_lock != null);
-        }
-
-#endif
-
         private void ThrowIfClosed()
         {
             if (_closed)
@@ -120,3 +107,21 @@ namespace Narvalo.Mvp
         }
     }
 }
+
+#if CONTRACTS_FULL
+
+namespace Narvalo.Mvp
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class MessageCoordinator
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_lock != null);
+        }
+    }
+}
+
+#endif

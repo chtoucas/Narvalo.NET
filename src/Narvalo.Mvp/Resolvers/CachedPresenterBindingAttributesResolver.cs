@@ -4,11 +4,8 @@ namespace Narvalo.Mvp.Resolvers
 {
     using System;
     using System.Collections.Generic;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
-    public sealed class CachedPresenterBindingAttributesResolver
+    public sealed partial class CachedPresenterBindingAttributesResolver
         : IPresenterBindingAttributesResolver
     {
         private readonly TypeKeyedResolverCache<IEnumerable<PresenterBindingAttribute>> _cache
@@ -27,16 +24,24 @@ namespace Narvalo.Mvp.Resolvers
         {
             return _cache.GetOrAdd(viewType, _inner.Resolve);
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.Resolvers
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class CachedPresenterBindingAttributesResolver
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_cache != null);
             Contract.Invariant(_inner != null);
         }
-
-#endif
     }
 }
+
+#endif

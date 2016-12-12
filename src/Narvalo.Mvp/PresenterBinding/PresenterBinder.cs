@@ -5,17 +5,13 @@ namespace Narvalo.Mvp.PresenterBinding
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
 
     using Narvalo;
     using Narvalo.Mvp.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
-    public class PresenterBinder
+    public partial class PresenterBinder
     {
         private readonly IList<IPresenter> _presenters = new List<IPresenter>();
         private readonly IList<IView> _viewsToBind = new List<IView>();
@@ -111,7 +107,7 @@ namespace Narvalo.Mvp.PresenterBinding
             {
                 foreach (var presenter in _presenters)
                 {
-                    if (presenter == null) { continue;  }
+                    if (presenter == null) { continue; }
 
                     _presenterFactory.Release(presenter);
                 }
@@ -139,22 +135,6 @@ namespace Narvalo.Mvp.PresenterBinding
         protected virtual void OnPresenterCreated(PresenterEventArgs args)
             => PresenterCreated?.Invoke(this, args);
 
-#if CONTRACTS_FULL
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Invariant(_compositeViewFactory != null);
-            Invariant(_hosts != null);
-            Invariant(_presenterDiscoveryStrategy != null);
-            Invariant(_presenterFactory != null);
-            Invariant(_presenters != null);
-            Invariant(_messageCoordinator != null);
-            Invariant(_viewsToBind != null);
-        }
-
-#endif
-
         private IEnumerable<PresenterBindingParameter> FindBindings(IEnumerable<Object> hosts)
         {
             Warrant.NotNull<IEnumerable<PresenterBindingParameter>>();
@@ -170,7 +150,7 @@ namespace Narvalo.Mvp.PresenterBinding
             if (unboundViews.Any())
             {
                 var unboundView = unboundViews.First();
-                Assume(unboundView != null, "At this point, we know for sure that there is an unbound view.");
+                Contract.Assume(unboundView != null, "At this point, we know for sure that there is an unbound view.");
 
                 throw new PresenterBindingException(Format.Current(
                    Strings.PresenterBinder_NoPresenterFoundForView,
@@ -208,3 +188,27 @@ namespace Narvalo.Mvp.PresenterBinding
         }
     }
 }
+
+#if CONTRACTS_FULL
+
+namespace Narvalo.Mvp.PresenterBinding
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class PresenterBinder
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_compositeViewFactory != null);
+            Contract.Invariant(_hosts != null);
+            Contract.Invariant(_presenterDiscoveryStrategy != null);
+            Contract.Invariant(_presenterFactory != null);
+            Contract.Invariant(_presenters != null);
+            Contract.Invariant(_messageCoordinator != null);
+            Contract.Invariant(_viewsToBind != null);
+        }
+    }
+}
+
+#endif

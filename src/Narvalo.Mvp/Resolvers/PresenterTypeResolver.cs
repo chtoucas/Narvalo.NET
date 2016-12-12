@@ -6,16 +6,13 @@ namespace Narvalo.Mvp.Resolvers
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
     using System.Reflection;
 
     using Narvalo.Mvp;
     using Narvalo.Mvp.Internal;
 
-    public class /*Default*/PresenterTypeResolver : IPresenterTypeResolver
+    public partial class /*Default*/PresenterTypeResolver : IPresenterTypeResolver
     {
         private readonly IBuildManager _buildManager;
         private readonly IEnumerable<string> _defaultNamespaces;
@@ -104,9 +101,17 @@ namespace Narvalo.Mvp.Resolvers
 
             return String.IsNullOrEmpty(name) ? viewName : name;
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.Resolvers
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class PresenterTypeResolver
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
@@ -115,7 +120,7 @@ namespace Narvalo.Mvp.Resolvers
             Contract.Invariant(_viewSuffixes != null);
             Contract.Invariant(_presenterNameTemplates != null);
         }
-
-#endif
     }
 }
+
+#endif

@@ -3,13 +3,10 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
     using System.Reflection;
 
-    public sealed class /*Default*/BuildManager : IBuildManager
+    public sealed partial class /*Default*/BuildManager : IBuildManager
     {
         private readonly Assembly[] _assemblies;
 
@@ -28,15 +25,23 @@ namespace Narvalo.Mvp.Resolvers
                 .Select(_ => _.GetType(typeName, throwOnError, ignoreCase))
                 .FirstOrDefault();
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.Resolvers
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class BuildManager
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_assemblies != null);
         }
-
-#endif
     }
 }
+
+#endif

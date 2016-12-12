@@ -5,16 +5,12 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Collections;
     using System.Collections.Generic;
-#if CONTRACTS_FULL
     using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
 
     using Narvalo.Mvp.Properties;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     /**
      * <content markup="commonmark">
@@ -57,7 +53,7 @@ namespace Narvalo.Mvp.Resolvers
      * ]]>
      * </content>
      */
-    public sealed class CompositeViewTypeBuilder
+    public sealed partial class CompositeViewTypeBuilder
     {
         private static readonly MethodAttributes s_MethodAttributes
                = MethodAttributes.Public
@@ -90,8 +86,8 @@ namespace Narvalo.Mvp.Resolvers
                 if (_compositeViewType == null)
                 {
                     var type = typeof(CompositeView<>);
-                    Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of CompositeView<>.");
-                    Assume(type.IsGenericTypeDefinition, "Obvious per definition of CompositeView<>.");
+                    Contract.Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of CompositeView<>.");
+                    Contract.Assume(type.IsGenericTypeDefinition, "Obvious per definition of CompositeView<>.");
 
                     _compositeViewType = type.MakeGenericType(new Type[] { _viewType });
                 }
@@ -109,8 +105,8 @@ namespace Narvalo.Mvp.Resolvers
                 if (_enumerableType == null)
                 {
                     var type = typeof(IEnumerable<>);
-                    Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of IEnumerable<>.");
-                    Assume(type.IsGenericTypeDefinition, "Obvious per definition of IEnumerable<>.");
+                    Contract.Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of IEnumerable<>.");
+                    Contract.Assume(type.IsGenericTypeDefinition, "Obvious per definition of IEnumerable<>.");
 
                     _enumerableType = type.MakeGenericType(new Type[] { _viewType });
                 }
@@ -128,8 +124,8 @@ namespace Narvalo.Mvp.Resolvers
                 if (_enumeratorType == null)
                 {
                     var type = typeof(IEnumerator<>);
-                    Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of IEnumerator<>.");
-                    Assume(type.IsGenericTypeDefinition, "Obvious per definition of IEnumerator<>.");
+                    Contract.Assume(type.GetGenericArguments()?.Length == 1, "Obvious per definition of IEnumerator<>.");
+                    Contract.Assume(type.IsGenericTypeDefinition, "Obvious per definition of IEnumerator<>.");
 
                     _enumeratorType = type.MakeGenericType(new Type[] { _viewType });
                 }
@@ -143,7 +139,7 @@ namespace Narvalo.Mvp.Resolvers
             Warrant.NotNull<Type>();
 
             var type = _typeBuilder.CreateType();
-            Assume(type != null, "Extern: BCL.");
+            Contract.Assume(type != null, "Extern: BCL.");
 
             return type;
         }
@@ -168,7 +164,7 @@ namespace Narvalo.Mvp.Resolvers
                 eventInfo.Name,
                 eventInfo.Attributes,
                 eventInfo.EventHandlerType);
-            Assume(@event != null, "Extern: BCL.");
+            Contract.Assume(@event != null, "Extern: BCL.");
 
             @event.SetAddOnMethod(addMethod);
             @event.SetRemoveOnMethod(removeMethod);
@@ -183,7 +179,7 @@ namespace Narvalo.Mvp.Resolvers
                 propertyInfo.Attributes,
                 propertyInfo.PropertyType,
                 Type.EmptyTypes);
-            Assume(property != null, "Extern: BCL.");
+            Contract.Assume(property != null, "Extern: BCL.");
 
             if (propertyInfo.CanRead)
             {
@@ -198,17 +194,6 @@ namespace Narvalo.Mvp.Resolvers
             }
         }
 
-#if CONTRACTS_FULL
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Invariant(_viewType != null);
-            Invariant(_typeBuilder != null);
-        }
-
-#endif
-
         private MethodBuilder DefineAddMethod(EventInfo eventInfo)
         {
             Demand.NotNull(eventInfo);
@@ -218,10 +203,10 @@ namespace Narvalo.Mvp.Resolvers
                 s_MethodAttributes,
                 typeof(void),
                 new[] { eventInfo.EventHandlerType });
-            Assume(addBuilder != null, "Extern: BCL.");
+            Contract.Assume(addBuilder != null, "Extern: BCL.");
 
             var il = addBuilder.GetILGenerator();
-            Assume(il != null, "Extern: BCL.");
+            Contract.Assume(il != null, "Extern: BCL.");
 
             EmitILForEachView(
                 il,
@@ -247,10 +232,10 @@ namespace Narvalo.Mvp.Resolvers
                 s_MethodAttributes,
                 typeof(void),
                 new[] { eventInfo.EventHandlerType });
-            Assume(removeBuilder != null, "Extern: BCL.");
+            Contract.Assume(removeBuilder != null, "Extern: BCL.");
 
             var il = removeBuilder.GetILGenerator();
-            Assume(il != null, "Extern: BCL.");
+            Contract.Assume(il != null, "Extern: BCL.");
 
             EmitILForEachView(
                 il,
@@ -309,14 +294,14 @@ namespace Narvalo.Mvp.Resolvers
                 s_MethodAttributes,
                 propertyInfo.PropertyType,
                 Type.EmptyTypes);
-            Assume(getBuilder != null, "Extern: BCL.");
+            Contract.Assume(getBuilder != null, "Extern: BCL.");
 
             var il = getBuilder.GetILGenerator();
-            Assume(il != null, "Extern: BCL.");
+            Contract.Assume(il != null, "Extern: BCL.");
 
             // Declare a local to store the return value in
             var local = il.DeclareLocal(propertyInfo.PropertyType);
-            Assume(local != null, "Extern: BCL.");
+            Contract.Assume(local != null, "Extern: BCL.");
 
             // Load the view instance on to the evaluation stack
             il.Emit(OpCodes.Ldarg, local.LocalIndex);
@@ -431,10 +416,10 @@ namespace Narvalo.Mvp.Resolvers
                 s_MethodAttributes,
                 typeof(void),
                 new[] { propertyInfo.PropertyType });
-            Assume(setBuilder != null, "Extern: BCL.");
+            Contract.Assume(setBuilder != null, "Extern: BCL.");
 
             var il = setBuilder.GetILGenerator();
-            Assume(il != null, "Extern: BCL.");
+            Contract.Assume(il != null, "Extern: BCL.");
 
             EmitILForEachView(
                 il,
@@ -458,13 +443,13 @@ namespace Narvalo.Mvp.Resolvers
 
             // Declare the locals we need
             var viewLocal = il.DeclareLocal(_viewType);
-            Assume(viewLocal != null, "Extern: BCL.");
+            Contract.Assume(viewLocal != null, "Extern: BCL.");
 
             var enumeratorLocal = il.DeclareLocal(EnumerableType);
-            Assume(enumeratorLocal != null, "Extern: BCL.");
+            Contract.Assume(enumeratorLocal != null, "Extern: BCL.");
 
             var enumeratorContinueLocal = il.DeclareLocal(typeof(bool));
-            Assume(enumeratorContinueLocal != null, "Extern: BCL.");
+            Contract.Assume(enumeratorContinueLocal != null, "Extern: BCL.");
 
             // Load the view instance on to the evaluation stack
             il.Emit(OpCodes.Ldarg, viewLocal.LocalIndex);
@@ -584,3 +569,22 @@ namespace Narvalo.Mvp.Resolvers
         }
     }
 }
+
+#if CONTRACTS_FULL
+
+namespace Narvalo.Mvp.Resolvers
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class CompositeViewTypeBuilder
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_viewType != null);
+            Contract.Invariant(_typeBuilder != null);
+        }
+    }
+}
+
+#endif

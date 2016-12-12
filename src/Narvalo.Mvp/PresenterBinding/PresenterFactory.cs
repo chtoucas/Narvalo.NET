@@ -4,9 +4,6 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Diagnostics;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
     using System.Reflection;
 
     using Narvalo;
@@ -17,7 +14,7 @@ namespace Narvalo.Mvp.PresenterBinding
     /// WARNING: This class can not be used for presenters that do not have a constructor
     /// accepting the view as a single parameter.
     /// </remarks>
-    public sealed class /*Default*/PresenterFactory : IPresenterFactory
+    public sealed partial class /*Default*/PresenterFactory : IPresenterFactory
     {
         private readonly IPresenterConstructorResolver _constructorResolver;
 
@@ -85,15 +82,23 @@ namespace Narvalo.Mvp.PresenterBinding
                 disposablePresenter.Dispose();
             }
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.PresenterBinding
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class PresenterFactory
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_constructorResolver != null);
         }
-
-#endif
     }
 }
+
+#endif

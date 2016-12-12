@@ -3,11 +3,8 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
-    public sealed class CachedCompositeViewTypeResolver : ICompositeViewTypeResolver
+    public sealed partial class CachedCompositeViewTypeResolver : ICompositeViewTypeResolver
     {
         private readonly TypeKeyedResolverCache<Type> _cache = new TypeKeyedResolverCache<Type>();
 
@@ -24,16 +21,24 @@ namespace Narvalo.Mvp.Resolvers
         {
             return _cache.GetOrAdd(viewType, _inner.Resolve);
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.Resolvers
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class CachedCompositeViewTypeResolver
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_cache != null);
             Contract.Invariant(_inner != null);
         }
-
-#endif
     }
 }
+
+#endif

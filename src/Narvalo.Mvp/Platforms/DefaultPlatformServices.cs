@@ -3,16 +3,13 @@
 namespace Narvalo.Mvp.Platforms
 {
     using System;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Properties;
 
     // FIXME: This whole business to ensure delayed initialization of the properties was
     // most certainly one of the worst idea I ever had.
-    public class DefaultPlatformServices : IPlatformServices
+    public partial class DefaultPlatformServices : IPlatformServices
     {
         private Func<ICompositeViewFactory> _compositeViewFactoryThunk
            = () =>
@@ -154,9 +151,17 @@ namespace Narvalo.Mvp.Platforms
 
             _presenterFactoryThunk = thunk;
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.Platforms
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class DefaultPlatformServices
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
@@ -165,7 +170,7 @@ namespace Narvalo.Mvp.Platforms
             Contract.Invariant(_presenterDiscoveryStrategyThunk != null);
             Contract.Invariant(_presenterFactoryThunk != null);
         }
-
-#endif
     }
 }
+
+#endif

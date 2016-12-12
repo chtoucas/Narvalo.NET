@@ -4,12 +4,9 @@ namespace Narvalo.Mvp
 {
     using System;
     using System.Diagnostics;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public sealed class PresenterBindingAttribute : Attribute
+    public sealed partial class PresenterBindingAttribute : Attribute
     {
         private readonly Type _presenterType;
 
@@ -56,15 +53,23 @@ namespace Narvalo.Mvp
             get { return _origin; }
             set { Demand.NotNull(value); _origin = value; }
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class PresenterBindingAttribute
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_presenterType != null);
         }
-
-#endif
     }
 }
+
+#endif

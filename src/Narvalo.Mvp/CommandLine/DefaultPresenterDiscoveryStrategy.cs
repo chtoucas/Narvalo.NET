@@ -3,9 +3,6 @@
 namespace Narvalo.Mvp.CommandLine
 {
     using System.Collections.Generic;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
     using System.Reflection;
 
@@ -14,7 +11,7 @@ namespace Narvalo.Mvp.CommandLine
     using Narvalo.Mvp.Resolvers;
 
     // Convention based presenter discovery strategy.
-    public sealed class DefaultPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed partial class DefaultPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         private static readonly string[] s_ViewSuffixes = new[]
         {
@@ -53,15 +50,23 @@ namespace Narvalo.Mvp.CommandLine
         {
             return _inner.FindBindings(hosts, views);
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.CommandLine
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class DefaultPresenterDiscoveryStrategy
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_inner != null);
         }
-
-#endif
     }
 }
+
+#endif

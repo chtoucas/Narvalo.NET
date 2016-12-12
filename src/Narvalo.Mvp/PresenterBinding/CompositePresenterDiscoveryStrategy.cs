@@ -4,14 +4,11 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Collections.Generic;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
 
     using Narvalo.Mvp.Properties;
 
-    public sealed class CompositePresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed partial class CompositePresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         private readonly IEnumerable<IPresenterDiscoveryStrategy> _strategies;
 
@@ -57,15 +54,23 @@ namespace Narvalo.Mvp.PresenterBinding
 
             return new PresenterDiscoveryResult(boundViews, bindings);
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.PresenterBinding
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class CompositePresenterDiscoveryStrategy
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_strategies != null);
         }
-
-#endif
     }
 }
+
+#endif

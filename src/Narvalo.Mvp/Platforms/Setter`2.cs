@@ -3,11 +3,8 @@
 namespace Narvalo.Mvp.Platforms
 {
     using System;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
-    public sealed class Setter<TSource, T> where TSource : class
+    public sealed partial class Setter<TSource, T> where TSource : class
     {
         private readonly TSource _source;
         private readonly Action<T> _set;
@@ -29,16 +26,24 @@ namespace Narvalo.Mvp.Platforms
 
             return _source;
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.Platforms
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class Setter<TSource, T>
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_source != null);
             Contract.Invariant(_set != null);
         }
-
-#endif
     }
 }
+
+#endif

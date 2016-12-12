@@ -2,10 +2,6 @@
 
 namespace Narvalo.Mvp
 {
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
-
     public abstract partial class Presenter<TView> : IPresenter<TView>, Internal.IPresenter
         where TView : class, IView
     {
@@ -26,15 +22,23 @@ namespace Narvalo.Mvp
         {
             set { Messages = value; }
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp
+{
+    using System.Diagnostics.Contracts;
+
+    public abstract partial class Presenter<TView>
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_view != null);
         }
-
-#endif
     }
 }
+
+#endif

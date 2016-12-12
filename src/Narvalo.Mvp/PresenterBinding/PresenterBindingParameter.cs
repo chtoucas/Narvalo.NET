@@ -4,15 +4,12 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Collections.Generic;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
 
     using Narvalo;
     using Narvalo.Mvp.Internal;
 
-    public sealed class PresenterBindingParameter
+    public sealed partial class PresenterBindingParameter
     {
         private readonly Type _presenterType;
         private readonly Type _viewType;
@@ -122,9 +119,17 @@ namespace Narvalo.Mvp.PresenterBinding
 
             return leftObjects.IsEmpty();
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.PresenterBinding
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class PresenterBindingParameter
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
@@ -132,7 +137,7 @@ namespace Narvalo.Mvp.PresenterBinding
             Contract.Invariant(_views != null);
             Contract.Invariant(_viewType != null);
         }
-
-#endif
     }
 }
+
+#endif

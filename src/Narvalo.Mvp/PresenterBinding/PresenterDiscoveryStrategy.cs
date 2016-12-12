@@ -4,9 +4,6 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System.Collections.Generic;
     using System.Diagnostics;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
     using Narvalo;
     using Narvalo.Mvp;
@@ -15,7 +12,7 @@ namespace Narvalo.Mvp.PresenterBinding
     /// <summary>
     /// Convention based presenter discovery strategy.
     /// </summary>
-    public sealed class /*Default*/PresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public sealed partial class /*Default*/PresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         private readonly IPresenterTypeResolver _typeResolver;
 
@@ -76,15 +73,23 @@ namespace Narvalo.Mvp.PresenterBinding
 
             return new PresenterDiscoveryResult(boundViews, bindings);
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.PresenterBinding
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class PresenterDiscoveryStrategy
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_typeResolver != null);
         }
-
-#endif
     }
 }
+
+#endif

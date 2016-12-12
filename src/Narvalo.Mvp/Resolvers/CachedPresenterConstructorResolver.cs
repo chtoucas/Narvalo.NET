@@ -3,12 +3,9 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
     using System.Reflection.Emit;
 
-    public sealed class CachedPresenterConstructorResolver : IPresenterConstructorResolver
+    public sealed partial class CachedPresenterConstructorResolver : IPresenterConstructorResolver
     {
         private readonly ResolverCache<Tuple<Type, Type>, string, DynamicMethod> _cache
            = new ResolverCache<Tuple<Type, Type>, string, DynamicMethod>(
@@ -33,16 +30,24 @@ namespace Narvalo.Mvp.Resolvers
         {
             return _cache.GetOrAdd(Tuple.Create(presenterType, viewType), _ => _inner.Resolve(_.Item1, _.Item2));
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.Resolvers
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class CachedPresenterConstructorResolver
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_cache != null);
             Contract.Invariant(_inner != null);
         }
-
-#endif
     }
 }
+
+#endif

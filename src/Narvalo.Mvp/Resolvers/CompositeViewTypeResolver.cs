@@ -5,15 +5,12 @@ namespace Narvalo.Mvp.Resolvers
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
     using System.Reflection;
 
     using Narvalo.Mvp.Properties;
 
-    public class /*Default*/CompositeViewTypeResolver : ICompositeViewTypeResolver
+    public partial class /*Default*/CompositeViewTypeResolver : ICompositeViewTypeResolver
     {
         private readonly CompositeViewModuleBuilder _moduleBuilder
             = new CompositeViewModuleBuilder("Narvalo.Mvp.CompositeViews");
@@ -114,15 +111,23 @@ namespace Narvalo.Mvp.Resolvers
                         && p.PropertyInfoFromCompositeViewBase.GetSetMethod() == null))
                 .Select(p => p.PropertyInfo);
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.Resolvers
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class CompositeViewTypeResolver
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_moduleBuilder != null);
         }
-
-#endif
     }
 }
+
+#endif

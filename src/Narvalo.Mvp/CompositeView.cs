@@ -5,16 +5,13 @@ namespace Narvalo.Mvp
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
     using Narvalo;
     using Narvalo.Mvp.Properties;
 
     // NB: Must stay public for "CompositeViewTypeBuilder" to work.
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public abstract class CompositeView<TView> : ICompositeView where TView : IView
+    public abstract partial class CompositeView<TView> : ICompositeView where TView : IView
     {
         private readonly IList<TView> _views = new List<TView>();
 
@@ -48,15 +45,23 @@ namespace Narvalo.Mvp
 
             _views.Add((TView)view);
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp
+{
+    using System.Diagnostics.Contracts;
+
+    public abstract partial class CompositeView<TView>
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_views != null);
         }
-
-#endif
     }
 }
+
+#endif

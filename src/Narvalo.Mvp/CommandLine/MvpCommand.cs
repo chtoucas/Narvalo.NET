@@ -3,14 +3,11 @@
 namespace Narvalo.Mvp.CommandLine
 {
     using System;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
     using Narvalo.Mvp.CommandLine.Internal;
     using Narvalo.Mvp.PresenterBinding;
 
-    public class MvpCommand : IView, ICommand
+    public partial class MvpCommand : IView, ICommand
     {
         private readonly bool _throwIfNoPresenterBound;
         private readonly PresenterBinder _presenterBinder;
@@ -42,15 +39,23 @@ namespace Narvalo.Mvp.CommandLine
         protected virtual void OnCompleted(EventArgs e) => Completed?.Invoke(this, e);
 
         protected virtual void OnLoad(EventArgs e) => Load?.Invoke(this, e);
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.CommandLine
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class MvpCommand
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_presenterBinder != null);
         }
-
-#endif
     }
 }
+
+#endif

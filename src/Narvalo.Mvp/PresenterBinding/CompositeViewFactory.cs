@@ -4,14 +4,11 @@ namespace Narvalo.Mvp.PresenterBinding
 {
     using System;
     using System.Collections.Generic;
-#if CONTRACTS_FULL
-    using System.Diagnostics.Contracts;
-#endif
 
     using Narvalo;
     using Narvalo.Mvp.Resolvers;
 
-    public sealed class /*Default*/CompositeViewFactory : ICompositeViewFactory
+    public sealed partial class /*Default*/CompositeViewFactory : ICompositeViewFactory
     {
         private readonly ICompositeViewTypeResolver _typeResolver;
 
@@ -52,15 +49,23 @@ namespace Narvalo.Mvp.PresenterBinding
 
             return view;
         }
+    }
+}
 
 #if CONTRACTS_FULL
 
+namespace Narvalo.Mvp.PresenterBinding
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class CompositeViewFactory
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_typeResolver != null);
         }
-
-#endif
     }
 }
+
+#endif
