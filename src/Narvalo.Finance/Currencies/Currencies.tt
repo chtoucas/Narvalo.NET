@@ -27,8 +27,6 @@ using global::System.Diagnostics.CodeAnalysis;
 
 namespace <#= Namespace #>
 {
-    using static System.Diagnostics.Contracts.Contract;
-
 <#
     foreach (var currency in currencies.OrderBy(_ => _.Code))
     {

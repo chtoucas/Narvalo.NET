@@ -20,8 +20,6 @@ namespace Narvalo.Fx
     using global::Narvalo;
     using Narvalo.Fx.Internal;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <content>
     /// Provides a set of static methods for <see cref="Identity{T}" />.
     /// </content>
@@ -517,8 +515,6 @@ namespace Narvalo.Fx
 
 namespace Narvalo.Fx
 {
-    using static System.Diagnostics.Contracts.Contract;
-
     // Implements core Comonad methods.
     public static partial class Identity
     {
@@ -549,8 +545,6 @@ namespace Narvalo.Fx
     using System.Collections.Generic;
 
     using Narvalo.Fx.Internal;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Identity{S}"/>.
@@ -584,8 +578,6 @@ namespace Narvalo.Fx.Advanced
 
     using Narvalo.Fx;
     using Narvalo.Fx.Internal;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -759,14 +751,11 @@ namespace Narvalo.Fx.Internal
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
     using global::Narvalo.Fx; // Required for EmptyIfNull().
     using Narvalo.Fx.Advanced;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.

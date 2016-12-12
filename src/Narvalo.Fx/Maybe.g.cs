@@ -20,8 +20,6 @@ namespace Narvalo.Fx
     using global::Narvalo;
     using Narvalo.Fx.Internal;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <content>
     /// Provides a set of static methods for <see cref="Maybe{T}" />.
     /// </content>
@@ -767,8 +765,6 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Internal;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
     /// </content>
@@ -818,8 +814,6 @@ namespace Narvalo.Fx.Advanced
 
     using Narvalo.Fx;
     using Narvalo.Fx.Internal;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -993,14 +987,11 @@ namespace Narvalo.Fx.Internal
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
     using global::Narvalo.Fx; // Required for EmptyIfNull().
     using Narvalo.Fx.Advanced;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
