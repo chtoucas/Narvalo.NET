@@ -16,6 +16,6 @@ using System.Runtime.InteropServices;
     Scope = "member", Target = "Narvalo.Mvp.Properties.Strings.#Culture",
     Justification = "[GeneratedCode] Default visibility for resources is internal.")]
 
-#if !NO_INTERNALS_VISIBLE_TO // Make internals visible to the test projects.
+#if !NO_INTERNALS_VISIBLE_TO
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Narvalo.Mvp.Facts" + Narvalo.Properties.AssemblyInfo.PublicKeySuffix)]
 #endif

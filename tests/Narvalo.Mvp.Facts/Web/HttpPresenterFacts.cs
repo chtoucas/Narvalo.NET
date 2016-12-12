@@ -137,7 +137,7 @@ namespace Narvalo.Mvp.Web
         }
     }
 
-#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
+#if !NO_INTERNALS_VISIBLE_TO
 
     public static partial class HttpPresenterFacts
     {

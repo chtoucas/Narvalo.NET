@@ -2,7 +2,7 @@
 
 namespace Narvalo.Web.UI
 {
-#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
+#if !NO_INTERNALS_VISIBLE_TO
 
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;

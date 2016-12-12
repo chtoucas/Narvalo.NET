@@ -673,7 +673,7 @@ namespace Narvalo.Fx
         #endregion
     }
 
-#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
+#if !NO_INTERNALS_VISIBLE_TO
 
     public static partial class MaybeFacts
     {

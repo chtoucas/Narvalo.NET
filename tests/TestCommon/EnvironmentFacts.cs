@@ -4,7 +4,7 @@ namespace Narvalo
 {
     public static partial class EnvironmentFacts
     {
-#if NO_INTERNALS_VISIBLE_TO // White-box tests.
+#if NO_INTERNALS_VISIBLE_TO
 
         [Xunit.Fact(Skip = "White-box tests are disabled for this configuration.")]
         public static void InternalsAreHidden() { }

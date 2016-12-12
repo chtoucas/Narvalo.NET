@@ -2,7 +2,7 @@
 
 namespace Narvalo.Finance.Internal
 {
-#if !NO_INTERNALS_VISIBLE_TO // White-box tests.
+#if !NO_INTERNALS_VISIBLE_TO
 
     using System;
     using System.Diagnostics.CodeAnalysis;
