@@ -11,8 +11,6 @@ namespace Narvalo.Mvp.Resolvers
 
     public sealed class CachedPresenterConstructorResolver : IPresenterConstructorResolver
     {
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1118:ParameterMustNotSpanMultipleLines",
-            Justification = "Inline initialization of a field.")]
         private readonly ResolverCache<Tuple<Type, Type>, string, DynamicMethod> _cache
            = new ResolverCache<Tuple<Type, Type>, string, DynamicMethod>(
                 _ => String.Join(

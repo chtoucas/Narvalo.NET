@@ -111,16 +111,12 @@ namespace Narvalo.Mvp
 
             protected override void SubscribeCore<T>(Action<T> onNext) { }
 
-            [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
-                Justification = "Implementation of lazy initialized singleton.")]
+            [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Implementation of lazy initialized singleton.")]
             private sealed class Singleton_
             {
                 internal static readonly BlackHole_ Instance = new BlackHole_();
 
-                [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline",
-                   Justification = "Implementation of lazy initialized singleton.")]
-                [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1409:RemoveUnnecessaryCode",
-                    Justification = "Explicit static constructor to tell C# compiler not to mark type as beforefieldinit.")]
+                [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Implementation of lazy initialized singleton.")]
                 static Singleton_() { }
             }
         }

@@ -68,8 +68,7 @@ namespace Narvalo.Fx
 
         public abstract Maybe<TRight> RightOrNone();
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Switch<TLeft, TRight> η(TLeft value)
         {
             Ensures(Result<Switch<TLeft, TRight>>() != null);
@@ -77,8 +76,7 @@ namespace Narvalo.Fx
             return value != null ? new Left_(value) : Switch<TLeft, TRight>.Empty;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Switch<TLeft, TRight> η(TRight value)
         {
             Ensures(Result<Switch<TLeft, TRight>>() != null);

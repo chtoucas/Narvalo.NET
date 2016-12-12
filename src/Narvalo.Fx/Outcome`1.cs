@@ -233,13 +233,11 @@ namespace Narvalo.Fx
 
         #region Core Monad methods
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
         internal static Outcome<T> η(T value) => new Success_(value);
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
         internal static Outcome<T> η(ExceptionDispatchInfo exceptionInfo)
         {
@@ -248,8 +246,7 @@ namespace Narvalo.Fx
             return new Failure_(exceptionInfo);
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter",
-            Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
         internal static Outcome<T> μ(Outcome<Outcome<T>> square)
         {
