@@ -106,7 +106,7 @@ namespace Narvalo.Finance
             get
             {
                 Warrant.NotNull<string>();
-                Ensures(Result<string>().Length == PREFIX_LENGTH);
+                Warrant.Length(PREFIX_LENGTH);
 
                 return _institutionCode;
             }
@@ -125,7 +125,7 @@ namespace Narvalo.Finance
             get
             {
                 Warrant.NotNull<string>();
-                Ensures(Result<string>().Length == SUFFIX_LENGTH);
+                Warrant.Length(SUFFIX_LENGTH);
 
                 return _locationCode;
             }

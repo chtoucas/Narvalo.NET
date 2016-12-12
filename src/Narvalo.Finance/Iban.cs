@@ -66,7 +66,7 @@ namespace Narvalo.Finance
             get
             {
                 Warrant.NotNull<string>();
-                Ensures(Result<string>().Length == CHECKDIGIT_LENGTH);
+                Warrant.Length(CHECKDIGIT_LENGTH);
 
                 return _checkDigit;
             }
@@ -80,7 +80,7 @@ namespace Narvalo.Finance
             get
             {
                 Warrant.NotNull<string>();
-                Ensures(Result<string>().Length == COUNTRY_LENGTH);
+                Warrant.Length(COUNTRY_LENGTH);
 
                 return _countryCode;
             }

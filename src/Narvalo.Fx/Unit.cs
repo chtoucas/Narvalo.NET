@@ -4,7 +4,8 @@ namespace Narvalo.Fx
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
+
+    using static System.Diagnostics.Contracts.Contract;
 
     public struct Unit : IEquatable<Unit>
     {
@@ -38,7 +39,7 @@ namespace Narvalo.Fx
 
         public override int GetHashCode()
         {
-            Contract.Ensures(Contract.Result<int>() == 0);
+            Ensures(Result<int>() == 0);
 
             return 0;
         }
