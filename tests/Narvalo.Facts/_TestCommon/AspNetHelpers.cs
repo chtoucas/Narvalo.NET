@@ -8,9 +8,10 @@ namespace Narvalo
     using System.Text;
     using System.Web;
     using System.Web.Hosting;
+    using System.Web.WebPages;
 
     // FIXME: Reset environment after.
-    public static class AspNetUtility
+    public static class AspNetHelpers
     {
         public static IDisposable CreateHttpContext()
         {

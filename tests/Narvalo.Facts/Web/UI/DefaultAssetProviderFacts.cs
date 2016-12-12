@@ -3,6 +3,7 @@
 namespace Narvalo.Web.UI
 {
     using System;
+    using System.Web.WebPages.TestUtils;
 
     using Xunit;
 
@@ -27,9 +28,9 @@ namespace Narvalo.Web.UI
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                AspNetUtility.SetupAspNetDomain();
+                AspNetHelpers.SetupAspNetDomain();
 
-                using (var _ = AspNetUtility.CreateHttpContext())
+                using (var _ = AspNetHelpers.CreateHttpContext())
                 {
                     // Arrange
                     var provider = new DefaultAssetProvider();
@@ -63,9 +64,9 @@ namespace Narvalo.Web.UI
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                AspNetUtility.SetupAspNetDomain();
+                AspNetHelpers.SetupAspNetDomain();
 
-                using (var _ = AspNetUtility.CreateHttpContext())
+                using (var _ = AspNetHelpers.CreateHttpContext())
                 {
                     // Arrange
                     var provider = new DefaultAssetProvider();
@@ -99,9 +100,9 @@ namespace Narvalo.Web.UI
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                AspNetUtility.SetupAspNetDomain();
+                AspNetHelpers.SetupAspNetDomain();
 
-                using (var _ = AspNetUtility.CreateHttpContext())
+                using (var _ = AspNetHelpers.CreateHttpContext())
                 {
                     // Arrange
                     var provider = new DefaultAssetProvider();
@@ -135,9 +136,9 @@ namespace Narvalo.Web.UI
         {
             AppDomainUtils.RunInSeparateAppDomain(() =>
             {
-                AspNetUtility.SetupAspNetDomain();
+                AspNetHelpers.SetupAspNetDomain();
 
-                using (var _ = AspNetUtility.CreateHttpContext())
+                using (var _ = AspNetHelpers.CreateHttpContext())
                 {
                     // Arrange
                     var provider = new DefaultAssetProvider();
