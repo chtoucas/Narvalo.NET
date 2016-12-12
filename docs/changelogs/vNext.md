@@ -57,6 +57,9 @@ Breaking Changes
 - New class constraint added to `Require.NotNull<T>()` (idem with `Demand`
   and `Expect`). See below for unconstrained alternatives.
 
+### Narvalo.Core
+- All classes in Narvalo.Collections moved to the package Narvalo.Common.
+
 ### Narvalo.Common
 - Renamed `PathUtility` to `PathHelpers`.
 
@@ -109,6 +112,13 @@ Methods marked as obsolete and their replacements:
 
 New classes and new methods:
 - `Range<T>.IsDegenerate`
+
+### Narvalo.Common
+New classes and new methods:
+- `DictionaryExtensions` previously available in Narvalo.Core.
+- `EnumeratorExtensions` previously available in Narvalo.Core.
+- `Appender<TSource, T>`
+- `Setter<TSource, T>`
 
 Enhancements
 ------------

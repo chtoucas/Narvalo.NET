@@ -13,7 +13,7 @@ namespace Narvalo.Fx
     public static partial class EnumerableExtensions
     {
         // Useful when using built-in LINQ operators. Even if it is not publicly visible,
-        // I think that all LINQ operators never return a null but rather an empty sequence if needed.
+        // I believe that all LINQ operators never return a null but rather an empty sequence if needed.
         public static IEnumerable<TSource> EmptyIfNull<TSource>(this IEnumerable<TSource> @this)
         {
             Warrant.NotNull<IEnumerable<TSource>>();

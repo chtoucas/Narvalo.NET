@@ -669,7 +669,7 @@ namespace Narvalo.Fx
             /* T4: C# indent */
             Require.NotNull(action, nameof(action));
 
-            // FIXME
+            // FIXME: It does nothing!
             //@this.PlusName(Maybe.Unit).Invoke(_ => action.Invoke());
 
             return @this;

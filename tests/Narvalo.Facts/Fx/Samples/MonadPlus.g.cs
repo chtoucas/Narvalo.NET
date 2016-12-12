@@ -708,7 +708,7 @@ namespace Narvalo.Fx.Samples
             Require.NotNull(action, nameof(action));
             Warrant.NotNull<MonadPlus<TSource>>();
 
-            // FIXME
+            // FIXME: It does nothing!
             //@this.PlusName(MonadPlus.Unit).Invoke(_ => action.Invoke());
 
             return @this;

@@ -53,6 +53,13 @@ namespace Narvalo
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+        public static void Fluent<T>(T @this) where T : class
+            => Contract.Ensures(Contract.Result<T>() == @this);
+
+        [ContractAbbreviator]
+        [Conditional("CONTRACTS_FULL")]
+        [ExcludeFromCodeCoverage(
+            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void Length(int length)
             => Contract.Ensures(Contract.Result<string>().Length == length);
     }

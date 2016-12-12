@@ -76,13 +76,13 @@
     <Compile Include="MessageCoordinator.cs" />
     <Compile Include="MvpException.cs" />
     <Compile Include="NamespaceDoc.cs" />
-    <Compile Include="Platforms\Appender`1.cs" />
+    <Compile Include="Platforms\Appender`2.cs" />
     <Compile Include="Platforms\DefaultPlatformServices.cs" />
     <Compile Include="Platforms\IPlatformServices.cs" />
     <Compile Include="Platforms\LazyValueHolder`1.cs" />
     <Compile Include="Platforms\MvpBootstrapper`1.cs" />
     <Compile Include="Platforms\PlatformServicesVirtualProxy.cs" />
-    <Compile Include="Platforms\Setter`1.cs" />
+    <Compile Include="Platforms\Setter`2.cs" />
     <Compile Include="PresenterBindingAttribute.cs" />
     <Compile Include="PresenterBindingException.cs" />
     <Compile Include="PresenterBindingMode.cs" />

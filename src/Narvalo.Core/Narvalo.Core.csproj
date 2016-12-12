@@ -62,8 +62,6 @@
   <ItemGroup>
     <Compile Include="BinaryEncoder.cs" />
     <Compile Include="BooleanStyles.cs" />
-    <Compile Include="Collections\Dictionary%24.cs" />
-    <Compile Include="Collections\Enumerator%24.cs" />
     <Compile Include="ConvertTo.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Int64Encoder.cs" />

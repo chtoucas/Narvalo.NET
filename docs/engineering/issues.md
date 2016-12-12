@@ -12,7 +12,7 @@ All members mentioned in a contract must be at least as visible as the method in
 appear. Failing to do so will produce a CC1038 error. One workaround could be to change the
 visibility depending on the CONTRACTS_FULL compiler flag. This works fine if the CC is
 used in source form in the target assembly, but it doe not work if this very CC
-is imported from another compiled assembly.
+is imported from another assembly.
 
 Narvalo.Fx
 ------------

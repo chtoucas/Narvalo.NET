@@ -60,11 +60,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\Dictionary%24.cs" />
+    <Compile Include="Collections\Enumerator%24.cs" />
     <Compile Include="Collections\NameValueCollection%24.cs" />
     <Compile Include="Configuration\AbsoluteUriValidator.cs" />
     <Compile Include="Configuration\AbsoluteUriValidatorAttribute.cs" />
+    <Compile Include="Configuration\Appender`2.cs" />
     <Compile Include="Configuration\Configuration%24.cs" />
     <Compile Include="Configuration\SectionManager.cs" />
+    <Compile Include="Configuration\Setter`2.cs" />
     <Compile Include="Data\DataRecord%24.cs" />
     <Compile Include="Data\NonQueryStoredProcedure`1.cs" />
     <Compile Include="Data\SqlCommand%24.cs" />

@@ -710,7 +710,7 @@ namespace Narvalo.Fx.Samples
             /* T4: C# indent */
             Require.NotNull(action, nameof(action));
 
-            // FIXME
+            // FIXME: It does nothing!
             //@this.PlusName(MonadValue.Unit).Invoke(_ => action.Invoke());
 
             return @this;
