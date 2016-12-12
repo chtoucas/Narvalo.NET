@@ -76,7 +76,7 @@
     <Compile Include="IO\ConcurrentFileFinder.cs" />
     <Compile Include="IO\DirectoryWalker.cs" />
     <Compile Include="IO\FileFinder.cs" />
-    <Compile Include="IO\PathUtility.cs" />
+    <Compile Include="IO\PathHelpers.cs" />
     <Compile Include="IO\RelativeDirectory.cs" />
     <Compile Include="IO\RelativeDirectoryEventArgs.cs" />
     <Compile Include="IO\RelativeFile.cs" />

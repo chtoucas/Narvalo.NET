@@ -34,7 +34,7 @@ namespace Narvalo.IO
             Require.NotNullOrEmpty(searchPattern, nameof(searchPattern));
             Contract.Ensures(Contract.Result<IEnumerable<RelativeFile>>() != null);
 
-            var rootPath = PathUtility.AppendDirectorySeparator(startDirectory.FullName);
+            var rootPath = PathHelpers.AppendDirectorySeparator(startDirectory.FullName);
             var rootUri = new Uri(rootPath);
 
             var stack = new Stack<DirectoryInfo>();
@@ -45,7 +45,7 @@ namespace Narvalo.IO
                 var directory = stack.Pop();
 
                 var relativeDirectoryName
-                    = PathUtility.MakeRelativePathCore(rootUri, directory.FullName);
+                    = PathHelpers.MakeRelativePathCore(rootUri, directory.FullName);
                 var relativeDirectory = new RelativeDirectory(directory, relativeDirectoryName);
 
                 OnDirectoryStart(new RelativeDirectoryEventArgs(relativeDirectory));

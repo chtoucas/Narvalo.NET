@@ -6,7 +6,7 @@ namespace Narvalo.IO
     using System.Diagnostics.Contracts;
     using System.IO;
 
-    public static class PathUtility
+    public static class PathHelpers
     {
         private static readonly string s_DirectorySeparator = Path.DirectorySeparatorChar.ToString();
 
