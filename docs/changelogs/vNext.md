@@ -113,3 +113,4 @@ New classes and new methods:
 Enhancements
 ------------
 - Full test coverage for Narvalo.Cerbere.
+- Narvalo.Facts is now free of CA warnings/errors.

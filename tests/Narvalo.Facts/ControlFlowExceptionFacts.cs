@@ -31,7 +31,7 @@ namespace Narvalo
         public static void Ctor_MessageInnerExceptionCtor()
         {
             var message = "My message";
-            var innerException = new Exception();
+            var innerException = new NotSupportedException();
             var ex = new ControlFlowException(message, innerException);
 
             Assert.Equal(message, ex.Message);

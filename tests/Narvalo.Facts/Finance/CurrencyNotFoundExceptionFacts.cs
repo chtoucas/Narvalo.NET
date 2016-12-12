@@ -31,7 +31,7 @@ namespace Narvalo.Finance
         public static void Ctor_MessageInnerExceptionCtor()
         {
             var message = "My message";
-            var innerException = new Exception();
+            var innerException = new NotSupportedException();
             var ex = new CurrencyNotFoundException(message, innerException);
 
             Assert.Equal(message, ex.Message);

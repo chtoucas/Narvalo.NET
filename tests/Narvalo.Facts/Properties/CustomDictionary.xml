@@ -10,14 +10,18 @@
       <Word>Comonad</Word>
 
       <Word>Ctor</Word>
+
+      <Word>Bic</Word>
+      <Word>Ascii</Word>
     </Recognized>
 
     <Compound>
       <!-- ForInt32, ForInt64... -->
       <Term CompoundAlternate="ForInt">forint</Term>
-      <Term CompoundAlternate="WebPages">webpages</Term>
 
+      <Term CompoundAlternate="WebPages">webpages</Term>
       <Term CompoundAlternate="NonEmpty">nonempty</Term>
+      <Term CompoundAlternate="NonWhite">nonwhite</Term>
     </Compound>
   </Words>
 </Dictionary>
