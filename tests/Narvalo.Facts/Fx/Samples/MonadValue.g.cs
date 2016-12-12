@@ -19,8 +19,6 @@ namespace Narvalo.Fx.Samples
     using global::Narvalo;
     using Narvalo.Fx.Samples.Internal;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <content>
     /// Provides a set of static methods for <see cref="MonadValue{T}" />.
     /// </content>
@@ -799,8 +797,6 @@ namespace Narvalo.Fx.Samples
 
     using Narvalo.Fx.Samples.Internal;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="MonadValue{S}"/>.
     /// </content>
@@ -838,8 +834,6 @@ namespace Narvalo.Fx.Samples.Advanced
 
     using Narvalo.Fx.Samples;
     using Narvalo.Fx.Samples.Internal;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -971,15 +965,12 @@ namespace Narvalo.Fx.Samples.Internal
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
     using global::Narvalo.Fx; // Required for EmptyIfNull().
     using Narvalo.Fx.Samples;
     using Narvalo.Fx.Samples.Advanced;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.

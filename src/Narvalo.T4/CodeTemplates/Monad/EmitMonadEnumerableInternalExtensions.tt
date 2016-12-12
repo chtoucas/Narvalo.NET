@@ -30,7 +30,7 @@ public partial class MonadTemplate
 
             var retval = @this.Aggregate(seed, fun);
 <#+ if (IsNullable) { #>
-            Contract.Assume(retval != null);
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
 <#+ } #>
 
             return retval;
@@ -66,7 +66,7 @@ public partial class MonadTemplate
 
             var retval = @this.Aggregate(<#= Name #><TSource>.<#= ZeroName #>, (m, n) => m.<#= PlusName #>(n));
 <#+ if (IsNullable) { #>
-            Contract.Assume(retval != null);
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
 <#+ } #>
 
             return retval;

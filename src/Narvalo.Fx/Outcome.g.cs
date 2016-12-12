@@ -525,6 +525,8 @@ namespace Narvalo.Fx
 {
     using System.Collections.Generic;
 
+    using Narvalo.Fx.Internal;
+
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Outcome{S}"/>.
     /// </content>
@@ -733,7 +735,6 @@ namespace Narvalo.Fx.Internal
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
@@ -758,7 +759,7 @@ namespace Narvalo.Fx.Internal
                 = (m, n) => m.Bind(list => CollectCore(n, list));
 
             var retval = @this.Aggregate(seed, fun);
-            Contract.Assume(retval != null);
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
 
             return retval;
         }

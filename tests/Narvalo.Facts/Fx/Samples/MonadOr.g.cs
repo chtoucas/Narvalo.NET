@@ -19,8 +19,6 @@ namespace Narvalo.Fx.Samples
     using global::Narvalo;
     using Narvalo.Fx.Samples.Internal;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <content>
     /// Provides a set of static methods for <see cref="MonadOr{T}" />.
     /// </content>
@@ -810,8 +808,6 @@ namespace Narvalo.Fx.Samples
 
     using Narvalo.Fx.Samples.Internal;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="MonadOr{S}"/>.
     /// </content>
@@ -863,8 +859,6 @@ namespace Narvalo.Fx.Samples.Advanced
 
     using Narvalo.Fx.Samples;
     using Narvalo.Fx.Samples.Internal;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides extension methods for <see cref="IEnumerable{T}"/>.
@@ -1046,15 +1040,12 @@ namespace Narvalo.Fx.Samples.Internal
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using global::Narvalo;
     using global::Narvalo.Fx; // Required for EmptyIfNull().
     using Narvalo.Fx.Samples;
     using Narvalo.Fx.Samples.Advanced;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
@@ -1073,7 +1064,7 @@ namespace Narvalo.Fx.Samples.Internal
                 = (m, n) => m.Bind(list => CollectCore(n, list));
 
             var retval = @this.Aggregate(seed, fun);
-            Contract.Assume(retval != null);
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
 
             return retval;
         }
@@ -1096,7 +1087,7 @@ namespace Narvalo.Fx.Samples.Internal
             Warrant.NotNull<MonadOr<TSource>>();
 
             var retval = @this.Aggregate(MonadOr<TSource>.None, (m, n) => m.OrElse(n));
-            Contract.Assume(retval != null);
+            System.Diagnostics.Contracts.Contract.Assume(retval != null);
 
             return retval;
         }
