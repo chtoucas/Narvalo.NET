@@ -5,6 +5,9 @@ namespace Narvalo.IO
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.IO;
     using System.Linq;
     using System.Threading;

@@ -3,6 +3,9 @@
 namespace Narvalo.Finance
 {
     using System;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.Runtime.InteropServices;
 
     using Narvalo.Finance.Internal;
@@ -52,7 +55,7 @@ namespace Narvalo.Finance
         [System.Diagnostics.Contracts.ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Invariant(_currency != null);
+            Contract.Invariant(_currency != null);
         }
 
 #endif

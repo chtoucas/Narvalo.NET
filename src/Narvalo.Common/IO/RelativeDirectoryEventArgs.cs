@@ -3,6 +3,9 @@
 namespace Narvalo.IO
 {
     using System;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
 
     public sealed class RelativeDirectoryEventArgs : EventArgs
     {

@@ -4,6 +4,9 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+    using System.Diagnostics.Contracts;
+#endif
     using System.IO;
     using System.Linq;
 
@@ -72,24 +75,10 @@ namespace Narvalo.IO
         }
 
         protected virtual void OnDirectoryStart(RelativeDirectoryEventArgs e)
-        {
-            EventHandler<RelativeDirectoryEventArgs> localHandler = DirectoryStart;
-
-            if (localHandler != null)
-            {
-                localHandler(this, e);
-            }
-        }
+            => DirectoryStart?.Invoke(this, e);
 
         protected virtual void OnDirectoryEnd(RelativeDirectoryEventArgs e)
-        {
-            EventHandler<RelativeDirectoryEventArgs> localHandler = DirectoryEnd;
-
-            if (localHandler != null)
-            {
-                localHandler(this, e);
-            }
-        }
+            => DirectoryEnd?.Invoke(this, e);
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
