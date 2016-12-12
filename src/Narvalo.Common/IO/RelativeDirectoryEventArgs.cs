@@ -3,11 +3,8 @@
 namespace Narvalo.IO
 {
     using System;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
 
-    public sealed class RelativeDirectoryEventArgs : EventArgs
+    public sealed partial class RelativeDirectoryEventArgs : EventArgs
     {
         private readonly RelativeDirectory _relativeDirectory;
 
@@ -27,15 +24,23 @@ namespace Narvalo.IO
                 return _relativeDirectory;
             }
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.IO
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class RelativeDirectoryEventArgs
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_relativeDirectory != null);
         }
-
-#endif
     }
 }
+
+#endif

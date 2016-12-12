@@ -3,9 +3,6 @@
 namespace Narvalo.Web
 {
     using System;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
     using System.Net;
     using System.Web;
@@ -67,8 +64,14 @@ namespace Narvalo.Web
             OnBindingFailure(context, exception);
         }
     }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Web
+{
+    using System.Diagnostics.Contracts;
+    using System.Web;
 
     [ContractClass(typeof(HttpHandlerContract<,>))]
     public abstract partial class HttpHandler<TQuery, TBinder> { }
@@ -83,6 +86,6 @@ namespace Narvalo.Web
             Contract.Requires(query != null);
         }
     }
+}
 
 #endif
-}

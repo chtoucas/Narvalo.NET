@@ -5,9 +5,6 @@ namespace Narvalo.Fx
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
 
     /// <summary>
     /// Represents the (possibly empty) sum of two types. An instance of the
@@ -317,8 +314,16 @@ namespace Narvalo.Fx
             }
         }
     }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Fx
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
 
     [ContractClass(typeof(SwitchContract<,>))]
     public partial class Switch<TLeft, TRight>
@@ -403,6 +408,6 @@ namespace Narvalo.Fx
 
         public override Maybe<TRight> RightOrNone() => default(Maybe<TRight>);
     }
+}
 
 #endif
-}

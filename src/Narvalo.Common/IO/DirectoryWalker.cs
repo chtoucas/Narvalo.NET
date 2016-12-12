@@ -8,7 +8,7 @@ namespace Narvalo.IO
     using System.IO;
     using System.Linq;
 
-    public abstract class DirectoryWalker
+    public abstract partial class DirectoryWalker
     {
         private readonly Func<DirectoryInfo, bool> _directoryFilter;
         private readonly Func<FileInfo, bool> _fileFilter;
@@ -71,16 +71,24 @@ namespace Narvalo.IO
         protected abstract void OnDirectoryEnd(DirectoryInfo directory);
 
         protected abstract void OnFile(FileInfo file);
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [System.Diagnostics.Contracts.ContractInvariantMethod]
+namespace Narvalo.IO
+{
+    using System.Diagnostics.Contracts;
+
+    public abstract partial class DirectoryWalker
+    {
+        [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            System.Diagnostics.Contracts.Contract.Invariant(_directoryFilter != null);
-            System.Diagnostics.Contracts.Contract.Invariant(_fileFilter != null);
+            Contract.Invariant(_directoryFilter != null);
+            Contract.Invariant(_fileFilter != null);
         }
-
-#endif
     }
 }
+
+#endif

@@ -4,13 +4,10 @@ namespace Narvalo.IO
 {
     using System;
     using System.Collections.Generic;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.IO;
     using System.Linq;
 
-    public class FileFinder
+    public partial class FileFinder
     {
         private readonly Func<DirectoryInfo, bool> _directoryFilter;
         private readonly Func<FileInfo, bool> _fileFilter;
@@ -79,16 +76,24 @@ namespace Narvalo.IO
 
         protected virtual void OnDirectoryEnd(RelativeDirectoryEventArgs e)
             => DirectoryEnd?.Invoke(this, e);
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.IO
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class FileFinder
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_directoryFilter != null);
             Contract.Invariant(_fileFilter != null);
         }
-
-#endif
     }
 }
+
+#endif

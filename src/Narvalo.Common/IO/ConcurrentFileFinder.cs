@@ -5,14 +5,11 @@ namespace Narvalo.IO
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.IO;
     using System.Linq;
     using System.Threading;
 
-    public class ConcurrentFileFinder
+    public partial class ConcurrentFileFinder
     {
         private readonly Func<DirectoryInfo, bool> _directoryFilter;
         private readonly Func<FileInfo, bool> _fileFilter;
@@ -107,16 +104,24 @@ namespace Narvalo.IO
                 localHandler(this, e);
             }
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.IO
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class ConcurrentFileFinder
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_directoryFilter != null);
             Contract.Invariant(_fileFilter != null);
         }
-
-#endif
     }
 }
+
+#endif

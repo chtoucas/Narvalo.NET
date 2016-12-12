@@ -2,12 +2,9 @@
 
 namespace Narvalo.Web.Semantic
 {
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Globalization;
 
-    public sealed class OpenGraphLocale
+    public sealed partial class OpenGraphLocale
     {
         private readonly CultureInfo _culture;
 
@@ -32,15 +29,23 @@ namespace Narvalo.Web.Semantic
         {
             return Culture.ToString().Replace('-', '_');
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Web.Semantic
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class OpenGraphLocale
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_culture != null);
         }
-
-#endif
     }
 }
+
+#endif

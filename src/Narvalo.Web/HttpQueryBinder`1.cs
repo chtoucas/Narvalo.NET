@@ -50,8 +50,16 @@ namespace Narvalo.Web
             _errors.Add(exception);
         }
     }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Web
+{
+    using System.Diagnostics.Contracts;
+    using System.Web;
+
+    using Narvalo.Fx;
 
     [ContractClass(typeof(HttpQueryBinderContract<>))]
     public abstract partial class HttpQueryBinder<TQuery>
@@ -74,6 +82,6 @@ namespace Narvalo.Web
             return default(Maybe<TQuery>);
         }
     }
+}
 
 #endif
-}

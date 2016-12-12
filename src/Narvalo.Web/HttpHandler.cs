@@ -2,9 +2,6 @@
 
 namespace Narvalo.Web
 {
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
@@ -97,8 +94,14 @@ namespace Narvalo.Web
                     select AcceptedVerbs.Contains(_)) ?? false;
         }
     }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Web
+{
+    using System.Diagnostics.Contracts;
+    using System.Web;
 
     [ContractClass(typeof(HttpHandlerContract))]
     public abstract partial class HttpHandler { }
@@ -111,6 +114,6 @@ namespace Narvalo.Web
             Contract.Requires(context != null);
         }
     }
+}
 
 #endif
-}

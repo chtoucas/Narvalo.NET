@@ -4,15 +4,12 @@ namespace Narvalo.Web.Optimization
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Text;
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;
     using System.Web.Razor.Tokenizer.Symbols;
 
-    public sealed class RazorOptimizer
+    public sealed partial class RazorOptimizer
     {
         private readonly IWhiteSpaceBuster _buster;
 
@@ -134,16 +131,6 @@ namespace Narvalo.Web.Optimization
             return sb.ToString();
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_buster != null);
-        }
-
-#endif
-
         private string BustWhiteSpaces(string content)
         {
             return _buster.Bust(content);
@@ -194,3 +181,21 @@ namespace Narvalo.Web.Optimization
         }
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Web.Optimization
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class RazorOptimizer
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_buster != null);
+        }
+    }
+}
+
+#endif

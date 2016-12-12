@@ -331,16 +331,24 @@ namespace Narvalo.Finance
         public override int GetHashCode()
             // REVIEW: Maybe we could cache the hashcode?
             => Code.GetHashCode();
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [System.Diagnostics.Contracts.ContractInvariantMethod]
+namespace Narvalo.Finance
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class Currency
+    {
+        [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Invariant(_code != null);
-            Invariant(_code.Length == 3);
+            Contract.Invariant(_code != null);
+            Contract.Invariant(_code.Length == 3);
         }
-
-#endif
     }
 }
+
+#endif

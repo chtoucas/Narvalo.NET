@@ -129,7 +129,7 @@ namespace Narvalo.Web.UI
     using System.Diagnostics.Contracts;
 
     [ContractClass(typeof(AssetProviderContract))]
-    public abstract partial class AssetProvider : ProviderBase { }
+    public abstract partial class AssetProvider { }
 
     [ContractClassFor(typeof(AssetProvider))]
     internal abstract class AssetProviderContract : AssetProvider

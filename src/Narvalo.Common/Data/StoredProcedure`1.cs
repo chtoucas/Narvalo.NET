@@ -108,8 +108,14 @@ namespace Narvalo.Data
             return cmd;
         }
     }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Data
+{
+    using System.Data.SqlClient;
+    using System.Diagnostics.Contracts;
 
     [ContractClass(typeof(StoredProcedureContract<>))]
     public abstract partial class StoredProcedure<TResult>
@@ -142,6 +148,6 @@ namespace Narvalo.Data
             Contract.Requires(parameters != null);
         }
     }
+}
 
 #endif
-}

@@ -2,11 +2,7 @@
 
 namespace Narvalo.Web.Optimization
 {
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
-
-    public sealed class DefaultWhiteSpaceBusterProvider : IWhiteSpaceBusterProvider
+    public sealed partial class DefaultWhiteSpaceBusterProvider : IWhiteSpaceBusterProvider
     {
         private readonly IWhiteSpaceBuster _buster = new DefaultWhiteSpaceBuster();
 
@@ -19,15 +15,23 @@ namespace Narvalo.Web.Optimization
                 return _buster;
             }
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Web.Optimization
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class DefaultWhiteSpaceBusterProvider
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_buster != null);
         }
-
-#endif
     }
 }
+
+#endif

@@ -5,15 +5,12 @@
 namespace Narvalo.Web.Internal
 {
     using System.Collections;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Web.UI;
 
     using Narvalo.Web.Optimization;
     using Narvalo.Web.UI;
 
-    internal sealed class WhiteSpaceControlTransformer
+    internal sealed partial class WhiteSpaceControlTransformer
     {
         private readonly IWhiteSpaceBuster _buster;
 
@@ -71,19 +68,27 @@ namespace Narvalo.Web.Internal
             }
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_buster != null);
-        }
-
-#endif
-
         private string TransformLiteral(string value)
         {
             return _buster.Bust(value);
         }
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Web.Internal
+{
+    using System.Diagnostics.Contracts;
+
+    internal sealed partial class WhiteSpaceControlTransformer
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_buster != null);
+        }
+    }
+}
+
+#endif

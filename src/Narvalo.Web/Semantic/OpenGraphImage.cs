@@ -3,11 +3,8 @@
 namespace Narvalo.Web.Semantic
 {
     using System;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
 
-    public class OpenGraphImage
+    public partial class OpenGraphImage
     {
         private readonly string _mimeType;
         private readonly Uri _url;
@@ -44,16 +41,24 @@ namespace Narvalo.Web.Semantic
         public int Height { get; set; }
 
         public int Width { get; set; }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Web.Semantic
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class OpenGraphImage
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_mimeType != null);
             Contract.Invariant(_url != null);
         }
-
-#endif
     }
 }
+
+#endif

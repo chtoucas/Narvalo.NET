@@ -3,11 +3,8 @@
 namespace Narvalo.Configuration
 {
     using System;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
 
-    public sealed class Setter<TSource, T> where TSource : class
+    public sealed partial class Setter<TSource, T> where TSource : class
     {
         private readonly TSource _source;
         private readonly Action<T> _set;
@@ -29,16 +26,24 @@ namespace Narvalo.Configuration
 
             return _source;
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Configuration
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class Setter<TSource, T>
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_source != null);
             Contract.Invariant(_set != null);
         }
-
-#endif
     }
 }
+
+#endif

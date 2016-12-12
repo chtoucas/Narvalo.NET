@@ -12,7 +12,7 @@ namespace Narvalo.Fx
     /// <seealso cref="Switch{T1, T2}"/>
     /// <seealso cref="VoidOrBreak"/>
     [DebuggerDisplay(@"""Void""")]
-    public class VoidOrError
+    public partial class VoidOrError
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly VoidOrError s_Void = new VoidOrError();
@@ -57,7 +57,7 @@ namespace Narvalo.Fx
 
         [DebuggerDisplay(@"""Error""")]
         [DebuggerTypeProxy(typeof(Error_.DebugView))]
-        private sealed class Error_ : VoidOrError
+        private sealed partial class Error_ : VoidOrError
         {
             private readonly ExceptionDispatchInfo _exceptionInfo;
 
@@ -81,16 +81,6 @@ namespace Narvalo.Fx
                 return Format.Current("Error({0})", exception.Message);
             }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-            [ContractInvariantMethod]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_exceptionInfo != null);
-            }
-
-#endif
-
             /// <summary>
             /// Represents a debugger type proxy for <see cref="VoidOrError.Error_"/>.
             /// </summary>
@@ -113,3 +103,24 @@ namespace Narvalo.Fx
         }
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Fx
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class VoidOrError
+    {
+        private sealed partial class Error_
+        {
+            [ContractInvariantMethod]
+            private void ObjectInvariant()
+            {
+                Contract.Invariant(_exceptionInfo != null);
+            }
+        }
+    }
+}
+
+#endif

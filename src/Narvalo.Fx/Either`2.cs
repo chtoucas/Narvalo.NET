@@ -166,7 +166,6 @@ namespace Narvalo.Fx
 namespace Narvalo.Fx
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
     [ContractClass(typeof(EitherContract<,>))]

@@ -172,19 +172,6 @@ namespace Narvalo.Finance
             return new Iban(countryCode, checkDigit, bban, value);
         }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Invariant(_bban != null);
-            Invariant(_checkDigit != null);
-            Invariant(_countryCode != null);
-            Invariant(_innerValue != null);
-        }
-
-#endif
-
 #if CONTRACTS_FULL
         public
 #else
@@ -248,3 +235,24 @@ namespace Narvalo.Finance
         public override int GetHashCode() => _innerValue.GetHashCode();
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Finance
+{
+    using System.Diagnostics.Contracts;
+
+    public partial struct Iban
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract. Invariant(_bban != null);
+            Contract.Invariant(_checkDigit != null);
+            Contract.Invariant(_countryCode != null);
+            Contract.Invariant(_innerValue != null);
+        }
+    }
+}
+
+#endif

@@ -3,9 +3,6 @@
 namespace Narvalo.Mvp.Web.Core
 {
     using System.Collections.Generic;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Web;
     using System.Web.UI;
 
@@ -14,7 +11,7 @@ namespace Narvalo.Mvp.Web.Core
 
     using static System.Diagnostics.Contracts.Contract;
 
-    public sealed class PageHost
+    public sealed partial class PageHost
     {
         private static readonly string s_PageHostKey = typeof(PageHost).FullName;
 
@@ -93,15 +90,23 @@ namespace Narvalo.Mvp.Web.Core
                 masterHost = masterHost.Master;
             }
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Mvp.Web.Core
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class PageHost
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Invariant(_presenterBinder != null);
+            Contract.Invariant(_presenterBinder != null);
         }
-
-#endif
     }
 }
+
+#endif

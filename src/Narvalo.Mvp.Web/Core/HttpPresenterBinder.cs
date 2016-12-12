@@ -3,15 +3,12 @@
 namespace Narvalo.Mvp.Web.Core
 {
     using System.Collections.Generic;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Web;
 
     using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
 
-    public sealed class HttpPresenterBinder : PresenterBinder
+    public sealed partial class HttpPresenterBinder : PresenterBinder
     {
         private readonly HttpContext _context;
 
@@ -51,15 +48,23 @@ namespace Narvalo.Mvp.Web.Core
 
             base.OnPresenterCreated(args);
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Mvp.Web.Core
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class HttpPresenterBinder
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_context != null);
         }
-
-#endif
     }
 }
+
+#endif

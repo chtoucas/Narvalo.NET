@@ -2,12 +2,9 @@
 
 namespace Narvalo.IO
 {
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.IO;
 
-    public sealed class RelativeFile
+    public sealed partial class RelativeFile
     {
         private readonly FileInfo _file;
         private readonly string _relativeDirectoryName;
@@ -41,16 +38,24 @@ namespace Narvalo.IO
                 return Path.Combine(_relativeDirectoryName, _file.Name);
             }
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.IO
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class RelativeFile
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_file != null);
             Contract.Invariant(_relativeDirectoryName != null);
         }
-
-#endif
     }
 }
+
+#endif

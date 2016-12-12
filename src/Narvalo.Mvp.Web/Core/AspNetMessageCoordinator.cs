@@ -7,9 +7,6 @@ namespace Narvalo.Mvp.Web.Core
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Diagnostics;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
 
     using Narvalo.Mvp;
@@ -24,7 +21,7 @@ namespace Narvalo.Mvp.Web.Core
     // You then do not have to worry about the order of the pub/sub events.
     // A good rule of thumb is to subscribe or publish messages during the Load event.
     // NB: After pre-render completes, the message bus is closed.
-    public sealed class AspNetMessageCoordinator : IMessageCoordinator
+    public sealed partial class AspNetMessageCoordinator : IMessageCoordinator
     {
         private readonly ConcurrentDictionary<Type, IList> _messages
             = new ConcurrentDictionary<Type, IList>();
@@ -149,9 +146,17 @@ namespace Narvalo.Mvp.Web.Core
                 throw new InvalidOperationException(Strings.AspNetMessageCoordinator_Closed);
             }
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Mvp.Web.Core
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class AspNetMessageCoordinator
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
@@ -159,7 +164,7 @@ namespace Narvalo.Mvp.Web.Core
             Contract.Invariant(_lock != null);
             Contract.Invariant(_messages != null);
         }
-
-#endif
     }
 }
+
+#endif

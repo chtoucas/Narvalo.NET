@@ -2,11 +2,7 @@
 
 namespace Narvalo.Finance
 {
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
-
-    public sealed class CurrencyProvider
+    public sealed partial class CurrencyProvider
     {
         private static readonly CurrencyProvider s_Instance = new CurrencyProvider();
 
@@ -52,15 +48,23 @@ namespace Narvalo.Finance
 
             _factory = factory;
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [System.Diagnostics.Contracts.ContractInvariantMethod]
+namespace Narvalo.Finance
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class CurrencyProvider
+    {
+        [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_factory != null);
         }
-
-#endif
     }
 }
+
+#endif

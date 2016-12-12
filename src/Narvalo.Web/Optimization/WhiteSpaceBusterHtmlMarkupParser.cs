@@ -7,7 +7,7 @@ namespace Narvalo.Web.Optimization
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;
 
-    public sealed class WhiteSpaceBusterHtmlMarkupParser : ParserBase
+    public sealed partial class WhiteSpaceBusterHtmlMarkupParser : ParserBase
     {
         private readonly RazorOptimizer _optimizer;
         private readonly ParserBase _inner;
@@ -49,16 +49,24 @@ namespace Narvalo.Web.Optimization
         {
             _inner.ParseSection(nestingSequences, caseSensitive);
         }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
-        [System.Diagnostics.Contracts.ContractInvariantMethod]
+namespace Narvalo.Web.Optimization
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class WhiteSpaceBusterHtmlMarkupParser
+    {
+        [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            System.Diagnostics.Contracts.Contract.Invariant(_inner != null);
-            System.Diagnostics.Contracts.Contract.Invariant(_optimizer != null);
+            Contract.Invariant(_inner != null);
+            Contract.Invariant(_optimizer != null);
         }
-
-#endif
     }
 }
+
+#endif

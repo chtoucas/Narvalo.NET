@@ -13,7 +13,7 @@ namespace Narvalo.Fx
     /// <seealso cref="Switch{T1, T2}"/>
     /// <seealso cref="VoidOrError"/>
     [DebuggerDisplay(@"""Void""")]
-    public class VoidOrBreak
+    public partial class VoidOrBreak
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly VoidOrBreak s_Void = new VoidOrBreak();
@@ -64,7 +64,7 @@ namespace Narvalo.Fx
 
         [DebuggerDisplay(@"""Break""")]
         [DebuggerTypeProxy(typeof(Break_.DebugView))]
-        private sealed class Break_ : VoidOrBreak
+        private sealed partial class Break_ : VoidOrBreak
         {
             private readonly string _reason;
 
@@ -93,17 +93,6 @@ namespace Narvalo.Fx
                 return Format.Current("Break({0})", _reason);
             }
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-            [ContractInvariantMethod]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_reason != null);
-                Contract.Invariant(_isBreak);
-            }
-
-#endif
-
             /// <summary>
             /// Represents a debugger type proxy for <see cref="VoidOrBreak.Break_"/>.
             /// </summary>
@@ -126,3 +115,25 @@ namespace Narvalo.Fx
         }
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Fx
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class VoidOrBreak
+    {
+        private sealed partial class Break_
+        {
+            [ContractInvariantMethod]
+            private void ObjectInvariant()
+            {
+                Contract.Invariant(_reason != null);
+                Contract.Invariant(_isBreak);
+            }
+        }
+    }
+}
+
+#endif

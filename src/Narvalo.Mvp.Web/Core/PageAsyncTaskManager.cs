@@ -3,9 +3,6 @@
 namespace Narvalo.Mvp.Web.Core
 {
     using System;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web;
@@ -13,7 +10,7 @@ namespace Narvalo.Mvp.Web.Core
 
     using Narvalo;
 
-    public class PageAsyncTaskManager : IAsyncTaskManager
+    public partial class PageAsyncTaskManager : IAsyncTaskManager
     {
         private readonly Page _page;
 
@@ -56,15 +53,23 @@ namespace Narvalo.Mvp.Web.Core
             bool executeInParallel)
             => _page.RegisterAsyncTask(
                 new PageAsyncTask(beginHandler, endHandler, timeoutHandler, state, executeInParallel));
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Mvp.Web.Core
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class PageAsyncTaskManager
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_page != null);
         }
-
-#endif
     }
 }
+
+#endif

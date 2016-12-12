@@ -3,12 +3,9 @@
 namespace Narvalo.Web.Semantic
 {
     using System;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Globalization;
 
-    public sealed class Ontology
+    public sealed partial class Ontology
     {
         public const string OpenGraphNamespace = "og: http://ogp.me/ns#";
 
@@ -85,9 +82,17 @@ namespace Narvalo.Web.Semantic
         public string Keywords { get { return _keywords; } set { _keywords = value; } }
 
         public string Title { get; set; }
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Web.Semantic
+{
+    using System.Diagnostics.Contracts;
+
+    public sealed partial class Ontology
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
@@ -96,7 +101,7 @@ namespace Narvalo.Web.Semantic
             Contract.Invariant(_relationships != null);
             Contract.Invariant(_schemaOrg != null);
         }
-
-#endif
     }
 }
+
+#endif

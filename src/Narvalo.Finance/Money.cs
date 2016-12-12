@@ -3,9 +3,6 @@
 namespace Narvalo.Finance
 {
     using System;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Runtime.InteropServices;
 
     using Narvalo.Finance.Internal;
@@ -49,16 +46,6 @@ namespace Narvalo.Finance
                 throw new ArithmeticException();
             }
         }
-
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-        [System.Diagnostics.Contracts.ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_currency != null);
-        }
-
-#endif
     }
 
     // Implements the IEquatable<Money> interface.
@@ -260,3 +247,21 @@ namespace Narvalo.Finance
         public Money Plus() => this;
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Finance
+{
+    using System.Diagnostics.Contracts;
+
+    public partial struct Money
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_currency != null);
+        }
+    }
+}
+
+#endif

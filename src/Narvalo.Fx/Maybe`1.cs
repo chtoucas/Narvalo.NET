@@ -472,16 +472,6 @@ namespace Narvalo.Fx
                 }
             }
         }
-
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(!IsSome || Value != null);
-        }
-
-#endif
     }
 
     /// <content>
@@ -601,3 +591,20 @@ namespace Narvalo.Fx
         public Maybe<T> OrElse(Maybe<T> other) => !IsSome ? other : this;
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Fx
+{
+    using System.Diagnostics.Contracts;
+
+    public partial struct Maybe<T>
+    {
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(!IsSome || Value != null);
+        }
+    }
+}
+
+#endif

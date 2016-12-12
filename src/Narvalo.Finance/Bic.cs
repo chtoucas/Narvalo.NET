@@ -181,20 +181,6 @@ namespace Narvalo.Finance
 
         public bool CheckSwiftFormat() => CheckFormat(false /* isoConformance */);
 
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Invariant(_branchCode != null);
-            Invariant(_countryCode != null);
-            Invariant(_innerValue != null);
-            Invariant(_institutionCode != null);
-            Invariant(_locationCode != null);
-        }
-
-#endif
-
         // NB: We only perform basic validation on the input string.
         private static Bic? ParseCore(string value, bool throwOnError)
         {
@@ -314,3 +300,25 @@ namespace Narvalo.Finance
         public override int GetHashCode() => _innerValue.GetHashCode();
     }
 }
+
+#if CONTRACTS_FULL // Contract Class and Object Invariants.
+
+namespace Narvalo.Finance
+{
+    using System.Diagnostics.Contracts;
+
+    public partial struct Bic
+    {
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_branchCode != null);
+            Contract.Invariant(_countryCode != null);
+            Contract.Invariant(_innerValue != null);
+            Contract.Invariant(_institutionCode != null);
+            Contract.Invariant(_locationCode != null);
+        }
+    }
+}
+
+#endif

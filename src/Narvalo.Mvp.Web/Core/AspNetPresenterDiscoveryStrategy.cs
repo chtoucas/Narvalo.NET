@@ -3,16 +3,13 @@
 namespace Narvalo.Mvp.Web.Core
 {
     using System.Collections.Generic;
-#if CONTRACTS_FULL // Contract Class and Object Invariants.
-    using System.Diagnostics.Contracts;
-#endif
     using System.Linq;
 
     using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
 
     // Convention based presenter discovery strategy.
-    public class AspNetPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
+    public partial class AspNetPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {
         private static readonly string[] s_DefaultPresenterNameTemplates = new[]
         {
@@ -80,15 +77,23 @@ namespace Narvalo.Mvp.Web.Core
             IEnumerable<object> hosts,
             IEnumerable<IView> views)
             => _inner.FindBindings(hosts, views);
+    }
+}
 
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
 
+namespace Narvalo.Mvp.Web.Core
+{
+    using System.Diagnostics.Contracts;
+
+    public partial class AspNetPresenterDiscoveryStrategy
+    {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(_inner != null);
         }
-
-#endif
     }
 }
+
+#endif
