@@ -150,7 +150,7 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of HasZero. #>
-    } // End of <#= Name #>.
+    } // End of <#= Name #> - T4: EmitMonadExtraExtensions().
 <#+
     } // T4: End of EmitMonadExtraExtensions().
 } // T4: End of MonadTemplate.

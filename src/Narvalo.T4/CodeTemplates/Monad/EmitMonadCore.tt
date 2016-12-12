@@ -223,7 +223,7 @@ public partial class MonadTemplate
         }
 
         #endregion
-    } // End of <#= Name #>.
+    } // End of <#= Name #> - T4: EmitMonadCore().
 <#+
     } // T4: End of EmitMonadCore().
 } // T4: End of MonadTemplate.

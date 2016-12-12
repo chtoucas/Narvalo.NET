@@ -38,6 +38,6 @@ namespace Narvalo.Fx.Samples
 
             return Comonad<T>.δ(monad);
         }
-    } // End of Comonad.
+    } // End of Comonad - T4: EmitComonadCore().
 }
 

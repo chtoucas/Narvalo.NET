@@ -13,7 +13,9 @@ public partial class MonadTemplate
 
 <#+ if (!HasTypeConstraints) { #>
 
+<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+<#+ } #>
         internal static <#= Name #><IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
         {
@@ -50,7 +52,9 @@ public partial class MonadTemplate
 
 <#+ if (HasSum) { #>
 
+<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
+<#+ } #>
         internal static <#= Name #><TSource> SumCore<TSource>(
             this IEnumerable<<#= Name #><TSource>> @this)
             <#+ WriteTypeConstraints("TSource"); #>
@@ -69,7 +73,7 @@ public partial class MonadTemplate
         }
 
 <#+ } // T4: End of HasSum. #>
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 <#+
     } // T4: End of EmitMonadEnumerableInternalExtensions().
 } // T4: End of MonadTemplate.

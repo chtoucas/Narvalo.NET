@@ -33,9 +33,9 @@ public partial class MonadTemplate
 
             return <#= Name #><T>.δ(monad);
         }
-    } // End of <#= Name #>.
+    } // End of <#= Name #> - T4: EmitComonadCore().
 <#+
-    } // T4: End of EmitCoreComonad().
+    } // T4: End of EmitComonadCore().
 } // T4: End of MonadTemplate.
 
 #>

@@ -67,7 +67,9 @@ public partial class MonadTemplate
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
+<#+ if (!SuppressMessage) { #>
         [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
+<#+ } #>
         public static <#= Name #><global::Narvalo.Fx.Unit> Forget<TSource>(this <#= Name #><TSource> @this)
             <#+ WriteTypeConstraints("TSource"); #>
         {
@@ -480,7 +482,7 @@ public partial class MonadTemplate
 <#+ } // T4: End of HasJoin. #>
 
         #endregion
-    } // End of <#= Name #>.
+    } // End of <#= Name #> - T4: EmitMonadExtensions().
 <#+
     } // T4: End of EmitMonadExtensions().
 } // T4: End of MonadTemplate.

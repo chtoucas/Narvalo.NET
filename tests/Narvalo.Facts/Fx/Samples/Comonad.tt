@@ -6,7 +6,10 @@
 
     public partial class _Template : MonadTemplate
     {
-        public _Template(TextTransformation parent) : base(parent) { }
+        public _Template(TextTransformation parent) : base(parent)
+        {
+            SuppressMessage = true;
+        }
 
         protected override void WriteContent()
         {

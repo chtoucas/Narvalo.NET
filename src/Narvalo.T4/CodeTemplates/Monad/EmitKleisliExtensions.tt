@@ -80,7 +80,7 @@ public partial class MonadTemplate
         }
 
         #endregion
-    } // End of FuncExtensions.
+    } // End of FuncExtensions - T4: EmitKleisliExtensions().
 <#+
     } // T4: End of EmitKleisliExtensions().
 } // T4: End of MonadTemplate.

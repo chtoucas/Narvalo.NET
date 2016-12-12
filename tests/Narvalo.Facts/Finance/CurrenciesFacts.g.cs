@@ -14,24 +14,17 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Currencies;
     using Xunit;
 
-    [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
-    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
     public static partial class CurrencyFacts
     {
         #region Built-In Currencies
 
         [Fact]
-        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
         public static void BuiltInCurrencies_AreNotNull()
         {
-            // Act & Assert
             Assert.True(ADP.Currency != null);
             Assert.True(AED.Currency != null);
             Assert.True(AFA.Currency != null);
@@ -336,8 +329,6 @@ namespace Narvalo.Finance
         }
 
         [Fact]
-        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
         public static void BuiltInCurrencies_SatisfyStructuralEqualityRules()
         {
             // Act & Assert
@@ -1853,8 +1844,6 @@ namespace Narvalo.Finance
         #region ToString()
 
         [Fact]
-        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
         public static void ToString_ReturnsNotNull()
         {
             // Act & Assert

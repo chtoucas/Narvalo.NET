@@ -14,7 +14,6 @@ namespace Narvalo.Fx.Samples
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using global::Narvalo;
@@ -194,7 +193,7 @@ namespace Narvalo.Fx.Samples
         }
 
         #endregion
-    } // End of Monad.
+    } // End of Monad - T4: EmitMonadCore().
 
     /// <content>
     /// Provides the core monadic extension methods for <see cref="Monad{T}" />.
@@ -249,7 +248,6 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
         public static Monad<global::Narvalo.Fx.Unit> Forget<TSource>(this Monad<TSource> @this)
             /* T4: C# indent */
         {
@@ -390,7 +388,7 @@ namespace Narvalo.Fx.Samples
 
 
         #endregion
-    } // End of Monad.
+    } // End of Monad - T4: EmitMonadExtensions().
 
     /// <content>
     /// Provides non-standard extension methods for <see cref="Monad{T}" />.
@@ -450,7 +448,7 @@ namespace Narvalo.Fx.Samples
             return @this.Bind(_ => { action.Invoke(_); return @this; });
         }
 
-    } // End of Monad.
+    } // End of Monad - T4: EmitMonadExtraExtensions().
 
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> in the Kleisli category.
@@ -520,7 +518,7 @@ namespace Narvalo.Fx.Samples
         }
 
         #endregion
-    } // End of FuncExtensions.
+    } // End of FuncExtensions - T4: EmitKleisliExtensions().
 }
 
 namespace Narvalo.Fx.Samples
@@ -554,7 +552,7 @@ namespace Narvalo.Fx.Samples
 
         #endregion
 
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Samples.Advanced
@@ -733,14 +731,13 @@ namespace Narvalo.Fx.Samples.Advanced
         }
 
         #endregion
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Samples.Internal
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -757,8 +754,6 @@ namespace Narvalo.Fx.Samples.Internal
     internal static partial class EnumerableExtensions
     {
 
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<IEnumerable<TSource>> CollectCore<TSource>(
             this IEnumerable<Monad<TSource>> @this)
         {
@@ -785,7 +780,7 @@ namespace Narvalo.Fx.Samples.Internal
             return m.Bind(item => Monad.Return(list.Concat(Enumerable.Repeat(item, 1))));
         }
 
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
@@ -793,8 +788,6 @@ namespace Narvalo.Fx.Samples.Internal
     internal static partial class EnumerableExtensions
     {
 
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<TResult>> funM)
@@ -806,8 +799,6 @@ namespace Narvalo.Fx.Samples.Internal
             return @this.Select(funM).EmptyIfNull().Collect();
         }
 
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, Monad<bool>> predicateM)
@@ -840,8 +831,6 @@ namespace Narvalo.Fx.Samples.Internal
             return list;
         }
 
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
             MapAndUnzipCore<TSource, TFirst, TSecond>(
             this IEnumerable<TSource> @this,
@@ -862,7 +851,6 @@ namespace Narvalo.Fx.Samples.Internal
                 });
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<IEnumerable<TResult>> ZipCore<TFirst, TSecond, TResult>(
             this IEnumerable<TFirst> @this,
             IEnumerable<TSecond> second,
@@ -882,8 +870,6 @@ namespace Narvalo.Fx.Samples.Internal
             return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
         }
 
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -908,7 +894,6 @@ namespace Narvalo.Fx.Samples.Internal
             return retval;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -921,7 +906,6 @@ namespace Narvalo.Fx.Samples.Internal
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Monad<TSource>> accumulatorM)
@@ -953,7 +937,6 @@ namespace Narvalo.Fx.Samples.Internal
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Monad<TSource>> accumulatorM)
@@ -965,7 +948,6 @@ namespace Narvalo.Fx.Samples.Internal
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -995,7 +977,6 @@ namespace Narvalo.Fx.Samples.Internal
             return retval;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Monad<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, Monad<TSource>> accumulatorM,
@@ -1028,6 +1009,6 @@ namespace Narvalo.Fx.Samples.Internal
                 return retval;
             }
         }
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitEnumerableInternalExtensions().
 }
 

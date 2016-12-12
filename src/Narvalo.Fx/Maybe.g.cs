@@ -218,7 +218,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of Maybe.
+    } // End of Maybe - T4: EmitMonadCore().
 
     /// <content>
     /// Provides the core monadic extension methods for <see cref="Maybe{T}" />.
@@ -582,7 +582,7 @@ namespace Narvalo.Fx
 
 
         #endregion
-    } // End of Maybe.
+    } // End of Maybe - T4: EmitMonadExtensions().
 
     /// <content>
     /// Provides non-standard extension methods for <see cref="Maybe{T}" />.
@@ -689,7 +689,7 @@ namespace Narvalo.Fx
             return @this.Invoke(action).OnNone(caseNone);
         }
 
-    } // End of Maybe.
+    } // End of Maybe - T4: EmitMonadExtraExtensions().
 
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> in the Kleisli category.
@@ -758,7 +758,7 @@ namespace Narvalo.Fx
         }
 
         #endregion
-    } // End of FuncExtensions.
+    } // End of FuncExtensions - T4: EmitKleisliExtensions().
 }
 
 namespace Narvalo.Fx
@@ -808,7 +808,7 @@ namespace Narvalo.Fx
 
         #endregion
 
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Advanced
@@ -985,7 +985,7 @@ namespace Narvalo.Fx.Advanced
         }
 
         #endregion
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Internal
@@ -1007,7 +1007,6 @@ namespace Narvalo.Fx.Internal
     /// </content>
     internal static partial class EnumerableExtensions
     {
-
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TSource>> CollectCore<TSource>(
@@ -1033,7 +1032,6 @@ namespace Narvalo.Fx.Internal
             return m.Bind(item => Maybe.Of(list.Concat(Enumerable.Repeat(item, 1))));
         }
 
-
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TSource> SumCore<TSource>(
             this IEnumerable<Maybe<TSource>> @this)
@@ -1046,14 +1044,13 @@ namespace Narvalo.Fx.Internal
             return retval;
         }
 
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
     /// </content>
     internal static partial class EnumerableExtensions
     {
-
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<IEnumerable<TResult>> ForEachCore<TSource, TResult>(
@@ -1065,7 +1062,6 @@ namespace Narvalo.Fx.Internal
 
             return @this.Select(funM).EmptyIfNull().Collect();
         }
-
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
@@ -1096,7 +1092,6 @@ namespace Narvalo.Fx.Internal
 
             return list;
         }
-
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<Tuple<IEnumerable<TFirst>, IEnumerable<TSecond>>>
@@ -1137,7 +1132,6 @@ namespace Narvalo.Fx.Internal
             // instead of using the Zip from LINQ.
             return @this.Zip(second, resultSelector: resultSelector).EmptyIfNull().Collect();
         }
-
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static Maybe<TAccumulate> FoldCore<TSource, TAccumulate>(
@@ -1264,5 +1258,5 @@ namespace Narvalo.Fx.Internal
                 return retval;
             }
         }
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitEnumerableInternalExtensions().
 }

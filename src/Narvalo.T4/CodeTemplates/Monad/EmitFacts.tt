@@ -233,7 +233,7 @@ namespace <#= Namespace #>
 <#+ } // T4: End of HasZero && HasPlus. #>
 
         #endregion
-    } // End of <#= Name #>.
+    } // End of <#= Name #> - T4: EmitFacts().
 } // End of <#= Namespace #>.
 <#+
     } // T4: End of EmitFacts().

@@ -111,6 +111,6 @@ namespace Narvalo.Fx
 
 
         #endregion
-    } // End of Outcome.
+    } // End of Outcome - T4: EmitFacts().
 } // End of Narvalo.Fx.
 

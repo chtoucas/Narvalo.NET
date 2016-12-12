@@ -200,7 +200,7 @@ public partial class MonadTemplate
         }
 
         #endregion
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitEnumerableExtensions().
 <#+
     } // T4: End of EmitEnumerableExtensions().
 } // T4: End of MonadTemplate.

@@ -229,6 +229,6 @@ namespace Narvalo.Fx
 
 
         #endregion
-    } // End of Maybe.
+    } // End of Maybe - T4: EmitFacts().
 } // End of Narvalo.Fx.
 

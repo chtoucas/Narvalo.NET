@@ -14,7 +14,6 @@ namespace Narvalo.Fx.Samples
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using global::Narvalo;
@@ -233,7 +232,7 @@ namespace Narvalo.Fx.Samples
         }
 
         #endregion
-    } // End of MonadValue.
+    } // End of MonadValue - T4: EmitMonadCore().
 
     /// <content>
     /// Provides the core monadic extension methods for <see cref="MonadValue{T}" />.
@@ -291,7 +290,6 @@ namespace Narvalo.Fx.Samples
         /// <remarks>
         /// Named <c>void</c> in Haskell parlance.
         /// </remarks>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "this", Justification = "[Intentionally] This method always returns the same result.")]
         public static MonadValue<global::Narvalo.Fx.Unit> Forget<TSource>(this MonadValue<TSource> @this)
             where TSource : struct
         {
@@ -622,7 +620,7 @@ namespace Narvalo.Fx.Samples
 
 
         #endregion
-    } // End of MonadValue.
+    } // End of MonadValue - T4: EmitMonadExtensions().
 
     /// <content>
     /// Provides non-standard extension methods for <see cref="MonadValue{T}" />.
@@ -732,7 +730,7 @@ namespace Narvalo.Fx.Samples
             return @this.Invoke(action).OnNone(caseNone);
         }
 
-    } // End of MonadValue.
+    } // End of MonadValue - T4: EmitMonadExtraExtensions().
 
     /// <content>
     /// Provides extension methods for <see cref="Func{T}"/> in the Kleisli category.
@@ -792,7 +790,7 @@ namespace Narvalo.Fx.Samples
         }
 
         #endregion
-    } // End of FuncExtensions.
+    } // End of FuncExtensions - T4: EmitKleisliExtensions().
 }
 
 namespace Narvalo.Fx.Samples
@@ -830,7 +828,7 @@ namespace Narvalo.Fx.Samples
 
         #endregion
 
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Samples.Advanced
@@ -966,14 +964,13 @@ namespace Narvalo.Fx.Samples.Advanced
         }
 
         #endregion
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitEnumerableExtensions().
 }
 
 namespace Narvalo.Fx.Samples.Internal
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -990,8 +987,6 @@ namespace Narvalo.Fx.Samples.Internal
     internal static partial class EnumerableExtensions
     {
 
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadValue<TSource> SumCore<TSource>(
             this IEnumerable<MonadValue<TSource>> @this)
             where TSource : struct
@@ -1003,7 +998,7 @@ namespace Narvalo.Fx.Samples.Internal
             return retval;
         }
 
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
     /// <content>
     /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
@@ -1011,8 +1006,6 @@ namespace Narvalo.Fx.Samples.Internal
     internal static partial class EnumerableExtensions
     {
 
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static IEnumerable<TSource> FilterCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, MonadValue<bool>> predicateM)
@@ -1042,8 +1035,6 @@ namespace Narvalo.Fx.Samples.Internal
             return list;
         }
 
-
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadValue<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -1064,7 +1055,6 @@ namespace Narvalo.Fx.Samples.Internal
             return retval;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadValue<TAccumulate> FoldBackCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -1078,7 +1068,6 @@ namespace Narvalo.Fx.Samples.Internal
             return @this.Reverse().EmptyIfNull().Fold(seed, accumulatorM);
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadValue<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
@@ -1105,7 +1094,6 @@ namespace Narvalo.Fx.Samples.Internal
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadValue<TSource> ReduceBackCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM)
@@ -1117,7 +1105,6 @@ namespace Narvalo.Fx.Samples.Internal
             return @this.Reverse().EmptyIfNull().Reduce(accumulatorM);
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadValue<TAccumulate> FoldCore<TSource, TAccumulate>(
             this IEnumerable<TSource> @this,
             TAccumulate seed,
@@ -1143,7 +1130,6 @@ namespace Narvalo.Fx.Samples.Internal
             return retval;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[GeneratedCode] This method has been overridden locally.")]
         internal static MonadValue<TSource> ReduceCore<TSource>(
             this IEnumerable<TSource> @this,
             Func<TSource, TSource, MonadValue<TSource>> accumulatorM,
@@ -1171,6 +1157,6 @@ namespace Narvalo.Fx.Samples.Internal
                 return retval;
             }
         }
-    } // End of EnumerableExtensions.
+    } // End of EnumerableExtensions - T4: EmitEnumerableInternalExtensions().
 }
 
