@@ -474,9 +474,7 @@ namespace Narvalo.Fx
         }
     }
 
-    /// <content>
-    /// Implements the <see cref="IEnumerable{T}"/> interface.
-    /// </content>
+    // Implements the IEnumerable>T>
     public partial struct Maybe<T>
     {
         [SuppressMessage("Microsoft.Contracts", "Suggestion-6-0", Justification = "[Ignore] Unrecognized postcondition by CCCheck.")]
@@ -504,9 +502,7 @@ namespace Narvalo.Fx
         }
     }
 
-    /// <content>
-    /// Implements the <see cref="IEquatable{T}"/> and <c>IEquatable&lt;Maybe&lt;T&gt;&gt;</c> interfaces.
-    /// </content>
+    // Implements the IEquatable<T> and IEquatable<Maybe<<T>> interfaces.
     public partial struct Maybe<T>
     {
         public static bool operator ==(Maybe<T> left, Maybe<T> right) => left.Equals(right);
@@ -554,9 +550,7 @@ namespace Narvalo.Fx
         }
     }
 
-    /// <content>
-    /// Provides the core Monad methods.
-    /// </content>
+    // Provides the core Monad methods.
     public partial struct Maybe<T>
     {
         public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> selector)
@@ -566,20 +560,18 @@ namespace Narvalo.Fx
             return IsSome ? selector.Invoke(Value) : Maybe<TResult>.None;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Maybe<T> η(T value)
             => value != null ? new Maybe<T>(value) : Maybe<T>.None;
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         [DebuggerHidden]
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics. Only used internally.")]
         internal static Maybe<T> μ(Maybe<Maybe<T>> square)
             => square.IsSome ? square.Value : Maybe<T>.None;
     }
 
-    /// <content>
-    /// Provides the core MonadOr methods.
-    /// </content>
+    // Provides the core MonadOr methods.
     public partial struct Maybe<T>
     {
         /// <summary>
