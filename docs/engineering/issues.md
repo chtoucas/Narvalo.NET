@@ -20,7 +20,7 @@ Narvalo.Fx
 - **Bug:** Monad.tt
   * `SumCore()` and `CollectCore()` assert that they never return `null`, is this correct?
   * `Then()` in `JoinCore()` and `GroupJoinCore()` can return `null`.
-- Write a T4 template to test common methods for monads.
+- Enhance EmitFacts.tt.
 
 Narvalo.Core
 ------------
@@ -170,6 +170,9 @@ MSBuild and `PSakefile`:
 - Remove `Invoke-RepairTask`. It is only used to check for the copyright header.
   * CodeFormatter can do the same.
   * There are (external) files that should not have a Narvalo copyright.
+
+### nuget-agent.exe
+- Watch NuGet update to v3.
 
 ### MyGet
 

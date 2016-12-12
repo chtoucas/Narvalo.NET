@@ -159,7 +159,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequireFacts.cs" />
     <Compile Include="StringManipFacts.cs" />
-    <Compile Include="_TestCommon\AspNetUtility.cs" />
+    <Compile Include="_TestCommon\AspNetHelpers.cs" />
     <Compile Include="_TestCommon\MvcHelper.cs" />
     <Compile Include="_TestCommon\ReleaseOnlyFactAttribute.cs" />
     <Compile Include="Web\Configuration\AssetSectionFacts.cs" />

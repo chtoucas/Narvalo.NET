@@ -1,18 +1,16 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
-
 // Adapted from aspnetwebstack\test\Microsoft.TestCommon\AppDomainUtils.cs
-namespace Narvalo
-{
-    using System;
-    using System.IO;
-    using System.Reflection;
-    using System.Web.Compilation;
-    using System.Web.Hosting;
 
+using System.IO;
+using System.Reflection;
+using System.Web.Compilation;
+using System.Web.Hosting;
+
+namespace System.Web.WebPages.TestUtils
+{
     [global::System.CodeDom.Compiler.GeneratedCode("Extern.Microsoft", "1.0")]
     public static class AppDomainUtils
     {
-
         // Allow a test to modify static fields in an independent appdomain so that
         // other tests will not be affected.
         public static void RunInSeparateAppDomain(Action action)

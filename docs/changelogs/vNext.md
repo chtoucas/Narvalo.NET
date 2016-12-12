@@ -57,7 +57,10 @@ Breaking Changes
 - New class constraint added to `Require.NotNull<T>()` (idem with `Demand`
   and `Expect`). See below for unconstrained alternatives.
 
-### Narvalo.Web.Configuration
+### Narvalo.Common
+- Renamed `PathUtility` to `PathHelpers`.
+
+### Narvalo.Web
 - `AssetSection.DefaultProvider` setter now throws an `ArgumentException`
   if the input consists of only white spaces.
 

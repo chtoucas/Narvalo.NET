@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
-
 // Adapted from aspnetwebstack\src\System.Web.WebPages\Common\DisposableAction.cs
-namespace Narvalo
-{
-    using System;
 
-    public class DisposableAction : IDisposable
+namespace System.Web.WebPages
+{
+    [global::System.CodeDom.Compiler.GeneratedCode("Extern.Microsoft", "1.0")]
+    internal class DisposableAction : IDisposable
     {
         private Action _action;
         private bool _hasDisposed;

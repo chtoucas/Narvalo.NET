@@ -1,17 +1,17 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
-
 // Adapted from aspnetwebstack\test\System.Web.Mvc.Test\Util\MvcHelper.cs
-namespace Narvalo
-{
-    using System;
-    using System.Collections;
-    using System.Globalization;
-    using System.IO;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Routing;
-    using Moq;
 
+using System;
+using System.Collections;
+using System.IO;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Moq;
+
+namespace Microsoft.Web.UnitTestUtil
+{
+    [global::System.CodeDom.Compiler.GeneratedCode("Extern.Microsoft", "1.0")]
     public static class MvcHelper
     {
         public const string AppPathModifier = "/$(SESSION)";
@@ -20,22 +20,16 @@ namespace Narvalo
         {
             HttpContextBase httpcontext = GetHttpContext("/app/", null, null);
             RouteCollection rt = new RouteCollection();
-            rt.Add(
-                new Route("{controller}/{action}/{id}", null) {
-                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
-                });
-            rt.Add(
-                "namedroute",
-                new Route("named/{controller}/{action}/{id}", null) {
-                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
-                });
+            rt.Add(new Route("{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
+            rt.Add("namedroute", new Route("named/{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
             RouteData rd = new RouteData();
             rd.Values.Add("controller", "home");
             rd.Values.Add("action", "oldaction");
 
             ViewDataDictionary vdd = new ViewDataDictionary();
 
-            ViewContext viewContext = new ViewContext() {
+            ViewContext viewContext = new ViewContext()
+            {
                 HttpContext = httpcontext,
                 RouteData = rd,
                 ViewData = vdd
@@ -51,15 +45,8 @@ namespace Narvalo
         {
             HttpContextBase httpcontext = GetHttpContext("/app/", null, null, protocol, port);
             RouteCollection rt = new RouteCollection();
-            rt.Add(
-                new Route("{controller}/{action}/{id}", null) {
-                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
-                });
-            rt.Add(
-                "namedroute",
-                new Route("named/{controller}/{action}/{id}", null) {
-                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
-                });
+            rt.Add(new Route("{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
+            rt.Add("namedroute", new Route("named/{controller}/{action}/{id}", null) { Defaults = new RouteValueDictionary(new { id = "defaultid" }) });
             RouteData rd = new RouteData();
             rd.Values.Add("controller", "home");
             rd.Values.Add("action", "oldaction");
@@ -109,9 +96,7 @@ namespace Narvalo
             return new HtmlHelper(viewContext, container, new RouteCollection());
         }
 
-        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(
-            ViewDataDictionary<TModel> viewData,
-            string appPath)
+        public static HtmlHelper<TModel> GetHtmlHelperWithPath<TModel>(ViewDataDictionary<TModel> viewData, string appPath)
         {
             ViewContext viewContext = GetViewContextWithPath(appPath, viewData);
             Mock<IViewDataContainer> mockContainer = new Mock<IViewDataContainer>();
@@ -125,12 +110,7 @@ namespace Narvalo
             return GetHtmlHelperWithPath(viewData, "/");
         }
 
-        public static HttpContextBase GetHttpContext(
-            string appPath,
-            string requestPath,
-            string httpMethod,
-            string protocol,
-            int port)
+        public static HttpContextBase GetHttpContext(string appPath, string requestPath, string httpMethod, string protocol, int port)
         {
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
 
@@ -139,7 +119,6 @@ namespace Narvalo
                 mockHttpContext.Setup(o => o.Request.ApplicationPath).Returns(appPath);
                 mockHttpContext.Setup(o => o.Request.RawUrl).Returns(appPath);
             }
-
             if (!String.IsNullOrEmpty(requestPath))
             {
                 mockHttpContext.Setup(o => o.Request.AppRelativeCurrentExecutionFilePath).Returns(requestPath);
@@ -149,13 +128,12 @@ namespace Narvalo
 
             if (port >= 0)
             {
-                uri = new Uri(protocol + "://localhost" + ":" + Convert.ToString(port, CultureInfo.InvariantCulture));
+                uri = new Uri(protocol + "://localhost" + ":" + Convert.ToString(port));
             }
             else
             {
                 uri = new Uri(protocol + "://localhost");
             }
-
             mockHttpContext.Setup(o => o.Request.Url).Returns(uri);
 
             mockHttpContext.Setup(o => o.Request.PathInfo).Returns(String.Empty);
@@ -165,8 +143,7 @@ namespace Narvalo
             }
 
             mockHttpContext.Setup(o => o.Session).Returns((HttpSessionStateBase)null);
-            mockHttpContext.Setup(
-                o => o.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(r => AppPathModifier + r);
+            mockHttpContext.Setup(o => o.Response.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(r => AppPathModifier + r);
             mockHttpContext.Setup(o => o.Items).Returns(new Hashtable());
             return mockHttpContext.Object;
         }
@@ -183,12 +160,7 @@ namespace Narvalo
             Mock<ViewContext> mockViewContext = new Mock<ViewContext>() { DefaultValue = DefaultValue.Mock };
             mockViewContext.Setup(c => c.HttpContext).Returns(httpContext);
             mockViewContext.Setup(c => c.ViewData).Returns(viewData);
-
-            using (var sw = new StringWriter(CultureInfo.CurrentCulture))
-            {
-                mockViewContext.Setup(c => c.Writer).Returns(sw);
-            }
-
+            mockViewContext.Setup(c => c.Writer).Returns(new StringWriter());
             return mockViewContext.Object;
         }
 
