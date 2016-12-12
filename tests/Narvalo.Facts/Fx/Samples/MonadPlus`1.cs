@@ -3,7 +3,6 @@
 namespace Narvalo.Fx.Samples
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     public sealed class MonadPlus<T>
     {
@@ -23,14 +22,12 @@ namespace Narvalo.Fx.Samples
         }
 
         // [Haskell] return
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static MonadPlus<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static MonadPlus<T> μ(MonadPlus<MonadPlus<T>> square)
         {
             return square.Bind(Stubs<MonadPlus<T>>.Identity);

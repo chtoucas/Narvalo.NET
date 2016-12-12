@@ -3,7 +3,6 @@
 namespace Narvalo.Fx.Samples
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     public struct MonadValue<T> : IEquatable<MonadValue<T>>
         where T : struct
@@ -50,14 +49,12 @@ namespace Narvalo.Fx.Samples
         }
 
         // [Haskell] return
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static MonadValue<T> η(T value)
         {
             throw new NotImplementedException();
         }
 
         // [Haskell] join
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static MonadValue<T> μ(MonadValue<MonadValue<T>> square)
         {
             return square.Bind(Stubs<MonadValue<T>>.Identity);

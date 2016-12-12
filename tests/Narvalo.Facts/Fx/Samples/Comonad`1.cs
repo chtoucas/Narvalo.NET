@@ -3,7 +3,6 @@
 namespace Narvalo.Fx.Samples
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     public sealed class Comonad<T>
     {
@@ -17,13 +16,11 @@ namespace Narvalo.Fx.Samples
             return Extend(_ => fun(ε(_)));
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static T ε(Comonad<T> monad)
         {
             throw new NotImplementedException();
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "[Intentionally] Standard naming convention from mathematics.")]
         internal static Comonad<Comonad<T>> δ(Comonad<T> monad)
         {
             return monad.Extend(_ => _);
