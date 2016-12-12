@@ -3,7 +3,6 @@
 namespace Narvalo.Web.UI
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Web;
 
     using Narvalo.Web.Properties;

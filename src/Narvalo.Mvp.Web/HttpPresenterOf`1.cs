@@ -9,8 +9,6 @@ namespace Narvalo.Mvp.Web
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public abstract class HttpPresenterOf<TViewModel>
         : PresenterOf<TViewModel>, IHttpPresenter, Internal.IHttpPresenter
         where TViewModel : class, new()

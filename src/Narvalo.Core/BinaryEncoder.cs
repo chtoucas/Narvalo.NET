@@ -4,8 +4,6 @@ namespace Narvalo
 {
     using System;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public static class BinaryEncoder
     {
         #region Hexadecimal

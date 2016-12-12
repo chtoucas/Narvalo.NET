@@ -2,7 +2,6 @@
 
 namespace Narvalo.Web.Html
 {
-    using System.Diagnostics.Contracts;
     using System.Web;
 
     using Narvalo.Web.UI;

@@ -12,8 +12,6 @@ namespace Narvalo.Mvp
     using Narvalo;
     using Narvalo.Mvp.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     // NB: Must stay public for "CompositeViewTypeBuilder" to work.
     [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class CompositeView<TView> : ICompositeView where TView : IView

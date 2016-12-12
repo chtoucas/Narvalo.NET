@@ -5,8 +5,6 @@ namespace Narvalo.Collections
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides extension methods for <see cref="IEnumerator{T}"/>.
     /// </summary>

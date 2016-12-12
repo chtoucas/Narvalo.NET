@@ -11,8 +11,6 @@ namespace Narvalo.Mvp.Platforms
 
     using Narvalo.Mvp.PresenterBinding;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public abstract class MvpBootstrapper<T> where T : MvpBootstrapper<T>
     {
         private readonly IList<IPresenterDiscoveryStrategy> _presenterDiscoveryStrategies

@@ -11,8 +11,6 @@ namespace Narvalo.Mvp.Web.Core
     using Narvalo.Mvp;
     using Narvalo.Mvp.PresenterBinding;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     // Convention based presenter discovery strategy.
     public class AspNetPresenterDiscoveryStrategy : IPresenterDiscoveryStrategy
     {

@@ -4,7 +4,6 @@ namespace Narvalo.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Diagnostics.Contracts;
     using System.IO;
 
     using Narvalo.Properties;

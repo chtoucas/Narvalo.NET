@@ -3,7 +3,6 @@
 namespace Narvalo.IO
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.IO;
 
     public static class PathHelpers

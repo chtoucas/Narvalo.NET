@@ -2,7 +2,6 @@
 
 namespace Narvalo.Web
 {
-    using System.Diagnostics.Contracts;
     using System.Net;
     using System.Web;
     using System.Web.Mvc;

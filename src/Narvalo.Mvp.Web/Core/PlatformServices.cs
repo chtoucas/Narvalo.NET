@@ -5,8 +5,6 @@ namespace Narvalo.Mvp.Web.Core
     using Narvalo.Mvp.Platforms;
     using Narvalo.Mvp.PresenterBinding;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public static class PlatformServices
     {
         private static readonly IPlatformServices s_Default

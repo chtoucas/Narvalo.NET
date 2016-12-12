@@ -12,8 +12,6 @@ namespace Narvalo.Mvp.PresenterBinding
     using Narvalo;
     using Narvalo.Mvp.Internal;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public sealed class PresenterBindingParameter
     {
         private readonly Type _presenterType;

@@ -3,7 +3,6 @@
 namespace Narvalo.Configuration
 {
     using System.Configuration;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Fx;
     using Narvalo.Properties;

@@ -7,7 +7,6 @@ namespace Narvalo.Mvp.Platforms
     using System.Diagnostics.Contracts;
 #endif
 
-    using static System.Diagnostics.Contracts.Contract;
 
     public sealed class Appender<TSource, T> where TSource : class
     {

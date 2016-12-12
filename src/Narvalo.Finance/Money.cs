@@ -3,13 +3,10 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;
 
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     // FIXME: Use int's to represent the amount and, later on, create a BigMoney struct based
     // on BigRational (BigDecimal?) for arbitrary-precision calculations.

@@ -2,8 +2,6 @@
 
 namespace Narvalo.Finance
 {
-    using static System.Diagnostics.Contracts.Contract;
-
     public sealed class CurrencyProvider
     {
         private static readonly CurrencyProvider s_Instance = new CurrencyProvider();

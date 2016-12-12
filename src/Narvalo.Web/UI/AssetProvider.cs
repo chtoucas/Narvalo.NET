@@ -8,8 +8,6 @@ namespace Narvalo.Web.UI
 
     using Narvalo.Web.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides a base implementation for the asset provider model.
     /// </summary>

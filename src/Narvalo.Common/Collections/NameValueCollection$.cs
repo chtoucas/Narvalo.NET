@@ -10,8 +10,6 @@ namespace Narvalo.Collections
     using Narvalo.Fx;
     using Narvalo.Fx.Advanced;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides extension methods for <see cref="NameValueCollection"/> that depend on the <see cref="Maybe{T}"/> class.
     /// </summary>

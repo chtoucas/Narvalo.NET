@@ -2,7 +2,6 @@
 
 namespace Narvalo.IO
 {
-    using System.Diagnostics.Contracts;
     using System.IO;
 
     public sealed class RelativeFile

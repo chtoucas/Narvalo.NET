@@ -4,7 +4,6 @@ namespace Narvalo.Web.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Diagnostics.Contracts;
 
     public sealed partial class OptimizationSection : ConfigurationSection
     {

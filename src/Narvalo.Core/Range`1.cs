@@ -5,8 +5,6 @@ namespace Narvalo
     using System;
     using System.Diagnostics.Contracts;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Represents a range of values.
     /// </summary>

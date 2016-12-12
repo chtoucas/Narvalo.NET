@@ -5,8 +5,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public abstract class CurrencyFactory
     {
         protected CurrencyFactory() { }

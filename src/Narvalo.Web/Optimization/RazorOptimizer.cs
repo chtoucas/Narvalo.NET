@@ -4,7 +4,6 @@ namespace Narvalo.Web.Optimization
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Text;
     using System.Web.Razor.Parser.SyntaxTree;
     using System.Web.Razor.Text;

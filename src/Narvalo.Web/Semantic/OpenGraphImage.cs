@@ -3,7 +3,6 @@
 namespace Narvalo.Web.Semantic
 {
     using System;
-    using System.Diagnostics.Contracts;
 
     public class OpenGraphImage
     {

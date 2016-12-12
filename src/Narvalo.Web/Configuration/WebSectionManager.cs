@@ -3,7 +3,6 @@
 namespace Narvalo.Web.Configuration
 {
     using System.Configuration;
-    using System.Diagnostics.Contracts;
     using System.Web.Configuration;
 
     using Narvalo.Fx;

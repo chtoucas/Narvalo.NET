@@ -11,8 +11,6 @@ namespace Narvalo.Mvp.Resolvers
 
     using Narvalo.Mvp.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes",
            Justification = "Using three generic parameters does not seem that much!")]
     public class ResolverCache<TKey, TCacheKey, TValue> where TKey : class

@@ -3,7 +3,6 @@
 namespace Narvalo.IO
 {
     using System;
-    using System.Diagnostics.Contracts;
 
     public sealed class RelativeDirectoryEventArgs : EventArgs
     {

@@ -11,8 +11,6 @@ namespace Narvalo.Mvp
 
     using Narvalo.Mvp.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public class /*Default*/MessageCoordinator : IMessageCoordinator
     {
         private readonly bool _closeable;

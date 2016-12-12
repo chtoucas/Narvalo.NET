@@ -2,7 +2,6 @@
 
 namespace Narvalo.Web.Semantic
 {
-    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     public sealed class OpenGraphLocale

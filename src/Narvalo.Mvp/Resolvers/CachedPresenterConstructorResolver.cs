@@ -3,7 +3,6 @@
 namespace Narvalo.Mvp.Resolvers
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 #if CONTRACTS_FULL // Contract Class and Object Invariants.
     using System.Diagnostics.Contracts;
 #endif

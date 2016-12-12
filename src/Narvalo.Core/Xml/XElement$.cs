@@ -8,8 +8,6 @@ namespace Narvalo.Xml
 
     using Narvalo.Fx;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides extension methods for <see cref="XElement"/>.
     /// </summary>

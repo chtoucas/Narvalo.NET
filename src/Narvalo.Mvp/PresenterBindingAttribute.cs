@@ -8,7 +8,6 @@ namespace Narvalo.Mvp
     using System.Diagnostics.Contracts;
 #endif
 
-    using static System.Diagnostics.Contracts.Contract;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class PresenterBindingAttribute : Attribute

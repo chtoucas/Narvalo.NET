@@ -10,8 +10,6 @@ namespace Narvalo.Mvp.Platforms
     using Narvalo.Mvp.PresenterBinding;
     using Narvalo.Mvp.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     // FIXME: This whole business to ensure delayed initialization of the properties was
     // most certainly one of the worst idea I ever had.
     public class DefaultPlatformServices : IPlatformServices

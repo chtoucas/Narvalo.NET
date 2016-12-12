@@ -4,8 +4,6 @@ namespace Narvalo.Mvp.CommandLine
 {
     using Narvalo.Mvp.Platforms;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public static class PlatformServices
     {
         private static readonly IPlatformServices s_Default = new DefaultPlatformServices_();

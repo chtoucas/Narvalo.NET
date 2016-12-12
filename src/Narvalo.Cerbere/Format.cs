@@ -8,8 +8,6 @@ namespace Narvalo
     using System.Globalization;
     using System.Runtime.CompilerServices;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <summary>
     /// Provides helper methods to format strings.
     /// </summary>

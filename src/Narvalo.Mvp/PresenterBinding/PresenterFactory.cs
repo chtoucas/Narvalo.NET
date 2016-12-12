@@ -13,8 +13,6 @@ namespace Narvalo.Mvp.PresenterBinding
     using Narvalo.Mvp.Properties;
     using Narvalo.Mvp.Resolvers;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     /// <remarks>
     /// WARNING: This class can not be used for presenters that do not have a constructor
     /// accepting the view as a single parameter.

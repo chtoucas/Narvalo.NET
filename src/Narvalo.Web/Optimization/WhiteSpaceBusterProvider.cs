@@ -2,8 +2,6 @@
 
 namespace Narvalo.Web.Optimization
 {
-    using System.Diagnostics.Contracts;
-
     public sealed class WhiteSpaceBusterProvider
     {
         private static readonly WhiteSpaceBusterProvider s_Instance = new WhiteSpaceBusterProvider();

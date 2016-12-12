@@ -6,8 +6,6 @@ namespace Narvalo.Mvp.CommandLine
 
     using Narvalo.Mvp.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public class MvpCommand<TViewModel> : MvpCommand, IView<TViewModel>
     {
         private TViewModel _model;

@@ -7,7 +7,6 @@ namespace Narvalo.Mvp.PresenterBinding
     using System.Diagnostics.Contracts;
 #endif
 
-    using static System.Diagnostics.Contracts.Contract;
 
     public sealed class PresenterDiscoveryResult
     {

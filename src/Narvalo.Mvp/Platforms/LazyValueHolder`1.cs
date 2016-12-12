@@ -10,8 +10,6 @@ namespace Narvalo.Mvp.Platforms
 
     using Narvalo.Mvp.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class LazyValueHolder<TValue> where TValue : class
     {

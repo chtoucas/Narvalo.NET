@@ -7,8 +7,6 @@ namespace Narvalo.Mvp.Web
     using Narvalo.Mvp;
     using Narvalo.Mvp.Web.Properties;
 
-    using static System.Diagnostics.Contracts.Contract;
-
     public class MvpUserControl<TViewModel> : MvpUserControl, IView<TViewModel>
     {
         private TViewModel _model;
