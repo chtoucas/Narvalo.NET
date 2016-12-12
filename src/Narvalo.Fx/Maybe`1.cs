@@ -592,6 +592,7 @@ namespace Narvalo.Fx
 
     public partial struct Maybe<T>
     {
+        [ContractInvariantMethod]
         private void ObjectInvariant()
         {
             Contract.Invariant(!IsSome || Value != null);
