@@ -8,6 +8,7 @@ namespace Narvalo
 
     public static class Warrant
     {
+        [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
@@ -16,6 +17,7 @@ namespace Narvalo
         public static void NotNull<T>() where T : class
             => Contract.Ensures(Contract.Result<T>() != null);
 
+        [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
@@ -24,6 +26,7 @@ namespace Narvalo
         public static void NotNullUnconstrained<T>()
             => Contract.Ensures(Contract.Result<T>() != null);
 
+        [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
@@ -35,6 +38,7 @@ namespace Narvalo
             Contract.Ensures(Contract.Result<string>().Length != 0);
         }
 
+        [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
@@ -42,6 +46,7 @@ namespace Narvalo
         public static void IsTrue()
             => Contract.Ensures(Contract.Result<bool>() == true);
 
+        [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
@@ -49,18 +54,12 @@ namespace Narvalo
         public static void IsFalse()
             => Contract.Ensures(Contract.Result<bool>() == false);
 
+        [DebuggerHidden]
         [ContractAbbreviator]
         [Conditional("CONTRACTS_FULL")]
         [ExcludeFromCodeCoverage(
             Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
         public static void PassThrough<T>(T @this) where T : class
             => Contract.Ensures(Contract.Result<T>() == @this);
-
-        [ContractAbbreviator]
-        [Conditional("CONTRACTS_FULL")]
-        [ExcludeFromCodeCoverage(
-            Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
-        public static void Length(int length)
-            => Contract.Ensures(Contract.Result<string>().Length == length);
     }
 }
