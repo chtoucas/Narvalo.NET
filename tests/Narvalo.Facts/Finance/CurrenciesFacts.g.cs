@@ -19,6 +19,8 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Currencies;
     using Xunit;
 
+    [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
+    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
     public static partial class CurrencyFacts
     {
         #region Built-In Currencies
