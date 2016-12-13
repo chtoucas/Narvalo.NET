@@ -5,9 +5,7 @@ public partial class MonadTemplate
     protected void EmitMonadEnumerableInternalExtensions()
     {
 #>
-    /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
-    /// </content>
+    // Provides the core extension methods for IEnumerable<T> where T is a <#= Name #><S>.
     internal static partial class EnumerableExtensions
     {
 

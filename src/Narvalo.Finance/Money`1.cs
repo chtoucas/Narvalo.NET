@@ -45,9 +45,7 @@ namespace Narvalo.Finance
             => new Money(value.Amount, s_Currency);
     }
 
-    /// <content>
-    /// Implements the <c>IEquatable</c> interfaces.
-    /// </content>
+    // Implements the IEquatable interfaces.
     public partial struct Money<TCurrency>
     {
         public static bool operator ==(Money<TCurrency> left, Money<TCurrency> right) => left.Equals(right);
@@ -79,9 +77,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Implements the <see cref="IFormattable"/> interface.
-    /// </content>
+    // Implements the IFormattable interface.
     public partial struct Money<TCurrency>
     {
         /// <inheritdoc cref="Object.ToString" />
@@ -91,9 +87,7 @@ namespace Narvalo.Finance
             => MoneyFormatter.Format(Amount, format, formatProvider);
     }
 
-    /// <content>
-    /// Implements the <c>IComparable</c> interfaces.
-    /// </content>
+    // Implements the IComparable interfaces.
     public partial struct Money<TCurrency>
     {
         public static bool operator <(Money<TCurrency> left, Money<TCurrency> right)
@@ -126,9 +120,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_Addition</c> operator.
-    /// </content>
+    // Overrides the op_Addition operator.
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator +(Money<TCurrency> left, Money<TCurrency> right)
@@ -149,9 +141,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_Subtraction</c> operator.
-    /// </content>
+    // Overrides the op_Subtraction operator.
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator -(Money<TCurrency> left, Money<TCurrency> right)
@@ -162,9 +152,7 @@ namespace Narvalo.Finance
         public Money<TCurrency> Subtract(decimal amount) => new Money<TCurrency>(Amount - amount);
     }
 
-    /// <content>
-    /// Overrides the <c>op_Multiply</c> operator.
-    /// </content>
+    // Overrides the op_Multiply operator.
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator *(decimal multiplier, Money<TCurrency> money)
@@ -181,9 +169,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_Division</c> operator.
-    /// </content>
+    // Overrides the op_Division operator.
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator /(Money<TCurrency> money, decimal divisor)
@@ -204,9 +190,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_Modulus</c> operator.
-    /// </content>
+    // Overrides the op_Modulus operator.
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator %(Money<TCurrency> money, decimal divisor)
@@ -227,9 +211,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_UnaryNegation</c> operator.
-    /// </content>
+    // Overrides the op_UnaryNegation operator.
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator -(Money<TCurrency> money)
@@ -243,9 +225,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_UnaryPlus</c> operator.
-    /// </content>
+    // Overrides the op_UnaryPlus operator.
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator +(Money<TCurrency> money) => money;

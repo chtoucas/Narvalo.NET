@@ -9,9 +9,7 @@ public partial class MonadTemplate
         // Indeed if we generate two monads in the same namespace, we might end up
         // with two methods named the same in the same partial class.
 #>
-    /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
-    /// </content>
+    // Provides the core extension methods for IEnumerable<T>.
     internal static partial class EnumerableExtensions
     {
 

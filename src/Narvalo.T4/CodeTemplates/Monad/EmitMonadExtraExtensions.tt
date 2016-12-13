@@ -5,9 +5,7 @@ public partial class MonadTemplate
     protected void EmitMonadExtraExtensions()
     {
 #>
-    /// <content>
-    /// Provides non-standard extension methods for <see cref="<#= Name #>{T}" />.
-    /// </content>
+    // Provides non-standard extension methods for <#= Name #><T>.
     public static partial class <#= Name #>
     {
         public static <#= Name #><TResult> Coalesce<TSource, TResult>(

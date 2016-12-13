@@ -5,9 +5,7 @@ public partial class MonadTemplate
     protected void EmitMonadEnumerableExtensions()
     {
 #>
-    /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="<#= Name #>{S}"/>.
-    /// </content>
+    // Provides extension methods for IEnumerable<T> where T is a <#= Name #><S>.
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)

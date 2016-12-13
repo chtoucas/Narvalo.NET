@@ -123,9 +123,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_Addition</c> operator.
-    /// </content>
+    // Overrides the op_Addition operator.
     public partial struct Money
     {
         public static Money operator +(Money left, Money right) => left.Add(right);
@@ -147,9 +145,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_Subtraction</c> operator.
-    /// </content>
+    // Overrides the op_Subtraction operator.
     public partial struct Money
     {
         public static Money operator -(Money left, Money right) => left.Subtract(right);
@@ -164,9 +160,7 @@ namespace Narvalo.Finance
         public Money Subtract(decimal amount) => new Money(Amount - amount, Currency);
     }
 
-    /// <content>
-    /// Overrides the <c>op_Multiply</c> operator.
-    /// </content>
+    // Overrides the op_Multiply operator.
     public partial struct Money
     {
         public static Money operator *(decimal multiplier, Money money) => money.Multiply(multiplier);
@@ -181,9 +175,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_Division</c> operator.
-    /// </content>
+    // Overrides the op_Division operator.
     public partial struct Money
     {
         public static Money operator /(Money money, decimal divisor)
@@ -204,9 +196,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_Modulus</c> operator.
-    /// </content>
+    // Overrides the op_Modulus operator.
     public partial struct Money
     {
         public static Money operator %(Money money, decimal divisor)
@@ -227,9 +217,7 @@ namespace Narvalo.Finance
         }
     }
 
-    /// <content>
-    /// Overrides the <c>op_UnaryNegation</c> operator.
-    /// </content>
+    // Overrides the op_UnaryNegation operator.
     public partial struct Money
     {
         public static Money operator -(Money money) => money.Negate();
@@ -237,9 +225,7 @@ namespace Narvalo.Finance
         public Money Negate() => new Money(-Amount, Currency);
     }
 
-    /// <content>
-    /// Overrides the <c>op_UnaryPlus</c> operator.
-    /// </content>
+    // Overrides the op_UnaryPlus operator.
     public partial struct Money
     {
         public static Money operator +(Money money) => money;

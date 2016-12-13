@@ -5,9 +5,7 @@ public partial class MonadTemplate
     protected void EmitMonadExtensions()
     {
 #>
-    /// <content>
-    /// Provides the core monadic extension methods for <see cref="<#= Name #>{T}" />.
-    /// </content>
+    // Provides the core monadic extension methods for <#= Name #><T>.
     public static partial class <#= Name #>
     {
         #region Basic Monad functions (Prelude)

@@ -19,7 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Iso4217Template.cs" />
-    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="_MonadTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VSTemplate.cs" />

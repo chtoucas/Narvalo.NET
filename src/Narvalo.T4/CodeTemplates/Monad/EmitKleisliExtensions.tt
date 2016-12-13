@@ -5,9 +5,7 @@ public partial class MonadTemplate
     public void EmitKleisliExtensions()
     {
 #>
-    /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> in the Kleisli category.
-    /// </content>
+    // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)

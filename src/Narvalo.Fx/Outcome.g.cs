@@ -20,12 +20,10 @@ namespace Narvalo.Fx
     using global::Narvalo;
     using Narvalo.Fx.Internal;
 
-    /// <content>
-    /// Provides a set of static methods for <see cref="Outcome{T}" />.
-    /// </content>
     /// <remarks>
     /// Sometimes we prefer to use extension methods over static methods to be able to override them locally.
     /// </remarks>
+    // Provides a set of static methods for Outcome<T>.
     public static partial class Outcome
     {
         /// <summary>
@@ -194,9 +192,7 @@ namespace Narvalo.Fx
         #endregion
     } // End of Outcome - T4: EmitMonadCore().
 
-    /// <content>
-    /// Provides the core monadic extension methods for <see cref="Outcome{T}" />.
-    /// </content>
+    // Provides the core monadic extension methods for Outcome<T>.
     public static partial class Outcome
     {
         #region Basic Monad functions (Prelude)
@@ -390,9 +386,7 @@ namespace Narvalo.Fx
         #endregion
     } // End of Outcome - T4: EmitMonadExtensions().
 
-    /// <content>
-    /// Provides non-standard extension methods for <see cref="Outcome{T}" />.
-    /// </content>
+    // Provides non-standard extension methods for Outcome<T>.
     public static partial class Outcome
     {
         public static Outcome<TResult> Coalesce<TSource, TResult>(
@@ -450,9 +444,7 @@ namespace Narvalo.Fx
 
     } // End of Outcome - T4: EmitMonadExtraExtensions().
 
-    /// <content>
-    /// Provides extension methods for <see cref="Func{T}"/> in the Kleisli category.
-    /// </content>
+    // Provides extension methods for Func<T> in the Kleisli category.
     public static partial class FuncExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -527,9 +519,7 @@ namespace Narvalo.Fx
 
     using Narvalo.Fx.Internal;
 
-    /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Outcome{S}"/>.
-    /// </content>
+    // Provides extension methods for IEnumerable<T> where T is a Outcome<S>.
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -561,9 +551,7 @@ namespace Narvalo.Fx.Advanced
     using Narvalo.Fx;
     using Narvalo.Fx.Internal;
 
-    /// <content>
-    /// Provides extension methods for <see cref="IEnumerable{T}"/>.
-    /// </content>
+    // Provides extension methods for IEnumerable<T>.
     public static partial class EnumerableExtensions
     {
         #region Basic Monad functions (Prelude)
@@ -741,9 +729,7 @@ namespace Narvalo.Fx.Internal
     using global::Narvalo.Fx; // Required for EmptyIfNull().
     using Narvalo.Fx.Advanced;
 
-    /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/> where <c>T</c> is a <see cref="Maybe{S}"/>.
-    /// </content>
+    // Provides the core extension methods for IEnumerable<T> where T is a Outcome<S>.
     internal static partial class EnumerableExtensions
     {
 
@@ -776,9 +762,7 @@ namespace Narvalo.Fx.Internal
 
     } // End of EnumerableExtensions - T4: EmitMonadEnumerableInternalExtensions().
 
-    /// <content>
-    /// Provides the core extension methods for <see cref="IEnumerable{T}"/>.
-    /// </content>
+    // Provides the core extension methods for IEnumerable<T>.
     internal static partial class EnumerableExtensions
     {
 
