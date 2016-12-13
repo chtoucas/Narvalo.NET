@@ -163,7 +163,7 @@ namespace Narvalo
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
         // NB: Using this method will cause a compilation error;
-        // the chosen parameter name ("this") was wrong most of the time.
+        // the default parameter name ("this") was wrong most of the time.
         [Obsolete("Use Require.NotNull() or Require.NotNullUnconstrained() instead.", true)]
         public static void Object<T>([ValidatedNotNull]T @this) => NotNullUnconstrained(@this, "this");
 

@@ -59,6 +59,10 @@ Breaking Changes
 
 ### Narvalo.Core
 - All classes in Narvalo.Collections moved to the package Narvalo.Common.
+- `BooleanStyles.EmptyIsFalse` has been replaced by
+  `BooleanStyles.EmptyOrWhiteSpaceIsFalse`. This is to better emphasize that
+  white-space only strings are treated as empty strings by `ParseTo.Boolean()`.
+- `Range<T>.Includes(T)` has been replaced by `Range<T>.Contains(T)`
 
 ### Narvalo.Common
 - Renamed `PathUtility` to `PathHelpers`.
@@ -100,20 +104,12 @@ New classes and new methods:
 - `Enforce.Range<T>()`
 - `Check.IsEmptyOrWhiteSpace()`
 - `Check.IsFlagsEnum()`
-- `Warrant` a new helper class to write postconditions.
+- `Warrant` a new helper class for postconditions.
 
 ### Narvalo.Core
-Methods marked as obsolete and their replacements:
-- `BooleanStyles.EmptyIsFalse` is declared obsolete;
-  use `BooleanStyles.EmptyOrWhiteSpaceIsFalse` instead. This is to better
-  emphasize that white-space only strings are treated as empty strings by
-  `ParseTo.Boolean()`.
-- `Range<T>.Includes(T)` -> `Range<T>.Contains(T)`
-
 New classes and new methods:
 - `Range.IsValid<T>()`
 - `Range<T>.IsDegenerate`
-- `AsciiHelpers`
 
 ### Narvalo.Finance
 New classes and new methods:

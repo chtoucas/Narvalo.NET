@@ -42,11 +42,6 @@ namespace Narvalo
                 && value.CompareTo(UpperEnd) <= 0;
         }
 
-        [Pure]
-        [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        [Obsolete("Use Range<T>.Contains() instead.")]
-        public bool Includes(T value) => Contains(value);
-
         /// <summary>
         /// Returns <see langword="true"/> if the value is included in the range.
         /// </summary>

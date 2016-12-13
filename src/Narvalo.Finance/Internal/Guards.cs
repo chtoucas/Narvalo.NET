@@ -10,8 +10,29 @@ namespace Narvalo.Finance.Internal
 
     internal static class Guards
     {
+        public static class Require
+        {
+            [ContractArgumentValidator]
+            public static void Format(string value, bool condition, string parameterName)
+            {
+                Narvalo.Require.NotNull(value, parameterName);
+                Narvalo.Require.True(condition, parameterName);
+            }
+        }
+
         public static class Demand
         {
+            [DebuggerHidden]
+            [ContractAbbreviator]
+            [Conditional("CONTRACTS_FULL")]
+            [ExcludeFromCodeCoverage(
+                Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+            public static void Format(string value, bool condition)
+            {
+                Narvalo.Demand.NotNull(value);
+                Narvalo.Demand.True(condition);
+            }
+
             [DebuggerHidden]
             [ContractAbbreviator]
             [Conditional("CONTRACTS_FULL")]

@@ -15,13 +15,13 @@ namespace Narvalo.Finance
         internal const int SuffixLength = 2;
         internal const int BranchLength = 3;
 
-        // conforming = ISO conformance.
-        public static bool Check(Bic bic, bool conforming)
+        // strict = ISO conformance.
+        public static bool Validate(Bic bic, bool strict)
             // NB: We do not need to check properties length.
-            => (conforming ? IsDigitOrUpperLetter(bic.InstitutionCode) : IsUpperLetter(bic.InstitutionCode))
+            => (strict ? IsDigitOrUpperLetter(bic.InstitutionCode) : IsUpperLetter(bic.InstitutionCode))
                 && IsUpperLetter(bic.CountryCode)
                 && IsDigitOrUpperLetter(bic.LocationCode)
-                && (bic.BranchCode.Length == 0 ? true : IsDigitOrUpperLetter(bic.BranchCode));
+                && (bic.BranchCode.Length == 0 || IsDigitOrUpperLetter(bic.BranchCode));
 
         [Pure]
         public static bool CheckBranchCode(string value)

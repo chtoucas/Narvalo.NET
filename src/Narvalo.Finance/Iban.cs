@@ -24,14 +24,10 @@ namespace Narvalo.Finance
 
         private Iban(string countryCode, string checkDigit, string bban, string innerValue)
         {
-            Demand.NotNull(countryCode);
-            Demand.NotNull(checkDigit);
-            Demand.NotNull(bban);
-            Demand.NotNull(innerValue);
-            Demand.True(CheckCountryCode(countryCode));
-            Demand.True(CheckCheckDigit(checkDigit));
-            Demand.True(CheckBban(bban));
-            Demand.True(CheckInnerValue(innerValue));
+            Guards.Demand.Format(countryCode, CheckCountryCode(countryCode));
+            Guards.Demand.Format(checkDigit, CheckCheckDigit(checkDigit));
+            Guards.Demand.Format(bban, CheckBban(bban));
+            Guards.Demand.Format(innerValue, CheckInnerValue(innerValue));
 
             _countryCode = countryCode;
             _checkDigit = checkDigit;
@@ -65,16 +61,12 @@ namespace Narvalo.Finance
 
         public static Iban Create(string countryCode, string checkDigit, string bban)
         {
-            Require.NotNull(countryCode, nameof(countryCode));
-            Require.NotNull(checkDigit, nameof(checkDigit));
-            Require.NotNull(bban, nameof(bban));
-            Require.True(CheckCountryCode(countryCode), nameof(countryCode));
-            Require.True(CheckCheckDigit(checkDigit), nameof(checkDigit));
-            Require.True(CheckBban(bban), nameof(bban));
+            Guards.Require.Format(countryCode, CheckCountryCode(countryCode), nameof(countryCode));
+            Guards.Require.Format(checkDigit, CheckCheckDigit(checkDigit), nameof(checkDigit));
+            Guards.Require.Format(bban, CheckBban(bban), nameof(bban));
 
             var innerValue = countryCode + checkDigit + bban;
             Contract.Assume(CheckInnerValue(innerValue));
-            Check.True(CheckInnerValue(innerValue));
 
             return new Iban(countryCode, checkDigit, bban, innerValue);
         }
@@ -85,7 +77,6 @@ namespace Narvalo.Finance
 
             Iban? iban = ParseCore(value, true /* throwOnError */);
             Contract.Assume(iban.HasValue);
-            Check.True(iban.HasValue);
 
             return iban.Value;
         }
@@ -122,7 +113,6 @@ namespace Narvalo.Finance
                 return null;
             }
             Contract.Assume(CheckInnerValue(value));
-            Check.True(CheckInnerValue(value));
 
             //if (!IsDigitOrUpperLetter(value))
             //{
@@ -179,15 +169,17 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
+    using static Narvalo.Finance.IbanFormat;
+
     public partial struct Iban
     {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(_bban != null);
-            Contract.Invariant(_checkDigit != null);
-            Contract.Invariant(_countryCode != null);
-            Contract.Invariant(_innerValue != null);
+            Contract.Invariant(CheckBban(_bban));
+            Contract.Invariant(CheckCheckDigit(_checkDigit));
+            Contract.Invariant(CheckCountryCode(_countryCode));
+            Contract.Invariant(CheckInnerValue(_innerValue));
         }
     }
 }

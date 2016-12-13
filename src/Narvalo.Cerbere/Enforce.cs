@@ -126,7 +126,7 @@ namespace Narvalo
 
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        // NB: Using this method will cause a compilation error; creating this method was an error.
+        // NB: Using this method will cause a compilation error; creating this method was a mistake.
         [Obsolete("Use Require.NotNullOrEmpty() and Enforce.NotWhiteSpace() instead.", true)]
         [SuppressMessage("Microsoft.Contracts", "MissingPrecondition-9-0", Justification = "[Ignore] We can not have a precondition and ContractArgumentValidator both at the same time; error CC1054.")]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
@@ -138,7 +138,7 @@ namespace Narvalo
 
         [ContractArgumentValidator]
         [ExcludeFromCodeCoverage(Justification = "Obsolete method.")]
-        // NB: Using this method will cause a compilation error; creating this method was an error.
+        // NB: Using this method will cause a compilation error; creating this method was a mistake.
         [Obsolete("Use Require.NotNullOrEmpty() and Enforce.NotWhiteSpace() instead.", true)]
         public static void PropertyNotWhiteSpace([ValidatedNotNull]string value)
         {
