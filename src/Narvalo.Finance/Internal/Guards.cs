@@ -6,6 +6,7 @@ namespace Narvalo.Finance.Internal
     using System.Diagnostics.Contracts;
 
     using static Narvalo.Finance.AsciiHelpers;
+    using static System.Diagnostics.Contracts.Contract;
 
     internal static class Guards
     {
@@ -56,8 +57,30 @@ namespace Narvalo.Finance.Internal
                 Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
             public static void Length(int length)
             {
-                Contract.Ensures(Contract.Result<string>() != null);
-                Contract.Ensures(Contract.Result<string>().Length == length);
+                Ensures(Result<string>() != null);
+                Ensures(Result<string>().Length == length);
+            }
+
+            [DebuggerHidden]
+            [ContractAbbreviator]
+            [Conditional("CONTRACTS_FULL")]
+            [ExcludeFromCodeCoverage(
+                Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+            public static void Lengths(int length1, int length2)
+            {
+                Ensures(Result<string>() != null);
+                Ensures(Result<string>().Length == length1 || Result<string>().Length == length2);
+            }
+
+            [DebuggerHidden]
+            [ContractAbbreviator]
+            [Conditional("CONTRACTS_FULL")]
+            [ExcludeFromCodeCoverage(
+                Justification = "OpenCover can't discover the tests because of the CONTRACTS_FULL conditional.")]
+            public static void LengthRange(int minLength, int maxLength)
+            {
+                Ensures(Result<string>() != null);
+                Ensures(Result<string>().Length >= minLength || Result<string>().Length <= maxLength);
             }
         }
     }

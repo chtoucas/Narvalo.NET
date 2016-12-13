@@ -7,7 +7,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Internal;
 
-    using static System.Diagnostics.Contracts.Contract;
+    using static Narvalo.Finance.IbanFormat;
 
     /// <summary>
     /// Represents an International Bank Account Number (IBAN).
@@ -17,13 +17,6 @@ namespace Narvalo.Finance
     /// </remarks>
     public partial struct Iban : IEquatable<Iban>
     {
-        private const int MIN_LENGTH = 14;
-        private const int MAX_LENGTH = 34;
-        private const int COUNTRY_LENGTH = 2;
-        private const int CHECKDIGIT_LENGTH = 2;
-        private const int BBAN_MIN_LENGTH = MIN_LENGTH - COUNTRY_LENGTH - CHECKDIGIT_LENGTH;
-        private const int BBAN_MAX_LENGTH = MAX_LENGTH - COUNTRY_LENGTH - CHECKDIGIT_LENGTH;
-
         private readonly string _bban;
         private readonly string _checkDigit;
         private readonly string _countryCode;
@@ -35,10 +28,10 @@ namespace Narvalo.Finance
             Demand.NotNull(checkDigit);
             Demand.NotNull(bban);
             Demand.NotNull(innerValue);
-            Demand.True(ValidateCountryCode(countryCode));
-            Demand.True(ValidateCheckDigit(checkDigit));
-            Demand.True(ValidateBban(bban));
-            Demand.True(ValidateInnerValue(innerValue));
+            Demand.True(CheckCountryCode(countryCode));
+            Demand.True(CheckCheckDigit(checkDigit));
+            Demand.True(CheckBban(bban));
+            Demand.True(CheckInnerValue(innerValue));
 
             _countryCode = countryCode;
             _checkDigit = checkDigit;
@@ -51,13 +44,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string Bban
         {
-            get
-            {
-                Warrant.NotNull<string>();
-                Ensures(Result<string>().Length >= BBAN_MIN_LENGTH || Result<string>().Length <= BBAN_MAX_LENGTH);
-
-                return _bban;
-            }
+            get { Guards.Warrant.LengthRange(BbanMinLength, BbanMaxLength); return _bban; }
         }
 
         /// <summary>
@@ -65,12 +52,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string CheckDigit
         {
-            get
-            {
-                Guards.Warrant.Length(CHECKDIGIT_LENGTH);
-
-                return _checkDigit;
-            }
+            get { Guards.Warrant.Length(CheckDigitLength); return _checkDigit; }
         }
 
         /// <summary>
@@ -78,12 +60,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string CountryCode
         {
-            get
-            {
-                Guards.Warrant.Length(COUNTRY_LENGTH);
-
-                return _countryCode;
-            }
+            get { Guards.Warrant.Length(CountryLength); return _countryCode; }
         }
 
         public static Iban Create(string countryCode, string checkDigit, string bban)
@@ -91,13 +68,13 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(checkDigit, nameof(checkDigit));
             Require.NotNull(bban, nameof(bban));
-            Require.True(ValidateCountryCode(countryCode), nameof(countryCode));
-            Require.True(ValidateCheckDigit(checkDigit), nameof(checkDigit));
-            Require.True(ValidateBban(bban), nameof(bban));
+            Require.True(CheckCountryCode(countryCode), nameof(countryCode));
+            Require.True(CheckCheckDigit(checkDigit), nameof(checkDigit));
+            Require.True(CheckBban(bban), nameof(bban));
 
             var innerValue = countryCode + checkDigit + bban;
-            Assume(ValidateInnerValue(innerValue));
-            Check.True(ValidateInnerValue(innerValue));
+            Contract.Assume(CheckInnerValue(innerValue));
+            Check.True(CheckInnerValue(innerValue));
 
             return new Iban(countryCode, checkDigit, bban, innerValue);
         }
@@ -107,7 +84,7 @@ namespace Narvalo.Finance
             Require.NotNull(value, nameof(value));
 
             Iban? iban = ParseCore(value, true /* throwOnError */);
-            Assume(iban.HasValue);
+            Contract.Assume(iban.HasValue);
             Check.True(iban.HasValue);
 
             return iban.Value;
@@ -134,7 +111,7 @@ namespace Narvalo.Finance
         {
             Demand.NotNull(value);
 
-            if (value.Length < MIN_LENGTH || value.Length > MAX_LENGTH)
+            if (value.Length < MinLength || value.Length > MaxLength)
             {
                 if (throwOnError)
                 {
@@ -144,8 +121,8 @@ namespace Narvalo.Finance
 
                 return null;
             }
-            Assume(ValidateInnerValue(value));
-            Check.True(ValidateInnerValue(value));
+            Contract.Assume(CheckInnerValue(value));
+            Check.True(CheckInnerValue(value));
 
             //if (!IsDigitOrUpperLetter(value))
             //{
@@ -159,53 +136,17 @@ namespace Narvalo.Finance
             //}
 
             // The first two letters define the ISO 3166-1 alpha-2 country code.
-            string countryCode = value.Substring(0, COUNTRY_LENGTH);
-            Check.True(ValidateCountryCode(countryCode));
+            string countryCode = value.Substring(0, CountryLength);
+            Check.True(CheckCountryCode(countryCode));
 
-            string checkDigit = value.Substring(COUNTRY_LENGTH, CHECKDIGIT_LENGTH);
-            Check.True(ValidateCheckDigit(checkDigit));
+            string checkDigit = value.Substring(CountryLength, CheckDigitLength);
+            Check.True(CheckCheckDigit(checkDigit));
 
-            string bban = value.Substring(COUNTRY_LENGTH + CHECKDIGIT_LENGTH);
-            Assume(ValidateBban(bban));
-            Check.True(ValidateBban(bban));
+            string bban = value.Substring(CountryLength + CheckDigitLength);
+            Contract.Assume(CheckBban(bban));
+            Check.True(CheckBban(bban));
 
             return new Iban(countryCode, checkDigit, bban, value);
-        }
-    }
-
-    // Validation helpers.
-    public partial struct Iban
-    {
-        [Pure]
-        public static bool ValidateBban(string value)
-        {
-            if (value == null) { return false; }
-
-            return value.Length >= BBAN_MIN_LENGTH && value.Length <= BBAN_MAX_LENGTH;
-        }
-
-        [Pure]
-        public static bool ValidateCheckDigit(string value)
-        {
-            if (value == null) { return false; }
-
-            return value.Length == CHECKDIGIT_LENGTH;
-        }
-
-        [Pure]
-        public static bool ValidateCountryCode(string value)
-        {
-            if (value == null) { return false; }
-
-            return value.Length == COUNTRY_LENGTH;
-        }
-
-        [Pure]
-        public static bool ValidateInnerValue(string value)
-        {
-            if (value == null) { return false; }
-
-            return value.Length >= MIN_LENGTH && value.Length <= MAX_LENGTH;
         }
     }
 
