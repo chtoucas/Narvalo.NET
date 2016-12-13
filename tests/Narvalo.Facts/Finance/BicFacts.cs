@@ -67,122 +67,108 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region Properties
+        #region Create()
+
+        #endregion
+
+        #region Parsing
 
         [Theory]
-        [InlineData("1234#######", "1234")]
-        [InlineData("1234#######", "1234")]
+        [InlineData("12345678", "12345678")]
+        [InlineData("12345678###", "12345678")]
         [CLSCompliant(false)]
-        public static void InstitutionCode(string value, string expectedValue)
+        public static void BusinessParty_AfterParsing(string value, string expectedValue)
         {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
+            var bic = Bic.Parse(value);
 
-            Assert.Equal(expectedValue, bic1.InstitutionCode);
-            Assert.Equal(expectedValue, bic2.Value.InstitutionCode);
-        }
-
-        [Theory]
-        [InlineData("####56##", "56")]
-        [InlineData("####56#####", "56")]
-        [CLSCompliant(false)]
-        public static void CountryCode(string value, string expectedValue)
-        {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
-
-            Assert.Equal(expectedValue, bic1.CountryCode);
-            Assert.Equal(expectedValue, bic2.Value.CountryCode);
-        }
-
-        [Theory]
-        [InlineData("######78", "78")]
-        [InlineData("######78###", "78")]
-        [CLSCompliant(false)]
-        public static void LocationCode(string value, string expectedValue)
-        {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
-
-            Assert.Equal(expectedValue, bic1.LocationCode);
-            Assert.Equal(expectedValue, bic2.Value.LocationCode);
+            Assert.Equal(expectedValue, bic.BusinessParty);
         }
 
         [Theory]
         [InlineData("########", "")]
         [InlineData("########901", "901")]
         [CLSCompliant(false)]
-        public static void BranchCode(string value, string expectedValue)
+        public static void BranchCode_AfterParsing(string value, string expectedValue)
         {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
+            var bic = Bic.Parse(value);
 
-            Assert.Equal(expectedValue, bic1.BranchCode);
-            Assert.Equal(expectedValue, bic2.Value.BranchCode);
+            Assert.Equal(expectedValue, bic.BranchCode);
         }
 
         [Theory]
-        [InlineData("12345678", "12345678")]
-        [InlineData("12345678###", "12345678")]
+        [InlineData("####56##", "56")]
+        [InlineData("####56#####", "56")]
         [CLSCompliant(false)]
-        public static void BusinessParty(string value, string expectedValue)
+        public static void CountryCode_AfterParsing(string value, string expectedValue)
         {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
+            var bic = Bic.Parse(value);
 
-            Assert.Equal(expectedValue, bic1.BusinessParty);
-            Assert.Equal(expectedValue, bic2.Value.BusinessParty);
+            Assert.Equal(expectedValue, bic.CountryCode);
+        }
+
+        [Theory]
+        [InlineData("1234#######", "1234")]
+        [InlineData("1234#######", "1234")]
+        [CLSCompliant(false)]
+        public static void InstitutionCode_AfterParsing(string value, string expectedValue)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.Equal(expectedValue, bic.InstitutionCode);
+        }
+
+        [Theory]
+        [InlineData("######78", "78")]
+        [InlineData("######78###", "78")]
+        [CLSCompliant(false)]
+        public static void LocationCode_AfterParsing(string value, string expectedValue)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.Equal(expectedValue, bic.LocationCode);
         }
 
         [Theory]
         [InlineData("########")]
         [InlineData("###########")]
         [CLSCompliant(false)]
-        public static void IsConnected(string value)
+        public static void IsConnected_IsTrue_AfterParsing(string value)
         {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
+            var bic = Bic.Parse(value);
 
-            Assert.True(bic1.IsConnected);
-            Assert.True(bic2.Value.IsConnected);
+            Assert.True(bic.IsConnected);
         }
 
         [Theory]
         [InlineData("#######1")]
         [InlineData("#######1###")]
         [CLSCompliant(false)]
-        public static void IsConnected_ReturnsFalse(string value)
+        public static void IsConnected_IsFalse_AfterParsing(string value)
         {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
+            var bic = Bic.Parse(value);
 
-            Assert.False(bic1.IsConnected);
-            Assert.False(bic2.Value.IsConnected);
+            Assert.False(bic.IsConnected);
         }
 
         [Theory]
         [InlineData("########")]
         [InlineData("########XXX")]
         [CLSCompliant(false)]
-        public static void IsPrimaryOffice(string value)
+        public static void IsPrimaryOffice_IsTrue_AfterParsing(string value)
         {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
+            var bic = Bic.Parse(value);
 
-            Assert.True(bic1.IsPrimaryOffice);
-            Assert.True(bic2.Value.IsPrimaryOffice);
+            Assert.True(bic.IsPrimaryOffice);
         }
 
         [Theory]
         [InlineData("###########")]
         [CLSCompliant(false)]
-        public static void IsPrimaryOffice_ReturnsFalse(string value)
+        public static void IsPrimaryOffice_IsFalse_AfterParsing(string value)
         {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
+            var bic = Bic.Parse(value);
 
-            Assert.False(bic1.IsPrimaryOffice);
-            Assert.False(bic2.Value.IsPrimaryOffice);
+            Assert.False(bic.IsPrimaryOffice);
         }
 
         #endregion
@@ -195,11 +181,9 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void ToString(string value, string expectedValue)
         {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
+            var bic = Bic.Parse(value);
 
-            Assert.Equal(expectedValue, bic1.ToString());
-            Assert.Equal(expectedValue, bic2.Value.ToString());
+            Assert.Equal(expectedValue, bic.ToString());
         }
 
         #endregion
@@ -207,31 +191,97 @@ namespace Narvalo.Finance
         #region ValidateFormat()
 
         [Theory]
-        [InlineData("ABCDBEB1")]
         [InlineData("ABCDBEBB")]
-        [InlineData("CHASUS33")]
-        [InlineData("AIRFFRP1")]
-        [InlineData("DEUTDEFF")]
-        [InlineData("CCHBNL2A")]
-        [InlineData("OKOYFIHH")]
-        [InlineData("AABAFI22")]
-        [InlineData("PSPBFIHH")]
-        [InlineData("HANDFIHH")]
-        [InlineData("DABAIE2D")]
-        [InlineData("UNCRITMM")]
-        [InlineData("BNORPHMM")]
-        [InlineData("DEUTDEFF500")]
-        [InlineData("DSBACNBXSHA")]
-        [InlineData("NEDSZAJJXXX")]
-        [InlineData("BSAMLKLXXXX")]
+        [InlineData("ABCDBEB1")]
+        [InlineData("ABCDBE11")]
+        [InlineData("ABCDBE1B")]
+        [InlineData("ABC1BEBB")]
+        [InlineData("AB11BEBB")]
+        [InlineData("A111BE1B")]
+        [InlineData("1111BEBB")]
+        [InlineData("ABCDBEBBXXX")]
+        [InlineData("ABCDBEBBXX1")]
+        [InlineData("ABCDBEBBX11")]
+        [InlineData("ABCDBEBB111")]
+        [InlineData("ABC1BEBBXXX")]
+        [InlineData("AB11BEBBXXX")]
+        [InlineData("A111BEBBXXX")]
+        [InlineData("1111BEBBXXX")]
         [CLSCompliant(false)]
-        public static void ValidateFormat(string value)
+        public static void ValidateFormat_ReturnsTrue_AfterParsing(string value)
         {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.TryParse(value);
+            var bic = Bic.Parse(value);
 
-            Assert.True(bic1.ValidateFormat());
-            Assert.True(bic2.Value.ValidateFormat());
+            Assert.True(bic.ValidateFormat());
+        }
+
+        [Theory]
+        [InlineData("aBCDBEBB")]
+        [InlineData("AbCDBEBB")]
+        [InlineData("ABcDBEBB")]
+        [InlineData("ABCdBEBB")]
+        [InlineData("ABCDbEBB")]
+        [InlineData("ABCDBeBB")]
+        [InlineData("ABCDBEbB")]
+        [InlineData("ABCDBEBb")]
+        [InlineData("ABCD1EBB")]
+        [InlineData("ABCDB1BB")]
+        [InlineData("ABCDBEBBxXX")]
+        [InlineData("ABCDBEBBXxX")]
+        [InlineData("ABCDBEBBXXx")]
+        [CLSCompliant(false)]
+        public static void ValidateFormat_ReturnsFalse_AfterParsing(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.False(bic.ValidateFormat());
+        }
+
+        #endregion
+
+        #region ValidateSwiftFormat()
+
+        [Theory]
+        [InlineData("ABCDBEBB")]
+        [InlineData("ABCDBEB1")]
+        [InlineData("ABCDBE11")]
+        [InlineData("ABCDBE1B")]
+        [InlineData("ABCDBEBBXXX")]
+        [InlineData("ABCDBEBBXX1")]
+        [InlineData("ABCDBEBBX11")]
+        [InlineData("ABCDBEBB111")]
+        [CLSCompliant(false)]
+        public static void ValidateSwiftFormat_ReturnsTrue_AfterParsing(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.True(bic.ValidateSwiftFormat());
+        }
+
+        [Theory]
+        [InlineData("1BCDBEBB")]
+        [InlineData("A1CDBEBB")]
+        [InlineData("AB1DBEBB")]
+        [InlineData("ABC1BEBB")]
+        [InlineData("aBCDBEBB")]
+        [InlineData("AbCDBEBB")]
+        [InlineData("ABcDBEBB")]
+        [InlineData("ABCdBEBB")]
+        [InlineData("ABCDbEBB")]
+        [InlineData("ABCDBeBB")]
+        [InlineData("ABCDBEbB")]
+        [InlineData("ABCDBEBb")]
+        [InlineData("ABCD1EBB")]
+        [InlineData("ABCDB1BB")]
+        [InlineData("ABCDBEBBxXX")]
+        [InlineData("ABCDBEBBXxX")]
+        [InlineData("ABCDBEBBXXx")]
+        [CLSCompliant(false)]
+        public static void ValidateSwiftFormat_ReturnsFalse_AfterParsing(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.False(bic.ValidateSwiftFormat());
         }
 
         #endregion
