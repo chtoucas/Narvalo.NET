@@ -7,19 +7,13 @@ Issues
 - Strange thing, CC reports that there are two remaining code fixes but does
   not give any details about them.
 
-### Contract visibility of `Bic`, `Iban`, `PredicateFor` and `ContractFor`.
-All members mentioned in a contract must be at least as visible as the method in which they
-appear. Failing to do so will produce a CC1038 error. One workaround could be to change the
-visibility depending on the CONTRACTS_FULL compiler flag. This works fine if the CC is
-used in source form in the target assembly, but it doe not work if this very CC
-is imported from another assembly.
-
 Narvalo.Fx
 ------------
 
 - **Bug:** Monad.tt
   * `SumCore()` and `CollectCore()` assert that they never return `null`, is this correct?
   * `Then()` in `JoinCore()` and `GroupJoinCore()` can return `null`.
+- `Maybe<T>`, add a reference constraint?
 - Enhance EmitFacts.tt.
 
 Narvalo.Core
@@ -84,10 +78,11 @@ Code Infrastructure
 -------------------
 
 ### Code Style
-- CodeFormatter.
+- CodeFormatter (crashes with the last exe).
 - Change `retval` for a more meaningful name.
 
 ### Documentation
+- Create a better CSS for docfx.
 - Provide better assembly descriptions.
 - Document behaviour regarding infinite sequences.
 - Reference the MSDN package without version attached.

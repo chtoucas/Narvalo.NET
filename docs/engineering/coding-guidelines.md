@@ -87,8 +87,14 @@ Remember that you can mark a type/member with the attribute `[ContractVerificati
 If this is expected to be permanent, justify it.
 
 ### Object Invariants
-
 Wrap any object invariants method and contract class with a compiler conditional clause.
+
+### Contract visibility.
+All members mentioned in a contract must be at least as visible as the method in which they
+appear. Failing to do so will produce a CC1038 error. One workaround could be to change the
+visibility depending on the CONTRACTS_FULL compiler flag. This works fine if the CC is
+used in source form in the target assembly, but it doe not work if this very CC
+is imported in compiled form.
 
 Compilation Symbols and Conditional Attributes
 ----------------------------------------------

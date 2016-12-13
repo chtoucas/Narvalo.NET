@@ -115,6 +115,12 @@ New classes and new methods:
 - `Range<T>.IsDegenerate`
 - `AsciiHelpers`
 
+### Narvalo.Finance
+New classes and new methods:
+- `BicFormat`
+- `IbanFormat`
+- `AsciiHelpers`
+
 ### Narvalo.Common
 New classes and new methods:
 - `DictionaryExtensions` previously available in Narvalo.Core.
