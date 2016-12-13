@@ -4,7 +4,8 @@
       "src": [
         {
           "files": [
-            "Narvalo.Cerbere/Narvalo.Cerbere.csproj"
+            "Narvalo.Cerbere/Narvalo.Cerbere.csproj",
+            "Narvalo.Fx/Narvalo.Fx.csproj"
           ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": "../src"
@@ -30,7 +31,7 @@
       }
     ],
     "resource": [],
-    "overwrite": [],
+    "overwrite": "apidocs/*.md",
     "dest": "www",
     "globalMetadata": {
       "_appTitle": "Narvalo.NET website",
@@ -39,7 +40,7 @@
     },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
-    "template": ["default"],
+    "template": ["default", "template"],
     "postProcessors": [],
     "xref": ["../packages/msdn.4.5.2.0.1.0-alpha-1611021200/content/msdn.4.5.2.zip"],
     "noLangKeyword": false
