@@ -8,7 +8,7 @@ namespace Narvalo.Finance.Internal
     using static System.Diagnostics.Contracts.Contract;
     using static Narvalo.Finance.Utilities.AsciiHelpers;
 
-    internal static class Guards
+    internal static class Sentinel
     {
         public static class Demand
         {

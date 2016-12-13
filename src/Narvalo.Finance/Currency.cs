@@ -37,7 +37,7 @@ namespace Narvalo.Finance
         /// <param name="code">A string that contains the three-letter identifier defined in ISO 4217.</param>
         internal Currency(string code)
         {
-            Guards.Demand.CurrencyCode(code);
+            Sentinel.Demand.CurrencyCode(code);
 
             _code = code;
         }
@@ -67,7 +67,7 @@ namespace Narvalo.Finance
         public static Currency Of(string code)
         {
             Require.NotNull(code, nameof(code));
-            Guards.Expect.CurrencyCode(code);
+            Sentinel.Expect.CurrencyCode(code);
             Warrant.NotNull<Currency>();
 
             var currency = s_Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency);

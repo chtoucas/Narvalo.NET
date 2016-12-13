@@ -97,7 +97,7 @@
     <Compile Include="Internal\CurrencyActivator`1.cs" />
     <Compile Include="Utilities\AsciiHelpers.cs" />
     <Compile Include="Internal\MoneyFormatter.cs" />
-    <Compile Include="Internal\Guards.cs" />
+    <Compile Include="Internal\Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

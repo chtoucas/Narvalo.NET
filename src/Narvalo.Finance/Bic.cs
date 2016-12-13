@@ -53,7 +53,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string BranchCode
         {
-            get { Guards.Warrant.Lengths(0, BranchLength); return _branchCode; }
+            get { Sentinel.Warrant.Lengths(0, BranchLength); return _branchCode; }
         }
 
         public string BusinessParty
@@ -66,7 +66,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string CountryCode
         {
-            get { Guards.Warrant.Length(CountryLength); return _countryCode; }
+            get { Sentinel.Warrant.Length(CountryLength); return _countryCode; }
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Narvalo.Finance
         /// <remarks>As of ISO 9362:2014, this is also the Business party prefix.</remarks>
         public string InstitutionCode
         {
-            get { Guards.Warrant.Length(PrefixLength); return _institutionCode; }
+            get { Sentinel.Warrant.Length(PrefixLength); return _institutionCode; }
         }
 
         public bool IsConnected => LocationCode[1] != CONNECTED_IDENTIFIER;
@@ -88,7 +88,7 @@ namespace Narvalo.Finance
         /// <remarks>As of ISO 9362:2014, this is also the Business party suffix.</remarks>
         public string LocationCode
         {
-            get { Guards.Warrant.Length(SuffixLength); return _locationCode; }
+            get { Sentinel.Warrant.Length(SuffixLength); return _locationCode; }
         }
 
         public static Bic Create(string institutionCode, string countryCode, string locationCode, string branchCode)

@@ -40,7 +40,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string Bban
         {
-            get { Guards.Warrant.LengthRange(BbanMinLength, BbanMaxLength); return _bban; }
+            get { Sentinel.Warrant.LengthRange(BbanMinLength, BbanMaxLength); return _bban; }
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string CheckDigit
         {
-            get { Guards.Warrant.Length(CheckDigitLength); return _checkDigit; }
+            get { Sentinel.Warrant.Length(CheckDigitLength); return _checkDigit; }
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string CountryCode
         {
-            get { Guards.Warrant.Length(CountryLength); return _countryCode; }
+            get { Sentinel.Warrant.Length(CountryLength); return _countryCode; }
         }
 
         public static Iban Create(string countryCode, string checkDigit, string bban)
