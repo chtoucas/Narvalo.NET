@@ -39,7 +39,7 @@ public class TestViewComposite : CompositeView<ITestView>, ITestView
 ```
 
 ---
-uid: Narvalo.Mvp.Resolvers.CompositeViewTypeBuilder.DefineGetter(PropertyInfo)
+uid: Narvalo.Mvp.Resolvers.CompositeViewTypeBuilder.DefineGetter(System.Reflection.PropertyInfo)
 ---
 
 Produces something functionally equivalent to this:
@@ -67,11 +67,11 @@ It does this by emitting IL like this:
     IL_0012:  br.s       IL_0014
     IL_0014:  ldloc.0
     IL_0015:  ret
-} // end of method CompositeDemoViewComposite::get_Model
+}
 ```
 
 ---
-uid: Narvalo.Mvp.Resolvers.CompositeViewTypeBuilder.DefineSetter(PropertyInfo)
+uid: Narvalo.Mvp.Resolvers.CompositeViewTypeBuilder.DefineSetter(System.Reflection.PropertyInfo)
 ---
 
 Produces something functionally equivalent to this:
@@ -134,5 +134,5 @@ It does this by emitting IL like this:
     }  // end handler
     IL_003b:  nop
     IL_003c:  ret
-} // end of method CompositeDemoViewComposite::set_Model
+}
 ```

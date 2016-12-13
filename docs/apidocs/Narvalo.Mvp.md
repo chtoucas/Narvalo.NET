@@ -2,7 +2,7 @@
 uid: Narvalo.Mvp
 ---
 
-The Narvalo.Mvp namespace contains classes and interfaces that support
+The **Narvalo.Mvp** namespace contains classes and interfaces that support
 the Model View Presenter (MVP) framework.
 
 ## WebFormsMvp ##

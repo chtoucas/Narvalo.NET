@@ -2,7 +2,7 @@
 uid: Narvalo.Mvp.Web
 ---
 
-The Narvalo.Mvp.Web namespace contains classes and interfaces that extend
+The **Narvalo.Mvp.Web** namespace contains classes and interfaces that extend
 the Narvalo.Mvp namespace to provide support for ASP.NET WebForms.
 
 ## WebFormsMvp ##

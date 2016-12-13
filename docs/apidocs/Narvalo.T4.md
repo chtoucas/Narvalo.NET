@@ -2,7 +2,7 @@
 uid: Narvalo.T4
 ---
 
-The Narvalo.T4 namespace contains classes dealing with Text Templating.
+The **Narvalo.T4** namespace contains classes dealing with Text Templating.
 
 After a succesful build, the dll is copied to `tools\lib\`.
 

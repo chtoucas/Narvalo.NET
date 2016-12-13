@@ -16,4 +16,4 @@ Par rapport au code d'origine, on a effectué les changements suivants :
   * `GetSimplePropertyEntries()` qui donne accès à la propriété interne `SimplePropertyEntries` ;
   * `GetRootBuilder()`.
 
-WARNING: Cette classe dépend de l'API non publique de `ControlBuilder`.
+**WARNING:** Cette classe dépend de l'API non publique de `ControlBuilder`.

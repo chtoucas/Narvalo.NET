@@ -90,9 +90,6 @@ Code Infrastructure
 ### Documentation
 - Provide better assembly descriptions.
 - Document behaviour regarding infinite sequences.
-- Things that need a rewrite (docfx):
-  * External links via `<see cref="!:" />`.
-  * `<content markup="commonmark">`.
 - Reference the MSDN package without version attached.
 - Coding Guidelines:
  * rules to explain when to use the new `=>` syntax for methods.

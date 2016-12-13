@@ -9,8 +9,6 @@ namespace Narvalo.Web
 
     public static class UrlManip
     {
-        // Also known as protocol-less URL.
-        // <seealso cref="!:http://tools.ietf.org/html/rfc3986#section-4.2"/>
         public static string ToProtocolRelativeString(Uri uri)
         {
             Require.NotNull(uri, nameof(uri));

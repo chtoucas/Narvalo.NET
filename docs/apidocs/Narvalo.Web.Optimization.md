@@ -2,7 +2,7 @@
 uid: Narvalo.Web.Optimization
 ---
 
-The Narvalo.Web.Optimization namespace contains types that enable you to
+The **Narvalo.Web.Optimization** namespace contains types that enable you to
 optimize web content for HTTP delivery.
 
 ## HTML Optimizations ##
