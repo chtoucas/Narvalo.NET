@@ -31,8 +31,8 @@
       }
     ],
     "resource": [],
-    "overwrite": "apidocs/*.md",
-    "dest": "www",
+    "overwrite": "apidocs/**/*.md",
+    "dest": "_www",
     "globalMetadata": {
       "_appTitle": "Narvalo.NET website",
       "_appFooter": "Copyright (c) Narvalo.Org",

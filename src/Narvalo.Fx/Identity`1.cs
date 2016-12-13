@@ -22,9 +22,7 @@ namespace Narvalo.Fx
         internal T Value { get { return _value; } }
     }
 
-    /// <content>
-    /// Implements the <see cref="IEquatable{T}"/> interface.
-    /// </content>
+    // Implements the IEquatable<T> interface.
     public partial struct Identity<T>
     {
         public static bool operator ==(Identity<T> left, Identity<T> right) => left.Equals(right);
@@ -85,9 +83,7 @@ namespace Narvalo.Fx
         }
     }
 
-    /// <content>
-    /// Provides the core Monad methods.
-    /// </content>
+    // Provides the core Monad methods.
     public partial struct Identity<T>
     {
         public Identity<TResult> Bind<TResult>(Func<T, Identity<TResult>> selector)
@@ -104,9 +100,7 @@ namespace Narvalo.Fx
         internal static Identity<T> μ(Identity<Identity<T>> square) => square.Value;
     }
 
-    /// <content>
-    /// Provides the core Comonad methods.
-    /// </content>
+    // Provides the core Comonad methods.
     public partial struct Identity<T>
     {
         public Identity<TResult> Extend<TResult>(Func<Identity<T>, TResult> fun)

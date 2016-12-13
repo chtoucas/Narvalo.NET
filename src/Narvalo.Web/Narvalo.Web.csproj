@@ -111,7 +111,6 @@
     <Compile Include="Internal\LiteralControlTransformer.cs" />
     <Compile Include="Optimization\DefaultWhiteSpaceBusterProvider.cs" />
     <Compile Include="Optimization\IWhiteSpaceBusterProvider.cs" />
-    <Compile Include="Optimization\NamespaceDoc.cs" />
     <Compile Include="Optimization\UnsafeWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\NoopWhiteSpaceBuster.cs" />
     <Compile Include="Optimization\DefaultWhiteSpaceBuster.cs" />

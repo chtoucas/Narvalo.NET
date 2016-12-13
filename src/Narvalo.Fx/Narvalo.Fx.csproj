@@ -80,7 +80,6 @@
     <Compile Include="Advanced\Action%24.cs" />
     <Compile Include="Advanced\Enumerable%24.cs" />
     <Compile Include="Advanced\Func%24.cs" />
-    <Compile Include="Advanced\NamespaceDoc.cs" />
     <Compile Include="Advanced\Nullable%24.cs" />
     <Compile Include="Advanced\Predicate%24.cs" />
     <Compile Include="Either.cs" />
@@ -102,7 +101,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Maybe`1.cs" />
-    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Outcome.cs" />
     <Compile Include="Outcome.g.cs">
       <DependentUpon>Outcome.tt</DependentUpon>

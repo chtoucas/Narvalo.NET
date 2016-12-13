@@ -87,7 +87,6 @@
     <Compile Include="MvpUserControl`1.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>

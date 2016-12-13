@@ -5,7 +5,7 @@
 :: - Generate documentation
 ::   make.cmd build
 :: - Generate documentation then start a local HTTP server
-::   make.cmd serve www
+::   make.cmd serve _www
 ::
 :: WARNING: Only works on my computer (the path to docfx.exe is hardcoded).
 

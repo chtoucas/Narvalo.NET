@@ -92,7 +92,6 @@ Code Infrastructure
 - Document behaviour regarding infinite sequences.
 - Things that need a rewrite (docfx):
   * External links via `<see cref="!:" />`.
-  * NamespaceDocs.
   * `<content markup="commonmark">`.
 - Reference the MSDN package without version attached.
 - Coding Guidelines:

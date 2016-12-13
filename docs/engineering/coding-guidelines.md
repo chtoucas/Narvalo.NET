@@ -157,6 +157,19 @@ Non-standard tags:
 - `<inheritdoc cref=""/>`
 - `<internalonly/>` for internal members or types.
 
+```csharp
+namespace Namespace
+{
+    using System.Runtime.CompilerServices;
+
+    /// <summary>
+    /// The <c>Namespace</c> namespace contains classes and interfaces inspired by functional programming.
+    /// </summary>
+    [CompilerGenerated]
+    internal static class NamespaceDoc { }
+}
+```
+
 Tests
 -----
 
