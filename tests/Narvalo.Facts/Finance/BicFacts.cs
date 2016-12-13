@@ -20,24 +20,55 @@ namespace Narvalo.Finance
             Assert.Equal("ABCD", bic2.InstitutionCode);
         }
 
-        [Fact]
-        public static void TryParse()
-        {
-            Assert.False(Bic.TryParse(null).HasValue);
-            Assert.False(Bic.TryParse("XXXXXXX").HasValue);
-            Assert.False(Bic.TryParse("XXXXXXXXX").HasValue);
-            Assert.False(Bic.TryParse("XXXXXXXXXX").HasValue);
-            Assert.False(Bic.TryParse("XXXXXXXXXXXX").HasValue);
-        }
+        [Theory]
+        [InlineData("12345678")]
+        [InlineData("123456789_1")]
+        [CLSCompliant(false)]
+        public static void TryParse_Succeeds(string value)
+            => Assert.True(Bic.TryParse(value).HasValue);
+
+        [Theory]
+        [InlineData("12345678")]
+        [InlineData("123456789_1")]
+        [CLSCompliant(false)]
+        public static void Parse_Succeeds(string value)
+            => Bic.Parse(value);
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("1")]
+        [InlineData("12")]
+        [InlineData("123")]
+        [InlineData("1234")]
+        [InlineData("12345")]
+        [InlineData("123456")]
+        [InlineData("1234567")]
+        [InlineData("123456789")]
+        [InlineData("123456789_")]
+        [InlineData("123456789_12")]
+        [CLSCompliant(false)]
+        public static void TryParse_ReturnsNull(string value)
+            => Assert.False(Bic.TryParse(value).HasValue);
 
         [Fact]
-        public static void Parse()
-        {
-            Assert.Throws<ArgumentNullException>(() => Bic.Parse(null));
-            Assert.Throws<FormatException>(() => Bic.Parse("XXXXXXX"));
-            Assert.Throws<FormatException>(() => Bic.Parse("XXXXXXXXX"));
-            Assert.Throws<FormatException>(() => Bic.Parse("XXXXXXXXXX"));
-            Assert.Throws<FormatException>(() => Bic.Parse("XXXXXXXXXXXX"));
-        }
+        public static void Parse_ThrowsArgumentNullException()
+            => Assert.Throws<ArgumentNullException>(() => Bic.Parse(null));
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("1")]
+        [InlineData("12")]
+        [InlineData("123")]
+        [InlineData("1234")]
+        [InlineData("12345")]
+        [InlineData("123456")]
+        [InlineData("1234567")]
+        [InlineData("123456789")]
+        [InlineData("123456789_")]
+        [InlineData("123456789_12")]
+        [CLSCompliant(false)]
+        public static void Parse_ThrowsFormatException(string value)
+            => Assert.Throws<FormatException>(() => Bic.Parse(value));
     }
 }
