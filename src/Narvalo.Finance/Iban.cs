@@ -7,7 +7,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Internal;
 
-    using static Narvalo.Finance.IbanFormat;
+    using static Narvalo.Finance.Utilities.IbanFormat;
 
     /// <summary>
     /// Represents an International Bank Account Number (IBAN).
@@ -20,19 +20,19 @@ namespace Narvalo.Finance
         private readonly string _bban;
         private readonly string _checkDigit;
         private readonly string _countryCode;
-        private readonly string _innerValue;
+        private readonly string _value;
 
-        private Iban(string countryCode, string checkDigit, string bban, string innerValue)
+        private Iban(string countryCode, string checkDigit, string bban, string value)
         {
-            Guards.Demand.Format(countryCode, CheckCountryCode(countryCode));
-            Guards.Demand.Format(checkDigit, CheckCheckDigit(checkDigit));
-            Guards.Demand.Format(bban, CheckBban(bban));
-            Guards.Demand.Format(innerValue, CheckInnerValue(innerValue));
+            Demand.True(CheckCountryCode(countryCode));
+            Demand.True(CheckCheckDigit(checkDigit));
+            Demand.True(CheckBban(bban));
+            Demand.True(CheckValue(value));
 
             _countryCode = countryCode;
             _checkDigit = checkDigit;
             _bban = bban;
-            _innerValue = innerValue;
+            _value = value;
         }
 
         /// <summary>
@@ -61,69 +61,51 @@ namespace Narvalo.Finance
 
         public static Iban Create(string countryCode, string checkDigit, string bban)
         {
-            Guards.Require.Format(countryCode, CheckCountryCode(countryCode), nameof(countryCode));
-            Guards.Require.Format(checkDigit, CheckCheckDigit(checkDigit), nameof(checkDigit));
-            Guards.Require.Format(bban, CheckBban(bban), nameof(bban));
+            Require.True(CheckCountryCode(countryCode), nameof(countryCode));
+            Require.True(CheckCheckDigit(checkDigit), nameof(checkDigit));
+            Require.True(CheckBban(bban), nameof(bban));
 
-            var innerValue = countryCode + checkDigit + bban;
-            Contract.Assume(CheckInnerValue(innerValue));
+            var value = countryCode + checkDigit + bban;
+            Contract.Assume(CheckValue(value));
 
-            return new Iban(countryCode, checkDigit, bban, innerValue);
+            return new Iban(countryCode, checkDigit, bban, value);
         }
 
         public static Iban Parse(string value)
         {
             Require.NotNull(value, nameof(value));
 
-            Iban? iban = ParseCore(value, true /* throwOnError */);
-            Contract.Assume(iban.HasValue);
+            if (!CheckValue(value))
+            {
+                throw new FormatException(
+                    "The IBAN string MUST be at most 34 characters long and at least 14 characters long.");
+            }
+            Check.True(CheckValue(value));
 
-            return iban.Value;
+            return ParseCore(value);
         }
 
         public static Iban? TryParse(string value)
         {
-            if (value == null)
+            if (!CheckValue(value))
             {
                 return null;
             }
+            Check.True(CheckValue(value));
 
-            return ParseCore(value, false /* throwOnError */);
+            return ParseCore(value);
         }
 
         public override string ToString()
         {
             Warrant.NotNull<string>();
 
-            return _innerValue;
+            return _value;
         }
 
-        private static Iban? ParseCore(string value, bool throwOnError)
+        private static Iban ParseCore(string value)
         {
-            Demand.NotNull(value);
-
-            if (value.Length < MinLength || value.Length > MaxLength)
-            {
-                if (throwOnError)
-                {
-                    throw new FormatException(
-                        "The IBAN string MUST be at most 34 characters long and at least 14 characters long.");
-                }
-
-                return null;
-            }
-            Contract.Assume(CheckInnerValue(value));
-
-            //if (!IsDigitOrUpperLetter(value))
-            //{
-            //    if (throwOnError)
-            //    {
-            //        throw new FormatException(
-            //            "The IBAN string MUST only contains digits and ASCII uppercase letters.");
-            //    }
-
-            //    return null;
-            //}
+            Demand.True(CheckValue(value));
 
             // The first two letters define the ISO 3166-1 alpha-2 country code.
             string countryCode = value.Substring(0, CountryLength);
@@ -134,7 +116,6 @@ namespace Narvalo.Finance
 
             string bban = value.Substring(CountryLength + CheckDigitLength);
             Contract.Assume(CheckBban(bban));
-            Check.True(CheckBban(bban));
 
             return new Iban(countryCode, checkDigit, bban, value);
         }
@@ -147,7 +128,7 @@ namespace Narvalo.Finance
 
         public static bool operator !=(Iban left, Iban right) => !left.Equals(right);
 
-        public bool Equals(Iban other) => _innerValue == other._innerValue;
+        public bool Equals(Iban other) => _value == other._value;
 
         public override bool Equals(object obj)
         {
@@ -159,7 +140,7 @@ namespace Narvalo.Finance
             return Equals((Iban)obj);
         }
 
-        public override int GetHashCode() => _innerValue.GetHashCode();
+        public override int GetHashCode() => _value.GetHashCode();
     }
 }
 
@@ -169,7 +150,7 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.IbanFormat;
+    using static Narvalo.Finance.Utilities.IbanFormat;
 
     public partial struct Iban
     {
@@ -179,7 +160,7 @@ namespace Narvalo.Finance
             Contract.Invariant(CheckBban(_bban));
             Contract.Invariant(CheckCheckDigit(_checkDigit));
             Contract.Invariant(CheckCountryCode(_countryCode));
-            Contract.Invariant(CheckInnerValue(_innerValue));
+            Contract.Invariant(CheckValue(_value));
         }
     }
 }

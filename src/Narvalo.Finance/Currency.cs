@@ -10,7 +10,7 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Currencies;
     using Narvalo.Finance.Internal;
 
-    using static Narvalo.Finance.AsciiHelpers;
+    using static Narvalo.Finance.Utilities.AsciiHelpers;
 
     /// <summary>
     /// Represents a currency unit such as Euro or US Dollar.

@@ -57,6 +57,9 @@ Breaking Changes
 - New class constraint added to `Require.NotNull<T>()` (idem with `Demand`
   and `Expect`). See below for unconstrained alternatives.
 
+### Narvalo.Common
+- Renamed `PathUtility` to `PathHelpers`.
+
 ### Narvalo.Core
 - All classes in Narvalo.Collections moved to the package Narvalo.Common.
 - `BooleanStyles.EmptyIsFalse` has been replaced by
@@ -64,8 +67,9 @@ Breaking Changes
   white-space only strings are treated as empty strings by `ParseTo.Boolean()`.
 - `Range<T>.Includes(T)` has been replaced by `Range<T>.Contains(T)`
 
-### Narvalo.Common
-- Renamed `PathUtility` to `PathHelpers`.
+### Narvalo.Finance
+- `Bic.CheckFormat()` has been replaced by `Bic.ValidateFormat()`.
+- `Bic.CheckSwiftFormat()` has been replaced by `Bic.ValidateSwiftFormat()`.
 
 ### Narvalo.Web
 - `AssetSection.DefaultProvider` setter now throws an `ArgumentException`
@@ -106,6 +110,13 @@ New classes and new methods:
 - `Check.IsFlagsEnum()`
 - `Warrant` a new helper class for postconditions.
 
+### Narvalo.Common
+New classes and new methods:
+- `DictionaryExtensions` previously available in Narvalo.Core.
+- `EnumeratorExtensions` previously available in Narvalo.Core.
+- `Appender<TSource, T>`
+- `Setter<TSource, T>`
+
 ### Narvalo.Core
 New classes and new methods:
 - `Range.IsValid<T>()`
@@ -116,13 +127,6 @@ New classes and new methods:
 - `BicFormat`
 - `IbanFormat`
 - `AsciiHelpers`
-
-### Narvalo.Common
-New classes and new methods:
-- `DictionaryExtensions` previously available in Narvalo.Core.
-- `EnumeratorExtensions` previously available in Narvalo.Core.
-- `Appender<TSource, T>`
-- `Setter<TSource, T>`
 
 Enhancements
 ------------

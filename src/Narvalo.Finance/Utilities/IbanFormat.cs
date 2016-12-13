@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance
+namespace Narvalo.Finance.Utilities
 {
     using System.Diagnostics.Contracts;
 
@@ -19,7 +19,6 @@ namespace Narvalo.Finance
         public static bool CheckBban(string value)
         {
             if (value == null) { return false; }
-
             return value.Length >= BbanMinLength && value.Length <= BbanMaxLength;
         }
 
@@ -27,7 +26,6 @@ namespace Narvalo.Finance
         public static bool CheckCheckDigit(string value)
         {
             if (value == null) { return false; }
-
             return value.Length == CheckDigitLength;
         }
 
@@ -35,15 +33,13 @@ namespace Narvalo.Finance
         public static bool CheckCountryCode(string value)
         {
             if (value == null) { return false; }
-
             return value.Length == CountryLength;
         }
 
         [Pure]
-        public static bool CheckInnerValue(string value)
+        public static bool CheckValue(string value)
         {
             if (value == null) { return false; }
-
             return value.Length >= MinLength && value.Length <= MaxLength;
         }
     }
