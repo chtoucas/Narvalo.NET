@@ -74,6 +74,67 @@ namespace Narvalo
             public override string ToString() => _value.ToString(CultureInfo.CurrentCulture);
         }
 
+        public struct SimpleStruct : IEquatable<SimpleStruct>
+        {
+            public SimpleStruct(int value) { Value = value; }
+
+            public int Value { get; }
+
+            public static bool operator ==(SimpleStruct left, SimpleStruct right) => left.Equals(right);
+
+            public static bool operator !=(SimpleStruct left, SimpleStruct right) => !left.Equals(right);
+
+            public bool Equals(SimpleStruct other) => Value == other.Value;
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null) { return false; }
+
+                if (!(obj is SimpleStruct)) { return false; }
+
+                return Equals((SimpleStruct)obj);
+            }
+
+            public override int GetHashCode() => Value.GetHashCode();
+        }
+
+        public sealed class ImmutableValue
+        {
+            public ImmutableValue(int value)
+            {
+                Value = value;
+            }
+
+            public int Value { get; }
+        }
+
+        public sealed class EquatableValue : IEquatable<EquatableValue>
+        {
+            public EquatableValue(string value) { Value = value; }
+
+            public string Value { get; }
+
+            public bool Equals(EquatableValue other)
+            {
+                if (ReferenceEquals(other, null)) { return false; }
+
+                return Value == other.Value;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(obj, null)) { return false; }
+
+                if (ReferenceEquals(obj, this)) { return true; }
+
+                if (obj.GetType() != this.GetType()) { return false; }
+
+                return Equals((EquatableValue)obj);
+            }
+
+            public override int GetHashCode() => Value.GetHashCode();
+        }
+
         [Serializable]
         public sealed class SimpleException : Exception
         {

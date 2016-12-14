@@ -191,7 +191,6 @@ namespace Narvalo
         #endregion
     }
 
-    // Helpers.
     public static partial class EnforceFacts
     {
         private static readonly My.ComparableStruct s_ValueBelow = new My.ComparableStruct(0);
@@ -200,7 +199,7 @@ namespace Narvalo
         private static readonly My.ComparableStruct s_MaxValue = new My.ComparableStruct(3);
         private static readonly My.ComparableStruct s_ValueAbove = new My.ComparableStruct(4);
 
-        public static IEnumerable<object> RangeValues
+        public static IEnumerable<object[]> RangeValues
         {
             get
             {
@@ -212,7 +211,7 @@ namespace Narvalo
             }
         }
 
-        public static IEnumerable<object> OutOfRangeValues
+        public static IEnumerable<object[]> OutOfRangeValues
         {
             get
             {
@@ -221,7 +220,7 @@ namespace Narvalo
             }
         }
 
-        public static IEnumerable<object> InRangeValues
+        public static IEnumerable<object[]> InRangeValues
         {
             get
             {

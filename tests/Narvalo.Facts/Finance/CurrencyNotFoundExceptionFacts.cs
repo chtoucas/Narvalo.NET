@@ -2,8 +2,6 @@
 
 namespace Narvalo.Finance
 {
-    using System;
-
     using Xunit;
 
     public static class CurrencyNotFoundExceptionFacts
@@ -31,7 +29,7 @@ namespace Narvalo.Finance
         public static void Ctor_MessageInnerExceptionCtor()
         {
             var message = "My message";
-            var innerException = new NotSupportedException();
+            var innerException = new My.SimpleException();
             var ex = new CurrencyNotFoundException(message, innerException);
 
             Assert.Equal(message, ex.Message);

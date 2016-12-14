@@ -88,7 +88,6 @@ namespace Narvalo
         #endregion
     }
 
-    // Helpers.
     public static partial class Int64EncoderFacts
     {
         public static IEnumerable<object[]> Base58TestData

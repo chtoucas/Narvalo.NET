@@ -9,24 +9,6 @@ namespace Narvalo.Web.Html
 
     public static partial class MarkupFacts
     {
-        public static IEnumerable<object[]> Paths
-        {
-            get
-            {
-                yield return new object[] { "http://tempuri.org/assets/path" };
-                yield return new object[] { "https://tempuri.org/assets/path" };
-                yield return new object[] { "//tempuri.org/assets/path" };
-                yield return new object[] { "/assets/path" };
-                yield return new object[] { "assets/path" };
-                yield return new object[] { "./assets/path" };
-                yield return new object[] { "../assets/path" };
-                yield return new object[] { "~/assets/path" };
-            }
-        }
-    }
-
-    public static partial class MarkupFacts
-    {
         #region Link()
 
         [Fact]
@@ -295,5 +277,23 @@ namespace Narvalo.Web.Html
         }
 
         #endregion
+    }
+
+    public static partial class MarkupFacts
+    {
+        public static IEnumerable<object[]> Paths
+        {
+            get
+            {
+                yield return new object[] { "http://tempuri.org/assets/path" };
+                yield return new object[] { "https://tempuri.org/assets/path" };
+                yield return new object[] { "//tempuri.org/assets/path" };
+                yield return new object[] { "/assets/path" };
+                yield return new object[] { "assets/path" };
+                yield return new object[] { "./assets/path" };
+                yield return new object[] { "../assets/path" };
+                yield return new object[] { "~/assets/path" };
+            }
+        }
     }
 }

@@ -7,30 +7,8 @@ namespace Narvalo.Fx
 
     using Xunit;
 
-    public static class StubsFacts
+    public static partial class StubsFacts
     {
-        public static IEnumerable<object[]> Int32TestData
-        {
-            get
-            {
-                yield return new object[] { Int32.MaxValue };
-                yield return new object[] { 1 };
-                yield return new object[] { 0 };
-                yield return new object[] { -1 };
-                yield return new object[] { Int32.MinValue };
-            }
-        }
-
-        public static IEnumerable<object[]> StringTestData
-        {
-            get
-            {
-                yield return new object[] { null };
-                yield return new object[] { String.Empty };
-                yield return new object[] { "value" };
-            }
-        }
-
         #region Noop
 
         [Fact]
@@ -192,4 +170,29 @@ namespace Narvalo.Fx
 
         #endregion
     }
-}
+
+    public static partial class StubsFacts
+    {
+        public static IEnumerable<object[]> Int32TestData
+        {
+            get
+            {
+                yield return new object[] { Int32.MaxValue };
+                yield return new object[] { 1 };
+                yield return new object[] { 0 };
+                yield return new object[] { -1 };
+                yield return new object[] { Int32.MinValue };
+            }
+        }
+
+        public static IEnumerable<object[]> StringTestData
+        {
+            get
+            {
+                yield return new object[] { null };
+                yield return new object[] { String.Empty };
+                yield return new object[] { "value" };
+            }
+        }
+    }
+    }

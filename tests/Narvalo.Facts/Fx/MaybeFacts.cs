@@ -9,91 +9,6 @@ namespace Narvalo.Fx
 
     public static partial class MaybeFacts
     {
-        private struct MyStruct_ : IEquatable<MyStruct_>
-        {
-            private int _value;
-
-            public MyStruct_(int value) { _value = value; }
-
-            public static bool operator ==(MyStruct_ left, MyStruct_ right)
-            {
-                return left.Equals(right);
-            }
-
-            public static bool operator !=(MyStruct_ left, MyStruct_ right)
-            {
-                return !left.Equals(right);
-            }
-
-            public bool Equals(MyStruct_ other)
-            {
-                return _value == other._value;
-            }
-
-            public override bool Equals(object obj)
-            {
-                if (obj == null)
-                {
-                    return false;
-                }
-
-                if (!(obj is MyStruct_))
-                {
-                    return false;
-                }
-
-                return Equals((MyStruct_)obj);
-            }
-
-            public override int GetHashCode()
-            {
-                return _value.GetHashCode();
-            }
-        }
-
-        private sealed class MyAlmostValue_ : IEquatable<MyAlmostValue_>
-        {
-            public string Value { get; set; }
-
-            public bool Equals(MyAlmostValue_ other)
-            {
-                if (ReferenceEquals(other, null))
-                {
-                    return false;
-                }
-
-                return Value == other.Value;
-            }
-
-            public override bool Equals(object obj)
-            {
-                if (ReferenceEquals(obj, null))
-                {
-                    return false;
-                }
-
-                if (ReferenceEquals(obj, this))
-                {
-                    return true;
-                }
-
-                if (obj.GetType() != this.GetType())
-                {
-                    return false;
-                }
-
-                return Equals((MyAlmostValue_)obj);
-            }
-
-            public override int GetHashCode()
-            {
-                return Value.GetHashCode();
-            }
-        }
-    }
-
-    public static partial class MaybeFacts
-    {
         #region None
 
         [Fact]
@@ -112,7 +27,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = Maybe<int>.None;
-            var value = Maybe<MyStruct_>.None;
+            var value = Maybe<My.SimpleStruct>.None;
             var reference = Maybe<List<int>>.None;
 
             // Act & Assert
@@ -126,7 +41,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = Maybe.Of(3141);
-            var value = Maybe.Of(new MyStruct_(3141));
+            var value = Maybe.Of(new My.SimpleStruct(3141));
             var reference = Maybe.Of(new List<int>());
 
             // Act & Assert
@@ -173,7 +88,7 @@ namespace Narvalo.Fx
         ////    // Arrange
         ////    // REVIEW: Cast
         ////    var simple = (Maybe<int>)null;
-        ////    var value = (Maybe<MyStruct_>)null;
+        ////    var value = (Maybe<My.SimpleStruct>)null;
         ////    var reference = (Maybe<List<int>>)null;
 
         ////    // Act & Assert
@@ -187,7 +102,7 @@ namespace Narvalo.Fx
         ////{
         ////    // Arrange
         ////    var simple = Maybe<int>.None;
-        ////    var value = Maybe<MyStruct_>.None;
+        ////    var value = Maybe<My.SimpleStruct>.None;
         ////    var reference = Maybe<List<int>>.None;
 
         ////    // Act & Assert
@@ -203,11 +118,11 @@ namespace Narvalo.Fx
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new MyStruct_(3141));
-            var valueA1 = Maybe.Of(new MyStruct_(3141));
+            var valueA0 = Maybe.Of(new My.SimpleStruct(3141));
+            var valueA1 = Maybe.Of(new My.SimpleStruct(3141));
 
-            var almostValueA0 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new My.EquatableValue("Une chaîne de caractère"));
+            var almostValueA1 = Maybe.Of(new My.EquatableValue("Une chaîne de caractère"));
 
             //// FIXME
             ////var referenceA0 = Maybe.Of(new List<int>());
@@ -230,7 +145,7 @@ namespace Narvalo.Fx
         ////    // Arrange
         ////    // REVIEW: Cast
         ////    var simple = (Maybe<int>)null;
-        ////    var value = (Maybe<MyStruct_>)null;
+        ////    var value = (Maybe<My.SimpleStruct>)null;
         ////    var reference = (Maybe<List<int>>)null;
 
         ////    // Act & Assert
@@ -244,7 +159,7 @@ namespace Narvalo.Fx
         ////{
         ////    // Arrange
         ////    var simple = Maybe<int>.None;
-        ////    var value = Maybe<MyStruct_>.None;
+        ////    var value = Maybe<My.SimpleStruct>.None;
         ////    var reference = Maybe<List<int>>.None;
 
         ////    // Act & Assert
@@ -260,11 +175,11 @@ namespace Narvalo.Fx
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new MyStruct_(3141));
-            var valueA1 = Maybe.Of(new MyStruct_(3141));
+            var valueA0 = Maybe.Of(new My.SimpleStruct(3141));
+            var valueA1 = Maybe.Of(new My.SimpleStruct(3141));
 
-            var almostValueA0 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new My.EquatableValue("Une chaîne de caractère"));
+            var almostValueA1 = Maybe.Of(new My.EquatableValue("Une chaîne de caractère"));
 
             //// FIXME
             ////var referenceA0 = Maybe.Of(new List<int>());
@@ -286,7 +201,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = Maybe.Of(3141);
-            var value = Maybe.Of(new MyStruct_(3141));
+            var value = Maybe.Of(new My.SimpleStruct(3141));
             var reference = Maybe.Of(new List<int>());
 
             // Act & Assert
@@ -303,9 +218,9 @@ namespace Narvalo.Fx
             var simpleA1 = Maybe.Of(3141);
             var simple = Maybe.Of(1570);
 
-            var valueA0 = Maybe.Of(new MyStruct_(3141));
-            var valueA1 = Maybe.Of(new MyStruct_(3141));
-            var value = Maybe.Of(new MyStruct_(1570));
+            var valueA0 = Maybe.Of(new My.SimpleStruct(3141));
+            var valueA1 = Maybe.Of(new My.SimpleStruct(3141));
+            var value = Maybe.Of(new My.SimpleStruct(1570));
 
             var referenceA0 = Maybe.Of(new List<int>());
             var referenceA1 = Maybe.Of(new List<int>());
@@ -328,9 +243,9 @@ namespace Narvalo.Fx
             var simple2 = Maybe.Of(3141);
             var simple3 = Maybe.Of(3141);
 
-            var value1 = Maybe.Of(new MyStruct_(3141));
-            var value2 = Maybe.Of(new MyStruct_(3141));
-            var value3 = Maybe.Of(new MyStruct_(3141));
+            var value1 = Maybe.Of(new My.SimpleStruct(3141));
+            var value2 = Maybe.Of(new My.SimpleStruct(3141));
+            var value3 = Maybe.Of(new My.SimpleStruct(3141));
 
             var reference1 = Maybe.Of(new List<int>());
             var reference2 = Maybe.Of(new List<int>());
@@ -347,7 +262,7 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = Maybe<int>.None;
-            var value = Maybe<MyStruct_>.None;
+            var value = Maybe<My.SimpleStruct>.None;
             var reference = Maybe<List<int>>.None;
 
             // Act & Assert
@@ -374,7 +289,7 @@ namespace Narvalo.Fx
         ////    var simple = 3141;
         ////    var simpleOpt = Maybe.Of(simple);
 
-        ////    var value = new MyStruct_(3141);
+        ////    var value = new My.SimpleStruct(3141);
         ////    var valueOpt = Maybe.Of(value);
 
         ////    var reference = new List<int>();
@@ -393,7 +308,7 @@ namespace Narvalo.Fx
         ////    var simple = 3141;
         ////    var simpleOpt = Maybe.Of(simple);
 
-        ////    var value = new MyStruct_(3141);
+        ////    var value = new My.SimpleStruct(3141);
         ////    var valueOpt = Maybe.Of(value);
 
         ////    var reference = new List<int>();
@@ -412,11 +327,11 @@ namespace Narvalo.Fx
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new MyStruct_(3141));
-            var valueA1 = Maybe.Of(new MyStruct_(3141));
+            var valueA0 = Maybe.Of(new My.SimpleStruct(3141));
+            var valueA1 = Maybe.Of(new My.SimpleStruct(3141));
 
-            var almostValueA0 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new My.EquatableValue("Une chaîne de caractère"));
+            var almostValueA1 = Maybe.Of(new My.EquatableValue("Une chaîne de caractère"));
 
             // Act & Assert
             Assert.True(simpleA0.Equals(simpleA1));
@@ -431,11 +346,11 @@ namespace Narvalo.Fx
             var simpleA0 = Maybe.Of(3141);
             var simpleA1 = Maybe.Of(3141);
 
-            var valueA0 = Maybe.Of(new MyStruct_(3141));
-            var valueA1 = Maybe.Of(new MyStruct_(3141));
+            var valueA0 = Maybe.Of(new My.SimpleStruct(3141));
+            var valueA1 = Maybe.Of(new My.SimpleStruct(3141));
 
-            var almostValueA0 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
-            var almostValueA1 = Maybe.Of(new MyAlmostValue_ { Value = "Une chaîne de caractère" });
+            var almostValueA0 = Maybe.Of(new My.EquatableValue("Une chaîne de caractère"));
+            var almostValueA1 = Maybe.Of(new My.EquatableValue("Une chaîne de caractère"));
 
             // Act & Assert
             Assert.True(simpleA0.Equals((object)simpleA1));
@@ -452,8 +367,8 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = 3141;
-            var value = new MyStruct_(3141);
-            MyStruct_? nullableValue = new MyStruct_(3141);
+            var value = new My.SimpleStruct(3141);
+            My.SimpleStruct? nullableValue = new My.SimpleStruct(3141);
             var reference = new List<int>();
 
             // Act
@@ -473,7 +388,7 @@ namespace Narvalo.Fx
         public static void Of_ReturnsNone_ForNull()
         {
             // Arrange
-            MyStruct_? value = null;
+            My.SimpleStruct? value = null;
             List<int> reference = null;
 
             // Act
@@ -491,7 +406,7 @@ namespace Narvalo.Fx
 
         /// <summary>
         /// <![CDATA[
-        /// Maybe<T>.Bind(selector) returned null when selector returned null. 
+        /// Maybe<T>.Bind(selector) returned null when selector returned null.
         /// The correct behaviour is to return Maybe<T>.None.
         /// ]]>
         /// </summary>
@@ -677,26 +592,11 @@ namespace Narvalo.Fx
 
     public static partial class MaybeFacts
     {
-        private sealed class MyValue_
-        {
-            private readonly int _value;
-
-            public MyValue_(int value)
-            {
-                _value = value;
-            }
-
-            public int Value { get { return _value; } }
-        }
-    }
-
-    public static partial class MaybeFacts
-    {
         [Fact]
         public static void Maybe_IsImmutable()
         {
             // Arrange
-            var value = new MyValue_(1);
+            var value = new My.ImmutableValue(1);
             var option = Maybe.Of(value);
 
             // Act
@@ -727,8 +627,8 @@ namespace Narvalo.Fx
         {
             // Arrange
             var simple = 3141;
-            var value = new MyStruct_(3141);
-            MyStruct_? nullableValue = new MyStruct_(3141);
+            var value = new My.SimpleStruct(3141);
+            My.SimpleStruct? nullableValue = new My.SimpleStruct(3141);
             var reference = new List<int>();
 
             var simpleOpt = Maybe.Of(simple);
