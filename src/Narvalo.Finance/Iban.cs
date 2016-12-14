@@ -18,19 +18,19 @@ namespace Narvalo.Finance
     public partial struct Iban : IEquatable<Iban>
     {
         private readonly string _bban;
-        private readonly string _checkDigit;
+        private readonly string _checkDigits;
         private readonly string _countryCode;
         private readonly string _value;
 
-        private Iban(string countryCode, string checkDigit, string bban, string value)
+        private Iban(string countryCode, string checkDigits, string bban, string value)
         {
             Demand.True(CheckCountryCode(countryCode));
-            Demand.True(CheckCheckDigit(checkDigit));
+            Demand.True(CheckCheckDigits(checkDigits));
             Demand.True(CheckBban(bban));
             Demand.True(CheckValue(value));
 
             _countryCode = countryCode;
-            _checkDigit = checkDigit;
+            _checkDigits = checkDigits;
             _bban = bban;
             _value = value;
         }
@@ -44,11 +44,11 @@ namespace Narvalo.Finance
         }
 
         /// <summary>
-        /// Gets the check digit.
+        /// Gets the check digits.
         /// </summary>
-        public string CheckDigit
+        public string CheckDigits
         {
-            get { Sentinel.Warrant.Length(CheckDigitLength); return _checkDigit; }
+            get { Sentinel.Warrant.Length(CheckDigitsLength); return _checkDigits; }
         }
 
         /// <summary>
@@ -59,16 +59,19 @@ namespace Narvalo.Finance
             get { Sentinel.Warrant.Length(CountryLength); return _countryCode; }
         }
 
-        public static Iban Create(string countryCode, string checkDigit, string bban)
+        public static Iban Create(string countryCode, string checkDigits, string bban)
         {
+            Require.NotNull(countryCode, nameof(countryCode));
+            Require.NotNull(checkDigits, nameof(checkDigits));
+            Require.NotNull(bban, nameof(bban));
             Require.True(CheckCountryCode(countryCode), nameof(countryCode));
-            Require.True(CheckCheckDigit(checkDigit), nameof(checkDigit));
+            Require.True(CheckCheckDigits(checkDigits), nameof(checkDigits));
             Require.True(CheckBban(bban), nameof(bban));
 
-            var value = countryCode + checkDigit + bban;
+            var value = countryCode + checkDigits + bban;
             Contract.Assume(CheckValue(value));
 
-            return new Iban(countryCode, checkDigit, bban, value);
+            return new Iban(countryCode, checkDigits, bban, value);
         }
 
         public static Iban Parse(string value)
@@ -103,6 +106,7 @@ namespace Narvalo.Finance
             return _value;
         }
 
+        // NB: We only perform basic validation on the input string.
         private static Iban ParseCore(string value)
         {
             Demand.True(CheckValue(value));
@@ -111,13 +115,13 @@ namespace Narvalo.Finance
             string countryCode = value.Substring(0, CountryLength);
             Check.True(CheckCountryCode(countryCode));
 
-            string checkDigit = value.Substring(CountryLength, CheckDigitLength);
-            Check.True(CheckCheckDigit(checkDigit));
+            string checkDigits = value.Substring(CountryLength, CheckDigitsLength);
+            Check.True(CheckCheckDigits(checkDigits));
 
-            string bban = value.Substring(CountryLength + CheckDigitLength);
+            string bban = value.Substring(CountryLength + CheckDigitsLength);
             Contract.Assume(CheckBban(bban));
 
-            return new Iban(countryCode, checkDigit, bban, value);
+            return new Iban(countryCode, checkDigits, bban, value);
         }
     }
 
@@ -158,7 +162,7 @@ namespace Narvalo.Finance
         private void ObjectInvariant()
         {
             Contract.Invariant(CheckBban(_bban));
-            Contract.Invariant(CheckCheckDigit(_checkDigit));
+            Contract.Invariant(CheckCheckDigits(_checkDigits));
             Contract.Invariant(CheckCountryCode(_countryCode));
             Contract.Invariant(CheckValue(_value));
         }

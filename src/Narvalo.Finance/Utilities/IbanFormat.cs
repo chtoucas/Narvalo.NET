@@ -10,10 +10,10 @@ namespace Narvalo.Finance.Utilities
         internal const int MaxLength = 34;
 
         internal const int CountryLength = 2;
-        internal const int CheckDigitLength = 2;
+        internal const int CheckDigitsLength = 2;
 
-        internal const int BbanMinLength = MinLength - CountryLength - CheckDigitLength;
-        internal const int BbanMaxLength = MaxLength - CountryLength - CheckDigitLength;
+        internal const int BbanMinLength = MinLength - CountryLength - CheckDigitsLength;
+        internal const int BbanMaxLength = MaxLength - CountryLength - CheckDigitsLength;
 
         [Pure]
         public static bool CheckBban(string value)
@@ -23,10 +23,10 @@ namespace Narvalo.Finance.Utilities
         }
 
         [Pure]
-        public static bool CheckCheckDigit(string value)
+        public static bool CheckCheckDigits(string value)
         {
             if (value == null) { return false; }
-            return value.Length == CheckDigitLength;
+            return value.Length == CheckDigitsLength;
         }
 
         [Pure]
