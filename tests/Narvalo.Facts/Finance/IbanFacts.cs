@@ -192,9 +192,9 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(DistinctValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Equality_ReturnsFalse_ForDifferentValues(string value1, string value2)
+        public static void Equality_ReturnsFalse_ForDistinctValues(string value1, string value2)
         {
             var iban1 = Iban.Parse(value1);
             var iban2 = Iban.Parse(value2);
@@ -218,9 +218,9 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(DistinctValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Inequality_ReturnsTrue_ForDifferentValues(string value1, string value2)
+        public static void Inequality_ReturnsTrue_ForDistinctValues(string value1, string value2)
         {
             var iban1 = Iban.Parse(value1);
             var iban2 = Iban.Parse(value2);
@@ -255,9 +255,9 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(DistinctValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Equals_ReturnsFalse_ForDifferentValues(string value1, string value2)
+        public static void Equals_ReturnsFalse_ForDistinctValues(string value1, string value2)
         {
             var iban1 = Iban.Parse(value1);
             var iban2 = Iban.Parse(value2);
@@ -290,7 +290,7 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(DistinctValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Equals_IsAbelian(string value1, string value2)
         {
@@ -441,7 +441,7 @@ namespace Narvalo.Finance
             }
         }
 
-        public static IEnumerable<object[]> DifferentValues
+        public static IEnumerable<object[]> DistinctValues
         {
             get
             {

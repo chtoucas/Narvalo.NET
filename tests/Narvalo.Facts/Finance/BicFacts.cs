@@ -240,9 +240,9 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(DistinctValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Equality_ReturnsFalse_ForDifferentValues(string value1, string value2)
+        public static void Equality_ReturnsFalse_ForDistinctValues(string value1, string value2)
         {
             var bic1 = Bic.Parse(value1);
             var bic2 = Bic.Parse(value2);
@@ -266,9 +266,9 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(DistinctValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Inequality_ReturnsTrue_ForDifferentValues(string value1, string value2)
+        public static void Inequality_ReturnsTrue_ForDistinctValues(string value1, string value2)
         {
             var bic1 = Bic.Parse(value1);
             var bic2 = Bic.Parse(value2);
@@ -292,6 +292,17 @@ namespace Narvalo.Finance
         }
 
         [Theory]
+        [MemberData(nameof(DistinctValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equals_ReturnsFalse_ForDistinctValues(string value1, string value2)
+        {
+            var bic1 = Bic.Parse(value1);
+            var bic2 = Bic.Parse(value2);
+
+            Assert.False(bic1.Equals(bic2));
+        }
+
+        [Theory]
         [MemberData(nameof(IdenticalValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Equals_ReturnsTrue_ForIdenticalValues_AfterBoxing(string value1, string value2)
@@ -300,17 +311,6 @@ namespace Narvalo.Finance
             object bic2 = Bic.Parse(value2);
 
             Assert.True(bic1.Equals(bic2));
-        }
-
-        [Theory]
-        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void Equals_ReturnsFalse_ForDifferentValues(string value1, string value2)
-        {
-            var bic1 = Bic.Parse(value1);
-            var bic2 = Bic.Parse(value2);
-
-            Assert.False(bic1.Equals(bic2));
         }
 
         [Theory]
@@ -339,7 +339,7 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(DistinctValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Equals_IsAbelian(string value1, string value2)
         {
@@ -349,18 +349,6 @@ namespace Narvalo.Finance
 
             Assert.Equal(bic1a.Equals(bic1b), bic1b.Equals(bic1a));
             Assert.Equal(bic1a.Equals(bic2), bic2.Equals(bic1a));
-        }
-
-        [Theory]
-        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void Equals_IsTransitive(string value)
-        {
-            var bic1 = Bic.Parse(value);
-            var bic2 = Bic.Parse(value);
-            var bic3 = Bic.Parse(value);
-
-            Assert.Equal(bic1.Equals(bic2) && bic2.Equals(bic3), bic1.Equals(bic3));
         }
 
         #endregion
@@ -414,7 +402,7 @@ namespace Narvalo.Finance
             }
         }
 
-        public static IEnumerable<object[]> DifferentValues
+        public static IEnumerable<object[]> DistinctValues
         {
             get
             {
