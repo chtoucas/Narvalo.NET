@@ -46,11 +46,9 @@ namespace Narvalo.T4
         /// <value><see langword="true"/> if debugging is enabled; otherwise <see langword="false"/>.</value>
         public bool Debug { get; set; }
 
-        protected List<Currency> ParseCurrent(string path)
+        protected IEnumerable<Currency> ParseCurrent(string path)
         {
             var source = VSHost.ResolvePath(path);
-
-            var retval = new List<Currency>();
 
             using (var reader = XmlReader.Create(source, s_Settings))
             {
@@ -105,25 +103,21 @@ namespace Narvalo.T4
                         minorUnits = Int16.Parse(minorUnitsValue);
                     }
 
-                    retval.Add(new Currency {
+                    yield return new Currency {
                         Code = code,
                         EnglishName = englishName,
                         EnglishRegionName = englishRegionName,
                         IsFund = isFund,
                         MinorUnits = minorUnits,
                         NumericCode = numericCode,
-                    });
+                    };
                 }
             }
-
-            return retval;
         }
 
-        protected List<Currency> ParseLegacy(string path)
+        protected IEnumerable<Currency> ParseLegacy(string path)
         {
             var source = VSHost.ResolvePath(path);
-
-            var retval = new List<Currency>();
 
             using (var reader = XmlReader.Create(source, s_Settings))
             {
@@ -173,18 +167,16 @@ namespace Narvalo.T4
                         .Replace("\"", "\"\"")
                         .Replace("\n", String.Empty);
 
-                    retval.Add(new Currency {
+                    yield return new Currency {
                         Code = code,
                         EnglishName = englishName,
                         EnglishRegionName = englishRegionName,
                         IsFund = isFund,
                         IsLegacy = true,
                         NumericCode = numericCode,
-                    });
+                    };
                 }
             }
-
-            return retval;
         }
 
         protected class Currency
