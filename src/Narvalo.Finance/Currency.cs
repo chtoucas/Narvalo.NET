@@ -92,6 +92,47 @@ namespace Narvalo.Finance
             return Of(code);
         }
 
+        public static Currency OfCurrentRegion()
+        {
+            Warrant.NotNull<Currency>();
+
+            return OfRegion(RegionInfo.CurrentRegion);
+        }
+
+        /// <summary>
+        /// Obtains an instance of the <see cref="Currency" /> class associated
+        /// with the specified culture.
+        /// </summary>
+        /// <param name="cultureInfo">A culture info.</param>
+        /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="cultureInfo"/> is <see langword="null"/>.</exception>
+        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the specified culture.</exception>
+        /// <returns>The currency for the specified culture info.</returns>
+        public static Currency OfCulture(CultureInfo cultureInfo)
+        {
+            Require.NotNull(cultureInfo, nameof(cultureInfo));
+            Warrant.NotNull<Currency>();
+
+            if (cultureInfo.IsNeutralCulture)
+            {
+                throw new NotSupportedException("The culture cannot be neutral.");
+            }
+
+            return OfRegion(new RegionInfo(cultureInfo.Name));
+        }
+
+        /// <summary>
+        /// Obtains an instance of the <see cref="Currency" /> class for the culture
+        /// used by the current thread.
+        /// </summary>
+        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the current culture.</exception>
+        /// <returns>The currency for the culture used by the current thread.</returns>
+        public static Currency OfCurrentCulture()
+        {
+            Warrant.NotNull<Currency>();
+
+            return OfCulture(CultureInfo.CurrentCulture);
+        }
+
         /// <summary>
         /// Returns a string containing the code of the currency.
         /// </summary>
@@ -268,9 +309,7 @@ namespace Narvalo.Finance
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
-        public override int GetHashCode()
-            // REVIEW: Maybe we could cache the hashcode?
-            => Code.GetHashCode();
+        public override int GetHashCode() => Code.GetHashCode();
     }
 }
 

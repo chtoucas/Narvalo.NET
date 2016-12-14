@@ -125,6 +125,9 @@ New classes and new methods:
 
 ### Narvalo.Finance
 New classes and new methods:
+- `Currency.OfCurrentRegion()`
+- `Currency.OfCulture()`
+- `Currency.OfCurrentCulture()`
 - `BicFormat`
 - `IbanFormat`
 - `AsciiHelpers`
