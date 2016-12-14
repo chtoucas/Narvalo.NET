@@ -123,7 +123,7 @@ Task OpenCoverVerbose `
         '/p:Configuration=Debug',
         '/p:SkipCodeContractsReferenceAssembly=true',
         '/p:SkipDocumentation=true',
-        '/p:Filter=_Core_'
+        '/p:Filter="_Core_;_Mvp_"'
 
     Invoke-OpenCover 'Debug'
     Invoke-ReportGenerator

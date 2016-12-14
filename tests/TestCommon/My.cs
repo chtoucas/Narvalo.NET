@@ -98,6 +98,11 @@ namespace Narvalo
             public override int GetHashCode() => Value.GetHashCode();
         }
 
+        public sealed class SimpleValue
+        {
+            public string Value { get; set; }
+        }
+
         public sealed class ImmutableValue
         {
             public ImmutableValue(int value)

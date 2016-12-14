@@ -61,6 +61,7 @@ namespace Narvalo.Finance
 
         public static Iban Create(string countryCode, string checkDigits, string bban)
         {
+            // REVIEW: We check for non-null twice...
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(checkDigits, nameof(checkDigits));
             Require.NotNull(bban, nameof(bban));

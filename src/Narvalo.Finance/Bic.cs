@@ -93,6 +93,7 @@ namespace Narvalo.Finance
 
         public static Bic Create(string institutionCode, string countryCode, string locationCode, string branchCode)
         {
+            // REVIEW: We check for non-null twice...
             Require.NotNull(institutionCode, nameof(institutionCode));
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(locationCode, nameof(locationCode));

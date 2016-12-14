@@ -27,6 +27,8 @@
       <Word>Cr</Word>
       <!-- Line Feed -->
       <Word>Lf</Word>
+      <!-- ISO -->
+      <Word>Iso</Word>
       <!-- Model View Controller -->
       <Word>Mvc</Word>
       <!-- Model View Presenter -->

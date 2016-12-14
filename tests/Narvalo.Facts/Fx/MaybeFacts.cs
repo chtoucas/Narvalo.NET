@@ -340,7 +340,7 @@ namespace Narvalo.Fx
         }
 
         [Fact]
-        public static void Equals_FollowsStructuralEqualityRulesAfterCastToObject()
+        public static void Equals_FollowsStructuralEqualityRules_AfterBoxing()
         {
             // Arrange
             var simpleA0 = Maybe.Of(3141);

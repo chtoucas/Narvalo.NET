@@ -48,12 +48,7 @@ namespace Narvalo.Finance
         /// <value>The alphabetic code of the currency.</value>
         public string Code
         {
-            get
-            {
-                Warrant.NotNull<string>();
-
-                return _code;
-            }
+            get { Warrant.NotNull<string>(); return _code; }
         }
 
         /// <summary>
