@@ -42,12 +42,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Andorran Peseta".</value>
         public static ADP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -76,12 +71,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "UAE Dirham".</value>
         public static AED Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -110,12 +100,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Afghani".</value>
         public static AFA Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -144,12 +129,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Afghani".</value>
         public static AFN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -178,12 +158,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Lek".</value>
         public static ALK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -212,12 +187,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lek".</value>
         public static ALL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -246,12 +216,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Armenian Dram".</value>
         public static AMD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -280,12 +245,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Netherlands Antillean Guilder".</value>
         public static ANG Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -314,12 +274,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza".</value>
         public static AOA Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -348,12 +303,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza".</value>
         public static AOK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -382,12 +332,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Kwanza".</value>
         public static AON Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -416,12 +361,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza Reajustado".</value>
         public static AOR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -450,12 +390,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Austral".</value>
         public static ARA Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -484,12 +419,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Argentino".</value>
         public static ARP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -518,12 +448,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Argentine Peso".</value>
         public static ARS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -552,12 +477,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso".</value>
         public static ARY Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -586,12 +506,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Schilling".</value>
         public static ATS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -620,12 +535,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Australian Dollar".</value>
         public static AUD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -654,12 +564,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Aruban Florin".</value>
         public static AWG Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -688,12 +593,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijan Manat".</value>
         public static AYM Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -722,12 +622,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".</value>
         public static AZM Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -756,12 +651,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".</value>
         public static AZN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -790,12 +680,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dinar".</value>
         public static BAD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -824,12 +709,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Convertible Mark".</value>
         public static BAM Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -858,12 +738,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Barbados Dollar".</value>
         public static BBD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -892,12 +767,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Taka".</value>
         public static BDT Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -926,12 +796,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Convertible Franc".</value>
         public static BEC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -960,12 +825,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belgian Franc".</value>
         public static BEF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -994,12 +854,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Financial Franc".</value>
         public static BEL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1028,12 +883,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev A/52".</value>
         public static BGJ Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1062,12 +912,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev A/62".</value>
         public static BGK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1096,12 +941,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev".</value>
         public static BGL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1130,12 +970,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bulgarian Lev".</value>
         public static BGN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1164,12 +999,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bahraini Dinar".</value>
         public static BHD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1198,12 +1028,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Burundi Franc".</value>
         public static BIF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1232,12 +1057,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bermudian Dollar".</value>
         public static BMD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1266,12 +1086,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Brunei Dollar".</value>
         public static BND Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1300,12 +1115,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Boliviano".</value>
         public static BOB Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1334,12 +1144,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso boliviano".</value>
         public static BOP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1368,12 +1173,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mvdol".</value>
         public static BOV Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1402,12 +1202,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro".</value>
         public static BRB Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1436,12 +1231,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzado".</value>
         public static BRC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1470,12 +1260,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro".</value>
         public static BRE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1504,12 +1289,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Brazilian Real".</value>
         public static BRL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1538,12 +1318,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Cruzado".</value>
         public static BRN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1572,12 +1347,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro Real".</value>
         public static BRR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1606,12 +1376,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bahamian Dollar".</value>
         public static BSD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1640,12 +1405,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ngultrum".</value>
         public static BTN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1674,12 +1434,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "N.A.".</value>
         public static BUK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1708,12 +1463,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pula".</value>
         public static BWP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1742,12 +1492,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".</value>
         public static BYB Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1776,12 +1521,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".</value>
         public static BYN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1810,12 +1550,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".</value>
         public static BYR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1844,12 +1579,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Belize Dollar".</value>
         public static BZD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1878,12 +1608,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Canadian Dollar".</value>
         public static CAD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1912,12 +1637,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Congolese Franc".</value>
         public static CDF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1946,12 +1666,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Franc (for electronic)".</value>
         public static CHC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -1980,12 +1695,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Euro".</value>
         public static CHE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2014,12 +1724,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Swiss Franc".</value>
         public static CHF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2048,12 +1753,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Franc".</value>
         public static CHW Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2082,12 +1782,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Fomento".</value>
         public static CLF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2116,12 +1811,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Chilean Peso".</value>
         public static CLP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2150,12 +1840,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peoples Bank Dollar".</value>
         public static CNX Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2184,12 +1869,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yuan Renminbi".</value>
         public static CNY Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2218,12 +1898,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Colombian Peso".</value>
         public static COP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2252,12 +1927,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Real".</value>
         public static COU Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2286,12 +1956,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Costa Rican Colon".</value>
         public static CRC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2320,12 +1985,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".</value>
         public static CSD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2354,12 +2014,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Krona A/53".</value>
         public static CSJ Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2388,12 +2043,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Koruna".</value>
         public static CSK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2422,12 +2072,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Convertible".</value>
         public static CUC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2456,12 +2101,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cuban Peso".</value>
         public static CUP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2490,12 +2130,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cabo Verde Escudo".</value>
         public static CVE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2524,12 +2159,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cyprus Pound".</value>
         public static CYP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2558,12 +2188,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Czech Koruna".</value>
         public static CZK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2592,12 +2217,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mark der DDR".</value>
         public static DDM Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2626,12 +2246,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Deutsche Mark".</value>
         public static DEM Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2660,12 +2275,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Djibouti Franc".</value>
         public static DJF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2694,12 +2304,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Danish Krone".</value>
         public static DKK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2728,12 +2333,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dominican Peso".</value>
         public static DOP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2762,12 +2362,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Algerian Dinar".</value>
         public static DZD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2796,12 +2391,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sucre".</value>
         public static ECS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2830,12 +2420,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Constante (UVC)".</value>
         public static ECV Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2864,12 +2449,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kroon".</value>
         public static EEK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2898,12 +2478,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Egyptian Pound".</value>
         public static EGP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2932,12 +2507,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ekwele".</value>
         public static EQE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -2966,12 +2536,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Nakfa".</value>
         public static ERN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3000,12 +2565,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".</value>
         public static ESA Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3034,12 +2594,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the """A"" Account (convertible Peseta Account)".</value>
         public static ESB Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3068,12 +2623,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".</value>
         public static ESP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3102,12 +2652,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ethiopian Birr".</value>
         public static ETB Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3136,12 +2681,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Euro".</value>
         public static EUR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3170,12 +2710,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Markka".</value>
         public static FIM Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3204,12 +2739,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Fiji Dollar".</value>
         public static FJD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3238,12 +2768,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Falkland Islands Pound".</value>
         public static FKP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3272,12 +2797,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "French Franc".</value>
         public static FRF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3306,12 +2826,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pound Sterling".</value>
         public static GBP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3340,12 +2855,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Georgian Coupon".</value>
         public static GEK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3374,12 +2884,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lari".</value>
         public static GEL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3408,12 +2913,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cedi".</value>
         public static GHC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3442,12 +2942,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".</value>
         public static GHP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3476,12 +2971,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".</value>
         public static GHS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3510,12 +3000,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gibraltar Pound".</value>
         public static GIP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3544,12 +3029,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dalasi".</value>
         public static GMD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3578,12 +3058,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Syli".</value>
         public static GNE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3612,12 +3087,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea Franc".</value>
         public static GNF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3646,12 +3116,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Syli".</value>
         public static GNS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3680,12 +3145,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ekwele".</value>
         public static GQE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3714,12 +3174,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Drachma".</value>
         public static GRD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3748,12 +3203,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Quetzal".</value>
         public static GTQ Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3782,12 +3232,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea Escudo".</value>
         public static GWE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3816,12 +3261,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea-Bissau Peso".</value>
         public static GWP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3850,12 +3290,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guyana Dollar".</value>
         public static GYD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3884,12 +3319,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Hong Kong Dollar".</value>
         public static HKD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3918,12 +3348,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lempira".</value>
         public static HNL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3952,12 +3377,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Croatian Dinar".</value>
         public static HRD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -3986,12 +3406,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kuna".</value>
         public static HRK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4020,12 +3435,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gourde".</value>
         public static HTG Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4054,12 +3464,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Forint".</value>
         public static HUF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4088,12 +3493,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rupiah".</value>
         public static IDR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4122,12 +3522,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Irish Pound".</value>
         public static IEP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4156,12 +3551,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pound".</value>
         public static ILP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4190,12 +3580,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Shekel".</value>
         public static ILR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4224,12 +3609,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Israeli Sheqel".</value>
         public static ILS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4258,12 +3638,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Indian Rupee".</value>
         public static INR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4292,12 +3667,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Iraqi Dinar".</value>
         public static IQD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4326,12 +3696,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Iranian Rial".</value>
         public static IRR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4360,12 +3725,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Krona".</value>
         public static ISJ Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4394,12 +3754,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Iceland Krona".</value>
         public static ISK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4428,12 +3783,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Italian Lira".</value>
         public static ITL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4462,12 +3812,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Jamaican Dollar".</value>
         public static JMD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4496,12 +3841,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Jordanian Dinar".</value>
         public static JOD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4530,12 +3870,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yen".</value>
         public static JPY Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4564,12 +3899,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kenyan Shilling".</value>
         public static KES Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4598,12 +3928,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Som".</value>
         public static KGS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4632,12 +3957,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Riel".</value>
         public static KHR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4666,12 +3986,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Comoro Franc".</value>
         public static KMF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4700,12 +4015,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "North Korean Won".</value>
         public static KPW Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4734,12 +4044,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Won".</value>
         public static KRW Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4768,12 +4073,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kuwaiti Dinar".</value>
         public static KWD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4802,12 +4102,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cayman Islands Dollar".</value>
         public static KYD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4836,12 +4131,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tenge".</value>
         public static KZT Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4870,12 +4160,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kip Pot Pol".</value>
         public static LAJ Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4904,12 +4189,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kip".</value>
         public static LAK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4938,12 +4218,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lebanese Pound".</value>
         public static LBP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -4972,12 +4247,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sri Lanka Rupee".</value>
         public static LKR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5006,12 +4276,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Liberian Dollar".</value>
         public static LRD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5040,12 +4305,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Loti".</value>
         public static LSL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5074,12 +4334,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Maloti".</value>
         public static LSM Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5108,12 +4363,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lithuanian Litas".</value>
         public static LTL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5142,12 +4392,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Talonas".</value>
         public static LTT Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5176,12 +4421,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Convertible Franc".</value>
         public static LUC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5210,12 +4450,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Franc".</value>
         public static LUF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5244,12 +4479,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Financial Franc".</value>
         public static LUL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5278,12 +4508,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Latvian Lats".</value>
         public static LVL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5312,12 +4537,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Latvian Ruble".</value>
         public static LVR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5346,12 +4566,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Libyan Dinar".</value>
         public static LYD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5380,12 +4595,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Moroccan Dirham".</value>
         public static MAD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5414,12 +4624,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mali Franc".</value>
         public static MAF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5448,12 +4653,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Moldovan Leu".</value>
         public static MDL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5482,12 +4682,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Malagasy Ariary".</value>
         public static MGA Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5516,12 +4711,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Malagasy Franc".</value>
         public static MGF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5550,12 +4740,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Denar".</value>
         public static MKD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5584,12 +4769,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mali Franc".</value>
         public static MLF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5618,12 +4798,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kyat".</value>
         public static MMK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5652,12 +4827,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tugrik".</value>
         public static MNT Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5686,12 +4856,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pataca".</value>
         public static MOP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5720,12 +4885,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Ouguiya".</value>
         public static MRO Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5754,12 +4914,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Maltese Lira".</value>
         public static MTL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5788,12 +4943,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Maltese Pound".</value>
         public static MTP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5822,12 +4972,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mauritius Rupee".</value>
         public static MUR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5856,12 +5001,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Maldive Rupee".</value>
         public static MVQ Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5890,12 +5030,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rufiyaa".</value>
         public static MVR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5924,12 +5059,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Malawi Kwacha".</value>
         public static MWK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5958,12 +5088,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Peso".</value>
         public static MXN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -5992,12 +5117,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Peso".</value>
         public static MXP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6026,12 +5146,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Unidad de Inversion (UDI)".</value>
         public static MXV Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6060,12 +5175,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Malaysian Ringgit".</value>
         public static MYR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6094,12 +5204,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Escudo".</value>
         public static MZE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6128,12 +5233,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".</value>
         public static MZM Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6162,12 +5262,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".</value>
         public static MZN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6196,12 +5291,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Namibia Dollar".</value>
         public static NAD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6230,12 +5320,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Naira".</value>
         public static NGN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6264,12 +5349,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cordoba".</value>
         public static NIC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6298,12 +5378,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Cordoba Oro".</value>
         public static NIO Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6332,12 +5407,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Netherlands Guilder".</value>
         public static NLG Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6366,12 +5436,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Norwegian Krone".</value>
         public static NOK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6400,12 +5465,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Nepalese Rupee".</value>
         public static NPR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6434,12 +5494,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Zealand Dollar".</value>
         public static NZD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6468,12 +5523,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rial Omani".</value>
         public static OMR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6502,12 +5552,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Balboa".</value>
         public static PAB Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6536,12 +5581,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
         public static PEH Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6570,12 +5610,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Inti".</value>
         public static PEI Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6604,12 +5639,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
         public static PEN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6638,12 +5668,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
         public static PES Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6672,12 +5697,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Kina".</value>
         public static PGK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6706,12 +5726,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Philippine Peso".</value>
         public static PHP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6740,12 +5755,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pakistan Rupee".</value>
         public static PKR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6774,12 +5784,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zloty".</value>
         public static PLN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6808,12 +5813,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zloty".</value>
         public static PLZ Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6842,12 +5842,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Portuguese Escudo".</value>
         public static PTE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6876,12 +5871,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Guarani".</value>
         public static PYG Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6910,12 +5900,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Qatari Rial".</value>
         public static QAR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6944,12 +5929,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".</value>
         public static RHD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -6978,12 +5958,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Leu A/52".</value>
         public static ROK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7012,12 +5987,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Leu".</value>
         public static ROL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7046,12 +6016,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Romanian Leu".</value>
         public static RON Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7080,12 +6045,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".</value>
         public static RSD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7114,12 +6074,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Russian Ruble".</value>
         public static RUB Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7148,12 +6103,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Russian Ruble".</value>
         public static RUR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7182,12 +6132,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rwanda Franc".</value>
         public static RWF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7216,12 +6161,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Saudi Riyal".</value>
         public static SAR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7250,12 +6190,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Solomon Islands Dollar".</value>
         public static SBD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7284,12 +6219,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Seychelles Rupee".</value>
         public static SCR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7318,12 +6248,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Dinar".</value>
         public static SDD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7352,12 +6277,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".</value>
         public static SDG Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7386,12 +6306,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".</value>
         public static SDP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7420,12 +6335,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Swedish Krona".</value>
         public static SEK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7454,12 +6364,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Singapore Dollar".</value>
         public static SGD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7488,12 +6393,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Saint Helena Pound".</value>
         public static SHP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7522,12 +6422,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tolar".</value>
         public static SIT Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7556,12 +6451,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Slovak Koruna".</value>
         public static SKK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7590,12 +6480,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Leone".</value>
         public static SLL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7624,12 +6509,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Somali Shilling".</value>
         public static SOS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7658,12 +6538,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Surinam Dollar".</value>
         public static SRD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7692,12 +6567,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Surinam Guilder".</value>
         public static SRG Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7726,12 +6596,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "South Sudanese Pound".</value>
         public static SSP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7760,12 +6625,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dobra".</value>
         public static STD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7794,12 +6654,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rouble".</value>
         public static SUR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7828,12 +6683,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "El Salvador Colon".</value>
         public static SVC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7862,12 +6712,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Syrian Pound".</value>
         public static SYP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7896,12 +6741,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Lilangeni".</value>
         public static SZL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7930,12 +6770,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Baht".</value>
         public static THB Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7964,12 +6799,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tajik Ruble".</value>
         public static TJR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -7998,12 +6828,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Somoni".</value>
         public static TJS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8032,12 +6857,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkmenistan Manat".</value>
         public static TMM Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8066,12 +6886,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkmenistan New Manat".</value>
         public static TMT Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8100,12 +6915,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tunisian Dinar".</value>
         public static TND Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8134,12 +6944,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Pa’anga".</value>
         public static TOP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8168,12 +6973,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Timor Escudo".</value>
         public static TPE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8202,12 +7002,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Turkish Lira".</value>
         public static TRL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8236,12 +7031,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkish Lira".</value>
         public static TRY Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8270,12 +7060,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Trinidad and Tobago Dollar".</value>
         public static TTD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8304,12 +7089,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Taiwan Dollar".</value>
         public static TWD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8338,12 +7118,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tanzanian Shilling".</value>
         public static TZS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8372,12 +7147,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Hryvnia".</value>
         public static UAH Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8406,12 +7176,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Karbovanet".</value>
         public static UAK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8440,12 +7205,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".</value>
         public static UGS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8474,12 +7234,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Shilling".</value>
         public static UGW Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8508,12 +7263,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".</value>
         public static UGX Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8542,12 +7292,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar".</value>
         public static USD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8576,12 +7321,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar (Next day)".</value>
         public static USN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8610,12 +7350,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar (Same day)".</value>
         public static USS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8644,12 +7379,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".</value>
         public static UYI Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8678,12 +7408,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Uruguay Peso".</value>
         public static UYN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8712,12 +7437,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uruguayan Peso".</value>
         public static UYP Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8746,12 +7466,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Uruguayo".</value>
         public static UYU Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8780,12 +7495,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Uzbekistan Sum".</value>
         public static UZS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8814,12 +7524,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bolivar".</value>
         public static VEB Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8848,12 +7553,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bolívar".</value>
         public static VEF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8882,12 +7582,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Dong".</value>
         public static VNC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8916,12 +7611,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Dong".</value>
         public static VND Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8950,12 +7640,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Vatu".</value>
         public static VUV Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -8984,12 +7669,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Tala".</value>
         public static WST Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9018,12 +7698,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "CFA Franc BEAC".</value>
         public static XAF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9052,12 +7727,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Silver".</value>
         public static XAG Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9086,12 +7756,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gold".</value>
         public static XAU Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9120,12 +7785,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".</value>
         public static XBA Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9154,12 +7814,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".</value>
         public static XBB Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9188,12 +7843,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".</value>
         public static XBC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9222,12 +7872,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".</value>
         public static XBD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9256,12 +7901,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "East Caribbean Dollar".</value>
         public static XCD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9290,12 +7930,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "SDR (Special Drawing Right)".</value>
         public static XDR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9324,12 +7959,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "European Currency Unit (E.C.U)".</value>
         public static XEU Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9358,12 +7988,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Gold-Franc".</value>
         public static XFO Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9392,12 +8017,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "UIC-Franc".</value>
         public static XFU Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9426,12 +8046,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "CFA Franc BCEAO".</value>
         public static XOF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9460,12 +8075,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Palladium".</value>
         public static XPD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9494,12 +8104,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "CFP Franc".</value>
         public static XPF Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9528,12 +8133,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Platinum".</value>
         public static XPT Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9562,12 +8162,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "RINET Funds Code".</value>
         public static XRE Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9596,12 +8191,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Sucre".</value>
         public static XSU Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9630,12 +8220,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Codes specifically reserved for testing purposes".</value>
         public static XTS Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9664,12 +8249,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "ADB Unit of Account".</value>
         public static XUA Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9698,12 +8278,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "The codes assigned for transactions where no currency is involved".</value>
         public static XXX Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9732,12 +8307,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yemeni Dinar".</value>
         public static YDD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9766,12 +8336,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yemeni Rial".</value>
         public static YER Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9800,12 +8365,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Yugoslavian Dinar".</value>
         public static YUD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9834,12 +8394,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Dinar".</value>
         public static YUM Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9868,12 +8423,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Yugoslavian Dinar".</value>
         public static YUN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9902,12 +8452,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Financial Rand".</value>
         public static ZAL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9936,12 +8481,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rand".</value>
         public static ZAR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -9970,12 +8510,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".</value>
         public static ZMK Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -10004,12 +8539,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".</value>
         public static ZMW Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -10038,12 +8568,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "New Zaire".</value>
         public static ZRN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -10072,12 +8597,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zaire".</value>
         public static ZRZ Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -10106,12 +8626,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".</value>
         public static ZWC Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -10140,12 +8655,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (old)".</value>
         public static ZWD Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -10174,12 +8684,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".</value>
         public static ZWL Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -10208,12 +8713,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (new)".</value>
         public static ZWN Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
@@ -10242,12 +8742,7 @@ namespace Narvalo.Finance.Currencies
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".</value>
         public static ZWR Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return s_Instance;
-            }
+            get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
     }
 
