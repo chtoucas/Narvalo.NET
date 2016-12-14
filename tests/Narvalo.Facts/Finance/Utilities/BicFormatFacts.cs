@@ -3,6 +3,7 @@
 namespace Narvalo.Finance.Utilities
 {
     using System;
+    using System.Collections.Generic;
 
     using Xunit;
 
@@ -66,9 +67,7 @@ namespace Narvalo.Finance.Utilities
             => Assert.False(BicFormat.CheckBranchCode(null));
 
         [Theory]
-        [InlineData("1")]
-        [InlineData("12")]
-        [InlineData("1234")]
+        [MemberData(nameof(InvalidBranchCodes), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckBranchCode_ReturnsFalse_ForInvalidInput(string value)
             => Assert.False(BicFormat.CheckBranchCode(value));
@@ -86,9 +85,7 @@ namespace Narvalo.Finance.Utilities
             => Assert.False(BicFormat.CheckCountryCode(null));
 
         [Theory]
-        [InlineData("")]
-        [InlineData("1")]
-        [InlineData("123")]
+        [MemberData(nameof(InvalidCountryCodes), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckCountryCode_ReturnsFalse_ForInvalidInput(string value)
             => Assert.False(BicFormat.CheckCountryCode(value));
@@ -106,11 +103,7 @@ namespace Narvalo.Finance.Utilities
             => Assert.False(BicFormat.CheckInstitutionCode(null));
 
         [Theory]
-        [InlineData("")]
-        [InlineData("1")]
-        [InlineData("12")]
-        [InlineData("123")]
-        [InlineData("12345")]
+        [MemberData(nameof(InvalidInstitutionCodes), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckInstitutionCode_ReturnsFalse_ForInvalidInput(string value)
             => Assert.False(BicFormat.CheckInstitutionCode(value));
@@ -128,9 +121,7 @@ namespace Narvalo.Finance.Utilities
             => Assert.False(BicFormat.CheckLocationCode(null));
 
         [Theory]
-        [InlineData("")]
-        [InlineData("1")]
-        [InlineData("123")]
+        [MemberData(nameof(InvalidLocationCodes), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckLocationCode_ReturnsFalse_ForInvalidInput(string value)
             => Assert.False(BicFormat.CheckLocationCode(value));
@@ -156,5 +147,50 @@ namespace Narvalo.Finance.Utilities
             => Assert.False(BicFormat.CheckValue(value));
 
         #endregion
+    }
+
+    public static partial class BicFormatFacts
+    {
+        public static IEnumerable<object[]> InvalidBranchCodes
+        {
+            get
+            {
+                yield return new object[] { "1" };
+                yield return new object[] { "12" };
+                yield return new object[] { "1234" };
+            }
+        }
+
+        public static IEnumerable<object[]> InvalidCountryCodes
+        {
+            get
+            {
+                yield return new object[] { "" };
+                yield return new object[] { "1" };
+                yield return new object[] { "123" };
+            }
+        }
+
+        public static IEnumerable<object[]> InvalidInstitutionCodes
+        {
+            get
+            {
+                yield return new object[] { "" };
+                yield return new object[] { "1" };
+                yield return new object[] { "12" };
+                yield return new object[] { "123" };
+                yield return new object[] { "12345" };
+            }
+        }
+
+        public static IEnumerable<object[]> InvalidLocationCodes
+        {
+            get
+            {
+                yield return new object[] { "" };
+                yield return new object[] { "1" };
+                yield return new object[] { "123" };
+            }
+        }
     }
 }

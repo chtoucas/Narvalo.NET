@@ -5,6 +5,7 @@ namespace Narvalo.Finance
     using System;
     using System.Collections.Generic;
 
+    using Narvalo.Finance.Utilities;
     using Xunit;
 
     public static partial class BicFacts
@@ -60,38 +61,29 @@ namespace Narvalo.Finance
             Assert.Throws<ArgumentNullException>(() => Bic.Create("ABCD", "BE", "BB", null));
         }
 
-        [Fact]
-        public static void Create_ThrowsArgumentException_ForInvalidInstitutionCode()
-        {
-            Assert.Throws<ArgumentException>(() => Bic.Create("", "BE", "BB", "XXX"));
-            Assert.Throws<ArgumentException>(() => Bic.Create("1", "BE", "BB", "XXX"));
-            Assert.Throws<ArgumentException>(() => Bic.Create("123", "BE", "BB", "XXX"));
-            Assert.Throws<ArgumentException>(() => Bic.Create("12345", "BE", "BB", "XXX"));
-        }
+        [Theory]
+        [MemberData(nameof(BicFormatFacts.InvalidInstitutionCodes), MemberType = typeof(BicFormatFacts), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Create_ThrowsArgumentException_ForInvalidInstitutionCode(string value)
+            => Assert.Throws<ArgumentException>(() => Bic.Create(value, "BE", "BB", "XXX"));
 
-        [Fact]
-        public static void Create_ThrowsArgumentException_ForInvalidCountryCode()
-        {
-            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "", "BB", "XXX"));
-            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "1", "BB", "XXX"));
-            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "123", "BB", "XXX"));
-        }
+        [Theory]
+        [MemberData(nameof(BicFormatFacts.InvalidCountryCodes), MemberType = typeof(BicFormatFacts), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Create_ThrowsArgumentException_ForInvalidCountryCode(string value)
+            => Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", value, "BB", "XXX"));
 
-        [Fact]
-        public static void Create_ThrowsArgumentException_ForInvalidLocationCode()
-        {
-            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "", "XXX"));
-            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "1", "XXX"));
-            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "123", "XXX"));
-        }
+        [Theory]
+        [MemberData(nameof(BicFormatFacts.InvalidLocationCodes), MemberType = typeof(BicFormatFacts), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Create_ThrowsArgumentException_ForInvalidLocationCode(string value)
+            => Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", value, "XXX"));
 
-        [Fact]
-        public static void Create_ThrowsArgumentException_ForInvalidBranchCode()
-        {
-            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "BB", "1"));
-            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "BB", "12"));
-            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "BB", "1234"));
-        }
+        [Theory]
+        [MemberData(nameof(BicFormatFacts.InvalidBranchCodes), MemberType = typeof(BicFormatFacts), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Create_ThrowsArgumentException_ForInvalidBranchCode(string value)
+            => Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "BB", value));
 
         [Fact]
         public static void Create_DoesNotThrow_ForValidInputs()
@@ -276,7 +268,7 @@ namespace Narvalo.Finance
         [Theory]
         [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Inquality_ReturnsTrue_ForDifferentValues(string value1, string value2)
+        public static void Inequality_ReturnsTrue_ForDifferentValues(string value1, string value2)
         {
             var bic1 = Bic.Parse(value1);
             var bic2 = Bic.Parse(value2);
