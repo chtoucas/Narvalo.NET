@@ -3,6 +3,7 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Collections.Generic;
 
     using Xunit;
 
@@ -11,25 +12,17 @@ namespace Narvalo.Finance
         #region TryParse()
 
         [Theory]
-        [InlineData("12345678")]
-        [InlineData("12345678901")]
+        [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_Succeeds_ForValidFormat(string value)
             => Assert.True(Bic.TryParse(value).HasValue);
 
+        [Fact]
+        public static void TryParse_ReturnsNull_ForNull()
+            => Assert.False(Bic.TryParse(null).HasValue);
+
         [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData("1")]
-        [InlineData("12")]
-        [InlineData("123")]
-        [InlineData("1234")]
-        [InlineData("12345")]
-        [InlineData("123456")]
-        [InlineData("1234567")]
-        [InlineData("123456789")]
-        [InlineData("1234567890")]
-        [InlineData("123456789012")]
+        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_ReturnsNull_ForInvalidFormat(string value)
             => Assert.False(Bic.TryParse(value).HasValue);
@@ -39,8 +32,7 @@ namespace Narvalo.Finance
         #region Parse()
 
         [Theory]
-        [InlineData("12345678")]
-        [InlineData("12345678901")]
+        [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Parse_Succeeds(string value)
             => Bic.Parse(value);
@@ -50,17 +42,7 @@ namespace Narvalo.Finance
             => Assert.Throws<ArgumentNullException>(() => Bic.Parse(null));
 
         [Theory]
-        [InlineData("")]
-        [InlineData("1")]
-        [InlineData("12")]
-        [InlineData("123")]
-        [InlineData("1234")]
-        [InlineData("12345")]
-        [InlineData("123456")]
-        [InlineData("1234567")]
-        [InlineData("123456789")]
-        [InlineData("1234567890")]
-        [InlineData("123456789012")]
+        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Parse_ThrowsFormatException_ForInvalidFormat(string value)
             => Assert.Throws<FormatException>(() => Bic.Parse(value));
@@ -69,15 +51,64 @@ namespace Narvalo.Finance
 
         #region Create()
 
+        [Fact]
+        public static void Create_ThrowsArgumentNulllException_ForNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => Bic.Create(null, "BE", "BB", "XXX"));
+            Assert.Throws<ArgumentNullException>(() => Bic.Create("ABCD", null, "BB", "XXX"));
+            Assert.Throws<ArgumentNullException>(() => Bic.Create("ABCD", "BE", null, "XXX"));
+            Assert.Throws<ArgumentNullException>(() => Bic.Create("ABCD", "BE", "BB", null));
+        }
+
+        [Fact]
+        public static void Create_ThrowsArgumentException_ForInvalidInstitutionCode()
+        {
+            Assert.Throws<ArgumentException>(() => Bic.Create("", "BE", "BB", "XXX"));
+            Assert.Throws<ArgumentException>(() => Bic.Create("1", "BE", "BB", "XXX"));
+            Assert.Throws<ArgumentException>(() => Bic.Create("123", "BE", "BB", "XXX"));
+            Assert.Throws<ArgumentException>(() => Bic.Create("12345", "BE", "BB", "XXX"));
+        }
+
+        [Fact]
+        public static void Create_ThrowsArgumentException_ForInvalidCountryCode()
+        {
+            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "", "BB", "XXX"));
+            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "1", "BB", "XXX"));
+            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "123", "BB", "XXX"));
+        }
+
+        [Fact]
+        public static void Create_ThrowsArgumentException_ForInvalidLocationCode()
+        {
+            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "", "XXX"));
+            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "1", "XXX"));
+            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "123", "XXX"));
+        }
+
+        [Fact]
+        public static void Create_ThrowsArgumentException_ForInvalidBranchCode()
+        {
+            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "BB", "1"));
+            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "BB", "12"));
+            Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "BB", "1234"));
+        }
+
+        [Fact]
+        public static void Create_DoesNotThrow_ForValidInputs()
+        {
+            Bic.Create("ABCD", "BE", "BB", "");
+            Bic.Create("ABCD", "BE", "BB", "XXX");
+        }
+
         #endregion
 
-        #region Parsing
+        #region ParseCore()
 
         [Theory]
         [InlineData("12345678", "12345678")]
         [InlineData("12345678###", "12345678")]
         [CLSCompliant(false)]
-        public static void BusinessParty_AfterParsing(string value, string expectedValue)
+        public static void ParseCore_SetBusinessPartyCorrectly(string value, string expectedValue)
         {
             var bic = Bic.Parse(value);
 
@@ -88,7 +119,7 @@ namespace Narvalo.Finance
         [InlineData("########", "")]
         [InlineData("########901", "901")]
         [CLSCompliant(false)]
-        public static void BranchCode_AfterParsing(string value, string expectedValue)
+        public static void ParseCore_SetBranchCodeCorrectly(string value, string expectedValue)
         {
             var bic = Bic.Parse(value);
 
@@ -99,7 +130,7 @@ namespace Narvalo.Finance
         [InlineData("####56##", "56")]
         [InlineData("####56#####", "56")]
         [CLSCompliant(false)]
-        public static void CountryCode_AfterParsing(string value, string expectedValue)
+        public static void ParseCore_SetCountryCodeCorrectly(string value, string expectedValue)
         {
             var bic = Bic.Parse(value);
 
@@ -107,10 +138,10 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [InlineData("1234#######", "1234")]
+        [InlineData("1234####", "1234")]
         [InlineData("1234#######", "1234")]
         [CLSCompliant(false)]
-        public static void InstitutionCode_AfterParsing(string value, string expectedValue)
+        public static void ParseCore_SetInstitutionCodeCorrectly(string value, string expectedValue)
         {
             var bic = Bic.Parse(value);
 
@@ -121,7 +152,7 @@ namespace Narvalo.Finance
         [InlineData("######78", "78")]
         [InlineData("######78###", "78")]
         [CLSCompliant(false)]
-        public static void LocationCode_AfterParsing(string value, string expectedValue)
+        public static void ParseCore_SetLocationCodeCorrectly(string value, string expectedValue)
         {
             var bic = Bic.Parse(value);
 
@@ -129,112 +160,52 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [InlineData("########")]
-        [InlineData("###########")]
+        [InlineData("########", true)]
+        [InlineData("###########", true)]
+        [InlineData("#######1", false)]
+        [InlineData("#######1###", false)]
         [CLSCompliant(false)]
-        public static void IsConnected_IsTrue_AfterParsing(string value)
+        public static void ParseCore_SetIsConnectedCorrectly(string value, bool expectedValue)
         {
             var bic = Bic.Parse(value);
 
-            Assert.True(bic.IsConnected);
+            Assert.Equal(expectedValue, bic.IsConnected);
         }
 
         [Theory]
-        [InlineData("#######1")]
-        [InlineData("#######1###")]
+        [InlineData("########", true)]
+        [InlineData("########XXX", true)]
+        [InlineData("###########", false)]
         [CLSCompliant(false)]
-        public static void IsConnected_IsFalse_AfterParsing(string value)
+        public static void ParseCore_SetIsPrimaryOfficeCorrectly(string value, bool expectedValue)
         {
             var bic = Bic.Parse(value);
 
-            Assert.False(bic.IsConnected);
-        }
-
-        [Theory]
-        [InlineData("########")]
-        [InlineData("########XXX")]
-        [CLSCompliant(false)]
-        public static void IsPrimaryOffice_IsTrue_AfterParsing(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.True(bic.IsPrimaryOffice);
-        }
-
-        [Theory]
-        [InlineData("###########")]
-        [CLSCompliant(false)]
-        public static void IsPrimaryOffice_IsFalse_AfterParsing(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.False(bic.IsPrimaryOffice);
+            Assert.Equal(expectedValue, bic.IsPrimaryOffice);
         }
 
         #endregion
 
-        #region ToString()
+        #region ValidateIsoFormat()
 
         [Theory]
-        [InlineData("12345678", "12345678")]
-        [InlineData("12345678901", "12345678901")]
+        [MemberData(nameof(ValidIsoValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString(string value, string expectedValue)
+        public static void ValidateIsoFormat_ReturnsTrue_ForValidInput(string value)
         {
             var bic = Bic.Parse(value);
 
-            Assert.Equal(expectedValue, bic.ToString());
-        }
-
-        #endregion
-
-        #region ValidateFormat()
-
-        [Theory]
-        [InlineData("ABCDBEBB")]
-        [InlineData("ABCDBEB1")]
-        [InlineData("ABCDBE11")]
-        [InlineData("ABCDBE1B")]
-        [InlineData("ABC1BEBB")]
-        [InlineData("AB11BEBB")]
-        [InlineData("A111BE1B")]
-        [InlineData("1111BEBB")]
-        [InlineData("ABCDBEBBXXX")]
-        [InlineData("ABCDBEBBXX1")]
-        [InlineData("ABCDBEBBX11")]
-        [InlineData("ABCDBEBB111")]
-        [InlineData("ABC1BEBBXXX")]
-        [InlineData("AB11BEBBXXX")]
-        [InlineData("A111BEBBXXX")]
-        [InlineData("1111BEBBXXX")]
-        [CLSCompliant(false)]
-        public static void ValidateFormat_ReturnsTrue_AfterParsing(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.True(bic.ValidateFormat());
+            Assert.True(bic.ValidateIsoFormat());
         }
 
         [Theory]
-        [InlineData("aBCDBEBB")]
-        [InlineData("AbCDBEBB")]
-        [InlineData("ABcDBEBB")]
-        [InlineData("ABCdBEBB")]
-        [InlineData("ABCDbEBB")]
-        [InlineData("ABCDBeBB")]
-        [InlineData("ABCDBEbB")]
-        [InlineData("ABCDBEBb")]
-        [InlineData("ABCD1EBB")]
-        [InlineData("ABCDB1BB")]
-        [InlineData("ABCDBEBBxXX")]
-        [InlineData("ABCDBEBBXxX")]
-        [InlineData("ABCDBEBBXXx")]
+        [MemberData(nameof(InvalidIsoValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ValidateFormat_ReturnsFalse_AfterParsing(string value)
+        public static void ValidateIsoFormat_ReturnsFalse_ForInvalidFormat(string value)
         {
             var bic = Bic.Parse(value);
 
-            Assert.False(bic.ValidateFormat());
+            Assert.False(bic.ValidateIsoFormat());
         }
 
         #endregion
@@ -242,16 +213,9 @@ namespace Narvalo.Finance
         #region ValidateSwiftFormat()
 
         [Theory]
-        [InlineData("ABCDBEBB")]
-        [InlineData("ABCDBEB1")]
-        [InlineData("ABCDBE11")]
-        [InlineData("ABCDBE1B")]
-        [InlineData("ABCDBEBBXXX")]
-        [InlineData("ABCDBEBBXX1")]
-        [InlineData("ABCDBEBBX11")]
-        [InlineData("ABCDBEBB111")]
+        [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ValidateSwiftFormat_ReturnsTrue_AfterParsing(string value)
+        public static void ValidateSwiftFormat_ReturnsTrue_ForValidInput(string value)
         {
             var bic = Bic.Parse(value);
 
@@ -259,25 +223,9 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [InlineData("1BCDBEBB")]
-        [InlineData("A1CDBEBB")]
-        [InlineData("AB1DBEBB")]
-        [InlineData("ABC1BEBB")]
-        [InlineData("aBCDBEBB")]
-        [InlineData("AbCDBEBB")]
-        [InlineData("ABcDBEBB")]
-        [InlineData("ABCdBEBB")]
-        [InlineData("ABCDbEBB")]
-        [InlineData("ABCDBeBB")]
-        [InlineData("ABCDBEbB")]
-        [InlineData("ABCDBEBb")]
-        [InlineData("ABCD1EBB")]
-        [InlineData("ABCDB1BB")]
-        [InlineData("ABCDBEBBxXX")]
-        [InlineData("ABCDBEBBXxX")]
-        [InlineData("ABCDBEBBXXx")]
+        [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ValidateSwiftFormat_ReturnsFalse_AfterParsing(string value)
+        public static void ValidateSwiftFormat_ReturnsFalse_ForInvalidInput(string value)
         {
             var bic = Bic.Parse(value);
 
@@ -285,5 +233,376 @@ namespace Narvalo.Finance
         }
 
         #endregion
+
+        #region op_Equality()
+
+        [Theory]
+        [MemberData(nameof(IdenticalValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equality_ReturnsTrue_ForIdenticalValues(string value1, string value2)
+        {
+            var bic1 = Bic.Parse(value1);
+            var bic2 = Bic.Parse(value2);
+
+            Assert.True(bic1 == bic2);
+        }
+
+        [Theory]
+        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equality_ReturnsFalse_ForDifferentValues(string value1, string value2)
+        {
+            var bic1 = Bic.Parse(value1);
+            var bic2 = Bic.Parse(value2);
+
+            Assert.False(bic1 == bic2);
+        }
+
+        #endregion
+
+        #region op_Inequality()
+
+        [Theory]
+        [MemberData(nameof(IdenticalValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Inequality_ReturnsFalse_ForIdenticalValues(string value1, string value2)
+        {
+            var bic1 = Bic.Parse(value1);
+            var bic2 = Bic.Parse(value2);
+
+            Assert.False(bic1 != bic2);
+        }
+
+        [Theory]
+        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Inquality_ReturnsTrue_ForDifferentValues(string value1, string value2)
+        {
+            var bic1 = Bic.Parse(value1);
+            var bic2 = Bic.Parse(value2);
+
+            Assert.True(bic1 != bic2);
+        }
+
+        #endregion
+
+        #region Equals()
+
+        [Theory]
+        [MemberData(nameof(IdenticalValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equals_ReturnsTrue_ForIdenticalValues(string value1, string value2)
+        {
+            var bic1 = Bic.Parse(value1);
+            var bic2 = Bic.Parse(value2);
+
+            Assert.True(bic1.Equals(bic2));
+        }
+
+        [Theory]
+        [MemberData(nameof(IdenticalValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equals_ReturnsTrue_ForIdenticalValues_AfterBoxing(string value1, string value2)
+        {
+            var bic1 = Bic.Parse(value1);
+            object bic2 = Bic.Parse(value2);
+
+            Assert.True(bic1.Equals(bic2));
+        }
+
+        [Theory]
+        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equals_ReturnsFalse_ForDifferentValues(string value1, string value2)
+        {
+            var bic1 = Bic.Parse(value1);
+            var bic2 = Bic.Parse(value2);
+
+            Assert.False(bic1.Equals(bic2));
+        }
+
+        [Theory]
+        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equals_ReturnsFalse_ForOtherTypes(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.False(bic.Equals(null));
+            Assert.False(bic.Equals(1));
+            Assert.False(bic.Equals(value));
+            Assert.False(bic.Equals(new Object()));
+            Assert.False(bic.Equals(new My.SimpleStruct(1)));
+        }
+
+        [Theory]
+        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equals_IsReflexive(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.True(bic.Equals(bic));
+        }
+
+        [Theory]
+        [MemberData(nameof(DifferentValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equals_IsAbelian(string value1, string value2)
+        {
+            var bic1a = Bic.Parse(value1);
+            var bic1b = Bic.Parse(value1);
+            var bic2 = Bic.Parse(value2);
+
+            Assert.Equal(bic1a.Equals(bic1b), bic1b.Equals(bic1a));
+            Assert.Equal(bic1a.Equals(bic2), bic2.Equals(bic1a));
+        }
+
+        [Theory]
+        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equals_IsTransitive(string value)
+        {
+            var bic1 = Bic.Parse(value);
+            var bic2 = Bic.Parse(value);
+            var bic3 = Bic.Parse(value);
+
+            Assert.Equal(bic1.Equals(bic2) && bic2.Equals(bic3), bic1.Equals(bic3));
+        }
+
+        #endregion
+
+        #region GetHashCode()
+
+        [Theory]
+        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void GetHashCode_ReturnsHashCodeValue(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.Equal(value.GetHashCode(), bic.GetHashCode());
+        }
+
+        #endregion
+
+        #region ToString()
+
+        [Theory]
+        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsValue(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.Equal(value, bic.ToString());
+        }
+
+        #endregion
+    }
+
+    public static partial class BicFacts
+    {
+        public static IEnumerable<object[]> SampleValues
+        {
+            get
+            {
+                yield return new object[] { "ABCDBEBB" };
+                yield return new object[] { "ABCDBEBBXXX" };
+            }
+        }
+
+        public static IEnumerable<object[]> IdenticalValues
+        {
+            get
+            {
+                yield return new object[] { "ABCDBEBB", "ABCDBEBB" };
+                yield return new object[] { "ABCDBEBBXXX", "ABCDBEBBXXX" };
+            }
+        }
+
+        public static IEnumerable<object[]> DifferentValues
+        {
+            get
+            {
+                yield return new object[] { "ABCDBEBB", "SHORTBIC" };
+                yield return new object[] { "ABCDBEBB", "LONGBICXXXX" };
+                yield return new object[] { "ABCDBEBBXXX", "SHORTBIC" };
+                yield return new object[] { "ABCDBEBBXXX", "LONGBICXXXX" };
+            }
+        }
+
+        public static IEnumerable<object[]> ValidLengths
+        {
+            get
+            {
+                yield return new object[] { "12345678" };
+                yield return new object[] { "12345678901" };
+            }
+        }
+
+        public static IEnumerable<object[]> InvalidLengths
+        {
+            get
+            {
+                yield return new object[] { "" };
+                yield return new object[] { "1" };
+                yield return new object[] { "12" };
+                yield return new object[] { "123" };
+                yield return new object[] { "1234" };
+                yield return new object[] { "12345" };
+                yield return new object[] { "123456" };
+                yield return new object[] { "1234567" };
+                yield return new object[] { "123456789" };
+                yield return new object[] { "1234567890" };
+                yield return new object[] { "123456789012" };
+            }
+        }
+
+        public static IEnumerable<object[]> ValidIsoValues
+        {
+            get
+            {
+                // Short form.
+                yield return new object[] { "ABCDBEBB" };
+                // Short form: digits in prefix.
+                yield return new object[] { "1BCDBEBB" };
+                yield return new object[] { "11CDBEBB" };
+                yield return new object[] { "111DBEBB" };
+                yield return new object[] { "1111BEBB" };
+                yield return new object[] { "A1CDBEBB" };
+                yield return new object[] { "A11DBEBB" };
+                yield return new object[] { "A111BEBB" };
+                yield return new object[] { "AB1DBEBB" };
+                yield return new object[] { "AB11BEBB" };
+                yield return new object[] { "ABC1BEBB" };
+                // Short form: digits in suffix.
+                yield return new object[] { "ABCDBE1B" };
+                yield return new object[] { "ABCDBE11" };
+                yield return new object[] { "ABCDBEB1" };
+                // Long form.
+                yield return new object[] { "ABCDBEBBXXX" };
+                // Long form: digit in prefix.
+                yield return new object[] { "1BCDBEBBXXX" };
+                yield return new object[] { "11CDBEBBXXX" };
+                yield return new object[] { "111DBEBBXXX" };
+                yield return new object[] { "1111BEBBXXX" };
+                yield return new object[] { "A1CDBEBBXXX" };
+                yield return new object[] { "A11DBEBBXXX" };
+                yield return new object[] { "A111BEBBXXX" };
+                yield return new object[] { "AB1DBEBBXXX" };
+                yield return new object[] { "AB11BEBBXXX" };
+                yield return new object[] { "ABC1BEBBXXX" };
+                // Long form: digit in suffix.
+                yield return new object[] { "ABCDBE1BXXX" };
+                yield return new object[] { "ABCDBE11XXX" };
+                yield return new object[] { "ABCDBEB1XXX" };
+                // Long form: digit in branch code.
+                yield return new object[] { "ABCDBEBB1XX" };
+                yield return new object[] { "ABCDBEBB11X" };
+                yield return new object[] { "ABCDBEBB111" };
+                yield return new object[] { "ABCDBEBBX1X" };
+                yield return new object[] { "ABCDBEBBX11" };
+                yield return new object[] { "ABCDBEBBXX1" };
+            }
+        }
+
+        public static IEnumerable<object[]> InvalidIsoValues
+        {
+            get
+            {
+                // Short form: lowercase letter in prefix.
+                yield return new object[] { "aBCDBEBB" };
+                yield return new object[] { "AbCDBEBB" };
+                yield return new object[] { "ABcDBEBB" };
+                yield return new object[] { "ABCdBEBB" };
+                // Short form: lowercase letter in country code.
+                yield return new object[] { "ABCDbEBB" };
+                yield return new object[] { "ABCDBeBB" };
+                // Short form: lowercase letter in suffix.
+                yield return new object[] { "ABCDBEbB" };
+                yield return new object[] { "ABCDBEBb" };
+                // Short form: digits in country code.
+                yield return new object[] { "ABCD1EBB" };
+                yield return new object[] { "ABCDB1BB" };
+                // Long form: lowercase letter in branch code.
+                yield return new object[] { "ABCDBEBBxXX" };
+                yield return new object[] { "ABCDBEBBXxX" };
+                yield return new object[] { "ABCDBEBBXXx" };
+            }
+        }
+
+        public static IEnumerable<object[]> ValidSwiftValues
+        {
+            get
+            {
+                // Short form.
+                yield return new object[] { "ABCDBEBB" };
+                // Short form: digits in suffix.
+                yield return new object[] { "ABCDBE1B" };
+                yield return new object[] { "ABCDBE11" };
+                yield return new object[] { "ABCDBEB1" };
+                // Long form.
+                yield return new object[] { "ABCDBEBBXXX" };
+                // Long form: digit in suffix.
+                yield return new object[] { "ABCDBE1BXXX" };
+                yield return new object[] { "ABCDBE11XXX" };
+                yield return new object[] { "ABCDBEB1XXX" };
+                // Long form: digit in branch code.
+                yield return new object[] { "ABCDBEBB1XX" };
+                yield return new object[] { "ABCDBEBB11X" };
+                yield return new object[] { "ABCDBEBB111" };
+                yield return new object[] { "ABCDBEBBX1X" };
+                yield return new object[] { "ABCDBEBBX11" };
+                yield return new object[] { "ABCDBEBBXX1" };
+            }
+        }
+
+        public static IEnumerable<object[]> InvalidSwiftValues
+        {
+            get
+            {
+                // Short form: digits in prefix.
+                yield return new object[] { "1BCDBEBB" };
+                yield return new object[] { "11CDBEBB" };
+                yield return new object[] { "111DBEBB" };
+                yield return new object[] { "1111BEBB" };
+                yield return new object[] { "A1CDBEBB" };
+                yield return new object[] { "A11DBEBB" };
+                yield return new object[] { "A111BEBB" };
+                yield return new object[] { "AB1DBEBB" };
+                yield return new object[] { "AB11BEBB" };
+                yield return new object[] { "ABC1BEBB" };
+                // Long form: digit in prefix.
+                yield return new object[] { "1BCDBEBBXXX" };
+                yield return new object[] { "11CDBEBBXXX" };
+                yield return new object[] { "111DBEBBXXX" };
+                yield return new object[] { "1111BEBBXXX" };
+                yield return new object[] { "A1CDBEBBXXX" };
+                yield return new object[] { "A11DBEBBXXX" };
+                yield return new object[] { "A111BEBBXXX" };
+                yield return new object[] { "AB1DBEBBXXX" };
+                yield return new object[] { "AB11BEBBXXX" };
+                yield return new object[] { "ABC1BEBBXXX" };
+                // Short form: lowercase letter in prefix.
+                yield return new object[] { "aBCDBEBB" };
+                yield return new object[] { "AbCDBEBB" };
+                yield return new object[] { "ABcDBEBB" };
+                yield return new object[] { "ABCdBEBB" };
+                // Short form: lowercase letter in country code.
+                yield return new object[] { "ABCDbEBB" };
+                yield return new object[] { "ABCDBeBB" };
+                // Short form: lowercase letter in suffix.
+                yield return new object[] { "ABCDBEbB" };
+                yield return new object[] { "ABCDBEBb" };
+                // Short form: digits in country code.
+                yield return new object[] { "ABCD1EBB" };
+                yield return new object[] { "ABCDB1BB" };
+                // Long form: lowercase letter in branch code.
+                yield return new object[] { "ABCDBEBBxXX" };
+                yield return new object[] { "ABCDBEBBXxX" };
+                yield return new object[] { "ABCDBEBBXXx" };
+            }
+        }
     }
 }

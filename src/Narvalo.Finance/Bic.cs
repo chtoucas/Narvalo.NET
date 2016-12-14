@@ -93,6 +93,10 @@ namespace Narvalo.Finance
 
         public static Bic Create(string institutionCode, string countryCode, string locationCode, string branchCode)
         {
+            Require.NotNull(institutionCode, nameof(institutionCode));
+            Require.NotNull(countryCode, nameof(countryCode));
+            Require.NotNull(locationCode, nameof(locationCode));
+            Require.NotNull(branchCode, nameof(branchCode));
             Require.True(CheckInstitutionCode(institutionCode), nameof(institutionCode));
             Require.True(CheckCountryCode(countryCode), nameof(countryCode));
             Require.True(CheckLocationCode(locationCode), nameof(locationCode));
@@ -135,9 +139,9 @@ namespace Narvalo.Finance
             return _value;
         }
 
-        public bool ValidateFormat() => Validate(this, true /* strict */);
+        public bool ValidateIsoFormat() => Validate(this, true /* isoConformance */);
 
-        public bool ValidateSwiftFormat() => Validate(this, false /* strict */);
+        public bool ValidateSwiftFormat() => Validate(this, false /* isoConformance */);
 
         // NB: We only perform basic validation on the input string.
         private static Bic ParseCore(string value)

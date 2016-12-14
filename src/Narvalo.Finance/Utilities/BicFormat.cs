@@ -19,9 +19,9 @@ namespace Narvalo.Finance.Utilities
         // strict = ISO conformance, loosy = SWIFT implementation.
         // The SWIFT implementation is more restrictive than ISO as it only expects letters.
         // In real world cases, strict conformance is rarely used.
-        public static bool Validate(Bic bic, bool strict)
+        public static bool Validate(Bic bic, bool isoConformance)
             // NB: We do not need to check properties length.
-            => (strict ? IsDigitOrUpperLetter(bic.InstitutionCode) : IsUpperLetter(bic.InstitutionCode))
+            => (isoConformance ? IsDigitOrUpperLetter(bic.InstitutionCode) : IsUpperLetter(bic.InstitutionCode))
                 && IsUpperLetter(bic.CountryCode)
                 && IsDigitOrUpperLetter(bic.LocationCode)
                 && (bic.BranchCode.Length == 0 || IsDigitOrUpperLetter(bic.BranchCode));

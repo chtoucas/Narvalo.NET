@@ -68,7 +68,7 @@ Breaking Changes
 - `Range<T>.Includes(T)` has been replaced by `Range<T>.Contains(T)`
 
 ### Narvalo.Finance
-- `Bic.CheckFormat()` has been replaced by `Bic.ValidateFormat()`.
+- `Bic.CheckFormat()` has been replaced by `Bic.ValidateIsoFormat()`.
 - `Bic.CheckSwiftFormat()` has been replaced by `Bic.ValidateSwiftFormat()`.
 
 ### Narvalo.Web

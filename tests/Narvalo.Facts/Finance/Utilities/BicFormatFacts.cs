@@ -11,22 +11,7 @@ namespace Narvalo.Finance.Utilities
         #region Validate()
 
         [Theory]
-        [InlineData("ABCDBEBB")]
-        [InlineData("ABCDBEB1")]
-        [InlineData("ABCDBE11")]
-        [InlineData("ABCDBE1B")]
-        [InlineData("ABC1BEBB")]
-        [InlineData("AB11BEBB")]
-        [InlineData("A111BE1B")]
-        [InlineData("1111BEBB")]
-        [InlineData("ABCDBEBBXXX")]
-        [InlineData("ABCDBEBBXX1")]
-        [InlineData("ABCDBEBBX11")]
-        [InlineData("ABCDBEBB111")]
-        [InlineData("ABC1BEBBXXX")]
-        [InlineData("AB11BEBBXXX")]
-        [InlineData("A111BEBBXXX")]
-        [InlineData("1111BEBBXXX")]
+        [MemberData(nameof(BicFacts.ValidIsoValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Validate_ReturnsTrue_ForValidInput(string value)
         {
@@ -36,19 +21,7 @@ namespace Narvalo.Finance.Utilities
         }
 
         [Theory]
-        [InlineData("aBCDBEBB")]
-        [InlineData("AbCDBEBB")]
-        [InlineData("ABcDBEBB")]
-        [InlineData("ABCdBEBB")]
-        [InlineData("ABCDbEBB")]
-        [InlineData("ABCDBeBB")]
-        [InlineData("ABCDBEbB")]
-        [InlineData("ABCDBEBb")]
-        [InlineData("ABCD1EBB")]
-        [InlineData("ABCDB1BB")]
-        [InlineData("ABCDBEBBxXX")]
-        [InlineData("ABCDBEBBXxX")]
-        [InlineData("ABCDBEBBXXx")]
+        [MemberData(nameof(BicFacts.InvalidIsoValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Validate_ReturnsFalse_ForInvalidInput(string value)
         {
@@ -58,14 +31,7 @@ namespace Narvalo.Finance.Utilities
         }
 
         [Theory]
-        [InlineData("ABCDBEBB")]
-        [InlineData("ABCDBEB1")]
-        [InlineData("ABCDBE11")]
-        [InlineData("ABCDBE1B")]
-        [InlineData("ABCDBEBBXXX")]
-        [InlineData("ABCDBEBBXX1")]
-        [InlineData("ABCDBEBBX11")]
-        [InlineData("ABCDBEBB111")]
+        [MemberData(nameof(BicFacts.ValidSwiftValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void ValidateSwift_ReturnsTrue_ForValidInput(string value)
         {
@@ -75,23 +41,7 @@ namespace Narvalo.Finance.Utilities
         }
 
         [Theory]
-        [InlineData("1BCDBEBB")]
-        [InlineData("A1CDBEBB")]
-        [InlineData("AB1DBEBB")]
-        [InlineData("ABC1BEBB")]
-        [InlineData("aBCDBEBB")]
-        [InlineData("AbCDBEBB")]
-        [InlineData("ABcDBEBB")]
-        [InlineData("ABCdBEBB")]
-        [InlineData("ABCDbEBB")]
-        [InlineData("ABCDBeBB")]
-        [InlineData("ABCDBEbB")]
-        [InlineData("ABCDBEBb")]
-        [InlineData("ABCD1EBB")]
-        [InlineData("ABCDB1BB")]
-        [InlineData("ABCDBEBBxXX")]
-        [InlineData("ABCDBEBBXxX")]
-        [InlineData("ABCDBEBBXXx")]
+        [MemberData(nameof(BicFacts.InvalidIsoValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void ValidateSwift_ReturnsFalse_ForValidInput(string value)
         {
@@ -190,8 +140,7 @@ namespace Narvalo.Finance.Utilities
         #region CheckValue()
 
         [Theory]
-        [InlineData("12345678")]
-        [InlineData("12345678901")]
+        [MemberData(nameof(BicFacts.ValidLengths), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckValue_ReturnsTrue_ForValidInput(string value)
             => Assert.True(BicFormat.CheckValue(value));
@@ -201,17 +150,7 @@ namespace Narvalo.Finance.Utilities
             => Assert.False(BicFormat.CheckValue(null));
 
         [Theory]
-        [InlineData("")]
-        [InlineData("1")]
-        [InlineData("12")]
-        [InlineData("123")]
-        [InlineData("1234")]
-        [InlineData("12345")]
-        [InlineData("123456")]
-        [InlineData("1234567")]
-        [InlineData("123456789")]
-        [InlineData("1234567890")]
-        [InlineData("123456789012")]
+        [MemberData(nameof(BicFacts.InvalidLengths), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckValue_ReturnsFalse_ForInvalidInput(string value)
             => Assert.False(BicFormat.CheckValue(value));
