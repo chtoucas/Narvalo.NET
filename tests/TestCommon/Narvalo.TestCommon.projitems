@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AppDomainUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DebugAssertFailedException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DebugAssertFixture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DisposableAction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EnvironmentFacts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IssueAttribute.cs" />

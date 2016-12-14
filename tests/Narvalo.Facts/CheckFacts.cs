@@ -6,19 +6,19 @@ namespace Narvalo
 
     using Xunit;
 
-    public static partial class CheckFacts
+    public sealed partial class CheckFacts : IClassFixture<DebugAssertFixture>
     {
         #region True()
 
         [Fact]
         public static void True_Passes_ForTrue() => Check.True(true);
 
-        [DebugOnlyFact]
-        public static void True_Fails_ForFalse()
-            => Assert.Throws<DebugAssertFailedException>(() => Check.True(false));
-
         [ReleaseOnlyFact]
         public static void True_Passes_ForFalse() => Check.True(false);
+
+        [DebugOnlyFact]
+        public void True_Fails_ForFalse()
+            => Assert.Throws<DebugAssertFailedException>(() => Check.True(false));
 
         #endregion
 
@@ -27,12 +27,12 @@ namespace Narvalo
         [Fact]
         public static void False_Passes_ForFalse() => Check.False(false);
 
-        [DebugOnlyFact]
-        public static void False_Fails_ForTrue()
-            => Assert.Throws<DebugAssertFailedException>(() => Check.False(true));
-
         [ReleaseOnlyFact]
         public static void False_Passes_ForTrue() => Check.False(true);
+
+        [DebugOnlyFact]
+        public void False_Fails_ForTrue()
+            => Assert.Throws<DebugAssertFailedException>(() => Check.False(true));
 
         #endregion
 

@@ -6,19 +6,19 @@ namespace Narvalo
 
     using Xunit;
 
-    public static class DemandFacts
+    public sealed class DemandFacts : IClassFixture<DebugAssertFixture>
     {
         #region State()
 
         [Fact]
         public static void State_Passes_ForTrue() => Demand.State(true);
 
-        [DebugOnlyFact]
-        public static void State_Fails_ForFalse()
-            => Assert.Throws<DebugAssertFailedException>(() => Demand.State(false));
-
         [ReleaseOnlyFact]
         public static void State_Passes_ForFalse() => Demand.State(false);
+
+        [DebugOnlyFact]
+        public void State_Fails_ForFalse()
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.State(false));
 
         #endregion
 
@@ -27,12 +27,12 @@ namespace Narvalo
         [Fact]
         public static void True_Passes_ForTrue() => Demand.True(true);
 
-        [DebugOnlyFact]
-        public static void True_Fails_ForFalse()
-            => Assert.Throws<DebugAssertFailedException>(() => Demand.State(false));
-
         [ReleaseOnlyFact]
         public static void True_Passes_ForFalse() => Demand.State(false);
+
+        [DebugOnlyFact]
+        public void True_Fails_ForFalse()
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.State(false));
 
         #endregion
 
@@ -41,12 +41,12 @@ namespace Narvalo
         [Fact]
         public static void Range_Passes_ForTrue() => Demand.Range(true);
 
-        [DebugOnlyFact]
-        public static void Range_Fails_ForFalse()
-            => Assert.Throws<DebugAssertFailedException>(() => Demand.Range(false));
-
         [ReleaseOnlyFact]
         public static void Range_Passes_ForFalse() => Demand.Range(false);
+
+        [DebugOnlyFact]
+        public void Range_Fails_ForFalse()
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.Range(false));
 
         #endregion
 
@@ -55,18 +55,18 @@ namespace Narvalo
         [Fact]
         public static void NotNull_Passes_ForNonNull() => Demand.NotNull(new Object());
 
-        [DebugOnlyFact]
-        public static void NotNull_Fails_ForNull()
-        {
-            Object obj = null;
-            Assert.Throws<DebugAssertFailedException>(() => Demand.NotNull(obj));
-        }
-
         [ReleaseOnlyFact]
         public static void NotNull_Passes_ForNull()
         {
             Object obj = null;
             Demand.NotNull(obj);
+        }
+
+        [DebugOnlyFact]
+        public void NotNull_Fails_ForNull()
+        {
+            Object obj = null;
+            Assert.Throws<DebugAssertFailedException>(() => Demand.NotNull(obj));
         }
 
         #endregion
@@ -81,18 +81,18 @@ namespace Narvalo
         public static void NotNullUnconstrained_Passes_ForNonNull()
             => Demand.NotNullUnconstrained(new Object());
 
-        [DebugOnlyFact]
-        public static void NotNullUnconstrained_Fails_ForNull()
-        {
-            Object obj = null;
-            Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullUnconstrained(obj));
-        }
-
         [ReleaseOnlyFact]
         public static void NotNullUnconstrained_Passes_ForNull()
         {
             Object obj = null;
             Demand.NotNullUnconstrained(obj);
+        }
+
+        [DebugOnlyFact]
+        public void NotNullUnconstrained_Fails_ForNull()
+        {
+            Object obj = null;
+            Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullUnconstrained(obj));
         }
 
         #endregion
@@ -103,19 +103,19 @@ namespace Narvalo
         public static void NotNullOrEmpty_Passes_ForNonNullOrEmptyString()
             => Demand.NotNullOrEmpty("value");
 
-        [DebugOnlyFact]
-        public static void NotNullOrEmpty_Fails_ForNullString()
-            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrEmpty(null));
-
         [ReleaseOnlyFact]
         public static void NotNullOrEmpty_Passes_ForNullString() => Demand.NotNullOrEmpty(null);
 
-        [DebugOnlyFact]
-        public static void NotNullOrEmpty_Fails_ForEmptyString()
-            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrEmpty(String.Empty));
-
         [ReleaseOnlyFact]
         public static void NotNullOrEmpty_Passes_ForEmptyString() => Demand.NotNullOrEmpty(String.Empty);
+
+        [DebugOnlyFact]
+        public void NotNullOrEmpty_Fails_ForNullString()
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrEmpty(null));
+
+        [DebugOnlyFact]
+        public void NotNullOrEmpty_Fails_ForEmptyString()
+            => Assert.Throws<DebugAssertFailedException>(() => Demand.NotNullOrEmpty(String.Empty));
 
         #endregion
     }
