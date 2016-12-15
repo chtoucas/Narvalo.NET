@@ -65,7 +65,7 @@ namespace <#= Namespace #>
         /// <summary>
         /// Initializes a new instance of the <see cref="<#= currency.Code #>" /> class.
         /// </summary>
-        internal <#= currency.Code #>() : base("<#= currency.Code #>") { }
+        private <#= currency.Code #>() : base("<#= currency.Code #>") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".

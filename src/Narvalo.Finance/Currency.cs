@@ -26,8 +26,7 @@ namespace Narvalo.Finance
     public partial class Currency : IEquatable<Currency>
     {
         // We cache all requested currencies.
-        private static readonly ConcurrentDictionary<string, Currency> s_Cache
-             = new ConcurrentDictionary<string, Currency>();
+        private static volatile ConcurrentDictionary<string, Currency> s_Cache;
 
         private readonly string _code;
 
@@ -51,6 +50,19 @@ namespace Narvalo.Finance
             get { Warrant.NotNull<string>(); return _code; }
         }
 
+        private static ConcurrentDictionary<string, Currency> Cache
+        {
+            get
+            {
+                if (s_Cache == null)
+                {
+                    s_Cache = new ConcurrentDictionary<string, Currency>();
+                }
+
+                return s_Cache;
+            }
+        }
+
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>
@@ -65,7 +77,7 @@ namespace Narvalo.Finance
             Sentinel.Expect.CurrencyCode(code);
             Warrant.NotNull<Currency>();
 
-            var currency = s_Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency);
+            var currency = Cache.GetOrAdd(code, CurrencyProvider.Current.GetCurrency);
             Contract.Assume(currency != null);
 
             return currency;

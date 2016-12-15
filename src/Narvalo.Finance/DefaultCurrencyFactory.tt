@@ -7,8 +7,8 @@
 <#@ import namespace="Narvalo.T4" #>
 <#
 
-List<Currency> currentCurrencies = ParseCurrent(@".\Resources\ISO4217\A1.xml");
-List<Currency> legacyCurrencies = ParseLegacy(@".\Resources\ISO4217\A3.xml");
+var currentCurrencies = ParseCurrent(@".\Resources\ISO4217\A1.xml");
+var legacyCurrencies = ParseLegacy(@".\Resources\ISO4217\A3.xml");
 var currencies = currentCurrencies.Concat(legacyCurrencies);
 
 var codeSet = new HashSet<string>();
@@ -21,7 +21,6 @@ foreach (var currency in currencies)
 WriteHeader();
 
 #>
-
 namespace <#= Namespace #>
 {
     using System.Collections.Generic;
@@ -31,10 +30,23 @@ namespace <#= Namespace #>
         /// <summary>
         /// The set of available currency codes.
         /// </summary>
-        private static readonly HashSet<string> s_CodeSet = new HashSet<string>() {
+        private static HashSet<string> CodeSet
+        {
+            get
+            {
+                if (s_CodeSet == null)
+                {
+                    var codeSet = new HashSet<string>() {
 <# foreach (var code in codeSet.OrderBy(_ => _)) { #>
-            "<#= code #>",
+                        "<#= code #>",
 <# } #>
-        };
+                    };
+
+                    s_CodeSet = codeSet;
+                }
+
+                return s_CodeSet;
+            }
+        }
     }
 }

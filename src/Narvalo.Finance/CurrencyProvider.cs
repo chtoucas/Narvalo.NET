@@ -17,22 +17,12 @@ namespace Narvalo.Finance
 
         public static CurrencyFactory Current
         {
-            get
-            {
-                Warrant.NotNull<CurrencyFactory>();
-
-                return s_Instance.InnerCurrent;
-            }
+            get { Warrant.NotNull<CurrencyFactory>(); return s_Instance.InnerCurrent; }
         }
 
         public CurrencyFactory InnerCurrent
         {
-            get
-            {
-                Warrant.NotNull<CurrencyFactory>();
-
-                return _factory;
-            }
+            get { Warrant.NotNull<CurrencyFactory>(); return _factory; }
         }
 
         public static void SetFactory(CurrencyFactory factory)

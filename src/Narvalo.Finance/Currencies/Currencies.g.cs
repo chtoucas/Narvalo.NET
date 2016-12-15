@@ -34,7 +34,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ADP" /> class.
         /// </summary>
-        internal ADP() : base("ADP") { }
+        private ADP() : base("ADP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Andorran Peseta".
@@ -63,7 +63,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AED" /> class.
         /// </summary>
-        internal AED() : base("AED") { }
+        private AED() : base("AED") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "UAE Dirham".
@@ -92,7 +92,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AFA" /> class.
         /// </summary>
-        internal AFA() : base("AFA") { }
+        private AFA() : base("AFA") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
@@ -121,7 +121,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AFN" /> class.
         /// </summary>
-        internal AFN() : base("AFN") { }
+        private AFN() : base("AFN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
@@ -150,7 +150,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ALK" /> class.
         /// </summary>
-        internal ALK() : base("ALK") { }
+        private ALK() : base("ALK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Lek".
@@ -179,7 +179,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ALL" /> class.
         /// </summary>
-        internal ALL() : base("ALL") { }
+        private ALL() : base("ALL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lek".
@@ -208,7 +208,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AMD" /> class.
         /// </summary>
-        internal AMD() : base("AMD") { }
+        private AMD() : base("AMD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Armenian Dram".
@@ -237,7 +237,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ANG" /> class.
         /// </summary>
-        internal ANG() : base("ANG") { }
+        private ANG() : base("ANG") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Antillean Guilder".
@@ -266,7 +266,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AOA" /> class.
         /// </summary>
-        internal AOA() : base("AOA") { }
+        private AOA() : base("AOA") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
@@ -295,7 +295,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AOK" /> class.
         /// </summary>
-        internal AOK() : base("AOK") { }
+        private AOK() : base("AOK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
@@ -324,7 +324,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AON" /> class.
         /// </summary>
-        internal AON() : base("AON") { }
+        private AON() : base("AON") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Kwanza".
@@ -353,7 +353,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AOR" /> class.
         /// </summary>
-        internal AOR() : base("AOR") { }
+        private AOR() : base("AOR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza Reajustado".
@@ -382,7 +382,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ARA" /> class.
         /// </summary>
-        internal ARA() : base("ARA") { }
+        private ARA() : base("ARA") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Austral".
@@ -411,7 +411,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ARP" /> class.
         /// </summary>
-        internal ARP() : base("ARP") { }
+        private ARP() : base("ARP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Argentino".
@@ -440,7 +440,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ARS" /> class.
         /// </summary>
-        internal ARS() : base("ARS") { }
+        private ARS() : base("ARS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Argentine Peso".
@@ -469,7 +469,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ARY" /> class.
         /// </summary>
-        internal ARY() : base("ARY") { }
+        private ARY() : base("ARY") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso".
@@ -498,7 +498,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ATS" /> class.
         /// </summary>
-        internal ATS() : base("ATS") { }
+        private ATS() : base("ATS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Schilling".
@@ -527,7 +527,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AUD" /> class.
         /// </summary>
-        internal AUD() : base("AUD") { }
+        private AUD() : base("AUD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Australian Dollar".
@@ -556,7 +556,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AWG" /> class.
         /// </summary>
-        internal AWG() : base("AWG") { }
+        private AWG() : base("AWG") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Aruban Florin".
@@ -585,7 +585,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AYM" /> class.
         /// </summary>
-        internal AYM() : base("AYM") { }
+        private AYM() : base("AYM") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijan Manat".
@@ -614,7 +614,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AZM" /> class.
         /// </summary>
-        internal AZM() : base("AZM") { }
+        private AZM() : base("AZM") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
@@ -643,7 +643,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="AZN" /> class.
         /// </summary>
-        internal AZN() : base("AZN") { }
+        private AZN() : base("AZN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
@@ -672,7 +672,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BAD" /> class.
         /// </summary>
-        internal BAD() : base("BAD") { }
+        private BAD() : base("BAD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dinar".
@@ -701,7 +701,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BAM" /> class.
         /// </summary>
-        internal BAM() : base("BAM") { }
+        private BAM() : base("BAM") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Mark".
@@ -730,7 +730,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BBD" /> class.
         /// </summary>
-        internal BBD() : base("BBD") { }
+        private BBD() : base("BBD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Barbados Dollar".
@@ -759,7 +759,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BDT" /> class.
         /// </summary>
-        internal BDT() : base("BDT") { }
+        private BDT() : base("BDT") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Taka".
@@ -788,7 +788,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BEC" /> class.
         /// </summary>
-        internal BEC() : base("BEC") { }
+        private BEC() : base("BEC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Franc".
@@ -817,7 +817,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BEF" /> class.
         /// </summary>
-        internal BEF() : base("BEF") { }
+        private BEF() : base("BEF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belgian Franc".
@@ -846,7 +846,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BEL" /> class.
         /// </summary>
-        internal BEL() : base("BEL") { }
+        private BEL() : base("BEL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Financial Franc".
@@ -875,7 +875,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BGJ" /> class.
         /// </summary>
-        internal BGJ() : base("BGJ") { }
+        private BGJ() : base("BGJ") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev A/52".
@@ -904,7 +904,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BGK" /> class.
         /// </summary>
-        internal BGK() : base("BGK") { }
+        private BGK() : base("BGK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev A/62".
@@ -933,7 +933,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BGL" /> class.
         /// </summary>
-        internal BGL() : base("BGL") { }
+        private BGL() : base("BGL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev".
@@ -962,7 +962,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BGN" /> class.
         /// </summary>
-        internal BGN() : base("BGN") { }
+        private BGN() : base("BGN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bulgarian Lev".
@@ -991,7 +991,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BHD" /> class.
         /// </summary>
-        internal BHD() : base("BHD") { }
+        private BHD() : base("BHD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahraini Dinar".
@@ -1020,7 +1020,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BIF" /> class.
         /// </summary>
-        internal BIF() : base("BIF") { }
+        private BIF() : base("BIF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Burundi Franc".
@@ -1049,7 +1049,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BMD" /> class.
         /// </summary>
-        internal BMD() : base("BMD") { }
+        private BMD() : base("BMD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bermudian Dollar".
@@ -1078,7 +1078,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BND" /> class.
         /// </summary>
-        internal BND() : base("BND") { }
+        private BND() : base("BND") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Brunei Dollar".
@@ -1107,7 +1107,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BOB" /> class.
         /// </summary>
-        internal BOB() : base("BOB") { }
+        private BOB() : base("BOB") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Boliviano".
@@ -1136,7 +1136,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BOP" /> class.
         /// </summary>
-        internal BOP() : base("BOP") { }
+        private BOP() : base("BOP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso boliviano".
@@ -1165,7 +1165,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BOV" /> class.
         /// </summary>
-        internal BOV() : base("BOV") { }
+        private BOV() : base("BOV") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mvdol".
@@ -1194,7 +1194,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BRB" /> class.
         /// </summary>
-        internal BRB() : base("BRB") { }
+        private BRB() : base("BRB") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro".
@@ -1223,7 +1223,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BRC" /> class.
         /// </summary>
-        internal BRC() : base("BRC") { }
+        private BRC() : base("BRC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzado".
@@ -1252,7 +1252,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BRE" /> class.
         /// </summary>
-        internal BRE() : base("BRE") { }
+        private BRE() : base("BRE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro".
@@ -1281,7 +1281,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BRL" /> class.
         /// </summary>
-        internal BRL() : base("BRL") { }
+        private BRL() : base("BRL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Brazilian Real".
@@ -1310,7 +1310,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BRN" /> class.
         /// </summary>
-        internal BRN() : base("BRN") { }
+        private BRN() : base("BRN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Cruzado".
@@ -1339,7 +1339,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BRR" /> class.
         /// </summary>
-        internal BRR() : base("BRR") { }
+        private BRR() : base("BRR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro Real".
@@ -1368,7 +1368,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BSD" /> class.
         /// </summary>
-        internal BSD() : base("BSD") { }
+        private BSD() : base("BSD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahamian Dollar".
@@ -1397,7 +1397,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BTN" /> class.
         /// </summary>
-        internal BTN() : base("BTN") { }
+        private BTN() : base("BTN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ngultrum".
@@ -1426,7 +1426,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BUK" /> class.
         /// </summary>
-        internal BUK() : base("BUK") { }
+        private BUK() : base("BUK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "N.A.".
@@ -1455,7 +1455,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BWP" /> class.
         /// </summary>
-        internal BWP() : base("BWP") { }
+        private BWP() : base("BWP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pula".
@@ -1484,7 +1484,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BYB" /> class.
         /// </summary>
-        internal BYB() : base("BYB") { }
+        private BYB() : base("BYB") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".
@@ -1513,7 +1513,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BYN" /> class.
         /// </summary>
-        internal BYN() : base("BYN") { }
+        private BYN() : base("BYN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".
@@ -1542,7 +1542,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BYR" /> class.
         /// </summary>
-        internal BYR() : base("BYR") { }
+        private BYR() : base("BYR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".
@@ -1571,7 +1571,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="BZD" /> class.
         /// </summary>
-        internal BZD() : base("BZD") { }
+        private BZD() : base("BZD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Belize Dollar".
@@ -1600,7 +1600,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CAD" /> class.
         /// </summary>
-        internal CAD() : base("CAD") { }
+        private CAD() : base("CAD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Canadian Dollar".
@@ -1629,7 +1629,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CDF" /> class.
         /// </summary>
-        internal CDF() : base("CDF") { }
+        private CDF() : base("CDF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Congolese Franc".
@@ -1658,7 +1658,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CHC" /> class.
         /// </summary>
-        internal CHC() : base("CHC") { }
+        private CHC() : base("CHC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc (for electronic)".
@@ -1687,7 +1687,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CHE" /> class.
         /// </summary>
-        internal CHE() : base("CHE") { }
+        private CHE() : base("CHE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Euro".
@@ -1716,7 +1716,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CHF" /> class.
         /// </summary>
-        internal CHF() : base("CHF") { }
+        private CHF() : base("CHF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Swiss Franc".
@@ -1745,7 +1745,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CHW" /> class.
         /// </summary>
-        internal CHW() : base("CHW") { }
+        private CHW() : base("CHW") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc".
@@ -1774,7 +1774,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CLF" /> class.
         /// </summary>
-        internal CLF() : base("CLF") { }
+        private CLF() : base("CLF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Fomento".
@@ -1803,7 +1803,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CLP" /> class.
         /// </summary>
-        internal CLP() : base("CLP") { }
+        private CLP() : base("CLP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Chilean Peso".
@@ -1832,7 +1832,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CNX" /> class.
         /// </summary>
-        internal CNX() : base("CNX") { }
+        private CNX() : base("CNX") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peoples Bank Dollar".
@@ -1861,7 +1861,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CNY" /> class.
         /// </summary>
-        internal CNY() : base("CNY") { }
+        private CNY() : base("CNY") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yuan Renminbi".
@@ -1890,7 +1890,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="COP" /> class.
         /// </summary>
-        internal COP() : base("COP") { }
+        private COP() : base("COP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Colombian Peso".
@@ -1919,7 +1919,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="COU" /> class.
         /// </summary>
-        internal COU() : base("COU") { }
+        private COU() : base("COU") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Real".
@@ -1948,7 +1948,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CRC" /> class.
         /// </summary>
-        internal CRC() : base("CRC") { }
+        private CRC() : base("CRC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Costa Rican Colon".
@@ -1977,7 +1977,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CSD" /> class.
         /// </summary>
-        internal CSD() : base("CSD") { }
+        private CSD() : base("CSD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
@@ -2006,7 +2006,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CSJ" /> class.
         /// </summary>
-        internal CSJ() : base("CSJ") { }
+        private CSJ() : base("CSJ") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Krona A/53".
@@ -2035,7 +2035,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CSK" /> class.
         /// </summary>
-        internal CSK() : base("CSK") { }
+        private CSK() : base("CSK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Koruna".
@@ -2064,7 +2064,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CUC" /> class.
         /// </summary>
-        internal CUC() : base("CUC") { }
+        private CUC() : base("CUC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Convertible".
@@ -2093,7 +2093,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CUP" /> class.
         /// </summary>
-        internal CUP() : base("CUP") { }
+        private CUP() : base("CUP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cuban Peso".
@@ -2122,7 +2122,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CVE" /> class.
         /// </summary>
-        internal CVE() : base("CVE") { }
+        private CVE() : base("CVE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cabo Verde Escudo".
@@ -2151,7 +2151,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CYP" /> class.
         /// </summary>
-        internal CYP() : base("CYP") { }
+        private CYP() : base("CYP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cyprus Pound".
@@ -2180,7 +2180,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="CZK" /> class.
         /// </summary>
-        internal CZK() : base("CZK") { }
+        private CZK() : base("CZK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Czech Koruna".
@@ -2209,7 +2209,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="DDM" /> class.
         /// </summary>
-        internal DDM() : base("DDM") { }
+        private DDM() : base("DDM") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mark der DDR".
@@ -2238,7 +2238,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="DEM" /> class.
         /// </summary>
-        internal DEM() : base("DEM") { }
+        private DEM() : base("DEM") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Deutsche Mark".
@@ -2267,7 +2267,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="DJF" /> class.
         /// </summary>
-        internal DJF() : base("DJF") { }
+        private DJF() : base("DJF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Djibouti Franc".
@@ -2296,7 +2296,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="DKK" /> class.
         /// </summary>
-        internal DKK() : base("DKK") { }
+        private DKK() : base("DKK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Danish Krone".
@@ -2325,7 +2325,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="DOP" /> class.
         /// </summary>
-        internal DOP() : base("DOP") { }
+        private DOP() : base("DOP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dominican Peso".
@@ -2354,7 +2354,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="DZD" /> class.
         /// </summary>
-        internal DZD() : base("DZD") { }
+        private DZD() : base("DZD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Algerian Dinar".
@@ -2383,7 +2383,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ECS" /> class.
         /// </summary>
-        internal ECS() : base("ECS") { }
+        private ECS() : base("ECS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
@@ -2412,7 +2412,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ECV" /> class.
         /// </summary>
-        internal ECV() : base("ECV") { }
+        private ECV() : base("ECV") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Constante (UVC)".
@@ -2441,7 +2441,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="EEK" /> class.
         /// </summary>
-        internal EEK() : base("EEK") { }
+        private EEK() : base("EEK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kroon".
@@ -2470,7 +2470,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="EGP" /> class.
         /// </summary>
-        internal EGP() : base("EGP") { }
+        private EGP() : base("EGP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Egyptian Pound".
@@ -2499,7 +2499,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="EQE" /> class.
         /// </summary>
-        internal EQE() : base("EQE") { }
+        private EQE() : base("EQE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ekwele".
@@ -2528,7 +2528,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ERN" /> class.
         /// </summary>
-        internal ERN() : base("ERN") { }
+        private ERN() : base("ERN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nakfa".
@@ -2557,7 +2557,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ESA" /> class.
         /// </summary>
-        internal ESA() : base("ESA") { }
+        private ESA() : base("ESA") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".
@@ -2586,7 +2586,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ESB" /> class.
         /// </summary>
-        internal ESB() : base("ESB") { }
+        private ESB() : base("ESB") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the """A"" Account (convertible Peseta Account)".
@@ -2615,7 +2615,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ESP" /> class.
         /// </summary>
-        internal ESP() : base("ESP") { }
+        private ESP() : base("ESP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".
@@ -2644,7 +2644,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ETB" /> class.
         /// </summary>
-        internal ETB() : base("ETB") { }
+        private ETB() : base("ETB") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ethiopian Birr".
@@ -2673,7 +2673,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="EUR" /> class.
         /// </summary>
-        internal EUR() : base("EUR") { }
+        private EUR() : base("EUR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Euro".
@@ -2702,7 +2702,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="FIM" /> class.
         /// </summary>
-        internal FIM() : base("FIM") { }
+        private FIM() : base("FIM") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Markka".
@@ -2731,7 +2731,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="FJD" /> class.
         /// </summary>
-        internal FJD() : base("FJD") { }
+        private FJD() : base("FJD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Fiji Dollar".
@@ -2760,7 +2760,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="FKP" /> class.
         /// </summary>
-        internal FKP() : base("FKP") { }
+        private FKP() : base("FKP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Falkland Islands Pound".
@@ -2789,7 +2789,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="FRF" /> class.
         /// </summary>
-        internal FRF() : base("FRF") { }
+        private FRF() : base("FRF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "French Franc".
@@ -2818,7 +2818,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GBP" /> class.
         /// </summary>
-        internal GBP() : base("GBP") { }
+        private GBP() : base("GBP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound Sterling".
@@ -2847,7 +2847,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GEK" /> class.
         /// </summary>
-        internal GEK() : base("GEK") { }
+        private GEK() : base("GEK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Georgian Coupon".
@@ -2876,7 +2876,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GEL" /> class.
         /// </summary>
-        internal GEL() : base("GEL") { }
+        private GEL() : base("GEL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lari".
@@ -2905,7 +2905,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GHC" /> class.
         /// </summary>
-        internal GHC() : base("GHC") { }
+        private GHC() : base("GHC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cedi".
@@ -2934,7 +2934,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GHP" /> class.
         /// </summary>
-        internal GHP() : base("GHP") { }
+        private GHP() : base("GHP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
@@ -2963,7 +2963,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GHS" /> class.
         /// </summary>
-        internal GHS() : base("GHS") { }
+        private GHS() : base("GHS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
@@ -2992,7 +2992,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GIP" /> class.
         /// </summary>
-        internal GIP() : base("GIP") { }
+        private GIP() : base("GIP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gibraltar Pound".
@@ -3021,7 +3021,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GMD" /> class.
         /// </summary>
-        internal GMD() : base("GMD") { }
+        private GMD() : base("GMD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dalasi".
@@ -3050,7 +3050,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GNE" /> class.
         /// </summary>
-        internal GNE() : base("GNE") { }
+        private GNE() : base("GNE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syli".
@@ -3079,7 +3079,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GNF" /> class.
         /// </summary>
-        internal GNF() : base("GNF") { }
+        private GNF() : base("GNF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Franc".
@@ -3108,7 +3108,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GNS" /> class.
         /// </summary>
-        internal GNS() : base("GNS") { }
+        private GNS() : base("GNS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syli".
@@ -3137,7 +3137,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GQE" /> class.
         /// </summary>
-        internal GQE() : base("GQE") { }
+        private GQE() : base("GQE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ekwele".
@@ -3166,7 +3166,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GRD" /> class.
         /// </summary>
-        internal GRD() : base("GRD") { }
+        private GRD() : base("GRD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Drachma".
@@ -3195,7 +3195,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GTQ" /> class.
         /// </summary>
-        internal GTQ() : base("GTQ") { }
+        private GTQ() : base("GTQ") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Quetzal".
@@ -3224,7 +3224,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GWE" /> class.
         /// </summary>
-        internal GWE() : base("GWE") { }
+        private GWE() : base("GWE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Escudo".
@@ -3253,7 +3253,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GWP" /> class.
         /// </summary>
-        internal GWP() : base("GWP") { }
+        private GWP() : base("GWP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea-Bissau Peso".
@@ -3282,7 +3282,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="GYD" /> class.
         /// </summary>
-        internal GYD() : base("GYD") { }
+        private GYD() : base("GYD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guyana Dollar".
@@ -3311,7 +3311,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="HKD" /> class.
         /// </summary>
-        internal HKD() : base("HKD") { }
+        private HKD() : base("HKD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Hong Kong Dollar".
@@ -3340,7 +3340,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="HNL" /> class.
         /// </summary>
-        internal HNL() : base("HNL") { }
+        private HNL() : base("HNL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lempira".
@@ -3369,7 +3369,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="HRD" /> class.
         /// </summary>
-        internal HRD() : base("HRD") { }
+        private HRD() : base("HRD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Croatian Dinar".
@@ -3398,7 +3398,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="HRK" /> class.
         /// </summary>
-        internal HRK() : base("HRK") { }
+        private HRK() : base("HRK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kuna".
@@ -3427,7 +3427,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="HTG" /> class.
         /// </summary>
-        internal HTG() : base("HTG") { }
+        private HTG() : base("HTG") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gourde".
@@ -3456,7 +3456,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="HUF" /> class.
         /// </summary>
-        internal HUF() : base("HUF") { }
+        private HUF() : base("HUF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Forint".
@@ -3485,7 +3485,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="IDR" /> class.
         /// </summary>
-        internal IDR() : base("IDR") { }
+        private IDR() : base("IDR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rupiah".
@@ -3514,7 +3514,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="IEP" /> class.
         /// </summary>
-        internal IEP() : base("IEP") { }
+        private IEP() : base("IEP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Irish Pound".
@@ -3543,7 +3543,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ILP" /> class.
         /// </summary>
-        internal ILP() : base("ILP") { }
+        private ILP() : base("ILP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound".
@@ -3572,7 +3572,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ILR" /> class.
         /// </summary>
-        internal ILR() : base("ILR") { }
+        private ILR() : base("ILR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Shekel".
@@ -3601,7 +3601,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ILS" /> class.
         /// </summary>
-        internal ILS() : base("ILS") { }
+        private ILS() : base("ILS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Israeli Sheqel".
@@ -3630,7 +3630,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="INR" /> class.
         /// </summary>
-        internal INR() : base("INR") { }
+        private INR() : base("INR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Indian Rupee".
@@ -3659,7 +3659,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="IQD" /> class.
         /// </summary>
-        internal IQD() : base("IQD") { }
+        private IQD() : base("IQD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iraqi Dinar".
@@ -3688,7 +3688,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="IRR" /> class.
         /// </summary>
-        internal IRR() : base("IRR") { }
+        private IRR() : base("IRR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iranian Rial".
@@ -3717,7 +3717,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ISJ" /> class.
         /// </summary>
-        internal ISJ() : base("ISJ") { }
+        private ISJ() : base("ISJ") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Krona".
@@ -3746,7 +3746,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ISK" /> class.
         /// </summary>
-        internal ISK() : base("ISK") { }
+        private ISK() : base("ISK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Iceland Krona".
@@ -3775,7 +3775,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ITL" /> class.
         /// </summary>
-        internal ITL() : base("ITL") { }
+        private ITL() : base("ITL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Italian Lira".
@@ -3804,7 +3804,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="JMD" /> class.
         /// </summary>
-        internal JMD() : base("JMD") { }
+        private JMD() : base("JMD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Jamaican Dollar".
@@ -3833,7 +3833,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="JOD" /> class.
         /// </summary>
-        internal JOD() : base("JOD") { }
+        private JOD() : base("JOD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Jordanian Dinar".
@@ -3862,7 +3862,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="JPY" /> class.
         /// </summary>
-        internal JPY() : base("JPY") { }
+        private JPY() : base("JPY") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yen".
@@ -3891,7 +3891,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="KES" /> class.
         /// </summary>
-        internal KES() : base("KES") { }
+        private KES() : base("KES") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kenyan Shilling".
@@ -3920,7 +3920,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="KGS" /> class.
         /// </summary>
-        internal KGS() : base("KGS") { }
+        private KGS() : base("KGS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Som".
@@ -3949,7 +3949,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="KHR" /> class.
         /// </summary>
-        internal KHR() : base("KHR") { }
+        private KHR() : base("KHR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Riel".
@@ -3978,7 +3978,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="KMF" /> class.
         /// </summary>
-        internal KMF() : base("KMF") { }
+        private KMF() : base("KMF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Comoro Franc".
@@ -4007,7 +4007,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="KPW" /> class.
         /// </summary>
-        internal KPW() : base("KPW") { }
+        private KPW() : base("KPW") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "North Korean Won".
@@ -4036,7 +4036,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="KRW" /> class.
         /// </summary>
-        internal KRW() : base("KRW") { }
+        private KRW() : base("KRW") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Won".
@@ -4065,7 +4065,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="KWD" /> class.
         /// </summary>
-        internal KWD() : base("KWD") { }
+        private KWD() : base("KWD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kuwaiti Dinar".
@@ -4094,7 +4094,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="KYD" /> class.
         /// </summary>
-        internal KYD() : base("KYD") { }
+        private KYD() : base("KYD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cayman Islands Dollar".
@@ -4123,7 +4123,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="KZT" /> class.
         /// </summary>
-        internal KZT() : base("KZT") { }
+        private KZT() : base("KZT") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tenge".
@@ -4152,7 +4152,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LAJ" /> class.
         /// </summary>
-        internal LAJ() : base("LAJ") { }
+        private LAJ() : base("LAJ") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip Pot Pol".
@@ -4181,7 +4181,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LAK" /> class.
         /// </summary>
-        internal LAK() : base("LAK") { }
+        private LAK() : base("LAK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip".
@@ -4210,7 +4210,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LBP" /> class.
         /// </summary>
-        internal LBP() : base("LBP") { }
+        private LBP() : base("LBP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lebanese Pound".
@@ -4239,7 +4239,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LKR" /> class.
         /// </summary>
-        internal LKR() : base("LKR") { }
+        private LKR() : base("LKR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sri Lanka Rupee".
@@ -4268,7 +4268,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LRD" /> class.
         /// </summary>
-        internal LRD() : base("LRD") { }
+        private LRD() : base("LRD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Liberian Dollar".
@@ -4297,7 +4297,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LSL" /> class.
         /// </summary>
-        internal LSL() : base("LSL") { }
+        private LSL() : base("LSL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Loti".
@@ -4326,7 +4326,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LSM" /> class.
         /// </summary>
-        internal LSM() : base("LSM") { }
+        private LSM() : base("LSM") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maloti".
@@ -4355,7 +4355,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LTL" /> class.
         /// </summary>
-        internal LTL() : base("LTL") { }
+        private LTL() : base("LTL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lithuanian Litas".
@@ -4384,7 +4384,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LTT" /> class.
         /// </summary>
-        internal LTT() : base("LTT") { }
+        private LTT() : base("LTT") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Talonas".
@@ -4413,7 +4413,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LUC" /> class.
         /// </summary>
-        internal LUC() : base("LUC") { }
+        private LUC() : base("LUC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Convertible Franc".
@@ -4442,7 +4442,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LUF" /> class.
         /// </summary>
-        internal LUF() : base("LUF") { }
+        private LUF() : base("LUF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Franc".
@@ -4471,7 +4471,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LUL" /> class.
         /// </summary>
-        internal LUL() : base("LUL") { }
+        private LUL() : base("LUL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Financial Franc".
@@ -4500,7 +4500,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LVL" /> class.
         /// </summary>
-        internal LVL() : base("LVL") { }
+        private LVL() : base("LVL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Latvian Lats".
@@ -4529,7 +4529,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LVR" /> class.
         /// </summary>
-        internal LVR() : base("LVR") { }
+        private LVR() : base("LVR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Latvian Ruble".
@@ -4558,7 +4558,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="LYD" /> class.
         /// </summary>
-        internal LYD() : base("LYD") { }
+        private LYD() : base("LYD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Libyan Dinar".
@@ -4587,7 +4587,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MAD" /> class.
         /// </summary>
-        internal MAD() : base("MAD") { }
+        private MAD() : base("MAD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Moroccan Dirham".
@@ -4616,7 +4616,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MAF" /> class.
         /// </summary>
-        internal MAF() : base("MAF") { }
+        private MAF() : base("MAF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mali Franc".
@@ -4645,7 +4645,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MDL" /> class.
         /// </summary>
-        internal MDL() : base("MDL") { }
+        private MDL() : base("MDL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Moldovan Leu".
@@ -4674,7 +4674,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MGA" /> class.
         /// </summary>
-        internal MGA() : base("MGA") { }
+        private MGA() : base("MGA") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Ariary".
@@ -4703,7 +4703,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MGF" /> class.
         /// </summary>
-        internal MGF() : base("MGF") { }
+        private MGF() : base("MGF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Franc".
@@ -4732,7 +4732,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MKD" /> class.
         /// </summary>
-        internal MKD() : base("MKD") { }
+        private MKD() : base("MKD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Denar".
@@ -4761,7 +4761,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MLF" /> class.
         /// </summary>
-        internal MLF() : base("MLF") { }
+        private MLF() : base("MLF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mali Franc".
@@ -4790,7 +4790,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MMK" /> class.
         /// </summary>
-        internal MMK() : base("MMK") { }
+        private MMK() : base("MMK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kyat".
@@ -4819,7 +4819,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MNT" /> class.
         /// </summary>
-        internal MNT() : base("MNT") { }
+        private MNT() : base("MNT") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tugrik".
@@ -4848,7 +4848,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MOP" /> class.
         /// </summary>
-        internal MOP() : base("MOP") { }
+        private MOP() : base("MOP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pataca".
@@ -4877,7 +4877,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MRO" /> class.
         /// </summary>
-        internal MRO() : base("MRO") { }
+        private MRO() : base("MRO") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Ouguiya".
@@ -4906,7 +4906,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MTL" /> class.
         /// </summary>
-        internal MTL() : base("MTL") { }
+        private MTL() : base("MTL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maltese Lira".
@@ -4935,7 +4935,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MTP" /> class.
         /// </summary>
-        internal MTP() : base("MTP") { }
+        private MTP() : base("MTP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maltese Pound".
@@ -4964,7 +4964,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MUR" /> class.
         /// </summary>
-        internal MUR() : base("MUR") { }
+        private MUR() : base("MUR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mauritius Rupee".
@@ -4993,7 +4993,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MVQ" /> class.
         /// </summary>
-        internal MVQ() : base("MVQ") { }
+        private MVQ() : base("MVQ") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Maldive Rupee".
@@ -5022,7 +5022,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MVR" /> class.
         /// </summary>
-        internal MVR() : base("MVR") { }
+        private MVR() : base("MVR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rufiyaa".
@@ -5051,7 +5051,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MWK" /> class.
         /// </summary>
-        internal MWK() : base("MWK") { }
+        private MWK() : base("MWK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malawi Kwacha".
@@ -5080,7 +5080,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MXN" /> class.
         /// </summary>
-        internal MXN() : base("MXN") { }
+        private MXN() : base("MXN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
@@ -5109,7 +5109,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MXP" /> class.
         /// </summary>
-        internal MXP() : base("MXP") { }
+        private MXP() : base("MXP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
@@ -5138,7 +5138,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MXV" /> class.
         /// </summary>
-        internal MXV() : base("MXV") { }
+        private MXV() : base("MXV") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Unidad de Inversion (UDI)".
@@ -5167,7 +5167,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MYR" /> class.
         /// </summary>
-        internal MYR() : base("MYR") { }
+        private MYR() : base("MYR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Malaysian Ringgit".
@@ -5196,7 +5196,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MZE" /> class.
         /// </summary>
-        internal MZE() : base("MZE") { }
+        private MZE() : base("MZE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Escudo".
@@ -5225,7 +5225,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MZM" /> class.
         /// </summary>
-        internal MZM() : base("MZM") { }
+        private MZM() : base("MZM") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
@@ -5254,7 +5254,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="MZN" /> class.
         /// </summary>
-        internal MZN() : base("MZN") { }
+        private MZN() : base("MZN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
@@ -5283,7 +5283,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="NAD" /> class.
         /// </summary>
-        internal NAD() : base("NAD") { }
+        private NAD() : base("NAD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Namibia Dollar".
@@ -5312,7 +5312,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="NGN" /> class.
         /// </summary>
-        internal NGN() : base("NGN") { }
+        private NGN() : base("NGN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Naira".
@@ -5341,7 +5341,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="NIC" /> class.
         /// </summary>
-        internal NIC() : base("NIC") { }
+        private NIC() : base("NIC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba".
@@ -5370,7 +5370,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="NIO" /> class.
         /// </summary>
-        internal NIO() : base("NIO") { }
+        private NIO() : base("NIO") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba Oro".
@@ -5399,7 +5399,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="NLG" /> class.
         /// </summary>
-        internal NLG() : base("NLG") { }
+        private NLG() : base("NLG") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Guilder".
@@ -5428,7 +5428,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="NOK" /> class.
         /// </summary>
-        internal NOK() : base("NOK") { }
+        private NOK() : base("NOK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Norwegian Krone".
@@ -5457,7 +5457,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="NPR" /> class.
         /// </summary>
-        internal NPR() : base("NPR") { }
+        private NPR() : base("NPR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Nepalese Rupee".
@@ -5486,7 +5486,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="NZD" /> class.
         /// </summary>
-        internal NZD() : base("NZD") { }
+        private NZD() : base("NZD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zealand Dollar".
@@ -5515,7 +5515,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="OMR" /> class.
         /// </summary>
-        internal OMR() : base("OMR") { }
+        private OMR() : base("OMR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rial Omani".
@@ -5544,7 +5544,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PAB" /> class.
         /// </summary>
-        internal PAB() : base("PAB") { }
+        private PAB() : base("PAB") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Balboa".
@@ -5573,7 +5573,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PEH" /> class.
         /// </summary>
-        internal PEH() : base("PEH") { }
+        private PEH() : base("PEH") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
@@ -5602,7 +5602,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PEI" /> class.
         /// </summary>
-        internal PEI() : base("PEI") { }
+        private PEI() : base("PEI") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Inti".
@@ -5631,7 +5631,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PEN" /> class.
         /// </summary>
-        internal PEN() : base("PEN") { }
+        private PEN() : base("PEN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
@@ -5660,7 +5660,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PES" /> class.
         /// </summary>
-        internal PES() : base("PES") { }
+        private PES() : base("PES") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
@@ -5689,7 +5689,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PGK" /> class.
         /// </summary>
-        internal PGK() : base("PGK") { }
+        private PGK() : base("PGK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Kina".
@@ -5718,7 +5718,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PHP" /> class.
         /// </summary>
-        internal PHP() : base("PHP") { }
+        private PHP() : base("PHP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Philippine Peso".
@@ -5747,7 +5747,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PKR" /> class.
         /// </summary>
-        internal PKR() : base("PKR") { }
+        private PKR() : base("PKR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pakistan Rupee".
@@ -5776,7 +5776,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PLN" /> class.
         /// </summary>
-        internal PLN() : base("PLN") { }
+        private PLN() : base("PLN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
@@ -5805,7 +5805,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PLZ" /> class.
         /// </summary>
-        internal PLZ() : base("PLZ") { }
+        private PLZ() : base("PLZ") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
@@ -5834,7 +5834,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PTE" /> class.
         /// </summary>
-        internal PTE() : base("PTE") { }
+        private PTE() : base("PTE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Portuguese Escudo".
@@ -5863,7 +5863,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="PYG" /> class.
         /// </summary>
-        internal PYG() : base("PYG") { }
+        private PYG() : base("PYG") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Guarani".
@@ -5892,7 +5892,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="QAR" /> class.
         /// </summary>
-        internal QAR() : base("QAR") { }
+        private QAR() : base("QAR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Qatari Rial".
@@ -5921,7 +5921,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="RHD" /> class.
         /// </summary>
-        internal RHD() : base("RHD") { }
+        private RHD() : base("RHD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".
@@ -5950,7 +5950,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ROK" /> class.
         /// </summary>
-        internal ROK() : base("ROK") { }
+        private ROK() : base("ROK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Leu A/52".
@@ -5979,7 +5979,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ROL" /> class.
         /// </summary>
-        internal ROL() : base("ROL") { }
+        private ROL() : base("ROL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Leu".
@@ -6008,7 +6008,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="RON" /> class.
         /// </summary>
-        internal RON() : base("RON") { }
+        private RON() : base("RON") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Romanian Leu".
@@ -6037,7 +6037,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="RSD" /> class.
         /// </summary>
-        internal RSD() : base("RSD") { }
+        private RSD() : base("RSD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
@@ -6066,7 +6066,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="RUB" /> class.
         /// </summary>
-        internal RUB() : base("RUB") { }
+        private RUB() : base("RUB") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
@@ -6095,7 +6095,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="RUR" /> class.
         /// </summary>
-        internal RUR() : base("RUR") { }
+        private RUR() : base("RUR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
@@ -6124,7 +6124,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="RWF" /> class.
         /// </summary>
-        internal RWF() : base("RWF") { }
+        private RWF() : base("RWF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rwanda Franc".
@@ -6153,7 +6153,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SAR" /> class.
         /// </summary>
-        internal SAR() : base("SAR") { }
+        private SAR() : base("SAR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Saudi Riyal".
@@ -6182,7 +6182,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SBD" /> class.
         /// </summary>
-        internal SBD() : base("SBD") { }
+        private SBD() : base("SBD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Solomon Islands Dollar".
@@ -6211,7 +6211,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SCR" /> class.
         /// </summary>
-        internal SCR() : base("SCR") { }
+        private SCR() : base("SCR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Seychelles Rupee".
@@ -6240,7 +6240,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SDD" /> class.
         /// </summary>
-        internal SDD() : base("SDD") { }
+        private SDD() : base("SDD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Dinar".
@@ -6269,7 +6269,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SDG" /> class.
         /// </summary>
-        internal SDG() : base("SDG") { }
+        private SDG() : base("SDG") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
@@ -6298,7 +6298,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SDP" /> class.
         /// </summary>
-        internal SDP() : base("SDP") { }
+        private SDP() : base("SDP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
@@ -6327,7 +6327,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SEK" /> class.
         /// </summary>
-        internal SEK() : base("SEK") { }
+        private SEK() : base("SEK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Swedish Krona".
@@ -6356,7 +6356,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SGD" /> class.
         /// </summary>
-        internal SGD() : base("SGD") { }
+        private SGD() : base("SGD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Singapore Dollar".
@@ -6385,7 +6385,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SHP" /> class.
         /// </summary>
-        internal SHP() : base("SHP") { }
+        private SHP() : base("SHP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Saint Helena Pound".
@@ -6414,7 +6414,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SIT" /> class.
         /// </summary>
-        internal SIT() : base("SIT") { }
+        private SIT() : base("SIT") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tolar".
@@ -6443,7 +6443,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SKK" /> class.
         /// </summary>
-        internal SKK() : base("SKK") { }
+        private SKK() : base("SKK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Slovak Koruna".
@@ -6472,7 +6472,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SLL" /> class.
         /// </summary>
-        internal SLL() : base("SLL") { }
+        private SLL() : base("SLL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Leone".
@@ -6501,7 +6501,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SOS" /> class.
         /// </summary>
-        internal SOS() : base("SOS") { }
+        private SOS() : base("SOS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Somali Shilling".
@@ -6530,7 +6530,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SRD" /> class.
         /// </summary>
-        internal SRD() : base("SRD") { }
+        private SRD() : base("SRD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Dollar".
@@ -6559,7 +6559,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SRG" /> class.
         /// </summary>
-        internal SRG() : base("SRG") { }
+        private SRG() : base("SRG") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Guilder".
@@ -6588,7 +6588,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SSP" /> class.
         /// </summary>
-        internal SSP() : base("SSP") { }
+        private SSP() : base("SSP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "South Sudanese Pound".
@@ -6617,7 +6617,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="STD" /> class.
         /// </summary>
-        internal STD() : base("STD") { }
+        private STD() : base("STD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dobra".
@@ -6646,7 +6646,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SUR" /> class.
         /// </summary>
-        internal SUR() : base("SUR") { }
+        private SUR() : base("SUR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rouble".
@@ -6675,7 +6675,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SVC" /> class.
         /// </summary>
-        internal SVC() : base("SVC") { }
+        private SVC() : base("SVC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "El Salvador Colon".
@@ -6704,7 +6704,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SYP" /> class.
         /// </summary>
-        internal SYP() : base("SYP") { }
+        private SYP() : base("SYP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Syrian Pound".
@@ -6733,7 +6733,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="SZL" /> class.
         /// </summary>
-        internal SZL() : base("SZL") { }
+        private SZL() : base("SZL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Lilangeni".
@@ -6762,7 +6762,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="THB" /> class.
         /// </summary>
-        internal THB() : base("THB") { }
+        private THB() : base("THB") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Baht".
@@ -6791,7 +6791,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TJR" /> class.
         /// </summary>
-        internal TJR() : base("TJR") { }
+        private TJR() : base("TJR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tajik Ruble".
@@ -6820,7 +6820,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TJS" /> class.
         /// </summary>
-        internal TJS() : base("TJS") { }
+        private TJS() : base("TJS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Somoni".
@@ -6849,7 +6849,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TMM" /> class.
         /// </summary>
-        internal TMM() : base("TMM") { }
+        private TMM() : base("TMM") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan Manat".
@@ -6878,7 +6878,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TMT" /> class.
         /// </summary>
-        internal TMT() : base("TMT") { }
+        private TMT() : base("TMT") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan New Manat".
@@ -6907,7 +6907,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TND" /> class.
         /// </summary>
-        internal TND() : base("TND") { }
+        private TND() : base("TND") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tunisian Dinar".
@@ -6936,7 +6936,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TOP" /> class.
         /// </summary>
-        internal TOP() : base("TOP") { }
+        private TOP() : base("TOP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Pa’anga".
@@ -6965,7 +6965,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TPE" /> class.
         /// </summary>
-        internal TPE() : base("TPE") { }
+        private TPE() : base("TPE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Timor Escudo".
@@ -6994,7 +6994,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TRL" /> class.
         /// </summary>
-        internal TRL() : base("TRL") { }
+        private TRL() : base("TRL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Turkish Lira".
@@ -7023,7 +7023,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TRY" /> class.
         /// </summary>
-        internal TRY() : base("TRY") { }
+        private TRY() : base("TRY") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkish Lira".
@@ -7052,7 +7052,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TTD" /> class.
         /// </summary>
-        internal TTD() : base("TTD") { }
+        private TTD() : base("TTD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Trinidad and Tobago Dollar".
@@ -7081,7 +7081,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TWD" /> class.
         /// </summary>
-        internal TWD() : base("TWD") { }
+        private TWD() : base("TWD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Taiwan Dollar".
@@ -7110,7 +7110,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="TZS" /> class.
         /// </summary>
-        internal TZS() : base("TZS") { }
+        private TZS() : base("TZS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tanzanian Shilling".
@@ -7139,7 +7139,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="UAH" /> class.
         /// </summary>
-        internal UAH() : base("UAH") { }
+        private UAH() : base("UAH") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Hryvnia".
@@ -7168,7 +7168,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="UAK" /> class.
         /// </summary>
-        internal UAK() : base("UAK") { }
+        private UAK() : base("UAK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Karbovanet".
@@ -7197,7 +7197,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="UGS" /> class.
         /// </summary>
-        internal UGS() : base("UGS") { }
+        private UGS() : base("UGS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
@@ -7226,7 +7226,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="UGW" /> class.
         /// </summary>
-        internal UGW() : base("UGW") { }
+        private UGW() : base("UGW") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Shilling".
@@ -7255,7 +7255,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="UGX" /> class.
         /// </summary>
-        internal UGX() : base("UGX") { }
+        private UGX() : base("UGX") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
@@ -7284,7 +7284,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="USD" /> class.
         /// </summary>
-        internal USD() : base("USD") { }
+        private USD() : base("USD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar".
@@ -7313,7 +7313,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="USN" /> class.
         /// </summary>
-        internal USN() : base("USN") { }
+        private USN() : base("USN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Next day)".
@@ -7342,7 +7342,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="USS" /> class.
         /// </summary>
-        internal USS() : base("USS") { }
+        private USS() : base("USS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Same day)".
@@ -7371,7 +7371,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="UYI" /> class.
         /// </summary>
-        internal UYI() : base("UYI") { }
+        private UYI() : base("UYI") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".
@@ -7400,7 +7400,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="UYN" /> class.
         /// </summary>
-        internal UYN() : base("UYN") { }
+        private UYN() : base("UYN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Uruguay Peso".
@@ -7429,7 +7429,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="UYP" /> class.
         /// </summary>
-        internal UYP() : base("UYP") { }
+        private UYP() : base("UYP") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguayan Peso".
@@ -7458,7 +7458,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="UYU" /> class.
         /// </summary>
-        internal UYU() : base("UYU") { }
+        private UYU() : base("UYU") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Uruguayo".
@@ -7487,7 +7487,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="UZS" /> class.
         /// </summary>
-        internal UZS() : base("UZS") { }
+        private UZS() : base("UZS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Uzbekistan Sum".
@@ -7516,7 +7516,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="VEB" /> class.
         /// </summary>
-        internal VEB() : base("VEB") { }
+        private VEB() : base("VEB") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolivar".
@@ -7545,7 +7545,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="VEF" /> class.
         /// </summary>
-        internal VEF() : base("VEF") { }
+        private VEF() : base("VEF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolívar".
@@ -7574,7 +7574,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="VNC" /> class.
         /// </summary>
-        internal VNC() : base("VNC") { }
+        private VNC() : base("VNC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Dong".
@@ -7603,7 +7603,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="VND" /> class.
         /// </summary>
-        internal VND() : base("VND") { }
+        private VND() : base("VND") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Dong".
@@ -7632,7 +7632,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="VUV" /> class.
         /// </summary>
-        internal VUV() : base("VUV") { }
+        private VUV() : base("VUV") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Vatu".
@@ -7661,7 +7661,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="WST" /> class.
         /// </summary>
-        internal WST() : base("WST") { }
+        private WST() : base("WST") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Tala".
@@ -7690,7 +7690,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XAF" /> class.
         /// </summary>
-        internal XAF() : base("XAF") { }
+        private XAF() : base("XAF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BEAC".
@@ -7719,7 +7719,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XAG" /> class.
         /// </summary>
-        internal XAG() : base("XAG") { }
+        private XAG() : base("XAG") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Silver".
@@ -7748,7 +7748,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XAU" /> class.
         /// </summary>
-        internal XAU() : base("XAU") { }
+        private XAU() : base("XAU") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold".
@@ -7777,7 +7777,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XBA" /> class.
         /// </summary>
-        internal XBA() : base("XBA") { }
+        private XBA() : base("XBA") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".
@@ -7806,7 +7806,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XBB" /> class.
         /// </summary>
-        internal XBB() : base("XBB") { }
+        private XBB() : base("XBB") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".
@@ -7835,7 +7835,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XBC" /> class.
         /// </summary>
-        internal XBC() : base("XBC") { }
+        private XBC() : base("XBC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".
@@ -7864,7 +7864,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XBD" /> class.
         /// </summary>
-        internal XBD() : base("XBD") { }
+        private XBD() : base("XBD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".
@@ -7893,7 +7893,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XCD" /> class.
         /// </summary>
-        internal XCD() : base("XCD") { }
+        private XCD() : base("XCD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "East Caribbean Dollar".
@@ -7922,7 +7922,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XDR" /> class.
         /// </summary>
-        internal XDR() : base("XDR") { }
+        private XDR() : base("XDR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "SDR (Special Drawing Right)".
@@ -7951,7 +7951,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XEU" /> class.
         /// </summary>
-        internal XEU() : base("XEU") { }
+        private XEU() : base("XEU") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "European Currency Unit (E.C.U)".
@@ -7980,7 +7980,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XFO" /> class.
         /// </summary>
-        internal XFO() : base("XFO") { }
+        private XFO() : base("XFO") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold-Franc".
@@ -8009,7 +8009,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XFU" /> class.
         /// </summary>
-        internal XFU() : base("XFU") { }
+        private XFU() : base("XFU") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "UIC-Franc".
@@ -8038,7 +8038,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XOF" /> class.
         /// </summary>
-        internal XOF() : base("XOF") { }
+        private XOF() : base("XOF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BCEAO".
@@ -8067,7 +8067,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XPD" /> class.
         /// </summary>
-        internal XPD() : base("XPD") { }
+        private XPD() : base("XPD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Palladium".
@@ -8096,7 +8096,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XPF" /> class.
         /// </summary>
-        internal XPF() : base("XPF") { }
+        private XPF() : base("XPF") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "CFP Franc".
@@ -8125,7 +8125,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XPT" /> class.
         /// </summary>
-        internal XPT() : base("XPT") { }
+        private XPT() : base("XPT") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Platinum".
@@ -8154,7 +8154,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XRE" /> class.
         /// </summary>
-        internal XRE() : base("XRE") { }
+        private XRE() : base("XRE") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "RINET Funds Code".
@@ -8183,7 +8183,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XSU" /> class.
         /// </summary>
-        internal XSU() : base("XSU") { }
+        private XSU() : base("XSU") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
@@ -8212,7 +8212,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XTS" /> class.
         /// </summary>
-        internal XTS() : base("XTS") { }
+        private XTS() : base("XTS") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Codes specifically reserved for testing purposes".
@@ -8241,7 +8241,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XUA" /> class.
         /// </summary>
-        internal XUA() : base("XUA") { }
+        private XUA() : base("XUA") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "ADB Unit of Account".
@@ -8270,7 +8270,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="XXX" /> class.
         /// </summary>
-        internal XXX() : base("XXX") { }
+        private XXX() : base("XXX") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "The codes assigned for transactions where no currency is involved".
@@ -8299,7 +8299,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="YDD" /> class.
         /// </summary>
-        internal YDD() : base("YDD") { }
+        private YDD() : base("YDD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Dinar".
@@ -8328,7 +8328,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="YER" /> class.
         /// </summary>
-        internal YER() : base("YER") { }
+        private YER() : base("YER") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Rial".
@@ -8357,7 +8357,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="YUD" /> class.
         /// </summary>
-        internal YUD() : base("YUD") { }
+        private YUD() : base("YUD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Yugoslavian Dinar".
@@ -8386,7 +8386,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="YUM" /> class.
         /// </summary>
-        internal YUM() : base("YUM") { }
+        private YUM() : base("YUM") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Dinar".
@@ -8415,7 +8415,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="YUN" /> class.
         /// </summary>
-        internal YUN() : base("YUN") { }
+        private YUN() : base("YUN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Yugoslavian Dinar".
@@ -8444,7 +8444,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZAL" /> class.
         /// </summary>
-        internal ZAL() : base("ZAL") { }
+        private ZAL() : base("ZAL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Financial Rand".
@@ -8473,7 +8473,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZAR" /> class.
         /// </summary>
-        internal ZAR() : base("ZAR") { }
+        private ZAR() : base("ZAR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rand".
@@ -8502,7 +8502,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZMK" /> class.
         /// </summary>
-        internal ZMK() : base("ZMK") { }
+        private ZMK() : base("ZMK") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
@@ -8531,7 +8531,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZMW" /> class.
         /// </summary>
-        internal ZMW() : base("ZMW") { }
+        private ZMW() : base("ZMW") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
@@ -8560,7 +8560,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZRN" /> class.
         /// </summary>
-        internal ZRN() : base("ZRN") { }
+        private ZRN() : base("ZRN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zaire".
@@ -8589,7 +8589,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZRZ" /> class.
         /// </summary>
-        internal ZRZ() : base("ZRZ") { }
+        private ZRZ() : base("ZRZ") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zaire".
@@ -8618,7 +8618,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZWC" /> class.
         /// </summary>
-        internal ZWC() : base("ZWC") { }
+        private ZWC() : base("ZWC") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".
@@ -8647,7 +8647,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZWD" /> class.
         /// </summary>
-        internal ZWD() : base("ZWD") { }
+        private ZWD() : base("ZWD") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (old)".
@@ -8676,7 +8676,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZWL" /> class.
         /// </summary>
-        internal ZWL() : base("ZWL") { }
+        private ZWL() : base("ZWL") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".
@@ -8705,7 +8705,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZWN" /> class.
         /// </summary>
-        internal ZWN() : base("ZWN") { }
+        private ZWN() : base("ZWN") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (new)".
@@ -8734,7 +8734,7 @@ namespace Narvalo.Finance.Currencies
         /// <summary>
         /// Initializes a new instance of the <see cref="ZWR" /> class.
         /// </summary>
-        internal ZWR() : base("ZWR") { }
+        private ZWR() : base("ZWR") { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".

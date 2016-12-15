@@ -2,10 +2,14 @@
 
 namespace Narvalo.Finance
 {
+    using System.Collections.Generic;
+
     public sealed partial class DefaultCurrencyFactory : CurrencyFactory
     {
+        private volatile static HashSet<string> s_CodeSet;
+
         public DefaultCurrencyFactory() { }
 
-        protected override bool Validate(string code) => s_CodeSet.Contains(code);
+        protected override bool Validate(string code) => CodeSet.Contains(code);
     }
 }

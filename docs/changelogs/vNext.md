@@ -128,6 +128,7 @@ New classes and new methods:
 - `Currency.OfCurrentRegion()`
 - `Currency.OfCulture()`
 - `Currency.OfCurrentCulture()`
+- `CurrencyTypes`
 - `BicFormat`
 - `IbanFormat`
 - `AsciiHelpers`

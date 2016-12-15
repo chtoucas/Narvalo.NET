@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bic.cs" />
+    <Compile Include="CurrencyTypes.cs" />
+    <Compile Include="Internal\CurrencyData.cs" />
     <Compile Include="Utilities\BicFormat.cs" />
     <Compile Include="Currencies\Currencies.g.cs">
       <AutoGen>True</AutoGen>
