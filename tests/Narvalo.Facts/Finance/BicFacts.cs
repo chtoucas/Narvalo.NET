@@ -53,7 +53,7 @@ namespace Narvalo.Finance
         #region Create()
 
         [Fact]
-        public static void Create_ThrowsArgumentNulllException_ForNull()
+        public static void Create_ThrowsArgumentNullException_ForNull()
         {
             Assert.Throws<ArgumentNullException>(() => Bic.Create(null, "BE", "BB", "XXX"));
             Assert.Throws<ArgumentNullException>(() => Bic.Create("ABCD", null, "BB", "XXX"));

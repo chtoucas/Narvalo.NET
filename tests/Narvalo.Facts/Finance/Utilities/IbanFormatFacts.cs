@@ -34,7 +34,7 @@ namespace Narvalo.Finance.Utilities
         [InlineData("12345678901234567890123456789")]
         [InlineData("123456789012345678901234567890")]
         [CLSCompliant(false)]
-        public static void v_ReturnsTrue_ForValidInput(string value)
+        public static void CheckBranchCode_ReturnsTrue_ForValidInput(string value)
             => Assert.True(IbanFormat.CheckBban(value));
 
         [Fact]

@@ -53,7 +53,7 @@ namespace Narvalo.Finance
         #region Create()
 
         [Fact]
-        public static void Create_ThrowsArgumentNulllException_ForNull()
+        public static void Create_ThrowsArgumentNullException_ForNull()
         {
             Assert.Throws<ArgumentNullException>(() => Iban.Create(null, "14", "20041010050500013M02606"));
             Assert.Throws<ArgumentNullException>(() => Iban.Create("FR", null, "20041010050500013M02606"));
