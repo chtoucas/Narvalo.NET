@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>a780ac3f-ef28-4128-a9b5-f1c8b97cadea</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Narvalo.Finance</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Sentinel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Snv\PubDateEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Snv\SnvCurrencyData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Snv\SnvCurrencyDatabase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Snv\SnvCurrencyDataCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Snv\SnvDataHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Snv\SnvXmlNames.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Snv\SnvXmlReader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Snv\XElement$.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\AsciiHelpers.cs" />
+  </ItemGroup>
+</Project>

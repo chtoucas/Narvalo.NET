@@ -47,8 +47,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Facts", "tests\Narv
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TestCommon", "tests\TestCommon\TestCommon.shproj", "{C141265F-95ED-4093-A56C-5991DBA96F67}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Narvalo.Finance.Shared", "src\Narvalo.Finance.Shared\Narvalo.Finance.Shared.shproj", "{A780AC3F-EF28-4128-A9B5-F1C8B97CADEA}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\Narvalo.Finance.Shared\Narvalo.Finance.Snv.projitems*{38055176-243b-4090-8148-efb8fe18ff23}*SharedItemsImports = 4
+		src\Narvalo.Finance.Shared\Narvalo.Finance.Snv.projitems*{a780ac3f-ef28-4128-a9b5-f1c8b97cadea}*SharedItemsImports = 13
 		tests\TestCommon\Narvalo.TestCommon.projitems*{c141265f-95ed-4093-a56c-5991dba96f67}*SharedItemsImports = 13
 		tests\TestCommon\Narvalo.TestCommon.projitems*{d05b40a6-15b6-46d0-abc1-8f8cfc5d02e8}*SharedItemsImports = 4
 	EndGlobalSection
@@ -155,5 +159,6 @@ Global
 		{E94F4D98-3882-4713-90FD-27C515B68BB0} = {7C09B3E7-756C-4ED3-A1F1-A789BA6AE3CA}
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8} = {7C09B3E7-756C-4ED3-A1F1-A789BA6AE3CA}
 		{C141265F-95ED-4093-A56C-5991DBA96F67} = {7C09B3E7-756C-4ED3-A1F1-A789BA6AE3CA}
+		{A780AC3F-EF28-4128-A9B5-F1C8B97CADEA} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
 	EndGlobalSection
 EndGlobal

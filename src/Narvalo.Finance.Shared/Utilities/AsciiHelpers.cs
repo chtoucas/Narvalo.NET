@@ -8,13 +8,13 @@ namespace Narvalo.Finance.Utilities
     public static partial class AsciiHelpers
     {
         [Pure]
-        public static bool IsDigitOrUpperLetter(string value)
+        public static bool IsUpperLetter(string value)
         {
             if (value == null || value.Length == 0) { return false; }
 
             for (int i = 0; i < value.Length; i++)
             {
-                if (!IsDigitOrUpperLetter(value[i]))
+                if (!IsUpperLetter(value[i]))
                 {
                     return false;
                 }
@@ -23,8 +23,6 @@ namespace Narvalo.Finance.Utilities
             return true;
         }
 
-        private static bool IsDigit(Char ch) => ch >= '0' && ch <= '9';
-
-        private static bool IsDigitOrUpperLetter(Char ch) => IsDigit(ch) || IsUpperLetter(ch);
+        private static bool IsUpperLetter(Char ch) => ch >= 'A' && ch <= 'Z';
     }
 }

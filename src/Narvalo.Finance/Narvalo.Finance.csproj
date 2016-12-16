@@ -76,8 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bic.cs" />
-    <Compile Include="CurrencyTypes.cs" />
-    <Compile Include="Internal\CurrencyData.cs" />
     <Compile Include="Utilities\BicFormat.cs" />
     <Compile Include="Currencies\Currencies.g.cs">
       <AutoGen>True</AutoGen>
@@ -131,8 +129,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\ISO4217\20150101\A1.xml" />
-    <Content Include="Resources\ISO4217\20150101\A3.xml" />
     <Content Include="Resources\ISO4217\A1.xml" />
     <Content Include="Resources\ISO4217\A3.xml" />
     <Content Include="Resources\ISO4217\README.txt" />
@@ -143,6 +139,7 @@
       <Name>Narvalo.Cerbere</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Narvalo.Finance.Shared\Narvalo.Finance.Snv.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

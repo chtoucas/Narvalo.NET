@@ -38,7 +38,7 @@ namespace <#= Namespace #>
         codeSet.Add(currency.Code);
 #>
     /// <summary>
-    /// Represents the currency unit for the "<#= currency.EnglishName #>".
+    /// Represents the currency unit for the code "<#= currency.Code #>".
     /// </summary>
     <# WriteCompilerAttributes(); #>
 <#
@@ -68,9 +68,9 @@ namespace <#= Namespace #>
         private <#= currency.Code #>() : base("<#= currency.Code #>") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "<#= currency.EnglishName #>".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".</value>
         public static <#= currency.Code #> Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }

@@ -19,7 +19,7 @@ using global::System.Diagnostics.CodeAnalysis;
 namespace Narvalo.Finance.Currencies
 {
     /// <summary>
-    /// Represents the currency unit for the "Andorran Peseta".
+    /// Represents the currency unit for the code "ADP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
@@ -37,9 +37,9 @@ namespace Narvalo.Finance.Currencies
         private ADP() : base("ADP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Andorran Peseta".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ADP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Andorran Peseta".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ADP".</value>
         public static ADP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -47,7 +47,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "UAE Dirham".
+    /// Represents the currency unit for the code "AED".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -66,9 +66,9 @@ namespace Narvalo.Finance.Currencies
         private AED() : base("AED") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "UAE Dirham".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AED".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "UAE Dirham".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AED".</value>
         public static AED Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -76,7 +76,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Afghani".
+    /// Represents the currency unit for the code "AFA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -95,9 +95,9 @@ namespace Narvalo.Finance.Currencies
         private AFA() : base("AFA") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFA".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Afghani".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFA".</value>
         public static AFA Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -105,7 +105,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Afghani".
+    /// Represents the currency unit for the code "AFN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -124,9 +124,9 @@ namespace Narvalo.Finance.Currencies
         private AFN() : base("AFN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Afghani".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Afghani".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFN".</value>
         public static AFN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -134,7 +134,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Old Lek".
+    /// Represents the currency unit for the code "ALK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -153,9 +153,9 @@ namespace Narvalo.Finance.Currencies
         private ALK() : base("ALK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Lek".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Lek".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALK".</value>
         public static ALK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -163,7 +163,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Lek".
+    /// Represents the currency unit for the code "ALL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -182,9 +182,9 @@ namespace Narvalo.Finance.Currencies
         private ALL() : base("ALL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lek".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lek".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALL".</value>
         public static ALL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -192,7 +192,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Armenian Dram".
+    /// Represents the currency unit for the code "AMD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -211,9 +211,9 @@ namespace Narvalo.Finance.Currencies
         private AMD() : base("AMD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Armenian Dram".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AMD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Armenian Dram".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AMD".</value>
         public static AMD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -221,7 +221,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Netherlands Antillean Guilder".
+    /// Represents the currency unit for the code "ANG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -240,9 +240,9 @@ namespace Narvalo.Finance.Currencies
         private ANG() : base("ANG") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Antillean Guilder".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ANG".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Netherlands Antillean Guilder".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ANG".</value>
         public static ANG Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -250,7 +250,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kwanza".
+    /// Represents the currency unit for the code "AOA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -269,9 +269,9 @@ namespace Narvalo.Finance.Currencies
         private AOA() : base("AOA") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOA".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOA".</value>
         public static AOA Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -279,7 +279,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kwanza".
+    /// Represents the currency unit for the code "AOK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -298,9 +298,9 @@ namespace Narvalo.Finance.Currencies
         private AOK() : base("AOK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOK".</value>
         public static AOK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -308,7 +308,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "New Kwanza".
+    /// Represents the currency unit for the code "AON".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -327,9 +327,9 @@ namespace Narvalo.Finance.Currencies
         private AON() : base("AON") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Kwanza".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AON".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Kwanza".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AON".</value>
         public static AON Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -337,7 +337,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kwanza Reajustado".
+    /// Represents the currency unit for the code "AOR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -356,9 +356,9 @@ namespace Narvalo.Finance.Currencies
         private AOR() : base("AOR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kwanza Reajustado".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kwanza Reajustado".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOR".</value>
         public static AOR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -366,7 +366,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Austral".
+    /// Represents the currency unit for the code "ARA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -385,9 +385,9 @@ namespace Narvalo.Finance.Currencies
         private ARA() : base("ARA") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Austral".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARA".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Austral".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARA".</value>
         public static ARA Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -395,7 +395,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Peso Argentino".
+    /// Represents the currency unit for the code "ARP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -414,9 +414,9 @@ namespace Narvalo.Finance.Currencies
         private ARP() : base("ARP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Argentino".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Argentino".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARP".</value>
         public static ARP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -424,7 +424,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Argentine Peso".
+    /// Represents the currency unit for the code "ARS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -443,9 +443,9 @@ namespace Narvalo.Finance.Currencies
         private ARS() : base("ARS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Argentine Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Argentine Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARS".</value>
         public static ARS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -453,7 +453,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Peso".
+    /// Represents the currency unit for the code "ARY".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -472,9 +472,9 @@ namespace Narvalo.Finance.Currencies
         private ARY() : base("ARY") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARY".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARY".</value>
         public static ARY Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -482,7 +482,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Schilling".
+    /// Represents the currency unit for the code "ATS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -501,9 +501,9 @@ namespace Narvalo.Finance.Currencies
         private ATS() : base("ATS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Schilling".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ATS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Schilling".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ATS".</value>
         public static ATS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -511,7 +511,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Australian Dollar".
+    /// Represents the currency unit for the code "AUD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -530,9 +530,9 @@ namespace Narvalo.Finance.Currencies
         private AUD() : base("AUD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Australian Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AUD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Australian Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AUD".</value>
         public static AUD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -540,7 +540,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Aruban Florin".
+    /// Represents the currency unit for the code "AWG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -559,9 +559,9 @@ namespace Narvalo.Finance.Currencies
         private AWG() : base("AWG") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Aruban Florin".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AWG".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Aruban Florin".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AWG".</value>
         public static AWG Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -569,7 +569,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Azerbaijan Manat".
+    /// Represents the currency unit for the code "AYM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -588,9 +588,9 @@ namespace Narvalo.Finance.Currencies
         private AYM() : base("AYM") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijan Manat".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AYM".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijan Manat".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AYM".</value>
         public static AYM Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -598,7 +598,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Azerbaijanian Manat".
+    /// Represents the currency unit for the code "AZM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -617,9 +617,9 @@ namespace Narvalo.Finance.Currencies
         private AZM() : base("AZM") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZM".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZM".</value>
         public static AZM Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -627,7 +627,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Azerbaijanian Manat".
+    /// Represents the currency unit for the code "AZN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -646,9 +646,9 @@ namespace Narvalo.Finance.Currencies
         private AZN() : base("AZN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Azerbaijanian Manat".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZN".</value>
         public static AZN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -656,7 +656,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Dinar".
+    /// Represents the currency unit for the code "BAD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -675,9 +675,9 @@ namespace Narvalo.Finance.Currencies
         private BAD() : base("BAD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAD".</value>
         public static BAD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -685,7 +685,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Convertible Mark".
+    /// Represents the currency unit for the code "BAM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -704,9 +704,9 @@ namespace Narvalo.Finance.Currencies
         private BAM() : base("BAM") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Mark".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAM".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Convertible Mark".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAM".</value>
         public static BAM Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -714,7 +714,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Barbados Dollar".
+    /// Represents the currency unit for the code "BBD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -733,9 +733,9 @@ namespace Narvalo.Finance.Currencies
         private BBD() : base("BBD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Barbados Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BBD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Barbados Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BBD".</value>
         public static BBD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -743,7 +743,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Taka".
+    /// Represents the currency unit for the code "BDT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -762,9 +762,9 @@ namespace Narvalo.Finance.Currencies
         private BDT() : base("BDT") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Taka".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BDT".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Taka".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BDT".</value>
         public static BDT Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -772,7 +772,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Convertible Franc".
+    /// Represents the currency unit for the code "BEC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -791,9 +791,9 @@ namespace Narvalo.Finance.Currencies
         private BEC() : base("BEC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Convertible Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Convertible Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEC".</value>
         public static BEC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -801,7 +801,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Belgian Franc".
+    /// Represents the currency unit for the code "BEF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -820,9 +820,9 @@ namespace Narvalo.Finance.Currencies
         private BEF() : base("BEF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Belgian Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Belgian Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEF".</value>
         public static BEF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -830,7 +830,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Financial Franc".
+    /// Represents the currency unit for the code "BEL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -849,9 +849,9 @@ namespace Narvalo.Finance.Currencies
         private BEL() : base("BEL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Financial Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Financial Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEL".</value>
         public static BEL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -859,7 +859,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Lev A/52".
+    /// Represents the currency unit for the code "BGJ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -878,9 +878,9 @@ namespace Narvalo.Finance.Currencies
         private BGJ() : base("BGJ") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev A/52".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGJ".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev A/52".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGJ".</value>
         public static BGJ Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -888,7 +888,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Lev A/62".
+    /// Represents the currency unit for the code "BGK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -907,9 +907,9 @@ namespace Narvalo.Finance.Currencies
         private BGK() : base("BGK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev A/62".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev A/62".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGK".</value>
         public static BGK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -917,7 +917,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Lev".
+    /// Represents the currency unit for the code "BGL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -936,9 +936,9 @@ namespace Narvalo.Finance.Currencies
         private BGL() : base("BGL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lev".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lev".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGL".</value>
         public static BGL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -946,7 +946,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bulgarian Lev".
+    /// Represents the currency unit for the code "BGN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -965,9 +965,9 @@ namespace Narvalo.Finance.Currencies
         private BGN() : base("BGN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bulgarian Lev".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bulgarian Lev".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGN".</value>
         public static BGN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -975,7 +975,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bahraini Dinar".
+    /// Represents the currency unit for the code "BHD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -994,9 +994,9 @@ namespace Narvalo.Finance.Currencies
         private BHD() : base("BHD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahraini Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BHD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bahraini Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BHD".</value>
         public static BHD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1004,7 +1004,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Burundi Franc".
+    /// Represents the currency unit for the code "BIF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1023,9 +1023,9 @@ namespace Narvalo.Finance.Currencies
         private BIF() : base("BIF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Burundi Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BIF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Burundi Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BIF".</value>
         public static BIF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1033,7 +1033,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bermudian Dollar".
+    /// Represents the currency unit for the code "BMD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1052,9 +1052,9 @@ namespace Narvalo.Finance.Currencies
         private BMD() : base("BMD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bermudian Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BMD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bermudian Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BMD".</value>
         public static BMD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1062,7 +1062,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Brunei Dollar".
+    /// Represents the currency unit for the code "BND".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1081,9 +1081,9 @@ namespace Narvalo.Finance.Currencies
         private BND() : base("BND") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Brunei Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BND".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Brunei Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BND".</value>
         public static BND Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1091,7 +1091,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Boliviano".
+    /// Represents the currency unit for the code "BOB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1110,9 +1110,9 @@ namespace Narvalo.Finance.Currencies
         private BOB() : base("BOB") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Boliviano".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOB".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Boliviano".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOB".</value>
         public static BOB Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1120,7 +1120,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Peso boliviano".
+    /// Represents the currency unit for the code "BOP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1139,9 +1139,9 @@ namespace Narvalo.Finance.Currencies
         private BOP() : base("BOP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso boliviano".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso boliviano".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOP".</value>
         public static BOP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1149,7 +1149,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mvdol".
+    /// Represents the currency unit for the code "BOV".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1168,9 +1168,9 @@ namespace Narvalo.Finance.Currencies
         private BOV() : base("BOV") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mvdol".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOV".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mvdol".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOV".</value>
         public static BOV Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1178,7 +1178,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cruzeiro".
+    /// Represents the currency unit for the code "BRB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1197,9 +1197,9 @@ namespace Narvalo.Finance.Currencies
         private BRB() : base("BRB") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRB".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRB".</value>
         public static BRB Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1207,7 +1207,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cruzado".
+    /// Represents the currency unit for the code "BRC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1226,9 +1226,9 @@ namespace Narvalo.Finance.Currencies
         private BRC() : base("BRC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzado".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzado".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRC".</value>
         public static BRC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1236,7 +1236,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cruzeiro".
+    /// Represents the currency unit for the code "BRE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1255,9 +1255,9 @@ namespace Narvalo.Finance.Currencies
         private BRE() : base("BRE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRE".</value>
         public static BRE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1265,7 +1265,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Brazilian Real".
+    /// Represents the currency unit for the code "BRL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1284,9 +1284,9 @@ namespace Narvalo.Finance.Currencies
         private BRL() : base("BRL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Brazilian Real".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Brazilian Real".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRL".</value>
         public static BRL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1294,7 +1294,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "New Cruzado".
+    /// Represents the currency unit for the code "BRN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1313,9 +1313,9 @@ namespace Narvalo.Finance.Currencies
         private BRN() : base("BRN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Cruzado".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Cruzado".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRN".</value>
         public static BRN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1323,7 +1323,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cruzeiro Real".
+    /// Represents the currency unit for the code "BRR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1342,9 +1342,9 @@ namespace Narvalo.Finance.Currencies
         private BRR() : base("BRR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cruzeiro Real".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cruzeiro Real".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRR".</value>
         public static BRR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1352,7 +1352,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bahamian Dollar".
+    /// Represents the currency unit for the code "BSD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1371,9 +1371,9 @@ namespace Narvalo.Finance.Currencies
         private BSD() : base("BSD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bahamian Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BSD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bahamian Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BSD".</value>
         public static BSD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1381,7 +1381,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Ngultrum".
+    /// Represents the currency unit for the code "BTN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1400,9 +1400,9 @@ namespace Narvalo.Finance.Currencies
         private BTN() : base("BTN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Ngultrum".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BTN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Ngultrum".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BTN".</value>
         public static BTN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1410,7 +1410,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "N.A.".
+    /// Represents the currency unit for the code "BUK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1429,9 +1429,9 @@ namespace Narvalo.Finance.Currencies
         private BUK() : base("BUK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "N.A.".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BUK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "N.A.".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BUK".</value>
         public static BUK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1439,7 +1439,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Pula".
+    /// Represents the currency unit for the code "BWP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1458,9 +1458,9 @@ namespace Narvalo.Finance.Currencies
         private BWP() : base("BWP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Pula".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BWP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Pula".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BWP".</value>
         public static BWP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1468,7 +1468,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Belarussian Ruble".
+    /// Represents the currency unit for the code "BYB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1487,9 +1487,9 @@ namespace Narvalo.Finance.Currencies
         private BYB() : base("BYB") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYB".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarussian Ruble".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYB".</value>
         public static BYB Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1497,7 +1497,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Belarusian Ruble".
+    /// Represents the currency unit for the code "BYN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1516,9 +1516,9 @@ namespace Narvalo.Finance.Currencies
         private BYN() : base("BYN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYN".</value>
         public static BYN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1526,7 +1526,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Belarusian Ruble".
+    /// Represents the currency unit for the code "BYR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1545,9 +1545,9 @@ namespace Narvalo.Finance.Currencies
         private BYR() : base("BYR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Belarusian Ruble".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYR".</value>
         public static BYR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1555,7 +1555,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Belize Dollar".
+    /// Represents the currency unit for the code "BZD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1574,9 +1574,9 @@ namespace Narvalo.Finance.Currencies
         private BZD() : base("BZD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Belize Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BZD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Belize Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BZD".</value>
         public static BZD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1584,7 +1584,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Canadian Dollar".
+    /// Represents the currency unit for the code "CAD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1603,9 +1603,9 @@ namespace Narvalo.Finance.Currencies
         private CAD() : base("CAD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Canadian Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CAD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Canadian Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CAD".</value>
         public static CAD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1613,7 +1613,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Congolese Franc".
+    /// Represents the currency unit for the code "CDF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1632,9 +1632,9 @@ namespace Narvalo.Finance.Currencies
         private CDF() : base("CDF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Congolese Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CDF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Congolese Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CDF".</value>
         public static CDF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1642,7 +1642,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "WIR Franc (for electronic)".
+    /// Represents the currency unit for the code "CHC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1661,9 +1661,9 @@ namespace Narvalo.Finance.Currencies
         private CHC() : base("CHC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc (for electronic)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Franc (for electronic)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHC".</value>
         public static CHC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1671,7 +1671,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "WIR Euro".
+    /// Represents the currency unit for the code "CHE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1690,9 +1690,9 @@ namespace Narvalo.Finance.Currencies
         private CHE() : base("CHE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Euro".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Euro".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHE".</value>
         public static CHE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1700,7 +1700,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Swiss Franc".
+    /// Represents the currency unit for the code "CHF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1719,9 +1719,9 @@ namespace Narvalo.Finance.Currencies
         private CHF() : base("CHF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Swiss Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Swiss Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHF".</value>
         public static CHF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1729,7 +1729,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "WIR Franc".
+    /// Represents the currency unit for the code "CHW".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1748,9 +1748,9 @@ namespace Narvalo.Finance.Currencies
         private CHW() : base("CHW") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "WIR Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHW".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "WIR Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHW".</value>
         public static CHW Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1758,7 +1758,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Unidad de Fomento".
+    /// Represents the currency unit for the code "CLF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1777,9 +1777,9 @@ namespace Narvalo.Finance.Currencies
         private CLF() : base("CLF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Fomento".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Fomento".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLF".</value>
         public static CLF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1787,7 +1787,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Chilean Peso".
+    /// Represents the currency unit for the code "CLP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1806,9 +1806,9 @@ namespace Narvalo.Finance.Currencies
         private CLP() : base("CLP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Chilean Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Chilean Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLP".</value>
         public static CLP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1816,7 +1816,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Peoples Bank Dollar".
+    /// Represents the currency unit for the code "CNX".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1835,9 +1835,9 @@ namespace Narvalo.Finance.Currencies
         private CNX() : base("CNX") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Peoples Bank Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNX".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Peoples Bank Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNX".</value>
         public static CNX Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1845,7 +1845,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Yuan Renminbi".
+    /// Represents the currency unit for the code "CNY".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1864,9 +1864,9 @@ namespace Narvalo.Finance.Currencies
         private CNY() : base("CNY") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Yuan Renminbi".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNY".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Yuan Renminbi".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNY".</value>
         public static CNY Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1874,7 +1874,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Colombian Peso".
+    /// Represents the currency unit for the code "COP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1893,9 +1893,9 @@ namespace Narvalo.Finance.Currencies
         private COP() : base("COP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Colombian Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "COP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Colombian Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "COP".</value>
         public static COP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1903,7 +1903,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Unidad de Valor Real".
+    /// Represents the currency unit for the code "COU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1922,9 +1922,9 @@ namespace Narvalo.Finance.Currencies
         private COU() : base("COU") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Real".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "COU".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Real".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "COU".</value>
         public static COU Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1932,7 +1932,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Costa Rican Colon".
+    /// Represents the currency unit for the code "CRC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1951,9 +1951,9 @@ namespace Narvalo.Finance.Currencies
         private CRC() : base("CRC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Costa Rican Colon".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CRC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Costa Rican Colon".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CRC".</value>
         public static CRC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1961,7 +1961,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Serbian Dinar".
+    /// Represents the currency unit for the code "CSD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -1980,9 +1980,9 @@ namespace Narvalo.Finance.Currencies
         private CSD() : base("CSD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSD".</value>
         public static CSD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -1990,7 +1990,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Krona A/53".
+    /// Represents the currency unit for the code "CSJ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2009,9 +2009,9 @@ namespace Narvalo.Finance.Currencies
         private CSJ() : base("CSJ") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Krona A/53".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSJ".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Krona A/53".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSJ".</value>
         public static CSJ Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2019,7 +2019,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Koruna".
+    /// Represents the currency unit for the code "CSK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2038,9 +2038,9 @@ namespace Narvalo.Finance.Currencies
         private CSK() : base("CSK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Koruna".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Koruna".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSK".</value>
         public static CSK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2048,7 +2048,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Peso Convertible".
+    /// Represents the currency unit for the code "CUC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2067,9 +2067,9 @@ namespace Narvalo.Finance.Currencies
         private CUC() : base("CUC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Convertible".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Convertible".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUC".</value>
         public static CUC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2077,7 +2077,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cuban Peso".
+    /// Represents the currency unit for the code "CUP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2096,9 +2096,9 @@ namespace Narvalo.Finance.Currencies
         private CUP() : base("CUP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cuban Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cuban Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUP".</value>
         public static CUP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2106,7 +2106,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cabo Verde Escudo".
+    /// Represents the currency unit for the code "CVE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2125,9 +2125,9 @@ namespace Narvalo.Finance.Currencies
         private CVE() : base("CVE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cabo Verde Escudo".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CVE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cabo Verde Escudo".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CVE".</value>
         public static CVE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2135,7 +2135,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cyprus Pound".
+    /// Represents the currency unit for the code "CYP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2154,9 +2154,9 @@ namespace Narvalo.Finance.Currencies
         private CYP() : base("CYP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cyprus Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CYP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cyprus Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CYP".</value>
         public static CYP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2164,7 +2164,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Czech Koruna".
+    /// Represents the currency unit for the code "CZK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2183,9 +2183,9 @@ namespace Narvalo.Finance.Currencies
         private CZK() : base("CZK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Czech Koruna".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CZK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Czech Koruna".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CZK".</value>
         public static CZK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2193,7 +2193,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mark der DDR".
+    /// Represents the currency unit for the code "DDM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2212,9 +2212,9 @@ namespace Narvalo.Finance.Currencies
         private DDM() : base("DDM") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mark der DDR".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DDM".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mark der DDR".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DDM".</value>
         public static DDM Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2222,7 +2222,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Deutsche Mark".
+    /// Represents the currency unit for the code "DEM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2241,9 +2241,9 @@ namespace Narvalo.Finance.Currencies
         private DEM() : base("DEM") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Deutsche Mark".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DEM".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Deutsche Mark".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DEM".</value>
         public static DEM Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2251,7 +2251,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Djibouti Franc".
+    /// Represents the currency unit for the code "DJF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2270,9 +2270,9 @@ namespace Narvalo.Finance.Currencies
         private DJF() : base("DJF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Djibouti Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DJF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Djibouti Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DJF".</value>
         public static DJF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2280,7 +2280,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Danish Krone".
+    /// Represents the currency unit for the code "DKK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2299,9 +2299,9 @@ namespace Narvalo.Finance.Currencies
         private DKK() : base("DKK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Danish Krone".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DKK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Danish Krone".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DKK".</value>
         public static DKK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2309,7 +2309,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Dominican Peso".
+    /// Represents the currency unit for the code "DOP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2328,9 +2328,9 @@ namespace Narvalo.Finance.Currencies
         private DOP() : base("DOP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Dominican Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DOP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Dominican Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DOP".</value>
         public static DOP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2338,7 +2338,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Algerian Dinar".
+    /// Represents the currency unit for the code "DZD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2357,9 +2357,9 @@ namespace Narvalo.Finance.Currencies
         private DZD() : base("DZD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Algerian Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DZD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Algerian Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DZD".</value>
         public static DZD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2367,7 +2367,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Sucre".
+    /// Represents the currency unit for the code "ECS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2386,9 +2386,9 @@ namespace Narvalo.Finance.Currencies
         private ECS() : base("ECS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sucre".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECS".</value>
         public static ECS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2396,7 +2396,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Unidad de Valor Constante (UVC)".
+    /// Represents the currency unit for the code "ECV".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2415,9 +2415,9 @@ namespace Narvalo.Finance.Currencies
         private ECV() : base("ECV") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Constante (UVC)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECV".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Unidad de Valor Constante (UVC)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECV".</value>
         public static ECV Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2425,7 +2425,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kroon".
+    /// Represents the currency unit for the code "EEK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2444,9 +2444,9 @@ namespace Narvalo.Finance.Currencies
         private EEK() : base("EEK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kroon".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "EEK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kroon".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "EEK".</value>
         public static EEK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2454,7 +2454,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Egyptian Pound".
+    /// Represents the currency unit for the code "EGP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2473,9 +2473,9 @@ namespace Narvalo.Finance.Currencies
         private EGP() : base("EGP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Egyptian Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "EGP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Egyptian Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "EGP".</value>
         public static EGP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2483,7 +2483,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Ekwele".
+    /// Represents the currency unit for the code "EQE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2502,9 +2502,9 @@ namespace Narvalo.Finance.Currencies
         private EQE() : base("EQE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Ekwele".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "EQE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Ekwele".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "EQE".</value>
         public static EQE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2512,7 +2512,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Nakfa".
+    /// Represents the currency unit for the code "ERN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2531,9 +2531,9 @@ namespace Narvalo.Finance.Currencies
         private ERN() : base("ERN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Nakfa".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ERN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Nakfa".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ERN".</value>
         public static ERN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2541,7 +2541,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Spanish Peseta".
+    /// Represents the currency unit for the code "ESA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2560,9 +2560,9 @@ namespace Narvalo.Finance.Currencies
         private ESA() : base("ESA") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESA".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESA".</value>
         public static ESA Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2570,7 +2570,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the """A"" Account (convertible Peseta Account)".
+    /// Represents the currency unit for the code "ESB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2589,9 +2589,9 @@ namespace Narvalo.Finance.Currencies
         private ESB() : base("ESB") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the """A"" Account (convertible Peseta Account)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESB".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the """A"" Account (convertible Peseta Account)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESB".</value>
         public static ESB Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2599,7 +2599,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Spanish Peseta".
+    /// Represents the currency unit for the code "ESP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2618,9 +2618,9 @@ namespace Narvalo.Finance.Currencies
         private ESP() : base("ESP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Spanish Peseta".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESP".</value>
         public static ESP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2628,7 +2628,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Ethiopian Birr".
+    /// Represents the currency unit for the code "ETB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2647,9 +2647,9 @@ namespace Narvalo.Finance.Currencies
         private ETB() : base("ETB") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Ethiopian Birr".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ETB".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Ethiopian Birr".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ETB".</value>
         public static ETB Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2657,7 +2657,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Euro".
+    /// Represents the currency unit for the code "EUR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2676,9 +2676,9 @@ namespace Narvalo.Finance.Currencies
         private EUR() : base("EUR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Euro".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "EUR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Euro".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "EUR".</value>
         public static EUR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2686,7 +2686,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Markka".
+    /// Represents the currency unit for the code "FIM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2705,9 +2705,9 @@ namespace Narvalo.Finance.Currencies
         private FIM() : base("FIM") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Markka".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "FIM".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Markka".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "FIM".</value>
         public static FIM Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2715,7 +2715,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Fiji Dollar".
+    /// Represents the currency unit for the code "FJD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2734,9 +2734,9 @@ namespace Narvalo.Finance.Currencies
         private FJD() : base("FJD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Fiji Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "FJD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Fiji Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "FJD".</value>
         public static FJD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2744,7 +2744,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Falkland Islands Pound".
+    /// Represents the currency unit for the code "FKP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2763,9 +2763,9 @@ namespace Narvalo.Finance.Currencies
         private FKP() : base("FKP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Falkland Islands Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "FKP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Falkland Islands Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "FKP".</value>
         public static FKP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2773,7 +2773,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "French Franc".
+    /// Represents the currency unit for the code "FRF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2792,9 +2792,9 @@ namespace Narvalo.Finance.Currencies
         private FRF() : base("FRF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "French Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "FRF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "French Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "FRF".</value>
         public static FRF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2802,7 +2802,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Pound Sterling".
+    /// Represents the currency unit for the code "GBP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2821,9 +2821,9 @@ namespace Narvalo.Finance.Currencies
         private GBP() : base("GBP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound Sterling".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GBP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Pound Sterling".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GBP".</value>
         public static GBP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2831,7 +2831,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Georgian Coupon".
+    /// Represents the currency unit for the code "GEK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2850,9 +2850,9 @@ namespace Narvalo.Finance.Currencies
         private GEK() : base("GEK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Georgian Coupon".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Georgian Coupon".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEK".</value>
         public static GEK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2860,7 +2860,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Lari".
+    /// Represents the currency unit for the code "GEL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2879,9 +2879,9 @@ namespace Narvalo.Finance.Currencies
         private GEL() : base("GEL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lari".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lari".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEL".</value>
         public static GEL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2889,7 +2889,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cedi".
+    /// Represents the currency unit for the code "GHC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2908,9 +2908,9 @@ namespace Narvalo.Finance.Currencies
         private GHC() : base("GHC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cedi".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cedi".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHC".</value>
         public static GHC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2918,7 +2918,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Ghana Cedi".
+    /// Represents the currency unit for the code "GHP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2937,9 +2937,9 @@ namespace Narvalo.Finance.Currencies
         private GHP() : base("GHP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHP".</value>
         public static GHP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2947,7 +2947,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Ghana Cedi".
+    /// Represents the currency unit for the code "GHS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2966,9 +2966,9 @@ namespace Narvalo.Finance.Currencies
         private GHS() : base("GHS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Ghana Cedi".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHS".</value>
         public static GHS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -2976,7 +2976,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Gibraltar Pound".
+    /// Represents the currency unit for the code "GIP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -2995,9 +2995,9 @@ namespace Narvalo.Finance.Currencies
         private GIP() : base("GIP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Gibraltar Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GIP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Gibraltar Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GIP".</value>
         public static GIP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3005,7 +3005,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Dalasi".
+    /// Represents the currency unit for the code "GMD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3024,9 +3024,9 @@ namespace Narvalo.Finance.Currencies
         private GMD() : base("GMD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Dalasi".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GMD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Dalasi".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GMD".</value>
         public static GMD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3034,7 +3034,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Syli".
+    /// Represents the currency unit for the code "GNE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3053,9 +3053,9 @@ namespace Narvalo.Finance.Currencies
         private GNE() : base("GNE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Syli".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Syli".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNE".</value>
         public static GNE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3063,7 +3063,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Guinea Franc".
+    /// Represents the currency unit for the code "GNF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3082,9 +3082,9 @@ namespace Narvalo.Finance.Currencies
         private GNF() : base("GNF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNF".</value>
         public static GNF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3092,7 +3092,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Syli".
+    /// Represents the currency unit for the code "GNS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3111,9 +3111,9 @@ namespace Narvalo.Finance.Currencies
         private GNS() : base("GNS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Syli".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Syli".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNS".</value>
         public static GNS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3121,7 +3121,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Ekwele".
+    /// Represents the currency unit for the code "GQE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3140,9 +3140,9 @@ namespace Narvalo.Finance.Currencies
         private GQE() : base("GQE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Ekwele".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GQE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Ekwele".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GQE".</value>
         public static GQE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3150,7 +3150,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Drachma".
+    /// Represents the currency unit for the code "GRD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3169,9 +3169,9 @@ namespace Narvalo.Finance.Currencies
         private GRD() : base("GRD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Drachma".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GRD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Drachma".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GRD".</value>
         public static GRD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3179,7 +3179,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Quetzal".
+    /// Represents the currency unit for the code "GTQ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3198,9 +3198,9 @@ namespace Narvalo.Finance.Currencies
         private GTQ() : base("GTQ") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Quetzal".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GTQ".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Quetzal".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GTQ".</value>
         public static GTQ Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3208,7 +3208,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Guinea Escudo".
+    /// Represents the currency unit for the code "GWE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3227,9 +3227,9 @@ namespace Narvalo.Finance.Currencies
         private GWE() : base("GWE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea Escudo".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea Escudo".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWE".</value>
         public static GWE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3237,7 +3237,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Guinea-Bissau Peso".
+    /// Represents the currency unit for the code "GWP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3256,9 +3256,9 @@ namespace Narvalo.Finance.Currencies
         private GWP() : base("GWP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Guinea-Bissau Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Guinea-Bissau Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWP".</value>
         public static GWP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3266,7 +3266,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Guyana Dollar".
+    /// Represents the currency unit for the code "GYD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3285,9 +3285,9 @@ namespace Narvalo.Finance.Currencies
         private GYD() : base("GYD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Guyana Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GYD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Guyana Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GYD".</value>
         public static GYD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3295,7 +3295,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Hong Kong Dollar".
+    /// Represents the currency unit for the code "HKD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3314,9 +3314,9 @@ namespace Narvalo.Finance.Currencies
         private HKD() : base("HKD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Hong Kong Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HKD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Hong Kong Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HKD".</value>
         public static HKD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3324,7 +3324,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Lempira".
+    /// Represents the currency unit for the code "HNL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3343,9 +3343,9 @@ namespace Narvalo.Finance.Currencies
         private HNL() : base("HNL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lempira".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HNL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lempira".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HNL".</value>
         public static HNL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3353,7 +3353,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Croatian Dinar".
+    /// Represents the currency unit for the code "HRD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3372,9 +3372,9 @@ namespace Narvalo.Finance.Currencies
         private HRD() : base("HRD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Croatian Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Croatian Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRD".</value>
         public static HRD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3382,7 +3382,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kuna".
+    /// Represents the currency unit for the code "HRK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3401,9 +3401,9 @@ namespace Narvalo.Finance.Currencies
         private HRK() : base("HRK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kuna".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kuna".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRK".</value>
         public static HRK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3411,7 +3411,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Gourde".
+    /// Represents the currency unit for the code "HTG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3430,9 +3430,9 @@ namespace Narvalo.Finance.Currencies
         private HTG() : base("HTG") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Gourde".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HTG".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Gourde".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HTG".</value>
         public static HTG Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3440,7 +3440,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Forint".
+    /// Represents the currency unit for the code "HUF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3459,9 +3459,9 @@ namespace Narvalo.Finance.Currencies
         private HUF() : base("HUF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Forint".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HUF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Forint".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HUF".</value>
         public static HUF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3469,7 +3469,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Rupiah".
+    /// Represents the currency unit for the code "IDR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3488,9 +3488,9 @@ namespace Narvalo.Finance.Currencies
         private IDR() : base("IDR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rupiah".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "IDR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rupiah".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "IDR".</value>
         public static IDR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3498,7 +3498,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Irish Pound".
+    /// Represents the currency unit for the code "IEP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3517,9 +3517,9 @@ namespace Narvalo.Finance.Currencies
         private IEP() : base("IEP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Irish Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "IEP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Irish Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "IEP".</value>
         public static IEP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3527,7 +3527,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Pound".
+    /// Represents the currency unit for the code "ILP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3546,9 +3546,9 @@ namespace Narvalo.Finance.Currencies
         private ILP() : base("ILP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILP".</value>
         public static ILP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3556,7 +3556,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Old Shekel".
+    /// Represents the currency unit for the code "ILR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3575,9 +3575,9 @@ namespace Narvalo.Finance.Currencies
         private ILR() : base("ILR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Shekel".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Shekel".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILR".</value>
         public static ILR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3585,7 +3585,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "New Israeli Sheqel".
+    /// Represents the currency unit for the code "ILS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3604,9 +3604,9 @@ namespace Narvalo.Finance.Currencies
         private ILS() : base("ILS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Israeli Sheqel".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Israeli Sheqel".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILS".</value>
         public static ILS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3614,7 +3614,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Indian Rupee".
+    /// Represents the currency unit for the code "INR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3633,9 +3633,9 @@ namespace Narvalo.Finance.Currencies
         private INR() : base("INR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Indian Rupee".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "INR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Indian Rupee".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "INR".</value>
         public static INR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3643,7 +3643,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Iraqi Dinar".
+    /// Represents the currency unit for the code "IQD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3662,9 +3662,9 @@ namespace Narvalo.Finance.Currencies
         private IQD() : base("IQD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Iraqi Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "IQD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Iraqi Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "IQD".</value>
         public static IQD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3672,7 +3672,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Iranian Rial".
+    /// Represents the currency unit for the code "IRR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3691,9 +3691,9 @@ namespace Narvalo.Finance.Currencies
         private IRR() : base("IRR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Iranian Rial".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "IRR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Iranian Rial".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "IRR".</value>
         public static IRR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3701,7 +3701,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Old Krona".
+    /// Represents the currency unit for the code "ISJ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3720,9 +3720,9 @@ namespace Narvalo.Finance.Currencies
         private ISJ() : base("ISJ") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Krona".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISJ".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Krona".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISJ".</value>
         public static ISJ Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3730,7 +3730,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Iceland Krona".
+    /// Represents the currency unit for the code "ISK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3749,9 +3749,9 @@ namespace Narvalo.Finance.Currencies
         private ISK() : base("ISK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Iceland Krona".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Iceland Krona".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISK".</value>
         public static ISK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3759,7 +3759,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Italian Lira".
+    /// Represents the currency unit for the code "ITL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3778,9 +3778,9 @@ namespace Narvalo.Finance.Currencies
         private ITL() : base("ITL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Italian Lira".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ITL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Italian Lira".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ITL".</value>
         public static ITL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3788,7 +3788,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Jamaican Dollar".
+    /// Represents the currency unit for the code "JMD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3807,9 +3807,9 @@ namespace Narvalo.Finance.Currencies
         private JMD() : base("JMD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Jamaican Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "JMD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Jamaican Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "JMD".</value>
         public static JMD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3817,7 +3817,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Jordanian Dinar".
+    /// Represents the currency unit for the code "JOD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3836,9 +3836,9 @@ namespace Narvalo.Finance.Currencies
         private JOD() : base("JOD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Jordanian Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "JOD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Jordanian Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "JOD".</value>
         public static JOD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3846,7 +3846,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Yen".
+    /// Represents the currency unit for the code "JPY".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3865,9 +3865,9 @@ namespace Narvalo.Finance.Currencies
         private JPY() : base("JPY") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Yen".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "JPY".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Yen".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "JPY".</value>
         public static JPY Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3875,7 +3875,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kenyan Shilling".
+    /// Represents the currency unit for the code "KES".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3894,9 +3894,9 @@ namespace Narvalo.Finance.Currencies
         private KES() : base("KES") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kenyan Shilling".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KES".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kenyan Shilling".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KES".</value>
         public static KES Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3904,7 +3904,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Som".
+    /// Represents the currency unit for the code "KGS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3923,9 +3923,9 @@ namespace Narvalo.Finance.Currencies
         private KGS() : base("KGS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Som".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KGS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Som".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KGS".</value>
         public static KGS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3933,7 +3933,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Riel".
+    /// Represents the currency unit for the code "KHR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3952,9 +3952,9 @@ namespace Narvalo.Finance.Currencies
         private KHR() : base("KHR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Riel".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KHR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Riel".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KHR".</value>
         public static KHR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3962,7 +3962,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Comoro Franc".
+    /// Represents the currency unit for the code "KMF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -3981,9 +3981,9 @@ namespace Narvalo.Finance.Currencies
         private KMF() : base("KMF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Comoro Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KMF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Comoro Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KMF".</value>
         public static KMF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -3991,7 +3991,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "North Korean Won".
+    /// Represents the currency unit for the code "KPW".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4010,9 +4010,9 @@ namespace Narvalo.Finance.Currencies
         private KPW() : base("KPW") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "North Korean Won".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KPW".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "North Korean Won".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KPW".</value>
         public static KPW Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4020,7 +4020,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Won".
+    /// Represents the currency unit for the code "KRW".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4039,9 +4039,9 @@ namespace Narvalo.Finance.Currencies
         private KRW() : base("KRW") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Won".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KRW".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Won".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KRW".</value>
         public static KRW Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4049,7 +4049,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kuwaiti Dinar".
+    /// Represents the currency unit for the code "KWD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4068,9 +4068,9 @@ namespace Narvalo.Finance.Currencies
         private KWD() : base("KWD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kuwaiti Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KWD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kuwaiti Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KWD".</value>
         public static KWD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4078,7 +4078,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cayman Islands Dollar".
+    /// Represents the currency unit for the code "KYD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4097,9 +4097,9 @@ namespace Narvalo.Finance.Currencies
         private KYD() : base("KYD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cayman Islands Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KYD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cayman Islands Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KYD".</value>
         public static KYD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4107,7 +4107,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Tenge".
+    /// Represents the currency unit for the code "KZT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4126,9 +4126,9 @@ namespace Narvalo.Finance.Currencies
         private KZT() : base("KZT") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Tenge".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KZT".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Tenge".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KZT".</value>
         public static KZT Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4136,7 +4136,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kip Pot Pol".
+    /// Represents the currency unit for the code "LAJ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4155,9 +4155,9 @@ namespace Narvalo.Finance.Currencies
         private LAJ() : base("LAJ") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip Pot Pol".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAJ".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kip Pot Pol".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAJ".</value>
         public static LAJ Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4165,7 +4165,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kip".
+    /// Represents the currency unit for the code "LAK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4184,9 +4184,9 @@ namespace Narvalo.Finance.Currencies
         private LAK() : base("LAK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kip".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kip".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAK".</value>
         public static LAK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4194,7 +4194,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Lebanese Pound".
+    /// Represents the currency unit for the code "LBP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4213,9 +4213,9 @@ namespace Narvalo.Finance.Currencies
         private LBP() : base("LBP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lebanese Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LBP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lebanese Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LBP".</value>
         public static LBP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4223,7 +4223,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Sri Lanka Rupee".
+    /// Represents the currency unit for the code "LKR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4242,9 +4242,9 @@ namespace Narvalo.Finance.Currencies
         private LKR() : base("LKR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sri Lanka Rupee".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LKR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sri Lanka Rupee".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LKR".</value>
         public static LKR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4252,7 +4252,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Liberian Dollar".
+    /// Represents the currency unit for the code "LRD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4271,9 +4271,9 @@ namespace Narvalo.Finance.Currencies
         private LRD() : base("LRD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Liberian Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LRD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Liberian Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LRD".</value>
         public static LRD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4281,7 +4281,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Loti".
+    /// Represents the currency unit for the code "LSL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4300,9 +4300,9 @@ namespace Narvalo.Finance.Currencies
         private LSL() : base("LSL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Loti".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Loti".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSL".</value>
         public static LSL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4310,7 +4310,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Maloti".
+    /// Represents the currency unit for the code "LSM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4329,9 +4329,9 @@ namespace Narvalo.Finance.Currencies
         private LSM() : base("LSM") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Maloti".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSM".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Maloti".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSM".</value>
         public static LSM Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4339,7 +4339,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Lithuanian Litas".
+    /// Represents the currency unit for the code "LTL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4358,9 +4358,9 @@ namespace Narvalo.Finance.Currencies
         private LTL() : base("LTL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lithuanian Litas".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lithuanian Litas".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTL".</value>
         public static LTL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4368,7 +4368,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Talonas".
+    /// Represents the currency unit for the code "LTT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4387,9 +4387,9 @@ namespace Narvalo.Finance.Currencies
         private LTT() : base("LTT") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Talonas".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTT".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Talonas".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTT".</value>
         public static LTT Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4397,7 +4397,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Luxembourg Convertible Franc".
+    /// Represents the currency unit for the code "LUC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4416,9 +4416,9 @@ namespace Narvalo.Finance.Currencies
         private LUC() : base("LUC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Convertible Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Convertible Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUC".</value>
         public static LUC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4426,7 +4426,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Luxembourg Franc".
+    /// Represents the currency unit for the code "LUF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4445,9 +4445,9 @@ namespace Narvalo.Finance.Currencies
         private LUF() : base("LUF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUF".</value>
         public static LUF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4455,7 +4455,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Luxembourg Financial Franc".
+    /// Represents the currency unit for the code "LUL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4474,9 +4474,9 @@ namespace Narvalo.Finance.Currencies
         private LUL() : base("LUL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Luxembourg Financial Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Luxembourg Financial Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUL".</value>
         public static LUL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4484,7 +4484,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Latvian Lats".
+    /// Represents the currency unit for the code "LVL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4503,9 +4503,9 @@ namespace Narvalo.Finance.Currencies
         private LVL() : base("LVL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Latvian Lats".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Latvian Lats".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVL".</value>
         public static LVL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4513,7 +4513,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Latvian Ruble".
+    /// Represents the currency unit for the code "LVR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4532,9 +4532,9 @@ namespace Narvalo.Finance.Currencies
         private LVR() : base("LVR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Latvian Ruble".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Latvian Ruble".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVR".</value>
         public static LVR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4542,7 +4542,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Libyan Dinar".
+    /// Represents the currency unit for the code "LYD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4561,9 +4561,9 @@ namespace Narvalo.Finance.Currencies
         private LYD() : base("LYD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Libyan Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LYD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Libyan Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LYD".</value>
         public static LYD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4571,7 +4571,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Moroccan Dirham".
+    /// Represents the currency unit for the code "MAD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4590,9 +4590,9 @@ namespace Narvalo.Finance.Currencies
         private MAD() : base("MAD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Moroccan Dirham".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Moroccan Dirham".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAD".</value>
         public static MAD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4600,7 +4600,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mali Franc".
+    /// Represents the currency unit for the code "MAF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4619,9 +4619,9 @@ namespace Narvalo.Finance.Currencies
         private MAF() : base("MAF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mali Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mali Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAF".</value>
         public static MAF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4629,7 +4629,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Moldovan Leu".
+    /// Represents the currency unit for the code "MDL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4648,9 +4648,9 @@ namespace Narvalo.Finance.Currencies
         private MDL() : base("MDL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Moldovan Leu".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MDL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Moldovan Leu".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MDL".</value>
         public static MDL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4658,7 +4658,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Malagasy Ariary".
+    /// Represents the currency unit for the code "MGA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4677,9 +4677,9 @@ namespace Narvalo.Finance.Currencies
         private MGA() : base("MGA") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Ariary".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGA".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Malagasy Ariary".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGA".</value>
         public static MGA Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4687,7 +4687,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Malagasy Franc".
+    /// Represents the currency unit for the code "MGF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4706,9 +4706,9 @@ namespace Narvalo.Finance.Currencies
         private MGF() : base("MGF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Malagasy Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Malagasy Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGF".</value>
         public static MGF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4716,7 +4716,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Denar".
+    /// Represents the currency unit for the code "MKD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4735,9 +4735,9 @@ namespace Narvalo.Finance.Currencies
         private MKD() : base("MKD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Denar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MKD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Denar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MKD".</value>
         public static MKD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4745,7 +4745,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mali Franc".
+    /// Represents the currency unit for the code "MLF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4764,9 +4764,9 @@ namespace Narvalo.Finance.Currencies
         private MLF() : base("MLF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mali Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MLF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mali Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MLF".</value>
         public static MLF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4774,7 +4774,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kyat".
+    /// Represents the currency unit for the code "MMK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4793,9 +4793,9 @@ namespace Narvalo.Finance.Currencies
         private MMK() : base("MMK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kyat".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MMK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kyat".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MMK".</value>
         public static MMK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4803,7 +4803,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Tugrik".
+    /// Represents the currency unit for the code "MNT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4822,9 +4822,9 @@ namespace Narvalo.Finance.Currencies
         private MNT() : base("MNT") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Tugrik".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MNT".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Tugrik".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MNT".</value>
         public static MNT Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4832,7 +4832,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Pataca".
+    /// Represents the currency unit for the code "MOP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4851,9 +4851,9 @@ namespace Narvalo.Finance.Currencies
         private MOP() : base("MOP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Pataca".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MOP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Pataca".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MOP".</value>
         public static MOP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4861,7 +4861,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Ouguiya".
+    /// Represents the currency unit for the code "MRO".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4880,9 +4880,9 @@ namespace Narvalo.Finance.Currencies
         private MRO() : base("MRO") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Ouguiya".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MRO".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Ouguiya".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MRO".</value>
         public static MRO Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4890,7 +4890,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Maltese Lira".
+    /// Represents the currency unit for the code "MTL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4909,9 +4909,9 @@ namespace Narvalo.Finance.Currencies
         private MTL() : base("MTL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Maltese Lira".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Maltese Lira".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTL".</value>
         public static MTL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4919,7 +4919,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Maltese Pound".
+    /// Represents the currency unit for the code "MTP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4938,9 +4938,9 @@ namespace Narvalo.Finance.Currencies
         private MTP() : base("MTP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Maltese Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Maltese Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTP".</value>
         public static MTP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4948,7 +4948,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mauritius Rupee".
+    /// Represents the currency unit for the code "MUR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4967,9 +4967,9 @@ namespace Narvalo.Finance.Currencies
         private MUR() : base("MUR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mauritius Rupee".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MUR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mauritius Rupee".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MUR".</value>
         public static MUR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -4977,7 +4977,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Maldive Rupee".
+    /// Represents the currency unit for the code "MVQ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -4996,9 +4996,9 @@ namespace Narvalo.Finance.Currencies
         private MVQ() : base("MVQ") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Maldive Rupee".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVQ".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Maldive Rupee".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVQ".</value>
         public static MVQ Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5006,7 +5006,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Rufiyaa".
+    /// Represents the currency unit for the code "MVR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5025,9 +5025,9 @@ namespace Narvalo.Finance.Currencies
         private MVR() : base("MVR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rufiyaa".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rufiyaa".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVR".</value>
         public static MVR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5035,7 +5035,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Malawi Kwacha".
+    /// Represents the currency unit for the code "MWK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5054,9 +5054,9 @@ namespace Narvalo.Finance.Currencies
         private MWK() : base("MWK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Malawi Kwacha".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MWK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Malawi Kwacha".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MWK".</value>
         public static MWK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5064,7 +5064,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mexican Peso".
+    /// Represents the currency unit for the code "MXN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5083,9 +5083,9 @@ namespace Narvalo.Finance.Currencies
         private MXN() : base("MXN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXN".</value>
         public static MXN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5093,7 +5093,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mexican Peso".
+    /// Represents the currency unit for the code "MXP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5112,9 +5112,9 @@ namespace Narvalo.Finance.Currencies
         private MXP() : base("MXP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXP".</value>
         public static MXP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5122,7 +5122,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mexican Unidad de Inversion (UDI)".
+    /// Represents the currency unit for the code "MXV".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5141,9 +5141,9 @@ namespace Narvalo.Finance.Currencies
         private MXV() : base("MXV") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mexican Unidad de Inversion (UDI)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXV".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mexican Unidad de Inversion (UDI)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXV".</value>
         public static MXV Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5151,7 +5151,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Malaysian Ringgit".
+    /// Represents the currency unit for the code "MYR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5170,9 +5170,9 @@ namespace Narvalo.Finance.Currencies
         private MYR() : base("MYR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Malaysian Ringgit".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MYR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Malaysian Ringgit".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MYR".</value>
         public static MYR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5180,7 +5180,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mozambique Escudo".
+    /// Represents the currency unit for the code "MZE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5199,9 +5199,9 @@ namespace Narvalo.Finance.Currencies
         private MZE() : base("MZE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Escudo".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Escudo".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZE".</value>
         public static MZE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5209,7 +5209,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mozambique Metical".
+    /// Represents the currency unit for the code "MZM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5228,9 +5228,9 @@ namespace Narvalo.Finance.Currencies
         private MZM() : base("MZM") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZM".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZM".</value>
         public static MZM Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5238,7 +5238,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Mozambique Metical".
+    /// Represents the currency unit for the code "MZN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5257,9 +5257,9 @@ namespace Narvalo.Finance.Currencies
         private MZN() : base("MZN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Mozambique Metical".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZN".</value>
         public static MZN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5267,7 +5267,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Namibia Dollar".
+    /// Represents the currency unit for the code "NAD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5286,9 +5286,9 @@ namespace Narvalo.Finance.Currencies
         private NAD() : base("NAD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Namibia Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NAD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Namibia Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NAD".</value>
         public static NAD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5296,7 +5296,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Naira".
+    /// Represents the currency unit for the code "NGN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5315,9 +5315,9 @@ namespace Narvalo.Finance.Currencies
         private NGN() : base("NGN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Naira".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NGN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Naira".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NGN".</value>
         public static NGN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5325,7 +5325,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cordoba".
+    /// Represents the currency unit for the code "NIC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5344,9 +5344,9 @@ namespace Narvalo.Finance.Currencies
         private NIC() : base("NIC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cordoba".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIC".</value>
         public static NIC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5354,7 +5354,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Cordoba Oro".
+    /// Represents the currency unit for the code "NIO".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5373,9 +5373,9 @@ namespace Narvalo.Finance.Currencies
         private NIO() : base("NIO") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Cordoba Oro".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIO".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Cordoba Oro".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIO".</value>
         public static NIO Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5383,7 +5383,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Netherlands Guilder".
+    /// Represents the currency unit for the code "NLG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5402,9 +5402,9 @@ namespace Narvalo.Finance.Currencies
         private NLG() : base("NLG") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Netherlands Guilder".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NLG".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Netherlands Guilder".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NLG".</value>
         public static NLG Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5412,7 +5412,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Norwegian Krone".
+    /// Represents the currency unit for the code "NOK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5431,9 +5431,9 @@ namespace Narvalo.Finance.Currencies
         private NOK() : base("NOK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Norwegian Krone".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NOK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Norwegian Krone".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NOK".</value>
         public static NOK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5441,7 +5441,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Nepalese Rupee".
+    /// Represents the currency unit for the code "NPR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5460,9 +5460,9 @@ namespace Narvalo.Finance.Currencies
         private NPR() : base("NPR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Nepalese Rupee".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NPR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Nepalese Rupee".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NPR".</value>
         public static NPR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5470,7 +5470,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "New Zealand Dollar".
+    /// Represents the currency unit for the code "NZD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5489,9 +5489,9 @@ namespace Narvalo.Finance.Currencies
         private NZD() : base("NZD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zealand Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NZD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Zealand Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NZD".</value>
         public static NZD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5499,7 +5499,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Rial Omani".
+    /// Represents the currency unit for the code "OMR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5518,9 +5518,9 @@ namespace Narvalo.Finance.Currencies
         private OMR() : base("OMR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rial Omani".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "OMR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rial Omani".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "OMR".</value>
         public static OMR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5528,7 +5528,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Balboa".
+    /// Represents the currency unit for the code "PAB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5547,9 +5547,9 @@ namespace Narvalo.Finance.Currencies
         private PAB() : base("PAB") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Balboa".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PAB".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Balboa".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PAB".</value>
         public static PAB Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5557,7 +5557,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Sol".
+    /// Represents the currency unit for the code "PEH".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5576,9 +5576,9 @@ namespace Narvalo.Finance.Currencies
         private PEH() : base("PEH") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEH".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEH".</value>
         public static PEH Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5586,7 +5586,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Inti".
+    /// Represents the currency unit for the code "PEI".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5605,9 +5605,9 @@ namespace Narvalo.Finance.Currencies
         private PEI() : base("PEI") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Inti".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEI".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Inti".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEI".</value>
         public static PEI Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5615,7 +5615,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Sol".
+    /// Represents the currency unit for the code "PEN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5634,9 +5634,9 @@ namespace Narvalo.Finance.Currencies
         private PEN() : base("PEN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEN".</value>
         public static PEN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5644,7 +5644,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Sol".
+    /// Represents the currency unit for the code "PES".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5663,9 +5663,9 @@ namespace Narvalo.Finance.Currencies
         private PES() : base("PES") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sol".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PES".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sol".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PES".</value>
         public static PES Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5673,7 +5673,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Kina".
+    /// Represents the currency unit for the code "PGK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5692,9 +5692,9 @@ namespace Narvalo.Finance.Currencies
         private PGK() : base("PGK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Kina".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PGK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Kina".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PGK".</value>
         public static PGK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5702,7 +5702,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Philippine Peso".
+    /// Represents the currency unit for the code "PHP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5721,9 +5721,9 @@ namespace Narvalo.Finance.Currencies
         private PHP() : base("PHP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Philippine Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PHP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Philippine Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PHP".</value>
         public static PHP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5731,7 +5731,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Pakistan Rupee".
+    /// Represents the currency unit for the code "PKR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5750,9 +5750,9 @@ namespace Narvalo.Finance.Currencies
         private PKR() : base("PKR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Pakistan Rupee".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PKR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Pakistan Rupee".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PKR".</value>
         public static PKR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5760,7 +5760,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Zloty".
+    /// Represents the currency unit for the code "PLN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5779,9 +5779,9 @@ namespace Narvalo.Finance.Currencies
         private PLN() : base("PLN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zloty".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLN".</value>
         public static PLN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5789,7 +5789,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Zloty".
+    /// Represents the currency unit for the code "PLZ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5808,9 +5808,9 @@ namespace Narvalo.Finance.Currencies
         private PLZ() : base("PLZ") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zloty".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLZ".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zloty".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLZ".</value>
         public static PLZ Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5818,7 +5818,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Portuguese Escudo".
+    /// Represents the currency unit for the code "PTE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5837,9 +5837,9 @@ namespace Narvalo.Finance.Currencies
         private PTE() : base("PTE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Portuguese Escudo".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PTE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Portuguese Escudo".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PTE".</value>
         public static PTE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5847,7 +5847,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Guarani".
+    /// Represents the currency unit for the code "PYG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5866,9 +5866,9 @@ namespace Narvalo.Finance.Currencies
         private PYG() : base("PYG") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Guarani".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PYG".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Guarani".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PYG".</value>
         public static PYG Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5876,7 +5876,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Qatari Rial".
+    /// Represents the currency unit for the code "QAR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5895,9 +5895,9 @@ namespace Narvalo.Finance.Currencies
         private QAR() : base("QAR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Qatari Rial".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "QAR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Qatari Rial".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "QAR".</value>
         public static QAR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5905,7 +5905,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Rhodesian Dollar".
+    /// Represents the currency unit for the code "RHD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5924,9 +5924,9 @@ namespace Narvalo.Finance.Currencies
         private RHD() : base("RHD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RHD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RHD".</value>
         public static RHD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5934,7 +5934,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Leu A/52".
+    /// Represents the currency unit for the code "ROK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5953,9 +5953,9 @@ namespace Narvalo.Finance.Currencies
         private ROK() : base("ROK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Leu A/52".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Leu A/52".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROK".</value>
         public static ROK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5963,7 +5963,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Old Leu".
+    /// Represents the currency unit for the code "ROL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -5982,9 +5982,9 @@ namespace Narvalo.Finance.Currencies
         private ROL() : base("ROL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Leu".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Leu".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROL".</value>
         public static ROL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -5992,7 +5992,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Romanian Leu".
+    /// Represents the currency unit for the code "RON".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6011,9 +6011,9 @@ namespace Narvalo.Finance.Currencies
         private RON() : base("RON") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Romanian Leu".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RON".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Romanian Leu".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RON".</value>
         public static RON Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6021,7 +6021,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Serbian Dinar".
+    /// Represents the currency unit for the code "RSD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6040,9 +6040,9 @@ namespace Narvalo.Finance.Currencies
         private RSD() : base("RSD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RSD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Serbian Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RSD".</value>
         public static RSD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6050,7 +6050,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Russian Ruble".
+    /// Represents the currency unit for the code "RUB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6069,9 +6069,9 @@ namespace Narvalo.Finance.Currencies
         private RUB() : base("RUB") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUB".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Russian Ruble".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUB".</value>
         public static RUB Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6079,7 +6079,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Russian Ruble".
+    /// Represents the currency unit for the code "RUR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6098,9 +6098,9 @@ namespace Narvalo.Finance.Currencies
         private RUR() : base("RUR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Russian Ruble".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Russian Ruble".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUR".</value>
         public static RUR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6108,7 +6108,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Rwanda Franc".
+    /// Represents the currency unit for the code "RWF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6127,9 +6127,9 @@ namespace Narvalo.Finance.Currencies
         private RWF() : base("RWF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rwanda Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RWF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rwanda Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RWF".</value>
         public static RWF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6137,7 +6137,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Saudi Riyal".
+    /// Represents the currency unit for the code "SAR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6156,9 +6156,9 @@ namespace Narvalo.Finance.Currencies
         private SAR() : base("SAR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Saudi Riyal".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SAR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Saudi Riyal".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SAR".</value>
         public static SAR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6166,7 +6166,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Solomon Islands Dollar".
+    /// Represents the currency unit for the code "SBD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6185,9 +6185,9 @@ namespace Narvalo.Finance.Currencies
         private SBD() : base("SBD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Solomon Islands Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SBD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Solomon Islands Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SBD".</value>
         public static SBD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6195,7 +6195,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Seychelles Rupee".
+    /// Represents the currency unit for the code "SCR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6214,9 +6214,9 @@ namespace Narvalo.Finance.Currencies
         private SCR() : base("SCR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Seychelles Rupee".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SCR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Seychelles Rupee".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SCR".</value>
         public static SCR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6224,7 +6224,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Sudanese Dinar".
+    /// Represents the currency unit for the code "SDD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6243,9 +6243,9 @@ namespace Narvalo.Finance.Currencies
         private SDD() : base("SDD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDD".</value>
         public static SDD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6253,7 +6253,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Sudanese Pound".
+    /// Represents the currency unit for the code "SDG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6272,9 +6272,9 @@ namespace Narvalo.Finance.Currencies
         private SDG() : base("SDG") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDG".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDG".</value>
         public static SDG Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6282,7 +6282,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Sudanese Pound".
+    /// Represents the currency unit for the code "SDP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6301,9 +6301,9 @@ namespace Narvalo.Finance.Currencies
         private SDP() : base("SDP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sudanese Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDP".</value>
         public static SDP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6311,7 +6311,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Swedish Krona".
+    /// Represents the currency unit for the code "SEK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6330,9 +6330,9 @@ namespace Narvalo.Finance.Currencies
         private SEK() : base("SEK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Swedish Krona".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SEK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Swedish Krona".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SEK".</value>
         public static SEK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6340,7 +6340,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Singapore Dollar".
+    /// Represents the currency unit for the code "SGD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6359,9 +6359,9 @@ namespace Narvalo.Finance.Currencies
         private SGD() : base("SGD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Singapore Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SGD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Singapore Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SGD".</value>
         public static SGD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6369,7 +6369,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Saint Helena Pound".
+    /// Represents the currency unit for the code "SHP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6388,9 +6388,9 @@ namespace Narvalo.Finance.Currencies
         private SHP() : base("SHP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Saint Helena Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SHP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Saint Helena Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SHP".</value>
         public static SHP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6398,7 +6398,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Tolar".
+    /// Represents the currency unit for the code "SIT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6417,9 +6417,9 @@ namespace Narvalo.Finance.Currencies
         private SIT() : base("SIT") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Tolar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SIT".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Tolar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SIT".</value>
         public static SIT Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6427,7 +6427,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Slovak Koruna".
+    /// Represents the currency unit for the code "SKK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6446,9 +6446,9 @@ namespace Narvalo.Finance.Currencies
         private SKK() : base("SKK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Slovak Koruna".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SKK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Slovak Koruna".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SKK".</value>
         public static SKK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6456,7 +6456,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Leone".
+    /// Represents the currency unit for the code "SLL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6475,9 +6475,9 @@ namespace Narvalo.Finance.Currencies
         private SLL() : base("SLL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Leone".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SLL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Leone".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SLL".</value>
         public static SLL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6485,7 +6485,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Somali Shilling".
+    /// Represents the currency unit for the code "SOS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6504,9 +6504,9 @@ namespace Narvalo.Finance.Currencies
         private SOS() : base("SOS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Somali Shilling".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SOS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Somali Shilling".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SOS".</value>
         public static SOS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6514,7 +6514,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Surinam Dollar".
+    /// Represents the currency unit for the code "SRD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6533,9 +6533,9 @@ namespace Narvalo.Finance.Currencies
         private SRD() : base("SRD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Surinam Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRD".</value>
         public static SRD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6543,7 +6543,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Surinam Guilder".
+    /// Represents the currency unit for the code "SRG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6562,9 +6562,9 @@ namespace Narvalo.Finance.Currencies
         private SRG() : base("SRG") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Surinam Guilder".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRG".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Surinam Guilder".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRG".</value>
         public static SRG Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6572,7 +6572,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "South Sudanese Pound".
+    /// Represents the currency unit for the code "SSP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6591,9 +6591,9 @@ namespace Narvalo.Finance.Currencies
         private SSP() : base("SSP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "South Sudanese Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SSP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "South Sudanese Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SSP".</value>
         public static SSP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6601,7 +6601,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Dobra".
+    /// Represents the currency unit for the code "STD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6620,9 +6620,9 @@ namespace Narvalo.Finance.Currencies
         private STD() : base("STD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Dobra".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "STD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Dobra".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "STD".</value>
         public static STD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6630,7 +6630,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Rouble".
+    /// Represents the currency unit for the code "SUR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6649,9 +6649,9 @@ namespace Narvalo.Finance.Currencies
         private SUR() : base("SUR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rouble".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SUR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rouble".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SUR".</value>
         public static SUR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6659,7 +6659,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "El Salvador Colon".
+    /// Represents the currency unit for the code "SVC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6678,9 +6678,9 @@ namespace Narvalo.Finance.Currencies
         private SVC() : base("SVC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "El Salvador Colon".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SVC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "El Salvador Colon".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SVC".</value>
         public static SVC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6688,7 +6688,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Syrian Pound".
+    /// Represents the currency unit for the code "SYP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6707,9 +6707,9 @@ namespace Narvalo.Finance.Currencies
         private SYP() : base("SYP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Syrian Pound".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SYP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Syrian Pound".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SYP".</value>
         public static SYP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6717,7 +6717,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Lilangeni".
+    /// Represents the currency unit for the code "SZL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6736,9 +6736,9 @@ namespace Narvalo.Finance.Currencies
         private SZL() : base("SZL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Lilangeni".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SZL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Lilangeni".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SZL".</value>
         public static SZL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6746,7 +6746,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Baht".
+    /// Represents the currency unit for the code "THB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6765,9 +6765,9 @@ namespace Narvalo.Finance.Currencies
         private THB() : base("THB") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Baht".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "THB".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Baht".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "THB".</value>
         public static THB Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6775,7 +6775,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Tajik Ruble".
+    /// Represents the currency unit for the code "TJR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6794,9 +6794,9 @@ namespace Narvalo.Finance.Currencies
         private TJR() : base("TJR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Tajik Ruble".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Tajik Ruble".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJR".</value>
         public static TJR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6804,7 +6804,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Somoni".
+    /// Represents the currency unit for the code "TJS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6823,9 +6823,9 @@ namespace Narvalo.Finance.Currencies
         private TJS() : base("TJS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Somoni".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Somoni".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJS".</value>
         public static TJS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6833,7 +6833,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Turkmenistan Manat".
+    /// Represents the currency unit for the code "TMM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6852,9 +6852,9 @@ namespace Narvalo.Finance.Currencies
         private TMM() : base("TMM") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan Manat".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMM".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkmenistan Manat".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMM".</value>
         public static TMM Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6862,7 +6862,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Turkmenistan New Manat".
+    /// Represents the currency unit for the code "TMT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6881,9 +6881,9 @@ namespace Narvalo.Finance.Currencies
         private TMT() : base("TMT") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkmenistan New Manat".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMT".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkmenistan New Manat".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMT".</value>
         public static TMT Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6891,7 +6891,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Tunisian Dinar".
+    /// Represents the currency unit for the code "TND".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6910,9 +6910,9 @@ namespace Narvalo.Finance.Currencies
         private TND() : base("TND") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Tunisian Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TND".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Tunisian Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TND".</value>
         public static TND Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6920,7 +6920,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Pa’anga".
+    /// Represents the currency unit for the code "TOP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6939,9 +6939,9 @@ namespace Narvalo.Finance.Currencies
         private TOP() : base("TOP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Pa’anga".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TOP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Pa’anga".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TOP".</value>
         public static TOP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6949,7 +6949,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Timor Escudo".
+    /// Represents the currency unit for the code "TPE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6968,9 +6968,9 @@ namespace Narvalo.Finance.Currencies
         private TPE() : base("TPE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Timor Escudo".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TPE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Timor Escudo".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TPE".</value>
         public static TPE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -6978,7 +6978,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Old Turkish Lira".
+    /// Represents the currency unit for the code "TRL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -6997,9 +6997,9 @@ namespace Narvalo.Finance.Currencies
         private TRL() : base("TRL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Turkish Lira".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Turkish Lira".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRL".</value>
         public static TRL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7007,7 +7007,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Turkish Lira".
+    /// Represents the currency unit for the code "TRY".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7026,9 +7026,9 @@ namespace Narvalo.Finance.Currencies
         private TRY() : base("TRY") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Turkish Lira".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRY".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Turkish Lira".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRY".</value>
         public static TRY Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7036,7 +7036,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Trinidad and Tobago Dollar".
+    /// Represents the currency unit for the code "TTD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7055,9 +7055,9 @@ namespace Narvalo.Finance.Currencies
         private TTD() : base("TTD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Trinidad and Tobago Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TTD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Trinidad and Tobago Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TTD".</value>
         public static TTD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7065,7 +7065,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "New Taiwan Dollar".
+    /// Represents the currency unit for the code "TWD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7084,9 +7084,9 @@ namespace Narvalo.Finance.Currencies
         private TWD() : base("TWD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Taiwan Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TWD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Taiwan Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TWD".</value>
         public static TWD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7094,7 +7094,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Tanzanian Shilling".
+    /// Represents the currency unit for the code "TZS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7113,9 +7113,9 @@ namespace Narvalo.Finance.Currencies
         private TZS() : base("TZS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Tanzanian Shilling".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TZS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Tanzanian Shilling".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TZS".</value>
         public static TZS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7123,7 +7123,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Hryvnia".
+    /// Represents the currency unit for the code "UAH".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7142,9 +7142,9 @@ namespace Narvalo.Finance.Currencies
         private UAH() : base("UAH") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Hryvnia".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAH".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Hryvnia".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAH".</value>
         public static UAH Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7152,7 +7152,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Karbovanet".
+    /// Represents the currency unit for the code "UAK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7171,9 +7171,9 @@ namespace Narvalo.Finance.Currencies
         private UAK() : base("UAK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Karbovanet".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Karbovanet".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAK".</value>
         public static UAK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7181,7 +7181,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Uganda Shilling".
+    /// Represents the currency unit for the code "UGS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7200,9 +7200,9 @@ namespace Narvalo.Finance.Currencies
         private UGS() : base("UGS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGS".</value>
         public static UGS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7210,7 +7210,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Old Shilling".
+    /// Represents the currency unit for the code "UGW".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7229,9 +7229,9 @@ namespace Narvalo.Finance.Currencies
         private UGW() : base("UGW") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Shilling".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGW".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Shilling".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGW".</value>
         public static UGW Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7239,7 +7239,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Uganda Shilling".
+    /// Represents the currency unit for the code "UGX".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7258,9 +7258,9 @@ namespace Narvalo.Finance.Currencies
         private UGX() : base("UGX") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGX".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Uganda Shilling".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGX".</value>
         public static UGX Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7268,7 +7268,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "US Dollar".
+    /// Represents the currency unit for the code "USD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7287,9 +7287,9 @@ namespace Narvalo.Finance.Currencies
         private USD() : base("USD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "USD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "USD".</value>
         public static USD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7297,7 +7297,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "US Dollar (Next day)".
+    /// Represents the currency unit for the code "USN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7316,9 +7316,9 @@ namespace Narvalo.Finance.Currencies
         private USN() : base("USN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Next day)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "USN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar (Next day)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "USN".</value>
         public static USN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7326,7 +7326,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "US Dollar (Same day)".
+    /// Represents the currency unit for the code "USS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7345,9 +7345,9 @@ namespace Narvalo.Finance.Currencies
         private USS() : base("USS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "US Dollar (Same day)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "USS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "US Dollar (Same day)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "USS".</value>
         public static USS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7355,7 +7355,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".
+    /// Represents the currency unit for the code "UYI".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7374,9 +7374,9 @@ namespace Narvalo.Finance.Currencies
         private UYI() : base("UYI") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYI".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Uruguay Peso en Unidades Indexadas (URUIURUI)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYI".</value>
         public static UYI Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7384,7 +7384,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Old Uruguay Peso".
+    /// Represents the currency unit for the code "UYN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7403,9 +7403,9 @@ namespace Narvalo.Finance.Currencies
         private UYN() : base("UYN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Uruguay Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Uruguay Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYN".</value>
         public static UYN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7413,7 +7413,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Uruguayan Peso".
+    /// Represents the currency unit for the code "UYP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7432,9 +7432,9 @@ namespace Narvalo.Finance.Currencies
         private UYP() : base("UYP") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Uruguayan Peso".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYP".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Uruguayan Peso".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYP".</value>
         public static UYP Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7442,7 +7442,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Peso Uruguayo".
+    /// Represents the currency unit for the code "UYU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7461,9 +7461,9 @@ namespace Narvalo.Finance.Currencies
         private UYU() : base("UYU") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Peso Uruguayo".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYU".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Peso Uruguayo".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYU".</value>
         public static UYU Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7471,7 +7471,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Uzbekistan Sum".
+    /// Represents the currency unit for the code "UZS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7490,9 +7490,9 @@ namespace Narvalo.Finance.Currencies
         private UZS() : base("UZS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Uzbekistan Sum".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UZS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Uzbekistan Sum".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UZS".</value>
         public static UZS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7500,7 +7500,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bolivar".
+    /// Represents the currency unit for the code "VEB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7519,9 +7519,9 @@ namespace Narvalo.Finance.Currencies
         private VEB() : base("VEB") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolivar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEB".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bolivar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEB".</value>
         public static VEB Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7529,7 +7529,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bolívar".
+    /// Represents the currency unit for the code "VEF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7548,9 +7548,9 @@ namespace Narvalo.Finance.Currencies
         private VEF() : base("VEF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bolívar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bolívar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEF".</value>
         public static VEF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7558,7 +7558,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Old Dong".
+    /// Represents the currency unit for the code "VNC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7577,9 +7577,9 @@ namespace Narvalo.Finance.Currencies
         private VNC() : base("VNC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Old Dong".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "VNC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Old Dong".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "VNC".</value>
         public static VNC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7587,7 +7587,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Dong".
+    /// Represents the currency unit for the code "VND".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7606,9 +7606,9 @@ namespace Narvalo.Finance.Currencies
         private VND() : base("VND") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Dong".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "VND".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Dong".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "VND".</value>
         public static VND Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7616,7 +7616,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Vatu".
+    /// Represents the currency unit for the code "VUV".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7635,9 +7635,9 @@ namespace Narvalo.Finance.Currencies
         private VUV() : base("VUV") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Vatu".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "VUV".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Vatu".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "VUV".</value>
         public static VUV Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7645,7 +7645,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Tala".
+    /// Represents the currency unit for the code "WST".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7664,9 +7664,9 @@ namespace Narvalo.Finance.Currencies
         private WST() : base("WST") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Tala".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "WST".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Tala".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "WST".</value>
         public static WST Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7674,7 +7674,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "CFA Franc BEAC".
+    /// Represents the currency unit for the code "XAF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7693,9 +7693,9 @@ namespace Narvalo.Finance.Currencies
         private XAF() : base("XAF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BEAC".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "CFA Franc BEAC".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAF".</value>
         public static XAF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7703,7 +7703,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Silver".
+    /// Represents the currency unit for the code "XAG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7722,9 +7722,9 @@ namespace Narvalo.Finance.Currencies
         private XAG() : base("XAG") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Silver".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAG".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Silver".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAG".</value>
         public static XAG Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7732,7 +7732,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Gold".
+    /// Represents the currency unit for the code "XAU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7751,9 +7751,9 @@ namespace Narvalo.Finance.Currencies
         private XAU() : base("XAU") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAU".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Gold".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAU".</value>
         public static XAU Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7761,7 +7761,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bond Markets Unit European Composite Unit (EURCO)".
+    /// Represents the currency unit for the code "XBA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7780,9 +7780,9 @@ namespace Narvalo.Finance.Currencies
         private XBA() : base("XBA") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBA".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Composite Unit (EURCO)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBA".</value>
         public static XBA Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7790,7 +7790,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".
+    /// Represents the currency unit for the code "XBB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7809,9 +7809,9 @@ namespace Narvalo.Finance.Currencies
         private XBB() : base("XBB") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBB".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Monetary Unit (E.M.U.-6)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBB".</value>
         public static XBB Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7819,7 +7819,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".
+    /// Represents the currency unit for the code "XBC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7838,9 +7838,9 @@ namespace Narvalo.Finance.Currencies
         private XBC() : base("XBC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBC".</value>
         public static XBC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7848,7 +7848,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".
+    /// Represents the currency unit for the code "XBD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7867,9 +7867,9 @@ namespace Narvalo.Finance.Currencies
         private XBD() : base("XBD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBD".</value>
         public static XBD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7877,7 +7877,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "East Caribbean Dollar".
+    /// Represents the currency unit for the code "XCD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7896,9 +7896,9 @@ namespace Narvalo.Finance.Currencies
         private XCD() : base("XCD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "East Caribbean Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XCD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "East Caribbean Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XCD".</value>
         public static XCD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7906,7 +7906,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "SDR (Special Drawing Right)".
+    /// Represents the currency unit for the code "XDR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7925,9 +7925,9 @@ namespace Narvalo.Finance.Currencies
         private XDR() : base("XDR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "SDR (Special Drawing Right)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XDR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "SDR (Special Drawing Right)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XDR".</value>
         public static XDR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7935,7 +7935,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "European Currency Unit (E.C.U)".
+    /// Represents the currency unit for the code "XEU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7954,9 +7954,9 @@ namespace Narvalo.Finance.Currencies
         private XEU() : base("XEU") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "European Currency Unit (E.C.U)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XEU".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "European Currency Unit (E.C.U)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XEU".</value>
         public static XEU Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7964,7 +7964,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Gold-Franc".
+    /// Represents the currency unit for the code "XFO".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -7983,9 +7983,9 @@ namespace Narvalo.Finance.Currencies
         private XFO() : base("XFO") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Gold-Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFO".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Gold-Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFO".</value>
         public static XFO Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -7993,7 +7993,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "UIC-Franc".
+    /// Represents the currency unit for the code "XFU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8012,9 +8012,9 @@ namespace Narvalo.Finance.Currencies
         private XFU() : base("XFU") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "UIC-Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFU".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "UIC-Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFU".</value>
         public static XFU Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8022,7 +8022,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "CFA Franc BCEAO".
+    /// Represents the currency unit for the code "XOF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8041,9 +8041,9 @@ namespace Narvalo.Finance.Currencies
         private XOF() : base("XOF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "CFA Franc BCEAO".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XOF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "CFA Franc BCEAO".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XOF".</value>
         public static XOF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8051,7 +8051,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Palladium".
+    /// Represents the currency unit for the code "XPD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8070,9 +8070,9 @@ namespace Narvalo.Finance.Currencies
         private XPD() : base("XPD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Palladium".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Palladium".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPD".</value>
         public static XPD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8080,7 +8080,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "CFP Franc".
+    /// Represents the currency unit for the code "XPF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8099,9 +8099,9 @@ namespace Narvalo.Finance.Currencies
         private XPF() : base("XPF") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "CFP Franc".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPF".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "CFP Franc".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPF".</value>
         public static XPF Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8109,7 +8109,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Platinum".
+    /// Represents the currency unit for the code "XPT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8128,9 +8128,9 @@ namespace Narvalo.Finance.Currencies
         private XPT() : base("XPT") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Platinum".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPT".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Platinum".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPT".</value>
         public static XPT Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8138,7 +8138,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "RINET Funds Code".
+    /// Represents the currency unit for the code "XRE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8157,9 +8157,9 @@ namespace Narvalo.Finance.Currencies
         private XRE() : base("XRE") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "RINET Funds Code".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XRE".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "RINET Funds Code".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XRE".</value>
         public static XRE Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8167,7 +8167,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Sucre".
+    /// Represents the currency unit for the code "XSU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8186,9 +8186,9 @@ namespace Narvalo.Finance.Currencies
         private XSU() : base("XSU") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Sucre".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XSU".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Sucre".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XSU".</value>
         public static XSU Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8196,7 +8196,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Codes specifically reserved for testing purposes".
+    /// Represents the currency unit for the code "XTS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8215,9 +8215,9 @@ namespace Narvalo.Finance.Currencies
         private XTS() : base("XTS") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Codes specifically reserved for testing purposes".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XTS".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Codes specifically reserved for testing purposes".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XTS".</value>
         public static XTS Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8225,7 +8225,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "ADB Unit of Account".
+    /// Represents the currency unit for the code "XUA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8244,9 +8244,9 @@ namespace Narvalo.Finance.Currencies
         private XUA() : base("XUA") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "ADB Unit of Account".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XUA".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "ADB Unit of Account".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XUA".</value>
         public static XUA Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8254,7 +8254,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "The codes assigned for transactions where no currency is involved".
+    /// Represents the currency unit for the code "XXX".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8273,9 +8273,9 @@ namespace Narvalo.Finance.Currencies
         private XXX() : base("XXX") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "The codes assigned for transactions where no currency is involved".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XXX".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "The codes assigned for transactions where no currency is involved".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XXX".</value>
         public static XXX Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8283,7 +8283,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Yemeni Dinar".
+    /// Represents the currency unit for the code "YDD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8302,9 +8302,9 @@ namespace Narvalo.Finance.Currencies
         private YDD() : base("YDD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "YDD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Yemeni Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "YDD".</value>
         public static YDD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8312,7 +8312,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Yemeni Rial".
+    /// Represents the currency unit for the code "YER".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8331,9 +8331,9 @@ namespace Narvalo.Finance.Currencies
         private YER() : base("YER") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Yemeni Rial".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "YER".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Yemeni Rial".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "YER".</value>
         public static YER Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8341,7 +8341,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "New Yugoslavian Dinar".
+    /// Represents the currency unit for the code "YUD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8360,9 +8360,9 @@ namespace Narvalo.Finance.Currencies
         private YUD() : base("YUD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Yugoslavian Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Yugoslavian Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUD".</value>
         public static YUD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8370,7 +8370,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "New Dinar".
+    /// Represents the currency unit for the code "YUM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8389,9 +8389,9 @@ namespace Narvalo.Finance.Currencies
         private YUM() : base("YUM") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUM".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUM".</value>
         public static YUM Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8399,7 +8399,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Yugoslavian Dinar".
+    /// Represents the currency unit for the code "YUN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8418,9 +8418,9 @@ namespace Narvalo.Finance.Currencies
         private YUN() : base("YUN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Yugoslavian Dinar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Yugoslavian Dinar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUN".</value>
         public static YUN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8428,7 +8428,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Financial Rand".
+    /// Represents the currency unit for the code "ZAL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8447,9 +8447,9 @@ namespace Narvalo.Finance.Currencies
         private ZAL() : base("ZAL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Financial Rand".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Financial Rand".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAL".</value>
         public static ZAL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8457,7 +8457,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Rand".
+    /// Represents the currency unit for the code "ZAR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8476,9 +8476,9 @@ namespace Narvalo.Finance.Currencies
         private ZAR() : base("ZAR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rand".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rand".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAR".</value>
         public static ZAR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8486,7 +8486,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Zambian Kwacha".
+    /// Represents the currency unit for the code "ZMK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8505,9 +8505,9 @@ namespace Narvalo.Finance.Currencies
         private ZMK() : base("ZMK") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMK".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMK".</value>
         public static ZMK Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8515,7 +8515,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Zambian Kwacha".
+    /// Represents the currency unit for the code "ZMW".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8534,9 +8534,9 @@ namespace Narvalo.Finance.Currencies
         private ZMW() : base("ZMW") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMW".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zambian Kwacha".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMW".</value>
         public static ZMW Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8544,7 +8544,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "New Zaire".
+    /// Represents the currency unit for the code "ZRN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8563,9 +8563,9 @@ namespace Narvalo.Finance.Currencies
         private ZRN() : base("ZRN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "New Zaire".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "New Zaire".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRN".</value>
         public static ZRN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8573,7 +8573,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Zaire".
+    /// Represents the currency unit for the code "ZRZ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8592,9 +8592,9 @@ namespace Narvalo.Finance.Currencies
         private ZRZ() : base("ZRZ") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zaire".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRZ".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zaire".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRZ".</value>
         public static ZRZ Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8602,7 +8602,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Rhodesian Dollar".
+    /// Represents the currency unit for the code "ZWC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8621,9 +8621,9 @@ namespace Narvalo.Finance.Currencies
         private ZWC() : base("ZWC") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWC".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Rhodesian Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWC".</value>
         public static ZWC Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8631,7 +8631,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Zimbabwe Dollar (old)".
+    /// Represents the currency unit for the code "ZWD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8650,9 +8650,9 @@ namespace Narvalo.Finance.Currencies
         private ZWD() : base("ZWD") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (old)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWD".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (old)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWD".</value>
         public static ZWD Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8660,7 +8660,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Zimbabwe Dollar".
+    /// Represents the currency unit for the code "ZWL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8679,9 +8679,9 @@ namespace Narvalo.Finance.Currencies
         private ZWL() : base("ZWL") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWL".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWL".</value>
         public static ZWL Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8689,7 +8689,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Zimbabwe Dollar (new)".
+    /// Represents the currency unit for the code "ZWN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8708,9 +8708,9 @@ namespace Narvalo.Finance.Currencies
         private ZWN() : base("ZWN") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (new)".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWN".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar (new)".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWN".</value>
         public static ZWN Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
@@ -8718,7 +8718,7 @@ namespace Narvalo.Finance.Currencies
     }
 
     /// <summary>
-    /// Represents the currency unit for the "Zimbabwe Dollar".
+    /// Represents the currency unit for the code "ZWR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
@@ -8737,9 +8737,9 @@ namespace Narvalo.Finance.Currencies
         private ZWR() : base("ZWR") { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".
+        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWR".
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Zimbabwe Dollar".</value>
+        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWR".</value>
         public static ZWR Currency
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }

@@ -8,9 +8,9 @@ namespace Narvalo.Finance.Internal
     using static System.Diagnostics.Contracts.Contract;
     using static Narvalo.Finance.Utilities.AsciiHelpers;
 
-    internal static class Sentinel
+    internal static partial class Sentinel
     {
-        public static class Demand
+        public static partial class Demand
         {
             [DebuggerHidden]
             [ContractAbbreviator]
@@ -29,7 +29,7 @@ namespace Narvalo.Finance.Internal
             }
         }
 
-        public static class Expect
+        public static partial class Expect
         {
             [DebuggerHidden]
             [ContractAbbreviator]
@@ -48,7 +48,7 @@ namespace Narvalo.Finance.Internal
             }
         }
 
-        public static class Warrant
+        public static partial class Warrant
         {
             [DebuggerHidden]
             [ContractAbbreviator]
