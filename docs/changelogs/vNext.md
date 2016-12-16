@@ -71,6 +71,7 @@ Breaking Changes
 - `Bic.CheckFormat()` has been replaced by `Bic.ValidateIsoFormat()`.
 - `Bic.CheckSwiftFormat()` has been replaced by `Bic.ValidateSwiftFormat()`.
 - `Iban.CheckDigit` becomes `Iban.CheckDigits`.
+- Removed `CurrencyFactory`, `CurrencyProvider` and `DefaultCurrencyFactory`.
 
 ### Narvalo.Web
 - `AssetSection.DefaultProvider` setter now throws an `ArgumentException`

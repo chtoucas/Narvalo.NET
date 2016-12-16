@@ -25,7 +25,7 @@ namespace <#= Namespace #>
 {
     using System.Collections.Generic;
 
-    public sealed partial class <#= Name #>
+    public partial class <#= Name #>
     {
         /// <summary>
         /// The set of available currency codes.
