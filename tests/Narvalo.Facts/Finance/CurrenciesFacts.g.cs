@@ -332,7 +332,7 @@ namespace Narvalo.Finance
             Assert.True(ZWN.Currency != null);
             Assert.True(ZWR.Currency != null);
         }
-
+        /*
         [Fact]
         [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
         [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
@@ -1844,7 +1844,7 @@ namespace Narvalo.Finance
             Assert.True(Object.ReferenceEquals(Currency.Of("ZWR"), Currency.Of("ZWR")));
             Assert.False(Object.ReferenceEquals(ZWR.Currency, Currency.Of("ZWR")));
 
-        }
+        } */
 
         #endregion
 
