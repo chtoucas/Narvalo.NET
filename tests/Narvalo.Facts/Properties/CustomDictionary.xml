@@ -11,7 +11,9 @@
 
       <Word>Ctor</Word>
 
+      <Word>Bban</Word>
       <Word>Bic</Word>
+      <Word>Iban</Word>
       <Word>Ascii</Word>
     </Recognized>
 

@@ -13,86 +13,64 @@ var currencies = currentCurrencies.Concat(legacyCurrencies);
 
 var codeSet = new HashSet<string>();
 
+foreach (var currency in currencies.OrderBy(_ => _.Code))
+{
+    if (codeSet.Contains(currency.Code))
+    {
+        continue;
+    }
+
+    codeSet.Add(currency.Code);
+}
+
 WriteHeader();
 
 #>
 
 namespace <#= Namespace #>
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Collections.Generic;
 
     using Narvalo.Finance.Currencies;
-    using Xunit;
 
-    [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
-    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
     public static partial class CurrencyFacts
     {
-        #region Built-In Currencies
-
-        [Fact]
-        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
-        public static void BuiltInCurrencies_AreNotNull()
+        public static IEnumerable<object[]> AllCodes
         {
-<#
-    foreach (var currency in currencies.OrderBy(_ => _.Code))
-    {
-        if (codeSet.Contains(currency.Code))
-        {
-            continue;
-        }
+            get
+            {
+                #region Long list of currency codes.
 
-        codeSet.Add(currency.Code);
-#>
-            Assert.True(<#= currency.Code #>.Currency != null);
-<#
-    }
-
-#>
-        }
-
-        [Fact(Skip = "Broken")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
-        public static void BuiltInCurrencies_SatisfyStructuralEqualityRules()
-        {
-            // Act & Assert
 <#
     foreach (var code in codeSet)
     {
 #>
-            Assert.True(<#= code #>.Currency.Equals(Currency.Of("<#= code #>")));
-            Assert.True(<#= code #>.Currency == Currency.Of("<#= code #>"));
-            Assert.True(Object.ReferenceEquals(Currency.Of("<#= code #>"), Currency.Of("<#= code #>")));
-            Assert.False(Object.ReferenceEquals(<#= code #>.Currency, Currency.Of("<#= code #>")));
-
+                yield return new object[] { "<#= code #>" };
 <#
     }
 #>
+
+                #endregion
+            }
         }
 
-        #endregion
-
-        #region ToString()
-
-        [Fact]
-        [SuppressMessage("Microsoft.Maintainability", "CA1505:AvoidUnmaintainableCode", Justification = "[Intentionally] Testing all currencies in a row.")]
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "[Intentionally] Testing all currencies in a row.")]
-        public static void ToString_ReturnsNotNull()
+        public static IEnumerable<object[]> BuiltInCurrencies
         {
-            // Act & Assert
+            get
+            {
+                #region Long list of built-in currencies.
+
 <#
     foreach (var code in codeSet)
     {
 #>
-            Assert.True(<#= code #>.Currency.ToString() != null);
+                yield return new object[] { <#= code #>.UniqInstance };
 <#
     }
 #>
-        }
 
-        #endregion
+                #endregion
+            }
+        }
     }
 }

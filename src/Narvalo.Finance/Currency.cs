@@ -158,7 +158,7 @@ namespace Narvalo.Finance
         /// for the pseudo-currency for transactions where no currency is involved.</value>
         public static Currency None
         {
-            get { Warrant.NotNull<Currency>(); return XXX.Currency; }
+            get { Warrant.NotNull<Currency>(); return XXX.UniqInstance; }
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Narvalo.Finance
         /// for the currency specifically reserved for testing purposes.</value>
         public static Currency Test
         {
-            get { Warrant.NotNull<Currency>(); return XTS.Currency; }
+            get { Warrant.NotNull<Currency>(); return XTS.UniqInstance; }
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Narvalo.Finance
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Euro".</value>
         public static Currency Euro
         {
-            get { Warrant.NotNull<Currency>(); return EUR.Currency; }
+            get { Warrant.NotNull<Currency>(); return EUR.UniqInstance; }
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace Narvalo.Finance
         /// <value>The unique instance of the <see cref="Currency" /> class for the (British) "Pound Sterling".</value>
         public static Currency PoundSterling
         {
-            get { Warrant.NotNull<Currency>(); return GBP.Currency; }
+            get { Warrant.NotNull<Currency>(); return GBP.UniqInstance; }
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Narvalo.Finance
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Swiss Franc".</value>
         public static Currency SwissFranc
         {
-            get { Warrant.NotNull<Currency>(); return CHF.Currency; }
+            get { Warrant.NotNull<Currency>(); return CHF.UniqInstance; }
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Narvalo.Finance
         /// <value>The unique instance of the <see cref="Currency" /> class for the "United States Dollar".</value>
         public static Currency UnitedStatesDollar
         {
-            get { Warrant.NotNull<Currency>(); return USD.Currency; }
+            get { Warrant.NotNull<Currency>(); return USD.UniqInstance; }
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Narvalo.Finance
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Japanese Yen".</value>
         public static Currency Yen
         {
-            get { Warrant.NotNull<Currency>(); return JPY.Currency; }
+            get { Warrant.NotNull<Currency>(); return JPY.UniqInstance; }
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace Narvalo.Finance
         /// <remarks>The code for a precious metal is formed after its chemical symbol: AU.</remarks>
         public static Currency Gold
         {
-            get { Warrant.NotNull<Currency>(); return XAU.Currency; }
+            get { Warrant.NotNull<Currency>(); return XAU.UniqInstance; }
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace Narvalo.Finance
         /// <remarks>The code for a precious metal is formed after its chemical symbol: PD.</remarks>
         public static Currency Palladium
         {
-            get { Warrant.NotNull<Currency>(); return XPD.Currency; }
+            get { Warrant.NotNull<Currency>(); return XPD.UniqInstance; }
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Narvalo.Finance
         /// <remarks>The code for a precious metal is formed after its chemical symbol: PT.</remarks>
         public static Currency Platinum
         {
-            get { Warrant.NotNull<Currency>(); return XPT.Currency; }
+            get { Warrant.NotNull<Currency>(); return XPT.UniqInstance; }
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Narvalo.Finance
         /// <remarks>The code for a precious metal is formed after its chemical symbol: AG.</remarks>
         public static Currency Silver
         {
-            get { Warrant.NotNull<Currency>(); return XAG.Currency; }
+            get { Warrant.NotNull<Currency>(); return XAG.UniqInstance; }
         }
     }
 

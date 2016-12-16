@@ -6,6 +6,7 @@ namespace Narvalo.Finance
     using System.Collections.Generic;
     using System.Globalization;
 
+    using Narvalo.Finance.Currencies;
     using Xunit;
 
     public static partial class CurrencyFacts
@@ -98,17 +99,19 @@ namespace Narvalo.Finance
 
         #region op_Equality()
 
-        [Fact]
-        public static void Equality_ReturnsTrue_ForIdenticalReferences()
+        [Theory(DisplayName = "op_Equality() follows structural equality rules.")]
+        [MemberData(nameof(AllCodes), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equality_ReturnsTrue_ForIdenticalCodes(string code)
         {
-            var currency1 = Currency.Of("EUR");
-            var currency2 = Currency.Of("EUR");
+            var currency1 = Currency.Of(code);
+            var currency2 = Currency.Of(code);
 
             Assert.True(currency1 == currency2);
         }
 
         [Fact]
-        public static void Equality_ReturnsFalse_ForDistinctReferences()
+        public static void Equality_ReturnsFalse_ForDistinctCodes()
         {
             var currency1 = Currency.Of("EUR");
             var currency2 = Currency.Of("JPY");
@@ -139,7 +142,7 @@ namespace Narvalo.Finance
         #region op_Inequality()
 
         [Fact]
-        public static void Inequality_ReturnsFalse_ForIdenticalReferences()
+        public static void Inequality_ReturnsFalse_ForIdenticalCodes()
         {
             var currency1 = Currency.Of("EUR");
             var currency2 = Currency.Of("EUR");
@@ -148,7 +151,7 @@ namespace Narvalo.Finance
         }
 
         [Fact]
-        public static void Inequality_ReturnsTrue_ForDistinctReferences()
+        public static void Inequality_ReturnsTrue_ForDistinctCodes()
         {
             var currency1 = Currency.Of("EUR");
             var currency2 = Currency.Of("JPY");
@@ -187,17 +190,19 @@ namespace Narvalo.Finance
             Assert.False(currency.Equals(other));
         }
 
-        [Fact]
-        public static void Equals_FollowsStructuralEqualityRules()
+        [Theory(DisplayName = "Equals() follows structural equality rules.")]
+        [MemberData(nameof(AllCodes), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Equals_ReturnsTrue_ForIdenticalCodes(string code)
         {
-            var currency1 = Currency.Of("EUR");
-            var currency2 = Currency.Of("EUR");
+            var currency1 = Currency.Of(code);
+            var currency2 = Currency.Of(code);
 
             Assert.True(currency1.Equals(currency2));
         }
 
         [Fact]
-        public static void Equals_ReturnsFalse_ForDistinctCurrencies()
+        public static void Equals_ReturnsFalse_ForDistinctCodes()
         {
             var currency1 = Currency.Of("EUR");
             var currency2 = Currency.Of("XPT");
@@ -215,7 +220,7 @@ namespace Narvalo.Finance
         }
 
         [Fact]
-        public static void Equals_ReturnsTrue_ForIdenticalCode_AfterConversionToObject()
+        public static void Equals_ReturnsTrue_ForIdenticalCodes_AfterConversionToObject()
         {
             var currency1 = Currency.Of("EUR");
             object currency2 = currency1;
@@ -236,7 +241,7 @@ namespace Narvalo.Finance
         }
 
         [Fact]
-        public static void Equals_ReturnsFalse_ForDistinctCurrencies_AfterConversionToObject()
+        public static void Equals_ReturnsFalse_ForDistinctCodes_AfterConversionToObject()
         {
             var currency1 = Currency.Of("EUR");
             object currency2 = Currency.Of("XPT");
@@ -282,10 +287,37 @@ namespace Narvalo.Finance
 
         #endregion
 
+        #region ToString()
+
+        [Theory]
+        [MemberData(nameof(BuiltInCurrencies), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsNotNull(Currency currency) => Assert.True(currency.ToString() != null);
+
+        #endregion
+
+        #region Aliases
+
         [Theory]
         [MemberData(nameof(Aliases), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Aliases_AreNotNull(Currency value) => Assert.NotNull(value);
+        public static void Alias_IsNotNull(Currency alias) => Assert.NotNull(alias);
+
+        #endregion
+
+        #region Built-In Currencies
+
+        [Theory]
+        [MemberData(nameof(BuiltInCurrencies), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void BuiltInCurrency_UniqInstance_ReturnsNonNull(Currency currency)
+            => Assert.True(currency != null);
+
+        [Fact]
+        public static void BuiltInCurrency_UniqInstance_ReturnsSingleton()
+            => Assert.True(Object.ReferenceEquals(EUR.UniqInstance, EUR.UniqInstance));
+
+        #endregion
     }
 
     public static partial class CurrencyFacts

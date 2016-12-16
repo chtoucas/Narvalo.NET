@@ -40,7 +40,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ADP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ADP".</value>
-        public static ADP Currency
+        public static ADP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -50,7 +50,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AED".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AED : Currency
@@ -69,7 +69,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AED".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AED".</value>
-        public static AED Currency
+        public static AED UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -79,7 +79,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AFA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFA : Currency
@@ -98,7 +98,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFA".</value>
-        public static AFA Currency
+        public static AFA UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -108,7 +108,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AFN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFN : Currency
@@ -127,7 +127,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFN".</value>
-        public static AFN Currency
+        public static AFN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -137,7 +137,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ALK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALK : Currency
@@ -156,7 +156,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALK".</value>
-        public static ALK Currency
+        public static ALK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -166,7 +166,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ALL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALL : Currency
@@ -185,7 +185,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALL".</value>
-        public static ALL Currency
+        public static ALL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -195,7 +195,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AMD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AMD : Currency
@@ -214,7 +214,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AMD".</value>
-        public static AMD Currency
+        public static AMD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -224,7 +224,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ANG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ANG : Currency
@@ -243,7 +243,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ANG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ANG".</value>
-        public static ANG Currency
+        public static ANG UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -253,7 +253,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AOA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOA : Currency
@@ -272,7 +272,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOA".</value>
-        public static AOA Currency
+        public static AOA UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -282,7 +282,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AOK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOK : Currency
@@ -301,7 +301,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOK".</value>
-        public static AOK Currency
+        public static AOK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -311,7 +311,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AON".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AON : Currency
@@ -330,7 +330,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AON".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AON".</value>
-        public static AON Currency
+        public static AON UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -340,7 +340,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AOR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOR : Currency
@@ -359,7 +359,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOR".</value>
-        public static AOR Currency
+        public static AOR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -369,7 +369,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ARA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARA : Currency
@@ -388,7 +388,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARA".</value>
-        public static ARA Currency
+        public static ARA UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -398,7 +398,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ARP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARP : Currency
@@ -417,7 +417,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARP".</value>
-        public static ARP Currency
+        public static ARP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -427,7 +427,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ARS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARS : Currency
@@ -446,7 +446,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARS".</value>
-        public static ARS Currency
+        public static ARS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -456,7 +456,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ARY".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARY : Currency
@@ -475,7 +475,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARY".</value>
-        public static ARY Currency
+        public static ARY UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -485,7 +485,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ATS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ATS : Currency
@@ -504,7 +504,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ATS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ATS".</value>
-        public static ATS Currency
+        public static ATS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -514,7 +514,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AUD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AUD : Currency
@@ -533,7 +533,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AUD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AUD".</value>
-        public static AUD Currency
+        public static AUD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -543,7 +543,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AWG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AWG : Currency
@@ -562,7 +562,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AWG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AWG".</value>
-        public static AWG Currency
+        public static AWG UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -572,7 +572,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AYM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AYM : Currency
@@ -591,7 +591,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AYM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AYM".</value>
-        public static AYM Currency
+        public static AYM UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -601,7 +601,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AZM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZM : Currency
@@ -620,7 +620,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZM".</value>
-        public static AZM Currency
+        public static AZM UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -630,7 +630,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "AZN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZN : Currency
@@ -649,7 +649,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZN".</value>
-        public static AZN Currency
+        public static AZN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -659,7 +659,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BAD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAD : Currency
@@ -678,7 +678,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAD".</value>
-        public static BAD Currency
+        public static BAD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -688,7 +688,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BAM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAM : Currency
@@ -707,7 +707,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAM".</value>
-        public static BAM Currency
+        public static BAM UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -717,7 +717,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BBD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BBD : Currency
@@ -736,7 +736,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BBD".</value>
-        public static BBD Currency
+        public static BBD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -746,7 +746,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BDT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BDT : Currency
@@ -765,7 +765,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BDT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BDT".</value>
-        public static BDT Currency
+        public static BDT UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -775,7 +775,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BEC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEC : Currency
@@ -794,7 +794,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEC".</value>
-        public static BEC Currency
+        public static BEC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -804,7 +804,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BEF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEF : Currency
@@ -823,7 +823,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEF".</value>
-        public static BEF Currency
+        public static BEF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -833,7 +833,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BEL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEL : Currency
@@ -852,7 +852,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEL".</value>
-        public static BEL Currency
+        public static BEL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -862,7 +862,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BGJ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGJ : Currency
@@ -881,7 +881,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGJ".</value>
-        public static BGJ Currency
+        public static BGJ UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -891,7 +891,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BGK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGK : Currency
@@ -910,7 +910,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGK".</value>
-        public static BGK Currency
+        public static BGK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -920,7 +920,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BGL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGL : Currency
@@ -939,7 +939,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGL".</value>
-        public static BGL Currency
+        public static BGL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -949,7 +949,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BGN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGN : Currency
@@ -968,7 +968,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGN".</value>
-        public static BGN Currency
+        public static BGN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -978,7 +978,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BHD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BHD : Currency
@@ -997,7 +997,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BHD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BHD".</value>
-        public static BHD Currency
+        public static BHD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1007,7 +1007,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BIF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BIF : Currency
@@ -1026,7 +1026,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BIF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BIF".</value>
-        public static BIF Currency
+        public static BIF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1036,7 +1036,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BMD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BMD : Currency
@@ -1055,7 +1055,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BMD".</value>
-        public static BMD Currency
+        public static BMD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1065,7 +1065,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BND".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BND : Currency
@@ -1084,7 +1084,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BND".</value>
-        public static BND Currency
+        public static BND UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1094,7 +1094,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BOB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOB : Currency
@@ -1113,7 +1113,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOB".</value>
-        public static BOB Currency
+        public static BOB UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1123,7 +1123,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BOP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOP : Currency
@@ -1142,7 +1142,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOP".</value>
-        public static BOP Currency
+        public static BOP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1152,7 +1152,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BOV".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOV : Currency
@@ -1171,7 +1171,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOV".</value>
-        public static BOV Currency
+        public static BOV UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1181,7 +1181,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BRB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRB : Currency
@@ -1200,7 +1200,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRB".</value>
-        public static BRB Currency
+        public static BRB UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1210,7 +1210,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BRC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRC : Currency
@@ -1229,7 +1229,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRC".</value>
-        public static BRC Currency
+        public static BRC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1239,7 +1239,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BRE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRE : Currency
@@ -1258,7 +1258,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRE".</value>
-        public static BRE Currency
+        public static BRE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1268,7 +1268,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BRL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRL : Currency
@@ -1287,7 +1287,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRL".</value>
-        public static BRL Currency
+        public static BRL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1297,7 +1297,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BRN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRN : Currency
@@ -1316,7 +1316,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRN".</value>
-        public static BRN Currency
+        public static BRN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1326,7 +1326,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BRR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRR : Currency
@@ -1345,7 +1345,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRR".</value>
-        public static BRR Currency
+        public static BRR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1355,7 +1355,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BSD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BSD : Currency
@@ -1374,7 +1374,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BSD".</value>
-        public static BSD Currency
+        public static BSD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1384,7 +1384,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BTN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BTN : Currency
@@ -1403,7 +1403,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BTN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BTN".</value>
-        public static BTN Currency
+        public static BTN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1413,7 +1413,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BUK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BUK : Currency
@@ -1432,7 +1432,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BUK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BUK".</value>
-        public static BUK Currency
+        public static BUK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1442,7 +1442,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BWP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BWP : Currency
@@ -1461,7 +1461,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BWP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BWP".</value>
-        public static BWP Currency
+        public static BWP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1471,7 +1471,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BYB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYB : Currency
@@ -1490,7 +1490,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYB".</value>
-        public static BYB Currency
+        public static BYB UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1500,7 +1500,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BYN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYN : Currency
@@ -1519,7 +1519,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYN".</value>
-        public static BYN Currency
+        public static BYN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1529,7 +1529,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BYR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYR : Currency
@@ -1548,7 +1548,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYR".</value>
-        public static BYR Currency
+        public static BYR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1558,7 +1558,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "BZD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BZD : Currency
@@ -1577,7 +1577,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BZD".</value>
-        public static BZD Currency
+        public static BZD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1587,7 +1587,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CAD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CAD : Currency
@@ -1606,7 +1606,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CAD".</value>
-        public static CAD Currency
+        public static CAD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1616,7 +1616,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CDF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CDF : Currency
@@ -1635,7 +1635,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CDF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CDF".</value>
-        public static CDF Currency
+        public static CDF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1645,7 +1645,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CHC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHC : Currency
@@ -1664,7 +1664,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHC".</value>
-        public static CHC Currency
+        public static CHC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1674,7 +1674,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CHE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHE : Currency
@@ -1693,7 +1693,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHE".</value>
-        public static CHE Currency
+        public static CHE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1703,7 +1703,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CHF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHF : Currency
@@ -1722,7 +1722,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHF".</value>
-        public static CHF Currency
+        public static CHF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1732,7 +1732,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CHW".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHW : Currency
@@ -1751,7 +1751,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHW".</value>
-        public static CHW Currency
+        public static CHW UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1761,7 +1761,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CLF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLF : Currency
@@ -1780,7 +1780,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLF".</value>
-        public static CLF Currency
+        public static CLF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1790,7 +1790,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CLP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLP : Currency
@@ -1809,7 +1809,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLP".</value>
-        public static CLP Currency
+        public static CLP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1819,7 +1819,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CNX".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNX : Currency
@@ -1838,7 +1838,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNX".</value>
-        public static CNX Currency
+        public static CNX UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1848,7 +1848,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CNY".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNY : Currency
@@ -1867,7 +1867,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNY".</value>
-        public static CNY Currency
+        public static CNY UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1877,7 +1877,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "COP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COP : Currency
@@ -1896,7 +1896,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "COP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "COP".</value>
-        public static COP Currency
+        public static COP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1906,7 +1906,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "COU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COU : Currency
@@ -1925,7 +1925,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "COU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "COU".</value>
-        public static COU Currency
+        public static COU UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1935,7 +1935,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CRC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CRC : Currency
@@ -1954,7 +1954,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CRC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CRC".</value>
-        public static CRC Currency
+        public static CRC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1964,7 +1964,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CSD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSD : Currency
@@ -1983,7 +1983,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSD".</value>
-        public static CSD Currency
+        public static CSD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -1993,7 +1993,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CSJ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSJ : Currency
@@ -2012,7 +2012,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSJ".</value>
-        public static CSJ Currency
+        public static CSJ UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2022,7 +2022,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CSK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSK : Currency
@@ -2041,7 +2041,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSK".</value>
-        public static CSK Currency
+        public static CSK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2051,7 +2051,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CUC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUC : Currency
@@ -2070,7 +2070,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUC".</value>
-        public static CUC Currency
+        public static CUC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2080,7 +2080,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CUP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUP : Currency
@@ -2099,7 +2099,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUP".</value>
-        public static CUP Currency
+        public static CUP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2109,7 +2109,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CVE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CVE : Currency
@@ -2128,7 +2128,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CVE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CVE".</value>
-        public static CVE Currency
+        public static CVE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2138,7 +2138,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CYP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CYP : Currency
@@ -2157,7 +2157,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CYP".</value>
-        public static CYP Currency
+        public static CYP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2167,7 +2167,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "CZK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CZK : Currency
@@ -2186,7 +2186,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CZK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CZK".</value>
-        public static CZK Currency
+        public static CZK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2196,7 +2196,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "DDM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DDM : Currency
@@ -2215,7 +2215,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DDM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DDM".</value>
-        public static DDM Currency
+        public static DDM UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2225,7 +2225,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "DEM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DEM : Currency
@@ -2244,7 +2244,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DEM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DEM".</value>
-        public static DEM Currency
+        public static DEM UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2254,7 +2254,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "DJF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DJF : Currency
@@ -2273,7 +2273,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DJF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DJF".</value>
-        public static DJF Currency
+        public static DJF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2283,7 +2283,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "DKK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DKK : Currency
@@ -2302,7 +2302,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DKK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DKK".</value>
-        public static DKK Currency
+        public static DKK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2312,7 +2312,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "DOP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DOP : Currency
@@ -2331,7 +2331,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DOP".</value>
-        public static DOP Currency
+        public static DOP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2341,7 +2341,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "DZD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DZD : Currency
@@ -2360,7 +2360,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DZD".</value>
-        public static DZD Currency
+        public static DZD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2370,7 +2370,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ECS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ECS : Currency
@@ -2389,7 +2389,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECS".</value>
-        public static ECS Currency
+        public static ECS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2399,7 +2399,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ECV".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ECV : Currency
@@ -2418,7 +2418,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECV".</value>
-        public static ECV Currency
+        public static ECV UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2428,7 +2428,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "EEK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EEK : Currency
@@ -2447,7 +2447,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EEK".</value>
-        public static EEK Currency
+        public static EEK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2457,7 +2457,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "EGP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EGP : Currency
@@ -2476,7 +2476,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EGP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EGP".</value>
-        public static EGP Currency
+        public static EGP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2486,7 +2486,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "EQE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EQE : Currency
@@ -2505,7 +2505,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EQE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EQE".</value>
-        public static EQE Currency
+        public static EQE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2515,7 +2515,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ERN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ERN : Currency
@@ -2534,7 +2534,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ERN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ERN".</value>
-        public static ERN Currency
+        public static ERN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2544,7 +2544,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ESA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESA : Currency
@@ -2563,7 +2563,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESA".</value>
-        public static ESA Currency
+        public static ESA UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2573,7 +2573,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ESB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESB : Currency
@@ -2592,7 +2592,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESB".</value>
-        public static ESB Currency
+        public static ESB UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2602,7 +2602,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ESP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESP : Currency
@@ -2621,7 +2621,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESP".</value>
-        public static ESP Currency
+        public static ESP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2631,7 +2631,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ETB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ETB : Currency
@@ -2650,7 +2650,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ETB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ETB".</value>
-        public static ETB Currency
+        public static ETB UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2660,7 +2660,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "EUR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EUR : Currency
@@ -2679,7 +2679,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EUR".</value>
-        public static EUR Currency
+        public static EUR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2689,7 +2689,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "FIM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FIM : Currency
@@ -2708,7 +2708,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FIM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FIM".</value>
-        public static FIM Currency
+        public static FIM UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2718,7 +2718,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "FJD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FJD : Currency
@@ -2737,7 +2737,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FJD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FJD".</value>
-        public static FJD Currency
+        public static FJD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2747,7 +2747,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "FKP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FKP : Currency
@@ -2766,7 +2766,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FKP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FKP".</value>
-        public static FKP Currency
+        public static FKP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2776,7 +2776,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "FRF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FRF : Currency
@@ -2795,7 +2795,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FRF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FRF".</value>
-        public static FRF Currency
+        public static FRF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2805,7 +2805,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GBP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GBP : Currency
@@ -2824,7 +2824,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GBP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GBP".</value>
-        public static GBP Currency
+        public static GBP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2834,7 +2834,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GEK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEK : Currency
@@ -2853,7 +2853,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEK".</value>
-        public static GEK Currency
+        public static GEK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2863,7 +2863,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GEL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEL : Currency
@@ -2882,7 +2882,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEL".</value>
-        public static GEL Currency
+        public static GEL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2892,7 +2892,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GHC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHC : Currency
@@ -2911,7 +2911,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHC".</value>
-        public static GHC Currency
+        public static GHC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2921,7 +2921,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GHP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHP : Currency
@@ -2940,7 +2940,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHP".</value>
-        public static GHP Currency
+        public static GHP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2950,7 +2950,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GHS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHS : Currency
@@ -2969,7 +2969,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHS".</value>
-        public static GHS Currency
+        public static GHS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -2979,7 +2979,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GIP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GIP : Currency
@@ -2998,7 +2998,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GIP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GIP".</value>
-        public static GIP Currency
+        public static GIP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3008,7 +3008,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GMD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GMD : Currency
@@ -3027,7 +3027,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GMD".</value>
-        public static GMD Currency
+        public static GMD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3037,7 +3037,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GNE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNE : Currency
@@ -3056,7 +3056,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNE".</value>
-        public static GNE Currency
+        public static GNE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3066,7 +3066,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GNF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNF : Currency
@@ -3085,7 +3085,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNF".</value>
-        public static GNF Currency
+        public static GNF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3095,7 +3095,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GNS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNS : Currency
@@ -3114,7 +3114,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNS".</value>
-        public static GNS Currency
+        public static GNS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3124,7 +3124,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GQE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GQE : Currency
@@ -3143,7 +3143,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GQE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GQE".</value>
-        public static GQE Currency
+        public static GQE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3153,7 +3153,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GRD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GRD : Currency
@@ -3172,7 +3172,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GRD".</value>
-        public static GRD Currency
+        public static GRD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3182,7 +3182,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GTQ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GTQ : Currency
@@ -3201,7 +3201,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GTQ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GTQ".</value>
-        public static GTQ Currency
+        public static GTQ UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3211,7 +3211,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GWE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GWE : Currency
@@ -3230,7 +3230,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWE".</value>
-        public static GWE Currency
+        public static GWE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3240,7 +3240,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GWP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GWP : Currency
@@ -3259,7 +3259,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWP".</value>
-        public static GWP Currency
+        public static GWP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3269,7 +3269,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "GYD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GYD : Currency
@@ -3288,7 +3288,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GYD".</value>
-        public static GYD Currency
+        public static GYD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3298,7 +3298,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "HKD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HKD : Currency
@@ -3317,7 +3317,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HKD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HKD".</value>
-        public static HKD Currency
+        public static HKD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3327,7 +3327,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "HNL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HNL : Currency
@@ -3346,7 +3346,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HNL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HNL".</value>
-        public static HNL Currency
+        public static HNL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3356,7 +3356,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "HRD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRD : Currency
@@ -3375,7 +3375,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRD".</value>
-        public static HRD Currency
+        public static HRD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3385,7 +3385,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "HRK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRK : Currency
@@ -3404,7 +3404,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRK".</value>
-        public static HRK Currency
+        public static HRK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3414,7 +3414,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "HTG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HTG : Currency
@@ -3433,7 +3433,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HTG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HTG".</value>
-        public static HTG Currency
+        public static HTG UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3443,7 +3443,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "HUF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HUF : Currency
@@ -3462,7 +3462,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HUF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HUF".</value>
-        public static HUF Currency
+        public static HUF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3472,7 +3472,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "IDR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IDR : Currency
@@ -3491,7 +3491,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IDR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IDR".</value>
-        public static IDR Currency
+        public static IDR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3501,7 +3501,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "IEP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IEP : Currency
@@ -3520,7 +3520,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IEP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IEP".</value>
-        public static IEP Currency
+        public static IEP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3530,7 +3530,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ILP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILP : Currency
@@ -3549,7 +3549,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILP".</value>
-        public static ILP Currency
+        public static ILP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3559,7 +3559,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ILR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILR : Currency
@@ -3578,7 +3578,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILR".</value>
-        public static ILR Currency
+        public static ILR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3588,7 +3588,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ILS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILS : Currency
@@ -3607,7 +3607,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILS".</value>
-        public static ILS Currency
+        public static ILS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3617,7 +3617,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "INR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class INR : Currency
@@ -3636,7 +3636,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "INR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "INR".</value>
-        public static INR Currency
+        public static INR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3646,7 +3646,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "IQD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IQD : Currency
@@ -3665,7 +3665,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IQD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IQD".</value>
-        public static IQD Currency
+        public static IQD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3675,7 +3675,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "IRR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IRR : Currency
@@ -3694,7 +3694,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IRR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IRR".</value>
-        public static IRR Currency
+        public static IRR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3704,7 +3704,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ISJ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISJ : Currency
@@ -3723,7 +3723,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISJ".</value>
-        public static ISJ Currency
+        public static ISJ UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3733,7 +3733,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ISK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISK : Currency
@@ -3752,7 +3752,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISK".</value>
-        public static ISK Currency
+        public static ISK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3762,7 +3762,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ITL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ITL : Currency
@@ -3781,7 +3781,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ITL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ITL".</value>
-        public static ITL Currency
+        public static ITL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3791,7 +3791,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "JMD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JMD : Currency
@@ -3810,7 +3810,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JMD".</value>
-        public static JMD Currency
+        public static JMD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3820,7 +3820,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "JOD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JOD : Currency
@@ -3839,7 +3839,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JOD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JOD".</value>
-        public static JOD Currency
+        public static JOD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3849,7 +3849,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "JPY".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JPY : Currency
@@ -3868,7 +3868,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JPY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JPY".</value>
-        public static JPY Currency
+        public static JPY UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3878,7 +3878,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "KES".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KES : Currency
@@ -3897,7 +3897,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KES".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KES".</value>
-        public static KES Currency
+        public static KES UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3907,7 +3907,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "KGS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KGS : Currency
@@ -3926,7 +3926,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KGS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KGS".</value>
-        public static KGS Currency
+        public static KGS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3936,7 +3936,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "KHR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KHR : Currency
@@ -3955,7 +3955,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KHR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KHR".</value>
-        public static KHR Currency
+        public static KHR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3965,7 +3965,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "KMF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KMF : Currency
@@ -3984,7 +3984,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KMF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KMF".</value>
-        public static KMF Currency
+        public static KMF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -3994,7 +3994,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "KPW".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KPW : Currency
@@ -4013,7 +4013,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KPW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KPW".</value>
-        public static KPW Currency
+        public static KPW UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4023,7 +4023,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "KRW".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KRW : Currency
@@ -4042,7 +4042,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KRW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KRW".</value>
-        public static KRW Currency
+        public static KRW UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4052,7 +4052,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "KWD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KWD : Currency
@@ -4071,7 +4071,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KWD".</value>
-        public static KWD Currency
+        public static KWD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4081,7 +4081,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "KYD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KYD : Currency
@@ -4100,7 +4100,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KYD".</value>
-        public static KYD Currency
+        public static KYD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4110,7 +4110,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "KZT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KZT : Currency
@@ -4129,7 +4129,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KZT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KZT".</value>
-        public static KZT Currency
+        public static KZT UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4139,7 +4139,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LAJ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAJ : Currency
@@ -4158,7 +4158,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAJ".</value>
-        public static LAJ Currency
+        public static LAJ UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4168,7 +4168,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LAK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAK : Currency
@@ -4187,7 +4187,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAK".</value>
-        public static LAK Currency
+        public static LAK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4197,7 +4197,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LBP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LBP : Currency
@@ -4216,7 +4216,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LBP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LBP".</value>
-        public static LBP Currency
+        public static LBP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4226,7 +4226,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LKR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LKR : Currency
@@ -4245,7 +4245,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LKR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LKR".</value>
-        public static LKR Currency
+        public static LKR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4255,7 +4255,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LRD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LRD : Currency
@@ -4274,7 +4274,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LRD".</value>
-        public static LRD Currency
+        public static LRD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4284,7 +4284,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LSL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSL : Currency
@@ -4303,7 +4303,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSL".</value>
-        public static LSL Currency
+        public static LSL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4313,7 +4313,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LSM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSM : Currency
@@ -4332,7 +4332,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSM".</value>
-        public static LSM Currency
+        public static LSM UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4342,7 +4342,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LTL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LTL : Currency
@@ -4361,7 +4361,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTL".</value>
-        public static LTL Currency
+        public static LTL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4371,7 +4371,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LTT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LTT : Currency
@@ -4390,7 +4390,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTT".</value>
-        public static LTT Currency
+        public static LTT UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4400,7 +4400,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LUC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUC : Currency
@@ -4419,7 +4419,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUC".</value>
-        public static LUC Currency
+        public static LUC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4429,7 +4429,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LUF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUF : Currency
@@ -4448,7 +4448,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUF".</value>
-        public static LUF Currency
+        public static LUF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4458,7 +4458,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LUL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUL : Currency
@@ -4477,7 +4477,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUL".</value>
-        public static LUL Currency
+        public static LUL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4487,7 +4487,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LVL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LVL : Currency
@@ -4506,7 +4506,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVL".</value>
-        public static LVL Currency
+        public static LVL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4516,7 +4516,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LVR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LVR : Currency
@@ -4535,7 +4535,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVR".</value>
-        public static LVR Currency
+        public static LVR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4545,7 +4545,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "LYD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LYD : Currency
@@ -4564,7 +4564,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LYD".</value>
-        public static LYD Currency
+        public static LYD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4574,7 +4574,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MAD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAD : Currency
@@ -4593,7 +4593,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAD".</value>
-        public static MAD Currency
+        public static MAD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4603,7 +4603,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MAF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAF : Currency
@@ -4622,7 +4622,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAF".</value>
-        public static MAF Currency
+        public static MAF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4632,7 +4632,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MDL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MDL : Currency
@@ -4651,7 +4651,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MDL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MDL".</value>
-        public static MDL Currency
+        public static MDL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4661,7 +4661,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MGA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGA : Currency
@@ -4680,7 +4680,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGA".</value>
-        public static MGA Currency
+        public static MGA UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4690,7 +4690,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MGF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGF : Currency
@@ -4709,7 +4709,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGF".</value>
-        public static MGF Currency
+        public static MGF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4719,7 +4719,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MKD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MKD : Currency
@@ -4738,7 +4738,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MKD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MKD".</value>
-        public static MKD Currency
+        public static MKD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4748,7 +4748,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MLF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MLF : Currency
@@ -4767,7 +4767,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MLF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MLF".</value>
-        public static MLF Currency
+        public static MLF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4777,7 +4777,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MMK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MMK : Currency
@@ -4796,7 +4796,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MMK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MMK".</value>
-        public static MMK Currency
+        public static MMK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4806,7 +4806,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MNT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MNT : Currency
@@ -4825,7 +4825,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MNT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MNT".</value>
-        public static MNT Currency
+        public static MNT UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4835,7 +4835,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MOP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MOP : Currency
@@ -4854,7 +4854,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MOP".</value>
-        public static MOP Currency
+        public static MOP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4864,7 +4864,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MRO".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MRO : Currency
@@ -4883,7 +4883,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MRO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MRO".</value>
-        public static MRO Currency
+        public static MRO UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4893,7 +4893,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MTL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MTL : Currency
@@ -4912,7 +4912,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTL".</value>
-        public static MTL Currency
+        public static MTL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4922,7 +4922,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MTP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MTP : Currency
@@ -4941,7 +4941,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTP".</value>
-        public static MTP Currency
+        public static MTP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4951,7 +4951,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MUR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MUR : Currency
@@ -4970,7 +4970,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MUR".</value>
-        public static MUR Currency
+        public static MUR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -4980,7 +4980,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MVQ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVQ : Currency
@@ -4999,7 +4999,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVQ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVQ".</value>
-        public static MVQ Currency
+        public static MVQ UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5009,7 +5009,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MVR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVR : Currency
@@ -5028,7 +5028,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVR".</value>
-        public static MVR Currency
+        public static MVR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5038,7 +5038,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MWK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MWK : Currency
@@ -5057,7 +5057,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MWK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MWK".</value>
-        public static MWK Currency
+        public static MWK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5067,7 +5067,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MXN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXN : Currency
@@ -5086,7 +5086,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXN".</value>
-        public static MXN Currency
+        public static MXN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5096,7 +5096,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MXP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXP : Currency
@@ -5115,7 +5115,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXP".</value>
-        public static MXP Currency
+        public static MXP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5125,7 +5125,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MXV".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXV : Currency
@@ -5144,7 +5144,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXV".</value>
-        public static MXV Currency
+        public static MXV UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5154,7 +5154,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MYR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MYR : Currency
@@ -5173,7 +5173,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MYR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MYR".</value>
-        public static MYR Currency
+        public static MYR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5183,7 +5183,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MZE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZE : Currency
@@ -5202,7 +5202,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZE".</value>
-        public static MZE Currency
+        public static MZE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5212,7 +5212,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MZM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZM : Currency
@@ -5231,7 +5231,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZM".</value>
-        public static MZM Currency
+        public static MZM UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5241,7 +5241,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "MZN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZN : Currency
@@ -5260,7 +5260,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZN".</value>
-        public static MZN Currency
+        public static MZN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5270,7 +5270,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "NAD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NAD : Currency
@@ -5289,7 +5289,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NAD".</value>
-        public static NAD Currency
+        public static NAD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5299,7 +5299,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "NGN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NGN : Currency
@@ -5318,7 +5318,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NGN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NGN".</value>
-        public static NGN Currency
+        public static NGN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5328,7 +5328,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "NIC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIC : Currency
@@ -5347,7 +5347,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIC".</value>
-        public static NIC Currency
+        public static NIC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5357,7 +5357,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "NIO".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIO : Currency
@@ -5376,7 +5376,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIO".</value>
-        public static NIO Currency
+        public static NIO UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5386,7 +5386,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "NLG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NLG : Currency
@@ -5405,7 +5405,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NLG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NLG".</value>
-        public static NLG Currency
+        public static NLG UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5415,7 +5415,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "NOK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NOK : Currency
@@ -5434,7 +5434,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NOK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NOK".</value>
-        public static NOK Currency
+        public static NOK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5444,7 +5444,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "NPR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NPR : Currency
@@ -5463,7 +5463,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NPR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NPR".</value>
-        public static NPR Currency
+        public static NPR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5473,7 +5473,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "NZD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NZD : Currency
@@ -5492,7 +5492,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NZD".</value>
-        public static NZD Currency
+        public static NZD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5502,7 +5502,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "OMR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class OMR : Currency
@@ -5521,7 +5521,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "OMR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "OMR".</value>
-        public static OMR Currency
+        public static OMR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5531,7 +5531,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PAB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PAB : Currency
@@ -5550,7 +5550,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PAB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PAB".</value>
-        public static PAB Currency
+        public static PAB UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5560,7 +5560,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PEH".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEH : Currency
@@ -5579,7 +5579,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEH".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEH".</value>
-        public static PEH Currency
+        public static PEH UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5589,7 +5589,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PEI".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEI : Currency
@@ -5608,7 +5608,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEI".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEI".</value>
-        public static PEI Currency
+        public static PEI UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5618,7 +5618,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PEN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEN : Currency
@@ -5637,7 +5637,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEN".</value>
-        public static PEN Currency
+        public static PEN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5647,7 +5647,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PES".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PES : Currency
@@ -5666,7 +5666,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PES".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PES".</value>
-        public static PES Currency
+        public static PES UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5676,7 +5676,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PGK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PGK : Currency
@@ -5695,7 +5695,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PGK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PGK".</value>
-        public static PGK Currency
+        public static PGK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5705,7 +5705,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PHP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PHP : Currency
@@ -5724,7 +5724,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PHP".</value>
-        public static PHP Currency
+        public static PHP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5734,7 +5734,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PKR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PKR : Currency
@@ -5753,7 +5753,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PKR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PKR".</value>
-        public static PKR Currency
+        public static PKR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5763,7 +5763,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PLN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLN : Currency
@@ -5782,7 +5782,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLN".</value>
-        public static PLN Currency
+        public static PLN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5792,7 +5792,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PLZ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLZ : Currency
@@ -5811,7 +5811,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLZ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLZ".</value>
-        public static PLZ Currency
+        public static PLZ UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5821,7 +5821,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PTE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PTE : Currency
@@ -5840,7 +5840,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PTE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PTE".</value>
-        public static PTE Currency
+        public static PTE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5850,7 +5850,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "PYG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PYG : Currency
@@ -5869,7 +5869,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PYG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PYG".</value>
-        public static PYG Currency
+        public static PYG UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5879,7 +5879,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "QAR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class QAR : Currency
@@ -5898,7 +5898,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "QAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "QAR".</value>
-        public static QAR Currency
+        public static QAR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5908,7 +5908,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "RHD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RHD : Currency
@@ -5927,7 +5927,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RHD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RHD".</value>
-        public static RHD Currency
+        public static RHD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5937,7 +5937,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ROK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ROK : Currency
@@ -5956,7 +5956,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROK".</value>
-        public static ROK Currency
+        public static ROK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5966,7 +5966,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ROL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ROL : Currency
@@ -5985,7 +5985,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROL".</value>
-        public static ROL Currency
+        public static ROL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -5995,7 +5995,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "RON".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RON : Currency
@@ -6014,7 +6014,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RON".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RON".</value>
-        public static RON Currency
+        public static RON UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6024,7 +6024,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "RSD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RSD : Currency
@@ -6043,7 +6043,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RSD".</value>
-        public static RSD Currency
+        public static RSD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6053,7 +6053,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "RUB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUB : Currency
@@ -6072,7 +6072,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUB".</value>
-        public static RUB Currency
+        public static RUB UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6082,7 +6082,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "RUR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUR : Currency
@@ -6101,7 +6101,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUR".</value>
-        public static RUR Currency
+        public static RUR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6111,7 +6111,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "RWF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RWF : Currency
@@ -6130,7 +6130,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RWF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RWF".</value>
-        public static RWF Currency
+        public static RWF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6140,7 +6140,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SAR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SAR : Currency
@@ -6159,7 +6159,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SAR".</value>
-        public static SAR Currency
+        public static SAR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6169,7 +6169,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SBD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SBD : Currency
@@ -6188,7 +6188,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SBD".</value>
-        public static SBD Currency
+        public static SBD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6198,7 +6198,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SCR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SCR : Currency
@@ -6217,7 +6217,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SCR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SCR".</value>
-        public static SCR Currency
+        public static SCR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6227,7 +6227,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SDD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDD : Currency
@@ -6246,7 +6246,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDD".</value>
-        public static SDD Currency
+        public static SDD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6256,7 +6256,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SDG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDG : Currency
@@ -6275,7 +6275,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDG".</value>
-        public static SDG Currency
+        public static SDG UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6285,7 +6285,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SDP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDP : Currency
@@ -6304,7 +6304,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDP".</value>
-        public static SDP Currency
+        public static SDP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6314,7 +6314,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SEK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SEK : Currency
@@ -6333,7 +6333,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SEK".</value>
-        public static SEK Currency
+        public static SEK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6343,7 +6343,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SGD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SGD : Currency
@@ -6362,7 +6362,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SGD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SGD".</value>
-        public static SGD Currency
+        public static SGD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6372,7 +6372,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SHP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SHP : Currency
@@ -6391,7 +6391,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SHP".</value>
-        public static SHP Currency
+        public static SHP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6401,7 +6401,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SIT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SIT : Currency
@@ -6420,7 +6420,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SIT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SIT".</value>
-        public static SIT Currency
+        public static SIT UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6430,7 +6430,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SKK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SKK : Currency
@@ -6449,7 +6449,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SKK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SKK".</value>
-        public static SKK Currency
+        public static SKK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6459,7 +6459,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SLL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SLL : Currency
@@ -6478,7 +6478,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SLL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SLL".</value>
-        public static SLL Currency
+        public static SLL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6488,7 +6488,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SOS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SOS : Currency
@@ -6507,7 +6507,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SOS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SOS".</value>
-        public static SOS Currency
+        public static SOS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6517,7 +6517,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SRD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRD : Currency
@@ -6536,7 +6536,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRD".</value>
-        public static SRD Currency
+        public static SRD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6546,7 +6546,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SRG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRG : Currency
@@ -6565,7 +6565,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRG".</value>
-        public static SRG Currency
+        public static SRG UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6575,7 +6575,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SSP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SSP : Currency
@@ -6594,7 +6594,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SSP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SSP".</value>
-        public static SSP Currency
+        public static SSP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6604,7 +6604,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "STD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class STD : Currency
@@ -6623,7 +6623,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "STD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "STD".</value>
-        public static STD Currency
+        public static STD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6633,7 +6633,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SUR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SUR : Currency
@@ -6652,7 +6652,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SUR".</value>
-        public static SUR Currency
+        public static SUR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6662,7 +6662,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SVC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SVC : Currency
@@ -6681,7 +6681,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SVC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SVC".</value>
-        public static SVC Currency
+        public static SVC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6691,7 +6691,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SYP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SYP : Currency
@@ -6710,7 +6710,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SYP".</value>
-        public static SYP Currency
+        public static SYP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6720,7 +6720,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "SZL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SZL : Currency
@@ -6739,7 +6739,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SZL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SZL".</value>
-        public static SZL Currency
+        public static SZL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6749,7 +6749,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "THB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class THB : Currency
@@ -6768,7 +6768,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "THB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "THB".</value>
-        public static THB Currency
+        public static THB UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6778,7 +6778,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TJR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJR : Currency
@@ -6797,7 +6797,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJR".</value>
-        public static TJR Currency
+        public static TJR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6807,7 +6807,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TJS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJS : Currency
@@ -6826,7 +6826,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJS".</value>
-        public static TJS Currency
+        public static TJS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6836,7 +6836,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TMM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMM : Currency
@@ -6855,7 +6855,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMM".</value>
-        public static TMM Currency
+        public static TMM UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6865,7 +6865,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TMT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMT : Currency
@@ -6884,7 +6884,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMT".</value>
-        public static TMT Currency
+        public static TMT UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6894,7 +6894,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TND".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TND : Currency
@@ -6913,7 +6913,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TND".</value>
-        public static TND Currency
+        public static TND UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6923,7 +6923,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TOP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TOP : Currency
@@ -6942,7 +6942,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TOP".</value>
-        public static TOP Currency
+        public static TOP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6952,7 +6952,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TPE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TPE : Currency
@@ -6971,7 +6971,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TPE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TPE".</value>
-        public static TPE Currency
+        public static TPE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -6981,7 +6981,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TRL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRL : Currency
@@ -7000,7 +7000,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRL".</value>
-        public static TRL Currency
+        public static TRL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7010,7 +7010,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TRY".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRY : Currency
@@ -7029,7 +7029,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRY".</value>
-        public static TRY Currency
+        public static TRY UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7039,7 +7039,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TTD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TTD : Currency
@@ -7058,7 +7058,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TTD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TTD".</value>
-        public static TTD Currency
+        public static TTD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7068,7 +7068,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TWD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TWD : Currency
@@ -7087,7 +7087,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TWD".</value>
-        public static TWD Currency
+        public static TWD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7097,7 +7097,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "TZS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TZS : Currency
@@ -7116,7 +7116,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TZS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TZS".</value>
-        public static TZS Currency
+        public static TZS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7126,7 +7126,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "UAH".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAH : Currency
@@ -7145,7 +7145,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAH".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAH".</value>
-        public static UAH Currency
+        public static UAH UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7155,7 +7155,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "UAK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAK : Currency
@@ -7174,7 +7174,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAK".</value>
-        public static UAK Currency
+        public static UAK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7184,7 +7184,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "UGS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGS : Currency
@@ -7203,7 +7203,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGS".</value>
-        public static UGS Currency
+        public static UGS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7213,7 +7213,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "UGW".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGW : Currency
@@ -7232,7 +7232,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGW".</value>
-        public static UGW Currency
+        public static UGW UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7242,7 +7242,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "UGX".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGX : Currency
@@ -7261,7 +7261,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGX".</value>
-        public static UGX Currency
+        public static UGX UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7271,7 +7271,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "USD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USD : Currency
@@ -7290,7 +7290,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USD".</value>
-        public static USD Currency
+        public static USD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7300,7 +7300,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "USN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USN : Currency
@@ -7319,7 +7319,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USN".</value>
-        public static USN Currency
+        public static USN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7329,7 +7329,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "USS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USS : Currency
@@ -7348,7 +7348,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USS".</value>
-        public static USS Currency
+        public static USS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7358,7 +7358,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "UYI".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYI : Currency
@@ -7377,7 +7377,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYI".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYI".</value>
-        public static UYI Currency
+        public static UYI UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7387,7 +7387,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "UYN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYN : Currency
@@ -7406,7 +7406,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYN".</value>
-        public static UYN Currency
+        public static UYN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7416,7 +7416,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "UYP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYP : Currency
@@ -7435,7 +7435,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYP".</value>
-        public static UYP Currency
+        public static UYP UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7445,7 +7445,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "UYU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYU : Currency
@@ -7464,7 +7464,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYU".</value>
-        public static UYU Currency
+        public static UYU UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7474,7 +7474,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "UZS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UZS : Currency
@@ -7493,7 +7493,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UZS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UZS".</value>
-        public static UZS Currency
+        public static UZS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7503,7 +7503,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "VEB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEB : Currency
@@ -7522,7 +7522,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEB".</value>
-        public static VEB Currency
+        public static VEB UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7532,7 +7532,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "VEF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEF : Currency
@@ -7551,7 +7551,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEF".</value>
-        public static VEF Currency
+        public static VEF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7561,7 +7561,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "VNC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VNC : Currency
@@ -7580,7 +7580,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VNC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VNC".</value>
-        public static VNC Currency
+        public static VNC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7590,7 +7590,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "VND".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VND : Currency
@@ -7609,7 +7609,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VND".</value>
-        public static VND Currency
+        public static VND UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7619,7 +7619,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "VUV".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VUV : Currency
@@ -7638,7 +7638,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VUV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VUV".</value>
-        public static VUV Currency
+        public static VUV UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7648,7 +7648,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "WST".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class WST : Currency
@@ -7667,7 +7667,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "WST".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "WST".</value>
-        public static WST Currency
+        public static WST UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7677,7 +7677,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XAF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAF : Currency
@@ -7696,7 +7696,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAF".</value>
-        public static XAF Currency
+        public static XAF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7706,7 +7706,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XAG".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAG : Currency
@@ -7725,7 +7725,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAG".</value>
-        public static XAG Currency
+        public static XAG UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7735,7 +7735,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XAU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAU : Currency
@@ -7754,7 +7754,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAU".</value>
-        public static XAU Currency
+        public static XAU UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7764,7 +7764,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XBA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBA : Currency
@@ -7783,7 +7783,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBA".</value>
-        public static XBA Currency
+        public static XBA UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7793,7 +7793,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XBB".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBB : Currency
@@ -7812,7 +7812,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBB".</value>
-        public static XBB Currency
+        public static XBB UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7822,7 +7822,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XBC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBC : Currency
@@ -7841,7 +7841,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBC".</value>
-        public static XBC Currency
+        public static XBC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7851,7 +7851,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XBD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBD : Currency
@@ -7870,7 +7870,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBD".</value>
-        public static XBD Currency
+        public static XBD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7880,7 +7880,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XCD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XCD : Currency
@@ -7899,7 +7899,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XCD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XCD".</value>
-        public static XCD Currency
+        public static XCD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7909,7 +7909,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XDR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XDR : Currency
@@ -7928,7 +7928,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XDR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XDR".</value>
-        public static XDR Currency
+        public static XDR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7938,7 +7938,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XEU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XEU : Currency
@@ -7957,7 +7957,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XEU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XEU".</value>
-        public static XEU Currency
+        public static XEU UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7967,7 +7967,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XFO".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XFO : Currency
@@ -7986,7 +7986,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFO".</value>
-        public static XFO Currency
+        public static XFO UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -7996,7 +7996,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XFU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XFU : Currency
@@ -8015,7 +8015,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFU".</value>
-        public static XFU Currency
+        public static XFU UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8025,7 +8025,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XOF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XOF : Currency
@@ -8044,7 +8044,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XOF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XOF".</value>
-        public static XOF Currency
+        public static XOF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8054,7 +8054,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XPD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPD : Currency
@@ -8073,7 +8073,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPD".</value>
-        public static XPD Currency
+        public static XPD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8083,7 +8083,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XPF".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPF : Currency
@@ -8102,7 +8102,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPF".</value>
-        public static XPF Currency
+        public static XPF UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8112,7 +8112,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XPT".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPT : Currency
@@ -8131,7 +8131,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPT".</value>
-        public static XPT Currency
+        public static XPT UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8141,7 +8141,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XRE".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XRE : Currency
@@ -8160,7 +8160,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XRE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XRE".</value>
-        public static XRE Currency
+        public static XRE UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8170,7 +8170,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XSU".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XSU : Currency
@@ -8189,7 +8189,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XSU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XSU".</value>
-        public static XSU Currency
+        public static XSU UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8199,7 +8199,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XTS".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XTS : Currency
@@ -8218,7 +8218,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XTS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XTS".</value>
-        public static XTS Currency
+        public static XTS UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8228,7 +8228,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XUA".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XUA : Currency
@@ -8247,7 +8247,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XUA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XUA".</value>
-        public static XUA Currency
+        public static XUA UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8257,7 +8257,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "XXX".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XXX : Currency
@@ -8276,7 +8276,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XXX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XXX".</value>
-        public static XXX Currency
+        public static XXX UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8286,7 +8286,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "YDD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YDD : Currency
@@ -8305,7 +8305,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YDD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YDD".</value>
-        public static YDD Currency
+        public static YDD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8315,7 +8315,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "YER".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YER : Currency
@@ -8334,7 +8334,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YER".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YER".</value>
-        public static YER Currency
+        public static YER UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8344,7 +8344,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "YUD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUD : Currency
@@ -8363,7 +8363,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUD".</value>
-        public static YUD Currency
+        public static YUD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8373,7 +8373,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "YUM".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUM : Currency
@@ -8392,7 +8392,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUM".</value>
-        public static YUM Currency
+        public static YUM UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8402,7 +8402,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "YUN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUN : Currency
@@ -8421,7 +8421,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUN".</value>
-        public static YUN Currency
+        public static YUN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8431,7 +8431,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZAL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAL : Currency
@@ -8450,7 +8450,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAL".</value>
-        public static ZAL Currency
+        public static ZAL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8460,7 +8460,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZAR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAR : Currency
@@ -8479,7 +8479,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAR".</value>
-        public static ZAR Currency
+        public static ZAR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8489,7 +8489,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZMK".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMK : Currency
@@ -8508,7 +8508,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMK".</value>
-        public static ZMK Currency
+        public static ZMK UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8518,7 +8518,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZMW".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMW : Currency
@@ -8537,7 +8537,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMW".</value>
-        public static ZMW Currency
+        public static ZMW UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8547,7 +8547,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZRN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZRN : Currency
@@ -8566,7 +8566,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRN".</value>
-        public static ZRN Currency
+        public static ZRN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8576,7 +8576,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZRZ".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZRZ : Currency
@@ -8595,7 +8595,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRZ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRZ".</value>
-        public static ZRZ Currency
+        public static ZRZ UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8605,7 +8605,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZWC".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWC : Currency
@@ -8624,7 +8624,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWC".</value>
-        public static ZWC Currency
+        public static ZWC UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8634,7 +8634,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZWD".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWD : Currency
@@ -8653,7 +8653,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWD".</value>
-        public static ZWD Currency
+        public static ZWD UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8663,7 +8663,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZWL".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWL : Currency
@@ -8682,7 +8682,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWL".</value>
-        public static ZWL Currency
+        public static ZWL UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8692,7 +8692,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZWN".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWN : Currency
@@ -8711,7 +8711,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWN".</value>
-        public static ZWN Currency
+        public static ZWN UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
@@ -8721,7 +8721,7 @@ namespace Narvalo.Finance.Currencies
     /// Represents the currency unit for the code "ZWR".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [ExcludeFromCodeCoverage(Justification = "We only need to test one currency.")]
+    [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
         Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWR : Currency
@@ -8740,7 +8740,7 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWR".</value>
-        public static ZWR Currency
+        public static ZWR UniqInstance
         {
             get { Warrant.NotNull<Currency>(); return s_Instance; }
         }
