@@ -7,6 +7,29 @@ Issues
 - Strange thing, CC reports that there are two remaining code fixes but does
   not give any details about them.
 
+### Locales - Unassigned
+- [CLDR](http://cldr.unicode.org/index/downloads)
+  * [NCLDR](https://github.com/GuySmithFerrier/NCLDR)
+  * [Onism](https://github.com/pgolebiowski/onism-cldr)
+  * [cldrjs](https://github.com/rxaviers/cldrjs)
+  * main/root.xml
+  * main/en.xml `<territories>`;
+    UN M.49. codes `<territory type="AD">Andorra</territory>`,
+    `<currencyFormats>`, `<currencies>`
+  * bcp47/currency.xml, Code -> Description
+- United Nations
+  * [United Nations Region Codes](http://unstats.un.org/unsd/methods/m49/m49alpha.htm)
+  * [UN M.49](https://en.wikipedia.org/wiki/UN_M.49)
+- [CIA World Factbook](https://www.cia.gov/library/publications/download/)
+  and [Country Data Codes](https://www.cia.gov/library/publications/the-world-factbook/appendix/appendix-d.html)
+- http://www.unc.edu/~rowlett/units/codes/country.htm
+- https://en.wikipedia.org/wiki/Country_code
+- [Geonames](http://www.geonames.org/export/)
+- IANA code
+- ITU calling
+- [DotNetTimeZoneDb](https://github.com/chrisdostert/DotNetTimeZoneDb)
+- INSEE
+
 Narvalo.Fx
 ------------
 
@@ -29,6 +52,8 @@ Narvalo.Common
 Narvalo.Finance
 ---------------
 
+- SNV = Swiss Association for Standardization;
+- LocalCurrency
 - Since we automatically generate the currencies, is it possible that one currency
   simply disappears after un update? This would be a breaking change.
 - `IConvertible` aka conversion between currencies.
