@@ -91,7 +91,7 @@ namespace Narvalo.Finance
             Contract.Assume(IsUpperLetter(code));
             Contract.Assume(code.Length == 3);
 
-            return Of(code);
+            return new Currency(code);
         }
 
         public static Currency OfCurrentRegion()
