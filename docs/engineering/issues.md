@@ -52,10 +52,9 @@ Narvalo.Common
 Narvalo.Finance
 ---------------
 
-- SNV = Swiss Association for Standardization;
+- For debugging the T4 templates, see
+  [here](http://stackoverflow.com/questions/5588792/determine-solution-configuration-debug-release-when-running-a-t4-template).
 - LocalCurrency
-- Since we automatically generate the currencies, is it possible that one currency
-  simply disappears after un update? This would be a breaking change.
 - `IConvertible` aka conversion between currencies.
 - `Decimal`, `Double`, `BigDecimal`, `BigInteger`... Overflows...
   [Microsoft SQL Server implementation](https://msdn.microsoft.com/en-au/library/ms179882.aspx):

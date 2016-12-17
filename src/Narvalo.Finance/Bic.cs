@@ -6,6 +6,7 @@ namespace Narvalo.Finance
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Internal;
+    using Narvalo.Finance.Properties;
 
     using static Narvalo.Finance.Utilities.BicFormat;
 
@@ -115,7 +116,7 @@ namespace Narvalo.Finance
 
             if (!CheckValue(value))
             {
-                throw new FormatException("The BIC string MUST be 8 or 11 characters long.");
+                throw new FormatException(Strings.Bic_InvalidFormat);
             }
             Check.True(CheckValue(value));
 
@@ -140,7 +141,7 @@ namespace Narvalo.Finance
             return _value;
         }
 
-        public bool ValidateIsoFormat() => Validate(this, true /* isoConformance */);
+        public bool ValidateISOFormat() => Validate(this, true /* isoConformance */);
 
         public bool ValidateSwiftFormat() => Validate(this, false /* isoConformance */);
 

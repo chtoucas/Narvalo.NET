@@ -97,6 +97,18 @@ namespace Narvalo.Finance
 
         #endregion
 
+        #region RegisterCurrency()
+
+        [Fact]
+        public static void RegisterCurrency_ReturnsFalse_ForExistingCode()
+            => Assert.False(Currency.RegisterCurrency("EUR"));
+
+        [Fact]
+        public static void RegisterCurrency_ReturnsTrue_ForNonExistingCode()
+            => Assert.True(Currency.RegisterCurrency("NEW"));
+
+        #endregion
+
         #region op_Equality()
 
         [Theory(DisplayName = "op_Equality() follows structural equality rules.")]
@@ -211,7 +223,7 @@ namespace Narvalo.Finance
         }
 
         [Fact]
-        public static void Equals_ReturnsFalse_ForNull_AfterConversionToObject()
+        public static void Equals_ReturnsFalse_ForNull_AfterConversionToRootObject()
         {
             var currency = Currency.Of("EUR");
             object other = null;
@@ -220,7 +232,7 @@ namespace Narvalo.Finance
         }
 
         [Fact]
-        public static void Equals_ReturnsTrue_ForIdenticalCodes_AfterConversionToObject()
+        public static void Equals_ReturnsTrue_ForIdenticalCodes_AfterConversionToRootObject()
         {
             var currency1 = Currency.Of("EUR");
             object currency2 = currency1;
@@ -241,7 +253,7 @@ namespace Narvalo.Finance
         }
 
         [Fact]
-        public static void Equals_ReturnsFalse_ForDistinctCodes_AfterConversionToObject()
+        public static void Equals_ReturnsFalse_ForDistinctCodes_AfterConversionToRootObject()
         {
             var currency1 = Currency.Of("EUR");
             object currency2 = Currency.Of("XPT");

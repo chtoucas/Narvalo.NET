@@ -76,6 +76,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bic.cs" />
+    <Compile Include="Snv\PubDateEventArgs.cs" />
+    <Compile Include="Snv\SnvCurrencyData.cs" />
+    <Compile Include="Snv\CurrentSnvCurrencyDataCollection.cs" />
+    <Compile Include="Snv\HistoricalSnvCurrencyDataCollection.cs" />
+    <Compile Include="Snv\SnvDatabase.cs" />
+    <Compile Include="Snv\SnvCurrencyDataCollection.cs" />
+    <Compile Include="Snv\SnvDataHelpers.cs" />
+    <Compile Include="Snv\SnvXmlNames.cs" />
+    <Compile Include="Snv\SnvXmlReader.cs" />
+    <Compile Include="Snv\XElement%24.cs" />
     <Compile Include="Utilities\BicFormat.cs" />
     <Compile Include="Currencies\Currencies.g.cs">
       <AutoGen>True</AutoGen>
@@ -136,7 +146,6 @@
       <Name>Narvalo.Cerbere</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Narvalo.Finance.Shared\Narvalo.Finance.Snv.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

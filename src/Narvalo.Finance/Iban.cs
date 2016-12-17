@@ -6,6 +6,8 @@ namespace Narvalo.Finance
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Internal;
+    using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Utilities;
 
     using static Narvalo.Finance.Utilities.IbanFormat;
 
@@ -79,10 +81,16 @@ namespace Narvalo.Finance
         {
             Require.NotNull(value, nameof(value));
 
+            return ParseExact(RemoveDisplayCharacters(value));
+        }
+
+        public static Iban ParseExact(string value)
+        {
+            Require.NotNull(value, nameof(value));
+
             if (!CheckValue(value))
             {
-                throw new FormatException(
-                    "The IBAN string MUST be at most 34 characters long and at least 14 characters long.");
+                throw new FormatException(Strings.Iban_InvalidFormat);
             }
             Check.True(CheckValue(value));
 
@@ -90,6 +98,13 @@ namespace Narvalo.Finance
         }
 
         public static Iban? TryParse(string value)
+        {
+            if (value == null) { return null; }
+
+            return TryParseExact(RemoveDisplayCharacters(value));
+        }
+
+        public static Iban? TryParseExact(string value)
         {
             if (!CheckValue(value))
             {

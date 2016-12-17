@@ -18,7 +18,8 @@ namespace Narvalo.T4
         /// <summary>
         /// Set of features to support on the <see cref="XmlReader"/>.
         /// </summary>
-        private static readonly XmlReaderSettings s_Settings = new XmlReaderSettings {
+        private static readonly XmlReaderSettings s_Settings = new XmlReaderSettings
+        {
             CheckCharacters = false,
             CloseInput = true,
             DtdProcessing = DtdProcessing.Ignore,
@@ -63,7 +64,7 @@ namespace Narvalo.T4
                     {
                         if (Debug)
                         {
-                            Warning("Found a country without universal currency: " + item.Element("CtryNm").Value);
+                            Warning("Found a currency without a universal currency: " + item.Element("CtryNm").Value);
                         }
 
                         continue;
@@ -103,7 +104,8 @@ namespace Narvalo.T4
                         minorUnits = Int16.Parse(minorUnitsValue);
                     }
 
-                    yield return new Currency {
+                    yield return new Currency
+                    {
                         Code = code,
                         EnglishName = englishName,
                         EnglishRegionName = englishRegionName,
@@ -167,7 +169,8 @@ namespace Narvalo.T4
                         .Replace("\"", "\"\"")
                         .Replace("\n", String.Empty);
 
-                    yield return new Currency {
+                    yield return new Currency
+                    {
                         Code = code,
                         EnglishName = englishName,
                         EnglishRegionName = englishRegionName,

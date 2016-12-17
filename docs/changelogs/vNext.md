@@ -16,9 +16,9 @@ Library Enhancements & Improvements:
   * localization.
   * BBAN implementation.
   * strong/weak validation of Bic, Iban & Bban (check digits).
-  * provide an alternate live Currency provider (see SnvCurrencyXmlReader).
   * currency info with implementation from the BCL.
   * money & currency formatting.
+  * change rate.
 - Narvalo.Mvp and Narvalo.Mvp.Web.
   * add localized messages in french for Narvalo.Mvp and Narvalo.Mvp.Web.
   * Application Controller and Navigator.
@@ -35,7 +35,7 @@ Narvalo.Build             | -
 Narvalo.Cerbere           | 2.1.0
 Narvalo.Common            | 0.26.0
 Narvalo.Core              | 0.26.0
-Narvalo.Finance           | 0.26.0
+Narvalo.Finance           | 0.26.0 (1.0.0?)
 Narvalo.Fx                | 0.26.0
 Narvalo.Mvp               | 1.1.0
 Narvalo.Mvp.Web           | 1.1.0
@@ -71,6 +71,7 @@ Breaking Changes
 - `Bic.CheckFormat()` has been replaced by `Bic.ValidateIsoFormat()`.
 - `Bic.CheckSwiftFormat()` has been replaced by `Bic.ValidateSwiftFormat()`.
 - `Iban.CheckDigit` becomes `Iban.CheckDigits`.
+- `Currency.Of()` now returns a different object at each call.
 - Removed `CurrencyFactory`, `CurrencyProvider` and `DefaultCurrencyFactory`.
 - For built-in currencies, renamed the singleton method, e.g 'EUR.Currency'
   becomes `EUR.UniqInstance`.
@@ -131,10 +132,12 @@ New classes and new methods:
 - `Currency.OfCurrentRegion()`
 - `Currency.OfCulture()`
 - `Currency.OfCurrentCulture()`
-- `CurrencyTypes`
+- `Currency.RegisterCurrency()`
 - `BicFormat`
 - `IbanFormat`
 - `AsciiHelpers`
+
+- `Iban.Parse()` and `Iban.TryParse()` allows the presence of display chars.
 
 Enhancements
 ------------

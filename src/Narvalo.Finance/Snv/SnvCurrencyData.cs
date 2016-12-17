@@ -1,9 +1,9 @@
 // Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance
+namespace Narvalo.Finance.Snv
 {
-    using System.Globalization;
     using Narvalo.Finance.Internal;
+    using Narvalo.Finance.Properties;
 
     /// <summary>
     /// Provides information about a localized currency.
@@ -29,31 +29,33 @@ namespace Narvalo.Finance
         /// </summary>
         /// <param name="code">A string that contains a three-letter code defined in ISO 4217.</param>
         /// <param name="numericCode">A numeric identifier defined in ISO 4217.</param>
-        /// <param name="superseded"></param>
-        private SnvCurrencyData(string code, short numericCode, bool superseded)
+        /// <param name="withdrawn"></param>
+        private SnvCurrencyData(string code, short numericCode, bool withdrawn)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
+            // NB: CreateCore() requires "numericCode" to be strictly positive,
+            // but CreateWithdrawnCurrency() allows zero for "numericCode".
             Demand.Range(numericCode >= 0 && numericCode < 1000);
 
             _code = code;
             _numericCode = numericCode;
-            Superseded = superseded;
+            Withdrawn = withdrawn;
         }
 
-        public static SnvCurrencyData Create(string code, short numericCode)
+        public static SnvCurrencyData CreateCurrency(string code, short numericCode)
             => CreateCore(code, numericCode, false);
 
-        public static SnvCurrencyData CreateLegacy(string code, short? numericCode)
+        public static SnvCurrencyData CreateWithdrawnCurrency(string code, short? numericCode)
             => numericCode.HasValue
             ? CreateCore(code, numericCode.Value, true)
             : new SnvCurrencyData(code, FallbackNumericCode, true);
 
-        private static SnvCurrencyData CreateCore(string code, short numericCode, bool superseded)
+        private static SnvCurrencyData CreateCore(string code, short numericCode, bool withdrawn)
         {
             Require.Range(numericCode > 0 && numericCode < 1000, nameof(numericCode),
-                "The numeric code MUST be greater than 0 and strictly less than 1000.");
+                Strings.Sentinel_OutOfRangeCurrencyNumericCode);
 
-            return new SnvCurrencyData(code, numericCode, superseded);
+            return new SnvCurrencyData(code, numericCode, withdrawn);
         }
 
         /// <summary>
@@ -97,9 +99,7 @@ namespace Narvalo.Finance
         /// </summary>
         /// <value><see langword="true"/> if the currency is no longer in use; otherwise <see langword="false"/>.
         /// The default is <see langword="false"/>.</value>
-        public bool Superseded { get; }
-
-        public bool Withdrawn => !Superseded;
+        public bool Withdrawn { get; }
 
         /// <summary>
         /// Gets or sets the full name of the currency in English.

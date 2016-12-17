@@ -117,13 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CurrencyFactory_UnknownCurrency" xml:space="preserve">
-    <value>Devise inconnue : {0}.</value>
+  <data name="Bic_InvalidFormat" xml:space="preserve">
+    <value>Un code BIC doit comporter 8 ou 11 caractères.</value>
+  </data>
+  <data name="CurrencyActivator_MissingCtor" xml:space="preserve">
+    <value />
   </data>
   <data name="CurrencyNotFoundException_DefaultMessage" xml:space="preserve">
     <value>Devise inconnue.</value>
   </data>
+  <data name="Currency_NotSupportedNeutralCulture" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Currency_UnknownCurrency" xml:space="preserve">
+    <value>Devise inconnue : {0}.</value>
+  </data>
+  <data name="Iban_InvalidFormat" xml:space="preserve">
+    <value>Un code IBAN string MUST doit comporter de 14 à 34 caractères.</value>
+  </data>
   <data name="Money_ArgIsNotMoney" xml:space="preserve">
     <value>L'argument doit être de type Money.</value>
+  </data>
+  <data name="Sentinel_OutOfRangeCurrencyAlphabeticCode" xml:space="preserve">
+    <value>Le code alphabétique d'une devise doit comporter 3 caractères exactement.</value>
+  </data>
+  <data name="Sentinel_OutOfRangeCurrencyNumericCode" xml:space="preserve">
+    <value>Le code alphabétique d'une devise doit être strictement positif et inférieur ou égal à 1000.</value>
+  </data>
+  <data name="SnvDataHelpers_InvalidMinorUnits" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SnvDataHelpers_InvalidNumericCode" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SnvDataHelpers_InvalidPubDate" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SnvDataHelpers_InvalidRangeForNumericCode" xml:space="preserve">
+    <value />
   </data>
 </root>

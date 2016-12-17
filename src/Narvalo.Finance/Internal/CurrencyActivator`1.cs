@@ -6,6 +6,8 @@ namespace Narvalo.Finance.Internal
     using System.Linq;
     using System.Reflection;
 
+    using Narvalo.Finance.Properties;
+
     using static System.Diagnostics.Contracts.Contract;
 
     internal static class CurrencyActivator<TCurrency>
@@ -14,7 +16,6 @@ namespace Narvalo.Finance.Internal
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified type parameter.
         /// </summary>
-        /// <returns></returns>
         public static TCurrency CreateInstance()
         {
             TypeInfo typeInfo = typeof(TCurrency).GetTypeInfo();
@@ -26,7 +27,7 @@ namespace Narvalo.Finance.Internal
 
             if (ctorInfo == null)
             {
-                throw new MissingMemberException("XXX");
+                throw new MissingMemberException(Strings.CurrencyActivator_MissingCtor);
             }
 
             return ctorInfo.Invoke(new Object[] { }) as TCurrency;

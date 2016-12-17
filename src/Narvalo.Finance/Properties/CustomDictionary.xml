@@ -12,6 +12,11 @@
       <Word>Iban</Word>
 
       <Word>Ascii</Word>
+      <Word>Uniq</Word>
     </Recognized>
+
+    <Compound>
+      <Term CompoundAlternate="UniqInstance">uniqinstance</Term>
+    </Compound>
   </Words>
 </Dictionary>

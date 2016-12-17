@@ -7,6 +7,8 @@ namespace Narvalo.Finance.Snv
     using System.Globalization;
     using System.IO;
 
+    using Narvalo.Finance.Properties;
+
     internal static class SnvDataHelpers
     {
         private const string MINOR_UNITS_NOT_AVAILABLE = "N.A.";
@@ -44,10 +46,9 @@ namespace Narvalo.Finance.Snv
             else
             {
                 short minorUnits;
-                var ok = Int16.TryParse(value, NumberStyles.None, NumberFormatInfo.InvariantInfo, out minorUnits);
-                if (!ok)
+                if (!Int16.TryParse(value, NumberStyles.None, NumberFormatInfo.InvariantInfo, out minorUnits))
                 {
-                    throw new InvalidDataException("Found an invalid value (" + value + ") for the minor units.");
+                    throw new InvalidDataException(Format.Current(Strings.SnvDataHelpers_InvalidMinorUnits, value));
                 }
 
                 return minorUnits;
@@ -59,13 +60,14 @@ namespace Narvalo.Finance.Snv
             Demand.NotNull(value);
 
             short numeriCode;
-            var ok = Int16.TryParse(value, NumberStyles.None, NumberFormatInfo.InvariantInfo, out numeriCode);
-            if (!ok) { return null; }
+            if (!Int16.TryParse(value, NumberStyles.None, NumberFormatInfo.InvariantInfo, out numeriCode))
+            {
+                return null;
+            }
 
             if (numeriCode <= 0 || numeriCode >= 1000)
             {
-                throw new InvalidDataException(
-                    "The numeric code MUST (" + value + ") be strictly greater than 0 and strictly less than 1000.");
+                throw new InvalidDataException(Format.Current(Strings.SnvDataHelpers_InvalidRangeForNumericCode, value));
             }
 
             return numeriCode;
@@ -76,16 +78,14 @@ namespace Narvalo.Finance.Snv
             Demand.NotNull(value);
 
             short numeriCode;
-            var ok = Int16.TryParse(value, NumberStyles.None, NumberFormatInfo.InvariantInfo, out numeriCode);
-            if (!ok)
+            if (!Int16.TryParse(value, NumberStyles.None, NumberFormatInfo.InvariantInfo, out numeriCode))
             {
-                throw new InvalidDataException("Found an invalid value (" + value + ") for the numeric code.");
+                throw new InvalidDataException(Format.Current(Strings.SnvDataHelpers_InvalidNumericCode, value));
             }
 
             if (numeriCode <= 0 || numeriCode >= 1000)
             {
-                throw new InvalidDataException(
-                    "The numeric code MUST (" + value + ") be strictly greater than 0 and strictly less than 1000.");
+                throw new InvalidDataException(Format.Current(Strings.SnvDataHelpers_InvalidRangeForNumericCode, value));
             }
 
             return numeriCode;
@@ -96,10 +96,9 @@ namespace Narvalo.Finance.Snv
             Demand.NotNull(value);
 
             DateTime pubDate;
-            var ok = DateTime.TryParseExact(value, "o", CultureInfo.InvariantCulture, DateTimeStyles.None, out pubDate);
-            if (!ok)
+            if (!DateTime.TryParseExact(value, "o", CultureInfo.InvariantCulture, DateTimeStyles.None, out pubDate))
             {
-                throw new InvalidDataException("Found an invalid value (" + value + ") for the publication date.");
+                throw new InvalidDataException(Format.Current(Strings.SnvDataHelpers_InvalidPubDate, value));
             }
 
             return pubDate;

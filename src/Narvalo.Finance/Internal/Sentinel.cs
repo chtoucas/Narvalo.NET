@@ -5,11 +5,29 @@ namespace Narvalo.Finance.Internal
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Finance.Properties;
+
     using static System.Diagnostics.Contracts.Contract;
     using static Narvalo.Finance.Utilities.AsciiHelpers;
 
     internal static partial class Sentinel
     {
+        public static partial class Require
+        {
+            [ContractAbbreviator]
+            public static void CurrencyCode(string code, string parameterName)
+            {
+                Narvalo.Require.NotNull(code, parameterName);
+
+                // A currency code MUST only contain uppercase ASCII letters.
+                Narvalo.Require.True(IsUpperLetter(code), parameterName);
+
+                // A currency code MUST be composed of exactly 3 letters.
+                Narvalo.Require.Range(code.Length == 3, parameterName,
+                    Strings.Sentinel_OutOfRangeCurrencyAlphabeticCode);
+            }
+        }
+
         public static partial class Demand
         {
             [DebuggerHidden]
@@ -25,7 +43,7 @@ namespace Narvalo.Finance.Internal
                 Narvalo.Demand.True(IsUpperLetter(code));
 
                 // A currency code MUST be composed of exactly 3 letters.
-                Narvalo.Demand.True(code.Length == 3);
+                Narvalo.Demand.Range(code.Length == 3);
             }
         }
 
@@ -44,7 +62,7 @@ namespace Narvalo.Finance.Internal
                 Narvalo.Expect.True(IsUpperLetter(code));
 
                 // A currency code MUST be composed of exactly 3 letters.
-                Narvalo.Expect.True(code.Length == 3);
+                Narvalo.Expect.Range(code.Length == 3);
             }
         }
 

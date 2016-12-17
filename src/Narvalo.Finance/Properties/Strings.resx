@@ -117,13 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CurrencyFactory_UnknownCurrency" xml:space="preserve">
-    <value>Unknown currency: {0}.</value>
+  <data name="Bic_InvalidFormat" xml:space="preserve">
+    <value>The BIC string MUST be 8 or 11 characters long.</value>
+  </data>
+  <data name="CurrencyActivator_MissingCtor" xml:space="preserve">
+    <value />
   </data>
   <data name="CurrencyNotFoundException_DefaultMessage" xml:space="preserve">
     <value>Unknown currency.</value>
   </data>
+  <data name="Currency_NotSupportedNeutralCulture" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Currency_UnknownCurrency" xml:space="preserve">
+    <value>Unknown currency: {0}.</value>
+  </data>
+  <data name="Iban_InvalidFormat" xml:space="preserve">
+    <value>The IBAN string MUST be at most 34 characters long and at least 14 characters long.</value>
+  </data>
   <data name="Money_ArgIsNotMoney" xml:space="preserve">
-    <value>The specified argument must be of Money type.</value>
+    <value>The specified argument MUST be of Money type.</value>
+  </data>
+  <data name="Sentinel_OutOfRangeCurrencyAlphabeticCode" xml:space="preserve">
+    <value>The alphabetic code MUST be composed of exactly 3 characters.</value>
+  </data>
+  <data name="Sentinel_OutOfRangeCurrencyNumericCode" xml:space="preserve">
+    <value>The numeric code MUST be greater than 0 and strictly less than 1000.</value>
+  </data>
+  <data name="SnvDataHelpers_InvalidMinorUnits" xml:space="preserve">
+    <value>Found an invalid value ({0}) for the minor units.</value>
+  </data>
+  <data name="SnvDataHelpers_InvalidNumericCode" xml:space="preserve">
+    <value>Found an invalid value ({0}) for the numeric code.</value>
+  </data>
+  <data name="SnvDataHelpers_InvalidPubDate" xml:space="preserve">
+    <value>Found an invalid value ({0}) for the publication date.</value>
+  </data>
+  <data name="SnvDataHelpers_InvalidRangeForNumericCode" xml:space="preserve">
+    <value>The numeric code ({0}) MUST be strictly greater than 0 and strictly less than 1000.</value>
   </data>
 </root>

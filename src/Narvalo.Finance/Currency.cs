@@ -66,8 +66,7 @@ namespace Narvalo.Finance
 
             if (!CodeSet.Contains(code))
             {
-                throw new CurrencyNotFoundException(
-                    Format.Current(Strings.CurrencyFactory_UnknownCurrency, code));
+                throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCurrency, code));
             }
 
             return new Currency(code);
@@ -116,7 +115,7 @@ namespace Narvalo.Finance
 
             if (cultureInfo.IsNeutralCulture)
             {
-                throw new NotSupportedException("The culture cannot be neutral.");
+                throw new NotSupportedException(Strings.Currency_NotSupportedNeutralCulture);
             }
 
             return OfRegion(new RegionInfo(cultureInfo.Name));
@@ -133,6 +132,15 @@ namespace Narvalo.Finance
             Warrant.NotNull<Currency>();
 
             return OfCulture(CultureInfo.CurrentCulture);
+        }
+
+        public static bool RegisterCurrency(string code)
+        {
+            Sentinel.Require.CurrencyCode(code, nameof(code));
+
+            if (CodeSet.Contains(code)) { return false; }
+
+            return CodeSet.Add(code);
         }
 
         /// <summary>
@@ -279,7 +287,7 @@ namespace Narvalo.Finance
         {
             if (Object.ReferenceEquals(other, null))
             {
-                // Remember, "this" is never null in C#.
+                // NB: "this" is never null in C#.
                 return false;
             }
 
@@ -291,13 +299,13 @@ namespace Narvalo.Finance
         {
             if (Object.ReferenceEquals(obj, null))
             {
-                // Remember, "this" is never null in C#.
+                // NB: "this" is never null in C#.
                 return false;
             }
 
             if (Object.ReferenceEquals(this, obj))
             {
-                // "obj" and "this" are exactly the same object.
+                // "obj" and "this" are the same object.
                 return true;
             }
 

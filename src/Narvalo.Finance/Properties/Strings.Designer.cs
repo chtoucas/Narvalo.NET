@@ -62,11 +62,38 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The BIC string MUST be 8 or 11 characters long..
+        /// </summary>
+        internal static string Bic_InvalidFormat {
+            get {
+                return ResourceManager.GetString("Bic_InvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Currency_NotSupportedNeutralCulture {
+            get {
+                return ResourceManager.GetString("Currency_NotSupportedNeutralCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown currency: {0}..
         /// </summary>
-        internal static string CurrencyFactory_UnknownCurrency {
+        internal static string Currency_UnknownCurrency {
             get {
-                return ResourceManager.GetString("CurrencyFactory_UnknownCurrency", resourceCulture);
+                return ResourceManager.GetString("Currency_UnknownCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string CurrencyActivator_MissingCtor {
+            get {
+                return ResourceManager.GetString("CurrencyActivator_MissingCtor", resourceCulture);
             }
         }
         
@@ -80,11 +107,74 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified argument must be of Money type..
+        ///   Looks up a localized string similar to The IBAN string MUST be at most 34 characters long and at least 14 characters long..
+        /// </summary>
+        internal static string Iban_InvalidFormat {
+            get {
+                return ResourceManager.GetString("Iban_InvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified argument MUST be of Money type..
         /// </summary>
         internal static string Money_ArgIsNotMoney {
             get {
                 return ResourceManager.GetString("Money_ArgIsNotMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The alphabetic code MUST be composed of exactly 3 characters..
+        /// </summary>
+        internal static string Sentinel_OutOfRangeCurrencyAlphabeticCode {
+            get {
+                return ResourceManager.GetString("Sentinel_OutOfRangeCurrencyAlphabeticCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The numeric code MUST be greater than 0 and strictly less than 1000..
+        /// </summary>
+        internal static string Sentinel_OutOfRangeCurrencyNumericCode {
+            get {
+                return ResourceManager.GetString("Sentinel_OutOfRangeCurrencyNumericCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found an invalid value ({0}) for the minor units..
+        /// </summary>
+        internal static string SnvDataHelpers_InvalidMinorUnits {
+            get {
+                return ResourceManager.GetString("SnvDataHelpers_InvalidMinorUnits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found an invalid value ({0}) for the numeric code..
+        /// </summary>
+        internal static string SnvDataHelpers_InvalidNumericCode {
+            get {
+                return ResourceManager.GetString("SnvDataHelpers_InvalidNumericCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found an invalid value ({0}) for the publication date..
+        /// </summary>
+        internal static string SnvDataHelpers_InvalidPubDate {
+            get {
+                return ResourceManager.GetString("SnvDataHelpers_InvalidPubDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The numeric code ({0}) MUST be strictly greater than 0 and strictly less than 1000..
+        /// </summary>
+        internal static string SnvDataHelpers_InvalidRangeForNumericCode {
+            get {
+                return ResourceManager.GetString("SnvDataHelpers_InvalidRangeForNumericCode", resourceCulture);
             }
         }
     }

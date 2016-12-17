@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" debug="false" hostspecific="true" inherits="Iso4217Template" #>
+﻿<#@ template language="C#" debug="true" hostspecific="true" inherits="Iso4217Template" #>
 <#@ output extension=".g.cs" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="EnvDTE" #>
@@ -8,7 +8,12 @@
 <#@ import namespace="Narvalo.T4" #>
 <#
 
-bool firstCurrency = true;
+// To avoid any breaking change, we include all currencies (withdrawn or not).
+
+// Uncomment to debug:
+//Debug = true;
+
+bool firstSeen = true;
 
 var currentCurrencies = ParseCurrent(@"..\Resources\ISO4217\A1.xml");
 var legacyCurrencies = ParseLegacy(@"..\Resources\ISO4217\A3.xml");
@@ -42,9 +47,9 @@ namespace <#= Namespace #>
     /// </summary>
     <# WriteCompilerAttributes(); #>
 <#
-        if (firstCurrency)
+        if (firstSeen)
         {
-            firstCurrency = false;
+            firstSeen = false;
         }
         else
         {
