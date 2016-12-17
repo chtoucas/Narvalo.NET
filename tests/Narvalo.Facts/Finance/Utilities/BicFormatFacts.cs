@@ -9,50 +9,6 @@ namespace Narvalo.Finance.Utilities
 
     public static partial class BicFormatFacts
     {
-        #region Validate()
-
-        [Theory]
-        [MemberData(nameof(BicFacts.ValidIsoValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void Validate_ReturnsTrue_ForValidInput(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.True(BicFormat.Validate(bic, true));
-        }
-
-        [Theory]
-        [MemberData(nameof(BicFacts.InvalidIsoValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void Validate_ReturnsFalse_ForInvalidInput(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.False(BicFormat.Validate(bic, true));
-        }
-
-        [Theory]
-        [MemberData(nameof(BicFacts.ValidSwiftValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ValidateSwift_ReturnsTrue_ForValidInput(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.True(BicFormat.Validate(bic, false));
-        }
-
-        [Theory]
-        [MemberData(nameof(BicFacts.InvalidIsoValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ValidateSwift_ReturnsFalse_ForValidInput(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.False(BicFormat.Validate(bic, false));
-        }
-
-        #endregion
-
         #region CheckBranchCode()
 
         [Theory]
@@ -148,6 +104,57 @@ namespace Narvalo.Finance.Utilities
 
         #endregion
     }
+
+#if !NO_INTERNALS_VISIBLE_TO
+
+    public static partial class BicFormatFacts
+    {
+        #region Validate()
+
+        [Theory]
+        [MemberData(nameof(BicFacts.ValidIsoValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Validate_ReturnsTrue_ForValidInput(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.True(BicFormat.Validate(bic, BicStyle.ISO));
+        }
+
+        [Theory]
+        [MemberData(nameof(BicFacts.InvalidIsoValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Validate_ReturnsFalse_ForInvalidInput(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.False(BicFormat.Validate(bic, BicStyle.ISO));
+        }
+
+        [Theory]
+        [MemberData(nameof(BicFacts.ValidSwiftValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ValidateSwift_ReturnsTrue_ForValidInput(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.True(BicFormat.Validate(bic, BicStyle.Swift));
+        }
+
+        [Theory]
+        [MemberData(nameof(BicFacts.InvalidIsoValues), MemberType = typeof(BicFacts), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ValidateSwift_ReturnsFalse_ForValidInput(string value)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.False(BicFormat.Validate(bic, BicStyle.Swift));
+        }
+
+        #endregion
+    }
+
+#endif
 
     public static partial class BicFormatFacts
     {

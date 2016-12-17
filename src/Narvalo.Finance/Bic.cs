@@ -7,6 +7,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Utilities;
 
     using static Narvalo.Finance.Utilities.BicFormat;
 
@@ -123,6 +124,26 @@ namespace Narvalo.Finance
             return ParseCore(value);
         }
 
+        public static Bic ParseExact(string value)
+        {
+            Demand.NotNull(value);
+
+            return ParseExact(value, BicStyle.Default);
+        }
+
+        public static Bic ParseExact(string value, BicStyle style)
+        {
+            Demand.NotNull(value);
+
+            var bic = Parse(value);
+            if (!bic.Validate(style))
+            {
+                throw new FormatException(Strings.Bic_InvalidFormat);
+            }
+
+            return bic;
+        }
+
         public static Bic? TryParse(string value)
         {
             if (!CheckValue(value))
@@ -134,16 +155,25 @@ namespace Narvalo.Finance
             return ParseCore(value);
         }
 
+        public static Bic? TryParseExact(string value) => TryParseExact(value, BicStyle.Default);
+
+        public static Bic? TryParseExact(string value, BicStyle style)
+        {
+            var bic = TryParse(value);
+
+            if (!bic.HasValue || !bic.Value.Validate(style)) { return null; }
+
+            return bic;
+        }
+
+        public bool Validate(BicStyle style) => BicFormat.Validate(this, style);
+
         public override string ToString()
         {
             Warrant.NotNull<string>();
 
             return _value;
         }
-
-        public bool ValidateISOFormat() => Validate(this, true /* isoConformance */);
-
-        public bool ValidateSwiftFormat() => Validate(this, false /* isoConformance */);
 
         // NB: We only perform basic validation on the input string.
         private static Bic ParseCore(string value)

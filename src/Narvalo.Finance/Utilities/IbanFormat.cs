@@ -16,7 +16,7 @@ namespace Narvalo.Finance.Utilities
         internal const int BbanMinLength = MinLength - CountryLength - CheckDigitsLength;
         internal const int BbanMaxLength = MaxLength - CountryLength - CheckDigitsLength;
 
-        public static string RemoveDisplayCharacters(string value)
+        internal static string RemoveDisplayCharacters(string value, IbanStyles styles)
         {
             Demand.NotNull(value);
             Warrant.NotNull<string>();
@@ -29,13 +29,25 @@ namespace Narvalo.Finance.Utilities
             {
                 var ch = inarr[i];
 
-                if (ch == ' ' || ch == '-') { continue; }
+                if (styles.Contains(IbanStyles.AllowWhiteSpaces) && ch == ' ')
+                {
+                    continue;
+                }
+                if (styles.Contains(IbanStyles.AllowDashes) && ch == '-')
+                {
+                    continue;
+                }
 
                 outarr[outlen] = ch;
                 outlen++;
             }
 
             return new String(outarr, 0, outlen);
+        }
+
+        internal static bool Validate(Iban iban)
+        {
+            throw new NotImplementedException();
         }
 
         [Pure]

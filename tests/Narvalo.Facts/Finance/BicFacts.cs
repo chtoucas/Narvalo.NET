@@ -178,7 +178,7 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region ValidateISOFormat()
+        #region Validate()
 
         [Theory]
         [MemberData(nameof(ValidIsoValues), DisableDiscoveryEnumeration = true)]
@@ -187,7 +187,7 @@ namespace Narvalo.Finance
         {
             var bic = Bic.Parse(value);
 
-            Assert.True(bic.ValidateISOFormat());
+            Assert.True(bic.Validate(BicStyle.ISO));
         }
 
         [Theory]
@@ -197,12 +197,8 @@ namespace Narvalo.Finance
         {
             var bic = Bic.Parse(value);
 
-            Assert.False(bic.ValidateISOFormat());
+            Assert.False(bic.Validate(BicStyle.ISO));
         }
-
-        #endregion
-
-        #region ValidateSwiftFormat()
 
         [Theory]
         [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
@@ -211,7 +207,7 @@ namespace Narvalo.Finance
         {
             var bic = Bic.Parse(value);
 
-            Assert.True(bic.ValidateSwiftFormat());
+            Assert.True(bic.Validate(BicStyle.Swift));
         }
 
         [Theory]
@@ -221,7 +217,7 @@ namespace Narvalo.Finance
         {
             var bic = Bic.Parse(value);
 
-            Assert.False(bic.ValidateSwiftFormat());
+            Assert.False(bic.Validate(BicStyle.Swift));
         }
 
         #endregion

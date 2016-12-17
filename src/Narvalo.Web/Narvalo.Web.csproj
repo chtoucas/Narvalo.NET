@@ -105,7 +105,6 @@
     <Compile Include="HttpHandler`2.cs" />
     <Compile Include="HttpResponse%24.cs" />
     <Compile Include="HttpVerbs%24.cs" />
-    <Compile Include="HttpVersions%24.cs" />
     <Compile Include="HttpVersions.cs" />
     <Compile Include="IHttpQueryBinder`1.cs" />
     <Compile Include="Internal\LiteralControlTransformer.cs" />

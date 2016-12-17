@@ -79,29 +79,32 @@ namespace Narvalo.Finance
 
         public static Iban Parse(string value)
         {
+            Demand.NotNull(value);
+
+            return Parse(value, IbanStyles.Any);
+        }
+
+        public static Iban Parse(string value, IbanStyles styles)
+        {
             Require.NotNull(value, nameof(value));
 
-            return ParseExact(RemoveDisplayCharacters(value));
+            return ParseInner(RemoveDisplayCharacters(value, styles));
         }
 
         public static Iban ParseExact(string value)
         {
             Require.NotNull(value, nameof(value));
 
-            if (!CheckValue(value))
-            {
-                throw new FormatException(Strings.Iban_InvalidFormat);
-            }
-            Check.True(CheckValue(value));
-
-            return ParseCore(value);
+            return ParseInner(value);
         }
 
-        public static Iban? TryParse(string value)
+        public static Iban? TryParse(string value) => TryParse(value, IbanStyles.Any);
+
+        public static Iban? TryParse(string value, IbanStyles styles)
         {
             if (value == null) { return null; }
 
-            return TryParseExact(RemoveDisplayCharacters(value));
+            return TryParseExact(RemoveDisplayCharacters(value, styles));
         }
 
         public static Iban? TryParseExact(string value)
@@ -115,11 +118,26 @@ namespace Narvalo.Finance
             return ParseCore(value);
         }
 
+        public bool Validate() => IbanFormat.Validate(this);
+
         public override string ToString()
         {
             Warrant.NotNull<string>();
 
             return _value;
+        }
+
+        private static Iban ParseInner(string value)
+        {
+            Demand.NotNull(value);
+
+            if (!CheckValue(value))
+            {
+                throw new FormatException(Strings.Iban_InvalidFormat);
+            }
+            Check.True(CheckValue(value));
+
+            return ParseCore(value);
         }
 
         // NB: We only perform basic validation on the input string.

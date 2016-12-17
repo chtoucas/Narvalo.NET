@@ -16,12 +16,11 @@ namespace Narvalo.Finance.Utilities
         internal const int PartyLength = PrefixLength + CountryLength + SuffixLength;
         internal const int BicLength = PartyLength + BranchLength;
 
-        // strict = ISO conformance, loosy = SWIFT implementation.
         // The SWIFT implementation is more restrictive than ISO as it only expects letters.
         // In real world cases, strict conformance is rarely used.
-        public static bool Validate(Bic bic, bool isoConformance)
+        internal static bool Validate(Bic bic, BicStyle style)
             // NB: We do not need to check properties length.
-            => (isoConformance ? IsDigitOrUpperLetter(bic.InstitutionCode) : IsUpperLetter(bic.InstitutionCode))
+            => (style == BicStyle.ISO ? IsDigitOrUpperLetter(bic.InstitutionCode) : IsUpperLetter(bic.InstitutionCode))
                 && IsUpperLetter(bic.CountryCode)
                 && IsDigitOrUpperLetter(bic.LocationCode)
                 && (bic.BranchCode.Length == 0 || IsDigitOrUpperLetter(bic.BranchCode));
