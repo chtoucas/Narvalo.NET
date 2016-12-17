@@ -5,7 +5,6 @@ namespace Narvalo.Finance
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Finance.Utilities;
     using Xunit;
 
     public static partial class BicFacts
@@ -181,23 +180,23 @@ namespace Narvalo.Finance
         #region Validate()
 
         [Theory]
-        [MemberData(nameof(ValidIsoValues), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void ValidateIsoFormat_ReturnsTrue_ForValidInput(string value)
         {
             var bic = Bic.Parse(value);
 
-            Assert.True(bic.Validate(BicStyle.ISO));
+            Assert.True(bic.Validate(BicVersion.ISO));
         }
 
         [Theory]
-        [MemberData(nameof(InvalidIsoValues), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void ValidateIsoFormat_ReturnsFalse_ForInvalidFormat(string value)
         {
             var bic = Bic.Parse(value);
 
-            Assert.False(bic.Validate(BicStyle.ISO));
+            Assert.False(bic.Validate(BicVersion.ISO));
         }
 
         [Theory]
@@ -207,7 +206,7 @@ namespace Narvalo.Finance
         {
             var bic = Bic.Parse(value);
 
-            Assert.True(bic.Validate(BicStyle.Swift));
+            Assert.True(bic.Validate(BicVersion.Swift));
         }
 
         [Theory]
@@ -217,7 +216,7 @@ namespace Narvalo.Finance
         {
             var bic = Bic.Parse(value);
 
-            Assert.False(bic.Validate(BicStyle.Swift));
+            Assert.False(bic.Validate(BicVersion.Swift));
         }
 
         #endregion
@@ -436,7 +435,7 @@ namespace Narvalo.Finance
             }
         }
 
-        public static IEnumerable<object[]> ValidIsoValues
+        public static IEnumerable<object[]> ValidISOValues
         {
             get
             {
@@ -484,7 +483,7 @@ namespace Narvalo.Finance
             }
         }
 
-        public static IEnumerable<object[]> InvalidIsoValues
+        public static IEnumerable<object[]> InvalidISOValues
         {
             get
             {

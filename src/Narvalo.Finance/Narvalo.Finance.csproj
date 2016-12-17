@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bic.cs" />
-    <Compile Include="BicStyle.cs" />
+    <Compile Include="BicVersion.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="Snv\PubDateEventArgs.cs" />
     <Compile Include="Snv\SnvCurrencyData.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="Snv\SnvXmlNames.cs" />
     <Compile Include="Snv\SnvXmlReader.cs" />
     <Compile Include="Snv\XElement%24.cs" />
-    <Compile Include="Utilities\BicFormat.cs" />
+    <Compile Include="BicFormat.cs" />
     <Compile Include="Currencies\Currencies.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -99,9 +99,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Iban.cs" />
-    <Compile Include="Utilities\IbanFormat.cs" />
+    <Compile Include="IbanFormat.cs" />
     <Compile Include="Internal\CurrencyActivator`1.cs" />
-    <Compile Include="Utilities\AsciiHelpers.cs" />
+    <Compile Include="AsciiHelpers.cs" />
     <Compile Include="Internal\MoneyFormatter.cs" />
     <Compile Include="Internal\Sentinel.cs" />
     <Compile Include="Money.cs" />

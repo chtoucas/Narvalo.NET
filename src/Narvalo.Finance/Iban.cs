@@ -7,9 +7,8 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Utilities;
 
-    using static Narvalo.Finance.Utilities.IbanFormat;
+    using static Narvalo.Finance.IbanFormat;
 
     /// <summary>
     /// Represents an International Bank Account Number (IBAN).
@@ -17,14 +16,14 @@ namespace Narvalo.Finance
     /// <remarks>
     /// The standard format for an IBAN is defined in ISO 13616.
     /// </remarks>
-    public partial struct Iban : IEquatable<Iban>
+    public partial struct Iban : IEquatable<Iban>, IFormattable
     {
         private readonly string _bban;
         private readonly string _checkDigits;
         private readonly string _countryCode;
         private readonly string _value;
 
-        private Iban(string countryCode, string checkDigits, string bban, string value)
+        private Iban(string countryCode, string checkDigits, string bban, string value, bool validated)
         {
             Demand.True(CheckCountryCode(countryCode));
             Demand.True(CheckCheckDigits(checkDigits));
@@ -35,6 +34,7 @@ namespace Narvalo.Finance
             _checkDigits = checkDigits;
             _bban = bban;
             _value = value;
+            Validated = validated;
         }
 
         /// <summary>
@@ -61,6 +61,10 @@ namespace Narvalo.Finance
             get { Sentinel.Warrant.Length(CountryLength); return _countryCode; }
         }
 
+        public bool Validated { get; }
+
+        internal string Value { get { Sentinel.Warrant.LengthRange(MinLength, MaxLength); return _value; } }
+
         public static Iban Create(string countryCode, string checkDigits, string bban)
         {
             // REVIEW: We check for non-null twice...
@@ -74,7 +78,7 @@ namespace Narvalo.Finance
             var value = countryCode + checkDigits + bban;
             Contract.Assume(CheckValue(value));
 
-            return new Iban(countryCode, checkDigits, bban, value);
+            return new Iban(countryCode, checkDigits, bban, value, false);
         }
 
         public static Iban Parse(string value)
@@ -88,14 +92,41 @@ namespace Narvalo.Finance
         {
             Require.NotNull(value, nameof(value));
 
-            return ParseInner(RemoveDisplayCharacters(value, styles));
+            var val = RemoveUnwantedCharacters(value, styles);
+            if (!CheckValue(val))
+            {
+                throw new FormatException(Strings.Iban_InvalidFormat);
+            }
+            Check.True(CheckValue(val));
+
+            return ParseCore(val, false);
         }
 
         public static Iban ParseExact(string value)
         {
+            Demand.NotNull(value);
+
+            return ParseExact(value, IbanStyles.None);
+        }
+
+        public static Iban ParseExact(string value, IbanStyles styles)
+        {
             Require.NotNull(value, nameof(value));
 
-            return ParseInner(value);
+            var val = RemoveUnwantedCharacters(value, styles);
+            if (!CheckValue(val))
+            {
+                throw new FormatException(Strings.Iban_InvalidFormat);
+            }
+            Check.True(CheckValue(val));
+
+            var iban = ParseCore(val, true);
+            if (!iban.Validate())
+            {
+                throw new FormatException(Strings.Iban_InvalidFormat);
+            }
+
+            return iban;
         }
 
         public static Iban? TryParse(string value) => TryParse(value, IbanStyles.Any);
@@ -104,21 +135,41 @@ namespace Narvalo.Finance
         {
             if (value == null) { return null; }
 
-            return TryParseExact(RemoveDisplayCharacters(value, styles));
+            var val = RemoveUnwantedCharacters(value, styles);
+            if (!CheckValue(val)) { return null; }
+            Check.True(CheckValue(val));
+
+            return ParseCore(val, false); ;
         }
 
-        public static Iban? TryParseExact(string value)
+        public static Iban? TryParseExact(string value) => TryParseExact(value, IbanStyles.Any);
+
+        public static Iban? TryParseExact(string value, IbanStyles styles)
         {
-            if (!CheckValue(value))
-            {
-                return null;
-            }
-            Check.True(CheckValue(value));
+            if (value == null) { return null; }
 
-            return ParseCore(value);
+            var val = RemoveUnwantedCharacters(value, styles);
+            if (!CheckValue(val)) { return null; }
+            Check.True(CheckValue(val));
+
+            var iban = ParseCore(val, true);
+            if (!iban.Validate()) { return null; }
+
+            return iban;
         }
 
-        public bool Validate() => IbanFormat.Validate(this);
+        public static Iban? Validate(Iban iban)
+        {
+            if (iban.Validated) { return iban; }
+            if (!iban.Validate()) { return null; }
+
+            return new Iban(iban.CountryCode, iban.CheckDigits, iban.Bban, iban._value, true);
+        }
+
+        public bool Validate()
+        {
+            throw new NotImplementedException();
+        }
 
         public override string ToString()
         {
@@ -127,21 +178,91 @@ namespace Narvalo.Finance
             return _value;
         }
 
-        private static Iban ParseInner(string value)
+        public string ToString(string format, IFormatProvider formatProvider)
         {
-            Demand.NotNull(value);
+            Warrant.NotNull<string>();
 
-            if (!CheckValue(value))
+            // If none given, use the default .NET format.
+            if (format == null) { format = "G"; }
+
+            if (formatProvider != null)
             {
-                throw new FormatException(Strings.Iban_InvalidFormat);
+                var fmt = formatProvider.GetFormat(GetType()) as ICustomFormatter;
+                if (fmt != null)
+                {
+                    return fmt.Format(format, this, formatProvider);
+                }
             }
-            Check.True(CheckValue(value));
 
-            return ParseCore(value);
+            // REVIEW: Add lowercase alts.
+            switch (format)
+            {
+                case "IBAN":
+                    return Format(this, IbanFormattingStyle.WhiteSpaces);
+                case "IBAN-":
+                    return Format(this, IbanFormattingStyle.Dashes);
+                case "G":
+                default:
+                    // Same as return ToString();
+                    return _value;
+            }
+        }
+
+        private enum IbanFormattingStyle
+        {
+            WhiteSpaces,
+            Dashes,
+            Default = WhiteSpaces,
+        }
+
+        // FIXME: Quick and dirty, it is wrong.
+        private static string Format(Iban iban, IbanFormattingStyle style)
+        {
+            Warrant.NotNull<string>();
+
+            var arr = iban.Value.ToCharArray();
+            var len = arr.Length;
+            var r = len % 4;
+            var q = (len - r) / 4;
+            var outarr = new char[5 * q + r];
+
+            var k = 1;
+            var interch = GetInterCharacter(style);
+
+            for (var i = 0; i < len; i++, k++)
+            {
+                if (k % 5 == 0)
+                {
+                    outarr[k - 1] = interch;
+                    outarr[k] = arr[i];
+                    k++;
+                }
+                else
+                {
+                    outarr[k] = arr[i];
+                }
+            }
+
+            return new String(outarr);
+        }
+
+        private static char GetInterCharacter(IbanFormattingStyle style)
+        {
+            switch (style)
+            {
+                case IbanFormattingStyle.Dashes:
+                    return '-';
+                case IbanFormattingStyle.WhiteSpaces:
+                    return ' ';
+                default:
+                    throw Check.Unreachable();
+            }
         }
 
         // NB: We only perform basic validation on the input string.
-        private static Iban ParseCore(string value)
+        // NB: We mark the result as validated, even if we have not yet perform any validation
+        //     work. The caller is in charge to do the right thing.
+        private static Iban ParseCore(string value, bool validated)
         {
             Demand.True(CheckValue(value));
 
@@ -155,7 +276,7 @@ namespace Narvalo.Finance
             string bban = value.Substring(CountryLength + CheckDigitsLength);
             Contract.Assume(CheckBban(bban));
 
-            return new Iban(countryCode, checkDigits, bban, value);
+            return new Iban(countryCode, checkDigits, bban, value, validated);
         }
     }
 

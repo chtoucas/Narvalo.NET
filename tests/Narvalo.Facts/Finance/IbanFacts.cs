@@ -5,7 +5,6 @@ namespace Narvalo.Finance
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Finance.Utilities;
     using Xunit;
 
     public static partial class IbanFacts

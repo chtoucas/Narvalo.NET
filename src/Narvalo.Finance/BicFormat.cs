@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Utilities
+namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
-
-    using static Narvalo.Finance.Utilities.AsciiHelpers;
 
     public static class BicFormat
     {
@@ -15,15 +13,6 @@ namespace Narvalo.Finance.Utilities
 
         internal const int PartyLength = PrefixLength + CountryLength + SuffixLength;
         internal const int BicLength = PartyLength + BranchLength;
-
-        // The SWIFT implementation is more restrictive than ISO as it only expects letters.
-        // In real world cases, strict conformance is rarely used.
-        internal static bool Validate(Bic bic, BicStyle style)
-            // NB: We do not need to check properties length.
-            => (style == BicStyle.ISO ? IsDigitOrUpperLetter(bic.InstitutionCode) : IsUpperLetter(bic.InstitutionCode))
-                && IsUpperLetter(bic.CountryCode)
-                && IsDigitOrUpperLetter(bic.LocationCode)
-                && (bic.BranchCode.Length == 0 || IsDigitOrUpperLetter(bic.BranchCode));
 
         [Pure]
         public static bool CheckBranchCode(string value)

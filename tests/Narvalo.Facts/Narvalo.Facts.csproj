@@ -84,9 +84,9 @@
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="Finance\CurrencyNotFoundExceptionFacts.cs" />
     <Compile Include="Finance\IbanFacts.cs" />
-    <Compile Include="Finance\Utilities\AsciiHelpersFacts.cs" />
-    <Compile Include="Finance\Utilities\BicFormatFacts.cs" />
-    <Compile Include="Finance\Utilities\IbanFormatFacts.cs" />
+    <Compile Include="Finance\AsciiHelpersFacts.cs" />
+    <Compile Include="Finance\BicFormatFacts.cs" />
+    <Compile Include="Finance\IbanFormatFacts.cs" />
     <Compile Include="Fx\Samples\Internal\EnumerableExtensions.cs" />
     <Compile Include="_TestCommon\DebugOnlyFactAttribute.cs" />
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />
