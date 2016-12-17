@@ -2,7 +2,6 @@
 
 namespace Narvalo.Finance
 {
-    using System;
     using System.Diagnostics.Contracts;
 
     public static class IbanFormat
@@ -15,34 +14,6 @@ namespace Narvalo.Finance
 
         internal const int BbanMinLength = MinLength - CountryLength - CheckDigitsLength;
         internal const int BbanMaxLength = MaxLength - CountryLength - CheckDigitsLength;
-
-        internal static string RemoveUnwantedCharacters(string value, IbanStyles styles)
-        {
-            Demand.NotNull(value);
-            Warrant.NotNull<string>();
-
-            if (styles.Contains(IbanStyles.None)) { return value; }
-
-            var inarr = value.ToCharArray();
-            var outarr = new char[inarr.Length];
-            var outlen = 0;
-
-            var removeWhiteSpaces = styles.Contains(IbanStyles.AllowWhiteSpaces);
-            var removeDashes = styles.Contains(IbanStyles.AllowDashes);
-
-            for (var i = 0; i < inarr.Length; i++)
-            {
-                var ch = inarr[i];
-
-                if (removeWhiteSpaces && ch == ' ') { continue; }
-                if (removeDashes && ch == '-') { continue; }
-
-                outarr[outlen] = ch;
-                outlen++;
-            }
-
-            return new String(outarr, 0, outlen);
-        }
 
         [Pure]
         public static bool CheckBban(string value)

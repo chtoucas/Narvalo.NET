@@ -3,6 +3,7 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Internal;
@@ -16,6 +17,7 @@ namespace Narvalo.Finance
     /// <remarks>
     /// The standard format for an IBAN is defined in ISO 13616.
     /// </remarks>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Iban : IEquatable<Iban>, IFormattable
     {
         private readonly string _bban;
@@ -63,7 +65,7 @@ namespace Narvalo.Finance
 
         public bool Validated { get; }
 
-        internal string Value { get { Sentinel.Warrant.LengthRange(MinLength, MaxLength); return _value; } }
+        private string DebuggerDisplay => ToString("S");
 
         public static Iban Create(string countryCode, string checkDigits, string bban)
         {
@@ -92,7 +94,7 @@ namespace Narvalo.Finance
         {
             Require.NotNull(value, nameof(value));
 
-            var val = RemoveUnwantedCharacters(value, styles);
+            var val = StripDisplayChars(value, styles);
             if (!CheckValue(val))
             {
                 throw new FormatException(Strings.Iban_InvalidFormat);
@@ -113,7 +115,7 @@ namespace Narvalo.Finance
         {
             Require.NotNull(value, nameof(value));
 
-            var val = RemoveUnwantedCharacters(value, styles);
+            var val = StripDisplayChars(value, styles);
             if (!CheckValue(val))
             {
                 throw new FormatException(Strings.Iban_InvalidFormat);
@@ -135,7 +137,7 @@ namespace Narvalo.Finance
         {
             if (value == null) { return null; }
 
-            var val = RemoveUnwantedCharacters(value, styles);
+            var val = StripDisplayChars(value, styles);
             if (!CheckValue(val)) { return null; }
             Check.True(CheckValue(val));
 
@@ -148,7 +150,7 @@ namespace Narvalo.Finance
         {
             if (value == null) { return null; }
 
-            var val = RemoveUnwantedCharacters(value, styles);
+            var val = StripDisplayChars(value, styles);
             if (!CheckValue(val)) { return null; }
             Check.True(CheckValue(val));
 
@@ -171,94 +173,6 @@ namespace Narvalo.Finance
             throw new NotImplementedException();
         }
 
-        public override string ToString()
-        {
-            Warrant.NotNull<string>();
-
-            return _value;
-        }
-
-        public string ToString(string format, IFormatProvider formatProvider)
-        {
-            Warrant.NotNull<string>();
-
-            // If none given, use the default .NET format.
-            if (format == null) { format = "G"; }
-
-            if (formatProvider != null)
-            {
-                var fmt = formatProvider.GetFormat(GetType()) as ICustomFormatter;
-                if (fmt != null)
-                {
-                    return fmt.Format(format, this, formatProvider);
-                }
-            }
-
-            // REVIEW: Add lowercase alts.
-            switch (format)
-            {
-                case "IBAN":
-                    return Format(this, IbanFormattingStyle.WhiteSpaces);
-                case "IBAN-":
-                    return Format(this, IbanFormattingStyle.Dashes);
-                case "G":
-                default:
-                    // Same as return ToString();
-                    return _value;
-            }
-        }
-
-        private enum IbanFormattingStyle
-        {
-            WhiteSpaces,
-            Dashes,
-            Default = WhiteSpaces,
-        }
-
-        // FIXME: Quick and dirty, it is wrong.
-        private static string Format(Iban iban, IbanFormattingStyle style)
-        {
-            Warrant.NotNull<string>();
-
-            var arr = iban.Value.ToCharArray();
-            var len = arr.Length;
-            var r = len % 4;
-            var q = (len - r) / 4;
-            var outarr = new char[5 * q + r];
-
-            var k = 1;
-            var interch = GetInterCharacter(style);
-
-            for (var i = 0; i < len; i++, k++)
-            {
-                if (k % 5 == 0)
-                {
-                    outarr[k - 1] = interch;
-                    outarr[k] = arr[i];
-                    k++;
-                }
-                else
-                {
-                    outarr[k] = arr[i];
-                }
-            }
-
-            return new String(outarr);
-        }
-
-        private static char GetInterCharacter(IbanFormattingStyle style)
-        {
-            switch (style)
-            {
-                case IbanFormattingStyle.Dashes:
-                    return '-';
-                case IbanFormattingStyle.WhiteSpaces:
-                    return ' ';
-                default:
-                    throw Check.Unreachable();
-            }
-        }
-
         // NB: We only perform basic validation on the input string.
         // NB: We mark the result as validated, even if we have not yet perform any validation
         //     work. The caller is in charge to do the right thing.
@@ -277,6 +191,120 @@ namespace Narvalo.Finance
             Contract.Assume(CheckBban(bban));
 
             return new Iban(countryCode, checkDigits, bban, value, validated);
+        }
+
+        private static string StripDisplayChars(string value, IbanStyles styles)
+        {
+            Demand.NotNull(value);
+            Warrant.NotNull<string>();
+
+            if (styles.Contains(IbanStyles.None)) { return value; }
+
+            var input = value.ToCharArray();
+            var output = new char[input.Length];
+
+            var rmspace = styles.Contains(IbanStyles.AllowWhiteSpaces);
+            var rmdash = styles.Contains(IbanStyles.AllowDashes);
+
+            var k = 0;
+            for (var i = 0; i < input.Length; i++)
+            {
+                var ch = input[i];
+
+                if (rmspace && ch == ' ') { continue; }
+                if (rmdash && ch == '-') { continue; }
+
+                output[k] = ch;
+                k++;
+            }
+
+            return new String(output, 0, k);
+        }
+    }
+
+    // Implements the IFormattable interface + ToString().
+    public partial struct Iban
+    {
+        public override string ToString()
+        {
+            Warrant.NotNull<string>();
+
+            return _value;
+        }
+
+        public string ToString(string format)
+        {
+            Warrant.NotNull<string>();
+
+            return ToString(format, null);
+        }
+
+        public string ToString(IFormatProvider formatProvider)
+        {
+            Warrant.NotNull<string>();
+
+            return ToString(null, formatProvider);
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            Warrant.NotNull<string>();
+
+            if (formatProvider != null)
+            {
+                var fmt = formatProvider.GetFormat(GetType()) as ICustomFormatter;
+                if (fmt != null)
+                {
+                    return fmt.Format(format, this, formatProvider);
+                }
+            }
+
+            switch (format)
+            {
+                case "S":
+                case "s":
+                    // Insert a space every 4 chars.
+                    return Format(_value, ' ');
+                case "-":
+                    // Insert a dash every 4 chars.
+                    return Format(_value, '-');
+                // If none, use the default .NET format ("G"); gives the same result as ToString().
+                case "G":
+                case "g":
+                default:
+                    return _value;
+            }
+        }
+
+        internal static string Format(string value, char ch)
+        {
+            Demand.NotNull(value);
+            Warrant.NotNull<string>();
+
+            var input = value.ToCharArray();
+            var len = input.Length;
+            var r = len % 4;
+            var q = (len - r) / 4;
+            var output = new char[5 * q + r];
+
+            var k = 1;
+
+            for (var i = 0; i < len; i++, k++)
+            {
+                // FIXME:
+                if (k % 5 == 0)
+                {
+                    output[k - 1] = ch;
+                    output[k] = input[i];
+                    k++;
+                }
+                else
+                {
+                    output[k - 1] = input[i];
+                }
+            }
+
+            return new String(output);
         }
     }
 

@@ -115,7 +115,7 @@ namespace Narvalo.Finance.Snv
         /// </summary>
         /// <remarks>
         /// <para>This name is not guaranteed to match the value of
-        /// <see cref="RegionInfo.EnglishName"/>.</para>
+        /// <see cref="System.Globalization.RegionInfo.EnglishName"/>.</para>
         /// <para>Most meta-currencies do not belong to a region but they still
         /// get a pseudo region name. Besides that, most of these currencies use
         /// a region name that starts with "ZZ" to make it clear.</para>
