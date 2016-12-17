@@ -15,8 +15,8 @@
 
 bool firstSeen = true;
 
-var currentCurrencies = ParseCurrent(@"..\Resources\ISO4217\A1.xml");
-var legacyCurrencies = ParseLegacy(@"..\Resources\ISO4217\A3.xml");
+var currentCurrencies = ParseCurrent(@"..\..\..\data\ISO4217\A1.xml");
+var legacyCurrencies = ParseLegacy(@"..\..\..\data\ISO4217\A3.xml");
 var currencies = currentCurrencies.Concat(legacyCurrencies);
 
 var codeSet = new HashSet<string>();

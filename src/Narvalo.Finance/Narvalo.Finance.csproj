@@ -70,9 +70,6 @@
     <None Include="Narvalo.Finance.Version.props">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Resources\ISO4217\schema.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bic.cs" />
@@ -134,11 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\ISO4217\A1.xml" />
-    <Content Include="Resources\ISO4217\A3.xml" />
-    <Content Include="Resources\ISO4217\README.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Narvalo.Cerbere\Narvalo.Cerbere.csproj">
