@@ -153,14 +153,31 @@ namespace Narvalo.Finance
         [Theory]
         [InlineData("########", true)]
         [InlineData("###########", true)]
+        [InlineData("#######0", false)]
+        [InlineData("#######0###", false)]
         [InlineData("#######1", false)]
         [InlineData("#######1###", false)]
         [CLSCompliant(false)]
-        public static void ParseCore_SetIsConnectedCorrectly(string value, bool expectedValue)
+        public static void ParseCore_SetIsSwiftConnectedCorrectly(string value, bool expectedValue)
         {
             var bic = Bic.Parse(value);
 
-            Assert.Equal(expectedValue, bic.IsConnected);
+            Assert.Equal(expectedValue, bic.IsSwiftConnected);
+        }
+
+        [Theory]
+        [InlineData("########", false)]
+        [InlineData("###########", false)]
+        [InlineData("#######0", true)]
+        [InlineData("#######0###", true)]
+        [InlineData("#######1", false)]
+        [InlineData("#######1###", false)]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetIsSwiftTestCorrectly(string value, bool expectedValue)
+        {
+            var bic = Bic.Parse(value);
+
+            Assert.Equal(expectedValue, bic.IsSwiftTest);
         }
 
         [Theory]
