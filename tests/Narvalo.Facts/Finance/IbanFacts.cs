@@ -11,57 +11,57 @@ namespace Narvalo.Finance
     {
         #region TryParse()
 
+        [Theory]
+        [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParse_Succeeds_ForValidFormat(string value)
+            => Assert.True(Iban.TryParse(value).HasValue);
+
         [Fact]
         public static void TryParse_ReturnsNull_ForNull()
             => Assert.False(Iban.TryParse(null).HasValue);
+
+        [Theory]
+        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParse_ReturnsNull_ForInvalidFormat(string value)
+            => Assert.False(Iban.TryParse(value).HasValue);
 
         #endregion
 
         #region TryParseExact()
 
-        [Theory]
-        [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryParseExact_Succeeds_ForValidFormat(string value)
-            => Assert.True(Iban.TryParseExact(value).HasValue);
-
         [Fact]
         public static void TryParseExact_ReturnsNull_ForNull()
             => Assert.False(Iban.TryParseExact(null).HasValue);
-
-        [Theory]
-        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryParseExact_ReturnsNull_ForInvalidFormat(string value)
-            => Assert.False(Iban.TryParseExact(value).HasValue);
 
         #endregion
 
         #region Parse()
 
+        [Theory]
+        [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Parse_Succeeds(string value)
+            => Iban.Parse(value);
+
         [Fact]
         public static void Parse_ThrowsArgumentNullException_ForNull()
             => Assert.Throws<ArgumentNullException>(() => Iban.Parse(null));
+
+        [Theory]
+        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Parse_ThrowsFormatException_ForInvalidFormat(string value)
+            => Assert.Throws<FormatException>(() => Iban.Parse(value));
 
         #endregion
 
         #region ParseExact()
 
-        [Theory]
-        [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ParseExact_Succeeds(string value)
-            => Iban.ParseExact(value);
-
         [Fact]
         public static void ParseExact_ThrowsArgumentNullException_ForNull()
             => Assert.Throws<ArgumentNullException>(() => Iban.ParseExact(null));
-
-        [Theory]
-        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ParseExact_ThrowsFormatException_ForInvalidFormat(string value)
-            => Assert.Throws<FormatException>(() => Iban.ParseExact(value));
 
         #endregion
 
@@ -126,7 +126,7 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void ParseCore_SetCountryCodeCorrectly(string value, string expectedValue)
         {
-            var iban = Iban.ParseExact(value);
+            var iban = Iban.Parse(value);
 
             Assert.Equal(expectedValue, iban.CountryCode);
         }
@@ -156,7 +156,7 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void ParseCore_SetCheckDigitsCorrectly(string value, string expectedValue)
         {
-            var iban = Iban.ParseExact(value);
+            var iban = Iban.Parse(value);
 
             Assert.Equal(expectedValue, iban.CheckDigits);
         }
@@ -186,7 +186,7 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void ParseCore_SetBbanCorrectly(string value, string expectedValue)
         {
-            var iban = Iban.ParseExact(value);
+            var iban = Iban.Parse(value);
 
             Assert.Equal(expectedValue, iban.Bban);
         }
@@ -200,8 +200,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equality_ReturnsTrue_ForIdenticalValues(string value1, string value2)
         {
-            var iban1 = Iban.ParseExact(value1);
-            var iban2 = Iban.ParseExact(value2);
+            var iban1 = Iban.Parse(value1);
+            var iban2 = Iban.Parse(value2);
 
             Assert.True(iban1 == iban2);
         }
@@ -211,8 +211,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equality_ReturnsFalse_ForDistinctValues(string value1, string value2)
         {
-            var iban1 = Iban.ParseExact(value1);
-            var iban2 = Iban.ParseExact(value2);
+            var iban1 = Iban.Parse(value1);
+            var iban2 = Iban.Parse(value2);
 
             Assert.False(iban1 == iban2);
         }
@@ -226,8 +226,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Inequality_ReturnsFalse_ForIdenticalValues(string value1, string value2)
         {
-            var iban1 = Iban.ParseExact(value1);
-            var iban2 = Iban.ParseExact(value2);
+            var iban1 = Iban.Parse(value1);
+            var iban2 = Iban.Parse(value2);
 
             Assert.False(iban1 != iban2);
         }
@@ -237,8 +237,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Inequality_ReturnsTrue_ForDistinctValues(string value1, string value2)
         {
-            var iban1 = Iban.ParseExact(value1);
-            var iban2 = Iban.ParseExact(value2);
+            var iban1 = Iban.Parse(value1);
+            var iban2 = Iban.Parse(value2);
 
             Assert.True(iban1 != iban2);
         }
@@ -252,8 +252,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_ReturnsTrue_ForIdenticalValues(string value1, string value2)
         {
-            var iban1 = Iban.ParseExact(value1);
-            var iban2 = Iban.ParseExact(value2);
+            var iban1 = Iban.Parse(value1);
+            var iban2 = Iban.Parse(value2);
 
             Assert.True(iban1.Equals(iban2));
         }
@@ -263,8 +263,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_ReturnsTrue_ForIdenticalValues_AfterBoxing(string value1, string value2)
         {
-            var iban1 = Iban.ParseExact(value1);
-            object iban2 = Iban.ParseExact(value2);
+            var iban1 = Iban.Parse(value1);
+            object iban2 = Iban.Parse(value2);
 
             Assert.True(iban1.Equals(iban2));
         }
@@ -274,8 +274,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_ReturnsFalse_ForDistinctValues(string value1, string value2)
         {
-            var iban1 = Iban.ParseExact(value1);
-            var iban2 = Iban.ParseExact(value2);
+            var iban1 = Iban.Parse(value1);
+            var iban2 = Iban.Parse(value2);
 
             Assert.False(iban1.Equals(iban2));
         }
@@ -285,7 +285,7 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_ReturnsFalse_ForOtherTypes(string value)
         {
-            var iban = Iban.ParseExact(value);
+            var iban = Iban.Parse(value);
 
             Assert.False(iban.Equals(null));
             Assert.False(iban.Equals(1));
@@ -299,7 +299,7 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_IsReflexive(string value)
         {
-            var iban = Iban.ParseExact(value);
+            var iban = Iban.Parse(value);
 
             Assert.True(iban.Equals(iban));
         }
@@ -309,9 +309,9 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_IsAbelian(string value1, string value2)
         {
-            var iban1a = Iban.ParseExact(value1);
-            var iban1b = Iban.ParseExact(value1);
-            var iban2 = Iban.ParseExact(value2);
+            var iban1a = Iban.Parse(value1);
+            var iban1b = Iban.Parse(value1);
+            var iban2 = Iban.Parse(value2);
 
             Assert.Equal(iban1a.Equals(iban1b), iban1b.Equals(iban1a));
             Assert.Equal(iban1a.Equals(iban2), iban2.Equals(iban1a));
@@ -322,9 +322,9 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_IsTransitive(string value)
         {
-            var iban1 = Iban.ParseExact(value);
-            var iban2 = Iban.ParseExact(value);
-            var iban3 = Iban.ParseExact(value);
+            var iban1 = Iban.Parse(value);
+            var iban2 = Iban.Parse(value);
+            var iban3 = Iban.Parse(value);
 
             Assert.Equal(iban1.Equals(iban2) && iban2.Equals(iban3), iban1.Equals(iban3));
         }
@@ -338,9 +338,10 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void GetHashCode_ReturnsHashCodeValue(string value)
         {
-            var iban = Iban.ParseExact(value);
+            var result = Iban.Parse(value).GetHashCode();
+            var expected = value.GetHashCode();
 
-            Assert.Equal(value.GetHashCode(), iban.GetHashCode());
+            Assert.Equal(expected, result);
         }
 
         #endregion
@@ -352,9 +353,54 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void ToString_ReturnsValue(string value)
         {
-            var iban = Iban.ParseExact(value);
+            var result = Iban.Parse(value).ToString();
 
-            Assert.Equal(value, iban.ToString());
+            Assert.Equal(value, result);
+        }
+
+        [Theory]
+        [MemberData(nameof(FormatWhiteSpaceSamples), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsFormattedValue_ForWhiteSpaceFormat(string value, string formattedValue)
+        {
+            var result1 = Iban.Parse(value).ToString("S");
+            var result2 = Iban.Parse(value).ToString("s");
+
+            Assert.Equal(formattedValue, result1);
+            Assert.Equal(formattedValue, result2);
+        }
+
+        [Theory]
+        [MemberData(nameof(FormatWhiteSpaceSamples), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsFormattedValue_ForDashFormat(string value, string formattedValue)
+        {
+            var result = Iban.Parse(value).ToString("-");
+            var expected = formattedValue.Replace(' ', '-');
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsValue_ForGeneralFormat(string value)
+        {
+            var result1 = Iban.Parse(value).ToString("G");
+            var result2 = Iban.Parse(value).ToString("g");
+
+            Assert.Equal(value, result1);
+            Assert.Equal(value, result2);
+        }
+
+        [Theory]
+        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsValue_ForDefaultFormat(string value)
+        {
+            var result = Iban.Parse(value).ToString(null);
+
+            Assert.Equal(value, result);
         }
 
         #endregion
@@ -362,6 +408,72 @@ namespace Narvalo.Finance
 
     public static partial class IbanFacts
     {
+        // Sample IBAN from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
+        public static IEnumerable<object[]> SampleDisplayValues
+        {
+            get
+            {
+                yield return new object[] { "AL47 2121 1009 0000 0002 3569 8741" };
+                yield return new object[] { "AD12 0001 2030 2003 5910 0100" };
+                yield return new object[] { "AT61 1904 3002 3457 3201" };
+                yield return new object[] { "AZ21 NABZ 0000 0000 1370 1000 1944" };
+                yield return new object[] { "BH67 BMAG 0000 1299 1234 56" };
+                yield return new object[] { "BE62 5100 0754 7061" };
+                yield return new object[] { "BA39 1290 0794 0102 8494" };
+                yield return new object[] { "BG80 BNBG 9661 1020 3456 78" };
+                yield return new object[] { "HR12 1001 0051 8630 0016 0" };
+                yield return new object[] { "CY17 0020 0128 0000 0012 0052 7600" };
+                yield return new object[] { "CZ65 0800 0000 1920 0014 5399" };
+                yield return new object[] { "DK50 0040 0440 1162 43" };
+                yield return new object[] { "EE38 2200 2210 2014 5685" };
+                yield return new object[] { "FO97 5432 0388 8999 44" };
+                yield return new object[] { "FI21 1234 5600 0007 85" };
+                yield return new object[] { "FR14 2004 1010 0505 0001 3M02 606" };
+                yield return new object[] { "GE29 NB00 0000 0101 9049 17" };
+                yield return new object[] { "DE89 3704 0044 0532 0130 00" };
+                yield return new object[] { "GI75 NWBK 0000 0000 7099 453" };
+                yield return new object[] { "GR16 0110 1250 0000 0001 2300 695" };
+                yield return new object[] { "GL56 0444 9876 5432 10" };
+                yield return new object[] { "HU42 1177 3016 1111 1018 0000 0000" };
+                yield return new object[] { "IS14 0159 2600 7654 5510 7303 39" };
+                yield return new object[] { "IE29 AIBK 9311 5212 3456 78" };
+                yield return new object[] { "IL62 0108 0000 0009 9999 999" };
+                yield return new object[] { "IT40 S054 2811 1010 0000 0123 456" };
+                yield return new object[] { "JO94 CBJO 0010 0000 0000 0131 0003 02" };
+                yield return new object[] { "KW81 CBKU 0000 0000 0000 1234 5601 01" };
+                yield return new object[] { "LV80 BANK 0000 4351 9500 1" };
+                yield return new object[] { "LB62 0999 0000 0001 0019 0122 9114" };
+                yield return new object[] { "LI21 0881 0000 2324 013A A" };
+                yield return new object[] { "LT12 1000 0111 0100 1000" };
+                yield return new object[] { "LU28 0019 4006 4475 0000" };
+                yield return new object[] { "MK072 5012 0000 0589 84" };
+                yield return new object[] { "MT84 MALT 0110 0001 2345 MTLC AST0 01S" };
+                yield return new object[] { "MU17 BOMM 0101 1010 3030 0200 000M UR" };
+                yield return new object[] { "MD24 AG00 0225 1000 1310 4168" };
+                yield return new object[] { "MC93 2005 2222 1001 1223 3M44 555" };
+                yield return new object[] { "ME25 5050 0001 2345 6789 51" };
+                yield return new object[] { "NL39 RABO 0300 0652 64" };
+                yield return new object[] { "NO93 8601 1117 947" };
+                yield return new object[] { "PK36 SCBL 0000 0011 2345 6702" };
+                yield return new object[] { "PL60 1020 1026 0000 0422 7020 1111" };
+                yield return new object[] { "PT50 0002 0123 1234 5678 9015 4" };
+                yield return new object[] { "QA58 DOHB 0000 1234 5678 90AB CDEF G" };
+                yield return new object[] { "RO49 AAAA 1B31 0075 9384 0000" };
+                yield return new object[] { "SM86 U032 2509 8000 0000 0270 100" };
+                yield return new object[] { "SA03 8000 0000 6080 1016 7519" };
+                yield return new object[] { "RS35 2600 0560 1001 6113 79" };
+                yield return new object[] { "SK31 1200 0000 1987 4263 7541" };
+                yield return new object[] { "SI56 1910 0000 0123 438" };
+                yield return new object[] { "ES80 2310 0001 1800 0001 2345" };
+                yield return new object[] { "SE35 5000 0000 0549 1000 0003" };
+                yield return new object[] { "CH93 0076 2011 6238 5295 7" };
+                yield return new object[] { "TN59 1000 6035 1835 9847 8831" };
+                yield return new object[] { "TR33 0006 1005 1978 6457 8413 26" };
+                yield return new object[] { "AE07 0331 2345 6789 0123 456" };
+                yield return new object[] { "GB29 RBOS 6016 1331 9268 19" };
+            }
+        }
+
         // Sample IBAN from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
         public static IEnumerable<object[]> SampleValues
         {
@@ -422,7 +534,7 @@ namespace Narvalo.Finance
                 yield return new object[] { "SE3550000000054910000003" };
                 yield return new object[] { "CH9300762011623852957" };
                 yield return new object[] { "TN5910006035183598478831" };
-                yield return new object[] { "TR3300061005197864578413 26" };
+                yield return new object[] { "TR330006100519786457841326" };
                 yield return new object[] { "AE070331234567890123456" };
                 yield return new object[] { "GB29RBOS60161331926819" };
             }
@@ -534,5 +646,32 @@ namespace Narvalo.Finance
             }
         }
 
+        public static IEnumerable<object[]> FormatWhiteSpaceSamples
+        {
+            get
+            {
+                yield return new object[] { "12345678901234", "1234 5678 9012 34" };
+                yield return new object[] { "123456789012345", "1234 5678 9012 345" };
+                yield return new object[] { "1234567890123456", "1234 5678 9012 3456" };
+                yield return new object[] { "12345678901234567", "1234 5678 9012 3456 7" };
+                yield return new object[] { "123456789012345678", "1234 5678 9012 3456 78" };
+                yield return new object[] { "1234567890123456789", "1234 5678 9012 3456 789" };
+                yield return new object[] { "12345678901234567890", "1234 5678 9012 3456 7890" };
+                yield return new object[] { "123456789012345678901", "1234 5678 9012 3456 7890 1" };
+                yield return new object[] { "1234567890123456789012", "1234 5678 9012 3456 7890 12" };
+                yield return new object[] { "12345678901234567890123", "1234 5678 9012 3456 7890 123" };
+                yield return new object[] { "123456789012345678901234", "1234 5678 9012 3456 7890 1234" };
+                yield return new object[] { "1234567890123456789012345", "1234 5678 9012 3456 7890 1234 5" };
+                yield return new object[] { "12345678901234567890123456", "1234 5678 9012 3456 7890 1234 56" };
+                yield return new object[] { "123456789012345678901234567", "1234 5678 9012 3456 7890 1234 567" };
+                yield return new object[] { "1234567890123456789012345678", "1234 5678 9012 3456 7890 1234 5678" };
+                yield return new object[] { "12345678901234567890123456789", "1234 5678 9012 3456 7890 1234 5678 9" };
+                yield return new object[] { "123456789012345678901234567890", "1234 5678 9012 3456 7890 1234 5678 90" };
+                yield return new object[] { "1234567890123456789012345678901", "1234 5678 9012 3456 7890 1234 5678 901" };
+                yield return new object[] { "12345678901234567890123456789012", "1234 5678 9012 3456 7890 1234 5678 9012" };
+                yield return new object[] { "123456789012345678901234567890123", "1234 5678 9012 3456 7890 1234 5678 9012 3" };
+                yield return new object[] { "1234567890123456789012345678901234", "1234 5678 9012 3456 7890 1234 5678 9012 34" };
+            }
+        }
     }
 }

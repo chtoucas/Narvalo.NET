@@ -85,7 +85,7 @@ namespace Narvalo.Finance
 
         public static Iban Parse(string value)
         {
-            Demand.NotNull(value);
+            Expect.NotNull(value);
 
             return Parse(value, IbanStyles.Any);
         }
@@ -106,7 +106,7 @@ namespace Narvalo.Finance
 
         public static Iban ParseExact(string value)
         {
-            Demand.NotNull(value);
+            Expect.NotNull(value);
 
             return ParseExact(value, IbanStyles.None);
         }
@@ -222,7 +222,7 @@ namespace Narvalo.Finance
         }
     }
 
-    // Implements the IFormattable interface + ToString().
+    // Implements the IFormattable interface + variations around ToString().
     public partial struct Iban
     {
         public override string ToString()
@@ -237,13 +237,6 @@ namespace Narvalo.Finance
             Warrant.NotNull<string>();
 
             return ToString(format, null);
-        }
-
-        public string ToString(IFormatProvider formatProvider)
-        {
-            Warrant.NotNull<string>();
-
-            return ToString(null, formatProvider);
         }
 
         public string ToString(string format, IFormatProvider formatProvider)
@@ -276,22 +269,21 @@ namespace Narvalo.Finance
             }
         }
 
-        internal static string Format(string value, char ch)
+        private static string Format(string value, char ch)
         {
             Demand.NotNull(value);
             Warrant.NotNull<string>();
 
             var input = value.ToCharArray();
-            var len = input.Length;
-            var r = len % 4;
-            var q = (len - r) / 4;
-            var output = new char[5 * q + r];
+            var inlen = input.Length;
+            var r = inlen % 4;
+            var q = (inlen - r) / 4;
+            var outlen = inlen + q - (r == 0 ? 1 : 0);
+            var output = new char[outlen];
 
             var k = 1;
-
-            for (var i = 0; i < len; i++, k++)
+            for (var i = 0; i < inlen; i++, k++)
             {
-                // FIXME:
                 if (k % 5 == 0)
                 {
                     output[k - 1] = ch;
@@ -315,7 +307,7 @@ namespace Narvalo.Finance
 
         public static bool operator !=(Iban left, Iban right) => !left.Equals(right);
 
-        public bool Equals(Iban other) => _value == other._value;
+        public bool Equals(Iban other) => _value == other._value && Validated == other.Validated;
 
         public override bool Equals(object obj)
         {
