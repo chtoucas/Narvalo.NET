@@ -17,14 +17,15 @@ namespace Narvalo.Finance
     /// </summary>
     /// <remarks>
     /// It was previously understood to be an acronym for Bank Identifier Code.
-    /// The standard format for a BIC is defined in ISO 9362:2014.
+    /// The standard format for a BIC is defined in ISO 9362-2.
     /// </remarks>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Bic : IEquatable<Bic>
     {
         public const string PrimaryOfficeBranchCode = "XXX";
 
-        private const char CONNECTED_IDENTIFIER = '1';
+        private const char SWIFT_TT_MARK = '0';
+        private const char SWIFT_NOT_CONNECTED_MARK = '1';
 
         private readonly string _branchCode;
         private readonly string _countryCode;
@@ -84,7 +85,11 @@ namespace Narvalo.Finance
             get { Sentinel.Warrant.Length(PrefixLength); return _institutionCode; }
         }
 
-        public bool IsConnected => LocationCode[1] != CONNECTED_IDENTIFIER;
+        // Connected to the SWIFTNet FIN network?
+        public bool IsSwiftConnected => !IsSwiftTest &&  LocationCode[1] != SWIFT_NOT_CONNECTED_MARK;
+
+        // SWIFTNet FIN network: Test & Training (T&T) service.
+        public bool IsSwiftTest => LocationCode[1] == SWIFT_TT_MARK;
 
         public bool IsPrimaryOffice => BranchCode.Length == 0 || BranchCode == PrimaryOfficeBranchCode;
 
@@ -134,7 +139,7 @@ namespace Narvalo.Finance
 
         public static Bic ParseExact(string value)
         {
-            Demand.NotNull(value);
+            Expect.NotNull(value);
 
             return ParseExact(value, BicVersion.Default);
         }
