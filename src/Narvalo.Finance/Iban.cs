@@ -223,7 +223,7 @@ namespace Narvalo.Finance
         }
     }
 
-    // Implements the IFormattable interface + variations around ToString().
+    // Implements the IFormattable interface.
     public partial struct Iban
     {
         public override string ToString()

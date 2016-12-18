@@ -9,6 +9,7 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Money<TCurrency>
         : IEquatable<Money<TCurrency>>, IComparable<Money<TCurrency>>, IComparable, IFormattable
         where TCurrency : Currency
@@ -31,6 +32,9 @@ namespace Narvalo.Finance
 
         public decimal Amount { get; }
 
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, s_Currency.Code);
+
         public static explicit operator Money<TCurrency>(Money value)
         {
             if (!(value.Currency == s_Currency))
@@ -43,6 +47,42 @@ namespace Narvalo.Finance
 
         public static explicit operator Money(Money<TCurrency> value)
             => new Money(value.Amount, s_Currency);
+    }
+
+    // Implements the IFormattable interface.
+    public partial struct Money<TCurrency>
+    {
+        /// <inheritdoc cref="Object.ToString" />
+        public override string ToString()
+        {
+            Warrant.NotNull<string>();
+
+            return Format.Current("{0:F2} ({1})", Amount, s_Currency.Code);
+        }
+
+        public string ToString(string format)
+        {
+            Warrant.NotNull<string>();
+
+            return ToString(format, null);
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            Warrant.NotNull<string>();
+
+            if (formatProvider != null)
+            {
+                var fmt = formatProvider.GetFormat(GetType()) as ICustomFormatter;
+                if (fmt != null)
+                {
+                    return fmt.Format(format, this, formatProvider);
+                }
+            }
+
+            // FIXME: wrong.
+            return Amount.ToString(format, formatProvider);
+        }
     }
 
     // Implements the IEquatable interfaces.
@@ -75,16 +115,6 @@ namespace Narvalo.Finance
                 return hash;
             }
         }
-    }
-
-    // Implements the IFormattable interface.
-    public partial struct Money<TCurrency>
-    {
-        /// <inheritdoc cref="Object.ToString" />
-        public override string ToString() => MoneyFormatter.Format(Amount, s_Currency);
-
-        public string ToString(string format, IFormatProvider formatProvider)
-            => MoneyFormatter.Format(Amount, format, formatProvider);
     }
 
     // Implements the IComparable interfaces.
@@ -126,9 +156,9 @@ namespace Narvalo.Finance
         public static Money<TCurrency> operator +(Money<TCurrency> left, Money<TCurrency> right)
             => left.Add(right);
 
-        public Money<TCurrency> Add(Money<TCurrency> money)
+        public Money<TCurrency> Add(Money<TCurrency> other)
         {
-            decimal amount = checked(Amount + money.Amount);
+            decimal amount = checked(Amount + other.Amount);
 
             return new Money<TCurrency>(amount);
         }
@@ -147,7 +177,7 @@ namespace Narvalo.Finance
         public static Money<TCurrency> operator -(Money<TCurrency> left, Money<TCurrency> right)
             => left.Subtract(right);
 
-        public Money<TCurrency> Subtract(Money<TCurrency> money) => new Money<TCurrency>(Amount - money.Amount);
+        public Money<TCurrency> Subtract(Money<TCurrency> other) => new Money<TCurrency>(Amount - other.Amount);
 
         public Money<TCurrency> Subtract(decimal amount) => new Money<TCurrency>(Amount - amount);
     }

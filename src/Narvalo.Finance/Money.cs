@@ -3,48 +3,81 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
 
-    using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
     // FIXME: Use int's to represent the amount and, later on, create a BigMoney struct based
     // on BigRational (BigDecimal?) for arbitrary-precision calculations.
     [StructLayout(LayoutKind.Auto)]
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Money
         : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
     {
         private readonly Currency _currency;
-        private readonly decimal _amount;
 
         public Money(decimal amount, Currency currency)
         {
             Require.NotNull(currency, nameof(currency));
 
-            _amount = amount;
+            Amount = amount;
             _currency = currency;
         }
 
-        public decimal Amount { get { return _amount; } }
+        public decimal Amount { get; }
 
         public Currency Currency
         {
-            get
-            {
-                Warrant.NotNull<Currency>();
-
-                return _currency;
-            }
+            get { Warrant.NotNull<Currency>(); return _currency; }
         }
 
-        // Check that currencies match.
-        private void ThrowIfCurrencyMismatch(Money other)
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, Currency.Code);
+
+        // Check that the currencies match.
+        private void ThrowIfCurrencyMismatch(Money other, string parameterName)
         {
             if (Currency != other.Currency)
             {
-                // FIXME: Throw the correct exception.
-                throw new ArithmeticException();
+                throw new ArgumentException("XXX", parameterName);
             }
+        }
+    }
+
+    // Implements the IFormattable interface.
+    public partial struct Money
+    {
+        /// <inheritdoc cref="Object.ToString" />
+        public override string ToString()
+        {
+            Warrant.NotNull<string>();
+
+            return Format.Current("{0:F2} ({1})", Amount, Currency.Code);
+        }
+
+        public string ToString(string format)
+        {
+            Warrant.NotNull<string>();
+
+            return ToString(format, null);
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            Warrant.NotNull<string>();
+
+            if (formatProvider != null)
+            {
+                var fmt = formatProvider.GetFormat(GetType()) as ICustomFormatter;
+                if (fmt != null)
+                {
+                    return fmt.Format(format, this, formatProvider);
+                }
+            }
+
+            // FIXME: wrong.
+            return Amount.ToString(format, formatProvider);
         }
     }
 
@@ -79,16 +112,6 @@ namespace Narvalo.Finance
         }
     }
 
-    // Implements the IFormattable interface.
-    public partial struct Money
-    {
-        /// <inheritdoc cref="Object.ToString" />
-        public override string ToString() => MoneyFormatter.Format(Amount, Currency);
-
-        public string ToString(string format, IFormatProvider formatProvider)
-            => MoneyFormatter.Format(Amount, format, formatProvider);
-    }
-
     // Implements the IComparable and IComparable<Money> interfaces.
     public partial struct Money
     {
@@ -102,7 +125,7 @@ namespace Narvalo.Finance
 
         public int CompareTo(Money other)
         {
-            ThrowIfCurrencyMismatch(other);
+            ThrowIfCurrencyMismatch(other, nameof(other));
 
             return Amount.CompareTo(other.Amount);
         }
@@ -128,11 +151,11 @@ namespace Narvalo.Finance
     {
         public static Money operator +(Money left, Money right) => left.Add(right);
 
-        public Money Add(Money money)
+        public Money Add(Money other)
         {
-            ThrowIfCurrencyMismatch(money);
+            ThrowIfCurrencyMismatch(other, nameof(other));
 
-            decimal amount = checked(Amount + money.Amount);
+            decimal amount = checked(Amount + other.Amount);
 
             return new Money(amount, Currency);
         }
@@ -150,11 +173,11 @@ namespace Narvalo.Finance
     {
         public static Money operator -(Money left, Money right) => left.Subtract(right);
 
-        public Money Subtract(Money money)
+        public Money Subtract(Money other)
         {
-            ThrowIfCurrencyMismatch(money);
+            ThrowIfCurrencyMismatch(other, nameof(other));
 
-            return new Money(Amount - money.Amount, Currency);
+            return new Money(Amount - other.Amount, Currency);
         }
 
         public Money Subtract(decimal amount) => new Money(Amount - amount, Currency);
