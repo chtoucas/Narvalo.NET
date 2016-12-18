@@ -6,6 +6,7 @@ namespace Narvalo.Finance
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
+    using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
@@ -57,14 +58,21 @@ namespace Narvalo.Finance
         {
             Warrant.NotNull<string>();
 
-            return Format.Current("{0:F2} ({1})", Amount, s_Currency.Code);
+            return MoneyFormatter.Format(Amount, s_Currency, null, MoneyFormatInfo.GetCurrentInfo(s_Currency));
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
 
-            return ToString(format, null);
+            return MoneyFormatter.Format(Amount, s_Currency, format, MoneyFormatInfo.GetCurrentInfo(s_Currency));
+        }
+
+        public string ToString(IFormatProvider formatProvider)
+        {
+            Warrant.NotNull<string>();
+
+            return MoneyFormatter.Format(Amount, s_Currency, null, MoneyFormatInfo.GetInstance(formatProvider, s_Currency));
         }
 
         public string ToString(string format, IFormatProvider formatProvider)
@@ -80,8 +88,7 @@ namespace Narvalo.Finance
                 }
             }
 
-            // FIXME: wrong.
-            return Amount.ToString(format, formatProvider);
+            return MoneyFormatter.Format(Amount, s_Currency, format, MoneyFormatInfo.GetInstance(formatProvider, s_Currency));
         }
     }
 

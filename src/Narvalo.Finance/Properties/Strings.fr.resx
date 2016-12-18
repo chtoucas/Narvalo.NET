@@ -141,6 +141,12 @@
   <data name="Money_ArgIsNotMoney" xml:space="preserve">
     <value>L'argument doit être de type Money.</value>
   </data>
+  <data name="Money_CurrencyMismatch" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Money_InvalidFormatSpecification" xml:space="preserve">
+    <value />
+  </data>
   <data name="Sentinel_OutOfRangeCurrencyAlphabeticCode" xml:space="preserve">
     <value>Le code alphabétique d'une devise doit comporter 3 caractères exactement.</value>
   </data>

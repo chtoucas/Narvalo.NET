@@ -197,11 +197,13 @@ namespace Narvalo.Finance
                 && IsDigitOrUpperLetter(LocationCode)
                 && (BranchCode.Length == 0 || IsDigitOrUpperLetter(BranchCode));
 
+        /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
             Warrant.NotNull<string>();
 
             return _value;
+        /// <inheritdoc cref="Object.ToString" />
         }
 
         // NB: We only perform basic validation on the input string.

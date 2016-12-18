@@ -6,14 +6,14 @@ namespace Narvalo.Finance
     using System.Diagnostics;
     using System.Runtime.InteropServices;
 
+    using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
 
     // FIXME: Use int's to represent the amount and, later on, create a BigMoney struct based
     // on BigRational (BigDecimal?) for arbitrary-precision calculations.
     [StructLayout(LayoutKind.Auto)]
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public partial struct Money
-        : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
+    public partial struct Money : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
     {
         private readonly Currency _currency;
 
@@ -37,12 +37,7 @@ namespace Narvalo.Finance
 
         // Check that the currencies match.
         private void ThrowIfCurrencyMismatch(Money other, string parameterName)
-        {
-            if (Currency != other.Currency)
-            {
-                throw new ArgumentException("XXX", parameterName);
-            }
-        }
+            => Enforce.True(Currency != other.Currency, parameterName, Strings.Money_CurrencyMismatch);
     }
 
     // Implements the IFormattable interface.
@@ -53,14 +48,21 @@ namespace Narvalo.Finance
         {
             Warrant.NotNull<string>();
 
-            return Format.Current("{0:F2} ({1})", Amount, Currency.Code);
+            return MoneyFormatter.Format(this, null, MoneyFormatInfo.GetCurrentInfo(Currency));
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
 
-            return ToString(format, null);
+            return MoneyFormatter.Format(this, format, MoneyFormatInfo.GetCurrentInfo(Currency));
+        }
+
+        public string ToString(IFormatProvider formatProvider)
+        {
+            Warrant.NotNull<string>();
+
+            return MoneyFormatter.Format(this, null, MoneyFormatInfo.GetInstance(formatProvider, Currency));
         }
 
         public string ToString(string format, IFormatProvider formatProvider)
@@ -76,8 +78,7 @@ namespace Narvalo.Finance
                 }
             }
 
-            // FIXME: wrong.
-            return Amount.ToString(format, formatProvider);
+            return MoneyFormatter.Format(this, format, MoneyFormatInfo.GetInstance(formatProvider, Currency));
         }
     }
 

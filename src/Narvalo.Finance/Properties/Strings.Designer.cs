@@ -134,6 +134,24 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Money_CurrencyMismatch {
+            get {
+                return ResourceManager.GetString("Money_CurrencyMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Money_InvalidFormatSpecification {
+            get {
+                return ResourceManager.GetString("Money_InvalidFormatSpecification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The alphabetic code MUST be composed of exactly 3 characters..
         /// </summary>
         internal static string Sentinel_OutOfRangeCurrencyAlphabeticCode {

@@ -141,6 +141,12 @@
   <data name="Money_ArgIsNotMoney" xml:space="preserve">
     <value>The specified argument MUST be of Money type.</value>
   </data>
+  <data name="Money_CurrencyMismatch" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Money_InvalidFormatSpecification" xml:space="preserve">
+    <value />
+  </data>
   <data name="Sentinel_OutOfRangeCurrencyAlphabeticCode" xml:space="preserve">
     <value>The alphabetic code MUST be composed of exactly 3 characters.</value>
   </data>

@@ -75,8 +75,9 @@
     <Compile Include="Bic.cs" />
     <Compile Include="BicFormatVersion.cs" />
     <Compile Include="CurrencySymbol.cs" />
+    <Compile Include="Globalization\MoneyFormatInfo.cs" />
     <Compile Include="IbanStyles.cs" />
-    <Compile Include="MoneyFormatter.cs" />
+    <Compile Include="Globalization\MoneyFormatter.cs" />
     <Compile Include="Snv\PubDateEventArgs.cs" />
     <Compile Include="Snv\SnvCurrencyData.cs" />
     <Compile Include="Snv\CurrentSnvCurrencyDataCollection.cs" />
