@@ -2,7 +2,7 @@
 
 namespace Narvalo.Finance
 {
-    public enum BicVersion
+    public enum BicFormatVersion
     {
         ISO,
 

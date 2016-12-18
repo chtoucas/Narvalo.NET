@@ -68,13 +68,13 @@ Breaking Changes
 - `Range<T>.Includes(T)` has been replaced by `Range<T>.Contains(T)`
 
 ### Narvalo.Finance
-- `Bic.CheckFormat()` has been replaced by `Bic.Validate()`.
-- `Bic.CheckSwiftFormat()` has been replaced by `Bic.Validate()`.
+- `Bic.CheckSwiftFormat()` has been merged with `Bic.CheckFormat()`.
 - `Iban.CheckDigit` becomes `Iban.CheckDigits`.
 - `Currency.Of()` now returns a different object at each call.
 - Removed `CurrencyFactory`, `CurrencyProvider` and `DefaultCurrencyFactory`.
 - For built-in currencies, renamed the singleton method, e.g 'EUR.Currency'
   becomes `EUR.UniqInstance`.
+- `Bic.IsConnected` becomes `Bic.IsSwiftConnected`.
 
 ### Narvalo.Web
 - `AssetSection.DefaultProvider` setter now throws an `ArgumentException`
@@ -133,6 +133,9 @@ New classes and new methods:
 - `Currency.OfCulture()`
 - `Currency.OfCurrentCulture()`
 - `Currency.RegisterCurrency()`
+- `Bic.IsSwiftTest`
+- `Bic` and `Iban` exact parsing methods.
+- `Iban` implemens `IFormattable`.
 - `BicFormat`
 - `BicStyles`
 - `IbanFormat`

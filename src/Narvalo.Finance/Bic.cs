@@ -95,6 +95,7 @@ namespace Narvalo.Finance
 
         public bool Validated { get; }
 
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         private string DebuggerDisplay => _value;
 
         /// <summary>
@@ -141,10 +142,10 @@ namespace Narvalo.Finance
         {
             Expect.NotNull(value);
 
-            return ParseExact(value, BicVersion.Default);
+            return ParseExact(value, BicFormatVersion.Default);
         }
 
-        public static Bic ParseExact(string value, BicVersion version)
+        public static Bic ParseExact(string value, BicFormatVersion version)
         {
             Require.NotNull(value, nameof(value));
 
@@ -155,7 +156,7 @@ namespace Narvalo.Finance
             Check.True(CheckValue(value));
 
             var bic = ParseCore(value, true);
-            if (!bic.Validate(version))
+            if (!bic.CheckFormat(version))
             {
                 throw new FormatException(Strings.Bic_InvalidFormat);
             }
@@ -171,31 +172,31 @@ namespace Narvalo.Finance
             return ParseCore(value, false);
         }
 
-        public static Bic? TryParseExact(string value) => TryParseExact(value, BicVersion.Default);
+        public static Bic? TryParseExact(string value) => TryParseExact(value, BicFormatVersion.Default);
 
-        public static Bic? TryParseExact(string value, BicVersion version)
+        public static Bic? TryParseExact(string value, BicFormatVersion version)
         {
             if (!CheckValue(value)) { return null; }
             Check.True(CheckValue(value));
 
             var bic = ParseCore(value, true);
-            if (!bic.Validate(version)) { return null; }
+            if (!bic.CheckFormat(version)) { return null; }
 
             return bic;
         }
 
-        public static Bic? Validate(Bic bic, BicVersion version)
+        public static Bic? CheckFormat(Bic bic, BicFormatVersion version)
         {
             if (bic.Validated) { return bic; }
-            if (!bic.Validate(version)) { return null; }
+            if (!bic.CheckFormat(version)) { return null; }
 
             return new Bic(bic.InstitutionCode, bic.CountryCode, bic.LocationCode, bic.BranchCode, bic._value, true);
         }
 
         // The SWIFT implementation is more restrictive than ISO as it only expects letters.
-        public bool Validate(BicVersion version)
+        public bool CheckFormat(BicFormatVersion version)
             // NB: We do not need to check properties length.
-            => (version == BicVersion.ISO ? IsDigitOrUpperLetter(InstitutionCode) : IsUpperLetter(InstitutionCode))
+            => (version == BicFormatVersion.ISO ? IsDigitOrUpperLetter(InstitutionCode) : IsUpperLetter(InstitutionCode))
                 && IsUpperLetter(CountryCode)
                 && IsDigitOrUpperLetter(LocationCode)
                 && (BranchCode.Length == 0 || IsDigitOrUpperLetter(BranchCode));

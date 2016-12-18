@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bic.cs" />
-    <Compile Include="BicVersion.cs" />
+    <Compile Include="BicFormatVersion.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="Snv\PubDateEventArgs.cs" />
     <Compile Include="Snv\SnvCurrencyData.cs" />

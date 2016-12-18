@@ -29,6 +29,44 @@ namespace Narvalo.Finance
 
         #endregion
 
+        #region TryParseExact()
+
+        [Theory]
+        [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParseExact_Succeeds_ForValidISOValues(string value)
+            => Assert.True(Bic.TryParseExact(value, BicFormatVersion.ISO).HasValue);
+
+        [Theory]
+        [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParseExact_Succeeds_ForValidSwiftValues(string value)
+            => Assert.True(Bic.TryParseExact(value, BicFormatVersion.Swift).HasValue);
+
+        [Theory]
+        [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParseExact_ReturnsNull_ForInvalidISOValues(string value)
+            => Assert.False(Bic.TryParseExact(value, BicFormatVersion.ISO).HasValue);
+
+        [Theory]
+        [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParseExact_ReturnsNull_ForInvalidSwiftValues(string value)
+            => Assert.False(Bic.TryParseExact(value, BicFormatVersion.Swift).HasValue);
+
+        [Fact]
+        public static void TryParseExact_ReturnsNull_ForNull()
+            => Assert.False(Bic.TryParseExact(null).HasValue);
+
+        [Theory]
+        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParseExact_ReturnsNull_ForInvalidFormat(string value)
+            => Assert.False(Bic.TryParseExact(value).HasValue);
+
+        #endregion
+
         #region Parse()
 
         [Theory]
@@ -46,6 +84,44 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Parse_ThrowsFormatException_ForInvalidFormat(string value)
             => Assert.Throws<FormatException>(() => Bic.Parse(value));
+
+        #endregion
+
+        #region ParseExact()
+
+        [Theory]
+        [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ParseExact_Succeeds_ForValidISOValues(string value)
+            => Bic.ParseExact(value, BicFormatVersion.ISO);
+
+        [Theory]
+        [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ParseExact_Succeeds_ForValidSwiftValues(string value)
+            => Bic.ParseExact(value, BicFormatVersion.Swift);
+
+        [Theory]
+        [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ParseExact_ThrowsFormatException_ForInvalidISOValues(string value)
+            => Assert.Throws<FormatException>(() => Bic.ParseExact(value, BicFormatVersion.ISO));
+
+        [Theory]
+        [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ParseExact_ThrowsFormatException_ForInvalidSwiftValues(string value)
+            => Assert.Throws<FormatException>(() => Bic.ParseExact(value, BicFormatVersion.Swift));
+
+        [Fact]
+        public static void ParseExact_ThrowsArgumentNullException_ForNull()
+            => Assert.Throws<ArgumentNullException>(() => Bic.ParseExact(null));
+
+        [Theory]
+        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ParseExact_ThrowsFormatException_ForInvalidFormat(string value)
+            => Assert.Throws<FormatException>(() => Bic.ParseExact(value));
 
         #endregion
 
@@ -194,46 +270,46 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region Validate()
+        #region CheckFormat()
 
         [Theory]
         [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ValidateIsoFormat_ReturnsTrue_ForValidInput(string value)
+        public static void CheckIsoFormat_ReturnsTrue_ForValidInput(string value)
         {
             var bic = Bic.Parse(value);
 
-            Assert.True(bic.Validate(BicVersion.ISO));
+            Assert.True(bic.CheckFormat(BicFormatVersion.ISO));
         }
 
         [Theory]
         [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ValidateIsoFormat_ReturnsFalse_ForInvalidFormat(string value)
+        public static void CheckIsoFormat_ReturnsFalse_ForInvalidFormat(string value)
         {
             var bic = Bic.Parse(value);
 
-            Assert.False(bic.Validate(BicVersion.ISO));
+            Assert.False(bic.CheckFormat(BicFormatVersion.ISO));
         }
 
         [Theory]
         [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ValidateSwiftFormat_ReturnsTrue_ForValidInput(string value)
+        public static void CheckSwiftFormat_ReturnsTrue_ForValidInput(string value)
         {
             var bic = Bic.Parse(value);
 
-            Assert.True(bic.Validate(BicVersion.Swift));
+            Assert.True(bic.CheckFormat(BicFormatVersion.Swift));
         }
 
         [Theory]
         [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ValidateSwiftFormat_ReturnsFalse_ForInvalidInput(string value)
+        public static void CheckSwiftFormat_ReturnsFalse_ForInvalidInput(string value)
         {
             var bic = Bic.Parse(value);
 
-            Assert.False(bic.Validate(BicVersion.Swift));
+            Assert.False(bic.CheckFormat(BicFormatVersion.Swift));
         }
 
         #endregion
