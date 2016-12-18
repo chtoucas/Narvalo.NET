@@ -12,7 +12,7 @@ namespace Narvalo.Fx
     /// <seealso cref="Either{T1, T2}"/>
     /// <seealso cref="Switch{T1, T2}"/>
     /// <seealso cref="VoidOrError"/>
-    [DebuggerDisplay(@"""Void""")]
+    [DebuggerDisplay("Void")]
     public partial class VoidOrBreak
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -62,7 +62,7 @@ namespace Narvalo.Fx
             return "Void";
         }
 
-        [DebuggerDisplay(@"""Break""")]
+        [DebuggerDisplay("Break")]
         [DebuggerTypeProxy(typeof(Break_.DebugView))]
         private sealed partial class Break_ : VoidOrBreak
         {

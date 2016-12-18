@@ -3,6 +3,7 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Internal;
@@ -18,6 +19,7 @@ namespace Narvalo.Finance
     /// It was previously understood to be an acronym for Bank Identifier Code.
     /// The standard format for a BIC is defined in ISO 9362:2014.
     /// </remarks>
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Bic : IEquatable<Bic>
     {
         public const string PrimaryOfficeBranchCode = "XXX";
@@ -87,6 +89,8 @@ namespace Narvalo.Finance
         public bool IsPrimaryOffice => BranchCode.Length == 0 || BranchCode == PrimaryOfficeBranchCode;
 
         public bool Validated { get; }
+
+        private string DebuggerDisplay => _value;
 
         /// <summary>
         /// Gets the location code.

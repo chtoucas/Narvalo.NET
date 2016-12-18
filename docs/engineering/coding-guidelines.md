@@ -211,7 +211,9 @@ Useful attributes
   in the call stack. This attribute can be set on a class.
 - `DebuggerNonUserCode`
 - `DebuggerBrowsable`
-- `DebuggerDisplay`
+- `DebuggerDisplay`, a good practice is to define a private property just for
+  this attribute, `[DebuggerDisplay("{DebuggerDisplay,nq}")]` (`nq` stands
+  for "no quotes").
 - `DebuggerTypeProxy`
 
 See http://geekswithblogs.net/terje/archive/2008/11/10/hiding-generated-code-from-code-analysis-metrics-and-test-coverage.aspx
