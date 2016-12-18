@@ -65,7 +65,8 @@ namespace Narvalo.Finance
 
         public bool Validated { get; }
 
-        private string DebuggerDisplay => ToString("S");
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        private string DebuggerDisplay => ToString("G");
 
         public static Iban Create(string countryCode, string checkDigits, string bban)
         {
@@ -254,17 +255,15 @@ namespace Narvalo.Finance
 
             switch (format)
             {
-                case "S":
-                case "s":
+                case "G":
+                case "g":
                     // Insert a space every 4 chars.
                     return Format(_value, ' ');
                 case "-":
                     // Insert a dash every 4 chars.
                     return Format(_value, '-');
-                // If none, use the default .NET format ("G"); gives the same result as ToString().
-                case "G":
-                case "g":
                 default:
+                    // Gives the same result as ToString().
                     return _value;
             }
         }

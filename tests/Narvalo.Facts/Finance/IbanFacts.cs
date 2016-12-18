@@ -35,6 +35,12 @@ namespace Narvalo.Finance
         public static void TryParseExact_ReturnsNull_ForNull()
             => Assert.False(Iban.TryParseExact(null).HasValue);
 
+        [Theory]
+        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParseExact_ReturnsNull_ForInvalidFormat(string value)
+            => Assert.False(Iban.TryParseExact(value).HasValue);
+
         #endregion
 
         #region Parse()
@@ -62,6 +68,12 @@ namespace Narvalo.Finance
         [Fact]
         public static void ParseExact_ThrowsArgumentNullException_ForNull()
             => Assert.Throws<ArgumentNullException>(() => Iban.ParseExact(null));
+
+        [Theory]
+        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ParseExact_ThrowsFormatException_ForInvalidFormat(string value)
+            => Assert.Throws<FormatException>(() => Iban.ParseExact(value));
 
         #endregion
 
@@ -359,12 +371,22 @@ namespace Narvalo.Finance
         }
 
         [Theory]
+        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsValue_ForNullFormat(string value)
+        {
+            var result = Iban.Parse(value).ToString(null);
+
+            Assert.Equal(value, result);
+        }
+
+        [Theory]
         [MemberData(nameof(FormatWhiteSpaceSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsFormattedValue_ForWhiteSpaceFormat(string value, string formattedValue)
+        public static void ToString_ReturnsFormattedValue_ForGeneralFormat(string value, string formattedValue)
         {
-            var result1 = Iban.Parse(value).ToString("S");
-            var result2 = Iban.Parse(value).ToString("s");
+            var result1 = Iban.Parse(value).ToString("G");
+            var result2 = Iban.Parse(value).ToString("g");
 
             Assert.Equal(formattedValue, result1);
             Assert.Equal(formattedValue, result2);
@@ -379,28 +401,6 @@ namespace Narvalo.Finance
             var expected = formattedValue.Replace(' ', '-');
 
             Assert.Equal(expected, result);
-        }
-
-        [Theory]
-        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ToString_ReturnsValue_ForGeneralFormat(string value)
-        {
-            var result1 = Iban.Parse(value).ToString("G");
-            var result2 = Iban.Parse(value).ToString("g");
-
-            Assert.Equal(value, result1);
-            Assert.Equal(value, result2);
-        }
-
-        [Theory]
-        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ToString_ReturnsValue_ForDefaultFormat(string value)
-        {
-            var result = Iban.Parse(value).ToString(null);
-
-            Assert.Equal(value, result);
         }
 
         #endregion
