@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Bic.cs" />
     <Compile Include="BicFormatVersion.cs" />
+    <Compile Include="CurrencySymbol.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="MoneyFormatter.cs" />
     <Compile Include="Snv\PubDateEventArgs.cs" />
