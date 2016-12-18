@@ -116,6 +116,15 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Format string can be only null, an empty string, &quot;G&quot;, &quot;g&quot;, &quot;D&quot;, &quot;d&quot;, &quot;N&quot;, &quot;n&quot;..
+        /// </summary>
+        internal static string Iban_InvalidFormatSpecification {
+            get {
+                return ResourceManager.GetString("Iban_InvalidFormatSpecification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified argument MUST be of Money type..
         /// </summary>
         internal static string Money_ArgIsNotMoney {

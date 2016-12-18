@@ -361,29 +361,48 @@ namespace Narvalo.Finance
         #region ToString()
 
         [Theory]
-        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [InlineData(" ")]
+        [InlineData("X")]
+        [InlineData("XX")]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsValue(string value)
+        public static void ToString_ThrowsFormatException_ForInvalidFormat(string value)
+            => Assert.Throws<FormatException>(
+                () => Iban.Parse("AL47212110090000000235698741").ToString(value));
+
+        [Theory]
+        [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsFormattedValue(string value, string formattedValue)
         {
             var result = Iban.Parse(value).ToString();
 
-            Assert.Equal(value, result);
+            Assert.Equal(formattedValue, result);
         }
 
         [Theory]
-        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsValue_ForNullFormat(string value)
+        public static void ToString_ReturnsValue_ForNullFormat(string value, string formattedValue)
         {
             var result = Iban.Parse(value).ToString(null);
 
-            Assert.Equal(value, result);
+            Assert.Equal(formattedValue, result);
         }
 
         [Theory]
-        [MemberData(nameof(FormatWhiteSpaceSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsFormattedValue_ForGeneralFormat(string value, string formattedValue)
+        public static void ToString_ReturnsValue_ForEmptyFormat(string value, string formattedValue)
+        {
+            var result = Iban.Parse(value).ToString(String.Empty);
+
+            Assert.Equal(formattedValue, result);
+        }
+
+        [Theory]
+        [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsFormattedValue_ForFormatG(string value, string formattedValue)
         {
             var result1 = Iban.Parse(value).ToString("G");
             var result2 = Iban.Parse(value).ToString("g");
@@ -393,14 +412,16 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(FormatWhiteSpaceSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsFormattedValue_ForDashFormat(string value, string formattedValue)
+        public static void ToString_ReturnsFormattedValue_ForFormatD(string value, string formattedValue)
         {
-            var result = Iban.Parse(value).ToString("-");
+            var result1 = Iban.Parse(value).ToString("D");
+            var result2 = Iban.Parse(value).ToString("d");
             var expected = formattedValue.Replace(' ', '-');
 
-            Assert.Equal(expected, result);
+            Assert.Equal(expected, result1);
+            Assert.Equal(expected, result2);
         }
 
         #endregion
@@ -646,7 +667,7 @@ namespace Narvalo.Finance
             }
         }
 
-        public static IEnumerable<object[]> FormatWhiteSpaceSamples
+        public static IEnumerable<object[]> FormatGSamples
         {
             get
             {

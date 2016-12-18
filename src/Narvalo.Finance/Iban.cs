@@ -20,6 +20,8 @@ namespace Narvalo.Finance
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Iban : IEquatable<Iban>, IFormattable
     {
+        private const string DefaultFormat = "G";
+
         private readonly string _bban;
         private readonly string _checkDigits;
         private readonly string _countryCode;
@@ -66,7 +68,11 @@ namespace Narvalo.Finance
         public bool Validated { get; }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
-        private string DebuggerDisplay => ToString("G");
+        // We only display the beginning of the IBAN value.
+        private string DebuggerDisplay
+            => _value.Length == MinLength
+            ? _value
+            : _value.Substring(0, MinLength) + "...";
 
         public static Iban Create(string countryCode, string checkDigits, string bban)
         {
@@ -230,7 +236,7 @@ namespace Narvalo.Finance
         {
             Warrant.NotNull<string>();
 
-            return _value;
+            return ToString(DefaultFormat, null);
         }
 
         public string ToString(string format)
@@ -253,18 +259,29 @@ namespace Narvalo.Finance
                 }
             }
 
+            if (format == null || format.Length == 0)
+            {
+                format = DefaultFormat;
+            }
+
             switch (format)
             {
                 case "G":
                 case "g":
+                    // Default format.
                     // Insert a space every 4 chars.
                     return Format(_value, ' ');
-                case "-":
-                    // Insert a dash every 4 chars.
+                case "D":
+                case "d":
+                    // Insert an hyphen every 4 chars.
                     return Format(_value, '-');
-                default:
-                    // Gives the same result as ToString().
+                case "N":
+                case "n":
+                    // "Neutral" format.
                     return _value;
+                default:
+                    throw new FormatException(
+                        Narvalo.Format.Current(Strings.Iban_InvalidFormatSpecification));
             }
         }
 

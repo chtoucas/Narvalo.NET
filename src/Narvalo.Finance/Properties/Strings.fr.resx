@@ -135,6 +135,9 @@
   <data name="Iban_InvalidFormat" xml:space="preserve">
     <value>Un code IBAN string MUST doit comporter de 14 à 34 caractères.</value>
   </data>
+  <data name="Iban_InvalidFormatSpecification" xml:space="preserve">
+    <value />
+  </data>
   <data name="Money_ArgIsNotMoney" xml:space="preserve">
     <value>L'argument doit être de type Money.</value>
   </data>
