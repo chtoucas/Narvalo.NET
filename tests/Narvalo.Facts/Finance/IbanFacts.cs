@@ -361,15 +361,6 @@ namespace Narvalo.Finance
         #region ToString()
 
         [Theory]
-        [InlineData(" ")]
-        [InlineData("X")]
-        [InlineData("XX")]
-        [CLSCompliant(false)]
-        public static void ToString_ThrowsFormatException_ForInvalidFormat(string value)
-            => Assert.Throws<FormatException>(
-                () => Iban.Parse("AL47212110090000000235698741").ToString(value));
-
-        [Theory]
         [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void ToString_ReturnsFormattedValue(string value, string formattedValue)
@@ -378,6 +369,15 @@ namespace Narvalo.Finance
 
             Assert.Equal(formattedValue, result);
         }
+
+        [Theory]
+        [InlineData(" ")]
+        [InlineData("X")]
+        [InlineData("XX")]
+        [CLSCompliant(false)]
+        public static void ToString_ThrowsFormatException_ForInvalidFormat(string value)
+            => Assert.Throws<FormatException>(
+                () => Iban.Parse("AL47212110090000000235698741").ToString(value));
 
         [Theory]
         [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]

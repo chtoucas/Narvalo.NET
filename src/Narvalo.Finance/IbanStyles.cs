@@ -9,11 +9,16 @@ namespace Narvalo.Finance
     {
         None = 0,
 
-        AllowWhiteSpaces = 1 << 0,
+        AllowLeadingWhite = 1 << 0,
 
-        AllowDashes = 1 << 1,
+        AllowTrailingWhite = 1 << 1,
 
-        Any = AllowWhiteSpaces | AllowDashes,
+        AllowInnerWhite = 1 << 2,
+
+        AllowHyphens = 1 << 3,
+
+        AllowWhiteSpaces = AllowLeadingWhite | AllowTrailingWhite | AllowInnerWhite,
+        Any = AllowWhiteSpaces | AllowHyphens,
     }
 
     public static class IbanStylesExtensions

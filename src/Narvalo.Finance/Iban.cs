@@ -101,7 +101,7 @@ namespace Narvalo.Finance
         {
             Require.NotNull(value, nameof(value));
 
-            var val = StripDisplayChars(value, styles);
+            var val = StripIgnorableSymbols(value, styles);
             if (!CheckValue(val))
             {
                 throw new FormatException(Strings.Iban_InvalidFormat);
@@ -122,7 +122,7 @@ namespace Narvalo.Finance
         {
             Require.NotNull(value, nameof(value));
 
-            var val = StripDisplayChars(value, styles);
+            var val = StripIgnorableSymbols(value, styles);
             if (!CheckValue(val))
             {
                 throw new FormatException(Strings.Iban_InvalidFormat);
@@ -144,7 +144,7 @@ namespace Narvalo.Finance
         {
             if (value == null) { return null; }
 
-            var val = StripDisplayChars(value, styles);
+            var val = StripIgnorableSymbols(value, styles);
             if (!CheckValue(val)) { return null; }
             Check.True(CheckValue(val));
 
@@ -157,7 +157,7 @@ namespace Narvalo.Finance
         {
             if (value == null) { return null; }
 
-            var val = StripDisplayChars(value, styles);
+            var val = StripIgnorableSymbols(value, styles);
             if (!CheckValue(val)) { return null; }
             Check.True(CheckValue(val));
 
@@ -200,26 +200,35 @@ namespace Narvalo.Finance
             return new Iban(countryCode, checkDigits, bban, value, validated);
         }
 
-        private static string StripDisplayChars(string value, IbanStyles styles)
+        private static string StripIgnorableSymbols(string text, IbanStyles styles)
         {
-            Demand.NotNull(value);
+            Demand.NotNull(text);
             Warrant.NotNull<string>();
 
-            if (styles.Contains(IbanStyles.None)) { return value; }
+            if (styles.Contains(IbanStyles.None)) { return text; }
 
-            var input = value.ToCharArray();
+            var input = text.ToCharArray();
             var output = new char[input.Length];
 
-            var rmspace = styles.Contains(IbanStyles.AllowWhiteSpaces);
-            var rmdash = styles.Contains(IbanStyles.AllowDashes);
+            var rmLeadingWhite = styles.Contains(IbanStyles.AllowLeadingWhite);
+            var rmInnerWhite = styles.Contains(IbanStyles.AllowInnerWhite);
+            var rmTrailingWhite = styles.Contains(IbanStyles.AllowTrailingWhite);
+            var rmWhites = rmLeadingWhite || rmInnerWhite || rmTrailingWhite;
+            var rmHyphens = styles.Contains(IbanStyles.AllowHyphens);
 
+            var inlen = input.Length;
             var k = 0;
-            for (var i = 0; i < input.Length; i++)
+            for (var i = 0; i < inlen; i++)
             {
                 var ch = input[i];
 
-                if (rmspace && ch == ' ') { continue; }
-                if (rmdash && ch == '-') { continue; }
+                if (rmWhites && ch == ' ')
+                {
+                    if (rmInnerWhite && i > 0 && i < inlen) { continue; }
+                    if (rmLeadingWhite && i == 0) { continue; }
+                    if (rmTrailingWhite && i == inlen) { continue; }
+                }
+                if (rmHyphens && ch == '-') { continue; }
 
                 output[k] = ch;
                 k++;
@@ -232,6 +241,7 @@ namespace Narvalo.Finance
     // Implements the IFormattable interface.
     public partial struct Iban
     {
+        /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
             Warrant.NotNull<string>();
@@ -263,21 +273,25 @@ namespace Narvalo.Finance
             {
                 format = DefaultFormat;
             }
+            else if (format.Length != 1)
+            {
+                throw new FormatException(
+                    Narvalo.Format.Current(Strings.Iban_InvalidFormatSpecification));
+            }
 
             switch (format)
             {
                 case "G":
                 case "g":
-                    // Default format.
-                    // Insert a space every 4 chars.
+                    // General (default): insert a space every 4 chars.
                     return Format(_value, ' ');
                 case "D":
                 case "d":
-                    // Insert an hyphen every 4 chars.
+                    // Display: insert an hyphen every 4 chars.
                     return Format(_value, '-');
                 case "N":
                 case "n":
-                    // "Neutral" format.
+                    // Neutral.
                     return _value;
                 default:
                     throw new FormatException(
