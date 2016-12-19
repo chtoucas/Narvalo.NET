@@ -104,10 +104,10 @@ namespace Narvalo.Finance
             string locationCode,
             string branchCode)
         {
-            Demand.True(CheckInstitutionCode(institutionCode));
-            Demand.True(CheckCountryCode(countryCode));
-            Demand.True(CheckLocationCode(locationCode));
-            Demand.True(CheckBranchCode(branchCode));
+            Expect.True(CheckInstitutionCode(institutionCode));
+            Expect.True(CheckCountryCode(countryCode));
+            Expect.True(CheckLocationCode(locationCode));
+            Expect.True(CheckBranchCode(branchCode));
 
             return Create(institutionCode, countryCode, locationCode, branchCode, BicFormatVersion.Default);
         }
@@ -133,8 +133,7 @@ namespace Narvalo.Finance
             Contract.Assume(CheckValue(value));
 
             var bic = new Bic(institutionCode, countryCode, locationCode, branchCode, value);
-
-            if (!bic.Validate(version))
+            if (!bic.CheckFormat(version))
             {
                 throw new FormatException(Strings.Bic_InvalidFormat);
             }
@@ -160,7 +159,7 @@ namespace Narvalo.Finance
             Check.True(CheckValue(value));
 
             var bic = ParseCore(value);
-            if (!bic.Validate(version))
+            if (!bic.CheckFormat(version))
             {
                 throw new FormatException(Strings.Bic_InvalidFormat);
             }
@@ -176,7 +175,7 @@ namespace Narvalo.Finance
             Check.True(CheckValue(value));
 
             var bic = ParseCore(value);
-            if (!bic.Validate(version)) { return null; }
+            if (!bic.CheckFormat(version)) { return null; }
 
             return bic;
         }
@@ -190,7 +189,7 @@ namespace Narvalo.Finance
         }
 
         // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
-        internal bool Validate(BicFormatVersion version)
+        internal bool CheckFormat(BicFormatVersion version)
             // NB: We do not need to check properties length.
             => (version == BicFormatVersion.ISO ? IsDigitOrUpperLetter(InstitutionCode) : IsUpperLetter(InstitutionCode))
                 && IsUpperLetter(CountryCode)

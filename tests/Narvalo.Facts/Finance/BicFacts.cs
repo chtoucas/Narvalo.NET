@@ -28,7 +28,7 @@ namespace Narvalo.Finance
             => Assert.False(Bic.TryParse(null).HasValue);
 
         [Theory]
-        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(BicFormatFacts.InvalidValues), MemberType = typeof(BicFormatFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_ReturnsNull_ForInvalidLength(string value)
             => Assert.False(Bic.TryParse(value).HasValue);
@@ -66,7 +66,7 @@ namespace Narvalo.Finance
             => Assert.Throws<ArgumentNullException>(() => Bic.Parse(null));
 
         [Theory]
-        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(BicFormatFacts.InvalidValues), MemberType = typeof(BicFormatFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Parse_ThrowsFormatException_ForInvalidLength(string value)
             => Assert.Throws<FormatException>(() => Bic.Parse(value));
@@ -390,46 +390,46 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region Validate()
+        #region CheckFormat()
 
         [Theory]
         [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Validate_ReturnsTrue_ForValidISOInput(string value)
+        public static void CheckFormat_ReturnsTrue_ForValidISOInput(string value)
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.True(bic.Validate(BicFormatVersion.ISO));
+            Assert.True(bic.CheckFormat(BicFormatVersion.ISO));
         }
 
         [Theory]
         [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Validate_ReturnsFalse_ForInvalidISOInput(string value)
+        public static void CheckFormat_ReturnsFalse_ForInvalidISOInput(string value)
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.False(bic.Validate(BicFormatVersion.ISO));
+            Assert.False(bic.CheckFormat(BicFormatVersion.ISO));
         }
 
         [Theory]
         [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Validate_ReturnsTrue_ForValidSwiftInput(string value)
+        public static void CheckFormat_ReturnsTrue_ForValidSwiftInput(string value)
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.True(bic.Validate(BicFormatVersion.Swift));
+            Assert.True(bic.CheckFormat(BicFormatVersion.Swift));
         }
 
         [Theory]
         [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Validate_ReturnsFalse_ForInvalidSwiftInput(string value)
+        public static void CheckFormat_ReturnsFalse_ForInvalidSwiftInput(string value)
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.False(bic.Validate(BicFormatVersion.Swift));
+            Assert.False(bic.CheckFormat(BicFormatVersion.Swift));
         }
 
         #endregion
@@ -465,33 +465,6 @@ namespace Narvalo.Finance
                 yield return new object[] { "ABCDBEBB", "LONGBICXXXX" };
                 yield return new object[] { "ABCDBEBBXXX", "SHORTBIC" };
                 yield return new object[] { "ABCDBEBBXXX", "LONGBICXXXX" };
-            }
-        }
-
-        public static IEnumerable<object[]> ValidLengths
-        {
-            get
-            {
-                yield return new object[] { "12345678" };
-                yield return new object[] { "12345678901" };
-            }
-        }
-
-        public static IEnumerable<object[]> InvalidLengths
-        {
-            get
-            {
-                yield return new object[] { "" };
-                yield return new object[] { "1" };
-                yield return new object[] { "12" };
-                yield return new object[] { "123" };
-                yield return new object[] { "1234" };
-                yield return new object[] { "12345" };
-                yield return new object[] { "123456" };
-                yield return new object[] { "1234567" };
-                yield return new object[] { "123456789" };
-                yield return new object[] { "1234567890" };
-                yield return new object[] { "123456789012" };
             }
         }
 
