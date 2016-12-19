@@ -135,7 +135,7 @@ namespace Narvalo.Finance
             var bic = new Bic(institutionCode, countryCode, locationCode, branchCode, value);
             if (!bic.CheckParts(version))
             {
-                throw new FormatException(Strings.Bic_InvalidFormat);
+                throw new FormatException(Strings.Bic_BadPartsFormat);
             }
 
             return bic;
@@ -161,7 +161,7 @@ namespace Narvalo.Finance
             var bic = ParseCore(value);
             if (!bic.CheckParts(version))
             {
-                throw new FormatException(Strings.Bic_InvalidFormat);
+                throw new FormatException(Strings.Bic_BadPartsFormat);
             }
 
             return bic;

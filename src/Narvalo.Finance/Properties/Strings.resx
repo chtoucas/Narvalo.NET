@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Bic_BadPartsFormat" xml:space="preserve">
+    <value />
+  </data>
   <data name="Bic_InvalidFormat" xml:space="preserve">
     <value>The BIC string MUST be 8 or 11 characters long.</value>
   </data>
@@ -130,6 +133,9 @@
     <value>Unknown currency: {0}.</value>
   </data>
   <data name="Currency_NeutralCulture" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Iban_BadPartsFormat" xml:space="preserve">
     <value />
   </data>
   <data name="Iban_IntegrityCheckFailure" xml:space="preserve">

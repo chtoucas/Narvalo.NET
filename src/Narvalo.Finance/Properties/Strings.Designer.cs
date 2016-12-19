@@ -62,6 +62,15 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Bic_BadPartsFormat {
+            get {
+                return ResourceManager.GetString("Bic_BadPartsFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The BIC string MUST be 8 or 11 characters long..
         /// </summary>
         internal static string Bic_InvalidFormat {
@@ -103,6 +112,15 @@ namespace Narvalo.Finance.Properties {
         internal static string CurrencyNotFoundException_DefaultMessage {
             get {
                 return ResourceManager.GetString("CurrencyNotFoundException_DefaultMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Iban_BadPartsFormat {
+            get {
+                return ResourceManager.GetString("Iban_BadPartsFormat", resourceCulture);
             }
         }
         

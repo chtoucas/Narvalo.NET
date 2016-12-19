@@ -27,6 +27,7 @@ namespace Narvalo.Finance
             // - http://unicode.org/charts/PDF/U20A0.pdf (authoritative)
             // - http://www.xe.com/symbols.php
             // - http://en.wikipedia.org/wiki/Currency_symbol
+            // Cf. https://gist.github.com/bzerangue/5484121
             switch (code)
             {
                 // Symbols made up from four characters.

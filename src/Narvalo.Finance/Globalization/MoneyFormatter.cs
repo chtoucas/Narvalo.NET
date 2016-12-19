@@ -31,6 +31,8 @@ namespace Narvalo.Finance.Globalization
             }
 
             // TODO: Improve C2. Add arbitrary formatting "###"? Check length?
+            // http://www.guysmithferrier.com/post/2007/07/Displaying-Currencies-In-Your-Local-Format.aspx
+            // https://codeascraft.com/2016/04/19/how-etsy-formats-currency/
             switch (format)
             {
                 case "G":
@@ -48,6 +50,11 @@ namespace Narvalo.Finance.Globalization
                     // General: use the currency format "C2" for the underlying NumberFormatInfo,
                     // but override the currency symbol if necessary.
                     return FormatCurrency(amount, currency, "0:C", mfi);
+                case "L":
+                case "l":
+                    // Legal.
+                    // http://publications.europa.eu/code/en/en-370303.htm
+                    return Narvalo.Format.Current("{1}\u00A0{0:F2}", amount, currency.Code);
                 case "N":
                 case "n":
                     // Neutral.
