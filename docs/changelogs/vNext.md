@@ -68,7 +68,8 @@ Breaking Changes
 - `Range<T>.Includes(T)` has been replaced by `Range<T>.Contains(T)`
 
 ### Narvalo.Finance
-- `Bic.CheckSwiftFormat()` has been merged with `Bic.CheckFormat()`.
+- `Bic.CheckSwiftFormat()` and `Bic.CheckFormat()` have been removed;
+  it is no longer possible to create an invalid Bic.
 - `Iban.CheckDigit` becomes `Iban.CheckDigits`.
 - `Currency.Of()` now returns a different object at each call.
 - Removed `CurrencyFactory`, `CurrencyProvider` and `DefaultCurrencyFactory`.
@@ -134,7 +135,7 @@ New classes and new methods:
 - `Currency.OfCurrentCulture()`
 - `Currency.RegisterCurrency()`
 - `Bic.IsSwiftTest`
-- `Bic` and `Iban` exact parsing methods.
+- `Iban` exact parsing methods.
 - `Iban` implemens `IFormattable`.
 - `BicFormat`
 - `BicStyles`

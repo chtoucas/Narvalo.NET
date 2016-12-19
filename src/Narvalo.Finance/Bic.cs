@@ -3,7 +3,6 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Internal;
@@ -37,8 +36,7 @@ namespace Narvalo.Finance
             string countryCode,
             string locationCode,
             string branchCode,
-            string value,
-            bool validated)
+            string value)
         {
             Demand.True(CheckInstitutionCode(institutionCode));
             Demand.True(CheckCountryCode(countryCode));
@@ -51,7 +49,6 @@ namespace Narvalo.Finance
             _locationCode = locationCode;
             _branchCode = branchCode;
             _value = value;
-            Validated = validated;
         }
 
         /// <summary>
@@ -85,14 +82,12 @@ namespace Narvalo.Finance
         }
 
         // Connected to the SWIFTNet FIN network?
-        public bool IsSwiftConnected => !IsSwiftTest &&  LocationCode[1] != SWIFT_NOT_CONNECTED_MARK;
+        public bool IsSwiftConnected => !IsSwiftTest && LocationCode[1] != SWIFT_NOT_CONNECTED_MARK;
 
         // SWIFTNet FIN network: Test & Training (T&T) service.
         public bool IsSwiftTest => LocationCode[1] == SWIFT_TT_MARK;
 
         public bool IsPrimaryOffice => BranchCode.Length == 0 || BranchCode == PrimaryOfficeBranchCode;
-
-        public bool Validated { get; }
 
         /// <summary>
         /// Gets the location code.
@@ -103,7 +98,26 @@ namespace Narvalo.Finance
             get { Sentinel.Warrant.Length(SuffixLength); return _locationCode; }
         }
 
-        public static Bic Create(string institutionCode, string countryCode, string locationCode, string branchCode)
+        public static Bic Create(
+            string institutionCode,
+            string countryCode,
+            string locationCode,
+            string branchCode)
+        {
+            Demand.True(CheckInstitutionCode(institutionCode));
+            Demand.True(CheckCountryCode(countryCode));
+            Demand.True(CheckLocationCode(locationCode));
+            Demand.True(CheckBranchCode(branchCode));
+
+            return Create(institutionCode, countryCode, locationCode, branchCode, BicFormatVersion.Default);
+        }
+
+        public static Bic Create(
+            string institutionCode,
+            string countryCode,
+            string locationCode,
+            string branchCode,
+            BicFormatVersion version)
         {
             // REVIEW: We check for non-null twice...
             Require.NotNull(institutionCode, nameof(institutionCode));
@@ -118,30 +132,24 @@ namespace Narvalo.Finance
             var value = institutionCode + countryCode + locationCode + branchCode;
             Contract.Assume(CheckValue(value));
 
-            return new Bic(institutionCode, countryCode, locationCode, branchCode, value, false);
+            var bic = new Bic(institutionCode, countryCode, locationCode, branchCode, value);
+
+            if (!bic.Validate(version))
+            {
+                throw new FormatException(Strings.Bic_InvalidFormat);
+            }
+
+            return bic;
         }
 
         public static Bic Parse(string value)
         {
-            Require.NotNull(value, nameof(value));
-
-            if (!CheckValue(value))
-            {
-                throw new FormatException(Strings.Bic_InvalidFormat);
-            }
-            Check.True(CheckValue(value));
-
-            return ParseCore(value, false);
-        }
-
-        public static Bic ParseExact(string value)
-        {
             Expect.NotNull(value);
 
-            return ParseExact(value, BicFormatVersion.Default);
+            return Parse(value, BicFormatVersion.Default);
         }
 
-        public static Bic ParseExact(string value, BicFormatVersion version)
+        public static Bic Parse(string value, BicFormatVersion version)
         {
             Require.NotNull(value, nameof(value));
 
@@ -151,8 +159,8 @@ namespace Narvalo.Finance
             }
             Check.True(CheckValue(value));
 
-            var bic = ParseCore(value, true);
-            if (!bic.CheckFormat(version))
+            var bic = ParseCore(value);
+            if (!bic.Validate(version))
             {
                 throw new FormatException(Strings.Bic_InvalidFormat);
             }
@@ -160,42 +168,18 @@ namespace Narvalo.Finance
             return bic;
         }
 
-        public static Bic? TryParse(string value)
+        public static Bic? TryParse(string value) => TryParse(value, BicFormatVersion.Default);
+
+        public static Bic? TryParse(string value, BicFormatVersion version)
         {
             if (!CheckValue(value)) { return null; }
             Check.True(CheckValue(value));
 
-            return ParseCore(value, false);
-        }
-
-        public static Bic? TryParseExact(string value) => TryParseExact(value, BicFormatVersion.Default);
-
-        public static Bic? TryParseExact(string value, BicFormatVersion version)
-        {
-            if (!CheckValue(value)) { return null; }
-            Check.True(CheckValue(value));
-
-            var bic = ParseCore(value, true);
-            if (!bic.CheckFormat(version)) { return null; }
+            var bic = ParseCore(value);
+            if (!bic.Validate(version)) { return null; }
 
             return bic;
         }
-
-        public static Bic? CheckFormat(Bic bic, BicFormatVersion version)
-        {
-            if (bic.Validated) { return bic; }
-            if (!bic.CheckFormat(version)) { return null; }
-
-            return new Bic(bic.InstitutionCode, bic.CountryCode, bic.LocationCode, bic.BranchCode, bic._value, true);
-        }
-
-        // The SWIFT implementation is more restrictive than ISO as it only expects letters.
-        public bool CheckFormat(BicFormatVersion version)
-            // NB: We do not need to check properties length.
-            => (version == BicFormatVersion.ISO ? IsDigitOrUpperLetter(InstitutionCode) : IsUpperLetter(InstitutionCode))
-                && IsUpperLetter(CountryCode)
-                && IsDigitOrUpperLetter(LocationCode)
-                && (BranchCode.Length == 0 || IsDigitOrUpperLetter(BranchCode));
 
         /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
@@ -203,13 +187,18 @@ namespace Narvalo.Finance
             Warrant.NotNull<string>();
 
             return _value;
-        /// <inheritdoc cref="Object.ToString" />
         }
 
-        // NB: We only perform basic validation on the input string.
-        // NB: We mark the result as validated, even if we have not yet perform any validation
-        //     work. The caller is in charge to do the right thing.
-        private static Bic ParseCore(string value, bool validated)
+        // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
+        internal bool Validate(BicFormatVersion version)
+            // NB: We do not need to check properties length.
+            => (version == BicFormatVersion.ISO ? IsDigitOrUpperLetter(InstitutionCode) : IsUpperLetter(InstitutionCode))
+                && IsUpperLetter(CountryCode)
+                && IsDigitOrUpperLetter(LocationCode)
+                && (BranchCode.Length == 0 || IsDigitOrUpperLetter(BranchCode));
+
+        // This method never throws.
+        internal static Bic ParseCore(string value)
         {
             Demand.True(CheckValue(value));
 
@@ -241,7 +230,7 @@ namespace Narvalo.Finance
                 : value.Substring(PrefixLength + CountryLength + SuffixLength, BranchLength);
             Contract.Assume(CheckBranchCode(branchCode));
 
-            return new Bic(institutionCode, countryCode, locationCode, branchCode, value, validated);
+            return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }
     }
 

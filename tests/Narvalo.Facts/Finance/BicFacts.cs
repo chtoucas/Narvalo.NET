@@ -12,10 +12,16 @@ namespace Narvalo.Finance
         #region TryParse()
 
         [Theory]
-        [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void TryParse_Succeeds_ForValidFormat(string value)
-            => Assert.True(Bic.TryParse(value).HasValue);
+        public static void TryParse_Succeeds_ForValidISOValue(string value)
+            => Assert.True(Bic.TryParse(value, BicFormatVersion.ISO).HasValue);
+
+        [Theory]
+        [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParse_Succeeds_ForValidSwiftValue(string value)
+            => Assert.True(Bic.TryParse(value, BicFormatVersion.Swift).HasValue);
 
         [Fact]
         public static void TryParse_ReturnsNull_ForNull()
@@ -24,56 +30,36 @@ namespace Narvalo.Finance
         [Theory]
         [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void TryParse_ReturnsNull_ForInvalidFormat(string value)
+        public static void TryParse_ReturnsNull_ForInvalidLength(string value)
             => Assert.False(Bic.TryParse(value).HasValue);
-
-        #endregion
-
-        #region TryParseExact()
-
-        [Theory]
-        [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryParseExact_Succeeds_ForValidISOValues(string value)
-            => Assert.True(Bic.TryParseExact(value, BicFormatVersion.ISO).HasValue);
-
-        [Theory]
-        [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryParseExact_Succeeds_ForValidSwiftValues(string value)
-            => Assert.True(Bic.TryParseExact(value, BicFormatVersion.Swift).HasValue);
 
         [Theory]
         [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void TryParseExact_ReturnsNull_ForInvalidISOValues(string value)
-            => Assert.False(Bic.TryParseExact(value, BicFormatVersion.ISO).HasValue);
+        public static void TryParse_ReturnsNull_ForInvalidISOValue(string value)
+            => Assert.False(Bic.TryParse(value, BicFormatVersion.ISO).HasValue);
 
         [Theory]
         [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void TryParseExact_ReturnsNull_ForInvalidSwiftValues(string value)
-            => Assert.False(Bic.TryParseExact(value, BicFormatVersion.Swift).HasValue);
-
-        [Fact]
-        public static void TryParseExact_ReturnsNull_ForNull()
-            => Assert.False(Bic.TryParseExact(null).HasValue);
-
-        [Theory]
-        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryParseExact_ReturnsNull_ForInvalidFormat(string value)
-            => Assert.False(Bic.TryParseExact(value).HasValue);
+        public static void TryParse_ReturnsNull_ForInvalidSwiftValue(string value)
+            => Assert.False(Bic.TryParse(value, BicFormatVersion.Swift).HasValue);
 
         #endregion
 
         #region Parse()
 
         [Theory]
-        [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Parse_Succeeds(string value)
-            => Bic.Parse(value);
+        public static void Parse_Succeeds_ForValidISOValue(string value)
+            => Bic.Parse(value, BicFormatVersion.ISO);
+
+        [Theory]
+        [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Parse_Succeeds_ForValidSwiftValue(string value)
+            => Bic.Parse(value, BicFormatVersion.Swift);
 
         [Fact]
         public static void Parse_ThrowsArgumentNullException_ForNull()
@@ -82,46 +68,20 @@ namespace Narvalo.Finance
         [Theory]
         [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Parse_ThrowsFormatException_ForInvalidFormat(string value)
+        public static void Parse_ThrowsFormatException_ForInvalidLength(string value)
             => Assert.Throws<FormatException>(() => Bic.Parse(value));
-
-        #endregion
-
-        #region ParseExact()
-
-        [Theory]
-        [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ParseExact_Succeeds_ForValidISOValues(string value)
-            => Bic.ParseExact(value, BicFormatVersion.ISO);
-
-        [Theory]
-        [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ParseExact_Succeeds_ForValidSwiftValues(string value)
-            => Bic.ParseExact(value, BicFormatVersion.Swift);
 
         [Theory]
         [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ParseExact_ThrowsFormatException_ForInvalidISOValues(string value)
-            => Assert.Throws<FormatException>(() => Bic.ParseExact(value, BicFormatVersion.ISO));
+        public static void Parse_ThrowsFormatException_ForInvalidISOValue(string value)
+            => Assert.Throws<FormatException>(() => Bic.Parse(value, BicFormatVersion.ISO));
 
         [Theory]
         [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ParseExact_ThrowsFormatException_ForInvalidSwiftValues(string value)
-            => Assert.Throws<FormatException>(() => Bic.ParseExact(value, BicFormatVersion.Swift));
-
-        [Fact]
-        public static void ParseExact_ThrowsArgumentNullException_ForNull()
-            => Assert.Throws<ArgumentNullException>(() => Bic.ParseExact(null));
-
-        [Theory]
-        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ParseExact_ThrowsFormatException_ForInvalidFormat(string value)
-            => Assert.Throws<FormatException>(() => Bic.ParseExact(value));
+        public static void Parse_ThrowsFormatException_ForInvalidSwiftValue(string value)
+            => Assert.Throws<FormatException>(() => Bic.Parse(value, BicFormatVersion.Swift));
 
         #endregion
 
@@ -139,177 +99,32 @@ namespace Narvalo.Finance
         [Theory]
         [MemberData(nameof(BicFormatFacts.InvalidInstitutionCodes), MemberType = typeof(BicFormatFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Create_ThrowsArgumentException_ForInvalidInstitutionCode(string value)
+        public static void Create_ThrowsArgumentException_ForInvalidInstitutionCodeLength(string value)
             => Assert.Throws<ArgumentException>(() => Bic.Create(value, "BE", "BB", "XXX"));
 
         [Theory]
         [MemberData(nameof(BicFormatFacts.InvalidCountryCodes), MemberType = typeof(BicFormatFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Create_ThrowsArgumentException_ForInvalidCountryCode(string value)
+        public static void Create_ThrowsArgumentException_ForInvalidCountryCodeLength(string value)
             => Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", value, "BB", "XXX"));
 
         [Theory]
         [MemberData(nameof(BicFormatFacts.InvalidLocationCodes), MemberType = typeof(BicFormatFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Create_ThrowsArgumentException_ForInvalidLocationCode(string value)
+        public static void Create_ThrowsArgumentException_ForInvalidLocationCodeLength(string value)
             => Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", value, "XXX"));
 
         [Theory]
         [MemberData(nameof(BicFormatFacts.InvalidBranchCodes), MemberType = typeof(BicFormatFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Create_ThrowsArgumentException_ForInvalidBranchCode(string value)
+        public static void Create_ThrowsArgumentException_ForInvalidBranchCodeLength(string value)
             => Assert.Throws<ArgumentException>(() => Bic.Create("ABCD", "BE", "BB", value));
 
         [Fact]
         public static void Create_DoesNotThrow_ForValidInputs()
         {
-            Bic.Create("ABCD", "BE", "BB", "");
+            Bic.Create("ABCD", "BE", "BB", String.Empty);
             Bic.Create("ABCD", "BE", "BB", "XXX");
-        }
-
-        #endregion
-
-        #region ParseCore()
-
-        [Theory]
-        [InlineData("12345678", "12345678")]
-        [InlineData("12345678###", "12345678")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetBusinessPartyCorrectly(string value, string expectedValue)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.Equal(expectedValue, bic.BusinessParty);
-        }
-
-        [Theory]
-        [InlineData("########", "")]
-        [InlineData("########901", "901")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetBranchCodeCorrectly(string value, string expectedValue)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.Equal(expectedValue, bic.BranchCode);
-        }
-
-        [Theory]
-        [InlineData("####56##", "56")]
-        [InlineData("####56#####", "56")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetCountryCodeCorrectly(string value, string expectedValue)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.Equal(expectedValue, bic.CountryCode);
-        }
-
-        [Theory]
-        [InlineData("1234####", "1234")]
-        [InlineData("1234#######", "1234")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetInstitutionCodeCorrectly(string value, string expectedValue)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.Equal(expectedValue, bic.InstitutionCode);
-        }
-
-        [Theory]
-        [InlineData("######78", "78")]
-        [InlineData("######78###", "78")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetLocationCodeCorrectly(string value, string expectedValue)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.Equal(expectedValue, bic.LocationCode);
-        }
-
-        [Theory]
-        [InlineData("########", true)]
-        [InlineData("###########", true)]
-        [InlineData("#######0", false)]
-        [InlineData("#######0###", false)]
-        [InlineData("#######1", false)]
-        [InlineData("#######1###", false)]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetIsSwiftConnectedCorrectly(string value, bool expectedValue)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.Equal(expectedValue, bic.IsSwiftConnected);
-        }
-
-        [Theory]
-        [InlineData("########", false)]
-        [InlineData("###########", false)]
-        [InlineData("#######0", true)]
-        [InlineData("#######0###", true)]
-        [InlineData("#######1", false)]
-        [InlineData("#######1###", false)]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetIsSwiftTestCorrectly(string value, bool expectedValue)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.Equal(expectedValue, bic.IsSwiftTest);
-        }
-
-        [Theory]
-        [InlineData("########", true)]
-        [InlineData("########XXX", true)]
-        [InlineData("###########", false)]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetIsPrimaryOfficeCorrectly(string value, bool expectedValue)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.Equal(expectedValue, bic.IsPrimaryOffice);
-        }
-
-        #endregion
-
-        #region CheckFormat()
-
-        [Theory]
-        [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckIsoFormat_ReturnsTrue_ForValidInput(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.True(bic.CheckFormat(BicFormatVersion.ISO));
-        }
-
-        [Theory]
-        [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckIsoFormat_ReturnsFalse_ForInvalidFormat(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.False(bic.CheckFormat(BicFormatVersion.ISO));
-        }
-
-        [Theory]
-        [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckSwiftFormat_ReturnsTrue_ForValidInput(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.True(bic.CheckFormat(BicFormatVersion.Swift));
-        }
-
-        [Theory]
-        [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckSwiftFormat_ReturnsFalse_ForInvalidInput(string value)
-        {
-            var bic = Bic.Parse(value);
-
-            Assert.False(bic.CheckFormat(BicFormatVersion.Swift));
         }
 
         #endregion
@@ -469,6 +284,158 @@ namespace Narvalo.Finance
 
         #endregion
     }
+
+#if !NO_INTERNALS_VISIBLE_TO
+
+    public static partial class BicFacts
+    {
+        #region ParseCore()
+
+        [Theory]
+        [InlineData("12345678", "12345678")]
+        [InlineData("12345678###", "12345678")]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetBusinessPartyCorrectly(string value, string expectedValue)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.Equal(expectedValue, bic.BusinessParty);
+        }
+
+        [Theory]
+        [InlineData("########", "")]
+        [InlineData("########901", "901")]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetBranchCodeCorrectly(string value, string expectedValue)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.Equal(expectedValue, bic.BranchCode);
+        }
+
+        [Theory]
+        [InlineData("####56##", "56")]
+        [InlineData("####56#####", "56")]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetCountryCodeCorrectly(string value, string expectedValue)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.Equal(expectedValue, bic.CountryCode);
+        }
+
+        [Theory]
+        [InlineData("1234####", "1234")]
+        [InlineData("1234#######", "1234")]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetInstitutionCodeCorrectly(string value, string expectedValue)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.Equal(expectedValue, bic.InstitutionCode);
+        }
+
+        [Theory]
+        [InlineData("######78", "78")]
+        [InlineData("######78###", "78")]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetLocationCodeCorrectly(string value, string expectedValue)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.Equal(expectedValue, bic.LocationCode);
+        }
+
+        [Theory]
+        [InlineData("########", true)]
+        [InlineData("###########", true)]
+        [InlineData("#######0", false)]
+        [InlineData("#######0###", false)]
+        [InlineData("#######1", false)]
+        [InlineData("#######1###", false)]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetIsSwiftConnectedCorrectly(string value, bool expectedValue)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.Equal(expectedValue, bic.IsSwiftConnected);
+        }
+
+        [Theory]
+        [InlineData("########", false)]
+        [InlineData("###########", false)]
+        [InlineData("#######0", true)]
+        [InlineData("#######0###", true)]
+        [InlineData("#######1", false)]
+        [InlineData("#######1###", false)]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetIsSwiftTestCorrectly(string value, bool expectedValue)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.Equal(expectedValue, bic.IsSwiftTest);
+        }
+
+        [Theory]
+        [InlineData("########", true)]
+        [InlineData("########XXX", true)]
+        [InlineData("###########", false)]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetIsPrimaryOfficeCorrectly(string value, bool expectedValue)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.Equal(expectedValue, bic.IsPrimaryOffice);
+        }
+
+        #endregion
+
+        #region Validate()
+
+        [Theory]
+        [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Validate_ReturnsTrue_ForValidISOInput(string value)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.True(bic.Validate(BicFormatVersion.ISO));
+        }
+
+        [Theory]
+        [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Validate_ReturnsFalse_ForInvalidISOInput(string value)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.False(bic.Validate(BicFormatVersion.ISO));
+        }
+
+        [Theory]
+        [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Validate_ReturnsTrue_ForValidSwiftInput(string value)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.True(bic.Validate(BicFormatVersion.Swift));
+        }
+
+        [Theory]
+        [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Validate_ReturnsFalse_ForInvalidSwiftInput(string value)
+        {
+            var bic = Bic.ParseCore(value);
+
+            Assert.False(bic.Validate(BicFormatVersion.Swift));
+        }
+
+        #endregion
+    }
+
+#endif
 
     public static partial class BicFacts
     {

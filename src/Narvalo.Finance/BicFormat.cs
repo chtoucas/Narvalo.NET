@@ -5,6 +5,7 @@ namespace Narvalo.Finance
     using System.Diagnostics.Contracts;
 
     // Keep this class public; its methods are member of the Bic's contract.
+    // This methods only check the length of the input, not its content.
     public static class BicFormat
     {
         internal const int PrefixLength = 4;
