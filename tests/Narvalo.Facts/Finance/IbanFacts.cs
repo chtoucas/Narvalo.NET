@@ -267,16 +267,6 @@ namespace Narvalo.Finance
         #region ToString()
 
         [Theory]
-        [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ToString_ReturnsFormattedValue(string value, string formattedValue)
-        {
-            var result = Iban.Parse(value).ToString();
-
-            Assert.Equal(formattedValue, result);
-        }
-
-        [Theory]
         [InlineData(" ")]
         [InlineData("X")]
         [InlineData("XX")]
@@ -286,9 +276,19 @@ namespace Narvalo.Finance
                 () => Iban.Parse("AL47212110090000000235698741").ToString(value));
 
         [Theory]
-        [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsValue_ForNullFormat(string value, string formattedValue)
+        public static void ToString_ReturnsFormattedValue(string value, string formattedValue)
+        {
+            var result = Iban.Parse(value).ToString();
+
+            Assert.Equal(formattedValue, result);
+        }
+
+        [Theory]
+        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsFormattedValue_ForNullFormat(string value, string formattedValue)
         {
             var result = Iban.Parse(value).ToString(null);
 
@@ -296,9 +296,9 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsValue_ForEmptyFormat(string value, string formattedValue)
+        public static void ToString_ReturnsFormattedValue_ForEmptyFormat(string value, string formattedValue)
         {
             var result = Iban.Parse(value).ToString(String.Empty);
 
@@ -306,28 +306,27 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsFormattedValue_ForFormatG(string value, string formattedValue)
+        public static void ToString_ReturnsFormattedValue_ForDisplayFormat(string value, string formattedValue)
         {
-            var result1 = Iban.Parse(value).ToString("G");
-            var result2 = Iban.Parse(value).ToString("g");
+            var result1 = Iban.Parse(value).ToString("D");
+            var result2 = Iban.Parse(value).ToString("d");
 
             Assert.Equal(formattedValue, result1);
             Assert.Equal(formattedValue, result2);
         }
 
         [Theory]
-        [MemberData(nameof(FormatGSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsFormattedValue_ForFormatD(string value, string formattedValue)
+        public static void ToString_ReturnsValue_ForGeneralFormat(string value, string formattedValue)
         {
-            var result1 = Iban.Parse(value).ToString("D");
-            var result2 = Iban.Parse(value).ToString("d");
-            var expected = formattedValue.Replace(' ', '-');
+            var result1 = Iban.Parse(value).ToString("G");
+            var result2 = Iban.Parse(value).ToString("g");
 
-            Assert.Equal(expected, result1);
-            Assert.Equal(expected, result2);
+            Assert.Equal(value, result1);
+            Assert.Equal(value, result2);
         }
 
         #endregion
@@ -337,6 +336,34 @@ namespace Narvalo.Finance
 
     public static partial class IbanFacts
     {
+        #region CheckIntegrity32bit()
+
+        [Theory]
+        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void CheckIntegrity32bit_ReturnsTrue(string value)
+        {
+            var iban = Iban.Parse(value);
+
+            Assert.True(iban.CheckIntegrity32bit());
+        }
+
+        #endregion
+
+        #region CheckIntegrity64bit()
+
+        [Theory]
+        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void CheckIntegrity64bit_ReturnsTrue(string value)
+        {
+            var iban = Iban.Parse(value);
+
+            Assert.True(iban.CheckIntegrity64bit());
+        }
+
+        #endregion
+
         #region ParseCore()
 
         [Theory]
@@ -436,14 +463,9 @@ namespace Narvalo.Finance
 
     public static partial class IbanFacts
     {
-        [Fact]
-        public static void Checksum()
-        {
-            var iban = Iban.Parse("BE62510007547061");
-            Assert.Equal(1, iban.FastComputeChecksum());
-        }
-
         // Sample IBAN from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
+        // except the last taken from http://www.xe.com/ibancalculator/sample/?ibancountry=united-kingdom since
+        // the one found on RBS is not valid.
         public static IEnumerable<object[]> SampleDisplayValues
         {
             get
@@ -505,11 +527,14 @@ namespace Narvalo.Finance
                 yield return new object[] { "TN59 1000 6035 1835 9847 8831" };
                 yield return new object[] { "TR33 0006 1005 1978 6457 8413 26" };
                 yield return new object[] { "AE07 0331 2345 6789 0123 456" };
-                yield return new object[] { "GB29 RBOS 6016 1331 9268 19" };
+                //yield return new object[] { "GB29 RBOS 6016 1331 9268 19" }; <- invalid
+                yield return new object[] { "GB29 NWBK 6016 1331 9268 19" };
             }
         }
 
         // Sample IBAN from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
+        // except the last taken from http://www.xe.com/ibancalculator/sample/?ibancountry=united-kingdom since
+        // the one found on RBS is not valid.
         public static IEnumerable<object[]> SampleValues
         {
             get
@@ -571,7 +596,8 @@ namespace Narvalo.Finance
                 yield return new object[] { "TN5910006035183598478831" };
                 yield return new object[] { "TR330006100519786457841326" };
                 yield return new object[] { "AE070331234567890123456" };
-                yield return new object[] { "GB29RBOS60161331926819" };
+                //yield return new object[] { "GB29RBOS60161331926819" }; <- Invalid
+                yield return new object[] { "GB29NWBK60161331926819" };
             }
         }
 
@@ -681,7 +707,7 @@ namespace Narvalo.Finance
             }
         }
 
-        public static IEnumerable<object[]> FormatGSamples
+        public static IEnumerable<object[]> FormatDSamples
         {
             get
             {
