@@ -4,6 +4,7 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
+    // Keep this class public; its methods are member of the Iban's contract.
     public static class IbanFormat
     {
         internal const int MinLength = 14;

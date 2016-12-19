@@ -4,6 +4,7 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
+    // Keep this class public; its methods are member of the Bic's contract.
     public static class BicFormat
     {
         internal const int PrefixLength = 4;
