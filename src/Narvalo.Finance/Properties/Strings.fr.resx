@@ -126,11 +126,11 @@
   <data name="CurrencyNotFoundException_DefaultMessage" xml:space="preserve">
     <value>Devise inconnue.</value>
   </data>
-  <data name="Currency_NotSupportedNeutralCulture" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Currency_UnknownCurrency" xml:space="preserve">
+  <data name="Currency_InvalidCode" xml:space="preserve">
     <value>Devise inconnue : {0}.</value>
+  </data>
+  <data name="Currency_NeutralCulture" xml:space="preserve">
+    <value />
   </data>
   <data name="Iban_InvalidFormat" xml:space="preserve">
     <value>Un code IBAN string MUST doit comporter de 14 à 34 caractères.</value>

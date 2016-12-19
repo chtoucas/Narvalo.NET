@@ -71,20 +71,20 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Unknown currency: {0}..
         /// </summary>
-        internal static string Currency_NotSupportedNeutralCulture {
+        internal static string Currency_InvalidCode {
             get {
-                return ResourceManager.GetString("Currency_NotSupportedNeutralCulture", resourceCulture);
+                return ResourceManager.GetString("Currency_InvalidCode", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknown currency: {0}..
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Currency_UnknownCurrency {
+        internal static string Currency_NeutralCulture {
             get {
-                return ResourceManager.GetString("Currency_UnknownCurrency", resourceCulture);
+                return ResourceManager.GetString("Currency_NeutralCulture", resourceCulture);
             }
         }
         
