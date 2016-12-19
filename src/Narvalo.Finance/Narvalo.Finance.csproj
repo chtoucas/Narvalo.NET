@@ -78,6 +78,7 @@
     <Compile Include="Globalization\MoneyFormatInfo.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="Globalization\MoneyFormatter.cs" />
+    <Compile Include="IbanVerificationMode.cs" />
     <Compile Include="Snv\PubDateEventArgs.cs" />
     <Compile Include="Snv\SnvCurrencyData.cs" />
     <Compile Include="Snv\CurrentSnvCurrencyDataCollection.cs" />

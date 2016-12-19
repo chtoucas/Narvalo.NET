@@ -436,6 +436,13 @@ namespace Narvalo.Finance
 
     public static partial class IbanFacts
     {
+        [Fact]
+        public static void Checksum()
+        {
+            var iban = Iban.Parse("BE62510007547061");
+            Assert.Equal(1, iban.FastComputeChecksum());
+        }
+
         // Sample IBAN from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
         public static IEnumerable<object[]> SampleDisplayValues
         {

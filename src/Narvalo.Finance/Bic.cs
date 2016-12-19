@@ -133,7 +133,7 @@ namespace Narvalo.Finance
             Contract.Assume(CheckValue(value));
 
             var bic = new Bic(institutionCode, countryCode, locationCode, branchCode, value);
-            if (!bic.CheckFormat(version))
+            if (!bic.CheckParts(version))
             {
                 throw new FormatException(Strings.Bic_InvalidFormat);
             }
@@ -159,7 +159,7 @@ namespace Narvalo.Finance
             Check.True(CheckValue(value));
 
             var bic = ParseCore(value);
-            if (!bic.CheckFormat(version))
+            if (!bic.CheckParts(version))
             {
                 throw new FormatException(Strings.Bic_InvalidFormat);
             }
@@ -175,7 +175,7 @@ namespace Narvalo.Finance
             Check.True(CheckValue(value));
 
             var bic = ParseCore(value);
-            if (!bic.CheckFormat(version)) { return null; }
+            if (!bic.CheckParts(version)) { return null; }
 
             return bic;
         }
@@ -189,8 +189,8 @@ namespace Narvalo.Finance
         }
 
         // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
-        internal bool CheckFormat(BicFormatVersion version)
-            // NB: We do not need to check properties length.
+        internal bool CheckParts(BicFormatVersion version)
+            // NB: We already checked the length for each property.
             => (version == BicFormatVersion.ISO ? IsDigitOrUpperLetter(InstitutionCode) : IsUpperLetter(InstitutionCode))
                 && IsUpperLetter(CountryCode)
                 && IsDigitOrUpperLetter(LocationCode)

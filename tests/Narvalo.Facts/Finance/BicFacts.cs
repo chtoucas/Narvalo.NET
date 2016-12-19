@@ -390,46 +390,46 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region CheckFormat()
+        #region CheckParts()
 
         [Theory]
         [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void CheckFormat_ReturnsTrue_ForValidISOInput(string value)
+        public static void CheckParts_ReturnsTrue_ForValidISOInput(string value)
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.True(bic.CheckFormat(BicFormatVersion.ISO));
+            Assert.True(bic.CheckParts(BicFormatVersion.ISO));
         }
 
         [Theory]
         [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void CheckFormat_ReturnsFalse_ForInvalidISOInput(string value)
+        public static void CheckParts_ReturnsFalse_ForInvalidISOInput(string value)
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.False(bic.CheckFormat(BicFormatVersion.ISO));
+            Assert.False(bic.CheckParts(BicFormatVersion.ISO));
         }
 
         [Theory]
         [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void CheckFormat_ReturnsTrue_ForValidSwiftInput(string value)
+        public static void CheckParts_ReturnsTrue_ForValidSwiftInput(string value)
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.True(bic.CheckFormat(BicFormatVersion.Swift));
+            Assert.True(bic.CheckParts(BicFormatVersion.Swift));
         }
 
         [Theory]
         [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void CheckFormat_ReturnsFalse_ForInvalidSwiftInput(string value)
+        public static void CheckParts_ReturnsFalse_ForInvalidSwiftInput(string value)
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.False(bic.CheckFormat(BicFormatVersion.Swift));
+            Assert.False(bic.CheckParts(BicFormatVersion.Swift));
         }
 
         #endregion

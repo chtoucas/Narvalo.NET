@@ -5,6 +5,7 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
 
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
@@ -39,7 +40,7 @@ namespace Narvalo.Finance
             _checkDigits = checkDigits;
             _bban = bban;
             _value = value;
-            Validated = validated;
+            Verified = validated;
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace Narvalo.Finance
             get { Sentinel.Warrant.Length(CountryLength); return _countryCode; }
         }
 
-        public bool Validated { get; }
+        public bool Verified { get; }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         // We only display the beginning of the IBAN value.
@@ -89,7 +90,7 @@ namespace Narvalo.Finance
             Contract.Assume(CheckValue(value));
 
             var iban = new Iban(countryCode, checkDigits, bban, value, false);
-            if (!iban.CheckFormat())
+            if (!iban.CheckParts())
             {
                 throw new FormatException(Strings.Iban_InvalidFormat);
             }
@@ -116,7 +117,7 @@ namespace Narvalo.Finance
             Check.True(CheckValue(val));
 
             var iban = ParseCore(val, false);
-            if (!iban.CheckFormat())
+            if (!iban.CheckParts())
             {
                 throw new FormatException(Strings.Iban_InvalidFormat);
             }
@@ -143,7 +144,7 @@ namespace Narvalo.Finance
             Check.True(CheckValue(val));
 
             var iban = ParseCore(val, true);
-            if (!iban.CheckFormat())
+            if (!iban.CheckParts())
             {
                 throw new FormatException(Strings.Iban_InvalidFormat);
             }
@@ -166,7 +167,7 @@ namespace Narvalo.Finance
             Check.True(CheckValue(val));
 
             var iban = ParseCore(val, false);
-            if (!iban.CheckFormat()) { return null; }
+            if (!iban.CheckParts()) { return null; }
 
             return iban;
         }
@@ -182,33 +183,72 @@ namespace Narvalo.Finance
             Check.True(CheckValue(val));
 
             var iban = ParseCore(val, true);
-            if (!iban.CheckFormat() && !iban.Verify()) { return null; }
+            if (!iban.CheckParts() && !iban.Verify()) { return null; }
 
             return iban;
         }
 
         public static Iban? Verify(Iban iban)
         {
-            if (iban.Validated) { return iban; }
+            if (iban.Verified) { return iban; }
             if (!iban.Verify()) { return null; }
 
             return new Iban(iban.CountryCode, iban.CheckDigits, iban.Bban, iban._value, true);
         }
 
-        internal bool Verify()
+        internal bool Verify() => Verify(IbanVerificationModes.Integrity);
+
+        private bool Verify(IbanVerificationModes modes)
         {
             throw new NotImplementedException();
         }
 
-        internal bool CheckFormat()
-            // NB: We do not need to check properties length.
+        private int SlowComputeChecksum()
+        {
+            //int len = _value.Length;
+            //var tmp = new int[len];
+
+            //for (var i = 0; i < len; i++)
+            //{
+            //    char ch = i < len - 4 ? _value[i + 4] : _value[(i + 4) % len];
+            //    // If it is not a digit, it is an uppercase ASCII letter.
+            //    // A is mapped to 10, B to 11, C to 12, and so on.
+            //    tmp[i] = ch >= '0' && ch <= '9' ? ch - '0' : ch - 'A' + 10;
+            //}
+
+            throw new NotImplementedException();
+        }
+
+        public long FastComputeChecksum()
+        {
+            int len = _value.Length;
+            long checksum = 0;
+
+            for (var i = 0; i < len; i++)
+            {
+                char ch = i < len - 4 ? _value[i + 4] : _value[(i + 4) % len];
+                if (ch >= '0' && ch <= '9')
+                {
+                    checksum = 10 * checksum + (ch - '0');
+                }
+                else
+                {
+                    checksum = 100 * checksum + (ch - 'A' + 10);
+                }
+            }
+
+            return checksum % 97;
+        }
+
+        internal bool CheckParts()
+            // NB: We already checked the length for each property.
             => IsUpperLetter(CountryCode)
                 && IsDigit(CheckDigits)
                 && IsDigitOrUpperLetter(Bban);
 
-        // NB: We mark the result as validated, even if we have not actually performed any validation.
+        // NB: If "verified" is true, it does not mean that we have already performed any verification.
         //     The caller is in charge to do the right thing.
-        internal static Iban ParseCore(string value, bool validated)
+        internal static Iban ParseCore(string value, bool verified)
         {
             Demand.True(CheckValue(value));
 
@@ -222,33 +262,32 @@ namespace Narvalo.Finance
             string bban = value.Substring(CountryLength + CheckDigitsLength);
             Contract.Assume(CheckBban(bban));
 
-            return new Iban(countryCode, checkDigits, bban, value, validated);
+            return new Iban(countryCode, checkDigits, bban, value, verified);
         }
 
-        private static string StripIgnorableSymbols(string text, IbanStyles styles)
+        private static string StripIgnorableSymbols(string input, IbanStyles styles)
         {
-            Demand.NotNull(text);
+            Demand.NotNull(input);
             Warrant.NotNull<string>();
 
-            if (text.Length == 0) { return String.Empty; }
-            if (styles.Contains(IbanStyles.None)) { return text; }
+            if (input.Length == 0) { return String.Empty; }
+            if (styles == IbanStyles.None) { return input; }
 
-            char[] input = text.ToCharArray();
-            char[] output = new char[input.Length];
+            var output = new char[input.Length];
 
-            int inlen = input.Length;
+            int len = input.Length;
 
             int start = 0;
             if (styles.Contains(IbanStyles.AllowLeadingWhite))
             {
                 // Ignore leading whitespaces.
-                while (start < inlen)
+                while (start < len)
                 {
                     if (input[start] != ' ') { break; }
                     start++;
                 }
             }
-            int end = inlen - 1;
+            int end = len - 1;
             if (styles.Contains(IbanStyles.AllowTrailingWhite))
             {
                 // Ignore trailing whitespaces.
@@ -342,21 +381,20 @@ namespace Narvalo.Finance
             }
         }
 
-        private static string Format(string value, char ch)
+        private static string Format(string input, char ch)
         {
-            Demand.NotNull(value);
+            Demand.NotNull(input);
             Warrant.NotNull<string>();
 
-            char[] input = value.ToCharArray();
-            int inlen = input.Length;
+            int len = input.Length;
 
-            int r = inlen % 4;
-            int q = (inlen - r) / 4;
-            int outlen = inlen + q - (r == 0 ? 1 : 0);
-            char[] output = new char[outlen];
+            int r = len % 4;
+            int q = (len - r) / 4;
+            int outlen = len + q - (r == 0 ? 1 : 0);
+            var output = new char[outlen];
 
             int k = 1;
-            for (var i = 0; i < inlen; i++, k++)
+            for (var i = 0; i < len; i++, k++)
             {
                 if (k % 5 == 0)
                 {
@@ -381,7 +419,7 @@ namespace Narvalo.Finance
 
         public static bool operator !=(Iban left, Iban right) => !left.Equals(right);
 
-        public bool Equals(Iban other) => _value == other._value && Validated == other.Validated;
+        public bool Equals(Iban other) => _value == other._value && Verified == other.Verified;
 
         public override bool Equals(object obj)
         {
