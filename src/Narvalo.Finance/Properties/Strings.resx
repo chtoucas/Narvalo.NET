@@ -132,6 +132,9 @@
   <data name="Currency_NeutralCulture" xml:space="preserve">
     <value />
   </data>
+  <data name="Iban_IntegrityCheckFailure" xml:space="preserve">
+    <value />
+  </data>
   <data name="Iban_InvalidFormat" xml:space="preserve">
     <value>The IBAN string MUST be at most 34 characters long and at least 14 characters long.</value>
   </data>

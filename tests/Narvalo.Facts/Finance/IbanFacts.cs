@@ -58,7 +58,7 @@ namespace Narvalo.Finance
         [Theory]
         [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Parse_ThrowsFormatException_ForInvalidFormat(string value)
+        public static void Parse_ThrowsFormatException_ForInvalidLength(string value)
             => Assert.Throws<FormatException>(() => Iban.Parse(value));
 
         #endregion
@@ -72,7 +72,7 @@ namespace Narvalo.Finance
         [Theory]
         [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ParseExact_ThrowsFormatException_ForInvalidFormat(string value)
+        public static void ParseExact_ThrowsFormatException_ForInvalidLength(string value)
             => Assert.Throws<FormatException>(() => Iban.ParseExact(value));
 
         #endregion
@@ -108,100 +108,6 @@ namespace Narvalo.Finance
         [Fact]
         public static void Create_DoesNotThrow_ForValidInputs()
             => Iban.Create("FR", "14", "20041010050500013M02606");
-
-        #endregion
-
-        #region ParseCore()
-
-        [Theory]
-        [InlineData("12############", "12")]
-        [InlineData("12#############", "12")]
-        [InlineData("12##############", "12")]
-        [InlineData("12###############", "12")]
-        [InlineData("12################", "12")]
-        [InlineData("12#################", "12")]
-        [InlineData("12##################", "12")]
-        [InlineData("12###################", "12")]
-        [InlineData("12####################", "12")]
-        [InlineData("12#####################", "12")]
-        [InlineData("12######################", "12")]
-        [InlineData("12#######################", "12")]
-        [InlineData("12########################", "12")]
-        [InlineData("12#########################", "12")]
-        [InlineData("12##########################", "12")]
-        [InlineData("12###########################", "12")]
-        [InlineData("12############################", "12")]
-        [InlineData("12#############################", "12")]
-        [InlineData("12##############################", "12")]
-        [InlineData("12###############################", "12")]
-        [InlineData("12################################", "12")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetCountryCodeCorrectly(string value, string expectedValue)
-        {
-            var iban = Iban.Parse(value);
-
-            Assert.Equal(expectedValue, iban.CountryCode);
-        }
-
-        [Theory]
-        [InlineData("##34##########", "34")]
-        [InlineData("##34###########", "34")]
-        [InlineData("##34############", "34")]
-        [InlineData("##34#############", "34")]
-        [InlineData("##34##############", "34")]
-        [InlineData("##34###############", "34")]
-        [InlineData("##34################", "34")]
-        [InlineData("##34#################", "34")]
-        [InlineData("##34##################", "34")]
-        [InlineData("##34###################", "34")]
-        [InlineData("##34####################", "34")]
-        [InlineData("##34#####################", "34")]
-        [InlineData("##34######################", "34")]
-        [InlineData("##34#######################", "34")]
-        [InlineData("##34########################", "34")]
-        [InlineData("##34#########################", "34")]
-        [InlineData("##34##########################", "34")]
-        [InlineData("##34###########################", "34")]
-        [InlineData("##34############################", "34")]
-        [InlineData("##34#############################", "34")]
-        [InlineData("##34##############################", "34")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetCheckDigitsCorrectly(string value, string expectedValue)
-        {
-            var iban = Iban.Parse(value);
-
-            Assert.Equal(expectedValue, iban.CheckDigits);
-        }
-
-        [Theory]
-        [InlineData("####5678901234", "5678901234")]
-        [InlineData("####56789012345", "56789012345")]
-        [InlineData("####567890123456", "567890123456")]
-        [InlineData("####5678901234567", "5678901234567")]
-        [InlineData("####56789012345678", "56789012345678")]
-        [InlineData("####567890123456789", "567890123456789")]
-        [InlineData("####5678901234567890", "5678901234567890")]
-        [InlineData("####56789012345678901", "56789012345678901")]
-        [InlineData("####567890123456789012", "567890123456789012")]
-        [InlineData("####5678901234567890123", "5678901234567890123")]
-        [InlineData("####56789012345678901234", "56789012345678901234")]
-        [InlineData("####567890123456789012345", "567890123456789012345")]
-        [InlineData("####5678901234567890123456", "5678901234567890123456")]
-        [InlineData("####56789012345678901234567", "56789012345678901234567")]
-        [InlineData("####567890123456789012345678", "567890123456789012345678")]
-        [InlineData("####5678901234567890123456789", "5678901234567890123456789")]
-        [InlineData("####56789012345678901234567890", "56789012345678901234567890")]
-        [InlineData("####567890123456789012345678901", "567890123456789012345678901")]
-        [InlineData("####5678901234567890123456789012", "5678901234567890123456789012")]
-        [InlineData("####56789012345678901234567890123", "56789012345678901234567890123")]
-        [InlineData("####567890123456789012345678901234", "567890123456789012345678901234")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetBbanCorrectly(string value, string expectedValue)
-        {
-            var iban = Iban.Parse(value);
-
-            Assert.Equal(expectedValue, iban.Bban);
-        }
 
         #endregion
 
@@ -427,6 +333,107 @@ namespace Narvalo.Finance
         #endregion
     }
 
+#if !NO_INTERNALS_VISIBLE_TO
+
+    public static partial class IbanFacts
+    {
+        #region ParseCore()
+
+        [Theory]
+        [InlineData("12############", "12")]
+        [InlineData("12#############", "12")]
+        [InlineData("12##############", "12")]
+        [InlineData("12###############", "12")]
+        [InlineData("12################", "12")]
+        [InlineData("12#################", "12")]
+        [InlineData("12##################", "12")]
+        [InlineData("12###################", "12")]
+        [InlineData("12####################", "12")]
+        [InlineData("12#####################", "12")]
+        [InlineData("12######################", "12")]
+        [InlineData("12#######################", "12")]
+        [InlineData("12########################", "12")]
+        [InlineData("12#########################", "12")]
+        [InlineData("12##########################", "12")]
+        [InlineData("12###########################", "12")]
+        [InlineData("12############################", "12")]
+        [InlineData("12#############################", "12")]
+        [InlineData("12##############################", "12")]
+        [InlineData("12###############################", "12")]
+        [InlineData("12################################", "12")]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetCountryCodeCorrectly(string value, string expectedValue)
+        {
+            var iban = Iban.ParseCore(value, false);
+
+            Assert.Equal(expectedValue, iban.CountryCode);
+        }
+
+        [Theory]
+        [InlineData("##34##########", "34")]
+        [InlineData("##34###########", "34")]
+        [InlineData("##34############", "34")]
+        [InlineData("##34#############", "34")]
+        [InlineData("##34##############", "34")]
+        [InlineData("##34###############", "34")]
+        [InlineData("##34################", "34")]
+        [InlineData("##34#################", "34")]
+        [InlineData("##34##################", "34")]
+        [InlineData("##34###################", "34")]
+        [InlineData("##34####################", "34")]
+        [InlineData("##34#####################", "34")]
+        [InlineData("##34######################", "34")]
+        [InlineData("##34#######################", "34")]
+        [InlineData("##34########################", "34")]
+        [InlineData("##34#########################", "34")]
+        [InlineData("##34##########################", "34")]
+        [InlineData("##34###########################", "34")]
+        [InlineData("##34############################", "34")]
+        [InlineData("##34#############################", "34")]
+        [InlineData("##34##############################", "34")]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetCheckDigitsCorrectly(string value, string expectedValue)
+        {
+            var iban = Iban.ParseCore(value, false);
+
+            Assert.Equal(expectedValue, iban.CheckDigits);
+        }
+
+        [Theory]
+        [InlineData("####5678901234", "5678901234")]
+        [InlineData("####56789012345", "56789012345")]
+        [InlineData("####567890123456", "567890123456")]
+        [InlineData("####5678901234567", "5678901234567")]
+        [InlineData("####56789012345678", "56789012345678")]
+        [InlineData("####567890123456789", "567890123456789")]
+        [InlineData("####5678901234567890", "5678901234567890")]
+        [InlineData("####56789012345678901", "56789012345678901")]
+        [InlineData("####567890123456789012", "567890123456789012")]
+        [InlineData("####5678901234567890123", "5678901234567890123")]
+        [InlineData("####56789012345678901234", "56789012345678901234")]
+        [InlineData("####567890123456789012345", "567890123456789012345")]
+        [InlineData("####5678901234567890123456", "5678901234567890123456")]
+        [InlineData("####56789012345678901234567", "56789012345678901234567")]
+        [InlineData("####567890123456789012345678", "567890123456789012345678")]
+        [InlineData("####5678901234567890123456789", "5678901234567890123456789")]
+        [InlineData("####56789012345678901234567890", "56789012345678901234567890")]
+        [InlineData("####567890123456789012345678901", "567890123456789012345678901")]
+        [InlineData("####5678901234567890123456789012", "5678901234567890123456789012")]
+        [InlineData("####56789012345678901234567890123", "56789012345678901234567890123")]
+        [InlineData("####567890123456789012345678901234", "567890123456789012345678901234")]
+        [CLSCompliant(false)]
+        public static void ParseCore_SetBbanCorrectly(string value, string expectedValue)
+        {
+            var iban = Iban.ParseCore(value, false);
+
+            Assert.Equal(expectedValue, iban.Bban);
+        }
+
+        #endregion
+    }
+
+#endif
+
     public static partial class IbanFacts
     {
         // Sample IBAN from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
@@ -520,7 +527,7 @@ namespace Narvalo.Finance
                 yield return new object[] { "DE89370400440532013000" };
                 yield return new object[] { "GI75NWBK000000007099453" };
                 yield return new object[] { "GR1601101250000000012300695" };
-                yield return new object[] { "L5604449876543210" };
+                yield return new object[] { "GL5604449876543210" };
                 yield return new object[] { "HU42117730161111101800000000" };
                 yield return new object[] { "IS140159260076545510730339" };
                 yield return new object[] { "IE29AIBK93115212345678" };
@@ -565,27 +572,27 @@ namespace Narvalo.Finance
         {
             get
             {
-                yield return new object[] { "12345678901234", "12345678901234" };
-                yield return new object[] { "123456789012345", "123456789012345" };
-                yield return new object[] { "1234567890123456", "1234567890123456" };
-                yield return new object[] { "12345678901234567", "12345678901234567" };
-                yield return new object[] { "123456789012345678", "123456789012345678" };
-                yield return new object[] { "1234567890123456789", "1234567890123456789" };
-                yield return new object[] { "12345678901234567890", "12345678901234567890" };
-                yield return new object[] { "123456789012345678901", "123456789012345678901" };
-                yield return new object[] { "1234567890123456789012", "1234567890123456789012" };
-                yield return new object[] { "12345678901234567890123", "12345678901234567890123" };
-                yield return new object[] { "123456789012345678901234", "123456789012345678901234" };
-                yield return new object[] { "1234567890123456789012345", "1234567890123456789012345" };
-                yield return new object[] { "12345678901234567890123456", "12345678901234567890123456" };
-                yield return new object[] { "123456789012345678901234567", "123456789012345678901234567" };
-                yield return new object[] { "1234567890123456789012345678", "1234567890123456789012345678" };
-                yield return new object[] { "12345678901234567890123456789", "12345678901234567890123456789" };
-                yield return new object[] { "123456789012345678901234567890", "123456789012345678901234567890" };
-                yield return new object[] { "1234567890123456789012345678901", "1234567890123456789012345678901" };
-                yield return new object[] { "12345678901234567890123456789012", "12345678901234567890123456789012" };
-                yield return new object[] { "123456789012345678901234567890123", "123456789012345678901234567890123" };
-                yield return new object[] { "1234567890123456789012345678901234", "1234567890123456789012345678901234" };
+                yield return new object[] { "AB345678901234", "AB345678901234" };
+                yield return new object[] { "AB3456789012345", "AB3456789012345" };
+                yield return new object[] { "AB34567890123456", "AB34567890123456" };
+                yield return new object[] { "AB345678901234567", "AB345678901234567" };
+                yield return new object[] { "AB3456789012345678", "AB3456789012345678" };
+                yield return new object[] { "AB34567890123456789", "AB34567890123456789" };
+                yield return new object[] { "AB345678901234567890", "AB345678901234567890" };
+                yield return new object[] { "AB3456789012345678901", "AB3456789012345678901" };
+                yield return new object[] { "AB34567890123456789012", "AB34567890123456789012" };
+                yield return new object[] { "AB345678901234567890123", "AB345678901234567890123" };
+                yield return new object[] { "AB3456789012345678901234", "AB3456789012345678901234" };
+                yield return new object[] { "AB34567890123456789012345", "AB34567890123456789012345" };
+                yield return new object[] { "AB345678901234567890123456", "AB345678901234567890123456" };
+                yield return new object[] { "AB3456789012345678901234567", "AB3456789012345678901234567" };
+                yield return new object[] { "AB34567890123456789012345678", "AB34567890123456789012345678" };
+                yield return new object[] { "AB345678901234567890123456789", "AB345678901234567890123456789" };
+                yield return new object[] { "AB3456789012345678901234567890", "AB3456789012345678901234567890" };
+                yield return new object[] { "AB34567890123456789012345678901", "AB34567890123456789012345678901" };
+                yield return new object[] { "AB345678901234567890123456789012", "AB345678901234567890123456789012" };
+                yield return new object[] { "AB3456789012345678901234567890123", "AB3456789012345678901234567890123" };
+                yield return new object[] { "AB34567890123456789012345678901234", "AB34567890123456789012345678901234" };
             }
         }
 
@@ -593,27 +600,27 @@ namespace Narvalo.Finance
         {
             get
             {
-                yield return new object[] { "12345678901234", "123456789012345" };
-                yield return new object[] { "123456789012345", "1234567890123456" };
-                yield return new object[] { "1234567890123456", "12345678901234567" };
-                yield return new object[] { "12345678901234567", "123456789012345678" };
-                yield return new object[] { "123456789012345678", "1234567890123456789" };
-                yield return new object[] { "1234567890123456789", "12345678901234567890" };
-                yield return new object[] { "12345678901234567890", "123456789012345678901" };
-                yield return new object[] { "123456789012345678901", "1234567890123456789012" };
-                yield return new object[] { "1234567890123456789012", "12345678901234567890123" };
-                yield return new object[] { "12345678901234567890123", "123456789012345678901234" };
-                yield return new object[] { "123456789012345678901234", "1234567890123456789012345" };
-                yield return new object[] { "1234567890123456789012345", "12345678901234567890123456" };
-                yield return new object[] { "12345678901234567890123456", "123456789012345678901234567" };
-                yield return new object[] { "123456789012345678901234567", "1234567890123456789012345678" };
-                yield return new object[] { "1234567890123456789012345678", "12345678901234567890123456789" };
-                yield return new object[] { "12345678901234567890123456789", "123456789012345678901234567890" };
-                yield return new object[] { "123456789012345678901234567890", "1234567890123456789012345678901" };
-                yield return new object[] { "1234567890123456789012345678901", "12345678901234567890123456789012" };
-                yield return new object[] { "12345678901234567890123456789012", "123456789012345678901234567890123" };
-                yield return new object[] { "123456789012345678901234567890123", "1234567890123456789012345678901234" };
-                yield return new object[] { "1234567890123456789012345678901234", "12345678901234" };
+                yield return new object[] { "AB345678901234", "AB3456789012345" };
+                yield return new object[] { "AB3456789012345", "AB34567890123456" };
+                yield return new object[] { "AB34567890123456", "AB345678901234567" };
+                yield return new object[] { "AB345678901234567", "AB3456789012345678" };
+                yield return new object[] { "AB3456789012345678", "AB34567890123456789" };
+                yield return new object[] { "AB34567890123456789", "AB345678901234567890" };
+                yield return new object[] { "AB345678901234567890", "AB3456789012345678901" };
+                yield return new object[] { "AB3456789012345678901", "AB34567890123456789012" };
+                yield return new object[] { "AB34567890123456789012", "AB345678901234567890123" };
+                yield return new object[] { "AB345678901234567890123", "AB3456789012345678901234" };
+                yield return new object[] { "AB3456789012345678901234", "AB34567890123456789012345" };
+                yield return new object[] { "AB34567890123456789012345", "AB345678901234567890123456" };
+                yield return new object[] { "AB345678901234567890123456", "AB3456789012345678901234567" };
+                yield return new object[] { "AB3456789012345678901234567", "AB34567890123456789012345678" };
+                yield return new object[] { "AB34567890123456789012345678", "AB345678901234567890123456789" };
+                yield return new object[] { "AB345678901234567890123456789", "AB3456789012345678901234567890" };
+                yield return new object[] { "AB3456789012345678901234567890", "AB34567890123456789012345678901" };
+                yield return new object[] { "AB34567890123456789012345678901", "AB345678901234567890123456789012" };
+                yield return new object[] { "AB345678901234567890123456789012", "AB3456789012345678901234567890123" };
+                yield return new object[] { "AB3456789012345678901234567890123", "AB34567890123456789012345678901234" };
+                yield return new object[] { "AB34567890123456789012345678901234", "AB345678901234" };
             }
         }
 
@@ -621,27 +628,27 @@ namespace Narvalo.Finance
         {
             get
             {
-                yield return new object[] { "12345678901234" };
-                yield return new object[] { "123456789012345" };
-                yield return new object[] { "1234567890123456" };
-                yield return new object[] { "12345678901234567" };
-                yield return new object[] { "123456789012345678" };
-                yield return new object[] { "1234567890123456789" };
-                yield return new object[] { "12345678901234567890" };
-                yield return new object[] { "123456789012345678901" };
-                yield return new object[] { "1234567890123456789012" };
-                yield return new object[] { "12345678901234567890123" };
-                yield return new object[] { "123456789012345678901234" };
-                yield return new object[] { "1234567890123456789012345" };
-                yield return new object[] { "12345678901234567890123456" };
-                yield return new object[] { "123456789012345678901234567" };
-                yield return new object[] { "1234567890123456789012345678" };
-                yield return new object[] { "12345678901234567890123456789" };
-                yield return new object[] { "123456789012345678901234567890" };
-                yield return new object[] { "1234567890123456789012345678901" };
-                yield return new object[] { "12345678901234567890123456789012" };
-                yield return new object[] { "123456789012345678901234567890123" };
-                yield return new object[] { "1234567890123456789012345678901234" };
+                yield return new object[] { "AB345678901234" };
+                yield return new object[] { "AB3456789012345" };
+                yield return new object[] { "AB34567890123456" };
+                yield return new object[] { "AB345678901234567" };
+                yield return new object[] { "AB3456789012345678" };
+                yield return new object[] { "AB34567890123456789" };
+                yield return new object[] { "AB345678901234567890" };
+                yield return new object[] { "AB3456789012345678901" };
+                yield return new object[] { "AB34567890123456789012" };
+                yield return new object[] { "AB345678901234567890123" };
+                yield return new object[] { "AB3456789012345678901234" };
+                yield return new object[] { "AB34567890123456789012345" };
+                yield return new object[] { "AB345678901234567890123456" };
+                yield return new object[] { "AB3456789012345678901234567" };
+                yield return new object[] { "AB34567890123456789012345678" };
+                yield return new object[] { "AB345678901234567890123456789" };
+                yield return new object[] { "AB3456789012345678901234567890" };
+                yield return new object[] { "AB34567890123456789012345678901" };
+                yield return new object[] { "AB345678901234567890123456789012" };
+                yield return new object[] { "AB3456789012345678901234567890123" };
+                yield return new object[] { "AB34567890123456789012345678901234" };
             }
         }
 
@@ -650,20 +657,20 @@ namespace Narvalo.Finance
             get
             {
                 yield return new object[] { "" };
-                yield return new object[] { "1" };
-                yield return new object[] { "12" };
-                yield return new object[] { "123" };
-                yield return new object[] { "1234" };
-                yield return new object[] { "12345" };
-                yield return new object[] { "123456" };
-                yield return new object[] { "1234567" };
-                yield return new object[] { "12345678" };
-                yield return new object[] { "123456789" };
-                yield return new object[] { "1234567890" };
-                yield return new object[] { "12345678901" };
-                yield return new object[] { "123456789012" };
-                yield return new object[] { "1234567890123" };
-                yield return new object[] { "12345678901234567890123456789012345" };
+                yield return new object[] { "A" };
+                yield return new object[] { "AB" };
+                yield return new object[] { "AB3" };
+                yield return new object[] { "AB34" };
+                yield return new object[] { "AB345" };
+                yield return new object[] { "AB3456" };
+                yield return new object[] { "AB34567" };
+                yield return new object[] { "AB345678" };
+                yield return new object[] { "AB3456789" };
+                yield return new object[] { "AB34567890" };
+                yield return new object[] { "AB345678901" };
+                yield return new object[] { "AB3456789012" };
+                yield return new object[] { "AB34567890123" };
+                yield return new object[] { "AB345678901234567890123456789012345" };
             }
         }
 
@@ -671,27 +678,27 @@ namespace Narvalo.Finance
         {
             get
             {
-                yield return new object[] { "12345678901234", "1234 5678 9012 34" };
-                yield return new object[] { "123456789012345", "1234 5678 9012 345" };
-                yield return new object[] { "1234567890123456", "1234 5678 9012 3456" };
-                yield return new object[] { "12345678901234567", "1234 5678 9012 3456 7" };
-                yield return new object[] { "123456789012345678", "1234 5678 9012 3456 78" };
-                yield return new object[] { "1234567890123456789", "1234 5678 9012 3456 789" };
-                yield return new object[] { "12345678901234567890", "1234 5678 9012 3456 7890" };
-                yield return new object[] { "123456789012345678901", "1234 5678 9012 3456 7890 1" };
-                yield return new object[] { "1234567890123456789012", "1234 5678 9012 3456 7890 12" };
-                yield return new object[] { "12345678901234567890123", "1234 5678 9012 3456 7890 123" };
-                yield return new object[] { "123456789012345678901234", "1234 5678 9012 3456 7890 1234" };
-                yield return new object[] { "1234567890123456789012345", "1234 5678 9012 3456 7890 1234 5" };
-                yield return new object[] { "12345678901234567890123456", "1234 5678 9012 3456 7890 1234 56" };
-                yield return new object[] { "123456789012345678901234567", "1234 5678 9012 3456 7890 1234 567" };
-                yield return new object[] { "1234567890123456789012345678", "1234 5678 9012 3456 7890 1234 5678" };
-                yield return new object[] { "12345678901234567890123456789", "1234 5678 9012 3456 7890 1234 5678 9" };
-                yield return new object[] { "123456789012345678901234567890", "1234 5678 9012 3456 7890 1234 5678 90" };
-                yield return new object[] { "1234567890123456789012345678901", "1234 5678 9012 3456 7890 1234 5678 901" };
-                yield return new object[] { "12345678901234567890123456789012", "1234 5678 9012 3456 7890 1234 5678 9012" };
-                yield return new object[] { "123456789012345678901234567890123", "1234 5678 9012 3456 7890 1234 5678 9012 3" };
-                yield return new object[] { "1234567890123456789012345678901234", "1234 5678 9012 3456 7890 1234 5678 9012 34" };
+                yield return new object[] { "AB345678901234", "AB34 5678 9012 34" };
+                yield return new object[] { "AB3456789012345", "AB34 5678 9012 345" };
+                yield return new object[] { "AB34567890123456", "AB34 5678 9012 3456" };
+                yield return new object[] { "AB345678901234567", "AB34 5678 9012 3456 7" };
+                yield return new object[] { "AB3456789012345678", "AB34 5678 9012 3456 78" };
+                yield return new object[] { "AB34567890123456789", "AB34 5678 9012 3456 789" };
+                yield return new object[] { "AB345678901234567890", "AB34 5678 9012 3456 7890" };
+                yield return new object[] { "AB3456789012345678901", "AB34 5678 9012 3456 7890 1" };
+                yield return new object[] { "AB34567890123456789012", "AB34 5678 9012 3456 7890 12" };
+                yield return new object[] { "AB345678901234567890123", "AB34 5678 9012 3456 7890 123" };
+                yield return new object[] { "AB3456789012345678901234", "AB34 5678 9012 3456 7890 1234" };
+                yield return new object[] { "AB34567890123456789012345", "AB34 5678 9012 3456 7890 1234 5" };
+                yield return new object[] { "AB345678901234567890123456", "AB34 5678 9012 3456 7890 1234 56" };
+                yield return new object[] { "AB3456789012345678901234567", "AB34 5678 9012 3456 7890 1234 567" };
+                yield return new object[] { "AB34567890123456789012345678", "AB34 5678 9012 3456 7890 1234 5678" };
+                yield return new object[] { "AB345678901234567890123456789", "AB34 5678 9012 3456 7890 1234 5678 9" };
+                yield return new object[] { "AB3456789012345678901234567890", "AB34 5678 9012 3456 7890 1234 5678 90" };
+                yield return new object[] { "AB34567890123456789012345678901", "AB34 5678 9012 3456 7890 1234 5678 901" };
+                yield return new object[] { "AB345678901234567890123456789012", "AB34 5678 9012 3456 7890 1234 5678 9012" };
+                yield return new object[] { "AB3456789012345678901234567890123", "AB34 5678 9012 3456 7890 1234 5678 9012 3" };
+                yield return new object[] { "AB34567890123456789012345678901234", "AB34 5678 9012 3456 7890 1234 5678 9012 34" };
             }
         }
     }

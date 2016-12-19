@@ -9,6 +9,7 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
+    using static Narvalo.Finance.AsciiHelpers;
     using static Narvalo.Finance.IbanFormat;
 
     /// <summary>
@@ -87,7 +88,13 @@ namespace Narvalo.Finance
             var value = countryCode + checkDigits + bban;
             Contract.Assume(CheckValue(value));
 
-            return new Iban(countryCode, checkDigits, bban, value, false);
+            var iban = new Iban(countryCode, checkDigits, bban, value, false);
+            if (!iban.CheckFormat())
+            {
+                throw new FormatException(Strings.Iban_InvalidFormat);
+            }
+
+            return iban;
         }
 
         public static Iban Parse(string value)
@@ -108,7 +115,13 @@ namespace Narvalo.Finance
             }
             Check.True(CheckValue(val));
 
-            return ParseCore(val, false);
+            var iban = ParseCore(val, false);
+            if (!iban.CheckFormat())
+            {
+                throw new FormatException(Strings.Iban_InvalidFormat);
+            }
+
+            return iban;
         }
 
         public static Iban ParseExact(string value)
@@ -130,9 +143,13 @@ namespace Narvalo.Finance
             Check.True(CheckValue(val));
 
             var iban = ParseCore(val, true);
-            if (!iban.Validate())
+            if (!iban.CheckFormat())
             {
                 throw new FormatException(Strings.Iban_InvalidFormat);
+            }
+            if (!iban.Verify())
+            {
+                throw new FormatException(Strings.Iban_IntegrityCheckFailure);
             }
 
             return iban;
@@ -148,7 +165,10 @@ namespace Narvalo.Finance
             if (!CheckValue(val)) { return null; }
             Check.True(CheckValue(val));
 
-            return ParseCore(val, false); ;
+            var iban = ParseCore(val, false);
+            if (!iban.CheckFormat()) { return null; }
+
+            return iban;
         }
 
         public static Iban? TryParseExact(string value) => TryParseExact(value, IbanStyles.Any);
@@ -162,28 +182,33 @@ namespace Narvalo.Finance
             Check.True(CheckValue(val));
 
             var iban = ParseCore(val, true);
-            if (!iban.Validate()) { return null; }
+            if (!iban.CheckFormat() && !iban.Verify()) { return null; }
 
             return iban;
         }
 
-        public static Iban? Validate(Iban iban)
+        public static Iban? Verify(Iban iban)
         {
             if (iban.Validated) { return iban; }
-            if (!iban.Validate()) { return null; }
+            if (!iban.Verify()) { return null; }
 
             return new Iban(iban.CountryCode, iban.CheckDigits, iban.Bban, iban._value, true);
         }
 
-        public bool Validate()
+        internal bool Verify()
         {
             throw new NotImplementedException();
         }
 
-        // NB: We only perform basic validation on the input string.
-        // NB: We mark the result as validated, even if we have not yet perform any validation
-        //     work. The caller is in charge to do the right thing.
-        private static Iban ParseCore(string value, bool validated)
+        internal bool CheckFormat()
+            // NB: We do not need to check properties length.
+            => IsUpperLetter(CountryCode)
+                && IsDigit(CheckDigits)
+                && IsDigitOrUpperLetter(Bban);
+
+        // NB: We mark the result as validated, even if we have not actually performed any validation.
+        //     The caller is in charge to do the right thing.
+        internal static Iban ParseCore(string value, bool validated)
         {
             Demand.True(CheckValue(value));
 
@@ -205,30 +230,48 @@ namespace Narvalo.Finance
             Demand.NotNull(text);
             Warrant.NotNull<string>();
 
+            if (text.Length == 0) { return String.Empty; }
             if (styles.Contains(IbanStyles.None)) { return text; }
 
-            var input = text.ToCharArray();
-            var output = new char[input.Length];
+            char[] input = text.ToCharArray();
+            char[] output = new char[input.Length];
 
-            var rmLeadingWhite = styles.Contains(IbanStyles.AllowLeadingWhite);
-            var rmInnerWhite = styles.Contains(IbanStyles.AllowInnerWhite);
-            var rmTrailingWhite = styles.Contains(IbanStyles.AllowTrailingWhite);
-            var rmWhites = rmLeadingWhite || rmInnerWhite || rmTrailingWhite;
-            var rmHyphens = styles.Contains(IbanStyles.AllowHyphens);
+            int inlen = input.Length;
 
-            var inlen = input.Length;
-            var k = 0;
-            for (var i = 0; i < inlen; i++)
+            int start = 0;
+            if (styles.Contains(IbanStyles.AllowLeadingWhite))
             {
-                var ch = input[i];
-
-                if (rmWhites && ch == ' ')
+                // Ignore leading whitespaces.
+                while (start < inlen)
                 {
-                    if (rmInnerWhite && i > 0 && i < inlen) { continue; }
-                    if (rmLeadingWhite && i == 0) { continue; }
-                    if (rmTrailingWhite && i == inlen) { continue; }
+                    if (input[start] != ' ') { break; }
+                    start++;
                 }
-                if (rmHyphens && ch == '-') { continue; }
+            }
+            int end = inlen - 1;
+            if (styles.Contains(IbanStyles.AllowTrailingWhite))
+            {
+                // Ignore trailing whitespaces.
+                while (end >= 0)
+                {
+                    if (input[end] != ' ') { break; }
+                    end--;
+                }
+            }
+
+            bool rmspace = styles.Contains(IbanStyles.AllowInnerWhite);
+            bool rmhyphen = styles.Contains(IbanStyles.AllowInnerHyphen);
+
+            int k = 0;
+            for (var i = start; i <= end; i++)
+            {
+                char ch = input[i];
+
+                if (i != start && i != end)
+                {
+                    if (rmspace && ch == ' ') { continue; }
+                    if (rmhyphen && ch == '-') { continue; }
+                }
 
                 output[k] = ch;
                 k++;
@@ -304,14 +347,15 @@ namespace Narvalo.Finance
             Demand.NotNull(value);
             Warrant.NotNull<string>();
 
-            var input = value.ToCharArray();
-            var inlen = input.Length;
-            var r = inlen % 4;
-            var q = (inlen - r) / 4;
-            var outlen = inlen + q - (r == 0 ? 1 : 0);
-            var output = new char[outlen];
+            char[] input = value.ToCharArray();
+            int inlen = input.Length;
 
-            var k = 1;
+            int r = inlen % 4;
+            int q = (inlen - r) / 4;
+            int outlen = inlen + q - (r == 0 ? 1 : 0);
+            char[] output = new char[outlen];
+
+            int k = 1;
             for (var i = 0; i < inlen; i++, k++)
             {
                 if (k % 5 == 0)

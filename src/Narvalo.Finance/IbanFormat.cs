@@ -5,6 +5,7 @@ namespace Narvalo.Finance
     using System.Diagnostics.Contracts;
 
     // Keep this class public; its methods are member of the Iban's contract.
+    // This methods only check the length of the input, not its content.
     public static class IbanFormat
     {
         internal const int MinLength = 14;

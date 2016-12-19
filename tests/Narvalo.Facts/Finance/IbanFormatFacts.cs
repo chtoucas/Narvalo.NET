@@ -88,7 +88,7 @@ namespace Narvalo.Finance
         #region CheckValue()
 
         [Theory]
-        [MemberData(nameof(IbanFacts.ValidLengths), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckValue_ReturnsTrue_ForValidInput(string value)
             => Assert.True(IbanFormat.CheckValue(value));
@@ -98,7 +98,7 @@ namespace Narvalo.Finance
             => Assert.False(IbanFormat.CheckValue(null));
 
         [Theory]
-        [MemberData(nameof(IbanFacts.InvalidLengths), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckValue_ReturnsFalse_ForInvalidInput(string value)
             => Assert.False(IbanFormat.CheckValue(value));
@@ -108,6 +108,57 @@ namespace Narvalo.Finance
 
     public static partial class IbanFormatFacts
     {
+
+        public static IEnumerable<object[]> ValidValues
+        {
+            get
+            {
+                yield return new object[] { "12345678901234" };
+                yield return new object[] { "123456789012345" };
+                yield return new object[] { "1234567890123456" };
+                yield return new object[] { "12345678901234567" };
+                yield return new object[] { "123456789012345678" };
+                yield return new object[] { "1234567890123456789" };
+                yield return new object[] { "12345678901234567890" };
+                yield return new object[] { "123456789012345678901" };
+                yield return new object[] { "1234567890123456789012" };
+                yield return new object[] { "12345678901234567890123" };
+                yield return new object[] { "123456789012345678901234" };
+                yield return new object[] { "1234567890123456789012345" };
+                yield return new object[] { "12345678901234567890123456" };
+                yield return new object[] { "123456789012345678901234567" };
+                yield return new object[] { "1234567890123456789012345678" };
+                yield return new object[] { "12345678901234567890123456789" };
+                yield return new object[] { "123456789012345678901234567890" };
+                yield return new object[] { "1234567890123456789012345678901" };
+                yield return new object[] { "12345678901234567890123456789012" };
+                yield return new object[] { "123456789012345678901234567890123" };
+                yield return new object[] { "1234567890123456789012345678901234" };
+            }
+        }
+
+        public static IEnumerable<object[]> InvalidValues
+        {
+            get
+            {
+                yield return new object[] { "" };
+                yield return new object[] { "1" };
+                yield return new object[] { "12" };
+                yield return new object[] { "123" };
+                yield return new object[] { "1234" };
+                yield return new object[] { "12345" };
+                yield return new object[] { "123456" };
+                yield return new object[] { "1234567" };
+                yield return new object[] { "12345678" };
+                yield return new object[] { "123456789" };
+                yield return new object[] { "1234567890" };
+                yield return new object[] { "12345678901" };
+                yield return new object[] { "123456789012" };
+                yield return new object[] { "1234567890123" };
+                yield return new object[] { "12345678901234567890123456789012345" };
+            }
+        }
+
         public static IEnumerable<object[]> InvalidBbans
         {
             get

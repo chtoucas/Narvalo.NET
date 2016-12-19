@@ -107,6 +107,15 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Iban_IntegrityCheckFailure {
+            get {
+                return ResourceManager.GetString("Iban_IntegrityCheckFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The IBAN string MUST be at most 34 characters long and at least 14 characters long..
         /// </summary>
         internal static string Iban_InvalidFormat {

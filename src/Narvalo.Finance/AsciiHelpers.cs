@@ -24,6 +24,22 @@ namespace Narvalo.Finance
         }
 
         [Pure]
+        public static bool IsDigit(string value)
+        {
+            if (value == null || value.Length == 0) { return false; }
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (!IsDigit(value[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        [Pure]
         public static bool IsDigitOrUpperLetter(string value)
         {
             if (value == null || value.Length == 0) { return false; }
