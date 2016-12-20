@@ -2,6 +2,8 @@
 
 namespace Narvalo.Finance.Validation
 {
+#if !NO_INTERNALS_VISIBLE_TO
+
     using System;
 
     using Xunit;
@@ -32,4 +34,6 @@ namespace Narvalo.Finance.Validation
 
         #endregion
     }
+
+#endif
 }

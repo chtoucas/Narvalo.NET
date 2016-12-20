@@ -508,7 +508,7 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.Utilities.IbanFormat;
+    using static Narvalo.Finance.Validation.IbanFormat;
 
     public partial struct Iban
     {
