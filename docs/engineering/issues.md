@@ -2,6 +2,8 @@ Issues
 ======
 
 ### Quick tasks
+- Review csproj's.
+- Add Narvalo.LocalData to all necessary targets (security, build, ...) + packaging.
 - `IEnumerable` extensions for `null`-checking and deferred execution.
 - Put all `ObjectInvariant()` at the end.
 - Strange thing, CC reports that there are two remaining code fixes but does

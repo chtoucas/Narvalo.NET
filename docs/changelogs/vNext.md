@@ -13,6 +13,7 @@ Documentation & Tests (Narvalo.Cerbere & Narvalo.Finance):
 
 Library Enhancements & Improvements:
 - Narvalo.Finance (still no big money for accurate computations, next time...)
+  * use Profile259.
   * localization.
   * BBAN implementation.
   * strong/weak validation of Bic, Iban & Bban (check digits).
@@ -149,3 +150,4 @@ Enhancements
 ------------
 - Full test coverage for Narvalo.Cerbere.
 - Narvalo.Facts is now free of CA warnings/errors.
+- Narvalo.Finance is now a Profile259 project.
