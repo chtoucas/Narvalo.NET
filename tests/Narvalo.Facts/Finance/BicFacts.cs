@@ -462,10 +462,10 @@ namespace Narvalo.Finance
         {
             get
             {
-                yield return new object[] { "ABCDBEBB", "SHORTBIC" };
-                yield return new object[] { "ABCDBEBB", "LONGBICXXXX" };
-                yield return new object[] { "ABCDBEBBXXX", "SHORTBIC" };
-                yield return new object[] { "ABCDBEBBXXX", "LONGBICXXXX" };
+                yield return new object[] { "ABCDBEBB", "ABFRBEBB" };
+                yield return new object[] { "ABCDBEBB", "ABFRBEBBXXX" };
+                yield return new object[] { "ABCDBEBBXXX", "ABFRBEBB" };
+                yield return new object[] { "ABCDBEBBXXX", "ABFRBEBBXXX" };
             }
         }
 

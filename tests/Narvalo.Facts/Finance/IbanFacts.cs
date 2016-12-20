@@ -500,27 +500,27 @@ namespace Narvalo.Finance
         {
             get
             {
-                yield return new object[] { "AB345678901234", "AB345678901234" };
-                yield return new object[] { "AB3456789012345", "AB3456789012345" };
-                yield return new object[] { "AB34567890123456", "AB34567890123456" };
-                yield return new object[] { "AB345678901234567", "AB345678901234567" };
-                yield return new object[] { "AB3456789012345678", "AB3456789012345678" };
-                yield return new object[] { "AB34567890123456789", "AB34567890123456789" };
-                yield return new object[] { "AB345678901234567890", "AB345678901234567890" };
-                yield return new object[] { "AB3456789012345678901", "AB3456789012345678901" };
-                yield return new object[] { "AB34567890123456789012", "AB34567890123456789012" };
-                yield return new object[] { "AB345678901234567890123", "AB345678901234567890123" };
-                yield return new object[] { "AB3456789012345678901234", "AB3456789012345678901234" };
-                yield return new object[] { "AB34567890123456789012345", "AB34567890123456789012345" };
-                yield return new object[] { "AB345678901234567890123456", "AB345678901234567890123456" };
-                yield return new object[] { "AB3456789012345678901234567", "AB3456789012345678901234567" };
-                yield return new object[] { "AB34567890123456789012345678", "AB34567890123456789012345678" };
-                yield return new object[] { "AB345678901234567890123456789", "AB345678901234567890123456789" };
-                yield return new object[] { "AB3456789012345678901234567890", "AB3456789012345678901234567890" };
-                yield return new object[] { "AB34567890123456789012345678901", "AB34567890123456789012345678901" };
-                yield return new object[] { "AB345678901234567890123456789012", "AB345678901234567890123456789012" };
-                yield return new object[] { "AB3456789012345678901234567890123", "AB3456789012345678901234567890123" };
-                yield return new object[] { "AB34567890123456789012345678901234", "AB34567890123456789012345678901234" };
+                yield return new object[] { "FR345678901234", "FR345678901234" };
+                yield return new object[] { "FR3456789012345", "FR3456789012345" };
+                yield return new object[] { "FR34567890123456", "FR34567890123456" };
+                yield return new object[] { "FR345678901234567", "FR345678901234567" };
+                yield return new object[] { "FR3456789012345678", "FR3456789012345678" };
+                yield return new object[] { "FR34567890123456789", "FR34567890123456789" };
+                yield return new object[] { "FR345678901234567890", "FR345678901234567890" };
+                yield return new object[] { "FR3456789012345678901", "FR3456789012345678901" };
+                yield return new object[] { "FR34567890123456789012", "FR34567890123456789012" };
+                yield return new object[] { "FR345678901234567890123", "FR345678901234567890123" };
+                yield return new object[] { "FR3456789012345678901234", "FR3456789012345678901234" };
+                yield return new object[] { "FR34567890123456789012345", "FR34567890123456789012345" };
+                yield return new object[] { "FR345678901234567890123456", "FR345678901234567890123456" };
+                yield return new object[] { "FR3456789012345678901234567", "FR3456789012345678901234567" };
+                yield return new object[] { "FR34567890123456789012345678", "FR34567890123456789012345678" };
+                yield return new object[] { "FR345678901234567890123456789", "FR345678901234567890123456789" };
+                yield return new object[] { "FR3456789012345678901234567890", "FR3456789012345678901234567890" };
+                yield return new object[] { "FR34567890123456789012345678901", "FR34567890123456789012345678901" };
+                yield return new object[] { "FR345678901234567890123456789012", "FR345678901234567890123456789012" };
+                yield return new object[] { "FR3456789012345678901234567890123", "FR3456789012345678901234567890123" };
+                yield return new object[] { "FR34567890123456789012345678901234", "FR34567890123456789012345678901234" };
             }
         }
 
@@ -528,27 +528,27 @@ namespace Narvalo.Finance
         {
             get
             {
-                yield return new object[] { "AB345678901234", "AB3456789012345" };
-                yield return new object[] { "AB3456789012345", "AB34567890123456" };
-                yield return new object[] { "AB34567890123456", "AB345678901234567" };
-                yield return new object[] { "AB345678901234567", "AB3456789012345678" };
-                yield return new object[] { "AB3456789012345678", "AB34567890123456789" };
-                yield return new object[] { "AB34567890123456789", "AB345678901234567890" };
-                yield return new object[] { "AB345678901234567890", "AB3456789012345678901" };
-                yield return new object[] { "AB3456789012345678901", "AB34567890123456789012" };
-                yield return new object[] { "AB34567890123456789012", "AB345678901234567890123" };
-                yield return new object[] { "AB345678901234567890123", "AB3456789012345678901234" };
-                yield return new object[] { "AB3456789012345678901234", "AB34567890123456789012345" };
-                yield return new object[] { "AB34567890123456789012345", "AB345678901234567890123456" };
-                yield return new object[] { "AB345678901234567890123456", "AB3456789012345678901234567" };
-                yield return new object[] { "AB3456789012345678901234567", "AB34567890123456789012345678" };
-                yield return new object[] { "AB34567890123456789012345678", "AB345678901234567890123456789" };
-                yield return new object[] { "AB345678901234567890123456789", "AB3456789012345678901234567890" };
-                yield return new object[] { "AB3456789012345678901234567890", "AB34567890123456789012345678901" };
-                yield return new object[] { "AB34567890123456789012345678901", "AB345678901234567890123456789012" };
-                yield return new object[] { "AB345678901234567890123456789012", "AB3456789012345678901234567890123" };
-                yield return new object[] { "AB3456789012345678901234567890123", "AB34567890123456789012345678901234" };
-                yield return new object[] { "AB34567890123456789012345678901234", "AB345678901234" };
+                yield return new object[] { "FR345678901234", "FR3456789012345" };
+                yield return new object[] { "FR3456789012345", "FR34567890123456" };
+                yield return new object[] { "FR34567890123456", "FR345678901234567" };
+                yield return new object[] { "FR345678901234567", "FR3456789012345678" };
+                yield return new object[] { "FR3456789012345678", "FR34567890123456789" };
+                yield return new object[] { "FR34567890123456789", "FR345678901234567890" };
+                yield return new object[] { "FR345678901234567890", "FR3456789012345678901" };
+                yield return new object[] { "FR3456789012345678901", "FR34567890123456789012" };
+                yield return new object[] { "FR34567890123456789012", "FR345678901234567890123" };
+                yield return new object[] { "FR345678901234567890123", "FR3456789012345678901234" };
+                yield return new object[] { "FR3456789012345678901234", "FR34567890123456789012345" };
+                yield return new object[] { "FR34567890123456789012345", "FR345678901234567890123456" };
+                yield return new object[] { "FR345678901234567890123456", "FR3456789012345678901234567" };
+                yield return new object[] { "FR3456789012345678901234567", "FR34567890123456789012345678" };
+                yield return new object[] { "FR34567890123456789012345678", "FR345678901234567890123456789" };
+                yield return new object[] { "FR345678901234567890123456789", "FR3456789012345678901234567890" };
+                yield return new object[] { "FR3456789012345678901234567890", "FR34567890123456789012345678901" };
+                yield return new object[] { "FR34567890123456789012345678901", "FR345678901234567890123456789012" };
+                yield return new object[] { "FR345678901234567890123456789012", "FR3456789012345678901234567890123" };
+                yield return new object[] { "FR3456789012345678901234567890123", "FR34567890123456789012345678901234" };
+                yield return new object[] { "FR34567890123456789012345678901234", "FR345678901234" };
             }
         }
 
@@ -556,27 +556,27 @@ namespace Narvalo.Finance
         {
             get
             {
-                yield return new object[] { "AB345678901234" };
-                yield return new object[] { "AB3456789012345" };
-                yield return new object[] { "AB34567890123456" };
-                yield return new object[] { "AB345678901234567" };
-                yield return new object[] { "AB3456789012345678" };
-                yield return new object[] { "AB34567890123456789" };
-                yield return new object[] { "AB345678901234567890" };
-                yield return new object[] { "AB3456789012345678901" };
-                yield return new object[] { "AB34567890123456789012" };
-                yield return new object[] { "AB345678901234567890123" };
-                yield return new object[] { "AB3456789012345678901234" };
-                yield return new object[] { "AB34567890123456789012345" };
-                yield return new object[] { "AB345678901234567890123456" };
-                yield return new object[] { "AB3456789012345678901234567" };
-                yield return new object[] { "AB34567890123456789012345678" };
-                yield return new object[] { "AB345678901234567890123456789" };
-                yield return new object[] { "AB3456789012345678901234567890" };
-                yield return new object[] { "AB34567890123456789012345678901" };
-                yield return new object[] { "AB345678901234567890123456789012" };
-                yield return new object[] { "AB3456789012345678901234567890123" };
-                yield return new object[] { "AB34567890123456789012345678901234" };
+                yield return new object[] { "FR345678901234" };
+                yield return new object[] { "FR3456789012345" };
+                yield return new object[] { "FR34567890123456" };
+                yield return new object[] { "FR345678901234567" };
+                yield return new object[] { "FR3456789012345678" };
+                yield return new object[] { "FR34567890123456789" };
+                yield return new object[] { "FR345678901234567890" };
+                yield return new object[] { "FR3456789012345678901" };
+                yield return new object[] { "FR34567890123456789012" };
+                yield return new object[] { "FR345678901234567890123" };
+                yield return new object[] { "FR3456789012345678901234" };
+                yield return new object[] { "FR34567890123456789012345" };
+                yield return new object[] { "FR345678901234567890123456" };
+                yield return new object[] { "FR3456789012345678901234567" };
+                yield return new object[] { "FR34567890123456789012345678" };
+                yield return new object[] { "FR345678901234567890123456789" };
+                yield return new object[] { "FR3456789012345678901234567890" };
+                yield return new object[] { "FR34567890123456789012345678901" };
+                yield return new object[] { "FR345678901234567890123456789012" };
+                yield return new object[] { "FR3456789012345678901234567890123" };
+                yield return new object[] { "FR34567890123456789012345678901234" };
             }
         }
 
@@ -585,20 +585,20 @@ namespace Narvalo.Finance
             get
             {
                 yield return new object[] { "" };
-                yield return new object[] { "A" };
-                yield return new object[] { "AB" };
-                yield return new object[] { "AB3" };
-                yield return new object[] { "AB34" };
-                yield return new object[] { "AB345" };
-                yield return new object[] { "AB3456" };
-                yield return new object[] { "AB34567" };
-                yield return new object[] { "AB345678" };
-                yield return new object[] { "AB3456789" };
-                yield return new object[] { "AB34567890" };
-                yield return new object[] { "AB345678901" };
-                yield return new object[] { "AB3456789012" };
-                yield return new object[] { "AB34567890123" };
-                yield return new object[] { "AB345678901234567890123456789012345" };
+                yield return new object[] { "F" };
+                yield return new object[] { "FR" };
+                yield return new object[] { "FR3" };
+                yield return new object[] { "FR34" };
+                yield return new object[] { "FR345" };
+                yield return new object[] { "FR3456" };
+                yield return new object[] { "FR34567" };
+                yield return new object[] { "FR345678" };
+                yield return new object[] { "FR3456789" };
+                yield return new object[] { "FR34567890" };
+                yield return new object[] { "FR345678901" };
+                yield return new object[] { "FR3456789012" };
+                yield return new object[] { "FR34567890123" };
+                yield return new object[] { "FR345678901234567890123456789012345" };
             }
         }
 
@@ -606,27 +606,27 @@ namespace Narvalo.Finance
         {
             get
             {
-                yield return new object[] { "AB345678901234", "AB34 5678 9012 34" };
-                yield return new object[] { "AB3456789012345", "AB34 5678 9012 345" };
-                yield return new object[] { "AB34567890123456", "AB34 5678 9012 3456" };
-                yield return new object[] { "AB345678901234567", "AB34 5678 9012 3456 7" };
-                yield return new object[] { "AB3456789012345678", "AB34 5678 9012 3456 78" };
-                yield return new object[] { "AB34567890123456789", "AB34 5678 9012 3456 789" };
-                yield return new object[] { "AB345678901234567890", "AB34 5678 9012 3456 7890" };
-                yield return new object[] { "AB3456789012345678901", "AB34 5678 9012 3456 7890 1" };
-                yield return new object[] { "AB34567890123456789012", "AB34 5678 9012 3456 7890 12" };
-                yield return new object[] { "AB345678901234567890123", "AB34 5678 9012 3456 7890 123" };
-                yield return new object[] { "AB3456789012345678901234", "AB34 5678 9012 3456 7890 1234" };
-                yield return new object[] { "AB34567890123456789012345", "AB34 5678 9012 3456 7890 1234 5" };
-                yield return new object[] { "AB345678901234567890123456", "AB34 5678 9012 3456 7890 1234 56" };
-                yield return new object[] { "AB3456789012345678901234567", "AB34 5678 9012 3456 7890 1234 567" };
-                yield return new object[] { "AB34567890123456789012345678", "AB34 5678 9012 3456 7890 1234 5678" };
-                yield return new object[] { "AB345678901234567890123456789", "AB34 5678 9012 3456 7890 1234 5678 9" };
-                yield return new object[] { "AB3456789012345678901234567890", "AB34 5678 9012 3456 7890 1234 5678 90" };
-                yield return new object[] { "AB34567890123456789012345678901", "AB34 5678 9012 3456 7890 1234 5678 901" };
-                yield return new object[] { "AB345678901234567890123456789012", "AB34 5678 9012 3456 7890 1234 5678 9012" };
-                yield return new object[] { "AB3456789012345678901234567890123", "AB34 5678 9012 3456 7890 1234 5678 9012 3" };
-                yield return new object[] { "AB34567890123456789012345678901234", "AB34 5678 9012 3456 7890 1234 5678 9012 34" };
+                yield return new object[] { "FR345678901234", "FR34 5678 9012 34" };
+                yield return new object[] { "FR3456789012345", "FR34 5678 9012 345" };
+                yield return new object[] { "FR34567890123456", "FR34 5678 9012 3456" };
+                yield return new object[] { "FR345678901234567", "FR34 5678 9012 3456 7" };
+                yield return new object[] { "FR3456789012345678", "FR34 5678 9012 3456 78" };
+                yield return new object[] { "FR34567890123456789", "FR34 5678 9012 3456 789" };
+                yield return new object[] { "FR345678901234567890", "FR34 5678 9012 3456 7890" };
+                yield return new object[] { "FR3456789012345678901", "FR34 5678 9012 3456 7890 1" };
+                yield return new object[] { "FR34567890123456789012", "FR34 5678 9012 3456 7890 12" };
+                yield return new object[] { "FR345678901234567890123", "FR34 5678 9012 3456 7890 123" };
+                yield return new object[] { "FR3456789012345678901234", "FR34 5678 9012 3456 7890 1234" };
+                yield return new object[] { "FR34567890123456789012345", "FR34 5678 9012 3456 7890 1234 5" };
+                yield return new object[] { "FR345678901234567890123456", "FR34 5678 9012 3456 7890 1234 56" };
+                yield return new object[] { "FR3456789012345678901234567", "FR34 5678 9012 3456 7890 1234 567" };
+                yield return new object[] { "FR34567890123456789012345678", "FR34 5678 9012 3456 7890 1234 5678" };
+                yield return new object[] { "FR345678901234567890123456789", "FR34 5678 9012 3456 7890 1234 5678 9" };
+                yield return new object[] { "FR3456789012345678901234567890", "FR34 5678 9012 3456 7890 1234 5678 90" };
+                yield return new object[] { "FR34567890123456789012345678901", "FR34 5678 9012 3456 7890 1234 5678 901" };
+                yield return new object[] { "FR345678901234567890123456789012", "FR34 5678 9012 3456 7890 1234 5678 9012" };
+                yield return new object[] { "FR3456789012345678901234567890123", "FR34 5678 9012 3456 7890 1234 5678 9012 3" };
+                yield return new object[] { "FR34567890123456789012345678901234", "FR34 5678 9012 3456 7890 1234 5678 9012 34" };
             }
         }
     }

@@ -134,6 +134,7 @@ namespace Narvalo.Finance
             return OfCulture(CultureInfo.CurrentCulture);
         }
 
+        // REVIEW: Should we worry about concurrent access? I don't believe.
         public static bool RegisterCurrency(string code)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));

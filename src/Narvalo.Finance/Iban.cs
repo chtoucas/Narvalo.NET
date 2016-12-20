@@ -4,6 +4,7 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Validation;
@@ -76,6 +77,7 @@ namespace Narvalo.Finance
         public bool IntegrityChecked { get; }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         // We only display the beginning of the IBAN value.
         private string DebuggerDisplay
             => _value.Length == MinLength
@@ -288,7 +290,9 @@ namespace Narvalo.Finance
 
             // NB: We already checked the length for each property.
             public bool Check()
-                => IsUpperLetter(CountryCode) && IsDigit(CheckDigits) && IsDigitOrUpperLetter(Bban);
+                => CountryISOCodes.TwoLetterCodeExists(CountryCode)
+                && IsDigit(CheckDigits)
+                && IsDigitOrUpperLetter(Bban);
         }
 
         private static string StripIgnorableSymbols(string input, IbanStyles styles)

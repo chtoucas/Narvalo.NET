@@ -191,10 +191,8 @@ namespace Narvalo.Finance
         // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
         internal bool CheckParts(BicFormatVersion version)
             // NB: We already checked the length for each property.
-            => (version == BicFormatVersion.ISO
-                ? IsDigitOrUpperLetter(InstitutionCode)
-                : IsUpperLetter(InstitutionCode))
-                && IsUpperLetter(CountryCode)
+            => (version == BicFormatVersion.ISO ? IsDigitOrUpperLetter(InstitutionCode) : IsUpperLetter(InstitutionCode))
+                && CountryISOCodes.TwoLetterCodeExists(CountryCode)
                 && IsDigitOrUpperLetter(LocationCode)
                 && (BranchCode.Length == 0 || IsDigitOrUpperLetter(BranchCode));
 

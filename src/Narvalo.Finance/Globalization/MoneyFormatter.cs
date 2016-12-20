@@ -31,6 +31,7 @@ namespace Narvalo.Finance.Globalization
             }
 
             // TODO: Improve C2. Add arbitrary formatting "###"? Check length?
+            // TODO: Simply use the CLDR data.
             // http://www.guysmithferrier.com/post/2007/07/Displaying-Currencies-In-Your-Local-Format.aspx
             // https://codeascraft.com/2016/04/19/how-etsy-formats-currency/
             switch (format)

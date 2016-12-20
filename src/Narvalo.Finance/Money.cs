@@ -4,6 +4,7 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
 
     using Narvalo.Finance.Globalization;
@@ -33,6 +34,7 @@ namespace Narvalo.Finance
         }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, Currency.Code);
 
         // Check that the currencies match.

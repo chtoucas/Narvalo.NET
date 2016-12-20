@@ -75,6 +75,7 @@
     <Compile Include="Bic.cs" />
     <Compile Include="BicFormatVersion.cs" />
     <Compile Include="CurrencySymbol.cs" />
+    <Compile Include="Validation\CountryISOCodes.cs" />
     <Compile Include="Globalization\MoneyFormatInfo.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="Globalization\MoneyFormatter.cs" />
@@ -102,6 +103,11 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Iban.cs" />
+    <Compile Include="Validation\CountryISOCodes.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CountryISOCodes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Validation\IbanFormat.cs" />
     <Compile Include="CurrencyActivator`1.cs" />
     <Compile Include="Validation\AsciiHelpers.cs" />
@@ -141,6 +147,12 @@
       <Project>{00388395-fc0d-4356-a1c8-9a9555b09943}</Project>
       <Name>Narvalo.Cerbere</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Validation\CountryISOCodes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CountryISOCodes.g.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

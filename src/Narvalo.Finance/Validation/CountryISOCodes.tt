@@ -1,0 +1,55 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" inherits="Iso4217Template" #>
+<#@ output extension=".g.cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(T4NarvaloLibrary)" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Narvalo.T4" #>
+<#
+
+// Country codes sorted in alphabetic english order.
+var codeSet = new HashSet<string> { };
+
+var source = VSHost.ResolvePath(@"..\..\..\data\ISO3166\alpha2.txt");
+var codes = File.ReadAllLines(source);
+
+foreach (var code in codes)
+{
+    codeSet.Add(code);
+}
+
+WriteHeader();
+
+#>
+namespace <#= Namespace #>
+{
+    using System.Collections.Generic;
+
+    internal partial class <#= Name #>
+    {
+        // All alpha-2 codes as defined in ISO 3166-1 alpha-2.
+        private static HashSet<string> TwoLetterCodeSet
+        {
+            get
+            {
+                if (s_TwoLetterCodeSet == null)
+                {
+                    var codeSet = new HashSet<string>() {
+        #region Long list of alpha-2 codes sorted in alphabetic order.
+
+<# foreach (var code in codeSet.OrderBy(_ => _)) { #>
+                        "<#= code #>",
+<# } #>
+
+        #endregion
+                    };
+
+                    s_TwoLetterCodeSet = codeSet;
+                }
+
+                return s_TwoLetterCodeSet;
+            }
+        }
+    }
+}
