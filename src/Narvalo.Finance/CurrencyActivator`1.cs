@@ -10,8 +10,7 @@ namespace Narvalo.Finance
 
     using static System.Diagnostics.Contracts.Contract;
 
-    internal static class CurrencyActivator<TCurrency>
-        where TCurrency : Currency
+    internal static class CurrencyActivator<TCurrency> where TCurrency : Currency
     {
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified type parameter.

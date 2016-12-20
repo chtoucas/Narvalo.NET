@@ -324,7 +324,7 @@ namespace Narvalo.Finance
                 }
             }
 
-            bool clrsp = styles.Contains(IbanStyles.AllowInnerWhite);
+            bool rmspace = styles.Contains(IbanStyles.AllowInnerWhite);
 
             int k = 0;
             for (var i = start; i <= end; i++)
@@ -332,8 +332,8 @@ namespace Narvalo.Finance
                 char ch = input[i];
 
                 // Normally, there is either a single whitespace char every four chars
-                // or no whitespace char at all. Here, we don't bother; just strip them.
-                if (clrsp && ch == WHITESPACE_CHAR && i != start && i != end) { continue; }
+                // or no whitespace char at all. Here, we don't bother and just ignore them.
+                if (rmspace && ch == WHITESPACE_CHAR && i != start && i != end) { continue; }
 
                 output[k] = ch;
                 k++;
@@ -417,18 +417,10 @@ namespace Narvalo.Finance
             return ToString(format, null);
         }
 
+        // NB: We ignore any user supplied "formatProvider".
         public string ToString(string format, IFormatProvider formatProvider)
         {
             Warrant.NotNull<string>();
-
-            if (formatProvider != null)
-            {
-                var fmt = formatProvider.GetFormat(GetType()) as ICustomFormatter;
-                if (fmt != null)
-                {
-                    return fmt.Format(format, this, formatProvider);
-                }
-            }
 
             if (format == null || format.Length == 0)
             {
@@ -439,11 +431,12 @@ namespace Narvalo.Finance
             {
                 case "D":
                 case "d":
-                    // Display (default): insert a space every 4 chars.
+                    // Display (default): insert a whitespace char every 4 chars.
+                    // This format is NOT suitable for electronic transmission.
                     return FormatD(_value);
                 case "G":
                 case "g":
-                    // General; this format is suitable for electronic transmission.
+                    // General.
                     return _value;
                 default:
                     throw new FormatException(Format.Current(Strings.Iban_InvalidFormatSpecification));
@@ -501,7 +494,7 @@ namespace Narvalo.Finance
             return Equals((Iban)obj);
         }
 
-        public override int GetHashCode() => _value.GetHashCode();
+        public override int GetHashCode() => _value.GetHashCode() ^ IntegrityChecked.GetHashCode();
     }
 }
 
