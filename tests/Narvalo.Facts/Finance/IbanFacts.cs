@@ -342,11 +342,7 @@ namespace Narvalo.Finance
         [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckIntegrity32bit_ReturnsTrue(string value)
-        {
-            var iban = Iban.Parse(value);
-
-            Assert.True(iban.CheckIntegrity32bit());
-        }
+            => Assert.True(Iban.CheckIntegrity32Bit(value));
 
         #endregion
 
@@ -356,105 +352,7 @@ namespace Narvalo.Finance
         [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckIntegrity64bit_ReturnsTrue(string value)
-        {
-            var iban = Iban.Parse(value);
-
-            Assert.True(iban.CheckIntegrity64bit());
-        }
-
-        #endregion
-
-        #region ParseCore()
-
-        [Theory]
-        [InlineData("12############", "12")]
-        [InlineData("12#############", "12")]
-        [InlineData("12##############", "12")]
-        [InlineData("12###############", "12")]
-        [InlineData("12################", "12")]
-        [InlineData("12#################", "12")]
-        [InlineData("12##################", "12")]
-        [InlineData("12###################", "12")]
-        [InlineData("12####################", "12")]
-        [InlineData("12#####################", "12")]
-        [InlineData("12######################", "12")]
-        [InlineData("12#######################", "12")]
-        [InlineData("12########################", "12")]
-        [InlineData("12#########################", "12")]
-        [InlineData("12##########################", "12")]
-        [InlineData("12###########################", "12")]
-        [InlineData("12############################", "12")]
-        [InlineData("12#############################", "12")]
-        [InlineData("12##############################", "12")]
-        [InlineData("12###############################", "12")]
-        [InlineData("12################################", "12")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetCountryCodeCorrectly(string value, string expectedValue)
-        {
-            var iban = Iban.ParseCore(value, false);
-
-            Assert.Equal(expectedValue, iban.CountryCode);
-        }
-
-        [Theory]
-        [InlineData("##34##########", "34")]
-        [InlineData("##34###########", "34")]
-        [InlineData("##34############", "34")]
-        [InlineData("##34#############", "34")]
-        [InlineData("##34##############", "34")]
-        [InlineData("##34###############", "34")]
-        [InlineData("##34################", "34")]
-        [InlineData("##34#################", "34")]
-        [InlineData("##34##################", "34")]
-        [InlineData("##34###################", "34")]
-        [InlineData("##34####################", "34")]
-        [InlineData("##34#####################", "34")]
-        [InlineData("##34######################", "34")]
-        [InlineData("##34#######################", "34")]
-        [InlineData("##34########################", "34")]
-        [InlineData("##34#########################", "34")]
-        [InlineData("##34##########################", "34")]
-        [InlineData("##34###########################", "34")]
-        [InlineData("##34############################", "34")]
-        [InlineData("##34#############################", "34")]
-        [InlineData("##34##############################", "34")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetCheckDigitsCorrectly(string value, string expectedValue)
-        {
-            var iban = Iban.ParseCore(value, false);
-
-            Assert.Equal(expectedValue, iban.CheckDigits);
-        }
-
-        [Theory]
-        [InlineData("####5678901234", "5678901234")]
-        [InlineData("####56789012345", "56789012345")]
-        [InlineData("####567890123456", "567890123456")]
-        [InlineData("####5678901234567", "5678901234567")]
-        [InlineData("####56789012345678", "56789012345678")]
-        [InlineData("####567890123456789", "567890123456789")]
-        [InlineData("####5678901234567890", "5678901234567890")]
-        [InlineData("####56789012345678901", "56789012345678901")]
-        [InlineData("####567890123456789012", "567890123456789012")]
-        [InlineData("####5678901234567890123", "5678901234567890123")]
-        [InlineData("####56789012345678901234", "56789012345678901234")]
-        [InlineData("####567890123456789012345", "567890123456789012345")]
-        [InlineData("####5678901234567890123456", "5678901234567890123456")]
-        [InlineData("####56789012345678901234567", "56789012345678901234567")]
-        [InlineData("####567890123456789012345678", "567890123456789012345678")]
-        [InlineData("####5678901234567890123456789", "5678901234567890123456789")]
-        [InlineData("####56789012345678901234567890", "56789012345678901234567890")]
-        [InlineData("####567890123456789012345678901", "567890123456789012345678901")]
-        [InlineData("####5678901234567890123456789012", "5678901234567890123456789012")]
-        [InlineData("####56789012345678901234567890123", "56789012345678901234567890123")]
-        [InlineData("####567890123456789012345678901234", "567890123456789012345678901234")]
-        [CLSCompliant(false)]
-        public static void ParseCore_SetBbanCorrectly(string value, string expectedValue)
-        {
-            var iban = Iban.ParseCore(value, false);
-
-            Assert.Equal(expectedValue, iban.Bban);
-        }
+            => Assert.True(Iban.CheckIntegrity64Bit(value));
 
         #endregion
     }
