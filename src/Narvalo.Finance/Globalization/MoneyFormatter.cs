@@ -30,8 +30,9 @@ namespace Narvalo.Finance.Globalization
                 format = DEFAULT_FORMAT;
             }
 
+            // FIXME: Simplify and remove most.
             // TODO: Improve C2. Add arbitrary formatting "###"? Check length?
-            // TODO: Simply use the CLDR data.
+            // TODO: Create a custom formatter using the CLDR data.
             // http://www.guysmithferrier.com/post/2007/07/Displaying-Currencies-In-Your-Local-Format.aspx
             // https://codeascraft.com/2016/04/19/how-etsy-formats-currency/
             switch (format)
@@ -91,7 +92,7 @@ namespace Narvalo.Finance.Globalization
             else
             {
                 var nfi = (NumberFormatInfo)mfi.NumberFormat.Clone();
-                nfi.CurrencySymbol = CurrencySymbol.GetFallbackSymbol(currency.Code);
+                nfi.CurrencySymbol = "\x00a4";  // ¤ - CURRENCY SIGN
 
                 return amount.ToString(format, mfi.NumberFormat);
             }

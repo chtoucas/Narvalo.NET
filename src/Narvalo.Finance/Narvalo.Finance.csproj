@@ -74,7 +74,6 @@
   <ItemGroup>
     <Compile Include="Bic.cs" />
     <Compile Include="BicFormatVersion.cs" />
-    <Compile Include="CurrencySymbol.cs" />
     <Compile Include="Validation\CountryISOCodes.cs" />
     <Compile Include="Globalization\MoneyFormatInfo.cs" />
     <Compile Include="IbanStyles.cs" />
