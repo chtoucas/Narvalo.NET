@@ -6,11 +6,11 @@ namespace Narvalo.Finance
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Finance.Internal;
+    using Narvalo.Finance.Validation;
     using Narvalo.Finance.Properties;
 
-    using static Narvalo.Finance.AsciiHelpers;
-    using static Narvalo.Finance.IbanFormat;
+    using static Narvalo.Finance.Validation.AsciiHelpers;
+    using static Narvalo.Finance.Validation.IbanFormat;
 
     /// <summary>
     /// Represents an International Bank Account Number (IBAN).
@@ -331,8 +331,8 @@ namespace Narvalo.Finance
             {
                 char ch = input[i];
 
-                // Normally, there is either a whitespace char every four chars
-                // or no whitespace char at all. Here, we don't bother and just strip them.
+                // Normally, there is either a single whitespace char every four chars
+                // or no whitespace char at all. Here, we don't bother; just strip them.
                 if (clrsp && ch == WHITESPACE_CHAR && i != start && i != end) { continue; }
 
                 output[k] = ch;
@@ -378,7 +378,7 @@ namespace Narvalo.Finance
             const long MAX_LETTER = (Int64.MaxValue - 35) / 100;
 
             int len = value.Length;
-            long checksum = 0;
+            long checksum = 0L;
 
             for (var i = 0; i < len; i++)
             {
@@ -488,7 +488,8 @@ namespace Narvalo.Finance
 
         public static bool operator !=(Iban left, Iban right) => !left.Equals(right);
 
-        public bool Equals(Iban other) => _value == other._value && IntegrityChecked == other.IntegrityChecked;
+        public bool Equals(Iban other)
+            => _value == other._value && IntegrityChecked == other.IntegrityChecked;
 
         public override bool Equals(object obj)
         {

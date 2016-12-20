@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Internal
+namespace Narvalo.Finance.Validation
 {
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
@@ -8,7 +8,7 @@ namespace Narvalo.Finance.Internal
     using Narvalo.Finance.Properties;
 
     using static System.Diagnostics.Contracts.Contract;
-    using static Narvalo.Finance.AsciiHelpers;
+    using static Narvalo.Finance.Validation.AsciiHelpers;
 
     internal static partial class Sentinel
     {

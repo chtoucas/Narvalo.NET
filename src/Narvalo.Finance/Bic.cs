@@ -5,11 +5,11 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Finance.Internal;
+    using Narvalo.Finance.Validation;
     using Narvalo.Finance.Properties;
 
-    using static Narvalo.Finance.AsciiHelpers;
-    using static Narvalo.Finance.BicFormat;
+    using static Narvalo.Finance.Validation.AsciiHelpers;
+    using static Narvalo.Finance.Validation.BicFormat;
 
     /// <summary>
     /// Represents a Business Identifier Code (BIC).

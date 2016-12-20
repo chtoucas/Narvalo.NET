@@ -88,7 +88,7 @@
     <Compile Include="Snv\SnvXmlNames.cs" />
     <Compile Include="Snv\SnvXmlReader.cs" />
     <Compile Include="Snv\XElement%24.cs" />
-    <Compile Include="BicFormat.cs" />
+    <Compile Include="Validation\BicFormat.cs" />
     <Compile Include="Currencies\Currencies.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,10 +102,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Iban.cs" />
-    <Compile Include="IbanFormat.cs" />
-    <Compile Include="Internal\CurrencyActivator`1.cs" />
-    <Compile Include="AsciiHelpers.cs" />
-    <Compile Include="Internal\Sentinel.cs" />
+    <Compile Include="Validation\IbanFormat.cs" />
+    <Compile Include="CurrencyActivator`1.cs" />
+    <Compile Include="Validation\AsciiHelpers.cs" />
+    <Compile Include="Validation\Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,7 +7,6 @@ namespace Narvalo.Finance
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Globalization;
-    using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]

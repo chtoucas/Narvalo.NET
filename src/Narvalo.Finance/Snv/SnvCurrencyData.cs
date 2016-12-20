@@ -2,8 +2,8 @@
 
 namespace Narvalo.Finance.Snv
 {
-    using Narvalo.Finance.Internal;
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Validation;
 
     /// <summary>
     /// Provides information about a localized currency.
