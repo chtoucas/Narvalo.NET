@@ -16,13 +16,13 @@ namespace Narvalo.Finance
         [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_Succeeds_ForValidISOValue(string value)
-            => Assert.True(Bic.TryParse(value, BicFormatVersion.ISO).HasValue);
+            => Assert.True(Bic.TryParse(value, BicVersion.ISO).HasValue);
 
         [Theory]
         [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_Succeeds_ForValidSwiftValue(string value)
-            => Assert.True(Bic.TryParse(value, BicFormatVersion.Swift).HasValue);
+            => Assert.True(Bic.TryParse(value, BicVersion.Swift).HasValue);
 
         [Fact]
         public static void TryParse_ReturnsNull_ForNull()
@@ -38,13 +38,13 @@ namespace Narvalo.Finance
         [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_ReturnsNull_ForInvalidISOValue(string value)
-            => Assert.False(Bic.TryParse(value, BicFormatVersion.ISO).HasValue);
+            => Assert.False(Bic.TryParse(value, BicVersion.ISO).HasValue);
 
         [Theory]
         [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void TryParse_ReturnsNull_ForInvalidSwiftValue(string value)
-            => Assert.False(Bic.TryParse(value, BicFormatVersion.Swift).HasValue);
+            => Assert.False(Bic.TryParse(value, BicVersion.Swift).HasValue);
 
         #endregion
 
@@ -54,13 +54,13 @@ namespace Narvalo.Finance
         [MemberData(nameof(ValidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Parse_Succeeds_ForValidISOValue(string value)
-            => Bic.Parse(value, BicFormatVersion.ISO);
+            => Bic.Parse(value, BicVersion.ISO);
 
         [Theory]
         [MemberData(nameof(ValidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Parse_Succeeds_ForValidSwiftValue(string value)
-            => Bic.Parse(value, BicFormatVersion.Swift);
+            => Bic.Parse(value, BicVersion.Swift);
 
         [Fact]
         public static void Parse_ThrowsArgumentNullException_ForNull()
@@ -76,13 +76,13 @@ namespace Narvalo.Finance
         [MemberData(nameof(InvalidISOValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Parse_ThrowsFormatException_ForInvalidISOValue(string value)
-            => Assert.Throws<FormatException>(() => Bic.Parse(value, BicFormatVersion.ISO));
+            => Assert.Throws<FormatException>(() => Bic.Parse(value, BicVersion.ISO));
 
         [Theory]
         [MemberData(nameof(InvalidSwiftValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Parse_ThrowsFormatException_ForInvalidSwiftValue(string value)
-            => Assert.Throws<FormatException>(() => Bic.Parse(value, BicFormatVersion.Swift));
+            => Assert.Throws<FormatException>(() => Bic.Parse(value, BicVersion.Swift));
 
         #endregion
 
@@ -400,7 +400,7 @@ namespace Narvalo.Finance
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.True(bic.CheckParts(BicFormatVersion.ISO));
+            Assert.True(bic.CheckParts(BicVersion.ISO));
         }
 
         [Theory]
@@ -410,7 +410,7 @@ namespace Narvalo.Finance
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.False(bic.CheckParts(BicFormatVersion.ISO));
+            Assert.False(bic.CheckParts(BicVersion.ISO));
         }
 
         [Theory]
@@ -420,7 +420,7 @@ namespace Narvalo.Finance
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.True(bic.CheckParts(BicFormatVersion.Swift));
+            Assert.True(bic.CheckParts(BicVersion.Swift));
         }
 
         [Theory]
@@ -430,7 +430,7 @@ namespace Narvalo.Finance
         {
             var bic = Bic.ParseCore(value);
 
-            Assert.False(bic.CheckParts(BicFormatVersion.Swift));
+            Assert.False(bic.CheckParts(BicVersion.Swift));
         }
 
         #endregion

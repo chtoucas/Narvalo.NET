@@ -109,7 +109,7 @@ namespace Narvalo.Finance
             Expect.True(CheckLocationCode(locationCode));
             Expect.True(CheckBranchCode(branchCode));
 
-            return Create(institutionCode, countryCode, locationCode, branchCode, BicFormatVersion.Default);
+            return Create(institutionCode, countryCode, locationCode, branchCode, BicVersion.Default);
         }
 
         public static Bic Create(
@@ -117,7 +117,7 @@ namespace Narvalo.Finance
             string countryCode,
             string locationCode,
             string branchCode,
-            BicFormatVersion version)
+            BicVersion version)
         {
             // REVIEW: We check for non-null twice...
             Require.NotNull(institutionCode, nameof(institutionCode));
@@ -145,10 +145,10 @@ namespace Narvalo.Finance
         {
             Expect.NotNull(value);
 
-            return Parse(value, BicFormatVersion.Default);
+            return Parse(value, BicVersion.Default);
         }
 
-        public static Bic Parse(string value, BicFormatVersion version)
+        public static Bic Parse(string value, BicVersion version)
         {
             Require.NotNull(value, nameof(value));
 
@@ -167,9 +167,9 @@ namespace Narvalo.Finance
             return bic;
         }
 
-        public static Bic? TryParse(string value) => TryParse(value, BicFormatVersion.Default);
+        public static Bic? TryParse(string value) => TryParse(value, BicVersion.Default);
 
-        public static Bic? TryParse(string value, BicFormatVersion version)
+        public static Bic? TryParse(string value, BicVersion version)
         {
             if (!CheckValue(value)) { return null; }
             Check.True(CheckValue(value));
@@ -189,9 +189,9 @@ namespace Narvalo.Finance
         }
 
         // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
-        internal bool CheckParts(BicFormatVersion version)
+        internal bool CheckParts(BicVersion version)
             // NB: We already checked the length for each property.
-            => (version == BicFormatVersion.ISO ? IsDigitOrUpperLetter(InstitutionCode) : IsUpperLetter(InstitutionCode))
+            => (version == BicVersion.ISO ? IsDigitOrUpperLetter(InstitutionCode) : IsUpperLetter(InstitutionCode))
                 && CountryISOCodes.TwoLetterCodeExists(CountryCode)
                 && IsDigitOrUpperLetter(LocationCode)
                 && (BranchCode.Length == 0 || IsDigitOrUpperLetter(BranchCode));
@@ -262,7 +262,7 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.Utilities.BicFormat;
+    using static Narvalo.Finance.Validation.BicFormat;
 
     public partial struct Bic
     {
