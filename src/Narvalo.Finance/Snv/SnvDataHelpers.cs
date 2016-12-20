@@ -11,8 +11,6 @@ namespace Narvalo.Finance.Snv
 
     internal static class SnvDataHelpers
     {
-        private const string MINOR_UNITS_NOT_AVAILABLE = "N.A.";
-
         public static string CleanupCountryName(string name)
             => name.Replace('’', '\'').Replace("\n", String.Empty);
 
@@ -39,7 +37,9 @@ namespace Narvalo.Finance.Snv
 
         public static short? ParseMinorUnits(string value)
         {
-            if (value == MINOR_UNITS_NOT_AVAILABLE)
+            const string NOT_AVAILABLE = "N.A.";
+
+            if (value == NOT_AVAILABLE)
             {
                 return null;
             }

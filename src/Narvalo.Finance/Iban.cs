@@ -24,17 +24,18 @@ namespace Narvalo.Finance
         private const string DEFAULT_FORMAT = "D";
         private const char WHITESPACE_CHAR = ' ';
         private const int CHECKSUM_MODULO = 97;
-        private const int MAX_CHECKSUM_DIGIT_32BIT = (Int32.MaxValue - 9) / 10;
-        private const int MAX_CHECKSUM_LETTER_32BIT = (Int32.MaxValue - 35) / 100;
-        private const long MAX_CHECKSUM_DIGIT_64BIT = (Int64.MaxValue - 9) / 10;
-        private const long MAX_CHECKSUM_LETTER_64BIT = (Int64.MaxValue - 35) / 100;
 
         private readonly string _bban;
         private readonly string _checkDigits;
         private readonly string _countryCode;
         private readonly string _value;
 
-        private Iban(string countryCode, string checkDigits, string bban, string value, bool verified)
+        private Iban(
+            string countryCode,
+            string checkDigits,
+            string bban,
+            string value,
+            bool integrityChecked)
         {
             Demand.True(CheckCountryCode(countryCode));
             Demand.True(CheckCheckDigits(checkDigits));
@@ -45,7 +46,7 @@ namespace Narvalo.Finance
             _checkDigits = checkDigits;
             _bban = bban;
             _value = value;
-            IntegrityChecked = verified;
+            IntegrityChecked = integrityChecked;
         }
 
         /// <summary>
@@ -83,6 +84,15 @@ namespace Narvalo.Finance
 
         public static Iban Create(string countryCode, string checkDigits, string bban)
         {
+            Expect.True(CheckCountryCode(countryCode));
+            Expect.True(CheckCheckDigits(checkDigits));
+            Expect.True(CheckBban(bban));
+
+            return Create(countryCode, checkDigits, bban, true);
+        }
+
+        public static Iban Create(string countryCode, string checkDigits, string bban, bool checkIntegrity)
+        {
             // REVIEW: We check for non-null twice...
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(checkDigits, nameof(checkDigits));
@@ -106,7 +116,13 @@ namespace Narvalo.Finance
                 throw new FormatException(Strings.Iban_BadPartsFormat);
             }
 
-            return new Iban(parts.CountryCode, parts.CheckDigits, parts.Bban, value, false);
+            // WARNING: This MUST stay after CheckValue() and parts.Check(). See CheckIntegrity().
+            if (checkIntegrity && !CheckIntegrity(value))
+            {
+                throw new FormatException(Strings.Iban_IntegrityCheckFailure);
+            }
+
+            return new Iban(parts.CountryCode, parts.CheckDigits, parts.Bban, value, checkIntegrity);
         }
 
         public static Iban Parse(string value)
@@ -160,6 +176,7 @@ namespace Narvalo.Finance
                 throw new FormatException(Strings.Iban_BadPartsFormat);
             }
 
+            // WARNING: This MUST stay after CheckValue() and parts.Check(). See CheckIntegrity().
             if (!CheckIntegrity(val))
             {
                 throw new FormatException(Strings.Iban_IntegrityCheckFailure);
@@ -197,6 +214,7 @@ namespace Narvalo.Finance
             var parts = IbanParts.Create(val);
             if (!parts.Check()) { return null; }
 
+            // WARNING: This MUST stay after CheckValue() and parts.Check(). See CheckIntegrity().
             if (!CheckIntegrity(val)) { return null; }
 
             return new Iban(parts.CountryCode, parts.CheckDigits, parts.Bban, val, true);
@@ -205,78 +223,39 @@ namespace Narvalo.Finance
         public static Iban? CheckIntegrity(Iban iban)
         {
             if (iban.IntegrityChecked) { return iban; }
+            // It is safe to call CheckIntegrity() since "_value" is guaranteed to be valid. See CheckIntegrity().
             if (!CheckIntegrity(iban._value)) { return null; }
 
             return new Iban(iban.CountryCode, iban.CheckDigits, iban.Bban, iban._value, true);
         }
 
         // We only verify the integrity of the whole IBAN; we do not validate the BBAN part.
+        // The algorithm is as follows:
+        // 1. Move the first 4 chars to the end of the value.
+        // 2. Replace '0' by 0, '1' by 1, etc.
+        // 3. Replace 'A' by 10, 'B' by 11, etc.
+        // 4. Verify that the resultint integer modulo 97 is equal to 1.
+        // NB: Only works if you can ensure that "value" is only made up of alphanumeric
+        // ASCII characters. Here this means that we have called CheckValue() and parts.Check().
         internal static bool CheckIntegrity(string value)
         {
             Demand.True(CheckValue(value));
 
             // NB: On full .NET we have Environment.Is64BitProcess.
-            // If IntPtr.Size is equal to 8, we are running in a 64-bit .NET Framework and
-            // we will check the integrity using Int64 arithmetic; otherwize (32-bit, 16-bit)
+            // If IntPtr.Size is equal to 8, we are running in a 64-bit process and
+            // we check the integrity using Int64 arithmetic; otherwize (32-bit or 16-bit process)
             // we use Int32 arithmetic (NB: IntPtr.Size = 4 in a 32-bit process). I believe,
-            // but I have not verified, that CheckIntegrity64Bit() is faster.
-            return IntPtr.Size == 8 ? CheckIntegrity64Bit(value) : CheckIntegrity32Bit(value);
+            // but I have not verified, that ComputeInt64Checksum() is faster for a 64-bit processor.
+            return CheckIntegrity(value, IntPtr.Size == 8);
         }
 
-        internal static bool CheckIntegrity32Bit(string value)
+        internal static bool CheckIntegrity(string value, bool sixtyfour)
         {
             Demand.True(CheckValue(value));
 
-            int len = value.Length;
-            int checksum = 0;
-
-            for (var i = 0; i < len; i++)
-            {
-                // Move the first 4 chars to the end of the string.
-                char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
-                if (ch >= '0' && ch <= '9')
-                {
-                    if (checksum > MAX_CHECKSUM_DIGIT_32BIT) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 10 * checksum + (ch - '0');
-                }
-                else
-                {
-                    // If "ch" is not a digit, it is an uppercase ASCII letter,
-                    // then 'A' is mapped to 10, 'B' to 11, 'C' to 12... and 'Z' to 35.
-                    if (checksum > MAX_CHECKSUM_LETTER_32BIT) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 100 * checksum + (ch - 'A' + 10);
-                }
-            }
-
-            return checksum % CHECKSUM_MODULO == 1;
-        }
-
-        internal static bool CheckIntegrity64Bit(string value)
-        {
-            Demand.True(CheckValue(value));
-
-            int len = value.Length;
-            long checksum = 0;
-
-            for (var i = 0; i < len; i++)
-            {
-                // Move the first 4 chars to the end of the string.
-                char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
-                if (ch >= '0' && ch <= '9')
-                {
-                    if (checksum > MAX_CHECKSUM_DIGIT_64BIT) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 10 * checksum + (ch - '0');
-                }
-                else
-                {
-                    // If "ch" is not a digit, it is an uppercase ASCII letter,
-                    // then A is mapped to 10, B to 11, C to 12, and so on.
-                    if (checksum > MAX_CHECKSUM_LETTER_64BIT) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 100 * checksum + (ch - 'A' + 10);
-                }
-            }
-
-            return checksum % CHECKSUM_MODULO == 1;
+            return sixtyfour
+                ? ComputeInt64Checksum(value) % CHECKSUM_MODULO == 1
+                : ComputeInt32Checksum(value) % CHECKSUM_MODULO == 1;
         }
 
         internal struct IbanParts
@@ -361,6 +340,62 @@ namespace Narvalo.Finance
             }
 
             return new String(output, 0, k);
+        }
+
+        private static int ComputeInt32Checksum(string value)
+        {
+            Demand.True(CheckValue(value));
+
+            const int MAX_DIGIT = (Int32.MaxValue - 9) / 10;
+            const int MAX_LETTER = (Int32.MaxValue - 35) / 100;
+
+            int len = value.Length;
+            int checksum = 0;
+
+            for (var i = 0; i < len; i++)
+            {
+                char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
+                if (ch >= '0' && ch <= '9')
+                {
+                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULO; }
+                    checksum = 10 * checksum + (ch - '0');
+                }
+                else
+                {
+                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULO; }
+                    checksum = 100 * checksum + (ch - 'A' + 10);
+                }
+            }
+
+            return checksum;
+        }
+
+        private static long ComputeInt64Checksum(string value)
+        {
+            Demand.True(CheckValue(value));
+
+            const long MAX_DIGIT = (Int64.MaxValue - 9) / 10;
+            const long MAX_LETTER = (Int64.MaxValue - 35) / 100;
+
+            int len = value.Length;
+            long checksum = 0;
+
+            for (var i = 0; i < len; i++)
+            {
+                char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
+                if (ch >= '0' && ch <= '9')
+                {
+                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULO; }
+                    checksum = 10 * checksum + (ch - '0');
+                }
+                else
+                {
+                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULO; }
+                    checksum = 100 * checksum + (ch - 'A' + 10);
+                }
+            }
+
+            return checksum;
         }
     }
 

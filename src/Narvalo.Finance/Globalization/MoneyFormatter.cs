@@ -9,7 +9,7 @@ namespace Narvalo.Finance.Globalization
 
     internal sealed class MoneyFormatter
     {
-        private const string DefaultFormat = "C";
+        private const string DEFAULT_FORMAT = "C";
 
         public static string Format(Money money, string format, MoneyFormatInfo mfi)
         {
@@ -27,7 +27,7 @@ namespace Narvalo.Finance.Globalization
 
             if (format == null || format.Length == 0)
             {
-                format = DefaultFormat;
+                format = DEFAULT_FORMAT;
             }
 
             // TODO: Improve C2. Add arbitrary formatting "###"? Check length?

@@ -167,7 +167,7 @@ namespace Narvalo
 
             Assert.NotNull(ex);
             Assert.IsType<ControlFlowException>(ex);
-            Assert.Equal(ExceptionMessage, ex.Message);
+            Assert.Equal(EXCEPTION_MESSAGE, ex.Message);
         }
 
         [Fact]
@@ -180,7 +180,7 @@ namespace Narvalo
     // Helpers
     public partial class CheckFacts
     {
-        private const string ExceptionMessage = "Found a missing case in the switch.";
+        private const string EXCEPTION_MESSAGE = "Found a missing case in the switch.";
 
         private static void ComprehensiveSwitch1(My.Enum012 value)
         {
@@ -199,7 +199,7 @@ namespace Narvalo
                 case My.Enum012.One:
                 case My.Enum012.Two:
                 case My.Enum012.Zero: break;
-                default: throw Check.Unreachable(ExceptionMessage);
+                default: throw Check.Unreachable(EXCEPTION_MESSAGE);
             }
         }
         private static void ComprehensiveSwitch3(My.Enum012 value)
@@ -226,7 +226,7 @@ namespace Narvalo
             switch (value)
             {
                 case My.Enum012.One: break;
-                default: throw Check.Unreachable(ExceptionMessage);
+                default: throw Check.Unreachable(EXCEPTION_MESSAGE);
             }
         }
         private static void IncompleteSwitch3(My.Enum012 value)

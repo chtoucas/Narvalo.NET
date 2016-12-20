@@ -336,23 +336,19 @@ namespace Narvalo.Finance
 
     public static partial class IbanFacts
     {
-        #region CheckIntegrity32bit()
+        #region CheckIntegrity()
 
         [Theory]
         [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void CheckIntegrity32bit_ReturnsTrue(string value)
-            => Assert.True(Iban.CheckIntegrity32Bit(value));
-
-        #endregion
-
-        #region CheckIntegrity64bit()
+        public static void CheckIntegrity_ReturnsTrue_UsingInt32Arithmetic(string value)
+            => Assert.True(Iban.CheckIntegrity(value, false));
 
         [Theory]
         [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void CheckIntegrity64bit_ReturnsTrue(string value)
-            => Assert.True(Iban.CheckIntegrity64Bit(value));
+        public static void CheckIntegrity_ReturnsTrue_UsingInt64Arithmetic(string value)
+            => Assert.True(Iban.CheckIntegrity(value, true));
 
         #endregion
     }
