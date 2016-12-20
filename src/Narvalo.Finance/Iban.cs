@@ -290,11 +290,15 @@ namespace Narvalo.Finance
 
             // NB: We already checked the length for each property.
             public bool Check()
+                // FIXME: It seems that the country code does not always match an (ISO) alpha-2 code.
                 => CountryISOCodes.TwoLetterCodeExists(CountryCode)
                 && IsDigit(CheckDigits)
                 && IsDigitOrUpperLetter(Bban);
         }
 
+        // NB: Normally, there is either a single whitespace char every four chars or no whitespace
+        // char at all. Here we are more permissive: multiple whitespaces are ok, and position check
+        // is not enforced.
         private static string StripIgnorableSymbols(string input, IbanStyles styles)
         {
             Demand.NotNull(input);
@@ -302,8 +306,6 @@ namespace Narvalo.Finance
 
             if (input.Length == 0) { return String.Empty; }
             if (styles == IbanStyles.None) { return input; }
-
-            var output = new char[input.Length];
 
             int len = input.Length;
 
@@ -317,27 +319,43 @@ namespace Narvalo.Finance
                     start++;
                 }
             }
+            // The input contains only whitespaces.
+            if (start == len) { return String.Empty; }
+
             int end = len - 1;
             if (styles.Contains(IbanStyles.AllowTrailingWhite))
             {
                 // Ignore trailing whitespaces.
-                while (end >= 0)
+                // NB: We are sure that end > start; otherwise input is an empty string but we
+                // already handled this case above.
+                while (end > start)
                 {
                     if (input[end] != WHITESPACE_CHAR) { break; }
                     end--;
                 }
             }
 
+            if (styles.Contains(IbanStyles.AllowIbanPrefix)
+                && input.Length >= start + 5
+                && input.Substring(start, 5) == "IBAN ")
+            {
+                start += 5;
+            }
+
             bool rmspace = styles.Contains(IbanStyles.AllowInnerWhite);
+
+            var output = new char[input.Length];
 
             int k = 0;
             for (var i = start; i <= end; i++)
             {
                 char ch = input[i];
 
-                // Normally, there is either a single whitespace char every four chars
-                // or no whitespace char at all. Here, we don't bother and just ignore them.
-                if (rmspace && ch == WHITESPACE_CHAR && i != start && i != end) { continue; }
+                // NB: If IbanStyles.AllowIbanPrefix is on and we did remove an IBAN prefix,
+                // we might have whitespaces again at the beginning of the loop. Lesson: do not
+                // exclude i = start. We do not exclude i = end, even if we know that "ch" is not
+                // a whitespace, only because this does not change anything.
+                if (rmspace && ch == WHITESPACE_CHAR) { continue; }
 
                 output[k] = ch;
                 k++;
@@ -438,6 +456,11 @@ namespace Narvalo.Finance
                     // Display (default): insert a whitespace char every 4 chars.
                     // This format is NOT suitable for electronic transmission.
                     return FormatD(_value);
+                case "H":
+                case "h":
+                    // Human: same as "D" but prefixed with "IBAN ".
+                    // This format is NOT suitable for electronic transmission.
+                    return "IBAN " + FormatD(_value);
                 case "G":
                 case "g":
                     // General.

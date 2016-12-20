@@ -68,6 +68,7 @@ Narvalo.Finance
 - References:
   * [Money Pattern](http://martinfowler.com/eaaCatalog/money.html)
   * [IBAN Calculator](http://www.ibancalculator.com/)
+  * https://www.iban.com/structure.html
   * [The Swift Codes](https://www.theswiftcodes.com/)
   * [SNV](http://www.currency-iso.org/)
   * [ISO 4217](http://www.iso.org/iso/home/standards/currency_codes.htm)
@@ -80,6 +81,7 @@ Narvalo.Finance
   * [Money Type for the CLR](https://bitbucket.org/rplaire/money-type-for-the-clr)
   * [CSharpMoney](https://csharpmoney.codeplex.com/)
   * [NMoneys](https://github.com/dgg/nmoneys)
+  * [PHP-IBAN](https://github.com/globalcitizen/php-iban)
 
 Narvalo.Web
 -----------

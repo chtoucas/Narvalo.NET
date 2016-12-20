@@ -5,9 +5,9 @@ namespace Narvalo.LocalData.Snv
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    public sealed class SnvDatabase
+    public sealed class SnvProvider
     {
-        private SnvDatabase(string fileName, bool historical)
+        private SnvProvider(string fileName, bool historical)
         {
             Require.NotNull(fileName, nameof(fileName));
 
@@ -19,18 +19,18 @@ namespace Narvalo.LocalData.Snv
 
         public bool Historical { get; }
 
-        public static SnvDatabase GetCurrentDatabase(string fileName)
+        public static SnvProvider GetCurrentDatabase(string fileName)
         {
             Expect.NotNull(fileName);
 
-            return new SnvDatabase(fileName, false);
+            return new SnvProvider(fileName, false);
         }
 
-        public static SnvDatabase GetHistoricalDatabase(string fileName)
+        public static SnvProvider GetHistoricalDatabase(string fileName)
         {
             Expect.NotNull(fileName);
 
-            return new SnvDatabase(fileName, true);
+            return new SnvProvider(fileName, true);
         }
 
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "[Intentionally] The method returns an enumeration.")]

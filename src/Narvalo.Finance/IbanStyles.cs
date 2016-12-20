@@ -15,9 +15,11 @@ namespace Narvalo.Finance
 
         AllowInnerWhite = 1 << 2,
 
+        AllowIbanPrefix = 1 << 3,
+
         AllowWhiteSpaces = AllowLeadingWhite | AllowTrailingWhite | AllowInnerWhite,
 
-        Any = AllowWhiteSpaces,
+        Any = AllowWhiteSpaces | AllowIbanPrefix,
     }
 
     public static class IbanStylesExtensions

@@ -15,7 +15,7 @@ Library Enhancements & Improvements:
 - Narvalo.Finance (still no big money for accurate computations, next time...)
   * use Profile259.
   * localization.
-  * BBAN implementation.
+  * BBAN & IIBAN implementations.
   * strong/weak validation of Bic, Iban & Bban (check digits).
   * currency info with implementation from the BCL.
   * money & currency formatting.

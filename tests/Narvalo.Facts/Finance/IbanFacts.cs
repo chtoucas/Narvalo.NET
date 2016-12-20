@@ -15,8 +15,19 @@ namespace Narvalo.Finance
         [Theory]
         [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void TryParse_Succeeds_ForValidFormat(string value)
+        public static void TryParse_Succeeds_ForValidLength(string value)
             => Assert.True(Iban.TryParse(value).HasValue);
+
+        [Theory]
+        [InlineData("     AL47 2121 1009 0000 0002 3569 8741")]
+        [InlineData("AL47 2121 1009 0000 0002 3569 8741     ")]
+        [InlineData("IBAN AL47 2121 1009 0000 0002 3569 8741")]
+        [InlineData("     IBAN AL47 2121 1009 0000 0002 3569 8741")]
+        [CLSCompliant(false)]
+        public static void TryParse_Succeeds_(string value)
+        {
+            Assert.True(Iban.TryParse(value, IbanStyles.Any).HasValue);
+        }
 
         [Fact]
         public static void TryParse_ReturnsNull_ForNull()
@@ -25,7 +36,7 @@ namespace Narvalo.Finance
         [Theory]
         [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void TryParse_ReturnsNull_ForInvalidFormat(string value)
+        public static void TryParse_ReturnsNull_ForInvalidLength(string value)
             => Assert.False(Iban.TryParse(value).HasValue);
 
         #endregion
@@ -316,6 +327,19 @@ namespace Narvalo.Finance
 
             Assert.Equal(formattedValue, result1);
             Assert.Equal(formattedValue, result2);
+        }
+
+        [Theory]
+        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ToString_ReturnsValue_ForHumanFormat(string value, string formattedValue)
+        {
+            var result1 = Iban.Parse(value).ToString("H");
+            var result2 = Iban.Parse(value).ToString("h");
+            var expected = "IBAN " + formattedValue;
+
+            Assert.Equal(expected, result1);
+            Assert.Equal(expected, result2);
         }
 
         [Theory]
