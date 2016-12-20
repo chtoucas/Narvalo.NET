@@ -1,4 +1,9 @@
-﻿## ISO 4217
+﻿## ISO 3166
+
+The file alpha2.txt is copied from the official ISO
+[website](http://www.iso.org/iso/home/standards/country_codes/country_names_and_code_elements_txt-temp.htm)
+
+## ISO 4217
 
 The files are copied from the SNV (Swiss Association for Standardization)
 [website](http://www.currency-iso.org/en/home.html):

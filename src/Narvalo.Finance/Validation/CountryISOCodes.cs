@@ -5,8 +5,10 @@ namespace Narvalo.Finance.Validation
     using System.Collections.Generic;
 
     // Only covers ISO 3166-1 alpha-2 codes.
+    // REVIEW: Should we manually include the deleted codes?
     internal static partial class CountryISOCodes
     {
+        // The list is automatically generated using the data obtained from the ISO website.
         private static volatile HashSet<string> s_TwoLetterCodeSet;
 
         public static bool TwoLetterCodeExists(string code)

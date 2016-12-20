@@ -26,6 +26,7 @@ namespace Narvalo.Finance
     /// </remarks>
     public partial class Currency : IEquatable<Currency>
     {
+        // The list is automatically generated using the data obtained from the SNV website.
         private volatile static HashSet<string> s_CodeSet;
 
         private readonly string _code;

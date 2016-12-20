@@ -12,11 +12,15 @@
 var codeSet = new HashSet<string> { };
 
 var source = VSHost.ResolvePath(@"..\..\..\data\ISO3166\alpha2.txt");
-var codes = File.ReadAllLines(source);
+var lines = File.ReadAllLines(source);
 
-foreach (var code in codes)
+// We start at 1 to ignore the header line.
+for (var i = 1; i < lines.Length; i++)
 {
-    codeSet.Add(code);
+    var line = lines[i];
+    // There migth be empty lines, just ignore them.
+    if (line == String.Empty) { continue; }
+    codeSet.Add(line.Substring(line.Length - 2));
 }
 
 WriteHeader();
@@ -36,9 +40,9 @@ namespace <#= Namespace #>
                 if (s_TwoLetterCodeSet == null)
                 {
                     var codeSet = new HashSet<string>() {
-        #region Long list of alpha-2 codes sorted in alphabetic order.
+        #region List of alpha-2 codes sorted in english alphabetic order.
 
-<# foreach (var code in codeSet.OrderBy(_ => _)) { #>
+<# foreach (var code in codeSet) { #>
                         "<#= code #>",
 <# } #>
 
