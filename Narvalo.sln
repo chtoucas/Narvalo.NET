@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.Facts", "tests\Narv
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TestCommon", "tests\TestCommon\TestCommon.shproj", "{C141265F-95ED-4093-A56C-5991DBA96F67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narvalo.LocalData", "src\Narvalo.LocalData\Narvalo.LocalData.csproj", "{8B0BA5D1-0935-4DBC-AFA0-671E7A1F6BB2}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		tests\TestCommon\Narvalo.TestCommon.projitems*{c141265f-95ed-4093-a56c-5991dba96f67}*SharedItemsImports = 13
@@ -135,6 +137,12 @@ Global
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B0BA5D1-0935-4DBC-AFA0-671E7A1F6BB2}.CodeContracts|Any CPU.ActiveCfg = Release|Any CPU
+		{8B0BA5D1-0935-4DBC-AFA0-671E7A1F6BB2}.CodeContracts|Any CPU.Build.0 = Release|Any CPU
+		{8B0BA5D1-0935-4DBC-AFA0-671E7A1F6BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B0BA5D1-0935-4DBC-AFA0-671E7A1F6BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B0BA5D1-0935-4DBC-AFA0-671E7A1F6BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B0BA5D1-0935-4DBC-AFA0-671E7A1F6BB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,5 +163,6 @@ Global
 		{E94F4D98-3882-4713-90FD-27C515B68BB0} = {7C09B3E7-756C-4ED3-A1F1-A789BA6AE3CA}
 		{D05B40A6-15B6-46D0-ABC1-8F8CFC5D02E8} = {7C09B3E7-756C-4ED3-A1F1-A789BA6AE3CA}
 		{C141265F-95ED-4093-A56C-5991DBA96F67} = {7C09B3E7-756C-4ED3-A1F1-A789BA6AE3CA}
+		{8B0BA5D1-0935-4DBC-AFA0-671E7A1F6BB2} = {E532D0F7-CFBB-4D52-BEA3-D67DA931AC86}
 	EndGlobalSection
 EndGlobal
