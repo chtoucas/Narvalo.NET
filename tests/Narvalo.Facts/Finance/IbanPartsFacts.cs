@@ -39,9 +39,9 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void GetParts_SetCountryCodeCorrectly(string value, string expectedValue)
         {
-            var parts = IbanParts.Parse(value);
+            var parts = IbanParts.Parse(value, false);
 
-            Assert.Equal(expectedValue, parts.CountryCode);
+            Assert.Equal(expectedValue, parts.Value.CountryCode);
         }
 
         [Theory]
@@ -69,9 +69,9 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void GetParts_SetCheckDigitsCorrectly(string value, string expectedValue)
         {
-            var parts = IbanParts.Parse(value);
+            var parts = IbanParts.Parse(value, false);
 
-            Assert.Equal(expectedValue, parts.CheckDigits);
+            Assert.Equal(expectedValue, parts.Value.CheckDigits);
         }
 
         [Theory]
@@ -99,9 +99,9 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void GetParts_SetBbanCorrectly(string value, string expectedValue)
         {
-            var parts = IbanParts.Parse(value);
+            var parts = IbanParts.Parse(value, false);
 
-            Assert.Equal(expectedValue, parts.Bban);
+            Assert.Equal(expectedValue, parts.Value.Bban);
         }
 
         #endregion
