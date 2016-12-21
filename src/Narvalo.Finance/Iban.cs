@@ -22,6 +22,8 @@ namespace Narvalo.Finance
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Iban : IEquatable<Iban>, IFormattable
     {
+        public const string HumanHeader = "IBAN ";
+
         private const string DEFAULT_FORMAT = "D";
         private const char WHITESPACE_CHAR = ' ';
         private const int CHECKSUM_MODULO = 97;
@@ -131,7 +133,7 @@ namespace Narvalo.Finance
         {
             Expect.NotNull(value);
 
-            return Parse(value, IbanStyles.Any);
+            return Parse(value, IbanStyles.None);
         }
 
         public static Iban Parse(string value, IbanStyles styles)
@@ -145,49 +147,24 @@ namespace Narvalo.Finance
             }
             Check.True(CheckValue(val));
 
-            var parts = IbanParts.Create(val);
+            var parts = IbanParts.Parse(val);
             if (!parts.Check())
             {
                 throw new FormatException(Strings.Iban_BadPartsFormat);
             }
 
-            return new Iban(parts.CountryCode, parts.CheckDigits, parts.Bban, val, false);
-        }
-
-        public static Iban ParseExact(string value)
-        {
-            Expect.NotNull(value);
-
-            return ParseExact(value, IbanStyles.None);
-        }
-
-        public static Iban ParseExact(string value, IbanStyles styles)
-        {
-            Require.NotNull(value, nameof(value));
-
-            var val = StripIgnorableSymbols(value, styles);
-            if (!CheckValue(val))
-            {
-                throw new FormatException(Strings.Iban_InvalidFormat);
-            }
-            Check.True(CheckValue(val));
-
-            var parts = IbanParts.Create(val);
-            if (!parts.Check())
-            {
-                throw new FormatException(Strings.Iban_BadPartsFormat);
-            }
+            bool checkIntegrity = styles.Contains(IbanStyles.CheckIntegrity);
 
             // WARNING: This MUST stay after CheckValue() and parts.Check(). See CheckIntegrity().
-            if (!CheckIntegrity(val))
+            if (checkIntegrity && !CheckIntegrity(val))
             {
                 throw new FormatException(Strings.Iban_IntegrityCheckFailure);
             }
 
-            return new Iban(parts.CountryCode, parts.CheckDigits, parts.Bban, val, true);
+            return new Iban(parts.CountryCode, parts.CheckDigits, parts.Bban, val, checkIntegrity);
         }
 
-        public static Iban? TryParse(string value) => TryParse(value, IbanStyles.Any);
+        public static Iban? TryParse(string value) => TryParse(value, IbanStyles.None);
 
         public static Iban? TryParse(string value, IbanStyles styles)
         {
@@ -197,29 +174,14 @@ namespace Narvalo.Finance
             if (!CheckValue(val)) { return null; }
             Check.True(CheckValue(val));
 
-            var parts = IbanParts.Create(val);
+            var parts = IbanParts.Parse(val);
             if (!parts.Check()) { return null; }
 
-            return new Iban(parts.CountryCode, parts.CheckDigits, parts.Bban, val, false);
-        }
-
-        public static Iban? TryParseExact(string value) => TryParseExact(value, IbanStyles.Any);
-
-        public static Iban? TryParseExact(string value, IbanStyles styles)
-        {
-            if (value == null) { return null; }
-
-            var val = StripIgnorableSymbols(value, styles);
-            if (!CheckValue(val)) { return null; }
-            Check.True(CheckValue(val));
-
-            var parts = IbanParts.Create(val);
-            if (!parts.Check()) { return null; }
-
+            bool checkIntegrity = styles.Contains(IbanStyles.CheckIntegrity);
             // WARNING: This MUST stay after CheckValue() and parts.Check(). See CheckIntegrity().
-            if (!CheckIntegrity(val)) { return null; }
+            if (checkIntegrity && !CheckIntegrity(val)) { return null; }
 
-            return new Iban(parts.CountryCode, parts.CheckDigits, parts.Bban, val, true);
+            return new Iban(parts.CountryCode, parts.CheckDigits, parts.Bban, val, checkIntegrity);
         }
 
         public static Iban? CheckIntegrity(Iban iban)
@@ -231,17 +193,18 @@ namespace Narvalo.Finance
             return new Iban(iban.CountryCode, iban.CheckDigits, iban.Bban, iban._value, true);
         }
 
-        // We only verify the integrity of the whole IBAN; we do not validate the BBAN part.
+        // We only verify the integrity of the whole IBAN; we do not validate the BBAN.
         // The algorithm is as follows:
         // 1. Move the first 4 chars to the end of the value.
         // 2. Replace '0' by 0, '1' by 1, etc.
         // 3. Replace 'A' by 10, 'B' by 11, etc.
         // 4. Verify that the resultint integer modulo 97 is equal to 1.
-        // NB: Only works if you can ensure that "value" is only made up of alphanumeric
-        // ASCII characters. Here this means that we have called CheckValue() and parts.Check().
+        // WARNING: Only works if you can ensure that "value" is only made up of alphanumeric
+        // ASCII characters. Here this means that we have already called CheckValue()
+        // and parts.Check().
         internal static bool CheckIntegrity(string value)
         {
-            Demand.True(CheckValue(value));
+            Demand.NotNull(value);
 
             // NB: On full .NET we have Environment.Is64BitProcess.
             // If IntPtr.Size is equal to 8, we are running in a 64-bit process and
@@ -253,7 +216,7 @@ namespace Narvalo.Finance
 
         internal static bool CheckIntegrity(string value, bool sixtyfour)
         {
-            Demand.True(CheckValue(value));
+            Demand.NotNull(value);
 
             return sixtyfour
                 ? ComputeInt64Checksum(value) % CHECKSUM_MODULO == 1
@@ -266,7 +229,7 @@ namespace Narvalo.Finance
             public string CheckDigits { get; set; }
             public string CountryCode { get; set; }
 
-            public static IbanParts Create(string value)
+            public static IbanParts Parse(string value)
             {
                 Demand.True(CheckValue(value));
 
@@ -326,8 +289,8 @@ namespace Narvalo.Finance
             if (styles.Contains(IbanStyles.AllowTrailingWhite))
             {
                 // Ignore trailing whitespaces.
-                // NB: We are sure that end > start; otherwise input is an empty string but we
-                // already handled this case above.
+                // NB: We know for sure that end > start; otherwise input would have been an empty
+                // string but we already handled this case above.
                 while (end > start)
                 {
                     if (input[end] != WHITESPACE_CHAR) { break; }
@@ -335,16 +298,16 @@ namespace Narvalo.Finance
                 }
             }
 
-            if (styles.Contains(IbanStyles.AllowIbanPrefix)
+            if (styles.Contains(IbanStyles.AllowHeader)
                 && input.Length >= start + 5
-                && input.Substring(start, 5) == "IBAN ")
+                && input.Substring(start, 5) == HumanHeader)
             {
                 start += 5;
             }
 
             bool rmspace = styles.Contains(IbanStyles.AllowInnerWhite);
 
-            var output = new char[input.Length];
+            var output = new char[end - start + 1];
 
             int k = 0;
             for (var i = start; i <= end; i++)
@@ -353,8 +316,8 @@ namespace Narvalo.Finance
 
                 // NB: If IbanStyles.AllowIbanPrefix is on and we did remove an IBAN prefix,
                 // we might have whitespaces again at the beginning of the loop. Lesson: do not
-                // exclude i = start. We do not exclude i = end, even if we know that "ch" is not
-                // a whitespace, only because this does not change anything.
+                // exclude i = start. We do not exclude i = end, even though we know that "ch" is
+                // not a whitespace, only because this does not change anything.
                 if (rmspace && ch == WHITESPACE_CHAR) { continue; }
 
                 output[k] = ch;
@@ -366,7 +329,7 @@ namespace Narvalo.Finance
 
         private static int ComputeInt32Checksum(string value)
         {
-            Demand.True(CheckValue(value));
+            Demand.NotNull(value);
 
             const int MAX_DIGIT = (Int32.MaxValue - 9) / 10;
             const int MAX_LETTER = (Int32.MaxValue - 35) / 100;
@@ -394,7 +357,7 @@ namespace Narvalo.Finance
 
         private static long ComputeInt64Checksum(string value)
         {
-            Demand.True(CheckValue(value));
+            Demand.NotNull(value);
 
             const long MAX_DIGIT = (Int64.MaxValue - 9) / 10;
             const long MAX_LETTER = (Int64.MaxValue - 35) / 100;
@@ -460,7 +423,7 @@ namespace Narvalo.Finance
                 case "h":
                     // Human: same as "D" but prefixed with "IBAN ".
                     // This format is NOT suitable for electronic transmission.
-                    return "IBAN " + FormatD(_value);
+                    return HumanHeader + FormatD(_value);
                 case "G":
                 case "g":
                     // General.

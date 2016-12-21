@@ -4,6 +4,10 @@ namespace Narvalo.Finance
 {
     using System;
 
+    /// <summary>
+    /// Defines the options that customized the behaviour of the Parse and TryParse methods
+    /// of the Iban type.
+    /// </summary>
     [Flags]
     public enum IbanStyles
     {
@@ -15,11 +19,13 @@ namespace Narvalo.Finance
 
         AllowInnerWhite = 1 << 2,
 
-        AllowIbanPrefix = 1 << 3,
+        AllowHeader = 1 << 3,
+
+        CheckIntegrity = 1 << 4,
 
         AllowWhiteSpaces = AllowLeadingWhite | AllowTrailingWhite | AllowInnerWhite,
 
-        Any = AllowWhiteSpaces | AllowIbanPrefix,
+        Any = AllowWhiteSpaces | AllowHeader | CheckIntegrity,
     }
 
     public static class IbanStylesExtensions

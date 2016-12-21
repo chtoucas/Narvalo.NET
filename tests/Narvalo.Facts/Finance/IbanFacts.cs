@@ -41,20 +41,6 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region TryParseExact()
-
-        [Fact]
-        public static void TryParseExact_ReturnsNull_ForNull()
-            => Assert.False(Iban.TryParseExact(null).HasValue);
-
-        [Theory]
-        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryParseExact_ReturnsNull_ForInvalidFormat(string value)
-            => Assert.False(Iban.TryParseExact(value).HasValue);
-
-        #endregion
-
         #region Parse()
 
         [Theory]
@@ -72,20 +58,6 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Parse_ThrowsFormatException_ForInvalidLength(string value)
             => Assert.Throws<FormatException>(() => Iban.Parse(value));
-
-        #endregion
-
-        #region ParseExact()
-
-        [Fact]
-        public static void ParseExact_ThrowsArgumentNullException_ForNull()
-            => Assert.Throws<ArgumentNullException>(() => Iban.ParseExact(null));
-
-        [Theory]
-        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ParseExact_ThrowsFormatException_ForInvalidLength(string value)
-            => Assert.Throws<FormatException>(() => Iban.ParseExact(value));
 
         #endregion
 
@@ -118,7 +90,7 @@ namespace Narvalo.Finance
             => Assert.Throws<ArgumentException>(() => Iban.Create("FR", "14", value));
 
         [Fact]
-        public static void Create_DoesNotThrow_ForValidInputs()
+        public static void Create_DoesNotThrow_ForValidInput()
             => Iban.Create("FR", "14", "20041010050500013M02606");
 
         #endregion
@@ -336,7 +308,7 @@ namespace Narvalo.Finance
         {
             var result1 = Iban.Parse(value).ToString("H");
             var result2 = Iban.Parse(value).ToString("h");
-            var expected = "IBAN " + formattedValue;
+            var expected = Iban.HumanHeader + formattedValue;
 
             Assert.Equal(expected, result1);
             Assert.Equal(expected, result2);

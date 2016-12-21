@@ -136,7 +136,6 @@ New classes and new methods:
 - `Currency.OfCurrentCulture()`
 - `Currency.RegisterCurrency()`
 - `Bic.IsSwiftTest`
-- `Iban` exact parsing methods.
 - `Iban` implemens `IFormattable`.
 - `BicFormat`
 - `BicStyles`
