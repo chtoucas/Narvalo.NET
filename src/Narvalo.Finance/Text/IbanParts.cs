@@ -2,15 +2,14 @@
 
 namespace Narvalo.Finance.Text
 {
+    using System;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Finance.Validation;
+    using Narvalo.Finance.Properties;
 
     using static Narvalo.Finance.Text.AsciiHelpers;
 
-    // The validation helpers must remain public; they are an integral part of the Iban's contract.
-    // These methods only enforce the length of each part, not their content.
-    public partial struct IbanParts
+    public partial struct IbanParts : IEquatable<IbanParts>
     {
         internal const int MinLength = 14;
         internal const int MaxLength = 34;
@@ -24,72 +23,116 @@ namespace Narvalo.Finance.Text
         private readonly string _bban;
         private readonly string _checkDigits;
         private readonly string _countryCode;
+        private readonly string _value;
 
-        private IbanParts(string countryCode, string checkDigits, string bban)
+        private IbanParts(string countryCode, string checkDigits, string bban, string value)
         {
-            Demand.True(CheckCountryCode(countryCode));
-            Demand.True(CheckCheckDigits(checkDigits));
-            Demand.True(CheckBban(bban));
+            Demand.NotNull(countryCode);
+            Demand.NotNull(checkDigits);
+            Demand.NotNull(bban);
+            Demand.NotNull(value);
 
             _bban = bban;
             _checkDigits = checkDigits;
             _countryCode = countryCode;
+            _value = value;
         }
 
         public string Bban
         {
-            get { Sentinel.Warrant.LengthRange(BbanMinLength, BbanMaxLength); return _bban; }
+            get { Warrant.NotNull<string>(); return _bban; }
         }
 
         public string CheckDigits
         {
-            get { Sentinel.Warrant.Length(CheckDigitsLength); return _checkDigits; }
+            get { Warrant.NotNull<string>(); return _checkDigits; }
         }
 
         public string CountryCode
         {
-            get { Sentinel.Warrant.Length(CountryLength); return _countryCode; }
+            get { Warrant.NotNull<string>(); return _countryCode; }
         }
 
-        public static IbanParts? Create(string countryCode, string checkDigits, string bban)
+        internal string LiteralValue => _value;
+
+        public static IbanParts Create(string countryCode, string checkDigits, string bban)
         {
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(checkDigits, nameof(checkDigits));
             Require.NotNull(bban, nameof(bban));
 
             if (CheckCountryCode(countryCode)
-                && IsUpperLetter(countryCode)
                 && CheckCheckDigits(checkDigits)
-                && IsDigit(checkDigits)
-                && CheckBban(bban)
-                && IsDigitOrUpperLetter(bban))
+                && CheckBban(bban))
             {
-                return new IbanParts(countryCode, checkDigits, bban);
+                var value = countryCode + checkDigits + bban;
+
+                return new IbanParts(countryCode, checkDigits, bban, value);
             }
 
-            return null;
+            throw new FormatException(Strings.Iban_InvalidFormat);
         }
 
-        public static IbanParts? Parse(string value) => ParseIntern(value, true);
+        public static IbanParts Parse(string value)
+        {
+            if (!CheckValue(value))
+            {
+                throw new FormatException(Strings.Iban_InvalidFormat);
+            }
 
-        internal static IbanParts? ParseIntern(string value, bool check)
+            string countryCode = GetCountryCode(value);
+            if (!CheckCountryCode(countryCode))
+            {
+                throw new FormatException(Strings.Iban_InvalidCountryCode);
+            }
+
+            string checkDigits = GetCheckDigits(value);
+            if (!CheckCheckDigits(checkDigits))
+            {
+                throw new FormatException(Strings.Iban_InvalidCheckDigits);
+            }
+
+            string bban = GetBban(value);
+            if (!CheckBban(bban))
+            {
+                throw new FormatException(Strings.Iban_InvalidBban);
+            }
+
+            return new IbanParts(countryCode, checkDigits, bban, value);
+        }
+
+        public static IbanParts? TryParse(string value)
         {
             if (!CheckValue(value)) { return null; }
 
-            // The first two letters define the ISO 3166-1 alpha-2 country code.
-            string countryCode = value.Substring(0, CountryLength);
-            Check.True(CheckCountryCode(countryCode));
-            if (check && !IsUpperLetter(countryCode)) { return null; }
+            string countryCode = GetCountryCode(value);
+            if (!CheckCountryCode(countryCode)) { return null; }
 
-            string checkDigits = value.Substring(CountryLength, CheckDigitsLength);
-            Check.True(CheckCheckDigits(checkDigits));
-            if (check && !IsDigit(checkDigits)) { return null; }
+            string checkDigits = GetCheckDigits(value);
+            if (!CheckCheckDigits(checkDigits)) { return null; }
 
-            string bban = value.Substring(CountryLength + CheckDigitsLength);
-            Contract.Assume(CheckBban(bban));
-            if (check && !IsDigitOrUpperLetter(bban)) { return null; }
+            string bban = GetBban(value);
+            if (!CheckBban(bban)) { return null; }
 
-            return new IbanParts(countryCode, checkDigits, bban);
+            return new IbanParts(countryCode, checkDigits, bban, value);
+        }
+
+        private static string GetBban(string value)
+        {
+            Expect.NotNull(value);
+            return value.Substring(CountryLength + CheckDigitsLength);
+        }
+
+        private static string GetCheckDigits(string value)
+        {
+            Expect.NotNull(value);
+            return value.Substring(CountryLength, CheckDigitsLength);
+        }
+
+        private static string GetCountryCode(string value)
+        {
+            Expect.NotNull(value);
+            return value.Substring(0, CountryLength);
         }
 
         #region Validation helpers.
@@ -98,21 +141,23 @@ namespace Narvalo.Finance.Text
         public static bool CheckBban(string value)
         {
             if (value == null) { return false; }
-            return value.Length >= BbanMinLength && value.Length <= BbanMaxLength;
+            return value.Length >= BbanMinLength
+                && value.Length <= BbanMaxLength
+                && IsDigitOrUpperLetter(value);
         }
 
         [Pure]
         public static bool CheckCheckDigits(string value)
         {
             if (value == null) { return false; }
-            return value.Length == CheckDigitsLength;
+            return value.Length == CheckDigitsLength && IsDigit(value);
         }
 
         [Pure]
         public static bool CheckCountryCode(string value)
         {
             if (value == null) { return false; }
-            return value.Length == CountryLength;
+            return value.Length == CountryLength && IsUpperLetter(value);
         }
 
         [Pure]
@@ -124,11 +169,33 @@ namespace Narvalo.Finance.Text
 
         #endregion
     }
+
+    // Implements the IEquatable<IbanParts> interface.
+    public partial struct IbanParts
+    {
+        public static bool operator ==(IbanParts left, IbanParts right) => left.Equals(right);
+
+        public static bool operator !=(IbanParts left, IbanParts right) => !left.Equals(right);
+
+        public bool Equals(IbanParts other) => _value == other._value;
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is IbanParts))
+            {
+                return false;
+            }
+
+            return Equals((IbanParts)obj);
+        }
+
+        public override int GetHashCode() => _value.GetHashCode();
+    }
 }
 
 #if CONTRACTS_FULL
 
-namespace Narvalo.Finance.Validation
+namespace Narvalo.Finance.Text
 {
     using System.Diagnostics.Contracts;
 
@@ -137,9 +204,10 @@ namespace Narvalo.Finance.Validation
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(CheckBban(_bban));
-            Contract.Invariant(CheckCheckDigits(_checkDigits));
-            Contract.Invariant(CheckCountryCode(_countryCode));
+            Contract.Invariant(_bban != null);
+            Contract.Invariant(_checkDigits != null);
+            Contract.Invariant(_countryCode != null);
+            Contract.Invariant(_value != null);
         }
     }
 }

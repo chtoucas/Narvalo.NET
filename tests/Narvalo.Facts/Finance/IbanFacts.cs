@@ -329,29 +329,6 @@ namespace Narvalo.Finance
         #endregion
     }
 
-#if !NO_INTERNALS_VISIBLE_TO
-
-    public static partial class IbanFacts
-    {
-        #region CheckIntegrity()
-
-        [Theory]
-        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckIntegrity_ReturnsTrue_UsingInt32Arithmetic(string value)
-            => Assert.True(Iban.CheckIntegrity(value, false));
-
-        [Theory]
-        [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckIntegrity_ReturnsTrue_UsingInt64Arithmetic(string value)
-            => Assert.True(Iban.CheckIntegrity(value, true));
-
-        #endregion
-    }
-
-#endif
-
     public static partial class IbanFacts
     {
         private static Iban ParseUnchecked(string value) => Iban.Parse(value, IbanStyles.None);

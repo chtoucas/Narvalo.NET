@@ -100,6 +100,8 @@
     <Compile Include="CurrencyActivator`1.cs" />
     <Compile Include="Text\AsciiHelpers.cs" />
     <Compile Include="Text\IbanParts.cs" />
+    <Compile Include="Validation\IbanValidations.cs" />
+    <Compile Include="Validation\IbanValidator.cs" />
     <Compile Include="Validation\Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />

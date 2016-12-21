@@ -262,7 +262,7 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.Validation.BicFormat;
+    using static Narvalo.Finance.Text.BicFormat;
 
     public partial struct Bic
     {

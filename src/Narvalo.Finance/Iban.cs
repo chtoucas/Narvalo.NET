@@ -23,17 +23,12 @@ namespace Narvalo.Finance
 
         private const string DEFAULT_FORMAT = "D";
         private const char WHITESPACE_CHAR = ' ';
-        private const int CHECKSUM_MODULO = 97;
 
         private readonly IbanParts _parts;
-        private readonly string _value;
 
-        private Iban(IbanParts parts, string value, bool integrityChecked)
+        private Iban(IbanParts parts, bool integrityChecked)
         {
-            Demand.NotNull(value);
-
             _parts = parts;
-            _value = value;
             IntegrityChecked = integrityChecked;
         }
 
@@ -42,7 +37,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string Bban
         {
-            get { Sentinel.Warrant.LengthRange(IbanParts.BbanMinLength, IbanParts.BbanMaxLength); return _parts.Bban; }
+            get { Warrant.NotNull<string>(); return _parts.Bban; }
         }
 
         /// <summary>
@@ -50,7 +45,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string CheckDigits
         {
-            get { Sentinel.Warrant.Length(IbanParts.CheckDigitsLength); return _parts.CheckDigits; }
+            get { Warrant.NotNull<string>(); return _parts.CheckDigits; }
         }
 
         /// <summary>
@@ -58,7 +53,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string CountryCode
         {
-            get { Sentinel.Warrant.Length(IbanParts.CountryLength); return _parts.CountryCode; }
+            get { Warrant.NotNull<string>(); return _parts.CountryCode; }
         }
 
         public bool IntegrityChecked { get; }
@@ -67,9 +62,9 @@ namespace Narvalo.Finance
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         // We only display the beginning of the IBAN value.
         private string DebuggerDisplay
-            => _value.Length == IbanParts.MinLength
-            ? _value
-            : _value.Substring(0, IbanParts.MinLength) + "...";
+            => _parts.LiteralValue.Length > IbanParts.MinLength
+            ? _parts.LiteralValue.Substring(0, IbanParts.MinLength) + "..."
+            : _parts.LiteralValue;
 
         public static Iban Create(string countryCode, string checkDigits, string bban)
         {
@@ -77,128 +72,113 @@ namespace Narvalo.Finance
             Expect.NotNull(checkDigits);
             Expect.NotNull(bban);
 
-            return Create(countryCode, checkDigits, bban, true);
+            return Create(countryCode, checkDigits, bban, IbanValidations.Integrity);
         }
 
-        public static Iban Create(string countryCode, string checkDigits, string bban, bool checkIntegrity)
+        public static Iban Create(string countryCode, string checkDigits, string bban, IbanValidations validations)
         {
             Expect.NotNull(countryCode);
             Expect.NotNull(checkDigits);
             Expect.NotNull(bban);
 
             var parts = IbanParts.Create(countryCode, checkDigits, bban);
-            if (!parts.HasValue)
+
+            if (validations.Contains(IbanValidations.ISOCountryCode)
+                && !IbanValidator.CheckCountryCode(parts))
             {
-                throw new FormatException(Strings.Iban_BadPartsFormat);
+                throw new FormatException(Strings.Iban_UnknownISOCountryCode);
             }
 
-            var value = countryCode + checkDigits + bban;
-
-            // It is safe to call CheckIntegrity() since "value" is guaranteed to be valid. See CheckIntegrity().
-            if (checkIntegrity && !CheckIntegrity(value))
+            bool checkIntegrity = validations.Contains(IbanValidations.Integrity);
+            if (checkIntegrity && !IbanValidator.CheckIntegrity(parts))
             {
                 throw new FormatException(Strings.Iban_IntegrityCheckFailure);
             }
 
-            return new Iban(parts.Value, value, checkIntegrity);
+            return new Iban(parts, checkIntegrity);
         }
 
         public static Iban Parse(string value)
         {
             Expect.NotNull(value);
 
-            return Parse(value, IbanStyles.None);
+            return Parse(value, IbanStyles.None, IbanValidations.Integrity);
         }
 
         public static Iban Parse(string value, IbanStyles styles)
+        {
+            Expect.NotNull(value);
+
+            return Parse(value, styles, IbanValidations.Integrity);
+        }
+
+        public static Iban Parse(string value, IbanValidations validations)
+        {
+            Expect.NotNull(value);
+
+            return Parse(value, IbanStyles.None, validations);
+        }
+
+        public static Iban Parse(string value, IbanStyles styles, IbanValidations validations)
         {
             Require.NotNull(value, nameof(value));
 
             var val = StripIgnorableSymbols(value, styles);
 
             var parts = IbanParts.Parse(val);
-            if (!parts.HasValue)
-            {
-                throw new FormatException(Strings.Iban_InvalidFormat);
-            }
 
-            if (styles.Contains(IbanStyles.CheckISOCountryCode)
-                && !CountryISOCodes.TwoLetterCodeExists(parts.Value.CountryCode))
+            if (validations.Contains(IbanValidations.ISOCountryCode)
+                && !IbanValidator.CheckCountryCode(parts))
             {
                 throw new FormatException(Strings.Iban_UnknownISOCountryCode);
             }
 
-            bool checkIntegrity = styles.Contains(IbanStyles.CheckIntegrity);
-            // It is safe to call CheckIntegrity() since "val" is guaranteed to be valid. See CheckIntegrity().
-            if (checkIntegrity && !CheckIntegrity(val))
+            bool checkIntegrity = validations.Contains(IbanValidations.Integrity);
+            if (checkIntegrity && !IbanValidator.CheckIntegrity(parts))
             {
                 throw new FormatException(Strings.Iban_IntegrityCheckFailure);
             }
 
-            return new Iban(parts.Value, val, checkIntegrity);
+            return new Iban(parts, checkIntegrity);
         }
 
-        public static Iban? TryParse(string value) => TryParse(value, IbanStyles.None);
+        public static Iban? TryParse(string value)
+            => TryParse(value, IbanStyles.None, IbanValidations.Integrity);
 
         public static Iban? TryParse(string value, IbanStyles styles)
+            => TryParse(value, styles, IbanValidations.Integrity);
+
+        public static Iban? TryParse(string value, IbanValidations validations)
+            => TryParse(value, IbanStyles.None, validations);
+
+        public static Iban? TryParse(string value, IbanStyles styles, IbanValidations validations)
         {
             if (value == null) { return null; }
 
             var val = StripIgnorableSymbols(value, styles);
 
-            var parts = IbanParts.Parse(val);
+            var parts = IbanParts.TryParse(val);
             if (!parts.HasValue) { return null; }
 
-            if (styles.Contains(IbanStyles.CheckISOCountryCode)
-                && !CountryISOCodes.TwoLetterCodeExists(parts.Value.CountryCode))
+            if (validations.Contains(IbanValidations.ISOCountryCode)
+                && !IbanValidator.CheckCountryCode(parts.Value))
             {
                 return null;
             }
 
-            bool checkIntegrity = styles.Contains(IbanStyles.CheckIntegrity);
-            // It is safe to call CheckIntegrity() since "val" is guaranteed to be valid. See CheckIntegrity().
-            if (checkIntegrity && !CheckIntegrity(val)) { return null; }
+            bool checkIntegrity = validations.Contains(IbanValidations.Integrity);
+            if (checkIntegrity && !IbanValidator.CheckIntegrity(parts.Value)) { return null; }
 
-            return new Iban(parts.Value, val, checkIntegrity);
+            return new Iban(parts.Value, checkIntegrity);
         }
 
         public static Iban? CheckIntegrity(Iban iban)
         {
             if (iban.IntegrityChecked) { return iban; }
             // It is safe to call CheckIntegrity() since "_value" is guaranteed to be valid. See CheckIntegrity().
-            if (!CheckIntegrity(iban._value)) { return null; }
+            if (!IbanValidator.CheckIntegrity(iban._parts)) { return null; }
 
-            return new Iban(iban._parts, iban._value, true);
-        }
-
-        // We only verify the integrity of the whole IBAN; we do not validate the BBAN.
-        // The algorithm is as follows:
-        // 1. Move the leading 4 chars to the end of the value.
-        // 2. Replace '0' by 0, '1' by 1, etc.
-        // 3. Replace 'A' by 10, 'B' by 11, etc.
-        // 4. Verify that the resulting integer modulo 97 is equal to 1.
-        // WARNING: Only works if you can ensure that "value" is only made up of alphanumeric
-        // ASCII characters. Here this means that we have already called CheckValue()
-        // and parts.Check().
-        internal static bool CheckIntegrity(string value)
-        {
-            Demand.NotNull(value);
-
-            // NB: On full .NET we have Environment.Is64BitProcess.
-            // If IntPtr.Size is equal to 8, we are running in a 64-bit process and
-            // we check the integrity using Int64 arithmetic; otherwize (32-bit or 16-bit process)
-            // we use Int32 arithmetic (NB: IntPtr.Size = 4 in a 32-bit process). I believe,
-            // but I have not verified, that ComputeInt64Checksum() is faster for a 64-bit processor.
-            return CheckIntegrity(value, IntPtr.Size == 8);
-        }
-
-        internal static bool CheckIntegrity(string value, bool sixtyfour)
-        {
-            Demand.NotNull(value);
-
-            return sixtyfour
-                ? ComputeInt64Checksum(value) % CHECKSUM_MODULO == 1
-                : ComputeInt32Checksum(value) % CHECKSUM_MODULO == 1;
+            return new Iban(iban._parts, true);
         }
 
         // NB: Normally, there is either a single whitespace char every four chars or no whitespace
@@ -269,62 +249,6 @@ namespace Narvalo.Finance
 
             return new String(output, 0, k);
         }
-
-        private static int ComputeInt32Checksum(string value)
-        {
-            Demand.NotNull(value);
-
-            const int MAX_DIGIT = (Int32.MaxValue - 9) / 10;
-            const int MAX_LETTER = (Int32.MaxValue - 35) / 100;
-
-            int len = value.Length;
-            int checksum = 0;
-
-            for (var i = 0; i < len; i++)
-            {
-                char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
-                if (ch >= '0' && ch <= '9')
-                {
-                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 10 * checksum + (ch - '0');
-                }
-                else
-                {
-                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 100 * checksum + (ch - 'A' + 10);
-                }
-            }
-
-            return checksum;
-        }
-
-        private static long ComputeInt64Checksum(string value)
-        {
-            Demand.NotNull(value);
-
-            const long MAX_DIGIT = (Int64.MaxValue - 9) / 10;
-            const long MAX_LETTER = (Int64.MaxValue - 35) / 100;
-
-            int len = value.Length;
-            long checksum = 0L;
-
-            for (var i = 0; i < len; i++)
-            {
-                char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
-                if (ch >= '0' && ch <= '9')
-                {
-                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 10 * checksum + (ch - '0');
-                }
-                else
-                {
-                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 100 * checksum + (ch - 'A' + 10);
-                }
-            }
-
-            return checksum;
-        }
     }
 
     // Implements the IFormattable interface.
@@ -361,16 +285,16 @@ namespace Narvalo.Finance
                 case "d":
                     // Display (default): insert a whitespace char every 4 chars.
                     // This format is NOT suitable for electronic transmission.
-                    return FormatD(_value);
+                    return FormatD(_parts.LiteralValue);
                 case "H":
                 case "h":
                     // Human: same as "D" but prefixed with "IBAN ".
                     // This format is NOT suitable for electronic transmission.
-                    return HumanHeader + FormatD(_value);
+                    return HumanHeader + FormatD(_parts.LiteralValue);
                 case "G":
                 case "g":
                     // General.
-                    return _value;
+                    return _parts.LiteralValue;
                 default:
                     throw new FormatException(Format.Current(Strings.Iban_InvalidFormatSpecification));
             }
@@ -415,7 +339,7 @@ namespace Narvalo.Finance
         public static bool operator !=(Iban left, Iban right) => !left.Equals(right);
 
         public bool Equals(Iban other)
-            => _value == other._value && IntegrityChecked == other.IntegrityChecked;
+            => _parts == other._parts && IntegrityChecked == other.IntegrityChecked;
 
         public override bool Equals(object obj)
         {
@@ -427,7 +351,7 @@ namespace Narvalo.Finance
             return Equals((Iban)obj);
         }
 
-        public override int GetHashCode() => _value.GetHashCode() ^ IntegrityChecked.GetHashCode();
+        public override int GetHashCode() => _parts.GetHashCode() ^ IntegrityChecked.GetHashCode();
     }
 }
 
@@ -437,7 +361,7 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.Validation.IbanParts;
+    using static Narvalo.Finance.Text.IbanParts;
 
     public partial struct Iban
     {

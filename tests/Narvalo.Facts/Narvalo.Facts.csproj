@@ -88,6 +88,7 @@
     <Compile Include="Finance\Text\BicFormatFacts.cs" />
     <Compile Include="Finance\Validation\CountryISOCodesFacts.cs" />
     <Compile Include="Finance\Text\IbanPartsFacts.cs" />
+    <Compile Include="Finance\Validation\IbanValidatorFacts.cs" />
     <Compile Include="Fx\Samples\Internal\EnumerableExtensions.cs" />
     <Compile Include="_TestCommon\DebugOnlyFactAttribute.cs" />
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />

@@ -34,11 +34,11 @@ namespace Narvalo.Finance.Text
         [InlineData("12345678901234567890123456789")]
         [InlineData("123456789012345678901234567890")]
         [CLSCompliant(false)]
-        public static void CheckBranchCode_ReturnsTrue_ForValidInput(string value)
+        public static void CheckBban_ReturnsTrue_ForValidInput(string value)
             => Assert.True(IbanParts.CheckBban(value));
 
         [Fact]
-        public static void CheckBranchCode_ReturnsFalse_ForNull()
+        public static void CheckBban_ReturnsFalse_ForNull()
             => Assert.False(IbanParts.CheckBban(null));
 
         [Theory]
@@ -71,7 +71,7 @@ namespace Narvalo.Finance.Text
 
         [Fact]
         public static void CheckCountryCode_ReturnsTrue_ForValidInput()
-            => Assert.True(IbanParts.CheckCountryCode("12"));
+            => Assert.True(IbanParts.CheckCountryCode("FR"));
 
         [Fact]
         public static void CheckCountryCode_ReturnsFalse_ForNull()
@@ -113,91 +113,91 @@ namespace Narvalo.Finance.Text
         #region ParseIntern()
 
         [Theory]
-        [InlineData("12############", "12")]
-        [InlineData("12#############", "12")]
-        [InlineData("12##############", "12")]
-        [InlineData("12###############", "12")]
-        [InlineData("12################", "12")]
-        [InlineData("12#################", "12")]
-        [InlineData("12##################", "12")]
-        [InlineData("12###################", "12")]
-        [InlineData("12####################", "12")]
-        [InlineData("12#####################", "12")]
-        [InlineData("12######################", "12")]
-        [InlineData("12#######################", "12")]
-        [InlineData("12########################", "12")]
-        [InlineData("12#########################", "12")]
-        [InlineData("12##########################", "12")]
-        [InlineData("12###########################", "12")]
-        [InlineData("12############################", "12")]
-        [InlineData("12#############################", "12")]
-        [InlineData("12##############################", "12")]
-        [InlineData("12###############################", "12")]
-        [InlineData("12################################", "12")]
+        [InlineData("FR345678901234", "FR")]
+        [InlineData("FR3456789012345", "FR")]
+        [InlineData("FR34567890123456", "FR")]
+        [InlineData("FR345678901234567", "FR")]
+        [InlineData("FR3456789012345678", "FR")]
+        [InlineData("FR34567890123456789", "FR")]
+        [InlineData("FR345678901234567890", "FR")]
+        [InlineData("FR3456789012345678901", "FR")]
+        [InlineData("FR34567890123456789012", "FR")]
+        [InlineData("FR345678901234567890123", "FR")]
+        [InlineData("FR3456789012345678901234", "FR")]
+        [InlineData("FR34567890123456789012345", "FR")]
+        [InlineData("FR345678901234567890123456", "FR")]
+        [InlineData("FR3456789012345678901234567", "FR")]
+        [InlineData("FR34567890123456789012345678", "FR")]
+        [InlineData("FR345678901234567890123456789", "FR")]
+        [InlineData("FR3456789012345678901234567890", "FR")]
+        [InlineData("FR34567890123456789012345678901", "FR")]
+        [InlineData("FR345678901234567890123456789012", "FR")]
+        [InlineData("FR3456789012345678901234567890123", "FR")]
+        [InlineData("FR34567890123456789012345678901234", "FR")]
         [CLSCompliant(false)]
         public static void ParseIntern_SetCountryCodeCorrectly(string value, string expectedValue)
         {
-            var parts = IbanParts.ParseIntern(value, false);
+            var parts = IbanParts.TryParse(value);
 
             Assert.Equal(expectedValue, parts.Value.CountryCode);
         }
 
         [Theory]
-        [InlineData("##34##########", "34")]
-        [InlineData("##34###########", "34")]
-        [InlineData("##34############", "34")]
-        [InlineData("##34#############", "34")]
-        [InlineData("##34##############", "34")]
-        [InlineData("##34###############", "34")]
-        [InlineData("##34################", "34")]
-        [InlineData("##34#################", "34")]
-        [InlineData("##34##################", "34")]
-        [InlineData("##34###################", "34")]
-        [InlineData("##34####################", "34")]
-        [InlineData("##34#####################", "34")]
-        [InlineData("##34######################", "34")]
-        [InlineData("##34#######################", "34")]
-        [InlineData("##34########################", "34")]
-        [InlineData("##34#########################", "34")]
-        [InlineData("##34##########################", "34")]
-        [InlineData("##34###########################", "34")]
-        [InlineData("##34############################", "34")]
-        [InlineData("##34#############################", "34")]
-        [InlineData("##34##############################", "34")]
+        [InlineData("FR345678901234", "34")]
+        [InlineData("FR3456789012345", "34")]
+        [InlineData("FR34567890123456", "34")]
+        [InlineData("FR345678901234567", "34")]
+        [InlineData("FR3456789012345678", "34")]
+        [InlineData("FR34567890123456789", "34")]
+        [InlineData("FR345678901234567890", "34")]
+        [InlineData("FR3456789012345678901", "34")]
+        [InlineData("FR34567890123456789012", "34")]
+        [InlineData("FR345678901234567890123", "34")]
+        [InlineData("FR3456789012345678901234", "34")]
+        [InlineData("FR34567890123456789012345", "34")]
+        [InlineData("FR345678901234567890123456", "34")]
+        [InlineData("FR3456789012345678901234567", "34")]
+        [InlineData("FR34567890123456789012345678", "34")]
+        [InlineData("FR345678901234567890123456789", "34")]
+        [InlineData("FR3456789012345678901234567890", "34")]
+        [InlineData("FR34567890123456789012345678901", "34")]
+        [InlineData("FR345678901234567890123456789012", "34")]
+        [InlineData("FR3456789012345678901234567890123", "34")]
+        [InlineData("FR34567890123456789012345678901234", "34")]
         [CLSCompliant(false)]
         public static void ParseIntern_SetCheckDigitsCorrectly(string value, string expectedValue)
         {
-            var parts = IbanParts.ParseIntern(value, false);
+            var parts = IbanParts.TryParse(value);
 
             Assert.Equal(expectedValue, parts.Value.CheckDigits);
         }
 
         [Theory]
-        [InlineData("####5678901234", "5678901234")]
-        [InlineData("####56789012345", "56789012345")]
-        [InlineData("####567890123456", "567890123456")]
-        [InlineData("####5678901234567", "5678901234567")]
-        [InlineData("####56789012345678", "56789012345678")]
-        [InlineData("####567890123456789", "567890123456789")]
-        [InlineData("####5678901234567890", "5678901234567890")]
-        [InlineData("####56789012345678901", "56789012345678901")]
-        [InlineData("####567890123456789012", "567890123456789012")]
-        [InlineData("####5678901234567890123", "5678901234567890123")]
-        [InlineData("####56789012345678901234", "56789012345678901234")]
-        [InlineData("####567890123456789012345", "567890123456789012345")]
-        [InlineData("####5678901234567890123456", "5678901234567890123456")]
-        [InlineData("####56789012345678901234567", "56789012345678901234567")]
-        [InlineData("####567890123456789012345678", "567890123456789012345678")]
-        [InlineData("####5678901234567890123456789", "5678901234567890123456789")]
-        [InlineData("####56789012345678901234567890", "56789012345678901234567890")]
-        [InlineData("####567890123456789012345678901", "567890123456789012345678901")]
-        [InlineData("####5678901234567890123456789012", "5678901234567890123456789012")]
-        [InlineData("####56789012345678901234567890123", "56789012345678901234567890123")]
-        [InlineData("####567890123456789012345678901234", "567890123456789012345678901234")]
+        [InlineData("FR345678901234", "5678901234")]
+        [InlineData("FR3456789012345", "56789012345")]
+        [InlineData("FR34567890123456", "567890123456")]
+        [InlineData("FR345678901234567", "5678901234567")]
+        [InlineData("FR3456789012345678", "56789012345678")]
+        [InlineData("FR34567890123456789", "567890123456789")]
+        [InlineData("FR345678901234567890", "5678901234567890")]
+        [InlineData("FR3456789012345678901", "56789012345678901")]
+        [InlineData("FR34567890123456789012", "567890123456789012")]
+        [InlineData("FR345678901234567890123", "5678901234567890123")]
+        [InlineData("FR3456789012345678901234", "56789012345678901234")]
+        [InlineData("FR34567890123456789012345", "567890123456789012345")]
+        [InlineData("FR345678901234567890123456", "5678901234567890123456")]
+        [InlineData("FR3456789012345678901234567", "56789012345678901234567")]
+        [InlineData("FR34567890123456789012345678", "567890123456789012345678")]
+        [InlineData("FR345678901234567890123456789", "5678901234567890123456789")]
+        [InlineData("FR3456789012345678901234567890", "56789012345678901234567890")]
+        [InlineData("FR34567890123456789012345678901", "567890123456789012345678901")]
+        [InlineData("FR345678901234567890123456789012", "5678901234567890123456789012")]
+        [InlineData("FR3456789012345678901234567890123", "56789012345678901234567890123")]
+        [InlineData("FR34567890123456789012345678901234", "567890123456789012345678901234")]
         [CLSCompliant(false)]
         public static void ParseIntern_SetBbanCorrectly(string value, string expectedValue)
         {
-            var parts = IbanParts.ParseIntern(value, false);
+            var parts = IbanParts.TryParse(value);
 
             Assert.Equal(expectedValue, parts.Value.Bban);
         }
