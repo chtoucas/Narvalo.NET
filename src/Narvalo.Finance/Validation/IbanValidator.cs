@@ -4,30 +4,40 @@ namespace Narvalo.Finance.Validation
 {
     using System;
 
+    using Narvalo.Finance.Properties;
     using Narvalo.Finance.Text;
 
-    public static class IbanValidator
+    public class IbanValidator
     {
         private const int CHECKSUM_MODULO = 97;
 
-        public static bool Check(IbanParts parts, IbanValidations styles)
+        private readonly bool _verifyIntegrity;
+        private readonly bool _verifyISOCountryCode;
+
+        public IbanValidator(IbanVerificationLevels levels)
         {
-            bool result = true;
-            if (styles.Contains(IbanValidations.Integrity))
-            {
-                result = result && CheckIntegrity(parts);
-            }
-            if (styles.Contains(IbanValidations.ISOCountryCode))
-            {
-                result = result && CheckCountryCode(parts);
-            }
-            return result;
+            _verifyIntegrity = levels.Contains(IbanVerificationLevels.Integrity);
+            _verifyISOCountryCode = levels.Contains(IbanVerificationLevels.ISOCountryCode);
         }
 
-        public static bool CheckCountryCode(IbanParts parts)
+        public void Verify(IbanParts parts)
         {
-            return CountryISOCodes.TwoLetterCodeExists(parts.CountryCode);
+            if (_verifyIntegrity && !VerifyIntegrity(parts))
+            {
+                throw new FormatException(Strings.IbanValidator_IntegrityCheckFailure);
+            }
+            if (_verifyISOCountryCode && !VerifyCountryCode(parts))
+            {
+                throw new FormatException(Strings.IbanValidator_UnknownISOCountryCode);
+            }
         }
+
+        public bool TryVerify(IbanParts parts)
+            => (_verifyIntegrity ? VerifyIntegrity(parts) : true)
+                && (!_verifyISOCountryCode || VerifyCountryCode(parts));
+
+        public static bool VerifyCountryCode(IbanParts parts)
+            => CountryISOCodes.TwoLetterCodeExists(parts.CountryCode);
 
         // We only verify the integrity of the whole IBAN; we do not validate the BBAN.
         // The algorithm is as follows:
@@ -38,7 +48,7 @@ namespace Narvalo.Finance.Validation
         // WARNING: Only works if you can ensure that "value" is only made up of alphanumeric
         // ASCII characters. Here this means that we have already called CheckValue()
         // and parts.Check().
-        public static bool CheckIntegrity(IbanParts parts)
+        public static bool VerifyIntegrity(IbanParts parts)
             // NB: On full .NET we have Environment.Is64BitProcess.
             // If IntPtr.Size is equal to 8, we are running in a 64-bit process and
             // we check the integrity using Int64 arithmetic; otherwize (32-bit or 16-bit process)

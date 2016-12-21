@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Validation
+namespace Narvalo.Finance
 {
     using System;
 
     [Flags]
-    public enum IbanValidations
+    public enum IbanVerificationLevels
     {
         None = 0,
 
@@ -16,8 +16,9 @@ namespace Narvalo.Finance.Validation
         Any = Integrity | ISOCountryCode,
     }
 
-    public static class IbanValidationsExtensions
+    public static class IbanVerificationLevelsExtensions
     {
-        public static bool Contains(this IbanValidations @this, IbanValidations value) => (@this & value) != 0;
+        public static bool Contains(this IbanVerificationLevels @this, IbanVerificationLevels value)
+            => (@this & value) != 0;
     }
 }

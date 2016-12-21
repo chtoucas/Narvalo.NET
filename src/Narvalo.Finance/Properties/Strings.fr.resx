@@ -135,7 +135,10 @@
   <data name="Currency_NeutralCulture" xml:space="preserve">
     <value />
   </data>
-  <data name="Iban_IntegrityCheckFailure" xml:space="preserve">
+  <data name="IbanValidator_IntegrityCheckFailure" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IbanValidator_UnknownISOCountryCode" xml:space="preserve">
     <value />
   </data>
   <data name="Iban_InvalidBban" xml:space="preserve">
@@ -151,9 +154,6 @@
     <value>Un code IBAN string doit comporter de 14 à 34 caractères.</value>
   </data>
   <data name="Iban_InvalidFormatSpecification" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Iban_UnknownISOCountryCode" xml:space="preserve">
     <value />
   </data>
   <data name="Money_ArgIsNotMoney" xml:space="preserve">

@@ -26,10 +26,10 @@ namespace Narvalo.Finance
 
         private readonly IbanParts _parts;
 
-        private Iban(IbanParts parts, bool integrityChecked)
+        private Iban(IbanParts parts, IbanVerificationLevels levels)
         {
             _parts = parts;
-            IntegrityChecked = integrityChecked;
+            VerificationLevels = levels;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Narvalo.Finance
             get { Warrant.NotNull<string>(); return _parts.CountryCode; }
         }
 
-        public bool IntegrityChecked { get; }
+        public IbanVerificationLevels VerificationLevels { get; }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -72,10 +72,10 @@ namespace Narvalo.Finance
             Expect.NotNull(checkDigits);
             Expect.NotNull(bban);
 
-            return Create(countryCode, checkDigits, bban, IbanValidations.Integrity);
+            return Create(countryCode, checkDigits, bban, IbanVerificationLevels.Integrity);
         }
 
-        public static Iban Create(string countryCode, string checkDigits, string bban, IbanValidations validations)
+        public static Iban Create(string countryCode, string checkDigits, string bban, IbanVerificationLevels levels)
         {
             Expect.NotNull(countryCode);
             Expect.NotNull(checkDigits);
@@ -83,43 +83,33 @@ namespace Narvalo.Finance
 
             var parts = IbanParts.Create(countryCode, checkDigits, bban);
 
-            if (validations.Contains(IbanValidations.ISOCountryCode)
-                && !IbanValidator.CheckCountryCode(parts))
-            {
-                throw new FormatException(Strings.Iban_UnknownISOCountryCode);
-            }
+            new IbanValidator(levels).Verify(parts);
 
-            bool checkIntegrity = validations.Contains(IbanValidations.Integrity);
-            if (checkIntegrity && !IbanValidator.CheckIntegrity(parts))
-            {
-                throw new FormatException(Strings.Iban_IntegrityCheckFailure);
-            }
-
-            return new Iban(parts, checkIntegrity);
+            return new Iban(parts, levels);
         }
 
         public static Iban Parse(string value)
         {
             Expect.NotNull(value);
 
-            return Parse(value, IbanStyles.None, IbanValidations.Integrity);
+            return Parse(value, IbanStyles.None, IbanVerificationLevels.Integrity);
         }
 
         public static Iban Parse(string value, IbanStyles styles)
         {
             Expect.NotNull(value);
 
-            return Parse(value, styles, IbanValidations.Integrity);
+            return Parse(value, styles, IbanVerificationLevels.Integrity);
         }
 
-        public static Iban Parse(string value, IbanValidations validations)
+        public static Iban Parse(string value, IbanVerificationLevels levels)
         {
             Expect.NotNull(value);
 
-            return Parse(value, IbanStyles.None, validations);
+            return Parse(value, IbanStyles.None, levels);
         }
 
-        public static Iban Parse(string value, IbanStyles styles, IbanValidations validations)
+        public static Iban Parse(string value, IbanStyles styles, IbanVerificationLevels levels)
         {
             Require.NotNull(value, nameof(value));
 
@@ -127,31 +117,21 @@ namespace Narvalo.Finance
 
             var parts = IbanParts.Parse(val);
 
-            if (validations.Contains(IbanValidations.ISOCountryCode)
-                && !IbanValidator.CheckCountryCode(parts))
-            {
-                throw new FormatException(Strings.Iban_UnknownISOCountryCode);
-            }
+            new IbanValidator(levels).Verify(parts);
 
-            bool checkIntegrity = validations.Contains(IbanValidations.Integrity);
-            if (checkIntegrity && !IbanValidator.CheckIntegrity(parts))
-            {
-                throw new FormatException(Strings.Iban_IntegrityCheckFailure);
-            }
-
-            return new Iban(parts, checkIntegrity);
+            return new Iban(parts, levels);
         }
 
         public static Iban? TryParse(string value)
-            => TryParse(value, IbanStyles.None, IbanValidations.Integrity);
+            => TryParse(value, IbanStyles.None, IbanVerificationLevels.Integrity);
 
         public static Iban? TryParse(string value, IbanStyles styles)
-            => TryParse(value, styles, IbanValidations.Integrity);
+            => TryParse(value, styles, IbanVerificationLevels.Integrity);
 
-        public static Iban? TryParse(string value, IbanValidations validations)
-            => TryParse(value, IbanStyles.None, validations);
+        public static Iban? TryParse(string value, IbanVerificationLevels levels)
+            => TryParse(value, IbanStyles.None, levels);
 
-        public static Iban? TryParse(string value, IbanStyles styles, IbanValidations validations)
+        public static Iban? TryParse(string value, IbanStyles styles, IbanVerificationLevels levels)
         {
             if (value == null) { return null; }
 
@@ -160,25 +140,17 @@ namespace Narvalo.Finance
             var parts = IbanParts.TryParse(val);
             if (!parts.HasValue) { return null; }
 
-            if (validations.Contains(IbanValidations.ISOCountryCode)
-                && !IbanValidator.CheckCountryCode(parts.Value))
-            {
-                return null;
-            }
+            if (!new IbanValidator(levels).TryVerify(parts.Value)) { return null; }
 
-            bool checkIntegrity = validations.Contains(IbanValidations.Integrity);
-            if (checkIntegrity && !IbanValidator.CheckIntegrity(parts.Value)) { return null; }
-
-            return new Iban(parts.Value, checkIntegrity);
+            return new Iban(parts.Value, levels);
         }
 
         public static Iban? CheckIntegrity(Iban iban)
         {
-            if (iban.IntegrityChecked) { return iban; }
-            // It is safe to call CheckIntegrity() since "_value" is guaranteed to be valid. See CheckIntegrity().
-            if (!IbanValidator.CheckIntegrity(iban._parts)) { return null; }
+            if (iban.VerificationLevels.Contains(IbanVerificationLevels.Integrity)) { return iban; }
+            if (!IbanValidator.VerifyIntegrity(iban._parts)) { return null; }
 
-            return new Iban(iban._parts, true);
+            return new Iban(iban._parts, iban.VerificationLevels | IbanVerificationLevels.Integrity);
         }
 
         // NB: Normally, there is either a single whitespace char every four chars or no whitespace
@@ -339,7 +311,7 @@ namespace Narvalo.Finance
         public static bool operator !=(Iban left, Iban right) => !left.Equals(right);
 
         public bool Equals(Iban other)
-            => _parts == other._parts && IntegrityChecked == other.IntegrityChecked;
+            => _parts == other._parts && VerificationLevels == other.VerificationLevels;
 
         public override bool Equals(object obj)
         {
@@ -351,26 +323,6 @@ namespace Narvalo.Finance
             return Equals((Iban)obj);
         }
 
-        public override int GetHashCode() => _parts.GetHashCode() ^ IntegrityChecked.GetHashCode();
+        public override int GetHashCode() => _parts.GetHashCode() ^ VerificationLevels.GetHashCode();
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Finance
-{
-    using System.Diagnostics.Contracts;
-
-    using static Narvalo.Finance.Text.IbanParts;
-
-    public partial struct Iban
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_value != null);
-        }
-    }
-}
-
-#endif

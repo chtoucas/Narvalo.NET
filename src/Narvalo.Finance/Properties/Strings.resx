@@ -135,7 +135,10 @@
   <data name="Currency_NeutralCulture" xml:space="preserve">
     <value />
   </data>
-  <data name="Iban_IntegrityCheckFailure" xml:space="preserve">
+  <data name="IbanValidator_IntegrityCheckFailure" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IbanValidator_UnknownISOCountryCode" xml:space="preserve">
     <value />
   </data>
   <data name="Iban_InvalidBban" xml:space="preserve">
@@ -152,9 +155,6 @@
   </data>
   <data name="Iban_InvalidFormatSpecification" xml:space="preserve">
     <value>Format string can be only null, an empty string, "G", "g", "D", "d", "N", "n".</value>
-  </data>
-  <data name="Iban_UnknownISOCountryCode" xml:space="preserve">
-    <value />
   </data>
   <data name="Money_ArgIsNotMoney" xml:space="preserve">
     <value>The specified argument MUST be of Money type.</value>

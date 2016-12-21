@@ -118,15 +118,6 @@ namespace Narvalo.Finance.Properties {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Iban_IntegrityCheckFailure {
-            get {
-                return ResourceManager.GetString("Iban_IntegrityCheckFailure", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
         internal static string Iban_InvalidBban {
             get {
                 return ResourceManager.GetString("Iban_InvalidBban", resourceCulture);
@@ -172,9 +163,18 @@ namespace Narvalo.Finance.Properties {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Iban_UnknownISOCountryCode {
+        internal static string IbanValidator_IntegrityCheckFailure {
             get {
-                return ResourceManager.GetString("Iban_UnknownISOCountryCode", resourceCulture);
+                return ResourceManager.GetString("IbanValidator_IntegrityCheckFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string IbanValidator_UnknownISOCountryCode {
+            get {
+                return ResourceManager.GetString("IbanValidator_UnknownISOCountryCode", resourceCulture);
             }
         }
         
