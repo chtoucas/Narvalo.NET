@@ -8,7 +8,7 @@ namespace Narvalo.Finance.Validation
     using Narvalo.Finance.Properties;
 
     using static System.Diagnostics.Contracts.Contract;
-    using static Narvalo.Finance.Validation.AsciiHelpers;
+    using static Narvalo.Finance.Text.AsciiHelpers;
 
     internal static partial class Sentinel
     {

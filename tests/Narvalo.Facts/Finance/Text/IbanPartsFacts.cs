@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Validation
+namespace Narvalo.Finance.Text
 {
     using System;
     using System.Collections.Generic;
 
     using Xunit;
 
-    public static partial class IbanFormatFacts
+    public static partial class IbanPartsFacts
     {
         #region CheckBban()
 
@@ -35,17 +35,17 @@ namespace Narvalo.Finance.Validation
         [InlineData("123456789012345678901234567890")]
         [CLSCompliant(false)]
         public static void CheckBranchCode_ReturnsTrue_ForValidInput(string value)
-            => Assert.True(IbanFormat.CheckBban(value));
+            => Assert.True(IbanParts.CheckBban(value));
 
         [Fact]
         public static void CheckBranchCode_ReturnsFalse_ForNull()
-            => Assert.False(IbanFormat.CheckBban(null));
+            => Assert.False(IbanParts.CheckBban(null));
 
         [Theory]
         [MemberData(nameof(InvalidBbans), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckBban_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(IbanFormat.CheckBban(value));
+            => Assert.False(IbanParts.CheckBban(value));
 
         #endregion
 
@@ -53,17 +53,17 @@ namespace Narvalo.Finance.Validation
 
         [Fact]
         public static void CheckCheckDigit_ReturnsTrue_ForValidInput()
-            => Assert.True(IbanFormat.CheckCheckDigits("12"));
+            => Assert.True(IbanParts.CheckCheckDigits("12"));
 
         [Fact]
         public static void CheckCheckDigit_ReturnsFalse_ForNull()
-            => Assert.False(IbanFormat.CheckCheckDigits(null));
+            => Assert.False(IbanParts.CheckCheckDigits(null));
 
         [Theory]
         [MemberData(nameof(InvalidCheckDigits), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckCheckDigit_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(IbanFormat.CheckCheckDigits(value));
+            => Assert.False(IbanParts.CheckCheckDigits(value));
 
         #endregion
 
@@ -71,17 +71,17 @@ namespace Narvalo.Finance.Validation
 
         [Fact]
         public static void CheckCountryCode_ReturnsTrue_ForValidInput()
-            => Assert.True(IbanFormat.CheckCountryCode("12"));
+            => Assert.True(IbanParts.CheckCountryCode("12"));
 
         [Fact]
         public static void CheckCountryCode_ReturnsFalse_ForNull()
-            => Assert.False(IbanFormat.CheckCountryCode(null));
+            => Assert.False(IbanParts.CheckCountryCode(null));
 
         [Theory]
         [MemberData(nameof(InvalidCountryCodes), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckCountryCode_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(IbanFormat.CheckCountryCode(value));
+            => Assert.False(IbanParts.CheckCountryCode(value));
 
         #endregion
 
@@ -91,24 +91,124 @@ namespace Narvalo.Finance.Validation
         [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckValue_ReturnsTrue_ForValidInput(string value)
-            => Assert.True(IbanFormat.CheckValue(value));
+            => Assert.True(IbanParts.CheckValue(value));
 
         [Fact]
         public static void CheckValue_ReturnsFalse_ForNull()
-            => Assert.False(IbanFormat.CheckValue(null));
+            => Assert.False(IbanParts.CheckValue(null));
 
         [Theory]
         [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckValue_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(IbanFormat.CheckValue(value));
+            => Assert.False(IbanParts.CheckValue(value));
 
         #endregion
     }
 
-    public static partial class IbanFormatFacts
-    {
+#if !NO_INTERNALS_VISIBLE_TO
 
+    public static partial class IbanPartsFacts
+    {
+        #region ParseIntern()
+
+        [Theory]
+        [InlineData("12############", "12")]
+        [InlineData("12#############", "12")]
+        [InlineData("12##############", "12")]
+        [InlineData("12###############", "12")]
+        [InlineData("12################", "12")]
+        [InlineData("12#################", "12")]
+        [InlineData("12##################", "12")]
+        [InlineData("12###################", "12")]
+        [InlineData("12####################", "12")]
+        [InlineData("12#####################", "12")]
+        [InlineData("12######################", "12")]
+        [InlineData("12#######################", "12")]
+        [InlineData("12########################", "12")]
+        [InlineData("12#########################", "12")]
+        [InlineData("12##########################", "12")]
+        [InlineData("12###########################", "12")]
+        [InlineData("12############################", "12")]
+        [InlineData("12#############################", "12")]
+        [InlineData("12##############################", "12")]
+        [InlineData("12###############################", "12")]
+        [InlineData("12################################", "12")]
+        [CLSCompliant(false)]
+        public static void ParseIntern_SetCountryCodeCorrectly(string value, string expectedValue)
+        {
+            var parts = IbanParts.ParseIntern(value, false);
+
+            Assert.Equal(expectedValue, parts.Value.CountryCode);
+        }
+
+        [Theory]
+        [InlineData("##34##########", "34")]
+        [InlineData("##34###########", "34")]
+        [InlineData("##34############", "34")]
+        [InlineData("##34#############", "34")]
+        [InlineData("##34##############", "34")]
+        [InlineData("##34###############", "34")]
+        [InlineData("##34################", "34")]
+        [InlineData("##34#################", "34")]
+        [InlineData("##34##################", "34")]
+        [InlineData("##34###################", "34")]
+        [InlineData("##34####################", "34")]
+        [InlineData("##34#####################", "34")]
+        [InlineData("##34######################", "34")]
+        [InlineData("##34#######################", "34")]
+        [InlineData("##34########################", "34")]
+        [InlineData("##34#########################", "34")]
+        [InlineData("##34##########################", "34")]
+        [InlineData("##34###########################", "34")]
+        [InlineData("##34############################", "34")]
+        [InlineData("##34#############################", "34")]
+        [InlineData("##34##############################", "34")]
+        [CLSCompliant(false)]
+        public static void ParseIntern_SetCheckDigitsCorrectly(string value, string expectedValue)
+        {
+            var parts = IbanParts.ParseIntern(value, false);
+
+            Assert.Equal(expectedValue, parts.Value.CheckDigits);
+        }
+
+        [Theory]
+        [InlineData("####5678901234", "5678901234")]
+        [InlineData("####56789012345", "56789012345")]
+        [InlineData("####567890123456", "567890123456")]
+        [InlineData("####5678901234567", "5678901234567")]
+        [InlineData("####56789012345678", "56789012345678")]
+        [InlineData("####567890123456789", "567890123456789")]
+        [InlineData("####5678901234567890", "5678901234567890")]
+        [InlineData("####56789012345678901", "56789012345678901")]
+        [InlineData("####567890123456789012", "567890123456789012")]
+        [InlineData("####5678901234567890123", "5678901234567890123")]
+        [InlineData("####56789012345678901234", "56789012345678901234")]
+        [InlineData("####567890123456789012345", "567890123456789012345")]
+        [InlineData("####5678901234567890123456", "5678901234567890123456")]
+        [InlineData("####56789012345678901234567", "56789012345678901234567")]
+        [InlineData("####567890123456789012345678", "567890123456789012345678")]
+        [InlineData("####5678901234567890123456789", "5678901234567890123456789")]
+        [InlineData("####56789012345678901234567890", "56789012345678901234567890")]
+        [InlineData("####567890123456789012345678901", "567890123456789012345678901")]
+        [InlineData("####5678901234567890123456789012", "5678901234567890123456789012")]
+        [InlineData("####56789012345678901234567890123", "56789012345678901234567890123")]
+        [InlineData("####567890123456789012345678901234", "567890123456789012345678901234")]
+        [CLSCompliant(false)]
+        public static void ParseIntern_SetBbanCorrectly(string value, string expectedValue)
+        {
+            var parts = IbanParts.ParseIntern(value, false);
+
+            Assert.Equal(expectedValue, parts.Value.Bban);
+        }
+
+        #endregion
+    }
+
+#endif
+
+    public static partial class IbanPartsFacts
+    {
         public static IEnumerable<object[]> ValidValues
         {
             get

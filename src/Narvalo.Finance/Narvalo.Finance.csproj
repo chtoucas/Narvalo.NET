@@ -78,7 +78,7 @@
     <Compile Include="Globalization\MoneyFormatInfo.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="Globalization\MoneyFormatter.cs" />
-    <Compile Include="Validation\BicFormat.cs" />
+    <Compile Include="Text\BicFormat.cs" />
     <Compile Include="Currencies\Currencies.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -97,9 +97,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CountryISOCodes.tt</DependentUpon>
     </Compile>
-    <Compile Include="Validation\IbanFormat.cs" />
     <Compile Include="CurrencyActivator`1.cs" />
-    <Compile Include="Validation\AsciiHelpers.cs" />
+    <Compile Include="Text\AsciiHelpers.cs" />
+    <Compile Include="Text\IbanParts.cs" />
     <Compile Include="Validation\Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />

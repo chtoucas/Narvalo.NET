@@ -84,11 +84,10 @@
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="Finance\CurrencyNotFoundExceptionFacts.cs" />
     <Compile Include="Finance\IbanFacts.cs" />
-    <Compile Include="Finance\Validation\AsciiHelpersFacts.cs" />
-    <Compile Include="Finance\Validation\BicFormatFacts.cs" />
+    <Compile Include="Finance\Text\AsciiHelpersFacts.cs" />
+    <Compile Include="Finance\Text\BicFormatFacts.cs" />
     <Compile Include="Finance\Validation\CountryISOCodesFacts.cs" />
-    <Compile Include="Finance\Validation\IbanFormatFacts.cs" />
-    <Compile Include="Finance\IbanPartsFacts.cs" />
+    <Compile Include="Finance\Text\IbanPartsFacts.cs" />
     <Compile Include="Fx\Samples\Internal\EnumerableExtensions.cs" />
     <Compile Include="_TestCommon\DebugOnlyFactAttribute.cs" />
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />

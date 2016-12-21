@@ -21,11 +21,17 @@ namespace Narvalo.Finance
 
         AllowHeader = 1 << 3,
 
-        CheckIntegrity = 1 << 4,
+        AllowLowercaseLetter = 1 << 4,
+
+        CheckIntegrity = 1 << 5,
+
+        CheckISOCountryCode = 1 << 6,
 
         AllowWhiteSpaces = AllowLeadingWhite | AllowTrailingWhite | AllowInnerWhite,
 
-        Any = AllowWhiteSpaces | AllowHeader | CheckIntegrity,
+        FullCheck = CheckIntegrity | CheckISOCountryCode,
+
+        Any = AllowWhiteSpaces | AllowHeader | AllowLowercaseLetter | FullCheck,
     }
 
     public static class IbanStylesExtensions

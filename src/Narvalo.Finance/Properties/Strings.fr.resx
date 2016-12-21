@@ -147,6 +147,9 @@
   <data name="Iban_InvalidFormatSpecification" xml:space="preserve">
     <value />
   </data>
+  <data name="Iban_UnknownISOCountryCode" xml:space="preserve">
+    <value />
+  </data>
   <data name="Money_ArgIsNotMoney" xml:space="preserve">
     <value>L'argument doit être de type Money.</value>
   </data>

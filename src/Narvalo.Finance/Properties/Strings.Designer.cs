@@ -152,6 +152,15 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Iban_UnknownISOCountryCode {
+            get {
+                return ResourceManager.GetString("Iban_UnknownISOCountryCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified argument MUST be of Money type..
         /// </summary>
         internal static string Money_ArgIsNotMoney {

@@ -8,8 +8,8 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Validation;
     using Narvalo.Finance.Properties;
 
-    using static Narvalo.Finance.Validation.AsciiHelpers;
-    using static Narvalo.Finance.Validation.BicFormat;
+    using static Narvalo.Finance.Text.AsciiHelpers;
+    using static Narvalo.Finance.Text.BicFormat;
 
     /// <summary>
     /// Represents a Business Identifier Code (BIC).

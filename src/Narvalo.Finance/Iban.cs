@@ -5,13 +5,10 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
 
+    using Narvalo.Finance.Text;
     using Narvalo.Finance.Validation;
     using Narvalo.Finance.Properties;
-
-    using static Narvalo.Finance.Validation.AsciiHelpers;
-    using static Narvalo.Finance.Validation.IbanFormat;
 
     /// <summary>
     /// Represents an International Bank Account Number (IBAN).
@@ -28,26 +25,14 @@ namespace Narvalo.Finance
         private const char WHITESPACE_CHAR = ' ';
         private const int CHECKSUM_MODULO = 97;
 
-        private readonly string _bban;
-        private readonly string _checkDigits;
-        private readonly string _countryCode;
+        private readonly IbanParts _parts;
         private readonly string _value;
 
-        private Iban(
-            string countryCode,
-            string checkDigits,
-            string bban,
-            string value,
-            bool integrityChecked)
+        private Iban(IbanParts parts, string value, bool integrityChecked)
         {
-            Demand.True(CheckCountryCode(countryCode));
-            Demand.True(CheckCheckDigits(checkDigits));
-            Demand.True(CheckBban(bban));
-            Demand.True(CheckValue(value));
+            Demand.NotNull(value);
 
-            _countryCode = countryCode;
-            _checkDigits = checkDigits;
-            _bban = bban;
+            _parts = parts;
             _value = value;
             IntegrityChecked = integrityChecked;
         }
@@ -57,7 +42,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string Bban
         {
-            get { Sentinel.Warrant.LengthRange(BbanMinLength, BbanMaxLength); return _bban; }
+            get { Sentinel.Warrant.LengthRange(IbanParts.BbanMinLength, IbanParts.BbanMaxLength); return _parts.Bban; }
         }
 
         /// <summary>
@@ -65,7 +50,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string CheckDigits
         {
-            get { Sentinel.Warrant.Length(CheckDigitsLength); return _checkDigits; }
+            get { Sentinel.Warrant.Length(IbanParts.CheckDigitsLength); return _parts.CheckDigits; }
         }
 
         /// <summary>
@@ -73,7 +58,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string CountryCode
         {
-            get { Sentinel.Warrant.Length(CountryLength); return _countryCode; }
+            get { Sentinel.Warrant.Length(IbanParts.CountryLength); return _parts.CountryCode; }
         }
 
         public bool IntegrityChecked { get; }
@@ -82,31 +67,24 @@ namespace Narvalo.Finance
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         // We only display the beginning of the IBAN value.
         private string DebuggerDisplay
-            => _value.Length == MinLength
+            => _value.Length == IbanParts.MinLength
             ? _value
-            : _value.Substring(0, MinLength) + "...";
+            : _value.Substring(0, IbanParts.MinLength) + "...";
 
         public static Iban Create(string countryCode, string checkDigits, string bban)
         {
-            Expect.True(CheckCountryCode(countryCode));
-            Expect.True(CheckCheckDigits(checkDigits));
-            Expect.True(CheckBban(bban));
+            Expect.NotNull(countryCode);
+            Expect.NotNull(checkDigits);
+            Expect.NotNull(bban);
 
             return Create(countryCode, checkDigits, bban, true);
         }
 
         public static Iban Create(string countryCode, string checkDigits, string bban, bool checkIntegrity)
         {
-            // REVIEW: We check for non-null twice...
-            Require.NotNull(countryCode, nameof(countryCode));
-            Require.NotNull(checkDigits, nameof(checkDigits));
-            Require.NotNull(bban, nameof(bban));
-            Require.True(CheckCountryCode(countryCode), nameof(countryCode));
-            Require.True(CheckCheckDigits(checkDigits), nameof(checkDigits));
-            Require.True(CheckBban(bban), nameof(bban));
-
-            var value = countryCode + checkDigits + bban;
-            Contract.Assume(CheckValue(value));
+            Expect.NotNull(countryCode);
+            Expect.NotNull(checkDigits);
+            Expect.NotNull(bban);
 
             var parts = IbanParts.Create(countryCode, checkDigits, bban);
             if (!parts.HasValue)
@@ -114,20 +92,15 @@ namespace Narvalo.Finance
                 throw new FormatException(Strings.Iban_BadPartsFormat);
             }
 
-            // WARNING: This MUST stay after CheckValue() and parts.Check(). See CheckIntegrity().
+            var value = countryCode + checkDigits + bban;
+
+            // It is safe to call CheckIntegrity() since "value" is guaranteed to be valid. See CheckIntegrity().
             if (checkIntegrity && !CheckIntegrity(value))
             {
                 throw new FormatException(Strings.Iban_IntegrityCheckFailure);
             }
 
-            return Create(parts.Value, value, checkIntegrity);
-        }
-
-        private static Iban Create(IbanParts parts, string value, bool checkIntegrity)
-        {
-            Demand.True(CheckValue(value));
-
-            return new Iban(parts.CountryCode, parts.CheckDigits, parts.Bban, value, checkIntegrity);
+            return new Iban(parts.Value, value, checkIntegrity);
         }
 
         public static Iban Parse(string value)
@@ -142,26 +115,27 @@ namespace Narvalo.Finance
             Require.NotNull(value, nameof(value));
 
             var val = StripIgnorableSymbols(value, styles);
-            if (!CheckValue(val))
-            {
-                throw new FormatException(Strings.Iban_InvalidFormat);
-            }
-            Check.True(CheckValue(val));
 
             var parts = IbanParts.Parse(val);
             if (!parts.HasValue)
             {
-                throw new FormatException(Strings.Iban_BadPartsFormat);
+                throw new FormatException(Strings.Iban_InvalidFormat);
+            }
+
+            if (styles.Contains(IbanStyles.CheckISOCountryCode)
+                && !CountryISOCodes.TwoLetterCodeExists(parts.Value.CountryCode))
+            {
+                throw new FormatException(Strings.Iban_UnknownISOCountryCode);
             }
 
             bool checkIntegrity = styles.Contains(IbanStyles.CheckIntegrity);
-            // WARNING: This MUST stay after CheckValue() and parts.Check(). See CheckIntegrity().
+            // It is safe to call CheckIntegrity() since "val" is guaranteed to be valid. See CheckIntegrity().
             if (checkIntegrity && !CheckIntegrity(val))
             {
                 throw new FormatException(Strings.Iban_IntegrityCheckFailure);
             }
 
-            return Create(parts.Value, val, checkIntegrity);
+            return new Iban(parts.Value, val, checkIntegrity);
         }
 
         public static Iban? TryParse(string value) => TryParse(value, IbanStyles.None);
@@ -171,17 +145,21 @@ namespace Narvalo.Finance
             if (value == null) { return null; }
 
             var val = StripIgnorableSymbols(value, styles);
-            if (!CheckValue(val)) { return null; }
-            Check.True(CheckValue(val));
 
             var parts = IbanParts.Parse(val);
             if (!parts.HasValue) { return null; }
 
+            if (styles.Contains(IbanStyles.CheckISOCountryCode)
+                && !CountryISOCodes.TwoLetterCodeExists(parts.Value.CountryCode))
+            {
+                return null;
+            }
+
             bool checkIntegrity = styles.Contains(IbanStyles.CheckIntegrity);
-            // WARNING: This MUST stay after CheckValue() and parts.Check(). See CheckIntegrity().
+            // It is safe to call CheckIntegrity() since "val" is guaranteed to be valid. See CheckIntegrity().
             if (checkIntegrity && !CheckIntegrity(val)) { return null; }
 
-            return Create(parts.Value, val, checkIntegrity);
+            return new Iban(parts.Value, val, checkIntegrity);
         }
 
         public static Iban? CheckIntegrity(Iban iban)
@@ -190,7 +168,7 @@ namespace Narvalo.Finance
             // It is safe to call CheckIntegrity() since "_value" is guaranteed to be valid. See CheckIntegrity().
             if (!CheckIntegrity(iban._value)) { return null; }
 
-            return new Iban(iban.CountryCode, iban.CheckDigits, iban.Bban, iban._value, true);
+            return new Iban(iban._parts, iban._value, true);
         }
 
         // We only verify the integrity of the whole IBAN; we do not validate the BBAN.
@@ -221,84 +199,6 @@ namespace Narvalo.Finance
             return sixtyfour
                 ? ComputeInt64Checksum(value) % CHECKSUM_MODULO == 1
                 : ComputeInt32Checksum(value) % CHECKSUM_MODULO == 1;
-        }
-
-        internal struct IbanParts
-        {
-            private readonly string _bban;
-            private readonly string _checkDigits;
-            private readonly string _countryCode;
-
-            private IbanParts(string countryCode, string checkDigits, string bban)
-            {
-                Demand.True(CheckCountryCode(countryCode));
-                Demand.True(CheckCheckDigits(checkDigits));
-                Demand.True(CheckBban(bban));
-
-                _bban = bban;
-                _checkDigits = checkDigits;
-                _countryCode = countryCode;
-            }
-
-            public string Bban
-            {
-                get { Sentinel.Warrant.LengthRange(BbanMinLength, BbanMaxLength); return _bban; }
-            }
-
-            public string CheckDigits
-            {
-                get { Sentinel.Warrant.Length(CheckDigitsLength); return _checkDigits; }
-            }
-
-            public string CountryCode
-            {
-                get { Sentinel.Warrant.Length(CountryLength); return _countryCode; }
-            }
-
-            internal static IbanParts? Create(string countryCode, string checkDigits, string bban)
-            {
-                Demand.True(CheckCountryCode(countryCode));
-                Demand.True(CheckCheckDigits(checkDigits));
-                Demand.True(CheckBban(bban));
-
-                if (CountryISOCodes.TwoLetterCodeExists(countryCode)
-                    && IsDigit(checkDigits)
-                    && IsDigitOrUpperLetter(bban))
-                {
-                    return new IbanParts(countryCode, checkDigits, bban);
-                }
-
-                return null;
-            }
-
-            internal static IbanParts? Parse(string value) => Parse(value, true);
-
-            internal static IbanParts? Parse(string value, bool check)
-            {
-                Demand.True(CheckValue(value));
-
-                // The first two letters define the ISO 3166-1 alpha-2 country code.
-                string countryCode = value.Substring(0, CountryLength);
-                Narvalo.Check.True(CheckCountryCode(countryCode));
-                if (check && !CountryISOCodes.TwoLetterCodeExists(countryCode)) { return null; }
-
-                string checkDigits = value.Substring(CountryLength, CheckDigitsLength);
-                Narvalo.Check.True(CheckCheckDigits(checkDigits));
-                if (check && !IsDigit(checkDigits)) { return null; }
-
-                string bban = value.Substring(CountryLength + CheckDigitsLength);
-                Contract.Assume(CheckBban(bban));
-                if (check && !IsDigitOrUpperLetter(bban)) { return null; }
-
-                return new IbanParts(countryCode, checkDigits, bban);
-            }
-
-            // NB: We already checked the length for each property.
-            public bool Check()
-                // FIXME: It seems that the country code does not always match an (ISO) alpha-2 code.
-                => CountryISOCodes.TwoLetterCodeExists(CountryCode)
-                && IsDigit(CheckDigits)
-                && IsDigitOrUpperLetter(Bban);
         }
 
         // NB: Normally, there is either a single whitespace char every four chars or no whitespace
@@ -347,6 +247,7 @@ namespace Narvalo.Finance
                 start += 5;
             }
 
+            // FIXME: Use AllowLowercaseLetter.
             bool rmspace = styles.Contains(IbanStyles.AllowInnerWhite);
 
             var output = new char[end - start + 1];
@@ -536,17 +437,14 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.Validation.IbanFormat;
+    using static Narvalo.Finance.Validation.IbanParts;
 
     public partial struct Iban
     {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(CheckBban(_bban));
-            Contract.Invariant(CheckCheckDigits(_checkDigits));
-            Contract.Invariant(CheckCountryCode(_countryCode));
-            Contract.Invariant(CheckValue(_value));
+            Contract.Invariant(_value != null);
         }
     }
 }
