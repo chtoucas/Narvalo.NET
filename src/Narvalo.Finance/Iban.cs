@@ -26,7 +26,7 @@ namespace Narvalo.Finance
 
         private readonly IbanParts _parts;
 
-        private Iban(IbanParts parts, IbanVerificationLevels levels)
+        private Iban(IbanParts parts, IbanValidationLevels levels)
         {
             _parts = parts;
             VerificationLevels = levels;
@@ -56,7 +56,7 @@ namespace Narvalo.Finance
             get { Warrant.NotNull<string>(); return _parts.CountryCode; }
         }
 
-        public IbanVerificationLevels VerificationLevels { get; }
+        public IbanValidationLevels VerificationLevels { get; }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -72,10 +72,10 @@ namespace Narvalo.Finance
             Expect.NotNull(checkDigits);
             Expect.NotNull(bban);
 
-            return Create(countryCode, checkDigits, bban, IbanVerificationLevels.Default);
+            return Create(countryCode, checkDigits, bban, IbanValidationLevels.Default);
         }
 
-        public static Iban Create(string countryCode, string checkDigits, string bban, IbanVerificationLevels levels)
+        public static Iban Create(string countryCode, string checkDigits, string bban, IbanValidationLevels levels)
         {
             Expect.NotNull(countryCode);
             Expect.NotNull(checkDigits);
@@ -83,7 +83,11 @@ namespace Narvalo.Finance
 
             var parts = IbanParts.Create(countryCode, checkDigits, bban);
 
-            new IbanValidator(levels).Validate(parts);
+            var result = new IbanValidator(levels).Validate(parts);
+            if (result.IsFalse)
+            {
+                throw new FormatException(result.Message);
+            }
 
             return new Iban(parts, levels);
         }
@@ -92,24 +96,24 @@ namespace Narvalo.Finance
         {
             Expect.NotNull(value);
 
-            return Parse(value, IbanStyles.None, IbanVerificationLevels.Default);
+            return Parse(value, IbanStyles.None, IbanValidationLevels.Default);
         }
 
         public static Iban Parse(string value, IbanStyles styles)
         {
             Expect.NotNull(value);
 
-            return Parse(value, styles, IbanVerificationLevels.Default);
+            return Parse(value, styles, IbanValidationLevels.Default);
         }
 
-        public static Iban Parse(string value, IbanVerificationLevels levels)
+        public static Iban Parse(string value, IbanValidationLevels levels)
         {
             Expect.NotNull(value);
 
             return Parse(value, IbanStyles.None, levels);
         }
 
-        public static Iban Parse(string value, IbanStyles styles, IbanVerificationLevels levels)
+        public static Iban Parse(string value, IbanStyles styles, IbanValidationLevels levels)
         {
             Require.NotNull(value, nameof(value));
 
@@ -117,21 +121,25 @@ namespace Narvalo.Finance
 
             var parts = IbanParts.Parse(val);
 
-            new IbanValidator(levels).Validate(parts);
+            var result = new IbanValidator(levels).Validate(parts);
+            if (result.IsFalse)
+            {
+                throw new FormatException(result.Message);
+            }
 
             return new Iban(parts, levels);
         }
 
         public static Iban? TryParse(string value)
-            => TryParse(value, IbanStyles.None, IbanVerificationLevels.Default);
+            => TryParse(value, IbanStyles.None, IbanValidationLevels.Default);
 
         public static Iban? TryParse(string value, IbanStyles styles)
-            => TryParse(value, styles, IbanVerificationLevels.Default);
+            => TryParse(value, styles, IbanValidationLevels.Default);
 
-        public static Iban? TryParse(string value, IbanVerificationLevels levels)
+        public static Iban? TryParse(string value, IbanValidationLevels levels)
             => TryParse(value, IbanStyles.None, levels);
 
-        public static Iban? TryParse(string value, IbanStyles styles, IbanVerificationLevels levels)
+        public static Iban? TryParse(string value, IbanStyles styles, IbanValidationLevels levels)
         {
             if (value == null) { return null; }
 
@@ -147,10 +155,10 @@ namespace Narvalo.Finance
 
         public static Iban? CheckIntegrity(Iban iban)
         {
-            if (iban.VerificationLevels.Contains(IbanVerificationLevels.Integrity)) { return iban; }
+            if (iban.VerificationLevels.Contains(IbanValidationLevels.Integrity)) { return iban; }
             if (!IbanValidator.VerifyIntegrity(iban._parts)) { return null; }
 
-            return new Iban(iban._parts, iban.VerificationLevels | IbanVerificationLevels.Integrity);
+            return new Iban(iban._parts, iban.VerificationLevels | IbanValidationLevels.Integrity);
         }
 
         // NB: Normally, there is either a single whitespace char every four chars or no whitespace
@@ -259,7 +267,7 @@ namespace Narvalo.Finance
                     return _parts.LiteralValue;
                 case "H":
                 case "h":
-                    // Human: same as "G" but prefixed with "IBAN ".
+                    // Human: same result as "G" but prefixed with "IBAN ".
                     // This format is NOT suitable for electronic transmission.
                     return HumanHeader + FormatG(_parts.LiteralValue);
                 case "G":

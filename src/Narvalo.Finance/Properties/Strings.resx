@@ -135,6 +135,18 @@
   <data name="Currency_NeutralCulture" xml:space="preserve">
     <value />
   </data>
+  <data name="IbanParts_InvalidBban" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IbanParts_InvalidCheckDigits" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IbanParts_InvalidCountryCode" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IbanParts_InvalidFormat" xml:space="preserve">
+    <value>The IBAN string MUST be at most 34 characters long and at least 14 characters long.</value>
+  </data>
   <data name="IbanValidator_BbanVerificationFailure" xml:space="preserve">
     <value />
   </data>
@@ -143,18 +155,6 @@
   </data>
   <data name="IbanValidator_UnknownISOCountryCode" xml:space="preserve">
     <value />
-  </data>
-  <data name="Iban_InvalidBban" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Iban_InvalidCheckDigits" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Iban_InvalidCountryCode" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Iban_InvalidFormat" xml:space="preserve">
-    <value>The IBAN string MUST be at most 34 characters long and at least 14 characters long.</value>
   </data>
   <data name="Iban_InvalidFormatSpecification" xml:space="preserve">
     <value>Format string can be only null, an empty string, "G", "g", "D", "d", "N", "n".</value>

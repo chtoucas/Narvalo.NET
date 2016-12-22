@@ -25,6 +25,14 @@ namespace Narvalo.Finance.Text
         private readonly string _countryCode;
         private readonly string _value;
 
+        private IbanParts(string countryCode, string checkDigits, string bban)
+            :this (countryCode, checkDigits, bban, countryCode + checkDigits + bban)
+        {
+            Expect.NotNull(countryCode);
+            Expect.NotNull(checkDigits);
+            Expect.NotNull(bban);
+        }
+
         private IbanParts(string countryCode, string checkDigits, string bban, string value)
         {
             Demand.NotNull(countryCode);
@@ -65,12 +73,12 @@ namespace Narvalo.Finance.Text
                 && CheckCheckDigits(checkDigits)
                 && CheckBban(bban))
             {
-                var value = countryCode + checkDigits + bban;
-
-                return new IbanParts(countryCode, checkDigits, bban, value);
+                return new IbanParts(countryCode, checkDigits, bban);
             }
-
-            throw new FormatException(Strings.Iban_InvalidFormat);
+            else
+            {
+                throw new FormatException(Strings.IbanParts_InvalidFormat);
+            }
         }
 
         public static IbanParts Parse(string value)
@@ -79,25 +87,25 @@ namespace Narvalo.Finance.Text
 
             if (!CheckValue(value))
             {
-                throw new FormatException(Strings.Iban_InvalidFormat);
+                throw new FormatException(Strings.IbanParts_InvalidFormat);
             }
 
             string countryCode = GetCountryCode(value);
             if (!CheckCountryCode(countryCode))
             {
-                throw new FormatException(Strings.Iban_InvalidCountryCode);
+                throw new FormatException(Strings.IbanParts_InvalidCountryCode);
             }
 
             string checkDigits = GetCheckDigits(value);
             if (!CheckCheckDigits(checkDigits))
             {
-                throw new FormatException(Strings.Iban_InvalidCheckDigits);
+                throw new FormatException(Strings.IbanParts_InvalidCheckDigits);
             }
 
             string bban = GetBban(value);
             if (!CheckBban(bban))
             {
-                throw new FormatException(Strings.Iban_InvalidBban);
+                throw new FormatException(Strings.IbanParts_InvalidBban);
             }
 
             return new IbanParts(countryCode, checkDigits, bban, value);

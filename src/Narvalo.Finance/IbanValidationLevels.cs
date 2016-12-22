@@ -5,7 +5,7 @@ namespace Narvalo.Finance
     using System;
 
     [Flags]
-    public enum IbanVerificationLevels
+    public enum IbanValidationLevels
     {
         None = 0,
 
@@ -24,7 +24,7 @@ namespace Narvalo.Finance
 
     public static class IbanVerificationLevelsExtensions
     {
-        public static bool Contains(this IbanVerificationLevels @this, IbanVerificationLevels value)
+        public static bool Contains(this IbanValidationLevels @this, IbanValidationLevels value)
             => (@this & value) != 0;
     }
 }

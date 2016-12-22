@@ -116,47 +116,47 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Format string can be only null, an empty string, &quot;G&quot;, &quot;g&quot;, &quot;D&quot;, &quot;d&quot;, &quot;N&quot;, &quot;n&quot;..
         /// </summary>
-        internal static string Iban_InvalidBban {
+        internal static string Iban_InvalidFormatSpecification {
             get {
-                return ResourceManager.GetString("Iban_InvalidBban", resourceCulture);
+                return ResourceManager.GetString("Iban_InvalidFormatSpecification", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Iban_InvalidCheckDigits {
+        internal static string IbanParts_InvalidBban {
             get {
-                return ResourceManager.GetString("Iban_InvalidCheckDigits", resourceCulture);
+                return ResourceManager.GetString("IbanParts_InvalidBban", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Iban_InvalidCountryCode {
+        internal static string IbanParts_InvalidCheckDigits {
             get {
-                return ResourceManager.GetString("Iban_InvalidCountryCode", resourceCulture);
+                return ResourceManager.GetString("IbanParts_InvalidCheckDigits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string IbanParts_InvalidCountryCode {
+            get {
+                return ResourceManager.GetString("IbanParts_InvalidCountryCode", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The IBAN string MUST be at most 34 characters long and at least 14 characters long..
         /// </summary>
-        internal static string Iban_InvalidFormat {
+        internal static string IbanParts_InvalidFormat {
             get {
-                return ResourceManager.GetString("Iban_InvalidFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Format string can be only null, an empty string, &quot;G&quot;, &quot;g&quot;, &quot;D&quot;, &quot;d&quot;, &quot;N&quot;, &quot;n&quot;..
-        /// </summary>
-        internal static string Iban_InvalidFormatSpecification {
-            get {
-                return ResourceManager.GetString("Iban_InvalidFormatSpecification", resourceCulture);
+                return ResourceManager.GetString("IbanParts_InvalidFormat", resourceCulture);
             }
         }
         

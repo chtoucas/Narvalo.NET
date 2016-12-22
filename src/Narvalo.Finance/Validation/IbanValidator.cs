@@ -15,27 +15,29 @@ namespace Narvalo.Finance.Validation
         private readonly bool _verifyISOCountryCode;
         private readonly bool _verifyBban;
 
-        public IbanValidator(IbanVerificationLevels levels)
+        public IbanValidator(IbanValidationLevels levels)
         {
-            _verifyIntegrity = levels.Contains(IbanVerificationLevels.Integrity);
-            _verifyISOCountryCode = levels.Contains(IbanVerificationLevels.ISOCountryCode);
-            _verifyBban = levels.Contains(IbanVerificationLevels.Bban);
+            _verifyIntegrity = levels.Contains(IbanValidationLevels.Integrity);
+            _verifyISOCountryCode = levels.Contains(IbanValidationLevels.ISOCountryCode);
+            _verifyBban = levels.Contains(IbanValidationLevels.Bban);
         }
 
-        public void Validate(IbanParts parts)
+        public BooleanResult Validate(IbanParts parts)
         {
             if (_verifyIntegrity && !VerifyIntegrity(parts))
             {
-                throw new FormatException(Strings.IbanValidator_IntegrityCheckFailure);
+                return BooleanResult.False(Strings.IbanValidator_IntegrityCheckFailure);
             }
             if (_verifyISOCountryCode && !VerifyISOCountryCode(parts))
             {
-                throw new FormatException(Strings.IbanValidator_UnknownISOCountryCode);
+                return BooleanResult.False(Strings.IbanValidator_UnknownISOCountryCode);
             }
             if (_verifyBban && !VerifyBban(parts))
             {
-                throw new FormatException(Strings.IbanValidator_BbanVerificationFailure);
+                return BooleanResult.False(Strings.IbanValidator_BbanVerificationFailure);
             }
+
+            return BooleanResult.True;
         }
 
         public bool Verify(IbanParts parts)
