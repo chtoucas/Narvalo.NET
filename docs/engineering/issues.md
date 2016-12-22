@@ -82,6 +82,7 @@ Narvalo.Finance
   * [CSharpMoney](https://csharpmoney.codeplex.com/)
   * [NMoneys](https://github.com/dgg/nmoneys)
   * [PHP-IBAN](https://github.com/globalcitizen/php-iban)
+  * [python-stdnum](https://github.com/arthurdejong/python-stdnum)
 
 Narvalo.Web
 -----------

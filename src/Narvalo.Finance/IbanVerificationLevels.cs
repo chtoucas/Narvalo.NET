@@ -11,9 +11,15 @@ namespace Narvalo.Finance
 
         Integrity = 1 << 0,
 
+        // NB: We might have to introduce an alternate country code verification. Indeed, it seems
+        // that the IBAN registry does not always use valid ISO alpha-2 codes.
         ISOCountryCode = 1 << 1,
 
-        Any = Integrity | ISOCountryCode,
+        Bban = 1 << 2,
+
+        Any = Integrity | ISOCountryCode | Bban,
+
+        Default = Integrity,
     }
 
     public static class IbanVerificationLevelsExtensions

@@ -5,18 +5,15 @@ namespace Narvalo.Finance
     using System;
     using System.Collections.Generic;
 
-    using Narvalo.Finance.Text;
     using Xunit;
 
     public static partial class IbanFacts
     {
         #region TryParse()
 
-        [Theory]
-        [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryParse_Succeeds_ForValidLength(string value)
-            => Assert.True(TryParseUnchecked(value).HasValue);
+        [Fact]
+        public static void TryParse_ReturnsNull_ForNull()
+            => Assert.False(Iban.TryParse(null).HasValue);
 
         [Theory]
         [InlineData("     AL47 2121 1009 0000 0002 3569 8741")]
@@ -25,73 +22,27 @@ namespace Narvalo.Finance
         [InlineData("     IBAN AL47 2121 1009 0000 0002 3569 8741")]
         [CLSCompliant(false)]
         public static void TryParse_Succeeds_(string value)
-        {
-            Assert.True(Iban.TryParse(value, IbanStyles.Any).HasValue);
-        }
-
-        [Fact]
-        public static void TryParse_ReturnsNull_ForNull()
-            => Assert.False(Iban.TryParse(null).HasValue);
-
-        [Theory]
-        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void TryParse_ReturnsNull_ForInvalidLength(string value)
-            => Assert.False(TryParseUnchecked(value).HasValue);
+            => Assert.True(Iban.TryParse(value, IbanStyles.Any).HasValue);
 
         #endregion
 
         #region Parse()
 
-        [Theory]
-        [MemberData(nameof(ValidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void Parse_Succeeds(string value)
-            => ParseUnchecked(value);
-
         [Fact]
         public static void Parse_ThrowsArgumentNullException_ForNull()
             => Assert.Throws<ArgumentNullException>(() => Iban.Parse(null));
-
-        [Theory]
-        [MemberData(nameof(InvalidLengths), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void Parse_ThrowsFormatException_ForInvalidLength(string value)
-            => Assert.Throws<FormatException>(() => ParseUnchecked(value));
 
         #endregion
 
         #region Create()
 
-        [Fact]
-        public static void Create_ThrowsArgumentNullException_ForNull()
-        {
-            Assert.Throws<ArgumentNullException>(() => Iban.Create(null, "14", "20041010050500013M02606"));
-            Assert.Throws<ArgumentNullException>(() => Iban.Create("FR", null, "20041010050500013M02606"));
-            Assert.Throws<ArgumentNullException>(() => Iban.Create("FR", "14", null));
-        }
-
         [Theory]
-        [MemberData(nameof(IbanPartsFacts.InvalidCountryCodes), MemberType = typeof(IbanPartsFacts), DisableDiscoveryEnumeration = true)]
+        [InlineData(null, "14", "20041010050500013M02606")]
+        [InlineData("FR", null, "20041010050500013M02606")]
+        [InlineData("FR", "14", null)]
         [CLSCompliant(false)]
-        public static void Create_ThrowsFormatException_ForInvalidCountryCode(string value)
-            => Assert.Throws<FormatException>(() => Iban.Create(value, "14", "20041010050500013M02606"));
-
-        [Theory]
-        [MemberData(nameof(IbanPartsFacts.InvalidCheckDigits), MemberType = typeof(IbanPartsFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void Create_ThrowsFormatException_ForInvalidCheckDigits(string value)
-            => Assert.Throws<FormatException>(() => Iban.Create("FR", value, "20041010050500013M02606"));
-
-        [Theory]
-        [MemberData(nameof(IbanPartsFacts.InvalidBbans), MemberType = typeof(IbanPartsFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void Create_ThrowsFormatException_ForInvalidBban(string value)
-            => Assert.Throws<FormatException>(() => Iban.Create("FR", "14", value));
-
-        [Fact]
-        public static void Create_DoesNotThrow_ForValidInput()
-            => Iban.Create("FR", "14", "20041010050500013M02606");
+        public static void Create_ThrowsArgumentNullException_ForNull(string countryCode, string checkDigits, string bban)
+            => Assert.Throws<ArgumentNullException>(() => Iban.Create(countryCode, checkDigits, bban));
 
         #endregion
 
@@ -102,8 +53,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equality_ReturnsTrue_ForIdenticalValues(string value1, string value2)
         {
-            var iban1 = ParseUnchecked(value1);
-            var iban2 = ParseUnchecked(value2);
+            var iban1 = ParseFast(value1);
+            var iban2 = ParseFast(value2);
 
             Assert.True(iban1 == iban2);
         }
@@ -113,8 +64,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equality_ReturnsFalse_ForDistinctValues(string value1, string value2)
         {
-            var iban1 = ParseUnchecked(value1);
-            var iban2 = ParseUnchecked(value2);
+            var iban1 = ParseFast(value1);
+            var iban2 = ParseFast(value2);
 
             Assert.False(iban1 == iban2);
         }
@@ -128,8 +79,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Inequality_ReturnsFalse_ForIdenticalValues(string value1, string value2)
         {
-            var iban1 = ParseUnchecked(value1);
-            var iban2 = ParseUnchecked(value2);
+            var iban1 = ParseFast(value1);
+            var iban2 = ParseFast(value2);
 
             Assert.False(iban1 != iban2);
         }
@@ -139,8 +90,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Inequality_ReturnsTrue_ForDistinctValues(string value1, string value2)
         {
-            var iban1 = ParseUnchecked(value1);
-            var iban2 = ParseUnchecked(value2);
+            var iban1 = ParseFast(value1);
+            var iban2 = ParseFast(value2);
 
             Assert.True(iban1 != iban2);
         }
@@ -154,8 +105,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_ReturnsTrue_ForIdenticalValues(string value1, string value2)
         {
-            var iban1 = ParseUnchecked(value1);
-            var iban2 = ParseUnchecked(value2);
+            var iban1 = ParseFast(value1);
+            var iban2 = ParseFast(value2);
 
             Assert.True(iban1.Equals(iban2));
         }
@@ -165,8 +116,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_ReturnsTrue_ForIdenticalValues_AfterBoxing(string value1, string value2)
         {
-            var iban1 = ParseUnchecked(value1);
-            object iban2 = ParseUnchecked(value2);
+            var iban1 = ParseFast(value1);
+            object iban2 = ParseFast(value2);
 
             Assert.True(iban1.Equals(iban2));
         }
@@ -176,8 +127,8 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_ReturnsFalse_ForDistinctValues(string value1, string value2)
         {
-            var iban1 = ParseUnchecked(value1);
-            var iban2 = ParseUnchecked(value2);
+            var iban1 = ParseFast(value1);
+            var iban2 = ParseFast(value2);
 
             Assert.False(iban1.Equals(iban2));
         }
@@ -187,7 +138,7 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_ReturnsFalse_ForOtherTypes(string value)
         {
-            var iban = ParseUnchecked(value);
+            var iban = ParseFast(value);
 
             Assert.False(iban.Equals(null));
             Assert.False(iban.Equals(1));
@@ -201,7 +152,7 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_IsReflexive(string value)
         {
-            var iban = ParseUnchecked(value);
+            var iban = ParseFast(value);
 
             Assert.True(iban.Equals(iban));
         }
@@ -211,9 +162,9 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_IsAbelian(string value1, string value2)
         {
-            var iban1a = ParseUnchecked(value1);
-            var iban1b = ParseUnchecked(value1);
-            var iban2 = ParseUnchecked(value2);
+            var iban1a = ParseFast(value1);
+            var iban1b = ParseFast(value1);
+            var iban2 = ParseFast(value2);
 
             Assert.Equal(iban1a.Equals(iban1b), iban1b.Equals(iban1a));
             Assert.Equal(iban1a.Equals(iban2), iban2.Equals(iban1a));
@@ -224,9 +175,9 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void Equals_IsTransitive(string value)
         {
-            var iban1 = ParseUnchecked(value);
-            var iban2 = ParseUnchecked(value);
-            var iban3 = ParseUnchecked(value);
+            var iban1 = ParseFast(value);
+            var iban2 = ParseFast(value);
+            var iban3 = ParseFast(value);
 
             Assert.Equal(iban1.Equals(iban2) && iban2.Equals(iban3), iban1.Equals(iban3));
         }
@@ -240,7 +191,7 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void GetHashCode_ReturnsHashCodeValue(string value)
         {
-            var result = ParseUnchecked(value).GetHashCode();
+            var result = ParseFast(value).GetHashCode();
             var expected = value.GetHashCode();
 
             Assert.Equal(expected, result);
@@ -257,57 +208,57 @@ namespace Narvalo.Finance
         [CLSCompliant(false)]
         public static void ToString_ThrowsFormatException_ForInvalidFormat(string value)
             => Assert.Throws<FormatException>(
-                () => ParseUnchecked("AL47212110090000000235698741").ToString(value));
+                () => ParseFast("AL47212110090000000235698741").ToString(value));
 
         [Theory]
-        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsFormattedValue(string value, string formattedValue)
+        public static void ToString_ForNullFormat(string value, string formattedValue)
         {
-            var result = ParseUnchecked(value).ToString();
+            var result = ParseFast(value).ToString(null);
 
             Assert.Equal(formattedValue, result);
         }
 
         [Theory]
-        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsFormattedValue_ForNullFormat(string value, string formattedValue)
+        public static void ToString_ForEmptyFormat(string value, string formattedValue)
         {
-            var result = ParseUnchecked(value).ToString(null);
+            var result = ParseFast(value).ToString(String.Empty);
 
             Assert.Equal(formattedValue, result);
         }
 
         [Theory]
-        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsFormattedValue_ForEmptyFormat(string value, string formattedValue)
+        public static void ToString_ForDefaultFormat(string value, string formattedValue)
         {
-            var result = ParseUnchecked(value).ToString(String.Empty);
+            var result = ParseFast(value).ToString();
 
             Assert.Equal(formattedValue, result);
         }
 
         [Theory]
-        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsFormattedValue_ForDisplayFormat(string value, string formattedValue)
+        public static void ToString_ForGeneralFormat(string value, string formattedValue)
         {
-            var result1 = ParseUnchecked(value).ToString("D");
-            var result2 = ParseUnchecked(value).ToString("d");
+            var result1 = ParseFast(value).ToString("G");
+            var result2 = ParseFast(value).ToString("g");
 
             Assert.Equal(formattedValue, result1);
             Assert.Equal(formattedValue, result2);
         }
 
         [Theory]
-        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsValue_ForHumanFormat(string value, string formattedValue)
+        public static void ToString_ForHumanFormat(string value, string formattedValue)
         {
-            var result1 = ParseUnchecked(value).ToString("H");
-            var result2 = ParseUnchecked(value).ToString("h");
+            var result1 = ParseFast(value).ToString("H");
+            var result2 = ParseFast(value).ToString("h");
             var expected = Iban.HumanHeader + formattedValue;
 
             Assert.Equal(expected, result1);
@@ -315,12 +266,12 @@ namespace Narvalo.Finance
         }
 
         [Theory]
-        [MemberData(nameof(FormatDSamples), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(FormatSamples), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ToString_ReturnsValue_ForGeneralFormat(string value, string formattedValue)
+        public static void ToString_ReturnsValue_ForCompactFormat(string value, string formattedValue)
         {
-            var result1 = ParseUnchecked(value).ToString("G");
-            var result2 = ParseUnchecked(value).ToString("g");
+            var result1 = ParseFast(value).ToString("C");
+            var result2 = ParseFast(value).ToString("c");
 
             Assert.Equal(value, result1);
             Assert.Equal(value, result2);
@@ -331,13 +282,12 @@ namespace Narvalo.Finance
 
     public static partial class IbanFacts
     {
-        private static Iban ParseUnchecked(string value) => Iban.Parse(value, IbanStyles.None);
+        private static Iban ParseFast(string value)
+            => Iban.Parse(value, IbanStyles.None, IbanVerificationLevels.None);
 
-        private static Iban? TryParseUnchecked(string value) => Iban.TryParse(value, IbanStyles.None);
-
-        // Sample IBAN from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
-        // except the last taken from http://www.xe.com/ibancalculator/sample/?ibancountry=united-kingdom since
-        // the one found on RBS is not valid.
+        // Sample IBANs from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
+        // except the last one "GB29 RBOS 6016 1331 9268 19" which is not valid;
+        // we use instead http://www.xe.com/ibancalculator/sample/?ibancountry=united-kingdom.
         public static IEnumerable<object[]> SampleDisplayValues
         {
             get
@@ -399,14 +349,11 @@ namespace Narvalo.Finance
                 yield return new object[] { "TN59 1000 6035 1835 9847 8831" };
                 yield return new object[] { "TR33 0006 1005 1978 6457 8413 26" };
                 yield return new object[] { "AE07 0331 2345 6789 0123 456" };
-                //yield return new object[] { "GB29 RBOS 6016 1331 9268 19" }; <- invalid
                 yield return new object[] { "GB29 NWBK 6016 1331 9268 19" };
             }
         }
 
-        // Sample IBAN from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
-        // except the last taken from http://www.xe.com/ibancalculator/sample/?ibancountry=united-kingdom since
-        // the one found on RBS is not valid.
+        // See comments before SampleDisplayValues.
         public static IEnumerable<object[]> SampleValues
         {
             get
@@ -468,7 +415,6 @@ namespace Narvalo.Finance
                 yield return new object[] { "TN5910006035183598478831" };
                 yield return new object[] { "TR330006100519786457841326" };
                 yield return new object[] { "AE070331234567890123456" };
-                //yield return new object[] { "GB29RBOS60161331926819" }; <- Invalid
                 yield return new object[] { "GB29NWBK60161331926819" };
             }
         }
@@ -529,57 +475,7 @@ namespace Narvalo.Finance
             }
         }
 
-        public static IEnumerable<object[]> ValidLengths
-        {
-            get
-            {
-                yield return new object[] { "FR345678901234" };
-                yield return new object[] { "FR3456789012345" };
-                yield return new object[] { "FR34567890123456" };
-                yield return new object[] { "FR345678901234567" };
-                yield return new object[] { "FR3456789012345678" };
-                yield return new object[] { "FR34567890123456789" };
-                yield return new object[] { "FR345678901234567890" };
-                yield return new object[] { "FR3456789012345678901" };
-                yield return new object[] { "FR34567890123456789012" };
-                yield return new object[] { "FR345678901234567890123" };
-                yield return new object[] { "FR3456789012345678901234" };
-                yield return new object[] { "FR34567890123456789012345" };
-                yield return new object[] { "FR345678901234567890123456" };
-                yield return new object[] { "FR3456789012345678901234567" };
-                yield return new object[] { "FR34567890123456789012345678" };
-                yield return new object[] { "FR345678901234567890123456789" };
-                yield return new object[] { "FR3456789012345678901234567890" };
-                yield return new object[] { "FR34567890123456789012345678901" };
-                yield return new object[] { "FR345678901234567890123456789012" };
-                yield return new object[] { "FR3456789012345678901234567890123" };
-                yield return new object[] { "FR34567890123456789012345678901234" };
-            }
-        }
-
-        public static IEnumerable<object[]> InvalidLengths
-        {
-            get
-            {
-                yield return new object[] { "" };
-                yield return new object[] { "F" };
-                yield return new object[] { "FR" };
-                yield return new object[] { "FR3" };
-                yield return new object[] { "FR34" };
-                yield return new object[] { "FR345" };
-                yield return new object[] { "FR3456" };
-                yield return new object[] { "FR34567" };
-                yield return new object[] { "FR345678" };
-                yield return new object[] { "FR3456789" };
-                yield return new object[] { "FR34567890" };
-                yield return new object[] { "FR345678901" };
-                yield return new object[] { "FR3456789012" };
-                yield return new object[] { "FR34567890123" };
-                yield return new object[] { "FR345678901234567890123456789012345" };
-            }
-        }
-
-        public static IEnumerable<object[]> FormatDSamples
+        public static IEnumerable<object[]> FormatSamples
         {
             get
             {

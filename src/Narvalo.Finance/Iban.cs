@@ -21,7 +21,7 @@ namespace Narvalo.Finance
     {
         public const string HumanHeader = "IBAN ";
 
-        private const string DEFAULT_FORMAT = "D";
+        private const string DEFAULT_FORMAT = "G";
         private const char WHITESPACE_CHAR = ' ';
 
         private readonly IbanParts _parts;
@@ -72,7 +72,7 @@ namespace Narvalo.Finance
             Expect.NotNull(checkDigits);
             Expect.NotNull(bban);
 
-            return Create(countryCode, checkDigits, bban, IbanVerificationLevels.Integrity);
+            return Create(countryCode, checkDigits, bban, IbanVerificationLevels.Default);
         }
 
         public static Iban Create(string countryCode, string checkDigits, string bban, IbanVerificationLevels levels)
@@ -83,7 +83,7 @@ namespace Narvalo.Finance
 
             var parts = IbanParts.Create(countryCode, checkDigits, bban);
 
-            new IbanValidator(levels).Verify(parts);
+            new IbanValidator(levels).Validate(parts);
 
             return new Iban(parts, levels);
         }
@@ -92,14 +92,14 @@ namespace Narvalo.Finance
         {
             Expect.NotNull(value);
 
-            return Parse(value, IbanStyles.None, IbanVerificationLevels.Integrity);
+            return Parse(value, IbanStyles.None, IbanVerificationLevels.Default);
         }
 
         public static Iban Parse(string value, IbanStyles styles)
         {
             Expect.NotNull(value);
 
-            return Parse(value, styles, IbanVerificationLevels.Integrity);
+            return Parse(value, styles, IbanVerificationLevels.Default);
         }
 
         public static Iban Parse(string value, IbanVerificationLevels levels)
@@ -117,16 +117,16 @@ namespace Narvalo.Finance
 
             var parts = IbanParts.Parse(val);
 
-            new IbanValidator(levels).Verify(parts);
+            new IbanValidator(levels).Validate(parts);
 
             return new Iban(parts, levels);
         }
 
         public static Iban? TryParse(string value)
-            => TryParse(value, IbanStyles.None, IbanVerificationLevels.Integrity);
+            => TryParse(value, IbanStyles.None, IbanVerificationLevels.Default);
 
         public static Iban? TryParse(string value, IbanStyles styles)
-            => TryParse(value, styles, IbanVerificationLevels.Integrity);
+            => TryParse(value, styles, IbanVerificationLevels.Default);
 
         public static Iban? TryParse(string value, IbanVerificationLevels levels)
             => TryParse(value, IbanStyles.None, levels);
@@ -140,7 +140,7 @@ namespace Narvalo.Finance
             var parts = IbanParts.TryParse(val);
             if (!parts.HasValue) { return null; }
 
-            if (!new IbanValidator(levels).TryVerify(parts.Value)) { return null; }
+            if (!new IbanValidator(levels).Verify(parts.Value)) { return null; }
 
             return new Iban(parts.Value, levels);
         }
@@ -253,26 +253,26 @@ namespace Narvalo.Finance
 
             switch (format)
             {
-                case "D":
-                case "d":
-                    // Display (default): insert a whitespace char every 4 chars.
-                    // This format is NOT suitable for electronic transmission.
-                    return FormatD(_parts.LiteralValue);
+                case "C":
+                case "c":
+                    // Compact.
+                    return _parts.LiteralValue;
                 case "H":
                 case "h":
-                    // Human: same as "D" but prefixed with "IBAN ".
+                    // Human: same as "G" but prefixed with "IBAN ".
                     // This format is NOT suitable for electronic transmission.
-                    return HumanHeader + FormatD(_parts.LiteralValue);
+                    return HumanHeader + FormatG(_parts.LiteralValue);
                 case "G":
                 case "g":
-                    // General.
-                    return _parts.LiteralValue;
+                    // General (default): insert a whitespace char every 4 chars.
+                    // This format is NOT suitable for electronic transmission.
+                    return FormatG(_parts.LiteralValue);
                 default:
                     throw new FormatException(Format.Current(Strings.Iban_InvalidFormatSpecification));
             }
         }
 
-        private static string FormatD(string input)
+        private static string FormatG(string input)
         {
             Demand.NotNull(input);
             Warrant.NotNull<string>();

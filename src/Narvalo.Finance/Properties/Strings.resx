@@ -135,6 +135,9 @@
   <data name="Currency_NeutralCulture" xml:space="preserve">
     <value />
   </data>
+  <data name="IbanValidator_BbanVerificationFailure" xml:space="preserve">
+    <value />
+  </data>
   <data name="IbanValidator_IntegrityCheckFailure" xml:space="preserve">
     <value />
   </data>

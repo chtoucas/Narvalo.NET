@@ -11,35 +11,15 @@ namespace Narvalo.Finance.Text
     {
         #region CheckBban()
 
-        [Theory]
-        [InlineData("1234567890")]
-        [InlineData("12345678901")]
-        [InlineData("123456789012")]
-        [InlineData("1234567890123")]
-        [InlineData("12345678901234")]
-        [InlineData("123456789012345")]
-        [InlineData("1234567890123456")]
-        [InlineData("12345678901234567")]
-        [InlineData("123456789012345678")]
-        [InlineData("1234567890123456789")]
-        [InlineData("12345678901234567890")]
-        [InlineData("123456789012345678901")]
-        [InlineData("1234567890123456789012")]
-        [InlineData("12345678901234567890123")]
-        [InlineData("123456789012345678901234")]
-        [InlineData("1234567890123456789012345")]
-        [InlineData("12345678901234567890123456")]
-        [InlineData("123456789012345678901234567")]
-        [InlineData("1234567890123456789012345678")]
-        [InlineData("12345678901234567890123456789")]
-        [InlineData("123456789012345678901234567890")]
-        [CLSCompliant(false)]
-        public static void CheckBban_ReturnsTrue_ForValidInput(string value)
-            => Assert.True(IbanParts.CheckBban(value));
-
         [Fact]
         public static void CheckBban_ReturnsFalse_ForNull()
             => Assert.False(IbanParts.CheckBban(null));
+
+        [Theory]
+        [MemberData(nameof(ValidBbans), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void CheckBban_ReturnsTrue_ForValidInput(string value)
+            => Assert.True(IbanParts.CheckBban(value));
 
         [Theory]
         [MemberData(nameof(InvalidBbans), DisableDiscoveryEnumeration = true)]
@@ -52,12 +32,12 @@ namespace Narvalo.Finance.Text
         #region CheckCheckDigits()
 
         [Fact]
-        public static void CheckCheckDigit_ReturnsTrue_ForValidInput()
-            => Assert.True(IbanParts.CheckCheckDigits("12"));
-
-        [Fact]
         public static void CheckCheckDigit_ReturnsFalse_ForNull()
             => Assert.False(IbanParts.CheckCheckDigits(null));
+
+        [Fact]
+        public static void CheckCheckDigit_ReturnsTrue_ForValidInput()
+            => Assert.True(IbanParts.CheckCheckDigits("12"));
 
         [Theory]
         [MemberData(nameof(InvalidCheckDigits), DisableDiscoveryEnumeration = true)]
@@ -70,12 +50,12 @@ namespace Narvalo.Finance.Text
         #region CheckCountryCode()
 
         [Fact]
-        public static void CheckCountryCode_ReturnsTrue_ForValidInput()
-            => Assert.True(IbanParts.CheckCountryCode("FR"));
-
-        [Fact]
         public static void CheckCountryCode_ReturnsFalse_ForNull()
             => Assert.False(IbanParts.CheckCountryCode(null));
+
+        [Fact]
+        public static void CheckCountryCode_ReturnsTrue_ForValidInput()
+            => Assert.True(IbanParts.CheckCountryCode("FR"));
 
         [Theory]
         [MemberData(nameof(InvalidCountryCodes), DisableDiscoveryEnumeration = true)]
@@ -87,15 +67,15 @@ namespace Narvalo.Finance.Text
 
         #region CheckValue()
 
+        [Fact]
+        public static void CheckValue_ReturnsFalse_ForNull()
+            => Assert.False(IbanParts.CheckValue(null));
+
         [Theory]
         [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckValue_ReturnsTrue_ForValidInput(string value)
             => Assert.True(IbanParts.CheckValue(value));
-
-        [Fact]
-        public static void CheckValue_ReturnsFalse_ForNull()
-            => Assert.False(IbanParts.CheckValue(null));
 
         [Theory]
         [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
@@ -104,72 +84,43 @@ namespace Narvalo.Finance.Text
             => Assert.False(IbanParts.CheckValue(value));
 
         #endregion
-    }
 
-#if !NO_INTERNALS_VISIBLE_TO
+        #region TryParse()
 
-    public static partial class IbanPartsFacts
-    {
-        #region ParseIntern()
+        [Fact]
+        public static void TryParse_ReturnsNull_ForNull()
+            => Assert.False(IbanParts.TryParse(null).HasValue);
 
         [Theory]
-        [InlineData("FR345678901234", "FR")]
-        [InlineData("FR3456789012345", "FR")]
-        [InlineData("FR34567890123456", "FR")]
-        [InlineData("FR345678901234567", "FR")]
-        [InlineData("FR3456789012345678", "FR")]
-        [InlineData("FR34567890123456789", "FR")]
-        [InlineData("FR345678901234567890", "FR")]
-        [InlineData("FR3456789012345678901", "FR")]
-        [InlineData("FR34567890123456789012", "FR")]
-        [InlineData("FR345678901234567890123", "FR")]
-        [InlineData("FR3456789012345678901234", "FR")]
-        [InlineData("FR34567890123456789012345", "FR")]
-        [InlineData("FR345678901234567890123456", "FR")]
-        [InlineData("FR3456789012345678901234567", "FR")]
-        [InlineData("FR34567890123456789012345678", "FR")]
-        [InlineData("FR345678901234567890123456789", "FR")]
-        [InlineData("FR3456789012345678901234567890", "FR")]
-        [InlineData("FR34567890123456789012345678901", "FR")]
-        [InlineData("FR345678901234567890123456789012", "FR")]
-        [InlineData("FR3456789012345678901234567890123", "FR")]
-        [InlineData("FR34567890123456789012345678901234", "FR")]
+        [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ParseIntern_SetCountryCodeCorrectly(string value, string expectedValue)
+        public static void TryParse_Succeeds_ForValidInput(string value)
+            => Assert.True(IbanParts.TryParse(value).HasValue);
+
+        [Theory]
+        [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParse_ReturnsNull_ForInvalidInput(string value)
+            => Assert.False(IbanParts.TryParse(value).HasValue);
+
+        [Theory]
+        [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void TryParse_SetCountryCodeCorrectly(string value)
         {
             var parts = IbanParts.TryParse(value);
 
-            Assert.Equal(expectedValue, parts.Value.CountryCode);
+            Assert.Equal("FR", parts.Value.CountryCode);
         }
 
         [Theory]
-        [InlineData("FR345678901234", "34")]
-        [InlineData("FR3456789012345", "34")]
-        [InlineData("FR34567890123456", "34")]
-        [InlineData("FR345678901234567", "34")]
-        [InlineData("FR3456789012345678", "34")]
-        [InlineData("FR34567890123456789", "34")]
-        [InlineData("FR345678901234567890", "34")]
-        [InlineData("FR3456789012345678901", "34")]
-        [InlineData("FR34567890123456789012", "34")]
-        [InlineData("FR345678901234567890123", "34")]
-        [InlineData("FR3456789012345678901234", "34")]
-        [InlineData("FR34567890123456789012345", "34")]
-        [InlineData("FR345678901234567890123456", "34")]
-        [InlineData("FR3456789012345678901234567", "34")]
-        [InlineData("FR34567890123456789012345678", "34")]
-        [InlineData("FR345678901234567890123456789", "34")]
-        [InlineData("FR3456789012345678901234567890", "34")]
-        [InlineData("FR34567890123456789012345678901", "34")]
-        [InlineData("FR345678901234567890123456789012", "34")]
-        [InlineData("FR3456789012345678901234567890123", "34")]
-        [InlineData("FR34567890123456789012345678901234", "34")]
+        [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void ParseIntern_SetCheckDigitsCorrectly(string value, string expectedValue)
+        public static void TryParse_SetCheckDigitsCorrectly(string value)
         {
             var parts = IbanParts.TryParse(value);
 
-            Assert.Equal(expectedValue, parts.Value.CheckDigits);
+            Assert.Equal("34", parts.Value.CheckDigits);
         }
 
         [Theory]
@@ -195,7 +146,7 @@ namespace Narvalo.Finance.Text
         [InlineData("FR3456789012345678901234567890123", "56789012345678901234567890123")]
         [InlineData("FR34567890123456789012345678901234", "567890123456789012345678901234")]
         [CLSCompliant(false)]
-        public static void ParseIntern_SetBbanCorrectly(string value, string expectedValue)
+        public static void TryParse_SetBbanCorrectly(string value, string expectedValue)
         {
             var parts = IbanParts.TryParse(value);
 
@@ -203,9 +154,61 @@ namespace Narvalo.Finance.Text
         }
 
         #endregion
-    }
 
-#endif
+        #region Parse()
+
+        [Fact]
+        public static void Parse_ThrowsArgumentNullException_ForNull()
+            => Assert.Throws<ArgumentNullException>(() => IbanParts.Parse(null));
+
+        [Theory]
+        [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Parse_DoesNotThrowFormatException_ForValidInput(string value)
+            => IbanParts.Parse(value);
+
+        [Theory]
+        [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Parse_ThrowsFormatException_ForInvalidInput(string value)
+            => Assert.Throws<FormatException>(() => IbanParts.Parse(value));
+
+        #endregion
+
+        #region Create()
+
+        [Theory]
+        [InlineData(null, "14", "20041010050500013M02606")]
+        [InlineData("FR", null, "20041010050500013M02606")]
+        [InlineData("FR", "14", null)]
+        [CLSCompliant(false)]
+        public static void Create_ThrowsArgumentNullException_ForNull(string countryCode, string checkDigits, string bban)
+            => Assert.Throws<ArgumentNullException>(() => IbanParts.Create(countryCode, checkDigits, bban));
+
+        [Theory]
+        [MemberData(nameof(InvalidCountryCodes), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Create_ThrowsFormatException_ForInvalidCountryCode(string value)
+            => Assert.Throws<FormatException>(() => IbanParts.Create(value, "14", "20041010050500013M02606"));
+
+        [Theory]
+        [MemberData(nameof(InvalidCheckDigits), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Create_ThrowsFormatException_ForInvalidCheckDigits(string value)
+            => Assert.Throws<FormatException>(() => IbanParts.Create("FR", value, "20041010050500013M02606"));
+
+        [Theory]
+        [MemberData(nameof(InvalidBbans), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Create_ThrowsFormatException_ForInvalidBban(string value)
+            => Assert.Throws<FormatException>(() => IbanParts.Create("FR", "14", value));
+
+        [Fact]
+        public static void Create_DoesNotThrowFormatException_ForValidInput()
+            => IbanParts.Create("FR", "14", "20041010050500013M02606");
+
+        #endregion
+    }
 
     public static partial class IbanPartsFacts
     {
@@ -213,6 +216,60 @@ namespace Narvalo.Finance.Text
         {
             get
             {
+                yield return new object[] { "FR345678901234" };
+                yield return new object[] { "FR3456789012345" };
+                yield return new object[] { "FR34567890123456" };
+                yield return new object[] { "FR345678901234567" };
+                yield return new object[] { "FR3456789012345678" };
+                yield return new object[] { "FR34567890123456789" };
+                yield return new object[] { "FR345678901234567890" };
+                yield return new object[] { "FR3456789012345678901" };
+                yield return new object[] { "FR34567890123456789012" };
+                yield return new object[] { "FR345678901234567890123" };
+                yield return new object[] { "FR3456789012345678901234" };
+                yield return new object[] { "FR34567890123456789012345" };
+                yield return new object[] { "FR345678901234567890123456" };
+                yield return new object[] { "FR3456789012345678901234567" };
+                yield return new object[] { "FR34567890123456789012345678" };
+                yield return new object[] { "FR345678901234567890123456789" };
+                yield return new object[] { "FR3456789012345678901234567890" };
+                yield return new object[] { "FR34567890123456789012345678901" };
+                yield return new object[] { "FR345678901234567890123456789012" };
+                yield return new object[] { "FR3456789012345678901234567890123" };
+                yield return new object[] { "FR34567890123456789012345678901234" };
+            }
+        }
+
+        public static IEnumerable<object[]> InvalidValues
+        {
+            get
+            {
+                yield return new object[] { "" };
+                yield return new object[] { "F" };
+                yield return new object[] { "FR" };
+                yield return new object[] { "FR3" };
+                yield return new object[] { "FR34" };
+                yield return new object[] { "FR345" };
+                yield return new object[] { "FR3456" };
+                yield return new object[] { "FR34567" };
+                yield return new object[] { "FR345678" };
+                yield return new object[] { "FR3456789" };
+                yield return new object[] { "FR34567890" };
+                yield return new object[] { "FR345678901" };
+                yield return new object[] { "FR3456789012" };
+                yield return new object[] { "FR34567890123" };
+                yield return new object[] { "FR345678901234567890123456789012345" };
+            }
+        }
+
+        public static IEnumerable<object[]> ValidBbans
+        {
+            get
+            {
+                yield return new object[] { "1234567890" };
+                yield return new object[] { "12345678901" };
+                yield return new object[] { "123456789012" };
+                yield return new object[] { "1234567890123" };
                 yield return new object[] { "12345678901234" };
                 yield return new object[] { "123456789012345" };
                 yield return new object[] { "1234567890123456" };
@@ -230,32 +287,6 @@ namespace Narvalo.Finance.Text
                 yield return new object[] { "1234567890123456789012345678" };
                 yield return new object[] { "12345678901234567890123456789" };
                 yield return new object[] { "123456789012345678901234567890" };
-                yield return new object[] { "1234567890123456789012345678901" };
-                yield return new object[] { "12345678901234567890123456789012" };
-                yield return new object[] { "123456789012345678901234567890123" };
-                yield return new object[] { "1234567890123456789012345678901234" };
-            }
-        }
-
-        public static IEnumerable<object[]> InvalidValues
-        {
-            get
-            {
-                yield return new object[] { "" };
-                yield return new object[] { "1" };
-                yield return new object[] { "12" };
-                yield return new object[] { "123" };
-                yield return new object[] { "1234" };
-                yield return new object[] { "12345" };
-                yield return new object[] { "123456" };
-                yield return new object[] { "1234567" };
-                yield return new object[] { "12345678" };
-                yield return new object[] { "123456789" };
-                yield return new object[] { "1234567890" };
-                yield return new object[] { "12345678901" };
-                yield return new object[] { "123456789012" };
-                yield return new object[] { "1234567890123" };
-                yield return new object[] { "12345678901234567890123456789012345" };
             }
         }
 
@@ -263,6 +294,7 @@ namespace Narvalo.Finance.Text
         {
             get
             {
+                // Lengths.
                 yield return new object[] { "" };
                 yield return new object[] { "1" };
                 yield return new object[] { "12" };
@@ -274,6 +306,9 @@ namespace Narvalo.Finance.Text
                 yield return new object[] { "12345678" };
                 yield return new object[] { "123456789" };
                 yield return new object[] { "1234567890123456789012345678901" };
+                // Content.
+                yield return new object[] { "         " };
+                yield return new object[] { "---------" };
             }
         }
 
@@ -281,9 +316,14 @@ namespace Narvalo.Finance.Text
         {
             get
             {
+                // Lengths.
                 yield return new object[] { "" };
                 yield return new object[] { "1" };
                 yield return new object[] { "123" };
+                // Content.
+                yield return new object[] { "  " };
+                yield return new object[] { "--" };
+                yield return new object[] { "AB" };
             }
         }
 
@@ -291,9 +331,13 @@ namespace Narvalo.Finance.Text
         {
             get
             {
+                // Lengths.
                 yield return new object[] { "" };
                 yield return new object[] { "1" };
                 yield return new object[] { "123" };
+                // Content.
+                yield return new object[] { "  " };
+                yield return new object[] { "--" };
             }
         }
     }

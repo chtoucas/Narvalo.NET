@@ -75,6 +75,8 @@ namespace Narvalo.Finance.Text
 
         public static IbanParts Parse(string value)
         {
+            Require.NotNull(value, nameof(value));
+
             if (!CheckValue(value))
             {
                 throw new FormatException(Strings.Iban_InvalidFormat);
