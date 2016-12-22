@@ -9,7 +9,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Currencies;
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Validation;
+    using Narvalo.Finance.Text;
 
     using static Narvalo.Finance.Text.AsciiHelpers;
 

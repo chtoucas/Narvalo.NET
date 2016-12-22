@@ -147,6 +147,9 @@
   <data name="IbanParts_InvalidFormat" xml:space="preserve">
     <value>Un code IBAN string doit comporter de 14 à 34 caractères.</value>
   </data>
+  <data name="IbanParts_InvalidParts" xml:space="preserve">
+    <value />
+  </data>
   <data name="IbanValidator_BbanVerificationFailure" xml:space="preserve">
     <value />
   </data>

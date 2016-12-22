@@ -283,7 +283,7 @@ namespace Narvalo.Finance
     public static partial class IbanFacts
     {
         private static Iban ParseFast(string value)
-            => Iban.Parse(value, IbanStyles.None, IbanValidationLevels.None);
+            => Iban.Parse(value, IbanStyles.None, IbanValidationLevels.None).Value;
 
         // Sample IBANs from http://www.rbs.co.uk/corporate/international/g0/guide-to-international-business/regulatory-information/iban/iban-example.ashx.
         // except the last one "GB29 RBOS 6016 1331 9268 19" which is not valid;

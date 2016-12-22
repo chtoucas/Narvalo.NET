@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Validation
+namespace Narvalo.Finance.Text
 {
     using System;
 
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Text;
 
     public sealed class IbanValidator
     {
@@ -38,6 +37,24 @@ namespace Narvalo.Finance.Validation
             }
 
             return BooleanResult.True;
+        }
+
+        internal Outcome<IbanParts> ValidateIntern(IbanParts parts)
+        {
+            if (_verifyIntegrity && !VerifyIntegrity(parts))
+            {
+                return Outcome.Failure<IbanParts>(Strings.IbanValidator_IntegrityCheckFailure);
+            }
+            if (_verifyISOCountryCode && !VerifyISOCountryCode(parts))
+            {
+                return Outcome.Failure<IbanParts>(Strings.IbanValidator_UnknownISOCountryCode);
+            }
+            if (_verifyBban && !VerifyBban(parts))
+            {
+                return Outcome.Failure<IbanParts>(Strings.IbanValidator_BbanVerificationFailure);
+            }
+
+            return Outcome.Success(parts);
         }
 
         public bool Verify(IbanParts parts)

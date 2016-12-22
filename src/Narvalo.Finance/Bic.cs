@@ -5,8 +5,8 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics.Contracts;
 
-    using Narvalo.Finance.Validation;
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Text;
 
     using static Narvalo.Finance.Text.AsciiHelpers;
     using static Narvalo.Finance.Text.BicFormat;

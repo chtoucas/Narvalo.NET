@@ -164,14 +164,14 @@ namespace Narvalo.Finance.Text
         [Theory]
         [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Parse_DoesNotThrowFormatException_ForValidInput(string value)
-            => IbanParts.Parse(value);
+        public static void Parse_ReturnsSuccess_ForValidInput(string value)
+            => Assert.True(IbanParts.Parse(value).Success);
 
         [Theory]
         [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Parse_ThrowsFormatException_ForInvalidInput(string value)
-            => Assert.Throws<FormatException>(() => IbanParts.Parse(value));
+        public static void Parse_ReturnsFailure_ForInvalidInput(string value)
+            => Assert.False(IbanParts.Parse(value).Success);
 
         #endregion
 
@@ -188,23 +188,23 @@ namespace Narvalo.Finance.Text
         [Theory]
         [MemberData(nameof(InvalidCountryCodes), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Create_ThrowsFormatException_ForInvalidCountryCode(string value)
-            => Assert.Throws<FormatException>(() => IbanParts.Create(value, "14", "20041010050500013M02606"));
+        public static void Create_ThrowsArgumentException_ForInvalidCountryCode(string value)
+            => Assert.Throws<ArgumentException>(() => IbanParts.Create(value, "14", "20041010050500013M02606"));
 
         [Theory]
         [MemberData(nameof(InvalidCheckDigits), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Create_ThrowsFormatException_ForInvalidCheckDigits(string value)
-            => Assert.Throws<FormatException>(() => IbanParts.Create("FR", value, "20041010050500013M02606"));
+        public static void Create_ThrowsArgumentException_ForInvalidCheckDigits(string value)
+            => Assert.Throws<ArgumentException>(() => IbanParts.Create("FR", value, "20041010050500013M02606"));
 
         [Theory]
         [MemberData(nameof(InvalidBbans), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Create_ThrowsFormatException_ForInvalidBban(string value)
-            => Assert.Throws<FormatException>(() => IbanParts.Create("FR", "14", value));
+        public static void Create_ThrowsArgumentException_ForInvalidBban(string value)
+            => Assert.Throws<ArgumentException>(() => IbanParts.Create("FR", "14", value));
 
         [Fact]
-        public static void Create_DoesNotThrowFormatException_ForValidInput()
+        public static void Create_DoesNotThrowArgumentException_ForValidInput()
             => IbanParts.Create("FR", "14", "20041010050500013M02606");
 
         #endregion

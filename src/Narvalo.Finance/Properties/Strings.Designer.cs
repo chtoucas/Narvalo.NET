@@ -163,6 +163,15 @@ namespace Narvalo.Finance.Properties {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string IbanParts_InvalidParts {
+            get {
+                return ResourceManager.GetString("IbanParts_InvalidParts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string IbanValidator_BbanVerificationFailure {
             get {
                 return ResourceManager.GetString("IbanValidator_BbanVerificationFailure", resourceCulture);

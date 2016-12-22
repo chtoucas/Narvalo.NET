@@ -7,7 +7,6 @@ namespace Narvalo.Finance
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Text;
-    using Narvalo.Finance.Validation;
     using Narvalo.Finance.Properties;
 
     /// <summary>
@@ -86,48 +85,42 @@ namespace Narvalo.Finance
             var result = new IbanValidator(levels).Validate(parts);
             if (result.IsFalse)
             {
-                throw new FormatException(result.Message);
+                throw new ArgumentException(result.Message);
             }
 
             return new Iban(parts, levels);
         }
 
-        public static Iban Parse(string value)
+        public static Outcome<Iban> Parse(string value)
         {
             Expect.NotNull(value);
 
             return Parse(value, IbanStyles.None, IbanValidationLevels.Default);
         }
 
-        public static Iban Parse(string value, IbanStyles styles)
+        public static Outcome<Iban> Parse(string value, IbanStyles styles)
         {
             Expect.NotNull(value);
 
             return Parse(value, styles, IbanValidationLevels.Default);
         }
 
-        public static Iban Parse(string value, IbanValidationLevels levels)
+        public static Outcome<Iban> Parse(string value, IbanValidationLevels levels)
         {
             Expect.NotNull(value);
 
             return Parse(value, IbanStyles.None, levels);
         }
 
-        public static Iban Parse(string value, IbanStyles styles, IbanValidationLevels levels)
+        public static Outcome<Iban> Parse(string value, IbanStyles styles, IbanValidationLevels levels)
         {
             Require.NotNull(value, nameof(value));
 
             var val = StripIgnorableSymbols(value, styles);
 
-            var parts = IbanParts.Parse(val);
-
-            var result = new IbanValidator(levels).Validate(parts);
-            if (result.IsFalse)
-            {
-                throw new FormatException(result.Message);
-            }
-
-            return new Iban(parts, levels);
+            return IbanParts.Parse(val)
+                .Bind(_ => new IbanValidator(levels).ValidateIntern(_))
+                .Select(_ => new Iban(_, levels));
         }
 
         public static Iban? TryParse(string value)
@@ -169,8 +162,8 @@ namespace Narvalo.Finance
             Demand.NotNull(input);
             Warrant.NotNull<string>();
 
-            if (input.Length == 0) { return String.Empty; }
             if (styles == IbanStyles.None) { return input; }
+            if (input.Length == 0) { return String.Empty; }
 
             int len = input.Length;
 
@@ -191,8 +184,8 @@ namespace Narvalo.Finance
             if (styles.Contains(IbanStyles.AllowTrailingWhite))
             {
                 // Ignore trailing whitespaces.
-                // NB: We know for sure that end > start; otherwise input would have been an empty
-                // string but we already handled this case above.
+                // NB: We know for sure that end > start; otherwise input would have been a
+                // whitespace only from the start and we already handled this case above.
                 while (end > start)
                 {
                     if (input[end] != WHITESPACE_CHAR) { break; }

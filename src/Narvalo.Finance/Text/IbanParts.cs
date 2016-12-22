@@ -26,7 +26,7 @@ namespace Narvalo.Finance.Text
         private readonly string _value;
 
         private IbanParts(string countryCode, string checkDigits, string bban)
-            :this (countryCode, checkDigits, bban, countryCode + checkDigits + bban)
+            : this(countryCode, checkDigits, bban, countryCode + checkDigits + bban)
         {
             Expect.NotNull(countryCode);
             Expect.NotNull(checkDigits);
@@ -77,38 +77,38 @@ namespace Narvalo.Finance.Text
             }
             else
             {
-                throw new FormatException(Strings.IbanParts_InvalidFormat);
+                throw new ArgumentException(Strings.IbanParts_InvalidParts);
             }
         }
 
-        public static IbanParts Parse(string value)
+        public static Outcome<IbanParts> Parse(string value)
         {
             Require.NotNull(value, nameof(value));
 
             if (!CheckValue(value))
             {
-                throw new FormatException(Strings.IbanParts_InvalidFormat);
+                return Outcome.Failure<IbanParts>(Strings.IbanParts_InvalidFormat);
             }
 
             string countryCode = GetCountryCode(value);
             if (!CheckCountryCode(countryCode))
             {
-                throw new FormatException(Strings.IbanParts_InvalidCountryCode);
+                return Outcome.Failure<IbanParts>(Strings.IbanParts_InvalidCountryCode);
             }
 
             string checkDigits = GetCheckDigits(value);
             if (!CheckCheckDigits(checkDigits))
             {
-                throw new FormatException(Strings.IbanParts_InvalidCheckDigits);
+                return Outcome.Failure<IbanParts>(Strings.IbanParts_InvalidCheckDigits);
             }
 
             string bban = GetBban(value);
             if (!CheckBban(bban))
             {
-                throw new FormatException(Strings.IbanParts_InvalidBban);
+                return Outcome.Failure<IbanParts>(Strings.IbanParts_InvalidBban);
             }
 
-            return new IbanParts(countryCode, checkDigits, bban, value);
+            return Outcome.Success(new IbanParts(countryCode, checkDigits, bban, value));
         }
 
         public static IbanParts? TryParse(string value)
