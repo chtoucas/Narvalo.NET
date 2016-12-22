@@ -85,30 +85,30 @@ namespace Narvalo.Finance.Text
 
         #endregion
 
-        #region TryParse()
+        #region Parse()
 
         [Fact]
-        public static void TryParse_ReturnsNull_ForNull()
-            => Assert.False(IbanParts.TryParse(null).HasValue);
+        public static void Parse_ReturnsNull_ForNull()
+            => Assert.False(IbanParts.Parse(null).HasValue);
 
         [Theory]
         [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void TryParse_Succeeds_ForValidInput(string value)
-            => Assert.True(IbanParts.TryParse(value).HasValue);
+        public static void Parse_Succeeds_ForValidInput(string value)
+            => Assert.True(IbanParts.Parse(value).HasValue);
 
         [Theory]
         [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void TryParse_ReturnsNull_ForInvalidInput(string value)
-            => Assert.False(IbanParts.TryParse(value).HasValue);
+        public static void Parse_ReturnsNull_ForInvalidInput(string value)
+            => Assert.False(IbanParts.Parse(value).HasValue);
 
         [Theory]
         [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void TryParse_SetCountryCodeCorrectly(string value)
+        public static void Parse_SetCountryCodeCorrectly(string value)
         {
-            var parts = IbanParts.TryParse(value);
+            var parts = IbanParts.Parse(value);
 
             Assert.Equal("FR", parts.Value.CountryCode);
         }
@@ -116,9 +116,9 @@ namespace Narvalo.Finance.Text
         [Theory]
         [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void TryParse_SetCheckDigitsCorrectly(string value)
+        public static void Parse_SetCheckDigitsCorrectly(string value)
         {
-            var parts = IbanParts.TryParse(value);
+            var parts = IbanParts.Parse(value);
 
             Assert.Equal("34", parts.Value.CheckDigits);
         }
@@ -146,32 +146,32 @@ namespace Narvalo.Finance.Text
         [InlineData("FR3456789012345678901234567890123", "56789012345678901234567890123")]
         [InlineData("FR34567890123456789012345678901234", "567890123456789012345678901234")]
         [CLSCompliant(false)]
-        public static void TryParse_SetBbanCorrectly(string value, string expectedValue)
+        public static void Parse_SetBbanCorrectly(string value, string expectedValue)
         {
-            var parts = IbanParts.TryParse(value);
+            var parts = IbanParts.Parse(value);
 
             Assert.Equal(expectedValue, parts.Value.Bban);
         }
 
         #endregion
 
-        #region Parse()
+        #region TryParse()
 
         [Fact]
-        public static void Parse_ThrowsArgumentNullException_ForNull()
-            => Assert.Throws<ArgumentNullException>(() => IbanParts.Parse(null));
+        public static void TryParse_ThrowsArgumentNullException_ForNull()
+            => Assert.Throws<ArgumentNullException>(() => IbanParts.TryParse(null));
 
         [Theory]
         [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Parse_ReturnsSuccess_ForValidInput(string value)
-            => Assert.True(IbanParts.Parse(value).Success);
+        public static void TryParse_ReturnsSuccess_ForValidInput(string value)
+            => Assert.True(IbanParts.TryParse(value).Success);
 
         [Theory]
         [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void Parse_ReturnsFailure_ForInvalidInput(string value)
-            => Assert.False(IbanParts.Parse(value).Success);
+        public static void TryParse_ReturnsFailure_ForInvalidInput(string value)
+            => Assert.False(IbanParts.TryParse(value).Success);
 
         #endregion
 

@@ -81,7 +81,23 @@ namespace Narvalo.Finance.Text
             }
         }
 
-        public static Outcome<IbanParts> Parse(string value)
+        public static IbanParts? Parse(string value)
+        {
+            if (!CheckValue(value)) { return null; }
+
+            string countryCode = GetCountryCode(value);
+            if (!CheckCountryCode(countryCode)) { return null; }
+
+            string checkDigits = GetCheckDigits(value);
+            if (!CheckCheckDigits(checkDigits)) { return null; }
+
+            string bban = GetBban(value);
+            if (!CheckBban(bban)) { return null; }
+
+            return new IbanParts(countryCode, checkDigits, bban, value);
+        }
+
+        public static Outcome<IbanParts> TryParse(string value)
         {
             Require.NotNull(value, nameof(value));
 
@@ -109,40 +125,6 @@ namespace Narvalo.Finance.Text
             }
 
             return Outcome.Success(new IbanParts(countryCode, checkDigits, bban, value));
-        }
-
-        public static IbanParts? TryParse(string value)
-        {
-            if (!CheckValue(value)) { return null; }
-
-            string countryCode = GetCountryCode(value);
-            if (!CheckCountryCode(countryCode)) { return null; }
-
-            string checkDigits = GetCheckDigits(value);
-            if (!CheckCheckDigits(checkDigits)) { return null; }
-
-            string bban = GetBban(value);
-            if (!CheckBban(bban)) { return null; }
-
-            return new IbanParts(countryCode, checkDigits, bban, value);
-        }
-
-        private static string GetBban(string value)
-        {
-            Expect.NotNull(value);
-            return value.Substring(CountryLength + CheckDigitsLength);
-        }
-
-        private static string GetCheckDigits(string value)
-        {
-            Expect.NotNull(value);
-            return value.Substring(CountryLength, CheckDigitsLength);
-        }
-
-        private static string GetCountryCode(string value)
-        {
-            Expect.NotNull(value);
-            return value.Substring(0, CountryLength);
         }
 
         #region Validation helpers.
@@ -175,6 +157,28 @@ namespace Narvalo.Finance.Text
         {
             if (value == null) { return false; }
             return value.Length >= MinLength && value.Length <= MaxLength;
+        }
+
+        #endregion
+
+        #region Parsing helpers.
+
+        private static string GetBban(string value)
+        {
+            Expect.NotNull(value);
+            return value.Substring(CountryLength + CheckDigitsLength);
+        }
+
+        private static string GetCheckDigits(string value)
+        {
+            Expect.NotNull(value);
+            return value.Substring(CountryLength, CheckDigitsLength);
+        }
+
+        private static string GetCountryCode(string value)
+        {
+            Expect.NotNull(value);
+            return value.Substring(0, CountryLength);
         }
 
         #endregion

@@ -9,11 +9,11 @@ namespace Narvalo.Finance
 
     public static partial class IbanFacts
     {
-        #region TryParse()
+        #region Parse()
 
         [Fact]
-        public static void TryParse_ReturnsNull_ForNull()
-            => Assert.False(Iban.TryParse(null).HasValue);
+        public static void Parse_ReturnsNull_ForNull()
+            => Assert.False(Iban.Parse(null).HasValue);
 
         [Theory]
         [InlineData("     AL47 2121 1009 0000 0002 3569 8741")]
@@ -21,16 +21,16 @@ namespace Narvalo.Finance
         [InlineData("IBAN AL47 2121 1009 0000 0002 3569 8741")]
         [InlineData("     IBAN AL47 2121 1009 0000 0002 3569 8741")]
         [CLSCompliant(false)]
-        public static void TryParse_Succeeds_(string value)
-            => Assert.True(Iban.TryParse(value, IbanStyles.Any).HasValue);
+        public static void Parse_Succeeds_(string value)
+            => Assert.True(Iban.Parse(value, IbanStyles.Any).HasValue);
 
         #endregion
 
-        #region Parse()
+        #region TryParse()
 
         [Fact]
-        public static void Parse_ThrowsArgumentNullException_ForNull()
-            => Assert.Throws<ArgumentNullException>(() => Iban.Parse(null));
+        public static void TryParse_ThrowsArgumentNullException_ForNull()
+            => Assert.Throws<ArgumentNullException>(() => Iban.TryParse(null));
 
         #endregion
 

@@ -18,17 +18,10 @@ namespace Narvalo.Finance.Text
 
         public static Outcome<T> Failure<T>(string message)
         {
-            Expect.NotNull(message);
+            Expect.NotNullOrEmpty(message);
             Warrant.NotNull<Outcome<T>>();
 
             return Outcome<T>.η(message);
-        }
-
-        public static Outcome<T> Where<T>(this Outcome<T> @this, Func<T, bool> predicate)
-        {
-            Require.NotNull(@this, nameof(@this));
-
-            return @this.Success && predicate.Invoke(@this.Value) ? @this : Failure<T>("XXX");
         }
     }
 }

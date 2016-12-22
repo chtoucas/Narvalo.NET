@@ -36,7 +36,7 @@ namespace Narvalo.Finance.Text
         [DebuggerHidden]
         internal static Outcome<T> η(string message)
         {
-            Require.NotNull(message, nameof(message));
+            Require.NotNullOrEmpty(message, nameof(message));
 
             return new Failure_(message);
         }
@@ -98,7 +98,7 @@ namespace Narvalo.Finance.Text
 
             public Failure_(string message) : base(false)
             {
-                Demand.NotNull(message);
+                Demand.NotNullOrEmpty(message);
 
                 _message = message;
             }

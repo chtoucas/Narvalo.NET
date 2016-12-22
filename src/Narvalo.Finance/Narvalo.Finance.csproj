@@ -78,7 +78,6 @@
     <Compile Include="Globalization\MoneyFormatInfo.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="Globalization\MoneyFormatter.cs" />
-    <Compile Include="Text\BicFormat.cs" />
     <Compile Include="Currencies\Currencies.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,7 +102,7 @@
     <Compile Include="IbanValidationLevels.cs" />
     <Compile Include="Text\BooleanResult.cs" />
     <Compile Include="Text\IbanValidator.cs" />
-    <Compile Include="Text\Sentinel.cs" />
+    <Compile Include="Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

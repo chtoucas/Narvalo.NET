@@ -85,7 +85,6 @@
     <Compile Include="Finance\CurrencyNotFoundExceptionFacts.cs" />
     <Compile Include="Finance\IbanFacts.cs" />
     <Compile Include="Finance\Text\AsciiHelpersFacts.cs" />
-    <Compile Include="Finance\Text\BicFormatFacts.cs" />
     <Compile Include="Finance\Text\CountryISOCodesFacts.cs" />
     <Compile Include="Finance\Text\IbanPartsFacts.cs" />
     <Compile Include="Finance\Text\IbanValidatorFacts.cs" />

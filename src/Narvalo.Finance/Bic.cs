@@ -9,7 +9,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Text;
 
     using static Narvalo.Finance.Text.AsciiHelpers;
-    using static Narvalo.Finance.Text.BicFormat;
 
     /// <summary>
     /// Represents a Business Identifier Code (BIC).
@@ -25,6 +24,14 @@ namespace Narvalo.Finance
         private const char SWIFT_TT_MARK = '0';
         private const char SWIFT_NOT_CONNECTED_MARK = '1';
 
+        internal const int PrefixLength = 4;
+        internal const int CountryLength = 2;
+        internal const int SuffixLength = 2;
+        internal const int BranchLength = 3;
+
+        internal const int PartyLength = PrefixLength + CountryLength + SuffixLength;
+        internal const int BicLength = PartyLength + BranchLength;
+
         private readonly string _branchCode;
         private readonly string _countryCode;
         private readonly string _institutionCode;
@@ -35,14 +42,32 @@ namespace Narvalo.Finance
             string institutionCode,
             string countryCode,
             string locationCode,
+            string branchCode)
+            : this(
+                institutionCode,
+                countryCode,
+                locationCode,
+                branchCode,
+                institutionCode + countryCode + locationCode + branchCode)
+        {
+            Expect.NotNull(institutionCode);
+            Expect.NotNull(countryCode);
+            Expect.NotNull(locationCode);
+            Expect.NotNull(branchCode);
+        }
+
+        private Bic(
+            string institutionCode,
+            string countryCode,
+            string locationCode,
             string branchCode,
             string value)
         {
-            Demand.True(CheckInstitutionCode(institutionCode));
-            Demand.True(CheckCountryCode(countryCode));
-            Demand.True(CheckLocationCode(locationCode));
-            Demand.True(CheckBranchCode(branchCode));
-            Demand.True(CheckValue(value));
+            Demand.NotNull(institutionCode);
+            Demand.NotNull(countryCode);
+            Demand.NotNull(locationCode);
+            Demand.NotNull(branchCode);
+            Demand.NotNull(value);
 
             _institutionCode = institutionCode;
             _countryCode = countryCode;
@@ -56,7 +81,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string BranchCode
         {
-            get { Sentinel.Warrant.Lengths(0, BranchLength); return _branchCode; }
+            get { Warrant.NotNull<string>(); return _branchCode; }
         }
 
         public string BusinessParty
@@ -69,7 +94,7 @@ namespace Narvalo.Finance
         /// </summary>
         public string CountryCode
         {
-            get { Sentinel.Warrant.Length(CountryLength); return _countryCode; }
+            get { Warrant.NotNull<string>(); return _countryCode; }
         }
 
         /// <summary>
@@ -78,7 +103,7 @@ namespace Narvalo.Finance
         /// <remarks>As of ISO 9362:2014, this is also the Business party prefix.</remarks>
         public string InstitutionCode
         {
-            get { Sentinel.Warrant.Length(PrefixLength); return _institutionCode; }
+            get { Warrant.NotNull<string>(); return _institutionCode; }
         }
 
         // Connected to the SWIFTNet FIN network?
@@ -95,7 +120,7 @@ namespace Narvalo.Finance
         /// <remarks>As of ISO 9362:2014, this is also the Business party suffix.</remarks>
         public string LocationCode
         {
-            get { Sentinel.Warrant.Length(SuffixLength); return _locationCode; }
+            get { Warrant.NotNull<string>(); return _locationCode; }
         }
 
         public static Bic Create(
@@ -104,10 +129,10 @@ namespace Narvalo.Finance
             string locationCode,
             string branchCode)
         {
-            Expect.True(CheckInstitutionCode(institutionCode));
-            Expect.True(CheckCountryCode(countryCode));
-            Expect.True(CheckLocationCode(locationCode));
-            Expect.True(CheckBranchCode(branchCode));
+            Expect.NotNull(institutionCode);
+            Expect.NotNull(countryCode);
+            Expect.NotNull(locationCode);
+            Expect.NotNull(branchCode);
 
             return Create(institutionCode, countryCode, locationCode, branchCode, BicVersion.Default);
         }
@@ -119,65 +144,86 @@ namespace Narvalo.Finance
             string branchCode,
             BicVersion version)
         {
-            // REVIEW: We check for non-null twice...
             Require.NotNull(institutionCode, nameof(institutionCode));
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(locationCode, nameof(locationCode));
             Require.NotNull(branchCode, nameof(branchCode));
-            Require.True(CheckInstitutionCode(institutionCode), nameof(institutionCode));
-            Require.True(CheckCountryCode(countryCode), nameof(countryCode));
-            Require.True(CheckLocationCode(locationCode), nameof(locationCode));
-            Require.True(CheckBranchCode(branchCode), nameof(branchCode));
 
-            var value = institutionCode + countryCode + locationCode + branchCode;
-            Contract.Assume(CheckValue(value));
-
-            var bic = new Bic(institutionCode, countryCode, locationCode, branchCode, value);
-            if (!bic.CheckParts(version))
+            if (CheckInstitutionCode(institutionCode, version)
+                && CheckCountryCode(countryCode)
+                && CheckLocationCode(locationCode)
+                && CheckBranchCode(branchCode))
             {
-                throw new FormatException(Strings.Bic_BadPartsFormat);
+                return new Bic(institutionCode, countryCode, locationCode, branchCode);
             }
-
-            return bic;
+            else
+            {
+                throw new ArgumentException(Strings.Bic_BadPartsFormat);
+            }
         }
 
-        public static Bic Parse(string value)
+        public static Bic? Parse(string value) => Parse(value, BicVersion.Default);
+
+        public static Bic? Parse(string value, BicVersion version)
+        {
+            if (!CheckValue(value)) { return null; }
+
+            string institutionCode = GetInstitutionCode(value);
+            if (!CheckInstitutionCode(institutionCode, version)) { return null; }
+
+            string countryCode = GetCountryCode(value);
+            if (!CheckCountryCode(countryCode)) { return null; }
+
+            string locationCode = GetLocationCode(value);
+            if (!CheckLocationCode(locationCode)) { return null; }
+
+            string branchCode = GetBranchCode(value);
+            if (!CheckBranchCode(branchCode)) { return null; }
+
+            return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
+        }
+
+        public static Outcome<Bic> TryParse(string value)
         {
             Expect.NotNull(value);
 
-            return Parse(value, BicVersion.Default);
+            return TryParse(value, BicVersion.Default);
         }
 
-        public static Bic Parse(string value, BicVersion version)
+        public static Outcome<Bic> TryParse(string value, BicVersion version)
         {
             Require.NotNull(value, nameof(value));
 
             if (!CheckValue(value))
             {
-                throw new FormatException(Strings.Bic_InvalidFormat);
+                return Outcome.Failure<Bic>(Strings.Bic_InvalidFormat);
             }
-            Check.True(CheckValue(value));
 
-            var bic = ParseCore(value);
-            if (!bic.CheckParts(version))
+            string institutionCode = GetInstitutionCode(value);
+            if (!CheckInstitutionCode(institutionCode, version))
             {
-                throw new FormatException(Strings.Bic_BadPartsFormat);
+                return Outcome.Failure<Bic>(Strings.Bic_InvalidInstitutionCode);
             }
 
-            return bic;
-        }
+            string countryCode = GetCountryCode(value);
+            if (!CheckCountryCode(countryCode))
+            {
+                return Outcome.Failure<Bic>(Strings.Bic_InvalidCountryCode);
+            }
 
-        public static Bic? TryParse(string value) => TryParse(value, BicVersion.Default);
+            string locationCode = GetLocationCode(value);
+            if (!CheckLocationCode(locationCode))
+            {
+                return Outcome.Failure<Bic>(Strings.Bic_InvalidLocationCode);
+            }
 
-        public static Bic? TryParse(string value, BicVersion version)
-        {
-            if (!CheckValue(value)) { return null; }
-            Check.True(CheckValue(value));
+            string branchCode = GetBranchCode(value);
+            if (!CheckBranchCode(branchCode))
+            {
+                return Outcome.Failure<Bic>(Strings.Bic_InvalidBranchCode);
+            }
 
-            var bic = ParseCore(value);
-            if (!bic.CheckParts(version)) { return null; }
-
-            return bic;
+            return Outcome.Success(new Bic(institutionCode, countryCode, locationCode, branchCode, value));
         }
 
         /// <inheritdoc cref="Object.ToString" />
@@ -188,49 +234,76 @@ namespace Narvalo.Finance
             return _value;
         }
 
-        // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
-        internal bool CheckParts(BicVersion version)
-            // NB: We already checked the length for each property.
-            => (version == BicVersion.ISO ? IsDigitOrUpperLetter(InstitutionCode) : IsUpperLetter(InstitutionCode))
-                && CountryISOCodes.TwoLetterCodeExists(CountryCode)
-                && IsDigitOrUpperLetter(LocationCode)
-                && (BranchCode.Length == 0 || IsDigitOrUpperLetter(BranchCode));
+        #region Validation helpers.
 
-        // This method never throws.
-        internal static Bic ParseCore(string value)
+        [Pure]
+        public static bool CheckBranchCode(string value)
         {
-            Demand.True(CheckValue(value));
+            if (value == null) { return false; }
+            return value.Length == 0 || (value.Length == BranchLength && IsDigitOrUpperLetter(value));
+        }
 
-#if CONTRACTS_FULL // Helps CCCheck to decipher the precondition.
+        [Pure]
+        public static bool CheckCountryCode(string value)
+        {
+            if (value == null) { return false; }
+            return value.Length == CountryLength && CountryISOCodes.TwoLetterCodeExists(value);
+        }
 
-            // This is just the negation of CheckValue(value).
-            if (value == null || (value.Length != PartyLength && value.Length != BicLength))
-            {
-                throw new InvalidOperationException();
-            }
+        // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
+        [Pure]
+        public static bool CheckInstitutionCode(string value, BicVersion version)
+        {
+            if (value == null) { return false; }
+            return value.Length == PrefixLength
+                && (version == BicVersion.ISO ? IsDigitOrUpperLetter(value) : IsUpperLetter(value));
+        }
 
-#endif
+        [Pure]
+        public static bool CheckLocationCode(string value)
+        {
+            if (value == null) { return false; }
+            return value.Length == SuffixLength && IsDigitOrUpperLetter(value);
+        }
 
-            // The first four letters or digits define the institution or bank code.
-            string institutionCode = value.Substring(0, PrefixLength);
-            Contract.Assume(CheckInstitutionCode(institutionCode));
+        [Pure]
+        public static bool CheckValue(string value)
+        {
+            if (value == null) { return false; }
+            return value.Length == PartyLength || value.Length == BicLength;
+        }
 
-            // The next two letters define the ISO 3166-1 alpha-2 country code.
-            string countryCode = value.Substring(PrefixLength, CountryLength);
-            Contract.Assume(CheckCountryCode(countryCode));
+        #endregion
 
-            // The next two letters or digits define the location code.
-            string locationCode = value.Substring(PrefixLength + CountryLength, SuffixLength);
-            Contract.Assume(CheckLocationCode(locationCode));
+        #region Parsing helpers.
 
-            // The next three letters or digits define the branch code (optional).
-            string branchCode = value.Length == PartyLength
+        private static string GetBranchCode(string value)
+        {
+            Expect.NotNull(value);
+            return value.Length == PartyLength
                 ? String.Empty
                 : value.Substring(PrefixLength + CountryLength + SuffixLength, BranchLength);
-            Contract.Assume(CheckBranchCode(branchCode));
-
-            return new Bic(institutionCode, countryCode, locationCode, branchCode, value);
         }
+
+        private static string GetCountryCode(string value)
+        {
+            Expect.NotNull(value);
+            return value.Substring(PrefixLength, CountryLength);
+        }
+
+        private static string GetInstitutionCode(string value)
+        {
+            Expect.NotNull(value);
+            return value.Substring(0, PrefixLength);
+        }
+
+        private static string GetLocationCode(string value)
+        {
+            Expect.NotNull(value);
+            return value.Substring(PrefixLength + CountryLength, SuffixLength);
+        }
+
+        #endregion
     }
 
     // Implements the IEquatable<Bic> interface.
@@ -269,11 +342,11 @@ namespace Narvalo.Finance
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(CheckBranchCode(_branchCode));
-            Contract.Invariant(CheckCountryCode(_countryCode));
-            Contract.Invariant(CheckInstitutionCode(_institutionCode));
-            Contract.Invariant(CheckLocationCode(_locationCode));
-            Contract.Invariant(CheckValue(_value));
+            Contract.Invariant(_branchCode);
+            Contract.Invariant(_countryCode);
+            Contract.Invariant(_institutionCode);
+            Contract.Invariant(_locationCode);
+            Contract.Invariant(_value);
         }
     }
 }

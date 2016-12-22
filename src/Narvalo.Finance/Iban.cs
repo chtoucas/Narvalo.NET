@@ -91,59 +91,59 @@ namespace Narvalo.Finance
             return new Iban(parts, levels);
         }
 
-        public static Outcome<Iban> Parse(string value)
-        {
-            Expect.NotNull(value);
+        public static Iban? Parse(string value)
+            => Parse(value, IbanStyles.None, IbanValidationLevels.Default);
 
-            return Parse(value, IbanStyles.None, IbanValidationLevels.Default);
-        }
+        public static Iban? Parse(string value, IbanStyles styles)
+            => Parse(value, styles, IbanValidationLevels.Default);
 
-        public static Outcome<Iban> Parse(string value, IbanStyles styles)
-        {
-            Expect.NotNull(value);
+        public static Iban? Parse(string value, IbanValidationLevels levels)
+            => Parse(value, IbanStyles.None, levels);
 
-            return Parse(value, styles, IbanValidationLevels.Default);
-        }
-
-        public static Outcome<Iban> Parse(string value, IbanValidationLevels levels)
-        {
-            Expect.NotNull(value);
-
-            return Parse(value, IbanStyles.None, levels);
-        }
-
-        public static Outcome<Iban> Parse(string value, IbanStyles styles, IbanValidationLevels levels)
-        {
-            Require.NotNull(value, nameof(value));
-
-            var val = StripIgnorableSymbols(value, styles);
-
-            return IbanParts.Parse(val)
-                .Bind(_ => new IbanValidator(levels).ValidateIntern(_))
-                .Select(_ => new Iban(_, levels));
-        }
-
-        public static Iban? TryParse(string value)
-            => TryParse(value, IbanStyles.None, IbanValidationLevels.Default);
-
-        public static Iban? TryParse(string value, IbanStyles styles)
-            => TryParse(value, styles, IbanValidationLevels.Default);
-
-        public static Iban? TryParse(string value, IbanValidationLevels levels)
-            => TryParse(value, IbanStyles.None, levels);
-
-        public static Iban? TryParse(string value, IbanStyles styles, IbanValidationLevels levels)
+        public static Iban? Parse(string value, IbanStyles styles, IbanValidationLevels levels)
         {
             if (value == null) { return null; }
 
             var val = StripIgnorableSymbols(value, styles);
 
-            var parts = IbanParts.TryParse(val);
+            var parts = IbanParts.Parse(val);
             if (!parts.HasValue) { return null; }
 
             if (!new IbanValidator(levels).Verify(parts.Value)) { return null; }
 
             return new Iban(parts.Value, levels);
+        }
+
+        public static Outcome<Iban> TryParse(string value)
+        {
+            Expect.NotNull(value);
+
+            return TryParse(value, IbanStyles.None, IbanValidationLevels.Default);
+        }
+
+        public static Outcome<Iban> TryParse(string value, IbanStyles styles)
+        {
+            Expect.NotNull(value);
+
+            return TryParse(value, styles, IbanValidationLevels.Default);
+        }
+
+        public static Outcome<Iban> TryParse(string value, IbanValidationLevels levels)
+        {
+            Expect.NotNull(value);
+
+            return TryParse(value, IbanStyles.None, levels);
+        }
+
+        public static Outcome<Iban> TryParse(string value, IbanStyles styles, IbanValidationLevels levels)
+        {
+            Require.NotNull(value, nameof(value));
+
+            var val = StripIgnorableSymbols(value, styles);
+
+            return IbanParts.TryParse(val)
+                .Bind(_ => new IbanValidator(levels).TryValidate(_))
+                .Select(_ => new Iban(_, levels));
         }
 
         public static Iban? CheckIntegrity(Iban iban)

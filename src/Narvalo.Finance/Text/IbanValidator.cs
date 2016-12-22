@@ -39,7 +39,7 @@ namespace Narvalo.Finance.Text
             return BooleanResult.True;
         }
 
-        internal Outcome<IbanParts> ValidateIntern(IbanParts parts)
+        internal Outcome<IbanParts> TryValidate(IbanParts parts)
         {
             if (_verifyIntegrity && !VerifyIntegrity(parts))
             {
