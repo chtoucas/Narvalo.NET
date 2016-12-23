@@ -279,7 +279,7 @@ namespace Narvalo.Finance
 
         private static string GetBranchCode(string value)
         {
-            Expect.NotNull(value);
+            Demand.True(CheckValue(value));
             return value.Length == PartyLength
                 ? String.Empty
                 : value.Substring(PrefixLength + CountryLength + SuffixLength, BranchLength);
@@ -287,19 +287,19 @@ namespace Narvalo.Finance
 
         private static string GetCountryCode(string value)
         {
-            Expect.NotNull(value);
+            Demand.True(CheckValue(value));
             return value.Substring(PrefixLength, CountryLength);
         }
 
         private static string GetInstitutionCode(string value)
         {
-            Expect.NotNull(value);
+            Demand.True(CheckValue(value));
             return value.Substring(0, PrefixLength);
         }
 
         private static string GetLocationCode(string value)
         {
-            Expect.NotNull(value);
+            Demand.True(CheckValue(value));
             return value.Substring(PrefixLength + CountryLength, SuffixLength);
         }
 
