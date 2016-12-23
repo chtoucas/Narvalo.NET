@@ -5,7 +5,7 @@ namespace Narvalo.Finance.Utilities
     /// <summary>
     /// Provides extension methods for <see cref="Outcome{T}"/>.
     /// </summary>
-    public static class Outcome
+    internal static class Outcome
     {
         public static Outcome<T> Success<T>(T value) where T : struct
         {

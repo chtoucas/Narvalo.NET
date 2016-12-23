@@ -19,7 +19,7 @@ namespace Narvalo.Finance.Utilities
             IsFalse = isFalse;
         }
 
-        public static BooleanResult True
+        internal static BooleanResult True
         {
             get { Warrant.NotNull<BooleanResult>(); return s_True; }
         }
@@ -35,7 +35,7 @@ namespace Narvalo.Finance.Utilities
 
         public static implicit operator bool(BooleanResult value) => value.IsTrue;
 
-        public static BooleanResult False(string message)
+        internal static BooleanResult False(string message)
         {
             Require.NotNullOrEmpty(message, nameof(message));
 

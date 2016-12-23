@@ -62,7 +62,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Argument_CurrencyMismatch.
         /// </summary>
         internal static string Argument_CurrencyMismatch {
             get {
@@ -71,7 +71,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Argument_InvalidBicParts.
         /// </summary>
         internal static string Argument_InvalidBicParts {
             get {
@@ -80,7 +80,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Argument_InvalidIbanParts.
         /// </summary>
         internal static string Argument_InvalidIbanParts {
             get {
@@ -98,7 +98,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Argument_NeutralCultureNotSupported.
         /// </summary>
         internal static string Argument_NeutralCultureNotSupported {
             get {
@@ -116,7 +116,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to CurrencyActivator_MissingCtor.
         /// </summary>
         internal static string CurrencyActivator_MissingCtor {
             get {
@@ -143,7 +143,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to IbanValidator_BbanVerificationFailure.
         /// </summary>
         internal static string IbanValidator_BbanVerificationFailure {
             get {
@@ -152,7 +152,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to IbanValidator_IntegrityCheckFailure.
         /// </summary>
         internal static string IbanValidator_IntegrityCheckFailure {
             get {
@@ -161,7 +161,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to IbanValidator_UnknownISOCountryCode.
         /// </summary>
         internal static string IbanValidator_UnknownISOCountryCode {
             get {
@@ -170,7 +170,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Money_InvalidFormatSpecification.
         /// </summary>
         internal static string Money_InvalidFormatSpecification {
             get {
@@ -179,7 +179,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Parse_InvalidBban.
         /// </summary>
         internal static string Parse_InvalidBban {
             get {
@@ -197,7 +197,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Parse_InvalidBranchCode.
         /// </summary>
         internal static string Parse_InvalidBranchCode {
             get {
@@ -206,7 +206,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Parse_InvalidCheckDigits.
         /// </summary>
         internal static string Parse_InvalidCheckDigits {
             get {
@@ -215,7 +215,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Parse_InvalidCountryCode.
         /// </summary>
         internal static string Parse_InvalidCountryCode {
             get {
@@ -233,7 +233,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Parse_InvalidInstitutionCode.
         /// </summary>
         internal static string Parse_InvalidInstitutionCode {
             get {
@@ -242,7 +242,7 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XXX.
+        ///   Looks up a localized string similar to Parse_InvalidLocationCode.
         /// </summary>
         internal static string Parse_InvalidLocationCode {
             get {

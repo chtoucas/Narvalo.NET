@@ -118,22 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Argument_CurrencyMismatch" xml:space="preserve">
-    <value>XXX</value>
+    <value>Argument_CurrencyMismatch</value>
   </data>
   <data name="Argument_InvalidBicParts" xml:space="preserve">
-    <value>XXX</value>
+    <value>Argument_InvalidBicParts</value>
   </data>
   <data name="Argument_InvalidIbanParts" xml:space="preserve">
-    <value>XXX</value>
+    <value>Argument_InvalidIbanParts</value>
   </data>
   <data name="Argument_InvalidMoneyType" xml:space="preserve">
     <value>The specified argument MUST be of Money type.</value>
   </data>
   <data name="Argument_NeutralCultureNotSupported" xml:space="preserve">
-    <value>XXX</value>
+    <value>Argument_NeutralCultureNotSupported</value>
   </data>
   <data name="CurrencyActivator_MissingCtor" xml:space="preserve">
-    <value>XXX</value>
+    <value>CurrencyActivator_MissingCtor</value>
   </data>
   <data name="CurrencyNotFound_DefaultMessage" xml:space="preserve">
     <value>Unknown currency.</value>
@@ -142,43 +142,43 @@
     <value>Unknown currency: {0}.</value>
   </data>
   <data name="IbanValidator_BbanVerificationFailure" xml:space="preserve">
-    <value>XXX</value>
+    <value>IbanValidator_BbanVerificationFailure</value>
   </data>
   <data name="IbanValidator_IntegrityCheckFailure" xml:space="preserve">
-    <value>XXX</value>
+    <value>IbanValidator_IntegrityCheckFailure</value>
   </data>
   <data name="IbanValidator_UnknownISOCountryCode" xml:space="preserve">
-    <value>XXX</value>
+    <value>IbanValidator_UnknownISOCountryCode</value>
   </data>
   <data name="Iban_InvalidFormatSpecification" xml:space="preserve">
     <value>Format string can be only null, an empty string, "G", "g", "C", "c", "H", "h".</value>
   </data>
   <data name="Money_InvalidFormatSpecification" xml:space="preserve">
-    <value>XXX</value>
+    <value>Money_InvalidFormatSpecification</value>
   </data>
   <data name="Parse_InvalidBban" xml:space="preserve">
-    <value>XXX</value>
+    <value>Parse_InvalidBban</value>
   </data>
   <data name="Parse_InvalidBicValue" xml:space="preserve">
     <value>The BIC string MUST be 8 or 11 characters long.</value>
   </data>
   <data name="Parse_InvalidBranchCode" xml:space="preserve">
-    <value>XXX</value>
+    <value>Parse_InvalidBranchCode</value>
   </data>
   <data name="Parse_InvalidCheckDigits" xml:space="preserve">
-    <value>XXX</value>
+    <value>Parse_InvalidCheckDigits</value>
   </data>
   <data name="Parse_InvalidCountryCode" xml:space="preserve">
-    <value>XXX</value>
+    <value>Parse_InvalidCountryCode</value>
   </data>
   <data name="Parse_InvalidIbanValue" xml:space="preserve">
     <value>The IBAN string MUST be at most 34 characters long and at least 14 characters long.</value>
   </data>
   <data name="Parse_InvalidInstitutionCode" xml:space="preserve">
-    <value>XXX</value>
+    <value>Parse_InvalidInstitutionCode</value>
   </data>
   <data name="Parse_InvalidLocationCode" xml:space="preserve">
-    <value>XXX</value>
+    <value>Parse_InvalidLocationCode</value>
   </data>
   <data name="Sentinel_OutOfRangeCurrencyAlphabeticCode" xml:space="preserve">
     <value>The alphabetic code MUST be composed of exactly 3 characters.</value>

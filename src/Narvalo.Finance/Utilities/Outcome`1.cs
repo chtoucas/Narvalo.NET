@@ -12,7 +12,7 @@ namespace Narvalo.Finance.Utilities
 
         public bool Success { get; }
 
-        public abstract string Message { get; }
+        public abstract string ErrorMessage { get; }
 
         public abstract T Value { get; }
 
@@ -22,7 +22,7 @@ namespace Narvalo.Finance.Utilities
         internal abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
              where TResult : struct;
 
-        public static Outcome<T> Failure(string message)
+        internal static Outcome<T> Failure(string message)
         {
             Require.NotNullOrEmpty(message, nameof(message));
             Warrant.NotNull<Outcome<T>>();
@@ -47,7 +47,7 @@ namespace Narvalo.Finance.Utilities
                 _value = value;
             }
 
-            public override string Message { get { throw new InvalidOperationException(); } }
+            public override string ErrorMessage { get { throw new InvalidOperationException(); } }
 
             public override T Value { get { return _value; } }
 
@@ -103,21 +103,21 @@ namespace Narvalo.Finance.Utilities
                 _message = message;
             }
 
-            public override string Message { get { Warrant.NotNullOrEmpty(); return _message; } }
+            public override string ErrorMessage { get { Warrant.NotNullOrEmpty(); return _message; } }
 
             public override T Value { get { throw new InvalidOperationException(); } }
 
             internal override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
-                => Outcome<TResult>.Failure(Message);
+                => Outcome<TResult>.Failure(ErrorMessage);
 
             internal override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
-                => Outcome<TResult>.Failure(Message);
+                => Outcome<TResult>.Failure(ErrorMessage);
 
             public bool Equals(Failure_ other)
             {
                 if (ReferenceEquals(other, null)) { return false; }
 
-                return Message == other.Message;
+                return ErrorMessage == other.ErrorMessage;
             }
 
             public override bool Equals(object obj)
@@ -130,13 +130,13 @@ namespace Narvalo.Finance.Utilities
                 return Equals(obj as Failure_);
             }
 
-            public override int GetHashCode() => Message.GetHashCode();
+            public override int GetHashCode() => ErrorMessage.GetHashCode();
 
             public override string ToString()
             {
                 Warrant.NotNull<string>();
 
-                return Format.Invariant("Failure({0})", Message);
+                return Format.Invariant("Failure({0})", ErrorMessage);
             }
         }
     }
