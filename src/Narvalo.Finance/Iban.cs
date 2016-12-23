@@ -162,6 +162,7 @@ namespace Narvalo.Finance
             Demand.NotNull(text);
             Warrant.NotNull<string>();
 
+            // Fast track.
             if (styles == IbanStyles.None) { return text; }
             if (text.Length == 0) { return String.Empty; }
 
