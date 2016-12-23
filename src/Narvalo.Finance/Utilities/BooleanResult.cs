@@ -33,6 +33,8 @@ namespace Narvalo.Finance.Utilities
             get { throw new InvalidOperationException(); }
         }
 
+        public static implicit operator bool(BooleanResult value) => value.IsTrue;
+
         public static BooleanResult False(string message)
         {
             Require.NotNullOrEmpty(message, nameof(message));
