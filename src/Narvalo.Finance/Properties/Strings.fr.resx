@@ -117,22 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Bic_BadPartsFormat" xml:space="preserve">
+  <data name="Argument_CurrencyMismatch" xml:space="preserve">
     <value>XXX</value>
   </data>
-  <data name="Bic_InvalidBranchCode" xml:space="preserve">
+  <data name="Argument_InvalidBicParts" xml:space="preserve">
     <value>XXX</value>
   </data>
-  <data name="Bic_InvalidCountryCode" xml:space="preserve">
+  <data name="Argument_InvalidIbanParts" xml:space="preserve">
     <value>XXX</value>
   </data>
-  <data name="Bic_InvalidFormat" xml:space="preserve">
-    <value>Un code BIC doit comporter 8 ou 11 caractères.</value>
+  <data name="Argument_InvalidMoneyType" xml:space="preserve">
+    <value>L'argument doit être de type Money.</value>
   </data>
-  <data name="Bic_InvalidInstitutionCode" xml:space="preserve">
-    <value>XXX</value>
-  </data>
-  <data name="Bic_InvalidLocationCode" xml:space="preserve">
+  <data name="Argument_NeutralCultureNotSupported" xml:space="preserve">
     <value>XXX</value>
   </data>
   <data name="CurrencyActivator_MissingCtor" xml:space="preserve">
@@ -141,26 +138,8 @@
   <data name="CurrencyNotFoundException_DefaultMessage" xml:space="preserve">
     <value>Devise inconnue.</value>
   </data>
-  <data name="Currency_InvalidCode" xml:space="preserve">
+  <data name="Currency_UnknownCode" xml:space="preserve">
     <value>Devise inconnue : {0}.</value>
-  </data>
-  <data name="Currency_NeutralCulture" xml:space="preserve">
-    <value>XXX</value>
-  </data>
-  <data name="IbanParts_InvalidBban" xml:space="preserve">
-    <value>XXX</value>
-  </data>
-  <data name="IbanParts_InvalidCheckDigits" xml:space="preserve">
-    <value>XXX</value>
-  </data>
-  <data name="IbanParts_InvalidCountryCode" xml:space="preserve">
-    <value>XXX</value>
-  </data>
-  <data name="IbanParts_InvalidFormat" xml:space="preserve">
-    <value>Un code IBAN string doit comporter de 14 à 34 caractères.</value>
-  </data>
-  <data name="IbanParts_InvalidParts" xml:space="preserve">
-    <value>XXX</value>
   </data>
   <data name="IbanValidator_BbanVerificationFailure" xml:space="preserve">
     <value>XXX</value>
@@ -174,13 +153,31 @@
   <data name="Iban_InvalidFormatSpecification" xml:space="preserve">
     <value>XXX</value>
   </data>
-  <data name="Money_ArgIsNotMoney" xml:space="preserve">
-    <value>L'argument doit être de type Money.</value>
-  </data>
-  <data name="Money_CurrencyMismatch" xml:space="preserve">
+  <data name="Money_InvalidFormatSpecification" xml:space="preserve">
     <value>XXX</value>
   </data>
-  <data name="Money_InvalidFormatSpecification" xml:space="preserve">
+  <data name="Parse_InvalidBban" xml:space="preserve">
+    <value>XXX</value>
+  </data>
+  <data name="Parse_InvalidBicValue" xml:space="preserve">
+    <value>Un code BIC doit comporter 8 ou 11 caractères.</value>
+  </data>
+  <data name="Parse_InvalidBranchCode" xml:space="preserve">
+    <value>XXX</value>
+  </data>
+  <data name="Parse_InvalidCheckDigits" xml:space="preserve">
+    <value>XXX</value>
+  </data>
+  <data name="Parse_InvalidCountryCode" xml:space="preserve">
+    <value>XXX</value>
+  </data>
+  <data name="Parse_InvalidIbanValue" xml:space="preserve">
+    <value>Un code IBAN string doit comporter de 14 à 34 caractères.</value>
+  </data>
+  <data name="Parse_InvalidInstitutionCode" xml:space="preserve">
+    <value>XXX</value>
+  </data>
+  <data name="Parse_InvalidLocationCode" xml:space="preserve">
     <value>XXX</value>
   </data>
   <data name="Sentinel_OutOfRangeCurrencyAlphabeticCode" xml:space="preserve">

@@ -158,7 +158,7 @@ namespace Narvalo.Finance
             }
             else
             {
-                throw new ArgumentException(Strings.Bic_BadPartsFormat);
+                throw new ArgumentException(Strings.Argument_InvalidBicParts);
             }
         }
 
@@ -196,31 +196,31 @@ namespace Narvalo.Finance
 
             if (!CheckValue(value))
             {
-                return Outcome<Bic>.Failure(Strings.Bic_InvalidValue);
+                return Outcome<Bic>.Failure(Strings.Parse_InvalidBic);
             }
 
             string institutionCode = GetInstitutionCode(value);
             if (!CheckInstitutionCode(institutionCode, version))
             {
-                return Outcome<Bic>.Failure(Strings.Bic_InvalidInstitutionCode);
+                return Outcome<Bic>.Failure(Strings.Parse_InvalidInstitutionCode);
             }
 
             string countryCode = GetCountryCode(value);
             if (!CheckCountryCode(countryCode))
             {
-                return Outcome<Bic>.Failure(Strings.Bic_InvalidCountryCode);
+                return Outcome<Bic>.Failure(Strings.Parse_InvalidCountryCode);
             }
 
             string locationCode = GetLocationCode(value);
             if (!CheckLocationCode(locationCode))
             {
-                return Outcome<Bic>.Failure(Strings.Bic_InvalidLocationCode);
+                return Outcome<Bic>.Failure(Strings.Parse_InvalidLocationCode);
             }
 
             string branchCode = GetBranchCode(value);
             if (!CheckBranchCode(branchCode))
             {
-                return Outcome<Bic>.Failure(Strings.Bic_InvalidBranchCode);
+                return Outcome<Bic>.Failure(Strings.Parse_InvalidBranchCode);
             }
 
             return Outcome.Success(new Bic(institutionCode, countryCode, locationCode, branchCode, value));

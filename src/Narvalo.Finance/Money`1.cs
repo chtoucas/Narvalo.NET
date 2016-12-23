@@ -139,14 +139,11 @@ namespace Narvalo.Finance
 
         int IComparable.CompareTo(object obj)
         {
-            if (obj == null)
-            {
-                return 1;
-            }
+            if (obj == null) { return 1; }
 
             if (!(obj is Money<TCurrency>))
             {
-                throw new ArgumentException(Strings.Money_ArgIsNotMoney, nameof(obj));
+                throw new ArgumentException(Strings.Argument_InvalidMoneyType, nameof(obj));
             }
 
             return CompareTo((Money<TCurrency>)obj);

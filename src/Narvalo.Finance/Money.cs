@@ -39,7 +39,7 @@ namespace Narvalo.Finance
 
         // Check that the currencies match.
         private void ThrowIfCurrencyMismatch(Money other, string parameterName)
-            => Enforce.True(Currency != other.Currency, parameterName, Strings.Money_CurrencyMismatch);
+            => Enforce.True(Currency != other.Currency, parameterName, Strings.Argument_CurrencyMismatch);
     }
 
     // Implements the IFormattable interface.
@@ -132,14 +132,11 @@ namespace Narvalo.Finance
 
         int IComparable.CompareTo(object obj)
         {
-            if (obj == null)
-            {
-                return 1;
-            }
+            if (obj == null) { return 1; }
 
             if (!(obj is Money))
             {
-                throw new ArgumentException(Strings.Money_ArgIsNotMoney, nameof(obj));
+                throw new ArgumentException(Strings.Argument_InvalidMoneyType, nameof(obj));
             }
 
             return CompareTo((Money)obj);

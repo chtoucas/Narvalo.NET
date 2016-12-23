@@ -78,7 +78,7 @@ namespace Narvalo.Finance
             }
             else
             {
-                throw new ArgumentException(Strings.IbanParts_InvalidParts);
+                throw new ArgumentException(Strings.Argument_InvalidIbanParts);
             }
         }
 
@@ -104,25 +104,25 @@ namespace Narvalo.Finance
 
             if (!CheckValue(value))
             {
-                return Outcome<IbanParts>.Failure(Strings.IbanParts_InvalidValue);
+                return Outcome<IbanParts>.Failure(Strings.Parse_InvalidIban);
             }
 
             string countryCode = GetCountryCode(value);
             if (!CheckCountryCode(countryCode))
             {
-                return Outcome<IbanParts>.Failure(Strings.IbanParts_InvalidCountryCode);
+                return Outcome<IbanParts>.Failure(Strings.Parse_InvalidCountryCode);
             }
 
             string checkDigits = GetCheckDigits(value);
             if (!CheckCheckDigits(checkDigits))
             {
-                return Outcome<IbanParts>.Failure(Strings.IbanParts_InvalidCheckDigits);
+                return Outcome<IbanParts>.Failure(Strings.Parse_InvalidCheckDigits);
             }
 
             string bban = GetBban(value);
             if (!CheckBban(bban))
             {
-                return Outcome<IbanParts>.Failure(Strings.IbanParts_InvalidBban);
+                return Outcome<IbanParts>.Failure(Strings.Parse_InvalidBban);
             }
 
             return Outcome.Success(new IbanParts(countryCode, checkDigits, bban, value));

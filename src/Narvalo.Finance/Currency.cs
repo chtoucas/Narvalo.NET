@@ -66,7 +66,7 @@ namespace Narvalo.Finance
 
             if (!CodeSet.Contains(code))
             {
-                throw new CurrencyNotFoundException(Format.Current(Strings.Currency_InvalidCode, code));
+                throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCode, code));
             }
 
             return new Currency(code);
@@ -115,7 +115,7 @@ namespace Narvalo.Finance
 
             if (cultureInfo.IsNeutralCulture)
             {
-                throw new NotSupportedException(Strings.Currency_NeutralCulture);
+                throw new ArgumentException(Strings.Argument_NeutralCultureNotSupported, nameof(cultureInfo));
             }
 
             return OfRegion(new RegionInfo(cultureInfo.Name));

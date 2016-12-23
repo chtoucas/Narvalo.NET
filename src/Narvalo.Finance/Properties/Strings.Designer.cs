@@ -64,72 +64,54 @@ namespace Narvalo.Finance.Properties {
         /// <summary>
         ///   Looks up a localized string similar to XXX.
         /// </summary>
-        internal static string Bic_BadPartsFormat {
+        internal static string Argument_CurrencyMismatch {
             get {
-                return ResourceManager.GetString("Bic_BadPartsFormat", resourceCulture);
+                return ResourceManager.GetString("Argument_CurrencyMismatch", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to XXX.
         /// </summary>
-        internal static string Bic_InvalidBranchCode {
+        internal static string Argument_InvalidBicParts {
             get {
-                return ResourceManager.GetString("Bic_InvalidBranchCode", resourceCulture);
+                return ResourceManager.GetString("Argument_InvalidBicParts", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to XXX.
         /// </summary>
-        internal static string Bic_InvalidCountryCode {
+        internal static string Argument_InvalidIbanParts {
             get {
-                return ResourceManager.GetString("Bic_InvalidCountryCode", resourceCulture);
+                return ResourceManager.GetString("Argument_InvalidIbanParts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified argument MUST be of Money type..
+        /// </summary>
+        internal static string Argument_InvalidMoneyType {
+            get {
+                return ResourceManager.GetString("Argument_InvalidMoneyType", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to XXX.
         /// </summary>
-        internal static string Bic_InvalidInstitutionCode {
+        internal static string Argument_NeutralCultureNotSupported {
             get {
-                return ResourceManager.GetString("Bic_InvalidInstitutionCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XXX.
-        /// </summary>
-        internal static string Bic_InvalidLocationCode {
-            get {
-                return ResourceManager.GetString("Bic_InvalidLocationCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The BIC string MUST be 8 or 11 characters long..
-        /// </summary>
-        internal static string Bic_InvalidValue {
-            get {
-                return ResourceManager.GetString("Bic_InvalidValue", resourceCulture);
+                return ResourceManager.GetString("Argument_NeutralCultureNotSupported", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Unknown currency: {0}..
         /// </summary>
-        internal static string Currency_InvalidCode {
+        internal static string Currency_UnknownCode {
             get {
-                return ResourceManager.GetString("Currency_InvalidCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XXX.
-        /// </summary>
-        internal static string Currency_NeutralCulture {
-            get {
-                return ResourceManager.GetString("Currency_NeutralCulture", resourceCulture);
+                return ResourceManager.GetString("Currency_UnknownCode", resourceCulture);
             }
         }
         
@@ -145,9 +127,9 @@ namespace Narvalo.Finance.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Unknown currency..
         /// </summary>
-        internal static string CurrencyNotFoundException_DefaultMessage {
+        internal static string CurrencyNotFound_DefaultMessage {
             get {
-                return ResourceManager.GetString("CurrencyNotFoundException_DefaultMessage", resourceCulture);
+                return ResourceManager.GetString("CurrencyNotFound_DefaultMessage", resourceCulture);
             }
         }
         
@@ -157,51 +139,6 @@ namespace Narvalo.Finance.Properties {
         internal static string Iban_InvalidFormatSpecification {
             get {
                 return ResourceManager.GetString("Iban_InvalidFormatSpecification", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XXX.
-        /// </summary>
-        internal static string IbanParts_InvalidBban {
-            get {
-                return ResourceManager.GetString("IbanParts_InvalidBban", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XXX.
-        /// </summary>
-        internal static string IbanParts_InvalidCheckDigits {
-            get {
-                return ResourceManager.GetString("IbanParts_InvalidCheckDigits", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XXX.
-        /// </summary>
-        internal static string IbanParts_InvalidCountryCode {
-            get {
-                return ResourceManager.GetString("IbanParts_InvalidCountryCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XXX.
-        /// </summary>
-        internal static string IbanParts_InvalidParts {
-            get {
-                return ResourceManager.GetString("IbanParts_InvalidParts", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The IBAN string MUST be at most 34 characters long and at least 14 characters long..
-        /// </summary>
-        internal static string IbanParts_InvalidValue {
-            get {
-                return ResourceManager.GetString("IbanParts_InvalidValue", resourceCulture);
             }
         }
         
@@ -233,29 +170,83 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified argument MUST be of Money type..
-        /// </summary>
-        internal static string Money_ArgIsNotMoney {
-            get {
-                return ResourceManager.GetString("Money_ArgIsNotMoney", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XXX.
-        /// </summary>
-        internal static string Money_CurrencyMismatch {
-            get {
-                return ResourceManager.GetString("Money_CurrencyMismatch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to XXX.
         /// </summary>
         internal static string Money_InvalidFormatSpecification {
             get {
                 return ResourceManager.GetString("Money_InvalidFormatSpecification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XXX.
+        /// </summary>
+        internal static string Parse_InvalidBban {
+            get {
+                return ResourceManager.GetString("Parse_InvalidBban", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The BIC string MUST be 8 or 11 characters long..
+        /// </summary>
+        internal static string Parse_InvalidBicValue {
+            get {
+                return ResourceManager.GetString("Parse_InvalidBicValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XXX.
+        /// </summary>
+        internal static string Parse_InvalidBranchCode {
+            get {
+                return ResourceManager.GetString("Parse_InvalidBranchCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XXX.
+        /// </summary>
+        internal static string Parse_InvalidCheckDigits {
+            get {
+                return ResourceManager.GetString("Parse_InvalidCheckDigits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XXX.
+        /// </summary>
+        internal static string Parse_InvalidCountryCode {
+            get {
+                return ResourceManager.GetString("Parse_InvalidCountryCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The IBAN string MUST be at most 34 characters long and at least 14 characters long..
+        /// </summary>
+        internal static string Parse_InvalidIbanValue {
+            get {
+                return ResourceManager.GetString("Parse_InvalidIbanValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XXX.
+        /// </summary>
+        internal static string Parse_InvalidInstitutionCode {
+            get {
+                return ResourceManager.GetString("Parse_InvalidInstitutionCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XXX.
+        /// </summary>
+        internal static string Parse_InvalidLocationCode {
+            get {
+                return ResourceManager.GetString("Parse_InvalidLocationCode", resourceCulture);
             }
         }
         
