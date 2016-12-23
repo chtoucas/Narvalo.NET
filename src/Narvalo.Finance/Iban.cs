@@ -85,7 +85,7 @@ namespace Narvalo.Finance
             var result = IbanValidator.TryValidate(parts, levels);
             if (result.IsFalse)
             {
-                throw new ArgumentException(result.Message);
+                throw new ArgumentException(result.ErrorMessage);
             }
 
             return new Iban(parts, levels);

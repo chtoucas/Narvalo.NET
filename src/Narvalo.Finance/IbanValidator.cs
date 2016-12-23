@@ -34,7 +34,7 @@ namespace Narvalo.Finance
 
             return result.IsTrue
                 ? Outcome.Success(parts)
-                : Outcome<IbanParts>.Failure(result.Message);
+                : Outcome<IbanParts>.Failure(result.ErrorMessage);
         }
 
         public bool Validate(IbanParts parts)
