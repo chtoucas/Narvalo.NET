@@ -332,18 +332,16 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
-    using static Narvalo.Finance.Text.BicFormat;
-
     public partial struct Bic
     {
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(_branchCode);
-            Contract.Invariant(_countryCode);
-            Contract.Invariant(_institutionCode);
-            Contract.Invariant(_locationCode);
-            Contract.Invariant(_value);
+            Contract.Invariant(_branchCode != null);
+            Contract.Invariant(_countryCode != null);
+            Contract.Invariant(_institutionCode != null);
+            Contract.Invariant(_locationCode != null);
+            Contract.Invariant(_value != null);
         }
     }
 }

@@ -67,11 +67,11 @@ namespace Narvalo.Finance
             => Assert.Throws<ArgumentNullException>(() => Currency.OfCulture(null));
 
         [Fact]
-        public static void OfCulture_ThrowsNotSupportedException_ForNeutralCulture()
+        public static void OfCulture_ThrowsArgumentException_ForNeutralCulture()
         {
             var ci = new CultureInfo("fr");
 
-            Assert.Throws<NotSupportedException>(() => Currency.OfCulture(ci));
+            Assert.Throws<ArgumentException>(() => Currency.OfCulture(ci));
         }
 
         [Theory]

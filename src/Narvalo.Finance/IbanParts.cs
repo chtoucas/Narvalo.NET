@@ -207,7 +207,7 @@ namespace Narvalo.Finance
 
 #if CONTRACTS_FULL
 
-namespace Narvalo.Finance.Text
+namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 

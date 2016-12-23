@@ -7,7 +7,7 @@ namespace Narvalo.Finance.Utilities
     using System.Diagnostics.Contracts;
 
     [DebuggerDisplay("True")]
-    public class BooleanResult
+    public partial class BooleanResult
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly BooleanResult s_True = new BooleanResult();
@@ -96,7 +96,7 @@ namespace Narvalo.Finance.Utilities
 
 #if CONTRACTS_FULL
 
-namespace Narvalo.Finance.Text
+namespace Narvalo.Finance.Utilities
 {
     using System.Diagnostics.Contracts;
 
