@@ -104,7 +104,7 @@ namespace Narvalo.Finance
 
             if (!CheckValue(value))
             {
-                return Outcome<IbanParts>.Failure(Strings.Parse_InvalidIban);
+                return Outcome<IbanParts>.Failure(Strings.Parse_InvalidIbanValue);
             }
 
             string countryCode = GetCountryCode(value);

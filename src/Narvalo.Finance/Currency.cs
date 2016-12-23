@@ -9,6 +9,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Currencies;
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Utilities;
 
     using static Narvalo.Finance.Utilities.AsciiHelpers;
 
@@ -156,6 +157,53 @@ namespace Narvalo.Finance
         }
     }
 
+    // Interface IEquatable<Currency>.
+    public partial class Currency
+    {
+        // WARNING: This (immutable) reference type follows value type semantics.
+        // To test reference equality, you must use Object.ReferenceEquals().
+        public static bool operator ==(Currency left, Currency right)
+        {
+            if (ReferenceEquals(left, null))
+            {
+                // If left is null, returns true if right is null too, otherwise false.
+                return ReferenceEquals(right, null);
+            }
+
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Currency left, Currency right) => !(left == right);
+
+        /// <inheritdoc cref="IEquatable{T}.Equals" />
+        public bool Equals(Currency other)
+        {
+            if (ReferenceEquals(other, null)) { return false; }
+
+            return EqualsImpl(other);
+        }
+
+        /// <inheritdoc cref="Object.Equals(Object)" />
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null)) { return false; }
+            if (ReferenceEquals(obj, this)) { return true; }
+            if (obj.GetType() != GetType()) { return false; }
+
+            return EqualsImpl(obj as Currency);
+        }
+
+        /// <inheritdoc cref="Object.GetHashCode" />
+        public override int GetHashCode() => Code.GetHashCode();
+
+        private bool EqualsImpl(Currency other)
+        {
+            Demand.NotNull(other);
+
+            return Code == other.Code;
+        }
+    }
+
     // Aliases for the most commonly used currencies.
     public partial class Currency
     {
@@ -264,53 +312,6 @@ namespace Narvalo.Finance
         public static Currency Silver
         {
             get { Warrant.NotNull<Currency>(); return XAG.UniqInstance; }
-        }
-    }
-
-    // Interface IEquatable<Currency>.
-    public partial class Currency
-    {
-        // WARNING: This (immutable) reference type follows value type semantics.
-        // To test reference equality, you must use Object.ReferenceEquals().
-        public static bool operator ==(Currency left, Currency right)
-        {
-            if (ReferenceEquals(left, null))
-            {
-                // If left is null, returns true if right is null too, otherwise false.
-                return ReferenceEquals(right, null);
-            }
-
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(Currency left, Currency right) => !(left == right);
-
-        /// <inheritdoc cref="IEquatable{T}.Equals" />
-        public bool Equals(Currency other)
-        {
-            if (ReferenceEquals(other, null)) { return false; }
-
-            return EqualsImpl(other);
-        }
-
-        /// <inheritdoc cref="Object.Equals(Object)" />
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(obj, null)) { return false; }
-            if (ReferenceEquals(obj, this)) { return true; }
-            if (obj.GetType() != GetType()) { return false; }
-
-            return EqualsImpl(obj as Currency);
-        }
-
-        /// <inheritdoc cref="Object.GetHashCode" />
-        public override int GetHashCode() => Code.GetHashCode();
-
-        private bool EqualsImpl(Currency other)
-        {
-            Demand.NotNull(other);
-
-            return Code == other.Code;
         }
     }
 }

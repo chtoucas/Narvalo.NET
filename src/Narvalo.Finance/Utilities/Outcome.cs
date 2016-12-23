@@ -7,7 +7,7 @@ namespace Narvalo.Finance.Utilities
     /// </summary>
     public static class Outcome
     {
-        public static Outcome<T> Success<T>(T value)
+        public static Outcome<T> Success<T>(T value) where T : struct
         {
             Warrant.NotNull<Outcome<T>>();
 

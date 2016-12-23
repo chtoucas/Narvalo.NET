@@ -3,12 +3,11 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
 
     using Narvalo.Finance.Properties;
-
-    using static System.Diagnostics.Contracts.Contract;
 
     internal static class CurrencyActivator<TCurrency> where TCurrency : Currency
     {
@@ -18,7 +17,7 @@ namespace Narvalo.Finance
         public static TCurrency CreateInstance()
         {
             TypeInfo typeInfo = typeof(TCurrency).GetTypeInfo();
-            Assume(typeInfo != null);
+            Contract.Assume(typeInfo != null);
 
             ConstructorInfo ctorInfo = typeInfo
                 .DeclaredConstructors

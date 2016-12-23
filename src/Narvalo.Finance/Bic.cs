@@ -196,7 +196,7 @@ namespace Narvalo.Finance
 
             if (!CheckValue(value))
             {
-                return Outcome<Bic>.Failure(Strings.Parse_InvalidBic);
+                return Outcome<Bic>.Failure(Strings.Parse_InvalidBicValue);
             }
 
             string institutionCode = GetInstitutionCode(value);

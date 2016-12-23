@@ -6,7 +6,7 @@ namespace Narvalo.Finance.Utilities
     using System.Collections.Generic;
     using System.Diagnostics;
 
-    public abstract partial class Outcome<T>
+    public abstract partial class Outcome<T> where T : struct
     {
         private Outcome(bool success) { Success = success; }
 
@@ -16,9 +16,11 @@ namespace Narvalo.Finance.Utilities
 
         public abstract T Value { get; }
 
-        internal abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
+        internal abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+             where TResult : struct;
 
-        internal abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector);
+        internal abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
+             where TResult : struct;
 
         public static Outcome<T> Failure(string message)
         {
@@ -74,13 +76,13 @@ namespace Narvalo.Finance.Utilities
             {
                 if (ReferenceEquals(obj, null)) { return false; }
                 if (ReferenceEquals(obj, this)) { return true; }
-                if (obj.GetType() != GetType()) { return false; }
+                // This class being sealed, we can ignore the next sentence.
+                // if (obj.GetType() != GetType()) { return false; }
 
                 return Equals(obj as Success_);
             }
 
-            public override int GetHashCode()
-                => Value == null ? 0 : EqualityComparer<T>.Default.GetHashCode(Value);
+            public override int GetHashCode() => EqualityComparer<T>.Default.GetHashCode(Value);
 
             public override string ToString()
             {
@@ -122,7 +124,8 @@ namespace Narvalo.Finance.Utilities
             {
                 if (ReferenceEquals(obj, null)) { return false; }
                 if (ReferenceEquals(obj, this)) { return true; }
-                if (obj.GetType() != GetType()) { return false; }
+                // This class being sealed, we can ignore the next sentence.
+                // if (obj.GetType() != GetType()) { return false; }
 
                 return Equals(obj as Failure_);
             }
