@@ -24,6 +24,14 @@ namespace Narvalo.Finance
         public static void Parse_Succeeds_(string value)
             => Assert.True(Iban.Parse(value, IbanStyles.Any).HasValue);
 
+        [Theory]
+        [InlineData("al47212110090000000235698741")]
+        [InlineData("Al47212110090000000235698741")]
+        [InlineData("mt84malt011000012345mtlcast001s")]
+        [CLSCompliant(false)]
+        public static void Parse_Succeeds_Lowercase(string value)
+            => Assert.True(Iban.Parse(value, IbanStyles.AllowLowercaseLetter).HasValue);
+
         #endregion
 
         #region TryParse()

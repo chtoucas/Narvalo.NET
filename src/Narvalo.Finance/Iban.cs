@@ -157,15 +157,15 @@ namespace Narvalo.Finance
         // NB: Normally, there is either a single whitespace char every four chars or no whitespace
         // char at all. Here we are more permissive: multiple whitespaces are ok, and position check
         // is not enforced.
-        private static string StripIgnorableSymbols(string input, IbanStyles styles)
+        private static string StripIgnorableSymbols(string text, IbanStyles styles)
         {
-            Demand.NotNull(input);
+            Demand.NotNull(text);
             Warrant.NotNull<string>();
 
-            if (styles == IbanStyles.None) { return input; }
-            if (input.Length == 0) { return String.Empty; }
+            if (styles == IbanStyles.None) { return text; }
+            if (text.Length == 0) { return String.Empty; }
 
-            int len = input.Length;
+            int len = text.Length;
 
             int start = 0;
             if (styles.Contains(IbanStyles.AllowLeadingWhite))
@@ -173,7 +173,7 @@ namespace Narvalo.Finance
                 // Ignore leading whitespaces.
                 while (start < len)
                 {
-                    if (input[start] != WHITESPACE_CHAR) { break; }
+                    if (text[start] != WHITESPACE_CHAR) { break; }
                     start++;
                 }
             }
@@ -184,39 +184,45 @@ namespace Narvalo.Finance
             if (styles.Contains(IbanStyles.AllowTrailingWhite))
             {
                 // Ignore trailing whitespaces.
-                // NB: We know for sure that end > start; otherwise input would have been a
-                // whitespace only from the start and we already handled this case above.
                 while (end > start)
                 {
-                    if (input[end] != WHITESPACE_CHAR) { break; }
+                    if (text[end] != WHITESPACE_CHAR) { break; }
                     end--;
                 }
             }
 
             if (styles.Contains(IbanStyles.AllowHeader)
-                && input.Length >= start + 5
-                && input.Substring(start, 5) == HumanHeader)
+                && text.Length >= start + 5
+                && text.Substring(start, 5) == HumanHeader)
             {
                 start += 5;
             }
 
-            // FIXME: Use AllowLowercaseLetter.
-            bool rmspace = styles.Contains(IbanStyles.AllowInnerWhite);
+            bool removespaces = styles.Contains(IbanStyles.AllowInnerWhite);
+            bool transformcase = styles.Contains(IbanStyles.AllowLowercaseLetter);
 
             var output = new char[end - start + 1];
 
             int k = 0;
             for (var i = start; i <= end; i++)
             {
-                char ch = input[i];
+                char ch = text[i];
 
                 // NB: If IbanStyles.AllowIbanPrefix is on and we did remove an IBAN prefix,
                 // we might have whitespaces again at the beginning of the loop. Lesson: do not
-                // exclude i = start. We do not exclude i = end, even though we know that "ch" is
-                // not a whitespace, only because this does not change anything.
-                if (rmspace && ch == WHITESPACE_CHAR) { continue; }
+                // exclude i = start. We do not exclude i = end too, even though we know that
+                // "ch" is not a whitespace, this truely would not make the code faster.
+                if (removespaces && ch == WHITESPACE_CHAR) { continue; }
 
-                output[k] = ch;
+                if (transformcase && ch >= 'a' && ch <= 'z')
+                {
+                    // NB: This is equivalent to (ch - 32). Just for the fun :-)
+                    output[k] = (char)(ch & 0xdf);
+                }
+                else
+                {
+                    output[k] = ch;
+                }
                 k++;
             }
 
