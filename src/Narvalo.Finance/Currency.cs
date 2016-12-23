@@ -9,7 +9,6 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Currencies;
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Text;
 
     using static Narvalo.Finance.Text.AsciiHelpers;
 
@@ -271,12 +270,14 @@ namespace Narvalo.Finance
     // Interface IEquatable<Currency>.
     public partial class Currency
     {
+        // WARNING: This (immutable) reference type follows value type semantics.
+        // To test reference equality, you must use Object.ReferenceEquals().
         public static bool operator ==(Currency left, Currency right)
         {
-            if (Object.ReferenceEquals(left, null))
+            if (ReferenceEquals(left, null))
             {
-                // If left is null, returns true if right is null too, false otherwise.
-                return Object.ReferenceEquals(right, null);
+                // If left is null, returns true if right is null too, otherwise false.
+                return ReferenceEquals(right, null);
             }
 
             return left.Equals(right);
@@ -287,41 +288,30 @@ namespace Narvalo.Finance
         /// <inheritdoc cref="IEquatable{T}.Equals" />
         public bool Equals(Currency other)
         {
-            if (Object.ReferenceEquals(other, null))
-            {
-                // NB: "this" is never null in C#.
-                return false;
-            }
+            if (ReferenceEquals(other, null)) { return false; }
 
-            return Code == other.Code;
+            return EqualsImpl(other);
         }
 
         /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
-            if (Object.ReferenceEquals(obj, null))
-            {
-                // NB: "this" is never null in C#.
-                return false;
-            }
+            if (ReferenceEquals(obj, null)) { return false; }
+            if (ReferenceEquals(obj, this)) { return true; }
+            if (obj.GetType() != GetType()) { return false; }
 
-            if (Object.ReferenceEquals(this, obj))
-            {
-                // "obj" and "this" are the same object.
-                return true;
-            }
-
-            if (GetType() != obj.GetType())
-            {
-                // "obj" and "this" are not of the same type.
-                return false;
-            }
-
-            return Equals(obj as Currency);
+            return EqualsImpl(obj as Currency);
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
         public override int GetHashCode() => Code.GetHashCode();
+
+        private bool EqualsImpl(Currency other)
+        {
+            Demand.NotNull(other);
+
+            return Code == other.Code;
+        }
     }
 }
 

@@ -13,7 +13,7 @@ namespace Narvalo.Finance.Text
         {
             Warrant.NotNull<Outcome<T>>();
 
-            return Outcome<T>.η(value);
+            return Outcome<T>.ReturnSuccess(value);
         }
 
         public static Outcome<T> Failure<T>(string message)
@@ -21,7 +21,7 @@ namespace Narvalo.Finance.Text
             Expect.NotNullOrEmpty(message);
             Warrant.NotNull<Outcome<T>>();
 
-            return Outcome<T>.η(message);
+            return Outcome<T>.ReturnFailure(message);
         }
     }
 }

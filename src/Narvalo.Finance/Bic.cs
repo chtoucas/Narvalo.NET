@@ -317,10 +317,7 @@ namespace Narvalo.Finance
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Bic))
-            {
-                return false;
-            }
+            if (!(obj is Bic)) { return false; }
 
             return Equals((Bic)obj);
         }

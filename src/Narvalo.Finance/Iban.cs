@@ -316,10 +316,7 @@ namespace Narvalo.Finance
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Iban))
-            {
-                return false;
-            }
+            if (!(obj is Iban)) { return false; }
 
             return Equals((Iban)obj);
         }

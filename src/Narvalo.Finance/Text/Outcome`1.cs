@@ -8,11 +8,11 @@ namespace Narvalo.Finance.Text
 
     public abstract partial class Outcome<T>
     {
-        private readonly bool _isSuccess;
+        private readonly bool _success;
 
-        private Outcome(bool isSuccess) { _isSuccess = isSuccess; }
+        private Outcome(bool success) { _success = success; }
 
-        public bool Success { get { return _isSuccess; } }
+        public bool Success { get { return _success; } }
 
         public virtual string Message
         {
@@ -24,24 +24,20 @@ namespace Narvalo.Finance.Text
             get { throw new InvalidOperationException(); }
         }
 
-        public abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
+        internal abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
 
-        public abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector);
-
-        #region Core Monad methods
+        internal abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector);
 
         [DebuggerHidden]
-        internal static Outcome<T> η(T value) => new Success_(value);
+        internal static Outcome<T> ReturnSuccess(T value) => new Success_(value);
 
         [DebuggerHidden]
-        internal static Outcome<T> η(string message)
+        internal static Outcome<T> ReturnFailure(string message)
         {
             Require.NotNullOrEmpty(message, nameof(message));
 
             return new Failure_(message);
         }
-
-        #endregion
 
         private sealed partial class Success_ : Outcome<T>, IEquatable<Success_>
         {
@@ -57,29 +53,35 @@ namespace Narvalo.Finance.Text
                 get { return _value; }
             }
 
-            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+            internal override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
                 return selector.Invoke(Value);
             }
 
-            public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
+            internal override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
             {
                 Require.NotNull(selector, nameof(selector));
 
-                return Outcome<TResult>.η(selector.Invoke(Value));
+                return Outcome<TResult>.ReturnSuccess(selector.Invoke(Value));
             }
 
             public bool Equals(Success_ other)
             {
-                if (ReferenceEquals(other, this)) { return true; }
                 if (ReferenceEquals(other, null)) { return false; }
 
                 return EqualityComparer<T>.Default.Equals(Value, other.Value);
             }
 
-            public override bool Equals(object obj) => Equals(obj as Success_);
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(obj, null)) { return false; }
+                if (ReferenceEquals(obj, this)) { return true; }
+                if (obj.GetType() != GetType()) { return false; }
+
+                return Equals(obj as Success_);
+            }
 
             public override int GetHashCode()
                 => Value == null ? 0 : EqualityComparer<T>.Default.GetHashCode(Value);
@@ -88,7 +90,7 @@ namespace Narvalo.Finance.Text
             {
                 Warrant.NotNull<string>();
 
-                return Format.Current("Success({0})", Value);
+                return Format.Invariant("Success({0})", Value);
             }
         }
 
@@ -105,24 +107,30 @@ namespace Narvalo.Finance.Text
 
             public override string Message
             {
-                get { Warrant.NotNull<string>(); return _message; }
+                get { Warrant.NotNullOrEmpty(); return _message; }
             }
 
-            public override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
-                => Outcome<TResult>.η(Message);
+            internal override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
+                => Outcome<TResult>.ReturnFailure(Message);
 
-            public override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
-                => Outcome<TResult>.η(Message);
+            internal override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
+                => Outcome<TResult>.ReturnFailure(Message);
 
             public bool Equals(Failure_ other)
             {
-                if (ReferenceEquals(other, this)) { return true; }
                 if (ReferenceEquals(other, null)) { return false; }
 
                 return Message == other.Message;
             }
 
-            public override bool Equals(object obj) => Equals(obj as Failure_);
+            public override bool Equals(object obj)
+            {
+                if (ReferenceEquals(obj, null)) { return false; }
+                if (ReferenceEquals(obj, this)) { return true; }
+                if (obj.GetType() != GetType()) { return false; }
+
+                return Equals(obj as Failure_);
+            }
 
             public override int GetHashCode() => Message.GetHashCode();
 
@@ -130,7 +138,7 @@ namespace Narvalo.Finance.Text
             {
                 Warrant.NotNull<string>();
 
-                return Format.Current("Failure({0})", Message);
+                return Format.Invariant("Failure({0})", Message);
             }
         }
     }

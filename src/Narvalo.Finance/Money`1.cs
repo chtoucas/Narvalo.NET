@@ -102,17 +102,14 @@ namespace Narvalo.Finance
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Money<TCurrency>))
-            {
-                return false;
-            }
+            if (!(obj is Money<TCurrency>)) { return false; }
 
             return Equals((Money<TCurrency>)obj);
         }
 
         public override int GetHashCode()
         {
-            // TODO: Cache the hash code for s_Currency.
+            // TODO: Cache the hash code for s_Currency?
             unchecked
             {
                 int hash = 17;

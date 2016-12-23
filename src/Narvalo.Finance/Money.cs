@@ -95,10 +95,7 @@ namespace Narvalo.Finance
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Money))
-            {
-                return false;
-            }
+            if (!(obj is Money)) { return false; }
 
             return Equals((Money)obj);
         }
