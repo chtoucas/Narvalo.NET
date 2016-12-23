@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Text
+namespace Narvalo.Finance
 {
     using System;
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Text;
 
     using static Narvalo.Finance.Text.AsciiHelpers;
 
@@ -165,19 +166,19 @@ namespace Narvalo.Finance.Text
 
         private static string GetBban(string value)
         {
-            Expect.NotNull(value);
+            Demand.True(CheckValue(value));
             return value.Substring(CountryLength + CheckDigitsLength);
         }
 
         private static string GetCheckDigits(string value)
         {
-            Expect.NotNull(value);
+            Demand.True(CheckValue(value));
             return value.Substring(CountryLength, CheckDigitsLength);
         }
 
         private static string GetCountryCode(string value)
         {
-            Expect.NotNull(value);
+            Demand.True(CheckValue(value));
             return value.Substring(0, CountryLength);
         }
 

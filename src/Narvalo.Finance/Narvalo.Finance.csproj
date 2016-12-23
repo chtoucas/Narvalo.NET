@@ -98,10 +98,10 @@
     </Compile>
     <Compile Include="CurrencyActivator`1.cs" />
     <Compile Include="Text\AsciiHelpers.cs" />
-    <Compile Include="Text\IbanParts.cs" />
+    <Compile Include="IbanParts.cs" />
     <Compile Include="IbanValidationLevels.cs" />
     <Compile Include="Text\BooleanResult.cs" />
-    <Compile Include="Text\IbanValidator.cs" />
+    <Compile Include="IbanValidator.cs" />
     <Compile Include="Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />

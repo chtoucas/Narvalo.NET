@@ -1,10 +1,11 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Text
+namespace Narvalo.Finance
 {
     using System;
 
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Text;
 
     public sealed class IbanValidator
     {
