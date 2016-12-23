@@ -74,7 +74,7 @@
   <ItemGroup>
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
-    <Compile Include="Text\CountryISOCodes.cs" />
+    <Compile Include="Utilities\CountryISOCodes.cs" />
     <Compile Include="Globalization\MoneyFormatInfo.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="Globalization\MoneyFormatter.cs" />
@@ -91,16 +91,16 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Iban.cs" />
-    <Compile Include="Text\CountryISOCodes.g.cs">
+    <Compile Include="Utilities\CountryISOCodes.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CountryISOCodes.tt</DependentUpon>
     </Compile>
     <Compile Include="CurrencyActivator`1.cs" />
-    <Compile Include="Text\AsciiHelpers.cs" />
+    <Compile Include="Utilities\AsciiHelpers.cs" />
     <Compile Include="IbanParts.cs" />
     <Compile Include="IbanValidationLevels.cs" />
-    <Compile Include="Text\BooleanResult.cs" />
+    <Compile Include="Utilities\BooleanResult.cs" />
     <Compile Include="IbanValidator.cs" />
     <Compile Include="Sentinel.cs" />
     <Compile Include="Money.cs" />
@@ -116,8 +116,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.fr.resx</DependentUpon>
     </Compile>
-    <Compile Include="Text\Outcome.cs" />
-    <Compile Include="Text\Outcome`1.cs" />
+    <Compile Include="Utilities\Outcome.cs" />
+    <Compile Include="Utilities\Outcome`1.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
@@ -142,7 +142,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Text\CountryISOCodes.tt">
+    <Content Include="Utilities\CountryISOCodes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CountryISOCodes.g.cs</LastGenOutput>
     </Content>

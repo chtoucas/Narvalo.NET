@@ -89,15 +89,6 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The BIC string MUST be 8 or 11 characters long..
-        /// </summary>
-        internal static string Bic_InvalidFormat {
-            get {
-                return ResourceManager.GetString("Bic_InvalidFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to XXX.
         /// </summary>
         internal static string Bic_InvalidInstitutionCode {
@@ -112,6 +103,15 @@ namespace Narvalo.Finance.Properties {
         internal static string Bic_InvalidLocationCode {
             get {
                 return ResourceManager.GetString("Bic_InvalidLocationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The BIC string MUST be 8 or 11 characters long..
+        /// </summary>
+        internal static string Bic_InvalidValue {
+            get {
+                return ResourceManager.GetString("Bic_InvalidValue", resourceCulture);
             }
         }
         
@@ -188,20 +188,20 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The IBAN string MUST be at most 34 characters long and at least 14 characters long..
-        /// </summary>
-        internal static string IbanParts_InvalidFormat {
-            get {
-                return ResourceManager.GetString("IbanParts_InvalidFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to XXX.
         /// </summary>
         internal static string IbanParts_InvalidParts {
             get {
                 return ResourceManager.GetString("IbanParts_InvalidParts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The IBAN string MUST be at most 34 characters long and at least 14 characters long..
+        /// </summary>
+        internal static string IbanParts_InvalidValue {
+            get {
+                return ResourceManager.GetString("IbanParts_InvalidValue", resourceCulture);
             }
         }
         

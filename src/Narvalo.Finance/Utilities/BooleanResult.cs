@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Text
+namespace Narvalo.Finance.Utilities
 {
     using System;
     using System.Diagnostics;
@@ -69,7 +69,7 @@ namespace Narvalo.Finance.Text
             {
                 Warrant.NotNull<string>();
 
-                return Format.Current("False({0})", _message);
+                return Format.Invariant("False({0})", _message);
             }
 
             /// <summary>
@@ -86,10 +86,7 @@ namespace Narvalo.Finance.Text
                     _inner = inner;
                 }
 
-                public string Message
-                {
-                    get { return _inner.Message; }
-                }
+                public string Message => _inner.Message;
             }
         }
     }

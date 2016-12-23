@@ -6,9 +6,9 @@ namespace Narvalo.Finance
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Text;
+    using Narvalo.Finance.Utilities;
 
-    using static Narvalo.Finance.Text.AsciiHelpers;
+    using static Narvalo.Finance.Utilities.AsciiHelpers;
 
     /// <summary>
     /// Represents a Business Identifier Code (BIC).
@@ -196,31 +196,31 @@ namespace Narvalo.Finance
 
             if (!CheckValue(value))
             {
-                return Outcome.Failure<Bic>(Strings.Bic_InvalidFormat);
+                return Outcome<Bic>.Failure(Strings.Bic_InvalidValue);
             }
 
             string institutionCode = GetInstitutionCode(value);
             if (!CheckInstitutionCode(institutionCode, version))
             {
-                return Outcome.Failure<Bic>(Strings.Bic_InvalidInstitutionCode);
+                return Outcome<Bic>.Failure(Strings.Bic_InvalidInstitutionCode);
             }
 
             string countryCode = GetCountryCode(value);
             if (!CheckCountryCode(countryCode))
             {
-                return Outcome.Failure<Bic>(Strings.Bic_InvalidCountryCode);
+                return Outcome<Bic>.Failure(Strings.Bic_InvalidCountryCode);
             }
 
             string locationCode = GetLocationCode(value);
             if (!CheckLocationCode(locationCode))
             {
-                return Outcome.Failure<Bic>(Strings.Bic_InvalidLocationCode);
+                return Outcome<Bic>.Failure(Strings.Bic_InvalidLocationCode);
             }
 
             string branchCode = GetBranchCode(value);
             if (!CheckBranchCode(branchCode))
             {
-                return Outcome.Failure<Bic>(Strings.Bic_InvalidBranchCode);
+                return Outcome<Bic>.Failure(Strings.Bic_InvalidBranchCode);
             }
 
             return Outcome.Success(new Bic(institutionCode, countryCode, locationCode, branchCode, value));

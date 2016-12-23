@@ -6,9 +6,9 @@ namespace Narvalo.Finance
     using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Text;
+    using Narvalo.Finance.Utilities;
 
-    using static Narvalo.Finance.Text.AsciiHelpers;
+    using static Narvalo.Finance.Utilities.AsciiHelpers;
 
     public partial struct IbanParts : IEquatable<IbanParts>
     {
@@ -104,25 +104,25 @@ namespace Narvalo.Finance
 
             if (!CheckValue(value))
             {
-                return Outcome.Failure<IbanParts>(Strings.IbanParts_InvalidFormat);
+                return Outcome<IbanParts>.Failure(Strings.IbanParts_InvalidValue);
             }
 
             string countryCode = GetCountryCode(value);
             if (!CheckCountryCode(countryCode))
             {
-                return Outcome.Failure<IbanParts>(Strings.IbanParts_InvalidCountryCode);
+                return Outcome<IbanParts>.Failure(Strings.IbanParts_InvalidCountryCode);
             }
 
             string checkDigits = GetCheckDigits(value);
             if (!CheckCheckDigits(checkDigits))
             {
-                return Outcome.Failure<IbanParts>(Strings.IbanParts_InvalidCheckDigits);
+                return Outcome<IbanParts>.Failure(Strings.IbanParts_InvalidCheckDigits);
             }
 
             string bban = GetBban(value);
             if (!CheckBban(bban))
             {
-                return Outcome.Failure<IbanParts>(Strings.IbanParts_InvalidBban);
+                return Outcome<IbanParts>.Failure(Strings.IbanParts_InvalidBban);
             }
 
             return Outcome.Success(new IbanParts(countryCode, checkDigits, bban, value));

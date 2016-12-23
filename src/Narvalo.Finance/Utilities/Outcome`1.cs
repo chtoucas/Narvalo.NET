@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Text
+namespace Narvalo.Finance.Utilities
 {
     using System;
     using System.Collections.Generic;
@@ -8,35 +8,32 @@ namespace Narvalo.Finance.Text
 
     public abstract partial class Outcome<T>
     {
-        private readonly bool _success;
+        private Outcome(bool success) { Success = success; }
 
-        private Outcome(bool success) { _success = success; }
+        public bool Success { get; }
 
-        public bool Success { get { return _success; } }
+        public abstract string Message { get; }
 
-        public virtual string Message
-        {
-            get { throw new InvalidOperationException(); }
-        }
-
-        public virtual T Value
-        {
-            get { throw new InvalidOperationException(); }
-        }
+        public abstract T Value { get; }
 
         internal abstract Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector);
 
         internal abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector);
 
-        [DebuggerHidden]
-        internal static Outcome<T> ReturnSuccess(T value) => new Success_(value);
-
-        [DebuggerHidden]
-        internal static Outcome<T> ReturnFailure(string message)
+        public static Outcome<T> Failure(string message)
         {
             Require.NotNullOrEmpty(message, nameof(message));
+            Warrant.NotNull<Outcome<T>>();
 
             return new Failure_(message);
+        }
+
+        [DebuggerHidden]
+        internal static Outcome<T> Return(T value)
+        {
+            Warrant.NotNull<Outcome<T>>();
+
+            return new Success_(value);
         }
 
         private sealed partial class Success_ : Outcome<T>, IEquatable<Success_>
@@ -48,10 +45,9 @@ namespace Narvalo.Finance.Text
                 _value = value;
             }
 
-            public override T Value
-            {
-                get { return _value; }
-            }
+            public override string Message { get { throw new InvalidOperationException(); } }
+
+            public override T Value { get { return _value; } }
 
             internal override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
             {
@@ -64,7 +60,7 @@ namespace Narvalo.Finance.Text
             {
                 Require.NotNull(selector, nameof(selector));
 
-                return Outcome<TResult>.ReturnSuccess(selector.Invoke(Value));
+                return Outcome<TResult>.Return(selector.Invoke(Value));
             }
 
             public bool Equals(Success_ other)
@@ -105,16 +101,15 @@ namespace Narvalo.Finance.Text
                 _message = message;
             }
 
-            public override string Message
-            {
-                get { Warrant.NotNullOrEmpty(); return _message; }
-            }
+            public override string Message { get { Warrant.NotNullOrEmpty(); return _message; } }
+
+            public override T Value { get { throw new InvalidOperationException(); } }
 
             internal override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
-                => Outcome<TResult>.ReturnFailure(Message);
+                => Outcome<TResult>.Failure(Message);
 
             internal override Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
-                => Outcome<TResult>.ReturnFailure(Message);
+                => Outcome<TResult>.Failure(Message);
 
             public bool Equals(Failure_ other)
             {

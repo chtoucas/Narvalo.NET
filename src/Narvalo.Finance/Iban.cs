@@ -6,8 +6,8 @@ namespace Narvalo.Finance
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
-    using Narvalo.Finance.Text;
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Utilities;
 
     /// <summary>
     /// Represents an International Bank Account Number (IBAN).

@@ -126,14 +126,14 @@
   <data name="Bic_InvalidCountryCode" xml:space="preserve">
     <value>XXX</value>
   </data>
-  <data name="Bic_InvalidFormat" xml:space="preserve">
-    <value>The BIC string MUST be 8 or 11 characters long.</value>
-  </data>
   <data name="Bic_InvalidInstitutionCode" xml:space="preserve">
     <value>XXX</value>
   </data>
   <data name="Bic_InvalidLocationCode" xml:space="preserve">
     <value>XXX</value>
+  </data>
+  <data name="Bic_InvalidValue" xml:space="preserve">
+    <value>The BIC string MUST be 8 or 11 characters long.</value>
   </data>
   <data name="CurrencyActivator_MissingCtor" xml:space="preserve">
     <value>XXX</value>
@@ -156,11 +156,11 @@
   <data name="IbanParts_InvalidCountryCode" xml:space="preserve">
     <value>XXX</value>
   </data>
-  <data name="IbanParts_InvalidFormat" xml:space="preserve">
-    <value>The IBAN string MUST be at most 34 characters long and at least 14 characters long.</value>
-  </data>
   <data name="IbanParts_InvalidParts" xml:space="preserve">
     <value>XXX</value>
+  </data>
+  <data name="IbanParts_InvalidValue" xml:space="preserve">
+    <value>The IBAN string MUST be at most 34 characters long and at least 14 characters long.</value>
   </data>
   <data name="IbanValidator_BbanVerificationFailure" xml:space="preserve">
     <value>XXX</value>

@@ -10,7 +10,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Finance.Text
+namespace Narvalo.Finance.Utilities
 {
     using System.Collections.Generic;
 

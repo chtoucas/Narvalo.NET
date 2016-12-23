@@ -5,7 +5,7 @@ namespace Narvalo.Finance
     using System;
 
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Text;
+    using Narvalo.Finance.Utilities;
 
     public sealed class IbanValidator
     {
@@ -44,15 +44,15 @@ namespace Narvalo.Finance
         {
             if (_verifyIntegrity && !VerifyIntegrity(parts))
             {
-                return Outcome.Failure<IbanParts>(Strings.IbanValidator_IntegrityCheckFailure);
+                return Outcome<IbanParts>.Failure(Strings.IbanValidator_IntegrityCheckFailure);
             }
             if (_verifyISOCountryCode && !VerifyISOCountryCode(parts))
             {
-                return Outcome.Failure<IbanParts>(Strings.IbanValidator_UnknownISOCountryCode);
+                return Outcome<IbanParts>.Failure(Strings.IbanValidator_UnknownISOCountryCode);
             }
             if (_verifyBban && !VerifyBban(parts))
             {
-                return Outcome.Failure<IbanParts>(Strings.IbanValidator_BbanVerificationFailure);
+                return Outcome<IbanParts>.Failure(Strings.IbanValidator_BbanVerificationFailure);
             }
 
             return Outcome.Success(parts);
