@@ -51,13 +51,10 @@ namespace Narvalo.Finance.Globalization
             Warrant.NotNull<string>();
 
             // http://publications.europa.eu/code/en/en-370303.htm
-            //return Narvalo.Format.Current("{1}\u00A0{0:F2}", amount, currency.Code);
-            // CurrencyGroupSeparator
-            // CurrencyDecimalSeparator
             var nfi = (NumberFormatInfo)mfi.NumberFormat.Clone();
-            nfi.CurrencySymbol = currency.Code;
+            nfi.CurrencySymbol = String.Empty;
 
-            return amount.ToString("C", nfi);
+            return currency.Code + "\u00A0" + amount.ToString("C", nfi).Trim();
         }
 
         private static string FormatCurrency(decimal amount, Currency currency, MoneyFormatInfo mfi)
