@@ -22,7 +22,27 @@ namespace Narvalo.Finance
             _verifyBban = levels.Contains(IbanValidationLevels.Bban);
         }
 
-        public BooleanResult Validate(IbanParts parts)
+        public static bool Validate(IbanParts parts, IbanValidationLevels levels)
+            => new IbanValidator(levels).Validate(parts);
+
+        public static BooleanResult TryValidate(IbanParts parts, IbanValidationLevels levels)
+            => new IbanValidator(levels).TryValidate(parts);
+
+        internal static Outcome<IbanParts> TryValidateIntern(IbanParts parts, IbanValidationLevels levels)
+        {
+            var result = new IbanValidator(levels).TryValidate(parts);
+
+            return result.IsTrue
+                ? Outcome.Success(parts)
+                : Outcome<IbanParts>.Failure(result.Message);
+        }
+
+        public bool Validate(IbanParts parts)
+            => (!_verifyIntegrity || VerifyIntegrity(parts))
+                  && (!_verifyISOCountryCode || VerifyISOCountryCode(parts))
+                  && (!_verifyBban || VerifyBban(parts));
+
+        public BooleanResult TryValidate(IbanParts parts)
         {
             if (_verifyIntegrity && !VerifyIntegrity(parts))
             {
@@ -39,29 +59,6 @@ namespace Narvalo.Finance
 
             return BooleanResult.True;
         }
-
-        internal Outcome<IbanParts> TryValidate(IbanParts parts)
-        {
-            if (_verifyIntegrity && !VerifyIntegrity(parts))
-            {
-                return Outcome<IbanParts>.Failure(Strings.IbanValidator_IntegrityCheckFailure);
-            }
-            if (_verifyISOCountryCode && !VerifyISOCountryCode(parts))
-            {
-                return Outcome<IbanParts>.Failure(Strings.IbanValidator_UnknownISOCountryCode);
-            }
-            if (_verifyBban && !VerifyBban(parts))
-            {
-                return Outcome<IbanParts>.Failure(Strings.IbanValidator_BbanVerificationFailure);
-            }
-
-            return Outcome.Success(parts);
-        }
-
-        public bool Verify(IbanParts parts)
-            => (!_verifyIntegrity || VerifyIntegrity(parts))
-                && (!_verifyISOCountryCode || VerifyISOCountryCode(parts))
-                && (!_verifyBban || VerifyBban(parts));
 
         public static bool VerifyISOCountryCode(IbanParts parts)
             => CountryISOCodes.TwoLetterCodeExists(parts.CountryCode);

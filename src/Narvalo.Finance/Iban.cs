@@ -82,7 +82,7 @@ namespace Narvalo.Finance
 
             var parts = IbanParts.Create(countryCode, checkDigits, bban);
 
-            var result = new IbanValidator(levels).Validate(parts);
+            var result = IbanValidator.TryValidate(parts, levels);
             if (result.IsFalse)
             {
                 throw new ArgumentException(result.Message);
@@ -109,7 +109,7 @@ namespace Narvalo.Finance
             var parts = IbanParts.Parse(val);
             if (!parts.HasValue) { return null; }
 
-            if (!new IbanValidator(levels).Verify(parts.Value)) { return null; }
+            if (!IbanValidator.Validate(parts.Value, levels)) { return null; }
 
             return new Iban(parts.Value, levels);
         }
@@ -142,7 +142,7 @@ namespace Narvalo.Finance
             var val = StripIgnorableSymbols(value, styles);
 
             return IbanParts.TryParse(val)
-                .Bind(_ => new IbanValidator(levels).TryValidate(_))
+                .Bind(_ => IbanValidator.TryValidateIntern(_, levels))
                 .Select(_ => new Iban(_, levels));
         }
 
