@@ -104,7 +104,7 @@ namespace Narvalo.Finance
         {
             if (value == null) { return null; }
 
-            var val = StripIgnorableSymbols(value, styles);
+            var val = PreprocessInput(value, styles);
 
             var parts = IbanParts.Parse(val);
             if (!parts.HasValue) { return null; }
@@ -139,7 +139,7 @@ namespace Narvalo.Finance
         {
             Require.NotNull(value, nameof(value));
 
-            var val = StripIgnorableSymbols(value, styles);
+            var val = PreprocessInput(value, styles);
 
             return IbanParts.TryParse(val)
                 .Bind(_ => IbanValidator.TryValidateIntern(_, levels))
@@ -157,7 +157,7 @@ namespace Narvalo.Finance
         // NB: Normally, there is either a single whitespace char every four chars or no whitespace
         // char at all. Here we are more permissive: multiple whitespaces are ok, and position check
         // is not enforced.
-        private static string StripIgnorableSymbols(string text, IbanStyles styles)
+        private static string PreprocessInput(string text, IbanStyles styles)
         {
             Demand.NotNull(text);
             Warrant.NotNull<string>();
@@ -201,6 +201,9 @@ namespace Narvalo.Finance
             bool removespaces = styles.Contains(IbanStyles.AllowInnerWhite);
             bool transformcase = styles.Contains(IbanStyles.AllowLowercaseLetter);
 
+            // NB: If end - start + 1 < MinLength, the input is clearly invalid, nevertheless
+            // we continue to process the input to completely fulfill the method's contract,
+            // that is cleanup the input according to the user provided rules.
             var output = new char[end - start + 1];
 
             int k = 0;
