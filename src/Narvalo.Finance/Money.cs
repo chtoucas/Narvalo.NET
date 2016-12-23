@@ -91,7 +91,14 @@ namespace Narvalo.Finance
 
         public static bool operator !=(Money left, Money right) => !left.Equals(right);
 
-        public bool Equals(Money other) => Amount == other.Amount && Currency.Equals(other.Currency);
+        public bool Equals(Money other)
+            // Two objects of the same amount but referencing two distinct
+            // currency objects with the same currency code are considered equal.
+            // This explains why, below, we use Currency.Equals() instead of ==;
+            // this better emphasizes that we do not care about reference equality
+            // for currencies. NB: In practice, it would make no difference as we
+            // also override the operator == so that it follows value type semantics.
+            => Amount == other.Amount && Currency.Equals(other.Currency);
 
         public override bool Equals(object obj)
         {
@@ -105,7 +112,7 @@ namespace Narvalo.Finance
             unchecked
             {
                 int hash = 17;
-                hash = 31 * hash + ((long)Amount).GetHashCode();
+                hash = 31 * hash + Amount.GetHashCode();
                 hash = 31 * hash + Currency.GetHashCode();
                 return hash;
             }

@@ -79,9 +79,9 @@ namespace Narvalo.Finance
         public static bool VerifyIntegrity(IbanParts parts)
             // NB: On full .NET we have Environment.Is64BitProcess.
             // If IntPtr.Size is equal to 8, we are running in a 64-bit process and
-            // we check the integrity using Int64 arithmetic; otherwize (32-bit or 16-bit process)
+            // we check the integrity using Int64 arithmetic; otherwise (32-bit or 16-bit process)
             // we use Int32 arithmetic (NB: IntPtr.Size = 4 in a 32-bit process). I believe,
-            // but I have not verified, that ComputeInt64Checksum() is faster for a 64-bit processor.
+            // but I have not verified, that ComputeInt64Checksum() is faster with a 64-bit processor.
             => CheckIntegrity(parts.LiteralValue, IntPtr.Size == 8);
 
         // WARNING: Only works for valid IBAN values.

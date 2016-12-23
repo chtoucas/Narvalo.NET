@@ -5,7 +5,7 @@ namespace Narvalo.Finance.Utilities
     using System.Collections.Generic;
 
     // Only covers ISO 3166-1 alpha-2 codes.
-    // REVIEW: Should we manually include the deleted codes?
+    // REVIEW: Should we also include the deleted codes?
     internal static partial class CountryISOCodes
     {
         // The list is automatically generated using the data obtained from the ISO website.

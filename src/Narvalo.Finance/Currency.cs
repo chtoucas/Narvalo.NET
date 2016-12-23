@@ -194,6 +194,7 @@ namespace Narvalo.Finance
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
+        // TODO: Since there are so few currencies, we could cache the hash code?
         public override int GetHashCode() => Code.GetHashCode();
 
         private bool EqualsImpl(Currency other)

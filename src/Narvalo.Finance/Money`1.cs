@@ -109,11 +109,10 @@ namespace Narvalo.Finance
 
         public override int GetHashCode()
         {
-            // TODO: Cache the hash code for s_Currency?
             unchecked
             {
                 int hash = 17;
-                hash = 31 * hash + ((long)Amount).GetHashCode();
+                hash = 31 * hash + Amount.GetHashCode();
                 hash = 31 * hash + s_Currency.GetHashCode();
                 return hash;
             }
@@ -244,15 +243,9 @@ namespace Narvalo.Finance
     // Overrides the op_UnaryNegation operator.
     public partial struct Money<TCurrency>
     {
-        public static Money<TCurrency> operator -(Money<TCurrency> money)
-        {
-            return money.Negate();
-        }
+        public static Money<TCurrency> operator -(Money<TCurrency> money) => money.Negate();
 
-        public Money<TCurrency> Negate()
-        {
-            return new Money<TCurrency>(-Amount);
-        }
+        public Money<TCurrency> Negate() => new Money<TCurrency>(-Amount);
     }
 
     // Overrides the op_UnaryPlus operator.
