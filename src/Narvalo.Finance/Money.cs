@@ -5,6 +5,7 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Runtime.InteropServices;
 
     using Narvalo.Finance.Globalization;
@@ -49,22 +50,19 @@ namespace Narvalo.Finance
         public override string ToString()
         {
             Warrant.NotNull<string>();
-
-            return MoneyFormatter.Format(this, null, MoneyFormatInfo.GetCurrentInfo(Currency));
+            return MoneyFormatter.Format(this, null, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
-
-            return MoneyFormatter.Format(this, format, MoneyFormatInfo.GetCurrentInfo(Currency));
+            return MoneyFormatter.Format(this, format, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(IFormatProvider formatProvider)
         {
             Warrant.NotNull<string>();
-
-            return MoneyFormatter.Format(this, null, MoneyFormatInfo.GetInstance(formatProvider, Currency));
+            return MoneyFormatter.Format(this, null, NumberFormatInfo.GetInstance(formatProvider));
         }
 
         public string ToString(string format, IFormatProvider formatProvider)
@@ -80,7 +78,7 @@ namespace Narvalo.Finance
                 }
             }
 
-            return MoneyFormatter.Format(this, format, MoneyFormatInfo.GetInstance(formatProvider, Currency));
+            return MoneyFormatter.Format(this, format, NumberFormatInfo.GetInstance(formatProvider));
         }
     }
 

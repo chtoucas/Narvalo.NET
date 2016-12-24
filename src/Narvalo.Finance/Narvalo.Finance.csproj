@@ -75,7 +75,9 @@
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
     <Compile Include="Utilities\CountryISOCodes.cs" />
+    <Compile Include="Globalization\LocalMoneyFormatter.cs" />
     <Compile Include="Globalization\MoneyFormatInfo.cs" />
+    <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="Globalization\MoneyFormatter.cs" />
     <Compile Include="Currencies\Currencies.g.cs">

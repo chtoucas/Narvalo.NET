@@ -5,6 +5,9 @@ namespace Narvalo.Finance.Globalization
     using System;
     using System.Globalization;
 
+    using Narvalo.Finance.Properties;
+
+    [Obsolete]
     internal sealed class MoneyFormatInfo : IFormatProvider
     {
         private readonly Currency _currency;
@@ -24,7 +27,7 @@ namespace Narvalo.Finance.Globalization
             get { Warrant.NotNull<NumberFormatInfo>(); return _numberFormat; }
         }
 
-        public Currency Currency {  get { Warrant.NotNull<Currency>(); return _currency; } }
+        public Currency Currency { get { Warrant.NotNull<Currency>(); return _currency; } }
 
         public bool CurrencyIsNative { get; private set; }
 
@@ -33,14 +36,9 @@ namespace Narvalo.Finance.Globalization
             Require.NotNull(cultureInfo, nameof(cultureInfo));
             Require.NotNull(currency, nameof(currency));
 
-            if (!cultureInfo.IsNeutralCulture)
+            if (currency.IsNative(cultureInfo))
             {
-                var ri = new RegionInfo(cultureInfo.Name);
-
-                if (ri.ISOCurrencySymbol == currency.Code)
-                {
-                    return new MoneyFormatInfo(cultureInfo.NumberFormat, currency) { CurrencyIsNative = true, } ;
-                }
+                return new MoneyFormatInfo(cultureInfo.NumberFormat, currency) { CurrencyIsNative = true, };
             }
 
             return new MoneyFormatInfo(cultureInfo.NumberFormat, currency);
@@ -80,5 +78,67 @@ namespace Narvalo.Finance.Globalization
 
             return Create(CultureInfo.CurrentCulture, currency);
         }
+
+        #region Formatting
+
+        public static string Format(Money money, string format, MoneyFormatInfo mfi)
+        {
+            Demand.NotNull(mfi);
+            Warrant.NotNull<string>();
+
+            return Format(money.Amount, money.Currency, format, mfi);
+        }
+
+        public static string Format(decimal amount, Currency currency, string format, MoneyFormatInfo mfi)
+        {
+            Demand.NotNull(currency);
+            Demand.NotNull(mfi);
+            Warrant.NotNull<string>();
+
+            if (format == null || format.Length == 0)
+            {
+                format = "G";
+            }
+
+            switch (format)
+            {
+                case "C":
+                case "c":
+                    // Currency.
+                    return FormatCurrency(amount, currency, mfi);
+                case "N":
+                case "n":
+                    // No currency symbol.
+                    return amount.ToString("C", mfi.NumberFormat.GetNoSymbolNoSpaceClone());
+                case "G":
+                case "g":
+                    // General (default).
+                    // http://publications.europa.eu/code/en/en-370303.htm
+                    // .Replace(' ', '\u00A0')
+                    return currency.Code + "\u00A0"
+                        + amount.ToString("C", mfi.NumberFormat.GetNoSymbolNoSpaceClone());
+                default:
+                    throw new FormatException(
+                        Narvalo.Format.Current(Strings.Money_InvalidFormatSpecification));
+            }
+        }
+
+        private static string FormatCurrency(decimal amount, Currency currency, MoneyFormatInfo mfi)
+        {
+            Require.NotNull(mfi, nameof(mfi));
+            Demand.NotNull(currency);
+            Warrant.NotNull<string>();
+
+            if (mfi.CurrencyIsNative)
+            {
+                return amount.ToString("C", mfi.NumberFormat);
+            }
+            else
+            {
+                return amount.ToString("C", mfi.NumberFormat.GetCurrencyCodeAndSpaceClone(currency));
+            }
+        }
+
+        #endregion
     }
 }

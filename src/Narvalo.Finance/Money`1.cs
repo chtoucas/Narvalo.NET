@@ -5,6 +5,7 @@ namespace Narvalo.Finance
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
 
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
@@ -26,9 +27,11 @@ namespace Narvalo.Finance
             Amount = amount;
         }
 
+        public static TCurrency UnderlyingCurrency => s_Currency;
+
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Money<TCurrency> Zero { get { return s_Zero; } }
+        public static Money<TCurrency> Zero => s_Zero;
 
         public decimal Amount { get; }
 
@@ -56,22 +59,19 @@ namespace Narvalo.Finance
         public override string ToString()
         {
             Warrant.NotNull<string>();
-
-            return MoneyFormatter.Format(Amount, s_Currency, null, MoneyFormatInfo.GetCurrentInfo(s_Currency));
+            return MoneyFormatter.Format(this, null, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
-
-            return MoneyFormatter.Format(Amount, s_Currency, format, MoneyFormatInfo.GetCurrentInfo(s_Currency));
+            return MoneyFormatter.Format(this, format, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(IFormatProvider formatProvider)
         {
             Warrant.NotNull<string>();
-
-            return MoneyFormatter.Format(Amount, s_Currency, null, MoneyFormatInfo.GetInstance(formatProvider, s_Currency));
+            return MoneyFormatter.Format(this, null, NumberFormatInfo.GetInstance(formatProvider));
         }
 
         public string ToString(string format, IFormatProvider formatProvider)
@@ -87,7 +87,7 @@ namespace Narvalo.Finance
                 }
             }
 
-            return MoneyFormatter.Format(Amount, s_Currency, format, MoneyFormatInfo.GetInstance(formatProvider, s_Currency));
+            return MoneyFormatter.Format(this, null, NumberFormatInfo.GetInstance(formatProvider));
         }
     }
 
