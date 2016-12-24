@@ -33,7 +33,8 @@ namespace Narvalo.Finance.Utilities
             get { throw new InvalidOperationException(); }
         }
 
-        public static implicit operator bool(BooleanResult value) => value.IsTrue;
+        // It is normally not possible to create a null BooleanResult, but we never know.
+        public static implicit operator bool(BooleanResult value) => value == null ? false : value.IsTrue;
 
         internal static BooleanResult False(string message)
         {

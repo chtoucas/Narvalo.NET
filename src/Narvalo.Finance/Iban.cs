@@ -221,7 +221,7 @@ namespace Narvalo.Finance
                 if (transformcase && ch >= 'a' && ch <= 'z')
                 {
                     // NB: This is equivalent to (ch - 32). Just for the fun :-)
-                    output[k] = (char)(ch & 0xdf);
+                    output[k] = (char)(ch & 0xDF);
                 }
                 else
                 {

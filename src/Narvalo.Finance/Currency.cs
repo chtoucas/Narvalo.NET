@@ -135,7 +135,9 @@ namespace Narvalo.Finance
             return OfCulture(CultureInfo.CurrentCulture);
         }
 
-        // REVIEW: Should we worry about concurrent access? I don't believe.
+        // REVIEW: Should we worry about concurrent access? I don't believe but I'm not sure.
+        // If it is already registered, no problem, otherwise two threads may attempt the same
+        // code; the first win, the second simply returns false.
         public static bool RegisterCurrency(string code)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
@@ -143,6 +145,17 @@ namespace Narvalo.Finance
             if (CodeSet.Contains(code)) { return false; }
 
             return CodeSet.Add(code);
+        }
+
+        public bool IsNative(CultureInfo cultureInfo)
+        {
+            Require.NotNull(cultureInfo, nameof(cultureInfo));
+
+            if (cultureInfo.IsNeutralCulture) { return false; }
+
+            var ri = new RegionInfo(cultureInfo.Name);
+
+            return ri.ISOCurrencySymbol == Code;
         }
 
         /// <summary>
