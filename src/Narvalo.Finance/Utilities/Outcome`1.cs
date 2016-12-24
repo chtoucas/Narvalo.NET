@@ -24,7 +24,7 @@ namespace Narvalo.Finance.Utilities
 
         internal static Outcome<T> Failure(string message)
         {
-            Require.NotNullOrEmpty(message, nameof(message));
+            Require.NotNull(message, nameof(message));
             Warrant.NotNull<Outcome<T>>();
 
             return new Failure_(message);
@@ -98,12 +98,12 @@ namespace Narvalo.Finance.Utilities
 
             public Failure_(string message) : base(false)
             {
-                Demand.NotNullOrEmpty(message);
+                Demand.NotNull(message);
 
                 _message = message;
             }
 
-            public override string ErrorMessage { get { Warrant.NotNullOrEmpty(); return _message; } }
+            public override string ErrorMessage { get { Warrant.NotNull<string>(); return _message; } }
 
             public override T Value { get { throw new InvalidOperationException(); } }
 

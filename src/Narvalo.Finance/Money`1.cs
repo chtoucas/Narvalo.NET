@@ -27,7 +27,7 @@ namespace Narvalo.Finance
             Amount = amount;
         }
 
-        public static TCurrency UnderlyingCurrency => s_Currency;
+        public static TCurrency UnderlyingCurrency { get { Warrant.NotNull<TCurrency>(); return s_Currency; } }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]

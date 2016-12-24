@@ -13,7 +13,7 @@ namespace Narvalo.Finance.Utilities
     {
         public static partial class Require
         {
-            [ContractAbbreviator]
+            [ContractArgumentValidator]
             public static void CurrencyCode(string code, string parameterName)
             {
                 Narvalo.Require.NotNull(code, parameterName);

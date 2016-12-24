@@ -38,9 +38,9 @@ namespace Narvalo.Finance.Utilities
 
         internal static BooleanResult False(string message)
         {
-            Require.NotNullOrEmpty(message, nameof(message));
+            Require.NotNull(message, nameof(message));
 
-            return new BooleanResult.False_(message);
+            return new False_(message);
         }
 
         public override string ToString()

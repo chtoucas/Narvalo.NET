@@ -27,6 +27,7 @@ namespace Narvalo.Finance
     public partial class Currency : IEquatable<Currency>
     {
         // The list is automatically generated using the data obtained from the SNV website.
+        // The volatile keyword is only for correctness.
         private volatile static HashSet<string> s_CodeSet;
 
         private readonly string _code;
@@ -65,6 +66,7 @@ namespace Narvalo.Finance
             Sentinel.Expect.CurrencyCode(code);
             Warrant.NotNull<Currency>();
 
+            Contract.Assume(CodeSet != null);
             if (!CodeSet.Contains(code))
             {
                 throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCode, code));
@@ -136,12 +138,13 @@ namespace Narvalo.Finance
         }
 
         // REVIEW: Should we worry about concurrent access? I don't believe but I'm not sure.
-        // If it is already registered, no problem, otherwise two threads may attempt the same
-        // code; the first win, the second simply returns false.
+        // If it is already registered, no problem, otherwise two threads may attempt to add
+        // the same code; the first win, the second simply returns false?
         public static bool RegisterCurrency(string code)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
 
+            Contract.Assume(CodeSet != null);
             if (CodeSet.Contains(code)) { return false; }
 
             return CodeSet.Add(code);

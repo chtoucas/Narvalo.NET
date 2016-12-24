@@ -7,10 +7,10 @@ namespace Narvalo.Finance.Globalization
 
     using Narvalo.Finance.Properties;
 
-    // Currency formatting is difficult. This class works consistently across .NET cultures
+    // Formatting currencies is difficult. This class works consistently across .NET cultures
     // at the sacrifice of omitting the currency symbol; it still uses the culture's rules to
     // format the amount.
-    public static class MoneyFormatter
+    internal static class MoneyFormatter
     {
         private const string DEFAULT_FORMAT = "G";
 
@@ -41,8 +41,16 @@ namespace Narvalo.Finance.Globalization
             {
                 case "N":
                 case "n":
-                    // Numeric. Do not display any currency symbol at all.
+                    // Numeric. Does not include any information about the currency.
                     return amount.ToString("C", nfi.GetNoSymbolNoSpaceClone());
+                case "L":
+                case "l":
+                    // Left (Currency code placed on the).
+                    return currency.Code + "\u00A0" + amount.ToString("C", nfi.GetNoSymbolNoSpaceClone());
+                case "R":
+                case "r":
+                    // Right (Currency code placed on the).
+                    return amount.ToString("C", nfi.GetNoSymbolNoSpaceClone()) + "\u00A0" + currency.Code;
                 case "G":
                 case "g":
                     // General (default). It replaces the currency symbol by the currency code

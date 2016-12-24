@@ -26,10 +26,15 @@ namespace Narvalo.Finance
             => new IbanValidator(levels).Validate(parts);
 
         public static BooleanResult TryValidate(IbanParts parts, IbanValidationLevels levels)
-            => new IbanValidator(levels).TryValidate(parts);
+        {
+            Warrant.NotNull<BooleanResult>();
+            return new IbanValidator(levels).TryValidate(parts);
+        }
 
         internal static Outcome<IbanParts> TryValidateIntern(IbanParts parts, IbanValidationLevels levels)
         {
+            Warrant.NotNull<Outcome<IbanParts>>();
+
             var result = new IbanValidator(levels).TryValidate(parts);
 
             return result.IsTrue
@@ -44,6 +49,8 @@ namespace Narvalo.Finance
 
         public BooleanResult TryValidate(IbanParts parts)
         {
+            Warrant.NotNull<BooleanResult>();
+
             if (_verifyIntegrity && !VerifyIntegrity(parts))
             {
                 return BooleanResult.False(Strings.IbanValidator_IntegrityCheckFailure);
@@ -123,7 +130,9 @@ namespace Narvalo.Finance
         {
             Demand.NotNull(value);
 
+            // 922 337 203 685 477 579
             const long MAX_DIGIT = (Int64.MaxValue - 9) / 10;
+            // 92 233 720 368 547 757
             const long MAX_LETTER = (Int64.MaxValue - 35) / 100;
 
             int len = value.Length;

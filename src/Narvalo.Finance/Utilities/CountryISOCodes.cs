@@ -9,6 +9,7 @@ namespace Narvalo.Finance.Utilities
     internal static partial class CountryISOCodes
     {
         // The list is automatically generated using the data obtained from the ISO website.
+        // The volatile keyword is only for correctness.
         private static volatile HashSet<string> s_TwoLetterCodeSet;
 
         public static bool TwoLetterCodeExists(string code)

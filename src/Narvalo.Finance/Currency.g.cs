@@ -13,12 +13,14 @@
 namespace Narvalo.Finance
 {
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
 
     public partial class Currency
     {
         /// <summary>
         /// The set of available currency codes.
         /// </summary>
+        [ContractVerification(false)]
         private static HashSet<string> CodeSet
         {
             get
