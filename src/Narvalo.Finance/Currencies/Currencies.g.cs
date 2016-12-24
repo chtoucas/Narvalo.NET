@@ -16,6 +16,8 @@ using global::System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY",
     Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
 
+// Each currency code defines a class which is a lazy initalized singleton.
+// The singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
 namespace Narvalo.Finance.Currencies
 {
     /// <summary>
@@ -27,11 +29,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ADP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ADP" /> class.
-        /// </summary>
-        private static readonly ADP s_Instance = new ADP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ADP" /> class.
         /// </summary>
         private ADP() : base("ADP") { }
@@ -40,9 +37,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ADP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ADP".</value>
-        public static ADP UniqInstance
+        public static ADP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ADP Instance = new ADP();
         }
     }
 
@@ -56,11 +56,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AED : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AED" /> class.
-        /// </summary>
-        private static readonly AED s_Instance = new AED();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AED" /> class.
         /// </summary>
         private AED() : base("AED") { }
@@ -69,9 +64,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AED".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AED".</value>
-        public static AED UniqInstance
+        public static AED UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AED Instance = new AED();
         }
     }
 
@@ -85,11 +83,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AFA : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AFA" /> class.
-        /// </summary>
-        private static readonly AFA s_Instance = new AFA();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AFA" /> class.
         /// </summary>
         private AFA() : base("AFA") { }
@@ -98,9 +91,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFA".</value>
-        public static AFA UniqInstance
+        public static AFA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AFA Instance = new AFA();
         }
     }
 
@@ -114,11 +110,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AFN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AFN" /> class.
-        /// </summary>
-        private static readonly AFN s_Instance = new AFN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AFN" /> class.
         /// </summary>
         private AFN() : base("AFN") { }
@@ -127,9 +118,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFN".</value>
-        public static AFN UniqInstance
+        public static AFN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AFN Instance = new AFN();
         }
     }
 
@@ -143,11 +137,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ALK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ALK" /> class.
-        /// </summary>
-        private static readonly ALK s_Instance = new ALK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ALK" /> class.
         /// </summary>
         private ALK() : base("ALK") { }
@@ -156,9 +145,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALK".</value>
-        public static ALK UniqInstance
+        public static ALK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ALK Instance = new ALK();
         }
     }
 
@@ -172,11 +164,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ALL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ALL" /> class.
-        /// </summary>
-        private static readonly ALL s_Instance = new ALL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ALL" /> class.
         /// </summary>
         private ALL() : base("ALL") { }
@@ -185,9 +172,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALL".</value>
-        public static ALL UniqInstance
+        public static ALL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ALL Instance = new ALL();
         }
     }
 
@@ -201,11 +191,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AMD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AMD" /> class.
-        /// </summary>
-        private static readonly AMD s_Instance = new AMD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AMD" /> class.
         /// </summary>
         private AMD() : base("AMD") { }
@@ -214,9 +199,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AMD".</value>
-        public static AMD UniqInstance
+        public static AMD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AMD Instance = new AMD();
         }
     }
 
@@ -230,11 +218,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ANG : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ANG" /> class.
-        /// </summary>
-        private static readonly ANG s_Instance = new ANG();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ANG" /> class.
         /// </summary>
         private ANG() : base("ANG") { }
@@ -243,9 +226,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ANG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ANG".</value>
-        public static ANG UniqInstance
+        public static ANG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ANG Instance = new ANG();
         }
     }
 
@@ -259,11 +245,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AOA : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AOA" /> class.
-        /// </summary>
-        private static readonly AOA s_Instance = new AOA();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AOA" /> class.
         /// </summary>
         private AOA() : base("AOA") { }
@@ -272,9 +253,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOA".</value>
-        public static AOA UniqInstance
+        public static AOA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AOA Instance = new AOA();
         }
     }
 
@@ -288,11 +272,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AOK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AOK" /> class.
-        /// </summary>
-        private static readonly AOK s_Instance = new AOK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AOK" /> class.
         /// </summary>
         private AOK() : base("AOK") { }
@@ -301,9 +280,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOK".</value>
-        public static AOK UniqInstance
+        public static AOK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AOK Instance = new AOK();
         }
     }
 
@@ -317,11 +299,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AON : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AON" /> class.
-        /// </summary>
-        private static readonly AON s_Instance = new AON();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AON" /> class.
         /// </summary>
         private AON() : base("AON") { }
@@ -330,9 +307,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AON".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AON".</value>
-        public static AON UniqInstance
+        public static AON UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AON Instance = new AON();
         }
     }
 
@@ -346,11 +326,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AOR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AOR" /> class.
-        /// </summary>
-        private static readonly AOR s_Instance = new AOR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AOR" /> class.
         /// </summary>
         private AOR() : base("AOR") { }
@@ -359,9 +334,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOR".</value>
-        public static AOR UniqInstance
+        public static AOR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AOR Instance = new AOR();
         }
     }
 
@@ -375,11 +353,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ARA : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ARA" /> class.
-        /// </summary>
-        private static readonly ARA s_Instance = new ARA();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ARA" /> class.
         /// </summary>
         private ARA() : base("ARA") { }
@@ -388,9 +361,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARA".</value>
-        public static ARA UniqInstance
+        public static ARA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ARA Instance = new ARA();
         }
     }
 
@@ -404,11 +380,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ARP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ARP" /> class.
-        /// </summary>
-        private static readonly ARP s_Instance = new ARP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ARP" /> class.
         /// </summary>
         private ARP() : base("ARP") { }
@@ -417,9 +388,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARP".</value>
-        public static ARP UniqInstance
+        public static ARP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ARP Instance = new ARP();
         }
     }
 
@@ -433,11 +407,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ARS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ARS" /> class.
-        /// </summary>
-        private static readonly ARS s_Instance = new ARS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ARS" /> class.
         /// </summary>
         private ARS() : base("ARS") { }
@@ -446,9 +415,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARS".</value>
-        public static ARS UniqInstance
+        public static ARS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ARS Instance = new ARS();
         }
     }
 
@@ -462,11 +434,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ARY : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ARY" /> class.
-        /// </summary>
-        private static readonly ARY s_Instance = new ARY();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ARY" /> class.
         /// </summary>
         private ARY() : base("ARY") { }
@@ -475,9 +442,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARY".</value>
-        public static ARY UniqInstance
+        public static ARY UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ARY Instance = new ARY();
         }
     }
 
@@ -491,11 +461,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ATS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ATS" /> class.
-        /// </summary>
-        private static readonly ATS s_Instance = new ATS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ATS" /> class.
         /// </summary>
         private ATS() : base("ATS") { }
@@ -504,9 +469,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ATS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ATS".</value>
-        public static ATS UniqInstance
+        public static ATS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ATS Instance = new ATS();
         }
     }
 
@@ -520,11 +488,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AUD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AUD" /> class.
-        /// </summary>
-        private static readonly AUD s_Instance = new AUD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AUD" /> class.
         /// </summary>
         private AUD() : base("AUD") { }
@@ -533,9 +496,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AUD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AUD".</value>
-        public static AUD UniqInstance
+        public static AUD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AUD Instance = new AUD();
         }
     }
 
@@ -549,11 +515,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AWG : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AWG" /> class.
-        /// </summary>
-        private static readonly AWG s_Instance = new AWG();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AWG" /> class.
         /// </summary>
         private AWG() : base("AWG") { }
@@ -562,9 +523,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AWG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AWG".</value>
-        public static AWG UniqInstance
+        public static AWG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AWG Instance = new AWG();
         }
     }
 
@@ -578,11 +542,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AYM : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AYM" /> class.
-        /// </summary>
-        private static readonly AYM s_Instance = new AYM();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AYM" /> class.
         /// </summary>
         private AYM() : base("AYM") { }
@@ -591,9 +550,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AYM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AYM".</value>
-        public static AYM UniqInstance
+        public static AYM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AYM Instance = new AYM();
         }
     }
 
@@ -607,11 +569,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AZM : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AZM" /> class.
-        /// </summary>
-        private static readonly AZM s_Instance = new AZM();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AZM" /> class.
         /// </summary>
         private AZM() : base("AZM") { }
@@ -620,9 +577,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZM".</value>
-        public static AZM UniqInstance
+        public static AZM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AZM Instance = new AZM();
         }
     }
 
@@ -636,11 +596,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class AZN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="AZN" /> class.
-        /// </summary>
-        private static readonly AZN s_Instance = new AZN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AZN" /> class.
         /// </summary>
         private AZN() : base("AZN") { }
@@ -649,9 +604,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZN".</value>
-        public static AZN UniqInstance
+        public static AZN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly AZN Instance = new AZN();
         }
     }
 
@@ -665,11 +623,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BAD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BAD" /> class.
-        /// </summary>
-        private static readonly BAD s_Instance = new BAD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BAD" /> class.
         /// </summary>
         private BAD() : base("BAD") { }
@@ -678,9 +631,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAD".</value>
-        public static BAD UniqInstance
+        public static BAD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BAD Instance = new BAD();
         }
     }
 
@@ -694,11 +650,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BAM : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BAM" /> class.
-        /// </summary>
-        private static readonly BAM s_Instance = new BAM();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BAM" /> class.
         /// </summary>
         private BAM() : base("BAM") { }
@@ -707,9 +658,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAM".</value>
-        public static BAM UniqInstance
+        public static BAM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BAM Instance = new BAM();
         }
     }
 
@@ -723,11 +677,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BBD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BBD" /> class.
-        /// </summary>
-        private static readonly BBD s_Instance = new BBD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BBD" /> class.
         /// </summary>
         private BBD() : base("BBD") { }
@@ -736,9 +685,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BBD".</value>
-        public static BBD UniqInstance
+        public static BBD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BBD Instance = new BBD();
         }
     }
 
@@ -752,11 +704,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BDT : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BDT" /> class.
-        /// </summary>
-        private static readonly BDT s_Instance = new BDT();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BDT" /> class.
         /// </summary>
         private BDT() : base("BDT") { }
@@ -765,9 +712,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BDT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BDT".</value>
-        public static BDT UniqInstance
+        public static BDT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BDT Instance = new BDT();
         }
     }
 
@@ -781,11 +731,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BEC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BEC" /> class.
-        /// </summary>
-        private static readonly BEC s_Instance = new BEC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BEC" /> class.
         /// </summary>
         private BEC() : base("BEC") { }
@@ -794,9 +739,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEC".</value>
-        public static BEC UniqInstance
+        public static BEC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BEC Instance = new BEC();
         }
     }
 
@@ -810,11 +758,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BEF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BEF" /> class.
-        /// </summary>
-        private static readonly BEF s_Instance = new BEF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BEF" /> class.
         /// </summary>
         private BEF() : base("BEF") { }
@@ -823,9 +766,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEF".</value>
-        public static BEF UniqInstance
+        public static BEF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BEF Instance = new BEF();
         }
     }
 
@@ -839,11 +785,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BEL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BEL" /> class.
-        /// </summary>
-        private static readonly BEL s_Instance = new BEL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BEL" /> class.
         /// </summary>
         private BEL() : base("BEL") { }
@@ -852,9 +793,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEL".</value>
-        public static BEL UniqInstance
+        public static BEL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BEL Instance = new BEL();
         }
     }
 
@@ -868,11 +812,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BGJ : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BGJ" /> class.
-        /// </summary>
-        private static readonly BGJ s_Instance = new BGJ();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BGJ" /> class.
         /// </summary>
         private BGJ() : base("BGJ") { }
@@ -881,9 +820,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGJ".</value>
-        public static BGJ UniqInstance
+        public static BGJ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BGJ Instance = new BGJ();
         }
     }
 
@@ -897,11 +839,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BGK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BGK" /> class.
-        /// </summary>
-        private static readonly BGK s_Instance = new BGK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BGK" /> class.
         /// </summary>
         private BGK() : base("BGK") { }
@@ -910,9 +847,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGK".</value>
-        public static BGK UniqInstance
+        public static BGK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BGK Instance = new BGK();
         }
     }
 
@@ -926,11 +866,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BGL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BGL" /> class.
-        /// </summary>
-        private static readonly BGL s_Instance = new BGL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BGL" /> class.
         /// </summary>
         private BGL() : base("BGL") { }
@@ -939,9 +874,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGL".</value>
-        public static BGL UniqInstance
+        public static BGL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BGL Instance = new BGL();
         }
     }
 
@@ -955,11 +893,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BGN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BGN" /> class.
-        /// </summary>
-        private static readonly BGN s_Instance = new BGN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BGN" /> class.
         /// </summary>
         private BGN() : base("BGN") { }
@@ -968,9 +901,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGN".</value>
-        public static BGN UniqInstance
+        public static BGN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BGN Instance = new BGN();
         }
     }
 
@@ -984,11 +920,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BHD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BHD" /> class.
-        /// </summary>
-        private static readonly BHD s_Instance = new BHD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BHD" /> class.
         /// </summary>
         private BHD() : base("BHD") { }
@@ -997,9 +928,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BHD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BHD".</value>
-        public static BHD UniqInstance
+        public static BHD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BHD Instance = new BHD();
         }
     }
 
@@ -1013,11 +947,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BIF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BIF" /> class.
-        /// </summary>
-        private static readonly BIF s_Instance = new BIF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BIF" /> class.
         /// </summary>
         private BIF() : base("BIF") { }
@@ -1026,9 +955,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BIF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BIF".</value>
-        public static BIF UniqInstance
+        public static BIF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BIF Instance = new BIF();
         }
     }
 
@@ -1042,11 +974,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BMD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BMD" /> class.
-        /// </summary>
-        private static readonly BMD s_Instance = new BMD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BMD" /> class.
         /// </summary>
         private BMD() : base("BMD") { }
@@ -1055,9 +982,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BMD".</value>
-        public static BMD UniqInstance
+        public static BMD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BMD Instance = new BMD();
         }
     }
 
@@ -1071,11 +1001,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BND : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BND" /> class.
-        /// </summary>
-        private static readonly BND s_Instance = new BND();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BND" /> class.
         /// </summary>
         private BND() : base("BND") { }
@@ -1084,9 +1009,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BND".</value>
-        public static BND UniqInstance
+        public static BND UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BND Instance = new BND();
         }
     }
 
@@ -1100,11 +1028,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BOB : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BOB" /> class.
-        /// </summary>
-        private static readonly BOB s_Instance = new BOB();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BOB" /> class.
         /// </summary>
         private BOB() : base("BOB") { }
@@ -1113,9 +1036,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOB".</value>
-        public static BOB UniqInstance
+        public static BOB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BOB Instance = new BOB();
         }
     }
 
@@ -1129,11 +1055,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BOP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BOP" /> class.
-        /// </summary>
-        private static readonly BOP s_Instance = new BOP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BOP" /> class.
         /// </summary>
         private BOP() : base("BOP") { }
@@ -1142,9 +1063,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOP".</value>
-        public static BOP UniqInstance
+        public static BOP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BOP Instance = new BOP();
         }
     }
 
@@ -1158,11 +1082,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BOV : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BOV" /> class.
-        /// </summary>
-        private static readonly BOV s_Instance = new BOV();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BOV" /> class.
         /// </summary>
         private BOV() : base("BOV") { }
@@ -1171,9 +1090,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOV".</value>
-        public static BOV UniqInstance
+        public static BOV UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BOV Instance = new BOV();
         }
     }
 
@@ -1187,11 +1109,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BRB : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BRB" /> class.
-        /// </summary>
-        private static readonly BRB s_Instance = new BRB();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BRB" /> class.
         /// </summary>
         private BRB() : base("BRB") { }
@@ -1200,9 +1117,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRB".</value>
-        public static BRB UniqInstance
+        public static BRB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BRB Instance = new BRB();
         }
     }
 
@@ -1216,11 +1136,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BRC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BRC" /> class.
-        /// </summary>
-        private static readonly BRC s_Instance = new BRC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BRC" /> class.
         /// </summary>
         private BRC() : base("BRC") { }
@@ -1229,9 +1144,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRC".</value>
-        public static BRC UniqInstance
+        public static BRC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BRC Instance = new BRC();
         }
     }
 
@@ -1245,11 +1163,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BRE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BRE" /> class.
-        /// </summary>
-        private static readonly BRE s_Instance = new BRE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BRE" /> class.
         /// </summary>
         private BRE() : base("BRE") { }
@@ -1258,9 +1171,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRE".</value>
-        public static BRE UniqInstance
+        public static BRE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BRE Instance = new BRE();
         }
     }
 
@@ -1274,11 +1190,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BRL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BRL" /> class.
-        /// </summary>
-        private static readonly BRL s_Instance = new BRL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BRL" /> class.
         /// </summary>
         private BRL() : base("BRL") { }
@@ -1287,9 +1198,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRL".</value>
-        public static BRL UniqInstance
+        public static BRL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BRL Instance = new BRL();
         }
     }
 
@@ -1303,11 +1217,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BRN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BRN" /> class.
-        /// </summary>
-        private static readonly BRN s_Instance = new BRN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BRN" /> class.
         /// </summary>
         private BRN() : base("BRN") { }
@@ -1316,9 +1225,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRN".</value>
-        public static BRN UniqInstance
+        public static BRN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BRN Instance = new BRN();
         }
     }
 
@@ -1332,11 +1244,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BRR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BRR" /> class.
-        /// </summary>
-        private static readonly BRR s_Instance = new BRR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BRR" /> class.
         /// </summary>
         private BRR() : base("BRR") { }
@@ -1345,9 +1252,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRR".</value>
-        public static BRR UniqInstance
+        public static BRR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BRR Instance = new BRR();
         }
     }
 
@@ -1361,11 +1271,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BSD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BSD" /> class.
-        /// </summary>
-        private static readonly BSD s_Instance = new BSD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BSD" /> class.
         /// </summary>
         private BSD() : base("BSD") { }
@@ -1374,9 +1279,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BSD".</value>
-        public static BSD UniqInstance
+        public static BSD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BSD Instance = new BSD();
         }
     }
 
@@ -1390,11 +1298,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BTN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BTN" /> class.
-        /// </summary>
-        private static readonly BTN s_Instance = new BTN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BTN" /> class.
         /// </summary>
         private BTN() : base("BTN") { }
@@ -1403,9 +1306,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BTN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BTN".</value>
-        public static BTN UniqInstance
+        public static BTN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BTN Instance = new BTN();
         }
     }
 
@@ -1419,11 +1325,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BUK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BUK" /> class.
-        /// </summary>
-        private static readonly BUK s_Instance = new BUK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BUK" /> class.
         /// </summary>
         private BUK() : base("BUK") { }
@@ -1432,9 +1333,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BUK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BUK".</value>
-        public static BUK UniqInstance
+        public static BUK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BUK Instance = new BUK();
         }
     }
 
@@ -1448,11 +1352,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BWP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BWP" /> class.
-        /// </summary>
-        private static readonly BWP s_Instance = new BWP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BWP" /> class.
         /// </summary>
         private BWP() : base("BWP") { }
@@ -1461,9 +1360,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BWP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BWP".</value>
-        public static BWP UniqInstance
+        public static BWP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BWP Instance = new BWP();
         }
     }
 
@@ -1477,11 +1379,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BYB : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BYB" /> class.
-        /// </summary>
-        private static readonly BYB s_Instance = new BYB();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BYB" /> class.
         /// </summary>
         private BYB() : base("BYB") { }
@@ -1490,9 +1387,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYB".</value>
-        public static BYB UniqInstance
+        public static BYB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BYB Instance = new BYB();
         }
     }
 
@@ -1506,11 +1406,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BYN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BYN" /> class.
-        /// </summary>
-        private static readonly BYN s_Instance = new BYN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BYN" /> class.
         /// </summary>
         private BYN() : base("BYN") { }
@@ -1519,9 +1414,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYN".</value>
-        public static BYN UniqInstance
+        public static BYN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BYN Instance = new BYN();
         }
     }
 
@@ -1535,11 +1433,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BYR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BYR" /> class.
-        /// </summary>
-        private static readonly BYR s_Instance = new BYR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BYR" /> class.
         /// </summary>
         private BYR() : base("BYR") { }
@@ -1548,9 +1441,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYR".</value>
-        public static BYR UniqInstance
+        public static BYR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BYR Instance = new BYR();
         }
     }
 
@@ -1564,11 +1460,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class BZD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="BZD" /> class.
-        /// </summary>
-        private static readonly BZD s_Instance = new BZD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BZD" /> class.
         /// </summary>
         private BZD() : base("BZD") { }
@@ -1577,9 +1468,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BZD".</value>
-        public static BZD UniqInstance
+        public static BZD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly BZD Instance = new BZD();
         }
     }
 
@@ -1593,11 +1487,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CAD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CAD" /> class.
-        /// </summary>
-        private static readonly CAD s_Instance = new CAD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CAD" /> class.
         /// </summary>
         private CAD() : base("CAD") { }
@@ -1606,9 +1495,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CAD".</value>
-        public static CAD UniqInstance
+        public static CAD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CAD Instance = new CAD();
         }
     }
 
@@ -1622,11 +1514,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CDF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CDF" /> class.
-        /// </summary>
-        private static readonly CDF s_Instance = new CDF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CDF" /> class.
         /// </summary>
         private CDF() : base("CDF") { }
@@ -1635,9 +1522,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CDF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CDF".</value>
-        public static CDF UniqInstance
+        public static CDF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CDF Instance = new CDF();
         }
     }
 
@@ -1651,11 +1541,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CHC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CHC" /> class.
-        /// </summary>
-        private static readonly CHC s_Instance = new CHC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CHC" /> class.
         /// </summary>
         private CHC() : base("CHC") { }
@@ -1664,9 +1549,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHC".</value>
-        public static CHC UniqInstance
+        public static CHC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CHC Instance = new CHC();
         }
     }
 
@@ -1680,11 +1568,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CHE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CHE" /> class.
-        /// </summary>
-        private static readonly CHE s_Instance = new CHE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CHE" /> class.
         /// </summary>
         private CHE() : base("CHE") { }
@@ -1693,9 +1576,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHE".</value>
-        public static CHE UniqInstance
+        public static CHE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CHE Instance = new CHE();
         }
     }
 
@@ -1709,11 +1595,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CHF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CHF" /> class.
-        /// </summary>
-        private static readonly CHF s_Instance = new CHF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CHF" /> class.
         /// </summary>
         private CHF() : base("CHF") { }
@@ -1722,9 +1603,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHF".</value>
-        public static CHF UniqInstance
+        public static CHF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CHF Instance = new CHF();
         }
     }
 
@@ -1738,11 +1622,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CHW : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CHW" /> class.
-        /// </summary>
-        private static readonly CHW s_Instance = new CHW();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CHW" /> class.
         /// </summary>
         private CHW() : base("CHW") { }
@@ -1751,9 +1630,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHW".</value>
-        public static CHW UniqInstance
+        public static CHW UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CHW Instance = new CHW();
         }
     }
 
@@ -1767,11 +1649,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CLF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CLF" /> class.
-        /// </summary>
-        private static readonly CLF s_Instance = new CLF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CLF" /> class.
         /// </summary>
         private CLF() : base("CLF") { }
@@ -1780,9 +1657,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLF".</value>
-        public static CLF UniqInstance
+        public static CLF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CLF Instance = new CLF();
         }
     }
 
@@ -1796,11 +1676,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CLP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CLP" /> class.
-        /// </summary>
-        private static readonly CLP s_Instance = new CLP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CLP" /> class.
         /// </summary>
         private CLP() : base("CLP") { }
@@ -1809,9 +1684,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLP".</value>
-        public static CLP UniqInstance
+        public static CLP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CLP Instance = new CLP();
         }
     }
 
@@ -1825,11 +1703,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CNX : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CNX" /> class.
-        /// </summary>
-        private static readonly CNX s_Instance = new CNX();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CNX" /> class.
         /// </summary>
         private CNX() : base("CNX") { }
@@ -1838,9 +1711,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNX".</value>
-        public static CNX UniqInstance
+        public static CNX UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CNX Instance = new CNX();
         }
     }
 
@@ -1854,11 +1730,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CNY : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CNY" /> class.
-        /// </summary>
-        private static readonly CNY s_Instance = new CNY();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CNY" /> class.
         /// </summary>
         private CNY() : base("CNY") { }
@@ -1867,9 +1738,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNY".</value>
-        public static CNY UniqInstance
+        public static CNY UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CNY Instance = new CNY();
         }
     }
 
@@ -1883,11 +1757,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class COP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="COP" /> class.
-        /// </summary>
-        private static readonly COP s_Instance = new COP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="COP" /> class.
         /// </summary>
         private COP() : base("COP") { }
@@ -1896,9 +1765,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "COP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "COP".</value>
-        public static COP UniqInstance
+        public static COP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly COP Instance = new COP();
         }
     }
 
@@ -1912,11 +1784,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class COU : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="COU" /> class.
-        /// </summary>
-        private static readonly COU s_Instance = new COU();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="COU" /> class.
         /// </summary>
         private COU() : base("COU") { }
@@ -1925,9 +1792,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "COU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "COU".</value>
-        public static COU UniqInstance
+        public static COU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly COU Instance = new COU();
         }
     }
 
@@ -1941,11 +1811,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CRC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CRC" /> class.
-        /// </summary>
-        private static readonly CRC s_Instance = new CRC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CRC" /> class.
         /// </summary>
         private CRC() : base("CRC") { }
@@ -1954,9 +1819,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CRC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CRC".</value>
-        public static CRC UniqInstance
+        public static CRC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CRC Instance = new CRC();
         }
     }
 
@@ -1970,11 +1838,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CSD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CSD" /> class.
-        /// </summary>
-        private static readonly CSD s_Instance = new CSD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CSD" /> class.
         /// </summary>
         private CSD() : base("CSD") { }
@@ -1983,9 +1846,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSD".</value>
-        public static CSD UniqInstance
+        public static CSD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CSD Instance = new CSD();
         }
     }
 
@@ -1999,11 +1865,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CSJ : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CSJ" /> class.
-        /// </summary>
-        private static readonly CSJ s_Instance = new CSJ();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CSJ" /> class.
         /// </summary>
         private CSJ() : base("CSJ") { }
@@ -2012,9 +1873,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSJ".</value>
-        public static CSJ UniqInstance
+        public static CSJ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CSJ Instance = new CSJ();
         }
     }
 
@@ -2028,11 +1892,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CSK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CSK" /> class.
-        /// </summary>
-        private static readonly CSK s_Instance = new CSK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CSK" /> class.
         /// </summary>
         private CSK() : base("CSK") { }
@@ -2041,9 +1900,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSK".</value>
-        public static CSK UniqInstance
+        public static CSK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CSK Instance = new CSK();
         }
     }
 
@@ -2057,11 +1919,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CUC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CUC" /> class.
-        /// </summary>
-        private static readonly CUC s_Instance = new CUC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CUC" /> class.
         /// </summary>
         private CUC() : base("CUC") { }
@@ -2070,9 +1927,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUC".</value>
-        public static CUC UniqInstance
+        public static CUC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CUC Instance = new CUC();
         }
     }
 
@@ -2086,11 +1946,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CUP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CUP" /> class.
-        /// </summary>
-        private static readonly CUP s_Instance = new CUP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CUP" /> class.
         /// </summary>
         private CUP() : base("CUP") { }
@@ -2099,9 +1954,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUP".</value>
-        public static CUP UniqInstance
+        public static CUP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CUP Instance = new CUP();
         }
     }
 
@@ -2115,11 +1973,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CVE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CVE" /> class.
-        /// </summary>
-        private static readonly CVE s_Instance = new CVE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CVE" /> class.
         /// </summary>
         private CVE() : base("CVE") { }
@@ -2128,9 +1981,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CVE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CVE".</value>
-        public static CVE UniqInstance
+        public static CVE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CVE Instance = new CVE();
         }
     }
 
@@ -2144,11 +2000,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CYP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CYP" /> class.
-        /// </summary>
-        private static readonly CYP s_Instance = new CYP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CYP" /> class.
         /// </summary>
         private CYP() : base("CYP") { }
@@ -2157,9 +2008,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CYP".</value>
-        public static CYP UniqInstance
+        public static CYP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CYP Instance = new CYP();
         }
     }
 
@@ -2173,11 +2027,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class CZK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="CZK" /> class.
-        /// </summary>
-        private static readonly CZK s_Instance = new CZK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CZK" /> class.
         /// </summary>
         private CZK() : base("CZK") { }
@@ -2186,9 +2035,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CZK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CZK".</value>
-        public static CZK UniqInstance
+        public static CZK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly CZK Instance = new CZK();
         }
     }
 
@@ -2202,11 +2054,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class DDM : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="DDM" /> class.
-        /// </summary>
-        private static readonly DDM s_Instance = new DDM();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DDM" /> class.
         /// </summary>
         private DDM() : base("DDM") { }
@@ -2215,9 +2062,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DDM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DDM".</value>
-        public static DDM UniqInstance
+        public static DDM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly DDM Instance = new DDM();
         }
     }
 
@@ -2231,11 +2081,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class DEM : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="DEM" /> class.
-        /// </summary>
-        private static readonly DEM s_Instance = new DEM();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DEM" /> class.
         /// </summary>
         private DEM() : base("DEM") { }
@@ -2244,9 +2089,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DEM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DEM".</value>
-        public static DEM UniqInstance
+        public static DEM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly DEM Instance = new DEM();
         }
     }
 
@@ -2260,11 +2108,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class DJF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="DJF" /> class.
-        /// </summary>
-        private static readonly DJF s_Instance = new DJF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DJF" /> class.
         /// </summary>
         private DJF() : base("DJF") { }
@@ -2273,9 +2116,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DJF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DJF".</value>
-        public static DJF UniqInstance
+        public static DJF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly DJF Instance = new DJF();
         }
     }
 
@@ -2289,11 +2135,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class DKK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="DKK" /> class.
-        /// </summary>
-        private static readonly DKK s_Instance = new DKK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DKK" /> class.
         /// </summary>
         private DKK() : base("DKK") { }
@@ -2302,9 +2143,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DKK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DKK".</value>
-        public static DKK UniqInstance
+        public static DKK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly DKK Instance = new DKK();
         }
     }
 
@@ -2318,11 +2162,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class DOP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="DOP" /> class.
-        /// </summary>
-        private static readonly DOP s_Instance = new DOP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DOP" /> class.
         /// </summary>
         private DOP() : base("DOP") { }
@@ -2331,9 +2170,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DOP".</value>
-        public static DOP UniqInstance
+        public static DOP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly DOP Instance = new DOP();
         }
     }
 
@@ -2347,11 +2189,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class DZD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="DZD" /> class.
-        /// </summary>
-        private static readonly DZD s_Instance = new DZD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DZD" /> class.
         /// </summary>
         private DZD() : base("DZD") { }
@@ -2360,9 +2197,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DZD".</value>
-        public static DZD UniqInstance
+        public static DZD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly DZD Instance = new DZD();
         }
     }
 
@@ -2376,11 +2216,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ECS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ECS" /> class.
-        /// </summary>
-        private static readonly ECS s_Instance = new ECS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ECS" /> class.
         /// </summary>
         private ECS() : base("ECS") { }
@@ -2389,9 +2224,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECS".</value>
-        public static ECS UniqInstance
+        public static ECS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ECS Instance = new ECS();
         }
     }
 
@@ -2405,11 +2243,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ECV : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ECV" /> class.
-        /// </summary>
-        private static readonly ECV s_Instance = new ECV();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ECV" /> class.
         /// </summary>
         private ECV() : base("ECV") { }
@@ -2418,9 +2251,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECV".</value>
-        public static ECV UniqInstance
+        public static ECV UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ECV Instance = new ECV();
         }
     }
 
@@ -2434,11 +2270,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class EEK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="EEK" /> class.
-        /// </summary>
-        private static readonly EEK s_Instance = new EEK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="EEK" /> class.
         /// </summary>
         private EEK() : base("EEK") { }
@@ -2447,9 +2278,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EEK".</value>
-        public static EEK UniqInstance
+        public static EEK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly EEK Instance = new EEK();
         }
     }
 
@@ -2463,11 +2297,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class EGP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="EGP" /> class.
-        /// </summary>
-        private static readonly EGP s_Instance = new EGP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="EGP" /> class.
         /// </summary>
         private EGP() : base("EGP") { }
@@ -2476,9 +2305,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EGP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EGP".</value>
-        public static EGP UniqInstance
+        public static EGP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly EGP Instance = new EGP();
         }
     }
 
@@ -2492,11 +2324,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class EQE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="EQE" /> class.
-        /// </summary>
-        private static readonly EQE s_Instance = new EQE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="EQE" /> class.
         /// </summary>
         private EQE() : base("EQE") { }
@@ -2505,9 +2332,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EQE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EQE".</value>
-        public static EQE UniqInstance
+        public static EQE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly EQE Instance = new EQE();
         }
     }
 
@@ -2521,11 +2351,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ERN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ERN" /> class.
-        /// </summary>
-        private static readonly ERN s_Instance = new ERN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ERN" /> class.
         /// </summary>
         private ERN() : base("ERN") { }
@@ -2534,9 +2359,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ERN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ERN".</value>
-        public static ERN UniqInstance
+        public static ERN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ERN Instance = new ERN();
         }
     }
 
@@ -2550,11 +2378,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ESA : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ESA" /> class.
-        /// </summary>
-        private static readonly ESA s_Instance = new ESA();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ESA" /> class.
         /// </summary>
         private ESA() : base("ESA") { }
@@ -2563,9 +2386,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESA".</value>
-        public static ESA UniqInstance
+        public static ESA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ESA Instance = new ESA();
         }
     }
 
@@ -2579,11 +2405,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ESB : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ESB" /> class.
-        /// </summary>
-        private static readonly ESB s_Instance = new ESB();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ESB" /> class.
         /// </summary>
         private ESB() : base("ESB") { }
@@ -2592,9 +2413,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESB".</value>
-        public static ESB UniqInstance
+        public static ESB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ESB Instance = new ESB();
         }
     }
 
@@ -2608,11 +2432,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ESP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ESP" /> class.
-        /// </summary>
-        private static readonly ESP s_Instance = new ESP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ESP" /> class.
         /// </summary>
         private ESP() : base("ESP") { }
@@ -2621,9 +2440,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESP".</value>
-        public static ESP UniqInstance
+        public static ESP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ESP Instance = new ESP();
         }
     }
 
@@ -2637,11 +2459,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ETB : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ETB" /> class.
-        /// </summary>
-        private static readonly ETB s_Instance = new ETB();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ETB" /> class.
         /// </summary>
         private ETB() : base("ETB") { }
@@ -2650,9 +2467,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ETB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ETB".</value>
-        public static ETB UniqInstance
+        public static ETB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ETB Instance = new ETB();
         }
     }
 
@@ -2666,11 +2486,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class EUR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="EUR" /> class.
-        /// </summary>
-        private static readonly EUR s_Instance = new EUR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="EUR" /> class.
         /// </summary>
         private EUR() : base("EUR") { }
@@ -2679,9 +2494,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EUR".</value>
-        public static EUR UniqInstance
+        public static EUR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly EUR Instance = new EUR();
         }
     }
 
@@ -2695,11 +2513,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class FIM : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="FIM" /> class.
-        /// </summary>
-        private static readonly FIM s_Instance = new FIM();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="FIM" /> class.
         /// </summary>
         private FIM() : base("FIM") { }
@@ -2708,9 +2521,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FIM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FIM".</value>
-        public static FIM UniqInstance
+        public static FIM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly FIM Instance = new FIM();
         }
     }
 
@@ -2724,11 +2540,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class FJD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="FJD" /> class.
-        /// </summary>
-        private static readonly FJD s_Instance = new FJD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="FJD" /> class.
         /// </summary>
         private FJD() : base("FJD") { }
@@ -2737,9 +2548,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FJD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FJD".</value>
-        public static FJD UniqInstance
+        public static FJD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly FJD Instance = new FJD();
         }
     }
 
@@ -2753,11 +2567,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class FKP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="FKP" /> class.
-        /// </summary>
-        private static readonly FKP s_Instance = new FKP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="FKP" /> class.
         /// </summary>
         private FKP() : base("FKP") { }
@@ -2766,9 +2575,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FKP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FKP".</value>
-        public static FKP UniqInstance
+        public static FKP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly FKP Instance = new FKP();
         }
     }
 
@@ -2782,11 +2594,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class FRF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="FRF" /> class.
-        /// </summary>
-        private static readonly FRF s_Instance = new FRF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="FRF" /> class.
         /// </summary>
         private FRF() : base("FRF") { }
@@ -2795,9 +2602,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FRF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FRF".</value>
-        public static FRF UniqInstance
+        public static FRF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly FRF Instance = new FRF();
         }
     }
 
@@ -2811,11 +2621,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GBP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GBP" /> class.
-        /// </summary>
-        private static readonly GBP s_Instance = new GBP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GBP" /> class.
         /// </summary>
         private GBP() : base("GBP") { }
@@ -2824,9 +2629,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GBP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GBP".</value>
-        public static GBP UniqInstance
+        public static GBP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GBP Instance = new GBP();
         }
     }
 
@@ -2840,11 +2648,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GEK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GEK" /> class.
-        /// </summary>
-        private static readonly GEK s_Instance = new GEK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GEK" /> class.
         /// </summary>
         private GEK() : base("GEK") { }
@@ -2853,9 +2656,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEK".</value>
-        public static GEK UniqInstance
+        public static GEK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GEK Instance = new GEK();
         }
     }
 
@@ -2869,11 +2675,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GEL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GEL" /> class.
-        /// </summary>
-        private static readonly GEL s_Instance = new GEL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GEL" /> class.
         /// </summary>
         private GEL() : base("GEL") { }
@@ -2882,9 +2683,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEL".</value>
-        public static GEL UniqInstance
+        public static GEL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GEL Instance = new GEL();
         }
     }
 
@@ -2898,11 +2702,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GHC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GHC" /> class.
-        /// </summary>
-        private static readonly GHC s_Instance = new GHC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GHC" /> class.
         /// </summary>
         private GHC() : base("GHC") { }
@@ -2911,9 +2710,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHC".</value>
-        public static GHC UniqInstance
+        public static GHC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GHC Instance = new GHC();
         }
     }
 
@@ -2927,11 +2729,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GHP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GHP" /> class.
-        /// </summary>
-        private static readonly GHP s_Instance = new GHP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GHP" /> class.
         /// </summary>
         private GHP() : base("GHP") { }
@@ -2940,9 +2737,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHP".</value>
-        public static GHP UniqInstance
+        public static GHP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GHP Instance = new GHP();
         }
     }
 
@@ -2956,11 +2756,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GHS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GHS" /> class.
-        /// </summary>
-        private static readonly GHS s_Instance = new GHS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GHS" /> class.
         /// </summary>
         private GHS() : base("GHS") { }
@@ -2969,9 +2764,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHS".</value>
-        public static GHS UniqInstance
+        public static GHS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GHS Instance = new GHS();
         }
     }
 
@@ -2985,11 +2783,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GIP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GIP" /> class.
-        /// </summary>
-        private static readonly GIP s_Instance = new GIP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GIP" /> class.
         /// </summary>
         private GIP() : base("GIP") { }
@@ -2998,9 +2791,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GIP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GIP".</value>
-        public static GIP UniqInstance
+        public static GIP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GIP Instance = new GIP();
         }
     }
 
@@ -3014,11 +2810,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GMD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GMD" /> class.
-        /// </summary>
-        private static readonly GMD s_Instance = new GMD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GMD" /> class.
         /// </summary>
         private GMD() : base("GMD") { }
@@ -3027,9 +2818,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GMD".</value>
-        public static GMD UniqInstance
+        public static GMD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GMD Instance = new GMD();
         }
     }
 
@@ -3043,11 +2837,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GNE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GNE" /> class.
-        /// </summary>
-        private static readonly GNE s_Instance = new GNE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GNE" /> class.
         /// </summary>
         private GNE() : base("GNE") { }
@@ -3056,9 +2845,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNE".</value>
-        public static GNE UniqInstance
+        public static GNE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GNE Instance = new GNE();
         }
     }
 
@@ -3072,11 +2864,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GNF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GNF" /> class.
-        /// </summary>
-        private static readonly GNF s_Instance = new GNF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GNF" /> class.
         /// </summary>
         private GNF() : base("GNF") { }
@@ -3085,9 +2872,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNF".</value>
-        public static GNF UniqInstance
+        public static GNF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GNF Instance = new GNF();
         }
     }
 
@@ -3101,11 +2891,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GNS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GNS" /> class.
-        /// </summary>
-        private static readonly GNS s_Instance = new GNS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GNS" /> class.
         /// </summary>
         private GNS() : base("GNS") { }
@@ -3114,9 +2899,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNS".</value>
-        public static GNS UniqInstance
+        public static GNS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GNS Instance = new GNS();
         }
     }
 
@@ -3130,11 +2918,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GQE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GQE" /> class.
-        /// </summary>
-        private static readonly GQE s_Instance = new GQE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GQE" /> class.
         /// </summary>
         private GQE() : base("GQE") { }
@@ -3143,9 +2926,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GQE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GQE".</value>
-        public static GQE UniqInstance
+        public static GQE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GQE Instance = new GQE();
         }
     }
 
@@ -3159,11 +2945,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GRD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GRD" /> class.
-        /// </summary>
-        private static readonly GRD s_Instance = new GRD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GRD" /> class.
         /// </summary>
         private GRD() : base("GRD") { }
@@ -3172,9 +2953,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GRD".</value>
-        public static GRD UniqInstance
+        public static GRD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GRD Instance = new GRD();
         }
     }
 
@@ -3188,11 +2972,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GTQ : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GTQ" /> class.
-        /// </summary>
-        private static readonly GTQ s_Instance = new GTQ();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GTQ" /> class.
         /// </summary>
         private GTQ() : base("GTQ") { }
@@ -3201,9 +2980,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GTQ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GTQ".</value>
-        public static GTQ UniqInstance
+        public static GTQ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GTQ Instance = new GTQ();
         }
     }
 
@@ -3217,11 +2999,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GWE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GWE" /> class.
-        /// </summary>
-        private static readonly GWE s_Instance = new GWE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GWE" /> class.
         /// </summary>
         private GWE() : base("GWE") { }
@@ -3230,9 +3007,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWE".</value>
-        public static GWE UniqInstance
+        public static GWE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GWE Instance = new GWE();
         }
     }
 
@@ -3246,11 +3026,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GWP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GWP" /> class.
-        /// </summary>
-        private static readonly GWP s_Instance = new GWP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GWP" /> class.
         /// </summary>
         private GWP() : base("GWP") { }
@@ -3259,9 +3034,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWP".</value>
-        public static GWP UniqInstance
+        public static GWP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GWP Instance = new GWP();
         }
     }
 
@@ -3275,11 +3053,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class GYD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="GYD" /> class.
-        /// </summary>
-        private static readonly GYD s_Instance = new GYD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GYD" /> class.
         /// </summary>
         private GYD() : base("GYD") { }
@@ -3288,9 +3061,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GYD".</value>
-        public static GYD UniqInstance
+        public static GYD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly GYD Instance = new GYD();
         }
     }
 
@@ -3304,11 +3080,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HKD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="HKD" /> class.
-        /// </summary>
-        private static readonly HKD s_Instance = new HKD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="HKD" /> class.
         /// </summary>
         private HKD() : base("HKD") { }
@@ -3317,9 +3088,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HKD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HKD".</value>
-        public static HKD UniqInstance
+        public static HKD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly HKD Instance = new HKD();
         }
     }
 
@@ -3333,11 +3107,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HNL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="HNL" /> class.
-        /// </summary>
-        private static readonly HNL s_Instance = new HNL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="HNL" /> class.
         /// </summary>
         private HNL() : base("HNL") { }
@@ -3346,9 +3115,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HNL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HNL".</value>
-        public static HNL UniqInstance
+        public static HNL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly HNL Instance = new HNL();
         }
     }
 
@@ -3362,11 +3134,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HRD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="HRD" /> class.
-        /// </summary>
-        private static readonly HRD s_Instance = new HRD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="HRD" /> class.
         /// </summary>
         private HRD() : base("HRD") { }
@@ -3375,9 +3142,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRD".</value>
-        public static HRD UniqInstance
+        public static HRD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly HRD Instance = new HRD();
         }
     }
 
@@ -3391,11 +3161,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HRK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="HRK" /> class.
-        /// </summary>
-        private static readonly HRK s_Instance = new HRK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="HRK" /> class.
         /// </summary>
         private HRK() : base("HRK") { }
@@ -3404,9 +3169,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRK".</value>
-        public static HRK UniqInstance
+        public static HRK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly HRK Instance = new HRK();
         }
     }
 
@@ -3420,11 +3188,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HTG : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="HTG" /> class.
-        /// </summary>
-        private static readonly HTG s_Instance = new HTG();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="HTG" /> class.
         /// </summary>
         private HTG() : base("HTG") { }
@@ -3433,9 +3196,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HTG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HTG".</value>
-        public static HTG UniqInstance
+        public static HTG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly HTG Instance = new HTG();
         }
     }
 
@@ -3449,11 +3215,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class HUF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="HUF" /> class.
-        /// </summary>
-        private static readonly HUF s_Instance = new HUF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="HUF" /> class.
         /// </summary>
         private HUF() : base("HUF") { }
@@ -3462,9 +3223,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HUF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HUF".</value>
-        public static HUF UniqInstance
+        public static HUF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly HUF Instance = new HUF();
         }
     }
 
@@ -3478,11 +3242,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class IDR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="IDR" /> class.
-        /// </summary>
-        private static readonly IDR s_Instance = new IDR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="IDR" /> class.
         /// </summary>
         private IDR() : base("IDR") { }
@@ -3491,9 +3250,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IDR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IDR".</value>
-        public static IDR UniqInstance
+        public static IDR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly IDR Instance = new IDR();
         }
     }
 
@@ -3507,11 +3269,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class IEP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="IEP" /> class.
-        /// </summary>
-        private static readonly IEP s_Instance = new IEP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="IEP" /> class.
         /// </summary>
         private IEP() : base("IEP") { }
@@ -3520,9 +3277,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IEP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IEP".</value>
-        public static IEP UniqInstance
+        public static IEP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly IEP Instance = new IEP();
         }
     }
 
@@ -3536,11 +3296,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ILP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ILP" /> class.
-        /// </summary>
-        private static readonly ILP s_Instance = new ILP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ILP" /> class.
         /// </summary>
         private ILP() : base("ILP") { }
@@ -3549,9 +3304,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILP".</value>
-        public static ILP UniqInstance
+        public static ILP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ILP Instance = new ILP();
         }
     }
 
@@ -3565,11 +3323,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ILR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ILR" /> class.
-        /// </summary>
-        private static readonly ILR s_Instance = new ILR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ILR" /> class.
         /// </summary>
         private ILR() : base("ILR") { }
@@ -3578,9 +3331,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILR".</value>
-        public static ILR UniqInstance
+        public static ILR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ILR Instance = new ILR();
         }
     }
 
@@ -3594,11 +3350,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ILS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ILS" /> class.
-        /// </summary>
-        private static readonly ILS s_Instance = new ILS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ILS" /> class.
         /// </summary>
         private ILS() : base("ILS") { }
@@ -3607,9 +3358,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILS".</value>
-        public static ILS UniqInstance
+        public static ILS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ILS Instance = new ILS();
         }
     }
 
@@ -3623,11 +3377,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class INR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="INR" /> class.
-        /// </summary>
-        private static readonly INR s_Instance = new INR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="INR" /> class.
         /// </summary>
         private INR() : base("INR") { }
@@ -3636,9 +3385,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "INR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "INR".</value>
-        public static INR UniqInstance
+        public static INR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly INR Instance = new INR();
         }
     }
 
@@ -3652,11 +3404,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class IQD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="IQD" /> class.
-        /// </summary>
-        private static readonly IQD s_Instance = new IQD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="IQD" /> class.
         /// </summary>
         private IQD() : base("IQD") { }
@@ -3665,9 +3412,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IQD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IQD".</value>
-        public static IQD UniqInstance
+        public static IQD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly IQD Instance = new IQD();
         }
     }
 
@@ -3681,11 +3431,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class IRR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="IRR" /> class.
-        /// </summary>
-        private static readonly IRR s_Instance = new IRR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="IRR" /> class.
         /// </summary>
         private IRR() : base("IRR") { }
@@ -3694,9 +3439,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IRR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IRR".</value>
-        public static IRR UniqInstance
+        public static IRR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly IRR Instance = new IRR();
         }
     }
 
@@ -3710,11 +3458,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ISJ : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ISJ" /> class.
-        /// </summary>
-        private static readonly ISJ s_Instance = new ISJ();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ISJ" /> class.
         /// </summary>
         private ISJ() : base("ISJ") { }
@@ -3723,9 +3466,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISJ".</value>
-        public static ISJ UniqInstance
+        public static ISJ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ISJ Instance = new ISJ();
         }
     }
 
@@ -3739,11 +3485,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ISK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ISK" /> class.
-        /// </summary>
-        private static readonly ISK s_Instance = new ISK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ISK" /> class.
         /// </summary>
         private ISK() : base("ISK") { }
@@ -3752,9 +3493,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISK".</value>
-        public static ISK UniqInstance
+        public static ISK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ISK Instance = new ISK();
         }
     }
 
@@ -3768,11 +3512,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ITL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ITL" /> class.
-        /// </summary>
-        private static readonly ITL s_Instance = new ITL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ITL" /> class.
         /// </summary>
         private ITL() : base("ITL") { }
@@ -3781,9 +3520,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ITL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ITL".</value>
-        public static ITL UniqInstance
+        public static ITL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ITL Instance = new ITL();
         }
     }
 
@@ -3797,11 +3539,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class JMD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="JMD" /> class.
-        /// </summary>
-        private static readonly JMD s_Instance = new JMD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="JMD" /> class.
         /// </summary>
         private JMD() : base("JMD") { }
@@ -3810,9 +3547,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JMD".</value>
-        public static JMD UniqInstance
+        public static JMD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly JMD Instance = new JMD();
         }
     }
 
@@ -3826,11 +3566,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class JOD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="JOD" /> class.
-        /// </summary>
-        private static readonly JOD s_Instance = new JOD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="JOD" /> class.
         /// </summary>
         private JOD() : base("JOD") { }
@@ -3839,9 +3574,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JOD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JOD".</value>
-        public static JOD UniqInstance
+        public static JOD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly JOD Instance = new JOD();
         }
     }
 
@@ -3855,11 +3593,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class JPY : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="JPY" /> class.
-        /// </summary>
-        private static readonly JPY s_Instance = new JPY();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="JPY" /> class.
         /// </summary>
         private JPY() : base("JPY") { }
@@ -3868,9 +3601,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JPY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JPY".</value>
-        public static JPY UniqInstance
+        public static JPY UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly JPY Instance = new JPY();
         }
     }
 
@@ -3884,11 +3620,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KES : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="KES" /> class.
-        /// </summary>
-        private static readonly KES s_Instance = new KES();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="KES" /> class.
         /// </summary>
         private KES() : base("KES") { }
@@ -3897,9 +3628,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KES".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KES".</value>
-        public static KES UniqInstance
+        public static KES UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly KES Instance = new KES();
         }
     }
 
@@ -3913,11 +3647,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KGS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="KGS" /> class.
-        /// </summary>
-        private static readonly KGS s_Instance = new KGS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="KGS" /> class.
         /// </summary>
         private KGS() : base("KGS") { }
@@ -3926,9 +3655,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KGS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KGS".</value>
-        public static KGS UniqInstance
+        public static KGS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly KGS Instance = new KGS();
         }
     }
 
@@ -3942,11 +3674,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KHR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="KHR" /> class.
-        /// </summary>
-        private static readonly KHR s_Instance = new KHR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="KHR" /> class.
         /// </summary>
         private KHR() : base("KHR") { }
@@ -3955,9 +3682,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KHR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KHR".</value>
-        public static KHR UniqInstance
+        public static KHR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly KHR Instance = new KHR();
         }
     }
 
@@ -3971,11 +3701,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KMF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="KMF" /> class.
-        /// </summary>
-        private static readonly KMF s_Instance = new KMF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="KMF" /> class.
         /// </summary>
         private KMF() : base("KMF") { }
@@ -3984,9 +3709,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KMF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KMF".</value>
-        public static KMF UniqInstance
+        public static KMF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly KMF Instance = new KMF();
         }
     }
 
@@ -4000,11 +3728,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KPW : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="KPW" /> class.
-        /// </summary>
-        private static readonly KPW s_Instance = new KPW();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="KPW" /> class.
         /// </summary>
         private KPW() : base("KPW") { }
@@ -4013,9 +3736,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KPW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KPW".</value>
-        public static KPW UniqInstance
+        public static KPW UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly KPW Instance = new KPW();
         }
     }
 
@@ -4029,11 +3755,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KRW : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="KRW" /> class.
-        /// </summary>
-        private static readonly KRW s_Instance = new KRW();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="KRW" /> class.
         /// </summary>
         private KRW() : base("KRW") { }
@@ -4042,9 +3763,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KRW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KRW".</value>
-        public static KRW UniqInstance
+        public static KRW UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly KRW Instance = new KRW();
         }
     }
 
@@ -4058,11 +3782,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KWD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="KWD" /> class.
-        /// </summary>
-        private static readonly KWD s_Instance = new KWD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="KWD" /> class.
         /// </summary>
         private KWD() : base("KWD") { }
@@ -4071,9 +3790,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KWD".</value>
-        public static KWD UniqInstance
+        public static KWD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly KWD Instance = new KWD();
         }
     }
 
@@ -4087,11 +3809,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KYD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="KYD" /> class.
-        /// </summary>
-        private static readonly KYD s_Instance = new KYD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="KYD" /> class.
         /// </summary>
         private KYD() : base("KYD") { }
@@ -4100,9 +3817,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KYD".</value>
-        public static KYD UniqInstance
+        public static KYD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly KYD Instance = new KYD();
         }
     }
 
@@ -4116,11 +3836,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class KZT : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="KZT" /> class.
-        /// </summary>
-        private static readonly KZT s_Instance = new KZT();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="KZT" /> class.
         /// </summary>
         private KZT() : base("KZT") { }
@@ -4129,9 +3844,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KZT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KZT".</value>
-        public static KZT UniqInstance
+        public static KZT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly KZT Instance = new KZT();
         }
     }
 
@@ -4145,11 +3863,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LAJ : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LAJ" /> class.
-        /// </summary>
-        private static readonly LAJ s_Instance = new LAJ();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LAJ" /> class.
         /// </summary>
         private LAJ() : base("LAJ") { }
@@ -4158,9 +3871,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAJ".</value>
-        public static LAJ UniqInstance
+        public static LAJ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LAJ Instance = new LAJ();
         }
     }
 
@@ -4174,11 +3890,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LAK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LAK" /> class.
-        /// </summary>
-        private static readonly LAK s_Instance = new LAK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LAK" /> class.
         /// </summary>
         private LAK() : base("LAK") { }
@@ -4187,9 +3898,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAK".</value>
-        public static LAK UniqInstance
+        public static LAK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LAK Instance = new LAK();
         }
     }
 
@@ -4203,11 +3917,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LBP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LBP" /> class.
-        /// </summary>
-        private static readonly LBP s_Instance = new LBP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LBP" /> class.
         /// </summary>
         private LBP() : base("LBP") { }
@@ -4216,9 +3925,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LBP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LBP".</value>
-        public static LBP UniqInstance
+        public static LBP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LBP Instance = new LBP();
         }
     }
 
@@ -4232,11 +3944,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LKR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LKR" /> class.
-        /// </summary>
-        private static readonly LKR s_Instance = new LKR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LKR" /> class.
         /// </summary>
         private LKR() : base("LKR") { }
@@ -4245,9 +3952,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LKR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LKR".</value>
-        public static LKR UniqInstance
+        public static LKR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LKR Instance = new LKR();
         }
     }
 
@@ -4261,11 +3971,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LRD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LRD" /> class.
-        /// </summary>
-        private static readonly LRD s_Instance = new LRD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LRD" /> class.
         /// </summary>
         private LRD() : base("LRD") { }
@@ -4274,9 +3979,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LRD".</value>
-        public static LRD UniqInstance
+        public static LRD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LRD Instance = new LRD();
         }
     }
 
@@ -4290,11 +3998,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LSL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LSL" /> class.
-        /// </summary>
-        private static readonly LSL s_Instance = new LSL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LSL" /> class.
         /// </summary>
         private LSL() : base("LSL") { }
@@ -4303,9 +4006,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSL".</value>
-        public static LSL UniqInstance
+        public static LSL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LSL Instance = new LSL();
         }
     }
 
@@ -4319,11 +4025,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LSM : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LSM" /> class.
-        /// </summary>
-        private static readonly LSM s_Instance = new LSM();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LSM" /> class.
         /// </summary>
         private LSM() : base("LSM") { }
@@ -4332,9 +4033,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSM".</value>
-        public static LSM UniqInstance
+        public static LSM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LSM Instance = new LSM();
         }
     }
 
@@ -4348,11 +4052,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LTL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LTL" /> class.
-        /// </summary>
-        private static readonly LTL s_Instance = new LTL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LTL" /> class.
         /// </summary>
         private LTL() : base("LTL") { }
@@ -4361,9 +4060,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTL".</value>
-        public static LTL UniqInstance
+        public static LTL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LTL Instance = new LTL();
         }
     }
 
@@ -4377,11 +4079,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LTT : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LTT" /> class.
-        /// </summary>
-        private static readonly LTT s_Instance = new LTT();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LTT" /> class.
         /// </summary>
         private LTT() : base("LTT") { }
@@ -4390,9 +4087,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTT".</value>
-        public static LTT UniqInstance
+        public static LTT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LTT Instance = new LTT();
         }
     }
 
@@ -4406,11 +4106,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LUC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LUC" /> class.
-        /// </summary>
-        private static readonly LUC s_Instance = new LUC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LUC" /> class.
         /// </summary>
         private LUC() : base("LUC") { }
@@ -4419,9 +4114,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUC".</value>
-        public static LUC UniqInstance
+        public static LUC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LUC Instance = new LUC();
         }
     }
 
@@ -4435,11 +4133,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LUF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LUF" /> class.
-        /// </summary>
-        private static readonly LUF s_Instance = new LUF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LUF" /> class.
         /// </summary>
         private LUF() : base("LUF") { }
@@ -4448,9 +4141,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUF".</value>
-        public static LUF UniqInstance
+        public static LUF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LUF Instance = new LUF();
         }
     }
 
@@ -4464,11 +4160,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LUL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LUL" /> class.
-        /// </summary>
-        private static readonly LUL s_Instance = new LUL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LUL" /> class.
         /// </summary>
         private LUL() : base("LUL") { }
@@ -4477,9 +4168,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUL".</value>
-        public static LUL UniqInstance
+        public static LUL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LUL Instance = new LUL();
         }
     }
 
@@ -4493,11 +4187,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LVL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LVL" /> class.
-        /// </summary>
-        private static readonly LVL s_Instance = new LVL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LVL" /> class.
         /// </summary>
         private LVL() : base("LVL") { }
@@ -4506,9 +4195,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVL".</value>
-        public static LVL UniqInstance
+        public static LVL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LVL Instance = new LVL();
         }
     }
 
@@ -4522,11 +4214,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LVR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LVR" /> class.
-        /// </summary>
-        private static readonly LVR s_Instance = new LVR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LVR" /> class.
         /// </summary>
         private LVR() : base("LVR") { }
@@ -4535,9 +4222,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVR".</value>
-        public static LVR UniqInstance
+        public static LVR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LVR Instance = new LVR();
         }
     }
 
@@ -4551,11 +4241,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class LYD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="LYD" /> class.
-        /// </summary>
-        private static readonly LYD s_Instance = new LYD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LYD" /> class.
         /// </summary>
         private LYD() : base("LYD") { }
@@ -4564,9 +4249,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LYD".</value>
-        public static LYD UniqInstance
+        public static LYD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly LYD Instance = new LYD();
         }
     }
 
@@ -4580,11 +4268,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MAD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MAD" /> class.
-        /// </summary>
-        private static readonly MAD s_Instance = new MAD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MAD" /> class.
         /// </summary>
         private MAD() : base("MAD") { }
@@ -4593,9 +4276,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAD".</value>
-        public static MAD UniqInstance
+        public static MAD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MAD Instance = new MAD();
         }
     }
 
@@ -4609,11 +4295,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MAF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MAF" /> class.
-        /// </summary>
-        private static readonly MAF s_Instance = new MAF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MAF" /> class.
         /// </summary>
         private MAF() : base("MAF") { }
@@ -4622,9 +4303,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAF".</value>
-        public static MAF UniqInstance
+        public static MAF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MAF Instance = new MAF();
         }
     }
 
@@ -4638,11 +4322,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MDL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MDL" /> class.
-        /// </summary>
-        private static readonly MDL s_Instance = new MDL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MDL" /> class.
         /// </summary>
         private MDL() : base("MDL") { }
@@ -4651,9 +4330,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MDL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MDL".</value>
-        public static MDL UniqInstance
+        public static MDL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MDL Instance = new MDL();
         }
     }
 
@@ -4667,11 +4349,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MGA : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MGA" /> class.
-        /// </summary>
-        private static readonly MGA s_Instance = new MGA();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MGA" /> class.
         /// </summary>
         private MGA() : base("MGA") { }
@@ -4680,9 +4357,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGA".</value>
-        public static MGA UniqInstance
+        public static MGA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MGA Instance = new MGA();
         }
     }
 
@@ -4696,11 +4376,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MGF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MGF" /> class.
-        /// </summary>
-        private static readonly MGF s_Instance = new MGF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MGF" /> class.
         /// </summary>
         private MGF() : base("MGF") { }
@@ -4709,9 +4384,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGF".</value>
-        public static MGF UniqInstance
+        public static MGF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MGF Instance = new MGF();
         }
     }
 
@@ -4725,11 +4403,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MKD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MKD" /> class.
-        /// </summary>
-        private static readonly MKD s_Instance = new MKD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MKD" /> class.
         /// </summary>
         private MKD() : base("MKD") { }
@@ -4738,9 +4411,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MKD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MKD".</value>
-        public static MKD UniqInstance
+        public static MKD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MKD Instance = new MKD();
         }
     }
 
@@ -4754,11 +4430,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MLF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MLF" /> class.
-        /// </summary>
-        private static readonly MLF s_Instance = new MLF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MLF" /> class.
         /// </summary>
         private MLF() : base("MLF") { }
@@ -4767,9 +4438,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MLF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MLF".</value>
-        public static MLF UniqInstance
+        public static MLF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MLF Instance = new MLF();
         }
     }
 
@@ -4783,11 +4457,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MMK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MMK" /> class.
-        /// </summary>
-        private static readonly MMK s_Instance = new MMK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MMK" /> class.
         /// </summary>
         private MMK() : base("MMK") { }
@@ -4796,9 +4465,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MMK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MMK".</value>
-        public static MMK UniqInstance
+        public static MMK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MMK Instance = new MMK();
         }
     }
 
@@ -4812,11 +4484,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MNT : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MNT" /> class.
-        /// </summary>
-        private static readonly MNT s_Instance = new MNT();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MNT" /> class.
         /// </summary>
         private MNT() : base("MNT") { }
@@ -4825,9 +4492,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MNT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MNT".</value>
-        public static MNT UniqInstance
+        public static MNT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MNT Instance = new MNT();
         }
     }
 
@@ -4841,11 +4511,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MOP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MOP" /> class.
-        /// </summary>
-        private static readonly MOP s_Instance = new MOP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MOP" /> class.
         /// </summary>
         private MOP() : base("MOP") { }
@@ -4854,9 +4519,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MOP".</value>
-        public static MOP UniqInstance
+        public static MOP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MOP Instance = new MOP();
         }
     }
 
@@ -4870,11 +4538,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MRO : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MRO" /> class.
-        /// </summary>
-        private static readonly MRO s_Instance = new MRO();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MRO" /> class.
         /// </summary>
         private MRO() : base("MRO") { }
@@ -4883,9 +4546,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MRO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MRO".</value>
-        public static MRO UniqInstance
+        public static MRO UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MRO Instance = new MRO();
         }
     }
 
@@ -4899,11 +4565,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MTL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MTL" /> class.
-        /// </summary>
-        private static readonly MTL s_Instance = new MTL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MTL" /> class.
         /// </summary>
         private MTL() : base("MTL") { }
@@ -4912,9 +4573,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTL".</value>
-        public static MTL UniqInstance
+        public static MTL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MTL Instance = new MTL();
         }
     }
 
@@ -4928,11 +4592,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MTP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MTP" /> class.
-        /// </summary>
-        private static readonly MTP s_Instance = new MTP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MTP" /> class.
         /// </summary>
         private MTP() : base("MTP") { }
@@ -4941,9 +4600,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTP".</value>
-        public static MTP UniqInstance
+        public static MTP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MTP Instance = new MTP();
         }
     }
 
@@ -4957,11 +4619,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MUR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MUR" /> class.
-        /// </summary>
-        private static readonly MUR s_Instance = new MUR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MUR" /> class.
         /// </summary>
         private MUR() : base("MUR") { }
@@ -4970,9 +4627,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MUR".</value>
-        public static MUR UniqInstance
+        public static MUR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MUR Instance = new MUR();
         }
     }
 
@@ -4986,11 +4646,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MVQ : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MVQ" /> class.
-        /// </summary>
-        private static readonly MVQ s_Instance = new MVQ();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MVQ" /> class.
         /// </summary>
         private MVQ() : base("MVQ") { }
@@ -4999,9 +4654,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVQ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVQ".</value>
-        public static MVQ UniqInstance
+        public static MVQ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MVQ Instance = new MVQ();
         }
     }
 
@@ -5015,11 +4673,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MVR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MVR" /> class.
-        /// </summary>
-        private static readonly MVR s_Instance = new MVR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MVR" /> class.
         /// </summary>
         private MVR() : base("MVR") { }
@@ -5028,9 +4681,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVR".</value>
-        public static MVR UniqInstance
+        public static MVR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MVR Instance = new MVR();
         }
     }
 
@@ -5044,11 +4700,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MWK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MWK" /> class.
-        /// </summary>
-        private static readonly MWK s_Instance = new MWK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MWK" /> class.
         /// </summary>
         private MWK() : base("MWK") { }
@@ -5057,9 +4708,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MWK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MWK".</value>
-        public static MWK UniqInstance
+        public static MWK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MWK Instance = new MWK();
         }
     }
 
@@ -5073,11 +4727,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MXN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MXN" /> class.
-        /// </summary>
-        private static readonly MXN s_Instance = new MXN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MXN" /> class.
         /// </summary>
         private MXN() : base("MXN") { }
@@ -5086,9 +4735,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXN".</value>
-        public static MXN UniqInstance
+        public static MXN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MXN Instance = new MXN();
         }
     }
 
@@ -5102,11 +4754,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MXP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MXP" /> class.
-        /// </summary>
-        private static readonly MXP s_Instance = new MXP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MXP" /> class.
         /// </summary>
         private MXP() : base("MXP") { }
@@ -5115,9 +4762,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXP".</value>
-        public static MXP UniqInstance
+        public static MXP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MXP Instance = new MXP();
         }
     }
 
@@ -5131,11 +4781,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MXV : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MXV" /> class.
-        /// </summary>
-        private static readonly MXV s_Instance = new MXV();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MXV" /> class.
         /// </summary>
         private MXV() : base("MXV") { }
@@ -5144,9 +4789,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXV".</value>
-        public static MXV UniqInstance
+        public static MXV UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MXV Instance = new MXV();
         }
     }
 
@@ -5160,11 +4808,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MYR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MYR" /> class.
-        /// </summary>
-        private static readonly MYR s_Instance = new MYR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MYR" /> class.
         /// </summary>
         private MYR() : base("MYR") { }
@@ -5173,9 +4816,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MYR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MYR".</value>
-        public static MYR UniqInstance
+        public static MYR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MYR Instance = new MYR();
         }
     }
 
@@ -5189,11 +4835,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MZE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MZE" /> class.
-        /// </summary>
-        private static readonly MZE s_Instance = new MZE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MZE" /> class.
         /// </summary>
         private MZE() : base("MZE") { }
@@ -5202,9 +4843,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZE".</value>
-        public static MZE UniqInstance
+        public static MZE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MZE Instance = new MZE();
         }
     }
 
@@ -5218,11 +4862,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MZM : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MZM" /> class.
-        /// </summary>
-        private static readonly MZM s_Instance = new MZM();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MZM" /> class.
         /// </summary>
         private MZM() : base("MZM") { }
@@ -5231,9 +4870,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZM".</value>
-        public static MZM UniqInstance
+        public static MZM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MZM Instance = new MZM();
         }
     }
 
@@ -5247,11 +4889,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class MZN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="MZN" /> class.
-        /// </summary>
-        private static readonly MZN s_Instance = new MZN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MZN" /> class.
         /// </summary>
         private MZN() : base("MZN") { }
@@ -5260,9 +4897,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZN".</value>
-        public static MZN UniqInstance
+        public static MZN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly MZN Instance = new MZN();
         }
     }
 
@@ -5276,11 +4916,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NAD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="NAD" /> class.
-        /// </summary>
-        private static readonly NAD s_Instance = new NAD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="NAD" /> class.
         /// </summary>
         private NAD() : base("NAD") { }
@@ -5289,9 +4924,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NAD".</value>
-        public static NAD UniqInstance
+        public static NAD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly NAD Instance = new NAD();
         }
     }
 
@@ -5305,11 +4943,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NGN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="NGN" /> class.
-        /// </summary>
-        private static readonly NGN s_Instance = new NGN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="NGN" /> class.
         /// </summary>
         private NGN() : base("NGN") { }
@@ -5318,9 +4951,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NGN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NGN".</value>
-        public static NGN UniqInstance
+        public static NGN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly NGN Instance = new NGN();
         }
     }
 
@@ -5334,11 +4970,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NIC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="NIC" /> class.
-        /// </summary>
-        private static readonly NIC s_Instance = new NIC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="NIC" /> class.
         /// </summary>
         private NIC() : base("NIC") { }
@@ -5347,9 +4978,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIC".</value>
-        public static NIC UniqInstance
+        public static NIC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly NIC Instance = new NIC();
         }
     }
 
@@ -5363,11 +4997,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NIO : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="NIO" /> class.
-        /// </summary>
-        private static readonly NIO s_Instance = new NIO();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="NIO" /> class.
         /// </summary>
         private NIO() : base("NIO") { }
@@ -5376,9 +5005,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIO".</value>
-        public static NIO UniqInstance
+        public static NIO UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly NIO Instance = new NIO();
         }
     }
 
@@ -5392,11 +5024,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NLG : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="NLG" /> class.
-        /// </summary>
-        private static readonly NLG s_Instance = new NLG();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="NLG" /> class.
         /// </summary>
         private NLG() : base("NLG") { }
@@ -5405,9 +5032,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NLG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NLG".</value>
-        public static NLG UniqInstance
+        public static NLG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly NLG Instance = new NLG();
         }
     }
 
@@ -5421,11 +5051,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NOK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="NOK" /> class.
-        /// </summary>
-        private static readonly NOK s_Instance = new NOK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="NOK" /> class.
         /// </summary>
         private NOK() : base("NOK") { }
@@ -5434,9 +5059,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NOK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NOK".</value>
-        public static NOK UniqInstance
+        public static NOK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly NOK Instance = new NOK();
         }
     }
 
@@ -5450,11 +5078,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NPR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="NPR" /> class.
-        /// </summary>
-        private static readonly NPR s_Instance = new NPR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="NPR" /> class.
         /// </summary>
         private NPR() : base("NPR") { }
@@ -5463,9 +5086,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NPR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NPR".</value>
-        public static NPR UniqInstance
+        public static NPR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly NPR Instance = new NPR();
         }
     }
 
@@ -5479,11 +5105,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class NZD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="NZD" /> class.
-        /// </summary>
-        private static readonly NZD s_Instance = new NZD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="NZD" /> class.
         /// </summary>
         private NZD() : base("NZD") { }
@@ -5492,9 +5113,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NZD".</value>
-        public static NZD UniqInstance
+        public static NZD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly NZD Instance = new NZD();
         }
     }
 
@@ -5508,11 +5132,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class OMR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="OMR" /> class.
-        /// </summary>
-        private static readonly OMR s_Instance = new OMR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="OMR" /> class.
         /// </summary>
         private OMR() : base("OMR") { }
@@ -5521,9 +5140,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "OMR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "OMR".</value>
-        public static OMR UniqInstance
+        public static OMR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly OMR Instance = new OMR();
         }
     }
 
@@ -5537,11 +5159,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PAB : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PAB" /> class.
-        /// </summary>
-        private static readonly PAB s_Instance = new PAB();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PAB" /> class.
         /// </summary>
         private PAB() : base("PAB") { }
@@ -5550,9 +5167,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PAB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PAB".</value>
-        public static PAB UniqInstance
+        public static PAB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PAB Instance = new PAB();
         }
     }
 
@@ -5566,11 +5186,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PEH : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PEH" /> class.
-        /// </summary>
-        private static readonly PEH s_Instance = new PEH();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PEH" /> class.
         /// </summary>
         private PEH() : base("PEH") { }
@@ -5579,9 +5194,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEH".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEH".</value>
-        public static PEH UniqInstance
+        public static PEH UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PEH Instance = new PEH();
         }
     }
 
@@ -5595,11 +5213,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PEI : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PEI" /> class.
-        /// </summary>
-        private static readonly PEI s_Instance = new PEI();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PEI" /> class.
         /// </summary>
         private PEI() : base("PEI") { }
@@ -5608,9 +5221,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEI".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEI".</value>
-        public static PEI UniqInstance
+        public static PEI UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PEI Instance = new PEI();
         }
     }
 
@@ -5624,11 +5240,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PEN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PEN" /> class.
-        /// </summary>
-        private static readonly PEN s_Instance = new PEN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PEN" /> class.
         /// </summary>
         private PEN() : base("PEN") { }
@@ -5637,9 +5248,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEN".</value>
-        public static PEN UniqInstance
+        public static PEN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PEN Instance = new PEN();
         }
     }
 
@@ -5653,11 +5267,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PES : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PES" /> class.
-        /// </summary>
-        private static readonly PES s_Instance = new PES();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PES" /> class.
         /// </summary>
         private PES() : base("PES") { }
@@ -5666,9 +5275,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PES".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PES".</value>
-        public static PES UniqInstance
+        public static PES UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PES Instance = new PES();
         }
     }
 
@@ -5682,11 +5294,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PGK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PGK" /> class.
-        /// </summary>
-        private static readonly PGK s_Instance = new PGK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PGK" /> class.
         /// </summary>
         private PGK() : base("PGK") { }
@@ -5695,9 +5302,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PGK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PGK".</value>
-        public static PGK UniqInstance
+        public static PGK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PGK Instance = new PGK();
         }
     }
 
@@ -5711,11 +5321,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PHP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PHP" /> class.
-        /// </summary>
-        private static readonly PHP s_Instance = new PHP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PHP" /> class.
         /// </summary>
         private PHP() : base("PHP") { }
@@ -5724,9 +5329,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PHP".</value>
-        public static PHP UniqInstance
+        public static PHP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PHP Instance = new PHP();
         }
     }
 
@@ -5740,11 +5348,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PKR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PKR" /> class.
-        /// </summary>
-        private static readonly PKR s_Instance = new PKR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PKR" /> class.
         /// </summary>
         private PKR() : base("PKR") { }
@@ -5753,9 +5356,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PKR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PKR".</value>
-        public static PKR UniqInstance
+        public static PKR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PKR Instance = new PKR();
         }
     }
 
@@ -5769,11 +5375,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PLN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PLN" /> class.
-        /// </summary>
-        private static readonly PLN s_Instance = new PLN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PLN" /> class.
         /// </summary>
         private PLN() : base("PLN") { }
@@ -5782,9 +5383,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLN".</value>
-        public static PLN UniqInstance
+        public static PLN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PLN Instance = new PLN();
         }
     }
 
@@ -5798,11 +5402,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PLZ : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PLZ" /> class.
-        /// </summary>
-        private static readonly PLZ s_Instance = new PLZ();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PLZ" /> class.
         /// </summary>
         private PLZ() : base("PLZ") { }
@@ -5811,9 +5410,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLZ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLZ".</value>
-        public static PLZ UniqInstance
+        public static PLZ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PLZ Instance = new PLZ();
         }
     }
 
@@ -5827,11 +5429,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PTE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PTE" /> class.
-        /// </summary>
-        private static readonly PTE s_Instance = new PTE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PTE" /> class.
         /// </summary>
         private PTE() : base("PTE") { }
@@ -5840,9 +5437,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PTE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PTE".</value>
-        public static PTE UniqInstance
+        public static PTE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PTE Instance = new PTE();
         }
     }
 
@@ -5856,11 +5456,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class PYG : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="PYG" /> class.
-        /// </summary>
-        private static readonly PYG s_Instance = new PYG();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PYG" /> class.
         /// </summary>
         private PYG() : base("PYG") { }
@@ -5869,9 +5464,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PYG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PYG".</value>
-        public static PYG UniqInstance
+        public static PYG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly PYG Instance = new PYG();
         }
     }
 
@@ -5885,11 +5483,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class QAR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="QAR" /> class.
-        /// </summary>
-        private static readonly QAR s_Instance = new QAR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="QAR" /> class.
         /// </summary>
         private QAR() : base("QAR") { }
@@ -5898,9 +5491,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "QAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "QAR".</value>
-        public static QAR UniqInstance
+        public static QAR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly QAR Instance = new QAR();
         }
     }
 
@@ -5914,11 +5510,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class RHD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="RHD" /> class.
-        /// </summary>
-        private static readonly RHD s_Instance = new RHD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="RHD" /> class.
         /// </summary>
         private RHD() : base("RHD") { }
@@ -5927,9 +5518,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RHD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RHD".</value>
-        public static RHD UniqInstance
+        public static RHD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly RHD Instance = new RHD();
         }
     }
 
@@ -5943,11 +5537,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ROK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ROK" /> class.
-        /// </summary>
-        private static readonly ROK s_Instance = new ROK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ROK" /> class.
         /// </summary>
         private ROK() : base("ROK") { }
@@ -5956,9 +5545,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROK".</value>
-        public static ROK UniqInstance
+        public static ROK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ROK Instance = new ROK();
         }
     }
 
@@ -5972,11 +5564,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ROL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ROL" /> class.
-        /// </summary>
-        private static readonly ROL s_Instance = new ROL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ROL" /> class.
         /// </summary>
         private ROL() : base("ROL") { }
@@ -5985,9 +5572,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROL".</value>
-        public static ROL UniqInstance
+        public static ROL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ROL Instance = new ROL();
         }
     }
 
@@ -6001,11 +5591,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class RON : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="RON" /> class.
-        /// </summary>
-        private static readonly RON s_Instance = new RON();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="RON" /> class.
         /// </summary>
         private RON() : base("RON") { }
@@ -6014,9 +5599,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RON".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RON".</value>
-        public static RON UniqInstance
+        public static RON UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly RON Instance = new RON();
         }
     }
 
@@ -6030,11 +5618,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class RSD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="RSD" /> class.
-        /// </summary>
-        private static readonly RSD s_Instance = new RSD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="RSD" /> class.
         /// </summary>
         private RSD() : base("RSD") { }
@@ -6043,9 +5626,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RSD".</value>
-        public static RSD UniqInstance
+        public static RSD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly RSD Instance = new RSD();
         }
     }
 
@@ -6059,11 +5645,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class RUB : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="RUB" /> class.
-        /// </summary>
-        private static readonly RUB s_Instance = new RUB();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="RUB" /> class.
         /// </summary>
         private RUB() : base("RUB") { }
@@ -6072,9 +5653,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUB".</value>
-        public static RUB UniqInstance
+        public static RUB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly RUB Instance = new RUB();
         }
     }
 
@@ -6088,11 +5672,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class RUR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="RUR" /> class.
-        /// </summary>
-        private static readonly RUR s_Instance = new RUR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="RUR" /> class.
         /// </summary>
         private RUR() : base("RUR") { }
@@ -6101,9 +5680,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUR".</value>
-        public static RUR UniqInstance
+        public static RUR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly RUR Instance = new RUR();
         }
     }
 
@@ -6117,11 +5699,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class RWF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="RWF" /> class.
-        /// </summary>
-        private static readonly RWF s_Instance = new RWF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="RWF" /> class.
         /// </summary>
         private RWF() : base("RWF") { }
@@ -6130,9 +5707,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RWF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RWF".</value>
-        public static RWF UniqInstance
+        public static RWF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly RWF Instance = new RWF();
         }
     }
 
@@ -6146,11 +5726,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SAR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SAR" /> class.
-        /// </summary>
-        private static readonly SAR s_Instance = new SAR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SAR" /> class.
         /// </summary>
         private SAR() : base("SAR") { }
@@ -6159,9 +5734,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SAR".</value>
-        public static SAR UniqInstance
+        public static SAR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SAR Instance = new SAR();
         }
     }
 
@@ -6175,11 +5753,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SBD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SBD" /> class.
-        /// </summary>
-        private static readonly SBD s_Instance = new SBD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SBD" /> class.
         /// </summary>
         private SBD() : base("SBD") { }
@@ -6188,9 +5761,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SBD".</value>
-        public static SBD UniqInstance
+        public static SBD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SBD Instance = new SBD();
         }
     }
 
@@ -6204,11 +5780,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SCR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SCR" /> class.
-        /// </summary>
-        private static readonly SCR s_Instance = new SCR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SCR" /> class.
         /// </summary>
         private SCR() : base("SCR") { }
@@ -6217,9 +5788,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SCR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SCR".</value>
-        public static SCR UniqInstance
+        public static SCR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SCR Instance = new SCR();
         }
     }
 
@@ -6233,11 +5807,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SDD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SDD" /> class.
-        /// </summary>
-        private static readonly SDD s_Instance = new SDD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SDD" /> class.
         /// </summary>
         private SDD() : base("SDD") { }
@@ -6246,9 +5815,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDD".</value>
-        public static SDD UniqInstance
+        public static SDD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SDD Instance = new SDD();
         }
     }
 
@@ -6262,11 +5834,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SDG : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SDG" /> class.
-        /// </summary>
-        private static readonly SDG s_Instance = new SDG();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SDG" /> class.
         /// </summary>
         private SDG() : base("SDG") { }
@@ -6275,9 +5842,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDG".</value>
-        public static SDG UniqInstance
+        public static SDG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SDG Instance = new SDG();
         }
     }
 
@@ -6291,11 +5861,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SDP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SDP" /> class.
-        /// </summary>
-        private static readonly SDP s_Instance = new SDP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SDP" /> class.
         /// </summary>
         private SDP() : base("SDP") { }
@@ -6304,9 +5869,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDP".</value>
-        public static SDP UniqInstance
+        public static SDP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SDP Instance = new SDP();
         }
     }
 
@@ -6320,11 +5888,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SEK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SEK" /> class.
-        /// </summary>
-        private static readonly SEK s_Instance = new SEK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SEK" /> class.
         /// </summary>
         private SEK() : base("SEK") { }
@@ -6333,9 +5896,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SEK".</value>
-        public static SEK UniqInstance
+        public static SEK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SEK Instance = new SEK();
         }
     }
 
@@ -6349,11 +5915,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SGD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SGD" /> class.
-        /// </summary>
-        private static readonly SGD s_Instance = new SGD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SGD" /> class.
         /// </summary>
         private SGD() : base("SGD") { }
@@ -6362,9 +5923,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SGD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SGD".</value>
-        public static SGD UniqInstance
+        public static SGD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SGD Instance = new SGD();
         }
     }
 
@@ -6378,11 +5942,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SHP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SHP" /> class.
-        /// </summary>
-        private static readonly SHP s_Instance = new SHP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SHP" /> class.
         /// </summary>
         private SHP() : base("SHP") { }
@@ -6391,9 +5950,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SHP".</value>
-        public static SHP UniqInstance
+        public static SHP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SHP Instance = new SHP();
         }
     }
 
@@ -6407,11 +5969,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SIT : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SIT" /> class.
-        /// </summary>
-        private static readonly SIT s_Instance = new SIT();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SIT" /> class.
         /// </summary>
         private SIT() : base("SIT") { }
@@ -6420,9 +5977,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SIT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SIT".</value>
-        public static SIT UniqInstance
+        public static SIT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SIT Instance = new SIT();
         }
     }
 
@@ -6436,11 +5996,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SKK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SKK" /> class.
-        /// </summary>
-        private static readonly SKK s_Instance = new SKK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SKK" /> class.
         /// </summary>
         private SKK() : base("SKK") { }
@@ -6449,9 +6004,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SKK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SKK".</value>
-        public static SKK UniqInstance
+        public static SKK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SKK Instance = new SKK();
         }
     }
 
@@ -6465,11 +6023,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SLL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SLL" /> class.
-        /// </summary>
-        private static readonly SLL s_Instance = new SLL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SLL" /> class.
         /// </summary>
         private SLL() : base("SLL") { }
@@ -6478,9 +6031,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SLL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SLL".</value>
-        public static SLL UniqInstance
+        public static SLL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SLL Instance = new SLL();
         }
     }
 
@@ -6494,11 +6050,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SOS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SOS" /> class.
-        /// </summary>
-        private static readonly SOS s_Instance = new SOS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SOS" /> class.
         /// </summary>
         private SOS() : base("SOS") { }
@@ -6507,9 +6058,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SOS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SOS".</value>
-        public static SOS UniqInstance
+        public static SOS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SOS Instance = new SOS();
         }
     }
 
@@ -6523,11 +6077,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SRD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SRD" /> class.
-        /// </summary>
-        private static readonly SRD s_Instance = new SRD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SRD" /> class.
         /// </summary>
         private SRD() : base("SRD") { }
@@ -6536,9 +6085,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRD".</value>
-        public static SRD UniqInstance
+        public static SRD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SRD Instance = new SRD();
         }
     }
 
@@ -6552,11 +6104,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SRG : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SRG" /> class.
-        /// </summary>
-        private static readonly SRG s_Instance = new SRG();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SRG" /> class.
         /// </summary>
         private SRG() : base("SRG") { }
@@ -6565,9 +6112,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRG".</value>
-        public static SRG UniqInstance
+        public static SRG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SRG Instance = new SRG();
         }
     }
 
@@ -6581,11 +6131,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SSP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SSP" /> class.
-        /// </summary>
-        private static readonly SSP s_Instance = new SSP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SSP" /> class.
         /// </summary>
         private SSP() : base("SSP") { }
@@ -6594,9 +6139,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SSP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SSP".</value>
-        public static SSP UniqInstance
+        public static SSP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SSP Instance = new SSP();
         }
     }
 
@@ -6610,11 +6158,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class STD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="STD" /> class.
-        /// </summary>
-        private static readonly STD s_Instance = new STD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="STD" /> class.
         /// </summary>
         private STD() : base("STD") { }
@@ -6623,9 +6166,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "STD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "STD".</value>
-        public static STD UniqInstance
+        public static STD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly STD Instance = new STD();
         }
     }
 
@@ -6639,11 +6185,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SUR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SUR" /> class.
-        /// </summary>
-        private static readonly SUR s_Instance = new SUR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SUR" /> class.
         /// </summary>
         private SUR() : base("SUR") { }
@@ -6652,9 +6193,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SUR".</value>
-        public static SUR UniqInstance
+        public static SUR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SUR Instance = new SUR();
         }
     }
 
@@ -6668,11 +6212,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SVC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SVC" /> class.
-        /// </summary>
-        private static readonly SVC s_Instance = new SVC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SVC" /> class.
         /// </summary>
         private SVC() : base("SVC") { }
@@ -6681,9 +6220,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SVC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SVC".</value>
-        public static SVC UniqInstance
+        public static SVC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SVC Instance = new SVC();
         }
     }
 
@@ -6697,11 +6239,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SYP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SYP" /> class.
-        /// </summary>
-        private static readonly SYP s_Instance = new SYP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SYP" /> class.
         /// </summary>
         private SYP() : base("SYP") { }
@@ -6710,9 +6247,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SYP".</value>
-        public static SYP UniqInstance
+        public static SYP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SYP Instance = new SYP();
         }
     }
 
@@ -6726,11 +6266,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class SZL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="SZL" /> class.
-        /// </summary>
-        private static readonly SZL s_Instance = new SZL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SZL" /> class.
         /// </summary>
         private SZL() : base("SZL") { }
@@ -6739,9 +6274,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SZL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SZL".</value>
-        public static SZL UniqInstance
+        public static SZL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly SZL Instance = new SZL();
         }
     }
 
@@ -6755,11 +6293,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class THB : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="THB" /> class.
-        /// </summary>
-        private static readonly THB s_Instance = new THB();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="THB" /> class.
         /// </summary>
         private THB() : base("THB") { }
@@ -6768,9 +6301,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "THB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "THB".</value>
-        public static THB UniqInstance
+        public static THB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly THB Instance = new THB();
         }
     }
 
@@ -6784,11 +6320,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TJR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TJR" /> class.
-        /// </summary>
-        private static readonly TJR s_Instance = new TJR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TJR" /> class.
         /// </summary>
         private TJR() : base("TJR") { }
@@ -6797,9 +6328,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJR".</value>
-        public static TJR UniqInstance
+        public static TJR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TJR Instance = new TJR();
         }
     }
 
@@ -6813,11 +6347,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TJS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TJS" /> class.
-        /// </summary>
-        private static readonly TJS s_Instance = new TJS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TJS" /> class.
         /// </summary>
         private TJS() : base("TJS") { }
@@ -6826,9 +6355,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJS".</value>
-        public static TJS UniqInstance
+        public static TJS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TJS Instance = new TJS();
         }
     }
 
@@ -6842,11 +6374,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TMM : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TMM" /> class.
-        /// </summary>
-        private static readonly TMM s_Instance = new TMM();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TMM" /> class.
         /// </summary>
         private TMM() : base("TMM") { }
@@ -6855,9 +6382,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMM".</value>
-        public static TMM UniqInstance
+        public static TMM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TMM Instance = new TMM();
         }
     }
 
@@ -6871,11 +6401,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TMT : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TMT" /> class.
-        /// </summary>
-        private static readonly TMT s_Instance = new TMT();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TMT" /> class.
         /// </summary>
         private TMT() : base("TMT") { }
@@ -6884,9 +6409,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMT".</value>
-        public static TMT UniqInstance
+        public static TMT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TMT Instance = new TMT();
         }
     }
 
@@ -6900,11 +6428,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TND : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TND" /> class.
-        /// </summary>
-        private static readonly TND s_Instance = new TND();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TND" /> class.
         /// </summary>
         private TND() : base("TND") { }
@@ -6913,9 +6436,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TND".</value>
-        public static TND UniqInstance
+        public static TND UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TND Instance = new TND();
         }
     }
 
@@ -6929,11 +6455,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TOP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TOP" /> class.
-        /// </summary>
-        private static readonly TOP s_Instance = new TOP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TOP" /> class.
         /// </summary>
         private TOP() : base("TOP") { }
@@ -6942,9 +6463,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TOP".</value>
-        public static TOP UniqInstance
+        public static TOP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TOP Instance = new TOP();
         }
     }
 
@@ -6958,11 +6482,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TPE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TPE" /> class.
-        /// </summary>
-        private static readonly TPE s_Instance = new TPE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TPE" /> class.
         /// </summary>
         private TPE() : base("TPE") { }
@@ -6971,9 +6490,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TPE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TPE".</value>
-        public static TPE UniqInstance
+        public static TPE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TPE Instance = new TPE();
         }
     }
 
@@ -6987,11 +6509,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TRL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TRL" /> class.
-        /// </summary>
-        private static readonly TRL s_Instance = new TRL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TRL" /> class.
         /// </summary>
         private TRL() : base("TRL") { }
@@ -7000,9 +6517,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRL".</value>
-        public static TRL UniqInstance
+        public static TRL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TRL Instance = new TRL();
         }
     }
 
@@ -7016,11 +6536,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TRY : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TRY" /> class.
-        /// </summary>
-        private static readonly TRY s_Instance = new TRY();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TRY" /> class.
         /// </summary>
         private TRY() : base("TRY") { }
@@ -7029,9 +6544,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRY".</value>
-        public static TRY UniqInstance
+        public static TRY UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TRY Instance = new TRY();
         }
     }
 
@@ -7045,11 +6563,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TTD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TTD" /> class.
-        /// </summary>
-        private static readonly TTD s_Instance = new TTD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TTD" /> class.
         /// </summary>
         private TTD() : base("TTD") { }
@@ -7058,9 +6571,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TTD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TTD".</value>
-        public static TTD UniqInstance
+        public static TTD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TTD Instance = new TTD();
         }
     }
 
@@ -7074,11 +6590,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TWD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TWD" /> class.
-        /// </summary>
-        private static readonly TWD s_Instance = new TWD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TWD" /> class.
         /// </summary>
         private TWD() : base("TWD") { }
@@ -7087,9 +6598,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TWD".</value>
-        public static TWD UniqInstance
+        public static TWD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TWD Instance = new TWD();
         }
     }
 
@@ -7103,11 +6617,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class TZS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="TZS" /> class.
-        /// </summary>
-        private static readonly TZS s_Instance = new TZS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TZS" /> class.
         /// </summary>
         private TZS() : base("TZS") { }
@@ -7116,9 +6625,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TZS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TZS".</value>
-        public static TZS UniqInstance
+        public static TZS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly TZS Instance = new TZS();
         }
     }
 
@@ -7132,11 +6644,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UAH : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="UAH" /> class.
-        /// </summary>
-        private static readonly UAH s_Instance = new UAH();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UAH" /> class.
         /// </summary>
         private UAH() : base("UAH") { }
@@ -7145,9 +6652,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAH".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAH".</value>
-        public static UAH UniqInstance
+        public static UAH UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly UAH Instance = new UAH();
         }
     }
 
@@ -7161,11 +6671,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UAK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="UAK" /> class.
-        /// </summary>
-        private static readonly UAK s_Instance = new UAK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UAK" /> class.
         /// </summary>
         private UAK() : base("UAK") { }
@@ -7174,9 +6679,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAK".</value>
-        public static UAK UniqInstance
+        public static UAK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly UAK Instance = new UAK();
         }
     }
 
@@ -7190,11 +6698,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UGS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="UGS" /> class.
-        /// </summary>
-        private static readonly UGS s_Instance = new UGS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UGS" /> class.
         /// </summary>
         private UGS() : base("UGS") { }
@@ -7203,9 +6706,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGS".</value>
-        public static UGS UniqInstance
+        public static UGS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly UGS Instance = new UGS();
         }
     }
 
@@ -7219,11 +6725,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UGW : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="UGW" /> class.
-        /// </summary>
-        private static readonly UGW s_Instance = new UGW();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UGW" /> class.
         /// </summary>
         private UGW() : base("UGW") { }
@@ -7232,9 +6733,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGW".</value>
-        public static UGW UniqInstance
+        public static UGW UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly UGW Instance = new UGW();
         }
     }
 
@@ -7248,11 +6752,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UGX : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="UGX" /> class.
-        /// </summary>
-        private static readonly UGX s_Instance = new UGX();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UGX" /> class.
         /// </summary>
         private UGX() : base("UGX") { }
@@ -7261,9 +6760,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGX".</value>
-        public static UGX UniqInstance
+        public static UGX UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly UGX Instance = new UGX();
         }
     }
 
@@ -7277,11 +6779,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class USD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="USD" /> class.
-        /// </summary>
-        private static readonly USD s_Instance = new USD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="USD" /> class.
         /// </summary>
         private USD() : base("USD") { }
@@ -7290,9 +6787,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USD".</value>
-        public static USD UniqInstance
+        public static USD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly USD Instance = new USD();
         }
     }
 
@@ -7306,11 +6806,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class USN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="USN" /> class.
-        /// </summary>
-        private static readonly USN s_Instance = new USN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="USN" /> class.
         /// </summary>
         private USN() : base("USN") { }
@@ -7319,9 +6814,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USN".</value>
-        public static USN UniqInstance
+        public static USN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly USN Instance = new USN();
         }
     }
 
@@ -7335,11 +6833,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class USS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="USS" /> class.
-        /// </summary>
-        private static readonly USS s_Instance = new USS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="USS" /> class.
         /// </summary>
         private USS() : base("USS") { }
@@ -7348,9 +6841,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USS".</value>
-        public static USS UniqInstance
+        public static USS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly USS Instance = new USS();
         }
     }
 
@@ -7364,11 +6860,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UYI : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="UYI" /> class.
-        /// </summary>
-        private static readonly UYI s_Instance = new UYI();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UYI" /> class.
         /// </summary>
         private UYI() : base("UYI") { }
@@ -7377,9 +6868,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYI".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYI".</value>
-        public static UYI UniqInstance
+        public static UYI UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly UYI Instance = new UYI();
         }
     }
 
@@ -7393,11 +6887,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UYN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="UYN" /> class.
-        /// </summary>
-        private static readonly UYN s_Instance = new UYN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UYN" /> class.
         /// </summary>
         private UYN() : base("UYN") { }
@@ -7406,9 +6895,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYN".</value>
-        public static UYN UniqInstance
+        public static UYN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly UYN Instance = new UYN();
         }
     }
 
@@ -7422,11 +6914,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UYP : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="UYP" /> class.
-        /// </summary>
-        private static readonly UYP s_Instance = new UYP();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UYP" /> class.
         /// </summary>
         private UYP() : base("UYP") { }
@@ -7435,9 +6922,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYP".</value>
-        public static UYP UniqInstance
+        public static UYP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly UYP Instance = new UYP();
         }
     }
 
@@ -7451,11 +6941,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UYU : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="UYU" /> class.
-        /// </summary>
-        private static readonly UYU s_Instance = new UYU();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UYU" /> class.
         /// </summary>
         private UYU() : base("UYU") { }
@@ -7464,9 +6949,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYU".</value>
-        public static UYU UniqInstance
+        public static UYU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly UYU Instance = new UYU();
         }
     }
 
@@ -7480,11 +6968,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class UZS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="UZS" /> class.
-        /// </summary>
-        private static readonly UZS s_Instance = new UZS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UZS" /> class.
         /// </summary>
         private UZS() : base("UZS") { }
@@ -7493,9 +6976,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UZS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UZS".</value>
-        public static UZS UniqInstance
+        public static UZS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly UZS Instance = new UZS();
         }
     }
 
@@ -7509,11 +6995,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class VEB : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="VEB" /> class.
-        /// </summary>
-        private static readonly VEB s_Instance = new VEB();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="VEB" /> class.
         /// </summary>
         private VEB() : base("VEB") { }
@@ -7522,9 +7003,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEB".</value>
-        public static VEB UniqInstance
+        public static VEB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly VEB Instance = new VEB();
         }
     }
 
@@ -7538,11 +7022,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class VEF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="VEF" /> class.
-        /// </summary>
-        private static readonly VEF s_Instance = new VEF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="VEF" /> class.
         /// </summary>
         private VEF() : base("VEF") { }
@@ -7551,9 +7030,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEF".</value>
-        public static VEF UniqInstance
+        public static VEF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly VEF Instance = new VEF();
         }
     }
 
@@ -7567,11 +7049,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class VNC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="VNC" /> class.
-        /// </summary>
-        private static readonly VNC s_Instance = new VNC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="VNC" /> class.
         /// </summary>
         private VNC() : base("VNC") { }
@@ -7580,9 +7057,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VNC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VNC".</value>
-        public static VNC UniqInstance
+        public static VNC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly VNC Instance = new VNC();
         }
     }
 
@@ -7596,11 +7076,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class VND : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="VND" /> class.
-        /// </summary>
-        private static readonly VND s_Instance = new VND();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="VND" /> class.
         /// </summary>
         private VND() : base("VND") { }
@@ -7609,9 +7084,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VND".</value>
-        public static VND UniqInstance
+        public static VND UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly VND Instance = new VND();
         }
     }
 
@@ -7625,11 +7103,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class VUV : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="VUV" /> class.
-        /// </summary>
-        private static readonly VUV s_Instance = new VUV();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="VUV" /> class.
         /// </summary>
         private VUV() : base("VUV") { }
@@ -7638,9 +7111,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VUV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VUV".</value>
-        public static VUV UniqInstance
+        public static VUV UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly VUV Instance = new VUV();
         }
     }
 
@@ -7654,11 +7130,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class WST : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="WST" /> class.
-        /// </summary>
-        private static readonly WST s_Instance = new WST();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="WST" /> class.
         /// </summary>
         private WST() : base("WST") { }
@@ -7667,9 +7138,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "WST".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "WST".</value>
-        public static WST UniqInstance
+        public static WST UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly WST Instance = new WST();
         }
     }
 
@@ -7683,11 +7157,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XAF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XAF" /> class.
-        /// </summary>
-        private static readonly XAF s_Instance = new XAF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XAF" /> class.
         /// </summary>
         private XAF() : base("XAF") { }
@@ -7696,9 +7165,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAF".</value>
-        public static XAF UniqInstance
+        public static XAF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XAF Instance = new XAF();
         }
     }
 
@@ -7712,11 +7184,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XAG : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XAG" /> class.
-        /// </summary>
-        private static readonly XAG s_Instance = new XAG();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XAG" /> class.
         /// </summary>
         private XAG() : base("XAG") { }
@@ -7725,9 +7192,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAG".</value>
-        public static XAG UniqInstance
+        public static XAG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XAG Instance = new XAG();
         }
     }
 
@@ -7741,11 +7211,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XAU : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XAU" /> class.
-        /// </summary>
-        private static readonly XAU s_Instance = new XAU();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XAU" /> class.
         /// </summary>
         private XAU() : base("XAU") { }
@@ -7754,9 +7219,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAU".</value>
-        public static XAU UniqInstance
+        public static XAU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XAU Instance = new XAU();
         }
     }
 
@@ -7770,11 +7238,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XBA : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XBA" /> class.
-        /// </summary>
-        private static readonly XBA s_Instance = new XBA();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XBA" /> class.
         /// </summary>
         private XBA() : base("XBA") { }
@@ -7783,9 +7246,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBA".</value>
-        public static XBA UniqInstance
+        public static XBA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XBA Instance = new XBA();
         }
     }
 
@@ -7799,11 +7265,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XBB : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XBB" /> class.
-        /// </summary>
-        private static readonly XBB s_Instance = new XBB();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XBB" /> class.
         /// </summary>
         private XBB() : base("XBB") { }
@@ -7812,9 +7273,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBB".</value>
-        public static XBB UniqInstance
+        public static XBB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XBB Instance = new XBB();
         }
     }
 
@@ -7828,11 +7292,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XBC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XBC" /> class.
-        /// </summary>
-        private static readonly XBC s_Instance = new XBC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XBC" /> class.
         /// </summary>
         private XBC() : base("XBC") { }
@@ -7841,9 +7300,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBC".</value>
-        public static XBC UniqInstance
+        public static XBC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XBC Instance = new XBC();
         }
     }
 
@@ -7857,11 +7319,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XBD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XBD" /> class.
-        /// </summary>
-        private static readonly XBD s_Instance = new XBD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XBD" /> class.
         /// </summary>
         private XBD() : base("XBD") { }
@@ -7870,9 +7327,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBD".</value>
-        public static XBD UniqInstance
+        public static XBD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XBD Instance = new XBD();
         }
     }
 
@@ -7886,11 +7346,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XCD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XCD" /> class.
-        /// </summary>
-        private static readonly XCD s_Instance = new XCD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XCD" /> class.
         /// </summary>
         private XCD() : base("XCD") { }
@@ -7899,9 +7354,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XCD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XCD".</value>
-        public static XCD UniqInstance
+        public static XCD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XCD Instance = new XCD();
         }
     }
 
@@ -7915,11 +7373,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XDR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XDR" /> class.
-        /// </summary>
-        private static readonly XDR s_Instance = new XDR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XDR" /> class.
         /// </summary>
         private XDR() : base("XDR") { }
@@ -7928,9 +7381,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XDR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XDR".</value>
-        public static XDR UniqInstance
+        public static XDR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XDR Instance = new XDR();
         }
     }
 
@@ -7944,11 +7400,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XEU : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XEU" /> class.
-        /// </summary>
-        private static readonly XEU s_Instance = new XEU();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XEU" /> class.
         /// </summary>
         private XEU() : base("XEU") { }
@@ -7957,9 +7408,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XEU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XEU".</value>
-        public static XEU UniqInstance
+        public static XEU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XEU Instance = new XEU();
         }
     }
 
@@ -7973,11 +7427,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XFO : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XFO" /> class.
-        /// </summary>
-        private static readonly XFO s_Instance = new XFO();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XFO" /> class.
         /// </summary>
         private XFO() : base("XFO") { }
@@ -7986,9 +7435,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFO".</value>
-        public static XFO UniqInstance
+        public static XFO UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XFO Instance = new XFO();
         }
     }
 
@@ -8002,11 +7454,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XFU : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XFU" /> class.
-        /// </summary>
-        private static readonly XFU s_Instance = new XFU();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XFU" /> class.
         /// </summary>
         private XFU() : base("XFU") { }
@@ -8015,9 +7462,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFU".</value>
-        public static XFU UniqInstance
+        public static XFU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XFU Instance = new XFU();
         }
     }
 
@@ -8031,11 +7481,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XOF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XOF" /> class.
-        /// </summary>
-        private static readonly XOF s_Instance = new XOF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XOF" /> class.
         /// </summary>
         private XOF() : base("XOF") { }
@@ -8044,9 +7489,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XOF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XOF".</value>
-        public static XOF UniqInstance
+        public static XOF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XOF Instance = new XOF();
         }
     }
 
@@ -8060,11 +7508,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XPD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XPD" /> class.
-        /// </summary>
-        private static readonly XPD s_Instance = new XPD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XPD" /> class.
         /// </summary>
         private XPD() : base("XPD") { }
@@ -8073,9 +7516,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPD".</value>
-        public static XPD UniqInstance
+        public static XPD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XPD Instance = new XPD();
         }
     }
 
@@ -8089,11 +7535,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XPF : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XPF" /> class.
-        /// </summary>
-        private static readonly XPF s_Instance = new XPF();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XPF" /> class.
         /// </summary>
         private XPF() : base("XPF") { }
@@ -8102,9 +7543,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPF".</value>
-        public static XPF UniqInstance
+        public static XPF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XPF Instance = new XPF();
         }
     }
 
@@ -8118,11 +7562,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XPT : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XPT" /> class.
-        /// </summary>
-        private static readonly XPT s_Instance = new XPT();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XPT" /> class.
         /// </summary>
         private XPT() : base("XPT") { }
@@ -8131,9 +7570,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPT".</value>
-        public static XPT UniqInstance
+        public static XPT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XPT Instance = new XPT();
         }
     }
 
@@ -8147,11 +7589,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XRE : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XRE" /> class.
-        /// </summary>
-        private static readonly XRE s_Instance = new XRE();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XRE" /> class.
         /// </summary>
         private XRE() : base("XRE") { }
@@ -8160,9 +7597,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XRE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XRE".</value>
-        public static XRE UniqInstance
+        public static XRE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XRE Instance = new XRE();
         }
     }
 
@@ -8176,11 +7616,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XSU : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XSU" /> class.
-        /// </summary>
-        private static readonly XSU s_Instance = new XSU();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XSU" /> class.
         /// </summary>
         private XSU() : base("XSU") { }
@@ -8189,9 +7624,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XSU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XSU".</value>
-        public static XSU UniqInstance
+        public static XSU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XSU Instance = new XSU();
         }
     }
 
@@ -8205,11 +7643,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XTS : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XTS" /> class.
-        /// </summary>
-        private static readonly XTS s_Instance = new XTS();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XTS" /> class.
         /// </summary>
         private XTS() : base("XTS") { }
@@ -8218,9 +7651,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XTS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XTS".</value>
-        public static XTS UniqInstance
+        public static XTS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XTS Instance = new XTS();
         }
     }
 
@@ -8234,11 +7670,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XUA : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XUA" /> class.
-        /// </summary>
-        private static readonly XUA s_Instance = new XUA();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XUA" /> class.
         /// </summary>
         private XUA() : base("XUA") { }
@@ -8247,9 +7678,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XUA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XUA".</value>
-        public static XUA UniqInstance
+        public static XUA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XUA Instance = new XUA();
         }
     }
 
@@ -8263,11 +7697,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class XXX : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="XXX" /> class.
-        /// </summary>
-        private static readonly XXX s_Instance = new XXX();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XXX" /> class.
         /// </summary>
         private XXX() : base("XXX") { }
@@ -8276,9 +7705,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XXX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XXX".</value>
-        public static XXX UniqInstance
+        public static XXX UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly XXX Instance = new XXX();
         }
     }
 
@@ -8292,11 +7724,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class YDD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="YDD" /> class.
-        /// </summary>
-        private static readonly YDD s_Instance = new YDD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="YDD" /> class.
         /// </summary>
         private YDD() : base("YDD") { }
@@ -8305,9 +7732,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YDD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YDD".</value>
-        public static YDD UniqInstance
+        public static YDD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly YDD Instance = new YDD();
         }
     }
 
@@ -8321,11 +7751,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class YER : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="YER" /> class.
-        /// </summary>
-        private static readonly YER s_Instance = new YER();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="YER" /> class.
         /// </summary>
         private YER() : base("YER") { }
@@ -8334,9 +7759,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YER".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YER".</value>
-        public static YER UniqInstance
+        public static YER UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly YER Instance = new YER();
         }
     }
 
@@ -8350,11 +7778,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class YUD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="YUD" /> class.
-        /// </summary>
-        private static readonly YUD s_Instance = new YUD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="YUD" /> class.
         /// </summary>
         private YUD() : base("YUD") { }
@@ -8363,9 +7786,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUD".</value>
-        public static YUD UniqInstance
+        public static YUD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly YUD Instance = new YUD();
         }
     }
 
@@ -8379,11 +7805,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class YUM : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="YUM" /> class.
-        /// </summary>
-        private static readonly YUM s_Instance = new YUM();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="YUM" /> class.
         /// </summary>
         private YUM() : base("YUM") { }
@@ -8392,9 +7813,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUM".</value>
-        public static YUM UniqInstance
+        public static YUM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly YUM Instance = new YUM();
         }
     }
 
@@ -8408,11 +7832,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class YUN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="YUN" /> class.
-        /// </summary>
-        private static readonly YUN s_Instance = new YUN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="YUN" /> class.
         /// </summary>
         private YUN() : base("YUN") { }
@@ -8421,9 +7840,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUN".</value>
-        public static YUN UniqInstance
+        public static YUN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly YUN Instance = new YUN();
         }
     }
 
@@ -8437,11 +7859,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZAL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZAL" /> class.
-        /// </summary>
-        private static readonly ZAL s_Instance = new ZAL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZAL" /> class.
         /// </summary>
         private ZAL() : base("ZAL") { }
@@ -8450,9 +7867,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAL".</value>
-        public static ZAL UniqInstance
+        public static ZAL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZAL Instance = new ZAL();
         }
     }
 
@@ -8466,11 +7886,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZAR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZAR" /> class.
-        /// </summary>
-        private static readonly ZAR s_Instance = new ZAR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZAR" /> class.
         /// </summary>
         private ZAR() : base("ZAR") { }
@@ -8479,9 +7894,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAR".</value>
-        public static ZAR UniqInstance
+        public static ZAR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZAR Instance = new ZAR();
         }
     }
 
@@ -8495,11 +7913,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZMK : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZMK" /> class.
-        /// </summary>
-        private static readonly ZMK s_Instance = new ZMK();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZMK" /> class.
         /// </summary>
         private ZMK() : base("ZMK") { }
@@ -8508,9 +7921,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMK".</value>
-        public static ZMK UniqInstance
+        public static ZMK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZMK Instance = new ZMK();
         }
     }
 
@@ -8524,11 +7940,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZMW : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZMW" /> class.
-        /// </summary>
-        private static readonly ZMW s_Instance = new ZMW();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZMW" /> class.
         /// </summary>
         private ZMW() : base("ZMW") { }
@@ -8537,9 +7948,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMW".</value>
-        public static ZMW UniqInstance
+        public static ZMW UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZMW Instance = new ZMW();
         }
     }
 
@@ -8553,11 +7967,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZRN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZRN" /> class.
-        /// </summary>
-        private static readonly ZRN s_Instance = new ZRN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZRN" /> class.
         /// </summary>
         private ZRN() : base("ZRN") { }
@@ -8566,9 +7975,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRN".</value>
-        public static ZRN UniqInstance
+        public static ZRN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZRN Instance = new ZRN();
         }
     }
 
@@ -8582,11 +7994,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZRZ : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZRZ" /> class.
-        /// </summary>
-        private static readonly ZRZ s_Instance = new ZRZ();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZRZ" /> class.
         /// </summary>
         private ZRZ() : base("ZRZ") { }
@@ -8595,9 +8002,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRZ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRZ".</value>
-        public static ZRZ UniqInstance
+        public static ZRZ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZRZ Instance = new ZRZ();
         }
     }
 
@@ -8611,11 +8021,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZWC : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZWC" /> class.
-        /// </summary>
-        private static readonly ZWC s_Instance = new ZWC();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZWC" /> class.
         /// </summary>
         private ZWC() : base("ZWC") { }
@@ -8624,9 +8029,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWC".</value>
-        public static ZWC UniqInstance
+        public static ZWC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZWC Instance = new ZWC();
         }
     }
 
@@ -8640,11 +8048,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZWD : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZWD" /> class.
-        /// </summary>
-        private static readonly ZWD s_Instance = new ZWD();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZWD" /> class.
         /// </summary>
         private ZWD() : base("ZWD") { }
@@ -8653,9 +8056,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWD".</value>
-        public static ZWD UniqInstance
+        public static ZWD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZWD Instance = new ZWD();
         }
     }
 
@@ -8669,11 +8075,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZWL : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZWL" /> class.
-        /// </summary>
-        private static readonly ZWL s_Instance = new ZWL();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZWL" /> class.
         /// </summary>
         private ZWL() : base("ZWL") { }
@@ -8682,9 +8083,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWL".</value>
-        public static ZWL UniqInstance
+        public static ZWL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZWL Instance = new ZWL();
         }
     }
 
@@ -8698,11 +8102,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZWN : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZWN" /> class.
-        /// </summary>
-        private static readonly ZWN s_Instance = new ZWN();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZWN" /> class.
         /// </summary>
         private ZWN() : base("ZWN") { }
@@ -8711,9 +8110,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWN".</value>
-        public static ZWN UniqInstance
+        public static ZWN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZWN Instance = new ZWN();
         }
     }
 
@@ -8727,11 +8129,6 @@ namespace Narvalo.Finance.Currencies
     public sealed class ZWR : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="ZWR" /> class.
-        /// </summary>
-        private static readonly ZWR s_Instance = new ZWR();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ZWR" /> class.
         /// </summary>
         private ZWR() : base("ZWR") { }
@@ -8740,9 +8137,12 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWR".</value>
-        public static ZWR UniqInstance
+        public static ZWR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly ZWR Instance = new ZWR();
         }
     }
 

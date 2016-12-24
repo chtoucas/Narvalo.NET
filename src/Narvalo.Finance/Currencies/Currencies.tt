@@ -30,6 +30,8 @@ using global::System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY",
     Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
 
+// Each currency code defines a class which is a lazy initalized singleton.
+// The singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
 namespace <#= Namespace #>
 {
 <#
@@ -63,11 +65,6 @@ namespace <#= Namespace #>
     public sealed class <#= currency.Code #> : Currency
     {
         /// <summary>
-        /// The unique instance of the <see cref="<#= currency.Code #>" /> class.
-        /// </summary>
-        private static readonly <#= currency.Code #> s_Instance = new <#= currency.Code #>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="<#= currency.Code #>" /> class.
         /// </summary>
         private <#= currency.Code #>() : base("<#= currency.Code #>") { }
@@ -76,9 +73,12 @@ namespace <#= Namespace #>
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".</value>
-        public static <#= currency.Code #> UniqInstance
+        public static <#= currency.Code #> UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+
+        private class Nested
         {
-            get { Warrant.NotNull<Currency>(); return s_Instance; }
+            static Nested() { }
+            internal static readonly <#= currency.Code #> Instance = new <#= currency.Code #>();
         }
     }
 
