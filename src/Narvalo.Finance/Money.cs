@@ -34,13 +34,6 @@ namespace Narvalo.Finance
             get { Warrant.NotNull<Currency>(); return _currency; }
         }
 
-        public static TCurrency GetUnderlyingCurrency<TCurrency>(Money<TCurrency> money)
-            where TCurrency : Currency
-        {
-            Warrant.NotNull<TCurrency>();
-            return money.Currency;
-        }
-
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, Currency.Code);

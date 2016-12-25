@@ -137,8 +137,10 @@ namespace Narvalo.Finance
             return OfCulture(CultureInfo.CurrentCulture);
         }
 
-        // REVIEW: Should we worry about concurrent access? I don't believe but I'm not sure.
-        // If it is already registered, no problem, otherwise two threads may attempt to add
+        // This method allows to register currencies that are not part of ISO 4217.
+        // See https://en.wikipedia.org/wiki/ISO_4217.
+        // REVIEW: Should we worry about concurrent access? I'm not sure.
+        // If the code is already registered, no problem, otherwise two threads may attempt to add
         // the same code; the first win, the second simply returns false?
         public static bool RegisterCurrency(string code)
         {

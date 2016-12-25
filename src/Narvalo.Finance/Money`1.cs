@@ -15,9 +15,9 @@ namespace Narvalo.Finance
         : IEquatable<Money<TCurrency>>, IComparable<Money<TCurrency>>, IComparable, IFormattable
         where TCurrency : Currency
     {
-        // IMPORTANT: This static field MUST remain first to be initialized before the others.
+        // IMPORTANT: This static field MUST remain first to be initialized before the other(s).
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly TCurrency s_Currency = CurrencyActivator<TCurrency>.CreateInstance();
+        private static readonly TCurrency s_UnderlyingCurrency = CurrencyActivator<TCurrency>.CreateInstance();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0m);
@@ -27,7 +27,10 @@ namespace Narvalo.Finance
             Amount = amount;
         }
 
-        internal TCurrency Currency { get { Warrant.NotNull<TCurrency>(); return s_Currency; } }
+        internal static TCurrency UnderlyingCurrency
+        {
+            get { Warrant.NotNull<TCurrency>(); return s_UnderlyingCurrency; }
+        }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
             Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
@@ -35,12 +38,17 @@ namespace Narvalo.Finance
 
         public decimal Amount { get; }
 
+        public TCurrency Currency
+        {
+            get { Warrant.NotNull<TCurrency>(); return UnderlyingCurrency; }
+        }
+
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
-        private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, s_Currency.Code);
+        private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, Currency.Code);
 
         public static explicit operator Money<TCurrency>(Money value)
         {
-            if (!(value.Currency == s_Currency))
+            if (!(value.Currency == UnderlyingCurrency))
             {
                 throw new InvalidCastException();
             }
@@ -49,7 +57,7 @@ namespace Narvalo.Finance
         }
 
         public static explicit operator Money(Money<TCurrency> value)
-            => new Money(value.Amount, s_Currency);
+            => new Money(value.Amount, value.Currency);
     }
 
     // Implements the IFormattable interface.
@@ -113,7 +121,7 @@ namespace Narvalo.Finance
             {
                 int hash = 17;
                 hash = 31 * hash + Amount.GetHashCode();
-                hash = 31 * hash + s_Currency.GetHashCode();
+                hash = 31 * hash + Currency.GetHashCode();
                 return hash;
             }
         }

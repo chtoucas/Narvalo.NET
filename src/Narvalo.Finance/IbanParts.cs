@@ -225,18 +225,18 @@ namespace Narvalo.Finance
                 case "h":
                     // Human: same result as "G" but prefixed with "IBAN ".
                     // This format is NOT suitable for electronic transmission.
-                    return HumanHeader + FormatG(_value);
+                    return HumanHeader + FormatGeneral(_value);
                 case "G":
                 case "g":
                     // General (default): insert a whitespace char every 4 chars.
                     // This format is NOT suitable for electronic transmission.
-                    return FormatG(_value);
+                    return FormatGeneral(_value);
                 default:
                     throw new FormatException(Format.Current(Strings.Iban_InvalidFormatSpecification));
             }
         }
 
-        private static string FormatG(string input)
+        private static string FormatGeneral(string input)
         {
             Demand.NotNull(input);
             Warrant.NotNull<string>();

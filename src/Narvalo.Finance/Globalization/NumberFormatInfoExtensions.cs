@@ -8,6 +8,7 @@ namespace Narvalo.Finance.Globalization
 
     internal static class NumberFormatInfoExtensions
     {
+        // The volatile keyword is only for correctness.
         private static volatile Dictionary<int, int> s_SpaceReversedNegativePatterns;
 
         private static Dictionary<int, int> SpaceReversedNegativePatterns
@@ -16,7 +17,7 @@ namespace Narvalo.Finance.Globalization
             {
                 if (s_SpaceReversedNegativePatterns == null)
                 {
-                    var map = new Dictionary<int, int>(16)
+                    var dic = new Dictionary<int, int>(16)
                     {
                         // Without space -> with space.
                         { 0, 14 },   // ($n)
@@ -38,7 +39,7 @@ namespace Narvalo.Finance.Globalization
                         { 15, 4 },   //(n $)    => (n$) (4)
                     };
 
-                    s_SpaceReversedNegativePatterns = map;
+                    s_SpaceReversedNegativePatterns = dic;
                 }
 
                 return s_SpaceReversedNegativePatterns;
