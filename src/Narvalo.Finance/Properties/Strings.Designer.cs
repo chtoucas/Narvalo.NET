@@ -107,6 +107,15 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to InvalidOperation_NoValue.
+        /// </summary>
+        internal static string BooleanResult_NoErrorMessage {
+            get {
+                return ResourceManager.GetString("BooleanResult_NoErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown currency: {0}..
         /// </summary>
         internal static string Currency_UnknownCode {
@@ -175,6 +184,24 @@ namespace Narvalo.Finance.Properties {
         internal static string Money_InvalidFormatSpecification {
             get {
                 return ResourceManager.GetString("Money_InvalidFormatSpecification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outcome_NoErrorMessage.
+        /// </summary>
+        internal static string Outcome_NoErrorMessage {
+            get {
+                return ResourceManager.GetString("Outcome_NoErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outcome_NoValue.
+        /// </summary>
+        internal static string Outcome_NoValue {
+            get {
+                return ResourceManager.GetString("Outcome_NoValue", resourceCulture);
             }
         }
         

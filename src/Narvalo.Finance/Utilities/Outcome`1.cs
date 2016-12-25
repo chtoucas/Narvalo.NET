@@ -6,6 +6,8 @@ namespace Narvalo.Finance.Utilities
     using System.Collections.Generic;
     using System.Diagnostics;
 
+    using Narvalo.Finance.Properties;
+
     public abstract partial class Outcome<T> where T : struct
     {
         private Outcome(bool success) { Success = success; }
@@ -21,6 +23,15 @@ namespace Narvalo.Finance.Utilities
 
         internal abstract Outcome<TResult> Select<TResult>(Func<T, TResult> selector)
              where TResult : struct;
+
+        public static implicit operator Outcome<T>(T value) => Return(value);
+
+        public static explicit operator T?(Outcome<T> value)
+        {
+            if (value == null) { return null; }
+
+            return value.ToNullable();
+        }
 
         internal static Outcome<T> Failure(string message)
         {
@@ -38,6 +49,13 @@ namespace Narvalo.Finance.Utilities
             return new Success_(value);
         }
 
+        public T? ToNullable()
+        {
+            if (!Success) { return null; }
+
+            return Value;
+        }
+
         private sealed partial class Success_ : Outcome<T>, IEquatable<Success_>
         {
             private readonly T _value;
@@ -47,7 +65,10 @@ namespace Narvalo.Finance.Utilities
                 _value = value;
             }
 
-            public override string ErrorMessage { get { throw new InvalidOperationException(); } }
+            public override string ErrorMessage
+            {
+                get { throw new InvalidOperationException(Strings.Outcome_NoErrorMessage); }
+            }
 
             public override T Value { get { return _value; } }
 
@@ -105,7 +126,10 @@ namespace Narvalo.Finance.Utilities
 
             public override string ErrorMessage { get { Warrant.NotNull<string>(); return _message; } }
 
-            public override T Value { get { throw new InvalidOperationException(); } }
+            public override T Value
+            {
+                get { throw new InvalidOperationException(Strings.Outcome_NoValue); }
+            }
 
             internal override Outcome<TResult> Bind<TResult>(Func<T, Outcome<TResult>> selector)
                 => Outcome<TResult>.Failure(ErrorMessage);

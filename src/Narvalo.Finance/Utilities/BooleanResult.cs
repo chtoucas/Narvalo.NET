@@ -6,13 +6,13 @@ namespace Narvalo.Finance.Utilities
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
 
+    using Narvalo.Finance.Properties;
+
     [DebuggerDisplay("True")]
     public partial class BooleanResult
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly BooleanResult s_True = new BooleanResult();
-
-        private BooleanResult() { }
+        private static readonly BooleanResult s_True = new BooleanResult(false);
 
         private BooleanResult(bool isFalse)
         {
@@ -30,10 +30,9 @@ namespace Narvalo.Finance.Utilities
 
         public virtual string ErrorMessage
         {
-            get { throw new InvalidOperationException(); }
+            get { throw new InvalidOperationException(Strings.BooleanResult_NoErrorMessage); }
         }
 
-        // It is normally not possible to create a null BooleanResult, but we never know.
         public static implicit operator bool(BooleanResult value) => value == null ? false : value.IsTrue;
 
         internal static BooleanResult False(string message)
@@ -42,6 +41,8 @@ namespace Narvalo.Finance.Utilities
 
             return new False_(message);
         }
+
+        public bool ToBoolean() => IsTrue;
 
         public override string ToString()
         {

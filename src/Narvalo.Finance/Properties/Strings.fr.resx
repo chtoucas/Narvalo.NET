@@ -132,10 +132,13 @@
   <data name="Argument_NeutralCultureNotSupported" xml:space="preserve">
     <value>Argument_NeutralCultureNotSupported</value>
   </data>
+  <data name="BooleanResult_NoErrorMessage" xml:space="preserve">
+    <value>InvalidOperation_NoValue</value>
+  </data>
   <data name="CurrencyActivator_MissingCtor" xml:space="preserve">
     <value>CurrencyActivator_MissingCtor</value>
   </data>
-  <data name="CurrencyNotFoundException_DefaultMessage" xml:space="preserve">
+  <data name="CurrencyNotFound_DefaultMessage" xml:space="preserve">
     <value>Devise inconnue.</value>
   </data>
   <data name="Currency_UnknownCode" xml:space="preserve">
@@ -155,6 +158,12 @@
   </data>
   <data name="Money_InvalidFormatSpecification" xml:space="preserve">
     <value>Money_InvalidFormatSpecification</value>
+  </data>
+  <data name="Outcome_NoErrorMessage" xml:space="preserve">
+    <value>BooleanResult_NoErrorMessage</value>
+  </data>
+  <data name="Outcome_NoValue" xml:space="preserve">
+    <value>Outcome_NoValue</value>
   </data>
   <data name="Parse_InvalidBban" xml:space="preserve">
     <value>Parse_InvalidBban</value>
