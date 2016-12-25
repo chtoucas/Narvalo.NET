@@ -20,7 +20,6 @@ namespace Narvalo.Finance
     {
         public const string HumanHeader = "IBAN ";
 
-        private const string DEFAULT_FORMAT = "G";
         private const char WHITESPACE_CHAR = ' ';
 
         private readonly IbanParts _parts;
@@ -234,75 +233,22 @@ namespace Narvalo.Finance
         {
             Warrant.NotNull<string>();
 
-            return ToString(DEFAULT_FORMAT, null);
+            return _parts.ToString(IbanParts.DefaultFormat, null);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
 
-            return ToString(format, null);
+            return _parts.ToString(format, null);
         }
 
-        // NB: We ignore any user supplied "formatProvider".
+        /// <inheritdoc cref="IFormattable.ToString(string, IFormatProvider)" />
         public string ToString(string format, IFormatProvider formatProvider)
         {
             Warrant.NotNull<string>();
 
-            if (format == null || format.Length == 0)
-            {
-                format = DEFAULT_FORMAT;
-            }
-
-            switch (format)
-            {
-                case "C":
-                case "c":
-                    // Compact.
-                    return _parts.LiteralValue;
-                case "H":
-                case "h":
-                    // Human: same result as "G" but prefixed with "IBAN ".
-                    // This format is NOT suitable for electronic transmission.
-                    return HumanHeader + FormatG(_parts.LiteralValue);
-                case "G":
-                case "g":
-                    // General (default): insert a whitespace char every 4 chars.
-                    // This format is NOT suitable for electronic transmission.
-                    return FormatG(_parts.LiteralValue);
-                default:
-                    throw new FormatException(Format.Current(Strings.Iban_InvalidFormatSpecification));
-            }
-        }
-
-        private static string FormatG(string input)
-        {
-            Demand.NotNull(input);
-            Warrant.NotNull<string>();
-
-            int len = input.Length;
-
-            int r = len % 4;
-            int q = (len - r) / 4;
-            int outlen = len + q - (r == 0 ? 1 : 0);
-            var output = new char[outlen];
-
-            int k = 1;
-            for (var i = 0; i < len; i++, k++)
-            {
-                if (k % 5 == 0)
-                {
-                    output[k - 1] = WHITESPACE_CHAR;
-                    output[k] = input[i];
-                    k++;
-                }
-                else
-                {
-                    output[k - 1] = input[i];
-                }
-            }
-
-            return new String(output);
+            return _parts.ToString(format, formatProvider);
         }
     }
 

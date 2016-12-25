@@ -3,17 +3,21 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
     using static Narvalo.Finance.Utilities.AsciiHelpers;
 
-    public partial struct IbanParts : IEquatable<IbanParts>
+    public partial struct IbanParts : IEquatable<IbanParts>, IFormattable
     {
+        internal const string DefaultFormat = "G";
         internal const int MinLength = 14;
         internal const int MaxLength = 34;
+
+        private const char WHITESPACE_CHAR = ' ';
+
+        public const string HumanHeader = "IBAN ";
 
         private readonly string _bban;
         private readonly string _checkDigits;
@@ -179,6 +183,87 @@ namespace Narvalo.Finance
             }
 
             private static bool CheckContent(string value) => IsUpperLetter(value);
+        }
+    }
+
+    // Implements the IFormattable interface.
+    public partial struct IbanParts
+    {
+        /// <inheritdoc cref="Object.ToString" />
+        public override string ToString()
+        {
+            Warrant.NotNull<string>();
+
+            return ToString(DefaultFormat, null);
+        }
+
+        public string ToString(string format)
+        {
+            Warrant.NotNull<string>();
+
+            return ToString(format, null);
+        }
+
+        /// <inheritdoc cref="IFormattable.ToString(string, IFormatProvider)" />
+        // NB: We ignore any user supplied "formatProvider".
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            Warrant.NotNull<string>();
+
+            if (format == null || format.Length == 0)
+            {
+                format = DefaultFormat;
+            }
+
+            switch (format)
+            {
+                case "C":
+                case "c":
+                    // Compact.
+                    return _value;
+                case "H":
+                case "h":
+                    // Human: same result as "G" but prefixed with "IBAN ".
+                    // This format is NOT suitable for electronic transmission.
+                    return HumanHeader + FormatG(_value);
+                case "G":
+                case "g":
+                    // General (default): insert a whitespace char every 4 chars.
+                    // This format is NOT suitable for electronic transmission.
+                    return FormatG(_value);
+                default:
+                    throw new FormatException(Format.Current(Strings.Iban_InvalidFormatSpecification));
+            }
+        }
+
+        private static string FormatG(string input)
+        {
+            Demand.NotNull(input);
+            Warrant.NotNull<string>();
+
+            int len = input.Length;
+
+            int r = len % 4;
+            int q = (len - r) / 4;
+            int outlen = len + q - (r == 0 ? 1 : 0);
+            var output = new char[outlen];
+
+            int k = 1;
+            for (var i = 0; i < len; i++, k++)
+            {
+                if (k % 5 == 0)
+                {
+                    output[k - 1] = WHITESPACE_CHAR;
+                    output[k] = input[i];
+                    k++;
+                }
+                else
+                {
+                    output[k - 1] = input[i];
+                }
+            }
+
+            return new String(output);
         }
     }
 

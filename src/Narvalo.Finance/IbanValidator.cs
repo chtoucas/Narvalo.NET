@@ -9,7 +9,6 @@ namespace Narvalo.Finance
 
     public sealed class IbanValidator
     {
-
         private const int CHECKSUM_MODULO = 97;
 
         private readonly bool _verifyIntegrity;
