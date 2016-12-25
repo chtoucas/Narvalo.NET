@@ -110,6 +110,9 @@ Code Infrastructure
 - CodeFormatter (crashes with the last exe).
 - Change `retval` for a more meaningful name.
 
+### Tests
+- Split the test library: per project and eventually move internal externals elsewhere.
+
 ### Documentation
 - Create a better CSS for docfx.
 - Provide better assembly descriptions.

@@ -59,9 +59,6 @@ namespace Narvalo.Finance
 
     public static partial class IbanValidatorFacts
     {
-        private static IbanParts ParseFast(string value)
-            => IbanParts.Parse(value).Value;
-
         #region TryValidateIntern()
 
         [Theory]
@@ -103,4 +100,10 @@ namespace Narvalo.Finance
     }
 
 #endif
+
+    public static partial class IbanValidatorFacts
+    {
+        private static IbanParts ParseFast(string value)
+            => IbanParts.Parse(value).Value;
+    }
 }
