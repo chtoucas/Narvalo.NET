@@ -18,8 +18,6 @@ namespace Narvalo.Finance
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Iban : IEquatable<Iban>, IFormattable
     {
-        public const string HumanHeader = "IBAN ";
-
         private const char WHITESPACE_CHAR = ' ';
 
         private readonly IbanParts _parts;
@@ -181,7 +179,7 @@ namespace Narvalo.Finance
 
             if (styles.Contains(IbanStyles.AllowHeader)
                 && text.Length >= start + 5
-                && text.Substring(start, 5) == HumanHeader)
+                && text.Substring(start, 5) == IbanParts.HumanHeader)
             {
                 start += 5;
             }

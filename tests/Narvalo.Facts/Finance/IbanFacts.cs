@@ -273,7 +273,7 @@ namespace Narvalo.Finance
         {
             var result1 = ParseFast(value).ToString("H");
             var result2 = ParseFast(value).ToString("h");
-            var expected = Iban.HumanHeader + formattedValue;
+            var expected = IbanParts.HumanHeader + formattedValue;
 
             Assert.Equal(expected, result1);
             Assert.Equal(expected, result2);
