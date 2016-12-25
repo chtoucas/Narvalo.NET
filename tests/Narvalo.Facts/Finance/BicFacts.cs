@@ -426,99 +426,99 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region CheckBranchCode()
-
-        [Theory]
-        [InlineData("")]
-        [InlineData("123")]
-        [CLSCompliant(false)]
-        public static void CheckBranchCode_ReturnsTrue_ForValidInput(string value)
-            => Assert.True(Bic.CheckBranchCode(value));
-
-        [Fact]
-        public static void CheckBranchCode_ReturnsFalse_ForNull()
-            => Assert.False(Bic.CheckBranchCode(null));
-
-        [Theory]
-        [MemberData(nameof(InvalidBranchCodes), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckBranchCode_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(Bic.CheckBranchCode(value));
-
-        #endregion
-
-        #region CheckCountryCode()
-
-        [Fact]
-        public static void CheckCountryCode_ReturnsTrue_ForValidInput()
-            => Assert.True(Bic.CheckCountryCode("FR"));
-
-        [Fact]
-        public static void CheckCountryCode_ReturnsFalse_ForNull()
-            => Assert.False(Bic.CheckCountryCode(null));
-
-        [Theory]
-        [MemberData(nameof(InvalidCountryCodes), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckCountryCode_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(Bic.CheckCountryCode(value));
-
-        #endregion
-
-        #region CheckInstitutionCode()
-
-        [Fact]
-        public static void CheckInstitutionCode_ReturnsTrue_ForValidInput()
-            => Assert.True(Bic.CheckInstitutionCode("1234", BicVersion.ISO));
-
-        [Fact]
-        public static void CheckInstitutionCode_ReturnsFalse_ForNull()
-            => Assert.False(Bic.CheckInstitutionCode(null, BicVersion.ISO));
-
-        [Theory]
-        [MemberData(nameof(InvalidInstitutionCodes), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckInstitutionCode_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(Bic.CheckInstitutionCode(value, BicVersion.ISO));
-
-        #endregion
-
-        #region CheckLocationCode()
-
-        [Fact]
-        public static void CheckLocationCode_ReturnsTrue_ForValidInput()
-            => Assert.True(Bic.CheckLocationCode("12"));
-
-        [Fact]
-        public static void CheckLocationCode_ReturnsFalse_ForNull()
-            => Assert.False(Bic.CheckLocationCode(null));
-
-        [Theory]
-        [MemberData(nameof(InvalidLocationCodes), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckLocationCode_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(Bic.CheckLocationCode(value));
-
-        #endregion
-
-        #region CheckValue()
+        #region CheckLength()
 
         [Theory]
         [InlineData("12345678")]
         [InlineData("12345678901")]
         [CLSCompliant(false)]
-        public static void CheckValue_ReturnsTrue_ForValidInput(string value)
-            => Assert.True(Bic.CheckValue(value));
+        public static void CheckLength_ReturnsTrue_ForValidInput(string value)
+            => Assert.True(Bic.CheckLength(value));
 
         [Fact]
-        public static void CheckValue_ReturnsFalse_ForNull()
-            => Assert.False(Bic.CheckValue(null));
+        public static void CheckLength_ReturnsFalse_ForNull()
+            => Assert.False(Bic.CheckLength(null));
 
         [Theory]
         [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void CheckValue_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(Bic.CheckValue(value));
+        public static void CheckLength_ReturnsFalse_ForInvalidInput(string value)
+            => Assert.False(Bic.CheckLength(value));
+
+        #endregion
+
+        #region ValidateBranchCode()
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("123")]
+        [CLSCompliant(false)]
+        public static void ValidateBranchCode_ReturnsTrue_ForValidInput(string value)
+            => Assert.True(Bic.ValidateBranchCode(value));
+
+        [Fact]
+        public static void ValidateBranchCode_ReturnsFalse_ForNull()
+            => Assert.False(Bic.ValidateBranchCode(null));
+
+        [Theory]
+        [MemberData(nameof(InvalidBranchCodes), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ValidateBranchCode_ReturnsFalse_ForInvalidInput(string value)
+            => Assert.False(Bic.ValidateBranchCode(value));
+
+        #endregion
+
+        #region ValidateCountryCode()
+
+        [Fact]
+        public static void ValidateCountryCode_ReturnsTrue_ForValidInput()
+            => Assert.True(Bic.ValidateCountryCode("FR"));
+
+        [Fact]
+        public static void ValidateCountryCode_ReturnsFalse_ForNull()
+            => Assert.False(Bic.ValidateCountryCode(null));
+
+        [Theory]
+        [MemberData(nameof(InvalidCountryCodes), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void ValidateCountryCode_ReturnsFalse_ForInvalidInput(string value)
+            => Assert.False(Bic.ValidateCountryCode(value));
+
+        #endregion
+
+        #region ValidateInstitutionCode()
+
+        [Fact]
+        public static void InstitutionPart_Validate_ReturnsTrue_ForValidInput()
+            => Assert.True(Bic.ValidateInstitutionCode("1234", BicVersion.ISO));
+
+        [Fact]
+        public static void InstitutionPart_Validate_ReturnsFalse_ForNull()
+            => Assert.False(Bic.ValidateInstitutionCode(null, BicVersion.ISO));
+
+        [Theory]
+        [MemberData(nameof(InvalidInstitutionCodes), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void InstitutionPart_Validate_ReturnsFalse_ForInvalidInput(string value)
+            => Assert.False(Bic.ValidateInstitutionCode(value, BicVersion.ISO));
+
+        #endregion
+
+        #region ValidateLocationCode()
+
+        [Fact]
+        public static void LocationPart_Validate_ReturnsTrue_ForValidInput()
+            => Assert.True(Bic.ValidateLocationCode("12"));
+
+        [Fact]
+        public static void LocationPart_Validate_ReturnsFalse_ForNull()
+            => Assert.False(Bic.ValidateLocationCode(null));
+
+        [Theory]
+        [MemberData(nameof(InvalidLocationCodes), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void LocationPart_Validate_ReturnsFalse_ForInvalidInput(string value)
+            => Assert.False(Bic.ValidateLocationCode(value));
 
         #endregion
     }

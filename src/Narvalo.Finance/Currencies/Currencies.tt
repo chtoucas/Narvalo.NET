@@ -27,8 +27,7 @@ WriteHeader();
 
 using global::System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY",
-    Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
+[assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY", Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
 
 // Each currency code defines a class which is a lazy initalized singleton.
 // The singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
@@ -60,8 +59,7 @@ namespace <#= Namespace #>
 <#
         }
 #>
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly",
-        Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
+    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class <#= currency.Code #> : Currency
     {
         /// <summary>
@@ -75,8 +73,10 @@ namespace <#= Namespace #>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".</value>
         public static <#= currency.Code #> UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
 
+        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Nested
         {
+            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
             internal static readonly <#= currency.Code #> Instance = new <#= currency.Code #>();
         }

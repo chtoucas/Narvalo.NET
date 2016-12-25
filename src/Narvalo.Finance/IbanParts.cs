@@ -15,12 +15,6 @@ namespace Narvalo.Finance
         internal const int MinLength = 14;
         internal const int MaxLength = 34;
 
-        internal const int CountryLength = 2;
-        internal const int CheckDigitsLength = 2;
-
-        internal const int BbanMinLength = MinLength - CountryLength - CheckDigitsLength;
-        internal const int BbanMaxLength = MaxLength - CountryLength - CheckDigitsLength;
-
         private readonly string _bban;
         private readonly string _checkDigits;
         private readonly string _countryCode;
@@ -70,9 +64,9 @@ namespace Narvalo.Finance
             Require.NotNull(checkDigits, nameof(checkDigits));
             Require.NotNull(bban, nameof(bban));
 
-            if (CheckCountryCode(countryCode)
-                && CheckCheckDigits(checkDigits)
-                && CheckBban(bban))
+            if (ValidateCountryCode(countryCode)
+                && ValidateCheckDigits(checkDigits)
+                && ValidateBban(bban))
             {
                 return new IbanParts(countryCode, checkDigits, bban);
             }
@@ -84,16 +78,16 @@ namespace Narvalo.Finance
 
         public static IbanParts? Parse(string value)
         {
-            if (!CheckValue(value)) { return null; }
+            if (!CheckLength(value)) { return null; }
 
-            string countryCode = GetCountryCode(value);
-            if (!CheckCountryCode(countryCode)) { return null; }
+            string countryCode = CountryPart.FromIban(value);
+            if (countryCode == null) { return null; }
 
-            string checkDigits = GetCheckDigits(value);
-            if (!CheckCheckDigits(checkDigits)) { return null; }
+            string checkDigits = CheckDigitsPart.FromIban(value);
+            if (checkDigits == null) { return null; }
 
-            string bban = GetBban(value);
-            if (!CheckBban(bban)) { return null; }
+            string bban = BbanPart.FromIban(value);
+            if (bban == null) { return null; }
 
             return new IbanParts(countryCode, checkDigits, bban, value);
         }
@@ -102,25 +96,25 @@ namespace Narvalo.Finance
         {
             Require.NotNull(value, nameof(value));
 
-            if (!CheckValue(value))
+            if (!CheckLength(value))
             {
                 return Outcome<IbanParts>.Failure(Strings.Parse_InvalidIbanValue);
             }
 
-            string countryCode = GetCountryCode(value);
-            if (!CheckCountryCode(countryCode))
+            string countryCode = CountryPart.FromIban(value);
+            if (countryCode == null)
             {
                 return Outcome<IbanParts>.Failure(Strings.Parse_InvalidCountryCode);
             }
 
-            string checkDigits = GetCheckDigits(value);
-            if (!CheckCheckDigits(checkDigits))
+            string checkDigits = CheckDigitsPart.FromIban(value);
+            if (checkDigits == null)
             {
                 return Outcome<IbanParts>.Failure(Strings.Parse_InvalidCheckDigits);
             }
 
-            string bban = GetBban(value);
-            if (!CheckBban(bban))
+            string bban = BbanPart.FromIban(value);
+            if (bban == null)
             {
                 return Outcome<IbanParts>.Failure(Strings.Parse_InvalidBban);
             }
@@ -128,61 +122,83 @@ namespace Narvalo.Finance
             return Outcome.Success(new IbanParts(countryCode, checkDigits, bban, value));
         }
 
-        #region Validation helpers.
-
         [Pure]
-        public static bool CheckBban(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length >= BbanMinLength
-                && value.Length <= BbanMaxLength
-                && IsDigitOrUpperLetter(value);
-        }
-
-        [Pure]
-        public static bool CheckCheckDigits(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length == CheckDigitsLength && IsDigit(value);
-        }
-
-        [Pure]
-        public static bool CheckCountryCode(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length == CountryLength && IsUpperLetter(value);
-        }
-
-        [Pure]
-        public static bool CheckValue(string value)
+        public static bool CheckLength(string value)
         {
             if (value == null) { return false; }
             return value.Length >= MinLength && value.Length <= MaxLength;
         }
 
-        #endregion
-
-        #region Parsing helpers.
-
-        private static string GetBban(string value)
+        [Pure]
+        public static bool ValidateBban(string value)
         {
-            Demand.True(CheckValue(value));
-            return value.Substring(CountryLength + CheckDigitsLength);
+            if (value == null) { return false; }
+            return value.Length >= BbanPart.MinLength && value.Length <= BbanPart.MaxLength
+                && BbanPart.Check(value);
         }
 
-        private static string GetCheckDigits(string value)
+        [Pure]
+        public static bool ValidateCheckDigits(string value)
         {
-            Demand.True(CheckValue(value));
-            return value.Substring(CountryLength, CheckDigitsLength);
+            if (value == null) { return false; }
+            return value.Length == CheckDigitsPart.Length && CheckDigitsPart.Check(value);
         }
 
-        private static string GetCountryCode(string value)
+        [Pure]
+        public static bool ValidateCountryCode(string value)
         {
-            Demand.True(CheckValue(value));
-            return value.Substring(0, CountryLength);
+            if (value == null) { return false; }
+            return value.Length == CountryPart.Length && CountryPart.Check(value);
         }
 
-        #endregion
+        private static class BbanPart
+        {
+            public const int MinLength = IbanParts.MinLength - CountryPart.Length - CheckDigitsPart.Length;
+            public const int MaxLength = IbanParts.MaxLength - CountryPart.Length - CheckDigitsPart.Length;
+
+            public static string FromIban(string value)
+            {
+                Demand.True(CheckLength(value));
+
+                var retval = value.Substring(CountryPart.Length + CheckDigitsPart.Length);
+
+                return Check(retval) ? retval : null;
+            }
+
+            public static bool Check(string value) => IsDigitOrUpperLetter(value);
+        }
+
+        private static class CheckDigitsPart
+        {
+            public const int Length = 2;
+
+            public static string FromIban(string value)
+            {
+                Demand.True(CheckLength(value));
+
+                var retval = value.Substring(CountryPart.Length, Length);
+
+                return Check(retval) ? retval : null;
+            }
+
+            public static bool Check(string value) => IsDigit(value);
+        }
+
+        private static class CountryPart
+        {
+            public const int Length = 2;
+
+            public static string FromIban(string value)
+            {
+                Demand.True(CheckLength(value));
+
+                var retval = value.Substring(0, Length);
+
+                return Check(retval) ? retval : null;
+            }
+
+            public static bool Check(string value) => IsUpperLetter(value);
+        }
     }
 
     // Implements the IEquatable<IbanParts> interface.
