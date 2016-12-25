@@ -203,8 +203,8 @@ namespace Narvalo.Finance
             bool transformcase = styles.Contains(IbanStyles.AllowLowercaseLetter);
 
             // NB: If end - start + 1 < MinLength, the input is clearly invalid, nevertheless
-            // we continue to process the input to completely fulfill the method's contract,
-            // that is cleanup the input according to the user provided rules.
+            // we continue to process the input until we completely fulfill the method's contract:
+            // cleanup the input according to the user provided rules.
             var output = new char[end - start + 1];
 
             int k = 0;
@@ -214,13 +214,17 @@ namespace Narvalo.Finance
 
                 // NB: If IbanStyles.AllowIbanPrefix is on and we did remove an IBAN prefix,
                 // we might have whitespaces again at the beginning of the loop. Lesson: do not
-                // exclude i = start. We do not exclude i = end too, even though we know that
-                // "ch" is not a whitespace, this truely would not make the code faster.
+                // exclude i = start. We do not exclude i = end too, even though we already know
+                // that "ch" is not a whitespace; useless optimization.
                 if (removespaces && ch == WHITESPACE_CHAR) { continue; }
 
                 if (transformcase && ch >= 'a' && ch <= 'z')
                 {
-                    // NB: This is equivalent to (ch - 32). Just for the fun :-)
+                    // NB: We use a known property of the ASCII charset; for instance
+                    //       01100001 = 0x61 = 'a'
+                    //   AND 11011111 = 0xDF = ~0x20
+                    //       --------
+                    //       01000001 = 0x41 = 'A'
                     output[k] = (char)(ch & 0xDF);
                 }
                 else

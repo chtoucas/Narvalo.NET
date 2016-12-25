@@ -9,6 +9,7 @@ namespace Narvalo.Finance
 
     public sealed class IbanValidator
     {
+
         private const int CHECKSUM_MODULO = 97;
 
         private readonly bool _verifyIntegrity;
@@ -31,6 +32,7 @@ namespace Narvalo.Finance
             return new IbanValidator(levels).TryValidate(parts);
         }
 
+        // Keep this internal. We prefer to expose the simpler TryValidate().
         internal static Outcome<IbanParts> TryValidateIntern(IbanParts parts, IbanValidationLevels levels)
         {
             Warrant.NotNull<Outcome<IbanParts>>();
@@ -85,10 +87,10 @@ namespace Narvalo.Finance
             // If IntPtr.Size is equal to 8, we are running in a 64-bit process and
             // we check the integrity using Int64 arithmetic; otherwise (32-bit or 16-bit process)
             // we use Int32 arithmetic (NB: IntPtr.Size = 4 in a 32-bit process). I believe,
-            // but I have not verified, that ComputeInt64Checksum() is faster with a 64-bit processor.
+            // but I have not verified, that ComputeInt64Checksum() is faster in a 64-bit process.
             => CheckIntegrity(parts.LiteralValue, IntPtr.Size == 8);
 
-        // WARNING: Only works for valid IBAN values.
+        // WARNING: Only works for well-formed IBAN values (length and valid characters).
         internal static bool CheckIntegrity(string value, bool sixtyfour)
         {
             Demand.NotNull(value);

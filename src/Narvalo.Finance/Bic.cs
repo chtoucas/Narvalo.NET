@@ -250,10 +250,10 @@ namespace Narvalo.Finance
             return value.Length == CountryLength && CountryISOCodes.TwoLetterCodeExists(value);
         }
 
-        // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
         [Pure]
         public static bool CheckInstitutionCode(string value, BicVersion version)
         {
+            // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
             if (value == null) { return false; }
             return value.Length == PrefixLength
                 && (version == BicVersion.ISO ? IsDigitOrUpperLetter(value) : IsUpperLetter(value));
