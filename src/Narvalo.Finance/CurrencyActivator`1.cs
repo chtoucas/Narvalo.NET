@@ -16,7 +16,7 @@ namespace Narvalo.Finance
         /// </summary>
         public static TCurrency CreateInstance()
         {
-            TypeInfo typeInfo = typeof(TCurrency).GetTypeInfo();
+            var typeInfo = typeof(TCurrency).GetTypeInfo();
             Contract.Assume(typeInfo != null);
 
             ConstructorInfo ctorInfo = typeInfo

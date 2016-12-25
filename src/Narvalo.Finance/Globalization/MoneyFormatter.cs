@@ -18,7 +18,7 @@ namespace Narvalo.Finance.Globalization
             where TCurrency : Currency
         {
             Warrant.NotNull<string>();
-            return Format(money.Amount, Money<TCurrency>.UnderlyingCurrency, format, nfi);
+            return Format(money.Amount, money.Currency, format, nfi);
         }
 
         public static string Format(Money money, string format, NumberFormatInfo nfi)
