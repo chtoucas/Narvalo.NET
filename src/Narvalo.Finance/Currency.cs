@@ -52,6 +52,8 @@ namespace Narvalo.Finance
             get { Warrant.NotNull<string>(); return _code; }
         }
 
+        public bool IsAlias => GetType().Namespace == typeof(EUR).Namespace;
+
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>

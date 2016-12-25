@@ -133,7 +133,7 @@
     <value>Argument_NeutralCultureNotSupported</value>
   </data>
   <data name="BooleanResult_NoErrorMessage" xml:space="preserve">
-    <value>InvalidOperation_NoValue</value>
+    <value>BooleanResult_NoErrorMessage</value>
   </data>
   <data name="CurrencyActivator_MissingCtor" xml:space="preserve">
     <value>CurrencyActivator_MissingCtor</value>
@@ -160,7 +160,7 @@
     <value>Money_InvalidFormatSpecification</value>
   </data>
   <data name="Outcome_NoErrorMessage" xml:space="preserve">
-    <value>BooleanResult_NoErrorMessage</value>
+    <value>Outcome_NoErrorMessage</value>
   </data>
   <data name="Outcome_NoValue" xml:space="preserve">
     <value>Outcome_NoValue</value>
