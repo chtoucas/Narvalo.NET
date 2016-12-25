@@ -115,29 +115,17 @@ namespace Narvalo.Finance
         }
 
         public static Outcome<Iban> TryParse(string value)
-        {
-            Expect.NotNull(value);
-
-            return TryParse(value, IbanStyles.None, IbanValidationLevels.Default);
-        }
+            => TryParse(value, IbanStyles.None, IbanValidationLevels.Default);
 
         public static Outcome<Iban> TryParse(string value, IbanStyles styles)
-        {
-            Expect.NotNull(value);
-
-            return TryParse(value, styles, IbanValidationLevels.Default);
-        }
+            => TryParse(value, styles, IbanValidationLevels.Default);
 
         public static Outcome<Iban> TryParse(string value, IbanValidationLevels levels)
-        {
-            Expect.NotNull(value);
-
-            return TryParse(value, IbanStyles.None, levels);
-        }
+            => TryParse(value, IbanStyles.None, levels);
 
         public static Outcome<Iban> TryParse(string value, IbanStyles styles, IbanValidationLevels levels)
         {
-            Require.NotNull(value, nameof(value));
+            if (value == null) { return Outcome<Iban>.Failure(Strings.Parse_InvalidIbanValue); }
 
             var val = PreprocessInput(value, styles);
 

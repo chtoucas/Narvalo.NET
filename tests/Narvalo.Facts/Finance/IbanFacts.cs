@@ -37,8 +37,8 @@ namespace Narvalo.Finance
         #region TryParse()
 
         [Fact]
-        public static void TryParse_ThrowsArgumentNullException_ForNull()
-            => Assert.Throws<ArgumentNullException>(() => Iban.TryParse(null));
+        public static void TryParse_ReturnsFailure_ForNull()
+            => Assert.False(Iban.TryParse(null).Success);
 
         [Theory]
         [MemberData(nameof(SampleValues), DisableDiscoveryEnumeration = true)]

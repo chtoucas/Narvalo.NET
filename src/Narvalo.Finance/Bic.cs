@@ -144,10 +144,10 @@ namespace Narvalo.Finance
             Require.NotNull(locationCode, nameof(locationCode));
             Require.NotNull(branchCode, nameof(branchCode));
 
-            if (ValidateInstitutionCode(institutionCode, version)
-                && ValidateCountryCode(countryCode)
-                && ValidateLocationCode(locationCode)
-                && ValidateBranchCode(branchCode))
+            if (InstitutionPart.Validate(institutionCode, version)
+                && CountryPart.Validate(countryCode)
+                && LocationPart.Validate(locationCode)
+                && BranchPart.Validate(branchCode))
             {
                 return new Bic(institutionCode, countryCode, locationCode, branchCode);
             }
@@ -179,44 +179,23 @@ namespace Narvalo.Finance
         }
 
         public static Outcome<Bic> TryParse(string value)
-        {
-            Expect.NotNull(value);
-
-            return TryParse(value, BicVersion.Default);
-        }
+            => TryParse(value, BicVersion.Default);
 
         public static Outcome<Bic> TryParse(string value, BicVersion version)
         {
-            Require.NotNull(value, nameof(value));
-
-            if (!CheckLength(value))
-            {
-                return Outcome<Bic>.Failure(Strings.Parse_InvalidBicValue);
-            }
+            if (!CheckLength(value)) { return Outcome<Bic>.Failure(Strings.Parse_InvalidBicValue); }
 
             string institutionCode = InstitutionPart.FromBic(value, version);
-            if (institutionCode == null)
-            {
-                return Outcome<Bic>.Failure(Strings.Parse_InvalidInstitutionCode);
-            }
+            if (institutionCode == null) { return Outcome<Bic>.Failure(Strings.Parse_InvalidInstitutionCode); }
 
             string countryCode = CountryPart.FromBic(value);
-            if (countryCode == null)
-            {
-                return Outcome<Bic>.Failure(Strings.Parse_InvalidCountryCode);
-            }
+            if (countryCode == null) { return Outcome<Bic>.Failure(Strings.Parse_InvalidCountryCode); }
 
             string locationCode = LocationPart.FromBic(value);
-            if (locationCode == null)
-            {
-                return Outcome<Bic>.Failure(Strings.Parse_InvalidLocationCode);
-            }
+            if (locationCode == null) { return Outcome<Bic>.Failure(Strings.Parse_InvalidLocationCode); }
 
             string branchCode = BranchPart.FromBic(value);
-            if (branchCode == null)
-            {
-                return Outcome<Bic>.Failure(Strings.Parse_InvalidBranchCode);
-            }
+            if (branchCode == null) { return Outcome<Bic>.Failure(Strings.Parse_InvalidBranchCode); }
 
             return Outcome.Success(new Bic(institutionCode, countryCode, locationCode, branchCode, value));
         }
@@ -229,48 +208,17 @@ namespace Narvalo.Finance
             return _value;
         }
 
-        [Pure]
-        public static bool CheckLength(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length == PartyLength || value.Length == BicLength;
-        }
-
-        [Pure]
-        public static bool ValidateBranchCode(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length == 0 || (value.Length == BranchPart.Length && BranchPart.Check(value));
-        }
-
-        [Pure]
-        public static bool ValidateCountryCode(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length == CountryPart.Length && CountryPart.Check(value);
-        }
-
-        [Pure]
-        public static bool ValidateInstitutionCode(string value, BicVersion version)
-        {
-            if (value == null) { return false; }
-            return value.Length == InstitutionPart.Length && InstitutionPart.Check(value, version);
-        }
-
-        [Pure]
-        public static bool ValidateLocationCode(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length == LocationPart.Length && LocationPart.Check(value);
-        }
+        private static bool CheckLength(string value)
+            => value != null && (value.Length == PartyLength || value.Length == BicLength);
 
         private static class BranchPart
         {
+            public const int StartIndex = PartyLength;
             public const int Length = 3;
 
             public static string FromBic(string value)
             {
-                Demand.True(CheckLength(value));
+                Demand.True(value.Length == StartIndex || value.Length >= StartIndex + Length);
 
                 if (value.Length == PartyLength)
                 {
@@ -278,64 +226,90 @@ namespace Narvalo.Finance
                 }
                 else
                 {
-                    var retval = value.Substring(
-                        InstitutionPart.Length + CountryPart.Length + LocationPart.Length, Length);
+                    var retval = value.Substring(StartIndex, Length);
 
-                    return Check(retval) ? retval : null;
+                    return CheckContent(retval) ? retval : null;
                 }
             }
 
-            public static bool Check(string value) => IsDigitOrUpperLetter(value);
+            public static bool Validate(string value)
+            {
+                Demand.NotNull(value);
+                return value.Length == 0 || (value.Length == Length && CheckContent(value));
+            }
+
+            private static bool CheckContent(string value) => IsDigitOrUpperLetter(value);
         }
 
         private static class CountryPart
         {
+            public const int StartIndex = InstitutionPart.Length;
             public const int Length = 2;
 
             public static string FromBic(string value)
             {
-                Demand.True(CheckLength(value));
+                Demand.True(value.Length >= StartIndex + Length);
 
-                var retval = value.Substring(InstitutionPart.Length, Length);
+                var retval = value.Substring(StartIndex, Length);
 
-                return Check(retval) ? retval : null;
+                return CheckContent(retval) ? retval : null;
             }
 
-            public static bool Check(string value) => CountryISOCodes.TwoLetterCodeExists(value);
+            public static bool Validate(string value)
+            {
+                Demand.NotNull(value);
+                return value.Length == Length && CheckContent(value);
+            }
+
+            private static bool CheckContent(string value) => CountryISOCodes.TwoLetterCodeExists(value);
         }
 
         private static class InstitutionPart
         {
-            internal const int Length = 4;
+            public const int StartIndex = 0;
+            public const int Length = 4;
 
             public static string FromBic(string value, BicVersion version)
             {
-                Demand.True(CheckLength(value));
+                Expect.True(value.Length >= StartIndex + Length);
 
-                var retval = value.Substring(0, Length);
+                var retval = value.Substring(StartIndex, Length);
 
-                return Check(retval, version) ? retval : null;
+                return CheckContent(retval, version) ? retval : null;
+            }
+
+            public static bool Validate(string value, BicVersion version)
+            {
+                Demand.NotNull(value);
+                return value.Length == Length && CheckContent(value, version);
             }
 
             // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
-            public static bool Check(string value, BicVersion version)
+            private static bool CheckContent(string value, BicVersion version)
                 => version == BicVersion.ISO ? IsDigitOrUpperLetter(value) : IsUpperLetter(value);
         }
 
         private static class LocationPart
         {
-            internal const int Length = 2;
+            public const int StartIndex = InstitutionPart.Length + CountryPart.Length;
+            public const int Length = 2;
 
             public static string FromBic(string value)
             {
-                Demand.True(CheckLength(value));
+                Demand.True(value.Length >= StartIndex + Length);
 
-                var retval = value.Substring(InstitutionPart.Length + CountryPart.Length, Length);
+                var retval = value.Substring(StartIndex, Length);
 
-                return Check(retval) ? retval : null;
+                return CheckContent(retval) ? retval : null;
             }
 
-            public static bool Check(string value) => IsDigitOrUpperLetter(value);
+            public static bool Validate(string value)
+            {
+                Demand.NotNull(value);
+                return value.Length == Length && CheckContent(value);
+            }
+
+            private static bool CheckContent(string value) => IsDigitOrUpperLetter(value);
         }
     }
 

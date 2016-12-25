@@ -82,8 +82,8 @@ namespace Narvalo.Finance
         #region TryParse()
 
         [Fact]
-        public static void TryParse_ThrowsArgumentNullException_ForNull()
-            => Assert.Throws<ArgumentNullException>(() => IbanParts.TryParse(null));
+        public static void TryParse_ReturnsFailure_ForNull()
+            => Assert.False(IbanParts.TryParse(null).Success);
 
         [Theory]
         [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
@@ -131,81 +131,11 @@ namespace Narvalo.Finance
         public static void Create_DoesNotThrowArgumentException_ForValidInput()
             => IbanParts.Create("FR", "14", "20041010050500013M02606");
 
-        #endregion
-
-        #region CheckLength()
-
-        [Fact]
-        public static void CheckLength_ReturnsFalse_ForNull()
-            => Assert.False(IbanParts.CheckLength(null));
-
-        [Theory]
-        [MemberData(nameof(ValidValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckLength_ReturnsTrue_ForValidInput(string value)
-            => Assert.True(IbanParts.CheckLength(value));
-
-        [Theory]
-        [MemberData(nameof(InvalidValues), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckLength_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(IbanParts.CheckLength(value));
-
-        #endregion
-
-        #region ValidateBban()
-
-        [Fact]
-        public static void BbanPart_Validate_ReturnsFalse_ForNull()
-            => Assert.False(IbanParts.ValidateBban(null));
-
         [Theory]
         [MemberData(nameof(ValidBbans), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
-        public static void BbanPart_Validate_ReturnsTrue_ForValidInput(string value)
-            => Assert.True(IbanParts.ValidateBban(value));
-
-        [Theory]
-        [MemberData(nameof(InvalidBbans), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void BbanPart_Validate_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(IbanParts.ValidateBban(value));
-
-        #endregion
-
-        #region ValidateCheckDigits()
-
-        [Fact]
-        public static void CheckDigitsPart_Validate_ReturnsFalse_ForNull()
-            => Assert.False(IbanParts.ValidateCheckDigits(null));
-
-        [Fact]
-        public static void CheckDigitsPart_Validate_ReturnsTrue_ForValidInput()
-            => Assert.True(IbanParts.ValidateCheckDigits("12"));
-
-        [Theory]
-        [MemberData(nameof(InvalidCheckDigits), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckDigitsPart_Validate_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(IbanParts.ValidateCheckDigits(value));
-
-        #endregion
-
-        #region ValidateCountryCode()
-
-        [Fact]
-        public static void ValidateCountryCode_ReturnsFalse_ForNull()
-            => Assert.False(IbanParts.ValidateCountryCode(null));
-
-        [Fact]
-        public static void ValidateCountryCode_ReturnsTrue_ForValidInput()
-            => Assert.True(IbanParts.ValidateCountryCode("FR"));
-
-        [Theory]
-        [MemberData(nameof(InvalidCountryCodes), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ValidateCountryCode_ReturnsFalse_ForInvalidInput(string value)
-            => Assert.False(IbanParts.ValidateCountryCode(value));
+        public static void Create_DoesNotThrowArgumentException_ForValidBban(string value)
+            => IbanParts.Create("FR", "14", value);
 
         #endregion
     }

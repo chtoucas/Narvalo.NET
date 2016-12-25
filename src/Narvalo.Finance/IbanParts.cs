@@ -64,9 +64,9 @@ namespace Narvalo.Finance
             Require.NotNull(checkDigits, nameof(checkDigits));
             Require.NotNull(bban, nameof(bban));
 
-            if (ValidateCountryCode(countryCode)
-                && ValidateCheckDigits(checkDigits)
-                && ValidateBban(bban))
+            if (CountryPart.Validate(countryCode)
+                && CheckDigitsPart.Validate(checkDigits)
+                && BbanPart.Validate(bban))
             {
                 return new IbanParts(countryCode, checkDigits, bban);
             }
@@ -94,110 +94,91 @@ namespace Narvalo.Finance
 
         public static Outcome<IbanParts> TryParse(string value)
         {
-            Require.NotNull(value, nameof(value));
-
-            if (!CheckLength(value))
-            {
-                return Outcome<IbanParts>.Failure(Strings.Parse_InvalidIbanValue);
-            }
+            if (!CheckLength(value)) { return Outcome<IbanParts>.Failure(Strings.Parse_InvalidIbanValue); }
 
             string countryCode = CountryPart.FromIban(value);
-            if (countryCode == null)
-            {
-                return Outcome<IbanParts>.Failure(Strings.Parse_InvalidCountryCode);
-            }
+            if (countryCode == null) { return Outcome<IbanParts>.Failure(Strings.Parse_InvalidCountryCode); }
 
             string checkDigits = CheckDigitsPart.FromIban(value);
-            if (checkDigits == null)
-            {
-                return Outcome<IbanParts>.Failure(Strings.Parse_InvalidCheckDigits);
-            }
+            if (checkDigits == null) { return Outcome<IbanParts>.Failure(Strings.Parse_InvalidCheckDigits); }
 
             string bban = BbanPart.FromIban(value);
-            if (bban == null)
-            {
-                return Outcome<IbanParts>.Failure(Strings.Parse_InvalidBban);
-            }
+            if (bban == null) { return Outcome<IbanParts>.Failure(Strings.Parse_InvalidBban); }
 
             return Outcome.Success(new IbanParts(countryCode, checkDigits, bban, value));
         }
 
-        [Pure]
-        public static bool CheckLength(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length >= MinLength && value.Length <= MaxLength;
-        }
-
-        [Pure]
-        public static bool ValidateBban(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length >= BbanPart.MinLength && value.Length <= BbanPart.MaxLength
-                && BbanPart.Check(value);
-        }
-
-        [Pure]
-        public static bool ValidateCheckDigits(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length == CheckDigitsPart.Length && CheckDigitsPart.Check(value);
-        }
-
-        [Pure]
-        public static bool ValidateCountryCode(string value)
-        {
-            if (value == null) { return false; }
-            return value.Length == CountryPart.Length && CountryPart.Check(value);
-        }
+        private static bool CheckLength(string value)
+            => value != null && value.Length >= MinLength && value.Length <= MaxLength;
 
         private static class BbanPart
         {
-            public const int MinLength = IbanParts.MinLength - CountryPart.Length - CheckDigitsPart.Length;
-            public const int MaxLength = IbanParts.MaxLength - CountryPart.Length - CheckDigitsPart.Length;
+            public const int StartIndex = CountryPart.Length + CheckDigitsPart.Length;
+            public const int MinLength = IbanParts.MinLength - StartIndex;
+            public const int MaxLength = IbanParts.MaxLength - StartIndex;
 
             public static string FromIban(string value)
             {
-                Demand.True(CheckLength(value));
+                Demand.Range(value.Length >= StartIndex);
 
-                var retval = value.Substring(CountryPart.Length + CheckDigitsPart.Length);
+                var retval = value.Substring(StartIndex);
 
-                return Check(retval) ? retval : null;
+                return CheckContent(retval) ? retval : null;
             }
 
-            public static bool Check(string value) => IsDigitOrUpperLetter(value);
+            public static bool Validate(string value)
+            {
+                Demand.NotNull(value);
+                return value.Length >= MinLength && value.Length <= MaxLength && CheckContent(value);
+            }
+
+            private static bool CheckContent(string value) => IsDigitOrUpperLetter(value);
         }
 
         private static class CheckDigitsPart
         {
+            public const int StartIndex = CountryPart.Length;
             public const int Length = 2;
 
             public static string FromIban(string value)
             {
-                Demand.True(CheckLength(value));
+                Demand.Range(value.Length >= StartIndex + Length);
 
-                var retval = value.Substring(CountryPart.Length, Length);
+                var retval = value.Substring(StartIndex, Length);
 
-                return Check(retval) ? retval : null;
+                return CheckContent(retval) ? retval : null;
             }
 
-            public static bool Check(string value) => IsDigit(value);
+            public static bool Validate(string value)
+            {
+                Demand.NotNull(value);
+                return value.Length == Length && CheckContent(value);
+            }
+
+            private static bool CheckContent(string value) => IsDigit(value);
         }
 
         private static class CountryPart
         {
+            public const int StartIndex = 0;
             public const int Length = 2;
 
             public static string FromIban(string value)
             {
-                Demand.True(CheckLength(value));
+                Demand.Range(value.Length >= StartIndex + Length);
 
-                var retval = value.Substring(0, Length);
+                var retval = value.Substring(StartIndex, Length);
 
-                return Check(retval) ? retval : null;
+                return CheckContent(retval) ? retval : null;
             }
 
-            public static bool Check(string value) => IsUpperLetter(value);
+            public static bool Validate(string value)
+            {
+                Demand.NotNull(value);
+                return value.Length == Length && CheckContent(value);
+            }
+
+            private static bool CheckContent(string value) => IsUpperLetter(value);
         }
     }
 
