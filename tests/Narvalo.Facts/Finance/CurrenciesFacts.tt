@@ -64,7 +64,7 @@ namespace <#= Namespace #>
     foreach (var code in codeSet)
     {
 #>
-                yield return new object[] { <#= code #>.UniqInstance };
+                yield return new object[] { <#= code #>.Unit };
 <#
     }
 #>

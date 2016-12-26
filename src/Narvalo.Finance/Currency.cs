@@ -52,8 +52,6 @@ namespace Narvalo.Finance
             get { Warrant.NotNull<string>(); return _code; }
         }
 
-        public bool IsAlias => GetType().Namespace == typeof(EUR).Namespace;
-
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>
@@ -154,7 +152,7 @@ namespace Narvalo.Finance
             return CodeSet.Add(code);
         }
 
-        public bool IsNative(CultureInfo cultureInfo)
+        public bool IsNativeTo(CultureInfo cultureInfo)
         {
             Require.NotNull(cultureInfo, nameof(cultureInfo));
 
@@ -236,7 +234,7 @@ namespace Narvalo.Finance
         /// for the pseudo-currency for transactions where no currency is involved.</value>
         public static Currency None
         {
-            get { Warrant.NotNull<Currency>(); return XXX.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return XXX.Unit; }
         }
 
         /// <summary>
@@ -247,7 +245,7 @@ namespace Narvalo.Finance
         /// for the currency specifically reserved for testing purposes.</value>
         public static Currency Test
         {
-            get { Warrant.NotNull<Currency>(); return XTS.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return XTS.Unit; }
         }
 
         /// <summary>
@@ -256,7 +254,7 @@ namespace Narvalo.Finance
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Euro".</value>
         public static Currency Euro
         {
-            get { Warrant.NotNull<Currency>(); return EUR.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return EUR.Unit; }
         }
 
         /// <summary>
@@ -265,7 +263,7 @@ namespace Narvalo.Finance
         /// <value>The unique instance of the <see cref="Currency" /> class for the (British) "Pound Sterling".</value>
         public static Currency PoundSterling
         {
-            get { Warrant.NotNull<Currency>(); return GBP.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return GBP.Unit; }
         }
 
         /// <summary>
@@ -274,7 +272,7 @@ namespace Narvalo.Finance
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Swiss Franc".</value>
         public static Currency SwissFranc
         {
-            get { Warrant.NotNull<Currency>(); return CHF.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return CHF.Unit; }
         }
 
         /// <summary>
@@ -283,7 +281,7 @@ namespace Narvalo.Finance
         /// <value>The unique instance of the <see cref="Currency" /> class for the "United States Dollar".</value>
         public static Currency UnitedStatesDollar
         {
-            get { Warrant.NotNull<Currency>(); return USD.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return USD.Unit; }
         }
 
         /// <summary>
@@ -292,7 +290,7 @@ namespace Narvalo.Finance
         /// <value>The unique instance of the <see cref="Currency" /> class for the "Japanese Yen".</value>
         public static Currency Yen
         {
-            get { Warrant.NotNull<Currency>(); return JPY.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return JPY.Unit; }
         }
 
         /// <summary>
@@ -302,7 +300,7 @@ namespace Narvalo.Finance
         /// <remarks>The code for a precious metal is formed after its chemical symbol: AU.</remarks>
         public static Currency Gold
         {
-            get { Warrant.NotNull<Currency>(); return XAU.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return XAU.Unit; }
         }
 
         /// <summary>
@@ -312,7 +310,7 @@ namespace Narvalo.Finance
         /// <remarks>The code for a precious metal is formed after its chemical symbol: PD.</remarks>
         public static Currency Palladium
         {
-            get { Warrant.NotNull<Currency>(); return XPD.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return XPD.Unit; }
         }
 
         /// <summary>
@@ -322,7 +320,7 @@ namespace Narvalo.Finance
         /// <remarks>The code for a precious metal is formed after its chemical symbol: PT.</remarks>
         public static Currency Platinum
         {
-            get { Warrant.NotNull<Currency>(); return XPT.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return XPT.Unit; }
         }
 
         /// <summary>
@@ -332,7 +330,7 @@ namespace Narvalo.Finance
         /// <remarks>The code for a precious metal is formed after its chemical symbol: AG.</remarks>
         public static Currency Silver
         {
-            get { Warrant.NotNull<Currency>(); return XAG.UniqInstance; }
+            get { Warrant.NotNull<Currency>(); return XAG.Unit; }
         }
     }
 }

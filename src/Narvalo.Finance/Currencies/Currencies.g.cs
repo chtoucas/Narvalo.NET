@@ -10,7 +10,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
 using global::System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY", Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
@@ -35,10 +34,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ADP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ADP".</value>
-        public static ADP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ADP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -63,10 +62,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AED".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AED".</value>
-        public static AED UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AED Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -91,10 +90,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFA".</value>
-        public static AFA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AFA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -119,10 +118,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFN".</value>
-        public static AFN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AFN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -147,10 +146,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALK".</value>
-        public static ALK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ALK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -175,10 +174,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALL".</value>
-        public static ALL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ALL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -203,10 +202,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AMD".</value>
-        public static AMD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AMD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -231,10 +230,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ANG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ANG".</value>
-        public static ANG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ANG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -259,10 +258,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOA".</value>
-        public static AOA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AOA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -287,10 +286,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOK".</value>
-        public static AOK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AOK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -315,10 +314,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AON".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AON".</value>
-        public static AON UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AON Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -343,10 +342,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOR".</value>
-        public static AOR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AOR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -371,10 +370,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARA".</value>
-        public static ARA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ARA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -399,10 +398,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARP".</value>
-        public static ARP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ARP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -427,10 +426,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARS".</value>
-        public static ARS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ARS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -455,10 +454,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARY".</value>
-        public static ARY UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ARY Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -483,10 +482,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ATS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ATS".</value>
-        public static ATS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ATS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -511,10 +510,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AUD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AUD".</value>
-        public static AUD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AUD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -539,10 +538,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AWG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AWG".</value>
-        public static AWG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AWG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -567,10 +566,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AYM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AYM".</value>
-        public static AYM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AYM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -595,10 +594,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZM".</value>
-        public static AZM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AZM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -623,10 +622,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZN".</value>
-        public static AZN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static AZN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -651,10 +650,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAD".</value>
-        public static BAD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BAD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -679,10 +678,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAM".</value>
-        public static BAM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BAM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -707,10 +706,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BBD".</value>
-        public static BBD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BBD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -735,10 +734,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BDT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BDT".</value>
-        public static BDT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BDT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -763,10 +762,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEC".</value>
-        public static BEC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BEC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -791,10 +790,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEF".</value>
-        public static BEF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BEF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -819,10 +818,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEL".</value>
-        public static BEL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BEL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -847,10 +846,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGJ".</value>
-        public static BGJ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BGJ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -875,10 +874,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGK".</value>
-        public static BGK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BGK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -903,10 +902,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGL".</value>
-        public static BGL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BGL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -931,10 +930,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGN".</value>
-        public static BGN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BGN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -959,10 +958,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BHD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BHD".</value>
-        public static BHD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BHD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -987,10 +986,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BIF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BIF".</value>
-        public static BIF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BIF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1015,10 +1014,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BMD".</value>
-        public static BMD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BMD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1043,10 +1042,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BND".</value>
-        public static BND UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BND Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1071,10 +1070,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOB".</value>
-        public static BOB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BOB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1099,10 +1098,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOP".</value>
-        public static BOP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BOP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1127,10 +1126,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOV".</value>
-        public static BOV UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BOV Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1155,10 +1154,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRB".</value>
-        public static BRB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BRB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1183,10 +1182,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRC".</value>
-        public static BRC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BRC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1211,10 +1210,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRE".</value>
-        public static BRE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BRE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1239,10 +1238,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRL".</value>
-        public static BRL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BRL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1267,10 +1266,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRN".</value>
-        public static BRN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BRN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1295,10 +1294,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRR".</value>
-        public static BRR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BRR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1323,10 +1322,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BSD".</value>
-        public static BSD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BSD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1351,10 +1350,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BTN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BTN".</value>
-        public static BTN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BTN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1379,10 +1378,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BUK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BUK".</value>
-        public static BUK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BUK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1407,10 +1406,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BWP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BWP".</value>
-        public static BWP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BWP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1435,10 +1434,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYB".</value>
-        public static BYB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BYB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1463,10 +1462,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYN".</value>
-        public static BYN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BYN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1491,10 +1490,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYR".</value>
-        public static BYR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BYR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1519,10 +1518,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BZD".</value>
-        public static BZD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static BZD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1547,10 +1546,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CAD".</value>
-        public static CAD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CAD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1575,10 +1574,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CDF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CDF".</value>
-        public static CDF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CDF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1603,10 +1602,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHC".</value>
-        public static CHC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CHC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1631,10 +1630,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHE".</value>
-        public static CHE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CHE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1659,10 +1658,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHF".</value>
-        public static CHF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CHF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1687,10 +1686,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHW".</value>
-        public static CHW UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CHW Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1715,10 +1714,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLF".</value>
-        public static CLF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CLF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1743,10 +1742,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLP".</value>
-        public static CLP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CLP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1771,10 +1770,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNX".</value>
-        public static CNX UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CNX Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1799,10 +1798,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNY".</value>
-        public static CNY UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CNY Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1827,10 +1826,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "COP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "COP".</value>
-        public static COP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static COP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1855,10 +1854,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "COU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "COU".</value>
-        public static COU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static COU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1883,10 +1882,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CRC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CRC".</value>
-        public static CRC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CRC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1911,10 +1910,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSD".</value>
-        public static CSD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CSD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1939,10 +1938,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSJ".</value>
-        public static CSJ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CSJ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1967,10 +1966,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSK".</value>
-        public static CSK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CSK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -1995,10 +1994,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUC".</value>
-        public static CUC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CUC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2023,10 +2022,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUP".</value>
-        public static CUP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CUP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2051,10 +2050,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CVE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CVE".</value>
-        public static CVE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CVE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2079,10 +2078,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CYP".</value>
-        public static CYP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CYP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2107,10 +2106,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CZK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CZK".</value>
-        public static CZK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static CZK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2135,10 +2134,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DDM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DDM".</value>
-        public static DDM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static DDM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2163,10 +2162,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DEM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DEM".</value>
-        public static DEM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static DEM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2191,10 +2190,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DJF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DJF".</value>
-        public static DJF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static DJF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2219,10 +2218,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DKK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DKK".</value>
-        public static DKK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static DKK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2247,10 +2246,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DOP".</value>
-        public static DOP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static DOP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2275,10 +2274,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DZD".</value>
-        public static DZD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static DZD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2303,10 +2302,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECS".</value>
-        public static ECS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ECS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2331,10 +2330,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECV".</value>
-        public static ECV UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ECV Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2359,10 +2358,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EEK".</value>
-        public static EEK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static EEK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2387,10 +2386,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EGP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EGP".</value>
-        public static EGP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static EGP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2415,10 +2414,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EQE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EQE".</value>
-        public static EQE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static EQE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2443,10 +2442,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ERN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ERN".</value>
-        public static ERN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ERN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2471,10 +2470,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESA".</value>
-        public static ESA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ESA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2499,10 +2498,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESB".</value>
-        public static ESB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ESB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2527,10 +2526,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESP".</value>
-        public static ESP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ESP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2555,10 +2554,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ETB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ETB".</value>
-        public static ETB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ETB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2583,10 +2582,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EUR".</value>
-        public static EUR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static EUR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2611,10 +2610,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FIM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FIM".</value>
-        public static FIM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static FIM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2639,10 +2638,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FJD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FJD".</value>
-        public static FJD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static FJD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2667,10 +2666,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FKP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FKP".</value>
-        public static FKP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static FKP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2695,10 +2694,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FRF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FRF".</value>
-        public static FRF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static FRF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2723,10 +2722,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GBP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GBP".</value>
-        public static GBP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GBP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2751,10 +2750,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEK".</value>
-        public static GEK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GEK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2779,10 +2778,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEL".</value>
-        public static GEL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GEL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2807,10 +2806,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHC".</value>
-        public static GHC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GHC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2835,10 +2834,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHP".</value>
-        public static GHP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GHP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2863,10 +2862,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHS".</value>
-        public static GHS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GHS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2891,10 +2890,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GIP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GIP".</value>
-        public static GIP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GIP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2919,10 +2918,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GMD".</value>
-        public static GMD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GMD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2947,10 +2946,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNE".</value>
-        public static GNE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GNE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -2975,10 +2974,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNF".</value>
-        public static GNF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GNF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3003,10 +3002,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNS".</value>
-        public static GNS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GNS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3031,10 +3030,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GQE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GQE".</value>
-        public static GQE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GQE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3059,10 +3058,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GRD".</value>
-        public static GRD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GRD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3087,10 +3086,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GTQ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GTQ".</value>
-        public static GTQ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GTQ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3115,10 +3114,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWE".</value>
-        public static GWE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GWE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3143,10 +3142,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWP".</value>
-        public static GWP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GWP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3171,10 +3170,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GYD".</value>
-        public static GYD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static GYD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3199,10 +3198,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HKD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HKD".</value>
-        public static HKD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static HKD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3227,10 +3226,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HNL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HNL".</value>
-        public static HNL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static HNL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3255,10 +3254,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRD".</value>
-        public static HRD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static HRD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3283,10 +3282,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRK".</value>
-        public static HRK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static HRK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3311,10 +3310,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HTG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HTG".</value>
-        public static HTG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static HTG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3339,10 +3338,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HUF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HUF".</value>
-        public static HUF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static HUF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3367,10 +3366,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IDR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IDR".</value>
-        public static IDR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static IDR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3395,10 +3394,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IEP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IEP".</value>
-        public static IEP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static IEP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3423,10 +3422,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILP".</value>
-        public static ILP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ILP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3451,10 +3450,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILR".</value>
-        public static ILR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ILR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3479,10 +3478,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILS".</value>
-        public static ILS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ILS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3507,10 +3506,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "INR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "INR".</value>
-        public static INR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static INR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3535,10 +3534,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IQD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IQD".</value>
-        public static IQD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static IQD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3563,10 +3562,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IRR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IRR".</value>
-        public static IRR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static IRR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3591,10 +3590,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISJ".</value>
-        public static ISJ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ISJ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3619,10 +3618,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISK".</value>
-        public static ISK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ISK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3647,10 +3646,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ITL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ITL".</value>
-        public static ITL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ITL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3675,10 +3674,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JMD".</value>
-        public static JMD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static JMD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3703,10 +3702,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JOD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JOD".</value>
-        public static JOD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static JOD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3731,10 +3730,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JPY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JPY".</value>
-        public static JPY UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static JPY Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3759,10 +3758,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KES".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KES".</value>
-        public static KES UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static KES Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3787,10 +3786,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KGS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KGS".</value>
-        public static KGS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static KGS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3815,10 +3814,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KHR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KHR".</value>
-        public static KHR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static KHR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3843,10 +3842,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KMF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KMF".</value>
-        public static KMF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static KMF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3871,10 +3870,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KPW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KPW".</value>
-        public static KPW UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static KPW Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3899,10 +3898,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KRW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KRW".</value>
-        public static KRW UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static KRW Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3927,10 +3926,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KWD".</value>
-        public static KWD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static KWD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3955,10 +3954,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KYD".</value>
-        public static KYD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static KYD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -3983,10 +3982,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KZT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KZT".</value>
-        public static KZT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static KZT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4011,10 +4010,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAJ".</value>
-        public static LAJ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LAJ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4039,10 +4038,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAK".</value>
-        public static LAK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LAK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4067,10 +4066,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LBP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LBP".</value>
-        public static LBP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LBP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4095,10 +4094,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LKR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LKR".</value>
-        public static LKR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LKR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4123,10 +4122,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LRD".</value>
-        public static LRD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LRD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4151,10 +4150,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSL".</value>
-        public static LSL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LSL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4179,10 +4178,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSM".</value>
-        public static LSM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LSM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4207,10 +4206,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTL".</value>
-        public static LTL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LTL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4235,10 +4234,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTT".</value>
-        public static LTT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LTT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4263,10 +4262,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUC".</value>
-        public static LUC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LUC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4291,10 +4290,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUF".</value>
-        public static LUF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LUF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4319,10 +4318,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUL".</value>
-        public static LUL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LUL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4347,10 +4346,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVL".</value>
-        public static LVL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LVL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4375,10 +4374,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVR".</value>
-        public static LVR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LVR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4403,10 +4402,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LYD".</value>
-        public static LYD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static LYD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4431,10 +4430,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAD".</value>
-        public static MAD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MAD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4459,10 +4458,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAF".</value>
-        public static MAF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MAF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4487,10 +4486,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MDL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MDL".</value>
-        public static MDL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MDL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4515,10 +4514,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGA".</value>
-        public static MGA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MGA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4543,10 +4542,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGF".</value>
-        public static MGF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MGF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4571,10 +4570,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MKD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MKD".</value>
-        public static MKD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MKD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4599,10 +4598,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MLF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MLF".</value>
-        public static MLF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MLF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4627,10 +4626,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MMK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MMK".</value>
-        public static MMK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MMK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4655,10 +4654,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MNT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MNT".</value>
-        public static MNT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MNT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4683,10 +4682,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MOP".</value>
-        public static MOP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MOP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4711,10 +4710,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MRO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MRO".</value>
-        public static MRO UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MRO Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4739,10 +4738,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTL".</value>
-        public static MTL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MTL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4767,10 +4766,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTP".</value>
-        public static MTP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MTP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4795,10 +4794,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MUR".</value>
-        public static MUR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MUR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4823,10 +4822,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVQ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVQ".</value>
-        public static MVQ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MVQ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4851,10 +4850,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVR".</value>
-        public static MVR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MVR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4879,10 +4878,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MWK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MWK".</value>
-        public static MWK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MWK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4907,10 +4906,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXN".</value>
-        public static MXN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MXN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4935,10 +4934,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXP".</value>
-        public static MXP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MXP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4963,10 +4962,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXV".</value>
-        public static MXV UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MXV Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -4991,10 +4990,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MYR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MYR".</value>
-        public static MYR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MYR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5019,10 +5018,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZE".</value>
-        public static MZE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MZE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5047,10 +5046,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZM".</value>
-        public static MZM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MZM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5075,10 +5074,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZN".</value>
-        public static MZN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static MZN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5103,10 +5102,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NAD".</value>
-        public static NAD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static NAD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5131,10 +5130,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NGN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NGN".</value>
-        public static NGN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static NGN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5159,10 +5158,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIC".</value>
-        public static NIC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static NIC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5187,10 +5186,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIO".</value>
-        public static NIO UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static NIO Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5215,10 +5214,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NLG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NLG".</value>
-        public static NLG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static NLG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5243,10 +5242,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NOK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NOK".</value>
-        public static NOK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static NOK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5271,10 +5270,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NPR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NPR".</value>
-        public static NPR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static NPR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5299,10 +5298,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NZD".</value>
-        public static NZD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static NZD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5327,10 +5326,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "OMR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "OMR".</value>
-        public static OMR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static OMR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5355,10 +5354,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PAB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PAB".</value>
-        public static PAB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PAB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5383,10 +5382,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEH".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEH".</value>
-        public static PEH UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PEH Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5411,10 +5410,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEI".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEI".</value>
-        public static PEI UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PEI Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5439,10 +5438,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEN".</value>
-        public static PEN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PEN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5467,10 +5466,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PES".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PES".</value>
-        public static PES UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PES Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5495,10 +5494,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PGK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PGK".</value>
-        public static PGK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PGK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5523,10 +5522,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PHP".</value>
-        public static PHP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PHP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5551,10 +5550,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PKR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PKR".</value>
-        public static PKR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PKR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5579,10 +5578,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLN".</value>
-        public static PLN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PLN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5607,10 +5606,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLZ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLZ".</value>
-        public static PLZ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PLZ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5635,10 +5634,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PTE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PTE".</value>
-        public static PTE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PTE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5663,10 +5662,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PYG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PYG".</value>
-        public static PYG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static PYG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5691,10 +5690,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "QAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "QAR".</value>
-        public static QAR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static QAR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5719,10 +5718,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RHD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RHD".</value>
-        public static RHD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static RHD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5747,10 +5746,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROK".</value>
-        public static ROK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ROK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5775,10 +5774,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROL".</value>
-        public static ROL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ROL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5803,10 +5802,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RON".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RON".</value>
-        public static RON UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static RON Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5831,10 +5830,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RSD".</value>
-        public static RSD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static RSD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5859,10 +5858,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUB".</value>
-        public static RUB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static RUB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5887,10 +5886,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUR".</value>
-        public static RUR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static RUR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5915,10 +5914,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RWF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RWF".</value>
-        public static RWF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static RWF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5943,10 +5942,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SAR".</value>
-        public static SAR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SAR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5971,10 +5970,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SBD".</value>
-        public static SBD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SBD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -5999,10 +5998,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SCR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SCR".</value>
-        public static SCR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SCR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6027,10 +6026,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDD".</value>
-        public static SDD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SDD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6055,10 +6054,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDG".</value>
-        public static SDG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SDG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6083,10 +6082,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDP".</value>
-        public static SDP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SDP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6111,10 +6110,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SEK".</value>
-        public static SEK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SEK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6139,10 +6138,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SGD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SGD".</value>
-        public static SGD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SGD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6167,10 +6166,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SHP".</value>
-        public static SHP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SHP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6195,10 +6194,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SIT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SIT".</value>
-        public static SIT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SIT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6223,10 +6222,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SKK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SKK".</value>
-        public static SKK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SKK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6251,10 +6250,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SLL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SLL".</value>
-        public static SLL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SLL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6279,10 +6278,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SOS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SOS".</value>
-        public static SOS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SOS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6307,10 +6306,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRD".</value>
-        public static SRD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SRD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6335,10 +6334,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRG".</value>
-        public static SRG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SRG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6363,10 +6362,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SSP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SSP".</value>
-        public static SSP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SSP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6391,10 +6390,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "STD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "STD".</value>
-        public static STD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static STD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6419,10 +6418,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SUR".</value>
-        public static SUR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SUR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6447,10 +6446,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SVC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SVC".</value>
-        public static SVC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SVC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6475,10 +6474,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SYP".</value>
-        public static SYP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SYP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6503,10 +6502,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SZL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SZL".</value>
-        public static SZL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static SZL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6531,10 +6530,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "THB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "THB".</value>
-        public static THB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static THB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6559,10 +6558,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJR".</value>
-        public static TJR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TJR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6587,10 +6586,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJS".</value>
-        public static TJS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TJS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6615,10 +6614,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMM".</value>
-        public static TMM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TMM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6643,10 +6642,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMT".</value>
-        public static TMT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TMT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6671,10 +6670,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TND".</value>
-        public static TND UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TND Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6699,10 +6698,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TOP".</value>
-        public static TOP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TOP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6727,10 +6726,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TPE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TPE".</value>
-        public static TPE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TPE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6755,10 +6754,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRL".</value>
-        public static TRL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TRL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6783,10 +6782,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRY".</value>
-        public static TRY UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TRY Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6811,10 +6810,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TTD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TTD".</value>
-        public static TTD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TTD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6839,10 +6838,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TWD".</value>
-        public static TWD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TWD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6867,10 +6866,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TZS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TZS".</value>
-        public static TZS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static TZS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6895,10 +6894,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAH".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAH".</value>
-        public static UAH UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static UAH Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6923,10 +6922,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAK".</value>
-        public static UAK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static UAK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6951,10 +6950,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGS".</value>
-        public static UGS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static UGS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -6979,10 +6978,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGW".</value>
-        public static UGW UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static UGW Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7007,10 +7006,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGX".</value>
-        public static UGX UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static UGX Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7035,10 +7034,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USD".</value>
-        public static USD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static USD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7063,10 +7062,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USN".</value>
-        public static USN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static USN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7091,10 +7090,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USS".</value>
-        public static USS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static USS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7119,10 +7118,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYI".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYI".</value>
-        public static UYI UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static UYI Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7147,10 +7146,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYN".</value>
-        public static UYN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static UYN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7175,10 +7174,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYP".</value>
-        public static UYP UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static UYP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7203,10 +7202,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYU".</value>
-        public static UYU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static UYU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7231,10 +7230,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UZS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UZS".</value>
-        public static UZS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static UZS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7259,10 +7258,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEB".</value>
-        public static VEB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static VEB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7287,10 +7286,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEF".</value>
-        public static VEF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static VEF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7315,10 +7314,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VNC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VNC".</value>
-        public static VNC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static VNC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7343,10 +7342,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VND".</value>
-        public static VND UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static VND Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7371,10 +7370,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VUV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VUV".</value>
-        public static VUV UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static VUV Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7399,10 +7398,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "WST".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "WST".</value>
-        public static WST UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static WST Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7427,10 +7426,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAF".</value>
-        public static XAF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XAF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7455,10 +7454,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAG".</value>
-        public static XAG UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XAG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7483,10 +7482,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAU".</value>
-        public static XAU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XAU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7511,10 +7510,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBA".</value>
-        public static XBA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XBA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7539,10 +7538,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBB".</value>
-        public static XBB UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XBB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7567,10 +7566,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBC".</value>
-        public static XBC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XBC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7595,10 +7594,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBD".</value>
-        public static XBD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XBD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7623,10 +7622,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XCD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XCD".</value>
-        public static XCD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XCD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7651,10 +7650,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XDR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XDR".</value>
-        public static XDR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XDR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7679,10 +7678,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XEU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XEU".</value>
-        public static XEU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XEU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7707,10 +7706,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFO".</value>
-        public static XFO UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XFO Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7735,10 +7734,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFU".</value>
-        public static XFU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XFU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7763,10 +7762,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XOF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XOF".</value>
-        public static XOF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XOF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7791,10 +7790,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPD".</value>
-        public static XPD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XPD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7819,10 +7818,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPF".</value>
-        public static XPF UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XPF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7847,10 +7846,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPT".</value>
-        public static XPT UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XPT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7875,10 +7874,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XRE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XRE".</value>
-        public static XRE UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XRE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7903,10 +7902,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XSU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XSU".</value>
-        public static XSU UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XSU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7931,10 +7930,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XTS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XTS".</value>
-        public static XTS UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XTS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7959,10 +7958,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XUA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XUA".</value>
-        public static XUA UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XUA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -7987,10 +7986,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XXX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XXX".</value>
-        public static XXX UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static XXX Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8015,10 +8014,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YDD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YDD".</value>
-        public static YDD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static YDD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8043,10 +8042,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YER".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YER".</value>
-        public static YER UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static YER Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8071,10 +8070,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUD".</value>
-        public static YUD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static YUD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8099,10 +8098,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUM".</value>
-        public static YUM UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static YUM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8127,10 +8126,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUN".</value>
-        public static YUN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static YUN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8155,10 +8154,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAL".</value>
-        public static ZAL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZAL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8183,10 +8182,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAR".</value>
-        public static ZAR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZAR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8211,10 +8210,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMK".</value>
-        public static ZMK UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZMK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8239,10 +8238,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMW".</value>
-        public static ZMW UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZMW Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8267,10 +8266,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRN".</value>
-        public static ZRN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZRN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8295,10 +8294,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRZ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRZ".</value>
-        public static ZRZ UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZRZ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8323,10 +8322,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWC".</value>
-        public static ZWC UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZWC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8351,10 +8350,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWD".</value>
-        public static ZWD UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZWD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8379,10 +8378,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWL".</value>
-        public static ZWL UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZWL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8407,10 +8406,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWN".</value>
-        public static ZWN UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZWN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
@@ -8435,10 +8434,10 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWR".</value>
-        public static ZWR UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static ZWR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }

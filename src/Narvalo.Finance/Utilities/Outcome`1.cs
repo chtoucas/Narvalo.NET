@@ -26,7 +26,7 @@ namespace Narvalo.Finance.Utilities
 
         public static implicit operator Outcome<T>(T value) => Return(value);
 
-        public static explicit operator T?(Outcome<T> value)
+        public static explicit operator T? (Outcome<T> value)
         {
             if (value == null) { return null; }
 

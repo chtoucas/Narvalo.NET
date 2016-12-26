@@ -327,7 +327,7 @@ namespace Narvalo.Finance
 
         [Fact]
         public static void BuiltInCurrency_UniqInstance_ReturnsSingleton()
-            => Assert.True(Object.ReferenceEquals(EUR.UniqInstance, EUR.UniqInstance));
+            => Assert.True(Object.ReferenceEquals(EUR.Unit, EUR.Unit));
 
         #endregion
     }

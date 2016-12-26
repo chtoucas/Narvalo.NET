@@ -24,7 +24,6 @@ var codeSet = new HashSet<string>();
 WriteHeader();
 
 #>
-
 using global::System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY", Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
@@ -71,10 +70,10 @@ namespace <#= Namespace #>
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".</value>
-        public static <#= currency.Code #> UniqInstance { get { Warrant.NotNull<Currency>(); return Nested.Instance; } }
+        public static <#= currency.Code #> Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
-        private class Nested
+        private class Uniq
         {
             [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
             static Nested() { }
