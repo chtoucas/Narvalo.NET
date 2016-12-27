@@ -10,19 +10,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using global::System.Diagnostics.CodeAnalysis;
-
-[assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY", Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
-
-// Each currency code defines a class which is a lazy initalized singleton.
-// The singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
+// Below, the singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
 namespace Narvalo.Finance.Currencies
 {
     /// <summary>
     /// Represents the currency unit for the code "ADP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ADP : Currency
     {
         /// <summary>
@@ -34,13 +28,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ADP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ADP".</value>
-        public static ADP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ADP Unit { get { Warrant.NotNull<ADP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ADP Instance = new ADP();
         }
     }
@@ -50,7 +42,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AED : Currency
     {
         /// <summary>
@@ -62,13 +53,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AED".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AED".</value>
-        public static AED Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AED Unit { get { Warrant.NotNull<AED>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AED Instance = new AED();
         }
     }
@@ -78,7 +67,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFA : Currency
     {
         /// <summary>
@@ -90,13 +78,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFA".</value>
-        public static AFA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AFA Unit { get { Warrant.NotNull<AFA>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AFA Instance = new AFA();
         }
     }
@@ -106,7 +92,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AFN : Currency
     {
         /// <summary>
@@ -118,13 +103,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFN".</value>
-        public static AFN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AFN Unit { get { Warrant.NotNull<AFN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AFN Instance = new AFN();
         }
     }
@@ -134,7 +117,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALK : Currency
     {
         /// <summary>
@@ -146,13 +128,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALK".</value>
-        public static ALK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ALK Unit { get { Warrant.NotNull<ALK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ALK Instance = new ALK();
         }
     }
@@ -162,7 +142,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ALL : Currency
     {
         /// <summary>
@@ -174,13 +153,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALL".</value>
-        public static ALL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ALL Unit { get { Warrant.NotNull<ALL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ALL Instance = new ALL();
         }
     }
@@ -190,7 +167,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AMD : Currency
     {
         /// <summary>
@@ -202,13 +178,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AMD".</value>
-        public static AMD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AMD Unit { get { Warrant.NotNull<AMD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AMD Instance = new AMD();
         }
     }
@@ -218,7 +192,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ANG : Currency
     {
         /// <summary>
@@ -230,13 +203,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ANG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ANG".</value>
-        public static ANG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ANG Unit { get { Warrant.NotNull<ANG>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ANG Instance = new ANG();
         }
     }
@@ -246,7 +217,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOA : Currency
     {
         /// <summary>
@@ -258,13 +228,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOA".</value>
-        public static AOA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AOA Unit { get { Warrant.NotNull<AOA>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AOA Instance = new AOA();
         }
     }
@@ -274,7 +242,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOK : Currency
     {
         /// <summary>
@@ -286,13 +253,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOK".</value>
-        public static AOK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AOK Unit { get { Warrant.NotNull<AOK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AOK Instance = new AOK();
         }
     }
@@ -302,7 +267,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AON : Currency
     {
         /// <summary>
@@ -314,13 +278,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AON".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AON".</value>
-        public static AON Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AON Unit { get { Warrant.NotNull<AON>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AON Instance = new AON();
         }
     }
@@ -330,7 +292,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AOR : Currency
     {
         /// <summary>
@@ -342,13 +303,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOR".</value>
-        public static AOR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AOR Unit { get { Warrant.NotNull<AOR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AOR Instance = new AOR();
         }
     }
@@ -358,7 +317,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARA : Currency
     {
         /// <summary>
@@ -370,13 +328,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARA".</value>
-        public static ARA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ARA Unit { get { Warrant.NotNull<ARA>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ARA Instance = new ARA();
         }
     }
@@ -386,7 +342,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARP : Currency
     {
         /// <summary>
@@ -398,13 +353,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARP".</value>
-        public static ARP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ARP Unit { get { Warrant.NotNull<ARP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ARP Instance = new ARP();
         }
     }
@@ -414,7 +367,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARS : Currency
     {
         /// <summary>
@@ -426,13 +378,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARS".</value>
-        public static ARS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ARS Unit { get { Warrant.NotNull<ARS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ARS Instance = new ARS();
         }
     }
@@ -442,7 +392,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ARY : Currency
     {
         /// <summary>
@@ -454,13 +403,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARY".</value>
-        public static ARY Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ARY Unit { get { Warrant.NotNull<ARY>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ARY Instance = new ARY();
         }
     }
@@ -470,7 +417,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ATS : Currency
     {
         /// <summary>
@@ -482,13 +428,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ATS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ATS".</value>
-        public static ATS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ATS Unit { get { Warrant.NotNull<ATS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ATS Instance = new ATS();
         }
     }
@@ -498,7 +442,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AUD : Currency
     {
         /// <summary>
@@ -510,13 +453,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AUD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AUD".</value>
-        public static AUD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AUD Unit { get { Warrant.NotNull<AUD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AUD Instance = new AUD();
         }
     }
@@ -526,7 +467,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AWG : Currency
     {
         /// <summary>
@@ -538,13 +478,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AWG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AWG".</value>
-        public static AWG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AWG Unit { get { Warrant.NotNull<AWG>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AWG Instance = new AWG();
         }
     }
@@ -554,7 +492,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AYM : Currency
     {
         /// <summary>
@@ -566,13 +503,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AYM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AYM".</value>
-        public static AYM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AYM Unit { get { Warrant.NotNull<AYM>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AYM Instance = new AYM();
         }
     }
@@ -582,7 +517,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZM : Currency
     {
         /// <summary>
@@ -594,13 +528,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZM".</value>
-        public static AZM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AZM Unit { get { Warrant.NotNull<AZM>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AZM Instance = new AZM();
         }
     }
@@ -610,7 +542,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class AZN : Currency
     {
         /// <summary>
@@ -622,13 +553,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZN".</value>
-        public static AZN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static AZN Unit { get { Warrant.NotNull<AZN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly AZN Instance = new AZN();
         }
     }
@@ -638,7 +567,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAD : Currency
     {
         /// <summary>
@@ -650,13 +578,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAD".</value>
-        public static BAD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BAD Unit { get { Warrant.NotNull<BAD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BAD Instance = new BAD();
         }
     }
@@ -666,7 +592,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BAM : Currency
     {
         /// <summary>
@@ -678,13 +603,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAM".</value>
-        public static BAM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BAM Unit { get { Warrant.NotNull<BAM>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BAM Instance = new BAM();
         }
     }
@@ -694,7 +617,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BBD : Currency
     {
         /// <summary>
@@ -706,13 +628,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BBD".</value>
-        public static BBD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BBD Unit { get { Warrant.NotNull<BBD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BBD Instance = new BBD();
         }
     }
@@ -722,7 +642,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BDT : Currency
     {
         /// <summary>
@@ -734,13 +653,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BDT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BDT".</value>
-        public static BDT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BDT Unit { get { Warrant.NotNull<BDT>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BDT Instance = new BDT();
         }
     }
@@ -750,7 +667,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEC : Currency
     {
         /// <summary>
@@ -762,13 +678,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEC".</value>
-        public static BEC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BEC Unit { get { Warrant.NotNull<BEC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BEC Instance = new BEC();
         }
     }
@@ -778,7 +692,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEF : Currency
     {
         /// <summary>
@@ -790,13 +703,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEF".</value>
-        public static BEF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BEF Unit { get { Warrant.NotNull<BEF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BEF Instance = new BEF();
         }
     }
@@ -806,7 +717,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BEL : Currency
     {
         /// <summary>
@@ -818,13 +728,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEL".</value>
-        public static BEL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BEL Unit { get { Warrant.NotNull<BEL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BEL Instance = new BEL();
         }
     }
@@ -834,7 +742,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGJ : Currency
     {
         /// <summary>
@@ -846,13 +753,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGJ".</value>
-        public static BGJ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BGJ Unit { get { Warrant.NotNull<BGJ>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BGJ Instance = new BGJ();
         }
     }
@@ -862,7 +767,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGK : Currency
     {
         /// <summary>
@@ -874,13 +778,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGK".</value>
-        public static BGK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BGK Unit { get { Warrant.NotNull<BGK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BGK Instance = new BGK();
         }
     }
@@ -890,7 +792,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGL : Currency
     {
         /// <summary>
@@ -902,13 +803,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGL".</value>
-        public static BGL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BGL Unit { get { Warrant.NotNull<BGL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BGL Instance = new BGL();
         }
     }
@@ -918,7 +817,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BGN : Currency
     {
         /// <summary>
@@ -930,13 +828,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGN".</value>
-        public static BGN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BGN Unit { get { Warrant.NotNull<BGN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BGN Instance = new BGN();
         }
     }
@@ -946,7 +842,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BHD : Currency
     {
         /// <summary>
@@ -958,13 +853,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BHD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BHD".</value>
-        public static BHD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BHD Unit { get { Warrant.NotNull<BHD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BHD Instance = new BHD();
         }
     }
@@ -974,7 +867,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BIF : Currency
     {
         /// <summary>
@@ -986,13 +878,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BIF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BIF".</value>
-        public static BIF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BIF Unit { get { Warrant.NotNull<BIF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BIF Instance = new BIF();
         }
     }
@@ -1002,7 +892,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BMD : Currency
     {
         /// <summary>
@@ -1014,13 +903,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BMD".</value>
-        public static BMD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BMD Unit { get { Warrant.NotNull<BMD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BMD Instance = new BMD();
         }
     }
@@ -1030,7 +917,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BND : Currency
     {
         /// <summary>
@@ -1042,13 +928,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BND".</value>
-        public static BND Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BND Unit { get { Warrant.NotNull<BND>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BND Instance = new BND();
         }
     }
@@ -1058,7 +942,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOB : Currency
     {
         /// <summary>
@@ -1070,13 +953,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOB".</value>
-        public static BOB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BOB Unit { get { Warrant.NotNull<BOB>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BOB Instance = new BOB();
         }
     }
@@ -1086,7 +967,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOP : Currency
     {
         /// <summary>
@@ -1098,13 +978,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOP".</value>
-        public static BOP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BOP Unit { get { Warrant.NotNull<BOP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BOP Instance = new BOP();
         }
     }
@@ -1114,7 +992,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BOV : Currency
     {
         /// <summary>
@@ -1126,13 +1003,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOV".</value>
-        public static BOV Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BOV Unit { get { Warrant.NotNull<BOV>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BOV Instance = new BOV();
         }
     }
@@ -1142,7 +1017,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRB : Currency
     {
         /// <summary>
@@ -1154,13 +1028,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRB".</value>
-        public static BRB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BRB Unit { get { Warrant.NotNull<BRB>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BRB Instance = new BRB();
         }
     }
@@ -1170,7 +1042,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRC : Currency
     {
         /// <summary>
@@ -1182,13 +1053,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRC".</value>
-        public static BRC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BRC Unit { get { Warrant.NotNull<BRC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BRC Instance = new BRC();
         }
     }
@@ -1198,7 +1067,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRE : Currency
     {
         /// <summary>
@@ -1210,13 +1078,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRE".</value>
-        public static BRE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BRE Unit { get { Warrant.NotNull<BRE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BRE Instance = new BRE();
         }
     }
@@ -1226,7 +1092,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRL : Currency
     {
         /// <summary>
@@ -1238,13 +1103,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRL".</value>
-        public static BRL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BRL Unit { get { Warrant.NotNull<BRL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BRL Instance = new BRL();
         }
     }
@@ -1254,7 +1117,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRN : Currency
     {
         /// <summary>
@@ -1266,13 +1128,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRN".</value>
-        public static BRN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BRN Unit { get { Warrant.NotNull<BRN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BRN Instance = new BRN();
         }
     }
@@ -1282,7 +1142,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BRR : Currency
     {
         /// <summary>
@@ -1294,13 +1153,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRR".</value>
-        public static BRR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BRR Unit { get { Warrant.NotNull<BRR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BRR Instance = new BRR();
         }
     }
@@ -1310,7 +1167,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BSD : Currency
     {
         /// <summary>
@@ -1322,13 +1178,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BSD".</value>
-        public static BSD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BSD Unit { get { Warrant.NotNull<BSD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BSD Instance = new BSD();
         }
     }
@@ -1338,7 +1192,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BTN : Currency
     {
         /// <summary>
@@ -1350,13 +1203,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BTN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BTN".</value>
-        public static BTN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BTN Unit { get { Warrant.NotNull<BTN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BTN Instance = new BTN();
         }
     }
@@ -1366,7 +1217,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BUK : Currency
     {
         /// <summary>
@@ -1378,13 +1228,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BUK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BUK".</value>
-        public static BUK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BUK Unit { get { Warrant.NotNull<BUK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BUK Instance = new BUK();
         }
     }
@@ -1394,7 +1242,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BWP : Currency
     {
         /// <summary>
@@ -1406,13 +1253,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BWP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BWP".</value>
-        public static BWP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BWP Unit { get { Warrant.NotNull<BWP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BWP Instance = new BWP();
         }
     }
@@ -1422,7 +1267,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYB : Currency
     {
         /// <summary>
@@ -1434,13 +1278,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYB".</value>
-        public static BYB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BYB Unit { get { Warrant.NotNull<BYB>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BYB Instance = new BYB();
         }
     }
@@ -1450,7 +1292,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYN : Currency
     {
         /// <summary>
@@ -1462,13 +1303,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYN".</value>
-        public static BYN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BYN Unit { get { Warrant.NotNull<BYN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BYN Instance = new BYN();
         }
     }
@@ -1478,7 +1317,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BYR : Currency
     {
         /// <summary>
@@ -1490,13 +1328,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYR".</value>
-        public static BYR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BYR Unit { get { Warrant.NotNull<BYR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BYR Instance = new BYR();
         }
     }
@@ -1506,7 +1342,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class BZD : Currency
     {
         /// <summary>
@@ -1518,13 +1353,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "BZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "BZD".</value>
-        public static BZD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static BZD Unit { get { Warrant.NotNull<BZD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly BZD Instance = new BZD();
         }
     }
@@ -1534,7 +1367,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CAD : Currency
     {
         /// <summary>
@@ -1546,13 +1378,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CAD".</value>
-        public static CAD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CAD Unit { get { Warrant.NotNull<CAD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CAD Instance = new CAD();
         }
     }
@@ -1562,7 +1392,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CDF : Currency
     {
         /// <summary>
@@ -1574,13 +1403,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CDF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CDF".</value>
-        public static CDF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CDF Unit { get { Warrant.NotNull<CDF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CDF Instance = new CDF();
         }
     }
@@ -1590,7 +1417,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHC : Currency
     {
         /// <summary>
@@ -1602,13 +1428,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHC".</value>
-        public static CHC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CHC Unit { get { Warrant.NotNull<CHC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CHC Instance = new CHC();
         }
     }
@@ -1618,7 +1442,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHE : Currency
     {
         /// <summary>
@@ -1630,13 +1453,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHE".</value>
-        public static CHE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CHE Unit { get { Warrant.NotNull<CHE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CHE Instance = new CHE();
         }
     }
@@ -1646,7 +1467,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHF : Currency
     {
         /// <summary>
@@ -1658,13 +1478,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHF".</value>
-        public static CHF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CHF Unit { get { Warrant.NotNull<CHF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CHF Instance = new CHF();
         }
     }
@@ -1674,7 +1492,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CHW : Currency
     {
         /// <summary>
@@ -1686,13 +1503,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHW".</value>
-        public static CHW Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CHW Unit { get { Warrant.NotNull<CHW>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CHW Instance = new CHW();
         }
     }
@@ -1702,7 +1517,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLF : Currency
     {
         /// <summary>
@@ -1714,13 +1528,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLF".</value>
-        public static CLF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CLF Unit { get { Warrant.NotNull<CLF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CLF Instance = new CLF();
         }
     }
@@ -1730,7 +1542,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CLP : Currency
     {
         /// <summary>
@@ -1742,13 +1553,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLP".</value>
-        public static CLP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CLP Unit { get { Warrant.NotNull<CLP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CLP Instance = new CLP();
         }
     }
@@ -1758,7 +1567,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNX : Currency
     {
         /// <summary>
@@ -1770,13 +1578,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNX".</value>
-        public static CNX Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CNX Unit { get { Warrant.NotNull<CNX>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CNX Instance = new CNX();
         }
     }
@@ -1786,7 +1592,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CNY : Currency
     {
         /// <summary>
@@ -1798,13 +1603,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNY".</value>
-        public static CNY Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CNY Unit { get { Warrant.NotNull<CNY>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CNY Instance = new CNY();
         }
     }
@@ -1814,7 +1617,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COP : Currency
     {
         /// <summary>
@@ -1826,13 +1628,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "COP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "COP".</value>
-        public static COP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static COP Unit { get { Warrant.NotNull<COP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly COP Instance = new COP();
         }
     }
@@ -1842,7 +1642,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class COU : Currency
     {
         /// <summary>
@@ -1854,13 +1653,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "COU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "COU".</value>
-        public static COU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static COU Unit { get { Warrant.NotNull<COU>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly COU Instance = new COU();
         }
     }
@@ -1870,7 +1667,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CRC : Currency
     {
         /// <summary>
@@ -1882,13 +1678,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CRC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CRC".</value>
-        public static CRC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CRC Unit { get { Warrant.NotNull<CRC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CRC Instance = new CRC();
         }
     }
@@ -1898,7 +1692,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSD : Currency
     {
         /// <summary>
@@ -1910,13 +1703,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSD".</value>
-        public static CSD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CSD Unit { get { Warrant.NotNull<CSD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CSD Instance = new CSD();
         }
     }
@@ -1926,7 +1717,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSJ : Currency
     {
         /// <summary>
@@ -1938,13 +1728,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSJ".</value>
-        public static CSJ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CSJ Unit { get { Warrant.NotNull<CSJ>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CSJ Instance = new CSJ();
         }
     }
@@ -1954,7 +1742,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CSK : Currency
     {
         /// <summary>
@@ -1966,13 +1753,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSK".</value>
-        public static CSK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CSK Unit { get { Warrant.NotNull<CSK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CSK Instance = new CSK();
         }
     }
@@ -1982,7 +1767,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUC : Currency
     {
         /// <summary>
@@ -1994,13 +1778,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUC".</value>
-        public static CUC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CUC Unit { get { Warrant.NotNull<CUC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CUC Instance = new CUC();
         }
     }
@@ -2010,7 +1792,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CUP : Currency
     {
         /// <summary>
@@ -2022,13 +1803,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUP".</value>
-        public static CUP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CUP Unit { get { Warrant.NotNull<CUP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CUP Instance = new CUP();
         }
     }
@@ -2038,7 +1817,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CVE : Currency
     {
         /// <summary>
@@ -2050,13 +1828,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CVE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CVE".</value>
-        public static CVE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CVE Unit { get { Warrant.NotNull<CVE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CVE Instance = new CVE();
         }
     }
@@ -2066,7 +1842,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CYP : Currency
     {
         /// <summary>
@@ -2078,13 +1853,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CYP".</value>
-        public static CYP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CYP Unit { get { Warrant.NotNull<CYP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CYP Instance = new CYP();
         }
     }
@@ -2094,7 +1867,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class CZK : Currency
     {
         /// <summary>
@@ -2106,13 +1878,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "CZK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "CZK".</value>
-        public static CZK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static CZK Unit { get { Warrant.NotNull<CZK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly CZK Instance = new CZK();
         }
     }
@@ -2122,7 +1892,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DDM : Currency
     {
         /// <summary>
@@ -2134,13 +1903,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DDM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DDM".</value>
-        public static DDM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static DDM Unit { get { Warrant.NotNull<DDM>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly DDM Instance = new DDM();
         }
     }
@@ -2150,7 +1917,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DEM : Currency
     {
         /// <summary>
@@ -2162,13 +1928,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DEM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DEM".</value>
-        public static DEM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static DEM Unit { get { Warrant.NotNull<DEM>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly DEM Instance = new DEM();
         }
     }
@@ -2178,7 +1942,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DJF : Currency
     {
         /// <summary>
@@ -2190,13 +1953,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DJF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DJF".</value>
-        public static DJF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static DJF Unit { get { Warrant.NotNull<DJF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly DJF Instance = new DJF();
         }
     }
@@ -2206,7 +1967,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DKK : Currency
     {
         /// <summary>
@@ -2218,13 +1978,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DKK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DKK".</value>
-        public static DKK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static DKK Unit { get { Warrant.NotNull<DKK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly DKK Instance = new DKK();
         }
     }
@@ -2234,7 +1992,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DOP : Currency
     {
         /// <summary>
@@ -2246,13 +2003,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DOP".</value>
-        public static DOP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static DOP Unit { get { Warrant.NotNull<DOP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly DOP Instance = new DOP();
         }
     }
@@ -2262,7 +2017,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class DZD : Currency
     {
         /// <summary>
@@ -2274,13 +2028,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "DZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "DZD".</value>
-        public static DZD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static DZD Unit { get { Warrant.NotNull<DZD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly DZD Instance = new DZD();
         }
     }
@@ -2290,7 +2042,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ECS : Currency
     {
         /// <summary>
@@ -2302,13 +2053,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECS".</value>
-        public static ECS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ECS Unit { get { Warrant.NotNull<ECS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ECS Instance = new ECS();
         }
     }
@@ -2318,7 +2067,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ECV : Currency
     {
         /// <summary>
@@ -2330,13 +2078,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECV".</value>
-        public static ECV Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ECV Unit { get { Warrant.NotNull<ECV>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ECV Instance = new ECV();
         }
     }
@@ -2346,7 +2092,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EEK : Currency
     {
         /// <summary>
@@ -2358,13 +2103,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EEK".</value>
-        public static EEK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static EEK Unit { get { Warrant.NotNull<EEK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly EEK Instance = new EEK();
         }
     }
@@ -2374,7 +2117,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EGP : Currency
     {
         /// <summary>
@@ -2386,13 +2128,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EGP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EGP".</value>
-        public static EGP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static EGP Unit { get { Warrant.NotNull<EGP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly EGP Instance = new EGP();
         }
     }
@@ -2402,7 +2142,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EQE : Currency
     {
         /// <summary>
@@ -2414,13 +2153,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EQE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EQE".</value>
-        public static EQE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static EQE Unit { get { Warrant.NotNull<EQE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly EQE Instance = new EQE();
         }
     }
@@ -2430,7 +2167,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ERN : Currency
     {
         /// <summary>
@@ -2442,13 +2178,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ERN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ERN".</value>
-        public static ERN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ERN Unit { get { Warrant.NotNull<ERN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ERN Instance = new ERN();
         }
     }
@@ -2458,7 +2192,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESA : Currency
     {
         /// <summary>
@@ -2470,13 +2203,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESA".</value>
-        public static ESA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ESA Unit { get { Warrant.NotNull<ESA>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ESA Instance = new ESA();
         }
     }
@@ -2486,7 +2217,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESB : Currency
     {
         /// <summary>
@@ -2498,13 +2228,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESB".</value>
-        public static ESB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ESB Unit { get { Warrant.NotNull<ESB>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ESB Instance = new ESB();
         }
     }
@@ -2514,7 +2242,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ESP : Currency
     {
         /// <summary>
@@ -2526,13 +2253,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESP".</value>
-        public static ESP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ESP Unit { get { Warrant.NotNull<ESP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ESP Instance = new ESP();
         }
     }
@@ -2542,7 +2267,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ETB : Currency
     {
         /// <summary>
@@ -2554,13 +2278,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ETB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ETB".</value>
-        public static ETB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ETB Unit { get { Warrant.NotNull<ETB>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ETB Instance = new ETB();
         }
     }
@@ -2570,7 +2292,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class EUR : Currency
     {
         /// <summary>
@@ -2582,13 +2303,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "EUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "EUR".</value>
-        public static EUR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static EUR Unit { get { Warrant.NotNull<EUR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly EUR Instance = new EUR();
         }
     }
@@ -2598,7 +2317,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FIM : Currency
     {
         /// <summary>
@@ -2610,13 +2328,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FIM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FIM".</value>
-        public static FIM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static FIM Unit { get { Warrant.NotNull<FIM>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly FIM Instance = new FIM();
         }
     }
@@ -2626,7 +2342,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FJD : Currency
     {
         /// <summary>
@@ -2638,13 +2353,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FJD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FJD".</value>
-        public static FJD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static FJD Unit { get { Warrant.NotNull<FJD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly FJD Instance = new FJD();
         }
     }
@@ -2654,7 +2367,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FKP : Currency
     {
         /// <summary>
@@ -2666,13 +2378,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FKP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FKP".</value>
-        public static FKP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static FKP Unit { get { Warrant.NotNull<FKP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly FKP Instance = new FKP();
         }
     }
@@ -2682,7 +2392,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class FRF : Currency
     {
         /// <summary>
@@ -2694,13 +2403,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "FRF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "FRF".</value>
-        public static FRF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static FRF Unit { get { Warrant.NotNull<FRF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly FRF Instance = new FRF();
         }
     }
@@ -2710,7 +2417,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GBP : Currency
     {
         /// <summary>
@@ -2722,13 +2428,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GBP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GBP".</value>
-        public static GBP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GBP Unit { get { Warrant.NotNull<GBP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GBP Instance = new GBP();
         }
     }
@@ -2738,7 +2442,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEK : Currency
     {
         /// <summary>
@@ -2750,13 +2453,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEK".</value>
-        public static GEK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GEK Unit { get { Warrant.NotNull<GEK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GEK Instance = new GEK();
         }
     }
@@ -2766,7 +2467,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GEL : Currency
     {
         /// <summary>
@@ -2778,13 +2478,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEL".</value>
-        public static GEL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GEL Unit { get { Warrant.NotNull<GEL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GEL Instance = new GEL();
         }
     }
@@ -2794,7 +2492,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHC : Currency
     {
         /// <summary>
@@ -2806,13 +2503,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHC".</value>
-        public static GHC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GHC Unit { get { Warrant.NotNull<GHC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GHC Instance = new GHC();
         }
     }
@@ -2822,7 +2517,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHP : Currency
     {
         /// <summary>
@@ -2834,13 +2528,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHP".</value>
-        public static GHP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GHP Unit { get { Warrant.NotNull<GHP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GHP Instance = new GHP();
         }
     }
@@ -2850,7 +2542,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GHS : Currency
     {
         /// <summary>
@@ -2862,13 +2553,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHS".</value>
-        public static GHS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GHS Unit { get { Warrant.NotNull<GHS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GHS Instance = new GHS();
         }
     }
@@ -2878,7 +2567,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GIP : Currency
     {
         /// <summary>
@@ -2890,13 +2578,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GIP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GIP".</value>
-        public static GIP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GIP Unit { get { Warrant.NotNull<GIP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GIP Instance = new GIP();
         }
     }
@@ -2906,7 +2592,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GMD : Currency
     {
         /// <summary>
@@ -2918,13 +2603,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GMD".</value>
-        public static GMD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GMD Unit { get { Warrant.NotNull<GMD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GMD Instance = new GMD();
         }
     }
@@ -2934,7 +2617,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNE : Currency
     {
         /// <summary>
@@ -2946,13 +2628,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNE".</value>
-        public static GNE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GNE Unit { get { Warrant.NotNull<GNE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GNE Instance = new GNE();
         }
     }
@@ -2962,7 +2642,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNF : Currency
     {
         /// <summary>
@@ -2974,13 +2653,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNF".</value>
-        public static GNF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GNF Unit { get { Warrant.NotNull<GNF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GNF Instance = new GNF();
         }
     }
@@ -2990,7 +2667,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GNS : Currency
     {
         /// <summary>
@@ -3002,13 +2678,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNS".</value>
-        public static GNS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GNS Unit { get { Warrant.NotNull<GNS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GNS Instance = new GNS();
         }
     }
@@ -3018,7 +2692,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GQE : Currency
     {
         /// <summary>
@@ -3030,13 +2703,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GQE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GQE".</value>
-        public static GQE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GQE Unit { get { Warrant.NotNull<GQE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GQE Instance = new GQE();
         }
     }
@@ -3046,7 +2717,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GRD : Currency
     {
         /// <summary>
@@ -3058,13 +2728,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GRD".</value>
-        public static GRD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GRD Unit { get { Warrant.NotNull<GRD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GRD Instance = new GRD();
         }
     }
@@ -3074,7 +2742,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GTQ : Currency
     {
         /// <summary>
@@ -3086,13 +2753,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GTQ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GTQ".</value>
-        public static GTQ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GTQ Unit { get { Warrant.NotNull<GTQ>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GTQ Instance = new GTQ();
         }
     }
@@ -3102,7 +2767,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GWE : Currency
     {
         /// <summary>
@@ -3114,13 +2778,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWE".</value>
-        public static GWE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GWE Unit { get { Warrant.NotNull<GWE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GWE Instance = new GWE();
         }
     }
@@ -3130,7 +2792,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GWP : Currency
     {
         /// <summary>
@@ -3142,13 +2803,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWP".</value>
-        public static GWP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GWP Unit { get { Warrant.NotNull<GWP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GWP Instance = new GWP();
         }
     }
@@ -3158,7 +2817,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class GYD : Currency
     {
         /// <summary>
@@ -3170,13 +2828,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "GYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "GYD".</value>
-        public static GYD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static GYD Unit { get { Warrant.NotNull<GYD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly GYD Instance = new GYD();
         }
     }
@@ -3186,7 +2842,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HKD : Currency
     {
         /// <summary>
@@ -3198,13 +2853,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HKD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HKD".</value>
-        public static HKD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static HKD Unit { get { Warrant.NotNull<HKD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly HKD Instance = new HKD();
         }
     }
@@ -3214,7 +2867,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HNL : Currency
     {
         /// <summary>
@@ -3226,13 +2878,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HNL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HNL".</value>
-        public static HNL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static HNL Unit { get { Warrant.NotNull<HNL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly HNL Instance = new HNL();
         }
     }
@@ -3242,7 +2892,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRD : Currency
     {
         /// <summary>
@@ -3254,13 +2903,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRD".</value>
-        public static HRD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static HRD Unit { get { Warrant.NotNull<HRD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly HRD Instance = new HRD();
         }
     }
@@ -3270,7 +2917,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HRK : Currency
     {
         /// <summary>
@@ -3282,13 +2928,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRK".</value>
-        public static HRK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static HRK Unit { get { Warrant.NotNull<HRK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly HRK Instance = new HRK();
         }
     }
@@ -3298,7 +2942,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HTG : Currency
     {
         /// <summary>
@@ -3310,13 +2953,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HTG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HTG".</value>
-        public static HTG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static HTG Unit { get { Warrant.NotNull<HTG>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly HTG Instance = new HTG();
         }
     }
@@ -3326,7 +2967,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class HUF : Currency
     {
         /// <summary>
@@ -3338,13 +2978,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "HUF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "HUF".</value>
-        public static HUF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static HUF Unit { get { Warrant.NotNull<HUF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly HUF Instance = new HUF();
         }
     }
@@ -3354,7 +2992,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IDR : Currency
     {
         /// <summary>
@@ -3366,13 +3003,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IDR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IDR".</value>
-        public static IDR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static IDR Unit { get { Warrant.NotNull<IDR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly IDR Instance = new IDR();
         }
     }
@@ -3382,7 +3017,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IEP : Currency
     {
         /// <summary>
@@ -3394,13 +3028,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IEP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IEP".</value>
-        public static IEP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static IEP Unit { get { Warrant.NotNull<IEP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly IEP Instance = new IEP();
         }
     }
@@ -3410,7 +3042,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILP : Currency
     {
         /// <summary>
@@ -3422,13 +3053,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILP".</value>
-        public static ILP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ILP Unit { get { Warrant.NotNull<ILP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ILP Instance = new ILP();
         }
     }
@@ -3438,7 +3067,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILR : Currency
     {
         /// <summary>
@@ -3450,13 +3078,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILR".</value>
-        public static ILR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ILR Unit { get { Warrant.NotNull<ILR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ILR Instance = new ILR();
         }
     }
@@ -3466,7 +3092,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ILS : Currency
     {
         /// <summary>
@@ -3478,13 +3103,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILS".</value>
-        public static ILS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ILS Unit { get { Warrant.NotNull<ILS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ILS Instance = new ILS();
         }
     }
@@ -3494,7 +3117,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class INR : Currency
     {
         /// <summary>
@@ -3506,13 +3128,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "INR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "INR".</value>
-        public static INR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static INR Unit { get { Warrant.NotNull<INR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly INR Instance = new INR();
         }
     }
@@ -3522,7 +3142,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IQD : Currency
     {
         /// <summary>
@@ -3534,13 +3153,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IQD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IQD".</value>
-        public static IQD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static IQD Unit { get { Warrant.NotNull<IQD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly IQD Instance = new IQD();
         }
     }
@@ -3550,7 +3167,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class IRR : Currency
     {
         /// <summary>
@@ -3562,13 +3178,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "IRR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "IRR".</value>
-        public static IRR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static IRR Unit { get { Warrant.NotNull<IRR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly IRR Instance = new IRR();
         }
     }
@@ -3578,7 +3192,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISJ : Currency
     {
         /// <summary>
@@ -3590,13 +3203,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISJ".</value>
-        public static ISJ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ISJ Unit { get { Warrant.NotNull<ISJ>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ISJ Instance = new ISJ();
         }
     }
@@ -3606,7 +3217,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ISK : Currency
     {
         /// <summary>
@@ -3618,13 +3228,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISK".</value>
-        public static ISK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ISK Unit { get { Warrant.NotNull<ISK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ISK Instance = new ISK();
         }
     }
@@ -3634,7 +3242,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ITL : Currency
     {
         /// <summary>
@@ -3646,13 +3253,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ITL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ITL".</value>
-        public static ITL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ITL Unit { get { Warrant.NotNull<ITL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ITL Instance = new ITL();
         }
     }
@@ -3662,7 +3267,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JMD : Currency
     {
         /// <summary>
@@ -3674,13 +3278,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JMD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JMD".</value>
-        public static JMD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static JMD Unit { get { Warrant.NotNull<JMD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly JMD Instance = new JMD();
         }
     }
@@ -3690,7 +3292,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JOD : Currency
     {
         /// <summary>
@@ -3702,13 +3303,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JOD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JOD".</value>
-        public static JOD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static JOD Unit { get { Warrant.NotNull<JOD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly JOD Instance = new JOD();
         }
     }
@@ -3718,7 +3317,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class JPY : Currency
     {
         /// <summary>
@@ -3730,13 +3328,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "JPY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "JPY".</value>
-        public static JPY Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static JPY Unit { get { Warrant.NotNull<JPY>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly JPY Instance = new JPY();
         }
     }
@@ -3746,7 +3342,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KES : Currency
     {
         /// <summary>
@@ -3758,13 +3353,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KES".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KES".</value>
-        public static KES Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static KES Unit { get { Warrant.NotNull<KES>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly KES Instance = new KES();
         }
     }
@@ -3774,7 +3367,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KGS : Currency
     {
         /// <summary>
@@ -3786,13 +3378,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KGS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KGS".</value>
-        public static KGS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static KGS Unit { get { Warrant.NotNull<KGS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly KGS Instance = new KGS();
         }
     }
@@ -3802,7 +3392,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KHR : Currency
     {
         /// <summary>
@@ -3814,13 +3403,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KHR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KHR".</value>
-        public static KHR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static KHR Unit { get { Warrant.NotNull<KHR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly KHR Instance = new KHR();
         }
     }
@@ -3830,7 +3417,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KMF : Currency
     {
         /// <summary>
@@ -3842,13 +3428,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KMF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KMF".</value>
-        public static KMF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static KMF Unit { get { Warrant.NotNull<KMF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly KMF Instance = new KMF();
         }
     }
@@ -3858,7 +3442,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KPW : Currency
     {
         /// <summary>
@@ -3870,13 +3453,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KPW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KPW".</value>
-        public static KPW Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static KPW Unit { get { Warrant.NotNull<KPW>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly KPW Instance = new KPW();
         }
     }
@@ -3886,7 +3467,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KRW : Currency
     {
         /// <summary>
@@ -3898,13 +3478,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KRW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KRW".</value>
-        public static KRW Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static KRW Unit { get { Warrant.NotNull<KRW>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly KRW Instance = new KRW();
         }
     }
@@ -3914,7 +3492,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KWD : Currency
     {
         /// <summary>
@@ -3926,13 +3503,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KWD".</value>
-        public static KWD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static KWD Unit { get { Warrant.NotNull<KWD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly KWD Instance = new KWD();
         }
     }
@@ -3942,7 +3517,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KYD : Currency
     {
         /// <summary>
@@ -3954,13 +3528,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KYD".</value>
-        public static KYD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static KYD Unit { get { Warrant.NotNull<KYD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly KYD Instance = new KYD();
         }
     }
@@ -3970,7 +3542,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class KZT : Currency
     {
         /// <summary>
@@ -3982,13 +3553,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "KZT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "KZT".</value>
-        public static KZT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static KZT Unit { get { Warrant.NotNull<KZT>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly KZT Instance = new KZT();
         }
     }
@@ -3998,7 +3567,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAJ : Currency
     {
         /// <summary>
@@ -4010,13 +3578,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAJ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAJ".</value>
-        public static LAJ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LAJ Unit { get { Warrant.NotNull<LAJ>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LAJ Instance = new LAJ();
         }
     }
@@ -4026,7 +3592,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LAK : Currency
     {
         /// <summary>
@@ -4038,13 +3603,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAK".</value>
-        public static LAK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LAK Unit { get { Warrant.NotNull<LAK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LAK Instance = new LAK();
         }
     }
@@ -4054,7 +3617,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LBP : Currency
     {
         /// <summary>
@@ -4066,13 +3628,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LBP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LBP".</value>
-        public static LBP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LBP Unit { get { Warrant.NotNull<LBP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LBP Instance = new LBP();
         }
     }
@@ -4082,7 +3642,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LKR : Currency
     {
         /// <summary>
@@ -4094,13 +3653,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LKR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LKR".</value>
-        public static LKR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LKR Unit { get { Warrant.NotNull<LKR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LKR Instance = new LKR();
         }
     }
@@ -4110,7 +3667,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LRD : Currency
     {
         /// <summary>
@@ -4122,13 +3678,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LRD".</value>
-        public static LRD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LRD Unit { get { Warrant.NotNull<LRD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LRD Instance = new LRD();
         }
     }
@@ -4138,7 +3692,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSL : Currency
     {
         /// <summary>
@@ -4150,13 +3703,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSL".</value>
-        public static LSL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LSL Unit { get { Warrant.NotNull<LSL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LSL Instance = new LSL();
         }
     }
@@ -4166,7 +3717,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LSM : Currency
     {
         /// <summary>
@@ -4178,13 +3728,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSM".</value>
-        public static LSM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LSM Unit { get { Warrant.NotNull<LSM>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LSM Instance = new LSM();
         }
     }
@@ -4194,7 +3742,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LTL : Currency
     {
         /// <summary>
@@ -4206,13 +3753,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTL".</value>
-        public static LTL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LTL Unit { get { Warrant.NotNull<LTL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LTL Instance = new LTL();
         }
     }
@@ -4222,7 +3767,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LTT : Currency
     {
         /// <summary>
@@ -4234,13 +3778,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTT".</value>
-        public static LTT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LTT Unit { get { Warrant.NotNull<LTT>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LTT Instance = new LTT();
         }
     }
@@ -4250,7 +3792,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUC : Currency
     {
         /// <summary>
@@ -4262,13 +3803,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUC".</value>
-        public static LUC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LUC Unit { get { Warrant.NotNull<LUC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LUC Instance = new LUC();
         }
     }
@@ -4278,7 +3817,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUF : Currency
     {
         /// <summary>
@@ -4290,13 +3828,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUF".</value>
-        public static LUF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LUF Unit { get { Warrant.NotNull<LUF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LUF Instance = new LUF();
         }
     }
@@ -4306,7 +3842,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LUL : Currency
     {
         /// <summary>
@@ -4318,13 +3853,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUL".</value>
-        public static LUL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LUL Unit { get { Warrant.NotNull<LUL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LUL Instance = new LUL();
         }
     }
@@ -4334,7 +3867,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LVL : Currency
     {
         /// <summary>
@@ -4346,13 +3878,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVL".</value>
-        public static LVL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LVL Unit { get { Warrant.NotNull<LVL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LVL Instance = new LVL();
         }
     }
@@ -4362,7 +3892,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LVR : Currency
     {
         /// <summary>
@@ -4374,13 +3903,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVR".</value>
-        public static LVR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LVR Unit { get { Warrant.NotNull<LVR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LVR Instance = new LVR();
         }
     }
@@ -4390,7 +3917,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class LYD : Currency
     {
         /// <summary>
@@ -4402,13 +3928,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "LYD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "LYD".</value>
-        public static LYD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static LYD Unit { get { Warrant.NotNull<LYD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly LYD Instance = new LYD();
         }
     }
@@ -4418,7 +3942,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAD : Currency
     {
         /// <summary>
@@ -4430,13 +3953,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAD".</value>
-        public static MAD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MAD Unit { get { Warrant.NotNull<MAD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MAD Instance = new MAD();
         }
     }
@@ -4446,7 +3967,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MAF : Currency
     {
         /// <summary>
@@ -4458,13 +3978,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAF".</value>
-        public static MAF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MAF Unit { get { Warrant.NotNull<MAF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MAF Instance = new MAF();
         }
     }
@@ -4474,7 +3992,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MDL : Currency
     {
         /// <summary>
@@ -4486,13 +4003,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MDL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MDL".</value>
-        public static MDL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MDL Unit { get { Warrant.NotNull<MDL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MDL Instance = new MDL();
         }
     }
@@ -4502,7 +4017,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGA : Currency
     {
         /// <summary>
@@ -4514,13 +4028,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGA".</value>
-        public static MGA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MGA Unit { get { Warrant.NotNull<MGA>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MGA Instance = new MGA();
         }
     }
@@ -4530,7 +4042,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MGF : Currency
     {
         /// <summary>
@@ -4542,13 +4053,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGF".</value>
-        public static MGF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MGF Unit { get { Warrant.NotNull<MGF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MGF Instance = new MGF();
         }
     }
@@ -4558,7 +4067,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MKD : Currency
     {
         /// <summary>
@@ -4570,13 +4078,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MKD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MKD".</value>
-        public static MKD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MKD Unit { get { Warrant.NotNull<MKD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MKD Instance = new MKD();
         }
     }
@@ -4586,7 +4092,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MLF : Currency
     {
         /// <summary>
@@ -4598,13 +4103,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MLF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MLF".</value>
-        public static MLF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MLF Unit { get { Warrant.NotNull<MLF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MLF Instance = new MLF();
         }
     }
@@ -4614,7 +4117,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MMK : Currency
     {
         /// <summary>
@@ -4626,13 +4128,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MMK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MMK".</value>
-        public static MMK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MMK Unit { get { Warrant.NotNull<MMK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MMK Instance = new MMK();
         }
     }
@@ -4642,7 +4142,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MNT : Currency
     {
         /// <summary>
@@ -4654,13 +4153,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MNT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MNT".</value>
-        public static MNT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MNT Unit { get { Warrant.NotNull<MNT>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MNT Instance = new MNT();
         }
     }
@@ -4670,7 +4167,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MOP : Currency
     {
         /// <summary>
@@ -4682,13 +4178,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MOP".</value>
-        public static MOP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MOP Unit { get { Warrant.NotNull<MOP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MOP Instance = new MOP();
         }
     }
@@ -4698,7 +4192,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MRO : Currency
     {
         /// <summary>
@@ -4710,13 +4203,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MRO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MRO".</value>
-        public static MRO Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MRO Unit { get { Warrant.NotNull<MRO>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MRO Instance = new MRO();
         }
     }
@@ -4726,7 +4217,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MTL : Currency
     {
         /// <summary>
@@ -4738,13 +4228,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTL".</value>
-        public static MTL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MTL Unit { get { Warrant.NotNull<MTL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MTL Instance = new MTL();
         }
     }
@@ -4754,7 +4242,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MTP : Currency
     {
         /// <summary>
@@ -4766,13 +4253,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTP".</value>
-        public static MTP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MTP Unit { get { Warrant.NotNull<MTP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MTP Instance = new MTP();
         }
     }
@@ -4782,7 +4267,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MUR : Currency
     {
         /// <summary>
@@ -4794,13 +4278,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MUR".</value>
-        public static MUR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MUR Unit { get { Warrant.NotNull<MUR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MUR Instance = new MUR();
         }
     }
@@ -4810,7 +4292,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVQ : Currency
     {
         /// <summary>
@@ -4822,13 +4303,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVQ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVQ".</value>
-        public static MVQ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MVQ Unit { get { Warrant.NotNull<MVQ>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MVQ Instance = new MVQ();
         }
     }
@@ -4838,7 +4317,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MVR : Currency
     {
         /// <summary>
@@ -4850,13 +4328,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVR".</value>
-        public static MVR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MVR Unit { get { Warrant.NotNull<MVR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MVR Instance = new MVR();
         }
     }
@@ -4866,7 +4342,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MWK : Currency
     {
         /// <summary>
@@ -4878,13 +4353,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MWK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MWK".</value>
-        public static MWK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MWK Unit { get { Warrant.NotNull<MWK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MWK Instance = new MWK();
         }
     }
@@ -4894,7 +4367,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXN : Currency
     {
         /// <summary>
@@ -4906,13 +4378,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXN".</value>
-        public static MXN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MXN Unit { get { Warrant.NotNull<MXN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MXN Instance = new MXN();
         }
     }
@@ -4922,7 +4392,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXP : Currency
     {
         /// <summary>
@@ -4934,13 +4403,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXP".</value>
-        public static MXP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MXP Unit { get { Warrant.NotNull<MXP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MXP Instance = new MXP();
         }
     }
@@ -4950,7 +4417,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MXV : Currency
     {
         /// <summary>
@@ -4962,13 +4428,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXV".</value>
-        public static MXV Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MXV Unit { get { Warrant.NotNull<MXV>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MXV Instance = new MXV();
         }
     }
@@ -4978,7 +4442,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MYR : Currency
     {
         /// <summary>
@@ -4990,13 +4453,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MYR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MYR".</value>
-        public static MYR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MYR Unit { get { Warrant.NotNull<MYR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MYR Instance = new MYR();
         }
     }
@@ -5006,7 +4467,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZE : Currency
     {
         /// <summary>
@@ -5018,13 +4478,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZE".</value>
-        public static MZE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MZE Unit { get { Warrant.NotNull<MZE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MZE Instance = new MZE();
         }
     }
@@ -5034,7 +4492,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZM : Currency
     {
         /// <summary>
@@ -5046,13 +4503,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZM".</value>
-        public static MZM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MZM Unit { get { Warrant.NotNull<MZM>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MZM Instance = new MZM();
         }
     }
@@ -5062,7 +4517,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class MZN : Currency
     {
         /// <summary>
@@ -5074,13 +4528,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZN".</value>
-        public static MZN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static MZN Unit { get { Warrant.NotNull<MZN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly MZN Instance = new MZN();
         }
     }
@@ -5090,7 +4542,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NAD : Currency
     {
         /// <summary>
@@ -5102,13 +4553,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NAD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NAD".</value>
-        public static NAD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static NAD Unit { get { Warrant.NotNull<NAD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly NAD Instance = new NAD();
         }
     }
@@ -5118,7 +4567,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NGN : Currency
     {
         /// <summary>
@@ -5130,13 +4578,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NGN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NGN".</value>
-        public static NGN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static NGN Unit { get { Warrant.NotNull<NGN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly NGN Instance = new NGN();
         }
     }
@@ -5146,7 +4592,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIC : Currency
     {
         /// <summary>
@@ -5158,13 +4603,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIC".</value>
-        public static NIC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static NIC Unit { get { Warrant.NotNull<NIC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly NIC Instance = new NIC();
         }
     }
@@ -5174,7 +4617,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NIO : Currency
     {
         /// <summary>
@@ -5186,13 +4628,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIO".</value>
-        public static NIO Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static NIO Unit { get { Warrant.NotNull<NIO>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly NIO Instance = new NIO();
         }
     }
@@ -5202,7 +4642,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NLG : Currency
     {
         /// <summary>
@@ -5214,13 +4653,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NLG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NLG".</value>
-        public static NLG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static NLG Unit { get { Warrant.NotNull<NLG>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly NLG Instance = new NLG();
         }
     }
@@ -5230,7 +4667,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NOK : Currency
     {
         /// <summary>
@@ -5242,13 +4678,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NOK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NOK".</value>
-        public static NOK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static NOK Unit { get { Warrant.NotNull<NOK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly NOK Instance = new NOK();
         }
     }
@@ -5258,7 +4692,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NPR : Currency
     {
         /// <summary>
@@ -5270,13 +4703,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NPR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NPR".</value>
-        public static NPR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static NPR Unit { get { Warrant.NotNull<NPR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly NPR Instance = new NPR();
         }
     }
@@ -5286,7 +4717,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class NZD : Currency
     {
         /// <summary>
@@ -5298,13 +4728,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "NZD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "NZD".</value>
-        public static NZD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static NZD Unit { get { Warrant.NotNull<NZD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly NZD Instance = new NZD();
         }
     }
@@ -5314,7 +4742,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class OMR : Currency
     {
         /// <summary>
@@ -5326,13 +4753,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "OMR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "OMR".</value>
-        public static OMR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static OMR Unit { get { Warrant.NotNull<OMR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly OMR Instance = new OMR();
         }
     }
@@ -5342,7 +4767,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PAB : Currency
     {
         /// <summary>
@@ -5354,13 +4778,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PAB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PAB".</value>
-        public static PAB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PAB Unit { get { Warrant.NotNull<PAB>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PAB Instance = new PAB();
         }
     }
@@ -5370,7 +4792,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEH : Currency
     {
         /// <summary>
@@ -5382,13 +4803,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEH".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEH".</value>
-        public static PEH Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PEH Unit { get { Warrant.NotNull<PEH>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PEH Instance = new PEH();
         }
     }
@@ -5398,7 +4817,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEI : Currency
     {
         /// <summary>
@@ -5410,13 +4828,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEI".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEI".</value>
-        public static PEI Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PEI Unit { get { Warrant.NotNull<PEI>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PEI Instance = new PEI();
         }
     }
@@ -5426,7 +4842,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PEN : Currency
     {
         /// <summary>
@@ -5438,13 +4853,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEN".</value>
-        public static PEN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PEN Unit { get { Warrant.NotNull<PEN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PEN Instance = new PEN();
         }
     }
@@ -5454,7 +4867,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PES : Currency
     {
         /// <summary>
@@ -5466,13 +4878,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PES".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PES".</value>
-        public static PES Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PES Unit { get { Warrant.NotNull<PES>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PES Instance = new PES();
         }
     }
@@ -5482,7 +4892,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PGK : Currency
     {
         /// <summary>
@@ -5494,13 +4903,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PGK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PGK".</value>
-        public static PGK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PGK Unit { get { Warrant.NotNull<PGK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PGK Instance = new PGK();
         }
     }
@@ -5510,7 +4917,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PHP : Currency
     {
         /// <summary>
@@ -5522,13 +4928,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PHP".</value>
-        public static PHP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PHP Unit { get { Warrant.NotNull<PHP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PHP Instance = new PHP();
         }
     }
@@ -5538,7 +4942,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PKR : Currency
     {
         /// <summary>
@@ -5550,13 +4953,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PKR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PKR".</value>
-        public static PKR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PKR Unit { get { Warrant.NotNull<PKR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PKR Instance = new PKR();
         }
     }
@@ -5566,7 +4967,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLN : Currency
     {
         /// <summary>
@@ -5578,13 +4978,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLN".</value>
-        public static PLN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PLN Unit { get { Warrant.NotNull<PLN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PLN Instance = new PLN();
         }
     }
@@ -5594,7 +4992,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PLZ : Currency
     {
         /// <summary>
@@ -5606,13 +5003,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLZ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLZ".</value>
-        public static PLZ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PLZ Unit { get { Warrant.NotNull<PLZ>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PLZ Instance = new PLZ();
         }
     }
@@ -5622,7 +5017,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PTE : Currency
     {
         /// <summary>
@@ -5634,13 +5028,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PTE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PTE".</value>
-        public static PTE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PTE Unit { get { Warrant.NotNull<PTE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PTE Instance = new PTE();
         }
     }
@@ -5650,7 +5042,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class PYG : Currency
     {
         /// <summary>
@@ -5662,13 +5053,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "PYG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "PYG".</value>
-        public static PYG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static PYG Unit { get { Warrant.NotNull<PYG>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly PYG Instance = new PYG();
         }
     }
@@ -5678,7 +5067,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class QAR : Currency
     {
         /// <summary>
@@ -5690,13 +5078,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "QAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "QAR".</value>
-        public static QAR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static QAR Unit { get { Warrant.NotNull<QAR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly QAR Instance = new QAR();
         }
     }
@@ -5706,7 +5092,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RHD : Currency
     {
         /// <summary>
@@ -5718,13 +5103,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RHD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RHD".</value>
-        public static RHD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static RHD Unit { get { Warrant.NotNull<RHD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly RHD Instance = new RHD();
         }
     }
@@ -5734,7 +5117,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ROK : Currency
     {
         /// <summary>
@@ -5746,13 +5128,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROK".</value>
-        public static ROK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ROK Unit { get { Warrant.NotNull<ROK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ROK Instance = new ROK();
         }
     }
@@ -5762,7 +5142,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ROL : Currency
     {
         /// <summary>
@@ -5774,13 +5153,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROL".</value>
-        public static ROL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ROL Unit { get { Warrant.NotNull<ROL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ROL Instance = new ROL();
         }
     }
@@ -5790,7 +5167,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RON : Currency
     {
         /// <summary>
@@ -5802,13 +5178,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RON".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RON".</value>
-        public static RON Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static RON Unit { get { Warrant.NotNull<RON>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly RON Instance = new RON();
         }
     }
@@ -5818,7 +5192,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RSD : Currency
     {
         /// <summary>
@@ -5830,13 +5203,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RSD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RSD".</value>
-        public static RSD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static RSD Unit { get { Warrant.NotNull<RSD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly RSD Instance = new RSD();
         }
     }
@@ -5846,7 +5217,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUB : Currency
     {
         /// <summary>
@@ -5858,13 +5228,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUB".</value>
-        public static RUB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static RUB Unit { get { Warrant.NotNull<RUB>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly RUB Instance = new RUB();
         }
     }
@@ -5874,7 +5242,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RUR : Currency
     {
         /// <summary>
@@ -5886,13 +5253,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUR".</value>
-        public static RUR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static RUR Unit { get { Warrant.NotNull<RUR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly RUR Instance = new RUR();
         }
     }
@@ -5902,7 +5267,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class RWF : Currency
     {
         /// <summary>
@@ -5914,13 +5278,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "RWF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "RWF".</value>
-        public static RWF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static RWF Unit { get { Warrant.NotNull<RWF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly RWF Instance = new RWF();
         }
     }
@@ -5930,7 +5292,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SAR : Currency
     {
         /// <summary>
@@ -5942,13 +5303,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SAR".</value>
-        public static SAR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SAR Unit { get { Warrant.NotNull<SAR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SAR Instance = new SAR();
         }
     }
@@ -5958,7 +5317,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SBD : Currency
     {
         /// <summary>
@@ -5970,13 +5328,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SBD".</value>
-        public static SBD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SBD Unit { get { Warrant.NotNull<SBD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SBD Instance = new SBD();
         }
     }
@@ -5986,7 +5342,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SCR : Currency
     {
         /// <summary>
@@ -5998,13 +5353,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SCR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SCR".</value>
-        public static SCR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SCR Unit { get { Warrant.NotNull<SCR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SCR Instance = new SCR();
         }
     }
@@ -6014,7 +5367,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDD : Currency
     {
         /// <summary>
@@ -6026,13 +5378,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDD".</value>
-        public static SDD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SDD Unit { get { Warrant.NotNull<SDD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SDD Instance = new SDD();
         }
     }
@@ -6042,7 +5392,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDG : Currency
     {
         /// <summary>
@@ -6054,13 +5403,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDG".</value>
-        public static SDG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SDG Unit { get { Warrant.NotNull<SDG>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SDG Instance = new SDG();
         }
     }
@@ -6070,7 +5417,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SDP : Currency
     {
         /// <summary>
@@ -6082,13 +5428,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDP".</value>
-        public static SDP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SDP Unit { get { Warrant.NotNull<SDP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SDP Instance = new SDP();
         }
     }
@@ -6098,7 +5442,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SEK : Currency
     {
         /// <summary>
@@ -6110,13 +5453,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SEK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SEK".</value>
-        public static SEK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SEK Unit { get { Warrant.NotNull<SEK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SEK Instance = new SEK();
         }
     }
@@ -6126,7 +5467,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SGD : Currency
     {
         /// <summary>
@@ -6138,13 +5478,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SGD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SGD".</value>
-        public static SGD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SGD Unit { get { Warrant.NotNull<SGD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SGD Instance = new SGD();
         }
     }
@@ -6154,7 +5492,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SHP : Currency
     {
         /// <summary>
@@ -6166,13 +5503,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SHP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SHP".</value>
-        public static SHP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SHP Unit { get { Warrant.NotNull<SHP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SHP Instance = new SHP();
         }
     }
@@ -6182,7 +5517,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SIT : Currency
     {
         /// <summary>
@@ -6194,13 +5528,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SIT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SIT".</value>
-        public static SIT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SIT Unit { get { Warrant.NotNull<SIT>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SIT Instance = new SIT();
         }
     }
@@ -6210,7 +5542,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SKK : Currency
     {
         /// <summary>
@@ -6222,13 +5553,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SKK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SKK".</value>
-        public static SKK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SKK Unit { get { Warrant.NotNull<SKK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SKK Instance = new SKK();
         }
     }
@@ -6238,7 +5567,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SLL : Currency
     {
         /// <summary>
@@ -6250,13 +5578,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SLL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SLL".</value>
-        public static SLL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SLL Unit { get { Warrant.NotNull<SLL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SLL Instance = new SLL();
         }
     }
@@ -6266,7 +5592,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SOS : Currency
     {
         /// <summary>
@@ -6278,13 +5603,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SOS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SOS".</value>
-        public static SOS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SOS Unit { get { Warrant.NotNull<SOS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SOS Instance = new SOS();
         }
     }
@@ -6294,7 +5617,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRD : Currency
     {
         /// <summary>
@@ -6306,13 +5628,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRD".</value>
-        public static SRD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SRD Unit { get { Warrant.NotNull<SRD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SRD Instance = new SRD();
         }
     }
@@ -6322,7 +5642,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SRG : Currency
     {
         /// <summary>
@@ -6334,13 +5653,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRG".</value>
-        public static SRG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SRG Unit { get { Warrant.NotNull<SRG>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SRG Instance = new SRG();
         }
     }
@@ -6350,7 +5667,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SSP : Currency
     {
         /// <summary>
@@ -6362,13 +5678,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SSP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SSP".</value>
-        public static SSP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SSP Unit { get { Warrant.NotNull<SSP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SSP Instance = new SSP();
         }
     }
@@ -6378,7 +5692,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class STD : Currency
     {
         /// <summary>
@@ -6390,13 +5703,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "STD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "STD".</value>
-        public static STD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static STD Unit { get { Warrant.NotNull<STD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly STD Instance = new STD();
         }
     }
@@ -6406,7 +5717,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SUR : Currency
     {
         /// <summary>
@@ -6418,13 +5728,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SUR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SUR".</value>
-        public static SUR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SUR Unit { get { Warrant.NotNull<SUR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SUR Instance = new SUR();
         }
     }
@@ -6434,7 +5742,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SVC : Currency
     {
         /// <summary>
@@ -6446,13 +5753,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SVC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SVC".</value>
-        public static SVC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SVC Unit { get { Warrant.NotNull<SVC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SVC Instance = new SVC();
         }
     }
@@ -6462,7 +5767,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SYP : Currency
     {
         /// <summary>
@@ -6474,13 +5778,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SYP".</value>
-        public static SYP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SYP Unit { get { Warrant.NotNull<SYP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SYP Instance = new SYP();
         }
     }
@@ -6490,7 +5792,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class SZL : Currency
     {
         /// <summary>
@@ -6502,13 +5803,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "SZL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "SZL".</value>
-        public static SZL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static SZL Unit { get { Warrant.NotNull<SZL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly SZL Instance = new SZL();
         }
     }
@@ -6518,7 +5817,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class THB : Currency
     {
         /// <summary>
@@ -6530,13 +5828,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "THB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "THB".</value>
-        public static THB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static THB Unit { get { Warrant.NotNull<THB>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly THB Instance = new THB();
         }
     }
@@ -6546,7 +5842,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJR : Currency
     {
         /// <summary>
@@ -6558,13 +5853,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJR".</value>
-        public static TJR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TJR Unit { get { Warrant.NotNull<TJR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TJR Instance = new TJR();
         }
     }
@@ -6574,7 +5867,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TJS : Currency
     {
         /// <summary>
@@ -6586,13 +5878,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJS".</value>
-        public static TJS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TJS Unit { get { Warrant.NotNull<TJS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TJS Instance = new TJS();
         }
     }
@@ -6602,7 +5892,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMM : Currency
     {
         /// <summary>
@@ -6614,13 +5903,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMM".</value>
-        public static TMM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TMM Unit { get { Warrant.NotNull<TMM>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TMM Instance = new TMM();
         }
     }
@@ -6630,7 +5917,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TMT : Currency
     {
         /// <summary>
@@ -6642,13 +5928,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMT".</value>
-        public static TMT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TMT Unit { get { Warrant.NotNull<TMT>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TMT Instance = new TMT();
         }
     }
@@ -6658,7 +5942,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TND : Currency
     {
         /// <summary>
@@ -6670,13 +5953,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TND".</value>
-        public static TND Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TND Unit { get { Warrant.NotNull<TND>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TND Instance = new TND();
         }
     }
@@ -6686,7 +5967,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TOP : Currency
     {
         /// <summary>
@@ -6698,13 +5978,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TOP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TOP".</value>
-        public static TOP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TOP Unit { get { Warrant.NotNull<TOP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TOP Instance = new TOP();
         }
     }
@@ -6714,7 +5992,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TPE : Currency
     {
         /// <summary>
@@ -6726,13 +6003,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TPE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TPE".</value>
-        public static TPE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TPE Unit { get { Warrant.NotNull<TPE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TPE Instance = new TPE();
         }
     }
@@ -6742,7 +6017,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRL : Currency
     {
         /// <summary>
@@ -6754,13 +6028,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRL".</value>
-        public static TRL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TRL Unit { get { Warrant.NotNull<TRL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TRL Instance = new TRL();
         }
     }
@@ -6770,7 +6042,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TRY : Currency
     {
         /// <summary>
@@ -6782,13 +6053,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRY".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRY".</value>
-        public static TRY Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TRY Unit { get { Warrant.NotNull<TRY>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TRY Instance = new TRY();
         }
     }
@@ -6798,7 +6067,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TTD : Currency
     {
         /// <summary>
@@ -6810,13 +6078,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TTD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TTD".</value>
-        public static TTD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TTD Unit { get { Warrant.NotNull<TTD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TTD Instance = new TTD();
         }
     }
@@ -6826,7 +6092,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TWD : Currency
     {
         /// <summary>
@@ -6838,13 +6103,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TWD".</value>
-        public static TWD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TWD Unit { get { Warrant.NotNull<TWD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TWD Instance = new TWD();
         }
     }
@@ -6854,7 +6117,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class TZS : Currency
     {
         /// <summary>
@@ -6866,13 +6128,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "TZS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "TZS".</value>
-        public static TZS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static TZS Unit { get { Warrant.NotNull<TZS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly TZS Instance = new TZS();
         }
     }
@@ -6882,7 +6142,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAH : Currency
     {
         /// <summary>
@@ -6894,13 +6153,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAH".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAH".</value>
-        public static UAH Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static UAH Unit { get { Warrant.NotNull<UAH>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly UAH Instance = new UAH();
         }
     }
@@ -6910,7 +6167,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UAK : Currency
     {
         /// <summary>
@@ -6922,13 +6178,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAK".</value>
-        public static UAK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static UAK Unit { get { Warrant.NotNull<UAK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly UAK Instance = new UAK();
         }
     }
@@ -6938,7 +6192,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGS : Currency
     {
         /// <summary>
@@ -6950,13 +6203,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGS".</value>
-        public static UGS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static UGS Unit { get { Warrant.NotNull<UGS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly UGS Instance = new UGS();
         }
     }
@@ -6966,7 +6217,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGW : Currency
     {
         /// <summary>
@@ -6978,13 +6228,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGW".</value>
-        public static UGW Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static UGW Unit { get { Warrant.NotNull<UGW>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly UGW Instance = new UGW();
         }
     }
@@ -6994,7 +6242,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UGX : Currency
     {
         /// <summary>
@@ -7006,13 +6253,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGX".</value>
-        public static UGX Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static UGX Unit { get { Warrant.NotNull<UGX>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly UGX Instance = new UGX();
         }
     }
@@ -7022,7 +6267,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USD : Currency
     {
         /// <summary>
@@ -7034,13 +6278,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USD".</value>
-        public static USD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static USD Unit { get { Warrant.NotNull<USD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly USD Instance = new USD();
         }
     }
@@ -7050,7 +6292,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USN : Currency
     {
         /// <summary>
@@ -7062,13 +6303,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USN".</value>
-        public static USN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static USN Unit { get { Warrant.NotNull<USN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly USN Instance = new USN();
         }
     }
@@ -7078,7 +6317,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class USS : Currency
     {
         /// <summary>
@@ -7090,13 +6328,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "USS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "USS".</value>
-        public static USS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static USS Unit { get { Warrant.NotNull<USS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly USS Instance = new USS();
         }
     }
@@ -7106,7 +6342,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYI : Currency
     {
         /// <summary>
@@ -7118,13 +6353,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYI".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYI".</value>
-        public static UYI Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static UYI Unit { get { Warrant.NotNull<UYI>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly UYI Instance = new UYI();
         }
     }
@@ -7134,7 +6367,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYN : Currency
     {
         /// <summary>
@@ -7146,13 +6378,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYN".</value>
-        public static UYN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static UYN Unit { get { Warrant.NotNull<UYN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly UYN Instance = new UYN();
         }
     }
@@ -7162,7 +6392,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYP : Currency
     {
         /// <summary>
@@ -7174,13 +6403,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYP".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYP".</value>
-        public static UYP Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static UYP Unit { get { Warrant.NotNull<UYP>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly UYP Instance = new UYP();
         }
     }
@@ -7190,7 +6417,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UYU : Currency
     {
         /// <summary>
@@ -7202,13 +6428,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYU".</value>
-        public static UYU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static UYU Unit { get { Warrant.NotNull<UYU>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly UYU Instance = new UYU();
         }
     }
@@ -7218,7 +6442,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class UZS : Currency
     {
         /// <summary>
@@ -7230,13 +6453,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "UZS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "UZS".</value>
-        public static UZS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static UZS Unit { get { Warrant.NotNull<UZS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly UZS Instance = new UZS();
         }
     }
@@ -7246,7 +6467,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEB : Currency
     {
         /// <summary>
@@ -7258,13 +6478,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEB".</value>
-        public static VEB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static VEB Unit { get { Warrant.NotNull<VEB>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly VEB Instance = new VEB();
         }
     }
@@ -7274,7 +6492,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VEF : Currency
     {
         /// <summary>
@@ -7286,13 +6503,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEF".</value>
-        public static VEF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static VEF Unit { get { Warrant.NotNull<VEF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly VEF Instance = new VEF();
         }
     }
@@ -7302,7 +6517,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VNC : Currency
     {
         /// <summary>
@@ -7314,13 +6528,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VNC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VNC".</value>
-        public static VNC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static VNC Unit { get { Warrant.NotNull<VNC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly VNC Instance = new VNC();
         }
     }
@@ -7330,7 +6542,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VND : Currency
     {
         /// <summary>
@@ -7342,13 +6553,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VND".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VND".</value>
-        public static VND Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static VND Unit { get { Warrant.NotNull<VND>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly VND Instance = new VND();
         }
     }
@@ -7358,7 +6567,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class VUV : Currency
     {
         /// <summary>
@@ -7370,13 +6578,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "VUV".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "VUV".</value>
-        public static VUV Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static VUV Unit { get { Warrant.NotNull<VUV>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly VUV Instance = new VUV();
         }
     }
@@ -7386,7 +6592,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class WST : Currency
     {
         /// <summary>
@@ -7398,13 +6603,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "WST".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "WST".</value>
-        public static WST Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static WST Unit { get { Warrant.NotNull<WST>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly WST Instance = new WST();
         }
     }
@@ -7414,7 +6617,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAF : Currency
     {
         /// <summary>
@@ -7426,13 +6628,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAF".</value>
-        public static XAF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XAF Unit { get { Warrant.NotNull<XAF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XAF Instance = new XAF();
         }
     }
@@ -7442,7 +6642,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAG : Currency
     {
         /// <summary>
@@ -7454,13 +6653,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAG".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAG".</value>
-        public static XAG Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XAG Unit { get { Warrant.NotNull<XAG>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XAG Instance = new XAG();
         }
     }
@@ -7470,7 +6667,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XAU : Currency
     {
         /// <summary>
@@ -7482,13 +6678,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAU".</value>
-        public static XAU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XAU Unit { get { Warrant.NotNull<XAU>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XAU Instance = new XAU();
         }
     }
@@ -7498,7 +6692,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBA : Currency
     {
         /// <summary>
@@ -7510,13 +6703,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBA".</value>
-        public static XBA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XBA Unit { get { Warrant.NotNull<XBA>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XBA Instance = new XBA();
         }
     }
@@ -7526,7 +6717,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBB : Currency
     {
         /// <summary>
@@ -7538,13 +6728,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBB".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBB".</value>
-        public static XBB Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XBB Unit { get { Warrant.NotNull<XBB>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XBB Instance = new XBB();
         }
     }
@@ -7554,7 +6742,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBC : Currency
     {
         /// <summary>
@@ -7566,13 +6753,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBC".</value>
-        public static XBC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XBC Unit { get { Warrant.NotNull<XBC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XBC Instance = new XBC();
         }
     }
@@ -7582,7 +6767,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XBD : Currency
     {
         /// <summary>
@@ -7594,13 +6778,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBD".</value>
-        public static XBD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XBD Unit { get { Warrant.NotNull<XBD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XBD Instance = new XBD();
         }
     }
@@ -7610,7 +6792,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XCD : Currency
     {
         /// <summary>
@@ -7622,13 +6803,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XCD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XCD".</value>
-        public static XCD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XCD Unit { get { Warrant.NotNull<XCD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XCD Instance = new XCD();
         }
     }
@@ -7638,7 +6817,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XDR : Currency
     {
         /// <summary>
@@ -7650,13 +6828,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XDR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XDR".</value>
-        public static XDR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XDR Unit { get { Warrant.NotNull<XDR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XDR Instance = new XDR();
         }
     }
@@ -7666,7 +6842,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XEU : Currency
     {
         /// <summary>
@@ -7678,13 +6853,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XEU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XEU".</value>
-        public static XEU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XEU Unit { get { Warrant.NotNull<XEU>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XEU Instance = new XEU();
         }
     }
@@ -7694,7 +6867,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XFO : Currency
     {
         /// <summary>
@@ -7706,13 +6878,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFO".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFO".</value>
-        public static XFO Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XFO Unit { get { Warrant.NotNull<XFO>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XFO Instance = new XFO();
         }
     }
@@ -7722,7 +6892,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XFU : Currency
     {
         /// <summary>
@@ -7734,13 +6903,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFU".</value>
-        public static XFU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XFU Unit { get { Warrant.NotNull<XFU>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XFU Instance = new XFU();
         }
     }
@@ -7750,7 +6917,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XOF : Currency
     {
         /// <summary>
@@ -7762,13 +6928,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XOF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XOF".</value>
-        public static XOF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XOF Unit { get { Warrant.NotNull<XOF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XOF Instance = new XOF();
         }
     }
@@ -7778,7 +6942,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPD : Currency
     {
         /// <summary>
@@ -7790,13 +6953,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPD".</value>
-        public static XPD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XPD Unit { get { Warrant.NotNull<XPD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XPD Instance = new XPD();
         }
     }
@@ -7806,7 +6967,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPF : Currency
     {
         /// <summary>
@@ -7818,13 +6978,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPF".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPF".</value>
-        public static XPF Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XPF Unit { get { Warrant.NotNull<XPF>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XPF Instance = new XPF();
         }
     }
@@ -7834,7 +6992,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XPT : Currency
     {
         /// <summary>
@@ -7846,13 +7003,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPT".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPT".</value>
-        public static XPT Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XPT Unit { get { Warrant.NotNull<XPT>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XPT Instance = new XPT();
         }
     }
@@ -7862,7 +7017,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XRE : Currency
     {
         /// <summary>
@@ -7874,13 +7028,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XRE".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XRE".</value>
-        public static XRE Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XRE Unit { get { Warrant.NotNull<XRE>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XRE Instance = new XRE();
         }
     }
@@ -7890,7 +7042,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XSU : Currency
     {
         /// <summary>
@@ -7902,13 +7053,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XSU".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XSU".</value>
-        public static XSU Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XSU Unit { get { Warrant.NotNull<XSU>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XSU Instance = new XSU();
         }
     }
@@ -7918,7 +7067,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XTS : Currency
     {
         /// <summary>
@@ -7930,13 +7078,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XTS".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XTS".</value>
-        public static XTS Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XTS Unit { get { Warrant.NotNull<XTS>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XTS Instance = new XTS();
         }
     }
@@ -7946,7 +7092,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XUA : Currency
     {
         /// <summary>
@@ -7958,13 +7103,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XUA".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XUA".</value>
-        public static XUA Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XUA Unit { get { Warrant.NotNull<XUA>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XUA Instance = new XUA();
         }
     }
@@ -7974,7 +7117,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class XXX : Currency
     {
         /// <summary>
@@ -7986,13 +7128,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "XXX".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "XXX".</value>
-        public static XXX Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static XXX Unit { get { Warrant.NotNull<XXX>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly XXX Instance = new XXX();
         }
     }
@@ -8002,7 +7142,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YDD : Currency
     {
         /// <summary>
@@ -8014,13 +7153,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YDD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YDD".</value>
-        public static YDD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static YDD Unit { get { Warrant.NotNull<YDD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly YDD Instance = new YDD();
         }
     }
@@ -8030,7 +7167,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YER : Currency
     {
         /// <summary>
@@ -8042,13 +7178,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YER".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YER".</value>
-        public static YER Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static YER Unit { get { Warrant.NotNull<YER>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly YER Instance = new YER();
         }
     }
@@ -8058,7 +7192,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUD : Currency
     {
         /// <summary>
@@ -8070,13 +7203,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUD".</value>
-        public static YUD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static YUD Unit { get { Warrant.NotNull<YUD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly YUD Instance = new YUD();
         }
     }
@@ -8086,7 +7217,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUM : Currency
     {
         /// <summary>
@@ -8098,13 +7228,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUM".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUM".</value>
-        public static YUM Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static YUM Unit { get { Warrant.NotNull<YUM>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly YUM Instance = new YUM();
         }
     }
@@ -8114,7 +7242,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class YUN : Currency
     {
         /// <summary>
@@ -8126,13 +7253,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUN".</value>
-        public static YUN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static YUN Unit { get { Warrant.NotNull<YUN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly YUN Instance = new YUN();
         }
     }
@@ -8142,7 +7267,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAL : Currency
     {
         /// <summary>
@@ -8154,13 +7278,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAL".</value>
-        public static ZAL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZAL Unit { get { Warrant.NotNull<ZAL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZAL Instance = new ZAL();
         }
     }
@@ -8170,7 +7292,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZAR : Currency
     {
         /// <summary>
@@ -8182,13 +7303,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAR".</value>
-        public static ZAR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZAR Unit { get { Warrant.NotNull<ZAR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZAR Instance = new ZAR();
         }
     }
@@ -8198,7 +7317,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMK : Currency
     {
         /// <summary>
@@ -8210,13 +7328,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMK".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMK".</value>
-        public static ZMK Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZMK Unit { get { Warrant.NotNull<ZMK>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZMK Instance = new ZMK();
         }
     }
@@ -8226,7 +7342,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZMW : Currency
     {
         /// <summary>
@@ -8238,13 +7353,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMW".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMW".</value>
-        public static ZMW Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZMW Unit { get { Warrant.NotNull<ZMW>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZMW Instance = new ZMW();
         }
     }
@@ -8254,7 +7367,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZRN : Currency
     {
         /// <summary>
@@ -8266,13 +7378,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRN".</value>
-        public static ZRN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZRN Unit { get { Warrant.NotNull<ZRN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZRN Instance = new ZRN();
         }
     }
@@ -8282,7 +7392,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZRZ : Currency
     {
         /// <summary>
@@ -8294,13 +7403,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRZ".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRZ".</value>
-        public static ZRZ Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZRZ Unit { get { Warrant.NotNull<ZRZ>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZRZ Instance = new ZRZ();
         }
     }
@@ -8310,7 +7417,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWC : Currency
     {
         /// <summary>
@@ -8322,13 +7428,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWC".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWC".</value>
-        public static ZWC Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZWC Unit { get { Warrant.NotNull<ZWC>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZWC Instance = new ZWC();
         }
     }
@@ -8338,7 +7442,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWD : Currency
     {
         /// <summary>
@@ -8350,13 +7453,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWD".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWD".</value>
-        public static ZWD Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZWD Unit { get { Warrant.NotNull<ZWD>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZWD Instance = new ZWD();
         }
     }
@@ -8366,7 +7467,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWL : Currency
     {
         /// <summary>
@@ -8378,13 +7478,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWL".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWL".</value>
-        public static ZWL Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZWL Unit { get { Warrant.NotNull<ZWL>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZWL Instance = new ZWL();
         }
     }
@@ -8394,7 +7492,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWN : Currency
     {
         /// <summary>
@@ -8406,13 +7503,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWN".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWN".</value>
-        public static ZWN Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZWN Unit { get { Warrant.NotNull<ZWN>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZWN Instance = new ZWN();
         }
     }
@@ -8422,7 +7517,6 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class ZWR : Currency
     {
         /// <summary>
@@ -8434,13 +7528,11 @@ namespace Narvalo.Finance.Currencies
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWR".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWR".</value>
-        public static ZWR Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static ZWR Unit { get { Warrant.NotNull<ZWR>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly ZWR Instance = new ZWR();
         }
     }

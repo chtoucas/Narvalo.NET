@@ -3,4 +3,7 @@
   <PropertyGroup Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
   </PropertyGroup>
+  <PropertyGroup>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
 </Project>

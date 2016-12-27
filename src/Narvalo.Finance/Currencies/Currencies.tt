@@ -23,13 +23,12 @@ var codeSet = new HashSet<string>();
 
 WriteHeader();
 
+#><#
+//using global::System.Diagnostics.CodeAnalysis;
+
+//[assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY", Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
 #>
-using global::System.Diagnostics.CodeAnalysis;
-
-[assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY", Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
-
-// Each currency code defines a class which is a lazy initalized singleton.
-// The singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
+// Below, the singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
 namespace <#= Namespace #>
 {
 <#
@@ -57,8 +56,8 @@ namespace <#= Namespace #>
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
 <#
         }
+    //[SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
 #>
-    [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
     public sealed class <#= currency.Code #> : Currency
     {
         /// <summary>
@@ -70,13 +69,11 @@ namespace <#= Namespace #>
         /// Gets the unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".
         /// </summary>
         /// <value>The unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".</value>
-        public static <#= currency.Code #> Unit { get { Warrant.NotNull<Currency>(); return Uniq.Instance; } }
+        public static <#= currency.Code #> Unit { get { Warrant.NotNull<<#= currency.Code #>>(); return Uniq.Instance; } }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "[Ignore] Singleton pattern.")]
         private class Uniq
         {
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "[Ignore] Singleton pattern.")]
-            static Nested() { }
+            static Uniq() { }
             internal static readonly <#= currency.Code #> Instance = new <#= currency.Code #>();
         }
     }
