@@ -3,8 +3,8 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
 
     using Narvalo.Finance.Properties;

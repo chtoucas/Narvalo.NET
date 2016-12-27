@@ -5,7 +5,6 @@ namespace Narvalo.Finance.Globalization
     using System;
     using System.Globalization;
 
-    using Narvalo.Finance.Currencies;
     using Narvalo.Finance.Properties;
 
     // Formatting currencies is difficult. This class works consistently across .NET cultures

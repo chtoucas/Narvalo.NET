@@ -7,7 +7,6 @@ namespace Narvalo.Finance
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
-    using Narvalo.Finance.Currencies;
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
 

@@ -3,7 +3,6 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Diagnostics.Contracts;
 
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
