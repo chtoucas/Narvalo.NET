@@ -33,7 +33,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ADP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -65,7 +64,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AED FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -97,7 +95,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AFA FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -129,7 +126,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AFN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -161,7 +157,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ALK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -193,7 +188,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ALL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -225,7 +219,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AMD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -257,7 +250,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ANG FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -289,7 +281,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AOA FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -321,7 +312,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AOK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -353,7 +343,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AON FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -385,7 +374,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AOR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -417,7 +405,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ARA FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -449,7 +436,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ARP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -481,7 +467,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ARS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -513,7 +498,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ARY FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -545,7 +529,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ATS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -577,7 +560,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AUD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -609,7 +591,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AWG FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -641,7 +622,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AYM FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -673,7 +653,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AZM FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -705,7 +684,6 @@ namespace Narvalo.Finance.Currencies
 
         public static AZN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -737,7 +715,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BAD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -769,7 +746,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BAM FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -801,7 +777,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BBD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -833,7 +808,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BDT FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -865,7 +839,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BEC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -897,7 +870,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BEF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -929,7 +901,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BEL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -961,7 +932,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BGJ FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -993,7 +963,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BGK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1025,7 +994,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BGL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1057,7 +1025,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BGN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1089,7 +1056,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BHD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1121,7 +1087,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BIF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1153,7 +1118,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BMD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1185,7 +1149,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BND FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1217,7 +1180,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BOB FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1249,7 +1211,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BOP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1281,7 +1242,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BOV FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1313,7 +1273,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BRB FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1345,7 +1304,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BRC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1377,7 +1335,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BRE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1409,7 +1366,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BRL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1441,7 +1397,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BRN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1473,7 +1428,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BRR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1505,7 +1459,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BSD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1537,7 +1490,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BTN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1569,7 +1521,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BUK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1601,7 +1552,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BWP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1633,7 +1583,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BYB FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1665,7 +1614,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BYN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1697,7 +1645,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BYR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1729,7 +1676,6 @@ namespace Narvalo.Finance.Currencies
 
         public static BZD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1761,7 +1707,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CAD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1793,7 +1738,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CDF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1825,7 +1769,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CHC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1857,7 +1800,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CHE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1889,7 +1831,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CHF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1921,7 +1862,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CHW FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1953,7 +1893,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CLF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -1985,7 +1924,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CLP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2017,7 +1955,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CNX FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2049,7 +1986,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CNY FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2081,7 +2017,6 @@ namespace Narvalo.Finance.Currencies
 
         public static COP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2113,7 +2048,6 @@ namespace Narvalo.Finance.Currencies
 
         public static COU FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2145,7 +2079,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CRC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2177,7 +2110,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CSD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2209,7 +2141,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CSJ FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2241,7 +2172,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CSK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2273,7 +2203,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CUC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2305,7 +2234,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CUP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2337,7 +2265,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CVE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2369,7 +2296,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CYP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2401,7 +2327,6 @@ namespace Narvalo.Finance.Currencies
 
         public static CZK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2433,7 +2358,6 @@ namespace Narvalo.Finance.Currencies
 
         public static DDM FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2465,7 +2389,6 @@ namespace Narvalo.Finance.Currencies
 
         public static DEM FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2497,7 +2420,6 @@ namespace Narvalo.Finance.Currencies
 
         public static DJF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2529,7 +2451,6 @@ namespace Narvalo.Finance.Currencies
 
         public static DKK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2561,7 +2482,6 @@ namespace Narvalo.Finance.Currencies
 
         public static DOP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2593,7 +2513,6 @@ namespace Narvalo.Finance.Currencies
 
         public static DZD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2625,7 +2544,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ECS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2657,7 +2575,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ECV FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2689,7 +2606,6 @@ namespace Narvalo.Finance.Currencies
 
         public static EEK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2721,7 +2637,6 @@ namespace Narvalo.Finance.Currencies
 
         public static EGP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2753,7 +2668,6 @@ namespace Narvalo.Finance.Currencies
 
         public static EQE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2785,7 +2699,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ERN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2817,7 +2730,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ESA FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2849,7 +2761,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ESB FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2881,7 +2792,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ESP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2913,7 +2823,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ETB FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2945,7 +2854,6 @@ namespace Narvalo.Finance.Currencies
 
         public static EUR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -2977,7 +2885,6 @@ namespace Narvalo.Finance.Currencies
 
         public static FIM FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3009,7 +2916,6 @@ namespace Narvalo.Finance.Currencies
 
         public static FJD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3041,7 +2947,6 @@ namespace Narvalo.Finance.Currencies
 
         public static FKP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3073,7 +2978,6 @@ namespace Narvalo.Finance.Currencies
 
         public static FRF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3105,7 +3009,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GBP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3137,7 +3040,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GEK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3169,7 +3071,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GEL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3201,7 +3102,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GHC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3233,7 +3133,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GHP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3265,7 +3164,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GHS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3297,7 +3195,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GIP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3329,7 +3226,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GMD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3361,7 +3257,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GNE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3393,7 +3288,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GNF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3425,7 +3319,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GNS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3457,7 +3350,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GQE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3489,7 +3381,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GRD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3521,7 +3412,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GTQ FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3553,7 +3443,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GWE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3585,7 +3474,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GWP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3617,7 +3505,6 @@ namespace Narvalo.Finance.Currencies
 
         public static GYD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3649,7 +3536,6 @@ namespace Narvalo.Finance.Currencies
 
         public static HKD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3681,7 +3567,6 @@ namespace Narvalo.Finance.Currencies
 
         public static HNL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3713,7 +3598,6 @@ namespace Narvalo.Finance.Currencies
 
         public static HRD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3745,7 +3629,6 @@ namespace Narvalo.Finance.Currencies
 
         public static HRK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3777,7 +3660,6 @@ namespace Narvalo.Finance.Currencies
 
         public static HTG FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3809,7 +3691,6 @@ namespace Narvalo.Finance.Currencies
 
         public static HUF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3841,7 +3722,6 @@ namespace Narvalo.Finance.Currencies
 
         public static IDR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3873,7 +3753,6 @@ namespace Narvalo.Finance.Currencies
 
         public static IEP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3905,7 +3784,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ILP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3937,7 +3815,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ILR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -3969,7 +3846,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ILS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4001,7 +3877,6 @@ namespace Narvalo.Finance.Currencies
 
         public static INR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4033,7 +3908,6 @@ namespace Narvalo.Finance.Currencies
 
         public static IQD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4065,7 +3939,6 @@ namespace Narvalo.Finance.Currencies
 
         public static IRR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4097,7 +3970,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ISJ FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4129,7 +4001,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ISK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4161,7 +4032,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ITL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4193,7 +4063,6 @@ namespace Narvalo.Finance.Currencies
 
         public static JMD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4225,7 +4094,6 @@ namespace Narvalo.Finance.Currencies
 
         public static JOD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4257,7 +4125,6 @@ namespace Narvalo.Finance.Currencies
 
         public static JPY FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4289,7 +4156,6 @@ namespace Narvalo.Finance.Currencies
 
         public static KES FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4321,7 +4187,6 @@ namespace Narvalo.Finance.Currencies
 
         public static KGS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4353,7 +4218,6 @@ namespace Narvalo.Finance.Currencies
 
         public static KHR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4385,7 +4249,6 @@ namespace Narvalo.Finance.Currencies
 
         public static KMF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4417,7 +4280,6 @@ namespace Narvalo.Finance.Currencies
 
         public static KPW FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4449,7 +4311,6 @@ namespace Narvalo.Finance.Currencies
 
         public static KRW FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4481,7 +4342,6 @@ namespace Narvalo.Finance.Currencies
 
         public static KWD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4513,7 +4373,6 @@ namespace Narvalo.Finance.Currencies
 
         public static KYD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4545,7 +4404,6 @@ namespace Narvalo.Finance.Currencies
 
         public static KZT FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4577,7 +4435,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LAJ FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4609,7 +4466,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LAK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4641,7 +4497,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LBP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4673,7 +4528,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LKR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4705,7 +4559,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LRD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4737,7 +4590,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LSL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4769,7 +4621,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LSM FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4801,7 +4652,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LTL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4833,7 +4683,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LTT FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4865,7 +4714,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LUC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4897,7 +4745,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LUF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4929,7 +4776,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LUL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4961,7 +4807,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LVL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -4993,7 +4838,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LVR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5025,7 +4869,6 @@ namespace Narvalo.Finance.Currencies
 
         public static LYD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5057,7 +4900,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MAD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5089,7 +4931,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MAF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5121,7 +4962,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MDL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5153,7 +4993,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MGA FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5185,7 +5024,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MGF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5217,7 +5055,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MKD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5249,7 +5086,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MLF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5281,7 +5117,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MMK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5313,7 +5148,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MNT FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5345,7 +5179,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MOP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5377,7 +5210,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MRO FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5409,7 +5241,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MTL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5441,7 +5272,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MTP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5473,7 +5303,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MUR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5505,7 +5334,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MVQ FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5537,7 +5365,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MVR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5569,7 +5396,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MWK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5601,7 +5427,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MXN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5633,7 +5458,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MXP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5665,7 +5489,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MXV FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5697,7 +5520,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MYR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5729,7 +5551,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MZE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5761,7 +5582,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MZM FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5793,7 +5613,6 @@ namespace Narvalo.Finance.Currencies
 
         public static MZN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5825,7 +5644,6 @@ namespace Narvalo.Finance.Currencies
 
         public static NAD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5857,7 +5675,6 @@ namespace Narvalo.Finance.Currencies
 
         public static NGN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5889,7 +5706,6 @@ namespace Narvalo.Finance.Currencies
 
         public static NIC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5921,7 +5737,6 @@ namespace Narvalo.Finance.Currencies
 
         public static NIO FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5953,7 +5768,6 @@ namespace Narvalo.Finance.Currencies
 
         public static NLG FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -5985,7 +5799,6 @@ namespace Narvalo.Finance.Currencies
 
         public static NOK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6017,7 +5830,6 @@ namespace Narvalo.Finance.Currencies
 
         public static NPR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6049,7 +5861,6 @@ namespace Narvalo.Finance.Currencies
 
         public static NZD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6081,7 +5892,6 @@ namespace Narvalo.Finance.Currencies
 
         public static OMR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6113,7 +5923,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PAB FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6145,7 +5954,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PEH FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6177,7 +5985,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PEI FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6209,7 +6016,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PEN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6241,7 +6047,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PES FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6273,7 +6078,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PGK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6305,7 +6109,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PHP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6337,7 +6140,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PKR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6369,7 +6171,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PLN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6401,7 +6202,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PLZ FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6433,7 +6233,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PTE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6465,7 +6264,6 @@ namespace Narvalo.Finance.Currencies
 
         public static PYG FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6497,7 +6295,6 @@ namespace Narvalo.Finance.Currencies
 
         public static QAR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6529,7 +6326,6 @@ namespace Narvalo.Finance.Currencies
 
         public static RHD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6561,7 +6357,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ROK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6593,7 +6388,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ROL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6625,7 +6419,6 @@ namespace Narvalo.Finance.Currencies
 
         public static RON FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6657,7 +6450,6 @@ namespace Narvalo.Finance.Currencies
 
         public static RSD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6689,7 +6481,6 @@ namespace Narvalo.Finance.Currencies
 
         public static RUB FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6721,7 +6512,6 @@ namespace Narvalo.Finance.Currencies
 
         public static RUR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6753,7 +6543,6 @@ namespace Narvalo.Finance.Currencies
 
         public static RWF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6785,7 +6574,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SAR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6817,7 +6605,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SBD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6849,7 +6636,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SCR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6881,7 +6667,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SDD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6913,7 +6698,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SDG FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6945,7 +6729,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SDP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -6977,7 +6760,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SEK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7009,7 +6791,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SGD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7041,7 +6822,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SHP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7073,7 +6853,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SIT FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7105,7 +6884,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SKK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7137,7 +6915,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SLL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7169,7 +6946,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SOS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7201,7 +6977,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SRD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7233,7 +7008,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SRG FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7265,7 +7039,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SSP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7297,7 +7070,6 @@ namespace Narvalo.Finance.Currencies
 
         public static STD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7329,7 +7101,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SUR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7361,7 +7132,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SVC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7393,7 +7163,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SYP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7425,7 +7194,6 @@ namespace Narvalo.Finance.Currencies
 
         public static SZL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7457,7 +7225,6 @@ namespace Narvalo.Finance.Currencies
 
         public static THB FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7489,7 +7256,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TJR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7521,7 +7287,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TJS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7553,7 +7318,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TMM FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7585,7 +7349,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TMT FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7617,7 +7380,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TND FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7649,7 +7411,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TOP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7681,7 +7442,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TPE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7713,7 +7473,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TRL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7745,7 +7504,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TRY FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7777,7 +7535,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TTD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7809,7 +7566,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TWD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7841,7 +7597,6 @@ namespace Narvalo.Finance.Currencies
 
         public static TZS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7873,7 +7628,6 @@ namespace Narvalo.Finance.Currencies
 
         public static UAH FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7905,7 +7659,6 @@ namespace Narvalo.Finance.Currencies
 
         public static UAK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7937,7 +7690,6 @@ namespace Narvalo.Finance.Currencies
 
         public static UGS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -7969,7 +7721,6 @@ namespace Narvalo.Finance.Currencies
 
         public static UGW FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8001,7 +7752,6 @@ namespace Narvalo.Finance.Currencies
 
         public static UGX FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8033,7 +7783,6 @@ namespace Narvalo.Finance.Currencies
 
         public static USD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8065,7 +7814,6 @@ namespace Narvalo.Finance.Currencies
 
         public static USN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8097,7 +7845,6 @@ namespace Narvalo.Finance.Currencies
 
         public static USS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8129,7 +7876,6 @@ namespace Narvalo.Finance.Currencies
 
         public static UYI FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8161,7 +7907,6 @@ namespace Narvalo.Finance.Currencies
 
         public static UYN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8193,7 +7938,6 @@ namespace Narvalo.Finance.Currencies
 
         public static UYP FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8225,7 +7969,6 @@ namespace Narvalo.Finance.Currencies
 
         public static UYU FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8257,7 +8000,6 @@ namespace Narvalo.Finance.Currencies
 
         public static UZS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8289,7 +8031,6 @@ namespace Narvalo.Finance.Currencies
 
         public static VEB FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8321,7 +8062,6 @@ namespace Narvalo.Finance.Currencies
 
         public static VEF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8353,7 +8093,6 @@ namespace Narvalo.Finance.Currencies
 
         public static VNC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8385,7 +8124,6 @@ namespace Narvalo.Finance.Currencies
 
         public static VND FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8417,7 +8155,6 @@ namespace Narvalo.Finance.Currencies
 
         public static VUV FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8449,7 +8186,6 @@ namespace Narvalo.Finance.Currencies
 
         public static WST FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8481,7 +8217,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XAF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8513,7 +8248,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XAG FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8545,7 +8279,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XAU FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8577,7 +8310,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XBA FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8609,7 +8341,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XBB FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8641,7 +8372,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XBC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8673,7 +8403,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XBD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8705,7 +8434,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XCD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8737,7 +8465,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XDR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8769,7 +8496,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XEU FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8801,7 +8527,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XFO FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8833,7 +8558,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XFU FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8865,7 +8589,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XOF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8897,7 +8620,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XPD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8929,7 +8651,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XPF FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8961,7 +8682,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XPT FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -8993,7 +8713,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XRE FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9025,7 +8744,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XSU FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9057,7 +8775,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XTS FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9089,7 +8806,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XUA FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9121,7 +8837,6 @@ namespace Narvalo.Finance.Currencies
 
         public static XXX FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9153,7 +8868,6 @@ namespace Narvalo.Finance.Currencies
 
         public static YDD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9185,7 +8899,6 @@ namespace Narvalo.Finance.Currencies
 
         public static YER FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9217,7 +8930,6 @@ namespace Narvalo.Finance.Currencies
 
         public static YUD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9249,7 +8961,6 @@ namespace Narvalo.Finance.Currencies
 
         public static YUM FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9281,7 +8992,6 @@ namespace Narvalo.Finance.Currencies
 
         public static YUN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9313,7 +9023,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZAL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9345,7 +9054,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZAR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9377,7 +9085,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZMK FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9409,7 +9116,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZMW FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9441,7 +9147,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZRN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9473,7 +9178,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZRZ FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9505,7 +9209,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZWC FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9537,7 +9240,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZWD FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9569,7 +9271,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZWL FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9601,7 +9302,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZWN FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
@@ -9633,7 +9333,6 @@ namespace Narvalo.Finance.Currencies
 
         public static ZWR FromCurrency(Currency value)
         {
-            if (value == null) { return null; }
             if (value.Code != Name) { throw new InvalidCastException(); }
 
             return Unit;
