@@ -23,10 +23,6 @@ var codeSet = new HashSet<string>();
 
 WriteHeader();
 
-#><#
-//using global::System.Diagnostics.CodeAnalysis;
-
-//[assembly: SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Try", Scope = "type", Target = "Narvalo.Finance.Currencies.TRY", Justification = "[Intentionally] TRY is the official currency code for the Turkish Lira.")]
 #>
 // Below, the singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
 namespace <#= Namespace #>
@@ -58,7 +54,6 @@ namespace <#= Namespace #>
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
 <#
         }
-    //[SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
 #>
     public sealed class <#= currency.Code #> : CurrencyUnit<<#= currency.Code #>>
     {

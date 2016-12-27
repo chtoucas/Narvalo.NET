@@ -4,11 +4,11 @@ namespace Narvalo.Finance
 {
     using Narvalo.Finance.Currencies;
 
-    // Aliases for the most commonly used currencies.
+    // Aliases for some of the most commonly used currencies.
     public static partial class CurrencyUnit
     {
         /// <summary>
-        /// Gets he currency unit for the pseudo-currency for transactions where no currency is involved.
+        /// Gets the currency unit for the pseudo-currency for transactions where no currency is involved.
         /// </summary>
         public static XXX None { get { Warrant.NotNull<XXX>(); return XXX.Unit; } }
 
