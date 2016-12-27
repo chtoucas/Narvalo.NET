@@ -23,9 +23,9 @@ namespace Narvalo.Finance
     /// <para>This class follows value type semantics when it comes to equality.</para>
     /// <para>This class does not offer extended information about the currency.</para>
     /// </remarks>
-    public sealed partial class Currency : IEquatable<Currency>
+    public partial struct Currency : IEquatable<Currency>
     {
-        // The list is automatically generated using the data obtained from the SNV website.
+        // The list is automatically generated using data obtained from the SNV website.
         // The volatile keyword is only for correctness.
         private volatile static HashSet<string> s_CodeSet;
 
@@ -63,7 +63,6 @@ namespace Narvalo.Finance
         {
             Require.NotNull(code, nameof(code));
             Sentinel.Expect.CurrencyCode(code);
-            Warrant.NotNull<Currency>();
 
             Contract.Assume(CodeSet != null);
             if (!CodeSet.Contains(code))
@@ -84,7 +83,6 @@ namespace Narvalo.Finance
         public static Currency OfRegion(RegionInfo regionInfo)
         {
             Require.NotNull(regionInfo, nameof(regionInfo));
-            Warrant.NotNull<Currency>();
 
             var code = regionInfo.ISOCurrencySymbol;
             Contract.Assume(code != null);
@@ -95,12 +93,7 @@ namespace Narvalo.Finance
             return new Currency(code);
         }
 
-        public static Currency OfCurrentRegion()
-        {
-            Warrant.NotNull<Currency>();
-
-            return OfRegion(RegionInfo.CurrentRegion);
-        }
+        public static Currency OfCurrentRegion() => OfRegion(RegionInfo.CurrentRegion);
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class associated
@@ -113,7 +106,6 @@ namespace Narvalo.Finance
         public static Currency OfCulture(CultureInfo cultureInfo)
         {
             Require.NotNull(cultureInfo, nameof(cultureInfo));
-            Warrant.NotNull<Currency>();
 
             if (cultureInfo.IsNeutralCulture)
             {
@@ -129,12 +121,7 @@ namespace Narvalo.Finance
         /// </summary>
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the current culture.</exception>
         /// <returns>The currency for the culture used by the current thread.</returns>
-        public static Currency OfCurrentCulture()
-        {
-            Warrant.NotNull<Currency>();
-
-            return OfCulture(CultureInfo.CurrentCulture);
-        }
+        public static Currency OfCurrentCulture() => OfCulture(CultureInfo.CurrentCulture);
 
         // This method allows to register currencies that are not part of ISO 4217.
         // See https://en.wikipedia.org/wiki/ISO_4217.
@@ -175,51 +162,26 @@ namespace Narvalo.Finance
     }
 
     // Interface IEquatable<Currency>.
-    public sealed partial class Currency
+    public partial struct Currency
     {
-        // WARNING: This (immutable) reference type follows value type semantics.
-        // To test reference equality, you must use Object.ReferenceEquals().
-        public static bool operator ==(Currency left, Currency right)
-        {
-            if (ReferenceEquals(left, null))
-            {
-                // If left is null, returns true if right is null too, otherwise false.
-                return ReferenceEquals(right, null);
-            }
+        public static bool operator ==(Currency left, Currency right) => left.Equals(right);
 
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(Currency left, Currency right) => !(left == right);
+        public static bool operator !=(Currency left, Currency right) => !left.Equals(right);
 
         /// <inheritdoc cref="IEquatable{T}.Equals" />
-        public bool Equals(Currency other)
-        {
-            if (ReferenceEquals(other, null)) { return false; }
-
-            return EqualsImpl(other);
-        }
+        public bool Equals(Currency other) => Code == other.Code;
 
         /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(obj, null)) { return false; }
-            if (ReferenceEquals(obj, this)) { return true; }
-            if (obj.GetType() != GetType()) { return false; }
+            if (!(obj is Currency)) { return false; }
 
-            return EqualsImpl(obj as Currency);
+            return Equals((Currency)obj);
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
         // TODO: Since there are so few currencies, we could cache the hash code?
         public override int GetHashCode() => Code.GetHashCode();
-
-        private bool EqualsImpl(Currency other)
-        {
-            Demand.NotNull(other);
-
-            return Code == other.Code;
-        }
     }
 }
 

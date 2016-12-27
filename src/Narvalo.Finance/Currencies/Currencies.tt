@@ -65,7 +65,7 @@ namespace <#= Namespace #>
         public static <#= currency.Code #> Unit { get { Warrant.NotNull<<#= currency.Code #>>(); return Uniq.Instance; } }
 
         public static explicit operator <#= currency.Code #>(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(<#= currency.Code #> value) => value?.ToCurrency();
+        public static explicit operator Currency(<#= currency.Code #> value) => value.ToCurrency();
 
         public static <#= currency.Code #> FromCurrency(Currency value)
         {

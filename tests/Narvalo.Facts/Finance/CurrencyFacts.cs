@@ -129,23 +129,23 @@ namespace Narvalo.Finance
             Assert.False(currency1 == currency2);
         }
 
-        [Fact]
-        public static void Equality_ReturnsFalse_ForNullOnOnlyOneSide()
-        {
-            var currency = Currency.Of("EUR");
+        //[Fact]
+        //public static void Equality_ReturnsFalse_ForNullOnOnlyOneSide()
+        //{
+        //    var currency = Currency.Of("EUR");
 
-            Assert.False(currency == null);
-            Assert.False(null == currency);
-        }
+        //    Assert.False(currency == null);
+        //    Assert.False(null == currency);
+        //}
 
-        [Fact]
-        public static void Equality_ReturnsTrue_ForNullOnBothSides()
-        {
-            Currency currency1 = null;
-            Currency currency2 = null;
+        //[Fact]
+        //public static void Equality_ReturnsTrue_ForNullOnBothSides()
+        //{
+        //    Currency currency1 = null;
+        //    Currency currency2 = null;
 
-            Assert.True(currency1 == currency2);
-        }
+        //    Assert.True(currency1 == currency2);
+        //}
 
         #endregion
 
@@ -169,36 +169,36 @@ namespace Narvalo.Finance
             Assert.True(currency1 != currency2);
         }
 
-        [Fact]
-        public static void Inequality_ReturnsTrue_ForNullOnOnlyOneSide()
-        {
-            var currency = Currency.Of("EUR");
+        //[Fact]
+        //public static void Inequality_ReturnsTrue_ForNullOnOnlyOneSide()
+        //{
+        //    var currency = Currency.Of("EUR");
 
-            Assert.True(currency != null);
-            Assert.True(null != currency);
-        }
+        //    Assert.True(currency != null);
+        //    Assert.True(null != currency);
+        //}
 
-        [Fact]
-        public static void Inequality_ReturnsFalse_ForNullOnBothSides()
-        {
-            Currency currency1 = null;
-            Currency currency2 = null;
+        //[Fact]
+        //public static void Inequality_ReturnsFalse_ForNullOnBothSides()
+        //{
+        //    Currency currency1 = null;
+        //    Currency currency2 = null;
 
-            Assert.False(currency1 != currency2);
-        }
+        //    Assert.False(currency1 != currency2);
+        //}
 
         #endregion
 
         #region Equals
 
-        [Fact]
-        public static void Equals_ReturnsFalse_ForNull()
-        {
-            var currency = Currency.Of("EUR");
-            Currency other = null;
+        //[Fact]
+        //public static void Equals_ReturnsFalse_ForNull()
+        //{
+        //    var currency = Currency.Of("EUR");
+        //    Currency other = null;
 
-            Assert.False(currency.Equals(other));
-        }
+        //    Assert.False(currency.Equals(other));
+        //}
 
         [Theory(DisplayName = "Equals() follows structural equality rules.")]
         [MemberData(nameof(AllCodes), DisableDiscoveryEnumeration = true)]
@@ -220,23 +220,23 @@ namespace Narvalo.Finance
             Assert.False(currency1.Equals(currency2));
         }
 
-        [Fact]
-        public static void Equals_ReturnsFalse_ForNull_AfterConversionToRootObject()
-        {
-            var currency = Currency.Of("EUR");
-            object other = null;
+        //[Fact]
+        //public static void Equals_ReturnsFalse_ForNull_AfterConversionToRootObject()
+        //{
+        //    var currency = Currency.Of("EUR");
+        //    object other = null;
 
-            Assert.False(currency.Equals(other));
-        }
+        //    Assert.False(currency.Equals(other));
+        //}
 
-        [Fact]
-        public static void Equals_ReturnsTrue_ForIdenticalCodes_AfterConversionToRootObject()
-        {
-            var currency1 = Currency.Of("EUR");
-            object currency2 = currency1;
+        //[Fact]
+        //public static void Equals_ReturnsTrue_ForIdenticalCodes_AfterConversionToRootObject()
+        //{
+        //    var currency1 = Currency.Of("EUR");
+        //    object currency2 = currency1;
 
-            Assert.True(currency1.Equals(currency2));
-        }
+        //    Assert.True(currency1.Equals(currency2));
+        //}
 
         [Fact]
         public static void Equals_ReturnsFalse_ForOtherTypes()
@@ -250,14 +250,14 @@ namespace Narvalo.Finance
             Assert.False(currency.Equals(new My.SimpleValue { Value = "Whatever" }));
         }
 
-        [Fact]
-        public static void Equals_ReturnsFalse_ForDistinctCodes_AfterConversionToRootObject()
-        {
-            var currency1 = Currency.Of("EUR");
-            object currency2 = Currency.Of("XPT");
+        //[Fact]
+        //public static void Equals_ReturnsFalse_ForDistinctCodes_AfterConversionToRootObject()
+        //{
+        //    var currency1 = Currency.Of("EUR");
+        //    object currency2 = Currency.Of("XPT");
 
-            Assert.False(currency1.Equals(currency2));
-        }
+        //    Assert.False(currency1.Equals(currency2));
+        //}
 
         [Fact]
         public static void Equals_IsReflexive()

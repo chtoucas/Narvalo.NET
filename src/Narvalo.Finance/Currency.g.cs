@@ -15,7 +15,7 @@ namespace Narvalo.Finance
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
-    public partial class Currency
+    public partial struct Currency
     {
         /// <summary>
         /// The set of available currency codes.

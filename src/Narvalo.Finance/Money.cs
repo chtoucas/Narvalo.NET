@@ -17,22 +17,15 @@ namespace Narvalo.Finance
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Money : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
     {
-        private readonly Currency _currency;
-
         public Money(decimal amount, Currency currency)
         {
-            Require.NotNull(currency, nameof(currency));
-
             Amount = amount;
-            _currency = currency;
+            Currency = currency;
         }
 
         public decimal Amount { get; }
 
-        public Currency Currency
-        {
-            get { Warrant.NotNull<Currency>(); return _currency; }
-        }
+        public Currency Currency { get; }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -89,14 +82,7 @@ namespace Narvalo.Finance
 
         public static bool operator !=(Money left, Money right) => !left.Equals(right);
 
-        public bool Equals(Money other)
-            // Two objects of the same amount but referencing two distinct
-            // currency objects with the same currency code are considered equal.
-            // This explains why, below, we use Currency.Equals() instead of ==;
-            // this better emphasizes that we do not care about reference equality
-            // for currencies. NB: In practice, it would make no difference as we
-            // also override the operator == so that it follows value type semantics.
-            => Amount == other.Amount && Currency.Equals(other.Currency);
+        public bool Equals(Money other) => Amount == other.Amount && Currency == other.Currency;
 
         public override bool Equals(object obj)
         {
@@ -258,21 +244,3 @@ namespace Narvalo.Finance
         public Money Plus() => this;
     }
 }
-
-#if CONTRACTS_FULL
-
-namespace Narvalo.Finance
-{
-    using System.Diagnostics.Contracts;
-
-    public partial struct Money
-    {
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_currency != null);
-        }
-    }
-}
-
-#endif

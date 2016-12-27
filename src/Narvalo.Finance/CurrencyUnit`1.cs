@@ -13,12 +13,7 @@ namespace Narvalo.Finance
             get { Warrant.NotNull<string>(); return typeof(TCurrency).Name; }
         }
 
-        public Currency ToCurrency()
-        {
-            Warrant.NotNull<Currency>();
-
-            return Currency.Of(Code);
-        }
+        public Currency ToCurrency() => Currency.Of(Code);
 
         public string Code
         {
