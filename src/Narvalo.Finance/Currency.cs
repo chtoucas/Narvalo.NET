@@ -23,7 +23,7 @@ namespace Narvalo.Finance
     /// <para>This class follows value type semantics when it comes to equality.</para>
     /// <para>This class does not offer extended information about the currency.</para>
     /// </remarks>
-    public partial class Currency : IEquatable<Currency>
+    public sealed partial class Currency : IEquatable<Currency>
     {
         // The list is automatically generated using the data obtained from the SNV website.
         // The volatile keyword is only for correctness.
@@ -175,7 +175,7 @@ namespace Narvalo.Finance
     }
 
     // Interface IEquatable<Currency>.
-    public partial class Currency
+    public sealed partial class Currency
     {
         // WARNING: This (immutable) reference type follows value type semantics.
         // To test reference equality, you must use Object.ReferenceEquals().
