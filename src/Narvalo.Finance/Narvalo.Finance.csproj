@@ -98,7 +98,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CountryISOCodes.tt</DependentUpon>
     </Compile>
-    <Compile Include="Currencies\CurrencyActivator.cs" />
     <Compile Include="Utilities\AsciiHelpers.cs" />
     <Compile Include="IbanParts.cs" />
     <Compile Include="IbanValidationLevels.cs" />

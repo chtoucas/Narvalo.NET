@@ -18,7 +18,7 @@ namespace Narvalo.Finance
     {
         // IMPORTANT: This static field MUST remain first to be initialized before the other(s).
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly TCurrency s_UnderlyingUnit = CurrencyActivator.CreateInstance<TCurrency>();
+        private static readonly TCurrency s_UnderlyingUnit = CurrencyUnit.OfType<TCurrency>();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0m);

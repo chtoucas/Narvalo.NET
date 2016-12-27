@@ -2,7 +2,31 @@
 
 namespace Narvalo.Finance
 {
+    using System.Diagnostics.Contracts;
+    using System.Reflection;
+
     using Narvalo.Finance.Currencies;
+
+    public static partial class CurrencyUnit
+    {
+        private const string SingletonPropertyName = "Unit";
+
+        // NB: On full .NET, there is a much faster alternative, namely:
+        //   Activator.CreateInstance(typeof(TCurrency), nonPublic: true) as TCurrency;
+        // Nevertheless, calling the constructor somehow defeats the idea of a unit being a singleton.
+        internal static TCurrency OfType<TCurrency>() where TCurrency : CurrencyUnit<TCurrency>
+        {
+            Warrant.NotNull<TCurrency>();
+
+            var typeInfo = typeof(TCurrency).GetTypeInfo();
+            Contract.Assume(typeInfo != null);
+
+            // Unsafe, only works for the built-in currency units.
+            var property = typeInfo.GetDeclaredProperty(SingletonPropertyName);
+
+            return property?.GetValue(null) as TCurrency;
+        }
+    }
 
     // Aliases for some of the most commonly used currencies.
     public static partial class CurrencyUnit

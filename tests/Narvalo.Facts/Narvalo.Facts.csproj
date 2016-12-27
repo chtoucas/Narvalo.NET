@@ -106,7 +106,6 @@
       <DependentUpon>BuiltInCurrencyFacts.tt</DependentUpon>
     </Compile>
     <Compile Include="Finance\CurrencyFacts.cs" />
-    <Compile Include="Finance\Currencies\CurrencyActivatorFacts.cs" />
     <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="FormatFacts.cs" />
     <Compile Include="Fx\Advanced\NullableFacts.cs" />

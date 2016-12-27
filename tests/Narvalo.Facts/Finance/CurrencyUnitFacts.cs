@@ -4,7 +4,9 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
 
+    using Narvalo.Finance.Currencies;
     using Xunit;
 
     public static partial class CurrencyUnitFacts
@@ -19,8 +21,29 @@ namespace Narvalo.Finance
         #endregion
     }
 
+#if !NO_INTERNALS_VISIBLE_TO
+
     public static partial class CurrencyUnitFacts
     {
+        #region OfType()
+
+        [Fact]
+        public static void OfType_Passes_ForBuiltInUnit()
+            => CurrencyUnit.OfType<EUR>();
+
+        [Fact]
+        public static void OfType_ReturnsNull_ForMissingSingletonProperty()
+            => Assert.Null(CurrencyUnit.OfType<ZZZ>());
+
+        #endregion
+    }
+
+#endif
+
+        public static partial class CurrencyUnitFacts
+    {
+        private sealed class ZZZ : CurrencyUnit<ZZZ> { private ZZZ() { } }
+
         public static IEnumerable<object[]> Aliases
         {
             get
