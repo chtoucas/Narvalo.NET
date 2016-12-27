@@ -5,6 +5,7 @@ namespace Narvalo.Finance.Globalization
     using System;
     using System.Globalization;
 
+    using Narvalo.Finance.Currencies;
     using Narvalo.Finance.Properties;
 
     // Formatting currencies is difficult. This class works consistently across .NET cultures
@@ -15,19 +16,19 @@ namespace Narvalo.Finance.Globalization
         private const string DEFAULT_FORMAT = "G";
 
         public static string Format<TCurrency>(Money<TCurrency> money, string format, NumberFormatInfo nfi)
-            where TCurrency : Currency
+            where TCurrency : CurrencyUnit<TCurrency>
         {
             Warrant.NotNull<string>();
-            return Format(money.Amount, money.Currency, format, nfi);
+            return Format(money.Amount, money.Unit.Code, format, nfi);
         }
 
         public static string Format(Money money, string format, NumberFormatInfo nfi)
         {
             Warrant.NotNull<string>();
-            return Format(money.Amount, money.Currency, format, nfi);
+            return Format(money.Amount, money.Currency.Code, format, nfi);
         }
 
-        private static string Format(decimal amount, Currency currency, string format, NumberFormatInfo nfi)
+        private static string Format(decimal amount, string currencyCode, string format, NumberFormatInfo nfi)
         {
             Demand.NotNull(nfi);
             Warrant.NotNull<string>();
@@ -46,16 +47,16 @@ namespace Narvalo.Finance.Globalization
                 case "L":
                 case "l":
                     // Left (Currency code placed on the).
-                    return currency.Code + "\u00A0" + amount.ToString("C", nfi.GetNoSymbolNoSpaceClone());
+                    return currencyCode + "\u00A0" + amount.ToString("C", nfi.GetNoSymbolNoSpaceClone());
                 case "R":
                 case "r":
                     // Right (Currency code placed on the).
-                    return amount.ToString("C", nfi.GetNoSymbolNoSpaceClone()) + "\u00A0" + currency.Code;
+                    return amount.ToString("C", nfi.GetNoSymbolNoSpaceClone()) + "\u00A0" + currencyCode;
                 case "G":
                 case "g":
                     // General (default). It replaces the currency symbol by the currency code
                     // and ensures that there is a space between the amount and the currency code.
-                    return amount.ToString("C", nfi.GetCurrencyCodeAndSpaceClone(currency));
+                    return amount.ToString("C", nfi.GetCurrencyCodeAndSpaceClone(currencyCode));
                 default:
                     throw new FormatException(
                         Narvalo.Format.Current(Strings.Money_InvalidFormatSpecification));

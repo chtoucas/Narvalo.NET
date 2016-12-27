@@ -135,9 +135,6 @@
   <data name="BooleanResult_NoErrorMessage" xml:space="preserve">
     <value>BooleanResult_NoErrorMessage</value>
   </data>
-  <data name="CurrencyActivator_MissingCtor" xml:space="preserve">
-    <value>CurrencyActivator_MissingCtor</value>
-  </data>
   <data name="CurrencyNotFound_DefaultMessage" xml:space="preserve">
     <value>Devise inconnue.</value>
   </data>

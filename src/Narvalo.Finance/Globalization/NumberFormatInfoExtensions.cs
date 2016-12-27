@@ -59,13 +59,13 @@ namespace Narvalo.Finance.Globalization
 
         public static NumberFormatInfo GetCurrencyCodeAndSpaceClone(
             this NumberFormatInfo @this,
-            Currency currency)
+            string currencyCode)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(currency);
+            Demand.NotNull(currencyCode);
 
             var nf = (NumberFormatInfo)@this.Clone();
-            nf.CurrencySymbol = currency.Code;
+            nf.CurrencySymbol = currencyCode;
 
             // If there is no space between the amount and the currency symbol, add one.
             if (!nf.CurrencyPositivePatternContainsSpace())

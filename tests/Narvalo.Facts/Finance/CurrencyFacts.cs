@@ -3,10 +3,8 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
 
-    using Narvalo.Finance.Currencies;
     using Xunit;
 
     public static partial class CurrencyFacts
@@ -298,58 +296,5 @@ namespace Narvalo.Finance
         }
 
         #endregion
-
-        #region ToString()
-
-        [Theory]
-        [MemberData(nameof(BuiltInCurrencies), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void ToString_ReturnsNotNull(Currency currency) => Assert.True(currency.ToString() != null);
-
-        #endregion
-
-        #region Aliases
-
-        [Theory]
-        [MemberData(nameof(Aliases), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void Alias_IsNotNull(Currency alias) => Assert.NotNull(alias);
-
-        #endregion
-
-        #region Built-In Currencies
-
-        [Theory]
-        [MemberData(nameof(BuiltInCurrencies), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void BuiltInCurrency_UniqInstance_ReturnsNonNull(Currency currency)
-            => Assert.True(currency != null);
-
-        [Fact]
-        public static void BuiltInCurrency_UniqInstance_ReturnsSingleton()
-            => Assert.True(Object.ReferenceEquals(EUR.Unit, EUR.Unit));
-
-        #endregion
-    }
-
-    public static partial class CurrencyFacts
-    {
-        public static IEnumerable<object[]> Aliases
-        {
-            get
-            {
-                yield return new object[] { Currency.None };
-                yield return new object[] { Currency.Test };
-                yield return new object[] { Currency.Euro };
-                yield return new object[] { Currency.PoundSterling };
-                yield return new object[] { Currency.SwissFranc };
-                yield return new object[] { Currency.UnitedStatesDollar };
-                yield return new object[] { Currency.Yen };
-                yield return new object[] { Currency.Gold };
-                yield return new object[] { Currency.Palladium };
-                yield return new object[] { Currency.Platinum };
-                yield return new object[] { Currency.Silver };
-            }
-        }
     }
 }

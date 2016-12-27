@@ -7,7 +7,6 @@ namespace Narvalo.Finance
     using System.Collections.Generic;
     using System.Globalization;
 
-    using Narvalo.Finance.Currencies;
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
@@ -36,7 +35,7 @@ namespace Narvalo.Finance
         /// Initializes a new instance of the <see cref="Currency" /> class for the specified code.
         /// </summary>
         /// <param name="code">A string that contains the three-letter identifier defined in ISO 4217.</param>
-        internal Currency(string code)
+        private Currency(string code)
         {
             Sentinel.Demand.CurrencyCode(code);
 
@@ -223,116 +222,116 @@ namespace Narvalo.Finance
         }
     }
 
-    // Aliases for the most commonly used currencies.
-    public partial class Currency
-    {
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class
-        /// for the pseudo-currency for transactions where no currency is involved.
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class
-        /// for the pseudo-currency for transactions where no currency is involved.</value>
-        public static Currency None
-        {
-            get { Warrant.NotNull<Currency>(); return XXX.Unit; }
-        }
+    //// Aliases for the most commonly used currencies.
+    //public partial class Currency
+    //{
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class
+    //    /// for the pseudo-currency for transactions where no currency is involved.
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class
+    //    /// for the pseudo-currency for transactions where no currency is involved.</value>
+    //    public static Currency None
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return XXX.Unit; }
+    //    }
 
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class
-        /// for the currency specifically reserved for testing purposes.
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class
-        /// for the currency specifically reserved for testing purposes.</value>
-        public static Currency Test
-        {
-            get { Warrant.NotNull<Currency>(); return XTS.Unit; }
-        }
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class
+    //    /// for the currency specifically reserved for testing purposes.
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class
+    //    /// for the currency specifically reserved for testing purposes.</value>
+    //    public static Currency Test
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return XTS.Unit; }
+    //    }
 
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Euro".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Euro".</value>
-        public static Currency Euro
-        {
-            get { Warrant.NotNull<Currency>(); return EUR.Unit; }
-        }
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class for the "Euro".
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class for the "Euro".</value>
+    //    public static Currency Euro
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return EUR.Unit; }
+    //    }
 
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "(British) "Pound Sterling".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the (British) "Pound Sterling".</value>
-        public static Currency PoundSterling
-        {
-            get { Warrant.NotNull<Currency>(); return GBP.Unit; }
-        }
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class for the "(British) "Pound Sterling".
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class for the (British) "Pound Sterling".</value>
+    //    public static Currency PoundSterling
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return GBP.Unit; }
+    //    }
 
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Swiss Franc".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Swiss Franc".</value>
-        public static Currency SwissFranc
-        {
-            get { Warrant.NotNull<Currency>(); return CHF.Unit; }
-        }
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class for the "Swiss Franc".
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class for the "Swiss Franc".</value>
+    //    public static Currency SwissFranc
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return CHF.Unit; }
+    //    }
 
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "United States Dollar".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "United States Dollar".</value>
-        public static Currency UnitedStatesDollar
-        {
-            get { Warrant.NotNull<Currency>(); return USD.Unit; }
-        }
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class for the "United States Dollar".
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class for the "United States Dollar".</value>
+    //    public static Currency UnitedStatesDollar
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return USD.Unit; }
+    //    }
 
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the "Japanese Yen".
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the "Japanese Yen".</value>
-        public static Currency Yen
-        {
-            get { Warrant.NotNull<Currency>(); return JPY.Unit; }
-        }
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class for the "Japanese Yen".
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class for the "Japanese Yen".</value>
+    //    public static Currency Yen
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return JPY.Unit; }
+    //    }
 
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for gold.
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for gold.</value>
-        /// <remarks>The code for a precious metal is formed after its chemical symbol: AU.</remarks>
-        public static Currency Gold
-        {
-            get { Warrant.NotNull<Currency>(); return XAU.Unit; }
-        }
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for gold.
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for gold.</value>
+    //    /// <remarks>The code for a precious metal is formed after its chemical symbol: AU.</remarks>
+    //    public static Currency Gold
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return XAU.Unit; }
+    //    }
 
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for palladium.
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for palladium.</value>
-        /// <remarks>The code for a precious metal is formed after its chemical symbol: PD.</remarks>
-        public static Currency Palladium
-        {
-            get { Warrant.NotNull<Currency>(); return XPD.Unit; }
-        }
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for palladium.
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for palladium.</value>
+    //    /// <remarks>The code for a precious metal is formed after its chemical symbol: PD.</remarks>
+    //    public static Currency Palladium
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return XPD.Unit; }
+    //    }
 
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for platinum.
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for platinum.</value>
-        /// <remarks>The code for a precious metal is formed after its chemical symbol: PT.</remarks>
-        public static Currency Platinum
-        {
-            get { Warrant.NotNull<Currency>(); return XPT.Unit; }
-        }
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for platinum.
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for platinum.</value>
+    //    /// <remarks>The code for a precious metal is formed after its chemical symbol: PT.</remarks>
+    //    public static Currency Platinum
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return XPT.Unit; }
+    //    }
 
-        /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for silver.
-        /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for silver.</value>
-        /// <remarks>The code for a precious metal is formed after its chemical symbol: AG.</remarks>
-        public static Currency Silver
-        {
-            get { Warrant.NotNull<Currency>(); return XAG.Unit; }
-        }
-    }
+    //    /// <summary>
+    //    /// Gets the unique instance of the <see cref="Currency" /> class for the pseudo-currency for silver.
+    //    /// </summary>
+    //    /// <value>The unique instance of the <see cref="Currency" /> class for the pseudo-currency for silver.</value>
+    //    /// <remarks>The code for a precious metal is formed after its chemical symbol: AG.</remarks>
+    //    public static Currency Silver
+    //    {
+    //        get { Warrant.NotNull<Currency>(); return XAG.Unit; }
+    //    }
+    //}
 }
 
 #if CONTRACTS_FULL

@@ -31,6 +31,8 @@ WriteHeader();
 // Below, the singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
 namespace <#= Namespace #>
 {
+    using System;
+
 <#
     foreach (var currency in currencies.OrderBy(_ => _.Code))
     {
@@ -58,18 +60,25 @@ namespace <#= Namespace #>
         }
     //[SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "[Intentionally] Exceptionally we prefer to preserve the currency code casing.")]
 #>
-    public sealed class <#= currency.Code #> : Currency
+    public sealed class <#= currency.Code #> : CurrencyUnit<<#= currency.Code #>>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="<#= currency.Code #>" /> class.
-        /// </summary>
-        private <#= currency.Code #>() : base("<#= currency.Code #>") { }
+        private <#= currency.Code #>() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".
+        /// Gets the unique instance of the <see cref="<#= currency.Code #>" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "<#= currency.Code #>".</value>
         public static <#= currency.Code #> Unit { get { Warrant.NotNull<<#= currency.Code #>>(); return Uniq.Instance; } }
+
+        public static explicit operator <#= currency.Code #>(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(<#= currency.Code #> value) => value?.ToCurrency();
+
+        public static <#= currency.Code #> FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {

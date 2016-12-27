@@ -13,22 +13,31 @@
 // Below, the singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
 namespace Narvalo.Finance.Currencies
 {
+    using System;
+
     /// <summary>
     /// Represents the currency unit for the code "ADP".
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
-    public sealed class ADP : Currency
+    public sealed class ADP : CurrencyUnit<ADP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ADP" /> class.
-        /// </summary>
-        private ADP() : base("ADP") { }
+        private ADP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ADP".
+        /// Gets the unique instance of the <see cref="ADP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ADP".</value>
         public static ADP Unit { get { Warrant.NotNull<ADP>(); return Uniq.Instance; } }
+
+        public static explicit operator ADP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ADP value) => value?.ToCurrency();
+
+        public static ADP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -42,18 +51,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AED : Currency
+    public sealed class AED : CurrencyUnit<AED>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AED" /> class.
-        /// </summary>
-        private AED() : base("AED") { }
+        private AED() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AED".
+        /// Gets the unique instance of the <see cref="AED" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AED".</value>
         public static AED Unit { get { Warrant.NotNull<AED>(); return Uniq.Instance; } }
+
+        public static explicit operator AED(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AED value) => value?.ToCurrency();
+
+        public static AED FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -67,18 +83,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AFA : Currency
+    public sealed class AFA : CurrencyUnit<AFA>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AFA" /> class.
-        /// </summary>
-        private AFA() : base("AFA") { }
+        private AFA() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFA".
+        /// Gets the unique instance of the <see cref="AFA" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFA".</value>
         public static AFA Unit { get { Warrant.NotNull<AFA>(); return Uniq.Instance; } }
+
+        public static explicit operator AFA(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AFA value) => value?.ToCurrency();
+
+        public static AFA FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -92,18 +115,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AFN : Currency
+    public sealed class AFN : CurrencyUnit<AFN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AFN" /> class.
-        /// </summary>
-        private AFN() : base("AFN") { }
+        private AFN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AFN".
+        /// Gets the unique instance of the <see cref="AFN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AFN".</value>
         public static AFN Unit { get { Warrant.NotNull<AFN>(); return Uniq.Instance; } }
+
+        public static explicit operator AFN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AFN value) => value?.ToCurrency();
+
+        public static AFN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -117,18 +147,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ALK : Currency
+    public sealed class ALK : CurrencyUnit<ALK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ALK" /> class.
-        /// </summary>
-        private ALK() : base("ALK") { }
+        private ALK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALK".
+        /// Gets the unique instance of the <see cref="ALK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALK".</value>
         public static ALK Unit { get { Warrant.NotNull<ALK>(); return Uniq.Instance; } }
+
+        public static explicit operator ALK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ALK value) => value?.ToCurrency();
+
+        public static ALK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -142,18 +179,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ALL : Currency
+    public sealed class ALL : CurrencyUnit<ALL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ALL" /> class.
-        /// </summary>
-        private ALL() : base("ALL") { }
+        private ALL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ALL".
+        /// Gets the unique instance of the <see cref="ALL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ALL".</value>
         public static ALL Unit { get { Warrant.NotNull<ALL>(); return Uniq.Instance; } }
+
+        public static explicit operator ALL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ALL value) => value?.ToCurrency();
+
+        public static ALL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -167,18 +211,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AMD : Currency
+    public sealed class AMD : CurrencyUnit<AMD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AMD" /> class.
-        /// </summary>
-        private AMD() : base("AMD") { }
+        private AMD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AMD".
+        /// Gets the unique instance of the <see cref="AMD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AMD".</value>
         public static AMD Unit { get { Warrant.NotNull<AMD>(); return Uniq.Instance; } }
+
+        public static explicit operator AMD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AMD value) => value?.ToCurrency();
+
+        public static AMD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -192,18 +243,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ANG : Currency
+    public sealed class ANG : CurrencyUnit<ANG>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ANG" /> class.
-        /// </summary>
-        private ANG() : base("ANG") { }
+        private ANG() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ANG".
+        /// Gets the unique instance of the <see cref="ANG" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ANG".</value>
         public static ANG Unit { get { Warrant.NotNull<ANG>(); return Uniq.Instance; } }
+
+        public static explicit operator ANG(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ANG value) => value?.ToCurrency();
+
+        public static ANG FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -217,18 +275,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AOA : Currency
+    public sealed class AOA : CurrencyUnit<AOA>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AOA" /> class.
-        /// </summary>
-        private AOA() : base("AOA") { }
+        private AOA() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOA".
+        /// Gets the unique instance of the <see cref="AOA" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOA".</value>
         public static AOA Unit { get { Warrant.NotNull<AOA>(); return Uniq.Instance; } }
+
+        public static explicit operator AOA(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AOA value) => value?.ToCurrency();
+
+        public static AOA FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -242,18 +307,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AOK : Currency
+    public sealed class AOK : CurrencyUnit<AOK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AOK" /> class.
-        /// </summary>
-        private AOK() : base("AOK") { }
+        private AOK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOK".
+        /// Gets the unique instance of the <see cref="AOK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOK".</value>
         public static AOK Unit { get { Warrant.NotNull<AOK>(); return Uniq.Instance; } }
+
+        public static explicit operator AOK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AOK value) => value?.ToCurrency();
+
+        public static AOK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -267,18 +339,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AON : Currency
+    public sealed class AON : CurrencyUnit<AON>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AON" /> class.
-        /// </summary>
-        private AON() : base("AON") { }
+        private AON() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AON".
+        /// Gets the unique instance of the <see cref="AON" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AON".</value>
         public static AON Unit { get { Warrant.NotNull<AON>(); return Uniq.Instance; } }
+
+        public static explicit operator AON(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AON value) => value?.ToCurrency();
+
+        public static AON FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -292,18 +371,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AOR : Currency
+    public sealed class AOR : CurrencyUnit<AOR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AOR" /> class.
-        /// </summary>
-        private AOR() : base("AOR") { }
+        private AOR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AOR".
+        /// Gets the unique instance of the <see cref="AOR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AOR".</value>
         public static AOR Unit { get { Warrant.NotNull<AOR>(); return Uniq.Instance; } }
+
+        public static explicit operator AOR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AOR value) => value?.ToCurrency();
+
+        public static AOR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -317,18 +403,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ARA : Currency
+    public sealed class ARA : CurrencyUnit<ARA>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ARA" /> class.
-        /// </summary>
-        private ARA() : base("ARA") { }
+        private ARA() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARA".
+        /// Gets the unique instance of the <see cref="ARA" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARA".</value>
         public static ARA Unit { get { Warrant.NotNull<ARA>(); return Uniq.Instance; } }
+
+        public static explicit operator ARA(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ARA value) => value?.ToCurrency();
+
+        public static ARA FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -342,18 +435,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ARP : Currency
+    public sealed class ARP : CurrencyUnit<ARP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ARP" /> class.
-        /// </summary>
-        private ARP() : base("ARP") { }
+        private ARP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARP".
+        /// Gets the unique instance of the <see cref="ARP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARP".</value>
         public static ARP Unit { get { Warrant.NotNull<ARP>(); return Uniq.Instance; } }
+
+        public static explicit operator ARP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ARP value) => value?.ToCurrency();
+
+        public static ARP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -367,18 +467,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ARS : Currency
+    public sealed class ARS : CurrencyUnit<ARS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ARS" /> class.
-        /// </summary>
-        private ARS() : base("ARS") { }
+        private ARS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARS".
+        /// Gets the unique instance of the <see cref="ARS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARS".</value>
         public static ARS Unit { get { Warrant.NotNull<ARS>(); return Uniq.Instance; } }
+
+        public static explicit operator ARS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ARS value) => value?.ToCurrency();
+
+        public static ARS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -392,18 +499,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ARY : Currency
+    public sealed class ARY : CurrencyUnit<ARY>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ARY" /> class.
-        /// </summary>
-        private ARY() : base("ARY") { }
+        private ARY() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ARY".
+        /// Gets the unique instance of the <see cref="ARY" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ARY".</value>
         public static ARY Unit { get { Warrant.NotNull<ARY>(); return Uniq.Instance; } }
+
+        public static explicit operator ARY(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ARY value) => value?.ToCurrency();
+
+        public static ARY FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -417,18 +531,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ATS : Currency
+    public sealed class ATS : CurrencyUnit<ATS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ATS" /> class.
-        /// </summary>
-        private ATS() : base("ATS") { }
+        private ATS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ATS".
+        /// Gets the unique instance of the <see cref="ATS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ATS".</value>
         public static ATS Unit { get { Warrant.NotNull<ATS>(); return Uniq.Instance; } }
+
+        public static explicit operator ATS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ATS value) => value?.ToCurrency();
+
+        public static ATS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -442,18 +563,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AUD : Currency
+    public sealed class AUD : CurrencyUnit<AUD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AUD" /> class.
-        /// </summary>
-        private AUD() : base("AUD") { }
+        private AUD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AUD".
+        /// Gets the unique instance of the <see cref="AUD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AUD".</value>
         public static AUD Unit { get { Warrant.NotNull<AUD>(); return Uniq.Instance; } }
+
+        public static explicit operator AUD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AUD value) => value?.ToCurrency();
+
+        public static AUD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -467,18 +595,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AWG : Currency
+    public sealed class AWG : CurrencyUnit<AWG>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AWG" /> class.
-        /// </summary>
-        private AWG() : base("AWG") { }
+        private AWG() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AWG".
+        /// Gets the unique instance of the <see cref="AWG" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AWG".</value>
         public static AWG Unit { get { Warrant.NotNull<AWG>(); return Uniq.Instance; } }
+
+        public static explicit operator AWG(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AWG value) => value?.ToCurrency();
+
+        public static AWG FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -492,18 +627,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AYM : Currency
+    public sealed class AYM : CurrencyUnit<AYM>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AYM" /> class.
-        /// </summary>
-        private AYM() : base("AYM") { }
+        private AYM() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AYM".
+        /// Gets the unique instance of the <see cref="AYM" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AYM".</value>
         public static AYM Unit { get { Warrant.NotNull<AYM>(); return Uniq.Instance; } }
+
+        public static explicit operator AYM(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AYM value) => value?.ToCurrency();
+
+        public static AYM FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -517,18 +659,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AZM : Currency
+    public sealed class AZM : CurrencyUnit<AZM>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AZM" /> class.
-        /// </summary>
-        private AZM() : base("AZM") { }
+        private AZM() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZM".
+        /// Gets the unique instance of the <see cref="AZM" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZM".</value>
         public static AZM Unit { get { Warrant.NotNull<AZM>(); return Uniq.Instance; } }
+
+        public static explicit operator AZM(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AZM value) => value?.ToCurrency();
+
+        public static AZM FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -542,18 +691,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class AZN : Currency
+    public sealed class AZN : CurrencyUnit<AZN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AZN" /> class.
-        /// </summary>
-        private AZN() : base("AZN") { }
+        private AZN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "AZN".
+        /// Gets the unique instance of the <see cref="AZN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "AZN".</value>
         public static AZN Unit { get { Warrant.NotNull<AZN>(); return Uniq.Instance; } }
+
+        public static explicit operator AZN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(AZN value) => value?.ToCurrency();
+
+        public static AZN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -567,18 +723,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BAD : Currency
+    public sealed class BAD : CurrencyUnit<BAD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BAD" /> class.
-        /// </summary>
-        private BAD() : base("BAD") { }
+        private BAD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAD".
+        /// Gets the unique instance of the <see cref="BAD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAD".</value>
         public static BAD Unit { get { Warrant.NotNull<BAD>(); return Uniq.Instance; } }
+
+        public static explicit operator BAD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BAD value) => value?.ToCurrency();
+
+        public static BAD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -592,18 +755,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BAM : Currency
+    public sealed class BAM : CurrencyUnit<BAM>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BAM" /> class.
-        /// </summary>
-        private BAM() : base("BAM") { }
+        private BAM() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BAM".
+        /// Gets the unique instance of the <see cref="BAM" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BAM".</value>
         public static BAM Unit { get { Warrant.NotNull<BAM>(); return Uniq.Instance; } }
+
+        public static explicit operator BAM(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BAM value) => value?.ToCurrency();
+
+        public static BAM FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -617,18 +787,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BBD : Currency
+    public sealed class BBD : CurrencyUnit<BBD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BBD" /> class.
-        /// </summary>
-        private BBD() : base("BBD") { }
+        private BBD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BBD".
+        /// Gets the unique instance of the <see cref="BBD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BBD".</value>
         public static BBD Unit { get { Warrant.NotNull<BBD>(); return Uniq.Instance; } }
+
+        public static explicit operator BBD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BBD value) => value?.ToCurrency();
+
+        public static BBD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -642,18 +819,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BDT : Currency
+    public sealed class BDT : CurrencyUnit<BDT>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BDT" /> class.
-        /// </summary>
-        private BDT() : base("BDT") { }
+        private BDT() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BDT".
+        /// Gets the unique instance of the <see cref="BDT" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BDT".</value>
         public static BDT Unit { get { Warrant.NotNull<BDT>(); return Uniq.Instance; } }
+
+        public static explicit operator BDT(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BDT value) => value?.ToCurrency();
+
+        public static BDT FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -667,18 +851,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BEC : Currency
+    public sealed class BEC : CurrencyUnit<BEC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BEC" /> class.
-        /// </summary>
-        private BEC() : base("BEC") { }
+        private BEC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEC".
+        /// Gets the unique instance of the <see cref="BEC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEC".</value>
         public static BEC Unit { get { Warrant.NotNull<BEC>(); return Uniq.Instance; } }
+
+        public static explicit operator BEC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BEC value) => value?.ToCurrency();
+
+        public static BEC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -692,18 +883,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BEF : Currency
+    public sealed class BEF : CurrencyUnit<BEF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BEF" /> class.
-        /// </summary>
-        private BEF() : base("BEF") { }
+        private BEF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEF".
+        /// Gets the unique instance of the <see cref="BEF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEF".</value>
         public static BEF Unit { get { Warrant.NotNull<BEF>(); return Uniq.Instance; } }
+
+        public static explicit operator BEF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BEF value) => value?.ToCurrency();
+
+        public static BEF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -717,18 +915,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BEL : Currency
+    public sealed class BEL : CurrencyUnit<BEL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BEL" /> class.
-        /// </summary>
-        private BEL() : base("BEL") { }
+        private BEL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BEL".
+        /// Gets the unique instance of the <see cref="BEL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BEL".</value>
         public static BEL Unit { get { Warrant.NotNull<BEL>(); return Uniq.Instance; } }
+
+        public static explicit operator BEL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BEL value) => value?.ToCurrency();
+
+        public static BEL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -742,18 +947,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BGJ : Currency
+    public sealed class BGJ : CurrencyUnit<BGJ>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BGJ" /> class.
-        /// </summary>
-        private BGJ() : base("BGJ") { }
+        private BGJ() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGJ".
+        /// Gets the unique instance of the <see cref="BGJ" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGJ".</value>
         public static BGJ Unit { get { Warrant.NotNull<BGJ>(); return Uniq.Instance; } }
+
+        public static explicit operator BGJ(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BGJ value) => value?.ToCurrency();
+
+        public static BGJ FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -767,18 +979,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BGK : Currency
+    public sealed class BGK : CurrencyUnit<BGK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BGK" /> class.
-        /// </summary>
-        private BGK() : base("BGK") { }
+        private BGK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGK".
+        /// Gets the unique instance of the <see cref="BGK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGK".</value>
         public static BGK Unit { get { Warrant.NotNull<BGK>(); return Uniq.Instance; } }
+
+        public static explicit operator BGK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BGK value) => value?.ToCurrency();
+
+        public static BGK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -792,18 +1011,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BGL : Currency
+    public sealed class BGL : CurrencyUnit<BGL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BGL" /> class.
-        /// </summary>
-        private BGL() : base("BGL") { }
+        private BGL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGL".
+        /// Gets the unique instance of the <see cref="BGL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGL".</value>
         public static BGL Unit { get { Warrant.NotNull<BGL>(); return Uniq.Instance; } }
+
+        public static explicit operator BGL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BGL value) => value?.ToCurrency();
+
+        public static BGL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -817,18 +1043,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BGN : Currency
+    public sealed class BGN : CurrencyUnit<BGN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BGN" /> class.
-        /// </summary>
-        private BGN() : base("BGN") { }
+        private BGN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BGN".
+        /// Gets the unique instance of the <see cref="BGN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BGN".</value>
         public static BGN Unit { get { Warrant.NotNull<BGN>(); return Uniq.Instance; } }
+
+        public static explicit operator BGN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BGN value) => value?.ToCurrency();
+
+        public static BGN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -842,18 +1075,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BHD : Currency
+    public sealed class BHD : CurrencyUnit<BHD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BHD" /> class.
-        /// </summary>
-        private BHD() : base("BHD") { }
+        private BHD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BHD".
+        /// Gets the unique instance of the <see cref="BHD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BHD".</value>
         public static BHD Unit { get { Warrant.NotNull<BHD>(); return Uniq.Instance; } }
+
+        public static explicit operator BHD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BHD value) => value?.ToCurrency();
+
+        public static BHD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -867,18 +1107,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BIF : Currency
+    public sealed class BIF : CurrencyUnit<BIF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BIF" /> class.
-        /// </summary>
-        private BIF() : base("BIF") { }
+        private BIF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BIF".
+        /// Gets the unique instance of the <see cref="BIF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BIF".</value>
         public static BIF Unit { get { Warrant.NotNull<BIF>(); return Uniq.Instance; } }
+
+        public static explicit operator BIF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BIF value) => value?.ToCurrency();
+
+        public static BIF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -892,18 +1139,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BMD : Currency
+    public sealed class BMD : CurrencyUnit<BMD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BMD" /> class.
-        /// </summary>
-        private BMD() : base("BMD") { }
+        private BMD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BMD".
+        /// Gets the unique instance of the <see cref="BMD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BMD".</value>
         public static BMD Unit { get { Warrant.NotNull<BMD>(); return Uniq.Instance; } }
+
+        public static explicit operator BMD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BMD value) => value?.ToCurrency();
+
+        public static BMD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -917,18 +1171,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BND : Currency
+    public sealed class BND : CurrencyUnit<BND>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BND" /> class.
-        /// </summary>
-        private BND() : base("BND") { }
+        private BND() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BND".
+        /// Gets the unique instance of the <see cref="BND" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BND".</value>
         public static BND Unit { get { Warrant.NotNull<BND>(); return Uniq.Instance; } }
+
+        public static explicit operator BND(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BND value) => value?.ToCurrency();
+
+        public static BND FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -942,18 +1203,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BOB : Currency
+    public sealed class BOB : CurrencyUnit<BOB>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BOB" /> class.
-        /// </summary>
-        private BOB() : base("BOB") { }
+        private BOB() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOB".
+        /// Gets the unique instance of the <see cref="BOB" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOB".</value>
         public static BOB Unit { get { Warrant.NotNull<BOB>(); return Uniq.Instance; } }
+
+        public static explicit operator BOB(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BOB value) => value?.ToCurrency();
+
+        public static BOB FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -967,18 +1235,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BOP : Currency
+    public sealed class BOP : CurrencyUnit<BOP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BOP" /> class.
-        /// </summary>
-        private BOP() : base("BOP") { }
+        private BOP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOP".
+        /// Gets the unique instance of the <see cref="BOP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOP".</value>
         public static BOP Unit { get { Warrant.NotNull<BOP>(); return Uniq.Instance; } }
+
+        public static explicit operator BOP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BOP value) => value?.ToCurrency();
+
+        public static BOP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -992,18 +1267,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BOV : Currency
+    public sealed class BOV : CurrencyUnit<BOV>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BOV" /> class.
-        /// </summary>
-        private BOV() : base("BOV") { }
+        private BOV() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BOV".
+        /// Gets the unique instance of the <see cref="BOV" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BOV".</value>
         public static BOV Unit { get { Warrant.NotNull<BOV>(); return Uniq.Instance; } }
+
+        public static explicit operator BOV(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BOV value) => value?.ToCurrency();
+
+        public static BOV FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1017,18 +1299,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRB : Currency
+    public sealed class BRB : CurrencyUnit<BRB>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BRB" /> class.
-        /// </summary>
-        private BRB() : base("BRB") { }
+        private BRB() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRB".
+        /// Gets the unique instance of the <see cref="BRB" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRB".</value>
         public static BRB Unit { get { Warrant.NotNull<BRB>(); return Uniq.Instance; } }
+
+        public static explicit operator BRB(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BRB value) => value?.ToCurrency();
+
+        public static BRB FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1042,18 +1331,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRC : Currency
+    public sealed class BRC : CurrencyUnit<BRC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BRC" /> class.
-        /// </summary>
-        private BRC() : base("BRC") { }
+        private BRC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRC".
+        /// Gets the unique instance of the <see cref="BRC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRC".</value>
         public static BRC Unit { get { Warrant.NotNull<BRC>(); return Uniq.Instance; } }
+
+        public static explicit operator BRC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BRC value) => value?.ToCurrency();
+
+        public static BRC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1067,18 +1363,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRE : Currency
+    public sealed class BRE : CurrencyUnit<BRE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BRE" /> class.
-        /// </summary>
-        private BRE() : base("BRE") { }
+        private BRE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRE".
+        /// Gets the unique instance of the <see cref="BRE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRE".</value>
         public static BRE Unit { get { Warrant.NotNull<BRE>(); return Uniq.Instance; } }
+
+        public static explicit operator BRE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BRE value) => value?.ToCurrency();
+
+        public static BRE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1092,18 +1395,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRL : Currency
+    public sealed class BRL : CurrencyUnit<BRL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BRL" /> class.
-        /// </summary>
-        private BRL() : base("BRL") { }
+        private BRL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRL".
+        /// Gets the unique instance of the <see cref="BRL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRL".</value>
         public static BRL Unit { get { Warrant.NotNull<BRL>(); return Uniq.Instance; } }
+
+        public static explicit operator BRL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BRL value) => value?.ToCurrency();
+
+        public static BRL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1117,18 +1427,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRN : Currency
+    public sealed class BRN : CurrencyUnit<BRN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BRN" /> class.
-        /// </summary>
-        private BRN() : base("BRN") { }
+        private BRN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRN".
+        /// Gets the unique instance of the <see cref="BRN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRN".</value>
         public static BRN Unit { get { Warrant.NotNull<BRN>(); return Uniq.Instance; } }
+
+        public static explicit operator BRN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BRN value) => value?.ToCurrency();
+
+        public static BRN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1142,18 +1459,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BRR : Currency
+    public sealed class BRR : CurrencyUnit<BRR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BRR" /> class.
-        /// </summary>
-        private BRR() : base("BRR") { }
+        private BRR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BRR".
+        /// Gets the unique instance of the <see cref="BRR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BRR".</value>
         public static BRR Unit { get { Warrant.NotNull<BRR>(); return Uniq.Instance; } }
+
+        public static explicit operator BRR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BRR value) => value?.ToCurrency();
+
+        public static BRR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1167,18 +1491,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BSD : Currency
+    public sealed class BSD : CurrencyUnit<BSD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BSD" /> class.
-        /// </summary>
-        private BSD() : base("BSD") { }
+        private BSD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BSD".
+        /// Gets the unique instance of the <see cref="BSD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BSD".</value>
         public static BSD Unit { get { Warrant.NotNull<BSD>(); return Uniq.Instance; } }
+
+        public static explicit operator BSD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BSD value) => value?.ToCurrency();
+
+        public static BSD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1192,18 +1523,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BTN : Currency
+    public sealed class BTN : CurrencyUnit<BTN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BTN" /> class.
-        /// </summary>
-        private BTN() : base("BTN") { }
+        private BTN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BTN".
+        /// Gets the unique instance of the <see cref="BTN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BTN".</value>
         public static BTN Unit { get { Warrant.NotNull<BTN>(); return Uniq.Instance; } }
+
+        public static explicit operator BTN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BTN value) => value?.ToCurrency();
+
+        public static BTN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1217,18 +1555,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BUK : Currency
+    public sealed class BUK : CurrencyUnit<BUK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BUK" /> class.
-        /// </summary>
-        private BUK() : base("BUK") { }
+        private BUK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BUK".
+        /// Gets the unique instance of the <see cref="BUK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BUK".</value>
         public static BUK Unit { get { Warrant.NotNull<BUK>(); return Uniq.Instance; } }
+
+        public static explicit operator BUK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BUK value) => value?.ToCurrency();
+
+        public static BUK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1242,18 +1587,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BWP : Currency
+    public sealed class BWP : CurrencyUnit<BWP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BWP" /> class.
-        /// </summary>
-        private BWP() : base("BWP") { }
+        private BWP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BWP".
+        /// Gets the unique instance of the <see cref="BWP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BWP".</value>
         public static BWP Unit { get { Warrant.NotNull<BWP>(); return Uniq.Instance; } }
+
+        public static explicit operator BWP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BWP value) => value?.ToCurrency();
+
+        public static BWP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1267,18 +1619,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BYB : Currency
+    public sealed class BYB : CurrencyUnit<BYB>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BYB" /> class.
-        /// </summary>
-        private BYB() : base("BYB") { }
+        private BYB() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYB".
+        /// Gets the unique instance of the <see cref="BYB" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYB".</value>
         public static BYB Unit { get { Warrant.NotNull<BYB>(); return Uniq.Instance; } }
+
+        public static explicit operator BYB(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BYB value) => value?.ToCurrency();
+
+        public static BYB FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1292,18 +1651,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BYN : Currency
+    public sealed class BYN : CurrencyUnit<BYN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BYN" /> class.
-        /// </summary>
-        private BYN() : base("BYN") { }
+        private BYN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYN".
+        /// Gets the unique instance of the <see cref="BYN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYN".</value>
         public static BYN Unit { get { Warrant.NotNull<BYN>(); return Uniq.Instance; } }
+
+        public static explicit operator BYN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BYN value) => value?.ToCurrency();
+
+        public static BYN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1317,18 +1683,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BYR : Currency
+    public sealed class BYR : CurrencyUnit<BYR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BYR" /> class.
-        /// </summary>
-        private BYR() : base("BYR") { }
+        private BYR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BYR".
+        /// Gets the unique instance of the <see cref="BYR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BYR".</value>
         public static BYR Unit { get { Warrant.NotNull<BYR>(); return Uniq.Instance; } }
+
+        public static explicit operator BYR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BYR value) => value?.ToCurrency();
+
+        public static BYR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1342,18 +1715,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class BZD : Currency
+    public sealed class BZD : CurrencyUnit<BZD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BZD" /> class.
-        /// </summary>
-        private BZD() : base("BZD") { }
+        private BZD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "BZD".
+        /// Gets the unique instance of the <see cref="BZD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "BZD".</value>
         public static BZD Unit { get { Warrant.NotNull<BZD>(); return Uniq.Instance; } }
+
+        public static explicit operator BZD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(BZD value) => value?.ToCurrency();
+
+        public static BZD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1367,18 +1747,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CAD : Currency
+    public sealed class CAD : CurrencyUnit<CAD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CAD" /> class.
-        /// </summary>
-        private CAD() : base("CAD") { }
+        private CAD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CAD".
+        /// Gets the unique instance of the <see cref="CAD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CAD".</value>
         public static CAD Unit { get { Warrant.NotNull<CAD>(); return Uniq.Instance; } }
+
+        public static explicit operator CAD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CAD value) => value?.ToCurrency();
+
+        public static CAD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1392,18 +1779,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CDF : Currency
+    public sealed class CDF : CurrencyUnit<CDF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CDF" /> class.
-        /// </summary>
-        private CDF() : base("CDF") { }
+        private CDF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CDF".
+        /// Gets the unique instance of the <see cref="CDF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CDF".</value>
         public static CDF Unit { get { Warrant.NotNull<CDF>(); return Uniq.Instance; } }
+
+        public static explicit operator CDF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CDF value) => value?.ToCurrency();
+
+        public static CDF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1417,18 +1811,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CHC : Currency
+    public sealed class CHC : CurrencyUnit<CHC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CHC" /> class.
-        /// </summary>
-        private CHC() : base("CHC") { }
+        private CHC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHC".
+        /// Gets the unique instance of the <see cref="CHC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHC".</value>
         public static CHC Unit { get { Warrant.NotNull<CHC>(); return Uniq.Instance; } }
+
+        public static explicit operator CHC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CHC value) => value?.ToCurrency();
+
+        public static CHC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1442,18 +1843,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CHE : Currency
+    public sealed class CHE : CurrencyUnit<CHE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CHE" /> class.
-        /// </summary>
-        private CHE() : base("CHE") { }
+        private CHE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHE".
+        /// Gets the unique instance of the <see cref="CHE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHE".</value>
         public static CHE Unit { get { Warrant.NotNull<CHE>(); return Uniq.Instance; } }
+
+        public static explicit operator CHE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CHE value) => value?.ToCurrency();
+
+        public static CHE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1467,18 +1875,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CHF : Currency
+    public sealed class CHF : CurrencyUnit<CHF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CHF" /> class.
-        /// </summary>
-        private CHF() : base("CHF") { }
+        private CHF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHF".
+        /// Gets the unique instance of the <see cref="CHF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHF".</value>
         public static CHF Unit { get { Warrant.NotNull<CHF>(); return Uniq.Instance; } }
+
+        public static explicit operator CHF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CHF value) => value?.ToCurrency();
+
+        public static CHF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1492,18 +1907,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CHW : Currency
+    public sealed class CHW : CurrencyUnit<CHW>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CHW" /> class.
-        /// </summary>
-        private CHW() : base("CHW") { }
+        private CHW() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CHW".
+        /// Gets the unique instance of the <see cref="CHW" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CHW".</value>
         public static CHW Unit { get { Warrant.NotNull<CHW>(); return Uniq.Instance; } }
+
+        public static explicit operator CHW(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CHW value) => value?.ToCurrency();
+
+        public static CHW FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1517,18 +1939,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CLF : Currency
+    public sealed class CLF : CurrencyUnit<CLF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CLF" /> class.
-        /// </summary>
-        private CLF() : base("CLF") { }
+        private CLF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLF".
+        /// Gets the unique instance of the <see cref="CLF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLF".</value>
         public static CLF Unit { get { Warrant.NotNull<CLF>(); return Uniq.Instance; } }
+
+        public static explicit operator CLF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CLF value) => value?.ToCurrency();
+
+        public static CLF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1542,18 +1971,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CLP : Currency
+    public sealed class CLP : CurrencyUnit<CLP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CLP" /> class.
-        /// </summary>
-        private CLP() : base("CLP") { }
+        private CLP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CLP".
+        /// Gets the unique instance of the <see cref="CLP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CLP".</value>
         public static CLP Unit { get { Warrant.NotNull<CLP>(); return Uniq.Instance; } }
+
+        public static explicit operator CLP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CLP value) => value?.ToCurrency();
+
+        public static CLP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1567,18 +2003,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CNX : Currency
+    public sealed class CNX : CurrencyUnit<CNX>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CNX" /> class.
-        /// </summary>
-        private CNX() : base("CNX") { }
+        private CNX() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNX".
+        /// Gets the unique instance of the <see cref="CNX" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNX".</value>
         public static CNX Unit { get { Warrant.NotNull<CNX>(); return Uniq.Instance; } }
+
+        public static explicit operator CNX(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CNX value) => value?.ToCurrency();
+
+        public static CNX FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1592,18 +2035,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CNY : Currency
+    public sealed class CNY : CurrencyUnit<CNY>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CNY" /> class.
-        /// </summary>
-        private CNY() : base("CNY") { }
+        private CNY() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CNY".
+        /// Gets the unique instance of the <see cref="CNY" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CNY".</value>
         public static CNY Unit { get { Warrant.NotNull<CNY>(); return Uniq.Instance; } }
+
+        public static explicit operator CNY(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CNY value) => value?.ToCurrency();
+
+        public static CNY FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1617,18 +2067,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class COP : Currency
+    public sealed class COP : CurrencyUnit<COP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="COP" /> class.
-        /// </summary>
-        private COP() : base("COP") { }
+        private COP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "COP".
+        /// Gets the unique instance of the <see cref="COP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "COP".</value>
         public static COP Unit { get { Warrant.NotNull<COP>(); return Uniq.Instance; } }
+
+        public static explicit operator COP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(COP value) => value?.ToCurrency();
+
+        public static COP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1642,18 +2099,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class COU : Currency
+    public sealed class COU : CurrencyUnit<COU>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="COU" /> class.
-        /// </summary>
-        private COU() : base("COU") { }
+        private COU() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "COU".
+        /// Gets the unique instance of the <see cref="COU" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "COU".</value>
         public static COU Unit { get { Warrant.NotNull<COU>(); return Uniq.Instance; } }
+
+        public static explicit operator COU(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(COU value) => value?.ToCurrency();
+
+        public static COU FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1667,18 +2131,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CRC : Currency
+    public sealed class CRC : CurrencyUnit<CRC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CRC" /> class.
-        /// </summary>
-        private CRC() : base("CRC") { }
+        private CRC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CRC".
+        /// Gets the unique instance of the <see cref="CRC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CRC".</value>
         public static CRC Unit { get { Warrant.NotNull<CRC>(); return Uniq.Instance; } }
+
+        public static explicit operator CRC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CRC value) => value?.ToCurrency();
+
+        public static CRC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1692,18 +2163,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CSD : Currency
+    public sealed class CSD : CurrencyUnit<CSD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CSD" /> class.
-        /// </summary>
-        private CSD() : base("CSD") { }
+        private CSD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSD".
+        /// Gets the unique instance of the <see cref="CSD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSD".</value>
         public static CSD Unit { get { Warrant.NotNull<CSD>(); return Uniq.Instance; } }
+
+        public static explicit operator CSD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CSD value) => value?.ToCurrency();
+
+        public static CSD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1717,18 +2195,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CSJ : Currency
+    public sealed class CSJ : CurrencyUnit<CSJ>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CSJ" /> class.
-        /// </summary>
-        private CSJ() : base("CSJ") { }
+        private CSJ() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSJ".
+        /// Gets the unique instance of the <see cref="CSJ" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSJ".</value>
         public static CSJ Unit { get { Warrant.NotNull<CSJ>(); return Uniq.Instance; } }
+
+        public static explicit operator CSJ(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CSJ value) => value?.ToCurrency();
+
+        public static CSJ FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1742,18 +2227,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CSK : Currency
+    public sealed class CSK : CurrencyUnit<CSK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CSK" /> class.
-        /// </summary>
-        private CSK() : base("CSK") { }
+        private CSK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CSK".
+        /// Gets the unique instance of the <see cref="CSK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CSK".</value>
         public static CSK Unit { get { Warrant.NotNull<CSK>(); return Uniq.Instance; } }
+
+        public static explicit operator CSK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CSK value) => value?.ToCurrency();
+
+        public static CSK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1767,18 +2259,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CUC : Currency
+    public sealed class CUC : CurrencyUnit<CUC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CUC" /> class.
-        /// </summary>
-        private CUC() : base("CUC") { }
+        private CUC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUC".
+        /// Gets the unique instance of the <see cref="CUC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUC".</value>
         public static CUC Unit { get { Warrant.NotNull<CUC>(); return Uniq.Instance; } }
+
+        public static explicit operator CUC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CUC value) => value?.ToCurrency();
+
+        public static CUC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1792,18 +2291,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CUP : Currency
+    public sealed class CUP : CurrencyUnit<CUP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CUP" /> class.
-        /// </summary>
-        private CUP() : base("CUP") { }
+        private CUP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CUP".
+        /// Gets the unique instance of the <see cref="CUP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CUP".</value>
         public static CUP Unit { get { Warrant.NotNull<CUP>(); return Uniq.Instance; } }
+
+        public static explicit operator CUP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CUP value) => value?.ToCurrency();
+
+        public static CUP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1817,18 +2323,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CVE : Currency
+    public sealed class CVE : CurrencyUnit<CVE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CVE" /> class.
-        /// </summary>
-        private CVE() : base("CVE") { }
+        private CVE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CVE".
+        /// Gets the unique instance of the <see cref="CVE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CVE".</value>
         public static CVE Unit { get { Warrant.NotNull<CVE>(); return Uniq.Instance; } }
+
+        public static explicit operator CVE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CVE value) => value?.ToCurrency();
+
+        public static CVE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1842,18 +2355,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CYP : Currency
+    public sealed class CYP : CurrencyUnit<CYP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CYP" /> class.
-        /// </summary>
-        private CYP() : base("CYP") { }
+        private CYP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CYP".
+        /// Gets the unique instance of the <see cref="CYP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CYP".</value>
         public static CYP Unit { get { Warrant.NotNull<CYP>(); return Uniq.Instance; } }
+
+        public static explicit operator CYP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CYP value) => value?.ToCurrency();
+
+        public static CYP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1867,18 +2387,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class CZK : Currency
+    public sealed class CZK : CurrencyUnit<CZK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CZK" /> class.
-        /// </summary>
-        private CZK() : base("CZK") { }
+        private CZK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "CZK".
+        /// Gets the unique instance of the <see cref="CZK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "CZK".</value>
         public static CZK Unit { get { Warrant.NotNull<CZK>(); return Uniq.Instance; } }
+
+        public static explicit operator CZK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(CZK value) => value?.ToCurrency();
+
+        public static CZK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1892,18 +2419,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DDM : Currency
+    public sealed class DDM : CurrencyUnit<DDM>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DDM" /> class.
-        /// </summary>
-        private DDM() : base("DDM") { }
+        private DDM() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DDM".
+        /// Gets the unique instance of the <see cref="DDM" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DDM".</value>
         public static DDM Unit { get { Warrant.NotNull<DDM>(); return Uniq.Instance; } }
+
+        public static explicit operator DDM(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(DDM value) => value?.ToCurrency();
+
+        public static DDM FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1917,18 +2451,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DEM : Currency
+    public sealed class DEM : CurrencyUnit<DEM>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DEM" /> class.
-        /// </summary>
-        private DEM() : base("DEM") { }
+        private DEM() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DEM".
+        /// Gets the unique instance of the <see cref="DEM" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DEM".</value>
         public static DEM Unit { get { Warrant.NotNull<DEM>(); return Uniq.Instance; } }
+
+        public static explicit operator DEM(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(DEM value) => value?.ToCurrency();
+
+        public static DEM FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1942,18 +2483,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DJF : Currency
+    public sealed class DJF : CurrencyUnit<DJF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DJF" /> class.
-        /// </summary>
-        private DJF() : base("DJF") { }
+        private DJF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DJF".
+        /// Gets the unique instance of the <see cref="DJF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DJF".</value>
         public static DJF Unit { get { Warrant.NotNull<DJF>(); return Uniq.Instance; } }
+
+        public static explicit operator DJF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(DJF value) => value?.ToCurrency();
+
+        public static DJF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1967,18 +2515,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DKK : Currency
+    public sealed class DKK : CurrencyUnit<DKK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DKK" /> class.
-        /// </summary>
-        private DKK() : base("DKK") { }
+        private DKK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DKK".
+        /// Gets the unique instance of the <see cref="DKK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DKK".</value>
         public static DKK Unit { get { Warrant.NotNull<DKK>(); return Uniq.Instance; } }
+
+        public static explicit operator DKK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(DKK value) => value?.ToCurrency();
+
+        public static DKK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -1992,18 +2547,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DOP : Currency
+    public sealed class DOP : CurrencyUnit<DOP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DOP" /> class.
-        /// </summary>
-        private DOP() : base("DOP") { }
+        private DOP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DOP".
+        /// Gets the unique instance of the <see cref="DOP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DOP".</value>
         public static DOP Unit { get { Warrant.NotNull<DOP>(); return Uniq.Instance; } }
+
+        public static explicit operator DOP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(DOP value) => value?.ToCurrency();
+
+        public static DOP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2017,18 +2579,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class DZD : Currency
+    public sealed class DZD : CurrencyUnit<DZD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DZD" /> class.
-        /// </summary>
-        private DZD() : base("DZD") { }
+        private DZD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "DZD".
+        /// Gets the unique instance of the <see cref="DZD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "DZD".</value>
         public static DZD Unit { get { Warrant.NotNull<DZD>(); return Uniq.Instance; } }
+
+        public static explicit operator DZD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(DZD value) => value?.ToCurrency();
+
+        public static DZD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2042,18 +2611,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ECS : Currency
+    public sealed class ECS : CurrencyUnit<ECS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ECS" /> class.
-        /// </summary>
-        private ECS() : base("ECS") { }
+        private ECS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECS".
+        /// Gets the unique instance of the <see cref="ECS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECS".</value>
         public static ECS Unit { get { Warrant.NotNull<ECS>(); return Uniq.Instance; } }
+
+        public static explicit operator ECS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ECS value) => value?.ToCurrency();
+
+        public static ECS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2067,18 +2643,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ECV : Currency
+    public sealed class ECV : CurrencyUnit<ECV>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ECV" /> class.
-        /// </summary>
-        private ECV() : base("ECV") { }
+        private ECV() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ECV".
+        /// Gets the unique instance of the <see cref="ECV" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ECV".</value>
         public static ECV Unit { get { Warrant.NotNull<ECV>(); return Uniq.Instance; } }
+
+        public static explicit operator ECV(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ECV value) => value?.ToCurrency();
+
+        public static ECV FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2092,18 +2675,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class EEK : Currency
+    public sealed class EEK : CurrencyUnit<EEK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EEK" /> class.
-        /// </summary>
-        private EEK() : base("EEK") { }
+        private EEK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "EEK".
+        /// Gets the unique instance of the <see cref="EEK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "EEK".</value>
         public static EEK Unit { get { Warrant.NotNull<EEK>(); return Uniq.Instance; } }
+
+        public static explicit operator EEK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(EEK value) => value?.ToCurrency();
+
+        public static EEK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2117,18 +2707,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class EGP : Currency
+    public sealed class EGP : CurrencyUnit<EGP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EGP" /> class.
-        /// </summary>
-        private EGP() : base("EGP") { }
+        private EGP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "EGP".
+        /// Gets the unique instance of the <see cref="EGP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "EGP".</value>
         public static EGP Unit { get { Warrant.NotNull<EGP>(); return Uniq.Instance; } }
+
+        public static explicit operator EGP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(EGP value) => value?.ToCurrency();
+
+        public static EGP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2142,18 +2739,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class EQE : Currency
+    public sealed class EQE : CurrencyUnit<EQE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EQE" /> class.
-        /// </summary>
-        private EQE() : base("EQE") { }
+        private EQE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "EQE".
+        /// Gets the unique instance of the <see cref="EQE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "EQE".</value>
         public static EQE Unit { get { Warrant.NotNull<EQE>(); return Uniq.Instance; } }
+
+        public static explicit operator EQE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(EQE value) => value?.ToCurrency();
+
+        public static EQE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2167,18 +2771,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ERN : Currency
+    public sealed class ERN : CurrencyUnit<ERN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ERN" /> class.
-        /// </summary>
-        private ERN() : base("ERN") { }
+        private ERN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ERN".
+        /// Gets the unique instance of the <see cref="ERN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ERN".</value>
         public static ERN Unit { get { Warrant.NotNull<ERN>(); return Uniq.Instance; } }
+
+        public static explicit operator ERN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ERN value) => value?.ToCurrency();
+
+        public static ERN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2192,18 +2803,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ESA : Currency
+    public sealed class ESA : CurrencyUnit<ESA>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ESA" /> class.
-        /// </summary>
-        private ESA() : base("ESA") { }
+        private ESA() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESA".
+        /// Gets the unique instance of the <see cref="ESA" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESA".</value>
         public static ESA Unit { get { Warrant.NotNull<ESA>(); return Uniq.Instance; } }
+
+        public static explicit operator ESA(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ESA value) => value?.ToCurrency();
+
+        public static ESA FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2217,18 +2835,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ESB : Currency
+    public sealed class ESB : CurrencyUnit<ESB>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ESB" /> class.
-        /// </summary>
-        private ESB() : base("ESB") { }
+        private ESB() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESB".
+        /// Gets the unique instance of the <see cref="ESB" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESB".</value>
         public static ESB Unit { get { Warrant.NotNull<ESB>(); return Uniq.Instance; } }
+
+        public static explicit operator ESB(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ESB value) => value?.ToCurrency();
+
+        public static ESB FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2242,18 +2867,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ESP : Currency
+    public sealed class ESP : CurrencyUnit<ESP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ESP" /> class.
-        /// </summary>
-        private ESP() : base("ESP") { }
+        private ESP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ESP".
+        /// Gets the unique instance of the <see cref="ESP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ESP".</value>
         public static ESP Unit { get { Warrant.NotNull<ESP>(); return Uniq.Instance; } }
+
+        public static explicit operator ESP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ESP value) => value?.ToCurrency();
+
+        public static ESP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2267,18 +2899,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ETB : Currency
+    public sealed class ETB : CurrencyUnit<ETB>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ETB" /> class.
-        /// </summary>
-        private ETB() : base("ETB") { }
+        private ETB() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ETB".
+        /// Gets the unique instance of the <see cref="ETB" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ETB".</value>
         public static ETB Unit { get { Warrant.NotNull<ETB>(); return Uniq.Instance; } }
+
+        public static explicit operator ETB(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ETB value) => value?.ToCurrency();
+
+        public static ETB FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2292,18 +2931,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class EUR : Currency
+    public sealed class EUR : CurrencyUnit<EUR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EUR" /> class.
-        /// </summary>
-        private EUR() : base("EUR") { }
+        private EUR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "EUR".
+        /// Gets the unique instance of the <see cref="EUR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "EUR".</value>
         public static EUR Unit { get { Warrant.NotNull<EUR>(); return Uniq.Instance; } }
+
+        public static explicit operator EUR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(EUR value) => value?.ToCurrency();
+
+        public static EUR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2317,18 +2963,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class FIM : Currency
+    public sealed class FIM : CurrencyUnit<FIM>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FIM" /> class.
-        /// </summary>
-        private FIM() : base("FIM") { }
+        private FIM() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "FIM".
+        /// Gets the unique instance of the <see cref="FIM" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "FIM".</value>
         public static FIM Unit { get { Warrant.NotNull<FIM>(); return Uniq.Instance; } }
+
+        public static explicit operator FIM(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(FIM value) => value?.ToCurrency();
+
+        public static FIM FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2342,18 +2995,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class FJD : Currency
+    public sealed class FJD : CurrencyUnit<FJD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FJD" /> class.
-        /// </summary>
-        private FJD() : base("FJD") { }
+        private FJD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "FJD".
+        /// Gets the unique instance of the <see cref="FJD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "FJD".</value>
         public static FJD Unit { get { Warrant.NotNull<FJD>(); return Uniq.Instance; } }
+
+        public static explicit operator FJD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(FJD value) => value?.ToCurrency();
+
+        public static FJD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2367,18 +3027,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class FKP : Currency
+    public sealed class FKP : CurrencyUnit<FKP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FKP" /> class.
-        /// </summary>
-        private FKP() : base("FKP") { }
+        private FKP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "FKP".
+        /// Gets the unique instance of the <see cref="FKP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "FKP".</value>
         public static FKP Unit { get { Warrant.NotNull<FKP>(); return Uniq.Instance; } }
+
+        public static explicit operator FKP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(FKP value) => value?.ToCurrency();
+
+        public static FKP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2392,18 +3059,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class FRF : Currency
+    public sealed class FRF : CurrencyUnit<FRF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FRF" /> class.
-        /// </summary>
-        private FRF() : base("FRF") { }
+        private FRF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "FRF".
+        /// Gets the unique instance of the <see cref="FRF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "FRF".</value>
         public static FRF Unit { get { Warrant.NotNull<FRF>(); return Uniq.Instance; } }
+
+        public static explicit operator FRF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(FRF value) => value?.ToCurrency();
+
+        public static FRF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2417,18 +3091,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GBP : Currency
+    public sealed class GBP : CurrencyUnit<GBP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GBP" /> class.
-        /// </summary>
-        private GBP() : base("GBP") { }
+        private GBP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GBP".
+        /// Gets the unique instance of the <see cref="GBP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GBP".</value>
         public static GBP Unit { get { Warrant.NotNull<GBP>(); return Uniq.Instance; } }
+
+        public static explicit operator GBP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GBP value) => value?.ToCurrency();
+
+        public static GBP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2442,18 +3123,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GEK : Currency
+    public sealed class GEK : CurrencyUnit<GEK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GEK" /> class.
-        /// </summary>
-        private GEK() : base("GEK") { }
+        private GEK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEK".
+        /// Gets the unique instance of the <see cref="GEK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEK".</value>
         public static GEK Unit { get { Warrant.NotNull<GEK>(); return Uniq.Instance; } }
+
+        public static explicit operator GEK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GEK value) => value?.ToCurrency();
+
+        public static GEK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2467,18 +3155,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GEL : Currency
+    public sealed class GEL : CurrencyUnit<GEL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GEL" /> class.
-        /// </summary>
-        private GEL() : base("GEL") { }
+        private GEL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GEL".
+        /// Gets the unique instance of the <see cref="GEL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GEL".</value>
         public static GEL Unit { get { Warrant.NotNull<GEL>(); return Uniq.Instance; } }
+
+        public static explicit operator GEL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GEL value) => value?.ToCurrency();
+
+        public static GEL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2492,18 +3187,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GHC : Currency
+    public sealed class GHC : CurrencyUnit<GHC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GHC" /> class.
-        /// </summary>
-        private GHC() : base("GHC") { }
+        private GHC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHC".
+        /// Gets the unique instance of the <see cref="GHC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHC".</value>
         public static GHC Unit { get { Warrant.NotNull<GHC>(); return Uniq.Instance; } }
+
+        public static explicit operator GHC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GHC value) => value?.ToCurrency();
+
+        public static GHC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2517,18 +3219,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GHP : Currency
+    public sealed class GHP : CurrencyUnit<GHP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GHP" /> class.
-        /// </summary>
-        private GHP() : base("GHP") { }
+        private GHP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHP".
+        /// Gets the unique instance of the <see cref="GHP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHP".</value>
         public static GHP Unit { get { Warrant.NotNull<GHP>(); return Uniq.Instance; } }
+
+        public static explicit operator GHP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GHP value) => value?.ToCurrency();
+
+        public static GHP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2542,18 +3251,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GHS : Currency
+    public sealed class GHS : CurrencyUnit<GHS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GHS" /> class.
-        /// </summary>
-        private GHS() : base("GHS") { }
+        private GHS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GHS".
+        /// Gets the unique instance of the <see cref="GHS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GHS".</value>
         public static GHS Unit { get { Warrant.NotNull<GHS>(); return Uniq.Instance; } }
+
+        public static explicit operator GHS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GHS value) => value?.ToCurrency();
+
+        public static GHS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2567,18 +3283,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GIP : Currency
+    public sealed class GIP : CurrencyUnit<GIP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GIP" /> class.
-        /// </summary>
-        private GIP() : base("GIP") { }
+        private GIP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GIP".
+        /// Gets the unique instance of the <see cref="GIP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GIP".</value>
         public static GIP Unit { get { Warrant.NotNull<GIP>(); return Uniq.Instance; } }
+
+        public static explicit operator GIP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GIP value) => value?.ToCurrency();
+
+        public static GIP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2592,18 +3315,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GMD : Currency
+    public sealed class GMD : CurrencyUnit<GMD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GMD" /> class.
-        /// </summary>
-        private GMD() : base("GMD") { }
+        private GMD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GMD".
+        /// Gets the unique instance of the <see cref="GMD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GMD".</value>
         public static GMD Unit { get { Warrant.NotNull<GMD>(); return Uniq.Instance; } }
+
+        public static explicit operator GMD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GMD value) => value?.ToCurrency();
+
+        public static GMD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2617,18 +3347,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GNE : Currency
+    public sealed class GNE : CurrencyUnit<GNE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GNE" /> class.
-        /// </summary>
-        private GNE() : base("GNE") { }
+        private GNE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNE".
+        /// Gets the unique instance of the <see cref="GNE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNE".</value>
         public static GNE Unit { get { Warrant.NotNull<GNE>(); return Uniq.Instance; } }
+
+        public static explicit operator GNE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GNE value) => value?.ToCurrency();
+
+        public static GNE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2642,18 +3379,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GNF : Currency
+    public sealed class GNF : CurrencyUnit<GNF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GNF" /> class.
-        /// </summary>
-        private GNF() : base("GNF") { }
+        private GNF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNF".
+        /// Gets the unique instance of the <see cref="GNF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNF".</value>
         public static GNF Unit { get { Warrant.NotNull<GNF>(); return Uniq.Instance; } }
+
+        public static explicit operator GNF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GNF value) => value?.ToCurrency();
+
+        public static GNF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2667,18 +3411,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GNS : Currency
+    public sealed class GNS : CurrencyUnit<GNS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GNS" /> class.
-        /// </summary>
-        private GNS() : base("GNS") { }
+        private GNS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GNS".
+        /// Gets the unique instance of the <see cref="GNS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GNS".</value>
         public static GNS Unit { get { Warrant.NotNull<GNS>(); return Uniq.Instance; } }
+
+        public static explicit operator GNS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GNS value) => value?.ToCurrency();
+
+        public static GNS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2692,18 +3443,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GQE : Currency
+    public sealed class GQE : CurrencyUnit<GQE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GQE" /> class.
-        /// </summary>
-        private GQE() : base("GQE") { }
+        private GQE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GQE".
+        /// Gets the unique instance of the <see cref="GQE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GQE".</value>
         public static GQE Unit { get { Warrant.NotNull<GQE>(); return Uniq.Instance; } }
+
+        public static explicit operator GQE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GQE value) => value?.ToCurrency();
+
+        public static GQE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2717,18 +3475,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GRD : Currency
+    public sealed class GRD : CurrencyUnit<GRD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GRD" /> class.
-        /// </summary>
-        private GRD() : base("GRD") { }
+        private GRD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GRD".
+        /// Gets the unique instance of the <see cref="GRD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GRD".</value>
         public static GRD Unit { get { Warrant.NotNull<GRD>(); return Uniq.Instance; } }
+
+        public static explicit operator GRD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GRD value) => value?.ToCurrency();
+
+        public static GRD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2742,18 +3507,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GTQ : Currency
+    public sealed class GTQ : CurrencyUnit<GTQ>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GTQ" /> class.
-        /// </summary>
-        private GTQ() : base("GTQ") { }
+        private GTQ() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GTQ".
+        /// Gets the unique instance of the <see cref="GTQ" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GTQ".</value>
         public static GTQ Unit { get { Warrant.NotNull<GTQ>(); return Uniq.Instance; } }
+
+        public static explicit operator GTQ(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GTQ value) => value?.ToCurrency();
+
+        public static GTQ FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2767,18 +3539,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GWE : Currency
+    public sealed class GWE : CurrencyUnit<GWE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GWE" /> class.
-        /// </summary>
-        private GWE() : base("GWE") { }
+        private GWE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWE".
+        /// Gets the unique instance of the <see cref="GWE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWE".</value>
         public static GWE Unit { get { Warrant.NotNull<GWE>(); return Uniq.Instance; } }
+
+        public static explicit operator GWE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GWE value) => value?.ToCurrency();
+
+        public static GWE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2792,18 +3571,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GWP : Currency
+    public sealed class GWP : CurrencyUnit<GWP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GWP" /> class.
-        /// </summary>
-        private GWP() : base("GWP") { }
+        private GWP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GWP".
+        /// Gets the unique instance of the <see cref="GWP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GWP".</value>
         public static GWP Unit { get { Warrant.NotNull<GWP>(); return Uniq.Instance; } }
+
+        public static explicit operator GWP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GWP value) => value?.ToCurrency();
+
+        public static GWP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2817,18 +3603,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class GYD : Currency
+    public sealed class GYD : CurrencyUnit<GYD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GYD" /> class.
-        /// </summary>
-        private GYD() : base("GYD") { }
+        private GYD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "GYD".
+        /// Gets the unique instance of the <see cref="GYD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "GYD".</value>
         public static GYD Unit { get { Warrant.NotNull<GYD>(); return Uniq.Instance; } }
+
+        public static explicit operator GYD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(GYD value) => value?.ToCurrency();
+
+        public static GYD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2842,18 +3635,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HKD : Currency
+    public sealed class HKD : CurrencyUnit<HKD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HKD" /> class.
-        /// </summary>
-        private HKD() : base("HKD") { }
+        private HKD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HKD".
+        /// Gets the unique instance of the <see cref="HKD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HKD".</value>
         public static HKD Unit { get { Warrant.NotNull<HKD>(); return Uniq.Instance; } }
+
+        public static explicit operator HKD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(HKD value) => value?.ToCurrency();
+
+        public static HKD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2867,18 +3667,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HNL : Currency
+    public sealed class HNL : CurrencyUnit<HNL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HNL" /> class.
-        /// </summary>
-        private HNL() : base("HNL") { }
+        private HNL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HNL".
+        /// Gets the unique instance of the <see cref="HNL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HNL".</value>
         public static HNL Unit { get { Warrant.NotNull<HNL>(); return Uniq.Instance; } }
+
+        public static explicit operator HNL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(HNL value) => value?.ToCurrency();
+
+        public static HNL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2892,18 +3699,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HRD : Currency
+    public sealed class HRD : CurrencyUnit<HRD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HRD" /> class.
-        /// </summary>
-        private HRD() : base("HRD") { }
+        private HRD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRD".
+        /// Gets the unique instance of the <see cref="HRD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRD".</value>
         public static HRD Unit { get { Warrant.NotNull<HRD>(); return Uniq.Instance; } }
+
+        public static explicit operator HRD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(HRD value) => value?.ToCurrency();
+
+        public static HRD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2917,18 +3731,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HRK : Currency
+    public sealed class HRK : CurrencyUnit<HRK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HRK" /> class.
-        /// </summary>
-        private HRK() : base("HRK") { }
+        private HRK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HRK".
+        /// Gets the unique instance of the <see cref="HRK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HRK".</value>
         public static HRK Unit { get { Warrant.NotNull<HRK>(); return Uniq.Instance; } }
+
+        public static explicit operator HRK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(HRK value) => value?.ToCurrency();
+
+        public static HRK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2942,18 +3763,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HTG : Currency
+    public sealed class HTG : CurrencyUnit<HTG>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HTG" /> class.
-        /// </summary>
-        private HTG() : base("HTG") { }
+        private HTG() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HTG".
+        /// Gets the unique instance of the <see cref="HTG" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HTG".</value>
         public static HTG Unit { get { Warrant.NotNull<HTG>(); return Uniq.Instance; } }
+
+        public static explicit operator HTG(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(HTG value) => value?.ToCurrency();
+
+        public static HTG FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2967,18 +3795,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class HUF : Currency
+    public sealed class HUF : CurrencyUnit<HUF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HUF" /> class.
-        /// </summary>
-        private HUF() : base("HUF") { }
+        private HUF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "HUF".
+        /// Gets the unique instance of the <see cref="HUF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "HUF".</value>
         public static HUF Unit { get { Warrant.NotNull<HUF>(); return Uniq.Instance; } }
+
+        public static explicit operator HUF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(HUF value) => value?.ToCurrency();
+
+        public static HUF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -2992,18 +3827,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class IDR : Currency
+    public sealed class IDR : CurrencyUnit<IDR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IDR" /> class.
-        /// </summary>
-        private IDR() : base("IDR") { }
+        private IDR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "IDR".
+        /// Gets the unique instance of the <see cref="IDR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "IDR".</value>
         public static IDR Unit { get { Warrant.NotNull<IDR>(); return Uniq.Instance; } }
+
+        public static explicit operator IDR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(IDR value) => value?.ToCurrency();
+
+        public static IDR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3017,18 +3859,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class IEP : Currency
+    public sealed class IEP : CurrencyUnit<IEP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IEP" /> class.
-        /// </summary>
-        private IEP() : base("IEP") { }
+        private IEP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "IEP".
+        /// Gets the unique instance of the <see cref="IEP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "IEP".</value>
         public static IEP Unit { get { Warrant.NotNull<IEP>(); return Uniq.Instance; } }
+
+        public static explicit operator IEP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(IEP value) => value?.ToCurrency();
+
+        public static IEP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3042,18 +3891,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ILP : Currency
+    public sealed class ILP : CurrencyUnit<ILP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ILP" /> class.
-        /// </summary>
-        private ILP() : base("ILP") { }
+        private ILP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILP".
+        /// Gets the unique instance of the <see cref="ILP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILP".</value>
         public static ILP Unit { get { Warrant.NotNull<ILP>(); return Uniq.Instance; } }
+
+        public static explicit operator ILP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ILP value) => value?.ToCurrency();
+
+        public static ILP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3067,18 +3923,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ILR : Currency
+    public sealed class ILR : CurrencyUnit<ILR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ILR" /> class.
-        /// </summary>
-        private ILR() : base("ILR") { }
+        private ILR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILR".
+        /// Gets the unique instance of the <see cref="ILR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILR".</value>
         public static ILR Unit { get { Warrant.NotNull<ILR>(); return Uniq.Instance; } }
+
+        public static explicit operator ILR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ILR value) => value?.ToCurrency();
+
+        public static ILR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3092,18 +3955,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ILS : Currency
+    public sealed class ILS : CurrencyUnit<ILS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ILS" /> class.
-        /// </summary>
-        private ILS() : base("ILS") { }
+        private ILS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ILS".
+        /// Gets the unique instance of the <see cref="ILS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ILS".</value>
         public static ILS Unit { get { Warrant.NotNull<ILS>(); return Uniq.Instance; } }
+
+        public static explicit operator ILS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ILS value) => value?.ToCurrency();
+
+        public static ILS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3117,18 +3987,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class INR : Currency
+    public sealed class INR : CurrencyUnit<INR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="INR" /> class.
-        /// </summary>
-        private INR() : base("INR") { }
+        private INR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "INR".
+        /// Gets the unique instance of the <see cref="INR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "INR".</value>
         public static INR Unit { get { Warrant.NotNull<INR>(); return Uniq.Instance; } }
+
+        public static explicit operator INR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(INR value) => value?.ToCurrency();
+
+        public static INR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3142,18 +4019,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class IQD : Currency
+    public sealed class IQD : CurrencyUnit<IQD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IQD" /> class.
-        /// </summary>
-        private IQD() : base("IQD") { }
+        private IQD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "IQD".
+        /// Gets the unique instance of the <see cref="IQD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "IQD".</value>
         public static IQD Unit { get { Warrant.NotNull<IQD>(); return Uniq.Instance; } }
+
+        public static explicit operator IQD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(IQD value) => value?.ToCurrency();
+
+        public static IQD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3167,18 +4051,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class IRR : Currency
+    public sealed class IRR : CurrencyUnit<IRR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="IRR" /> class.
-        /// </summary>
-        private IRR() : base("IRR") { }
+        private IRR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "IRR".
+        /// Gets the unique instance of the <see cref="IRR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "IRR".</value>
         public static IRR Unit { get { Warrant.NotNull<IRR>(); return Uniq.Instance; } }
+
+        public static explicit operator IRR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(IRR value) => value?.ToCurrency();
+
+        public static IRR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3192,18 +4083,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ISJ : Currency
+    public sealed class ISJ : CurrencyUnit<ISJ>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ISJ" /> class.
-        /// </summary>
-        private ISJ() : base("ISJ") { }
+        private ISJ() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISJ".
+        /// Gets the unique instance of the <see cref="ISJ" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISJ".</value>
         public static ISJ Unit { get { Warrant.NotNull<ISJ>(); return Uniq.Instance; } }
+
+        public static explicit operator ISJ(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ISJ value) => value?.ToCurrency();
+
+        public static ISJ FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3217,18 +4115,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ISK : Currency
+    public sealed class ISK : CurrencyUnit<ISK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ISK" /> class.
-        /// </summary>
-        private ISK() : base("ISK") { }
+        private ISK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ISK".
+        /// Gets the unique instance of the <see cref="ISK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ISK".</value>
         public static ISK Unit { get { Warrant.NotNull<ISK>(); return Uniq.Instance; } }
+
+        public static explicit operator ISK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ISK value) => value?.ToCurrency();
+
+        public static ISK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3242,18 +4147,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ITL : Currency
+    public sealed class ITL : CurrencyUnit<ITL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ITL" /> class.
-        /// </summary>
-        private ITL() : base("ITL") { }
+        private ITL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ITL".
+        /// Gets the unique instance of the <see cref="ITL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ITL".</value>
         public static ITL Unit { get { Warrant.NotNull<ITL>(); return Uniq.Instance; } }
+
+        public static explicit operator ITL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ITL value) => value?.ToCurrency();
+
+        public static ITL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3267,18 +4179,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class JMD : Currency
+    public sealed class JMD : CurrencyUnit<JMD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JMD" /> class.
-        /// </summary>
-        private JMD() : base("JMD") { }
+        private JMD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "JMD".
+        /// Gets the unique instance of the <see cref="JMD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "JMD".</value>
         public static JMD Unit { get { Warrant.NotNull<JMD>(); return Uniq.Instance; } }
+
+        public static explicit operator JMD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(JMD value) => value?.ToCurrency();
+
+        public static JMD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3292,18 +4211,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class JOD : Currency
+    public sealed class JOD : CurrencyUnit<JOD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JOD" /> class.
-        /// </summary>
-        private JOD() : base("JOD") { }
+        private JOD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "JOD".
+        /// Gets the unique instance of the <see cref="JOD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "JOD".</value>
         public static JOD Unit { get { Warrant.NotNull<JOD>(); return Uniq.Instance; } }
+
+        public static explicit operator JOD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(JOD value) => value?.ToCurrency();
+
+        public static JOD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3317,18 +4243,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class JPY : Currency
+    public sealed class JPY : CurrencyUnit<JPY>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JPY" /> class.
-        /// </summary>
-        private JPY() : base("JPY") { }
+        private JPY() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "JPY".
+        /// Gets the unique instance of the <see cref="JPY" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "JPY".</value>
         public static JPY Unit { get { Warrant.NotNull<JPY>(); return Uniq.Instance; } }
+
+        public static explicit operator JPY(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(JPY value) => value?.ToCurrency();
+
+        public static JPY FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3342,18 +4275,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KES : Currency
+    public sealed class KES : CurrencyUnit<KES>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KES" /> class.
-        /// </summary>
-        private KES() : base("KES") { }
+        private KES() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KES".
+        /// Gets the unique instance of the <see cref="KES" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KES".</value>
         public static KES Unit { get { Warrant.NotNull<KES>(); return Uniq.Instance; } }
+
+        public static explicit operator KES(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(KES value) => value?.ToCurrency();
+
+        public static KES FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3367,18 +4307,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KGS : Currency
+    public sealed class KGS : CurrencyUnit<KGS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KGS" /> class.
-        /// </summary>
-        private KGS() : base("KGS") { }
+        private KGS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KGS".
+        /// Gets the unique instance of the <see cref="KGS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KGS".</value>
         public static KGS Unit { get { Warrant.NotNull<KGS>(); return Uniq.Instance; } }
+
+        public static explicit operator KGS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(KGS value) => value?.ToCurrency();
+
+        public static KGS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3392,18 +4339,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KHR : Currency
+    public sealed class KHR : CurrencyUnit<KHR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KHR" /> class.
-        /// </summary>
-        private KHR() : base("KHR") { }
+        private KHR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KHR".
+        /// Gets the unique instance of the <see cref="KHR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KHR".</value>
         public static KHR Unit { get { Warrant.NotNull<KHR>(); return Uniq.Instance; } }
+
+        public static explicit operator KHR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(KHR value) => value?.ToCurrency();
+
+        public static KHR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3417,18 +4371,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KMF : Currency
+    public sealed class KMF : CurrencyUnit<KMF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KMF" /> class.
-        /// </summary>
-        private KMF() : base("KMF") { }
+        private KMF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KMF".
+        /// Gets the unique instance of the <see cref="KMF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KMF".</value>
         public static KMF Unit { get { Warrant.NotNull<KMF>(); return Uniq.Instance; } }
+
+        public static explicit operator KMF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(KMF value) => value?.ToCurrency();
+
+        public static KMF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3442,18 +4403,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KPW : Currency
+    public sealed class KPW : CurrencyUnit<KPW>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KPW" /> class.
-        /// </summary>
-        private KPW() : base("KPW") { }
+        private KPW() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KPW".
+        /// Gets the unique instance of the <see cref="KPW" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KPW".</value>
         public static KPW Unit { get { Warrant.NotNull<KPW>(); return Uniq.Instance; } }
+
+        public static explicit operator KPW(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(KPW value) => value?.ToCurrency();
+
+        public static KPW FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3467,18 +4435,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KRW : Currency
+    public sealed class KRW : CurrencyUnit<KRW>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KRW" /> class.
-        /// </summary>
-        private KRW() : base("KRW") { }
+        private KRW() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KRW".
+        /// Gets the unique instance of the <see cref="KRW" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KRW".</value>
         public static KRW Unit { get { Warrant.NotNull<KRW>(); return Uniq.Instance; } }
+
+        public static explicit operator KRW(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(KRW value) => value?.ToCurrency();
+
+        public static KRW FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3492,18 +4467,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KWD : Currency
+    public sealed class KWD : CurrencyUnit<KWD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KWD" /> class.
-        /// </summary>
-        private KWD() : base("KWD") { }
+        private KWD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KWD".
+        /// Gets the unique instance of the <see cref="KWD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KWD".</value>
         public static KWD Unit { get { Warrant.NotNull<KWD>(); return Uniq.Instance; } }
+
+        public static explicit operator KWD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(KWD value) => value?.ToCurrency();
+
+        public static KWD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3517,18 +4499,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KYD : Currency
+    public sealed class KYD : CurrencyUnit<KYD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KYD" /> class.
-        /// </summary>
-        private KYD() : base("KYD") { }
+        private KYD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KYD".
+        /// Gets the unique instance of the <see cref="KYD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KYD".</value>
         public static KYD Unit { get { Warrant.NotNull<KYD>(); return Uniq.Instance; } }
+
+        public static explicit operator KYD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(KYD value) => value?.ToCurrency();
+
+        public static KYD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3542,18 +4531,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class KZT : Currency
+    public sealed class KZT : CurrencyUnit<KZT>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KZT" /> class.
-        /// </summary>
-        private KZT() : base("KZT") { }
+        private KZT() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "KZT".
+        /// Gets the unique instance of the <see cref="KZT" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "KZT".</value>
         public static KZT Unit { get { Warrant.NotNull<KZT>(); return Uniq.Instance; } }
+
+        public static explicit operator KZT(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(KZT value) => value?.ToCurrency();
+
+        public static KZT FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3567,18 +4563,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LAJ : Currency
+    public sealed class LAJ : CurrencyUnit<LAJ>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LAJ" /> class.
-        /// </summary>
-        private LAJ() : base("LAJ") { }
+        private LAJ() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAJ".
+        /// Gets the unique instance of the <see cref="LAJ" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAJ".</value>
         public static LAJ Unit { get { Warrant.NotNull<LAJ>(); return Uniq.Instance; } }
+
+        public static explicit operator LAJ(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LAJ value) => value?.ToCurrency();
+
+        public static LAJ FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3592,18 +4595,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LAK : Currency
+    public sealed class LAK : CurrencyUnit<LAK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LAK" /> class.
-        /// </summary>
-        private LAK() : base("LAK") { }
+        private LAK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LAK".
+        /// Gets the unique instance of the <see cref="LAK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LAK".</value>
         public static LAK Unit { get { Warrant.NotNull<LAK>(); return Uniq.Instance; } }
+
+        public static explicit operator LAK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LAK value) => value?.ToCurrency();
+
+        public static LAK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3617,18 +4627,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LBP : Currency
+    public sealed class LBP : CurrencyUnit<LBP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LBP" /> class.
-        /// </summary>
-        private LBP() : base("LBP") { }
+        private LBP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LBP".
+        /// Gets the unique instance of the <see cref="LBP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LBP".</value>
         public static LBP Unit { get { Warrant.NotNull<LBP>(); return Uniq.Instance; } }
+
+        public static explicit operator LBP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LBP value) => value?.ToCurrency();
+
+        public static LBP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3642,18 +4659,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LKR : Currency
+    public sealed class LKR : CurrencyUnit<LKR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LKR" /> class.
-        /// </summary>
-        private LKR() : base("LKR") { }
+        private LKR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LKR".
+        /// Gets the unique instance of the <see cref="LKR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LKR".</value>
         public static LKR Unit { get { Warrant.NotNull<LKR>(); return Uniq.Instance; } }
+
+        public static explicit operator LKR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LKR value) => value?.ToCurrency();
+
+        public static LKR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3667,18 +4691,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LRD : Currency
+    public sealed class LRD : CurrencyUnit<LRD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LRD" /> class.
-        /// </summary>
-        private LRD() : base("LRD") { }
+        private LRD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LRD".
+        /// Gets the unique instance of the <see cref="LRD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LRD".</value>
         public static LRD Unit { get { Warrant.NotNull<LRD>(); return Uniq.Instance; } }
+
+        public static explicit operator LRD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LRD value) => value?.ToCurrency();
+
+        public static LRD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3692,18 +4723,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LSL : Currency
+    public sealed class LSL : CurrencyUnit<LSL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LSL" /> class.
-        /// </summary>
-        private LSL() : base("LSL") { }
+        private LSL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSL".
+        /// Gets the unique instance of the <see cref="LSL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSL".</value>
         public static LSL Unit { get { Warrant.NotNull<LSL>(); return Uniq.Instance; } }
+
+        public static explicit operator LSL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LSL value) => value?.ToCurrency();
+
+        public static LSL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3717,18 +4755,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LSM : Currency
+    public sealed class LSM : CurrencyUnit<LSM>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LSM" /> class.
-        /// </summary>
-        private LSM() : base("LSM") { }
+        private LSM() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LSM".
+        /// Gets the unique instance of the <see cref="LSM" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LSM".</value>
         public static LSM Unit { get { Warrant.NotNull<LSM>(); return Uniq.Instance; } }
+
+        public static explicit operator LSM(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LSM value) => value?.ToCurrency();
+
+        public static LSM FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3742,18 +4787,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LTL : Currency
+    public sealed class LTL : CurrencyUnit<LTL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LTL" /> class.
-        /// </summary>
-        private LTL() : base("LTL") { }
+        private LTL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTL".
+        /// Gets the unique instance of the <see cref="LTL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTL".</value>
         public static LTL Unit { get { Warrant.NotNull<LTL>(); return Uniq.Instance; } }
+
+        public static explicit operator LTL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LTL value) => value?.ToCurrency();
+
+        public static LTL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3767,18 +4819,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LTT : Currency
+    public sealed class LTT : CurrencyUnit<LTT>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LTT" /> class.
-        /// </summary>
-        private LTT() : base("LTT") { }
+        private LTT() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LTT".
+        /// Gets the unique instance of the <see cref="LTT" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LTT".</value>
         public static LTT Unit { get { Warrant.NotNull<LTT>(); return Uniq.Instance; } }
+
+        public static explicit operator LTT(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LTT value) => value?.ToCurrency();
+
+        public static LTT FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3792,18 +4851,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LUC : Currency
+    public sealed class LUC : CurrencyUnit<LUC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LUC" /> class.
-        /// </summary>
-        private LUC() : base("LUC") { }
+        private LUC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUC".
+        /// Gets the unique instance of the <see cref="LUC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUC".</value>
         public static LUC Unit { get { Warrant.NotNull<LUC>(); return Uniq.Instance; } }
+
+        public static explicit operator LUC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LUC value) => value?.ToCurrency();
+
+        public static LUC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3817,18 +4883,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LUF : Currency
+    public sealed class LUF : CurrencyUnit<LUF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LUF" /> class.
-        /// </summary>
-        private LUF() : base("LUF") { }
+        private LUF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUF".
+        /// Gets the unique instance of the <see cref="LUF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUF".</value>
         public static LUF Unit { get { Warrant.NotNull<LUF>(); return Uniq.Instance; } }
+
+        public static explicit operator LUF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LUF value) => value?.ToCurrency();
+
+        public static LUF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3842,18 +4915,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LUL : Currency
+    public sealed class LUL : CurrencyUnit<LUL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LUL" /> class.
-        /// </summary>
-        private LUL() : base("LUL") { }
+        private LUL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LUL".
+        /// Gets the unique instance of the <see cref="LUL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LUL".</value>
         public static LUL Unit { get { Warrant.NotNull<LUL>(); return Uniq.Instance; } }
+
+        public static explicit operator LUL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LUL value) => value?.ToCurrency();
+
+        public static LUL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3867,18 +4947,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LVL : Currency
+    public sealed class LVL : CurrencyUnit<LVL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LVL" /> class.
-        /// </summary>
-        private LVL() : base("LVL") { }
+        private LVL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVL".
+        /// Gets the unique instance of the <see cref="LVL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVL".</value>
         public static LVL Unit { get { Warrant.NotNull<LVL>(); return Uniq.Instance; } }
+
+        public static explicit operator LVL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LVL value) => value?.ToCurrency();
+
+        public static LVL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3892,18 +4979,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LVR : Currency
+    public sealed class LVR : CurrencyUnit<LVR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LVR" /> class.
-        /// </summary>
-        private LVR() : base("LVR") { }
+        private LVR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LVR".
+        /// Gets the unique instance of the <see cref="LVR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LVR".</value>
         public static LVR Unit { get { Warrant.NotNull<LVR>(); return Uniq.Instance; } }
+
+        public static explicit operator LVR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LVR value) => value?.ToCurrency();
+
+        public static LVR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3917,18 +5011,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class LYD : Currency
+    public sealed class LYD : CurrencyUnit<LYD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LYD" /> class.
-        /// </summary>
-        private LYD() : base("LYD") { }
+        private LYD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "LYD".
+        /// Gets the unique instance of the <see cref="LYD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "LYD".</value>
         public static LYD Unit { get { Warrant.NotNull<LYD>(); return Uniq.Instance; } }
+
+        public static explicit operator LYD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(LYD value) => value?.ToCurrency();
+
+        public static LYD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3942,18 +5043,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MAD : Currency
+    public sealed class MAD : CurrencyUnit<MAD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MAD" /> class.
-        /// </summary>
-        private MAD() : base("MAD") { }
+        private MAD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAD".
+        /// Gets the unique instance of the <see cref="MAD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAD".</value>
         public static MAD Unit { get { Warrant.NotNull<MAD>(); return Uniq.Instance; } }
+
+        public static explicit operator MAD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MAD value) => value?.ToCurrency();
+
+        public static MAD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3967,18 +5075,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MAF : Currency
+    public sealed class MAF : CurrencyUnit<MAF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MAF" /> class.
-        /// </summary>
-        private MAF() : base("MAF") { }
+        private MAF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MAF".
+        /// Gets the unique instance of the <see cref="MAF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MAF".</value>
         public static MAF Unit { get { Warrant.NotNull<MAF>(); return Uniq.Instance; } }
+
+        public static explicit operator MAF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MAF value) => value?.ToCurrency();
+
+        public static MAF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -3992,18 +5107,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MDL : Currency
+    public sealed class MDL : CurrencyUnit<MDL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MDL" /> class.
-        /// </summary>
-        private MDL() : base("MDL") { }
+        private MDL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MDL".
+        /// Gets the unique instance of the <see cref="MDL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MDL".</value>
         public static MDL Unit { get { Warrant.NotNull<MDL>(); return Uniq.Instance; } }
+
+        public static explicit operator MDL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MDL value) => value?.ToCurrency();
+
+        public static MDL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4017,18 +5139,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MGA : Currency
+    public sealed class MGA : CurrencyUnit<MGA>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MGA" /> class.
-        /// </summary>
-        private MGA() : base("MGA") { }
+        private MGA() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGA".
+        /// Gets the unique instance of the <see cref="MGA" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGA".</value>
         public static MGA Unit { get { Warrant.NotNull<MGA>(); return Uniq.Instance; } }
+
+        public static explicit operator MGA(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MGA value) => value?.ToCurrency();
+
+        public static MGA FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4042,18 +5171,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MGF : Currency
+    public sealed class MGF : CurrencyUnit<MGF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MGF" /> class.
-        /// </summary>
-        private MGF() : base("MGF") { }
+        private MGF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MGF".
+        /// Gets the unique instance of the <see cref="MGF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MGF".</value>
         public static MGF Unit { get { Warrant.NotNull<MGF>(); return Uniq.Instance; } }
+
+        public static explicit operator MGF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MGF value) => value?.ToCurrency();
+
+        public static MGF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4067,18 +5203,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MKD : Currency
+    public sealed class MKD : CurrencyUnit<MKD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MKD" /> class.
-        /// </summary>
-        private MKD() : base("MKD") { }
+        private MKD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MKD".
+        /// Gets the unique instance of the <see cref="MKD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MKD".</value>
         public static MKD Unit { get { Warrant.NotNull<MKD>(); return Uniq.Instance; } }
+
+        public static explicit operator MKD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MKD value) => value?.ToCurrency();
+
+        public static MKD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4092,18 +5235,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MLF : Currency
+    public sealed class MLF : CurrencyUnit<MLF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MLF" /> class.
-        /// </summary>
-        private MLF() : base("MLF") { }
+        private MLF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MLF".
+        /// Gets the unique instance of the <see cref="MLF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MLF".</value>
         public static MLF Unit { get { Warrant.NotNull<MLF>(); return Uniq.Instance; } }
+
+        public static explicit operator MLF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MLF value) => value?.ToCurrency();
+
+        public static MLF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4117,18 +5267,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MMK : Currency
+    public sealed class MMK : CurrencyUnit<MMK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MMK" /> class.
-        /// </summary>
-        private MMK() : base("MMK") { }
+        private MMK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MMK".
+        /// Gets the unique instance of the <see cref="MMK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MMK".</value>
         public static MMK Unit { get { Warrant.NotNull<MMK>(); return Uniq.Instance; } }
+
+        public static explicit operator MMK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MMK value) => value?.ToCurrency();
+
+        public static MMK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4142,18 +5299,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MNT : Currency
+    public sealed class MNT : CurrencyUnit<MNT>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MNT" /> class.
-        /// </summary>
-        private MNT() : base("MNT") { }
+        private MNT() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MNT".
+        /// Gets the unique instance of the <see cref="MNT" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MNT".</value>
         public static MNT Unit { get { Warrant.NotNull<MNT>(); return Uniq.Instance; } }
+
+        public static explicit operator MNT(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MNT value) => value?.ToCurrency();
+
+        public static MNT FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4167,18 +5331,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MOP : Currency
+    public sealed class MOP : CurrencyUnit<MOP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MOP" /> class.
-        /// </summary>
-        private MOP() : base("MOP") { }
+        private MOP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MOP".
+        /// Gets the unique instance of the <see cref="MOP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MOP".</value>
         public static MOP Unit { get { Warrant.NotNull<MOP>(); return Uniq.Instance; } }
+
+        public static explicit operator MOP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MOP value) => value?.ToCurrency();
+
+        public static MOP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4192,18 +5363,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MRO : Currency
+    public sealed class MRO : CurrencyUnit<MRO>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MRO" /> class.
-        /// </summary>
-        private MRO() : base("MRO") { }
+        private MRO() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MRO".
+        /// Gets the unique instance of the <see cref="MRO" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MRO".</value>
         public static MRO Unit { get { Warrant.NotNull<MRO>(); return Uniq.Instance; } }
+
+        public static explicit operator MRO(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MRO value) => value?.ToCurrency();
+
+        public static MRO FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4217,18 +5395,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MTL : Currency
+    public sealed class MTL : CurrencyUnit<MTL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MTL" /> class.
-        /// </summary>
-        private MTL() : base("MTL") { }
+        private MTL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTL".
+        /// Gets the unique instance of the <see cref="MTL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTL".</value>
         public static MTL Unit { get { Warrant.NotNull<MTL>(); return Uniq.Instance; } }
+
+        public static explicit operator MTL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MTL value) => value?.ToCurrency();
+
+        public static MTL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4242,18 +5427,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MTP : Currency
+    public sealed class MTP : CurrencyUnit<MTP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MTP" /> class.
-        /// </summary>
-        private MTP() : base("MTP") { }
+        private MTP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MTP".
+        /// Gets the unique instance of the <see cref="MTP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MTP".</value>
         public static MTP Unit { get { Warrant.NotNull<MTP>(); return Uniq.Instance; } }
+
+        public static explicit operator MTP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MTP value) => value?.ToCurrency();
+
+        public static MTP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4267,18 +5459,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MUR : Currency
+    public sealed class MUR : CurrencyUnit<MUR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MUR" /> class.
-        /// </summary>
-        private MUR() : base("MUR") { }
+        private MUR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MUR".
+        /// Gets the unique instance of the <see cref="MUR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MUR".</value>
         public static MUR Unit { get { Warrant.NotNull<MUR>(); return Uniq.Instance; } }
+
+        public static explicit operator MUR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MUR value) => value?.ToCurrency();
+
+        public static MUR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4292,18 +5491,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MVQ : Currency
+    public sealed class MVQ : CurrencyUnit<MVQ>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MVQ" /> class.
-        /// </summary>
-        private MVQ() : base("MVQ") { }
+        private MVQ() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVQ".
+        /// Gets the unique instance of the <see cref="MVQ" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVQ".</value>
         public static MVQ Unit { get { Warrant.NotNull<MVQ>(); return Uniq.Instance; } }
+
+        public static explicit operator MVQ(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MVQ value) => value?.ToCurrency();
+
+        public static MVQ FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4317,18 +5523,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MVR : Currency
+    public sealed class MVR : CurrencyUnit<MVR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MVR" /> class.
-        /// </summary>
-        private MVR() : base("MVR") { }
+        private MVR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MVR".
+        /// Gets the unique instance of the <see cref="MVR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MVR".</value>
         public static MVR Unit { get { Warrant.NotNull<MVR>(); return Uniq.Instance; } }
+
+        public static explicit operator MVR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MVR value) => value?.ToCurrency();
+
+        public static MVR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4342,18 +5555,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MWK : Currency
+    public sealed class MWK : CurrencyUnit<MWK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MWK" /> class.
-        /// </summary>
-        private MWK() : base("MWK") { }
+        private MWK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MWK".
+        /// Gets the unique instance of the <see cref="MWK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MWK".</value>
         public static MWK Unit { get { Warrant.NotNull<MWK>(); return Uniq.Instance; } }
+
+        public static explicit operator MWK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MWK value) => value?.ToCurrency();
+
+        public static MWK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4367,18 +5587,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MXN : Currency
+    public sealed class MXN : CurrencyUnit<MXN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MXN" /> class.
-        /// </summary>
-        private MXN() : base("MXN") { }
+        private MXN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXN".
+        /// Gets the unique instance of the <see cref="MXN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXN".</value>
         public static MXN Unit { get { Warrant.NotNull<MXN>(); return Uniq.Instance; } }
+
+        public static explicit operator MXN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MXN value) => value?.ToCurrency();
+
+        public static MXN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4392,18 +5619,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MXP : Currency
+    public sealed class MXP : CurrencyUnit<MXP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MXP" /> class.
-        /// </summary>
-        private MXP() : base("MXP") { }
+        private MXP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXP".
+        /// Gets the unique instance of the <see cref="MXP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXP".</value>
         public static MXP Unit { get { Warrant.NotNull<MXP>(); return Uniq.Instance; } }
+
+        public static explicit operator MXP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MXP value) => value?.ToCurrency();
+
+        public static MXP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4417,18 +5651,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MXV : Currency
+    public sealed class MXV : CurrencyUnit<MXV>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MXV" /> class.
-        /// </summary>
-        private MXV() : base("MXV") { }
+        private MXV() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MXV".
+        /// Gets the unique instance of the <see cref="MXV" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MXV".</value>
         public static MXV Unit { get { Warrant.NotNull<MXV>(); return Uniq.Instance; } }
+
+        public static explicit operator MXV(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MXV value) => value?.ToCurrency();
+
+        public static MXV FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4442,18 +5683,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MYR : Currency
+    public sealed class MYR : CurrencyUnit<MYR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MYR" /> class.
-        /// </summary>
-        private MYR() : base("MYR") { }
+        private MYR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MYR".
+        /// Gets the unique instance of the <see cref="MYR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MYR".</value>
         public static MYR Unit { get { Warrant.NotNull<MYR>(); return Uniq.Instance; } }
+
+        public static explicit operator MYR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MYR value) => value?.ToCurrency();
+
+        public static MYR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4467,18 +5715,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MZE : Currency
+    public sealed class MZE : CurrencyUnit<MZE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MZE" /> class.
-        /// </summary>
-        private MZE() : base("MZE") { }
+        private MZE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZE".
+        /// Gets the unique instance of the <see cref="MZE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZE".</value>
         public static MZE Unit { get { Warrant.NotNull<MZE>(); return Uniq.Instance; } }
+
+        public static explicit operator MZE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MZE value) => value?.ToCurrency();
+
+        public static MZE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4492,18 +5747,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MZM : Currency
+    public sealed class MZM : CurrencyUnit<MZM>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MZM" /> class.
-        /// </summary>
-        private MZM() : base("MZM") { }
+        private MZM() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZM".
+        /// Gets the unique instance of the <see cref="MZM" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZM".</value>
         public static MZM Unit { get { Warrant.NotNull<MZM>(); return Uniq.Instance; } }
+
+        public static explicit operator MZM(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MZM value) => value?.ToCurrency();
+
+        public static MZM FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4517,18 +5779,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class MZN : Currency
+    public sealed class MZN : CurrencyUnit<MZN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MZN" /> class.
-        /// </summary>
-        private MZN() : base("MZN") { }
+        private MZN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "MZN".
+        /// Gets the unique instance of the <see cref="MZN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "MZN".</value>
         public static MZN Unit { get { Warrant.NotNull<MZN>(); return Uniq.Instance; } }
+
+        public static explicit operator MZN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(MZN value) => value?.ToCurrency();
+
+        public static MZN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4542,18 +5811,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NAD : Currency
+    public sealed class NAD : CurrencyUnit<NAD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NAD" /> class.
-        /// </summary>
-        private NAD() : base("NAD") { }
+        private NAD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NAD".
+        /// Gets the unique instance of the <see cref="NAD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NAD".</value>
         public static NAD Unit { get { Warrant.NotNull<NAD>(); return Uniq.Instance; } }
+
+        public static explicit operator NAD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(NAD value) => value?.ToCurrency();
+
+        public static NAD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4567,18 +5843,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NGN : Currency
+    public sealed class NGN : CurrencyUnit<NGN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NGN" /> class.
-        /// </summary>
-        private NGN() : base("NGN") { }
+        private NGN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NGN".
+        /// Gets the unique instance of the <see cref="NGN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NGN".</value>
         public static NGN Unit { get { Warrant.NotNull<NGN>(); return Uniq.Instance; } }
+
+        public static explicit operator NGN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(NGN value) => value?.ToCurrency();
+
+        public static NGN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4592,18 +5875,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NIC : Currency
+    public sealed class NIC : CurrencyUnit<NIC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NIC" /> class.
-        /// </summary>
-        private NIC() : base("NIC") { }
+        private NIC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIC".
+        /// Gets the unique instance of the <see cref="NIC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIC".</value>
         public static NIC Unit { get { Warrant.NotNull<NIC>(); return Uniq.Instance; } }
+
+        public static explicit operator NIC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(NIC value) => value?.ToCurrency();
+
+        public static NIC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4617,18 +5907,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NIO : Currency
+    public sealed class NIO : CurrencyUnit<NIO>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NIO" /> class.
-        /// </summary>
-        private NIO() : base("NIO") { }
+        private NIO() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NIO".
+        /// Gets the unique instance of the <see cref="NIO" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NIO".</value>
         public static NIO Unit { get { Warrant.NotNull<NIO>(); return Uniq.Instance; } }
+
+        public static explicit operator NIO(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(NIO value) => value?.ToCurrency();
+
+        public static NIO FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4642,18 +5939,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NLG : Currency
+    public sealed class NLG : CurrencyUnit<NLG>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NLG" /> class.
-        /// </summary>
-        private NLG() : base("NLG") { }
+        private NLG() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NLG".
+        /// Gets the unique instance of the <see cref="NLG" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NLG".</value>
         public static NLG Unit { get { Warrant.NotNull<NLG>(); return Uniq.Instance; } }
+
+        public static explicit operator NLG(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(NLG value) => value?.ToCurrency();
+
+        public static NLG FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4667,18 +5971,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NOK : Currency
+    public sealed class NOK : CurrencyUnit<NOK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NOK" /> class.
-        /// </summary>
-        private NOK() : base("NOK") { }
+        private NOK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NOK".
+        /// Gets the unique instance of the <see cref="NOK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NOK".</value>
         public static NOK Unit { get { Warrant.NotNull<NOK>(); return Uniq.Instance; } }
+
+        public static explicit operator NOK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(NOK value) => value?.ToCurrency();
+
+        public static NOK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4692,18 +6003,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NPR : Currency
+    public sealed class NPR : CurrencyUnit<NPR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NPR" /> class.
-        /// </summary>
-        private NPR() : base("NPR") { }
+        private NPR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NPR".
+        /// Gets the unique instance of the <see cref="NPR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NPR".</value>
         public static NPR Unit { get { Warrant.NotNull<NPR>(); return Uniq.Instance; } }
+
+        public static explicit operator NPR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(NPR value) => value?.ToCurrency();
+
+        public static NPR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4717,18 +6035,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class NZD : Currency
+    public sealed class NZD : CurrencyUnit<NZD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NZD" /> class.
-        /// </summary>
-        private NZD() : base("NZD") { }
+        private NZD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "NZD".
+        /// Gets the unique instance of the <see cref="NZD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "NZD".</value>
         public static NZD Unit { get { Warrant.NotNull<NZD>(); return Uniq.Instance; } }
+
+        public static explicit operator NZD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(NZD value) => value?.ToCurrency();
+
+        public static NZD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4742,18 +6067,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class OMR : Currency
+    public sealed class OMR : CurrencyUnit<OMR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OMR" /> class.
-        /// </summary>
-        private OMR() : base("OMR") { }
+        private OMR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "OMR".
+        /// Gets the unique instance of the <see cref="OMR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "OMR".</value>
         public static OMR Unit { get { Warrant.NotNull<OMR>(); return Uniq.Instance; } }
+
+        public static explicit operator OMR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(OMR value) => value?.ToCurrency();
+
+        public static OMR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4767,18 +6099,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PAB : Currency
+    public sealed class PAB : CurrencyUnit<PAB>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PAB" /> class.
-        /// </summary>
-        private PAB() : base("PAB") { }
+        private PAB() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PAB".
+        /// Gets the unique instance of the <see cref="PAB" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PAB".</value>
         public static PAB Unit { get { Warrant.NotNull<PAB>(); return Uniq.Instance; } }
+
+        public static explicit operator PAB(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PAB value) => value?.ToCurrency();
+
+        public static PAB FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4792,18 +6131,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PEH : Currency
+    public sealed class PEH : CurrencyUnit<PEH>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PEH" /> class.
-        /// </summary>
-        private PEH() : base("PEH") { }
+        private PEH() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEH".
+        /// Gets the unique instance of the <see cref="PEH" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEH".</value>
         public static PEH Unit { get { Warrant.NotNull<PEH>(); return Uniq.Instance; } }
+
+        public static explicit operator PEH(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PEH value) => value?.ToCurrency();
+
+        public static PEH FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4817,18 +6163,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PEI : Currency
+    public sealed class PEI : CurrencyUnit<PEI>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PEI" /> class.
-        /// </summary>
-        private PEI() : base("PEI") { }
+        private PEI() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEI".
+        /// Gets the unique instance of the <see cref="PEI" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEI".</value>
         public static PEI Unit { get { Warrant.NotNull<PEI>(); return Uniq.Instance; } }
+
+        public static explicit operator PEI(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PEI value) => value?.ToCurrency();
+
+        public static PEI FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4842,18 +6195,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PEN : Currency
+    public sealed class PEN : CurrencyUnit<PEN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PEN" /> class.
-        /// </summary>
-        private PEN() : base("PEN") { }
+        private PEN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PEN".
+        /// Gets the unique instance of the <see cref="PEN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PEN".</value>
         public static PEN Unit { get { Warrant.NotNull<PEN>(); return Uniq.Instance; } }
+
+        public static explicit operator PEN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PEN value) => value?.ToCurrency();
+
+        public static PEN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4867,18 +6227,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PES : Currency
+    public sealed class PES : CurrencyUnit<PES>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PES" /> class.
-        /// </summary>
-        private PES() : base("PES") { }
+        private PES() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PES".
+        /// Gets the unique instance of the <see cref="PES" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PES".</value>
         public static PES Unit { get { Warrant.NotNull<PES>(); return Uniq.Instance; } }
+
+        public static explicit operator PES(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PES value) => value?.ToCurrency();
+
+        public static PES FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4892,18 +6259,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PGK : Currency
+    public sealed class PGK : CurrencyUnit<PGK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PGK" /> class.
-        /// </summary>
-        private PGK() : base("PGK") { }
+        private PGK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PGK".
+        /// Gets the unique instance of the <see cref="PGK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PGK".</value>
         public static PGK Unit { get { Warrant.NotNull<PGK>(); return Uniq.Instance; } }
+
+        public static explicit operator PGK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PGK value) => value?.ToCurrency();
+
+        public static PGK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4917,18 +6291,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PHP : Currency
+    public sealed class PHP : CurrencyUnit<PHP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PHP" /> class.
-        /// </summary>
-        private PHP() : base("PHP") { }
+        private PHP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PHP".
+        /// Gets the unique instance of the <see cref="PHP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PHP".</value>
         public static PHP Unit { get { Warrant.NotNull<PHP>(); return Uniq.Instance; } }
+
+        public static explicit operator PHP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PHP value) => value?.ToCurrency();
+
+        public static PHP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4942,18 +6323,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PKR : Currency
+    public sealed class PKR : CurrencyUnit<PKR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PKR" /> class.
-        /// </summary>
-        private PKR() : base("PKR") { }
+        private PKR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PKR".
+        /// Gets the unique instance of the <see cref="PKR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PKR".</value>
         public static PKR Unit { get { Warrant.NotNull<PKR>(); return Uniq.Instance; } }
+
+        public static explicit operator PKR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PKR value) => value?.ToCurrency();
+
+        public static PKR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4967,18 +6355,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PLN : Currency
+    public sealed class PLN : CurrencyUnit<PLN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PLN" /> class.
-        /// </summary>
-        private PLN() : base("PLN") { }
+        private PLN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLN".
+        /// Gets the unique instance of the <see cref="PLN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLN".</value>
         public static PLN Unit { get { Warrant.NotNull<PLN>(); return Uniq.Instance; } }
+
+        public static explicit operator PLN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PLN value) => value?.ToCurrency();
+
+        public static PLN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -4992,18 +6387,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PLZ : Currency
+    public sealed class PLZ : CurrencyUnit<PLZ>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PLZ" /> class.
-        /// </summary>
-        private PLZ() : base("PLZ") { }
+        private PLZ() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PLZ".
+        /// Gets the unique instance of the <see cref="PLZ" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PLZ".</value>
         public static PLZ Unit { get { Warrant.NotNull<PLZ>(); return Uniq.Instance; } }
+
+        public static explicit operator PLZ(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PLZ value) => value?.ToCurrency();
+
+        public static PLZ FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5017,18 +6419,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PTE : Currency
+    public sealed class PTE : CurrencyUnit<PTE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PTE" /> class.
-        /// </summary>
-        private PTE() : base("PTE") { }
+        private PTE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PTE".
+        /// Gets the unique instance of the <see cref="PTE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PTE".</value>
         public static PTE Unit { get { Warrant.NotNull<PTE>(); return Uniq.Instance; } }
+
+        public static explicit operator PTE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PTE value) => value?.ToCurrency();
+
+        public static PTE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5042,18 +6451,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class PYG : Currency
+    public sealed class PYG : CurrencyUnit<PYG>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PYG" /> class.
-        /// </summary>
-        private PYG() : base("PYG") { }
+        private PYG() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "PYG".
+        /// Gets the unique instance of the <see cref="PYG" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "PYG".</value>
         public static PYG Unit { get { Warrant.NotNull<PYG>(); return Uniq.Instance; } }
+
+        public static explicit operator PYG(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(PYG value) => value?.ToCurrency();
+
+        public static PYG FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5067,18 +6483,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class QAR : Currency
+    public sealed class QAR : CurrencyUnit<QAR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="QAR" /> class.
-        /// </summary>
-        private QAR() : base("QAR") { }
+        private QAR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "QAR".
+        /// Gets the unique instance of the <see cref="QAR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "QAR".</value>
         public static QAR Unit { get { Warrant.NotNull<QAR>(); return Uniq.Instance; } }
+
+        public static explicit operator QAR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(QAR value) => value?.ToCurrency();
+
+        public static QAR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5092,18 +6515,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RHD : Currency
+    public sealed class RHD : CurrencyUnit<RHD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RHD" /> class.
-        /// </summary>
-        private RHD() : base("RHD") { }
+        private RHD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RHD".
+        /// Gets the unique instance of the <see cref="RHD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RHD".</value>
         public static RHD Unit { get { Warrant.NotNull<RHD>(); return Uniq.Instance; } }
+
+        public static explicit operator RHD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(RHD value) => value?.ToCurrency();
+
+        public static RHD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5117,18 +6547,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ROK : Currency
+    public sealed class ROK : CurrencyUnit<ROK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ROK" /> class.
-        /// </summary>
-        private ROK() : base("ROK") { }
+        private ROK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROK".
+        /// Gets the unique instance of the <see cref="ROK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROK".</value>
         public static ROK Unit { get { Warrant.NotNull<ROK>(); return Uniq.Instance; } }
+
+        public static explicit operator ROK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ROK value) => value?.ToCurrency();
+
+        public static ROK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5142,18 +6579,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ROL : Currency
+    public sealed class ROL : CurrencyUnit<ROL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ROL" /> class.
-        /// </summary>
-        private ROL() : base("ROL") { }
+        private ROL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ROL".
+        /// Gets the unique instance of the <see cref="ROL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ROL".</value>
         public static ROL Unit { get { Warrant.NotNull<ROL>(); return Uniq.Instance; } }
+
+        public static explicit operator ROL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ROL value) => value?.ToCurrency();
+
+        public static ROL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5167,18 +6611,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RON : Currency
+    public sealed class RON : CurrencyUnit<RON>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RON" /> class.
-        /// </summary>
-        private RON() : base("RON") { }
+        private RON() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RON".
+        /// Gets the unique instance of the <see cref="RON" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RON".</value>
         public static RON Unit { get { Warrant.NotNull<RON>(); return Uniq.Instance; } }
+
+        public static explicit operator RON(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(RON value) => value?.ToCurrency();
+
+        public static RON FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5192,18 +6643,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RSD : Currency
+    public sealed class RSD : CurrencyUnit<RSD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RSD" /> class.
-        /// </summary>
-        private RSD() : base("RSD") { }
+        private RSD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RSD".
+        /// Gets the unique instance of the <see cref="RSD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RSD".</value>
         public static RSD Unit { get { Warrant.NotNull<RSD>(); return Uniq.Instance; } }
+
+        public static explicit operator RSD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(RSD value) => value?.ToCurrency();
+
+        public static RSD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5217,18 +6675,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RUB : Currency
+    public sealed class RUB : CurrencyUnit<RUB>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RUB" /> class.
-        /// </summary>
-        private RUB() : base("RUB") { }
+        private RUB() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUB".
+        /// Gets the unique instance of the <see cref="RUB" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUB".</value>
         public static RUB Unit { get { Warrant.NotNull<RUB>(); return Uniq.Instance; } }
+
+        public static explicit operator RUB(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(RUB value) => value?.ToCurrency();
+
+        public static RUB FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5242,18 +6707,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RUR : Currency
+    public sealed class RUR : CurrencyUnit<RUR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RUR" /> class.
-        /// </summary>
-        private RUR() : base("RUR") { }
+        private RUR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RUR".
+        /// Gets the unique instance of the <see cref="RUR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RUR".</value>
         public static RUR Unit { get { Warrant.NotNull<RUR>(); return Uniq.Instance; } }
+
+        public static explicit operator RUR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(RUR value) => value?.ToCurrency();
+
+        public static RUR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5267,18 +6739,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class RWF : Currency
+    public sealed class RWF : CurrencyUnit<RWF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RWF" /> class.
-        /// </summary>
-        private RWF() : base("RWF") { }
+        private RWF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "RWF".
+        /// Gets the unique instance of the <see cref="RWF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "RWF".</value>
         public static RWF Unit { get { Warrant.NotNull<RWF>(); return Uniq.Instance; } }
+
+        public static explicit operator RWF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(RWF value) => value?.ToCurrency();
+
+        public static RWF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5292,18 +6771,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SAR : Currency
+    public sealed class SAR : CurrencyUnit<SAR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SAR" /> class.
-        /// </summary>
-        private SAR() : base("SAR") { }
+        private SAR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SAR".
+        /// Gets the unique instance of the <see cref="SAR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SAR".</value>
         public static SAR Unit { get { Warrant.NotNull<SAR>(); return Uniq.Instance; } }
+
+        public static explicit operator SAR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SAR value) => value?.ToCurrency();
+
+        public static SAR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5317,18 +6803,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SBD : Currency
+    public sealed class SBD : CurrencyUnit<SBD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SBD" /> class.
-        /// </summary>
-        private SBD() : base("SBD") { }
+        private SBD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SBD".
+        /// Gets the unique instance of the <see cref="SBD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SBD".</value>
         public static SBD Unit { get { Warrant.NotNull<SBD>(); return Uniq.Instance; } }
+
+        public static explicit operator SBD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SBD value) => value?.ToCurrency();
+
+        public static SBD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5342,18 +6835,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SCR : Currency
+    public sealed class SCR : CurrencyUnit<SCR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SCR" /> class.
-        /// </summary>
-        private SCR() : base("SCR") { }
+        private SCR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SCR".
+        /// Gets the unique instance of the <see cref="SCR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SCR".</value>
         public static SCR Unit { get { Warrant.NotNull<SCR>(); return Uniq.Instance; } }
+
+        public static explicit operator SCR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SCR value) => value?.ToCurrency();
+
+        public static SCR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5367,18 +6867,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SDD : Currency
+    public sealed class SDD : CurrencyUnit<SDD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SDD" /> class.
-        /// </summary>
-        private SDD() : base("SDD") { }
+        private SDD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDD".
+        /// Gets the unique instance of the <see cref="SDD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDD".</value>
         public static SDD Unit { get { Warrant.NotNull<SDD>(); return Uniq.Instance; } }
+
+        public static explicit operator SDD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SDD value) => value?.ToCurrency();
+
+        public static SDD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5392,18 +6899,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SDG : Currency
+    public sealed class SDG : CurrencyUnit<SDG>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SDG" /> class.
-        /// </summary>
-        private SDG() : base("SDG") { }
+        private SDG() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDG".
+        /// Gets the unique instance of the <see cref="SDG" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDG".</value>
         public static SDG Unit { get { Warrant.NotNull<SDG>(); return Uniq.Instance; } }
+
+        public static explicit operator SDG(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SDG value) => value?.ToCurrency();
+
+        public static SDG FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5417,18 +6931,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SDP : Currency
+    public sealed class SDP : CurrencyUnit<SDP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SDP" /> class.
-        /// </summary>
-        private SDP() : base("SDP") { }
+        private SDP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SDP".
+        /// Gets the unique instance of the <see cref="SDP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SDP".</value>
         public static SDP Unit { get { Warrant.NotNull<SDP>(); return Uniq.Instance; } }
+
+        public static explicit operator SDP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SDP value) => value?.ToCurrency();
+
+        public static SDP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5442,18 +6963,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SEK : Currency
+    public sealed class SEK : CurrencyUnit<SEK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SEK" /> class.
-        /// </summary>
-        private SEK() : base("SEK") { }
+        private SEK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SEK".
+        /// Gets the unique instance of the <see cref="SEK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SEK".</value>
         public static SEK Unit { get { Warrant.NotNull<SEK>(); return Uniq.Instance; } }
+
+        public static explicit operator SEK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SEK value) => value?.ToCurrency();
+
+        public static SEK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5467,18 +6995,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SGD : Currency
+    public sealed class SGD : CurrencyUnit<SGD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SGD" /> class.
-        /// </summary>
-        private SGD() : base("SGD") { }
+        private SGD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SGD".
+        /// Gets the unique instance of the <see cref="SGD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SGD".</value>
         public static SGD Unit { get { Warrant.NotNull<SGD>(); return Uniq.Instance; } }
+
+        public static explicit operator SGD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SGD value) => value?.ToCurrency();
+
+        public static SGD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5492,18 +7027,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SHP : Currency
+    public sealed class SHP : CurrencyUnit<SHP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SHP" /> class.
-        /// </summary>
-        private SHP() : base("SHP") { }
+        private SHP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SHP".
+        /// Gets the unique instance of the <see cref="SHP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SHP".</value>
         public static SHP Unit { get { Warrant.NotNull<SHP>(); return Uniq.Instance; } }
+
+        public static explicit operator SHP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SHP value) => value?.ToCurrency();
+
+        public static SHP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5517,18 +7059,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SIT : Currency
+    public sealed class SIT : CurrencyUnit<SIT>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SIT" /> class.
-        /// </summary>
-        private SIT() : base("SIT") { }
+        private SIT() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SIT".
+        /// Gets the unique instance of the <see cref="SIT" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SIT".</value>
         public static SIT Unit { get { Warrant.NotNull<SIT>(); return Uniq.Instance; } }
+
+        public static explicit operator SIT(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SIT value) => value?.ToCurrency();
+
+        public static SIT FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5542,18 +7091,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SKK : Currency
+    public sealed class SKK : CurrencyUnit<SKK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SKK" /> class.
-        /// </summary>
-        private SKK() : base("SKK") { }
+        private SKK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SKK".
+        /// Gets the unique instance of the <see cref="SKK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SKK".</value>
         public static SKK Unit { get { Warrant.NotNull<SKK>(); return Uniq.Instance; } }
+
+        public static explicit operator SKK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SKK value) => value?.ToCurrency();
+
+        public static SKK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5567,18 +7123,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SLL : Currency
+    public sealed class SLL : CurrencyUnit<SLL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SLL" /> class.
-        /// </summary>
-        private SLL() : base("SLL") { }
+        private SLL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SLL".
+        /// Gets the unique instance of the <see cref="SLL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SLL".</value>
         public static SLL Unit { get { Warrant.NotNull<SLL>(); return Uniq.Instance; } }
+
+        public static explicit operator SLL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SLL value) => value?.ToCurrency();
+
+        public static SLL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5592,18 +7155,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SOS : Currency
+    public sealed class SOS : CurrencyUnit<SOS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SOS" /> class.
-        /// </summary>
-        private SOS() : base("SOS") { }
+        private SOS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SOS".
+        /// Gets the unique instance of the <see cref="SOS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SOS".</value>
         public static SOS Unit { get { Warrant.NotNull<SOS>(); return Uniq.Instance; } }
+
+        public static explicit operator SOS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SOS value) => value?.ToCurrency();
+
+        public static SOS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5617,18 +7187,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SRD : Currency
+    public sealed class SRD : CurrencyUnit<SRD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SRD" /> class.
-        /// </summary>
-        private SRD() : base("SRD") { }
+        private SRD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRD".
+        /// Gets the unique instance of the <see cref="SRD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRD".</value>
         public static SRD Unit { get { Warrant.NotNull<SRD>(); return Uniq.Instance; } }
+
+        public static explicit operator SRD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SRD value) => value?.ToCurrency();
+
+        public static SRD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5642,18 +7219,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SRG : Currency
+    public sealed class SRG : CurrencyUnit<SRG>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SRG" /> class.
-        /// </summary>
-        private SRG() : base("SRG") { }
+        private SRG() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SRG".
+        /// Gets the unique instance of the <see cref="SRG" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SRG".</value>
         public static SRG Unit { get { Warrant.NotNull<SRG>(); return Uniq.Instance; } }
+
+        public static explicit operator SRG(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SRG value) => value?.ToCurrency();
+
+        public static SRG FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5667,18 +7251,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SSP : Currency
+    public sealed class SSP : CurrencyUnit<SSP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SSP" /> class.
-        /// </summary>
-        private SSP() : base("SSP") { }
+        private SSP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SSP".
+        /// Gets the unique instance of the <see cref="SSP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SSP".</value>
         public static SSP Unit { get { Warrant.NotNull<SSP>(); return Uniq.Instance; } }
+
+        public static explicit operator SSP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SSP value) => value?.ToCurrency();
+
+        public static SSP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5692,18 +7283,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class STD : Currency
+    public sealed class STD : CurrencyUnit<STD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="STD" /> class.
-        /// </summary>
-        private STD() : base("STD") { }
+        private STD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "STD".
+        /// Gets the unique instance of the <see cref="STD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "STD".</value>
         public static STD Unit { get { Warrant.NotNull<STD>(); return Uniq.Instance; } }
+
+        public static explicit operator STD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(STD value) => value?.ToCurrency();
+
+        public static STD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5717,18 +7315,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SUR : Currency
+    public sealed class SUR : CurrencyUnit<SUR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SUR" /> class.
-        /// </summary>
-        private SUR() : base("SUR") { }
+        private SUR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SUR".
+        /// Gets the unique instance of the <see cref="SUR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SUR".</value>
         public static SUR Unit { get { Warrant.NotNull<SUR>(); return Uniq.Instance; } }
+
+        public static explicit operator SUR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SUR value) => value?.ToCurrency();
+
+        public static SUR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5742,18 +7347,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SVC : Currency
+    public sealed class SVC : CurrencyUnit<SVC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SVC" /> class.
-        /// </summary>
-        private SVC() : base("SVC") { }
+        private SVC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SVC".
+        /// Gets the unique instance of the <see cref="SVC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SVC".</value>
         public static SVC Unit { get { Warrant.NotNull<SVC>(); return Uniq.Instance; } }
+
+        public static explicit operator SVC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SVC value) => value?.ToCurrency();
+
+        public static SVC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5767,18 +7379,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SYP : Currency
+    public sealed class SYP : CurrencyUnit<SYP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SYP" /> class.
-        /// </summary>
-        private SYP() : base("SYP") { }
+        private SYP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SYP".
+        /// Gets the unique instance of the <see cref="SYP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SYP".</value>
         public static SYP Unit { get { Warrant.NotNull<SYP>(); return Uniq.Instance; } }
+
+        public static explicit operator SYP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SYP value) => value?.ToCurrency();
+
+        public static SYP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5792,18 +7411,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class SZL : Currency
+    public sealed class SZL : CurrencyUnit<SZL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SZL" /> class.
-        /// </summary>
-        private SZL() : base("SZL") { }
+        private SZL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "SZL".
+        /// Gets the unique instance of the <see cref="SZL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "SZL".</value>
         public static SZL Unit { get { Warrant.NotNull<SZL>(); return Uniq.Instance; } }
+
+        public static explicit operator SZL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(SZL value) => value?.ToCurrency();
+
+        public static SZL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5817,18 +7443,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class THB : Currency
+    public sealed class THB : CurrencyUnit<THB>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="THB" /> class.
-        /// </summary>
-        private THB() : base("THB") { }
+        private THB() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "THB".
+        /// Gets the unique instance of the <see cref="THB" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "THB".</value>
         public static THB Unit { get { Warrant.NotNull<THB>(); return Uniq.Instance; } }
+
+        public static explicit operator THB(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(THB value) => value?.ToCurrency();
+
+        public static THB FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5842,18 +7475,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TJR : Currency
+    public sealed class TJR : CurrencyUnit<TJR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TJR" /> class.
-        /// </summary>
-        private TJR() : base("TJR") { }
+        private TJR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJR".
+        /// Gets the unique instance of the <see cref="TJR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJR".</value>
         public static TJR Unit { get { Warrant.NotNull<TJR>(); return Uniq.Instance; } }
+
+        public static explicit operator TJR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TJR value) => value?.ToCurrency();
+
+        public static TJR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5867,18 +7507,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TJS : Currency
+    public sealed class TJS : CurrencyUnit<TJS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TJS" /> class.
-        /// </summary>
-        private TJS() : base("TJS") { }
+        private TJS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TJS".
+        /// Gets the unique instance of the <see cref="TJS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TJS".</value>
         public static TJS Unit { get { Warrant.NotNull<TJS>(); return Uniq.Instance; } }
+
+        public static explicit operator TJS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TJS value) => value?.ToCurrency();
+
+        public static TJS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5892,18 +7539,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TMM : Currency
+    public sealed class TMM : CurrencyUnit<TMM>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TMM" /> class.
-        /// </summary>
-        private TMM() : base("TMM") { }
+        private TMM() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMM".
+        /// Gets the unique instance of the <see cref="TMM" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMM".</value>
         public static TMM Unit { get { Warrant.NotNull<TMM>(); return Uniq.Instance; } }
+
+        public static explicit operator TMM(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TMM value) => value?.ToCurrency();
+
+        public static TMM FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5917,18 +7571,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TMT : Currency
+    public sealed class TMT : CurrencyUnit<TMT>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TMT" /> class.
-        /// </summary>
-        private TMT() : base("TMT") { }
+        private TMT() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TMT".
+        /// Gets the unique instance of the <see cref="TMT" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TMT".</value>
         public static TMT Unit { get { Warrant.NotNull<TMT>(); return Uniq.Instance; } }
+
+        public static explicit operator TMT(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TMT value) => value?.ToCurrency();
+
+        public static TMT FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5942,18 +7603,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TND : Currency
+    public sealed class TND : CurrencyUnit<TND>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TND" /> class.
-        /// </summary>
-        private TND() : base("TND") { }
+        private TND() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TND".
+        /// Gets the unique instance of the <see cref="TND" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TND".</value>
         public static TND Unit { get { Warrant.NotNull<TND>(); return Uniq.Instance; } }
+
+        public static explicit operator TND(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TND value) => value?.ToCurrency();
+
+        public static TND FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5967,18 +7635,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TOP : Currency
+    public sealed class TOP : CurrencyUnit<TOP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TOP" /> class.
-        /// </summary>
-        private TOP() : base("TOP") { }
+        private TOP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TOP".
+        /// Gets the unique instance of the <see cref="TOP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TOP".</value>
         public static TOP Unit { get { Warrant.NotNull<TOP>(); return Uniq.Instance; } }
+
+        public static explicit operator TOP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TOP value) => value?.ToCurrency();
+
+        public static TOP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -5992,18 +7667,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TPE : Currency
+    public sealed class TPE : CurrencyUnit<TPE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TPE" /> class.
-        /// </summary>
-        private TPE() : base("TPE") { }
+        private TPE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TPE".
+        /// Gets the unique instance of the <see cref="TPE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TPE".</value>
         public static TPE Unit { get { Warrant.NotNull<TPE>(); return Uniq.Instance; } }
+
+        public static explicit operator TPE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TPE value) => value?.ToCurrency();
+
+        public static TPE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6017,18 +7699,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TRL : Currency
+    public sealed class TRL : CurrencyUnit<TRL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TRL" /> class.
-        /// </summary>
-        private TRL() : base("TRL") { }
+        private TRL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRL".
+        /// Gets the unique instance of the <see cref="TRL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRL".</value>
         public static TRL Unit { get { Warrant.NotNull<TRL>(); return Uniq.Instance; } }
+
+        public static explicit operator TRL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TRL value) => value?.ToCurrency();
+
+        public static TRL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6042,18 +7731,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TRY : Currency
+    public sealed class TRY : CurrencyUnit<TRY>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TRY" /> class.
-        /// </summary>
-        private TRY() : base("TRY") { }
+        private TRY() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TRY".
+        /// Gets the unique instance of the <see cref="TRY" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TRY".</value>
         public static TRY Unit { get { Warrant.NotNull<TRY>(); return Uniq.Instance; } }
+
+        public static explicit operator TRY(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TRY value) => value?.ToCurrency();
+
+        public static TRY FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6067,18 +7763,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TTD : Currency
+    public sealed class TTD : CurrencyUnit<TTD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TTD" /> class.
-        /// </summary>
-        private TTD() : base("TTD") { }
+        private TTD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TTD".
+        /// Gets the unique instance of the <see cref="TTD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TTD".</value>
         public static TTD Unit { get { Warrant.NotNull<TTD>(); return Uniq.Instance; } }
+
+        public static explicit operator TTD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TTD value) => value?.ToCurrency();
+
+        public static TTD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6092,18 +7795,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TWD : Currency
+    public sealed class TWD : CurrencyUnit<TWD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TWD" /> class.
-        /// </summary>
-        private TWD() : base("TWD") { }
+        private TWD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TWD".
+        /// Gets the unique instance of the <see cref="TWD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TWD".</value>
         public static TWD Unit { get { Warrant.NotNull<TWD>(); return Uniq.Instance; } }
+
+        public static explicit operator TWD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TWD value) => value?.ToCurrency();
+
+        public static TWD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6117,18 +7827,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class TZS : Currency
+    public sealed class TZS : CurrencyUnit<TZS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TZS" /> class.
-        /// </summary>
-        private TZS() : base("TZS") { }
+        private TZS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "TZS".
+        /// Gets the unique instance of the <see cref="TZS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "TZS".</value>
         public static TZS Unit { get { Warrant.NotNull<TZS>(); return Uniq.Instance; } }
+
+        public static explicit operator TZS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(TZS value) => value?.ToCurrency();
+
+        public static TZS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6142,18 +7859,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UAH : Currency
+    public sealed class UAH : CurrencyUnit<UAH>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UAH" /> class.
-        /// </summary>
-        private UAH() : base("UAH") { }
+        private UAH() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAH".
+        /// Gets the unique instance of the <see cref="UAH" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAH".</value>
         public static UAH Unit { get { Warrant.NotNull<UAH>(); return Uniq.Instance; } }
+
+        public static explicit operator UAH(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(UAH value) => value?.ToCurrency();
+
+        public static UAH FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6167,18 +7891,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UAK : Currency
+    public sealed class UAK : CurrencyUnit<UAK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UAK" /> class.
-        /// </summary>
-        private UAK() : base("UAK") { }
+        private UAK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UAK".
+        /// Gets the unique instance of the <see cref="UAK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UAK".</value>
         public static UAK Unit { get { Warrant.NotNull<UAK>(); return Uniq.Instance; } }
+
+        public static explicit operator UAK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(UAK value) => value?.ToCurrency();
+
+        public static UAK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6192,18 +7923,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UGS : Currency
+    public sealed class UGS : CurrencyUnit<UGS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UGS" /> class.
-        /// </summary>
-        private UGS() : base("UGS") { }
+        private UGS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGS".
+        /// Gets the unique instance of the <see cref="UGS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGS".</value>
         public static UGS Unit { get { Warrant.NotNull<UGS>(); return Uniq.Instance; } }
+
+        public static explicit operator UGS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(UGS value) => value?.ToCurrency();
+
+        public static UGS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6217,18 +7955,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UGW : Currency
+    public sealed class UGW : CurrencyUnit<UGW>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UGW" /> class.
-        /// </summary>
-        private UGW() : base("UGW") { }
+        private UGW() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGW".
+        /// Gets the unique instance of the <see cref="UGW" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGW".</value>
         public static UGW Unit { get { Warrant.NotNull<UGW>(); return Uniq.Instance; } }
+
+        public static explicit operator UGW(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(UGW value) => value?.ToCurrency();
+
+        public static UGW FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6242,18 +7987,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UGX : Currency
+    public sealed class UGX : CurrencyUnit<UGX>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UGX" /> class.
-        /// </summary>
-        private UGX() : base("UGX") { }
+        private UGX() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UGX".
+        /// Gets the unique instance of the <see cref="UGX" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UGX".</value>
         public static UGX Unit { get { Warrant.NotNull<UGX>(); return Uniq.Instance; } }
+
+        public static explicit operator UGX(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(UGX value) => value?.ToCurrency();
+
+        public static UGX FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6267,18 +8019,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class USD : Currency
+    public sealed class USD : CurrencyUnit<USD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="USD" /> class.
-        /// </summary>
-        private USD() : base("USD") { }
+        private USD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "USD".
+        /// Gets the unique instance of the <see cref="USD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "USD".</value>
         public static USD Unit { get { Warrant.NotNull<USD>(); return Uniq.Instance; } }
+
+        public static explicit operator USD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(USD value) => value?.ToCurrency();
+
+        public static USD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6292,18 +8051,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class USN : Currency
+    public sealed class USN : CurrencyUnit<USN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="USN" /> class.
-        /// </summary>
-        private USN() : base("USN") { }
+        private USN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "USN".
+        /// Gets the unique instance of the <see cref="USN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "USN".</value>
         public static USN Unit { get { Warrant.NotNull<USN>(); return Uniq.Instance; } }
+
+        public static explicit operator USN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(USN value) => value?.ToCurrency();
+
+        public static USN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6317,18 +8083,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class USS : Currency
+    public sealed class USS : CurrencyUnit<USS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="USS" /> class.
-        /// </summary>
-        private USS() : base("USS") { }
+        private USS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "USS".
+        /// Gets the unique instance of the <see cref="USS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "USS".</value>
         public static USS Unit { get { Warrant.NotNull<USS>(); return Uniq.Instance; } }
+
+        public static explicit operator USS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(USS value) => value?.ToCurrency();
+
+        public static USS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6342,18 +8115,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UYI : Currency
+    public sealed class UYI : CurrencyUnit<UYI>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UYI" /> class.
-        /// </summary>
-        private UYI() : base("UYI") { }
+        private UYI() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYI".
+        /// Gets the unique instance of the <see cref="UYI" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYI".</value>
         public static UYI Unit { get { Warrant.NotNull<UYI>(); return Uniq.Instance; } }
+
+        public static explicit operator UYI(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(UYI value) => value?.ToCurrency();
+
+        public static UYI FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6367,18 +8147,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UYN : Currency
+    public sealed class UYN : CurrencyUnit<UYN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UYN" /> class.
-        /// </summary>
-        private UYN() : base("UYN") { }
+        private UYN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYN".
+        /// Gets the unique instance of the <see cref="UYN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYN".</value>
         public static UYN Unit { get { Warrant.NotNull<UYN>(); return Uniq.Instance; } }
+
+        public static explicit operator UYN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(UYN value) => value?.ToCurrency();
+
+        public static UYN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6392,18 +8179,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UYP : Currency
+    public sealed class UYP : CurrencyUnit<UYP>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UYP" /> class.
-        /// </summary>
-        private UYP() : base("UYP") { }
+        private UYP() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYP".
+        /// Gets the unique instance of the <see cref="UYP" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYP".</value>
         public static UYP Unit { get { Warrant.NotNull<UYP>(); return Uniq.Instance; } }
+
+        public static explicit operator UYP(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(UYP value) => value?.ToCurrency();
+
+        public static UYP FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6417,18 +8211,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UYU : Currency
+    public sealed class UYU : CurrencyUnit<UYU>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UYU" /> class.
-        /// </summary>
-        private UYU() : base("UYU") { }
+        private UYU() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UYU".
+        /// Gets the unique instance of the <see cref="UYU" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UYU".</value>
         public static UYU Unit { get { Warrant.NotNull<UYU>(); return Uniq.Instance; } }
+
+        public static explicit operator UYU(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(UYU value) => value?.ToCurrency();
+
+        public static UYU FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6442,18 +8243,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class UZS : Currency
+    public sealed class UZS : CurrencyUnit<UZS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UZS" /> class.
-        /// </summary>
-        private UZS() : base("UZS") { }
+        private UZS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "UZS".
+        /// Gets the unique instance of the <see cref="UZS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "UZS".</value>
         public static UZS Unit { get { Warrant.NotNull<UZS>(); return Uniq.Instance; } }
+
+        public static explicit operator UZS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(UZS value) => value?.ToCurrency();
+
+        public static UZS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6467,18 +8275,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class VEB : Currency
+    public sealed class VEB : CurrencyUnit<VEB>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VEB" /> class.
-        /// </summary>
-        private VEB() : base("VEB") { }
+        private VEB() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEB".
+        /// Gets the unique instance of the <see cref="VEB" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEB".</value>
         public static VEB Unit { get { Warrant.NotNull<VEB>(); return Uniq.Instance; } }
+
+        public static explicit operator VEB(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(VEB value) => value?.ToCurrency();
+
+        public static VEB FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6492,18 +8307,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class VEF : Currency
+    public sealed class VEF : CurrencyUnit<VEF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VEF" /> class.
-        /// </summary>
-        private VEF() : base("VEF") { }
+        private VEF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "VEF".
+        /// Gets the unique instance of the <see cref="VEF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "VEF".</value>
         public static VEF Unit { get { Warrant.NotNull<VEF>(); return Uniq.Instance; } }
+
+        public static explicit operator VEF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(VEF value) => value?.ToCurrency();
+
+        public static VEF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6517,18 +8339,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class VNC : Currency
+    public sealed class VNC : CurrencyUnit<VNC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VNC" /> class.
-        /// </summary>
-        private VNC() : base("VNC") { }
+        private VNC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "VNC".
+        /// Gets the unique instance of the <see cref="VNC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "VNC".</value>
         public static VNC Unit { get { Warrant.NotNull<VNC>(); return Uniq.Instance; } }
+
+        public static explicit operator VNC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(VNC value) => value?.ToCurrency();
+
+        public static VNC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6542,18 +8371,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class VND : Currency
+    public sealed class VND : CurrencyUnit<VND>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VND" /> class.
-        /// </summary>
-        private VND() : base("VND") { }
+        private VND() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "VND".
+        /// Gets the unique instance of the <see cref="VND" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "VND".</value>
         public static VND Unit { get { Warrant.NotNull<VND>(); return Uniq.Instance; } }
+
+        public static explicit operator VND(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(VND value) => value?.ToCurrency();
+
+        public static VND FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6567,18 +8403,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class VUV : Currency
+    public sealed class VUV : CurrencyUnit<VUV>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VUV" /> class.
-        /// </summary>
-        private VUV() : base("VUV") { }
+        private VUV() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "VUV".
+        /// Gets the unique instance of the <see cref="VUV" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "VUV".</value>
         public static VUV Unit { get { Warrant.NotNull<VUV>(); return Uniq.Instance; } }
+
+        public static explicit operator VUV(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(VUV value) => value?.ToCurrency();
+
+        public static VUV FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6592,18 +8435,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class WST : Currency
+    public sealed class WST : CurrencyUnit<WST>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WST" /> class.
-        /// </summary>
-        private WST() : base("WST") { }
+        private WST() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "WST".
+        /// Gets the unique instance of the <see cref="WST" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "WST".</value>
         public static WST Unit { get { Warrant.NotNull<WST>(); return Uniq.Instance; } }
+
+        public static explicit operator WST(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(WST value) => value?.ToCurrency();
+
+        public static WST FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6617,18 +8467,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XAF : Currency
+    public sealed class XAF : CurrencyUnit<XAF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XAF" /> class.
-        /// </summary>
-        private XAF() : base("XAF") { }
+        private XAF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAF".
+        /// Gets the unique instance of the <see cref="XAF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAF".</value>
         public static XAF Unit { get { Warrant.NotNull<XAF>(); return Uniq.Instance; } }
+
+        public static explicit operator XAF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XAF value) => value?.ToCurrency();
+
+        public static XAF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6642,18 +8499,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XAG : Currency
+    public sealed class XAG : CurrencyUnit<XAG>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XAG" /> class.
-        /// </summary>
-        private XAG() : base("XAG") { }
+        private XAG() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAG".
+        /// Gets the unique instance of the <see cref="XAG" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAG".</value>
         public static XAG Unit { get { Warrant.NotNull<XAG>(); return Uniq.Instance; } }
+
+        public static explicit operator XAG(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XAG value) => value?.ToCurrency();
+
+        public static XAG FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6667,18 +8531,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XAU : Currency
+    public sealed class XAU : CurrencyUnit<XAU>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XAU" /> class.
-        /// </summary>
-        private XAU() : base("XAU") { }
+        private XAU() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XAU".
+        /// Gets the unique instance of the <see cref="XAU" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XAU".</value>
         public static XAU Unit { get { Warrant.NotNull<XAU>(); return Uniq.Instance; } }
+
+        public static explicit operator XAU(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XAU value) => value?.ToCurrency();
+
+        public static XAU FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6692,18 +8563,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XBA : Currency
+    public sealed class XBA : CurrencyUnit<XBA>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XBA" /> class.
-        /// </summary>
-        private XBA() : base("XBA") { }
+        private XBA() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBA".
+        /// Gets the unique instance of the <see cref="XBA" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBA".</value>
         public static XBA Unit { get { Warrant.NotNull<XBA>(); return Uniq.Instance; } }
+
+        public static explicit operator XBA(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XBA value) => value?.ToCurrency();
+
+        public static XBA FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6717,18 +8595,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XBB : Currency
+    public sealed class XBB : CurrencyUnit<XBB>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XBB" /> class.
-        /// </summary>
-        private XBB() : base("XBB") { }
+        private XBB() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBB".
+        /// Gets the unique instance of the <see cref="XBB" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBB".</value>
         public static XBB Unit { get { Warrant.NotNull<XBB>(); return Uniq.Instance; } }
+
+        public static explicit operator XBB(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XBB value) => value?.ToCurrency();
+
+        public static XBB FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6742,18 +8627,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XBC : Currency
+    public sealed class XBC : CurrencyUnit<XBC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XBC" /> class.
-        /// </summary>
-        private XBC() : base("XBC") { }
+        private XBC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBC".
+        /// Gets the unique instance of the <see cref="XBC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBC".</value>
         public static XBC Unit { get { Warrant.NotNull<XBC>(); return Uniq.Instance; } }
+
+        public static explicit operator XBC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XBC value) => value?.ToCurrency();
+
+        public static XBC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6767,18 +8659,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XBD : Currency
+    public sealed class XBD : CurrencyUnit<XBD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XBD" /> class.
-        /// </summary>
-        private XBD() : base("XBD") { }
+        private XBD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XBD".
+        /// Gets the unique instance of the <see cref="XBD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XBD".</value>
         public static XBD Unit { get { Warrant.NotNull<XBD>(); return Uniq.Instance; } }
+
+        public static explicit operator XBD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XBD value) => value?.ToCurrency();
+
+        public static XBD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6792,18 +8691,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XCD : Currency
+    public sealed class XCD : CurrencyUnit<XCD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XCD" /> class.
-        /// </summary>
-        private XCD() : base("XCD") { }
+        private XCD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XCD".
+        /// Gets the unique instance of the <see cref="XCD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XCD".</value>
         public static XCD Unit { get { Warrant.NotNull<XCD>(); return Uniq.Instance; } }
+
+        public static explicit operator XCD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XCD value) => value?.ToCurrency();
+
+        public static XCD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6817,18 +8723,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XDR : Currency
+    public sealed class XDR : CurrencyUnit<XDR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XDR" /> class.
-        /// </summary>
-        private XDR() : base("XDR") { }
+        private XDR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XDR".
+        /// Gets the unique instance of the <see cref="XDR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XDR".</value>
         public static XDR Unit { get { Warrant.NotNull<XDR>(); return Uniq.Instance; } }
+
+        public static explicit operator XDR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XDR value) => value?.ToCurrency();
+
+        public static XDR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6842,18 +8755,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XEU : Currency
+    public sealed class XEU : CurrencyUnit<XEU>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XEU" /> class.
-        /// </summary>
-        private XEU() : base("XEU") { }
+        private XEU() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XEU".
+        /// Gets the unique instance of the <see cref="XEU" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XEU".</value>
         public static XEU Unit { get { Warrant.NotNull<XEU>(); return Uniq.Instance; } }
+
+        public static explicit operator XEU(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XEU value) => value?.ToCurrency();
+
+        public static XEU FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6867,18 +8787,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XFO : Currency
+    public sealed class XFO : CurrencyUnit<XFO>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XFO" /> class.
-        /// </summary>
-        private XFO() : base("XFO") { }
+        private XFO() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFO".
+        /// Gets the unique instance of the <see cref="XFO" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFO".</value>
         public static XFO Unit { get { Warrant.NotNull<XFO>(); return Uniq.Instance; } }
+
+        public static explicit operator XFO(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XFO value) => value?.ToCurrency();
+
+        public static XFO FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6892,18 +8819,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XFU : Currency
+    public sealed class XFU : CurrencyUnit<XFU>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XFU" /> class.
-        /// </summary>
-        private XFU() : base("XFU") { }
+        private XFU() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XFU".
+        /// Gets the unique instance of the <see cref="XFU" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XFU".</value>
         public static XFU Unit { get { Warrant.NotNull<XFU>(); return Uniq.Instance; } }
+
+        public static explicit operator XFU(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XFU value) => value?.ToCurrency();
+
+        public static XFU FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6917,18 +8851,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XOF : Currency
+    public sealed class XOF : CurrencyUnit<XOF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XOF" /> class.
-        /// </summary>
-        private XOF() : base("XOF") { }
+        private XOF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XOF".
+        /// Gets the unique instance of the <see cref="XOF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XOF".</value>
         public static XOF Unit { get { Warrant.NotNull<XOF>(); return Uniq.Instance; } }
+
+        public static explicit operator XOF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XOF value) => value?.ToCurrency();
+
+        public static XOF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6942,18 +8883,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XPD : Currency
+    public sealed class XPD : CurrencyUnit<XPD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XPD" /> class.
-        /// </summary>
-        private XPD() : base("XPD") { }
+        private XPD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPD".
+        /// Gets the unique instance of the <see cref="XPD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPD".</value>
         public static XPD Unit { get { Warrant.NotNull<XPD>(); return Uniq.Instance; } }
+
+        public static explicit operator XPD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XPD value) => value?.ToCurrency();
+
+        public static XPD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6967,18 +8915,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XPF : Currency
+    public sealed class XPF : CurrencyUnit<XPF>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XPF" /> class.
-        /// </summary>
-        private XPF() : base("XPF") { }
+        private XPF() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPF".
+        /// Gets the unique instance of the <see cref="XPF" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPF".</value>
         public static XPF Unit { get { Warrant.NotNull<XPF>(); return Uniq.Instance; } }
+
+        public static explicit operator XPF(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XPF value) => value?.ToCurrency();
+
+        public static XPF FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -6992,18 +8947,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XPT : Currency
+    public sealed class XPT : CurrencyUnit<XPT>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XPT" /> class.
-        /// </summary>
-        private XPT() : base("XPT") { }
+        private XPT() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XPT".
+        /// Gets the unique instance of the <see cref="XPT" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XPT".</value>
         public static XPT Unit { get { Warrant.NotNull<XPT>(); return Uniq.Instance; } }
+
+        public static explicit operator XPT(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XPT value) => value?.ToCurrency();
+
+        public static XPT FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7017,18 +8979,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XRE : Currency
+    public sealed class XRE : CurrencyUnit<XRE>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XRE" /> class.
-        /// </summary>
-        private XRE() : base("XRE") { }
+        private XRE() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XRE".
+        /// Gets the unique instance of the <see cref="XRE" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XRE".</value>
         public static XRE Unit { get { Warrant.NotNull<XRE>(); return Uniq.Instance; } }
+
+        public static explicit operator XRE(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XRE value) => value?.ToCurrency();
+
+        public static XRE FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7042,18 +9011,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XSU : Currency
+    public sealed class XSU : CurrencyUnit<XSU>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XSU" /> class.
-        /// </summary>
-        private XSU() : base("XSU") { }
+        private XSU() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XSU".
+        /// Gets the unique instance of the <see cref="XSU" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XSU".</value>
         public static XSU Unit { get { Warrant.NotNull<XSU>(); return Uniq.Instance; } }
+
+        public static explicit operator XSU(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XSU value) => value?.ToCurrency();
+
+        public static XSU FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7067,18 +9043,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XTS : Currency
+    public sealed class XTS : CurrencyUnit<XTS>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XTS" /> class.
-        /// </summary>
-        private XTS() : base("XTS") { }
+        private XTS() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XTS".
+        /// Gets the unique instance of the <see cref="XTS" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XTS".</value>
         public static XTS Unit { get { Warrant.NotNull<XTS>(); return Uniq.Instance; } }
+
+        public static explicit operator XTS(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XTS value) => value?.ToCurrency();
+
+        public static XTS FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7092,18 +9075,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XUA : Currency
+    public sealed class XUA : CurrencyUnit<XUA>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XUA" /> class.
-        /// </summary>
-        private XUA() : base("XUA") { }
+        private XUA() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XUA".
+        /// Gets the unique instance of the <see cref="XUA" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XUA".</value>
         public static XUA Unit { get { Warrant.NotNull<XUA>(); return Uniq.Instance; } }
+
+        public static explicit operator XUA(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XUA value) => value?.ToCurrency();
+
+        public static XUA FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7117,18 +9107,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class XXX : Currency
+    public sealed class XXX : CurrencyUnit<XXX>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XXX" /> class.
-        /// </summary>
-        private XXX() : base("XXX") { }
+        private XXX() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "XXX".
+        /// Gets the unique instance of the <see cref="XXX" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "XXX".</value>
         public static XXX Unit { get { Warrant.NotNull<XXX>(); return Uniq.Instance; } }
+
+        public static explicit operator XXX(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(XXX value) => value?.ToCurrency();
+
+        public static XXX FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7142,18 +9139,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class YDD : Currency
+    public sealed class YDD : CurrencyUnit<YDD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="YDD" /> class.
-        /// </summary>
-        private YDD() : base("YDD") { }
+        private YDD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "YDD".
+        /// Gets the unique instance of the <see cref="YDD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "YDD".</value>
         public static YDD Unit { get { Warrant.NotNull<YDD>(); return Uniq.Instance; } }
+
+        public static explicit operator YDD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(YDD value) => value?.ToCurrency();
+
+        public static YDD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7167,18 +9171,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class YER : Currency
+    public sealed class YER : CurrencyUnit<YER>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="YER" /> class.
-        /// </summary>
-        private YER() : base("YER") { }
+        private YER() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "YER".
+        /// Gets the unique instance of the <see cref="YER" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "YER".</value>
         public static YER Unit { get { Warrant.NotNull<YER>(); return Uniq.Instance; } }
+
+        public static explicit operator YER(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(YER value) => value?.ToCurrency();
+
+        public static YER FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7192,18 +9203,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class YUD : Currency
+    public sealed class YUD : CurrencyUnit<YUD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="YUD" /> class.
-        /// </summary>
-        private YUD() : base("YUD") { }
+        private YUD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUD".
+        /// Gets the unique instance of the <see cref="YUD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUD".</value>
         public static YUD Unit { get { Warrant.NotNull<YUD>(); return Uniq.Instance; } }
+
+        public static explicit operator YUD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(YUD value) => value?.ToCurrency();
+
+        public static YUD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7217,18 +9235,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class YUM : Currency
+    public sealed class YUM : CurrencyUnit<YUM>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="YUM" /> class.
-        /// </summary>
-        private YUM() : base("YUM") { }
+        private YUM() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUM".
+        /// Gets the unique instance of the <see cref="YUM" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUM".</value>
         public static YUM Unit { get { Warrant.NotNull<YUM>(); return Uniq.Instance; } }
+
+        public static explicit operator YUM(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(YUM value) => value?.ToCurrency();
+
+        public static YUM FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7242,18 +9267,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class YUN : Currency
+    public sealed class YUN : CurrencyUnit<YUN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="YUN" /> class.
-        /// </summary>
-        private YUN() : base("YUN") { }
+        private YUN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "YUN".
+        /// Gets the unique instance of the <see cref="YUN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "YUN".</value>
         public static YUN Unit { get { Warrant.NotNull<YUN>(); return Uniq.Instance; } }
+
+        public static explicit operator YUN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(YUN value) => value?.ToCurrency();
+
+        public static YUN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7267,18 +9299,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZAL : Currency
+    public sealed class ZAL : CurrencyUnit<ZAL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZAL" /> class.
-        /// </summary>
-        private ZAL() : base("ZAL") { }
+        private ZAL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAL".
+        /// Gets the unique instance of the <see cref="ZAL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAL".</value>
         public static ZAL Unit { get { Warrant.NotNull<ZAL>(); return Uniq.Instance; } }
+
+        public static explicit operator ZAL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZAL value) => value?.ToCurrency();
+
+        public static ZAL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7292,18 +9331,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZAR : Currency
+    public sealed class ZAR : CurrencyUnit<ZAR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZAR" /> class.
-        /// </summary>
-        private ZAR() : base("ZAR") { }
+        private ZAR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZAR".
+        /// Gets the unique instance of the <see cref="ZAR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZAR".</value>
         public static ZAR Unit { get { Warrant.NotNull<ZAR>(); return Uniq.Instance; } }
+
+        public static explicit operator ZAR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZAR value) => value?.ToCurrency();
+
+        public static ZAR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7317,18 +9363,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZMK : Currency
+    public sealed class ZMK : CurrencyUnit<ZMK>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZMK" /> class.
-        /// </summary>
-        private ZMK() : base("ZMK") { }
+        private ZMK() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMK".
+        /// Gets the unique instance of the <see cref="ZMK" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMK".</value>
         public static ZMK Unit { get { Warrant.NotNull<ZMK>(); return Uniq.Instance; } }
+
+        public static explicit operator ZMK(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZMK value) => value?.ToCurrency();
+
+        public static ZMK FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7342,18 +9395,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZMW : Currency
+    public sealed class ZMW : CurrencyUnit<ZMW>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZMW" /> class.
-        /// </summary>
-        private ZMW() : base("ZMW") { }
+        private ZMW() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZMW".
+        /// Gets the unique instance of the <see cref="ZMW" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZMW".</value>
         public static ZMW Unit { get { Warrant.NotNull<ZMW>(); return Uniq.Instance; } }
+
+        public static explicit operator ZMW(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZMW value) => value?.ToCurrency();
+
+        public static ZMW FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7367,18 +9427,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZRN : Currency
+    public sealed class ZRN : CurrencyUnit<ZRN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZRN" /> class.
-        /// </summary>
-        private ZRN() : base("ZRN") { }
+        private ZRN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRN".
+        /// Gets the unique instance of the <see cref="ZRN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRN".</value>
         public static ZRN Unit { get { Warrant.NotNull<ZRN>(); return Uniq.Instance; } }
+
+        public static explicit operator ZRN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZRN value) => value?.ToCurrency();
+
+        public static ZRN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7392,18 +9459,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZRZ : Currency
+    public sealed class ZRZ : CurrencyUnit<ZRZ>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZRZ" /> class.
-        /// </summary>
-        private ZRZ() : base("ZRZ") { }
+        private ZRZ() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZRZ".
+        /// Gets the unique instance of the <see cref="ZRZ" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZRZ".</value>
         public static ZRZ Unit { get { Warrant.NotNull<ZRZ>(); return Uniq.Instance; } }
+
+        public static explicit operator ZRZ(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZRZ value) => value?.ToCurrency();
+
+        public static ZRZ FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7417,18 +9491,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZWC : Currency
+    public sealed class ZWC : CurrencyUnit<ZWC>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZWC" /> class.
-        /// </summary>
-        private ZWC() : base("ZWC") { }
+        private ZWC() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWC".
+        /// Gets the unique instance of the <see cref="ZWC" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWC".</value>
         public static ZWC Unit { get { Warrant.NotNull<ZWC>(); return Uniq.Instance; } }
+
+        public static explicit operator ZWC(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZWC value) => value?.ToCurrency();
+
+        public static ZWC FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7442,18 +9523,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZWD : Currency
+    public sealed class ZWD : CurrencyUnit<ZWD>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZWD" /> class.
-        /// </summary>
-        private ZWD() : base("ZWD") { }
+        private ZWD() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWD".
+        /// Gets the unique instance of the <see cref="ZWD" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWD".</value>
         public static ZWD Unit { get { Warrant.NotNull<ZWD>(); return Uniq.Instance; } }
+
+        public static explicit operator ZWD(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZWD value) => value?.ToCurrency();
+
+        public static ZWD FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7467,18 +9555,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZWL : Currency
+    public sealed class ZWL : CurrencyUnit<ZWL>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZWL" /> class.
-        /// </summary>
-        private ZWL() : base("ZWL") { }
+        private ZWL() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWL".
+        /// Gets the unique instance of the <see cref="ZWL" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWL".</value>
         public static ZWL Unit { get { Warrant.NotNull<ZWL>(); return Uniq.Instance; } }
+
+        public static explicit operator ZWL(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZWL value) => value?.ToCurrency();
+
+        public static ZWL FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7492,18 +9587,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZWN : Currency
+    public sealed class ZWN : CurrencyUnit<ZWN>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZWN" /> class.
-        /// </summary>
-        private ZWN() : base("ZWN") { }
+        private ZWN() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWN".
+        /// Gets the unique instance of the <see cref="ZWN" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWN".</value>
         public static ZWN Unit { get { Warrant.NotNull<ZWN>(); return Uniq.Instance; } }
+
+        public static explicit operator ZWN(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZWN value) => value?.ToCurrency();
+
+        public static ZWN FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {
@@ -7517,18 +9619,25 @@ namespace Narvalo.Finance.Currencies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
-    public sealed class ZWR : Currency
+    public sealed class ZWR : CurrencyUnit<ZWR>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZWR" /> class.
-        /// </summary>
-        private ZWR() : base("ZWR") { }
+        private ZWR() { }
 
         /// <summary>
-        /// Gets the unique instance of the <see cref="Currency" /> class for the code "ZWR".
+        /// Gets the unique instance of the <see cref="ZWR" /> class.
         /// </summary>
-        /// <value>The unique instance of the <see cref="Currency" /> class for the code "ZWR".</value>
         public static ZWR Unit { get { Warrant.NotNull<ZWR>(); return Uniq.Instance; } }
+
+        public static explicit operator ZWR(Currency value) => FromCurrency(value);
+        public static explicit operator Currency(ZWR value) => value?.ToCurrency();
+
+        public static ZWR FromCurrency(Currency value)
+        {
+            if (value == null) { return null; }
+            if (value.Code != Name) { throw new InvalidCastException(); }
+
+            return Unit;
+        }
 
         private class Uniq
         {

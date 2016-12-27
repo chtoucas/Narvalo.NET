@@ -82,7 +82,14 @@
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="DemandFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
+    <Compile Include="Finance\Currencies\BuiltInCurrencyFacts.cs" />
     <Compile Include="Finance\CurrencyNotFoundExceptionFacts.cs" />
+    <Compile Include="Finance\CurrencyFacts.g.cs">
+      <DependentUpon>CurrencyFacts.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Finance\CurrencyUnitFacts.cs" />
     <Compile Include="Finance\IbanFacts.cs" />
     <Compile Include="Finance\Utilities\AsciiHelpersFacts.cs" />
     <Compile Include="Finance\Utilities\CountryISOCodesFacts.cs" />
@@ -93,13 +100,13 @@
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />
     <Compile Include="ExpectFacts.cs" />
     <Compile Include="Finance\BicFacts.cs" />
-    <Compile Include="Finance\CurrenciesFacts.g.cs">
+    <Compile Include="Finance\Currencies\BuiltInCurrencyFacts.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CurrenciesFacts.tt</DependentUpon>
+      <DependentUpon>BuiltInCurrencyFacts.tt</DependentUpon>
     </Compile>
     <Compile Include="Finance\CurrencyFacts.cs" />
-    <Compile Include="Finance\CurrencyActivatorFacts.cs" />
+    <Compile Include="Finance\Currencies\CurrencyActivatorFacts.cs" />
     <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="FormatFacts.cs" />
     <Compile Include="Fx\Advanced\NullableFacts.cs" />
@@ -178,9 +185,13 @@
     <Compile Include="Web\UrlManipFacts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Finance\CurrenciesFacts.tt">
+    <Content Include="Finance\CurrencyFacts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CurrenciesFacts.g.cs</LastGenOutput>
+      <LastGenOutput>CurrencyFacts.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Finance\Currencies\BuiltInCurrencyFacts.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BuiltInCurrencyFacts.g.cs</LastGenOutput>
     </Content>
     <Content Include="Fx\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

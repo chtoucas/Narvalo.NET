@@ -7,17 +7,18 @@ namespace Narvalo.Finance
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
+    using Narvalo.Finance.Currencies;
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Money<TCurrency>
         : IEquatable<Money<TCurrency>>, IComparable<Money<TCurrency>>, IComparable, IFormattable
-        where TCurrency : Currency
+        where TCurrency : CurrencyUnit<TCurrency>
     {
         // IMPORTANT: This static field MUST remain first to be initialized before the other(s).
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly TCurrency s_UnderlyingCurrency = CurrencyActivator<TCurrency>.CreateInstance();
+        private static readonly TCurrency s_UnderlyingUnit = CurrencyActivator.CreateInstance<TCurrency>();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0m);
@@ -27,9 +28,9 @@ namespace Narvalo.Finance
             Amount = amount;
         }
 
-        internal static TCurrency UnderlyingCurrency
+        internal static TCurrency UnderlyingUnit
         {
-            get { Warrant.NotNull<TCurrency>(); return s_UnderlyingCurrency; }
+            get { Warrant.NotNull<TCurrency>(); return s_UnderlyingUnit; }
         }
 
         [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
@@ -38,17 +39,17 @@ namespace Narvalo.Finance
 
         public decimal Amount { get; }
 
-        public TCurrency Currency
+        public TCurrency Unit
         {
-            get { Warrant.NotNull<TCurrency>(); return UnderlyingCurrency; }
+            get { Warrant.NotNull<TCurrency>(); return UnderlyingUnit; }
         }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
-        private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, Currency.Code);
+        private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, Unit.Code);
 
         public static explicit operator Money<TCurrency>(Money value)
         {
-            if (!(value.Currency == UnderlyingCurrency))
+            if (!(value.Currency.Code == UnderlyingUnit.Code))
             {
                 throw new InvalidCastException();
             }
@@ -57,7 +58,7 @@ namespace Narvalo.Finance
         }
 
         public static explicit operator Money(Money<TCurrency> value)
-            => new Money(value.Amount, value.Currency);
+            => new Money(value.Amount, value.Unit.ToCurrency());
     }
 
     // Implements the IFormattable interface.
@@ -121,7 +122,7 @@ namespace Narvalo.Finance
             {
                 int hash = 17;
                 hash = 31 * hash + Amount.GetHashCode();
-                hash = 31 * hash + Currency.GetHashCode();
+                hash = 31 * hash + Unit.GetHashCode();
                 return hash;
             }
         }

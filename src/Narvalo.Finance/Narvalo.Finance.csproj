@@ -74,7 +74,8 @@
   <ItemGroup>
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
-    <Compile Include="Currencies\ICurrencyUnit.cs" />
+    <Compile Include="Currencies\CurrencyUnit`1.cs" />
+    <Compile Include="CurrencyUnit.cs" />
     <Compile Include="Utilities\CountryISOCodes.cs" />
     <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
     <Compile Include="IbanStyles.cs" />
@@ -97,7 +98,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CountryISOCodes.tt</DependentUpon>
     </Compile>
-    <Compile Include="CurrencyActivator`1.cs" />
+    <Compile Include="Currencies\CurrencyActivator.cs" />
     <Compile Include="Utilities\AsciiHelpers.cs" />
     <Compile Include="IbanParts.cs" />
     <Compile Include="IbanValidationLevels.cs" />

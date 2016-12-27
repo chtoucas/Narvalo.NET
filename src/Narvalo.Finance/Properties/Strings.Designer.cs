@@ -125,15 +125,6 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CurrencyActivator_MissingCtor.
-        /// </summary>
-        internal static string CurrencyActivator_MissingCtor {
-            get {
-                return ResourceManager.GetString("CurrencyActivator_MissingCtor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Unknown currency..
         /// </summary>
         internal static string CurrencyNotFound_DefaultMessage {
