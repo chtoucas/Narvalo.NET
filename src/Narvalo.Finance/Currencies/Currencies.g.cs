@@ -29,7 +29,7 @@ namespace Narvalo.Finance.Currencies
         public static ADP Unit { get { Warrant.NotNull<ADP>(); return Uniq.Instance; } }
 
         public static explicit operator ADP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ADP value) => value.ToCurrency();
+        public static explicit operator Currency?(ADP value) => value?.ToCurrency();
 
         public static ADP FromCurrency(Currency value)
         {
@@ -60,7 +60,7 @@ namespace Narvalo.Finance.Currencies
         public static AED Unit { get { Warrant.NotNull<AED>(); return Uniq.Instance; } }
 
         public static explicit operator AED(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AED value) => value.ToCurrency();
+        public static explicit operator Currency?(AED value) => value?.ToCurrency();
 
         public static AED FromCurrency(Currency value)
         {
@@ -91,7 +91,7 @@ namespace Narvalo.Finance.Currencies
         public static AFA Unit { get { Warrant.NotNull<AFA>(); return Uniq.Instance; } }
 
         public static explicit operator AFA(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AFA value) => value.ToCurrency();
+        public static explicit operator Currency?(AFA value) => value?.ToCurrency();
 
         public static AFA FromCurrency(Currency value)
         {
@@ -122,7 +122,7 @@ namespace Narvalo.Finance.Currencies
         public static AFN Unit { get { Warrant.NotNull<AFN>(); return Uniq.Instance; } }
 
         public static explicit operator AFN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AFN value) => value.ToCurrency();
+        public static explicit operator Currency?(AFN value) => value?.ToCurrency();
 
         public static AFN FromCurrency(Currency value)
         {
@@ -153,7 +153,7 @@ namespace Narvalo.Finance.Currencies
         public static ALK Unit { get { Warrant.NotNull<ALK>(); return Uniq.Instance; } }
 
         public static explicit operator ALK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ALK value) => value.ToCurrency();
+        public static explicit operator Currency?(ALK value) => value?.ToCurrency();
 
         public static ALK FromCurrency(Currency value)
         {
@@ -184,7 +184,7 @@ namespace Narvalo.Finance.Currencies
         public static ALL Unit { get { Warrant.NotNull<ALL>(); return Uniq.Instance; } }
 
         public static explicit operator ALL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ALL value) => value.ToCurrency();
+        public static explicit operator Currency?(ALL value) => value?.ToCurrency();
 
         public static ALL FromCurrency(Currency value)
         {
@@ -215,7 +215,7 @@ namespace Narvalo.Finance.Currencies
         public static AMD Unit { get { Warrant.NotNull<AMD>(); return Uniq.Instance; } }
 
         public static explicit operator AMD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AMD value) => value.ToCurrency();
+        public static explicit operator Currency?(AMD value) => value?.ToCurrency();
 
         public static AMD FromCurrency(Currency value)
         {
@@ -246,7 +246,7 @@ namespace Narvalo.Finance.Currencies
         public static ANG Unit { get { Warrant.NotNull<ANG>(); return Uniq.Instance; } }
 
         public static explicit operator ANG(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ANG value) => value.ToCurrency();
+        public static explicit operator Currency?(ANG value) => value?.ToCurrency();
 
         public static ANG FromCurrency(Currency value)
         {
@@ -277,7 +277,7 @@ namespace Narvalo.Finance.Currencies
         public static AOA Unit { get { Warrant.NotNull<AOA>(); return Uniq.Instance; } }
 
         public static explicit operator AOA(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AOA value) => value.ToCurrency();
+        public static explicit operator Currency?(AOA value) => value?.ToCurrency();
 
         public static AOA FromCurrency(Currency value)
         {
@@ -308,7 +308,7 @@ namespace Narvalo.Finance.Currencies
         public static AOK Unit { get { Warrant.NotNull<AOK>(); return Uniq.Instance; } }
 
         public static explicit operator AOK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AOK value) => value.ToCurrency();
+        public static explicit operator Currency?(AOK value) => value?.ToCurrency();
 
         public static AOK FromCurrency(Currency value)
         {
@@ -339,7 +339,7 @@ namespace Narvalo.Finance.Currencies
         public static AON Unit { get { Warrant.NotNull<AON>(); return Uniq.Instance; } }
 
         public static explicit operator AON(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AON value) => value.ToCurrency();
+        public static explicit operator Currency?(AON value) => value?.ToCurrency();
 
         public static AON FromCurrency(Currency value)
         {
@@ -370,7 +370,7 @@ namespace Narvalo.Finance.Currencies
         public static AOR Unit { get { Warrant.NotNull<AOR>(); return Uniq.Instance; } }
 
         public static explicit operator AOR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AOR value) => value.ToCurrency();
+        public static explicit operator Currency?(AOR value) => value?.ToCurrency();
 
         public static AOR FromCurrency(Currency value)
         {
@@ -401,7 +401,7 @@ namespace Narvalo.Finance.Currencies
         public static ARA Unit { get { Warrant.NotNull<ARA>(); return Uniq.Instance; } }
 
         public static explicit operator ARA(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ARA value) => value.ToCurrency();
+        public static explicit operator Currency?(ARA value) => value?.ToCurrency();
 
         public static ARA FromCurrency(Currency value)
         {
@@ -432,7 +432,7 @@ namespace Narvalo.Finance.Currencies
         public static ARP Unit { get { Warrant.NotNull<ARP>(); return Uniq.Instance; } }
 
         public static explicit operator ARP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ARP value) => value.ToCurrency();
+        public static explicit operator Currency?(ARP value) => value?.ToCurrency();
 
         public static ARP FromCurrency(Currency value)
         {
@@ -463,7 +463,7 @@ namespace Narvalo.Finance.Currencies
         public static ARS Unit { get { Warrant.NotNull<ARS>(); return Uniq.Instance; } }
 
         public static explicit operator ARS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ARS value) => value.ToCurrency();
+        public static explicit operator Currency?(ARS value) => value?.ToCurrency();
 
         public static ARS FromCurrency(Currency value)
         {
@@ -494,7 +494,7 @@ namespace Narvalo.Finance.Currencies
         public static ARY Unit { get { Warrant.NotNull<ARY>(); return Uniq.Instance; } }
 
         public static explicit operator ARY(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ARY value) => value.ToCurrency();
+        public static explicit operator Currency?(ARY value) => value?.ToCurrency();
 
         public static ARY FromCurrency(Currency value)
         {
@@ -525,7 +525,7 @@ namespace Narvalo.Finance.Currencies
         public static ATS Unit { get { Warrant.NotNull<ATS>(); return Uniq.Instance; } }
 
         public static explicit operator ATS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ATS value) => value.ToCurrency();
+        public static explicit operator Currency?(ATS value) => value?.ToCurrency();
 
         public static ATS FromCurrency(Currency value)
         {
@@ -556,7 +556,7 @@ namespace Narvalo.Finance.Currencies
         public static AUD Unit { get { Warrant.NotNull<AUD>(); return Uniq.Instance; } }
 
         public static explicit operator AUD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AUD value) => value.ToCurrency();
+        public static explicit operator Currency?(AUD value) => value?.ToCurrency();
 
         public static AUD FromCurrency(Currency value)
         {
@@ -587,7 +587,7 @@ namespace Narvalo.Finance.Currencies
         public static AWG Unit { get { Warrant.NotNull<AWG>(); return Uniq.Instance; } }
 
         public static explicit operator AWG(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AWG value) => value.ToCurrency();
+        public static explicit operator Currency?(AWG value) => value?.ToCurrency();
 
         public static AWG FromCurrency(Currency value)
         {
@@ -618,7 +618,7 @@ namespace Narvalo.Finance.Currencies
         public static AYM Unit { get { Warrant.NotNull<AYM>(); return Uniq.Instance; } }
 
         public static explicit operator AYM(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AYM value) => value.ToCurrency();
+        public static explicit operator Currency?(AYM value) => value?.ToCurrency();
 
         public static AYM FromCurrency(Currency value)
         {
@@ -649,7 +649,7 @@ namespace Narvalo.Finance.Currencies
         public static AZM Unit { get { Warrant.NotNull<AZM>(); return Uniq.Instance; } }
 
         public static explicit operator AZM(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AZM value) => value.ToCurrency();
+        public static explicit operator Currency?(AZM value) => value?.ToCurrency();
 
         public static AZM FromCurrency(Currency value)
         {
@@ -680,7 +680,7 @@ namespace Narvalo.Finance.Currencies
         public static AZN Unit { get { Warrant.NotNull<AZN>(); return Uniq.Instance; } }
 
         public static explicit operator AZN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(AZN value) => value.ToCurrency();
+        public static explicit operator Currency?(AZN value) => value?.ToCurrency();
 
         public static AZN FromCurrency(Currency value)
         {
@@ -711,7 +711,7 @@ namespace Narvalo.Finance.Currencies
         public static BAD Unit { get { Warrant.NotNull<BAD>(); return Uniq.Instance; } }
 
         public static explicit operator BAD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BAD value) => value.ToCurrency();
+        public static explicit operator Currency?(BAD value) => value?.ToCurrency();
 
         public static BAD FromCurrency(Currency value)
         {
@@ -742,7 +742,7 @@ namespace Narvalo.Finance.Currencies
         public static BAM Unit { get { Warrant.NotNull<BAM>(); return Uniq.Instance; } }
 
         public static explicit operator BAM(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BAM value) => value.ToCurrency();
+        public static explicit operator Currency?(BAM value) => value?.ToCurrency();
 
         public static BAM FromCurrency(Currency value)
         {
@@ -773,7 +773,7 @@ namespace Narvalo.Finance.Currencies
         public static BBD Unit { get { Warrant.NotNull<BBD>(); return Uniq.Instance; } }
 
         public static explicit operator BBD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BBD value) => value.ToCurrency();
+        public static explicit operator Currency?(BBD value) => value?.ToCurrency();
 
         public static BBD FromCurrency(Currency value)
         {
@@ -804,7 +804,7 @@ namespace Narvalo.Finance.Currencies
         public static BDT Unit { get { Warrant.NotNull<BDT>(); return Uniq.Instance; } }
 
         public static explicit operator BDT(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BDT value) => value.ToCurrency();
+        public static explicit operator Currency?(BDT value) => value?.ToCurrency();
 
         public static BDT FromCurrency(Currency value)
         {
@@ -835,7 +835,7 @@ namespace Narvalo.Finance.Currencies
         public static BEC Unit { get { Warrant.NotNull<BEC>(); return Uniq.Instance; } }
 
         public static explicit operator BEC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BEC value) => value.ToCurrency();
+        public static explicit operator Currency?(BEC value) => value?.ToCurrency();
 
         public static BEC FromCurrency(Currency value)
         {
@@ -866,7 +866,7 @@ namespace Narvalo.Finance.Currencies
         public static BEF Unit { get { Warrant.NotNull<BEF>(); return Uniq.Instance; } }
 
         public static explicit operator BEF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BEF value) => value.ToCurrency();
+        public static explicit operator Currency?(BEF value) => value?.ToCurrency();
 
         public static BEF FromCurrency(Currency value)
         {
@@ -897,7 +897,7 @@ namespace Narvalo.Finance.Currencies
         public static BEL Unit { get { Warrant.NotNull<BEL>(); return Uniq.Instance; } }
 
         public static explicit operator BEL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BEL value) => value.ToCurrency();
+        public static explicit operator Currency?(BEL value) => value?.ToCurrency();
 
         public static BEL FromCurrency(Currency value)
         {
@@ -928,7 +928,7 @@ namespace Narvalo.Finance.Currencies
         public static BGJ Unit { get { Warrant.NotNull<BGJ>(); return Uniq.Instance; } }
 
         public static explicit operator BGJ(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BGJ value) => value.ToCurrency();
+        public static explicit operator Currency?(BGJ value) => value?.ToCurrency();
 
         public static BGJ FromCurrency(Currency value)
         {
@@ -959,7 +959,7 @@ namespace Narvalo.Finance.Currencies
         public static BGK Unit { get { Warrant.NotNull<BGK>(); return Uniq.Instance; } }
 
         public static explicit operator BGK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BGK value) => value.ToCurrency();
+        public static explicit operator Currency?(BGK value) => value?.ToCurrency();
 
         public static BGK FromCurrency(Currency value)
         {
@@ -990,7 +990,7 @@ namespace Narvalo.Finance.Currencies
         public static BGL Unit { get { Warrant.NotNull<BGL>(); return Uniq.Instance; } }
 
         public static explicit operator BGL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BGL value) => value.ToCurrency();
+        public static explicit operator Currency?(BGL value) => value?.ToCurrency();
 
         public static BGL FromCurrency(Currency value)
         {
@@ -1021,7 +1021,7 @@ namespace Narvalo.Finance.Currencies
         public static BGN Unit { get { Warrant.NotNull<BGN>(); return Uniq.Instance; } }
 
         public static explicit operator BGN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BGN value) => value.ToCurrency();
+        public static explicit operator Currency?(BGN value) => value?.ToCurrency();
 
         public static BGN FromCurrency(Currency value)
         {
@@ -1052,7 +1052,7 @@ namespace Narvalo.Finance.Currencies
         public static BHD Unit { get { Warrant.NotNull<BHD>(); return Uniq.Instance; } }
 
         public static explicit operator BHD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BHD value) => value.ToCurrency();
+        public static explicit operator Currency?(BHD value) => value?.ToCurrency();
 
         public static BHD FromCurrency(Currency value)
         {
@@ -1083,7 +1083,7 @@ namespace Narvalo.Finance.Currencies
         public static BIF Unit { get { Warrant.NotNull<BIF>(); return Uniq.Instance; } }
 
         public static explicit operator BIF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BIF value) => value.ToCurrency();
+        public static explicit operator Currency?(BIF value) => value?.ToCurrency();
 
         public static BIF FromCurrency(Currency value)
         {
@@ -1114,7 +1114,7 @@ namespace Narvalo.Finance.Currencies
         public static BMD Unit { get { Warrant.NotNull<BMD>(); return Uniq.Instance; } }
 
         public static explicit operator BMD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BMD value) => value.ToCurrency();
+        public static explicit operator Currency?(BMD value) => value?.ToCurrency();
 
         public static BMD FromCurrency(Currency value)
         {
@@ -1145,7 +1145,7 @@ namespace Narvalo.Finance.Currencies
         public static BND Unit { get { Warrant.NotNull<BND>(); return Uniq.Instance; } }
 
         public static explicit operator BND(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BND value) => value.ToCurrency();
+        public static explicit operator Currency?(BND value) => value?.ToCurrency();
 
         public static BND FromCurrency(Currency value)
         {
@@ -1176,7 +1176,7 @@ namespace Narvalo.Finance.Currencies
         public static BOB Unit { get { Warrant.NotNull<BOB>(); return Uniq.Instance; } }
 
         public static explicit operator BOB(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BOB value) => value.ToCurrency();
+        public static explicit operator Currency?(BOB value) => value?.ToCurrency();
 
         public static BOB FromCurrency(Currency value)
         {
@@ -1207,7 +1207,7 @@ namespace Narvalo.Finance.Currencies
         public static BOP Unit { get { Warrant.NotNull<BOP>(); return Uniq.Instance; } }
 
         public static explicit operator BOP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BOP value) => value.ToCurrency();
+        public static explicit operator Currency?(BOP value) => value?.ToCurrency();
 
         public static BOP FromCurrency(Currency value)
         {
@@ -1238,7 +1238,7 @@ namespace Narvalo.Finance.Currencies
         public static BOV Unit { get { Warrant.NotNull<BOV>(); return Uniq.Instance; } }
 
         public static explicit operator BOV(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BOV value) => value.ToCurrency();
+        public static explicit operator Currency?(BOV value) => value?.ToCurrency();
 
         public static BOV FromCurrency(Currency value)
         {
@@ -1269,7 +1269,7 @@ namespace Narvalo.Finance.Currencies
         public static BRB Unit { get { Warrant.NotNull<BRB>(); return Uniq.Instance; } }
 
         public static explicit operator BRB(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BRB value) => value.ToCurrency();
+        public static explicit operator Currency?(BRB value) => value?.ToCurrency();
 
         public static BRB FromCurrency(Currency value)
         {
@@ -1300,7 +1300,7 @@ namespace Narvalo.Finance.Currencies
         public static BRC Unit { get { Warrant.NotNull<BRC>(); return Uniq.Instance; } }
 
         public static explicit operator BRC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BRC value) => value.ToCurrency();
+        public static explicit operator Currency?(BRC value) => value?.ToCurrency();
 
         public static BRC FromCurrency(Currency value)
         {
@@ -1331,7 +1331,7 @@ namespace Narvalo.Finance.Currencies
         public static BRE Unit { get { Warrant.NotNull<BRE>(); return Uniq.Instance; } }
 
         public static explicit operator BRE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BRE value) => value.ToCurrency();
+        public static explicit operator Currency?(BRE value) => value?.ToCurrency();
 
         public static BRE FromCurrency(Currency value)
         {
@@ -1362,7 +1362,7 @@ namespace Narvalo.Finance.Currencies
         public static BRL Unit { get { Warrant.NotNull<BRL>(); return Uniq.Instance; } }
 
         public static explicit operator BRL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BRL value) => value.ToCurrency();
+        public static explicit operator Currency?(BRL value) => value?.ToCurrency();
 
         public static BRL FromCurrency(Currency value)
         {
@@ -1393,7 +1393,7 @@ namespace Narvalo.Finance.Currencies
         public static BRN Unit { get { Warrant.NotNull<BRN>(); return Uniq.Instance; } }
 
         public static explicit operator BRN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BRN value) => value.ToCurrency();
+        public static explicit operator Currency?(BRN value) => value?.ToCurrency();
 
         public static BRN FromCurrency(Currency value)
         {
@@ -1424,7 +1424,7 @@ namespace Narvalo.Finance.Currencies
         public static BRR Unit { get { Warrant.NotNull<BRR>(); return Uniq.Instance; } }
 
         public static explicit operator BRR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BRR value) => value.ToCurrency();
+        public static explicit operator Currency?(BRR value) => value?.ToCurrency();
 
         public static BRR FromCurrency(Currency value)
         {
@@ -1455,7 +1455,7 @@ namespace Narvalo.Finance.Currencies
         public static BSD Unit { get { Warrant.NotNull<BSD>(); return Uniq.Instance; } }
 
         public static explicit operator BSD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BSD value) => value.ToCurrency();
+        public static explicit operator Currency?(BSD value) => value?.ToCurrency();
 
         public static BSD FromCurrency(Currency value)
         {
@@ -1486,7 +1486,7 @@ namespace Narvalo.Finance.Currencies
         public static BTN Unit { get { Warrant.NotNull<BTN>(); return Uniq.Instance; } }
 
         public static explicit operator BTN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BTN value) => value.ToCurrency();
+        public static explicit operator Currency?(BTN value) => value?.ToCurrency();
 
         public static BTN FromCurrency(Currency value)
         {
@@ -1517,7 +1517,7 @@ namespace Narvalo.Finance.Currencies
         public static BUK Unit { get { Warrant.NotNull<BUK>(); return Uniq.Instance; } }
 
         public static explicit operator BUK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BUK value) => value.ToCurrency();
+        public static explicit operator Currency?(BUK value) => value?.ToCurrency();
 
         public static BUK FromCurrency(Currency value)
         {
@@ -1548,7 +1548,7 @@ namespace Narvalo.Finance.Currencies
         public static BWP Unit { get { Warrant.NotNull<BWP>(); return Uniq.Instance; } }
 
         public static explicit operator BWP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BWP value) => value.ToCurrency();
+        public static explicit operator Currency?(BWP value) => value?.ToCurrency();
 
         public static BWP FromCurrency(Currency value)
         {
@@ -1579,7 +1579,7 @@ namespace Narvalo.Finance.Currencies
         public static BYB Unit { get { Warrant.NotNull<BYB>(); return Uniq.Instance; } }
 
         public static explicit operator BYB(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BYB value) => value.ToCurrency();
+        public static explicit operator Currency?(BYB value) => value?.ToCurrency();
 
         public static BYB FromCurrency(Currency value)
         {
@@ -1610,7 +1610,7 @@ namespace Narvalo.Finance.Currencies
         public static BYN Unit { get { Warrant.NotNull<BYN>(); return Uniq.Instance; } }
 
         public static explicit operator BYN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BYN value) => value.ToCurrency();
+        public static explicit operator Currency?(BYN value) => value?.ToCurrency();
 
         public static BYN FromCurrency(Currency value)
         {
@@ -1641,7 +1641,7 @@ namespace Narvalo.Finance.Currencies
         public static BYR Unit { get { Warrant.NotNull<BYR>(); return Uniq.Instance; } }
 
         public static explicit operator BYR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BYR value) => value.ToCurrency();
+        public static explicit operator Currency?(BYR value) => value?.ToCurrency();
 
         public static BYR FromCurrency(Currency value)
         {
@@ -1672,7 +1672,7 @@ namespace Narvalo.Finance.Currencies
         public static BZD Unit { get { Warrant.NotNull<BZD>(); return Uniq.Instance; } }
 
         public static explicit operator BZD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(BZD value) => value.ToCurrency();
+        public static explicit operator Currency?(BZD value) => value?.ToCurrency();
 
         public static BZD FromCurrency(Currency value)
         {
@@ -1703,7 +1703,7 @@ namespace Narvalo.Finance.Currencies
         public static CAD Unit { get { Warrant.NotNull<CAD>(); return Uniq.Instance; } }
 
         public static explicit operator CAD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CAD value) => value.ToCurrency();
+        public static explicit operator Currency?(CAD value) => value?.ToCurrency();
 
         public static CAD FromCurrency(Currency value)
         {
@@ -1734,7 +1734,7 @@ namespace Narvalo.Finance.Currencies
         public static CDF Unit { get { Warrant.NotNull<CDF>(); return Uniq.Instance; } }
 
         public static explicit operator CDF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CDF value) => value.ToCurrency();
+        public static explicit operator Currency?(CDF value) => value?.ToCurrency();
 
         public static CDF FromCurrency(Currency value)
         {
@@ -1765,7 +1765,7 @@ namespace Narvalo.Finance.Currencies
         public static CHC Unit { get { Warrant.NotNull<CHC>(); return Uniq.Instance; } }
 
         public static explicit operator CHC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CHC value) => value.ToCurrency();
+        public static explicit operator Currency?(CHC value) => value?.ToCurrency();
 
         public static CHC FromCurrency(Currency value)
         {
@@ -1796,7 +1796,7 @@ namespace Narvalo.Finance.Currencies
         public static CHE Unit { get { Warrant.NotNull<CHE>(); return Uniq.Instance; } }
 
         public static explicit operator CHE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CHE value) => value.ToCurrency();
+        public static explicit operator Currency?(CHE value) => value?.ToCurrency();
 
         public static CHE FromCurrency(Currency value)
         {
@@ -1827,7 +1827,7 @@ namespace Narvalo.Finance.Currencies
         public static CHF Unit { get { Warrant.NotNull<CHF>(); return Uniq.Instance; } }
 
         public static explicit operator CHF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CHF value) => value.ToCurrency();
+        public static explicit operator Currency?(CHF value) => value?.ToCurrency();
 
         public static CHF FromCurrency(Currency value)
         {
@@ -1858,7 +1858,7 @@ namespace Narvalo.Finance.Currencies
         public static CHW Unit { get { Warrant.NotNull<CHW>(); return Uniq.Instance; } }
 
         public static explicit operator CHW(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CHW value) => value.ToCurrency();
+        public static explicit operator Currency?(CHW value) => value?.ToCurrency();
 
         public static CHW FromCurrency(Currency value)
         {
@@ -1889,7 +1889,7 @@ namespace Narvalo.Finance.Currencies
         public static CLF Unit { get { Warrant.NotNull<CLF>(); return Uniq.Instance; } }
 
         public static explicit operator CLF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CLF value) => value.ToCurrency();
+        public static explicit operator Currency?(CLF value) => value?.ToCurrency();
 
         public static CLF FromCurrency(Currency value)
         {
@@ -1920,7 +1920,7 @@ namespace Narvalo.Finance.Currencies
         public static CLP Unit { get { Warrant.NotNull<CLP>(); return Uniq.Instance; } }
 
         public static explicit operator CLP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CLP value) => value.ToCurrency();
+        public static explicit operator Currency?(CLP value) => value?.ToCurrency();
 
         public static CLP FromCurrency(Currency value)
         {
@@ -1951,7 +1951,7 @@ namespace Narvalo.Finance.Currencies
         public static CNX Unit { get { Warrant.NotNull<CNX>(); return Uniq.Instance; } }
 
         public static explicit operator CNX(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CNX value) => value.ToCurrency();
+        public static explicit operator Currency?(CNX value) => value?.ToCurrency();
 
         public static CNX FromCurrency(Currency value)
         {
@@ -1982,7 +1982,7 @@ namespace Narvalo.Finance.Currencies
         public static CNY Unit { get { Warrant.NotNull<CNY>(); return Uniq.Instance; } }
 
         public static explicit operator CNY(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CNY value) => value.ToCurrency();
+        public static explicit operator Currency?(CNY value) => value?.ToCurrency();
 
         public static CNY FromCurrency(Currency value)
         {
@@ -2013,7 +2013,7 @@ namespace Narvalo.Finance.Currencies
         public static COP Unit { get { Warrant.NotNull<COP>(); return Uniq.Instance; } }
 
         public static explicit operator COP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(COP value) => value.ToCurrency();
+        public static explicit operator Currency?(COP value) => value?.ToCurrency();
 
         public static COP FromCurrency(Currency value)
         {
@@ -2044,7 +2044,7 @@ namespace Narvalo.Finance.Currencies
         public static COU Unit { get { Warrant.NotNull<COU>(); return Uniq.Instance; } }
 
         public static explicit operator COU(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(COU value) => value.ToCurrency();
+        public static explicit operator Currency?(COU value) => value?.ToCurrency();
 
         public static COU FromCurrency(Currency value)
         {
@@ -2075,7 +2075,7 @@ namespace Narvalo.Finance.Currencies
         public static CRC Unit { get { Warrant.NotNull<CRC>(); return Uniq.Instance; } }
 
         public static explicit operator CRC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CRC value) => value.ToCurrency();
+        public static explicit operator Currency?(CRC value) => value?.ToCurrency();
 
         public static CRC FromCurrency(Currency value)
         {
@@ -2106,7 +2106,7 @@ namespace Narvalo.Finance.Currencies
         public static CSD Unit { get { Warrant.NotNull<CSD>(); return Uniq.Instance; } }
 
         public static explicit operator CSD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CSD value) => value.ToCurrency();
+        public static explicit operator Currency?(CSD value) => value?.ToCurrency();
 
         public static CSD FromCurrency(Currency value)
         {
@@ -2137,7 +2137,7 @@ namespace Narvalo.Finance.Currencies
         public static CSJ Unit { get { Warrant.NotNull<CSJ>(); return Uniq.Instance; } }
 
         public static explicit operator CSJ(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CSJ value) => value.ToCurrency();
+        public static explicit operator Currency?(CSJ value) => value?.ToCurrency();
 
         public static CSJ FromCurrency(Currency value)
         {
@@ -2168,7 +2168,7 @@ namespace Narvalo.Finance.Currencies
         public static CSK Unit { get { Warrant.NotNull<CSK>(); return Uniq.Instance; } }
 
         public static explicit operator CSK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CSK value) => value.ToCurrency();
+        public static explicit operator Currency?(CSK value) => value?.ToCurrency();
 
         public static CSK FromCurrency(Currency value)
         {
@@ -2199,7 +2199,7 @@ namespace Narvalo.Finance.Currencies
         public static CUC Unit { get { Warrant.NotNull<CUC>(); return Uniq.Instance; } }
 
         public static explicit operator CUC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CUC value) => value.ToCurrency();
+        public static explicit operator Currency?(CUC value) => value?.ToCurrency();
 
         public static CUC FromCurrency(Currency value)
         {
@@ -2230,7 +2230,7 @@ namespace Narvalo.Finance.Currencies
         public static CUP Unit { get { Warrant.NotNull<CUP>(); return Uniq.Instance; } }
 
         public static explicit operator CUP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CUP value) => value.ToCurrency();
+        public static explicit operator Currency?(CUP value) => value?.ToCurrency();
 
         public static CUP FromCurrency(Currency value)
         {
@@ -2261,7 +2261,7 @@ namespace Narvalo.Finance.Currencies
         public static CVE Unit { get { Warrant.NotNull<CVE>(); return Uniq.Instance; } }
 
         public static explicit operator CVE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CVE value) => value.ToCurrency();
+        public static explicit operator Currency?(CVE value) => value?.ToCurrency();
 
         public static CVE FromCurrency(Currency value)
         {
@@ -2292,7 +2292,7 @@ namespace Narvalo.Finance.Currencies
         public static CYP Unit { get { Warrant.NotNull<CYP>(); return Uniq.Instance; } }
 
         public static explicit operator CYP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CYP value) => value.ToCurrency();
+        public static explicit operator Currency?(CYP value) => value?.ToCurrency();
 
         public static CYP FromCurrency(Currency value)
         {
@@ -2323,7 +2323,7 @@ namespace Narvalo.Finance.Currencies
         public static CZK Unit { get { Warrant.NotNull<CZK>(); return Uniq.Instance; } }
 
         public static explicit operator CZK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(CZK value) => value.ToCurrency();
+        public static explicit operator Currency?(CZK value) => value?.ToCurrency();
 
         public static CZK FromCurrency(Currency value)
         {
@@ -2354,7 +2354,7 @@ namespace Narvalo.Finance.Currencies
         public static DDM Unit { get { Warrant.NotNull<DDM>(); return Uniq.Instance; } }
 
         public static explicit operator DDM(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(DDM value) => value.ToCurrency();
+        public static explicit operator Currency?(DDM value) => value?.ToCurrency();
 
         public static DDM FromCurrency(Currency value)
         {
@@ -2385,7 +2385,7 @@ namespace Narvalo.Finance.Currencies
         public static DEM Unit { get { Warrant.NotNull<DEM>(); return Uniq.Instance; } }
 
         public static explicit operator DEM(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(DEM value) => value.ToCurrency();
+        public static explicit operator Currency?(DEM value) => value?.ToCurrency();
 
         public static DEM FromCurrency(Currency value)
         {
@@ -2416,7 +2416,7 @@ namespace Narvalo.Finance.Currencies
         public static DJF Unit { get { Warrant.NotNull<DJF>(); return Uniq.Instance; } }
 
         public static explicit operator DJF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(DJF value) => value.ToCurrency();
+        public static explicit operator Currency?(DJF value) => value?.ToCurrency();
 
         public static DJF FromCurrency(Currency value)
         {
@@ -2447,7 +2447,7 @@ namespace Narvalo.Finance.Currencies
         public static DKK Unit { get { Warrant.NotNull<DKK>(); return Uniq.Instance; } }
 
         public static explicit operator DKK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(DKK value) => value.ToCurrency();
+        public static explicit operator Currency?(DKK value) => value?.ToCurrency();
 
         public static DKK FromCurrency(Currency value)
         {
@@ -2478,7 +2478,7 @@ namespace Narvalo.Finance.Currencies
         public static DOP Unit { get { Warrant.NotNull<DOP>(); return Uniq.Instance; } }
 
         public static explicit operator DOP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(DOP value) => value.ToCurrency();
+        public static explicit operator Currency?(DOP value) => value?.ToCurrency();
 
         public static DOP FromCurrency(Currency value)
         {
@@ -2509,7 +2509,7 @@ namespace Narvalo.Finance.Currencies
         public static DZD Unit { get { Warrant.NotNull<DZD>(); return Uniq.Instance; } }
 
         public static explicit operator DZD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(DZD value) => value.ToCurrency();
+        public static explicit operator Currency?(DZD value) => value?.ToCurrency();
 
         public static DZD FromCurrency(Currency value)
         {
@@ -2540,7 +2540,7 @@ namespace Narvalo.Finance.Currencies
         public static ECS Unit { get { Warrant.NotNull<ECS>(); return Uniq.Instance; } }
 
         public static explicit operator ECS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ECS value) => value.ToCurrency();
+        public static explicit operator Currency?(ECS value) => value?.ToCurrency();
 
         public static ECS FromCurrency(Currency value)
         {
@@ -2571,7 +2571,7 @@ namespace Narvalo.Finance.Currencies
         public static ECV Unit { get { Warrant.NotNull<ECV>(); return Uniq.Instance; } }
 
         public static explicit operator ECV(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ECV value) => value.ToCurrency();
+        public static explicit operator Currency?(ECV value) => value?.ToCurrency();
 
         public static ECV FromCurrency(Currency value)
         {
@@ -2602,7 +2602,7 @@ namespace Narvalo.Finance.Currencies
         public static EEK Unit { get { Warrant.NotNull<EEK>(); return Uniq.Instance; } }
 
         public static explicit operator EEK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(EEK value) => value.ToCurrency();
+        public static explicit operator Currency?(EEK value) => value?.ToCurrency();
 
         public static EEK FromCurrency(Currency value)
         {
@@ -2633,7 +2633,7 @@ namespace Narvalo.Finance.Currencies
         public static EGP Unit { get { Warrant.NotNull<EGP>(); return Uniq.Instance; } }
 
         public static explicit operator EGP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(EGP value) => value.ToCurrency();
+        public static explicit operator Currency?(EGP value) => value?.ToCurrency();
 
         public static EGP FromCurrency(Currency value)
         {
@@ -2664,7 +2664,7 @@ namespace Narvalo.Finance.Currencies
         public static EQE Unit { get { Warrant.NotNull<EQE>(); return Uniq.Instance; } }
 
         public static explicit operator EQE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(EQE value) => value.ToCurrency();
+        public static explicit operator Currency?(EQE value) => value?.ToCurrency();
 
         public static EQE FromCurrency(Currency value)
         {
@@ -2695,7 +2695,7 @@ namespace Narvalo.Finance.Currencies
         public static ERN Unit { get { Warrant.NotNull<ERN>(); return Uniq.Instance; } }
 
         public static explicit operator ERN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ERN value) => value.ToCurrency();
+        public static explicit operator Currency?(ERN value) => value?.ToCurrency();
 
         public static ERN FromCurrency(Currency value)
         {
@@ -2726,7 +2726,7 @@ namespace Narvalo.Finance.Currencies
         public static ESA Unit { get { Warrant.NotNull<ESA>(); return Uniq.Instance; } }
 
         public static explicit operator ESA(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ESA value) => value.ToCurrency();
+        public static explicit operator Currency?(ESA value) => value?.ToCurrency();
 
         public static ESA FromCurrency(Currency value)
         {
@@ -2757,7 +2757,7 @@ namespace Narvalo.Finance.Currencies
         public static ESB Unit { get { Warrant.NotNull<ESB>(); return Uniq.Instance; } }
 
         public static explicit operator ESB(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ESB value) => value.ToCurrency();
+        public static explicit operator Currency?(ESB value) => value?.ToCurrency();
 
         public static ESB FromCurrency(Currency value)
         {
@@ -2788,7 +2788,7 @@ namespace Narvalo.Finance.Currencies
         public static ESP Unit { get { Warrant.NotNull<ESP>(); return Uniq.Instance; } }
 
         public static explicit operator ESP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ESP value) => value.ToCurrency();
+        public static explicit operator Currency?(ESP value) => value?.ToCurrency();
 
         public static ESP FromCurrency(Currency value)
         {
@@ -2819,7 +2819,7 @@ namespace Narvalo.Finance.Currencies
         public static ETB Unit { get { Warrant.NotNull<ETB>(); return Uniq.Instance; } }
 
         public static explicit operator ETB(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ETB value) => value.ToCurrency();
+        public static explicit operator Currency?(ETB value) => value?.ToCurrency();
 
         public static ETB FromCurrency(Currency value)
         {
@@ -2850,7 +2850,7 @@ namespace Narvalo.Finance.Currencies
         public static EUR Unit { get { Warrant.NotNull<EUR>(); return Uniq.Instance; } }
 
         public static explicit operator EUR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(EUR value) => value.ToCurrency();
+        public static explicit operator Currency?(EUR value) => value?.ToCurrency();
 
         public static EUR FromCurrency(Currency value)
         {
@@ -2881,7 +2881,7 @@ namespace Narvalo.Finance.Currencies
         public static FIM Unit { get { Warrant.NotNull<FIM>(); return Uniq.Instance; } }
 
         public static explicit operator FIM(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(FIM value) => value.ToCurrency();
+        public static explicit operator Currency?(FIM value) => value?.ToCurrency();
 
         public static FIM FromCurrency(Currency value)
         {
@@ -2912,7 +2912,7 @@ namespace Narvalo.Finance.Currencies
         public static FJD Unit { get { Warrant.NotNull<FJD>(); return Uniq.Instance; } }
 
         public static explicit operator FJD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(FJD value) => value.ToCurrency();
+        public static explicit operator Currency?(FJD value) => value?.ToCurrency();
 
         public static FJD FromCurrency(Currency value)
         {
@@ -2943,7 +2943,7 @@ namespace Narvalo.Finance.Currencies
         public static FKP Unit { get { Warrant.NotNull<FKP>(); return Uniq.Instance; } }
 
         public static explicit operator FKP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(FKP value) => value.ToCurrency();
+        public static explicit operator Currency?(FKP value) => value?.ToCurrency();
 
         public static FKP FromCurrency(Currency value)
         {
@@ -2974,7 +2974,7 @@ namespace Narvalo.Finance.Currencies
         public static FRF Unit { get { Warrant.NotNull<FRF>(); return Uniq.Instance; } }
 
         public static explicit operator FRF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(FRF value) => value.ToCurrency();
+        public static explicit operator Currency?(FRF value) => value?.ToCurrency();
 
         public static FRF FromCurrency(Currency value)
         {
@@ -3005,7 +3005,7 @@ namespace Narvalo.Finance.Currencies
         public static GBP Unit { get { Warrant.NotNull<GBP>(); return Uniq.Instance; } }
 
         public static explicit operator GBP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GBP value) => value.ToCurrency();
+        public static explicit operator Currency?(GBP value) => value?.ToCurrency();
 
         public static GBP FromCurrency(Currency value)
         {
@@ -3036,7 +3036,7 @@ namespace Narvalo.Finance.Currencies
         public static GEK Unit { get { Warrant.NotNull<GEK>(); return Uniq.Instance; } }
 
         public static explicit operator GEK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GEK value) => value.ToCurrency();
+        public static explicit operator Currency?(GEK value) => value?.ToCurrency();
 
         public static GEK FromCurrency(Currency value)
         {
@@ -3067,7 +3067,7 @@ namespace Narvalo.Finance.Currencies
         public static GEL Unit { get { Warrant.NotNull<GEL>(); return Uniq.Instance; } }
 
         public static explicit operator GEL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GEL value) => value.ToCurrency();
+        public static explicit operator Currency?(GEL value) => value?.ToCurrency();
 
         public static GEL FromCurrency(Currency value)
         {
@@ -3098,7 +3098,7 @@ namespace Narvalo.Finance.Currencies
         public static GHC Unit { get { Warrant.NotNull<GHC>(); return Uniq.Instance; } }
 
         public static explicit operator GHC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GHC value) => value.ToCurrency();
+        public static explicit operator Currency?(GHC value) => value?.ToCurrency();
 
         public static GHC FromCurrency(Currency value)
         {
@@ -3129,7 +3129,7 @@ namespace Narvalo.Finance.Currencies
         public static GHP Unit { get { Warrant.NotNull<GHP>(); return Uniq.Instance; } }
 
         public static explicit operator GHP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GHP value) => value.ToCurrency();
+        public static explicit operator Currency?(GHP value) => value?.ToCurrency();
 
         public static GHP FromCurrency(Currency value)
         {
@@ -3160,7 +3160,7 @@ namespace Narvalo.Finance.Currencies
         public static GHS Unit { get { Warrant.NotNull<GHS>(); return Uniq.Instance; } }
 
         public static explicit operator GHS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GHS value) => value.ToCurrency();
+        public static explicit operator Currency?(GHS value) => value?.ToCurrency();
 
         public static GHS FromCurrency(Currency value)
         {
@@ -3191,7 +3191,7 @@ namespace Narvalo.Finance.Currencies
         public static GIP Unit { get { Warrant.NotNull<GIP>(); return Uniq.Instance; } }
 
         public static explicit operator GIP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GIP value) => value.ToCurrency();
+        public static explicit operator Currency?(GIP value) => value?.ToCurrency();
 
         public static GIP FromCurrency(Currency value)
         {
@@ -3222,7 +3222,7 @@ namespace Narvalo.Finance.Currencies
         public static GMD Unit { get { Warrant.NotNull<GMD>(); return Uniq.Instance; } }
 
         public static explicit operator GMD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GMD value) => value.ToCurrency();
+        public static explicit operator Currency?(GMD value) => value?.ToCurrency();
 
         public static GMD FromCurrency(Currency value)
         {
@@ -3253,7 +3253,7 @@ namespace Narvalo.Finance.Currencies
         public static GNE Unit { get { Warrant.NotNull<GNE>(); return Uniq.Instance; } }
 
         public static explicit operator GNE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GNE value) => value.ToCurrency();
+        public static explicit operator Currency?(GNE value) => value?.ToCurrency();
 
         public static GNE FromCurrency(Currency value)
         {
@@ -3284,7 +3284,7 @@ namespace Narvalo.Finance.Currencies
         public static GNF Unit { get { Warrant.NotNull<GNF>(); return Uniq.Instance; } }
 
         public static explicit operator GNF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GNF value) => value.ToCurrency();
+        public static explicit operator Currency?(GNF value) => value?.ToCurrency();
 
         public static GNF FromCurrency(Currency value)
         {
@@ -3315,7 +3315,7 @@ namespace Narvalo.Finance.Currencies
         public static GNS Unit { get { Warrant.NotNull<GNS>(); return Uniq.Instance; } }
 
         public static explicit operator GNS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GNS value) => value.ToCurrency();
+        public static explicit operator Currency?(GNS value) => value?.ToCurrency();
 
         public static GNS FromCurrency(Currency value)
         {
@@ -3346,7 +3346,7 @@ namespace Narvalo.Finance.Currencies
         public static GQE Unit { get { Warrant.NotNull<GQE>(); return Uniq.Instance; } }
 
         public static explicit operator GQE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GQE value) => value.ToCurrency();
+        public static explicit operator Currency?(GQE value) => value?.ToCurrency();
 
         public static GQE FromCurrency(Currency value)
         {
@@ -3377,7 +3377,7 @@ namespace Narvalo.Finance.Currencies
         public static GRD Unit { get { Warrant.NotNull<GRD>(); return Uniq.Instance; } }
 
         public static explicit operator GRD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GRD value) => value.ToCurrency();
+        public static explicit operator Currency?(GRD value) => value?.ToCurrency();
 
         public static GRD FromCurrency(Currency value)
         {
@@ -3408,7 +3408,7 @@ namespace Narvalo.Finance.Currencies
         public static GTQ Unit { get { Warrant.NotNull<GTQ>(); return Uniq.Instance; } }
 
         public static explicit operator GTQ(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GTQ value) => value.ToCurrency();
+        public static explicit operator Currency?(GTQ value) => value?.ToCurrency();
 
         public static GTQ FromCurrency(Currency value)
         {
@@ -3439,7 +3439,7 @@ namespace Narvalo.Finance.Currencies
         public static GWE Unit { get { Warrant.NotNull<GWE>(); return Uniq.Instance; } }
 
         public static explicit operator GWE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GWE value) => value.ToCurrency();
+        public static explicit operator Currency?(GWE value) => value?.ToCurrency();
 
         public static GWE FromCurrency(Currency value)
         {
@@ -3470,7 +3470,7 @@ namespace Narvalo.Finance.Currencies
         public static GWP Unit { get { Warrant.NotNull<GWP>(); return Uniq.Instance; } }
 
         public static explicit operator GWP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GWP value) => value.ToCurrency();
+        public static explicit operator Currency?(GWP value) => value?.ToCurrency();
 
         public static GWP FromCurrency(Currency value)
         {
@@ -3501,7 +3501,7 @@ namespace Narvalo.Finance.Currencies
         public static GYD Unit { get { Warrant.NotNull<GYD>(); return Uniq.Instance; } }
 
         public static explicit operator GYD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(GYD value) => value.ToCurrency();
+        public static explicit operator Currency?(GYD value) => value?.ToCurrency();
 
         public static GYD FromCurrency(Currency value)
         {
@@ -3532,7 +3532,7 @@ namespace Narvalo.Finance.Currencies
         public static HKD Unit { get { Warrant.NotNull<HKD>(); return Uniq.Instance; } }
 
         public static explicit operator HKD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(HKD value) => value.ToCurrency();
+        public static explicit operator Currency?(HKD value) => value?.ToCurrency();
 
         public static HKD FromCurrency(Currency value)
         {
@@ -3563,7 +3563,7 @@ namespace Narvalo.Finance.Currencies
         public static HNL Unit { get { Warrant.NotNull<HNL>(); return Uniq.Instance; } }
 
         public static explicit operator HNL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(HNL value) => value.ToCurrency();
+        public static explicit operator Currency?(HNL value) => value?.ToCurrency();
 
         public static HNL FromCurrency(Currency value)
         {
@@ -3594,7 +3594,7 @@ namespace Narvalo.Finance.Currencies
         public static HRD Unit { get { Warrant.NotNull<HRD>(); return Uniq.Instance; } }
 
         public static explicit operator HRD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(HRD value) => value.ToCurrency();
+        public static explicit operator Currency?(HRD value) => value?.ToCurrency();
 
         public static HRD FromCurrency(Currency value)
         {
@@ -3625,7 +3625,7 @@ namespace Narvalo.Finance.Currencies
         public static HRK Unit { get { Warrant.NotNull<HRK>(); return Uniq.Instance; } }
 
         public static explicit operator HRK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(HRK value) => value.ToCurrency();
+        public static explicit operator Currency?(HRK value) => value?.ToCurrency();
 
         public static HRK FromCurrency(Currency value)
         {
@@ -3656,7 +3656,7 @@ namespace Narvalo.Finance.Currencies
         public static HTG Unit { get { Warrant.NotNull<HTG>(); return Uniq.Instance; } }
 
         public static explicit operator HTG(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(HTG value) => value.ToCurrency();
+        public static explicit operator Currency?(HTG value) => value?.ToCurrency();
 
         public static HTG FromCurrency(Currency value)
         {
@@ -3687,7 +3687,7 @@ namespace Narvalo.Finance.Currencies
         public static HUF Unit { get { Warrant.NotNull<HUF>(); return Uniq.Instance; } }
 
         public static explicit operator HUF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(HUF value) => value.ToCurrency();
+        public static explicit operator Currency?(HUF value) => value?.ToCurrency();
 
         public static HUF FromCurrency(Currency value)
         {
@@ -3718,7 +3718,7 @@ namespace Narvalo.Finance.Currencies
         public static IDR Unit { get { Warrant.NotNull<IDR>(); return Uniq.Instance; } }
 
         public static explicit operator IDR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(IDR value) => value.ToCurrency();
+        public static explicit operator Currency?(IDR value) => value?.ToCurrency();
 
         public static IDR FromCurrency(Currency value)
         {
@@ -3749,7 +3749,7 @@ namespace Narvalo.Finance.Currencies
         public static IEP Unit { get { Warrant.NotNull<IEP>(); return Uniq.Instance; } }
 
         public static explicit operator IEP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(IEP value) => value.ToCurrency();
+        public static explicit operator Currency?(IEP value) => value?.ToCurrency();
 
         public static IEP FromCurrency(Currency value)
         {
@@ -3780,7 +3780,7 @@ namespace Narvalo.Finance.Currencies
         public static ILP Unit { get { Warrant.NotNull<ILP>(); return Uniq.Instance; } }
 
         public static explicit operator ILP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ILP value) => value.ToCurrency();
+        public static explicit operator Currency?(ILP value) => value?.ToCurrency();
 
         public static ILP FromCurrency(Currency value)
         {
@@ -3811,7 +3811,7 @@ namespace Narvalo.Finance.Currencies
         public static ILR Unit { get { Warrant.NotNull<ILR>(); return Uniq.Instance; } }
 
         public static explicit operator ILR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ILR value) => value.ToCurrency();
+        public static explicit operator Currency?(ILR value) => value?.ToCurrency();
 
         public static ILR FromCurrency(Currency value)
         {
@@ -3842,7 +3842,7 @@ namespace Narvalo.Finance.Currencies
         public static ILS Unit { get { Warrant.NotNull<ILS>(); return Uniq.Instance; } }
 
         public static explicit operator ILS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ILS value) => value.ToCurrency();
+        public static explicit operator Currency?(ILS value) => value?.ToCurrency();
 
         public static ILS FromCurrency(Currency value)
         {
@@ -3873,7 +3873,7 @@ namespace Narvalo.Finance.Currencies
         public static INR Unit { get { Warrant.NotNull<INR>(); return Uniq.Instance; } }
 
         public static explicit operator INR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(INR value) => value.ToCurrency();
+        public static explicit operator Currency?(INR value) => value?.ToCurrency();
 
         public static INR FromCurrency(Currency value)
         {
@@ -3904,7 +3904,7 @@ namespace Narvalo.Finance.Currencies
         public static IQD Unit { get { Warrant.NotNull<IQD>(); return Uniq.Instance; } }
 
         public static explicit operator IQD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(IQD value) => value.ToCurrency();
+        public static explicit operator Currency?(IQD value) => value?.ToCurrency();
 
         public static IQD FromCurrency(Currency value)
         {
@@ -3935,7 +3935,7 @@ namespace Narvalo.Finance.Currencies
         public static IRR Unit { get { Warrant.NotNull<IRR>(); return Uniq.Instance; } }
 
         public static explicit operator IRR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(IRR value) => value.ToCurrency();
+        public static explicit operator Currency?(IRR value) => value?.ToCurrency();
 
         public static IRR FromCurrency(Currency value)
         {
@@ -3966,7 +3966,7 @@ namespace Narvalo.Finance.Currencies
         public static ISJ Unit { get { Warrant.NotNull<ISJ>(); return Uniq.Instance; } }
 
         public static explicit operator ISJ(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ISJ value) => value.ToCurrency();
+        public static explicit operator Currency?(ISJ value) => value?.ToCurrency();
 
         public static ISJ FromCurrency(Currency value)
         {
@@ -3997,7 +3997,7 @@ namespace Narvalo.Finance.Currencies
         public static ISK Unit { get { Warrant.NotNull<ISK>(); return Uniq.Instance; } }
 
         public static explicit operator ISK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ISK value) => value.ToCurrency();
+        public static explicit operator Currency?(ISK value) => value?.ToCurrency();
 
         public static ISK FromCurrency(Currency value)
         {
@@ -4028,7 +4028,7 @@ namespace Narvalo.Finance.Currencies
         public static ITL Unit { get { Warrant.NotNull<ITL>(); return Uniq.Instance; } }
 
         public static explicit operator ITL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ITL value) => value.ToCurrency();
+        public static explicit operator Currency?(ITL value) => value?.ToCurrency();
 
         public static ITL FromCurrency(Currency value)
         {
@@ -4059,7 +4059,7 @@ namespace Narvalo.Finance.Currencies
         public static JMD Unit { get { Warrant.NotNull<JMD>(); return Uniq.Instance; } }
 
         public static explicit operator JMD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(JMD value) => value.ToCurrency();
+        public static explicit operator Currency?(JMD value) => value?.ToCurrency();
 
         public static JMD FromCurrency(Currency value)
         {
@@ -4090,7 +4090,7 @@ namespace Narvalo.Finance.Currencies
         public static JOD Unit { get { Warrant.NotNull<JOD>(); return Uniq.Instance; } }
 
         public static explicit operator JOD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(JOD value) => value.ToCurrency();
+        public static explicit operator Currency?(JOD value) => value?.ToCurrency();
 
         public static JOD FromCurrency(Currency value)
         {
@@ -4121,7 +4121,7 @@ namespace Narvalo.Finance.Currencies
         public static JPY Unit { get { Warrant.NotNull<JPY>(); return Uniq.Instance; } }
 
         public static explicit operator JPY(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(JPY value) => value.ToCurrency();
+        public static explicit operator Currency?(JPY value) => value?.ToCurrency();
 
         public static JPY FromCurrency(Currency value)
         {
@@ -4152,7 +4152,7 @@ namespace Narvalo.Finance.Currencies
         public static KES Unit { get { Warrant.NotNull<KES>(); return Uniq.Instance; } }
 
         public static explicit operator KES(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(KES value) => value.ToCurrency();
+        public static explicit operator Currency?(KES value) => value?.ToCurrency();
 
         public static KES FromCurrency(Currency value)
         {
@@ -4183,7 +4183,7 @@ namespace Narvalo.Finance.Currencies
         public static KGS Unit { get { Warrant.NotNull<KGS>(); return Uniq.Instance; } }
 
         public static explicit operator KGS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(KGS value) => value.ToCurrency();
+        public static explicit operator Currency?(KGS value) => value?.ToCurrency();
 
         public static KGS FromCurrency(Currency value)
         {
@@ -4214,7 +4214,7 @@ namespace Narvalo.Finance.Currencies
         public static KHR Unit { get { Warrant.NotNull<KHR>(); return Uniq.Instance; } }
 
         public static explicit operator KHR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(KHR value) => value.ToCurrency();
+        public static explicit operator Currency?(KHR value) => value?.ToCurrency();
 
         public static KHR FromCurrency(Currency value)
         {
@@ -4245,7 +4245,7 @@ namespace Narvalo.Finance.Currencies
         public static KMF Unit { get { Warrant.NotNull<KMF>(); return Uniq.Instance; } }
 
         public static explicit operator KMF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(KMF value) => value.ToCurrency();
+        public static explicit operator Currency?(KMF value) => value?.ToCurrency();
 
         public static KMF FromCurrency(Currency value)
         {
@@ -4276,7 +4276,7 @@ namespace Narvalo.Finance.Currencies
         public static KPW Unit { get { Warrant.NotNull<KPW>(); return Uniq.Instance; } }
 
         public static explicit operator KPW(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(KPW value) => value.ToCurrency();
+        public static explicit operator Currency?(KPW value) => value?.ToCurrency();
 
         public static KPW FromCurrency(Currency value)
         {
@@ -4307,7 +4307,7 @@ namespace Narvalo.Finance.Currencies
         public static KRW Unit { get { Warrant.NotNull<KRW>(); return Uniq.Instance; } }
 
         public static explicit operator KRW(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(KRW value) => value.ToCurrency();
+        public static explicit operator Currency?(KRW value) => value?.ToCurrency();
 
         public static KRW FromCurrency(Currency value)
         {
@@ -4338,7 +4338,7 @@ namespace Narvalo.Finance.Currencies
         public static KWD Unit { get { Warrant.NotNull<KWD>(); return Uniq.Instance; } }
 
         public static explicit operator KWD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(KWD value) => value.ToCurrency();
+        public static explicit operator Currency?(KWD value) => value?.ToCurrency();
 
         public static KWD FromCurrency(Currency value)
         {
@@ -4369,7 +4369,7 @@ namespace Narvalo.Finance.Currencies
         public static KYD Unit { get { Warrant.NotNull<KYD>(); return Uniq.Instance; } }
 
         public static explicit operator KYD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(KYD value) => value.ToCurrency();
+        public static explicit operator Currency?(KYD value) => value?.ToCurrency();
 
         public static KYD FromCurrency(Currency value)
         {
@@ -4400,7 +4400,7 @@ namespace Narvalo.Finance.Currencies
         public static KZT Unit { get { Warrant.NotNull<KZT>(); return Uniq.Instance; } }
 
         public static explicit operator KZT(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(KZT value) => value.ToCurrency();
+        public static explicit operator Currency?(KZT value) => value?.ToCurrency();
 
         public static KZT FromCurrency(Currency value)
         {
@@ -4431,7 +4431,7 @@ namespace Narvalo.Finance.Currencies
         public static LAJ Unit { get { Warrant.NotNull<LAJ>(); return Uniq.Instance; } }
 
         public static explicit operator LAJ(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LAJ value) => value.ToCurrency();
+        public static explicit operator Currency?(LAJ value) => value?.ToCurrency();
 
         public static LAJ FromCurrency(Currency value)
         {
@@ -4462,7 +4462,7 @@ namespace Narvalo.Finance.Currencies
         public static LAK Unit { get { Warrant.NotNull<LAK>(); return Uniq.Instance; } }
 
         public static explicit operator LAK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LAK value) => value.ToCurrency();
+        public static explicit operator Currency?(LAK value) => value?.ToCurrency();
 
         public static LAK FromCurrency(Currency value)
         {
@@ -4493,7 +4493,7 @@ namespace Narvalo.Finance.Currencies
         public static LBP Unit { get { Warrant.NotNull<LBP>(); return Uniq.Instance; } }
 
         public static explicit operator LBP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LBP value) => value.ToCurrency();
+        public static explicit operator Currency?(LBP value) => value?.ToCurrency();
 
         public static LBP FromCurrency(Currency value)
         {
@@ -4524,7 +4524,7 @@ namespace Narvalo.Finance.Currencies
         public static LKR Unit { get { Warrant.NotNull<LKR>(); return Uniq.Instance; } }
 
         public static explicit operator LKR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LKR value) => value.ToCurrency();
+        public static explicit operator Currency?(LKR value) => value?.ToCurrency();
 
         public static LKR FromCurrency(Currency value)
         {
@@ -4555,7 +4555,7 @@ namespace Narvalo.Finance.Currencies
         public static LRD Unit { get { Warrant.NotNull<LRD>(); return Uniq.Instance; } }
 
         public static explicit operator LRD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LRD value) => value.ToCurrency();
+        public static explicit operator Currency?(LRD value) => value?.ToCurrency();
 
         public static LRD FromCurrency(Currency value)
         {
@@ -4586,7 +4586,7 @@ namespace Narvalo.Finance.Currencies
         public static LSL Unit { get { Warrant.NotNull<LSL>(); return Uniq.Instance; } }
 
         public static explicit operator LSL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LSL value) => value.ToCurrency();
+        public static explicit operator Currency?(LSL value) => value?.ToCurrency();
 
         public static LSL FromCurrency(Currency value)
         {
@@ -4617,7 +4617,7 @@ namespace Narvalo.Finance.Currencies
         public static LSM Unit { get { Warrant.NotNull<LSM>(); return Uniq.Instance; } }
 
         public static explicit operator LSM(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LSM value) => value.ToCurrency();
+        public static explicit operator Currency?(LSM value) => value?.ToCurrency();
 
         public static LSM FromCurrency(Currency value)
         {
@@ -4648,7 +4648,7 @@ namespace Narvalo.Finance.Currencies
         public static LTL Unit { get { Warrant.NotNull<LTL>(); return Uniq.Instance; } }
 
         public static explicit operator LTL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LTL value) => value.ToCurrency();
+        public static explicit operator Currency?(LTL value) => value?.ToCurrency();
 
         public static LTL FromCurrency(Currency value)
         {
@@ -4679,7 +4679,7 @@ namespace Narvalo.Finance.Currencies
         public static LTT Unit { get { Warrant.NotNull<LTT>(); return Uniq.Instance; } }
 
         public static explicit operator LTT(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LTT value) => value.ToCurrency();
+        public static explicit operator Currency?(LTT value) => value?.ToCurrency();
 
         public static LTT FromCurrency(Currency value)
         {
@@ -4710,7 +4710,7 @@ namespace Narvalo.Finance.Currencies
         public static LUC Unit { get { Warrant.NotNull<LUC>(); return Uniq.Instance; } }
 
         public static explicit operator LUC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LUC value) => value.ToCurrency();
+        public static explicit operator Currency?(LUC value) => value?.ToCurrency();
 
         public static LUC FromCurrency(Currency value)
         {
@@ -4741,7 +4741,7 @@ namespace Narvalo.Finance.Currencies
         public static LUF Unit { get { Warrant.NotNull<LUF>(); return Uniq.Instance; } }
 
         public static explicit operator LUF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LUF value) => value.ToCurrency();
+        public static explicit operator Currency?(LUF value) => value?.ToCurrency();
 
         public static LUF FromCurrency(Currency value)
         {
@@ -4772,7 +4772,7 @@ namespace Narvalo.Finance.Currencies
         public static LUL Unit { get { Warrant.NotNull<LUL>(); return Uniq.Instance; } }
 
         public static explicit operator LUL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LUL value) => value.ToCurrency();
+        public static explicit operator Currency?(LUL value) => value?.ToCurrency();
 
         public static LUL FromCurrency(Currency value)
         {
@@ -4803,7 +4803,7 @@ namespace Narvalo.Finance.Currencies
         public static LVL Unit { get { Warrant.NotNull<LVL>(); return Uniq.Instance; } }
 
         public static explicit operator LVL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LVL value) => value.ToCurrency();
+        public static explicit operator Currency?(LVL value) => value?.ToCurrency();
 
         public static LVL FromCurrency(Currency value)
         {
@@ -4834,7 +4834,7 @@ namespace Narvalo.Finance.Currencies
         public static LVR Unit { get { Warrant.NotNull<LVR>(); return Uniq.Instance; } }
 
         public static explicit operator LVR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LVR value) => value.ToCurrency();
+        public static explicit operator Currency?(LVR value) => value?.ToCurrency();
 
         public static LVR FromCurrency(Currency value)
         {
@@ -4865,7 +4865,7 @@ namespace Narvalo.Finance.Currencies
         public static LYD Unit { get { Warrant.NotNull<LYD>(); return Uniq.Instance; } }
 
         public static explicit operator LYD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(LYD value) => value.ToCurrency();
+        public static explicit operator Currency?(LYD value) => value?.ToCurrency();
 
         public static LYD FromCurrency(Currency value)
         {
@@ -4896,7 +4896,7 @@ namespace Narvalo.Finance.Currencies
         public static MAD Unit { get { Warrant.NotNull<MAD>(); return Uniq.Instance; } }
 
         public static explicit operator MAD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MAD value) => value.ToCurrency();
+        public static explicit operator Currency?(MAD value) => value?.ToCurrency();
 
         public static MAD FromCurrency(Currency value)
         {
@@ -4927,7 +4927,7 @@ namespace Narvalo.Finance.Currencies
         public static MAF Unit { get { Warrant.NotNull<MAF>(); return Uniq.Instance; } }
 
         public static explicit operator MAF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MAF value) => value.ToCurrency();
+        public static explicit operator Currency?(MAF value) => value?.ToCurrency();
 
         public static MAF FromCurrency(Currency value)
         {
@@ -4958,7 +4958,7 @@ namespace Narvalo.Finance.Currencies
         public static MDL Unit { get { Warrant.NotNull<MDL>(); return Uniq.Instance; } }
 
         public static explicit operator MDL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MDL value) => value.ToCurrency();
+        public static explicit operator Currency?(MDL value) => value?.ToCurrency();
 
         public static MDL FromCurrency(Currency value)
         {
@@ -4989,7 +4989,7 @@ namespace Narvalo.Finance.Currencies
         public static MGA Unit { get { Warrant.NotNull<MGA>(); return Uniq.Instance; } }
 
         public static explicit operator MGA(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MGA value) => value.ToCurrency();
+        public static explicit operator Currency?(MGA value) => value?.ToCurrency();
 
         public static MGA FromCurrency(Currency value)
         {
@@ -5020,7 +5020,7 @@ namespace Narvalo.Finance.Currencies
         public static MGF Unit { get { Warrant.NotNull<MGF>(); return Uniq.Instance; } }
 
         public static explicit operator MGF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MGF value) => value.ToCurrency();
+        public static explicit operator Currency?(MGF value) => value?.ToCurrency();
 
         public static MGF FromCurrency(Currency value)
         {
@@ -5051,7 +5051,7 @@ namespace Narvalo.Finance.Currencies
         public static MKD Unit { get { Warrant.NotNull<MKD>(); return Uniq.Instance; } }
 
         public static explicit operator MKD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MKD value) => value.ToCurrency();
+        public static explicit operator Currency?(MKD value) => value?.ToCurrency();
 
         public static MKD FromCurrency(Currency value)
         {
@@ -5082,7 +5082,7 @@ namespace Narvalo.Finance.Currencies
         public static MLF Unit { get { Warrant.NotNull<MLF>(); return Uniq.Instance; } }
 
         public static explicit operator MLF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MLF value) => value.ToCurrency();
+        public static explicit operator Currency?(MLF value) => value?.ToCurrency();
 
         public static MLF FromCurrency(Currency value)
         {
@@ -5113,7 +5113,7 @@ namespace Narvalo.Finance.Currencies
         public static MMK Unit { get { Warrant.NotNull<MMK>(); return Uniq.Instance; } }
 
         public static explicit operator MMK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MMK value) => value.ToCurrency();
+        public static explicit operator Currency?(MMK value) => value?.ToCurrency();
 
         public static MMK FromCurrency(Currency value)
         {
@@ -5144,7 +5144,7 @@ namespace Narvalo.Finance.Currencies
         public static MNT Unit { get { Warrant.NotNull<MNT>(); return Uniq.Instance; } }
 
         public static explicit operator MNT(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MNT value) => value.ToCurrency();
+        public static explicit operator Currency?(MNT value) => value?.ToCurrency();
 
         public static MNT FromCurrency(Currency value)
         {
@@ -5175,7 +5175,7 @@ namespace Narvalo.Finance.Currencies
         public static MOP Unit { get { Warrant.NotNull<MOP>(); return Uniq.Instance; } }
 
         public static explicit operator MOP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MOP value) => value.ToCurrency();
+        public static explicit operator Currency?(MOP value) => value?.ToCurrency();
 
         public static MOP FromCurrency(Currency value)
         {
@@ -5206,7 +5206,7 @@ namespace Narvalo.Finance.Currencies
         public static MRO Unit { get { Warrant.NotNull<MRO>(); return Uniq.Instance; } }
 
         public static explicit operator MRO(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MRO value) => value.ToCurrency();
+        public static explicit operator Currency?(MRO value) => value?.ToCurrency();
 
         public static MRO FromCurrency(Currency value)
         {
@@ -5237,7 +5237,7 @@ namespace Narvalo.Finance.Currencies
         public static MTL Unit { get { Warrant.NotNull<MTL>(); return Uniq.Instance; } }
 
         public static explicit operator MTL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MTL value) => value.ToCurrency();
+        public static explicit operator Currency?(MTL value) => value?.ToCurrency();
 
         public static MTL FromCurrency(Currency value)
         {
@@ -5268,7 +5268,7 @@ namespace Narvalo.Finance.Currencies
         public static MTP Unit { get { Warrant.NotNull<MTP>(); return Uniq.Instance; } }
 
         public static explicit operator MTP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MTP value) => value.ToCurrency();
+        public static explicit operator Currency?(MTP value) => value?.ToCurrency();
 
         public static MTP FromCurrency(Currency value)
         {
@@ -5299,7 +5299,7 @@ namespace Narvalo.Finance.Currencies
         public static MUR Unit { get { Warrant.NotNull<MUR>(); return Uniq.Instance; } }
 
         public static explicit operator MUR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MUR value) => value.ToCurrency();
+        public static explicit operator Currency?(MUR value) => value?.ToCurrency();
 
         public static MUR FromCurrency(Currency value)
         {
@@ -5330,7 +5330,7 @@ namespace Narvalo.Finance.Currencies
         public static MVQ Unit { get { Warrant.NotNull<MVQ>(); return Uniq.Instance; } }
 
         public static explicit operator MVQ(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MVQ value) => value.ToCurrency();
+        public static explicit operator Currency?(MVQ value) => value?.ToCurrency();
 
         public static MVQ FromCurrency(Currency value)
         {
@@ -5361,7 +5361,7 @@ namespace Narvalo.Finance.Currencies
         public static MVR Unit { get { Warrant.NotNull<MVR>(); return Uniq.Instance; } }
 
         public static explicit operator MVR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MVR value) => value.ToCurrency();
+        public static explicit operator Currency?(MVR value) => value?.ToCurrency();
 
         public static MVR FromCurrency(Currency value)
         {
@@ -5392,7 +5392,7 @@ namespace Narvalo.Finance.Currencies
         public static MWK Unit { get { Warrant.NotNull<MWK>(); return Uniq.Instance; } }
 
         public static explicit operator MWK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MWK value) => value.ToCurrency();
+        public static explicit operator Currency?(MWK value) => value?.ToCurrency();
 
         public static MWK FromCurrency(Currency value)
         {
@@ -5423,7 +5423,7 @@ namespace Narvalo.Finance.Currencies
         public static MXN Unit { get { Warrant.NotNull<MXN>(); return Uniq.Instance; } }
 
         public static explicit operator MXN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MXN value) => value.ToCurrency();
+        public static explicit operator Currency?(MXN value) => value?.ToCurrency();
 
         public static MXN FromCurrency(Currency value)
         {
@@ -5454,7 +5454,7 @@ namespace Narvalo.Finance.Currencies
         public static MXP Unit { get { Warrant.NotNull<MXP>(); return Uniq.Instance; } }
 
         public static explicit operator MXP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MXP value) => value.ToCurrency();
+        public static explicit operator Currency?(MXP value) => value?.ToCurrency();
 
         public static MXP FromCurrency(Currency value)
         {
@@ -5485,7 +5485,7 @@ namespace Narvalo.Finance.Currencies
         public static MXV Unit { get { Warrant.NotNull<MXV>(); return Uniq.Instance; } }
 
         public static explicit operator MXV(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MXV value) => value.ToCurrency();
+        public static explicit operator Currency?(MXV value) => value?.ToCurrency();
 
         public static MXV FromCurrency(Currency value)
         {
@@ -5516,7 +5516,7 @@ namespace Narvalo.Finance.Currencies
         public static MYR Unit { get { Warrant.NotNull<MYR>(); return Uniq.Instance; } }
 
         public static explicit operator MYR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MYR value) => value.ToCurrency();
+        public static explicit operator Currency?(MYR value) => value?.ToCurrency();
 
         public static MYR FromCurrency(Currency value)
         {
@@ -5547,7 +5547,7 @@ namespace Narvalo.Finance.Currencies
         public static MZE Unit { get { Warrant.NotNull<MZE>(); return Uniq.Instance; } }
 
         public static explicit operator MZE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MZE value) => value.ToCurrency();
+        public static explicit operator Currency?(MZE value) => value?.ToCurrency();
 
         public static MZE FromCurrency(Currency value)
         {
@@ -5578,7 +5578,7 @@ namespace Narvalo.Finance.Currencies
         public static MZM Unit { get { Warrant.NotNull<MZM>(); return Uniq.Instance; } }
 
         public static explicit operator MZM(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MZM value) => value.ToCurrency();
+        public static explicit operator Currency?(MZM value) => value?.ToCurrency();
 
         public static MZM FromCurrency(Currency value)
         {
@@ -5609,7 +5609,7 @@ namespace Narvalo.Finance.Currencies
         public static MZN Unit { get { Warrant.NotNull<MZN>(); return Uniq.Instance; } }
 
         public static explicit operator MZN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(MZN value) => value.ToCurrency();
+        public static explicit operator Currency?(MZN value) => value?.ToCurrency();
 
         public static MZN FromCurrency(Currency value)
         {
@@ -5640,7 +5640,7 @@ namespace Narvalo.Finance.Currencies
         public static NAD Unit { get { Warrant.NotNull<NAD>(); return Uniq.Instance; } }
 
         public static explicit operator NAD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(NAD value) => value.ToCurrency();
+        public static explicit operator Currency?(NAD value) => value?.ToCurrency();
 
         public static NAD FromCurrency(Currency value)
         {
@@ -5671,7 +5671,7 @@ namespace Narvalo.Finance.Currencies
         public static NGN Unit { get { Warrant.NotNull<NGN>(); return Uniq.Instance; } }
 
         public static explicit operator NGN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(NGN value) => value.ToCurrency();
+        public static explicit operator Currency?(NGN value) => value?.ToCurrency();
 
         public static NGN FromCurrency(Currency value)
         {
@@ -5702,7 +5702,7 @@ namespace Narvalo.Finance.Currencies
         public static NIC Unit { get { Warrant.NotNull<NIC>(); return Uniq.Instance; } }
 
         public static explicit operator NIC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(NIC value) => value.ToCurrency();
+        public static explicit operator Currency?(NIC value) => value?.ToCurrency();
 
         public static NIC FromCurrency(Currency value)
         {
@@ -5733,7 +5733,7 @@ namespace Narvalo.Finance.Currencies
         public static NIO Unit { get { Warrant.NotNull<NIO>(); return Uniq.Instance; } }
 
         public static explicit operator NIO(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(NIO value) => value.ToCurrency();
+        public static explicit operator Currency?(NIO value) => value?.ToCurrency();
 
         public static NIO FromCurrency(Currency value)
         {
@@ -5764,7 +5764,7 @@ namespace Narvalo.Finance.Currencies
         public static NLG Unit { get { Warrant.NotNull<NLG>(); return Uniq.Instance; } }
 
         public static explicit operator NLG(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(NLG value) => value.ToCurrency();
+        public static explicit operator Currency?(NLG value) => value?.ToCurrency();
 
         public static NLG FromCurrency(Currency value)
         {
@@ -5795,7 +5795,7 @@ namespace Narvalo.Finance.Currencies
         public static NOK Unit { get { Warrant.NotNull<NOK>(); return Uniq.Instance; } }
 
         public static explicit operator NOK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(NOK value) => value.ToCurrency();
+        public static explicit operator Currency?(NOK value) => value?.ToCurrency();
 
         public static NOK FromCurrency(Currency value)
         {
@@ -5826,7 +5826,7 @@ namespace Narvalo.Finance.Currencies
         public static NPR Unit { get { Warrant.NotNull<NPR>(); return Uniq.Instance; } }
 
         public static explicit operator NPR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(NPR value) => value.ToCurrency();
+        public static explicit operator Currency?(NPR value) => value?.ToCurrency();
 
         public static NPR FromCurrency(Currency value)
         {
@@ -5857,7 +5857,7 @@ namespace Narvalo.Finance.Currencies
         public static NZD Unit { get { Warrant.NotNull<NZD>(); return Uniq.Instance; } }
 
         public static explicit operator NZD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(NZD value) => value.ToCurrency();
+        public static explicit operator Currency?(NZD value) => value?.ToCurrency();
 
         public static NZD FromCurrency(Currency value)
         {
@@ -5888,7 +5888,7 @@ namespace Narvalo.Finance.Currencies
         public static OMR Unit { get { Warrant.NotNull<OMR>(); return Uniq.Instance; } }
 
         public static explicit operator OMR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(OMR value) => value.ToCurrency();
+        public static explicit operator Currency?(OMR value) => value?.ToCurrency();
 
         public static OMR FromCurrency(Currency value)
         {
@@ -5919,7 +5919,7 @@ namespace Narvalo.Finance.Currencies
         public static PAB Unit { get { Warrant.NotNull<PAB>(); return Uniq.Instance; } }
 
         public static explicit operator PAB(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PAB value) => value.ToCurrency();
+        public static explicit operator Currency?(PAB value) => value?.ToCurrency();
 
         public static PAB FromCurrency(Currency value)
         {
@@ -5950,7 +5950,7 @@ namespace Narvalo.Finance.Currencies
         public static PEH Unit { get { Warrant.NotNull<PEH>(); return Uniq.Instance; } }
 
         public static explicit operator PEH(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PEH value) => value.ToCurrency();
+        public static explicit operator Currency?(PEH value) => value?.ToCurrency();
 
         public static PEH FromCurrency(Currency value)
         {
@@ -5981,7 +5981,7 @@ namespace Narvalo.Finance.Currencies
         public static PEI Unit { get { Warrant.NotNull<PEI>(); return Uniq.Instance; } }
 
         public static explicit operator PEI(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PEI value) => value.ToCurrency();
+        public static explicit operator Currency?(PEI value) => value?.ToCurrency();
 
         public static PEI FromCurrency(Currency value)
         {
@@ -6012,7 +6012,7 @@ namespace Narvalo.Finance.Currencies
         public static PEN Unit { get { Warrant.NotNull<PEN>(); return Uniq.Instance; } }
 
         public static explicit operator PEN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PEN value) => value.ToCurrency();
+        public static explicit operator Currency?(PEN value) => value?.ToCurrency();
 
         public static PEN FromCurrency(Currency value)
         {
@@ -6043,7 +6043,7 @@ namespace Narvalo.Finance.Currencies
         public static PES Unit { get { Warrant.NotNull<PES>(); return Uniq.Instance; } }
 
         public static explicit operator PES(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PES value) => value.ToCurrency();
+        public static explicit operator Currency?(PES value) => value?.ToCurrency();
 
         public static PES FromCurrency(Currency value)
         {
@@ -6074,7 +6074,7 @@ namespace Narvalo.Finance.Currencies
         public static PGK Unit { get { Warrant.NotNull<PGK>(); return Uniq.Instance; } }
 
         public static explicit operator PGK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PGK value) => value.ToCurrency();
+        public static explicit operator Currency?(PGK value) => value?.ToCurrency();
 
         public static PGK FromCurrency(Currency value)
         {
@@ -6105,7 +6105,7 @@ namespace Narvalo.Finance.Currencies
         public static PHP Unit { get { Warrant.NotNull<PHP>(); return Uniq.Instance; } }
 
         public static explicit operator PHP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PHP value) => value.ToCurrency();
+        public static explicit operator Currency?(PHP value) => value?.ToCurrency();
 
         public static PHP FromCurrency(Currency value)
         {
@@ -6136,7 +6136,7 @@ namespace Narvalo.Finance.Currencies
         public static PKR Unit { get { Warrant.NotNull<PKR>(); return Uniq.Instance; } }
 
         public static explicit operator PKR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PKR value) => value.ToCurrency();
+        public static explicit operator Currency?(PKR value) => value?.ToCurrency();
 
         public static PKR FromCurrency(Currency value)
         {
@@ -6167,7 +6167,7 @@ namespace Narvalo.Finance.Currencies
         public static PLN Unit { get { Warrant.NotNull<PLN>(); return Uniq.Instance; } }
 
         public static explicit operator PLN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PLN value) => value.ToCurrency();
+        public static explicit operator Currency?(PLN value) => value?.ToCurrency();
 
         public static PLN FromCurrency(Currency value)
         {
@@ -6198,7 +6198,7 @@ namespace Narvalo.Finance.Currencies
         public static PLZ Unit { get { Warrant.NotNull<PLZ>(); return Uniq.Instance; } }
 
         public static explicit operator PLZ(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PLZ value) => value.ToCurrency();
+        public static explicit operator Currency?(PLZ value) => value?.ToCurrency();
 
         public static PLZ FromCurrency(Currency value)
         {
@@ -6229,7 +6229,7 @@ namespace Narvalo.Finance.Currencies
         public static PTE Unit { get { Warrant.NotNull<PTE>(); return Uniq.Instance; } }
 
         public static explicit operator PTE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PTE value) => value.ToCurrency();
+        public static explicit operator Currency?(PTE value) => value?.ToCurrency();
 
         public static PTE FromCurrency(Currency value)
         {
@@ -6260,7 +6260,7 @@ namespace Narvalo.Finance.Currencies
         public static PYG Unit { get { Warrant.NotNull<PYG>(); return Uniq.Instance; } }
 
         public static explicit operator PYG(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(PYG value) => value.ToCurrency();
+        public static explicit operator Currency?(PYG value) => value?.ToCurrency();
 
         public static PYG FromCurrency(Currency value)
         {
@@ -6291,7 +6291,7 @@ namespace Narvalo.Finance.Currencies
         public static QAR Unit { get { Warrant.NotNull<QAR>(); return Uniq.Instance; } }
 
         public static explicit operator QAR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(QAR value) => value.ToCurrency();
+        public static explicit operator Currency?(QAR value) => value?.ToCurrency();
 
         public static QAR FromCurrency(Currency value)
         {
@@ -6322,7 +6322,7 @@ namespace Narvalo.Finance.Currencies
         public static RHD Unit { get { Warrant.NotNull<RHD>(); return Uniq.Instance; } }
 
         public static explicit operator RHD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(RHD value) => value.ToCurrency();
+        public static explicit operator Currency?(RHD value) => value?.ToCurrency();
 
         public static RHD FromCurrency(Currency value)
         {
@@ -6353,7 +6353,7 @@ namespace Narvalo.Finance.Currencies
         public static ROK Unit { get { Warrant.NotNull<ROK>(); return Uniq.Instance; } }
 
         public static explicit operator ROK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ROK value) => value.ToCurrency();
+        public static explicit operator Currency?(ROK value) => value?.ToCurrency();
 
         public static ROK FromCurrency(Currency value)
         {
@@ -6384,7 +6384,7 @@ namespace Narvalo.Finance.Currencies
         public static ROL Unit { get { Warrant.NotNull<ROL>(); return Uniq.Instance; } }
 
         public static explicit operator ROL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ROL value) => value.ToCurrency();
+        public static explicit operator Currency?(ROL value) => value?.ToCurrency();
 
         public static ROL FromCurrency(Currency value)
         {
@@ -6415,7 +6415,7 @@ namespace Narvalo.Finance.Currencies
         public static RON Unit { get { Warrant.NotNull<RON>(); return Uniq.Instance; } }
 
         public static explicit operator RON(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(RON value) => value.ToCurrency();
+        public static explicit operator Currency?(RON value) => value?.ToCurrency();
 
         public static RON FromCurrency(Currency value)
         {
@@ -6446,7 +6446,7 @@ namespace Narvalo.Finance.Currencies
         public static RSD Unit { get { Warrant.NotNull<RSD>(); return Uniq.Instance; } }
 
         public static explicit operator RSD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(RSD value) => value.ToCurrency();
+        public static explicit operator Currency?(RSD value) => value?.ToCurrency();
 
         public static RSD FromCurrency(Currency value)
         {
@@ -6477,7 +6477,7 @@ namespace Narvalo.Finance.Currencies
         public static RUB Unit { get { Warrant.NotNull<RUB>(); return Uniq.Instance; } }
 
         public static explicit operator RUB(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(RUB value) => value.ToCurrency();
+        public static explicit operator Currency?(RUB value) => value?.ToCurrency();
 
         public static RUB FromCurrency(Currency value)
         {
@@ -6508,7 +6508,7 @@ namespace Narvalo.Finance.Currencies
         public static RUR Unit { get { Warrant.NotNull<RUR>(); return Uniq.Instance; } }
 
         public static explicit operator RUR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(RUR value) => value.ToCurrency();
+        public static explicit operator Currency?(RUR value) => value?.ToCurrency();
 
         public static RUR FromCurrency(Currency value)
         {
@@ -6539,7 +6539,7 @@ namespace Narvalo.Finance.Currencies
         public static RWF Unit { get { Warrant.NotNull<RWF>(); return Uniq.Instance; } }
 
         public static explicit operator RWF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(RWF value) => value.ToCurrency();
+        public static explicit operator Currency?(RWF value) => value?.ToCurrency();
 
         public static RWF FromCurrency(Currency value)
         {
@@ -6570,7 +6570,7 @@ namespace Narvalo.Finance.Currencies
         public static SAR Unit { get { Warrant.NotNull<SAR>(); return Uniq.Instance; } }
 
         public static explicit operator SAR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SAR value) => value.ToCurrency();
+        public static explicit operator Currency?(SAR value) => value?.ToCurrency();
 
         public static SAR FromCurrency(Currency value)
         {
@@ -6601,7 +6601,7 @@ namespace Narvalo.Finance.Currencies
         public static SBD Unit { get { Warrant.NotNull<SBD>(); return Uniq.Instance; } }
 
         public static explicit operator SBD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SBD value) => value.ToCurrency();
+        public static explicit operator Currency?(SBD value) => value?.ToCurrency();
 
         public static SBD FromCurrency(Currency value)
         {
@@ -6632,7 +6632,7 @@ namespace Narvalo.Finance.Currencies
         public static SCR Unit { get { Warrant.NotNull<SCR>(); return Uniq.Instance; } }
 
         public static explicit operator SCR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SCR value) => value.ToCurrency();
+        public static explicit operator Currency?(SCR value) => value?.ToCurrency();
 
         public static SCR FromCurrency(Currency value)
         {
@@ -6663,7 +6663,7 @@ namespace Narvalo.Finance.Currencies
         public static SDD Unit { get { Warrant.NotNull<SDD>(); return Uniq.Instance; } }
 
         public static explicit operator SDD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SDD value) => value.ToCurrency();
+        public static explicit operator Currency?(SDD value) => value?.ToCurrency();
 
         public static SDD FromCurrency(Currency value)
         {
@@ -6694,7 +6694,7 @@ namespace Narvalo.Finance.Currencies
         public static SDG Unit { get { Warrant.NotNull<SDG>(); return Uniq.Instance; } }
 
         public static explicit operator SDG(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SDG value) => value.ToCurrency();
+        public static explicit operator Currency?(SDG value) => value?.ToCurrency();
 
         public static SDG FromCurrency(Currency value)
         {
@@ -6725,7 +6725,7 @@ namespace Narvalo.Finance.Currencies
         public static SDP Unit { get { Warrant.NotNull<SDP>(); return Uniq.Instance; } }
 
         public static explicit operator SDP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SDP value) => value.ToCurrency();
+        public static explicit operator Currency?(SDP value) => value?.ToCurrency();
 
         public static SDP FromCurrency(Currency value)
         {
@@ -6756,7 +6756,7 @@ namespace Narvalo.Finance.Currencies
         public static SEK Unit { get { Warrant.NotNull<SEK>(); return Uniq.Instance; } }
 
         public static explicit operator SEK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SEK value) => value.ToCurrency();
+        public static explicit operator Currency?(SEK value) => value?.ToCurrency();
 
         public static SEK FromCurrency(Currency value)
         {
@@ -6787,7 +6787,7 @@ namespace Narvalo.Finance.Currencies
         public static SGD Unit { get { Warrant.NotNull<SGD>(); return Uniq.Instance; } }
 
         public static explicit operator SGD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SGD value) => value.ToCurrency();
+        public static explicit operator Currency?(SGD value) => value?.ToCurrency();
 
         public static SGD FromCurrency(Currency value)
         {
@@ -6818,7 +6818,7 @@ namespace Narvalo.Finance.Currencies
         public static SHP Unit { get { Warrant.NotNull<SHP>(); return Uniq.Instance; } }
 
         public static explicit operator SHP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SHP value) => value.ToCurrency();
+        public static explicit operator Currency?(SHP value) => value?.ToCurrency();
 
         public static SHP FromCurrency(Currency value)
         {
@@ -6849,7 +6849,7 @@ namespace Narvalo.Finance.Currencies
         public static SIT Unit { get { Warrant.NotNull<SIT>(); return Uniq.Instance; } }
 
         public static explicit operator SIT(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SIT value) => value.ToCurrency();
+        public static explicit operator Currency?(SIT value) => value?.ToCurrency();
 
         public static SIT FromCurrency(Currency value)
         {
@@ -6880,7 +6880,7 @@ namespace Narvalo.Finance.Currencies
         public static SKK Unit { get { Warrant.NotNull<SKK>(); return Uniq.Instance; } }
 
         public static explicit operator SKK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SKK value) => value.ToCurrency();
+        public static explicit operator Currency?(SKK value) => value?.ToCurrency();
 
         public static SKK FromCurrency(Currency value)
         {
@@ -6911,7 +6911,7 @@ namespace Narvalo.Finance.Currencies
         public static SLL Unit { get { Warrant.NotNull<SLL>(); return Uniq.Instance; } }
 
         public static explicit operator SLL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SLL value) => value.ToCurrency();
+        public static explicit operator Currency?(SLL value) => value?.ToCurrency();
 
         public static SLL FromCurrency(Currency value)
         {
@@ -6942,7 +6942,7 @@ namespace Narvalo.Finance.Currencies
         public static SOS Unit { get { Warrant.NotNull<SOS>(); return Uniq.Instance; } }
 
         public static explicit operator SOS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SOS value) => value.ToCurrency();
+        public static explicit operator Currency?(SOS value) => value?.ToCurrency();
 
         public static SOS FromCurrency(Currency value)
         {
@@ -6973,7 +6973,7 @@ namespace Narvalo.Finance.Currencies
         public static SRD Unit { get { Warrant.NotNull<SRD>(); return Uniq.Instance; } }
 
         public static explicit operator SRD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SRD value) => value.ToCurrency();
+        public static explicit operator Currency?(SRD value) => value?.ToCurrency();
 
         public static SRD FromCurrency(Currency value)
         {
@@ -7004,7 +7004,7 @@ namespace Narvalo.Finance.Currencies
         public static SRG Unit { get { Warrant.NotNull<SRG>(); return Uniq.Instance; } }
 
         public static explicit operator SRG(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SRG value) => value.ToCurrency();
+        public static explicit operator Currency?(SRG value) => value?.ToCurrency();
 
         public static SRG FromCurrency(Currency value)
         {
@@ -7035,7 +7035,7 @@ namespace Narvalo.Finance.Currencies
         public static SSP Unit { get { Warrant.NotNull<SSP>(); return Uniq.Instance; } }
 
         public static explicit operator SSP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SSP value) => value.ToCurrency();
+        public static explicit operator Currency?(SSP value) => value?.ToCurrency();
 
         public static SSP FromCurrency(Currency value)
         {
@@ -7066,7 +7066,7 @@ namespace Narvalo.Finance.Currencies
         public static STD Unit { get { Warrant.NotNull<STD>(); return Uniq.Instance; } }
 
         public static explicit operator STD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(STD value) => value.ToCurrency();
+        public static explicit operator Currency?(STD value) => value?.ToCurrency();
 
         public static STD FromCurrency(Currency value)
         {
@@ -7097,7 +7097,7 @@ namespace Narvalo.Finance.Currencies
         public static SUR Unit { get { Warrant.NotNull<SUR>(); return Uniq.Instance; } }
 
         public static explicit operator SUR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SUR value) => value.ToCurrency();
+        public static explicit operator Currency?(SUR value) => value?.ToCurrency();
 
         public static SUR FromCurrency(Currency value)
         {
@@ -7128,7 +7128,7 @@ namespace Narvalo.Finance.Currencies
         public static SVC Unit { get { Warrant.NotNull<SVC>(); return Uniq.Instance; } }
 
         public static explicit operator SVC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SVC value) => value.ToCurrency();
+        public static explicit operator Currency?(SVC value) => value?.ToCurrency();
 
         public static SVC FromCurrency(Currency value)
         {
@@ -7159,7 +7159,7 @@ namespace Narvalo.Finance.Currencies
         public static SYP Unit { get { Warrant.NotNull<SYP>(); return Uniq.Instance; } }
 
         public static explicit operator SYP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SYP value) => value.ToCurrency();
+        public static explicit operator Currency?(SYP value) => value?.ToCurrency();
 
         public static SYP FromCurrency(Currency value)
         {
@@ -7190,7 +7190,7 @@ namespace Narvalo.Finance.Currencies
         public static SZL Unit { get { Warrant.NotNull<SZL>(); return Uniq.Instance; } }
 
         public static explicit operator SZL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(SZL value) => value.ToCurrency();
+        public static explicit operator Currency?(SZL value) => value?.ToCurrency();
 
         public static SZL FromCurrency(Currency value)
         {
@@ -7221,7 +7221,7 @@ namespace Narvalo.Finance.Currencies
         public static THB Unit { get { Warrant.NotNull<THB>(); return Uniq.Instance; } }
 
         public static explicit operator THB(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(THB value) => value.ToCurrency();
+        public static explicit operator Currency?(THB value) => value?.ToCurrency();
 
         public static THB FromCurrency(Currency value)
         {
@@ -7252,7 +7252,7 @@ namespace Narvalo.Finance.Currencies
         public static TJR Unit { get { Warrant.NotNull<TJR>(); return Uniq.Instance; } }
 
         public static explicit operator TJR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TJR value) => value.ToCurrency();
+        public static explicit operator Currency?(TJR value) => value?.ToCurrency();
 
         public static TJR FromCurrency(Currency value)
         {
@@ -7283,7 +7283,7 @@ namespace Narvalo.Finance.Currencies
         public static TJS Unit { get { Warrant.NotNull<TJS>(); return Uniq.Instance; } }
 
         public static explicit operator TJS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TJS value) => value.ToCurrency();
+        public static explicit operator Currency?(TJS value) => value?.ToCurrency();
 
         public static TJS FromCurrency(Currency value)
         {
@@ -7314,7 +7314,7 @@ namespace Narvalo.Finance.Currencies
         public static TMM Unit { get { Warrant.NotNull<TMM>(); return Uniq.Instance; } }
 
         public static explicit operator TMM(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TMM value) => value.ToCurrency();
+        public static explicit operator Currency?(TMM value) => value?.ToCurrency();
 
         public static TMM FromCurrency(Currency value)
         {
@@ -7345,7 +7345,7 @@ namespace Narvalo.Finance.Currencies
         public static TMT Unit { get { Warrant.NotNull<TMT>(); return Uniq.Instance; } }
 
         public static explicit operator TMT(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TMT value) => value.ToCurrency();
+        public static explicit operator Currency?(TMT value) => value?.ToCurrency();
 
         public static TMT FromCurrency(Currency value)
         {
@@ -7376,7 +7376,7 @@ namespace Narvalo.Finance.Currencies
         public static TND Unit { get { Warrant.NotNull<TND>(); return Uniq.Instance; } }
 
         public static explicit operator TND(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TND value) => value.ToCurrency();
+        public static explicit operator Currency?(TND value) => value?.ToCurrency();
 
         public static TND FromCurrency(Currency value)
         {
@@ -7407,7 +7407,7 @@ namespace Narvalo.Finance.Currencies
         public static TOP Unit { get { Warrant.NotNull<TOP>(); return Uniq.Instance; } }
 
         public static explicit operator TOP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TOP value) => value.ToCurrency();
+        public static explicit operator Currency?(TOP value) => value?.ToCurrency();
 
         public static TOP FromCurrency(Currency value)
         {
@@ -7438,7 +7438,7 @@ namespace Narvalo.Finance.Currencies
         public static TPE Unit { get { Warrant.NotNull<TPE>(); return Uniq.Instance; } }
 
         public static explicit operator TPE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TPE value) => value.ToCurrency();
+        public static explicit operator Currency?(TPE value) => value?.ToCurrency();
 
         public static TPE FromCurrency(Currency value)
         {
@@ -7469,7 +7469,7 @@ namespace Narvalo.Finance.Currencies
         public static TRL Unit { get { Warrant.NotNull<TRL>(); return Uniq.Instance; } }
 
         public static explicit operator TRL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TRL value) => value.ToCurrency();
+        public static explicit operator Currency?(TRL value) => value?.ToCurrency();
 
         public static TRL FromCurrency(Currency value)
         {
@@ -7500,7 +7500,7 @@ namespace Narvalo.Finance.Currencies
         public static TRY Unit { get { Warrant.NotNull<TRY>(); return Uniq.Instance; } }
 
         public static explicit operator TRY(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TRY value) => value.ToCurrency();
+        public static explicit operator Currency?(TRY value) => value?.ToCurrency();
 
         public static TRY FromCurrency(Currency value)
         {
@@ -7531,7 +7531,7 @@ namespace Narvalo.Finance.Currencies
         public static TTD Unit { get { Warrant.NotNull<TTD>(); return Uniq.Instance; } }
 
         public static explicit operator TTD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TTD value) => value.ToCurrency();
+        public static explicit operator Currency?(TTD value) => value?.ToCurrency();
 
         public static TTD FromCurrency(Currency value)
         {
@@ -7562,7 +7562,7 @@ namespace Narvalo.Finance.Currencies
         public static TWD Unit { get { Warrant.NotNull<TWD>(); return Uniq.Instance; } }
 
         public static explicit operator TWD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TWD value) => value.ToCurrency();
+        public static explicit operator Currency?(TWD value) => value?.ToCurrency();
 
         public static TWD FromCurrency(Currency value)
         {
@@ -7593,7 +7593,7 @@ namespace Narvalo.Finance.Currencies
         public static TZS Unit { get { Warrant.NotNull<TZS>(); return Uniq.Instance; } }
 
         public static explicit operator TZS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(TZS value) => value.ToCurrency();
+        public static explicit operator Currency?(TZS value) => value?.ToCurrency();
 
         public static TZS FromCurrency(Currency value)
         {
@@ -7624,7 +7624,7 @@ namespace Narvalo.Finance.Currencies
         public static UAH Unit { get { Warrant.NotNull<UAH>(); return Uniq.Instance; } }
 
         public static explicit operator UAH(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(UAH value) => value.ToCurrency();
+        public static explicit operator Currency?(UAH value) => value?.ToCurrency();
 
         public static UAH FromCurrency(Currency value)
         {
@@ -7655,7 +7655,7 @@ namespace Narvalo.Finance.Currencies
         public static UAK Unit { get { Warrant.NotNull<UAK>(); return Uniq.Instance; } }
 
         public static explicit operator UAK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(UAK value) => value.ToCurrency();
+        public static explicit operator Currency?(UAK value) => value?.ToCurrency();
 
         public static UAK FromCurrency(Currency value)
         {
@@ -7686,7 +7686,7 @@ namespace Narvalo.Finance.Currencies
         public static UGS Unit { get { Warrant.NotNull<UGS>(); return Uniq.Instance; } }
 
         public static explicit operator UGS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(UGS value) => value.ToCurrency();
+        public static explicit operator Currency?(UGS value) => value?.ToCurrency();
 
         public static UGS FromCurrency(Currency value)
         {
@@ -7717,7 +7717,7 @@ namespace Narvalo.Finance.Currencies
         public static UGW Unit { get { Warrant.NotNull<UGW>(); return Uniq.Instance; } }
 
         public static explicit operator UGW(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(UGW value) => value.ToCurrency();
+        public static explicit operator Currency?(UGW value) => value?.ToCurrency();
 
         public static UGW FromCurrency(Currency value)
         {
@@ -7748,7 +7748,7 @@ namespace Narvalo.Finance.Currencies
         public static UGX Unit { get { Warrant.NotNull<UGX>(); return Uniq.Instance; } }
 
         public static explicit operator UGX(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(UGX value) => value.ToCurrency();
+        public static explicit operator Currency?(UGX value) => value?.ToCurrency();
 
         public static UGX FromCurrency(Currency value)
         {
@@ -7779,7 +7779,7 @@ namespace Narvalo.Finance.Currencies
         public static USD Unit { get { Warrant.NotNull<USD>(); return Uniq.Instance; } }
 
         public static explicit operator USD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(USD value) => value.ToCurrency();
+        public static explicit operator Currency?(USD value) => value?.ToCurrency();
 
         public static USD FromCurrency(Currency value)
         {
@@ -7810,7 +7810,7 @@ namespace Narvalo.Finance.Currencies
         public static USN Unit { get { Warrant.NotNull<USN>(); return Uniq.Instance; } }
 
         public static explicit operator USN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(USN value) => value.ToCurrency();
+        public static explicit operator Currency?(USN value) => value?.ToCurrency();
 
         public static USN FromCurrency(Currency value)
         {
@@ -7841,7 +7841,7 @@ namespace Narvalo.Finance.Currencies
         public static USS Unit { get { Warrant.NotNull<USS>(); return Uniq.Instance; } }
 
         public static explicit operator USS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(USS value) => value.ToCurrency();
+        public static explicit operator Currency?(USS value) => value?.ToCurrency();
 
         public static USS FromCurrency(Currency value)
         {
@@ -7872,7 +7872,7 @@ namespace Narvalo.Finance.Currencies
         public static UYI Unit { get { Warrant.NotNull<UYI>(); return Uniq.Instance; } }
 
         public static explicit operator UYI(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(UYI value) => value.ToCurrency();
+        public static explicit operator Currency?(UYI value) => value?.ToCurrency();
 
         public static UYI FromCurrency(Currency value)
         {
@@ -7903,7 +7903,7 @@ namespace Narvalo.Finance.Currencies
         public static UYN Unit { get { Warrant.NotNull<UYN>(); return Uniq.Instance; } }
 
         public static explicit operator UYN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(UYN value) => value.ToCurrency();
+        public static explicit operator Currency?(UYN value) => value?.ToCurrency();
 
         public static UYN FromCurrency(Currency value)
         {
@@ -7934,7 +7934,7 @@ namespace Narvalo.Finance.Currencies
         public static UYP Unit { get { Warrant.NotNull<UYP>(); return Uniq.Instance; } }
 
         public static explicit operator UYP(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(UYP value) => value.ToCurrency();
+        public static explicit operator Currency?(UYP value) => value?.ToCurrency();
 
         public static UYP FromCurrency(Currency value)
         {
@@ -7965,7 +7965,7 @@ namespace Narvalo.Finance.Currencies
         public static UYU Unit { get { Warrant.NotNull<UYU>(); return Uniq.Instance; } }
 
         public static explicit operator UYU(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(UYU value) => value.ToCurrency();
+        public static explicit operator Currency?(UYU value) => value?.ToCurrency();
 
         public static UYU FromCurrency(Currency value)
         {
@@ -7996,7 +7996,7 @@ namespace Narvalo.Finance.Currencies
         public static UZS Unit { get { Warrant.NotNull<UZS>(); return Uniq.Instance; } }
 
         public static explicit operator UZS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(UZS value) => value.ToCurrency();
+        public static explicit operator Currency?(UZS value) => value?.ToCurrency();
 
         public static UZS FromCurrency(Currency value)
         {
@@ -8027,7 +8027,7 @@ namespace Narvalo.Finance.Currencies
         public static VEB Unit { get { Warrant.NotNull<VEB>(); return Uniq.Instance; } }
 
         public static explicit operator VEB(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(VEB value) => value.ToCurrency();
+        public static explicit operator Currency?(VEB value) => value?.ToCurrency();
 
         public static VEB FromCurrency(Currency value)
         {
@@ -8058,7 +8058,7 @@ namespace Narvalo.Finance.Currencies
         public static VEF Unit { get { Warrant.NotNull<VEF>(); return Uniq.Instance; } }
 
         public static explicit operator VEF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(VEF value) => value.ToCurrency();
+        public static explicit operator Currency?(VEF value) => value?.ToCurrency();
 
         public static VEF FromCurrency(Currency value)
         {
@@ -8089,7 +8089,7 @@ namespace Narvalo.Finance.Currencies
         public static VNC Unit { get { Warrant.NotNull<VNC>(); return Uniq.Instance; } }
 
         public static explicit operator VNC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(VNC value) => value.ToCurrency();
+        public static explicit operator Currency?(VNC value) => value?.ToCurrency();
 
         public static VNC FromCurrency(Currency value)
         {
@@ -8120,7 +8120,7 @@ namespace Narvalo.Finance.Currencies
         public static VND Unit { get { Warrant.NotNull<VND>(); return Uniq.Instance; } }
 
         public static explicit operator VND(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(VND value) => value.ToCurrency();
+        public static explicit operator Currency?(VND value) => value?.ToCurrency();
 
         public static VND FromCurrency(Currency value)
         {
@@ -8151,7 +8151,7 @@ namespace Narvalo.Finance.Currencies
         public static VUV Unit { get { Warrant.NotNull<VUV>(); return Uniq.Instance; } }
 
         public static explicit operator VUV(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(VUV value) => value.ToCurrency();
+        public static explicit operator Currency?(VUV value) => value?.ToCurrency();
 
         public static VUV FromCurrency(Currency value)
         {
@@ -8182,7 +8182,7 @@ namespace Narvalo.Finance.Currencies
         public static WST Unit { get { Warrant.NotNull<WST>(); return Uniq.Instance; } }
 
         public static explicit operator WST(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(WST value) => value.ToCurrency();
+        public static explicit operator Currency?(WST value) => value?.ToCurrency();
 
         public static WST FromCurrency(Currency value)
         {
@@ -8213,7 +8213,7 @@ namespace Narvalo.Finance.Currencies
         public static XAF Unit { get { Warrant.NotNull<XAF>(); return Uniq.Instance; } }
 
         public static explicit operator XAF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XAF value) => value.ToCurrency();
+        public static explicit operator Currency?(XAF value) => value?.ToCurrency();
 
         public static XAF FromCurrency(Currency value)
         {
@@ -8244,7 +8244,7 @@ namespace Narvalo.Finance.Currencies
         public static XAG Unit { get { Warrant.NotNull<XAG>(); return Uniq.Instance; } }
 
         public static explicit operator XAG(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XAG value) => value.ToCurrency();
+        public static explicit operator Currency?(XAG value) => value?.ToCurrency();
 
         public static XAG FromCurrency(Currency value)
         {
@@ -8275,7 +8275,7 @@ namespace Narvalo.Finance.Currencies
         public static XAU Unit { get { Warrant.NotNull<XAU>(); return Uniq.Instance; } }
 
         public static explicit operator XAU(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XAU value) => value.ToCurrency();
+        public static explicit operator Currency?(XAU value) => value?.ToCurrency();
 
         public static XAU FromCurrency(Currency value)
         {
@@ -8306,7 +8306,7 @@ namespace Narvalo.Finance.Currencies
         public static XBA Unit { get { Warrant.NotNull<XBA>(); return Uniq.Instance; } }
 
         public static explicit operator XBA(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XBA value) => value.ToCurrency();
+        public static explicit operator Currency?(XBA value) => value?.ToCurrency();
 
         public static XBA FromCurrency(Currency value)
         {
@@ -8337,7 +8337,7 @@ namespace Narvalo.Finance.Currencies
         public static XBB Unit { get { Warrant.NotNull<XBB>(); return Uniq.Instance; } }
 
         public static explicit operator XBB(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XBB value) => value.ToCurrency();
+        public static explicit operator Currency?(XBB value) => value?.ToCurrency();
 
         public static XBB FromCurrency(Currency value)
         {
@@ -8368,7 +8368,7 @@ namespace Narvalo.Finance.Currencies
         public static XBC Unit { get { Warrant.NotNull<XBC>(); return Uniq.Instance; } }
 
         public static explicit operator XBC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XBC value) => value.ToCurrency();
+        public static explicit operator Currency?(XBC value) => value?.ToCurrency();
 
         public static XBC FromCurrency(Currency value)
         {
@@ -8399,7 +8399,7 @@ namespace Narvalo.Finance.Currencies
         public static XBD Unit { get { Warrant.NotNull<XBD>(); return Uniq.Instance; } }
 
         public static explicit operator XBD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XBD value) => value.ToCurrency();
+        public static explicit operator Currency?(XBD value) => value?.ToCurrency();
 
         public static XBD FromCurrency(Currency value)
         {
@@ -8430,7 +8430,7 @@ namespace Narvalo.Finance.Currencies
         public static XCD Unit { get { Warrant.NotNull<XCD>(); return Uniq.Instance; } }
 
         public static explicit operator XCD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XCD value) => value.ToCurrency();
+        public static explicit operator Currency?(XCD value) => value?.ToCurrency();
 
         public static XCD FromCurrency(Currency value)
         {
@@ -8461,7 +8461,7 @@ namespace Narvalo.Finance.Currencies
         public static XDR Unit { get { Warrant.NotNull<XDR>(); return Uniq.Instance; } }
 
         public static explicit operator XDR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XDR value) => value.ToCurrency();
+        public static explicit operator Currency?(XDR value) => value?.ToCurrency();
 
         public static XDR FromCurrency(Currency value)
         {
@@ -8492,7 +8492,7 @@ namespace Narvalo.Finance.Currencies
         public static XEU Unit { get { Warrant.NotNull<XEU>(); return Uniq.Instance; } }
 
         public static explicit operator XEU(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XEU value) => value.ToCurrency();
+        public static explicit operator Currency?(XEU value) => value?.ToCurrency();
 
         public static XEU FromCurrency(Currency value)
         {
@@ -8523,7 +8523,7 @@ namespace Narvalo.Finance.Currencies
         public static XFO Unit { get { Warrant.NotNull<XFO>(); return Uniq.Instance; } }
 
         public static explicit operator XFO(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XFO value) => value.ToCurrency();
+        public static explicit operator Currency?(XFO value) => value?.ToCurrency();
 
         public static XFO FromCurrency(Currency value)
         {
@@ -8554,7 +8554,7 @@ namespace Narvalo.Finance.Currencies
         public static XFU Unit { get { Warrant.NotNull<XFU>(); return Uniq.Instance; } }
 
         public static explicit operator XFU(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XFU value) => value.ToCurrency();
+        public static explicit operator Currency?(XFU value) => value?.ToCurrency();
 
         public static XFU FromCurrency(Currency value)
         {
@@ -8585,7 +8585,7 @@ namespace Narvalo.Finance.Currencies
         public static XOF Unit { get { Warrant.NotNull<XOF>(); return Uniq.Instance; } }
 
         public static explicit operator XOF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XOF value) => value.ToCurrency();
+        public static explicit operator Currency?(XOF value) => value?.ToCurrency();
 
         public static XOF FromCurrency(Currency value)
         {
@@ -8616,7 +8616,7 @@ namespace Narvalo.Finance.Currencies
         public static XPD Unit { get { Warrant.NotNull<XPD>(); return Uniq.Instance; } }
 
         public static explicit operator XPD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XPD value) => value.ToCurrency();
+        public static explicit operator Currency?(XPD value) => value?.ToCurrency();
 
         public static XPD FromCurrency(Currency value)
         {
@@ -8647,7 +8647,7 @@ namespace Narvalo.Finance.Currencies
         public static XPF Unit { get { Warrant.NotNull<XPF>(); return Uniq.Instance; } }
 
         public static explicit operator XPF(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XPF value) => value.ToCurrency();
+        public static explicit operator Currency?(XPF value) => value?.ToCurrency();
 
         public static XPF FromCurrency(Currency value)
         {
@@ -8678,7 +8678,7 @@ namespace Narvalo.Finance.Currencies
         public static XPT Unit { get { Warrant.NotNull<XPT>(); return Uniq.Instance; } }
 
         public static explicit operator XPT(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XPT value) => value.ToCurrency();
+        public static explicit operator Currency?(XPT value) => value?.ToCurrency();
 
         public static XPT FromCurrency(Currency value)
         {
@@ -8709,7 +8709,7 @@ namespace Narvalo.Finance.Currencies
         public static XRE Unit { get { Warrant.NotNull<XRE>(); return Uniq.Instance; } }
 
         public static explicit operator XRE(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XRE value) => value.ToCurrency();
+        public static explicit operator Currency?(XRE value) => value?.ToCurrency();
 
         public static XRE FromCurrency(Currency value)
         {
@@ -8740,7 +8740,7 @@ namespace Narvalo.Finance.Currencies
         public static XSU Unit { get { Warrant.NotNull<XSU>(); return Uniq.Instance; } }
 
         public static explicit operator XSU(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XSU value) => value.ToCurrency();
+        public static explicit operator Currency?(XSU value) => value?.ToCurrency();
 
         public static XSU FromCurrency(Currency value)
         {
@@ -8771,7 +8771,7 @@ namespace Narvalo.Finance.Currencies
         public static XTS Unit { get { Warrant.NotNull<XTS>(); return Uniq.Instance; } }
 
         public static explicit operator XTS(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XTS value) => value.ToCurrency();
+        public static explicit operator Currency?(XTS value) => value?.ToCurrency();
 
         public static XTS FromCurrency(Currency value)
         {
@@ -8802,7 +8802,7 @@ namespace Narvalo.Finance.Currencies
         public static XUA Unit { get { Warrant.NotNull<XUA>(); return Uniq.Instance; } }
 
         public static explicit operator XUA(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XUA value) => value.ToCurrency();
+        public static explicit operator Currency?(XUA value) => value?.ToCurrency();
 
         public static XUA FromCurrency(Currency value)
         {
@@ -8833,7 +8833,7 @@ namespace Narvalo.Finance.Currencies
         public static XXX Unit { get { Warrant.NotNull<XXX>(); return Uniq.Instance; } }
 
         public static explicit operator XXX(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(XXX value) => value.ToCurrency();
+        public static explicit operator Currency?(XXX value) => value?.ToCurrency();
 
         public static XXX FromCurrency(Currency value)
         {
@@ -8864,7 +8864,7 @@ namespace Narvalo.Finance.Currencies
         public static YDD Unit { get { Warrant.NotNull<YDD>(); return Uniq.Instance; } }
 
         public static explicit operator YDD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(YDD value) => value.ToCurrency();
+        public static explicit operator Currency?(YDD value) => value?.ToCurrency();
 
         public static YDD FromCurrency(Currency value)
         {
@@ -8895,7 +8895,7 @@ namespace Narvalo.Finance.Currencies
         public static YER Unit { get { Warrant.NotNull<YER>(); return Uniq.Instance; } }
 
         public static explicit operator YER(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(YER value) => value.ToCurrency();
+        public static explicit operator Currency?(YER value) => value?.ToCurrency();
 
         public static YER FromCurrency(Currency value)
         {
@@ -8926,7 +8926,7 @@ namespace Narvalo.Finance.Currencies
         public static YUD Unit { get { Warrant.NotNull<YUD>(); return Uniq.Instance; } }
 
         public static explicit operator YUD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(YUD value) => value.ToCurrency();
+        public static explicit operator Currency?(YUD value) => value?.ToCurrency();
 
         public static YUD FromCurrency(Currency value)
         {
@@ -8957,7 +8957,7 @@ namespace Narvalo.Finance.Currencies
         public static YUM Unit { get { Warrant.NotNull<YUM>(); return Uniq.Instance; } }
 
         public static explicit operator YUM(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(YUM value) => value.ToCurrency();
+        public static explicit operator Currency?(YUM value) => value?.ToCurrency();
 
         public static YUM FromCurrency(Currency value)
         {
@@ -8988,7 +8988,7 @@ namespace Narvalo.Finance.Currencies
         public static YUN Unit { get { Warrant.NotNull<YUN>(); return Uniq.Instance; } }
 
         public static explicit operator YUN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(YUN value) => value.ToCurrency();
+        public static explicit operator Currency?(YUN value) => value?.ToCurrency();
 
         public static YUN FromCurrency(Currency value)
         {
@@ -9019,7 +9019,7 @@ namespace Narvalo.Finance.Currencies
         public static ZAL Unit { get { Warrant.NotNull<ZAL>(); return Uniq.Instance; } }
 
         public static explicit operator ZAL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZAL value) => value.ToCurrency();
+        public static explicit operator Currency?(ZAL value) => value?.ToCurrency();
 
         public static ZAL FromCurrency(Currency value)
         {
@@ -9050,7 +9050,7 @@ namespace Narvalo.Finance.Currencies
         public static ZAR Unit { get { Warrant.NotNull<ZAR>(); return Uniq.Instance; } }
 
         public static explicit operator ZAR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZAR value) => value.ToCurrency();
+        public static explicit operator Currency?(ZAR value) => value?.ToCurrency();
 
         public static ZAR FromCurrency(Currency value)
         {
@@ -9081,7 +9081,7 @@ namespace Narvalo.Finance.Currencies
         public static ZMK Unit { get { Warrant.NotNull<ZMK>(); return Uniq.Instance; } }
 
         public static explicit operator ZMK(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZMK value) => value.ToCurrency();
+        public static explicit operator Currency?(ZMK value) => value?.ToCurrency();
 
         public static ZMK FromCurrency(Currency value)
         {
@@ -9112,7 +9112,7 @@ namespace Narvalo.Finance.Currencies
         public static ZMW Unit { get { Warrant.NotNull<ZMW>(); return Uniq.Instance; } }
 
         public static explicit operator ZMW(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZMW value) => value.ToCurrency();
+        public static explicit operator Currency?(ZMW value) => value?.ToCurrency();
 
         public static ZMW FromCurrency(Currency value)
         {
@@ -9143,7 +9143,7 @@ namespace Narvalo.Finance.Currencies
         public static ZRN Unit { get { Warrant.NotNull<ZRN>(); return Uniq.Instance; } }
 
         public static explicit operator ZRN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZRN value) => value.ToCurrency();
+        public static explicit operator Currency?(ZRN value) => value?.ToCurrency();
 
         public static ZRN FromCurrency(Currency value)
         {
@@ -9174,7 +9174,7 @@ namespace Narvalo.Finance.Currencies
         public static ZRZ Unit { get { Warrant.NotNull<ZRZ>(); return Uniq.Instance; } }
 
         public static explicit operator ZRZ(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZRZ value) => value.ToCurrency();
+        public static explicit operator Currency?(ZRZ value) => value?.ToCurrency();
 
         public static ZRZ FromCurrency(Currency value)
         {
@@ -9205,7 +9205,7 @@ namespace Narvalo.Finance.Currencies
         public static ZWC Unit { get { Warrant.NotNull<ZWC>(); return Uniq.Instance; } }
 
         public static explicit operator ZWC(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZWC value) => value.ToCurrency();
+        public static explicit operator Currency?(ZWC value) => value?.ToCurrency();
 
         public static ZWC FromCurrency(Currency value)
         {
@@ -9236,7 +9236,7 @@ namespace Narvalo.Finance.Currencies
         public static ZWD Unit { get { Warrant.NotNull<ZWD>(); return Uniq.Instance; } }
 
         public static explicit operator ZWD(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZWD value) => value.ToCurrency();
+        public static explicit operator Currency?(ZWD value) => value?.ToCurrency();
 
         public static ZWD FromCurrency(Currency value)
         {
@@ -9267,7 +9267,7 @@ namespace Narvalo.Finance.Currencies
         public static ZWL Unit { get { Warrant.NotNull<ZWL>(); return Uniq.Instance; } }
 
         public static explicit operator ZWL(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZWL value) => value.ToCurrency();
+        public static explicit operator Currency?(ZWL value) => value?.ToCurrency();
 
         public static ZWL FromCurrency(Currency value)
         {
@@ -9298,7 +9298,7 @@ namespace Narvalo.Finance.Currencies
         public static ZWN Unit { get { Warrant.NotNull<ZWN>(); return Uniq.Instance; } }
 
         public static explicit operator ZWN(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZWN value) => value.ToCurrency();
+        public static explicit operator Currency?(ZWN value) => value?.ToCurrency();
 
         public static ZWN FromCurrency(Currency value)
         {
@@ -9329,7 +9329,7 @@ namespace Narvalo.Finance.Currencies
         public static ZWR Unit { get { Warrant.NotNull<ZWR>(); return Uniq.Instance; } }
 
         public static explicit operator ZWR(Currency value) => FromCurrency(value);
-        public static explicit operator Currency(ZWR value) => value.ToCurrency();
+        public static explicit operator Currency?(ZWR value) => value?.ToCurrency();
 
         public static ZWR FromCurrency(Currency value)
         {
