@@ -15,7 +15,7 @@ namespace Narvalo.Finance
         : IEquatable<Money<TCurrency>>, IComparable<Money<TCurrency>>, IComparable, IFormattable
         where TCurrency : CurrencyUnit<TCurrency>
     {
-        // IMPORTANT: This static field MUST remain first to be initialized before the other(s).
+        // IMPORTANT: This static field MUST remain first in order to be initialized before the other(s).
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly TCurrency s_UnderlyingUnit = CurrencyUnit.OfType<TCurrency>();
 

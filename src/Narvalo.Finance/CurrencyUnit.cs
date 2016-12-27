@@ -21,7 +21,7 @@ namespace Narvalo.Finance
             var typeInfo = typeof(TCurrency).GetTypeInfo();
             Contract.Assume(typeInfo != null);
 
-            // Unsafe, only works for the built-in currency units.
+            // We expect that all built-in currency units defines this property.
             var property = typeInfo.GetDeclaredProperty(SingletonPropertyName);
 
             return property?.GetValue(null) as TCurrency;

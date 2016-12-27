@@ -8,7 +8,7 @@ namespace Narvalo.Finance.Utilities
     // REVIEW: Should we also include the deleted codes?
     internal static partial class CountryISOCodes
     {
-        // The list is automatically generated using the data obtained from the ISO website.
+        // The list is automatically generated using data obtained from the ISO website.
         // The volatile keyword is only for correctness.
         private static volatile HashSet<string> s_TwoLetterCodeSet;
 
