@@ -20,7 +20,7 @@ namespace Narvalo.Finance
         private static readonly TCurrency s_UnderlyingUnit = CurrencyUnit.OfType<TCurrency>();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0m);
+        private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0M);
 
         public Money(decimal amount)
         {
