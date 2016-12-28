@@ -91,7 +91,7 @@
     </Compile>
     <Compile Include="Finance\CurrencyUnitFacts.cs" />
     <Compile Include="Finance\IbanFacts.cs" />
-    <Compile Include="Finance\Utilities\AsciiHelpersFacts.cs" />
+    <Compile Include="Finance\Utilities\AsciiFacts.cs" />
     <Compile Include="Finance\Utilities\CountryISOCodesFacts.cs" />
     <Compile Include="Finance\IbanPartsFacts.cs" />
     <Compile Include="Finance\IbanValidatorFacts.cs" />

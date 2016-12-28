@@ -7,8 +7,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
-    using static Narvalo.Finance.Utilities.AsciiHelpers;
-
     public partial struct IbanParts : IEquatable<IbanParts>, IFormattable
     {
         internal const string DefaultFormat = "G";
@@ -136,7 +134,7 @@ namespace Narvalo.Finance
                 return value.Length >= MinLength && value.Length <= MaxLength && CheckContent(value);
             }
 
-            private static bool CheckContent(string value) => IsDigitOrUpperLetter(value);
+            private static bool CheckContent(string value) => Ascii.IsDigitOrUpperLetter(value);
         }
 
         private static class CheckDigitsPart
@@ -159,7 +157,7 @@ namespace Narvalo.Finance
                 return value.Length == Length && CheckContent(value);
             }
 
-            private static bool CheckContent(string value) => IsDigit(value);
+            private static bool CheckContent(string value) => Ascii.IsDigit(value);
         }
 
         private static class CountryPart
@@ -182,7 +180,7 @@ namespace Narvalo.Finance
                 return value.Length == Length && CheckContent(value);
             }
 
-            private static bool CheckContent(string value) => IsUpperLetter(value);
+            private static bool CheckContent(string value) => Ascii.IsUpperLetter(value);
         }
     }
 

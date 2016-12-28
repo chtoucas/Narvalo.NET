@@ -5,7 +5,7 @@ namespace Narvalo.Finance.Utilities
     using System;
     using System.Diagnostics.Contracts;
 
-    public static partial class AsciiHelpers
+    public static partial class Ascii
     {
         [Pure]
         public static bool IsUpperLetter(string value)

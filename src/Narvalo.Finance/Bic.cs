@@ -7,8 +7,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
-    using static Narvalo.Finance.Utilities.AsciiHelpers;
-
     /// <summary>
     /// Represents a Business Identifier Code (BIC).
     /// </summary>
@@ -237,7 +235,7 @@ namespace Narvalo.Finance
                 return value.Length == 0 || (value.Length == Length && CheckContent(value));
             }
 
-            private static bool CheckContent(string value) => IsDigitOrUpperLetter(value);
+            private static bool CheckContent(string value) => Ascii.IsDigitOrUpperLetter(value);
         }
 
         private static class CountryPart
@@ -285,7 +283,7 @@ namespace Narvalo.Finance
 
             // The SWIFT implementation is more restrictive as it does not allow for digits in the institution code.
             private static bool CheckContent(string value, BicVersion version)
-                => version == BicVersion.ISO ? IsDigitOrUpperLetter(value) : IsUpperLetter(value);
+                => version == BicVersion.ISO ? Ascii.IsDigitOrUpperLetter(value) : Ascii.IsUpperLetter(value);
         }
 
         private static class LocationPart
@@ -308,7 +306,7 @@ namespace Narvalo.Finance
                 return value.Length == Length && CheckContent(value);
             }
 
-            private static bool CheckContent(string value) => IsDigitOrUpperLetter(value);
+            private static bool CheckContent(string value) => Ascii.IsDigitOrUpperLetter(value);
         }
     }
 

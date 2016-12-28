@@ -10,8 +10,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
-    using static Narvalo.Finance.Utilities.AsciiHelpers;
-
     /// <summary>
     /// Represents a currency such as Euro or US Dollar.
     /// </summary>
@@ -87,7 +85,7 @@ namespace Narvalo.Finance
             var code = regionInfo.ISOCurrencySymbol;
             Contract.Assume(code != null);
             Contract.Assume(code.Length != 0);   // Should not be necessary, but CCCheck insists.
-            Contract.Assume(IsUpperLetter(code));
+            Contract.Assume(Ascii.IsUpperLetter(code));
             Contract.Assume(code.Length == 3);
 
             return new Currency(code);
