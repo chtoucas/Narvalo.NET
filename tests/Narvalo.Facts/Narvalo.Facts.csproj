@@ -82,31 +82,32 @@
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="DemandFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
+    <Compile Include="Finance\BicFacts.cs" />
     <Compile Include="Finance\Currencies\BuiltInCurrencyFacts.cs" />
-    <Compile Include="Finance\CurrencyNotFoundExceptionFacts.cs" />
+    <Compile Include="Finance\CurrencyFacts.cs" />
     <Compile Include="Finance\CurrencyFacts.g.cs">
-      <DependentUpon>CurrencyFacts.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyFacts.tt</DependentUpon>
     </Compile>
+    <Compile Include="Finance\CurrencyNotFoundExceptionFacts.cs" />
     <Compile Include="Finance\CurrencyUnitFacts.cs" />
     <Compile Include="Finance\IbanFacts.cs" />
-    <Compile Include="Finance\Utilities\AsciiFacts.cs" />
-    <Compile Include="Finance\Utilities\CountryISOCodesFacts.cs" />
     <Compile Include="Finance\IbanPartsFacts.cs" />
     <Compile Include="Finance\IbanValidatorFacts.cs" />
+    <Compile Include="Finance\MoneyFacts.cs" />
+    <Compile Include="Finance\Utilities\AsciiFacts.cs" />
+    <Compile Include="Finance\Utilities\CountryISOCodesFacts.cs" />
     <Compile Include="Fx\Samples\Internal\EnumerableExtensions.cs" />
+    <Compile Include="_TestCommon\AppDomainUtils.cs" />
     <Compile Include="_TestCommon\DebugOnlyFactAttribute.cs" />
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />
     <Compile Include="ExpectFacts.cs" />
-    <Compile Include="Finance\BicFacts.cs" />
     <Compile Include="Finance\Currencies\BuiltInCurrencyFacts.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BuiltInCurrencyFacts.tt</DependentUpon>
     </Compile>
-    <Compile Include="Finance\CurrencyFacts.cs" />
-    <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="FormatFacts.cs" />
     <Compile Include="Fx\Advanced\NullableFacts.cs" />
     <Compile Include="Fx\EitherFacts.cs" />
@@ -184,13 +185,13 @@
     <Compile Include="Web\UrlManipFacts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Finance\CurrencyFacts.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CurrencyFacts.g.cs</LastGenOutput>
-    </Content>
     <Content Include="Finance\Currencies\BuiltInCurrencyFacts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BuiltInCurrencyFacts.g.cs</LastGenOutput>
+    </Content>
+    <Content Include="Finance\CurrencyFacts.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CurrencyFacts1.g.cs</LastGenOutput>
     </Content>
     <Content Include="Fx\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
