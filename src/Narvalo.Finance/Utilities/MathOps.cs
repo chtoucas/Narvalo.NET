@@ -47,20 +47,48 @@ namespace Narvalo.Finance.Utilities
             => new DivisionResult<T>(value, n, remainder);
     }
 
-    public sealed class DivisionResult<T> : IEnumerable<T>
+    public sealed class DivisionResult<T>
     {
-        private readonly IEnumerable<T> _it;
+        private readonly IEnumerable<T> _coll;
         private readonly T _remainder;
 
         public DivisionResult(T value, int n, T remainder)
         {
-            _it = Enumerable.Repeat(value, n);
+            _coll = Enumerable.Repeat(value, n);
             _remainder = remainder;
         }
 
-        public IEnumerator<T> GetEnumerator() => _it.GetEnumerator();
+        public T Remainder => _remainder;
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        public IEnumerable<T> ToEnumerable() => _coll;
+    }
+
+    public sealed class Partition
+    {
+        private readonly IEnumerable<decimal> _ratios;
+
+        private Partition(IEnumerable<decimal> ratios)
+        {
+            _ratios = ratios;
+        }
+
+        public IEnumerable<decimal> AsEnumerable() => _ratios;
+
+        public static Partition Create(IEnumerable<int> partition)
+        {
+            var arr = partition.ToArray();
+            if (arr.Sum() != 100) { throw new ArgumentException(); }
+
+            return new Partition(from _ in partition select _ * 0.01M);
+        }
+
+        public static Partition Create(IEnumerable<decimal> ratios)
+        {
+            var arr = ratios.ToArray();
+            if (ratios.Sum() != 1M) { throw new ArgumentException(); }
+
+            return new Partition(ratios);
+        }
     }
 
     // Notes:
@@ -155,47 +183,36 @@ namespace Narvalo.Finance.Utilities
             yield return last;
         }
 
-        public static IEnumerable<decimal> Allocate(decimal value, int minorUnits, int[] ratios)
-            => Allocate(value, minorUnits, ratios, MidpointRounding.ToEven);
-
-        public static IEnumerable<decimal> Allocate(decimal value, int minorUnits, int[] ratios, MidpointRounding mode)
+        public static IEnumerable<decimal> Allocate(
+            decimal value,
+            int minorUnits,
+            Partition partition,
+            MidpointRounding mode)
         {
-            var len = ratios.Length;
-            var sum = ratios.Sum();
+            var coll = from _ in partition.AsEnumerable() select Math.Round(_ * value, minorUnits, mode);
+            var arr = coll.ToArray();
+            arr[arr.Length - 1] = value - (arr.Sum() - arr[arr.Length - 1]);
+
+            return arr;
+        }
+
+        public static IEnumerable<decimal> Allocate(decimal value, int minorUnits, int[] partition)
+            => Allocate(value, minorUnits, partition, MidpointRounding.ToEven);
+
+        public static IEnumerable<decimal> Allocate(decimal value, int minorUnits, int[] partition, MidpointRounding mode)
+        {
+            var len = partition.Length;
+            var sum = partition.Sum();
             var last = value;
 
             for (var i = 0; i < len - 1; i++)
             {
-                decimal next = Math.Round(value * ratios[i] / sum, minorUnits, mode);
+                decimal next = Math.Round(value * partition[i] / sum, minorUnits, mode);
                 last -= next;
                 yield return next;
             }
 
             yield return last;
-        }
-
-        // http://www.timlabonne.com/2013/07/distributing-monetary-amounts-in-c/
-        public static decimal[] Distribute(decimal value, int[] ratios)
-        {
-            var len = ratios.Length;
-
-            var total = 0M;
-            for (var i = 0; i < len; i++) { total += ratios[i]; }
-
-            var remainder = value;
-            var dist = new decimal[len];
-            for (var i = 0; i < len; i++)
-            {
-                dist[i] = Math.Floor(value * ratios[i] / total);
-                remainder -= dist[i];
-            }
-
-            for (var i = 0; i < remainder; i++)
-            {
-                dist[i]++;
-            }
-
-            return dist;
         }
     }
 }
