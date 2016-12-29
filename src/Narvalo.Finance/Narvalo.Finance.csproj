@@ -106,7 +106,7 @@
     <Compile Include="IbanValidationLevels.cs" />
     <Compile Include="Utilities\BooleanResult.cs" />
     <Compile Include="IbanValidator.cs" />
-    <Compile Include="Utilities\Partition.cs" />
+    <Compile Include="Utilities\MathOps.cs" />
     <Compile Include="Utilities\Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />
