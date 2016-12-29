@@ -63,31 +63,31 @@ namespace Narvalo.Finance.Utilities
         public IEnumerable<T> ToEnumerable() => _coll;
     }
 
-    public sealed class Partition
+    public sealed class Weights
     {
-        private readonly IEnumerable<decimal> _ratios;
+        private readonly IEnumerable<decimal> _weights;
 
-        private Partition(IEnumerable<decimal> ratios)
+        private Weights(IEnumerable<decimal> weights)
         {
-            _ratios = ratios;
+            _weights = weights;
         }
 
-        public IEnumerable<decimal> AsEnumerable() => _ratios;
+        public IEnumerable<decimal> AsEnumerable() => _weights;
 
-        public static Partition Create(IEnumerable<int> partition)
+        public static Weights NewPartition(IEnumerable<int> partition)
         {
             var arr = partition.ToArray();
             if (arr.Sum() != 100) { throw new ArgumentException(); }
 
-            return new Partition(from _ in partition select _ * 0.01M);
+            return new Weights(from _ in partition select _ * 0.01M);
         }
 
-        public static Partition Create(IEnumerable<decimal> ratios)
+        public static Weights NewPartition(IEnumerable<decimal> ratios)
         {
             var arr = ratios.ToArray();
             if (ratios.Sum() != 1M) { throw new ArgumentException(); }
 
-            return new Partition(ratios);
+            return new Weights(ratios);
         }
     }
 
@@ -138,7 +138,7 @@ namespace Narvalo.Finance.Utilities
             return DivisionResult.Create(low, n, remainder);
         }
 
-        // Distribute an integer (value) across n integers:
+        // Distribute an integer (value) across n copies of value / n:
         //   value = nq + r = (n - r) q + r (q + 1) where q = value / n.
         // First returns the high value r times, then the low value n - r times.
         public static IEnumerable<int> Distribute(int value, int n)
@@ -186,10 +186,10 @@ namespace Narvalo.Finance.Utilities
         public static IEnumerable<decimal> Allocate(
             decimal value,
             int minorUnits,
-            Partition partition,
+            Weights weights,
             MidpointRounding mode)
         {
-            var coll = from _ in partition.AsEnumerable() select Math.Round(_ * value, minorUnits, mode);
+            var coll = from _ in weights.AsEnumerable() select Math.Round(_ * value, minorUnits, mode);
             var arr = coll.ToArray();
             arr[arr.Length - 1] = value - (arr.Sum() - arr[arr.Length - 1]);
 
