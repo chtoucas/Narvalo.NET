@@ -1,37 +1,17 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Utilities
+namespace Narvalo.Finance.Numerics
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
 
-    public enum MinorUnits
+    public enum AllocationRecipient
     {
-        Zero,
-        One,
-        Two,
-        Three,
-        Four,
-        Five,
-    }
-
-    // See https://en.wikipedia.org/wiki/Rounding
-    // In .NET:
-    // - ToEven, aka Bankers' Rounding.
-    //   Advantage: it is symmetric (negative and positive numbers are treated equally);
-    //   we can divide the result by two without losing precision; it is unbalanced compare to Down
-    //  or Up when it comes to cumulative computations followed by approximations.
-    // - AwayFromZero,
-    // Stochastic?
-    public enum NumberRounding
-    {
-        Down,
-        Up,
-        TowardZero,
-        AwayFromZero,
-        Nearest,
+        First,
+        Last,
+        Lowest,
+        Highest,
+        PseudoRandom,
     }
 
     // Spread? Partition? Evenly?
@@ -40,56 +20,6 @@ namespace Narvalo.Finance.Utilities
     //    PseudoUniform,
     //    Single,
     //}
-
-    public static class DivisionResult
-    {
-        public static DivisionResult<T> Create<T>(T value, int n, T remainder)
-            => new DivisionResult<T>(value, n, remainder);
-    }
-
-    public sealed class DivisionResult<T>
-    {
-        private readonly IEnumerable<T> _coll;
-        private readonly T _remainder;
-
-        public DivisionResult(T value, int n, T remainder)
-        {
-            _coll = Enumerable.Repeat(value, n);
-            _remainder = remainder;
-        }
-
-        public T Remainder => _remainder;
-
-        public IEnumerable<T> ToEnumerable() => _coll;
-    }
-
-    public sealed class Weights
-    {
-        private readonly IEnumerable<decimal> _weights;
-
-        private Weights(IEnumerable<decimal> weights)
-        {
-            _weights = weights;
-        }
-
-        public IEnumerable<decimal> AsEnumerable() => _weights;
-
-        public static Weights NewPartition(IEnumerable<int> partition)
-        {
-            var arr = partition.ToArray();
-            if (arr.Sum() != 100) { throw new ArgumentException(); }
-
-            return new Weights(from _ in partition select _ * 0.01M);
-        }
-
-        public static Weights NewPartition(IEnumerable<decimal> ratios)
-        {
-            var arr = ratios.ToArray();
-            if (ratios.Sum() != 1M) { throw new ArgumentException(); }
-
-            return new Weights(ratios);
-        }
-    }
 
     // Notes:
     // With a PCL, we can not use Decimal.Round, instead we have Math.Round.
@@ -169,9 +99,13 @@ namespace Narvalo.Finance.Utilities
         public static IEnumerable<decimal> Distribute(decimal value, int minorUnits, int n)
             => Distribute(value, minorUnits, n, MidpointRounding.ToEven);
 
-        public static IEnumerable<decimal> Distribute(decimal value, int minorUnits, int n, MidpointRounding mode)
+        public static IEnumerable<decimal> Distribute(
+            decimal value,
+            int minorUnits,
+            int n,
+            MidpointRounding rounding)
         {
-            decimal q = Math.Round(value / n, minorUnits, mode);
+            decimal q = Math.Round(value / n, minorUnits, rounding);
 
             for (var i = 0; i < n - 1; i++)
             {
@@ -183,31 +117,25 @@ namespace Narvalo.Finance.Utilities
             yield return last;
         }
 
+        public static IEnumerable<decimal> Allocate(decimal value, int minorUnits, int[] partition)
+            => Allocate(value, minorUnits, Weights.From(partition), MidpointRounding.ToEven);
+
+        public static IEnumerable<decimal> Allocate(decimal value, int minorUnits, decimal[] ratios)
+            => Allocate(value, minorUnits, Weights.From(ratios), MidpointRounding.ToEven);
+
         public static IEnumerable<decimal> Allocate(
             decimal value,
             int minorUnits,
             Weights weights,
-            MidpointRounding mode)
+            MidpointRounding rounding)
         {
-            var coll = from _ in weights.AsEnumerable() select Math.Round(_ * value, minorUnits, mode);
-            var arr = coll.ToArray();
-            arr[arr.Length - 1] = value - (arr.Sum() - arr[arr.Length - 1]);
-
-            return arr;
-        }
-
-        public static IEnumerable<decimal> Allocate(decimal value, int minorUnits, int[] partition)
-            => Allocate(value, minorUnits, partition, MidpointRounding.ToEven);
-
-        public static IEnumerable<decimal> Allocate(decimal value, int minorUnits, int[] partition, MidpointRounding mode)
-        {
-            var len = partition.Length;
-            var sum = partition.Sum();
+            var len = weights.Length;
+            var dist = new decimal[len];
             var last = value;
 
             for (var i = 0; i < len - 1; i++)
             {
-                decimal next = Math.Round(value * partition[i] / sum, minorUnits, mode);
+                decimal next = Math.Round(weights[i] * value, minorUnits, rounding);
                 last -= next;
                 yield return next;
             }
