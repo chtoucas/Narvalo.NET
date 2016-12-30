@@ -9,11 +9,11 @@ namespace Narvalo.Finance.Numerics
         // Reproduces the Math.DivRem() method which is not available with PCL:
         // > int rem;
         // > int div = Math.DivRem(m, n, out rem);
-        internal static int Divide(int m, int n, out int rem)
+        public static int Divide(int dividend, int divisor, out int remainder)
         {
-            int q = m / n;
+            int q = dividend / divisor;
             // NB: remainder = m % n is slower.
-            rem = m - q * n;
+            remainder = dividend - q * divisor;
             return q;
         }
 

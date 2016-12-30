@@ -6,10 +6,10 @@ namespace Narvalo.Finance.Numerics
 
     public static class Int64Calculator
     {
-        internal static long Divide(long m, long n, out long rem)
+        public static long Divide(long dividend, long divisor, out long remainder)
         {
-            long q = m / n;
-            rem = m - q * n;
+            long q = dividend / divisor;
+            remainder = dividend - q * divisor;
             return q;
         }
 
