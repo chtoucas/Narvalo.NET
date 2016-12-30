@@ -6,7 +6,6 @@ namespace Narvalo.Finance.Numerics
 
     public static class Int64Calculator
     {
-        /// <see cref="Int32Calculator.Divide(int, int, out int)">.
         internal static long Divide(long m, long n, out long rem)
         {
             long q = m / n;
@@ -14,7 +13,6 @@ namespace Narvalo.Finance.Numerics
             return q;
         }
 
-        /// <see cref="Int32Calculator.Divide(int, int)">.
         public static DivCollection<long> Divide(long amount, int parts)
         {
             long rem;
@@ -23,7 +21,6 @@ namespace Narvalo.Finance.Numerics
             return DivCollection<long>.Create(q, rem, parts);
         }
 
-        /// <see cref="Int32Calculator.Distribute(int, int)">.
         public static IEnumerable<long> Distribute(long amount, long parts)
         {
             long rem;

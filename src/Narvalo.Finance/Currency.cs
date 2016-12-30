@@ -189,7 +189,7 @@ namespace Narvalo.Finance
 {
     using System.Diagnostics.Contracts;
 
-    public partial class Currency
+    public partial struct Currency
     {
         [ContractInvariantMethod]
         private void ObjectInvariant()
