@@ -98,6 +98,7 @@
     <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="Finance\Utilities\AsciiFacts.cs" />
     <Compile Include="Finance\Utilities\CountryISOCodesFacts.cs" />
+    <Compile Include="Finance\Utilities\ISO7064Facts.cs" />
     <Compile Include="Fx\Samples\Internal\EnumerableExtensions.cs" />
     <Compile Include="_TestCommon\AppDomainUtils.cs" />
     <Compile Include="_TestCommon\DebugOnlyFactAttribute.cs" />

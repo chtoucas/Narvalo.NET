@@ -11,8 +11,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
 
-    // FIXME: Use int's to represent the amount and, later on, create a BigMoney struct based
-    // on BigRational (BigDecimal?) for arbitrary-precision calculations.
     [StructLayout(LayoutKind.Auto)]
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Money : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable

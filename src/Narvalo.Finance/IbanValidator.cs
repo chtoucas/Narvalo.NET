@@ -9,8 +9,6 @@ namespace Narvalo.Finance
 
     public sealed class IbanValidator
     {
-        private const int CHECKSUM_MODULO = 97;
-
         private readonly bool _verifyIntegrity;
         private readonly bool _verifyISOCountryCode;
         private readonly bool _verifyBban;
@@ -76,85 +74,12 @@ namespace Narvalo.Finance
             throw new NotImplementedException();
         }
 
-        // The algorithm is as follows (ISO 7064 mod 97-10):
-        // 1. Move the leading 4 chars to the end of the value.
-        // 2. Replace '0' by 0, '1' by 1, etc.
-        // 3. Replace 'A' by 10, 'B' by 11, etc.
-        // 4. Verify that the resulting integer modulo 97 is equal to 1.
         public static bool VerifyIntegrity(IbanParts parts)
             // NB: On full .NET we have Environment.Is64BitProcess.
             // If IntPtr.Size is equal to 8, we are running in a 64-bit process and
             // we check the integrity using Int64 arithmetic; otherwise (32-bit or 16-bit process)
             // we use Int32 arithmetic (NB: IntPtr.Size = 4 in a 32-bit process). I believe,
             // but I have not verified, that ComputeInt64Checksum() is faster in a 64-bit process.
-            => CheckIntegrity(parts.LiteralValue, IntPtr.Size == 8);
-
-        // WARNING: Only works for well-formed IBAN values (length and valid characters).
-        internal static bool CheckIntegrity(string value, bool sixtyfour)
-        {
-            Demand.NotNull(value);
-
-            return sixtyfour
-                ? ComputeInt64Checksum(value) % CHECKSUM_MODULO == 1
-                : ComputeInt32Checksum(value) % CHECKSUM_MODULO == 1;
-        }
-
-        private static int ComputeInt32Checksum(string value)
-        {
-            Demand.NotNull(value);
-
-            const int MAX_DIGIT = (Int32.MaxValue - 9) / 10;
-            const int MAX_LETTER = (Int32.MaxValue - 35) / 100;
-
-            int len = value.Length;
-            int checksum = 0;
-
-            for (var i = 0; i < len; i++)
-            {
-                char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
-                if (ch >= '0' && ch <= '9')
-                {
-                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 10 * checksum + (ch - '0');
-                }
-                else
-                {
-                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 100 * checksum + (ch - 'A' + 10);
-                }
-            }
-
-            return checksum;
-        }
-
-        private static long ComputeInt64Checksum(string value)
-        {
-            Demand.NotNull(value);
-
-            // 922 337 203 685 477 579
-            const long MAX_DIGIT = (Int64.MaxValue - 9) / 10;
-            // 92 233 720 368 547 757
-            const long MAX_LETTER = (Int64.MaxValue - 35) / 100;
-
-            int len = value.Length;
-            long checksum = 0L;
-
-            for (var i = 0; i < len; i++)
-            {
-                char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
-                if (ch >= '0' && ch <= '9')
-                {
-                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 10 * checksum + (ch - '0');
-                }
-                else
-                {
-                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULO; }
-                    checksum = 100 * checksum + (ch - 'A' + 10);
-                }
-            }
-
-            return checksum;
-        }
+            => ISO7064.CheckIntegrity(parts.LiteralValue, IntPtr.Size == 8);
     }
 }

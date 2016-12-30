@@ -2,7 +2,7 @@
 
 namespace Narvalo.Finance.Numerics
 {
-    public enum MinorUnit
+    public enum DecimalPlace
     {
         Zero,
         One,

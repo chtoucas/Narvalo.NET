@@ -56,9 +56,9 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Generic\Currencies.tt">
+    <None Include="Generic\Units.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Currencies.g.cs</LastGenOutput>
+      <LastGenOutput>Units.g.cs</LastGenOutput>
     </None>
     <None Include="Currency.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -82,17 +82,18 @@
     <Compile Include="Numerics\Int64Calculator.cs" />
     <Compile Include="Numerics\Int32Calculator.cs" />
     <Compile Include="Numerics\DivCollection`1.cs" />
-    <Compile Include="Numerics\MinorUnit.cs" />
+    <Compile Include="Utilities\ISO7064.cs" />
+    <Compile Include="Numerics\DecimalPlace.cs" />
     <Compile Include="Numerics\DecimalRounding.cs" />
     <Compile Include="Numerics\Ratios.cs" />
     <Compile Include="Utilities\CountryISOCodes.cs" />
     <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="Globalization\MoneyFormatter.cs" />
-    <Compile Include="Generic\Currencies.g.cs">
+    <Compile Include="Generic\Units.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Currencies.tt</DependentUpon>
+      <DependentUpon>Units.tt</DependentUpon>
     </Compile>
     <Compile Include="Currency.cs" />
     <Compile Include="CurrencyNotFoundException.cs" />

@@ -81,29 +81,12 @@ namespace Narvalo.Finance
                 () => IbanValidator.TryValidateIntern(ParseFast(value), IbanValidationLevels.Bban));
 
         #endregion
-
-        #region CheckIntegrity()
-
-        [Theory]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckIntegrity_ReturnsTrue_UsingInt32Arithmetic(string value)
-            => Assert.True(IbanValidator.CheckIntegrity(value, false));
-
-        [Theory]
-        [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
-        [CLSCompliant(false)]
-        public static void CheckIntegrity_ReturnsTrue_UsingInt64Arithmetic(string value)
-            => Assert.True(IbanValidator.CheckIntegrity(value, true));
-
-        #endregion
     }
 
 #endif
 
     public static partial class IbanValidatorFacts
     {
-        private static IbanParts ParseFast(string value)
-            => IbanParts.Parse(value).Value;
+        private static IbanParts ParseFast(string value) => IbanParts.Parse(value).Value;
     }
 }
