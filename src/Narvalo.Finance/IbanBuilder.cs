@@ -3,6 +3,7 @@
 namespace Narvalo.Finance
 {
     using System;
+    using Narvalo.Finance.Utilities;
 
     public sealed class IbanBuilder
     {
@@ -12,8 +13,9 @@ namespace Narvalo.Finance
 
         public Iban Build()
         {
-            // TODO: Compute check digits then return Iban.Create().
-            throw new NotImplementedException();
+            var checkDigits = IbanCheckDigits.Compute(CountryCode, Bban, IntPtr.Size == 8);
+
+            return Iban.Create(CountryCode, checkDigits, Bban, IbanValidationLevels.None);
         }
     }
 }

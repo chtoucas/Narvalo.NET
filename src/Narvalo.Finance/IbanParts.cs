@@ -111,7 +111,7 @@ namespace Narvalo.Finance
             return Outcome.Success(new IbanParts(countryCode, checkDigits, bban, value));
         }
 
-        private static bool CheckLength(string value)
+        internal static bool CheckLength(string value)
             => value != null && value.Length >= MinLength && value.Length <= MaxLength;
 
         private static class BbanPart

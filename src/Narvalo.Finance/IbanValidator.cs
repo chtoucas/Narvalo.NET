@@ -81,6 +81,6 @@ namespace Narvalo.Finance
             // we check the integrity using Int64 arithmetic; otherwise (32-bit or 16-bit process)
             // we use Int32 arithmetic (NB: IntPtr.Size = 4 in a 32-bit process). I believe,
             // but I have not verified, that ComputeInt64Checksum() is faster in a 64-bit process.
-            => CheckDigits.CheckIntegrity(parts.LiteralValue, IntPtr.Size == 8);
+            => IbanCheckDigits.Verify(parts.LiteralValue, IntPtr.Size == 8);
     }
 }

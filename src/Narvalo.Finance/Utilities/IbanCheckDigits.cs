@@ -3,43 +3,46 @@
 namespace Narvalo.Finance.Utilities
 {
     using System;
+    using System.Globalization;
 
-    public static class CheckDigits
+    public static class IbanCheckDigits
     {
-        private const int CHECKSUM_MODULUS = 97;
+        private const int MODULUS = 97;
+
+        public static string Compute(string countryCode, string bban, bool useInt64)
+        {
+            // No need to check bban or countryCode (except its length), we will perform
+            // all necessary validations inside ComputeInt32Checksum() or ComputeInt64Checksum().
+            Require.NotNull(countryCode, nameof(countryCode));
+            Require.NotNull(bban, nameof(bban));
+            Require.Range(countryCode.Length == 2, nameof(countryCode));
+
+            var iban = countryCode + "00" + bban;
+
+            int checksum = useInt64 ? ComputeInt64Checksum(iban) : ComputeInt32Checksum(iban);
+            int val = MODULUS + 1 - checksum;
+            var strval = val.ToString(CultureInfo.InvariantCulture);
+
+            return val > 9 ? strval : "0" + strval;
+        }
 
         // The algorithm is as follows (ISO 7064 mod 97-10):
         // 1. Move the leading 4 chars to the end of the value.
         // 2. Replace '0' by 0, '1' by 1, etc.
         // 3. Replace 'A' by 10, 'B' by 11, etc.
         // 4. Verify that the resulting integer modulo 97 is equal to 1.
-        public static bool CheckIntegrity(string value, bool sixtyfour)
+        public static bool Verify(string iban, bool useInt64)
         {
-            Expect.NotNull(value);
+            Expect.NotNull(iban);
 
-            return sixtyfour
-                ? ComputeInt64Checksum(value) % CHECKSUM_MODULUS == 1
-                : ComputeInt32Checksum(value) % CHECKSUM_MODULUS == 1;
-        }
-
-        public static bool CheckIntegrity(string value)
-        {
-            Expect.NotNull(value);
-
-            return ComputeInt32Checksum(value) % CHECKSUM_MODULUS == 1;
-        }
-
-        public static bool CheckIntegrity64(string value)
-        {
-            Expect.NotNull(value);
-
-            return ComputeInt64Checksum(value) % CHECKSUM_MODULUS == 1;
+            return (useInt64 ? ComputeInt64Checksum(iban) : ComputeInt32Checksum(iban)) == 1;
         }
 
         // WARNING: Only works for well-formed values (length and valid characters).
         public static int ComputeInt32Checksum(string value)
         {
             Require.NotNull(value, nameof(value));
+            Enforce.Range(IbanParts.CheckLength(value), nameof(value));
 
             const int MAX_DIGIT = (Int32.MaxValue - 9) / 10;
             const int MAX_LETTER = (Int32.MaxValue - 35) / 100;
@@ -52,23 +55,28 @@ namespace Narvalo.Finance.Utilities
                 char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
                 if (ch >= '0' && ch <= '9')
                 {
-                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULUS; }
+                    if (checksum > MAX_DIGIT) { checksum = checksum % MODULUS; }
                     checksum = 10 * checksum + (ch - '0');
+                }
+                else if (ch >= 'A' && ch <= 'Z')
+                {
+                    if (checksum > MAX_LETTER) { checksum = checksum % MODULUS; }
+                    checksum = 100 * checksum + (ch - 'A' + 10);
                 }
                 else
                 {
-                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULUS; }
-                    checksum = 100 * checksum + (ch - 'A' + 10);
+                    throw new ArgumentException("XXX", nameof(value));
                 }
             }
 
-            return checksum;
+            return checksum % MODULUS;
         }
 
         // WARNING: Only works for well-formed values (length and valid characters).
-        public static long ComputeInt64Checksum(string value)
+        public static int ComputeInt64Checksum(string value)
         {
             Require.NotNull(value, nameof(value));
+            Enforce.Range(IbanParts.CheckLength(value), nameof(value));
 
             // 922 337 203 685 477 579
             const long MAX_DIGIT = (Int64.MaxValue - 9) / 10;
@@ -83,17 +91,21 @@ namespace Narvalo.Finance.Utilities
                 char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
                 if (ch >= '0' && ch <= '9')
                 {
-                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULUS; }
+                    if (checksum > MAX_DIGIT) { checksum = checksum % MODULUS; }
                     checksum = 10 * checksum + (ch - '0');
+                }
+                else if (ch >= 'A' && ch <= 'Z')
+                {
+                    if (checksum > MAX_LETTER) { checksum = checksum % MODULUS; }
+                    checksum = 100 * checksum + (ch - 'A' + 10);
                 }
                 else
                 {
-                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULUS; }
-                    checksum = 100 * checksum + (ch - 'A' + 10);
+                    throw new ArgumentException("XXX", nameof(value));
                 }
             }
 
-            return checksum;
+            return (int)(checksum % MODULUS);
         }
     }
 }

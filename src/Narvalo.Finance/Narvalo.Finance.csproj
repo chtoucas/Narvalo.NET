@@ -84,7 +84,7 @@
     <Compile Include="Numerics\Int64Calculator.cs" />
     <Compile Include="Numerics\Int32Calculator.cs" />
     <Compile Include="Numerics\DivCollection`1.cs" />
-    <Compile Include="Utilities\CheckDigits.cs" />
+    <Compile Include="Utilities\IbanCheckDigits.cs" />
     <Compile Include="Numerics\DecimalPlace.cs" />
     <Compile Include="Numerics\DecimalRounding.cs" />
     <Compile Include="Numerics\Ratios.cs" />
