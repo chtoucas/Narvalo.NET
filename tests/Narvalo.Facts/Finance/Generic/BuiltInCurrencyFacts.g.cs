@@ -11,7 +11,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace Narvalo.Finance.Currencies
+namespace Narvalo.Finance.Generic
 {
     using System.Collections.Generic;
 

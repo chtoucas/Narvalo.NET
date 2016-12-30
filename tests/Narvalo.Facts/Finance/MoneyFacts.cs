@@ -2,9 +2,7 @@
 
 namespace Narvalo.Finance
 {
-    using System;
-
-    using Narvalo.Finance.Currencies;
+    using Narvalo.Finance.Generic;
     using Xunit;
 
     public static partial class MoneyFacts

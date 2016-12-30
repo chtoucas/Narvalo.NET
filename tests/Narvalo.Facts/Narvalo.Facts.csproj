@@ -83,7 +83,7 @@
     <Compile Include="DemandFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
     <Compile Include="Finance\BicFacts.cs" />
-    <Compile Include="Finance\Currencies\BuiltInCurrencyFacts.cs" />
+    <Compile Include="Finance\Generic\BuiltInCurrencyFacts.cs" />
     <Compile Include="Finance\CurrencyFacts.cs" />
     <Compile Include="Finance\CurrencyFacts.g.cs">
       <AutoGen>True</AutoGen>
@@ -91,7 +91,7 @@
       <DependentUpon>CurrencyFacts.tt</DependentUpon>
     </Compile>
     <Compile Include="Finance\CurrencyNotFoundExceptionFacts.cs" />
-    <Compile Include="Finance\CurrencyUnitFacts.cs" />
+    <Compile Include="Finance\Generic\CurrencyUnitFacts.cs" />
     <Compile Include="Finance\IbanFacts.cs" />
     <Compile Include="Finance\IbanPartsFacts.cs" />
     <Compile Include="Finance\IbanValidatorFacts.cs" />
@@ -103,7 +103,7 @@
     <Compile Include="_TestCommon\DebugOnlyFactAttribute.cs" />
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />
     <Compile Include="ExpectFacts.cs" />
-    <Compile Include="Finance\Currencies\BuiltInCurrencyFacts.g.cs">
+    <Compile Include="Finance\Generic\BuiltInCurrencyFacts.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BuiltInCurrencyFacts.tt</DependentUpon>
@@ -185,7 +185,7 @@
     <Compile Include="Web\UrlManipFacts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Finance\Currencies\BuiltInCurrencyFacts.tt">
+    <Content Include="Finance\Generic\BuiltInCurrencyFacts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BuiltInCurrencyFacts.g.cs</LastGenOutput>
     </Content>

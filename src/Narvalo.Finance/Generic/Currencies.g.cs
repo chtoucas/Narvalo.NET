@@ -11,7 +11,7 @@
 //------------------------------------------------------------------------------
 
 // Below, the singleton implementation is taken from http://csharpindepth.com/Articles/General/Singleton.aspx.
-namespace Narvalo.Finance.Currencies
+namespace Narvalo.Finance.Generic
 {
     using System;
 

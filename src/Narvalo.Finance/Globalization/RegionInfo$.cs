@@ -4,6 +4,8 @@ namespace Narvalo.Finance
 {
     using System.Globalization;
 
+    using Narvalo.Finance.Generic;
+
     public static class RegionInfoExtensions
     {
         public static bool IsUsing(this RegionInfo @this, Currency currency)

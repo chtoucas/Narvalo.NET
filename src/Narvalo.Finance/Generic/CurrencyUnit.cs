@@ -1,11 +1,9 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance
+namespace Narvalo.Finance.Generic
 {
     using System.Diagnostics.Contracts;
     using System.Reflection;
-
-    using Narvalo.Finance.Currencies;
 
     public static partial class CurrencyUnit
     {
