@@ -6,7 +6,7 @@ namespace Narvalo.Finance.Utilities
 
     using Xunit;
 
-    public static partial class ISO7064Facts
+    public static partial class CheckDigitsFacts
     {
         #region CheckIntegrity()
 
@@ -14,13 +14,13 @@ namespace Narvalo.Finance.Utilities
         [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckIntegrity_ReturnsTrue_UsingInt32Arithmetic(string value)
-            => Assert.True(ISO7064.CheckIntegrity(value, false));
+            => Assert.True(CheckDigits.CheckIntegrity(value, false));
 
         [Theory]
         [MemberData(nameof(IbanFacts.SampleValues), MemberType = typeof(IbanFacts), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void CheckIntegrity_ReturnsTrue_UsingInt64Arithmetic(string value)
-            => Assert.True(ISO7064.CheckIntegrity(value, true));
+            => Assert.True(CheckDigits.CheckIntegrity(value, true));
 
         #endregion
     }

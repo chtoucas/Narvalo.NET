@@ -74,15 +74,17 @@
   <ItemGroup>
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
+    <Compile Include="CurrencyTypes.cs" />
     <Compile Include="Generic\CurrencyUnit`1.cs" />
     <Compile Include="Generic\CurrencyUnit.cs" />
+    <Compile Include="Globalization\LocalMoneyFormatter.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="IbanBuilder.cs" />
     <Compile Include="Money%24.cs" />
     <Compile Include="Numerics\Int64Calculator.cs" />
     <Compile Include="Numerics\Int32Calculator.cs" />
     <Compile Include="Numerics\DivCollection`1.cs" />
-    <Compile Include="Utilities\ISO7064.cs" />
+    <Compile Include="Utilities\CheckDigits.cs" />
     <Compile Include="Numerics\DecimalPlace.cs" />
     <Compile Include="Numerics\DecimalRounding.cs" />
     <Compile Include="Numerics\Ratios.cs" />

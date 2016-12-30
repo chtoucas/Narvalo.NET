@@ -4,9 +4,9 @@ namespace Narvalo.Finance.Utilities
 {
     using System;
 
-    public static class ISO7064
+    public static class CheckDigits
     {
-        private const int CHECKSUM_MODULO = 97;
+        private const int CHECKSUM_MODULUS = 97;
 
         // The algorithm is as follows (ISO 7064 mod 97-10):
         // 1. Move the leading 4 chars to the end of the value.
@@ -18,8 +18,22 @@ namespace Narvalo.Finance.Utilities
             Expect.NotNull(value);
 
             return sixtyfour
-                ? ComputeInt64Checksum(value) % CHECKSUM_MODULO == 1
-                : ComputeInt32Checksum(value) % CHECKSUM_MODULO == 1;
+                ? ComputeInt64Checksum(value) % CHECKSUM_MODULUS == 1
+                : ComputeInt32Checksum(value) % CHECKSUM_MODULUS == 1;
+        }
+
+        public static bool CheckIntegrity(string value)
+        {
+            Expect.NotNull(value);
+
+            return ComputeInt32Checksum(value) % CHECKSUM_MODULUS == 1;
+        }
+
+        public static bool CheckIntegrity64(string value)
+        {
+            Expect.NotNull(value);
+
+            return ComputeInt64Checksum(value) % CHECKSUM_MODULUS == 1;
         }
 
         // WARNING: Only works for well-formed values (length and valid characters).
@@ -38,12 +52,12 @@ namespace Narvalo.Finance.Utilities
                 char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
                 if (ch >= '0' && ch <= '9')
                 {
-                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULO; }
+                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULUS; }
                     checksum = 10 * checksum + (ch - '0');
                 }
                 else
                 {
-                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULO; }
+                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULUS; }
                     checksum = 100 * checksum + (ch - 'A' + 10);
                 }
             }
@@ -69,12 +83,12 @@ namespace Narvalo.Finance.Utilities
                 char ch = i < len - 4 ? value[i + 4] : value[(i + 4) % len];
                 if (ch >= '0' && ch <= '9')
                 {
-                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULO; }
+                    if (checksum > MAX_DIGIT) { checksum = checksum % CHECKSUM_MODULUS; }
                     checksum = 10 * checksum + (ch - '0');
                 }
                 else
                 {
-                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULO; }
+                    if (checksum > MAX_LETTER) { checksum = checksum % CHECKSUM_MODULUS; }
                     checksum = 100 * checksum + (ch - 'A' + 10);
                 }
             }
