@@ -3,7 +3,6 @@ Issues
 
 ### Quick tasks
 - Review csproj's.
-- Create a separate test project for Narvalo.Finance.
 - Add Narvalo.LocalData to all necessary targets (security, build, ...) + packaging.
 - `IEnumerable` extensions for `null`-checking and deferred execution.
 - Strange thing, CC reports that there are two remaining code fixes but does

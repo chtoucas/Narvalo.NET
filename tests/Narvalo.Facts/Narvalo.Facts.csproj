@@ -82,33 +82,11 @@
     <Compile Include="ConvertToFacts.cs" />
     <Compile Include="DemandFacts.cs" />
     <Compile Include="EnforceFacts.cs" />
-    <Compile Include="Finance\BicFacts.cs" />
-    <Compile Include="Finance\Generic\BuiltInCurrencyFacts.cs" />
-    <Compile Include="Finance\CurrencyFacts.cs" />
-    <Compile Include="Finance\CurrencyFacts.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CurrencyFacts.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Finance\CurrencyNotFoundExceptionFacts.cs" />
-    <Compile Include="Finance\Generic\CurrencyUnitFacts.cs" />
-    <Compile Include="Finance\IbanFacts.cs" />
-    <Compile Include="Finance\IbanPartsFacts.cs" />
-    <Compile Include="Finance\IbanValidatorFacts.cs" />
-    <Compile Include="Finance\MoneyFacts.cs" />
-    <Compile Include="Finance\Utilities\AsciiFacts.cs" />
-    <Compile Include="Finance\Globalization\CountryISOCodesFacts.cs" />
-    <Compile Include="Finance\Utilities\IbanCheckDigitsFacts.cs" />
     <Compile Include="Fx\Samples\Internal\EnumerableExtensions.cs" />
     <Compile Include="_TestCommon\AppDomainUtils.cs" />
     <Compile Include="_TestCommon\DebugOnlyFactAttribute.cs" />
     <Compile Include="_TestCommon\EnvironmentFacts.cs" />
     <Compile Include="ExpectFacts.cs" />
-    <Compile Include="Finance\Generic\BuiltInCurrencyFacts.g.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BuiltInCurrencyFacts.tt</DependentUpon>
-    </Compile>
     <Compile Include="FormatFacts.cs" />
     <Compile Include="Fx\Advanced\NullableFacts.cs" />
     <Compile Include="Fx\EitherFacts.cs" />
@@ -186,14 +164,6 @@
     <Compile Include="Web\UrlManipFacts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Finance\Generic\BuiltInCurrencyFacts.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BuiltInCurrencyFacts.g.cs</LastGenOutput>
-    </Content>
-    <Content Include="Finance\CurrencyFacts.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CurrencyFacts.g.cs</LastGenOutput>
-    </Content>
     <Content Include="Fx\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Maybe.g.cs</LastGenOutput>
@@ -252,10 +222,6 @@
       <Project>{66b62ba5-e26e-4899-85ac-4c52d3a427e9}</Project>
       <Name>Narvalo.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Narvalo.Finance\Narvalo.Finance.csproj">
-      <Project>{38055176-243b-4090-8148-efb8fe18ff23}</Project>
-      <Name>Narvalo.Finance</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Narvalo.Fx\Narvalo.Fx.csproj">
       <Project>{28f6175d-0ee3-4763-8004-662a7de41280}</Project>
       <Name>Narvalo.Fx</Name>
@@ -265,7 +231,6 @@
       <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

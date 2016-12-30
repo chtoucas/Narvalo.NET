@@ -238,6 +238,15 @@ Task Package-Core `
         '/p:Filter=_Core_'
 }
 
+Task Package-Finance `
+    -Description 'Create the Narvalo.Finance package.' `
+    -Depends _Package-InitializeVariables `
+    -Alias PackFinance `
+{
+    MSBuild $Foundations $Opts $Package_Targets $Package_Props `
+        '/p:Filter=_Finance_'
+}
+
 Task Package-Mvp `
     -Description 'Create the MVP-related packages.' `
     -Depends _Package-InitializeVariables `
@@ -527,8 +536,9 @@ function Invoke-OpenCover {
     $excludeByAttribute = 'System.Runtime.CompilerServices.CompilerGeneratedAttribute;Narvalo.ExcludeFromCodeCoverageAttribute;System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute'
 
     $asm1 = Get-LocalPath "work\bin\$Configuration\Narvalo.Facts.dll" -Resolve
-    $asm2  = Get-LocalPath "work\bin\$Configuration\Narvalo.Mvp.Facts.dll" -Resolve
-    $asms = "$asm1 $asm2"
+    $asm2  = Get-LocalPath "work\bin\$Configuration\Narvalo.Finance.Facts.dll" -Resolve
+    $asm3  = Get-LocalPath "work\bin\$Configuration\Narvalo.Mvp.Facts.dll" -Resolve
+    $asms = "$asm1 $asm2 $asm3"
 
     # Be very careful with arguments containing spaces.
     . $opencover `

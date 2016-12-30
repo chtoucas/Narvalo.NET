@@ -7,6 +7,7 @@
     - '_CodeContracts_', only include libraries ready for CC analysis
     - '_Security_', only include libraries ready for security analysis
     - '_Core_', include Core projects
+    - '_Finance_', include Finance projects
     - '_Mvp_', include Mvp projects
     - '_Build_', include Narvalo.Build project
     or any combination, e.g. '/p:Filter="_Core_;_Mvp_"'.
@@ -70,11 +71,16 @@
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Cerbere\Narvalo.Cerbere.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Common\Narvalo.Common.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Core\Narvalo.Core.csproj" />
-        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Fx\Narvalo.Fx.csproj" />
         <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Web\Narvalo.Web.csproj" />
 
         <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Facts\Narvalo.Facts.csproj" />
+      </ItemGroup>
+
+      <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Finance_))' == 'true' ">
+        <ProjectsToBuild Include="$(RepositoryRoot)src\Narvalo.Finance\Narvalo.Finance.csproj" />
+
+        <ProjectsToBuild Include="$(RepositoryRoot)tests\Narvalo.Finance.Facts\Narvalo.Finance.Facts.csproj" />
       </ItemGroup>
 
       <ItemGroup Condition=" '$(Filter)' == '_None_' Or '$(Filter.Contains(_Mvp_))' == 'true' ">
