@@ -8,8 +8,6 @@ namespace Narvalo.Finance
     {
         public static Money Create(decimal amount) => new Money(amount, Currency.Of("XXX"));
 
-        public static Money Create(double amount, Currency currency) => new Money((decimal)amount, currency);
-
         public static Money Create(long amount, Currency currency) => new Money(amount, currency);
 
         [CLSCompliant(false)]
