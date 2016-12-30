@@ -10,7 +10,7 @@ namespace Narvalo.Finance.Numerics
     //  or Up when it comes to cumulative computations followed by approximations.
     // - AwayFromZero,
     // Stochastic?
-    public enum NumberRounding
+    public enum DecimalRounding
     {
         Down,
         Up,

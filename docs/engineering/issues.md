@@ -59,13 +59,11 @@ Narvalo.Finance
 - LocalCurrency
 - `IConvertible` and conversion between currencies.
 - Rounding, Allocation.
-- `Decimal`, `Double`, `BigDecimal`, `BigInteger`... Overflows...
-  [Microsoft SQL Server implementation](https://msdn.microsoft.com/en-au/library/ms179882.aspx):
+- [Microsoft SQL Server implementation](https://msdn.microsoft.com/en-au/library/ms179882.aspx):
   `Int32` or `Int64`, and designate the lower four digits (or possibly even 2) as
   "right of the decimal point". So "on the edges" you'll need some "* 10000"
   on the way in and some "/ 10000" on the way out. The nicity of this is that
   all your summation can be done using (fast) integer arithmetic.
-  Do we really need `BigMoney` and `BigMoney<TCurrency>` types.
 - References:
   * [Money Pattern](http://martinfowler.com/eaaCatalog/money.html)
   * [IBAN Calculator](http://www.ibancalculator.com/)

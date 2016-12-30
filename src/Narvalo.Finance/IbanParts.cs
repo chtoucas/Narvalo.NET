@@ -4,6 +4,7 @@ namespace Narvalo.Finance
 {
     using System;
 
+    using Narvalo.Finance.Numerics;
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
@@ -241,9 +242,10 @@ namespace Narvalo.Finance
 
             int len = input.Length;
 
-            int r = len % 4;
-            int q = (len - r) / 4;
-            int outlen = len + q - (r == 0 ? 1 : 0);
+            int rem;
+            int div = Int32Calculator.Divide(len, 4, out rem);
+
+            int outlen = len + div - (rem == 0 ? 1 : 0);
             var output = new char[outlen];
 
             int k = 1;

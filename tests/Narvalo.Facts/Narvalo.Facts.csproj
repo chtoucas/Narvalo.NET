@@ -191,7 +191,7 @@
     </Content>
     <Content Include="Finance\CurrencyFacts.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CurrencyFacts1.g.cs</LastGenOutput>
+      <LastGenOutput>CurrencyFacts.g.cs</LastGenOutput>
     </Content>
     <Content Include="Fx\Maybe.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

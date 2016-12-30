@@ -79,11 +79,12 @@
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="IbanBuilder.cs" />
     <Compile Include="Money%24.cs" />
-    <Compile Include="Numerics\DivisionResult.cs" />
-    <Compile Include="Numerics\DivisionResult`1.cs" />
-    <Compile Include="Numerics\MinorUnits.cs" />
-    <Compile Include="Numerics\NumberRounding.cs" />
-    <Compile Include="Numerics\Weights.cs" />
+    <Compile Include="Numerics\Int64Calculator.cs" />
+    <Compile Include="Numerics\Int32Calculator.cs" />
+    <Compile Include="Numerics\DivCollection`1.cs" />
+    <Compile Include="Numerics\MinorUnit.cs" />
+    <Compile Include="Numerics\DecimalRounding.cs" />
+    <Compile Include="Numerics\Ratios.cs" />
     <Compile Include="Utilities\CountryISOCodes.cs" />
     <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
     <Compile Include="IbanStyles.cs" />
@@ -111,7 +112,7 @@
     <Compile Include="IbanValidationLevels.cs" />
     <Compile Include="Utilities\BooleanResult.cs" />
     <Compile Include="IbanValidator.cs" />
-    <Compile Include="Numerics\MathOps.cs" />
+    <Compile Include="Numerics\DecimalCalculator.cs" />
     <Compile Include="Utilities\Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Money`1.cs" />
