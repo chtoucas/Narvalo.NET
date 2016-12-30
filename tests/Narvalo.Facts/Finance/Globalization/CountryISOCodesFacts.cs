@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Utilities
+namespace Narvalo.Finance.Globalization
 {
-#if !NO_INTERNALS_VISIBLE_TO
-
     using System;
 
     using Xunit;
@@ -34,6 +32,4 @@ namespace Narvalo.Finance.Utilities
 
         #endregion
     }
-
-#endif
 }

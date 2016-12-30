@@ -86,7 +86,7 @@
     <Compile Include="Numerics\DecimalPlace.cs" />
     <Compile Include="Numerics\DecimalRounding.cs" />
     <Compile Include="Numerics\Ratios.cs" />
-    <Compile Include="Utilities\CountryISOCodes.cs" />
+    <Compile Include="Globalization\CountryISOCodes.cs" />
     <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
     <Compile Include="IbanStyles.cs" />
     <Compile Include="Globalization\MoneyFormatter.cs" />
@@ -103,7 +103,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Iban.cs" />
-    <Compile Include="Utilities\CountryISOCodes.g.cs">
+    <Compile Include="Globalization\CountryISOCodes.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CountryISOCodes.tt</DependentUpon>
@@ -154,7 +154,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Utilities\CountryISOCodes.tt">
+    <Content Include="Globalization\CountryISOCodes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CountryISOCodes.g.cs</LastGenOutput>
     </Content>

@@ -97,7 +97,7 @@
     <Compile Include="Finance\IbanValidatorFacts.cs" />
     <Compile Include="Finance\MoneyFacts.cs" />
     <Compile Include="Finance\Utilities\AsciiFacts.cs" />
-    <Compile Include="Finance\Utilities\CountryISOCodesFacts.cs" />
+    <Compile Include="Finance\Globalization\CountryISOCodesFacts.cs" />
     <Compile Include="Finance\Utilities\ISO7064Facts.cs" />
     <Compile Include="Fx\Samples\Internal\EnumerableExtensions.cs" />
     <Compile Include="_TestCommon\AppDomainUtils.cs" />
@@ -265,9 +265,7 @@
       <Name>Narvalo.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Finance\Globalization\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\TestCommon\Narvalo.TestCommon.projitems" Label="Shared" />
   <Import Project="..\..\tools\Narvalo.Common.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

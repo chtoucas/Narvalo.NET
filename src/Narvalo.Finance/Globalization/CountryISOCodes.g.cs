@@ -10,12 +10,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Narvalo.Finance.Utilities
+namespace Narvalo.Finance.Globalization
 {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
-    internal partial class CountryISOCodes
+    public partial class CountryISOCodes
     {
         // All alpha-2 codes as defined in ISO 3166-1 alpha-2.
         [ContractVerification(false)]
