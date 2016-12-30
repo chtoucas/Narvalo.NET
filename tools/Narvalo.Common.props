@@ -45,7 +45,6 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <RegisterForComInterop>false</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
 
     <LangVersion>default</LangVersion>
     <ErrorReport>prompt</ErrorReport>
@@ -55,6 +54,8 @@
     <SignAssembly>false</SignAssembly>
 
     <DefaultLanguage>en-US</DefaultLanguage>
+
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
 
   <!--
@@ -72,6 +73,7 @@
     <Optimize>false</Optimize>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
 
   <!-- Release configuration -->
@@ -82,6 +84,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DefineConstants>TRACE</DefineConstants>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 
   <!-- CodeContracts configuration -->
@@ -96,6 +99,7 @@
          confguration. Otherwise, note that the Code Contracts rewriter will
          define the CODE_ANALYSIS symbol. -->
     <DefineConstants>TRACE;CONTRACTS_FULL</DefineConstants>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
 
   <!-- Inside VS, we would like to always define the Code Contracts symbol; otherwise many lines
