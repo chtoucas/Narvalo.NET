@@ -13,13 +13,12 @@ Documentation & Tests (Narvalo.Cerbere & Narvalo.Finance):
 
 Library Enhancements & Improvements:
 - Narvalo.Finance (still no big money for accurate computations, next time...)
-  * use Profile259.
   * localization.
   * BBAN & IIBAN implementations.
   * strong/weak validation of Bic, Iban & Bban (check digits).
-  * currency info with implementation from the BCL.
+  * currency info with implementation from the BCL & CLDR.
   * money & currency formatting.
-  * change rate.
+  * exchange rate.
 - Narvalo.Mvp and Narvalo.Mvp.Web.
   * add localized messages in french for Narvalo.Mvp and Narvalo.Mvp.Web.
   * Application Controller and Navigator.
@@ -150,3 +149,4 @@ Enhancements
 - Full test coverage for Narvalo.Cerbere.
 - Narvalo.Facts is now free of CA warnings/errors.
 - Narvalo.Finance is now a Profile259 project.
+- Turned off overflow checking for Release builds.

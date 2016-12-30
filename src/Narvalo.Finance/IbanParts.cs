@@ -61,6 +61,21 @@ namespace Narvalo.Finance
 
         internal string LiteralValue => _value;
 
+        public static IbanParts Build(string countryCode, string bban)
+        {
+            Require.NotNull(countryCode, nameof(countryCode));
+            Require.NotNull(bban, nameof(bban));
+
+            if (!CountryPart.Validate(countryCode) || !BbanPart.Validate(bban))
+            {
+                throw new ArgumentException(Strings.Argument_InvalidIbanParts);
+            }
+
+            var checkDigits = IbanCheckDigits.Compute(countryCode, bban, IntPtr.Size == 8);
+
+            return new IbanParts(countryCode, checkDigits, bban);
+        }
+
         public static IbanParts Create(string countryCode, string checkDigits, string bban)
         {
             Require.NotNull(countryCode, nameof(countryCode));

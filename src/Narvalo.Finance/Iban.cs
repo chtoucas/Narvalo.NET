@@ -62,6 +62,17 @@ namespace Narvalo.Finance
             ? _parts.LiteralValue.Substring(0, IbanParts.MinLength) + "..."
             : _parts.LiteralValue;
 
+        // REVIEW: TryBuild? Add validation?
+        public static Iban Build(string countryCode, string bban)
+        {
+            Expect.NotNull(countryCode);
+            Expect.NotNull(bban);
+
+            var parts = IbanParts.Build(countryCode, bban);
+
+            return new Iban(parts, IbanValidationLevels.Integrity);
+        }
+
         public static Iban Create(string countryCode, string checkDigits, string bban)
         {
             Expect.NotNull(countryCode);
