@@ -3,14 +3,39 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Collections.Generic;
 
-    public partial struct Money
+    using Narvalo.Finance.Numerics;
+
+    public static partial class MoneyExtensions
     {
-        public static Money Create(decimal amount) => new Money(amount, Currency.Of("XXX"));
+        public static IEnumerable<decimal> Distribute(this Money @this, int decimalPlaces, int parts)
+            => Distribute(@this, decimalPlaces, parts, MidpointRounding.ToEven);
 
-        public static Money Create(long amount, Currency currency) => new Money(amount, currency);
+        public static IEnumerable<decimal> Distribute(
+            this Money @this,
+            int decimalPlaces,
+            int parts,
+            MidpointRounding rounding)
+            => DecimalCalculator.Distribute(@this.Amount, decimalPlaces, parts, rounding);
 
-        [CLSCompliant(false)]
-        public static Money Create(ulong amount, Currency currency) => new Money(amount, currency);
+        public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, int percentage)
+            => Allocate(@this, decimalPlaces, RatioArray.FromPercentage(percentage), MidpointRounding.ToEven);
+
+        public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, int[] percentages)
+            => Allocate(@this, decimalPlaces, RatioArray.FromPercentages(percentages), MidpointRounding.ToEven);
+
+        public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, decimal ratio)
+            => Allocate(@this, decimalPlaces, RatioArray.Of(ratio), MidpointRounding.ToEven);
+
+        public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, decimal[] ratios)
+            => Allocate(@this, decimalPlaces, RatioArray.Of(ratios), MidpointRounding.ToEven);
+
+        public static IEnumerable<decimal> Allocate(
+            this Money @this,
+            int decimalPlaces,
+            RatioArray ratios,
+            MidpointRounding rounding)
+            => DecimalCalculator.Allocate(@this.Amount, decimalPlaces, ratios, rounding);
     }
 }

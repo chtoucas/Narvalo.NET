@@ -5,8 +5,8 @@ namespace Narvalo.Finance.Utilities
     using System;
     using System.Globalization;
 
-    // ComputeInt64Checksum() is slightly faster in a 64-bit process; it does less modulo
-    // operations but more additions.
+    // ComputeInt64Checksum() is slightly faster in a 64-bit process; it does more additions
+    // but less divisions.
     public static class IbanCheckDigits
     {
         private const int MODULUS = 97;

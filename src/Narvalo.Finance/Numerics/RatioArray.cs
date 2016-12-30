@@ -5,11 +5,11 @@ namespace Narvalo.Finance.Numerics
     using System;
     using System.Linq;
 
-    public partial struct Ratios : IEquatable<Ratios>
+    public partial struct RatioArray : IEquatable<RatioArray>
     {
         private readonly decimal[] _ratios;
 
-        private Ratios(decimal[] ratios)
+        private RatioArray(decimal[] ratios)
         {
             Demand.NotNull(ratios);
 
@@ -20,29 +20,29 @@ namespace Narvalo.Finance.Numerics
 
         public decimal this[int index] => _ratios[index];
 
-        public static Ratios Of(decimal ratio)
+        public static RatioArray Of(decimal ratio)
         {
             var ratios = new decimal[2] { ratio, 1M - ratio };
-            return new Ratios(ratios);
+            return new RatioArray(ratios);
         }
 
-        public static Ratios Of(decimal[] ratios)
+        public static RatioArray Of(decimal[] ratios)
         {
             Require.NotNull(ratios, nameof(ratios));
 
             if (ratios.Sum() != 1M) { throw new ArgumentException("XXX", nameof(ratios)); }
 
-            return new Ratios(ratios);
+            return new RatioArray(ratios);
         }
 
-        public static Ratios FromPercentage(int percentage)
+        public static RatioArray FromPercentage(int percentage)
         {
             decimal ratio = percentage * 0.01M;
 
             return Of(ratio);
         }
 
-        public static Ratios FromPercentages(int[] percentages)
+        public static RatioArray FromPercentages(int[] percentages)
         {
             Require.NotNull(percentages, nameof(percentages));
 
@@ -54,26 +54,26 @@ namespace Narvalo.Finance.Numerics
                 ratios[i] *= 0.01M;
             }
 
-            return new Ratios(ratios);
+            return new RatioArray(ratios);
         }
     }
 
     // Implements the IEquatable<Ratios> interface.
-    public partial struct Ratios
+    public partial struct RatioArray
     {
-        public static bool operator ==(Ratios left, Ratios right) => left.Equals(right);
+        public static bool operator ==(RatioArray left, RatioArray right) => left.Equals(right);
 
-        public static bool operator !=(Ratios left, Ratios right) => !left.Equals(right);
+        public static bool operator !=(RatioArray left, RatioArray right) => !left.Equals(right);
 
         /// <inheritdoc cref="IEquatable{T}.Equals" />
-        public bool Equals(Ratios other) => _ratios == other._ratios;
+        public bool Equals(RatioArray other) => _ratios == other._ratios;
 
         /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
-            if (!(obj is Ratios)) { return false; }
+            if (!(obj is RatioArray)) { return false; }
 
-            return Equals((Ratios)obj);
+            return Equals((RatioArray)obj);
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />

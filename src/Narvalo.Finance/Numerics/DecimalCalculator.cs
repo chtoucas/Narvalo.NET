@@ -48,16 +48,13 @@ namespace Narvalo.Finance.Numerics
         //    { 5, 0.00001M },
         //};
 
-        public static IEnumerable<decimal> Distribute(decimal amount, int minorUnits, int parts)
-            => Distribute(amount, minorUnits, parts, MidpointRounding.ToEven);
-
         public static IEnumerable<decimal> Distribute(
             decimal value,
-            int minorUnits,
+            int decimalPlaces,
             int parts,
             MidpointRounding rounding)
         {
-            decimal q = Math.Round(value / parts, minorUnits, rounding);
+            decimal q = Math.Round(value / parts, decimalPlaces, rounding);
 
             for (var i = 0; i < parts - 1; i++)
             {
@@ -69,22 +66,10 @@ namespace Narvalo.Finance.Numerics
             yield return last;
         }
 
-        public static IEnumerable<decimal> Allocate(decimal amount, int minorUnits, int percentage)
-            => Allocate(amount, minorUnits, Ratios.FromPercentage(percentage), MidpointRounding.ToEven);
-
-        public static IEnumerable<decimal> Allocate(decimal amount, int minorUnits, int[] percentages)
-            => Allocate(amount, minorUnits, Ratios.FromPercentages(percentages), MidpointRounding.ToEven);
-
-        public static IEnumerable<decimal> Allocate(decimal amount, int minorUnits, decimal ratio)
-            => Allocate(amount, minorUnits, Ratios.Of(ratio), MidpointRounding.ToEven);
-
-        public static IEnumerable<decimal> Allocate(decimal amount, int minorUnits, decimal[] ratios)
-            => Allocate(amount, minorUnits, Ratios.Of(ratios), MidpointRounding.ToEven);
-
         public static IEnumerable<decimal> Allocate(
             decimal amount,
-            int minorUnits,
-            Ratios ratios,
+            int decimalPlaces,
+            RatioArray ratios,
             MidpointRounding rounding)
         {
             var len = ratios.Length;
@@ -93,7 +78,7 @@ namespace Narvalo.Finance.Numerics
 
             for (var i = 0; i < len - 1; i++)
             {
-                decimal next = Math.Round(ratios[i] * amount, minorUnits, rounding);
+                decimal next = Math.Round(ratios[i] * amount, decimalPlaces, rounding);
                 last -= next;
                 yield return next;
             }

@@ -86,7 +86,7 @@
     <Compile Include="Utilities\IbanCheckDigits.cs" />
     <Compile Include="Numerics\DecimalPlace.cs" />
     <Compile Include="Numerics\DecimalRounding.cs" />
-    <Compile Include="Numerics\Ratios.cs" />
+    <Compile Include="Numerics\RatioArray.cs" />
     <Compile Include="Globalization\CountryISOCodes.cs" />
     <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
     <Compile Include="IbanStyles.cs" />

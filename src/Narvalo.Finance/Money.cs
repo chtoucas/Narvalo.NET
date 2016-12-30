@@ -34,6 +34,16 @@ namespace Narvalo.Finance
             => Enforce.True(Currency != other.Currency, parameterName, Strings.Argument_CurrencyMismatch);
     }
 
+    public partial struct Money
+    {
+        public static Money Create(decimal amount) => new Money(amount, Currency.Of("XXX"));
+
+        public static Money Create(long amount, Currency currency) => new Money(amount, currency);
+
+        [CLSCompliant(false)]
+        public static Money Create(ulong amount, Currency currency) => new Money(amount, currency);
+    }
+
     // Implements the IFormattable interface.
     public partial struct Money
     {
