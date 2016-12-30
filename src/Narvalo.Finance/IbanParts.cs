@@ -65,11 +65,8 @@ namespace Narvalo.Finance
         {
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(bban, nameof(bban));
-
-            if (!CountryPart.Validate(countryCode) || !BbanPart.Validate(bban))
-            {
-                throw new ArgumentException(Strings.Argument_InvalidIbanParts);
-            }
+            Enforce.True(CountryPart.Validate(countryCode), nameof(countryCode));
+            Enforce.True(BbanPart.Validate(bban), nameof(bban));
 
             var checkDigits = IbanCheckDigits.Compute(countryCode, bban, IntPtr.Size == 8);
 
@@ -81,17 +78,11 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(checkDigits, nameof(checkDigits));
             Require.NotNull(bban, nameof(bban));
+            Enforce.True(CountryPart.Validate(countryCode), nameof(countryCode));
+            Enforce.True(CheckDigitsPart.Validate(checkDigits), nameof(checkDigits));
+            Enforce.True(BbanPart.Validate(bban), nameof(bban));
 
-            if (CountryPart.Validate(countryCode)
-                && CheckDigitsPart.Validate(checkDigits)
-                && BbanPart.Validate(bban))
-            {
-                return new IbanParts(countryCode, checkDigits, bban);
-            }
-            else
-            {
-                throw new ArgumentException(Strings.Argument_InvalidIbanParts);
-            }
+            return new IbanParts(countryCode, checkDigits, bban);
         }
 
         public static IbanParts? Parse(string value)

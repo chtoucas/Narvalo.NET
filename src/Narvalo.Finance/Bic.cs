@@ -141,18 +141,12 @@ namespace Narvalo.Finance
             Require.NotNull(countryCode, nameof(countryCode));
             Require.NotNull(locationCode, nameof(locationCode));
             Require.NotNull(branchCode, nameof(branchCode));
+            Enforce.True(InstitutionPart.Validate(institutionCode, version), nameof(institutionCode));
+            Enforce.True(CountryPart.Validate(countryCode), nameof(countryCode));
+            Enforce.True(LocationPart.Validate(locationCode), nameof(locationCode));
+            Enforce.True(BranchPart.Validate(branchCode), nameof(branchCode));
 
-            if (InstitutionPart.Validate(institutionCode, version)
-                && CountryPart.Validate(countryCode)
-                && LocationPart.Validate(locationCode)
-                && BranchPart.Validate(branchCode))
-            {
-                return new Bic(institutionCode, countryCode, locationCode, branchCode);
-            }
-            else
-            {
-                throw new ArgumentException(Strings.Argument_InvalidBicParts);
-            }
+            return new Bic(institutionCode, countryCode, locationCode, branchCode);
         }
 
         public static Bic? Parse(string value) => Parse(value, BicVersion.Default);
