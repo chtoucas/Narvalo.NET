@@ -7,9 +7,16 @@ namespace Narvalo.Finance.Utilities
 
     // ComputeInt64Checksum() is slightly faster in a 64-bit process; it does more additions
     // but less divisions.
+    // NB: On full .NET we have Environment.Is64BitProcess.
+    // If IntPtr.Size is equal to 8, we are running in a 64-bit process and
+    // we check the integrity using Int64 arithmetic; otherwise (32-bit or 16-bit process)
+    // we use Int32 arithmetic (NB: IntPtr.Size = 4 in a 32-bit process).
     public static class IbanCheckDigits
     {
         private const int MODULUS = 97;
+
+        public static string Compute(string countryCode, string bban)
+            => Compute(countryCode, bban, IntPtr.Size == 8);
 
         public static string Compute(string countryCode, string bban, bool useInt64)
         {
@@ -27,6 +34,8 @@ namespace Narvalo.Finance.Utilities
 
             return val > 9 ? strval : "0" + strval;
         }
+
+        public static bool Verify(string iban) => Verify(iban, IntPtr.Size == 8);
 
         // The algorithm is as follows (ISO 7064 mod 97-10):
         // 1. Move the leading 4 chars to the end of the value.

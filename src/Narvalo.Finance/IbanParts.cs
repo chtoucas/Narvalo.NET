@@ -68,7 +68,7 @@ namespace Narvalo.Finance
             Enforce.True(CountryPart.Validate(countryCode), nameof(countryCode));
             Enforce.True(BbanPart.Validate(bban), nameof(bban));
 
-            var checkDigits = IbanCheckDigits.Compute(countryCode, bban, IntPtr.Size == 8);
+            var checkDigits = IbanCheckDigits.Compute(countryCode, bban);
 
             return new IbanParts(countryCode, checkDigits, bban);
         }

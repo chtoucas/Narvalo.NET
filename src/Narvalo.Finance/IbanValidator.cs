@@ -75,11 +75,6 @@ namespace Narvalo.Finance
             throw new NotImplementedException();
         }
 
-        public static bool VerifyIntegrity(IbanParts parts)
-            // NB: On full .NET we have Environment.Is64BitProcess.
-            // If IntPtr.Size is equal to 8, we are running in a 64-bit process and
-            // we check the integrity using Int64 arithmetic; otherwise (32-bit or 16-bit process)
-            // we use Int32 arithmetic (NB: IntPtr.Size = 4 in a 32-bit process).
-            => IbanCheckDigits.Verify(parts.LiteralValue, IntPtr.Size == 8);
+        public static bool VerifyIntegrity(IbanParts parts) => IbanCheckDigits.Verify(parts.LiteralValue);
     }
 }
