@@ -17,6 +17,7 @@ Library Enhancements & Improvements:
   * BBAN & IIBAN implementations.
   * strong/weak validation of Bic, Iban & Bban (check digits).
   * currency info with implementation from the BCL & CLDR.
+  * handle rounding and native scale.
   * money & currency formatting.
   * exchange rate.
 - Narvalo.Mvp and Narvalo.Mvp.Web.

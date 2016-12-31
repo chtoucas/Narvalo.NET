@@ -127,20 +127,16 @@ namespace Narvalo.Finance.Generic
         }
     }
 
-    // Implements the IComparable interfaces.
+    // Implements the IComparable and IComparable<Money<TCurrency>> interfaces.
     public partial struct Money<TCurrency>
     {
-        public static bool operator <(Money<TCurrency> left, Money<TCurrency> right)
-            => left.CompareTo(right) < 0;
+        public static bool operator <(Money<TCurrency> left, Money<TCurrency> right) => left.CompareTo(right) < 0;
 
-        public static bool operator <=(Money<TCurrency> left, Money<TCurrency> right)
-            => left.CompareTo(right) <= 0;
+        public static bool operator <=(Money<TCurrency> left, Money<TCurrency> right) => left.CompareTo(right) <= 0;
 
-        public static bool operator >(Money<TCurrency> left, Money<TCurrency> right)
-            => left.CompareTo(right) > 0;
+        public static bool operator >(Money<TCurrency> left, Money<TCurrency> right) => left.CompareTo(right) > 0;
 
-        public static bool operator >=(Money<TCurrency> left, Money<TCurrency> right)
-            => left.CompareTo(right) >= 0;
+        public static bool operator >=(Money<TCurrency> left, Money<TCurrency> right) => left.CompareTo(right) >= 0;
 
         public int CompareTo(Money<TCurrency> other) => Amount.CompareTo(other.Amount);
 
@@ -163,19 +159,9 @@ namespace Narvalo.Finance.Generic
         public static Money<TCurrency> operator +(Money<TCurrency> left, Money<TCurrency> right)
             => left.Add(right);
 
-        public Money<TCurrency> Add(Money<TCurrency> other)
-        {
-            decimal amount = checked(Amount + other.Amount);
+        public Money<TCurrency> Add(Money<TCurrency> other) => new Money<TCurrency>(Amount + other.Amount);
 
-            return new Money<TCurrency>(amount);
-        }
-
-        public Money<TCurrency> Add(decimal amount)
-        {
-            decimal value = checked(Amount + amount);
-
-            return new Money<TCurrency>(value);
-        }
+        public Money<TCurrency> Add(decimal amount) => new Money<TCurrency>(Amount + amount);
     }
 
     // Overrides the op_Subtraction operator.
@@ -199,11 +185,7 @@ namespace Narvalo.Finance.Generic
             => money.Multiply(multiplier);
 
         public Money<TCurrency> Multiply(decimal multiplier)
-        {
-            var amount = checked(multiplier * Amount);
-
-            return new Money<TCurrency>(amount);
-        }
+            => new Money<TCurrency>(multiplier * Amount);
     }
 
     // Overrides the op_Division operator.

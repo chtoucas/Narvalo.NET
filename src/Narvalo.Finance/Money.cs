@@ -151,17 +151,10 @@ namespace Narvalo.Finance
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
 
-            decimal amount = checked(Amount + other.Amount);
-
-            return new Money(amount, Currency);
+            return new Money(Amount + other.Amount, Currency);
         }
 
-        public Money Add(decimal amount)
-        {
-            decimal value = checked(Amount + amount);
-
-            return new Money(value, Currency);
-        }
+        public Money Add(decimal amount) => new Money(Amount + amount, Currency);
     }
 
     // Overrides the op_Subtraction operator.
@@ -186,12 +179,7 @@ namespace Narvalo.Finance
 
         public static Money operator *(Money money, decimal multiplier) => money.Multiply(multiplier);
 
-        public Money Multiply(decimal multiplier)
-        {
-            decimal amount = checked(multiplier * Amount);
-
-            return new Money(amount, Currency);
-        }
+        public Money Multiply(decimal multiplier) => new Money(multiplier * Amount, Currency);
     }
 
     // Overrides the op_Division operator.

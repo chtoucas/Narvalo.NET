@@ -38,7 +38,7 @@ namespace Narvalo.Finance.Numerics
     // - Explain how to reverse or randomize the distribution.
     public static class DecimalCalculator
     {
-        //private static readonly Dictionary<int, decimal> s_Corrections = new Dictionary<int, decimal>
+        //private static readonly Dictionary<int, decimal> s_Deltas = new Dictionary<int, decimal>
         //{
         //    { 0, 0M },
         //    { 1, 0.1M },
