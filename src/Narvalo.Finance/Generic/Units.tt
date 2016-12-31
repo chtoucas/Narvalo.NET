@@ -57,7 +57,7 @@ namespace <#= Namespace #>
 #>
     public sealed class <#= currency.Code #> : CurrencyUnit<<#= currency.Code #>>
     {
-        private <#= currency.Code #>() { }
+        private <#= currency.Code #>() : base(<#= currency.MinorUnits.HasValue ? currency.MinorUnits.Value.ToString() : "null"  #>) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="<#= currency.Code #>" /> class.

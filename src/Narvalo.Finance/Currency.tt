@@ -15,12 +15,11 @@ var legacyCurrencies = ParseLegacy(@"..\..\data\ISO4217\A3.xml");
 // NB: Current currencies must come first.
 var currencies = currentCurrencies.Concat(legacyCurrencies);
 
-var codeSet = new HashSet<string>();
 var dict = new Dictionary<string, short?>();
 
 foreach (var currency in currencies)
 {
-    if (codeSet.Contains(currency.Code))
+    if (dict.ContainsKey(currency.Code))
     {
         if (!currency.IsLegacy && dict[currency.Code] != currency.MinorUnits)
         {
@@ -31,8 +30,6 @@ foreach (var currency in currencies)
     {
         dict.Add(currency.Code, currency.MinorUnits);
     }
-
-    codeSet.Add(currency.Code);
 }
 
 WriteHeader();

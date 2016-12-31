@@ -34,7 +34,7 @@ namespace Narvalo.Finance
         /// Initializes a new instance of the <see cref="Currency" /> class for the specified code.
         /// </summary>
         /// <param name="code">A string that contains the three-letter identifier defined in ISO 4217.</param>
-        private Currency(string code, int? minorUnits)
+        internal Currency(string code, int? minorUnits)
         {
             Sentinel.Demand.CurrencyCode(code);
 
