@@ -7,14 +7,31 @@
 <#@ import namespace="Narvalo.T4" #>
 <#
 
+// Uncomment to debug:
+//Debug = true;
+
 var currentCurrencies = ParseCurrent(@"..\..\data\ISO4217\A1.xml");
 var legacyCurrencies = ParseLegacy(@"..\..\data\ISO4217\A3.xml");
+// NB: Current currencies must come first.
 var currencies = currentCurrencies.Concat(legacyCurrencies);
 
 var codeSet = new HashSet<string>();
+var dict = new Dictionary<string, short?>();
 
 foreach (var currency in currencies)
 {
+    if (codeSet.Contains(currency.Code))
+    {
+        if (!currency.IsLegacy && dict[currency.Code] != currency.MinorUnits)
+        {
+            Warning("A currency has different units: (" + currency.IsLegacy.ToString() + ") " + currency.EnglishName + " " + currency.Code + " " + currency.MinorUnits);
+        }
+    }
+    else
+    {
+        dict.Add(currency.Code, currency.MinorUnits);
+    }
+
     codeSet.Add(currency.Code);
 }
 
@@ -29,25 +46,25 @@ namespace <#= Namespace #>
     public partial struct <#= Name #>
     {
         /// <summary>
-        /// The set of available currency codes.
+        /// The list of available currency codes.
         /// </summary>
         [ContractVerification(false)]
-        private static HashSet<string> CodeSet
+        private static Dictionary<string, int?> Codes
         {
             get
             {
-                if (s_CodeSet == null)
+                if (s_Codes == null)
                 {
-                    var codeSet = new HashSet<string>() {
-<# foreach (var code in codeSet.OrderBy(_ => _)) { #>
-                        "<#= code #>",
+                    var dict = new Dictionary<string, int?>() {
+<# foreach (var pair in dict.OrderBy(_ => _.Key)) { #>
+                        { "<#= pair.Key #>", <#= pair.Value.HasValue ? pair.Value.Value.ToString() : "null"  #>},
 <# } #>
                     };
 
-                    s_CodeSet = codeSet;
+                    s_Codes = dict;
                 }
 
-                return s_CodeSet;
+                return s_Codes;
             }
         }
     }

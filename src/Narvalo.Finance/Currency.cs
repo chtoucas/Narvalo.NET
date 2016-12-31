@@ -25,19 +25,21 @@ namespace Narvalo.Finance
     {
         // The list is automatically generated using data obtained from the SNV website.
         // The volatile keyword is only for correctness.
-        private volatile static HashSet<string> s_CodeSet;
+        private volatile static Dictionary<string, int?> s_Codes;
 
         private readonly string _code;
+        private readonly int? _minorUnits;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Currency" /> class for the specified code.
         /// </summary>
         /// <param name="code">A string that contains the three-letter identifier defined in ISO 4217.</param>
-        private Currency(string code)
+        private Currency(string code, int? minorUnits)
         {
             Sentinel.Demand.CurrencyCode(code);
 
             _code = code;
+            _minorUnits = minorUnits;
         }
 
         /// <summary>
@@ -47,6 +49,11 @@ namespace Narvalo.Finance
         public string Code
         {
             get { Warrant.NotNull<string>(); return _code; }
+        }
+
+        public int? MinorUnits
+        {
+            get { Warrant.NotNull<string>(); return _minorUnits; }
         }
 
         /// <summary>
@@ -62,13 +69,14 @@ namespace Narvalo.Finance
             Require.NotNull(code, nameof(code));
             Sentinel.Expect.CurrencyCode(code);
 
-            Contract.Assume(CodeSet != null);
-            if (!CodeSet.Contains(code))
+            Contract.Assume(Codes != null);
+            int? minorUnits;
+            if (!Codes.TryGetValue(code, out minorUnits))
             {
                 throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCode, code));
             }
 
-            return new Currency(code);
+            return new Currency(code, minorUnits);
         }
 
         /// <summary>
@@ -82,13 +90,13 @@ namespace Narvalo.Finance
         {
             Require.NotNull(regionInfo, nameof(regionInfo));
 
-            var code = regionInfo.ISOCurrencySymbol;
-            Contract.Assume(code != null);
-            Contract.Assume(code.Length != 0);   // Should not be necessary, but CCCheck insists.
-            Contract.Assume(Ascii.IsUpperLetter(code));
-            Contract.Assume(code.Length == 3);
+            //var code = regionInfo.ISOCurrencySymbol;
+            //Contract.Assume(code != null);
+            //Contract.Assume(code.Length != 0);   // Should not be necessary, but CCCheck insists.
+            //Contract.Assume(Ascii.IsUpperLetter(code));
+            //Contract.Assume(code.Length == 3);
 
-            return new Currency(code);
+            return Of(regionInfo.ISOCurrencySymbol);
         }
 
         public static Currency OfCurrentRegion() => OfRegion(RegionInfo.CurrentRegion);
@@ -123,17 +131,15 @@ namespace Narvalo.Finance
 
         // This method allows to register currencies that are not part of ISO 4217.
         // See https://en.wikipedia.org/wiki/ISO_4217.
-        // REVIEW: Should we worry about concurrent access? I'm not sure.
-        // If the code is already registered, no problem, otherwise two threads may attempt to add
-        // the same code; the first win, the second simply returns false?
-        public static bool RegisterCurrency(string code)
+        // FIXME: Concurrent access. Also add a method TryRegisterCurrency.
+        public static void RegisterCurrency(string code, int? minorUnits)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
 
-            Contract.Assume(CodeSet != null);
-            if (CodeSet.Contains(code)) { return false; }
+            Contract.Assume(Codes != null);
+            if (Codes.ContainsKey(code)) { return; }
 
-            return CodeSet.Add(code);
+            Codes.Add(code, minorUnits);
         }
 
         public bool IsNativeTo(CultureInfo cultureInfo)
