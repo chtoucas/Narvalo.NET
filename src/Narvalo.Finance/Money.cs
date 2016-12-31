@@ -25,6 +25,8 @@ namespace Narvalo.Finance
 
         public Currency Currency { get; }
 
+        public static Money Create(decimal amount) => new Money(amount, Currency.Of("XXX"));
+
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, Currency.Code);
@@ -32,16 +34,6 @@ namespace Narvalo.Finance
         // Check that the currencies match.
         private void ThrowIfCurrencyMismatch(Money other, string parameterName)
             => Enforce.True(Currency != other.Currency, parameterName, Strings.Argument_CurrencyMismatch);
-    }
-
-    public partial struct Money
-    {
-        public static Money Create(decimal amount) => new Money(amount, Currency.Of("XXX"));
-
-        public static Money Create(long amount, Currency currency) => new Money(amount, currency);
-
-        [CLSCompliant(false)]
-        public static Money Create(ulong amount, Currency currency) => new Money(amount, currency);
     }
 
     // Implements the IFormattable interface.

@@ -18,7 +18,7 @@ Library Enhancements & Improvements:
   * strong/weak validation of Bic, Iban & Bban (check digits).
   * currency info with implementation from the BCL & CLDR.
   * handle rounding and native scale.
-  * money & currency formatting.
+  * money & currency formatting + rounding before formatting.
   * exchange rate.
 - Narvalo.Mvp and Narvalo.Mvp.Web.
   * add localized messages in french for Narvalo.Mvp and Narvalo.Mvp.Web.
