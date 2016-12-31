@@ -37,9 +37,9 @@ namespace Narvalo.LocalData.Snv
 
         public static short? ParseMinorUnits(string value)
         {
-            const string NOT_AVAILABLE = "N.A.";
+            const string NOT_APPLICABLE = "N.A.";
 
-            if (value == NOT_AVAILABLE)
+            if (value == NOT_APPLICABLE)
             {
                 return null;
             }
