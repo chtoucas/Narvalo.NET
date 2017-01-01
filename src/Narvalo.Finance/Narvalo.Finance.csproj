@@ -81,10 +81,11 @@
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Money%24.cs" />
     <Compile Include="Numerics\Decimal%24.cs" />
-    <Compile Include="Numerics\NDecimal.cs" />
+    <Compile Include="Numerics\_Decimal.cs" />
     <Compile Include="Numerics\Int64Calculator.cs" />
     <Compile Include="Numerics\Int32Calculator.cs" />
     <Compile Include="Numerics\DivCollection`1.cs" />
+    <Compile Include="Utilities\CurrencyHelpers.cs" />
     <Compile Include="Utilities\IbanCheckDigits.cs" />
     <Compile Include="Numerics\DecimalPlace.cs" />
     <Compile Include="Numerics\DecimalRounding.cs" />

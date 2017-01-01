@@ -6,26 +6,65 @@ namespace Narvalo.Finance
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.Runtime.InteropServices;
 
     using Narvalo.Finance.Globalization;
+    using Narvalo.Finance.Numerics;
     using Narvalo.Finance.Properties;
 
-    [StructLayout(LayoutKind.Auto)]
+    // Per default, the CLR will use LayoutKind.Sequential for structs. Here, we do not care
+    // about interop with unmanaged code, so why not let the CLR decide what's best for it?
+    // Disabled: http://stackoverflow.com/questions/21881554/why-does-the-system-datetime-struct-have-layout-kind-auto?rq=1
+    //[StructLayout(LayoutKind.Auto)]
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Money : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
     {
+        private readonly _Decimal _amount;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Money"/> class without any currency attached.
+        /// </summary>
+        /// <param name="amount">A decimal representing the amount of money.</param>
+        public Money(decimal amount) : this(amount, Currency.None) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount for which no rounding is done.
+        /// </summary>
+        /// <param name="amount">A decimal representing the amount of money.</param>
+        /// <param name="currency">The specific currency.</param>
         public Money(decimal amount, Currency currency)
         {
-            Amount = amount;
+            _amount = new _Decimal(amount);
             Currency = currency;
         }
 
-        public decimal Amount { get; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount for which the number of decimal places is determined by the currency.
+        /// </summary>
+        /// <param name="amount">A decimal representing the amount of money.</param>
+        /// <param name="currency">The specific currency.</param>
+        /// <param name="rounding">The rounding mode.</param>
+        public Money(decimal amount, Currency currency, MidpointRounding rounding)
+        {
+            _amount = new _Decimal(amount, currency.DecimalPlaces, rounding);
+            Currency = currency;
+        }
+
+        public decimal Amount => _amount.Value;
 
         public Currency Currency { get; }
 
-        public static Money Create(decimal amount) => new Money(amount, Currency.Of("XXX"));
+        public bool Normalized => _amount.Normalized;
+
+        public Money Normalize() => Normalize(MidpointRounding.ToEven);
+
+        public Money Normalize(MidpointRounding rounding)
+        {
+            if (Normalized) { return this; }
+
+            return new Money(Amount, Currency, rounding);
+        }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -132,6 +171,85 @@ namespace Narvalo.Finance
 
             return CompareTo((Money)obj);
         }
+    }
+
+    // Conversions.
+    public partial struct Money
+    {
+        public static byte ToByte(Money value) => Decimal.ToByte(value.Amount);
+
+        [CLSCompliant(false)]
+        public static sbyte ToSByte(Money value) => Decimal.ToSByte(value.Amount);
+
+        [CLSCompliant(false)]
+        public static ushort ToUInt16(Money value) => Decimal.ToUInt16(value.Amount);
+
+        public static short ToInt16(Money value) => Decimal.ToInt16(value.Amount);
+
+        [CLSCompliant(false)]
+        public static uint ToUInt32(Money value) => Decimal.ToUInt32(value.Amount);
+
+        public static int ToInt32(Money value) => Decimal.ToInt32(value.Amount);
+
+        [CLSCompliant(false)]
+        public static ulong ToUInt64(Money value) => Decimal.ToUInt64(value.Amount);
+
+        public static long ToInt64(Money value) => Decimal.ToInt64(value.Amount);
+
+        public static decimal ToDecimal(Money value) => value.Amount;
+
+        #region Integral type or decimal -> Money.
+
+        public static implicit operator Money(byte value) => new Money(value);
+
+        [CLSCompliant(false)]
+        public static implicit operator Money(sbyte value) => new Money(value);
+
+        [CLSCompliant(false)]
+        public static implicit operator Money(ushort value) => new Money(value);
+
+        public static implicit operator Money(short value) => new Money(value);
+
+        [CLSCompliant(false)]
+        public static implicit operator Money(uint value) => new Money(value);
+
+        public static implicit operator Money(int value) => new Money(value);
+
+        [CLSCompliant(false)]
+        public static implicit operator Money(ulong value) => new Money(value);
+
+        public static implicit operator Money(long value) => new Money(value);
+
+        public static implicit operator Money(decimal value) => new Money(value);
+
+        #endregion
+
+        #region Money -> integral type or decimal.
+
+        public static explicit operator byte(Money value) => ToByte(value);
+
+        [CLSCompliant(false)]
+        public static explicit operator sbyte(Money value) => ToSByte(value);
+
+        [CLSCompliant(false)]
+        public static explicit operator ushort(Money value) => ToUInt16(value);
+
+        public static explicit operator short(Money value) => ToInt16(value);
+
+        [CLSCompliant(false)]
+        public static explicit operator uint(Money value) => ToUInt32(value);
+
+        public static explicit operator int(Money value) => ToInt32(value);
+
+        [CLSCompliant(false)]
+        public static explicit operator ulong(Money value) => ToUInt64(value);
+
+        public static explicit operator long(Money value) => ToInt64(value);
+
+        // NB: This one is implicit (no loss of precision).
+        public static implicit operator decimal(Money value) => ToDecimal(value);
+
+        #endregion
     }
 
     // Overrides the op_Addition operator.

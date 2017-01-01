@@ -53,6 +53,8 @@ Narvalo.Common
 Narvalo.Finance
 ---------------
 
+- [Liste des devises et de leurs subdivisions](https://fr.wikipedia.org/wiki/Liste_des_monnaies_en_circulation)
+- Add support for minor units (EUR -> EUr).
 - For debugging the T4 templates, see
   [here](http://stackoverflow.com/questions/5588792/determine-solution-configuration-debug-release-when-running-a-t4-template).
 - LocalCurrency
