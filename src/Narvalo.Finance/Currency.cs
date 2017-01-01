@@ -6,6 +6,7 @@ namespace Narvalo.Finance
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Linq;
 
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
@@ -27,6 +28,8 @@ namespace Narvalo.Finance
 
         // The list is automatically generated using data obtained from the SNV website.
         // The volatile keyword is only for correctness.
+        // REVIEW: Instead of using a volatile field, wouldn't it be better to create a temporary
+        // dictionary and then swap the references?
         private volatile static Dictionary<string, int?> s_Codes;
 
         // REVIEW: Use Currency.Of("XXX")?
@@ -70,7 +73,7 @@ namespace Narvalo.Finance
         /// those of a real country.</para>
         /// </remarks>
         /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
-        public  bool IsMetaCurrency => CurrencyHelpers.IsMetaCurrency(Code);
+        public bool IsMetaCurrency => CurrencyHelpers.IsMetaCurrency(Code);
 
         /// <summary>
         /// Gets the number of minor units.
@@ -152,8 +155,8 @@ namespace Narvalo.Finance
         public static Currency OfCurrentCulture() => OfCulture(CultureInfo.CurrentCulture);
 
         // This method allows to register currencies that are not part of ISO 4217.
-        // See https://en.wikipedia.org/wiki/ISO_4217.
-        // FIXME: Concurrent access. Also add a method TryRegisterCurrency.
+        // For details, see https://en.wikipedia.org/wiki/ISO_4217.
+        // FIXME: Concurrent access.
         public static bool RegisterCurrency(string code, int? minorUnits)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
@@ -161,7 +164,13 @@ namespace Narvalo.Finance
             Contract.Assume(Codes != null);
             if (Codes.ContainsKey(code)) { return false; }
 
-            Codes.Add(code, minorUnits);
+            // Work on a temporary copy of Codes. This is not very efficient but ensures
+            // that s_Codes does not end up in a broken state if any bad things happen.
+            // Anyway, we do not expect this method to be called very often, if ever.
+            var tmpCopy = Codes.ToDictionary(_ => _.Key, _ => _.Value);
+            tmpCopy[code] = minorUnits;
+
+            s_Codes = tmpCopy;
 
             return true;
         }
