@@ -31,11 +31,11 @@ namespace Narvalo.Finance.Generic
 
         [Fact]
         public static void OfType_ReturnsNull_ForMissingSingletonProperty()
-            => Assert.Null(CurrencyUnit.OfType<ZZZ>());
+            => Assert.Null(CurrencyUnit.OfType<XXN>());
 
         #endregion
 
-        private sealed class ZZZ : CurrencyUnit<ZZZ> { private ZZZ() { } }
+        private sealed class XXN : CurrencyUnit<XXN> { private XXN() : base(0) { } }
     }
 
 #endif
