@@ -6,7 +6,7 @@ namespace Narvalo.Finance.Numerics
 
     internal static class DecimalExtensions
     {
-        private const int SIGN_MASK = unchecked((int)0x80000000);
+        //private const int SIGN_MASK = unchecked((int)0x80000000);
         //private const byte DECIMAL_NEG = 0x80;
         //private const byte DECIMAL_ADD = 0x00;
         private const int SCALE_MASK = 0x00FF0000;
@@ -33,12 +33,12 @@ namespace Narvalo.Finance.Numerics
             return (flags & SCALE_MASK) >> SCALE_SHIFT;
         }
 
-        public static bool GetSign(this decimal @this)
-        {
-            int flags = Decimal.GetBits(@this)[3];
-            // The last bit contains the sign: 0 means positive, and 1 means negative.
-            return (flags & SIGN_MASK) != 0;
-        }
-
+        //public static bool GetSign(this decimal @this)
+        //{
+        //    return @this > 0;
+        //    //int flags = Decimal.GetBits(@this)[3];
+        //    //// The last bit contains the sign: 0 means positive, and 1 means negative.
+        //    //return (flags & SIGN_MASK) != 0;
+        //}
     }
 }
