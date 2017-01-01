@@ -4,25 +4,26 @@ namespace Narvalo.Finance.Generic
 {
     using System.Globalization;
 
+    using Narvalo.Finance.Utilities;
+
     public class CurrencyUnit<TCurrency> where TCurrency : CurrencyUnit<TCurrency>
     {
-        private readonly int? _minorUnits;
-
-        internal CurrencyUnit(int? minorUnits) { _minorUnits = minorUnits; }
+        internal CurrencyUnit(int? minorUnits) { MinorUnits = minorUnits; }
 
         protected static string Name
         {
             get { Warrant.NotNull<string>(); return typeof(TCurrency).Name; }
         }
 
+        public string Code { get { Warrant.NotNull<string>(); return Name; } }
+
+        public int DecimalPlaces => MinorUnits ?? 0;
+
+        public  bool IsMetaCurrency => CurrencyHelpers.IsMetaCurrency(Code);
+
+        public int? MinorUnits { get; }
+
         public Currency ToCurrency() => new Currency(Code, MinorUnits);
-
-        public string Code
-        {
-            get { Warrant.NotNull<string>(); return Name; }
-        }
-
-        public int? MinorUnits => _minorUnits;
 
         public override string ToString()
         {

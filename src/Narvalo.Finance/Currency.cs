@@ -23,12 +23,16 @@ namespace Narvalo.Finance
     /// </remarks>
     public partial struct Currency : IEquatable<Currency>
     {
+        private const string NoCurrencyCode = "XXX";
+
         // The list is automatically generated using data obtained from the SNV website.
         // The volatile keyword is only for correctness.
         private volatile static Dictionary<string, int?> s_Codes;
 
+        // REVIEW: Use Currency.Of("XXX")?
+        private static readonly Currency s_None = new Currency(NoCurrencyCode, null);
+
         private readonly string _code;
-        private readonly int? _minorUnits;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Currency" /> class for the specified code.
@@ -39,22 +43,40 @@ namespace Narvalo.Finance
             Sentinel.Demand.CurrencyCode(code);
 
             _code = code;
-            _minorUnits = minorUnits;
+            MinorUnits = minorUnits;
         }
+
+        public static Currency None => s_None;
 
         /// <summary>
         /// Gets the alphabetic code of the currency.
         /// </summary>
         /// <value>The alphabetic code of the currency.</value>
-        public string Code
-        {
-            get { Warrant.NotNull<string>(); return _code; }
-        }
+        public string Code { get { Warrant.NotNull<string>(); return _code; } }
 
-        public int? MinorUnits
-        {
-            get { Warrant.NotNull<string>(); return _minorUnits; }
-        }
+        public int DecimalPlaces => MinorUnits ?? 0;
+
+        /// <summary>
+        /// Gets a value indicating whether the currency is a meta-currency.
+        /// </summary>
+        /// <remarks>
+        /// <para>Meta-currencies include supranational currencies (but notice that EUR
+        /// is not part of them...), precious metals, the test currency, the "no"
+        /// currency and currencies used in international finance.</para>
+        /// <para>Meta-currencies are not attached to a specific country.
+        /// Their numeric codes are in the range 900-999 and their codes are in the
+        /// range XA(A)-XZ(Z). They fall in the ranges of user-assigned codes
+        /// as defined by the ISO 3166 standard, ie they will never clash with
+        /// those of a real country.</para>
+        /// </remarks>
+        /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
+        public  bool IsMetaCurrency => CurrencyHelpers.IsMetaCurrency(Code);
+
+        /// <summary>
+        /// Gets the number of minor units.
+        /// </summary>
+        /// <value>The number of minor units; <see langword="null"/> if none defined.</value>
+        public int? MinorUnits { get; }
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
@@ -132,14 +154,16 @@ namespace Narvalo.Finance
         // This method allows to register currencies that are not part of ISO 4217.
         // See https://en.wikipedia.org/wiki/ISO_4217.
         // FIXME: Concurrent access. Also add a method TryRegisterCurrency.
-        public static void RegisterCurrency(string code, int? minorUnits)
+        public static bool RegisterCurrency(string code, int? minorUnits)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
 
             Contract.Assume(Codes != null);
-            if (Codes.ContainsKey(code)) { return; }
+            if (Codes.ContainsKey(code)) { return false; }
 
             Codes.Add(code, minorUnits);
+
+            return true;
         }
 
         public bool IsNativeTo(CultureInfo cultureInfo)
