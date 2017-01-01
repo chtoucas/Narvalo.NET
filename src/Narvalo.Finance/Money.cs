@@ -13,7 +13,6 @@ namespace Narvalo.Finance
 
     // Per default, the CLR will use LayoutKind.Sequential for structs. Here, we do not care
     // about interop with unmanaged code, so why not let the CLR decide what's best for it?
-    // Disabled: http://stackoverflow.com/questions/21881554/why-does-the-system-datetime-struct-have-layout-kind-auto?rq=1
     //[StructLayout(LayoutKind.Auto)]
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Money : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable

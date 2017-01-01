@@ -6,7 +6,7 @@ namespace Narvalo.Finance.Generic
 
     public class CurrencyUnit<TCurrency> where TCurrency : CurrencyUnit<TCurrency>
     {
-        internal CurrencyUnit(int? minorUnits) { MinorUnits = minorUnits; }
+        internal CurrencyUnit(short? minorUnits) { MinorUnits = minorUnits; }
 
         protected static string Name
         {
@@ -15,11 +15,11 @@ namespace Narvalo.Finance.Generic
 
         public string Code { get { Warrant.NotNull<string>(); return Name; } }
 
-        public int DecimalPlaces => MinorUnits ?? 0;
+        public short DecimalPlaces => MinorUnits ?? 0;
 
         public  bool IsMeta => Currency.IsMetaCurrency(Code);
 
-        public int? MinorUnits { get; }
+        public short? MinorUnits { get; }
 
         public Currency ToCurrency() => new Currency(Code, MinorUnits);
 

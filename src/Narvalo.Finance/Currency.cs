@@ -29,8 +29,8 @@ namespace Narvalo.Finance
         // The list is automatically generated using data obtained from the SNV website.
         // The volatile keyword is only for correctness.
         // REVIEW: Instead of using a volatile field, wouldn't it be better to create a temporary
-        // dictionary and then swap the references?
-        private volatile static Dictionary<string, int?> s_Codes;
+        // dictionary then swap the references?
+        private volatile static Dictionary<string, short?> s_Codes;
 
         private readonly string _code;
 
@@ -38,7 +38,7 @@ namespace Narvalo.Finance
         /// Initializes a new instance of the <see cref="Currency" /> class for the specified code.
         /// </summary>
         /// <param name="code">A string that contains the three-letter identifier defined in ISO 4217.</param>
-        internal Currency(string code, int? minorUnits)
+        internal Currency(string code, short? minorUnits)
         {
             Sentinel.Demand.CurrencyCode(code);
 
@@ -52,7 +52,7 @@ namespace Narvalo.Finance
         /// <value>The alphabetic code of the currency.</value>
         public string Code { get { Warrant.NotNull<string>(); return _code; } }
 
-        public int DecimalPlaces => MinorUnits ?? 0;
+        public short DecimalPlaces => MinorUnits ?? 0;
 
         /// <summary>
         /// Gets a value indicating whether the currency is a meta-currency.
@@ -74,13 +74,14 @@ namespace Narvalo.Finance
         /// Gets the number of minor units.
         /// </summary>
         /// <value>The number of minor units; <see langword="null"/> if none defined.</value>
-        public int? MinorUnits { get; }
+        public short? MinorUnits { get; }
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>
         /// <param name="code">The three letter ISO-4217 code of the currency.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="code"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="code"/> is
+        /// <see langword="null"/>.</exception>
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
         /// specified code.</exception>
         /// <returns>The currency for the specified code.</returns>
@@ -90,7 +91,7 @@ namespace Narvalo.Finance
             Sentinel.Expect.CurrencyCode(code);
 
             Contract.Assume(Codes != null);
-            int? minorUnits;
+            short? minorUnits;
             if (!Codes.TryGetValue(code, out minorUnits))
             {
                 throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCode, code));
@@ -103,8 +104,10 @@ namespace Narvalo.Finance
         /// Obtains an instance of the <see cref="Currency" /> class associated with the specified region.
         /// </summary>
         /// <param name="regionInfo">A region info.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="regionInfo"/> is <see langword="null"/>.</exception>
-        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the specified region.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="regionInfo"/> is
+        /// <see langword="null"/>.</exception>
+        /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
+        /// specified region.</exception>
         /// <returns>The currency for the specified region info.</returns>
         public static Currency OfRegion(RegionInfo regionInfo)
         {
@@ -126,7 +129,8 @@ namespace Narvalo.Finance
         /// with the specified culture.
         /// </summary>
         /// <param name="cultureInfo">A culture info.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="cultureInfo"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="cultureInfo"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="cultureInfo"/> is neutral.</exception>
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the specified culture.</exception>
         /// <returns>The currency for the specified culture info.</returns>
         public static Currency OfCulture(CultureInfo cultureInfo)
@@ -152,7 +156,7 @@ namespace Narvalo.Finance
         // This method allows to register currencies that are not part of ISO 4217.
         // For details, see https://en.wikipedia.org/wiki/ISO_4217.
         // FIXME: Concurrent access.
-        public static bool RegisterCurrency(string code, int? minorUnits)
+        public static bool RegisterCurrency(string code, short? minorUnits)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
 

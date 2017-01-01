@@ -5,7 +5,7 @@ namespace Narvalo.Finance.Globalization
     using System.Collections.Generic;
 
     // Only covers ISO 3166-1 alpha-2 codes.
-    // REVIEW: Should we also include the deleted codes?
+    // REVIEW: Should we also include the deleted or reserved codes (like EU)?
     public static partial class CountryISOCodes
     {
         // The list is automatically generated using data obtained from the ISO website.

@@ -10,7 +10,7 @@ namespace Narvalo.Finance.Numerics
     {
         public const MidpointRounding DefaultRounding = MidpointRounding.ToEven;
 
-        private const int MAX_DECIMAL_PLACES = 28;
+        private const short MAX_DECIMAL_PLACES = 28;
 
         public _Decimal(decimal value)
         {
@@ -19,18 +19,20 @@ namespace Narvalo.Finance.Numerics
             HasFixedScale = false;
         }
 
-        public _Decimal(decimal value, int decimalPlaces, MidpointRounding rounding)
+        public _Decimal(decimal value, short decimalPlaces, MidpointRounding rounding)
         {
             Require.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES, nameof(decimalPlaces));
 
-            Value = Math.Round(value, decimalPlaces, rounding);
+            Value = decimalPlaces == 0
+                ? Math.Truncate(value)
+                : Math.Round(value, decimalPlaces, rounding);
             DecimalPlaces = decimalPlaces;
             HasFixedScale = true;
         }
 
         // Only call this one when "decimalPlaces" is known to be lower than or equal to
         // the one stored inside "value".
-        private _Decimal(decimal value, int decimalPlaces)
+        private _Decimal(decimal value, short decimalPlaces)
         {
             Demand.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES);
 
@@ -39,7 +41,7 @@ namespace Narvalo.Finance.Numerics
             HasFixedScale = true;
         }
 
-        public int DecimalPlaces { get; }
+        public short DecimalPlaces { get; }
 
         public bool HasFixedScale { get; }
 

@@ -21,13 +21,13 @@ namespace Narvalo.Finance
         /// The list of available currency codes.
         /// </summary>
         [ContractVerification(false)]
-        private static Dictionary<string, int?> Codes
+        private static Dictionary<string, short?> Codes
         {
             get
             {
                 if (s_Codes == null)
                 {
-                    var dict = new Dictionary<string, int?>() {
+                    var dict = new Dictionary<string, short?>() {
                         { "ADP", null},
                         { "AED", 2},
                         { "AFA", null},
