@@ -24,7 +24,8 @@ namespace Narvalo.Finance
     /// </remarks>
     public partial struct Currency : IEquatable<Currency>
     {
-        private const string NoCurrencyCode = "XXX";
+        private const string NO_CURRENCY_CODE = "XXX";
+        private const char META_CURRENCY_MARK = 'X';
 
         // The list is automatically generated using data obtained from the SNV website.
         // The volatile keyword is only for correctness.
@@ -33,7 +34,7 @@ namespace Narvalo.Finance
         private volatile static Dictionary<string, int?> s_Codes;
 
         // REVIEW: Use Currency.Of("XXX")?
-        private static readonly Currency s_None = new Currency(NoCurrencyCode, null);
+        private static readonly Currency s_None = new Currency(NO_CURRENCY_CODE, null);
 
         private readonly string _code;
 
@@ -73,7 +74,7 @@ namespace Narvalo.Finance
         /// those of a real country.</para>
         /// </remarks>
         /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
-        public bool IsMetaCurrency => CurrencyHelpers.IsMetaCurrency(Code);
+        public bool IsMetaCurrency => IsMetaCode(Code);
 
         /// <summary>
         /// Gets the number of minor units.
@@ -173,6 +174,15 @@ namespace Narvalo.Finance
             s_Codes = tmpCopy;
 
             return true;
+        }
+
+        // TODO: What about EUR, CFP... for this, is it enough to check the country code too
+        // (the first two letters)?
+        internal static bool IsMetaCode(string currencyCode)
+        {
+            Demand.NotNullOrEmpty(currencyCode);
+
+            return currencyCode[0] == META_CURRENCY_MARK;
         }
 
         public bool IsNativeTo(CultureInfo cultureInfo)
