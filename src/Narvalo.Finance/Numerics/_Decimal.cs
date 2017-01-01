@@ -16,7 +16,7 @@ namespace Narvalo.Finance.Numerics
         {
             Value = value;
             DecimalPlaces = MAX_DECIMAL_PLACES;
-            Normalized = false;
+            HasFixedScale = false;
         }
 
         public _Decimal(decimal value, int decimalPlaces, MidpointRounding rounding)
@@ -25,7 +25,7 @@ namespace Narvalo.Finance.Numerics
 
             Value = Math.Round(value, decimalPlaces, rounding);
             DecimalPlaces = decimalPlaces;
-            Normalized = true;
+            HasFixedScale = true;
         }
 
         // Only call this one when "decimalPlaces" is known to be lower than or equal to
@@ -36,12 +36,12 @@ namespace Narvalo.Finance.Numerics
 
             Value = value;
             DecimalPlaces = decimalPlaces;
-            Normalized = true;
+            HasFixedScale = true;
         }
 
         public int DecimalPlaces { get; }
 
-        public bool Normalized { get; }
+        public bool HasFixedScale { get; }
 
         public decimal Value { get; }
 

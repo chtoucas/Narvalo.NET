@@ -17,7 +17,7 @@ namespace Narvalo.Finance.Generic
 
         public int DecimalPlaces => MinorUnits ?? 0;
 
-        public  bool IsMetaCurrency => Currency.IsMetaCode(Code);
+        public  bool IsMeta => Currency.IsMetaCurrency(Code);
 
         public int? MinorUnits { get; }
 

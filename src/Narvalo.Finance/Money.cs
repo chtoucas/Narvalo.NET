@@ -18,7 +18,7 @@ namespace Narvalo.Finance
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Money : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
     {
-        private readonly _Decimal _amount;
+        private readonly _Decimal _decimal;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class without any currency attached.
@@ -34,7 +34,7 @@ namespace Narvalo.Finance
         /// <param name="currency">The specific currency.</param>
         public Money(decimal amount, Currency currency)
         {
-            _amount = new _Decimal(amount);
+            _decimal = new _Decimal(amount);
             Currency = currency;
         }
 
@@ -47,15 +47,15 @@ namespace Narvalo.Finance
         /// <param name="rounding">The rounding mode.</param>
         public Money(decimal amount, Currency currency, MidpointRounding rounding)
         {
-            _amount = new _Decimal(amount, currency.DecimalPlaces, rounding);
+            _decimal = new _Decimal(amount, currency.DecimalPlaces, rounding);
             Currency = currency;
         }
 
-        public decimal Amount => _amount.Value;
+        public decimal Amount => _decimal.Value;
 
         public Currency Currency { get; }
 
-        public bool Normalized => _amount.Normalized;
+        public bool Normalized => _decimal.HasFixedScale;
 
         public Money Normalize() => Normalize(MidpointRounding.ToEven);
 

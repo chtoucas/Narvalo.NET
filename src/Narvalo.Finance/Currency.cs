@@ -24,7 +24,6 @@ namespace Narvalo.Finance
     /// </remarks>
     public partial struct Currency : IEquatable<Currency>
     {
-        private const string NO_CURRENCY_CODE = "XXX";
         private const char META_CURRENCY_MARK = 'X';
 
         // The list is automatically generated using data obtained from the SNV website.
@@ -32,9 +31,6 @@ namespace Narvalo.Finance
         // REVIEW: Instead of using a volatile field, wouldn't it be better to create a temporary
         // dictionary and then swap the references?
         private volatile static Dictionary<string, int?> s_Codes;
-
-        // REVIEW: Use Currency.Of("XXX")?
-        private static readonly Currency s_None = new Currency(NO_CURRENCY_CODE, null);
 
         private readonly string _code;
 
@@ -49,8 +45,6 @@ namespace Narvalo.Finance
             _code = code;
             MinorUnits = minorUnits;
         }
-
-        public static Currency None => s_None;
 
         /// <summary>
         /// Gets the alphabetic code of the currency.
@@ -74,7 +68,7 @@ namespace Narvalo.Finance
         /// those of a real country.</para>
         /// </remarks>
         /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
-        public bool IsMetaCurrency => IsMetaCode(Code);
+        public bool IsMeta => IsMetaCurrency(Code);
 
         /// <summary>
         /// Gets the number of minor units.
@@ -178,7 +172,7 @@ namespace Narvalo.Finance
 
         // TODO: What about EUR, CFP... for this, is it enough to check the country code too
         // (the first two letters)?
-        internal static bool IsMetaCode(string currencyCode)
+        internal static bool IsMetaCurrency(string currencyCode)
         {
             Demand.NotNullOrEmpty(currencyCode);
 
@@ -229,6 +223,69 @@ namespace Narvalo.Finance
         /// <inheritdoc cref="Object.GetHashCode" />
         // TODO: Since there are so few currencies, we could cache the hash code?
         public override int GetHashCode() => Code.GetHashCode();
+    }
+
+    // Aliases for some of the most commonly used currencies.
+    public partial struct Currency
+    {
+        /// <summary>
+        /// Gets the currency unit for the pseudo-currency for transactions where no currency is involved.
+        /// </summary>
+        public static Currency None => Of("XXX");
+
+        /// <summary>
+        /// Gets the currency unit for the currency specifically reserved for testing purposes.
+        /// </summary>
+        public static Currency Test => Of("XTS");
+
+        /// <summary>
+        /// Gets the currency unit for the "Euro".
+        /// </summary>
+        public static Currency Euro => Of("EUR");
+
+        /// <summary>
+        /// Gets the currency unit for the "(British) "Pound Sterling".
+        /// </summary>
+        public static Currency PoundSterling => Of("GBP");
+
+        /// <summary>
+        /// Gets the currency unit for the "Swiss Franc".
+        /// </summary>
+        public static Currency SwissFranc => Of("CHF");
+
+        /// <summary>
+        /// Gets the currency unit for the "United States Dollar".
+        /// </summary>
+        public static Currency UnitedStatesDollar => Of("USD");
+
+        /// <summary>
+        /// Gets the currency unit for the "Japanese Yen".
+        /// </summary>
+        public static Currency Yen => Of("JPY");
+
+        /// <summary>
+        /// Gets the currency unit for the pseudo-currency for gold.
+        /// </summary>
+        /// <remarks>The code for a precious metal is formed after its chemical symbol: AU.</remarks>
+        public static Currency Gold => Of("XAU");
+
+        /// <summary>
+        /// Gets the currency unit class for the pseudo-currency for palladium.
+        /// </summary>
+        /// <remarks>The code for a precious metal is formed after its chemical symbol: PD.</remarks>
+        public static Currency Palladium => Of("XPD");
+
+        /// <summary>
+        /// Gets the currency unit for the pseudo-currency for platinum.
+        /// </summary>
+        /// <remarks>The code for a precious metal is formed after its chemical symbol: PT.</remarks>
+        public static Currency Platinum => Of("XPT");
+
+        /// <summary>
+        /// Gets the currency unit for the pseudo-currency for silver.
+        /// </summary>
+        /// <remarks>The code for a precious metal is formed after its chemical symbol: AG.</remarks>
+        public static Currency Silver => Of("XAG");
     }
 }
 
