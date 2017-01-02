@@ -42,6 +42,11 @@ Narvalo.Mvp               | 1.1.0
 Narvalo.Mvp.Web           | 1.1.0
 Narvalo.Web               | 0.26.0
 
+TODO
+----
+- Complete `_Decimal`. Update `IEquatable<_Decimal>`.
+- Migrate `Money<TCurrency>` to `_Decimal`.
+
 Highlights
 ----------
 

@@ -163,8 +163,8 @@ namespace Narvalo.Finance
             Contract.Assume(Codes != null);
             if (Codes.ContainsKey(code)) { return false; }
 
-            // Work on a temporary copy of Codes. This is not very efficient but ensures
-            // that s_Codes does not end up in a broken state if any bad things happen.
+            // We work on a temporary copy of Codes. This is not very efficient but ensures
+            // that s_Codes does not end up in a broken state if anything bad happens.
             // Anyway, we do not expect this method to be called very often, if ever.
             var tmpCopy = Codes.ToDictionary(_ => _.Key, _ => _.Value);
             tmpCopy[code] = minorUnits;
