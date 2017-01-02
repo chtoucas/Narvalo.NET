@@ -3,95 +3,64 @@
 namespace Narvalo.Finance.Numerics
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    internal partial struct _Decimal : IEquatable<_Decimal>, IComparable<_Decimal>, IComparable //, IFormattable
+    internal partial struct _Decimal : IEquatable<_Decimal>, IComparable<_Decimal>, IComparable
     {
-        public const MidpointRounding DefaultRounding = MidpointRounding.ToEven;
-
         private const short MAX_DECIMAL_PLACES = 28;
 
         public _Decimal(decimal value)
         {
             Value = value;
             DecimalPlaces = MAX_DECIMAL_PLACES;
-            HasFixedScale = false;
         }
 
         public _Decimal(decimal value, short decimalPlaces, MidpointRounding rounding)
         {
             Require.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES, nameof(decimalPlaces));
 
-            Value = decimalPlaces == 0
-                ? Math.Truncate(value)
-                : Math.Round(value, decimalPlaces, rounding);
+            Value = decimalPlaces == MAX_DECIMAL_PLACES
+                ? value
+                : Round(value, decimalPlaces, rounding);
             DecimalPlaces = decimalPlaces;
-            HasFixedScale = true;
         }
 
-        // Only call this one when "decimalPlaces" is known to be lower than or equal to
-        // the one stored inside "value".
+        // Only call this one when you know that rounding "value" to "decimalPlaces" will have no effects.
         private _Decimal(decimal value, short decimalPlaces)
         {
             Demand.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES);
 
             Value = value;
             DecimalPlaces = decimalPlaces;
-            HasFixedScale = true;
+        }
+
+        private _Decimal(decimal value, short decimalPlaces, MidpointRounding rounding, bool round)
+        {
+            Demand.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES);
+
+            Value = round ? Round(value, decimalPlaces, rounding) : value;
+            DecimalPlaces = decimalPlaces;
         }
 
         public short DecimalPlaces { get; }
 
-        public bool HasFixedScale { get; }
+        public bool HasFixedScale => DecimalPlaces != MAX_DECIMAL_PLACES;
 
         public decimal Value { get; }
 
-        private _Decimal Map(decimal value, MidpointRounding rounding, int decimalPlaces)
-            => decimalPlaces <= DecimalPlaces
-            ? new _Decimal(value, DecimalPlaces)
-            : new _Decimal(value, DecimalPlaces, rounding);
+        private static decimal Round(decimal value, short decimalPlaces, MidpointRounding rounding)
+            => decimalPlaces == 0 ? Math.Truncate(value) : Math.Round(value, decimalPlaces, rounding);
 
-        //private bool IsLossy(NDecimal other) => !IsLoseless(other);
-
-        //private bool IsLoseless(NDecimal other) => other.DecimalPlaces <= DecimalPlaces;
-
-        //private void ThrowIfLossy(NDecimal other)
+        //private _Decimal Create(decimal value, MidpointRounding rounding, bool round)
         //{
-        //    if (other.DecimalPlaces > DecimalPlaces)
-        //    {
-        //        throw new InvalidOperationException();
-        //    }
+        //    return round
+        //        ? new _Decimal(value, DecimalPlaces, rounding)
+        //        : new _Decimal(value, DecimalPlaces);
         //}
+
+        private bool IsLossy(_Decimal other) => !IsLoseless(other);
+
+        private bool IsLoseless(_Decimal other) => other.DecimalPlaces <= DecimalPlaces;
     }
-
-    // Implements the IFormattable interface.
-    //internal partial struct _Decimal
-    //{
-    //    public string ToString(string format)
-    //    {
-    //        Warrant.NotNull<string>();
-    //        return Value.ToString(format);
-    //    }
-
-    //    public string ToString(IFormatProvider formatProvider)
-    //    {
-    //        Warrant.NotNull<string>();
-    //        return Value.ToString(formatProvider);
-    //    }
-
-    //    public string ToString(string format, IFormatProvider formatProvider)
-    //    {
-    //        Warrant.NotNull<string>();
-    //        return Value.ToString(format, formatProvider);
-    //    }
-
-    //    public override string ToString()
-    //    {
-    //        Warrant.NotNull<string>();
-    //        return Value.ToString();
-    //    }
-    //}
 
     // Implements the IEquatable<_Decimal> interface.
     internal partial struct _Decimal
@@ -150,28 +119,66 @@ namespace Narvalo.Finance.Numerics
     // Overrides the op_Addition operator.
     internal partial struct _Decimal
     {
-        public static _Decimal operator +(_Decimal left, _Decimal right) => left.Add(right);
+        // Return a "variable" _Decimal, ie result.DecimalPlaces = MAX_DECIMAL_PLACES.
+        public _Decimal Add(decimal other)
+        {
+            if (other == 0M) { return this; }
+            return new _Decimal(Value + other);
+        }
 
-        public _Decimal Add(_Decimal other) => Add(other, DefaultRounding);
+        // This addition is symmetric (as expected) but throws if the two objects do not have
+        // the same scale.
+        public _Decimal Add(_Decimal other)
+        {
+            Enforce.True(other.DecimalPlaces == DecimalPlaces, nameof(other), "XXX");
 
-        public _Decimal Add(_Decimal other, MidpointRounding rounding)
+            if (Value == 0M) { return other; }
+            if (other.Value == 0M) { return this; }
+            return new _Decimal(Value + other.Value, DecimalPlaces);
+        }
+
+        // This addition is NOT symmetric.
+        public _Decimal Plus(decimal other, MidpointRounding rounding)
+        {
+            if (other == 0M) { return this; }
+            return new _Decimal(Value + other, DecimalPlaces, rounding);
+        }
+
+        // This addition is NOT symmetric.
+        public _Decimal Plus(_Decimal other, MidpointRounding rounding)
         {
             if (other.Value == 0M) { return this; }
-
-            return Map(Value + other.Value, rounding, other.DecimalPlaces);
-        }
-
-        public _Decimal Add(IEnumerable<_Decimal> others) => Add(others, DefaultRounding);
-
-        public _Decimal Add(IEnumerable<_Decimal> others, MidpointRounding rounding)
-        {
-            Require.NotNull(others, nameof(others));
-
-            var sum = Value + others.Sum(_ => _.Value);
-
-            return new _Decimal(sum, DecimalPlaces, rounding);
+            return new _Decimal(Value + other.Value, DecimalPlaces, rounding, IsLossy(other));
         }
     }
+
+    // Implements the IFormattable interface.
+    //internal partial struct _Decimal
+    //{
+    //    public string ToString(string format)
+    //    {
+    //        Warrant.NotNull<string>();
+    //        return Value.ToString(format);
+    //    }
+
+    //    public string ToString(IFormatProvider formatProvider)
+    //    {
+    //        Warrant.NotNull<string>();
+    //        return Value.ToString(formatProvider);
+    //    }
+
+    //    public string ToString(string format, IFormatProvider formatProvider)
+    //    {
+    //        Warrant.NotNull<string>();
+    //        return Value.ToString(format, formatProvider);
+    //    }
+
+    //    public override string ToString()
+    //    {
+    //        Warrant.NotNull<string>();
+    //        return Value.ToString();
+    //    }
+    //}
 }
 
 #if CONTRACTS_FULL

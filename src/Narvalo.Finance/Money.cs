@@ -17,6 +17,8 @@ namespace Narvalo.Finance
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Money : IEquatable<Money>, IComparable<Money>, IComparable, IFormattable
     {
+        public const MidpointRounding DefaultRounding = MidpointRounding.ToEven;
+
         private readonly _Decimal _decimal;
 
         /// <summary>
@@ -35,6 +37,7 @@ namespace Narvalo.Finance
         {
             _decimal = new _Decimal(amount);
             Currency = currency;
+            Normalized = false;
         }
 
         /// <summary>
@@ -48,13 +51,23 @@ namespace Narvalo.Finance
         {
             _decimal = new _Decimal(amount, currency.DecimalPlaces, rounding);
             Currency = currency;
+            Normalized = true;
+        }
+
+        private Money(_Decimal amount, Currency currency)
+        {
+            _decimal = amount;
+            Currency = currency;
+            Normalized = true;
         }
 
         public decimal Amount => _decimal.Value;
 
         public Currency Currency { get; }
 
-        public bool Normalized => _decimal.HasFixedScale;
+        public bool Normalized { get; }
+
+        private _Decimal _Decimal => _decimal;
 
         public Money Normalize() => Normalize(MidpointRounding.ToEven);
 
@@ -67,7 +80,7 @@ namespace Narvalo.Finance
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
-        private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, Currency.Code);
+        private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Currency.Code);
 
         // Check that the currencies match.
         private void ThrowIfCurrencyMismatch(Money other, string parameterName)
@@ -120,7 +133,7 @@ namespace Narvalo.Finance
 
         public static bool operator !=(Money left, Money right) => !left.Equals(right);
 
-        public bool Equals(Money other) => Amount == other.Amount && Currency == other.Currency;
+        public bool Equals(Money other) => _Decimal == other._Decimal && Currency == other.Currency;
 
         public override bool Equals(object obj)
         {
@@ -134,7 +147,7 @@ namespace Narvalo.Finance
             unchecked
             {
                 int hash = 17;
-                hash = 31 * hash + Amount.GetHashCode();
+                hash = 31 * hash + _Decimal.GetHashCode();
                 hash = 31 * hash + Currency.GetHashCode();
                 return hash;
             }
@@ -156,7 +169,7 @@ namespace Narvalo.Finance
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
 
-            return Amount.CompareTo(other.Amount);
+            return _Decimal.CompareTo(other._Decimal);
         }
 
         int IComparable.CompareTo(object obj)
@@ -219,7 +232,7 @@ namespace Narvalo.Finance
 
         public static implicit operator Money(long value) => new Money(value);
 
-        public static implicit operator Money(decimal value) => new Money(value);
+        //public static implicit operator Money(decimal value) => new Money(value);
 
         #endregion
 
@@ -246,7 +259,7 @@ namespace Narvalo.Finance
         public static explicit operator long(Money value) => ToInt64(value);
 
         // NB: This one is implicit (no loss of precision).
-        public static implicit operator decimal(Money value) => ToDecimal(value);
+        //public static implicit operator decimal(Money value) => ToDecimal(value);
 
         #endregion
     }
@@ -255,15 +268,31 @@ namespace Narvalo.Finance
     public partial struct Money
     {
         public static Money operator +(Money left, Money right) => left.Add(right);
+        public static Money operator +(Money left, decimal right) => left.Add(right);
+        public static Money operator +(decimal left, Money right) => right.Add(left);
 
+        // Returns a denormalized money.
+        public Money Add(decimal other) => new Money(_Decimal.Add(other), Currency);
+
+        // Returns a normalized money.
+        public Money Add(decimal other, MidpointRounding rounding)
+            => new Money(_Decimal.Plus(other, rounding), Currency);
+
+        // Returns a normalized money.
         public Money Add(Money other)
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
 
-            return new Money(Amount + other.Amount, Currency);
+            return new Money(_Decimal.Add(other._Decimal), Currency);
         }
 
-        public Money Add(decimal amount) => new Money(Amount + amount, Currency);
+        // Returns a normalized money.
+        public Money Add(Money other, MidpointRounding rounding)
+        {
+            ThrowIfCurrencyMismatch(other, nameof(other));
+
+            return new Money(_Decimal.Plus(other._Decimal, rounding), Currency);
+        }
     }
 
     // Overrides the op_Subtraction operator.
