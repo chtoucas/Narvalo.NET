@@ -12,13 +12,12 @@ Documentation & Tests (Narvalo.Cerbere & Narvalo.Finance):
 - Good test coverage.
 
 Library Enhancements & Improvements:
-- Narvalo.Finance (still no big money for accurate computations, next time...)
-  * localization.
+- Narvalo.Finance
   * BBAN & IIBAN implementations.
-  * strong/weak validation of Bic, Iban & Bban (check digits).
+  * validation for BIC, IBAN, IIBAN & BBAN.
   * currency info with implementation from the BCL & CLDR.
-  * handle rounding and native scale.
-  * money & currency formatting + rounding before formatting.
+  * money rounding.
+  * money & currency formatting.
   * exchange rate.
 - Narvalo.Mvp and Narvalo.Mvp.Web.
   * add localized messages in french for Narvalo.Mvp and Narvalo.Mvp.Web.
@@ -45,7 +44,9 @@ Narvalo.Web               | 0.26.0
 TODO
 ----
 - Complete `_Decimal`. Update `IEquatable<_Decimal>`.
-- Migrate `Money<TCurrency>` to `_Decimal`.
+- Update `Money<TCurrency>`, `MoneyFormatter` to use `_Decimal`.
+- Handle rounding and native scale.
+- Complete localization of messages.
 
 Highlights
 ----------
