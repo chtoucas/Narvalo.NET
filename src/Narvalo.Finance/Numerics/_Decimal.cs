@@ -8,6 +8,18 @@ namespace Narvalo.Finance.Numerics
     {
         private const short MAX_DECIMAL_PLACES = 28;
 
+        public _Decimal(long value)
+        {
+            Value = value;
+            DecimalPlaces = 0;
+        }
+
+        public _Decimal(ulong value)
+        {
+            Value = value;
+            DecimalPlaces = 0;
+        }
+
         public _Decimal(decimal value)
         {
             Value = value;
@@ -16,7 +28,7 @@ namespace Narvalo.Finance.Numerics
 
         public _Decimal(decimal value, short decimalPlaces, MidpointRounding rounding)
         {
-            Require.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES, nameof(decimalPlaces));
+            //Require.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES, nameof(decimalPlaces));
 
             Value = decimalPlaces == MAX_DECIMAL_PLACES
                 ? value
@@ -27,7 +39,7 @@ namespace Narvalo.Finance.Numerics
         // Only call this one when you know that rounding "value" to "decimalPlaces" will have no effects.
         private _Decimal(decimal value, short decimalPlaces)
         {
-            Demand.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES);
+            //Demand.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES);
 
             Value = value;
             DecimalPlaces = decimalPlaces;
@@ -35,7 +47,7 @@ namespace Narvalo.Finance.Numerics
 
         private _Decimal(decimal value, short decimalPlaces, MidpointRounding rounding, bool round)
         {
-            Demand.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES);
+            //Demand.Range(decimalPlaces >= 0 && decimalPlaces <= MAX_DECIMAL_PLACES);
 
             Value = round ? Round(value, decimalPlaces, rounding) : value;
             DecimalPlaces = decimalPlaces;
@@ -43,7 +55,7 @@ namespace Narvalo.Finance.Numerics
 
         public short DecimalPlaces { get; }
 
-        public bool HasFixedScale => DecimalPlaces != MAX_DECIMAL_PLACES;
+        //public bool HasFixedScale => DecimalPlaces != MAX_DECIMAL_PLACES;
 
         public decimal Value { get; }
 
@@ -120,10 +132,17 @@ namespace Narvalo.Finance.Numerics
     internal partial struct _Decimal
     {
         // Return a "variable" _Decimal, ie result.DecimalPlaces = MAX_DECIMAL_PLACES.
-        public _Decimal Add(decimal other)
+        public _Decimal Plus(decimal other)
         {
             if (other == 0M) { return this; }
             return new _Decimal(Value + other);
+        }
+
+        // This addition is NOT symmetric.
+        public _Decimal Plus(decimal other, MidpointRounding rounding)
+        {
+            if (other == 0M) { return this; }
+            return new _Decimal(Value + other, DecimalPlaces, rounding);
         }
 
         // This addition is symmetric (as expected) but throws if the two objects do not have
@@ -138,14 +157,7 @@ namespace Narvalo.Finance.Numerics
         }
 
         // This addition is NOT symmetric.
-        public _Decimal Plus(decimal other, MidpointRounding rounding)
-        {
-            if (other == 0M) { return this; }
-            return new _Decimal(Value + other, DecimalPlaces, rounding);
-        }
-
-        // This addition is NOT symmetric.
-        public _Decimal Plus(_Decimal other, MidpointRounding rounding)
+        public _Decimal Add(_Decimal other, MidpointRounding rounding)
         {
             if (other.Value == 0M) { return this; }
             return new _Decimal(Value + other.Value, DecimalPlaces, rounding, IsLossy(other));

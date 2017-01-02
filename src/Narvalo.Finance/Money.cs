@@ -21,8 +21,24 @@ namespace Narvalo.Finance
 
         private readonly _Decimal _decimal;
 
+        public Money(long amount)
+        {
+            _decimal = new _Decimal(amount);
+            Currency = Currency.None;
+            Normalized = true;
+        }
+
+        [CLSCompliant(false)]
+        public Money(ulong amount)
+        {
+            _decimal = new _Decimal(amount);
+            Currency = Currency.None;
+            Normalized = true;
+        }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="Money"/> class without any currency attached.
+        /// Initializes a new instance of the <see cref="Money"/> class without any currency attached
+        /// and an amount for which no rounding is done.
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         public Money(decimal amount) : this(amount, Currency.None) { }
@@ -268,17 +284,17 @@ namespace Narvalo.Finance
     public partial struct Money
     {
         public static Money operator +(Money left, Money right) => left.Add(right);
-        public static Money operator +(Money left, decimal right) => left.Add(right);
-        public static Money operator +(decimal left, Money right) => right.Add(left);
+        public static Money operator +(Money left, decimal right) => left.Plus(right);
+        public static Money operator +(decimal left, Money right) => right.Plus(left);
 
         // Returns a denormalized money.
-        public Money Add(decimal other) => new Money(_Decimal.Add(other), Currency);
+        public Money Plus(decimal other) => new Money(_Decimal.Plus(other), Currency);
 
-        // Returns a normalized money.
-        public Money Add(decimal other, MidpointRounding rounding)
+        // Preserves the .
+        public Money Plus(decimal other, MidpointRounding rounding)
             => new Money(_Decimal.Plus(other, rounding), Currency);
 
-        // Returns a normalized money.
+        // If one of the money is denormalized, returns a denormalized money.
         public Money Add(Money other)
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
@@ -291,7 +307,7 @@ namespace Narvalo.Finance
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
 
-            return new Money(_Decimal.Plus(other._Decimal, rounding), Currency);
+            return new Money(_Decimal.Add(other._Decimal, rounding), Currency);
         }
     }
 
