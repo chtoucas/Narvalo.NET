@@ -25,7 +25,6 @@ namespace Narvalo.Finance
         {
             _decimal = new _Decimal(amount);
             Currency = Currency.None;
-            Normalized = true;
         }
 
         [CLSCompliant(false)]
@@ -33,7 +32,6 @@ namespace Narvalo.Finance
         {
             _decimal = new _Decimal(amount);
             Currency = Currency.None;
-            Normalized = true;
         }
 
         /// <summary>
@@ -41,7 +39,7 @@ namespace Narvalo.Finance
         /// and an amount for which no rounding is done.
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
-        public Money(decimal amount) : this(amount, Currency.None) { }
+        //public Money(decimal amount) : this(amount, Currency.None) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
@@ -53,7 +51,6 @@ namespace Narvalo.Finance
         {
             _decimal = new _Decimal(amount);
             Currency = currency;
-            Normalized = false;
         }
 
         /// <summary>
@@ -67,21 +64,19 @@ namespace Narvalo.Finance
         {
             _decimal = new _Decimal(amount, currency.DecimalPlaces, rounding);
             Currency = currency;
-            Normalized = true;
         }
 
         private Money(_Decimal amount, Currency currency)
         {
             _decimal = amount;
             Currency = currency;
-            Normalized = true;
         }
 
         public decimal Amount => _decimal.Value;
 
         public Currency Currency { get; }
 
-        public bool Normalized { get; }
+        public bool Normalized => _Decimal.HasFixedScale;
 
         private _Decimal _Decimal => _decimal;
 
@@ -283,31 +278,51 @@ namespace Narvalo.Finance
     // Overrides the op_Addition operator.
     public partial struct Money
     {
+        [CLSCompliant(false)]
+        public static Money operator +(Money left, ulong right) => left.Add(right);
+        [CLSCompliant(false)]
+        public static Money operator +(ulong left, Money right) => right.Add(left);
+        public static Money operator +(Money left, long right) => left.Add(right);
+        public static Money operator +(long left, Money right) => right.Add(left);
+        public static Money operator +(Money left, decimal right) => left.Add(right);
+        public static Money operator +(decimal left, Money right) => right.Add(left);
         public static Money operator +(Money left, Money right) => left.Add(right);
-        public static Money operator +(Money left, decimal right) => left.Plus(right);
-        public static Money operator +(decimal left, Money right) => right.Plus(left);
 
-        // Returns a denormalized money.
-        public Money Plus(decimal other) => new Money(_Decimal.Plus(other), Currency);
+        [CLSCompliant(false)]
+        public Money Add(ulong other)
+        {
+            if (other == 0UL) { return this; }
+            return new Money(_Decimal.Add(other), Currency);
+        }
 
-        // Preserves the .
-        public Money Plus(decimal other, MidpointRounding rounding)
-            => new Money(_Decimal.Plus(other, rounding), Currency);
+        public Money Add(long other)
+        {
+            if (other == 0L) { return this; }
+            return new Money(_Decimal.Add(other), Currency);
+        }
 
-        // If one of the money is denormalized, returns a denormalized money.
+        public Money Add(decimal other)
+        {
+            if (other == 0M) { return this; }
+            return new Money(_Decimal.Add(other), Currency);
+        }
+
         public Money Add(Money other)
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
-
             return new Money(_Decimal.Add(other._Decimal), Currency);
         }
 
-        // Returns a normalized money.
+        public Money Plus(decimal other, MidpointRounding rounding)
+        {
+            if (other == 0M) { return this; }
+            return new Money(_Decimal.Plus(other, rounding), Currency);
+        }
+
         public Money Add(Money other, MidpointRounding rounding)
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
-
-            return new Money(_Decimal.Add(other._Decimal, rounding), Currency);
+            return new Money(_Decimal.Plus(other._Decimal, rounding), Currency);
         }
     }
 

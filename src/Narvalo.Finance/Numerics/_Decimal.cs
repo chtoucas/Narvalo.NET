@@ -55,7 +55,9 @@ namespace Narvalo.Finance.Numerics
 
         public short DecimalPlaces { get; }
 
-        //public bool HasFixedScale => DecimalPlaces != MAX_DECIMAL_PLACES;
+        public bool IsIntegral => DecimalPlaces == 0;
+
+        public bool HasFixedScale => DecimalPlaces != MAX_DECIMAL_PLACES;
 
         public decimal Value { get; }
 
@@ -128,36 +130,41 @@ namespace Narvalo.Finance.Numerics
         }
     }
 
-    // Overrides the op_Addition operator.
+    // Additions.
     internal partial struct _Decimal
     {
-        // Return a "variable" _Decimal, ie result.DecimalPlaces = MAX_DECIMAL_PLACES.
-        public _Decimal Plus(decimal other)
+        public _Decimal Add(ulong other)
+        {
+            if (other == 0UL) { return this; }
+            return new _Decimal(Value + other, DecimalPlaces);
+        }
+
+        public _Decimal Add(long other)
+        {
+            if (other == 0L) { return this; }
+            return new _Decimal(Value + other, DecimalPlaces);
+        }
+
+        public _Decimal Add(decimal other)
         {
             if (other == 0M) { return this; }
             return new _Decimal(Value + other);
         }
 
-        // This addition is NOT symmetric.
+        public _Decimal Add(_Decimal other)
+        {
+            if (Value == 0M) { return other; }
+            if (other.Value == 0M) { return this; }
+            return new _Decimal(Value + other.Value, Math.Max(DecimalPlaces, other.DecimalPlaces));
+        }
+
         public _Decimal Plus(decimal other, MidpointRounding rounding)
         {
             if (other == 0M) { return this; }
             return new _Decimal(Value + other, DecimalPlaces, rounding);
         }
 
-        // This addition is symmetric (as expected) but throws if the two objects do not have
-        // the same scale.
-        public _Decimal Add(_Decimal other)
-        {
-            Enforce.True(other.DecimalPlaces == DecimalPlaces, nameof(other), "XXX");
-
-            if (Value == 0M) { return other; }
-            if (other.Value == 0M) { return this; }
-            return new _Decimal(Value + other.Value, DecimalPlaces);
-        }
-
-        // This addition is NOT symmetric.
-        public _Decimal Add(_Decimal other, MidpointRounding rounding)
+        public _Decimal Plus(_Decimal other, MidpointRounding rounding)
         {
             if (other.Value == 0M) { return this; }
             return new _Decimal(Value + other.Value, DecimalPlaces, rounding, IsLossy(other));
