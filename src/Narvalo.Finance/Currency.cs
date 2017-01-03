@@ -32,6 +32,14 @@ namespace Narvalo.Finance
         // dictionary then swap the references?
         private volatile static Dictionary<string, short?> s_Codes;
 
+        private static readonly decimal[] s_Units = new decimal[4]
+        {
+            1m,
+            0.1m,
+            0.01m,
+            0.001m,
+        };
+
         private readonly string _code;
 
         /// <summary>
@@ -52,6 +60,12 @@ namespace Narvalo.Finance
         /// <value>The alphabetic code of the currency.</value>
         public string Code { get { Warrant.NotNull<string>(); return _code; } }
 
+        /// <summary>
+        /// Gets the number of minor units.
+        /// </summary>
+        /// <value>The number of minor units; <see langword="null"/> if none defined.</value>
+        public short? MinorUnits { get; }
+
         public short DecimalPlaces => MinorUnits ?? 0;
 
         /// <summary>
@@ -70,11 +84,9 @@ namespace Narvalo.Finance
         /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
         public bool IsMeta => IsMetaCurrency(Code);
 
-        /// <summary>
-        /// Gets the number of minor units.
-        /// </summary>
-        /// <value>The number of minor units; <see langword="null"/> if none defined.</value>
-        public short? MinorUnits { get; }
+        // Gets the smallest non zero unit.
+        // Returns 1m if the currency has no minor unit.
+        public decimal SmallestUnit => s_Units[DecimalPlaces];
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.

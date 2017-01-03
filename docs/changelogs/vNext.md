@@ -43,10 +43,12 @@ Narvalo.Web               | 0.26.0
 
 TODO
 ----
-- Complete `_Decimal`. Update `IEquatable<_Decimal>`.
-- Update `Money<TCurrency>`, `MoneyFormatter` to use `_Decimal`.
-- Handle rounding and native scale.
+- Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
 - Complete localization of messages.
+- Division Money/Money. double, float? Conversion to another currency. Other
+  math ops. Sum(). More rounding modes. Distribute(), Allocate().
+- Non-decimal moneys: Mauritania & Madagascar; see [here](https://en.wikipedia.org/wiki/Denomination_(currency))
+- Money.Parse & Money.TryParse.
 
 Highlights
 ----------

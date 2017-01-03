@@ -18,22 +18,39 @@ namespace Narvalo.Finance
     {
         public const MidpointRounding DefaultRounding = MidpointRounding.ToEven;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount without minor units.
+        /// </summary>
+        /// <param name="amount">An unsigned integer representing the amount of money.</param>
+        /// <param name="currency">The specific currency.</param>
         [CLSCompliant(false)]
-        public Money(uint amount) : this(amount, Currency.None, true) { }
-
-        [CLSCompliant(false)]
-        public Money(ulong amount) : this(amount, Currency.None, true) { }
-
-        public Money(int amount) : this(amount, Currency.None, true) { }
-
-        public Money(long amount) : this(amount, Currency.None, true) { }
+        public Money(uint amount, Currency currency) : this(amount, currency, true) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Money"/> class without any currency attached
-        /// and an amount for which no rounding is done.
+        /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount without minor units.
         /// </summary>
-        /// <param name="amount">A decimal representing the amount of money.</param>
-        public Money(decimal amount) : this(amount, Currency.None, false) { }
+        /// <param name="amount">A signed integer representing the amount of money.</param>
+        /// <param name="currency">The specific currency.</param>
+        [CLSCompliant(false)]
+        public Money(ulong amount, Currency currency) : this(amount, currency, true) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount without minor units.
+        /// </summary>
+        /// <param name="amount">An unsigned long representing the amount of money.</param>
+        /// <param name="currency">The specific currency.</param>
+        public Money(int amount, Currency currency) : this(amount, currency, true) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount without minor units.
+        /// </summary>
+        /// <param name="amount">An signed long representing the amount of money.</param>
+        /// <param name="currency">The specific currency.</param>
+        public Money(long amount, Currency currency) : this(amount, currency, true) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
@@ -45,7 +62,7 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount for which the number of decimal places is determined by the currency.
+        /// and an amount for which the number of decimal places will be determined by the currency.
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">The specific currency.</param>
@@ -56,29 +73,70 @@ namespace Narvalo.Finance
                 ? Math.Truncate(amount)
                 : Math.Round(amount, currency.DecimalPlaces, rounding);
             Currency = currency;
-            Rounded = true;
+            IsRounded = true;
         }
 
         private Money(decimal amount, Currency currency, bool rounded)
         {
             Amount = amount;
             Currency = currency;
-            Rounded = rounded;
+            IsRounded = rounded;
         }
 
+        /// <summary>
+        /// Gets the amount of money.
+        /// </summary>
         public decimal Amount { get; }
 
+        /// <summary>
+        /// Gets the currency.
+        /// </summary>
         public Currency Currency { get; }
 
-        public bool Rounded { get; }
+        /// <summary>
+        /// Gets a value indicating whether the amount is rounded to the number of decimal places
+        /// specified by the currency.
+        /// </summary>
+        public bool IsRounded { get; }
 
-        public static Money Zero(Currency currency) => new Money(0L, currency);
+        /// <summary>
+        /// Gets a value indicating whether the amount is zero.
+        /// </summary>
+        public bool IsZero => Amount == 0m;
+
+        /// <summary>
+        /// Gets a value indicating whether the amount is lower than zero.
+        /// </summary>
+        public bool IsNegative => Amount < 0m;
+
+        /// <summary>
+        /// Gets a value indicating whether the amount is lower than or equal to zero.
+        /// </summary>
+        public bool IsNegativeOrZero => Amount <= 0m;
+
+        /// <summary>
+        /// Gets a value indicating whether the amount is greater than zero.
+        /// </summary>
+        public bool IsPositive => Amount > 0m;
+
+        /// <summary>
+        /// Gets a value indicating whether the amount is greater than or equal to zero.
+        /// </summary>
+        public bool IsPositiveOrZero => Amount >= 0m;
+
+        public static Money Zero(Currency currency) => new Money(0, currency, true);
+
+        public static Money MajorOne(Currency currency) => new Money(1, currency, true);
+
+        public static Money MinorOne(Currency currency) => new Money(currency.SmallestUnit, currency, true);
+
+        public Money Abs() => IsNegative ? Negate() : this;
 
         public Money Round() => Round(MidpointRounding.ToEven);
 
         public Money Round(MidpointRounding rounding)
         {
-            if (Rounded) { return this; }
+            if (IsRounded) { return this; }
 
             return new Money(Amount, Currency, rounding);
         }
@@ -139,7 +197,7 @@ namespace Narvalo.Finance
         public static bool operator !=(Money left, Money right) => !left.Equals(right);
 
         public bool Equals(Money other)
-            => Amount == other.Amount && Currency == other.Currency && Rounded == other.Rounded;
+            => Amount == other.Amount && Currency == other.Currency && IsRounded == other.IsRounded;
 
         public override bool Equals(object obj)
         {
@@ -155,7 +213,7 @@ namespace Narvalo.Finance
                 int hash = 17;
                 hash = 31 * hash + Amount.GetHashCode();
                 hash = 31 * hash + Currency.GetHashCode();
-                hash = 31 * hash + Rounded.GetHashCode();
+                hash = 31 * hash + IsRounded.GetHashCode();
                 return hash;
             }
         }
@@ -165,11 +223,8 @@ namespace Narvalo.Finance
     public partial struct Money
     {
         public static bool operator <(Money left, Money right) => left.CompareTo(right) < 0;
-
         public static bool operator <=(Money left, Money right) => left.CompareTo(right) <= 0;
-
         public static bool operator >(Money left, Money right) => left.CompareTo(right) > 0;
-
         public static bool operator >=(Money left, Money right) => left.CompareTo(right) >= 0;
 
         public int CompareTo(Money other)
@@ -220,26 +275,26 @@ namespace Narvalo.Finance
         #region Integral type or decimal -> Money.
 
         [CLSCompliant(false)]
-        public static implicit operator Money(sbyte value) => new Money(value);
+        public static implicit operator Money(sbyte value) => new Money(value, Currency.None);
 
         [CLSCompliant(false)]
-        public static implicit operator Money(ushort value) => new Money(value);
+        public static implicit operator Money(ushort value) => new Money(value, Currency.None);
 
         [CLSCompliant(false)]
-        public static implicit operator Money(uint value) => new Money(value);
+        public static implicit operator Money(uint value) => new Money(value, Currency.None);
 
         [CLSCompliant(false)]
-        public static implicit operator Money(ulong value) => new Money(value);
+        public static implicit operator Money(ulong value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(byte value) => new Money(value);
+        public static implicit operator Money(byte value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(short value) => new Money(value);
+        public static implicit operator Money(short value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(int value) => new Money(value);
+        public static implicit operator Money(int value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(long value) => new Money(value);
+        public static implicit operator Money(long value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(decimal value) => new Money(value);
+        public static implicit operator Money(decimal value) => new Money(value, Currency.None);
 
         #endregion
 
@@ -265,7 +320,7 @@ namespace Narvalo.Finance
 
         public static explicit operator long(Money value) => ToInt64(value);
 
-        // NB: This one is implicit (no loss of precision).
+        // NB: This one is implicit (no unexpected loss of precision).
         public static implicit operator decimal(Money value) => ToDecimal(value);
 
         #endregion
@@ -294,26 +349,26 @@ namespace Narvalo.Finance
         public Money Add(uint amount)
         {
             if (amount == 0) { return this; }
-            return new Money(Amount + amount, Currency, Rounded);
+            return new Money(Amount + amount, Currency, IsRounded);
         }
 
         [CLSCompliant(false)]
         public Money Add(ulong amount)
         {
             if (amount == 0UL) { return this; }
-            return new Money(Amount + amount, Currency, Rounded);
+            return new Money(Amount + amount, Currency, IsRounded);
         }
 
         public Money Add(int amount)
         {
             if (amount == 0) { return this; }
-            return new Money(Amount + amount, Currency, Rounded);
+            return new Money(Amount + amount, Currency, IsRounded);
         }
 
         public Money Add(long amount)
         {
             if (amount == 0L) { return this; }
-            return new Money(Amount + amount, Currency, Rounded);
+            return new Money(Amount + amount, Currency, IsRounded);
         }
 
         public Money Add(decimal amount)
@@ -328,7 +383,7 @@ namespace Narvalo.Finance
 
             if (Amount == 0M) { return other; }
             if (other.Amount == 0M) { return this; }
-            return new Money(Amount + other.Amount, Currency, Rounded && other.Rounded);
+            return new Money(Amount + other.Amount, Currency, IsRounded && other.IsRounded);
         }
 
         public Money Plus(decimal amount) => Plus(amount, MidpointRounding.ToEven);
@@ -345,7 +400,7 @@ namespace Narvalo.Finance
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
 
-            return Rounded && other.Rounded
+            return IsRounded && other.IsRounded
                 ? new Money(Amount + other.Amount, Currency, true)
                 : new Money(Amount + other.Amount, Currency, rounding);
         }
@@ -374,14 +429,14 @@ namespace Narvalo.Finance
         public Money Subtract(uint amount)
         {
             if (amount == 0) { return this; }
-            return new Money(Amount - amount, Currency, Rounded);
+            return new Money(Amount - amount, Currency, IsRounded);
         }
 
         [CLSCompliant(false)]
         public Money Subtract(ulong amount)
         {
             if (amount == 0UL) { return this; }
-            return new Money(Amount - amount, Currency, Rounded);
+            return new Money(Amount - amount, Currency, IsRounded);
         }
 
         public Money Subtract(int amount) => Add(-amount);
@@ -396,7 +451,7 @@ namespace Narvalo.Finance
 
             if (Amount == 0M) { return other.Negate(); }
             if (other.Amount == 0M) { return this; }
-            return new Money(other.Amount - Amount, Currency, Rounded && other.Rounded);
+            return new Money(other.Amount - Amount, Currency, IsRounded && other.IsRounded);
         }
 
         public Money Minus(decimal amount) => Plus(-amount, MidpointRounding.ToEven);
@@ -409,18 +464,18 @@ namespace Narvalo.Finance
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
 
-            return Rounded && other.Rounded
+            return IsRounded && other.IsRounded
                 ? new Money(Amount - other.Amount, Currency, true)
                 : new Money(Amount - other.Amount, Currency, rounding);
         }
 
-        private Money SubtractLeft(uint amount) => new Money(amount - Amount, Currency, Rounded);
+        private Money SubtractLeft(uint amount) => new Money(amount - Amount, Currency, IsRounded);
 
-        private Money SubtractLeft(ulong amount) => new Money(amount - Amount, Currency, Rounded);
+        private Money SubtractLeft(ulong amount) => new Money(amount - Amount, Currency, IsRounded);
 
-        private Money SubtractLeft(int amount) => new Money(amount - Amount, Currency, Rounded);
+        private Money SubtractLeft(int amount) => new Money(amount - Amount, Currency, IsRounded);
 
-        private Money SubtractLeft(long amount) => new Money(amount - Amount, Currency, Rounded);
+        private Money SubtractLeft(long amount) => new Money(amount - Amount, Currency, IsRounded);
 
         private Money SubtractLeft(decimal amount)
         {
@@ -444,14 +499,14 @@ namespace Narvalo.Finance
         public static Money operator *(Money money, decimal multiplier) => money.Multiply(multiplier);
 
         [CLSCompliant(false)]
-        public Money Multiply(uint multiplier) => new Money(multiplier * Amount, Currency, Rounded);
+        public Money Multiply(uint multiplier) => new Money(multiplier * Amount, Currency, IsRounded);
 
         [CLSCompliant(false)]
-        public Money Multiply(ulong multiplier) => new Money(multiplier * Amount, Currency, Rounded);
+        public Money Multiply(ulong multiplier) => new Money(multiplier * Amount, Currency, IsRounded);
 
-        public Money Multiply(int multiplier) => new Money(multiplier * Amount, Currency, Rounded);
+        public Money Multiply(int multiplier) => new Money(multiplier * Amount, Currency, IsRounded);
 
-        public Money Multiply(long multiplier) => new Money(multiplier * Amount, Currency, Rounded);
+        public Money Multiply(long multiplier) => new Money(multiplier * Amount, Currency, IsRounded);
 
         public Money Multiply(decimal multiplier) => new Money(multiplier * Amount, Currency, false);
     }
@@ -498,11 +553,35 @@ namespace Narvalo.Finance
         }
     }
 
+    // Overrides the op_Increment operator.
+    public partial struct Money
+    {
+        public static Money operator ++(Money money) => money.Increment();
+
+        public Money Increment() => new Money(Amount + 1, Currency, IsRounded);
+    }
+
+    // Overrides the op_Decrement operator.
+    public partial struct Money
+    {
+        public static Money operator --(Money money) => money.Decrement();
+
+        public Money Decrement() => new Money(Amount - 1, Currency, IsRounded);
+    }
+
     // Overrides the op_UnaryNegation operator.
     public partial struct Money
     {
         public static Money operator -(Money money) => money.Negate();
 
-        public Money Negate() => new Money(-Amount, Currency, Rounded);
+        public Money Negate() => IsZero ? this : new Money(-Amount, Currency, IsRounded);
+    }
+
+    // Overrides the op_UnaryPlus operator.
+    public partial struct Money
+    {
+        public static Money operator +(Money money) => money;
+
+        public Money Plus() => this;
     }
 }
