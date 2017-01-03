@@ -583,6 +583,8 @@ namespace Narvalo.Finance
         public static Money operator ++(Money money) => money.Increment();
 
         public Money Increment() => new Money(Amount + Currency.One, Currency, IsRounded);
+
+        public Money IncrementMinor() => new Money(Amount + Currency.Epsilon, Currency, IsRounded);
     }
 
     // Overrides the op_Decrement operator.
@@ -591,6 +593,8 @@ namespace Narvalo.Finance
         public static Money operator --(Money money) => money.Decrement();
 
         public Money Decrement() => new Money(Amount - Currency.One, Currency, IsRounded);
+
+        public Money DecrementMinor() => new Money(Amount - Currency.Epsilon, Currency, IsRounded);
     }
 
     // Overrides the op_UnaryNegation operator.

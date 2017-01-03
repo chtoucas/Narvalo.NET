@@ -28,5 +28,7 @@ namespace Narvalo.Finance.Numerics
         ToOdd,
 
         Nearest,
+
+        Stochastic,
     }
 }
