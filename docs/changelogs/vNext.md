@@ -45,12 +45,15 @@ TODO
 ----
 - Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
 - Complete localization of messages.
-- Division Money/Money. double, float? Conversion to another currency. Other
-  math ops. Sum(). More rounding modes. Distribute(), Allocate().
-- Non-decimal moneys: Mauritania & Madagascar; see [here](https://en.wikipedia.org/wiki/Denomination_(currency))
+- Division Money/Money. Ops with double, float? Conversion to another currency.
+  Other math ops: Sum(), Distribute(), Allocate().
+- Non-decimal moneys: Mauritania & Madagascar;
+  see [here](https://en.wikipedia.org/wiki/Denomination_(currency))
 - Money.Parse & Money.TryParse.
 - `IConvertible` and conversion between currencies.
-- Rounding, Allocation.
+- Rounding, Allocation; See
+  [rounding](https://en.wikipedia.org/wiki/Rounding),
+  [sum](https://en.wikipedia.org/wiki/Kahan_summation_algorithm).
 
 Highlights
 ----------

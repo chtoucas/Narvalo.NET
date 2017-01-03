@@ -24,28 +24,21 @@ namespace Narvalo.Finance.Numerics
     // Notes:
     // With a PCL, we can not use Decimal.Round, instead we have Math.Round.
     //
-    // - PEAA p.494
     // - Double.MaxValue > Decimal.MaxValue > Int64.MaxValue > Int32.MaxValue
-    // -  Check if this is correct for negative values.
+    // - Check if this is correct for negative values.
     //
-    // Math.Floor (down), Math.Ceiling (up), Math.Truncate (zero), Math.Round?
-    // - Floor = partie entière (n <= x < n +1); partie fractionnaire ({x} = x - |x|)
-    // - Ceiling (n - 1 < x <= n)
-    // - Truncate
-    // - Round(ToEven)
-    // - Round(AwayFromZero)
     // Remark: Integer division rounds toward zero.
     // - Explain how to reverse or randomize the distribution.
     public static class DecimalCalculator
     {
-        //private static readonly Dictionary<int, decimal> s_Deltas = new Dictionary<int, decimal>
+        //private static readonly decimal[] s_Deltas = new decimal[]
         //{
-        //    { 0, 0M },
-        //    { 1, 0.1M },
-        //    { 2, 0.01M },
-        //    { 3, 0.001M },
-        //    { 4, 0.0001M },
-        //    { 5, 0.00001M },
+        //    0M,
+        //    0.1M,
+        //    0.01M,
+        //    0.001M,
+        //    0.0001M,
+        //    0.00001M,
         //};
 
         public static IEnumerable<decimal> Distribute(
