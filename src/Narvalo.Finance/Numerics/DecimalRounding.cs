@@ -16,6 +16,8 @@ namespace Narvalo.Finance.Numerics
         Up,
         TowardZero,
         AwayFromZero,
+        ToEven,
+        ToOdd,
         Nearest,
     }
 }

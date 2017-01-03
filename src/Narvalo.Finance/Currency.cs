@@ -40,6 +40,13 @@ namespace Narvalo.Finance
             0.001m,
         };
 
+        private static decimal[] s_Powers10 = new decimal[4] {
+            1m,
+            10m,
+            100m,
+            1000m,
+        };
+
         private readonly string _code;
 
         /// <summary>
@@ -204,6 +211,36 @@ namespace Narvalo.Finance
             var ri = new RegionInfo(cultureInfo.Name);
 
             return ri.ISOCurrencySymbol == Code;
+        }
+
+        /// <summary>
+        /// Converts an amount to a value expressed in minor units.
+        /// </summary>
+        /// <remarks>We expect the amount to be normalized.</remarks>
+        /// <exception cref="OverflowException">Thrown if the amount is too large to fit into
+        /// the Int64 range.</exception>
+        internal long ConvertToMinorUnits(decimal major)
+            => Convert.ToInt64(s_Powers10[DecimalPlaces] * major);
+
+        public long ConvertToMinorUnits(decimal amount, MidpointRounding rounding)
+        {
+            decimal major = Math.Round(amount, DecimalPlaces, rounding);
+            return ConvertToMinorUnits(major);
+        }
+
+        public long? TryConvertToMinorUnits(decimal amount, MidpointRounding rounding)
+        {
+            decimal major = Math.Round(amount, DecimalPlaces, rounding);
+            decimal minor = s_Powers10[DecimalPlaces] * major;
+
+            if (minor < Int64.MaxValue || minor > Int64.MaxValue) { return null; }
+
+            return Convert.ToInt64(minor);
+        }
+
+        public decimal ConvertToMajorUnits(long amount)
+        {
+            return s_Units[DecimalPlaces] * amount;
         }
 
         /// <summary>

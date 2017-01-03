@@ -2,7 +2,7 @@
 
 namespace Narvalo.Finance.Numerics
 {
-    public enum DecimalScale : short
+    public enum DecimalScale
     {
         Zero = 0,
         One = 1,

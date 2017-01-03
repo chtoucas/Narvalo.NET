@@ -58,8 +58,6 @@ Narvalo.Finance
 - For debugging the T4 templates, see
   [here](http://stackoverflow.com/questions/5588792/determine-solution-configuration-debug-release-when-running-a-t4-template).
 - LocalCurrency
-- `IConvertible` and conversion between currencies.
-- Rounding, Allocation.
 - [Microsoft SQL Server implementation](https://msdn.microsoft.com/en-au/library/ms179882.aspx):
   `Int32` or `Int64`, and designate the lower four digits (or possibly even 2) as
   "right of the decimal point". So "on the edges" you'll need some "* 10000"
@@ -83,6 +81,7 @@ Narvalo.Finance
   * [NMoneys](https://github.com/dgg/nmoneys)
   * [PHP-IBAN](https://github.com/globalcitizen/php-iban)
   * [python-stdnum](https://github.com/arthurdejong/python-stdnum)
+  * [Ruby](http://www.rubydoc.info/gems/money/Money)
 
 Narvalo.Web
 -----------

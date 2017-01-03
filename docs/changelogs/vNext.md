@@ -49,6 +49,8 @@ TODO
   math ops. Sum(). More rounding modes. Distribute(), Allocate().
 - Non-decimal moneys: Mauritania & Madagascar; see [here](https://en.wikipedia.org/wiki/Denomination_(currency))
 - Money.Parse & Money.TryParse.
+- `IConvertible` and conversion between currencies.
+- Rounding, Allocation.
 
 Highlights
 ----------

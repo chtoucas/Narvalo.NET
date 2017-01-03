@@ -10,7 +10,7 @@ namespace Narvalo.Finance
     public static partial class MoneyExtensions
     {
         public static IEnumerable<decimal> Distribute(this Money @this, int decimalPlaces, int parts)
-            => Distribute(@this, decimalPlaces, parts, MidpointRounding.ToEven);
+            => Distribute(@this, decimalPlaces, parts, Money.DefaultRounding);
 
         public static IEnumerable<decimal> Distribute(
             this Money @this,
@@ -20,16 +20,16 @@ namespace Narvalo.Finance
             => DecimalCalculator.Distribute(@this.Amount, decimalPlaces, parts, rounding);
 
         public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, int percentage)
-            => Allocate(@this, decimalPlaces, RatioArray.FromPercentage(percentage), MidpointRounding.ToEven);
+            => Allocate(@this, decimalPlaces, RatioArray.FromPercentage(percentage), Money.DefaultRounding);
 
         public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, int[] percentages)
-            => Allocate(@this, decimalPlaces, RatioArray.FromPercentages(percentages), MidpointRounding.ToEven);
+            => Allocate(@this, decimalPlaces, RatioArray.FromPercentages(percentages), Money.DefaultRounding);
 
         public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, decimal ratio)
-            => Allocate(@this, decimalPlaces, RatioArray.Of(ratio), MidpointRounding.ToEven);
+            => Allocate(@this, decimalPlaces, RatioArray.Of(ratio), Money.DefaultRounding);
 
         public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, decimal[] ratios)
-            => Allocate(@this, decimalPlaces, RatioArray.Of(ratios), MidpointRounding.ToEven);
+            => Allocate(@this, decimalPlaces, RatioArray.Of(ratios), Money.DefaultRounding);
 
         public static IEnumerable<decimal> Allocate(
             this Money @this,

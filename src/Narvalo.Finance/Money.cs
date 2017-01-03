@@ -54,7 +54,7 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount for which no rounding is done.
+        /// and an amount for which no rounding will be done automatically.
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">The specific currency.</param>
@@ -66,12 +66,12 @@ namespace Narvalo.Finance
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">The specific currency.</param>
-        /// <param name="rounding">The rounding mode.</param>
-        public Money(decimal amount, Currency currency, MidpointRounding rounding)
+        /// <param name="rounding">The rounding mode. If none specified, it will use
+        /// <see cref="DefaultRounding"/>.</param>
+        public Money(decimal amount, Currency currency, MidpointRounding? rounding)
         {
-            Amount = currency.DecimalPlaces == 0
-                ? Math.Truncate(amount)
-                : Math.Round(amount, currency.DecimalPlaces, rounding);
+            // REVIEW: Simply truncate if currency.DecimalPlaces == 0?
+            Amount = Math.Round(amount, currency.DecimalPlaces, rounding ?? DefaultRounding);
             Currency = currency;
             IsRounded = true;
         }
@@ -100,6 +100,31 @@ namespace Narvalo.Finance
         public bool IsRounded { get; }
 
         /// <summary>
+        /// Alias for <see cref="IsRounded"/>.
+        /// </summary>
+        public bool Normalized => IsRounded;
+
+        /// <summary>
+        /// Gets the amount expressed in minor units.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Throw if the instance is not normalized
+        /// according to the currency rules concerning the number of decimal places.</exception>
+        /// <exception cref="OverflowException">Thrown if the amount is too large to fit into
+        /// the Int64 range.</exception>
+        public long AmountInMinorUnits
+        {
+            get
+            {
+                if (!IsRounded)
+                {
+                    throw new InvalidOperationException("XXX");
+                }
+
+                return Currency.ConvertToMinorUnits(Amount);
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether the amount is zero.
         /// </summary>
         public bool IsZero => Amount == 0m;
@@ -126,13 +151,13 @@ namespace Narvalo.Finance
 
         public static Money Zero(Currency currency) => new Money(0, currency, true);
 
-        public static Money MajorOne(Currency currency) => new Money(1, currency, true);
-
         public static Money MinorOne(Currency currency) => new Money(currency.SmallestUnit, currency, true);
+
+        public static Money One(Currency currency) => new Money(1, currency, true);
 
         public Money Abs() => IsNegative ? Negate() : this;
 
-        public Money Round() => Round(MidpointRounding.ToEven);
+        public Money Round() => Round(DefaultRounding);
 
         public Money Round(MidpointRounding rounding)
         {
@@ -386,7 +411,7 @@ namespace Narvalo.Finance
             return new Money(Amount + other.Amount, Currency, IsRounded && other.IsRounded);
         }
 
-        public Money Plus(decimal amount) => Plus(amount, MidpointRounding.ToEven);
+        public Money Plus(decimal amount) => Plus(amount, DefaultRounding);
 
         public Money Plus(decimal amount, MidpointRounding rounding)
         {
@@ -394,7 +419,7 @@ namespace Narvalo.Finance
             return new Money(Amount + amount, Currency, rounding);
         }
 
-        public Money Plus(Money other) => Plus(other, MidpointRounding.ToEven);
+        public Money Plus(Money other) => Plus(other, DefaultRounding);
 
         public Money Plus(Money other, MidpointRounding rounding)
         {
@@ -454,11 +479,11 @@ namespace Narvalo.Finance
             return new Money(other.Amount - Amount, Currency, IsRounded && other.IsRounded);
         }
 
-        public Money Minus(decimal amount) => Plus(-amount, MidpointRounding.ToEven);
+        public Money Minus(decimal amount) => Plus(-amount, DefaultRounding);
 
         public Money Minus(decimal amount, MidpointRounding rounding) => Plus(-amount, rounding);
 
-        public Money Minus(Money other) => Minus(other, MidpointRounding.ToEven);
+        public Money Minus(Money other) => Minus(other, DefaultRounding);
 
         public Money Minus(Money other, MidpointRounding rounding)
         {
