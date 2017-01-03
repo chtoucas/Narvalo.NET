@@ -70,7 +70,6 @@ namespace Narvalo.Finance
         /// <see cref="DefaultRounding"/>.</param>
         public Money(decimal amount, Currency currency, MidpointRounding? rounding)
         {
-            // REVIEW: Simply truncate if currency.DecimalPlaces == 0?
             Amount = Math.Round(amount, currency.DecimalPlaces, rounding ?? DefaultRounding);
             Currency = currency;
             IsRounded = true;
@@ -151,9 +150,9 @@ namespace Narvalo.Finance
 
         public static Money Zero(Currency currency) => new Money(0, currency, true);
 
-        public static Money MinorOne(Currency currency) => new Money(currency.SmallestUnit, currency, true);
+        public static Money Epsilon(Currency currency) => new Money(currency.Epsilon, currency, true);
 
-        public static Money One(Currency currency) => new Money(1, currency, true);
+        public static Money One(Currency currency) => new Money(currency.One, currency, true);
 
         public Money Abs() => IsNegative ? Negate() : this;
 
@@ -583,7 +582,7 @@ namespace Narvalo.Finance
     {
         public static Money operator ++(Money money) => money.Increment();
 
-        public Money Increment() => new Money(Amount + 1, Currency, IsRounded);
+        public Money Increment() => new Money(Amount + Currency.One, Currency, IsRounded);
     }
 
     // Overrides the op_Decrement operator.
@@ -591,7 +590,7 @@ namespace Narvalo.Finance
     {
         public static Money operator --(Money money) => money.Decrement();
 
-        public Money Decrement() => new Money(Amount - 1, Currency, IsRounded);
+        public Money Decrement() => new Money(Amount - Currency.One, Currency, IsRounded);
     }
 
     // Overrides the op_UnaryNegation operator.

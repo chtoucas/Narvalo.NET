@@ -13,7 +13,9 @@
 var currentCurrencies = ParseCurrent(@"..\..\data\ISO4217\A1.xml");
 var legacyCurrencies = ParseLegacy(@"..\..\data\ISO4217\A3.xml");
 // NB: Current currencies must come first.
-var currencies = currentCurrencies.Concat(legacyCurrencies);
+var currencies = currentCurrencies.Concat(legacyCurrencies).ToList();
+
+var highestMinor = currencies.Max(_ => _.MinorUnits);
 
 var dict = new Dictionary<string, short?>();
 
@@ -42,6 +44,20 @@ namespace <#= Namespace #>
 
     public partial struct <#= Name #>
     {
+        private static readonly decimal[] s_Epsilons = new decimal[]
+        {
+            1M,
+<# for (var i = 1; i <= highestMinor; i++) { var format = "N" + i.ToString(); #>
+            <#= Math.Pow(10, -i).ToString(format) #>M,
+<# } #>
+        };
+
+        private static decimal[] s_Powers10 = new decimal[] {
+<# for (var i = 0; i <= highestMinor; i++) { #>
+            <#= Math.Pow(10, i).ToString("G") #>M,
+<# } #>
+        };
+
         /// <summary>
         /// The list of available currency codes.
         /// </summary>

@@ -17,6 +17,23 @@ namespace Narvalo.Finance
 
     public partial struct Currency
     {
+        private static readonly decimal[] s_Epsilons = new decimal[]
+        {
+            1M,
+            0,1M,
+            0,01M,
+            0,001M,
+            0,0001M,
+        };
+
+        private static decimal[] s_Powers10 = new decimal[] {
+            1M,
+            10M,
+            100M,
+            1000M,
+            10000M,
+        };
+
         /// <summary>
         /// The list of available currency codes.
         /// </summary>

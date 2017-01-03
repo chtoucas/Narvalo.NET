@@ -32,21 +32,6 @@ namespace Narvalo.Finance
         // dictionary then swap the references?
         private volatile static Dictionary<string, short?> s_Codes;
 
-        private static readonly decimal[] s_Units = new decimal[4]
-        {
-            1m,
-            0.1m,
-            0.01m,
-            0.001m,
-        };
-
-        private static decimal[] s_Powers10 = new decimal[4] {
-            1m,
-            10m,
-            100m,
-            1000m,
-        };
-
         private readonly string _code;
 
         /// <summary>
@@ -60,6 +45,12 @@ namespace Narvalo.Finance
             _code = code;
             MinorUnits = minorUnits;
         }
+
+        // The list is automatically generated using data obtained from the SNV website.
+        private static decimal[] Epsilons => s_Epsilons;
+
+        // The list is automatically generated using data obtained from the SNV website.
+        private static decimal[] Powers10 => s_Powers10;
 
         /// <summary>
         /// Gets the alphabetic code of the currency.
@@ -91,9 +82,15 @@ namespace Narvalo.Finance
         /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
         public bool IsMeta => IsMetaCurrency(Code);
 
-        // Gets the smallest non zero unit.
-        // Returns 1m if the currency has no minor unit.
-        public decimal SmallestUnit => s_Units[DecimalPlaces];
+        /// <summary>
+        /// Gets the smallest positive (non zero) unit.
+        /// </summary>
+        /// <remarks>Returns 1m if the currency has no minor unit.</remarks>
+        public decimal Epsilon => Epsilons[DecimalPlaces];
+
+        public decimal One => 1M;
+
+        private decimal Factor => Powers10[DecimalPlaces];
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
@@ -220,28 +217,37 @@ namespace Narvalo.Finance
         /// <exception cref="OverflowException">Thrown if the amount is too large to fit into
         /// the Int64 range.</exception>
         internal long ConvertToMinorUnits(decimal major)
-            => Convert.ToInt64(s_Powers10[DecimalPlaces] * major);
+            => Convert.ToInt64(Factor * major);
 
         public long ConvertToMinorUnits(decimal amount, MidpointRounding rounding)
-        {
-            decimal major = Math.Round(amount, DecimalPlaces, rounding);
-            return ConvertToMinorUnits(major);
-        }
+            => ConvertToMinorUnits(Math.Round(amount, DecimalPlaces, rounding));
 
         public long? TryConvertToMinorUnits(decimal amount, MidpointRounding rounding)
         {
             decimal major = Math.Round(amount, DecimalPlaces, rounding);
-            decimal minor = s_Powers10[DecimalPlaces] * major;
+            decimal minor = Factor * major;
 
             if (minor < Int64.MaxValue || minor > Int64.MaxValue) { return null; }
 
             return Convert.ToInt64(minor);
         }
 
-        public decimal ConvertToMajorUnits(long amount)
+        public bool TryConvertToMinorUnits(decimal amount, MidpointRounding rounding, out long result)
         {
-            return s_Units[DecimalPlaces] * amount;
+            decimal major = Math.Round(amount, DecimalPlaces, rounding);
+            decimal minor = Factor * major;
+
+            if (minor < Int64.MaxValue || minor > Int64.MaxValue)
+            {
+                result = major < 0 ? Int64.MinValue : Int64.MaxValue;
+                return false;
+            }
+
+            result = Convert.ToInt64(minor);
+            return true;
         }
+
+        public decimal ConvertToMajorUnits(long amount) => Epsilon * amount;
 
         /// <summary>
         /// Returns a string containing the code of the currency.
