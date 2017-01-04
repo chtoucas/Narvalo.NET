@@ -117,11 +117,6 @@ namespace Narvalo.Finance
         public bool IsNormalized { get; }
 
         /// <summary>
-        /// Alias for <see cref="IsNormalized"/>.
-        /// </summary>
-        public bool IsRounded => IsNormalized;
-
-        /// <summary>
         /// Gets a value indicating whether the amount is zero.
         /// </summary>
         public bool IsZero => Amount == 0m;
@@ -400,7 +395,7 @@ namespace Narvalo.Finance
 
         public Money Add(decimal amount)
         {
-            if (amount == 0M) { return this; }
+            if (amount == 0m { return this; }
             return new Money(Amount + amount, Currency, false);
         }
 
@@ -408,8 +403,8 @@ namespace Narvalo.Finance
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
 
-            if (Amount == 0M) { return other; }
-            if (other.Amount == 0M) { return this; }
+            if (Amount == 0m) { return other; }
+            if (other.Amount == 0m) { return this; }
             return new Money(Amount + other.Amount, Currency, IsNormalized && other.IsNormalized);
         }
 
@@ -417,7 +412,7 @@ namespace Narvalo.Finance
 
         public Money Plus(decimal amount, MoneyRounding rounding)
         {
-            if (amount == 0M) { return this; }
+            if (amount == 0m) { return this; }
             return new Money(Amount + amount, Currency, rounding);
         }
 
@@ -476,8 +471,8 @@ namespace Narvalo.Finance
         {
             ThrowIfCurrencyMismatch(other, nameof(other));
 
-            if (Amount == 0M) { return other.Negate(); }
-            if (other.Amount == 0M) { return this; }
+            if (Amount == 0m) { return other.Negate(); }
+            if (other.Amount == 0m) { return this; }
             return new Money(other.Amount - Amount, Currency, IsNormalized && other.IsNormalized);
         }
 
@@ -506,7 +501,7 @@ namespace Narvalo.Finance
 
         private Money SubtractLeft(decimal amount)
         {
-            if (amount == 0M) { return Negate(); }
+            if (amount == 0m) { return Negate(); }
             return new Money(amount - Amount, Currency, false);
         }
     }

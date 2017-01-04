@@ -86,7 +86,6 @@
     <Compile Include="Numerics\Int32Calculator.cs" />
     <Compile Include="Numerics\DivCollection`1.cs" />
     <Compile Include="Utilities\IbanCheckDigits.cs" />
-    <Compile Include="Numerics\DecimalScale.cs" />
     <Compile Include="Numerics\NumberRounding.cs" />
     <Compile Include="Numerics\RatioArray.cs" />
     <Compile Include="Globalization\CountryISOCodes.cs" />

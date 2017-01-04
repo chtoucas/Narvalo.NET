@@ -19,19 +19,19 @@ namespace Narvalo.Finance
     {
         private static readonly decimal[] s_Epsilons = new decimal[]
         {
-            1M,
-            0,1M,
-            0,01M,
-            0,001M,
-            0,0001M,
+            1m,
+            0,1m,
+            0,01m,
+            0,001m,
+            0,0001m,
         };
 
         private static decimal[] s_Powers10 = new decimal[] {
-            1M,
-            10M,
-            100M,
-            1000M,
-            10000M,
+            1m,
+            10m,
+            100m,
+            1000m,
+            10000m,
         };
 
         /// <summary>

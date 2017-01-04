@@ -50,6 +50,7 @@
     <Compile Include="IbanPartsFacts.cs" />
     <Compile Include="IbanValidatorFacts.cs" />
     <Compile Include="MoneyFacts.cs" />
+    <Compile Include="Numerics\DecimalCalculatorFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AsciiFacts.cs" />
     <Compile Include="Utilities\IbanCheckDigitsFacts.cs" />

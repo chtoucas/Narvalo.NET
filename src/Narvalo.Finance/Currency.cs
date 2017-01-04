@@ -88,7 +88,7 @@ namespace Narvalo.Finance
         /// <remarks>Returns 1m if the currency has no minor unit.</remarks>
         public decimal Epsilon => Epsilons[DecimalPlaces];
 
-        public decimal One => 1M;
+        public decimal One => 1m;
 
         private decimal Factor => Powers10[DecimalPlaces];
 

@@ -46,15 +46,15 @@ namespace <#= Namespace #>
     {
         private static readonly decimal[] s_Epsilons = new decimal[]
         {
-            1M,
+            1m,
 <# for (var i = 1; i <= highestMinor; i++) { var format = "N" + i.ToString(); #>
-            <#= Math.Pow(10, -i).ToString(format) #>M,
+            <#= Math.Pow(10, -i).ToString(format) #>m,
 <# } #>
         };
 
         private static decimal[] s_Powers10 = new decimal[] {
 <# for (var i = 0; i <= highestMinor; i++) { #>
-            <#= Math.Pow(10, i).ToString("G") #>M,
+            <#= Math.Pow(10, i).ToString("G") #>m,
 <# } #>
         };
 
