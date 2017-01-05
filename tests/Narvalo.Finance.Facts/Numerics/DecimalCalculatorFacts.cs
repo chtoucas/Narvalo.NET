@@ -12,14 +12,6 @@ namespace Narvalo.Finance.Numerics
         #region Round()
 
         [Fact]
-        public static void Round_ToOdd_ThrowsNotImplementedException()
-            => Assert.Throws<NotImplementedException>(() => DecimalCalculator.Round(1m, NumberRounding.ToOdd));
-
-        [Fact]
-        public static void Round_Stochastic_ThrowsNotImplementedException()
-            => Assert.Throws<NotImplementedException>(() => DecimalCalculator.Round(1m, NumberRounding.Stochastic));
-
-        [Fact]
         public static void Round_Down()
         {
             Func<decimal, decimal> round = _ => DecimalCalculator.Round(_, NumberRounding.Down);
@@ -210,6 +202,23 @@ namespace Narvalo.Finance.Numerics
             Assert.Equal(0m, round(0.5m));
             Assert.Equal(0m, round(-0.5m));
             Assert.Equal(-2m, round(-1.5m));
+        }
+
+        [Theory(Skip ="The implementation is currently incorrect.")]
+        [MemberData(nameof(NearestRounding), DisableDiscoveryEnumeration = true)]
+        [CLSCompliant(false)]
+        public static void Round_ToOdd(decimal value, decimal expectedValue)
+            => Assert.Equal(expectedValue, DecimalCalculator.Round(value, NumberRounding.ToOdd));
+
+        [Fact]
+        public static void Round_ToOdd_ForHalfWayPoints()
+        {
+            Func<decimal, decimal> round = _ => DecimalCalculator.Round(_, NumberRounding.ToOdd);
+
+            Assert.Equal(1m, round(1.5m));
+            Assert.Equal(1m, round(0.5m));
+            Assert.Equal(-1m, round(-0.5m));
+            Assert.Equal(-1m, round(-1.5m));
         }
 
         [Theory(Skip = "Temporary test.")]

@@ -57,36 +57,33 @@ namespace Narvalo.Finance.Numerics
         // NB:
         // - for x > 0, Down = TowardsZero and Up = AwayFromZero.
         // - for x < 0, Down = AwayFromZero and Up = TowardsZero.
+        // - floor(-x) = - ceiling(x), therefore
         //
-        //       Down Up   TowardsZero AwayFromZero Nearest (see below for ambiguous points)
-        //  1.6   1    2    1           2            2
-        //  1.4                                      1
-        //  0.6   0    1    0           1
-        //  0.4                                      0
-        // -0.4  -1    0    0           -1
-        // -0.6                                     -1
-        // -1.4  -2   -1   -1           -2
-        // -1.6                                     -2
+        //       Down Up   TowardsZero AwayFromZero
+        //  1.5   1    2    1            2
+        //  0.5   0    1    0            1
+        // -0.5  -1    0    0           -1
+        // -1.5  -2   -1   -1           -2
         //
         // Rounding to the nearest integer
         // -------------------------------
         //
         // When the fractional part is half-way of two integers, we need a tie-breaking rule.
         //
-        // If x is of the form x = i + 0.5 where i is an integer.
         // - HalfDown,         n = ceiling(x - 0.5)
         // - HalfUp,           n = [x + 0.5]
         // - HalfTowardsZero,  n = - sign(x) [-|x| + 0.5]
         // - HalfAwayFromZero, n = sign(x) [|x| + 0.5]
+        // - ToEven,
+        // - ToOdd,
         //
-        // NB: floor(-x) = - ceiling(x), therefore
         //       HalfDown HalfUp HalfTowardsZero HalfAwayFromZero ToEven ToOdd
         //  1.5   1        2      1               2                2      1
         //  0.5   0        1      0               1                0      1
         // -0.5  -1        0      0              -1                0     -1
         // -1.5  -2       -1     -1              -2               -2     -1
         //
-        // NB:
+        // Notes:
         // - for HalfUp and positive numbers, we just need to examine the first digit of the
         //   fractional part.
         // - HalfAwayFromZero, aka called commercial rounding,
@@ -140,6 +137,7 @@ namespace Narvalo.Finance.Numerics
                     return Math.Round(value, 0, MidpointRounding.ToEven);
 
                 case NumberRounding.ToOdd:
+                    // FIXME: this is not correct.
                     var n = Math.Round(value, 0, MidpointRounding.AwayFromZero);
                     return n % 2 == 0 ? (n > 0 ? --n : ++n) : n;
 

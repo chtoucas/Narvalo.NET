@@ -196,8 +196,8 @@ namespace Narvalo.Finance
         // This method should be thread-safe.
         public static void RegisterCurrencies(Dictionary<string, short?> currencies)
         {
-            // See RegisterCurrency() for explanations. Comparing with it, we do not use directly
-            // s_Codes, because we don't know if it has yet been initialized.
+            // See RegisterCurrency() for explanations. Comparing with it, we do not use s_Codes
+            // directly, because we don't know yet if it has been initialized.
             var tmpCopy = Codes.ToDictionary(_ => _.Key, _ => _.Value);
 
             foreach (var pair in currencies)
