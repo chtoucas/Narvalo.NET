@@ -42,6 +42,7 @@ namespace <#= Namespace #>
 {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Threading;
 
     public partial struct <#= Name #>
     {
@@ -60,7 +61,7 @@ namespace <#= Namespace #>
         };
 
         /// <summary>
-        /// The list of available currency codes.
+        /// The list of available currency codes/minor units.
         /// </summary>
         [ContractVerification(false)]
         private static Dictionary<string, short?> Codes
@@ -75,7 +76,8 @@ namespace <#= Namespace #>
 <# } #>
                     };
 
-                    s_Codes = dict;
+                    // If the field is still null, write to it.
+                    Interlocked.CompareExchange(ref s_Codes, dict, null);
                 }
 
                 return s_Codes;

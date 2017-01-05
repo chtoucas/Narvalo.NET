@@ -7,6 +7,7 @@ namespace Narvalo.Finance
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
+    using System.Threading;
 
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
@@ -27,10 +28,7 @@ namespace Narvalo.Finance
         private const char META_CURRENCY_MARK = 'X';
 
         // The list is automatically generated using data obtained from the SNV website.
-        // The volatile keyword is only for correctness.
-        // REVIEW: Instead of using a volatile field, wouldn't it be better to create a temporary
-        // dictionary then swap the references?
-        private volatile static Dictionary<string, short?> s_Codes;
+        private static Dictionary<string, short?> s_Codes;
 
         private readonly string _code;
 
@@ -171,7 +169,9 @@ namespace Narvalo.Finance
 
         // This method allows to register currencies that are not part of ISO 4217.
         // For details, see https://en.wikipedia.org/wiki/ISO_4217.
-        // FIXME: Concurrent access.
+        // If you have more than one currency to register, you should use RegisterCurrencies()
+        // instead; it will be more efficient.
+        // This method should be thread-safe.
         public static bool RegisterCurrency(string code, short? minorUnits)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
@@ -179,15 +179,44 @@ namespace Narvalo.Finance
             Contract.Assume(Codes != null);
             if (Codes.ContainsKey(code)) { return false; }
 
-            // We work on a temporary copy of Codes. This is not very efficient but ensures
-            // that s_Codes does not end up in a broken state if anything bad happens.
-            // Anyway, we do not expect this method to be called very often, if ever.
-            var tmpCopy = Codes.ToDictionary(_ => _.Key, _ => _.Value);
+            // We work on a temporary copy of s_Codes (which is guaranteed to be non-null since we
+            // just called Codes). This is not very efficient but ensures that s_Codes does not end
+            // up in a broken state if anything bad happens. Also note that, with competing
+            // threads, we may end up creating 'tmpCopy' more than once. Anyway, we do not expect
+            // this method to be called very often, if ever.
+            var tmpCopy = s_Codes.ToDictionary(_ => _.Key, _ => _.Value);
             tmpCopy[code] = minorUnits;
 
-            s_Codes = tmpCopy;
+            // We use a volatile write to make sure that instructions don't get re-ordered.
+            Volatile.Write(ref s_Codes, tmpCopy);
 
             return true;
+        }
+
+        // This method should be thread-safe.
+        public static void RegisterCurrencies(Dictionary<string, short?> currencies)
+        {
+            // See RegisterCurrency() for explanations. Comparing with it, we do not use directly
+            // s_Codes, because we don't know if it has yet been initialized.
+            var tmpCopy = Codes.ToDictionary(_ => _.Key, _ => _.Value);
+
+            foreach (var pair in currencies)
+            {
+                var code = pair.Key;
+                if (code == null
+                    || !Ascii.IsUpperLetter(code)
+                    || code.Length != 3)
+                {
+                    throw new ArgumentException("XXX");
+                }
+
+                if (!tmpCopy.ContainsKey(code))
+                {
+                    tmpCopy[code] = pair.Value;
+                }
+            }
+
+            Volatile.Write(ref s_Codes, tmpCopy);
         }
 
         // TODO: What about EUR, CFP... for this, is it enough to check the country code too

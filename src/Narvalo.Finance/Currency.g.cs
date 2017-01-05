@@ -14,6 +14,7 @@ namespace Narvalo.Finance
 {
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Threading;
 
     public partial struct Currency
     {
@@ -35,7 +36,7 @@ namespace Narvalo.Finance
         };
 
         /// <summary>
-        /// The list of available currency codes.
+        /// The list of available currency codes/minor units.
         /// </summary>
         [ContractVerification(false)]
         private static Dictionary<string, short?> Codes
@@ -348,7 +349,8 @@ namespace Narvalo.Finance
                         { "ZWR", null},
                     };
 
-                    s_Codes = dict;
+                    // If the field is still null, write to it.
+                    Interlocked.CompareExchange(ref s_Codes, dict, null);
                 }
 
                 return s_Codes;
