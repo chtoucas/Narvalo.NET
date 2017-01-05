@@ -4,7 +4,6 @@ namespace Narvalo.Finance.Numerics
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     public enum BiasAllocation
     {
@@ -32,7 +31,7 @@ namespace Narvalo.Finance.Numerics
     // - Explain how to reverse or randomize the distribution.
     public static class DecimalCalculator
     {
-        public static int GetScale(this decimal @this)
+        internal static int GetScale(this decimal @this)
         {
             int flags = Decimal.GetBits(@this)[3];
             // Bits 16 to 23 contains an exponent between 0 and 28, which indicates the power
@@ -87,16 +86,20 @@ namespace Narvalo.Finance.Numerics
         // -0.5  -1        0      0              -1                0     -1
         // -1.5  -2       -1     -1              -2               -2     -1
         //
+        // NB:
+        // - for HalfUp and positive numbers, we just need to examine the first digit of the
+        //   fractional part.
+        // - HalfAwayFromZero, aka called commercial rounding,
+        //   we just need to examine the first digit of the fractional part.
+        // - ToEven, aka bankers' rounding. IEEE 754 default rounding mode.
+        //
         // A rule is said to be
         // - balanced if the effect of rounding is statistically cancelled.
         // - symmetric if it treats symmetrically positive and negative numbers.
 
-        //public static decimal Ceiling(decimal value)
-        //    => value > 0 ? Decimal.Truncate(value) + 1 : Decimal.Truncate(value);
-
-        //public static decimal Floor(decimal value)
-        //    => value > 0 ? Decimal.Truncate(value) : Decimal.Truncate(value) - 1;
-
+        // WARNING: It only works for representable values, ie those that has not been
+        // silently rounded using the default rounding mode (MidpointRounding.ToEven).
+        // Another problem is that we might compute value -/+ 0.5m.
         public static decimal Round(decimal value, NumberRounding rounding)
         {
             switch (rounding)
@@ -137,10 +140,8 @@ namespace Narvalo.Finance.Numerics
                     return Math.Round(value, 0, MidpointRounding.ToEven);
 
                 case NumberRounding.ToOdd:
-                    throw new NotImplementedException();
-
-                case NumberRounding.Stochastic:
-                    throw new NotImplementedException();
+                    var n = Math.Round(value, 0, MidpointRounding.AwayFromZero);
+                    return n % 2 == 0 ? (n > 0 ? --n : ++n) : n;
 
                 default: throw Check.Unreachable("XXX");
             }
