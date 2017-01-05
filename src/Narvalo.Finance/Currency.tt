@@ -3,6 +3,7 @@
 <#@ assembly name="System.Core" #>
 <#@ assembly name="$(T4NarvaloLibrary)" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Globalization" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="Narvalo.T4" #>
 <#
@@ -48,7 +49,7 @@ namespace <#= Namespace #>
         {
             1m,
 <# for (var i = 1; i <= highestMinor; i++) { var format = "N" + i.ToString(); #>
-            <#= Math.Pow(10, -i).ToString(format) #>m,
+            <#= Math.Pow(10, -i).ToString(format, CultureInfo.InvariantCulture) #>m,
 <# } #>
         };
 

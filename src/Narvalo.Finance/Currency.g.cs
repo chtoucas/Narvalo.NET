@@ -20,10 +20,10 @@ namespace Narvalo.Finance
         private static readonly decimal[] s_Epsilons = new decimal[]
         {
             1m,
-            0,1m,
-            0,01m,
-            0,001m,
-            0,0001m,
+            0.1m,
+            0.01m,
+            0.001m,
+            0.0001m,
         };
 
         private static decimal[] s_Powers10 = new decimal[] {
