@@ -395,7 +395,7 @@ namespace Narvalo.Finance
 
         public Money Add(decimal amount)
         {
-            if (amount == 0m { return this; }
+            if (amount == 0m) { return this; }
             return new Money(Amount + amount, Currency, false);
         }
 

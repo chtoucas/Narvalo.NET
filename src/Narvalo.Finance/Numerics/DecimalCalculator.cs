@@ -32,6 +32,14 @@ namespace Narvalo.Finance.Numerics
     // - Explain how to reverse or randomize the distribution.
     public static class DecimalCalculator
     {
+        public static int GetScale(this decimal @this)
+        {
+            int flags = Decimal.GetBits(@this)[3];
+            // Bits 16 to 23 contains an exponent between 0 and 28, which indicates the power
+            // of 10 to divide the integer number.
+            return (flags & 0x00FF0000) >> 16;
+        }
+
         #region Rounding.
 
         // Directed rouding
@@ -83,11 +91,11 @@ namespace Narvalo.Finance.Numerics
         // - balanced if the effect of rounding is statistically cancelled.
         // - symmetric if it treats symmetrically positive and negative numbers.
 
-        public static decimal Ceiling(decimal value)
-            => value > 0 ? Decimal.Truncate(value) + 1 : Decimal.Truncate(value);
+        //public static decimal Ceiling(decimal value)
+        //    => value > 0 ? Decimal.Truncate(value) + 1 : Decimal.Truncate(value);
 
-        public static decimal Floor(decimal value)
-            => value > 0 ? Decimal.Truncate(value) : Decimal.Truncate(value) - 1;
+        //public static decimal Floor(decimal value)
+        //    => value > 0 ? Decimal.Truncate(value) : Decimal.Truncate(value) - 1;
 
         public static decimal Round(decimal value, NumberRounding rounding)
         {
@@ -119,7 +127,6 @@ namespace Narvalo.Finance.Numerics
                     return Decimal.Floor(value + 0.5m);
 
                 case NumberRounding.HalfTowardsZero:
-                    // See above for an explanation of why we treat these two separately.
                     return value > 0 ? Decimal.Ceiling(value - .5m) : Decimal.Floor(value + .5m);
 
                 case NumberRounding.HalfAwayFromZero:
