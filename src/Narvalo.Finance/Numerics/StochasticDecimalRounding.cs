@@ -12,13 +12,19 @@ namespace Narvalo.Finance.Numerics
         private static bool UpOrDown => s_Random.Next(0, 2) == 0;
 
         public decimal Round(decimal value)
-            => UpOrDown
-            ? DecimalRounding.RoundHalfUp(value)
-            : DecimalRounding.RoundHalfDown(value);
+        {
+            if (value == 0m) { return 0m; }
+            return UpOrDown
+                ? DecimalRounding.RoundHalfUp(value)
+                : DecimalRounding.RoundHalfDown(value);
+        }
 
         public decimal Round(decimal value, int decimals)
-            => UpOrDown
-            ? DecimalRounding.RoundHalfUp(value, decimals)
-            : DecimalRounding.RoundHalfDown(value, decimals);
+        {
+            if (value == 0m) { return 0m; }
+            return UpOrDown
+                ? DecimalRounding.RoundHalfUp(value, decimals)
+                : DecimalRounding.RoundHalfDown(value, decimals);
+        }
     }
 }

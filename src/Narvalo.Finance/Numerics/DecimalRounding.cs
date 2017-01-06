@@ -98,6 +98,8 @@ namespace Narvalo.Finance.Numerics
         // With PCL, we can not use Decimal.Round, instead we have Math.Round.
         public static decimal Round(decimal value, NumberRounding rounding)
         {
+            if (value == 0m) { return 0m; }
+
             switch (rounding)
             {
                 case NumberRounding.Down: return Decimal.Floor(value);
@@ -105,6 +107,7 @@ namespace Narvalo.Finance.Numerics
                 case NumberRounding.TowardsZero: return Decimal.Truncate(value);
                 case NumberRounding.HalfAwayFromZero: return RoundHalfAwayFromZero(value);
                 case NumberRounding.ToEven: return RoundHalfToEven(value);
+
                 // Rounding modes not part of IEEE 754.
                 case NumberRounding.AwayFromZero: return RoundAwayFromZero(value);
                 case NumberRounding.HalfDown: return RoundHalfDown(value);
@@ -115,9 +118,9 @@ namespace Narvalo.Finance.Numerics
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static decimal RoundHalfDown(decimal value, int decimals)
         {
+            Demand.Range(value != 0m);
             if (decimals == 0)
             {
                 return RoundHalfDown(value);
@@ -129,9 +132,9 @@ namespace Narvalo.Finance.Numerics
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static decimal RoundHalfUp(decimal value, int decimals)
         {
+            Demand.Range(value != 0m);
             if (decimals == 0)
             {
                 return RoundHalfUp(value);
@@ -145,63 +148,64 @@ namespace Narvalo.Finance.Numerics
 
         #region Core methods.
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static decimal RoundAwayFromZero(decimal value)
+        {
+            Demand.Range(value != 0m);
+            return value > 0m ? Decimal.Ceiling(value) : Decimal.Floor(value);
+        }
+
         internal static decimal RoundHalfDown(decimal value)
         {
+            Demand.Range(value != 0m);
             // For positive values, HalfDown ie equivalent to HalfTowardsZero.
             // For negative values, HalfDown ie equivalent to HalfAwayFromZero.
             // If there were no risks, we could simply compute Decimal.Ceiling(value - 0.5m),
             // but "value - 0.5m" might be rounded automatically (nearest to even) if it is not
             // representable. Another advantage is that we do not have to treat Decimal.Minvalue
             // separately which would throw a StackOverflow exception.
-            if (value == 0m) { return 0m; }
             return value > 0m
-                ? RoundHalfTowardsZeroOrDown(value)
+                ? RoundHalfTowardsZeroForPositiveValue(value)
                 : RoundHalfAwayFromZero(value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static decimal RoundHalfUp(decimal value)
         {
+            Demand.Range(value != 0m);
             // For positive values, HalfUp ie equivalent to HalfAwayFromZero.
             // For negative values, HalfUp ie equivalent to HalfTowardsZero.
             // If there were no risks, we could simply compute Decimal.Floor(value + 0.5m),
             // but "value + 0.5m" might be rounded automatically (nearest to even) if it is not
             // representable. Another advantage is that we do not have to treat Decimal.MaxValue
             // separately which would throw a StackOverflow exception.
-            if (value == 0m) { return 0m; }
             return value > 0m
                 ? RoundHalfAwayFromZero(value)
-                : RoundHalfTowardsZeroOrUp(value);
+                : RoundHalfTowardsZeroForNegativeValue(value);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundAwayFromZero(decimal value)
+        private static decimal RoundHalfAwayFromZero(decimal value)
         {
-            if (value == 0m) { return 0m; }
-            return value > 0m ? Decimal.Ceiling(value) : Decimal.Floor(value);
+            Demand.Range(value != 0m);
+            return Math.Round(value, 0, MidpointRounding.AwayFromZero);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundHalfAwayFromZero(decimal value)
-            => Math.Round(value, 0, MidpointRounding.AwayFromZero);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundHalfTowardsZero(decimal value)
+        private static decimal RoundHalfTowardsZero(decimal value)
         {
-            if (value == 0m) { return 0m; }
+            Demand.Range(value != 0m);
             return value > 0
-                ? RoundHalfTowardsZeroOrDown(value)
-                : RoundHalfTowardsZeroOrUp(value);
+                ? RoundHalfTowardsZeroForPositiveValue(value)
+                : RoundHalfTowardsZeroForNegativeValue(value);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundHalfToEven(decimal value)
-            => Math.Round(value, 0, MidpointRounding.ToEven);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundHalfToOdd(decimal value)
+        private static decimal RoundHalfToEven(decimal value)
         {
+            Demand.Range(value != 0m);
+            return Math.Round(value, 0, MidpointRounding.ToEven);
+        }
+
+        private static decimal RoundHalfToOdd(decimal value)
+        {
+            Demand.Range(value != 0m);
             var n = Math.Round(value, 0, MidpointRounding.AwayFromZero);
 
             if (value > 0m)
@@ -218,20 +222,20 @@ namespace Narvalo.Finance.Numerics
 
         #region Helpers.
 
-        private static decimal RoundHalfTowardsZeroOrDown(decimal posval)
+        private static decimal RoundHalfTowardsZeroForPositiveValue(decimal value)
         {
-            Demand.Range(posval > 0m);
-            var n = Decimal.Floor(posval);
+            Demand.Range(value > 0m);
+            var n = Decimal.Floor(value);
             // If we are not at a midpoint, we return the nearest integer.
-            return posval - n == 0.5m ? n : RoundHalfAwayFromZero(posval);
+            return value - n == 0.5m ? n : RoundHalfAwayFromZero(value);
         }
 
-        private static decimal RoundHalfTowardsZeroOrUp(decimal negval)
+        private static decimal RoundHalfTowardsZeroForNegativeValue(decimal value)
         {
-            Demand.Range(negval < 0m);
-            var n = Decimal.Ceiling(negval);
+            Demand.Range(value < 0m);
+            var n = Decimal.Ceiling(value);
             // If we are not at a midpoint, we return the nearest integer.
-            return negval - n == -0.5m ? n : RoundHalfAwayFromZero(negval);
+            return value - n == -0.5m ? n : RoundHalfAwayFromZero(value);
         }
 
         private static void CheckRange(decimal value, int decimals)

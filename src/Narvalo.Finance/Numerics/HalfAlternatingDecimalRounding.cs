@@ -28,14 +28,20 @@ namespace Narvalo.Finance.Numerics
         public void Dispose() => Dispose(true);
 
         public decimal Round(decimal value)
-            => UpOrDown
-            ? DecimalRounding.RoundHalfUp(value)
-            : DecimalRounding.RoundHalfDown(value);
+        {
+            if (value == 0m) { return 0m; }
+            return UpOrDown
+               ? DecimalRounding.RoundHalfUp(value)
+               : DecimalRounding.RoundHalfDown(value);
+        }
 
         public decimal Round(decimal value, int decimals)
-            => UpOrDown
-            ? DecimalRounding.RoundHalfUp(value, decimals)
-            : DecimalRounding.RoundHalfDown(value, decimals);
+        {
+            if (value == 0m) { return 0m; }
+            return UpOrDown
+                ? DecimalRounding.RoundHalfUp(value, decimals)
+                : DecimalRounding.RoundHalfDown(value, decimals);
+        }
 
         private void Dispose(bool disposing)
         {
