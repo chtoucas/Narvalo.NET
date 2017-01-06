@@ -21,13 +21,7 @@ namespace Narvalo.Finance.Numerics
     //    Single,
     //}
 
-    // Notes:
-    // With a PCL, we can not use Decimal.Round, instead we have Math.Round.
-    //
-    // - Double.MaxValue > Decimal.MaxValue > Int64.MaxValue > Int32.MaxValue
     // - Check if this is correct for negative values.
-    //
-    // Remark: Integer division rounds toward zero.
     // - Explain how to reverse or randomize the distribution.
     public static class DecimalCalculator
     {
@@ -38,126 +32,6 @@ namespace Narvalo.Finance.Numerics
             // of 10 to divide the integer number.
             return (flags & 0x00FF0000) >> 16;
         }
-
-        #region Rounding.
-
-        // Directed rouding
-        // ----------------
-        //
-        // - Down, aka "rounding towards minus infinity".       -infty <-
-        // - Up, aka "rounding towards plus infinity".                      -> +infty
-        // - TowardsZero, aka "rounding away from infinity".           -> 0 <-
-        // - AwayFromZero, aka "rounding towards infinity".            <- 0 ->
-        //
-        // Mathematically speaking:
-        // - Down,         floor(x) = n where n <= x < n + 1. En notation française, [x].
-        // - Up,           ceiling(x) = n where n - 1 < x <= n.
-        // - TowardsZero,  truncate(x) = sign(x) [|x|].
-        // - AwayFromZero, n = - sign(x) [-|x|]
-        // NB:
-        // - for x > 0, Down = TowardsZero and Up = AwayFromZero.
-        // - for x < 0, Down = AwayFromZero and Up = TowardsZero.
-        // - floor(-x) = - ceiling(x), therefore
-        //
-        //       Down Up   TowardsZero AwayFromZero
-        //  1.5   1    2    1            2
-        //  0.5   0    1    0            1
-        // -0.5  -1    0    0           -1
-        // -1.5  -2   -1   -1           -2
-        //
-        // Rounding to the nearest integer
-        // -------------------------------
-        //
-        // When the fractional part is half-way of two integers, we need a tie-breaking rule.
-        //
-        // - HalfDown,         n = ceiling(x - 0.5)
-        // - HalfUp,           n = [x + 0.5]
-        // - HalfTowardsZero,  n = - sign(x) [-|x| + 0.5]
-        // - HalfAwayFromZero, n = sign(x) [|x| + 0.5]
-        // - ToEven,
-        // - ToOdd,
-        //
-        //       HalfDown HalfUp HalfTowardsZero HalfAwayFromZero ToEven ToOdd
-        //  1.5   1        2      1               2                2      1
-        //  0.5   0        1      0               1                0      1
-        // -0.5  -1        0      0              -1                0     -1
-        // -1.5  -2       -1     -1              -2               -2     -1
-        //
-        // Notes:
-        // - for HalfUp and positive numbers, we just need to examine the first digit of the
-        //   fractional part.
-        // - HalfAwayFromZero, aka called commercial rounding,
-        //   we just need to examine the first digit of the fractional part.
-        // - ToEven, aka bankers' rounding. IEEE 754 default rounding mode.
-        //
-        // A rule is said to be
-        // - balanced if the effect of rounding is statistically cancelled.
-        // - symmetric if it treats symmetrically positive and negative numbers.
-
-        // WARNING: It only works for representable values, ie those that has not been
-        // silently rounded using the default rounding mode (MidpointRounding.ToEven).
-        // Another problem is that we might compute value -/+ 0.5m.
-        public static decimal Round(decimal value, NumberRounding rounding)
-        {
-            switch (rounding)
-            {
-                case NumberRounding.Down:
-                    return Decimal.Floor(value);
-
-                case NumberRounding.Up:
-                    return Decimal.Ceiling(value);
-
-                case NumberRounding.TowardsZero:
-                    // Equivalent to: x > 0 ? floor(x) : ceiling(x)
-                    return Decimal.Truncate(value);
-
-                case NumberRounding.AwayFromZero:
-                    return value > 0 ? Decimal.Ceiling(value) : Decimal.Floor(value);
-
-                case NumberRounding.HalfDown:
-                    // We treat Decimal.MinValue separately to avoid a stack overflow.
-                    // NB: Decimal.MinValue is an integer.
-                    if (value == Decimal.MinValue) { return value; }
-                    return Decimal.Ceiling(value - 0.5m);
-
-                case NumberRounding.HalfUp:
-                    // We treat Decimal.MaxValue separately to avoid a stack overflow.
-                    // NB: Decimal.MaxValue is an integer.
-                    if (value == Decimal.MaxValue) { return value; }
-                    return Decimal.Floor(value + 0.5m);
-
-                case NumberRounding.HalfTowardsZero:
-                    return value > 0 ? Decimal.Ceiling(value - .5m) : Decimal.Floor(value + .5m);
-
-                case NumberRounding.HalfAwayFromZero:
-                    // Equivalent to: x > 0 ? floor(x + .5) : ceiling(x - .5)
-                    return Math.Round(value, 0, MidpointRounding.AwayFromZero);
-
-                case NumberRounding.ToEven:
-                    return Math.Round(value, 0, MidpointRounding.ToEven);
-
-                case NumberRounding.ToOdd:
-                    // FIXME: this is not correct.
-                    var n = Math.Round(value, 0, MidpointRounding.AwayFromZero);
-                    return n % 2 == 0 ? (n > 0 ? --n : ++n) : n;
-
-                default: throw Check.Unreachable("XXX");
-            }
-        }
-
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //internal static decimal NearestTowardsZero(decimal x)
-        //{
-        //    decimal n = Decimal.Floor(x);
-        //    decimal r = x - n - 0.5M;
-
-        //    if (r < 0M) { return n; }
-        //    if (r > 0M) { return n + 1; }
-
-        //    return x > 0 ? n : Decimal.Truncate(x);
-        //}
-
-        #endregion
 
         #region Distribution/Allocation.
 

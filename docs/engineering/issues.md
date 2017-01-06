@@ -82,6 +82,10 @@ Narvalo.Finance
   * [PHP-IBAN](https://github.com/globalcitizen/php-iban)
   * [python-stdnum](https://github.com/arthurdejong/python-stdnum)
   * [Ruby](http://www.rubydoc.info/gems/money/Money)
+- Rounding
+  * [Lippert](https://blogs.msdn.microsoft.com/ericlippert/2003/09/26/bankers-rounding/)
+  * [Microsoft KB](https://support.microsoft.com/en-us/kb/196652)
+  * [Xencraft](http://www.xencraft.com/resources/multi-currency.html#rounding)
 
 Narvalo.Web
 -----------
