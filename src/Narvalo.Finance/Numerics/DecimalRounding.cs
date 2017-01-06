@@ -154,11 +154,11 @@ namespace Narvalo.Finance.Numerics
             return value > 0m ? Decimal.Ceiling(value) : Decimal.Floor(value);
         }
 
-        internal static decimal RoundHalfDown(decimal value)
+        private static decimal RoundHalfDown(decimal value)
         {
             Demand.Range(value != 0m);
-            // For positive values, HalfDown ie equivalent to HalfTowardsZero.
-            // For negative values, HalfDown ie equivalent to HalfAwayFromZero.
+            // For positive values, HalfDown is equivalent to HalfTowardsZero.
+            // For negative values, HalfDown is equivalent to HalfAwayFromZero.
             // If there were no risks, we could simply compute Decimal.Ceiling(value - 0.5m),
             // but "value - 0.5m" might be rounded automatically (nearest to even) if it is not
             // representable. Another advantage is that we do not have to treat Decimal.Minvalue
@@ -168,12 +168,11 @@ namespace Narvalo.Finance.Numerics
                 : RoundHalfAwayFromZero(value);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundHalfUp(decimal value)
+        private static decimal RoundHalfUp(decimal value)
         {
             Demand.Range(value != 0m);
-            // For positive values, HalfUp ie equivalent to HalfAwayFromZero.
-            // For negative values, HalfUp ie equivalent to HalfTowardsZero.
+            // For positive values, HalfUp is equivalent to HalfAwayFromZero.
+            // For negative values, HalfUp is equivalent to HalfTowardsZero.
             // If there were no risks, we could simply compute Decimal.Floor(value + 0.5m),
             // but "value + 0.5m" might be rounded automatically (nearest to even) if it is not
             // representable. Another advantage is that we do not have to treat Decimal.MaxValue
@@ -226,7 +225,7 @@ namespace Narvalo.Finance.Numerics
         {
             Demand.Range(value > 0m);
             var n = Decimal.Floor(value);
-            // If we are not at a midpoint, we return the nearest integer.
+            // If value is not at a midpoint, we return the nearest integer.
             return value - n == 0.5m ? n : RoundHalfAwayFromZero(value);
         }
 
@@ -234,7 +233,7 @@ namespace Narvalo.Finance.Numerics
         {
             Demand.Range(value < 0m);
             var n = Decimal.Ceiling(value);
-            // If we are not at a midpoint, we return the nearest integer.
+            // If value is not at a midpoint, we return the nearest integer.
             return value - n == -0.5m ? n : RoundHalfAwayFromZero(value);
         }
 

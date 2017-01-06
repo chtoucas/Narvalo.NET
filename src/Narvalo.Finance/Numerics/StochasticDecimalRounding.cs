@@ -15,8 +15,8 @@ namespace Narvalo.Finance.Numerics
         {
             if (value == 0m) { return 0m; }
             return UpOrDown
-                ? DecimalRounding.RoundHalfUp(value)
-                : DecimalRounding.RoundHalfDown(value);
+                ? DecimalRounding.RoundHalfUp(value, 0)
+                : DecimalRounding.RoundHalfDown(value, 0);
         }
 
         public decimal Round(decimal value, int decimals)
