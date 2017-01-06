@@ -70,8 +70,6 @@ namespace Narvalo.Finance.Numerics
 
         #region IDecimalRounding interface.
 
-        public decimal Round(decimal value) => Round(value, Rounding);
-
         public decimal Round(decimal value, int decimals)
         {
             if (Rounding == NumberRounding.ToEven)

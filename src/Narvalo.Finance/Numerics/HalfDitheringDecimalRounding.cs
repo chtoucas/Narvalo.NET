@@ -11,11 +11,6 @@ namespace Narvalo.Finance.Numerics
 
         private double Next => s_Random.NextDouble();
 
-        public decimal Round(decimal value)
-        {
-            throw new NotImplementedException();
-        }
-
         public decimal Round(decimal value, int decimals)
         {
             throw new NotImplementedException();

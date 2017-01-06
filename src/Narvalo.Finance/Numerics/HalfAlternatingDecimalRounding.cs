@@ -27,8 +27,6 @@ namespace Narvalo.Finance.Numerics
 
         public void Dispose() => Dispose(true);
 
-        public decimal Round(decimal value) => Round(value, 0);
-
         public decimal Round(decimal value, int decimals)
             => UpOrDown
             ? DecimalRounding.RoundHalfUp(value, decimals)
