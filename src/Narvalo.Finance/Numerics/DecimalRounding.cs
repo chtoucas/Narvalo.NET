@@ -6,6 +6,7 @@ namespace Narvalo.Finance.Numerics
 
     public sealed class DecimalRounding : IDecimalRounding
     {
+        // This limit is rather artificial, but this should not be a problem.
         private const int MAX_SCALE = 9;
 
         private const decimal
@@ -81,15 +82,10 @@ namespace Narvalo.Finance.Numerics
             {
                 return Math.Round(value, decimals, MidpointRounding.AwayFromZero);
             }
-            else if (decimals == 0)
-            {
-                return Round(value, Rounding);
-            }
-            else
-            {
-                CheckRange(value, decimals);
-                return Round(s_Powers10[decimals - 1] * value, Rounding) * s_Epsilons[decimals - 1];
-            }
+
+            return decimals == 0
+                ? Round(value, Rounding)
+                : Unscale(Round(Scale(value, decimals), Rounding), decimals);
         }
 
         #endregion
@@ -150,31 +146,17 @@ namespace Narvalo.Finance.Numerics
         internal static decimal RoundHalfDown(decimal value, int decimals)
         {
             if (value == 0m) { return 0m; }
-
-            if (decimals == 0)
-            {
-                return RoundHalfDown(value);
-            }
-            else
-            {
-                CheckRange(value, decimals);
-                return RoundHalfDown(s_Powers10[decimals - 1] * value) * s_Epsilons[decimals - 1];
-            }
+            return decimals == 0
+                ? RoundHalfDown(value)
+                : Unscale(RoundHalfDown(Scale(value, decimals)), decimals);
         }
 
         internal static decimal RoundHalfUp(decimal value, int decimals)
         {
             if (value == 0m) { return 0m; }
-
-            if (decimals == 0)
-            {
-                return RoundHalfUp(value);
-            }
-            else
-            {
-                CheckRange(value, decimals);
-                return RoundHalfUp(s_Powers10[decimals - 1] * value) * s_Epsilons[decimals - 1];
-            }
+            return decimals == 0
+                ? RoundHalfUp(value)
+                : Unscale(RoundHalfUp(Scale(value, decimals)), decimals);
         }
 
         #region Helpers.
@@ -215,13 +197,17 @@ namespace Narvalo.Finance.Numerics
             return value - n == -0.5m ? n : Math.Round(value, 0, MidpointRounding.AwayFromZero);
         }
 
-        private static void CheckRange(decimal value, int decimals)
+        private static decimal Scale(decimal value, int decimals)
         {
             Enforce.Range(1 <= decimals && decimals <= MAX_SCALE, nameof(decimals));
 
             decimal maxValue = s_MaxValues[decimals - 1];
             Enforce.Range(-maxValue <= value && value <= maxValue, nameof(value));
+
+            return s_Powers10[decimals - 1] * value;
         }
+
+        private static decimal Unscale(decimal value, int decimals) => s_Epsilons[decimals - 1] * value;
 
         #endregion
     }

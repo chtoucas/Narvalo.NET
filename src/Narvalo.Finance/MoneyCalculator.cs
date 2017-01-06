@@ -9,22 +9,6 @@ namespace Narvalo.Finance
 
     public static partial class MoneyCalculator
     {
-        internal static decimal Round(decimal amount, Currency currency, RoundingMode mode)
-        {
-            switch (mode)
-            {
-                case RoundingMode.AwayFromZero:
-                    return Math.Round(amount, currency.DecimalPlaces, MidpointRounding.AwayFromZero);
-                case RoundingMode.ToEven:
-                    return Math.Round(amount, currency.DecimalPlaces, MidpointRounding.ToEven);
-                case RoundingMode.None:
-                case RoundingMode.Unnecessary:
-                    return amount;
-                default:
-                    throw Check.Unreachable("XXX");
-            }
-        }
-
         public static IEnumerable<decimal> Distribute(this Money @this, int decimalPlaces, int parts)
             => Distribute(@this, decimalPlaces, parts, RoundingMode.Default);
 

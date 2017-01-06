@@ -68,7 +68,7 @@ namespace Narvalo.Finance
         /// <see cref="DefaultRounding"/>.</param>
         public Money(decimal amount, Currency currency, RoundingMode mode)
         {
-            Amount = MoneyCalculator.Round(amount, currency, mode);
+            Amount = mode == RoundingMode.None ? amount : MoneyRounding.Round(amount, currency, mode);
             Currency = currency;
             IsNormalized = mode != RoundingMode.None;
         }

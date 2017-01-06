@@ -79,7 +79,9 @@
     <Compile Include="Generic\CurrencyUnit.cs" />
     <Compile Include="Globalization\LocalMoneyFormatter.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
+    <Compile Include="IMoneyRounding.cs" />
     <Compile Include="MoneyCalculator.cs" />
+    <Compile Include="MoneyRounding.cs" />
     <Compile Include="RoundingMode.cs" />
     <Compile Include="Numerics\DecimalRounding.cs" />
     <Compile Include="Numerics\HalfAlternatingDecimalRounding.cs" />
