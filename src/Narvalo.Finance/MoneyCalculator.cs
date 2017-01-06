@@ -9,16 +9,16 @@ namespace Narvalo.Finance
 
     public static partial class MoneyCalculator
     {
-        internal static decimal Round(decimal amount, Currency currency, MoneyRounding rounding)
+        internal static decimal Round(decimal amount, Currency currency, RoundingMode mode)
         {
-            switch (rounding)
+            switch (mode)
             {
-                case MoneyRounding.AwayFromZero:
+                case RoundingMode.AwayFromZero:
                     return Math.Round(amount, currency.DecimalPlaces, MidpointRounding.AwayFromZero);
-                case MoneyRounding.ToEven:
+                case RoundingMode.ToEven:
                     return Math.Round(amount, currency.DecimalPlaces, MidpointRounding.ToEven);
-                case MoneyRounding.None:
-                case MoneyRounding.Unnecessary:
+                case RoundingMode.None:
+                case RoundingMode.Unnecessary:
                     return amount;
                 default:
                     throw Check.Unreachable("XXX");
@@ -26,35 +26,35 @@ namespace Narvalo.Finance
         }
 
         public static IEnumerable<decimal> Distribute(this Money @this, int decimalPlaces, int parts)
-            => Distribute(@this, decimalPlaces, parts, MoneyRounding.Default);
+            => Distribute(@this, decimalPlaces, parts, RoundingMode.Default);
 
         public static IEnumerable<decimal> Distribute(
             this Money @this,
             int decimalPlaces,
             int parts,
-            MoneyRounding rounding)
+            RoundingMode mode)
         {
             //return DecimalCalculator.Distribute(@this.Amount, decimalPlaces, parts, rounding);
             throw new NotImplementedException();
         }
 
         public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, int percentage)
-            => Allocate(@this, decimalPlaces, RatioArray.FromPercentage(percentage), MoneyRounding.Default);
+            => Allocate(@this, decimalPlaces, RatioArray.FromPercentage(percentage), RoundingMode.Default);
 
         public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, int[] percentages)
-            => Allocate(@this, decimalPlaces, RatioArray.FromPercentages(percentages), MoneyRounding.Default);
+            => Allocate(@this, decimalPlaces, RatioArray.FromPercentages(percentages), RoundingMode.Default);
 
         public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, decimal ratio)
-            => Allocate(@this, decimalPlaces, RatioArray.Of(ratio), MoneyRounding.Default);
+            => Allocate(@this, decimalPlaces, RatioArray.Of(ratio), RoundingMode.Default);
 
         public static IEnumerable<decimal> Allocate(this Money @this, int decimalPlaces, decimal[] ratios)
-            => Allocate(@this, decimalPlaces, RatioArray.Of(ratios), MoneyRounding.Default);
+            => Allocate(@this, decimalPlaces, RatioArray.Of(ratios), RoundingMode.Default);
 
         public static IEnumerable<decimal> Allocate(
             this Money @this,
             int decimalPlaces,
             RatioArray ratios,
-            MoneyRounding rounding)
+            RoundingMode mode)
         {
             //return DecimalCalculator.Allocate(@this.Amount, decimalPlaces, ratios, rounding);
             throw new NotImplementedException();

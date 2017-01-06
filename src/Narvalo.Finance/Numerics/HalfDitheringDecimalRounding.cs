@@ -13,15 +13,11 @@ namespace Narvalo.Finance.Numerics
 
         public decimal Round(decimal value)
         {
-            if (value == 0m) { return 0m; }
-
             throw new NotImplementedException();
         }
 
         public decimal Round(decimal value, int decimals)
         {
-            if (value == 0m) { return 0m; }
-
             throw new NotImplementedException();
         }
     }

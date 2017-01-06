@@ -2,7 +2,7 @@
 
 namespace Narvalo.Finance
 {
-    public enum MoneyRounding
+    public enum RoundingMode
     {
         None,
 
