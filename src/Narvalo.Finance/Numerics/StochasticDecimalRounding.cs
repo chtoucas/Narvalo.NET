@@ -11,8 +11,6 @@ namespace Narvalo.Finance.Numerics
 
         private static bool UpOrDown => s_Random.Next(0, 2) == 0;
 
-        public decimal Round(decimal value) => Round(value, 0);
-
         public decimal Round(decimal value, int decimals)
             => UpOrDown
             ? DecimalRounding.RoundHalfUp(value, decimals)
