@@ -4,19 +4,20 @@ namespace Narvalo.Finance
 {
     using System;
 
+    using Narvalo.Finance.Numerics;
+
     public sealed class MoneyRounding : IMoneyRounding
     {
-        public MoneyRounding(RoundingMode mode)
-        {
-            Require.Range(mode != RoundingMode.None, nameof(mode));
+        private readonly IDecimalRounding _inner;
 
-            Mode = mode;
+        public MoneyRounding(IDecimalRounding inner)
+        {
+            Require.NotNull(inner, nameof(inner));
+            _inner = inner;
         }
 
-        public RoundingMode Mode { get; }
-
         public decimal Round(decimal amount, Currency currency)
-            => Round(amount, currency, Mode);
+            => _inner.Round(amount, currency.DecimalPlaces);
 
         public static decimal Round(decimal amount, Currency currency, RoundingMode mode)
         {

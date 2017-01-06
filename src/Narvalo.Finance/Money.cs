@@ -68,9 +68,18 @@ namespace Narvalo.Finance
         /// <see cref="DefaultRounding"/>.</param>
         public Money(decimal amount, Currency currency, RoundingMode mode)
         {
-            Amount = mode == RoundingMode.None ? amount : MoneyRounding.Round(amount, currency, mode);
+            Amount = MoneyRounding.Round(amount, currency, mode);
             Currency = currency;
             IsNormalized = mode != RoundingMode.None;
+        }
+
+        public Money(decimal amount, Currency currency, IMoneyRounding rounding)
+        {
+            Require.NotNull(rounding, nameof(rounding));
+
+            Amount = rounding.Round(amount, currency);
+            Currency = currency;
+            IsNormalized = true;
         }
 
         private Money(decimal amount, Currency currency, bool normalized)
@@ -161,6 +170,15 @@ namespace Narvalo.Finance
             }
 
             return new Money(Amount, Currency, mode);
+        }
+
+        public Money Normalize(IMoneyRounding rounding)
+        {
+            Require.NotNull(rounding, nameof(rounding));
+
+            if (IsNormalized) { return this; }
+
+            return new Money(Amount, Currency, rounding);
         }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
@@ -416,6 +434,12 @@ namespace Narvalo.Finance
             return new Money(Amount + amount, Currency, mode);
         }
 
+        public Money Plus(decimal amount, IMoneyRounding rounding)
+        {
+            if (amount == 0m) { return this; }
+            return new Money(Amount + amount, Currency, rounding);
+        }
+
         public Money Plus(Money other) => Plus(other, RoundingMode.Default);
 
         public Money Plus(Money other, RoundingMode mode)
@@ -425,6 +449,15 @@ namespace Narvalo.Finance
             return IsNormalized && other.IsNormalized
                 ? new Money(Amount + other.Amount, Currency, true)
                 : new Money(Amount + other.Amount, Currency, mode);
+        }
+
+        public Money Plus(Money other, IMoneyRounding rounding)
+        {
+            ThrowIfCurrencyMismatch(other, nameof(other));
+
+            return IsNormalized && other.IsNormalized
+                ? new Money(Amount + other.Amount, Currency, true)
+                : new Money(Amount + other.Amount, Currency, rounding);
         }
     }
 
@@ -480,6 +513,8 @@ namespace Narvalo.Finance
 
         public Money Minus(decimal amount, RoundingMode mode) => Plus(-amount, mode);
 
+        public Money Minus(decimal amount, IMoneyRounding rounding) => Plus(-amount, rounding);
+
         public Money Minus(Money other) => Minus(other, RoundingMode.Default);
 
         public Money Minus(Money other, RoundingMode mode)
@@ -489,6 +524,15 @@ namespace Narvalo.Finance
             return IsNormalized && other.IsNormalized
                 ? new Money(Amount - other.Amount, Currency, true)
                 : new Money(Amount - other.Amount, Currency, mode);
+        }
+
+        public Money Minus(Money other, IMoneyRounding rounding)
+        {
+            ThrowIfCurrencyMismatch(other, nameof(other));
+
+            return IsNormalized && other.IsNormalized
+                ? new Money(Amount - other.Amount, Currency, true)
+                : new Money(Amount - other.Amount, Currency, rounding);
         }
 
         private Money SubtractLeft(uint amount) => new Money(amount - Amount, Currency, IsNormalized);
@@ -531,6 +575,12 @@ namespace Narvalo.Finance
         public Money Multiply(long multiplier) => new Money(multiplier * Amount, Currency, IsNormalized);
 
         public Money Multiply(decimal multiplier) => new Money(multiplier * Amount, Currency, false);
+
+        public Money Multiply(decimal multiplier, RoundingMode mode)
+            => new Money(multiplier * Amount, Currency, mode);
+
+        public Money Multiply(decimal multiplier, IMoneyRounding rounding)
+            => new Money(multiplier * Amount, Currency, rounding);
     }
 
     // Overrides the op_Division operator.
@@ -539,18 +589,25 @@ namespace Narvalo.Finance
         public static Money operator /(Money money, decimal divisor)
         {
             Expect.True(divisor != 0m);
-
             return money.Divide(divisor);
         }
 
         public Money Divide(decimal divisor)
         {
-            if (divisor == 0m)
-            {
-                throw new DivideByZeroException();
-            }
-
+            if (divisor == 0m) { throw new DivideByZeroException(); }
             return new Money(Amount / divisor, Currency, false);
+        }
+
+        public Money Divide(decimal divisor, RoundingMode mode)
+        {
+            if (divisor == 0m) { throw new DivideByZeroException(); }
+            return new Money(Amount / divisor, Currency, mode);
+        }
+
+        public Money Divide(decimal divisor, IMoneyRounding rounding)
+        {
+            if (divisor == 0m) { throw new DivideByZeroException(); }
+            return new Money(Amount / divisor, Currency, rounding);
         }
     }
 
@@ -560,18 +617,25 @@ namespace Narvalo.Finance
         public static Money operator %(Money money, decimal divisor)
         {
             Expect.True(divisor != 0m);
-
             return money.Remainder(divisor);
         }
 
         public Money Remainder(decimal divisor)
         {
-            if (divisor == 0m)
-            {
-                throw new DivideByZeroException();
-            }
-
+            if (divisor == 0m) { throw new DivideByZeroException(); }
             return new Money(Amount % divisor, Currency, false);
+        }
+
+        public Money Remainder(decimal divisor, RoundingMode mode)
+        {
+            if (divisor == 0m) { throw new DivideByZeroException(); }
+            return new Money(Amount % divisor, Currency, mode);
+        }
+
+        public Money Remainder(decimal divisor, IMoneyRounding rounding)
+        {
+            if (divisor == 0m) { throw new DivideByZeroException(); }
+            return new Money(Amount % divisor, Currency, rounding);
         }
     }
 
