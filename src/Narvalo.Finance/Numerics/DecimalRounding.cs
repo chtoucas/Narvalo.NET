@@ -66,6 +66,8 @@ namespace Narvalo.Finance.Numerics
 
         public NumberRounding Rounding { get; }
 
+        #region IDecimalRounding interface.
+
         public decimal Round(decimal value) => Round(value, Rounding);
 
         public decimal Round(decimal value, int decimals)
@@ -89,6 +91,8 @@ namespace Narvalo.Finance.Numerics
             }
         }
 
+        #endregion
+
         // WARNING: It only works for representable values, ie those that has not been
         // silently rounded using the default rounding mode (MidpointRounding.ToEven).
         // With PCL, we can not use Decimal.Round, instead we have Math.Round.
@@ -99,14 +103,14 @@ namespace Narvalo.Finance.Numerics
                 case NumberRounding.Down: return Decimal.Floor(value);
                 case NumberRounding.Up: return Decimal.Ceiling(value);
                 case NumberRounding.TowardsZero: return Decimal.Truncate(value);
-                case NumberRounding.HalfAwayFromZero: return Math.Round(value, 0, MidpointRounding.AwayFromZero);
-                case NumberRounding.ToEven: return Math.Round(value, 0, MidpointRounding.ToEven);
+                case NumberRounding.HalfAwayFromZero: return RoundHalfAwayFromZero(value);
+                case NumberRounding.ToEven: return RoundHalfToEven(value);
                 // Rounding modes not part of IEEE 754.
                 case NumberRounding.AwayFromZero: return RoundAwayFromZero(value);
                 case NumberRounding.HalfDown: return RoundHalfDown(value);
                 case NumberRounding.HalfUp: return RoundHalfUp(value);
                 case NumberRounding.HalfTowardsZero: return RoundHalfTowardsZero(value);
-                case NumberRounding.ToOdd: return RoundToOdd(value);
+                case NumberRounding.ToOdd: return RoundHalfToOdd(value);
                 default: throw Check.Unreachable("XXX");
             }
         }
@@ -126,21 +130,6 @@ namespace Narvalo.Finance.Numerics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundHalfDown(decimal value)
-        {
-            // For positive values, HalfDown ie equivalent to HalfTowardsZero.
-            // For negative values, HalfDown ie equivalent to HalfAwayFromZero.
-            // If there were no risks, we could simply compute Decimal.Ceiling(value - 0.5m),
-            // but "value - 0.5m" might be rounded automatically (nearest to even) if it is not
-            // representable. Another advantage is that we do not have to treat Decimal.Minvalue
-            // separately which would throw a StackOverflow exception.
-            if (value == 0m) { return 0m; }
-            return value > 0m
-                ? RoundHalfTowardsZeroOrDown(value)
-                : Math.Round(value, 0, MidpointRounding.AwayFromZero);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static decimal RoundHalfUp(decimal value, int decimals)
         {
             if (decimals == 0)
@@ -154,6 +143,23 @@ namespace Narvalo.Finance.Numerics
             }
         }
 
+        #region Core methods.
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundHalfDown(decimal value)
+        {
+            // For positive values, HalfDown ie equivalent to HalfTowardsZero.
+            // For negative values, HalfDown ie equivalent to HalfAwayFromZero.
+            // If there were no risks, we could simply compute Decimal.Ceiling(value - 0.5m),
+            // but "value - 0.5m" might be rounded automatically (nearest to even) if it is not
+            // representable. Another advantage is that we do not have to treat Decimal.Minvalue
+            // separately which would throw a StackOverflow exception.
+            if (value == 0m) { return 0m; }
+            return value > 0m
+                ? RoundHalfTowardsZeroOrDown(value)
+                : RoundHalfAwayFromZero(value);
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static decimal RoundHalfUp(decimal value)
         {
@@ -165,17 +171,23 @@ namespace Narvalo.Finance.Numerics
             // separately which would throw a StackOverflow exception.
             if (value == 0m) { return 0m; }
             return value > 0m
-                ? Math.Round(value, 0, MidpointRounding.AwayFromZero)
+                ? RoundHalfAwayFromZero(value)
                 : RoundHalfTowardsZeroOrUp(value);
         }
 
-        private static decimal RoundAwayFromZero(decimal value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundAwayFromZero(decimal value)
         {
             if (value == 0m) { return 0m; }
             return value > 0m ? Decimal.Ceiling(value) : Decimal.Floor(value);
         }
 
-        private static decimal RoundHalfTowardsZero(decimal value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundHalfAwayFromZero(decimal value)
+            => Math.Round(value, 0, MidpointRounding.AwayFromZero);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundHalfTowardsZero(decimal value)
         {
             if (value == 0m) { return 0m; }
             return value > 0
@@ -183,13 +195,18 @@ namespace Narvalo.Finance.Numerics
                 : RoundHalfTowardsZeroOrUp(value);
         }
 
-        private static decimal RoundToOdd(decimal value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundHalfToEven(decimal value)
+            => Math.Round(value, 0, MidpointRounding.ToEven);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundHalfToOdd(decimal value)
         {
             var n = Math.Round(value, 0, MidpointRounding.AwayFromZero);
 
             if (value > 0m)
             {
-                return n - value == 0.5m && n % 2 == 0 ? --n : n;
+                return value - n == -0.5m && n % 2 == 0 ? --n : n;
             }
             else
             {
@@ -197,18 +214,24 @@ namespace Narvalo.Finance.Numerics
             }
         }
 
+        #endregion
+
+        #region Helpers.
+
         private static decimal RoundHalfTowardsZeroOrDown(decimal posval)
         {
             Demand.Range(posval > 0m);
             var n = Decimal.Floor(posval);
-            return posval - n == 0.5m ? n : Math.Round(posval, 0, MidpointRounding.AwayFromZero);
+            // If we are not at a midpoint, we return the nearest integer.
+            return posval - n == 0.5m ? n : RoundHalfAwayFromZero(posval);
         }
 
         private static decimal RoundHalfTowardsZeroOrUp(decimal negval)
         {
             Demand.Range(negval < 0m);
             var n = Decimal.Ceiling(negval);
-            return n - negval == 0.5m ? n : Math.Round(negval, 0, MidpointRounding.AwayFromZero);
+            // If we are not at a midpoint, we return the nearest integer.
+            return negval - n == -0.5m ? n : RoundHalfAwayFromZero(negval);
         }
 
         private static void CheckRange(decimal value, int decimals)
@@ -218,5 +241,7 @@ namespace Narvalo.Finance.Numerics
             decimal maxValue = s_MaxValues[decimals - 1];
             Enforce.Range(-maxValue <= value && value <= maxValue, nameof(value));
         }
+
+        #endregion
     }
 }
