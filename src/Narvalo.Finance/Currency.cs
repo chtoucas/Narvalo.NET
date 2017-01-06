@@ -48,7 +48,7 @@ namespace Narvalo.Finance
         private static decimal[] Epsilons => s_Epsilons;
 
         // The list is automatically generated using data obtained from the SNV website.
-        private static decimal[] Powers10 => s_Powers10;
+        private static uint[] Powers10 => s_Powers10;
 
         /// <summary>
         /// Gets the alphabetic code of the currency.

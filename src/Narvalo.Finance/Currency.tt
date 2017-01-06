@@ -54,9 +54,9 @@ namespace <#= Namespace #>
 <# } #>
         };
 
-        private static decimal[] s_Powers10 = new decimal[] {
+        private static uint[] s_Powers10 = new uint[] {
 <# for (var i = 0; i <= highestMinor; i++) { #>
-            <#= Math.Pow(10, i).ToString("G") #>m,
+            <#= Math.Pow(10, i).ToString("G") #>,
 <# } #>
         };
 

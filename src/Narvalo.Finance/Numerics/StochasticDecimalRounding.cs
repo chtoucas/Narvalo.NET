@@ -17,8 +17,12 @@ namespace Narvalo.Finance.Numerics
             : DecimalRounding.Round(value, NumberRounding.HalfDown);
 
         public decimal Round(decimal value, int decimals)
-            => UpOrDown
-            ? DecimalRounding.Round(value, decimals, NumberRounding.HalfUp)
-            : DecimalRounding.Round(value, decimals, NumberRounding.HalfDown);
+        {
+            Require.Range(0 <= decimals && decimals <= DecimalRounding.MaxScale, nameof(decimals));
+
+            return UpOrDown
+                ? DecimalRounding.Round(value, decimals, NumberRounding.HalfUp)
+                : DecimalRounding.Round(value, decimals, NumberRounding.HalfDown);
+        }
     }
 }

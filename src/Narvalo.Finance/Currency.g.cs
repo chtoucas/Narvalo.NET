@@ -27,12 +27,12 @@ namespace Narvalo.Finance
             0.0001m,
         };
 
-        private static decimal[] s_Powers10 = new decimal[] {
-            1m,
-            10m,
-            100m,
-            1000m,
-            10000m,
+        private static uint[] s_Powers10 = new uint[] {
+            1,
+            10,
+            100,
+            1000,
+            10000,
         };
 
         /// <summary>

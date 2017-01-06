@@ -18,6 +18,8 @@ namespace Narvalo.Finance.Numerics
 
         public decimal Round(decimal value, int decimals)
         {
+            Require.Range(0 <= decimals && decimals <= DecimalRounding.MaxScale, nameof(decimals));
+
             throw new NotImplementedException();
         }
     }

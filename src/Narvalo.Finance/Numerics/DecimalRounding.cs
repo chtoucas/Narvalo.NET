@@ -6,25 +6,23 @@ namespace Narvalo.Finance.Numerics
 
     public sealed class DecimalRounding : IDecimalRounding
     {
-        // TODO: use a more sensible value.
-        private const int MAX_DECIMALS = 10;
+        internal const int MaxScale = 9;
 
-        private static readonly decimal[] s_Powers10 = new decimal[MAX_DECIMALS + 1]
+        private static readonly uint[] s_Powers10 = new uint[MaxScale + 1]
         {
-            1m,
-            10m,
-            100m,
-            1000m,
-            10000m,
-            100000m,
-            1000000m,
-            10000000m,
-            100000000m,
-            1000000000m,
-            10000000000m,
+            1,
+            10,
+            100,
+            1000,
+            10000,
+            100000,
+            1000000,
+            10000000,
+            100000000,
+            1000000000
         };
 
-        private static readonly decimal[] s_Epsilons = new decimal[MAX_DECIMALS + 1]
+        private static readonly decimal[] s_Epsilons = new decimal[MaxScale + 1]
         {
             1m,
             0.1m,
@@ -35,8 +33,7 @@ namespace Narvalo.Finance.Numerics
             0.000001m,
             0.0000001m,
             0.00000001m,
-            0.000000001m,
-            0.0000000001m,
+            0.000000001m
         };
 
         public decimal Round(decimal value)
@@ -47,7 +44,7 @@ namespace Narvalo.Finance.Numerics
 
         public static decimal Round(decimal value, int decimals, NumberRounding rounding)
         {
-            Require.Range(0 <= decimals && decimals <= MAX_DECIMALS, nameof(decimals));
+            Require.Range(0 <= decimals && decimals <= MaxScale, nameof(decimals));
 
             return Round(s_Powers10[decimals] * value, rounding) * s_Epsilons[decimals];
         }
