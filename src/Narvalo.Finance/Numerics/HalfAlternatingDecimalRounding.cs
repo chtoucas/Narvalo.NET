@@ -29,17 +29,13 @@ namespace Narvalo.Finance.Numerics
 
         public decimal Round(decimal value)
             => UpOrDown
-            ? DecimalRounding.Round(value, NumberRounding.HalfUp)
-            : DecimalRounding.Round(value, NumberRounding.HalfDown);
+            ? DecimalRounding.RoundHalfUp(value)
+            : DecimalRounding.RoundHalfDown(value);
 
         public decimal Round(decimal value, int decimals)
-        {
-            Require.Range(0 <= decimals && decimals <= DecimalRounding.MaxScale, nameof(decimals));
-
-            return UpOrDown
-                ? DecimalRounding.Round(value, decimals, NumberRounding.HalfUp)
-                : DecimalRounding.Round(value, decimals, NumberRounding.HalfDown);
-        }
+            => UpOrDown
+            ? DecimalRounding.RoundHalfUp(value, decimals)
+            : DecimalRounding.RoundHalfDown(value, decimals);
 
         private void Dispose(bool disposing)
         {

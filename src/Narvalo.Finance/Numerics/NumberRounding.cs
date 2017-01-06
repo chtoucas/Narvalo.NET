@@ -15,6 +15,7 @@ namespace Narvalo.Finance.Numerics
     // - Down,         floor(x) = n where n <= x < n + 1. En notation française, [x]
     // - Up,           ceiling(x) = n where n - 1 < x <= n
     // - TowardsZero,  truncate(x) = sign(x) [|x|]
+    //              or x > 0 ? floor(x) : ceiling(x)
     // - AwayFromZero, n = - sign(x) [-|x|]
     // NB:
     // - for x > 0, Down = TowardsZero and Up = AwayFromZero
@@ -35,7 +36,9 @@ namespace Narvalo.Finance.Numerics
     // - HalfDown,         n = ceiling(x - 0.5)
     // - HalfUp,           n = [x + 0.5]
     // - HalfTowardsZero,  n = - sign(x) [-|x| + 0.5]
+    //                  or n = x > 0 ? ceiling(x - .5) : floor(x + .5)
     // - HalfAwayFromZero, n = sign(x) [|x| + 0.5]
+    //                  or n = x > 0 ? floor(x + .5) : ceiling(x - .5)
     // - ToEven,
     // - ToOdd,
     // Among these six modes, only HalfAwayFromZero and ToEven are part of IEEE 754.

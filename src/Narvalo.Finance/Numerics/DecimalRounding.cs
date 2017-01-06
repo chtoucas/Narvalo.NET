@@ -3,14 +3,38 @@
 namespace Narvalo.Finance.Numerics
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     public sealed class DecimalRounding : IDecimalRounding
     {
-        internal const int MaxScale = 9;
+        private const int MAX_SCALE = 9;
 
-        private static readonly uint[] s_Powers10 = new uint[MaxScale + 1]
+        private const decimal
+            MAX_1 = Decimal.MaxValue / 10,
+            MAX_2 = MAX_1 / 10,
+            MAX_3 = MAX_2 / 10,
+            MAX_4 = MAX_3 / 10,
+            MAX_5 = MAX_4 / 10,
+            MAX_6 = MAX_5 / 10,
+            MAX_7 = MAX_6 / 10,
+            MAX_8 = MAX_7 / 10,
+            MAX_9 = MAX_8 / 10;
+
+        private static readonly decimal[] s_MaxValues = new decimal[MAX_SCALE]
         {
-            1,
+            MAX_1,
+            MAX_2,
+            MAX_3,
+            MAX_4,
+            MAX_5,
+            MAX_6,
+            MAX_7,
+            MAX_8,
+            MAX_9
+        };
+
+        private static readonly uint[] s_Powers10 = new uint[MAX_SCALE]
+        {
             10,
             100,
             1000,
@@ -22,9 +46,8 @@ namespace Narvalo.Finance.Numerics
             1000000000
         };
 
-        private static readonly decimal[] s_Epsilons = new decimal[MaxScale + 1]
+        private static readonly decimal[] s_Epsilons = new decimal[MAX_SCALE]
         {
-            1m,
             0.1m,
             0.01m,
             0.001m,
@@ -36,83 +59,164 @@ namespace Narvalo.Finance.Numerics
             0.000000001m
         };
 
-        public decimal Round(decimal value)
-            => Math.Round(value, 0, MidpointRounding.ToEven);
+        public DecimalRounding(NumberRounding rounding)
+        {
+            Rounding = rounding;
+        }
+
+        public NumberRounding Rounding { get; }
+
+        public decimal Round(decimal value) => Round(value, Rounding);
 
         public decimal Round(decimal value, int decimals)
-            => Math.Round(value, decimals, MidpointRounding.ToEven);
-
-        public static decimal Round(decimal value, int decimals, NumberRounding rounding)
         {
-            Require.Range(0 <= decimals && decimals <= MaxScale, nameof(decimals));
-
-            return Round(s_Powers10[decimals] * value, rounding) * s_Epsilons[decimals];
+            if (Rounding == NumberRounding.ToEven)
+            {
+                return Math.Round(value, decimals, MidpointRounding.ToEven);
+            }
+            else if (Rounding == NumberRounding.AwayFromZero)
+            {
+                return Math.Round(value, decimals, MidpointRounding.AwayFromZero);
+            }
+            else if (decimals == 0)
+            {
+                return Round(value, Rounding);
+            }
+            else
+            {
+                CheckRange(value, decimals);
+                return Round(s_Powers10[decimals - 1] * value, Rounding) * s_Epsilons[decimals - 1];
+            }
         }
 
         // WARNING: It only works for representable values, ie those that has not been
         // silently rounded using the default rounding mode (MidpointRounding.ToEven).
-        // Another problem is that we use operations that can produce non-representable values
-        // (like -/+ 0.5m) which, then, are rounded automatically.
         // With PCL, we can not use Decimal.Round, instead we have Math.Round.
         public static decimal Round(decimal value, NumberRounding rounding)
         {
             switch (rounding)
             {
-                case NumberRounding.Down:
-                    return Decimal.Floor(value);
-
-                case NumberRounding.Up:
-                    return Decimal.Ceiling(value);
-
-                case NumberRounding.TowardsZero:
-                    // Equivalent to: x > 0 ? floor(x) : ceiling(x)
-                    return Decimal.Truncate(value);
-
-                case NumberRounding.AwayFromZero:
-                    return value > 0 ? Decimal.Ceiling(value) : Decimal.Floor(value);
-
-                case NumberRounding.HalfDown:
-                    // For negative values, HalfDown ie equivalent to HalfAwayFromZero.
-                    // This allows us to avoid to compute "value - 0.5m" which might be loosy.
-                    // Another advantage is that we do not have to treat Decimal.Minvalue separately
-                    // which would throw a StackOverflow exception.
-                    return value > 0
-                        ? Decimal.Ceiling(value - 0.5m)
-                        : Math.Round(value, 0, MidpointRounding.AwayFromZero);
-
-                case NumberRounding.HalfUp:
-                    // For positive values, HalfUp ie equivalent to HalfAwayFromZero.
-                    // This allows us to avoid to compute "value + 0.5m" which might be loosy.
-                    // Another advantage is that we do not have to treat Decimal.MaxValue separately
-                    // which would throw a StackOverflow exception.
-                    return value > 0
-                        ? Math.Round(value, 0, MidpointRounding.AwayFromZero)
-                        : Decimal.Floor(value + 0.5m);
-
-                case NumberRounding.HalfTowardsZero:
-                    return value > 0 ? Decimal.Ceiling(value - 0.5m) : Decimal.Floor(value + 0.5m);
-
-                case NumberRounding.HalfAwayFromZero:
-                    // Equivalent to: x > 0 ? floor(x + .5) : ceiling(x - .5)
-                    return Math.Round(value, 0, MidpointRounding.AwayFromZero);
-
-                case NumberRounding.ToEven:
-                    return Math.Round(value, 0, MidpointRounding.ToEven);
-
-                case NumberRounding.ToOdd:
-                    var n = Math.Round(value, 0, MidpointRounding.AwayFromZero);
-
-                    if (value > 0)
-                    {
-                        return n - value == 0.5m && n % 2 == 0 ? --n : n;
-                    }
-                    else
-                    {
-                        return value - n == 0.5m && n % 2 == 0 ? ++n : n;
-                    }
-
+                case NumberRounding.Down: return Decimal.Floor(value);
+                case NumberRounding.Up: return Decimal.Ceiling(value);
+                case NumberRounding.TowardsZero: return Decimal.Truncate(value);
+                case NumberRounding.HalfAwayFromZero: return Math.Round(value, 0, MidpointRounding.AwayFromZero);
+                case NumberRounding.ToEven: return Math.Round(value, 0, MidpointRounding.ToEven);
+                // Rounding modes not part of IEEE 754.
+                case NumberRounding.AwayFromZero: return RoundAwayFromZero(value);
+                case NumberRounding.HalfDown: return RoundHalfDown(value);
+                case NumberRounding.HalfUp: return RoundHalfUp(value);
+                case NumberRounding.HalfTowardsZero: return RoundHalfTowardsZero(value);
+                case NumberRounding.ToOdd: return RoundToOdd(value);
                 default: throw Check.Unreachable("XXX");
             }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundHalfDown(decimal value, int decimals)
+        {
+            if (decimals == 0)
+            {
+                return RoundHalfDown(value);
+            }
+            else
+            {
+                CheckRange(value, decimals);
+                return RoundHalfDown(s_Powers10[decimals - 1] * value) * s_Epsilons[decimals - 1];
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundHalfDown(decimal value)
+        {
+            // For positive values, HalfDown ie equivalent to HalfTowardsZero.
+            // For negative values, HalfDown ie equivalent to HalfAwayFromZero.
+            // If there were no risks, we could simply compute Decimal.Ceiling(value - 0.5m),
+            // but "value - 0.5m" might be rounded automatically (nearest to even) if it is not
+            // representable. Another advantage is that we do not have to treat Decimal.Minvalue
+            // separately which would throw a StackOverflow exception.
+            if (value == 0m) { return 0m; }
+            return value > 0m
+                ? RoundHalfTowardsZeroOrDown(value)
+                : Math.Round(value, 0, MidpointRounding.AwayFromZero);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundHalfUp(decimal value, int decimals)
+        {
+            if (decimals == 0)
+            {
+                return RoundHalfUp(value);
+            }
+            else
+            {
+                CheckRange(value, decimals);
+                return RoundHalfUp(s_Powers10[decimals - 1] * value) * s_Epsilons[decimals - 1];
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundHalfUp(decimal value)
+        {
+            // For positive values, HalfUp ie equivalent to HalfAwayFromZero.
+            // For negative values, HalfUp ie equivalent to HalfTowardsZero.
+            // If there were no risks, we could simply compute Decimal.Floor(value + 0.5m),
+            // but "value + 0.5m" might be rounded automatically (nearest to even) if it is not
+            // representable. Another advantage is that we do not have to treat Decimal.MaxValue
+            // separately which would throw a StackOverflow exception.
+            if (value == 0m) { return 0m; }
+            return value > 0m
+                ? Math.Round(value, 0, MidpointRounding.AwayFromZero)
+                : RoundHalfTowardsZeroOrUp(value);
+        }
+
+        private static decimal RoundAwayFromZero(decimal value)
+        {
+            if (value == 0m) { return 0m; }
+            return value > 0m ? Decimal.Ceiling(value) : Decimal.Floor(value);
+        }
+
+        private static decimal RoundHalfTowardsZero(decimal value)
+        {
+            if (value == 0m) { return 0m; }
+            return value > 0
+                ? RoundHalfTowardsZeroOrDown(value)
+                : RoundHalfTowardsZeroOrUp(value);
+        }
+
+        private static decimal RoundToOdd(decimal value)
+        {
+            var n = Math.Round(value, 0, MidpointRounding.AwayFromZero);
+
+            if (value > 0m)
+            {
+                return n - value == 0.5m && n % 2 == 0 ? --n : n;
+            }
+            else
+            {
+                return value - n == 0.5m && n % 2 == 0 ? ++n : n;
+            }
+        }
+
+        private static decimal RoundHalfTowardsZeroOrDown(decimal posval)
+        {
+            Demand.Range(posval > 0m);
+            var n = Decimal.Floor(posval);
+            return posval - n == 0.5m ? n : Math.Round(posval, 0, MidpointRounding.AwayFromZero);
+        }
+
+        private static decimal RoundHalfTowardsZeroOrUp(decimal negval)
+        {
+            Demand.Range(negval < 0m);
+            var n = Decimal.Ceiling(negval);
+            return n - negval == 0.5m ? n : Math.Round(negval, 0, MidpointRounding.AwayFromZero);
+        }
+
+        private static void CheckRange(decimal value, int decimals)
+        {
+            Enforce.Range(1 <= decimals && decimals <= MAX_SCALE, nameof(decimals));
+
+            decimal maxValue = s_MaxValues[decimals - 1];
+            Enforce.Range(-maxValue <= value && value <= maxValue, nameof(value));
         }
     }
 }
