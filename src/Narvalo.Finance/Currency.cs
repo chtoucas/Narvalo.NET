@@ -256,7 +256,7 @@ namespace Narvalo.Finance
             decimal major = Math.Round(amount, DecimalPlaces, rounding);
             decimal minor = Factor * major;
 
-            if (minor < Int64.MaxValue || minor > Int64.MaxValue) { return null; }
+            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
 
             return Convert.ToInt64(minor);
         }
@@ -266,7 +266,7 @@ namespace Narvalo.Finance
             decimal major = Math.Round(amount, DecimalPlaces, rounding);
             decimal minor = Factor * major;
 
-            if (minor < Int64.MaxValue || minor > Int64.MaxValue)
+            if (minor < Int64.MinValue || minor > Int64.MaxValue)
             {
                 result = major < 0 ? Int64.MinValue : Int64.MaxValue;
                 return false;
