@@ -27,10 +27,10 @@ namespace Narvalo.Finance.Numerics
 
         public void Dispose() => Dispose(true);
 
-        public decimal Round(decimal value, int decimals)
+        public decimal Round(decimal value, int decimalPlaces)
             => UpOrDown
-            ? DecimalRounding.RoundHalfUp(value, decimals)
-            : DecimalRounding.RoundHalfDown(value, decimals);
+            ? DecimalRounding.RoundHalfUp(value, decimalPlaces)
+            : DecimalRounding.RoundHalfDown(value, decimalPlaces);
 
         private void Dispose(bool disposing)
         {
