@@ -41,6 +41,8 @@ namespace Narvalo.Finance.Numerics
             int parts,
             NumberRounding rounding)
         {
+            if (parts == 0) { throw new DivideByZeroException(); }
+
             decimal q = DecimalRounding.Round(value / parts, decimalPlaces, rounding);
 
             for (var i = 0; i < parts - 1; i++)
