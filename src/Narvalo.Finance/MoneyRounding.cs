@@ -21,6 +21,7 @@ namespace Narvalo.Finance
         /// <summary>
         /// When a number is halfway between two others, it is rounded toward the nearest even number.
         /// </summary>
+        /// <remarks>Default IEEE 754 rounding mode.</remarks>
         ToEven,
 
         /// <summary>
@@ -28,11 +29,6 @@ namespace Narvalo.Finance
         /// number that is away from zero.
         /// </summary>
         AwayFromZero,
-
-        /// <summary>
-        /// Default IEEE 754 rounding mode.
-        /// </summary>
-        Default = ToEven,
     }
 
     public static class MoneyRoundingExtensions

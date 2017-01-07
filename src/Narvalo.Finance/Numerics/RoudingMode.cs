@@ -84,7 +84,5 @@ namespace Narvalo.Finance.Numerics
         ToEven, // roundTiesToEven (IEEE 754)
 
         ToOdd,
-
-        Default = ToEven,
     }
 }

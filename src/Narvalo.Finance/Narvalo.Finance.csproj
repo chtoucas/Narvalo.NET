@@ -82,6 +82,7 @@
     <Compile Include="MoneyCalculator.cs" />
     <Compile Include="MoneyRounding.cs" />
     <Compile Include="Numerics\DecimalRounding.cs" />
+    <Compile Include="Numerics\DivisionCollection`1.cs" />
     <Compile Include="Numerics\HalfAlternatingDecimalRounding.cs" />
     <Compile Include="Numerics\HalfDitheringDecimalRounding.cs" />
     <Compile Include="Numerics\IDecimalRounding.cs" />

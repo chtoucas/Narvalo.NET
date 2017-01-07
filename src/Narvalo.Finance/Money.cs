@@ -57,7 +57,7 @@ namespace Narvalo.Finance
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">The specific currency.</param>
-        public Money(decimal amount, Currency currency) : this(amount, currency, MoneyRounding.Default) { }
+        public Money(decimal amount, Currency currency) : this(amount, currency, MoneyRounding.ToEven) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
@@ -157,8 +157,6 @@ namespace Narvalo.Finance
         public static Money One(Currency currency) => new Money(currency.One, currency, true);
 
         public Money Abs() => IsNegative ? Negate() : this;
-
-        public Money Normalize() => Normalize(MoneyRounding.Default);
 
         public Money Normalize(MoneyRounding rounding)
         {
