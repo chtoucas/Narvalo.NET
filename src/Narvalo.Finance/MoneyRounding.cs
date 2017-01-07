@@ -2,8 +2,6 @@
 
 namespace Narvalo.Finance
 {
-    using System;
-
     using Narvalo.Finance.Numerics;
 
     public sealed class MoneyRounding : IMoneyRounding
@@ -21,17 +19,17 @@ namespace Narvalo.Finance
 
         public static decimal Round(decimal amount, Currency currency, RoundingMode mode)
         {
-            switch (mode)
+            if (mode == RoundingMode.ToEven)
             {
-                case RoundingMode.AwayFromZero:
-                    return Math.Round(amount, currency.DecimalPlaces, MidpointRounding.AwayFromZero);
-                case RoundingMode.ToEven:
-                    return Math.Round(amount, currency.DecimalPlaces, MidpointRounding.ToEven);
-                case RoundingMode.None:
-                case RoundingMode.Unnecessary:
-                    return amount;
-                default:
-                    throw Check.Unreachable("XXX");
+                return DecimalRounding.RoundToEven(amount, currency.DecimalPlaces);
+            }
+            else if (mode == RoundingMode.AwayFromZero)
+            {
+                return DecimalRounding.RoundHalfAwayFromZero(amount, currency.DecimalPlaces);
+            }
+            else
+            {
+                return amount;
             }
         }
     }

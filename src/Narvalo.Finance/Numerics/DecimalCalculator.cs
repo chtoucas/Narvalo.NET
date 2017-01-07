@@ -39,9 +39,9 @@ namespace Narvalo.Finance.Numerics
             decimal value,
             int decimalPlaces,
             int parts,
-            MidpointRounding rounding)
+            NumberRounding rounding)
         {
-            decimal q = Math.Round(value / parts, decimalPlaces, rounding);
+            decimal q = DecimalRounding.Round(value / parts, decimalPlaces, rounding);
 
             for (var i = 0; i < parts - 1; i++)
             {
@@ -57,7 +57,7 @@ namespace Narvalo.Finance.Numerics
             decimal amount,
             int decimalPlaces,
             RatioArray ratios,
-            MidpointRounding rounding)
+            NumberRounding rounding)
         {
             var len = ratios.Length;
             var dist = new decimal[len];
@@ -65,7 +65,7 @@ namespace Narvalo.Finance.Numerics
 
             for (var i = 0; i < len - 1; i++)
             {
-                decimal next = Math.Round(ratios[i] * amount, decimalPlaces, rounding);
+                decimal next = DecimalRounding.Round(ratios[i] * amount, decimalPlaces, rounding);
                 last -= next;
                 yield return next;
             }

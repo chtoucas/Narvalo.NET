@@ -3,11 +3,15 @@
 namespace Narvalo.Finance.Numerics
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     public sealed class DecimalRounding : IDecimalRounding
     {
-        // This limit is rather artificial, but this should not be a problem.
+        // This limit is rather artificial, but this should be OK for our use cases.
+        // NB: This limit is not enforced for ToEven and HalAwayFromZero, in which cases
+        // we simply use the default maximum scale for decimals.
         private const int MAX_SCALE = 9;
+        private const int MAX_DECIMAL_SCALE = 28;
 
         private const decimal
             MAX_1 = Decimal.MaxValue / 10,
@@ -70,23 +74,25 @@ namespace Narvalo.Finance.Numerics
 
         #region IDecimalRounding interface.
 
-        public decimal Round(decimal value, int decimals)
+        public decimal Round(decimal value, int decimals) => Round(value, decimals, Rounding);
+
+        #endregion
+
+        public static decimal Round(decimal value, int decimals, NumberRounding rounding)
         {
-            if (Rounding == NumberRounding.ToEven)
+            if (rounding == NumberRounding.ToEven)
             {
-                return Math.Round(value, decimals, MidpointRounding.ToEven);
+                return RoundToEven(value, decimals);
             }
-            else if (Rounding == NumberRounding.AwayFromZero)
+            else if (rounding == NumberRounding.AwayFromZero)
             {
-                return Math.Round(value, decimals, MidpointRounding.AwayFromZero);
+                return RoundHalfAwayFromZero(value, decimals);
             }
 
             return decimals == 0
-                ? Round(value, Rounding)
-                : Unscale(Round(Scale(value, decimals), Rounding), decimals);
+                ? Round(value, rounding)
+                : Unscale(Round(Scale(value, decimals), rounding), decimals);
         }
-
-        #endregion
 
         public static decimal Round(decimal value, NumberRounding rounding)
         {
@@ -103,9 +109,9 @@ namespace Narvalo.Finance.Numerics
                 case NumberRounding.TowardsZero:
                     return Decimal.Truncate(value);
                 case NumberRounding.HalfAwayFromZero:
-                    return Math.Round(value, 0, MidpointRounding.AwayFromZero);
+                    return RoundHalfAwayFromZero(value, 0);
                 case NumberRounding.ToEven:
-                    return Math.Round(value, 0, MidpointRounding.ToEven);
+                    return RoundToEven(value, 0);
             }
 
             // Rounding modes not part of IEEE 754.
@@ -126,7 +132,7 @@ namespace Narvalo.Finance.Numerics
                         : RoundHalfTowardsZeroForNegativeValue(value);
 
                 case NumberRounding.ToOdd:
-                    var n = Math.Round(value, 0, MidpointRounding.AwayFromZero);
+                    var n = RoundHalfAwayFromZero(value, 0);
 
                     if (value > 0m)
                     {
@@ -141,6 +147,7 @@ namespace Narvalo.Finance.Numerics
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static decimal RoundHalfDown(decimal value, int decimals)
         {
             if (value == 0m) { return 0m; }
@@ -149,12 +156,27 @@ namespace Narvalo.Finance.Numerics
                 : Unscale(RoundHalfDown(Scale(value, decimals)), decimals);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static decimal RoundHalfUp(decimal value, int decimals)
         {
             if (value == 0m) { return 0m; }
             return decimals == 0
                 ? RoundHalfUp(value)
                 : Unscale(RoundHalfUp(Scale(value, decimals)), decimals);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundToEven(decimal value, int decimals)
+        {
+            Demand.Range(0 <= decimals && decimals <= MAX_DECIMAL_SCALE);
+            return Math.Round(value, decimals, MidpointRounding.ToEven);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static decimal RoundHalfAwayFromZero(decimal value, int decimals)
+        {
+            Demand.Range(0 <= decimals && decimals <= MAX_DECIMAL_SCALE);
+            return Math.Round(value, decimals, MidpointRounding.AwayFromZero);
         }
 
         #region Helpers.
@@ -168,7 +190,7 @@ namespace Narvalo.Finance.Numerics
         private static decimal RoundHalfDown(decimal value)
             => value > 0m
             ? RoundHalfTowardsZeroForPositiveValue(value)
-            : Math.Round(value, 0, MidpointRounding.AwayFromZero);
+            : RoundHalfAwayFromZero(value, 0);
 
         // For positive values, HalfUp is equivalent to HalfAwayFromZero.
         // For negative values, HalfUp is equivalent to HalfTowardsZero.
@@ -178,26 +200,26 @@ namespace Narvalo.Finance.Numerics
         // separately which would throw a StackOverflow exception.
         private static decimal RoundHalfUp(decimal value)
             => value > 0m
-            ? Math.Round(value, 0, MidpointRounding.AwayFromZero)
+            ? RoundHalfAwayFromZero(value, 0)
             : RoundHalfTowardsZeroForNegativeValue(value);
 
         private static decimal RoundHalfTowardsZeroForPositiveValue(decimal value)
         {
             var n = Decimal.Floor(value);
             // If 'value' is not a midpoint, we return the nearest integer.
-            return value - n == 0.5m ? n : Math.Round(value, 0, MidpointRounding.AwayFromZero);
+            return value - n == 0.5m ? n : RoundHalfAwayFromZero(value, 0);
         }
 
         private static decimal RoundHalfTowardsZeroForNegativeValue(decimal value)
         {
             var n = Decimal.Ceiling(value);
             // If 'value' is not a midpoint, we return the nearest integer.
-            return value - n == -0.5m ? n : Math.Round(value, 0, MidpointRounding.AwayFromZero);
+            return value - n == -0.5m ? n : RoundHalfAwayFromZero(value, 0);
         }
 
         private static decimal Scale(decimal value, int decimals)
         {
-            Enforce.Range(1 <= decimals && decimals <= MAX_SCALE, nameof(decimals));
+            Require.Range(1 <= decimals && decimals <= MAX_SCALE, nameof(decimals));
 
             decimal maxValue = s_MaxValues[decimals - 1];
             Enforce.Range(-maxValue <= value && value <= maxValue, nameof(value));
