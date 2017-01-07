@@ -334,7 +334,7 @@ namespace Narvalo.Finance
 
         public static implicit operator Money(long value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(decimal value) => new Money(value, Currency.None, RoundingMode.None);
+        public static implicit operator Money(decimal value) => new Money(value, Currency.None, false);
 
         #endregion
 
