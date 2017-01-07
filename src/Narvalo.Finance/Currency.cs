@@ -248,32 +248,37 @@ namespace Narvalo.Finance
         internal long ConvertToMinorUnits(decimal major)
             => Convert.ToInt64(Factor * major);
 
-        public long ConvertToMinorUnits(decimal amount, MidpointRounding rounding)
-            => ConvertToMinorUnits(Math.Round(amount, DecimalPlaces, rounding));
+        public long ConvertToMinorUnits(decimal amount, RoundingMode mode)
+            => ConvertToMinorUnits(MoneyRounding.Round(amount, this, mode));
 
-        public long? TryConvertToMinorUnits(decimal amount, MidpointRounding rounding)
+        public long? TryConvertToMinorUnits(decimal amount, RoundingMode mode)
         {
-            decimal major = Math.Round(amount, DecimalPlaces, rounding);
-            decimal minor = Factor * major;
-
+            decimal minor = Factor * MoneyRounding.Round(amount, this, mode);
             if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
-
             return Convert.ToInt64(minor);
         }
 
-        public bool TryConvertToMinorUnits(decimal amount, MidpointRounding rounding, out long result)
+        public long? TryConvertToMinorUnits(decimal amount, IMoneyRounding rounding)
         {
-            decimal major = Math.Round(amount, DecimalPlaces, rounding);
-            decimal minor = Factor * major;
+            Require.NotNull(rounding, nameof(rounding));
+            decimal minor = Factor * rounding.Round(amount, this);
+            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
+            return Convert.ToInt64(minor);
+        }
 
-            if (minor < Int64.MinValue || minor > Int64.MaxValue)
-            {
-                result = major < 0 ? Int64.MinValue : Int64.MaxValue;
-                return false;
-            }
+        public bool TryConvertToMinorUnits(decimal amount, RoundingMode mode, out long result)
+        {
+            long? minor = TryConvertToMinorUnits(amount, mode);
+            result = minor ?? (amount > 0 ? Int64.MaxValue : Int64.MinValue);
+            return minor.HasValue;
+        }
 
-            result = Convert.ToInt64(minor);
-            return true;
+        public bool TryConvertToMinorUnits(decimal amount, IMoneyRounding rounding, out long result)
+        {
+            Expect.NotNull(rounding);
+            long? minor = TryConvertToMinorUnits(amount, rounding);
+            result = minor ?? (amount > 0 ? Int64.MaxValue : Int64.MinValue);
+            return minor.HasValue;
         }
 
         public decimal ConvertToMajorUnits(long amount) => Epsilon * amount;
