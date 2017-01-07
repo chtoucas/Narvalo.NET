@@ -2,6 +2,10 @@
 
 namespace Narvalo.Finance
 {
+    using System;
+
+    using Narvalo.Finance.Numerics;
+
     public enum RoundingMode
     {
         /// <summary>
@@ -29,5 +33,40 @@ namespace Narvalo.Finance
         /// Default IEEE 754 rounding mode.
         /// </summary>
         Default = ToEven,
+    }
+
+    public static class RoundingModeExtensions
+    {
+        public static MidpointRounding ToMidpointRounding(this RoundingMode @this)
+        {
+            if (@this == RoundingMode.ToEven)
+            {
+                return MidpointRounding.ToEven;
+            }
+            else if (@this == RoundingMode.AwayFromZero)
+            {
+                return MidpointRounding.AwayFromZero;
+            }
+            else
+            {
+                throw new ArgumentException("XXX", nameof(@this));
+            }
+        }
+
+        public static NumberRounding ToNumberRounding(this RoundingMode @this)
+        {
+            if (@this == RoundingMode.ToEven)
+            {
+                return NumberRounding.ToEven;
+            }
+            else if (@this == RoundingMode.AwayFromZero)
+            {
+                return NumberRounding.HalfAwayFromZero;
+            }
+            else
+            {
+                throw new ArgumentException("XXX", nameof(@this));
+            }
+        }
     }
 }
