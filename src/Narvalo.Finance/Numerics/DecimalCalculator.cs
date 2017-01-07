@@ -33,11 +33,50 @@ namespace Narvalo.Finance.Numerics
             return (flags & 0x00FF0000) >> 16;
         }
 
-        #region Distribution/Allocation.
+        #region Distribution.
 
         public static IEnumerable<decimal> Distribute(decimal value, int parts)
         {
+            Require.Range(parts >= 0, nameof(parts));
             if (parts == 0) { throw new DivideByZeroException(); }
+
+            var seq = DistributeCore(value, parts);
+
+            foreach (var _ in seq) yield return _;
+        }
+
+        public static IEnumerable<decimal> Distribute(
+            decimal value,
+            int decimalPlaces,
+            int parts,
+            RoundingMode mode)
+        {
+            Require.Range(parts >= 0, nameof(parts));
+            if (parts == 0) { throw new DivideByZeroException(); }
+
+            var seq = DistributeCore(value, parts);
+
+            foreach (var _ in seq) yield return DecimalRounding.Round(_, decimalPlaces, mode);
+        }
+
+        public static IEnumerable<decimal> Distribute(
+            decimal value,
+            int decimalPlaces,
+            int parts,
+            IDecimalRounding rounding)
+        {
+            Require.NotNull(rounding, nameof(rounding));
+            Require.Range(parts >= 0, nameof(parts));
+            if (parts == 0) { throw new DivideByZeroException(); }
+
+            var seq = DistributeCore(value, parts);
+
+            foreach (var _ in seq) yield return rounding.Round(_, decimalPlaces);
+        }
+
+        private static IEnumerable<decimal> DistributeCore(decimal value, int parts)
+        {
+            Demand.Range(parts > 0);
 
             decimal q = value / parts;
 
@@ -51,47 +90,9 @@ namespace Narvalo.Finance.Numerics
             yield return last;
         }
 
-        public static IEnumerable<decimal> Distribute(
-            decimal value,
-            int decimalPlaces,
-            int parts,
-            RoundingMode mode)
-        {
-            if (parts == 0) { throw new DivideByZeroException(); }
+        #endregion
 
-            decimal q = DecimalRounding.Round(value / parts, decimalPlaces, mode);
-
-            for (var i = 0; i < parts - 1; i++)
-            {
-                yield return q;
-            }
-
-            var last = value - (parts - 1) * q;
-
-            yield return last;
-        }
-
-        public static IEnumerable<decimal> Distribute(
-            decimal value,
-            int decimalPlaces,
-            int parts,
-            IDecimalRounding rounding)
-        {
-            Require.NotNull(rounding, nameof(rounding));
-
-            if (parts == 0) { throw new DivideByZeroException(); }
-
-            decimal q = rounding.Round(value / parts, decimalPlaces);
-
-            for (var i = 0; i < parts - 1; i++)
-            {
-                yield return q;
-            }
-
-            var last = value - (parts - 1) * q;
-
-            yield return last;
-        }
+        #region Allocation.
 
         public static IEnumerable<decimal> Allocate(decimal amount, RatioArray ratios)
         {
@@ -115,18 +116,9 @@ namespace Narvalo.Finance.Numerics
             RatioArray ratios,
             RoundingMode mode)
         {
-            var len = ratios.Length;
-            var dist = new decimal[len];
-            var last = amount;
+            var seq = Allocate(amount, ratios);
 
-            for (var i = 0; i < len - 1; i++)
-            {
-                decimal next = DecimalRounding.Round(ratios[i] * amount, decimalPlaces, mode);
-                last -= next;
-                yield return next;
-            }
-
-            yield return last;
+            foreach (var _ in seq) yield return DecimalRounding.Round(_, decimalPlaces, mode);
         }
 
         public static IEnumerable<decimal> Allocate(
@@ -137,18 +129,9 @@ namespace Narvalo.Finance.Numerics
         {
             Require.NotNull(rounding, nameof(rounding));
 
-            var len = ratios.Length;
-            var dist = new decimal[len];
-            var last = amount;
+            var seq = Allocate(amount, ratios);
 
-            for (var i = 0; i < len - 1; i++)
-            {
-                decimal next = rounding.Round(ratios[i] * amount, decimalPlaces);
-                last -= next;
-                yield return next;
-            }
-
-            yield return last;
+            foreach (var _ in seq) yield return rounding.Round(_, decimalPlaces);
         }
 
         #endregion

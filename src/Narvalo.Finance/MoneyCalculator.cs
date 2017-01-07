@@ -138,7 +138,10 @@ namespace Narvalo.Finance
     public static partial class MoneyCalculator
     {
         public static IEnumerable<Money> Distribute(this Money @this, int decimalPlaces, int parts)
-            => Distribute(@this, decimalPlaces, parts, MoneyRounding.Default);
+        {
+            Expect.Range(parts > 0);
+            return Distribute(@this, decimalPlaces, parts, MoneyRounding.Default);
+        }
 
         public static IEnumerable<Money> Distribute(
             this Money @this,
@@ -147,6 +150,7 @@ namespace Narvalo.Finance
             MoneyRounding rounding)
         {
             Require.True(rounding != MoneyRounding.Unnecessary, nameof(rounding));
+            Expect.Range(parts > 0);
 
             if (rounding == MoneyRounding.None)
             {
@@ -171,6 +175,7 @@ namespace Narvalo.Finance
             IDecimalRounding rounding)
         {
             Require.NotNull(rounding, nameof(rounding));
+            Expect.Range(parts > 0);
 
             return from _
                    in DecimalCalculator.Distribute(@this.Amount, decimalPlaces, parts, rounding)
