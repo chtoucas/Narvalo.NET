@@ -3,6 +3,7 @@
 namespace Narvalo.Finance.Numerics
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     public sealed class DecimalRounding : IDecimalRounding
@@ -13,6 +14,7 @@ namespace Narvalo.Finance.Numerics
         private const int MAX_SCALE = 9;
         private const int MAX_DECIMAL_SCALE = 28;
 
+        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "[Ignore] Weird, these constants are used to initialize s_MaxValues.")]
         private const decimal
             MAX_1 = Decimal.MaxValue / 10,
             MAX_2 = MAX_1 / 10,
@@ -63,75 +65,75 @@ namespace Narvalo.Finance.Numerics
             0.000000001m
         };
 
-        public DecimalRounding() : this(NumberRounding.ToEven) { }
+        public DecimalRounding() : this(RoundingMode.ToEven) { }
 
-        public DecimalRounding(NumberRounding rounding)
+        public DecimalRounding(RoundingMode mode)
         {
-            Rounding = rounding;
+            Mode = mode;
         }
 
-        public NumberRounding Rounding { get; }
+        public RoundingMode Mode { get; }
 
         #region IDecimalRounding interface.
 
-        public decimal Round(decimal value, int decimals) => Round(value, decimals, Rounding);
+        public decimal Round(decimal value, int decimalPlaces) => Round(value, decimalPlaces, Mode);
 
         #endregion
 
-        public static decimal Round(decimal value, int decimals, NumberRounding rounding)
+        public static decimal Round(decimal value, int decimalPlaces, RoundingMode mode)
         {
-            if (rounding == NumberRounding.ToEven)
+            if (mode == RoundingMode.ToEven)
             {
-                return RoundToEven(value, decimals);
+                return RoundToEven(value, decimalPlaces);
             }
-            else if (rounding == NumberRounding.AwayFromZero)
+            else if (mode == RoundingMode.AwayFromZero)
             {
-                return RoundHalfAwayFromZero(value, decimals);
+                return RoundHalfAwayFromZero(value, decimalPlaces);
             }
 
-            return decimals == 0
-                ? Round(value, rounding)
-                : Unscale(Round(Scale(value, decimals), rounding), decimals);
+            return decimalPlaces == 0
+                ? Round(value, mode)
+                : Unscale(Round(Scale(value, decimalPlaces), mode), decimalPlaces);
         }
 
-        public static decimal Round(decimal value, NumberRounding rounding)
+        public static decimal Round(decimal value, RoundingMode mode)
         {
             if (value == 0m) { return 0m; }
 
             // Rounding modes defined in IEEE 754.
             // Unsurprisingly, .NET provides native support for them.
-            switch (rounding)
+            switch (mode)
             {
-                case NumberRounding.Down:
+                case RoundingMode.Down:
                     return Decimal.Floor(value);
-                case NumberRounding.Up:
+                case RoundingMode.Up:
                     return Decimal.Ceiling(value);
-                case NumberRounding.TowardsZero:
+                case RoundingMode.TowardsZero:
                     return Decimal.Truncate(value);
-                case NumberRounding.HalfAwayFromZero:
+                case RoundingMode.HalfAwayFromZero:
                     return RoundHalfAwayFromZero(value, 0);
-                case NumberRounding.ToEven:
+                case RoundingMode.ToEven:
                     return RoundToEven(value, 0);
             }
 
             // Rounding modes not part of IEEE 754.
-            switch (rounding)
+            switch (mode)
             {
-                case NumberRounding.AwayFromZero:
+                case RoundingMode.AwayFromZero:
                     return value > 0m ? Decimal.Ceiling(value) : Decimal.Floor(value);
 
-                case NumberRounding.HalfDown:
+                case RoundingMode.HalfDown:
                     return RoundHalfDown(value);
 
-                case NumberRounding.HalfUp:
+                case RoundingMode.HalfUp:
                     return RoundHalfUp(value);
 
-                case NumberRounding.HalfTowardsZero:
+                case RoundingMode.HalfTowardsZero:
                     return value > 0
                         ? RoundHalfTowardsZeroForPositiveValue(value)
                         : RoundHalfTowardsZeroForNegativeValue(value);
 
-                case NumberRounding.ToOdd:
+                case RoundingMode.ToOdd:
                     var n = RoundHalfAwayFromZero(value, 0);
 
                     if (value > 0m)
@@ -148,35 +150,35 @@ namespace Narvalo.Finance.Numerics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundHalfDown(decimal value, int decimals)
+        internal static decimal RoundHalfDown(decimal value, int decimalPlaces)
         {
             if (value == 0m) { return 0m; }
-            return decimals == 0
+            return decimalPlaces == 0
                 ? RoundHalfDown(value)
-                : Unscale(RoundHalfDown(Scale(value, decimals)), decimals);
+                : Unscale(RoundHalfDown(Scale(value, decimalPlaces)), decimalPlaces);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundHalfUp(decimal value, int decimals)
+        internal static decimal RoundHalfUp(decimal value, int decimalPlaces)
         {
             if (value == 0m) { return 0m; }
-            return decimals == 0
+            return decimalPlaces == 0
                 ? RoundHalfUp(value)
-                : Unscale(RoundHalfUp(Scale(value, decimals)), decimals);
+                : Unscale(RoundHalfUp(Scale(value, decimalPlaces)), decimalPlaces);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundToEven(decimal value, int decimals)
+        internal static decimal RoundToEven(decimal value, int decimalPlaces)
         {
-            Demand.Range(0 <= decimals && decimals <= MAX_DECIMAL_SCALE);
-            return Math.Round(value, decimals, MidpointRounding.ToEven);
+            Demand.Range(0 <= decimalPlaces && decimalPlaces <= MAX_DECIMAL_SCALE);
+            return Math.Round(value, decimalPlaces, MidpointRounding.ToEven);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundHalfAwayFromZero(decimal value, int decimals)
+        internal static decimal RoundHalfAwayFromZero(decimal value, int decimalPlaces)
         {
-            Demand.Range(0 <= decimals && decimals <= MAX_DECIMAL_SCALE);
-            return Math.Round(value, decimals, MidpointRounding.AwayFromZero);
+            Demand.Range(0 <= decimalPlaces && decimalPlaces <= MAX_DECIMAL_SCALE);
+            return Math.Round(value, decimalPlaces, MidpointRounding.AwayFromZero);
         }
 
         #region Helpers.
@@ -217,17 +219,18 @@ namespace Narvalo.Finance.Numerics
             return value - n == -0.5m ? n : RoundHalfAwayFromZero(value, 0);
         }
 
-        private static decimal Scale(decimal value, int decimals)
+        private static decimal Scale(decimal value, int decimalPlaces)
         {
-            Require.Range(1 <= decimals && decimals <= MAX_SCALE, nameof(decimals));
+            Require.Range(1 <= decimalPlaces && decimalPlaces <= MAX_SCALE, nameof(decimalPlaces));
 
-            decimal maxValue = s_MaxValues[decimals - 1];
+            decimal maxValue = s_MaxValues[decimalPlaces - 1];
             Enforce.Range(-maxValue <= value && value <= maxValue, nameof(value));
 
-            return s_Powers10[decimals - 1] * value;
+            return s_Powers10[decimalPlaces - 1] * value;
         }
 
-        private static decimal Unscale(decimal value, int decimals) => s_Epsilons[decimals - 1] * value;
+        private static decimal Unscale(decimal value, int decimalPlaces)
+            => s_Epsilons[decimalPlaces - 1] * value;
 
         #endregion
     }

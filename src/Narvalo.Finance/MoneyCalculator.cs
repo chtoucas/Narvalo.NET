@@ -4,6 +4,7 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Narvalo.Finance.Numerics;
     using Narvalo.Finance.Properties;
@@ -12,38 +13,38 @@ namespace Narvalo.Finance
     public static partial class MoneyCalculator
     {
         public static Money Plus(this Money @this, decimal amount)
-            => Plus(@this, amount, RoundingMode.Default);
+            => Plus(@this, amount, MoneyRounding.Default);
 
-        public static Money Plus(this Money @this, decimal amount, RoundingMode mode)
+        public static Money Plus(this Money @this, decimal amount, MoneyRounding rounding)
         {
             if (amount == 0m) { return @this; }
-            return new Money(@this.Amount + amount, @this.Currency, mode);
+            return new Money(@this.Amount + amount, @this.Currency, rounding);
         }
 
-        public static Money Plus(this Money @this, decimal amount, IMoneyRounding rounding)
+        public static Money Plus(this Money @this, decimal amount, IDecimalRounding rounding)
         {
             if (amount == 0m) { return @this; }
             return new Money(@this.Amount + amount, @this.Currency, rounding);
         }
 
         public static Money Plus(this Money @this, Money other)
-            => Plus(@this, other, RoundingMode.Default);
+            => Plus(@this, other, MoneyRounding.Default);
 
-        public static Money Plus(this Money @this, Money other, RoundingMode mode)
+        public static Money Plus(this Money @this, Money other, MoneyRounding rounding)
         {
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
-            if (@this.IsNormalized && other.IsNormalized) { mode = RoundingMode.Unnecessary; }
+            if (@this.IsNormalized && other.IsNormalized) { rounding = MoneyRounding.Unnecessary; }
 
-            return new Money(@this.Amount + other.Amount, @this.Currency, mode);
+            return new Money(@this.Amount + other.Amount, @this.Currency, rounding);
         }
 
-        public static Money Plus(this Money @this, Money other, IMoneyRounding rounding)
+        public static Money Plus(this Money @this, Money other, IDecimalRounding rounding)
         {
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
             return @this.IsNormalized && other.IsNormalized
-                ? new Money(@this.Amount + other.Amount, @this.Currency, RoundingMode.Unnecessary)
+                ? new Money(@this.Amount + other.Amount, @this.Currency, MoneyRounding.Unnecessary)
                 : new Money(@this.Amount + other.Amount, @this.Currency, rounding);
         }
     }
@@ -52,32 +53,32 @@ namespace Narvalo.Finance
     public static partial class MoneyCalculator
     {
         public static Money Minus(this Money @this, decimal amount)
-            => Plus(@this, -amount, RoundingMode.Default);
+            => Plus(@this, -amount, MoneyRounding.Default);
 
-        public static Money Minus(this Money @this, decimal amount, RoundingMode mode)
-            => Plus(@this, -amount, mode);
+        public static Money Minus(this Money @this, decimal amount, MoneyRounding rounding)
+            => Plus(@this, -amount, rounding);
 
-        public static Money Minus(this Money @this, decimal amount, IMoneyRounding rounding)
+        public static Money Minus(this Money @this, decimal amount, IDecimalRounding rounding)
             => Plus(@this, -amount, rounding);
 
         public static Money Minus(this Money @this, Money other)
-            => Minus(@this, other, RoundingMode.Default);
+            => Minus(@this, other, MoneyRounding.Default);
 
-        public static Money Minus(this Money @this, Money other, RoundingMode mode)
+        public static Money Minus(this Money @this, Money other, MoneyRounding rounding)
         {
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
-            if (@this.IsNormalized && other.IsNormalized) { mode = RoundingMode.Unnecessary; }
+            if (@this.IsNormalized && other.IsNormalized) { rounding = MoneyRounding.Unnecessary; }
 
-            return new Money(@this.Amount - other.Amount, @this.Currency, mode);
+            return new Money(@this.Amount - other.Amount, @this.Currency, rounding);
         }
 
-        public static Money Minus(this Money @this, Money other, IMoneyRounding rounding)
+        public static Money Minus(this Money @this, Money other, IDecimalRounding rounding)
         {
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
             return @this.IsNormalized && other.IsNormalized
-                ? new Money(@this.Amount - other.Amount, @this.Currency, RoundingMode.Unnecessary)
+                ? new Money(@this.Amount - other.Amount, @this.Currency, MoneyRounding.Unnecessary)
                 : new Money(@this.Amount - other.Amount, @this.Currency, rounding);
         }
     }
@@ -86,12 +87,12 @@ namespace Narvalo.Finance
     public static partial class MoneyCalculator
     {
         public static Money MultiplyBy(this Money @this, decimal multiplier)
-            => MultiplyBy(@this, multiplier, RoundingMode.Default);
+            => MultiplyBy(@this, multiplier, MoneyRounding.Default);
 
-        public static Money MultiplyBy(this Money @this, decimal multiplier, RoundingMode mode)
-            => new Money(multiplier * @this.Amount, @this.Currency, mode);
+        public static Money MultiplyBy(this Money @this, decimal multiplier, MoneyRounding rounding)
+            => new Money(multiplier * @this.Amount, @this.Currency, rounding);
 
-        public static Money MultiplyBy(this Money @this, decimal multiplier, IMoneyRounding rounding)
+        public static Money MultiplyBy(this Money @this, decimal multiplier, IDecimalRounding rounding)
             => new Money(multiplier * @this.Amount, @this.Currency, rounding);
     }
 
@@ -99,15 +100,15 @@ namespace Narvalo.Finance
     public static partial class MoneyCalculator
     {
         public static Money DivideBy(this Money @this, decimal divisor)
-            => DivideBy(@this, divisor, RoundingMode.Default);
+            => DivideBy(@this, divisor, MoneyRounding.Default);
 
-        public static Money DivideBy(this Money @this, decimal divisor, RoundingMode mode)
+        public static Money DivideBy(this Money @this, decimal divisor, MoneyRounding rounding)
         {
             if (divisor == 0m) { throw new DivideByZeroException(); }
-            return new Money(@this.Amount / divisor, @this.Currency, mode);
+            return new Money(@this.Amount / divisor, @this.Currency, rounding);
         }
 
-        public static Money DivideBy(this Money @this, decimal divisor, IMoneyRounding rounding)
+        public static Money DivideBy(this Money @this, decimal divisor, IDecimalRounding rounding)
         {
             if (divisor == 0m) { throw new DivideByZeroException(); }
             return new Money(@this.Amount / divisor, @this.Currency, rounding);
@@ -118,15 +119,15 @@ namespace Narvalo.Finance
     public static partial class MoneyCalculator
     {
         public static Money Modulo(this Money @this, decimal divisor)
-            => Modulo(@this, divisor, RoundingMode.Default);
+            => Modulo(@this, divisor, MoneyRounding.Default);
 
-        public static Money Modulo(this Money @this, decimal divisor, RoundingMode mode)
+        public static Money Modulo(this Money @this, decimal divisor, MoneyRounding rounding)
         {
             if (divisor == 0m) { throw new DivideByZeroException(); }
-            return new Money(@this.Amount % divisor, @this.Currency, mode);
+            return new Money(@this.Amount % divisor, @this.Currency, rounding);
         }
 
-        public static Money Modulo(this Money @this, decimal divisor, IMoneyRounding rounding)
+        public static Money Modulo(this Money @this, decimal divisor, IDecimalRounding rounding)
         {
             if (divisor == 0m) { throw new DivideByZeroException(); }
             return new Money(@this.Amount % divisor, @this.Currency, rounding);
@@ -137,38 +138,83 @@ namespace Narvalo.Finance
     public static partial class MoneyCalculator
     {
         public static IEnumerable<Money> Distribute(this Money @this, int decimalPlaces, int parts)
-            => Distribute(@this, decimalPlaces, parts, RoundingMode.Default);
+            => Distribute(@this, decimalPlaces, parts, MoneyRounding.Default);
 
         public static IEnumerable<Money> Distribute(
             this Money @this,
             int decimalPlaces,
             int parts,
-            RoundingMode mode)
+            MoneyRounding rounding)
         {
-            //return DecimalCalculator.Distribute(@this.Amount, decimalPlaces, parts, rounding);
-            throw new NotImplementedException();
+            Require.True(rounding != MoneyRounding.Unnecessary, nameof(rounding));
+
+            if (rounding == MoneyRounding.None)
+            {
+                return from _
+                       in DecimalCalculator.Distribute(@this.Amount, parts)
+                       select new Money(_, @this.Currency, MoneyRounding.None);
+            }
+            else
+            {
+                var mode = rounding.ToRoundingMode();
+
+                return from _
+                       in DecimalCalculator.Distribute(@this.Amount, decimalPlaces, parts, mode)
+                       select new Money(_, @this.Currency, MoneyRounding.Unnecessary);
+            }
         }
 
-        public static IEnumerable<Money> Allocate(this Money @this, int decimalPlaces, int percentage)
-            => Allocate(@this, decimalPlaces, RatioArray.FromPercentage(percentage), RoundingMode.Default);
+        public static IEnumerable<Money> Distribute(
+            this Money @this,
+            int decimalPlaces,
+            int parts,
+            IDecimalRounding rounding)
+        {
+            Require.NotNull(rounding, nameof(rounding));
 
-        public static IEnumerable<Money> Allocate(this Money @this, int decimalPlaces, int[] percentages)
-            => Allocate(@this, decimalPlaces, RatioArray.FromPercentages(percentages), RoundingMode.Default);
+            return from _
+                   in DecimalCalculator.Distribute(@this.Amount, decimalPlaces, parts, rounding)
+                   select new Money(_, @this.Currency, MoneyRounding.Unnecessary);
+        }
 
-        public static IEnumerable<Money> Allocate(this Money @this, int decimalPlaces, decimal ratio)
-            => Allocate(@this, decimalPlaces, RatioArray.Of(ratio), RoundingMode.Default);
-
-        public static IEnumerable<Money> Allocate(this Money @this, int decimalPlaces, decimal[] ratios)
-            => Allocate(@this, decimalPlaces, RatioArray.Of(ratios), RoundingMode.Default);
+        public static IEnumerable<Money> Allocate(this Money @this, int decimalPlaces, RatioArray ratios)
+            => Allocate(@this, decimalPlaces, ratios, MoneyRounding.Default);
 
         public static IEnumerable<Money> Allocate(
             this Money @this,
             int decimalPlaces,
             RatioArray ratios,
-            RoundingMode mode)
+            MoneyRounding rounding)
         {
-            //return DecimalCalculator.Allocate(@this.Amount, decimalPlaces, ratios, rounding);
-            throw new NotImplementedException();
+            Require.True(rounding != MoneyRounding.Unnecessary, nameof(rounding));
+
+            if (rounding == MoneyRounding.None)
+            {
+                return from _
+                       in DecimalCalculator.Allocate(@this.Amount, ratios)
+                       select new Money(_, @this.Currency, MoneyRounding.None);
+            }
+            else
+            {
+                var mode = rounding.ToRoundingMode();
+
+                return from _
+                       in DecimalCalculator.Allocate(@this.Amount, decimalPlaces, ratios, mode)
+                       select new Money(_, @this.Currency, MoneyRounding.Unnecessary);
+            }
+        }
+
+        public static IEnumerable<Money> Allocate(
+            this Money @this,
+            int decimalPlaces,
+            RatioArray ratios,
+            IDecimalRounding rounding)
+        {
+            Require.NotNull(rounding, nameof(rounding));
+
+            return from _
+                   in DecimalCalculator.Allocate(@this.Amount, decimalPlaces, ratios, rounding)
+                   select new Money(_, @this.Currency, MoneyRounding.Unnecessary);
         }
     }
 

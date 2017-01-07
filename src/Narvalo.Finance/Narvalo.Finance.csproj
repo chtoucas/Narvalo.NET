@@ -79,20 +79,16 @@
     <Compile Include="Generic\CurrencyUnit.cs" />
     <Compile Include="Globalization\LocalMoneyFormatter.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
-    <Compile Include="IMoneyRounding.cs" />
     <Compile Include="MoneyCalculator.cs" />
     <Compile Include="MoneyRounding.cs" />
-    <Compile Include="RoundingMode.cs" />
     <Compile Include="Numerics\DecimalRounding.cs" />
     <Compile Include="Numerics\HalfAlternatingDecimalRounding.cs" />
     <Compile Include="Numerics\HalfDitheringDecimalRounding.cs" />
     <Compile Include="Numerics\IDecimalRounding.cs" />
-    <Compile Include="Numerics\Int64Calculator.cs" />
     <Compile Include="Numerics\Int32Calculator.cs" />
-    <Compile Include="Numerics\DivCollection`1.cs" />
     <Compile Include="Numerics\StochasticDecimalRounding.cs" />
     <Compile Include="Utilities\IbanCheckDigits.cs" />
-    <Compile Include="Numerics\NumberRounding.cs" />
+    <Compile Include="Numerics\RoudingMode.cs" />
     <Compile Include="Numerics\RatioArray.cs" />
     <Compile Include="Globalization\CountryISOCodes.cs" />
     <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
@@ -146,6 +142,7 @@
     <EmbeddedResource Include="Properties\Strings.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -2,34 +2,86 @@
 
 namespace Narvalo.Finance
 {
+    using System;
+
     using Narvalo.Finance.Numerics;
 
-    public sealed class MoneyRounding : IMoneyRounding
+    public enum MoneyRounding
     {
-        private readonly IDecimalRounding _inner;
+        /// <summary>
+        /// The number should be kept as it.
+        /// </summary>
+        None,
 
-        public MoneyRounding(IDecimalRounding inner)
+        /// <summary>
+        /// The number is already rounded.
+        /// </summary>
+        Unnecessary,
+
+        /// <summary>
+        /// When a number is halfway between two others, it is rounded toward the nearest even number.
+        /// </summary>
+        ToEven,
+
+        /// <summary>
+        /// When a number is halfway between two others, it is rounded toward the nearest
+        /// number that is away from zero.
+        /// </summary>
+        AwayFromZero,
+
+        /// <summary>
+        /// Default IEEE 754 rounding mode.
+        /// </summary>
+        Default = ToEven,
+    }
+
+    public static class MoneyRoundingExtensions
+    {
+        public static decimal Round(this MoneyRounding @this, decimal amount, Currency currency)
         {
-            Require.NotNull(inner, nameof(inner));
-            _inner = inner;
-        }
-
-        public decimal Round(decimal amount, Currency currency)
-            => _inner.Round(amount, currency.DecimalPlaces);
-
-        public static decimal Round(decimal amount, Currency currency, RoundingMode mode)
-        {
-            if (mode == RoundingMode.ToEven)
+            if (@this == MoneyRounding.ToEven)
             {
                 return DecimalRounding.RoundToEven(amount, currency.DecimalPlaces);
             }
-            else if (mode == RoundingMode.AwayFromZero)
+            else if (@this == MoneyRounding.AwayFromZero)
             {
                 return DecimalRounding.RoundHalfAwayFromZero(amount, currency.DecimalPlaces);
             }
             else
             {
                 return amount;
+            }
+        }
+
+        public static MidpointRounding ToMidpointRounding(this MoneyRounding @this)
+        {
+            if (@this == MoneyRounding.ToEven)
+            {
+                return MidpointRounding.ToEven;
+            }
+            else if (@this == MoneyRounding.AwayFromZero)
+            {
+                return MidpointRounding.AwayFromZero;
+            }
+            else
+            {
+                throw new ArgumentException("XXX", nameof(@this));
+            }
+        }
+
+        public static RoundingMode ToRoundingMode(this MoneyRounding @this)
+        {
+            if (@this == MoneyRounding.ToEven)
+            {
+                return RoundingMode.ToEven;
+            }
+            else if (@this == MoneyRounding.AwayFromZero)
+            {
+                return RoundingMode.HalfAwayFromZero;
+            }
+            else
+            {
+                throw new ArgumentException("XXX", nameof(@this));
             }
         }
     }

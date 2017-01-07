@@ -4,11 +4,13 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Threading;
 
+    using Narvalo.Finance.Numerics;
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
@@ -86,6 +88,7 @@ namespace Narvalo.Finance
         /// <remarks>Returns 1m if the currency has no minor unit.</remarks>
         public decimal Epsilon => Epsilons[DecimalPlaces];
 
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] For currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
 
         private decimal Factor => Powers10[DecimalPlaces];
@@ -196,6 +199,8 @@ namespace Narvalo.Finance
         // This method should be thread-safe.
         public static void RegisterCurrencies(Dictionary<string, short?> currencies)
         {
+            Require.NotNull(currencies, nameof(currencies));
+
             // See RegisterCurrency() for explanations. Comparing with it, we do not use s_Codes
             // directly, because we don't know yet if it has been initialized.
             var tmpCopy = Codes.ToDictionary(_ => _.Key, _ => _.Value);
@@ -248,32 +253,32 @@ namespace Narvalo.Finance
         internal long ConvertToMinorUnits(decimal major)
             => Convert.ToInt64(Factor * major);
 
-        public long ConvertToMinorUnits(decimal amount, RoundingMode mode)
-            => ConvertToMinorUnits(MoneyRounding.Round(amount, this, mode));
+        public long ConvertToMinorUnits(decimal amount, MoneyRounding rounding)
+            => ConvertToMinorUnits(rounding.Round(amount, this));
 
-        public long? TryConvertToMinorUnits(decimal amount, RoundingMode mode)
+        public long? TryConvertToMinorUnits(decimal amount, MoneyRounding rounding)
         {
-            decimal minor = Factor * MoneyRounding.Round(amount, this, mode);
-            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
-            return Convert.ToInt64(minor);
-        }
-
-        public long? TryConvertToMinorUnits(decimal amount, IMoneyRounding rounding)
-        {
-            Require.NotNull(rounding, nameof(rounding));
             decimal minor = Factor * rounding.Round(amount, this);
             if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
             return Convert.ToInt64(minor);
         }
 
-        public bool TryConvertToMinorUnits(decimal amount, RoundingMode mode, out long result)
+        public long? TryConvertToMinorUnits(decimal amount, IDecimalRounding rounding)
         {
-            long? minor = TryConvertToMinorUnits(amount, mode);
+            Require.NotNull(rounding, nameof(rounding));
+            decimal minor = Factor * rounding.Round(amount, DecimalPlaces);
+            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
+            return Convert.ToInt64(minor);
+        }
+
+        public bool TryConvertToMinorUnits(decimal amount, MoneyRounding rounding, out long result)
+        {
+            long? minor = TryConvertToMinorUnits(amount, rounding);
             result = minor ?? (amount > 0 ? Int64.MaxValue : Int64.MinValue);
             return minor.HasValue;
         }
 
-        public bool TryConvertToMinorUnits(decimal amount, IMoneyRounding rounding, out long result)
+        public bool TryConvertToMinorUnits(decimal amount, IDecimalRounding rounding, out long result)
         {
             Expect.NotNull(rounding);
             long? minor = TryConvertToMinorUnits(amount, rounding);

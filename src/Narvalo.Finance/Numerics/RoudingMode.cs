@@ -63,7 +63,7 @@ namespace Narvalo.Finance.Numerics
     // This rules out HalfDown and HalfUp which are not symmetric.
     //
     // Remark: Integer division rounds toward zero.
-    public enum NumberRounding
+    public enum RoundingMode
     {
         Down, // roundTowardNegative (IEEE 754)
 

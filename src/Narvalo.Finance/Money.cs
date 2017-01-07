@@ -8,6 +8,7 @@ namespace Narvalo.Finance
     using System.Globalization;
 
     using Narvalo.Finance.Globalization;
+    using Narvalo.Finance.Numerics;
     using Narvalo.Finance.Properties;
 
     // Per default, the CLR will use LayoutKind.Sequential for structs. Here, we do not care
@@ -56,7 +57,7 @@ namespace Narvalo.Finance
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">The specific currency.</param>
-        public Money(decimal amount, Currency currency) : this(amount, currency, RoundingMode.Default) { }
+        public Money(decimal amount, Currency currency) : this(amount, currency, MoneyRounding.Default) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
@@ -64,20 +65,19 @@ namespace Narvalo.Finance
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">The specific currency.</param>
-        /// <param name="mode">The rounding mode. If none specified, it will use
-        /// <see cref="DefaultRounding"/>.</param>
-        public Money(decimal amount, Currency currency, RoundingMode mode)
+        /// <param name="rounding">The rounding mode.</param>
+        public Money(decimal amount, Currency currency, MoneyRounding rounding)
         {
-            Amount = MoneyRounding.Round(amount, currency, mode);
+            Amount = rounding.Round(amount, currency);
             Currency = currency;
-            IsNormalized = mode != RoundingMode.None;
+            IsNormalized = rounding != MoneyRounding.None;
         }
 
-        public Money(decimal amount, Currency currency, IMoneyRounding rounding)
+        public Money(decimal amount, Currency currency, IDecimalRounding rounding)
         {
             Require.NotNull(rounding, nameof(rounding));
 
-            Amount = rounding.Round(amount, currency);
+            Amount = rounding.Round(amount, currency.DecimalPlaces);
             Currency = currency;
             IsNormalized = true;
         }
@@ -158,21 +158,21 @@ namespace Narvalo.Finance
 
         public Money Abs() => IsNegative ? Negate() : this;
 
-        public Money Normalize() => Normalize(RoundingMode.Default);
+        public Money Normalize() => Normalize(MoneyRounding.Default);
 
-        public Money Normalize(RoundingMode mode)
+        public Money Normalize(MoneyRounding rounding)
         {
             if (IsNormalized) { return this; }
 
-            if (mode == RoundingMode.None || mode == RoundingMode.Unnecessary)
+            if (rounding == MoneyRounding.None || rounding == MoneyRounding.Unnecessary)
             {
                 throw new InvalidOperationException("XXX");
             }
 
-            return new Money(Amount, Currency, mode);
+            return new Money(Amount, Currency, rounding);
         }
 
-        public Money Normalize(IMoneyRounding rounding)
+        public Money Normalize(IDecimalRounding rounding)
         {
             Require.NotNull(rounding, nameof(rounding));
 
