@@ -249,7 +249,7 @@ namespace Narvalo.Finance
             int len = input.Length;
 
             int rem;
-            int div = Int32Calculator.Divide(len, 4, out rem);
+            int div = Int32Calculator.DivRem(len, 4, out rem);
 
             int outlen = len + div - (rem == 0 ? 1 : 0);
             var output = new char[outlen];

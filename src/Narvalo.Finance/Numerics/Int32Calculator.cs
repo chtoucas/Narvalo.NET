@@ -10,7 +10,7 @@ namespace Narvalo.Finance.Numerics
         // > int rem;
         // > int div = Math.DivRem(m, n, out rem);
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Mimic the behaviour of Math.DivRem().")]
-        public static int Divide(int dividend, int divisor, out int remainder)
+        public static int DivRem(int dividend, int divisor, out int remainder)
         {
             int q = dividend / divisor;
             // NB: remainder = m % n is slower.

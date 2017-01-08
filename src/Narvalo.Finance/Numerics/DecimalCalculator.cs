@@ -35,7 +35,7 @@ namespace Narvalo.Finance.Numerics
         //}
 
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Mimic the behaviour of Math.DivRem().")]
-        public static decimal Divide(decimal dividend, decimal divisor, out decimal remainder)
+        public static decimal DivRem(decimal dividend, decimal divisor, out decimal remainder)
         {
             Expect.True(divisor != 0m);
 
@@ -50,7 +50,7 @@ namespace Narvalo.Finance.Numerics
             Require.Range(divisor > 0, nameof(divisor));
 
             decimal rem;
-            decimal q = Divide(dividend, divisor, out rem);
+            decimal q = DivRem(dividend, divisor, out rem);
 
             return DivisionCollection<decimal>.Create(q, rem, divisor);
         }
