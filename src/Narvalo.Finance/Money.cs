@@ -160,6 +160,22 @@ namespace Narvalo.Finance
             return new Money(Amount, Currency, mode);
         }
 
+        internal Money Normalize(Func<decimal, decimal> normalizer)
+        {
+            // REVIEW: IsNormalized?
+            if (IsNormalized) { return this; }
+            return new Money(normalizer.Invoke(Amount), Currency, true);
+        }
+
+        internal Money Round(int decimalPlaces, MidpointRounding mode)
+        {
+            // REVIEW: IsNormalized?
+            if (IsNormalized) { return this; }
+            bool normalized = decimalPlaces <= Currency.DecimalPlaces;
+            decimal amount = mode.Round(Amount, decimalPlaces);
+            return new Money(amount, Currency, normalized);
+        }
+
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Currency.Code);
@@ -498,44 +514,22 @@ namespace Narvalo.Finance
     // Overrides the op_Division operator.
     public partial struct Money
     {
-        // WARNING: This method returns a decimal (a division means that we lost the unit).
-        public static decimal operator /(Money dividend, Money divisor)
-        {
-            return dividend.Divide(divisor);
-        }
+        // WARNING: This method returns a decimal (a division means that we lost the currency unit).
+        public static decimal operator /(Money dividend, Money divisor) => dividend.Divide(divisor);
+        public static Money operator /(Money dividend, decimal divisor) => dividend.Divide(divisor);
 
-        public static Money operator /(Money dividend, decimal divisor)
-        {
-            Expect.True(divisor != 0m);
-            return dividend.Divide(divisor);
-        }
+        // WARNING: This method returns a decimal (a division means that we lost the currency unit).
+        public decimal Divide(Money divisor) => Amount / divisor.Amount;
 
-        public decimal Divide(Money divisor)
-        {
-            return Amount / divisor.Amount;
-        }
-
-        public Money Divide(decimal divisor)
-        {
-            Expect.True(divisor != 0m);
-            return new Money(Amount / divisor, Currency, false);
-        }
+        public Money Divide(decimal divisor) => new Money(Amount / divisor, Currency, false);
     }
 
     // Overrides the op_Modulus operator.
     public partial struct Money
     {
-        public static Money operator %(Money money, decimal divisor)
-        {
-            Expect.True(divisor != 0m);
-            return money.Remainder(divisor);
-        }
+        public static Money operator %(Money dividend, decimal divisor) => dividend.Remainder(divisor);
 
-        public Money Remainder(decimal divisor)
-        {
-            Expect.True(divisor != 0m);
-            return new Money(Amount % divisor, Currency, false);
-        }
+        public Money Remainder(decimal divisor) => new Money(Amount % divisor, Currency, false);
     }
 
     // Overrides the op_Increment operator.

@@ -192,32 +192,18 @@ namespace Narvalo.Finance.Generic
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator /(Money<TCurrency> money, decimal divisor)
-        {
-            Expect.True(divisor != 0m);
-            return money.Divide(divisor);
-        }
+            => money.Divide(divisor);
 
-        public Money<TCurrency> Divide(decimal divisor)
-        {
-            Expect.True(divisor != 0m);
-            return new Money<TCurrency>(Amount / divisor);
-        }
+        public Money<TCurrency> Divide(decimal divisor) => new Money<TCurrency>(Amount / divisor);
     }
 
     // Overrides the op_Modulus operator.
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator %(Money<TCurrency> money, decimal divisor)
-        {
-            Expect.True(divisor != 0m);
-            return money.Remainder(divisor);
-        }
+            => money.Remainder(divisor);
 
-        public Money<TCurrency> Remainder(decimal divisor)
-        {
-            Expect.True(divisor != 0m);
-            return new Money<TCurrency>(Amount % divisor);
-        }
+        public Money<TCurrency> Remainder(decimal divisor) => new Money<TCurrency>(Amount % divisor);
     }
 
     // Overrides the op_UnaryNegation operator.

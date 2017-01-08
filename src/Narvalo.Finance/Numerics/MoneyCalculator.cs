@@ -2,6 +2,7 @@
 
 namespace Narvalo.Finance.Numerics
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -67,7 +68,6 @@ namespace Narvalo.Finance.Numerics
     {
         public static Money Divide(this Money @this, decimal divisor, IDecimalRounding rounding)
         {
-            Expect.True(divisor != 0m);
             Expect.NotNull(rounding);
             return MoneyFactory.Create(@this.Amount / divisor, @this.Currency, rounding);
         }
@@ -78,13 +78,26 @@ namespace Narvalo.Finance.Numerics
     {
         public static Money Remainder(this Money @this, decimal divisor, IDecimalRounding rounding)
         {
-            Expect.True(divisor != 0m);
             Expect.NotNull(rounding);
             return MoneyFactory.Create(@this.Amount % divisor, @this.Currency, rounding);
         }
     }
 
-    // Other calculations.
+    // LINQ extensions.
+    public static partial class MoneyCalculator
+    {
+        public static Money Sum(this IEnumerable<Money> @this, IDecimalRounding rounding)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Money Average(this IEnumerable<Money> @this, IDecimalRounding rounding)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    // Distribute.
     public static partial class MoneyCalculator
     {
         public static IEnumerable<Money> Distribute(

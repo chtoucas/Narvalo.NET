@@ -38,10 +38,8 @@ namespace Narvalo.Finance.Numerics
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
         public static decimal DivRem(decimal dividend, decimal divisor, out decimal remainder)
         {
-            Expect.True(divisor != 0m);
-
             decimal q = dividend / divisor;
-            // NB: remainder = dividend % divisor is slower.
+            // NB: remainder = dividend % divisor is slower? Sign?
             remainder = dividend - q * divisor;
             return q;
         }

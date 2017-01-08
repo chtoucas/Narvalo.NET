@@ -59,27 +59,19 @@ namespace Narvalo.Finance
     public static partial class MoneyCalculator
     {
         public static Money Divide(this Money @this, decimal divisor, MidpointRounding mode)
-        {
-            Expect.True(divisor != 0m);
-            return new Money(@this.Amount / divisor, @this.Currency, mode);
-        }
+            => new Money(@this.Amount / divisor, @this.Currency, mode);
     }
 
     // Remainder/Modulo with rounding.
     public static partial class MoneyCalculator
     {
         public static Money Remainder(this Money @this, decimal divisor, MidpointRounding mode)
-        {
-            Expect.True(divisor != 0m);
-            return new Money(@this.Amount % divisor, @this.Currency, mode);
-        }
+            => new Money(@this.Amount % divisor, @this.Currency, mode);
     }
 
-    // Other calculations.
+    // Operators normally found in the class Math.
     public static partial class MoneyCalculator
     {
-        #region Operators normally found in the class Math.
-
         public static Money Abs(Money money) => money.IsPositiveOrZero ? money : money.Negate();
 
         public static Money Sign(Money money) => money < 0 ? -1 : (money > 0 ? 1 : 0);
@@ -100,34 +92,71 @@ namespace Narvalo.Finance
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
         public static Money DivRem(Money dividend, decimal divisor, out Money remainder)
         {
-            Expect.True(divisor != 0m);
-
-            var q = dividend.Divide(divisor);
             // REVIEW: remainder = dividend % divisor is slower for integers. What about decimals?
-            // > remainder = new Money(dividend.Amount - q.Amount * divisor, dividend.Currency);
-            remainder = dividend.Remainder(divisor);
-            return q;
+            // > var q = dividend.Divide(divisor);
+            // > remainder = dividend.Remainder(divisor);
+            // For doubles, .NET uses:
+            // Modulus = (Math.Abs(dividend) - (Math.Abs(divisor)
+            //   * (Math.Floor(Math.Abs(dividend) / Math.Abs(divisor)))))
+            //   * Math.Sign(dividend)
+            decimal q = dividend.Amount / divisor;
+            decimal rem = dividend.Amount - q * divisor;
+            remainder = new Money(rem, dividend.Currency);
+            return new Money(q, dividend.Currency);
         }
 
-        public static Money Ceiling(Money money) => Money.OfCurrency(Math.Ceiling(money.Amount), money.Currency);
+        // DANGEROUS ZONE: You might lose or gain money.
+        public static Money Ceiling(Money money) => money.Normalize(Math.Ceiling);
 
-        public static Money Floor(Money money) => Money.OfCurrency(Math.Floor(money.Amount), money.Currency);
+        // DANGEROUS ZONE: You might lose or gain money.
+        public static Money Floor(Money money) => money.Normalize(Math.Floor);
 
-        public static Money Truncate(Money money) => Money.OfCurrency(Math.Truncate(money.Amount), money.Currency);
+        // DANGEROUS ZONE: You might lose or gain money.
+        public static Money Truncate(Money money) => money.Normalize(Math.Truncate);
 
-        public static Money Round(Money money) => Money.OfCurrency(Math.Round(money.Amount), money.Currency);
+        // DANGEROUS ZONE: You might lose or gain money.
+        public static Money Round(Money money) => money.Normalize(Math.Round);
 
-        public static Money Round(Money money, int decimalPlaces)
-            => Money.OfCurrency(Math.Round(money.Amount, decimalPlaces), money.Currency);
-
-        public static Money Round(Money money, int decimalPlaces, MidpointRounding mode)
-            => Money.OfCurrency(Math.Round(money.Amount, decimalPlaces, mode), money.Currency);
-
+        // DANGEROUS ZONE: You might lose or gain money.
         public static Money Round(Money money, MidpointRounding mode)
-            => Money.OfCurrency(Math.Round(money.Amount, mode), money.Currency);
+            => money.Normalize(_ => Math.Round(_, mode));
 
-        #endregion
+        // DANGEROUS ZONE: You might lose or gain money.
+        public static Money Round(Money money, int decimalPlaces)
+            => money.Round(decimalPlaces, MidpointRounding.ToEven);
 
+        // DANGEROUS ZONE: You might lose or gain money.
+        public static Money Round(Money money, int decimalPlaces, MidpointRounding mode)
+            => money.Round(decimalPlaces, mode);
+    }
+
+    // LINQ extensions.
+    public static partial class MoneyCalculator
+    {
+        public static Money Sum(this IEnumerable<Money> @this)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Money Sum(this IEnumerable<Money> @this, MidpointRounding rounding)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Money Average(this IEnumerable<Money> @this)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Money Average(this IEnumerable<Money> @this, MidpointRounding rounding)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    // Distribute.
+    public static partial class MoneyCalculator
+    {
         #region Distribute
 
         public static IEnumerable<Money> Distribute(Money money, int parts)
