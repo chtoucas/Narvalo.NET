@@ -12,19 +12,20 @@ namespace Narvalo.Finance
     // Addition with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Plus(this Money @this, decimal amount, MoneyRounding rounding)
+        public static Money Add(this Money @this, decimal amount, MoneyRounding rounding)
         {
             if (amount == 0m) { return @this; }
             return new Money(@this.Amount + amount, @this.Currency, rounding);
         }
 
-        public static Money Plus(this Money @this, decimal amount, IDecimalRounding rounding)
+        public static Money Add(this Money @this, decimal amount, IDecimalRounding rounding)
         {
+            Expect.NotNull(rounding);
             if (amount == 0m) { return @this; }
             return new Money(@this.Amount + amount, @this.Currency, rounding);
         }
 
-        public static Money Plus(this Money @this, Money other, MoneyRounding rounding)
+        public static Money Add(this Money @this, Money other, MoneyRounding rounding)
         {
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
@@ -33,8 +34,9 @@ namespace Narvalo.Finance
             return new Money(@this.Amount + other.Amount, @this.Currency, rounding);
         }
 
-        public static Money Plus(this Money @this, Money other, IDecimalRounding rounding)
+        public static Money Add(this Money @this, Money other, IDecimalRounding rounding)
         {
+            Expect.NotNull(rounding);
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
             return @this.IsNormalized && other.IsNormalized
@@ -46,13 +48,16 @@ namespace Narvalo.Finance
     // Subtraction with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Minus(this Money @this, decimal amount, MoneyRounding rounding)
-            => Plus(@this, -amount, rounding);
+        public static Money Subtract(this Money @this, decimal amount, MoneyRounding rounding)
+            => Add(@this, -amount, rounding);
 
-        public static Money Minus(this Money @this, decimal amount, IDecimalRounding rounding)
-            => Plus(@this, -amount, rounding);
+        public static Money Subtract(this Money @this, decimal amount, IDecimalRounding rounding)
+        {
+            Expect.NotNull(rounding);
+            return Add(@this, -amount, rounding);
+        }
 
-        public static Money Minus(this Money @this, Money other, MoneyRounding rounding)
+        public static Money Subtract(this Money @this, Money other, MoneyRounding rounding)
         {
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
@@ -61,8 +66,9 @@ namespace Narvalo.Finance
             return new Money(@this.Amount - other.Amount, @this.Currency, rounding);
         }
 
-        public static Money Minus(this Money @this, Money other, IDecimalRounding rounding)
+        public static Money Subtract(this Money @this, Money other, IDecimalRounding rounding)
         {
+            Expect.NotNull(rounding);
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
             return @this.IsNormalized && other.IsNormalized
@@ -74,41 +80,46 @@ namespace Narvalo.Finance
     // Multiplication with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money MultiplyBy(this Money @this, decimal multiplier, MoneyRounding rounding)
+        public static Money Multiply(this Money @this, decimal multiplier, MoneyRounding rounding)
             => new Money(multiplier * @this.Amount, @this.Currency, rounding);
 
-        public static Money MultiplyBy(this Money @this, decimal multiplier, IDecimalRounding rounding)
-            => new Money(multiplier * @this.Amount, @this.Currency, rounding);
+        public static Money Multiply(this Money @this, decimal multiplier, IDecimalRounding rounding)
+        {
+            Expect.NotNull(rounding);
+            return new Money(multiplier * @this.Amount, @this.Currency, rounding);
+        }
     }
 
     // Division with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money DivideBy(this Money @this, decimal divisor, MoneyRounding rounding)
+        public static Money Divide(this Money @this, decimal divisor, MoneyRounding rounding)
         {
-            if (divisor == 0m) { throw new DivideByZeroException(); }
+            Expect.True(divisor != 0m);
             return new Money(@this.Amount / divisor, @this.Currency, rounding);
         }
 
-        public static Money DivideBy(this Money @this, decimal divisor, IDecimalRounding rounding)
+        public static Money Divide(this Money @this, decimal divisor, IDecimalRounding rounding)
         {
-            if (divisor == 0m) { throw new DivideByZeroException(); }
+            Expect.True(divisor != 0m);
+            Expect.NotNull(rounding);
             return new Money(@this.Amount / divisor, @this.Currency, rounding);
         }
     }
 
-    // Remainder with rounding.
+    // Remainder/Modulo with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Modulo(this Money @this, decimal divisor, MoneyRounding rounding)
+        public static Money Remainder(this Money @this, decimal divisor, MoneyRounding rounding)
         {
-            if (divisor == 0m) { throw new DivideByZeroException(); }
+            Expect.True(divisor != 0m);
             return new Money(@this.Amount % divisor, @this.Currency, rounding);
         }
 
-        public static Money Modulo(this Money @this, decimal divisor, IDecimalRounding rounding)
+        public static Money Remainder(this Money @this, decimal divisor, IDecimalRounding rounding)
         {
-            if (divisor == 0m) { throw new DivideByZeroException(); }
+            Expect.True(divisor != 0m);
+            Expect.NotNull(rounding);
             return new Money(@this.Amount % divisor, @this.Currency, rounding);
         }
     }
@@ -116,8 +127,6 @@ namespace Narvalo.Finance
     // Allocation / Distribution.
     public static partial class MoneyCalculator
     {
-        private static Func<decimal, decimal> s_Id = _ => _;
-
         #region Distribute
 
         public static IEnumerable<Money> Distribute(
@@ -127,8 +136,8 @@ namespace Narvalo.Finance
             MoneyRounding rounding)
         {
             Require.True(rounding != MoneyRounding.Unnecessary, nameof(rounding));
-            Require.Range(parts >= 0, nameof(parts));
-            if (parts == 0) { throw new DivideByZeroException(); }
+            Require.Range(parts > 0, nameof(parts));
+            Warrant.NotNull<IEnumerable<Money>>();
 
             return DistributeImpl(money, parts, decimalPlaces, rounding);
         }
@@ -140,8 +149,8 @@ namespace Narvalo.Finance
             IDecimalRounding rounding)
         {
             Require.NotNull(rounding, nameof(rounding));
-            Require.Range(parts >= 0, nameof(parts));
-            if (parts == 0) { throw new DivideByZeroException(); }
+            Require.Range(parts > 0, nameof(parts));
+            Warrant.NotNull<IEnumerable<Money>>();
 
             return DistributeImpl(money, parts, decimalPlaces, rounding);
         }
@@ -152,6 +161,8 @@ namespace Narvalo.Finance
             int decimalPlaces,
             MoneyRounding rounding)
         {
+            Warrant.NotNull<IEnumerable<Money>>();
+
             if (rounding == MoneyRounding.None)
             {
                 var q = money.Amount / parts;
@@ -174,6 +185,9 @@ namespace Narvalo.Finance
             int decimalPlaces,
             IDecimalRounding rounding)
         {
+            Demand.NotNull(rounding);
+            Warrant.NotNull<IEnumerable<Money>>();
+
             var q = rounding.Round(money.Amount / parts, decimalPlaces);
             var seq = GetDistribution(money.Amount, parts, q);
 
@@ -182,6 +196,8 @@ namespace Narvalo.Finance
 
         private static IEnumerable<decimal> GetDistribution(decimal total, int count, decimal part)
         {
+            Warrant.NotNull<IEnumerable<decimal>>();
+
             for (var i = 0; i < count - 1; i++)
             {
                 yield return part;
