@@ -4,7 +4,6 @@ namespace Narvalo.Finance.Numerics
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.CompilerServices;
 
     public sealed class DecimalRounding : IDecimalRounding
     {
@@ -149,7 +148,6 @@ namespace Narvalo.Finance.Numerics
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static decimal RoundHalfDown(decimal value, int decimalPlaces)
         {
             if (value == 0m) { return 0m; }
@@ -158,7 +156,6 @@ namespace Narvalo.Finance.Numerics
                 : Unscale(RoundHalfDown(Scale(value, decimalPlaces)), decimalPlaces);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static decimal RoundHalfUp(decimal value, int decimalPlaces)
         {
             if (value == 0m) { return 0m; }
@@ -167,21 +164,13 @@ namespace Narvalo.Finance.Numerics
                 : Unscale(RoundHalfUp(Scale(value, decimalPlaces)), decimalPlaces);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundToEven(decimal value, int decimalPlaces)
-        {
-            Demand.Range(0 <= decimalPlaces && decimalPlaces <= MAX_DECIMAL_SCALE);
-            return Math.Round(value, decimalPlaces, MidpointRounding.ToEven);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static decimal RoundHalfAwayFromZero(decimal value, int decimalPlaces)
-        {
-            Demand.Range(0 <= decimalPlaces && decimalPlaces <= MAX_DECIMAL_SCALE);
-            return Math.Round(value, decimalPlaces, MidpointRounding.AwayFromZero);
-        }
-
         #region Helpers.
+
+        private static decimal RoundToEven(decimal value, int decimalPlaces)
+            => Math.Round(value, decimalPlaces, MidpointRounding.ToEven);
+
+        private static decimal RoundHalfAwayFromZero(decimal value, int decimalPlaces)
+            => Math.Round(value, decimalPlaces, MidpointRounding.AwayFromZero);
 
         // For positive values, HalfDown is equivalent to HalfTowardsZero.
         // For negative values, HalfDown is equivalent to HalfAwayFromZero.

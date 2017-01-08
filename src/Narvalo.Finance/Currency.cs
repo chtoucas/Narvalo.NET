@@ -253,12 +253,12 @@ namespace Narvalo.Finance
         internal long ConvertToMinorUnits(decimal major)
             => Convert.ToInt64(Factor * major);
 
-        public long ConvertToMinorUnits(decimal amount, MoneyRounding rounding)
-            => ConvertToMinorUnits(rounding.Round(amount, this));
+        public long ConvertToMinorUnits(decimal amount, MidpointRounding rounding)
+            => ConvertToMinorUnits(rounding.Round(amount, DecimalPlaces));
 
-        public long? TryConvertToMinorUnits(decimal amount, MoneyRounding rounding)
+        public long? TryConvertToMinorUnits(decimal amount, MidpointRounding rounding)
         {
-            decimal minor = Factor * rounding.Round(amount, this);
+            decimal minor = Factor * rounding.Round(amount, DecimalPlaces);
             if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
             return Convert.ToInt64(minor);
         }
@@ -271,7 +271,7 @@ namespace Narvalo.Finance
             return Convert.ToInt64(minor);
         }
 
-        public bool TryConvertToMinorUnits(decimal amount, MoneyRounding rounding, out long result)
+        public bool TryConvertToMinorUnits(decimal amount, MidpointRounding rounding, out long result)
         {
             long? minor = TryConvertToMinorUnits(amount, rounding);
             result = minor ?? (amount > 0 ? Int64.MaxValue : Int64.MinValue);

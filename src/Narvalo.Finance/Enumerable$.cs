@@ -14,7 +14,7 @@ namespace Narvalo.Finance
             throw new NotImplementedException();
         }
 
-        public static Money Sum(this IEnumerable<Money> @this, MoneyRounding rounding)
+        public static Money Sum(this IEnumerable<Money> @this, MidpointRounding rounding)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +29,7 @@ namespace Narvalo.Finance
             throw new NotImplementedException();
         }
 
-        public static Money Average(this IEnumerable<Money> @this, MoneyRounding rounding)
+        public static Money Average(this IEnumerable<Money> @this, MidpointRounding rounding)
         {
             throw new NotImplementedException();
         }

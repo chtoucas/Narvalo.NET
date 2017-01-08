@@ -88,6 +88,7 @@
     <Compile Include="Numerics\HalfDitheringDecimalRounding.cs" />
     <Compile Include="Numerics\IDecimalRounding.cs" />
     <Compile Include="Numerics\Int32Calculator.cs" />
+    <Compile Include="Numerics\MidpointRounding%24.cs" />
     <Compile Include="Numerics\StochasticDecimalRounding.cs" />
     <Compile Include="Utilities\IbanCheckDigits.cs" />
     <Compile Include="Numerics\RoudingMode.cs" />

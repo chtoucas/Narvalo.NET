@@ -59,6 +59,9 @@ namespace Narvalo.Finance
         /// <param name="currency">The specific currency.</param>
         public Money(decimal amount, Currency currency) : this(amount, currency, false) { }
 
+        public Money(decimal amount, Currency currency, MoneyRounding rounding)
+            : this(amount, currency, rounding != MoneyRounding.None) { }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
         /// and an amount for which the number of decimal places will be determined by the currency.
@@ -66,9 +69,9 @@ namespace Narvalo.Finance
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">The specific currency.</param>
         /// <param name="rounding">The rounding mode.</param>
-        public Money(decimal amount, Currency currency, MoneyRounding rounding)
+        public Money(decimal amount, Currency currency, MidpointRounding rounding)
         {
-            Amount = rounding.Round(amount, currency);
+            Amount = rounding.Round(amount, currency.DecimalPlaces);
             Currency = currency;
             IsNormalized = true;
         }
@@ -82,7 +85,7 @@ namespace Narvalo.Finance
             IsNormalized = true;
         }
 
-        private Money(decimal amount, Currency currency, bool normalized)
+        internal Money(decimal amount, Currency currency, bool normalized)
         {
             Amount = amount;
             Currency = currency;
@@ -156,17 +159,9 @@ namespace Narvalo.Finance
 
         public static Money One(Currency currency) => new Money(currency.One, currency, true);
 
-        public Money Abs() => IsNegative ? Negate() : this;
-
-        public Money Normalize(MoneyRounding rounding)
+        public Money Normalize(MidpointRounding rounding)
         {
             if (IsNormalized) { return this; }
-
-            if (rounding == MoneyRounding.Unnecessary)
-            {
-                throw new InvalidOperationException("XXX");
-            }
-
             return new Money(Amount, Currency, rounding);
         }
 
