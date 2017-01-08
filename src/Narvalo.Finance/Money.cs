@@ -53,11 +53,11 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount for which default rounding will be done.
+        /// and an amount for which NO rounding will be done.
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">The specific currency.</param>
-        public Money(decimal amount, Currency currency) : this(amount, currency, MoneyRounding.ToEven) { }
+        public Money(decimal amount, Currency currency) : this(amount, currency, false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
