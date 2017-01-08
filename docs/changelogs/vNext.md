@@ -54,6 +54,9 @@ TODO
 - Rounding, Allocation; See
   [rounding](https://en.wikipedia.org/wiki/Rounding),
   [sum](https://en.wikipedia.org/wiki/Kahan_summation_algorithm).
+- IsPseudoCurrency -> !IsLegacy && MinorUnits == null.
+- Protect Multiply, Divide and Remainder against absurd results.
+- DecimalRounding.Scale(), check for minimal value?
 
 Highlights
 ----------

@@ -38,6 +38,8 @@ namespace Narvalo.Finance
         /// Initializes a new instance of the <see cref="Currency" /> class for the specified code.
         /// </summary>
         /// <param name="code">A string that contains the three-letter identifier defined in ISO 4217.</param>
+        /// <param name="minorUnits">The value of a unit expressed in minor units. If there are no
+        /// minor units, use null instead.</param>
         internal Currency(string code, short? minorUnits)
         {
             Sentinel.Demand.CurrencyCode(code);
@@ -91,7 +93,7 @@ namespace Narvalo.Finance
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] For currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
 
-        private decimal Factor => Powers10[DecimalPlaces];
+        internal decimal Factor => Powers10[DecimalPlaces];
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
@@ -263,24 +265,8 @@ namespace Narvalo.Finance
             return Convert.ToInt64(minor);
         }
 
-        public long? TryConvertToMinorUnits(decimal amount, IDecimalRounding rounding)
-        {
-            Require.NotNull(rounding, nameof(rounding));
-            decimal minor = Factor * rounding.Round(amount, DecimalPlaces);
-            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
-            return Convert.ToInt64(minor);
-        }
-
         public bool TryConvertToMinorUnits(decimal amount, MidpointRounding rounding, out long result)
         {
-            long? minor = TryConvertToMinorUnits(amount, rounding);
-            result = minor ?? (amount > 0 ? Int64.MaxValue : Int64.MinValue);
-            return minor.HasValue;
-        }
-
-        public bool TryConvertToMinorUnits(decimal amount, IDecimalRounding rounding, out long result)
-        {
-            Expect.NotNull(rounding);
             long? minor = TryConvertToMinorUnits(amount, rounding);
             result = minor ?? (amount > 0 ? Int64.MaxValue : Int64.MinValue);
             return minor.HasValue;

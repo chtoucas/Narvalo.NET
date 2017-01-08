@@ -65,10 +65,10 @@ namespace Narvalo.Finance
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">The specific currency.</param>
-        /// <param name="rounding">The rounding mode.</param>
-        public Money(decimal amount, Currency currency, MidpointRounding rounding)
+        /// <param name="mode">The rounding mode.</param>
+        public Money(decimal amount, Currency currency, MidpointRounding mode)
         {
-            Amount = rounding.Round(amount, currency.DecimalPlaces);
+            Amount = mode.Round(amount, currency.DecimalPlaces);
             Currency = currency;
             IsNormalized = true;
         }
@@ -147,42 +147,22 @@ namespace Narvalo.Finance
 
         public static Money One(Currency currency) => new Money(currency.One, currency, true);
 
-        public static Money Of(decimal amount, Currency currency)
+        public static Money OfCurrency(decimal amount, Currency currency)
             => new Money(amount, currency, true);
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount for which the number of decimal places is determined by the currency.
-        /// </summary>
-        /// <param name="amount">A decimal representing the amount of money.</param>
-        /// <param name="currency">The specific currency.</param>
-        /// <param name="rounding">The rounding operator.</param>
-        public static Money Create(decimal amount, Currency currency, IDecimalRounding rounding)
-        {
-            Require.NotNull(rounding, nameof(rounding));
-            return new Money(rounding.Round(amount, currency.DecimalPlaces), currency, true);
-        }
+        // Check that the currencies match.
+        internal static void ThrowIfCurrencyMismatch(Money @this, Money other, string parameterName)
+            => Enforce.True(@this.Currency != other.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
-        public static Money Normalize(Money money, IDecimalRounding rounding)
-        {
-            Expect.NotNull(rounding);
-            if (money.IsNormalized) { return money; }
-            return Create(money.Amount, money.Currency, rounding);
-        }
-
-        public Money Normalize(MidpointRounding rounding)
+        public Money Normalize(MidpointRounding mode)
         {
             if (IsNormalized) { return this; }
-            return new Money(Amount, Currency, rounding);
+            return new Money(Amount, Currency, mode);
         }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Currency.Code);
-
-        // Check that the currencies match.
-        private void ThrowIfCurrencyMismatch(Money other, string parameterName)
-            => Enforce.True(Currency != other.Currency, parameterName, Strings.Argument_CurrencyMismatch);
     }
 
     // Implements the IFormattable interface.
@@ -266,7 +246,7 @@ namespace Narvalo.Finance
 
         public int CompareTo(Money other)
         {
-            ThrowIfCurrencyMismatch(other, nameof(other));
+            ThrowIfCurrencyMismatch(this, other, nameof(other));
 
             return Amount.CompareTo(other.Amount);
         }
@@ -331,7 +311,8 @@ namespace Narvalo.Finance
 
         public static implicit operator Money(long value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(decimal value) => new Money(value, Currency.None, false);
+        // NB: This one is explicit (the result is not normalized).
+        public static explicit operator Money(decimal value) => new Money(value, Currency.None, false);
 
         #endregion
 
@@ -416,7 +397,7 @@ namespace Narvalo.Finance
 
         public Money Add(Money other)
         {
-            ThrowIfCurrencyMismatch(other, nameof(other));
+            ThrowIfCurrencyMismatch(this, other, nameof(other));
 
             if (Amount == 0m) { return other; }
             if (other.Amount == 0m) { return this; }
@@ -465,7 +446,7 @@ namespace Narvalo.Finance
 
         public Money Subtract(Money other)
         {
-            ThrowIfCurrencyMismatch(other, nameof(other));
+            ThrowIfCurrencyMismatch(this, other, nameof(other));
 
             if (Amount == 0m) { return other.Negate(); }
             if (other.Amount == 0m) { return this; }
@@ -517,10 +498,21 @@ namespace Narvalo.Finance
     // Overrides the op_Division operator.
     public partial struct Money
     {
-        public static Money operator /(Money money, decimal divisor)
+        // WARNING: This method returns a decimal (a division means that we lost the unit).
+        public static decimal operator /(Money dividend, Money divisor)
+        {
+            return dividend.Divide(divisor);
+        }
+
+        public static Money operator /(Money dividend, decimal divisor)
         {
             Expect.True(divisor != 0m);
-            return money.Divide(divisor);
+            return dividend.Divide(divisor);
+        }
+
+        public decimal Divide(Money divisor)
+        {
+            return Amount / divisor.Amount;
         }
 
         public Money Divide(decimal divisor)
