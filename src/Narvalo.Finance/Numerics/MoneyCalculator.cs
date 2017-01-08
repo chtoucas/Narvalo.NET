@@ -83,16 +83,22 @@ namespace Narvalo.Finance.Numerics
         }
     }
 
-    // LINQ extensions.
+    // LINQ Sum() extension.
     public static partial class MoneyCalculator
     {
-        public static Money Sum(this IEnumerable<Money> @this, IDecimalRounding rounding)
+        public static Money Sum(this IEnumerable<Money> @this, IDecimalRounding mode)
         {
+            Require.NotNull(@this, nameof(@this));
             throw new NotImplementedException();
         }
+    }
 
-        public static Money Average(this IEnumerable<Money> @this, IDecimalRounding rounding)
+    // LINQ Average() extension.
+    public static partial class MoneyCalculator
+    {
+        public static Money Average(this IEnumerable<Money> @this, IDecimalRounding mode)
         {
+            Require.NotNull(@this, nameof(@this));
             throw new NotImplementedException();
         }
     }
@@ -108,18 +114,6 @@ namespace Narvalo.Finance.Numerics
         {
             Require.NotNull(rounding, nameof(rounding));
             Require.Range(parts > 0, nameof(parts));
-            Warrant.NotNull<IEnumerable<Money>>();
-
-            return DistributeImpl(money, parts, decimalPlaces, rounding);
-        }
-
-        private static IEnumerable<Money> DistributeImpl(
-            Money money,
-            int parts,
-            int decimalPlaces,
-            IDecimalRounding rounding)
-        {
-            Demand.NotNull(rounding);
             Warrant.NotNull<IEnumerable<Money>>();
 
             var q = rounding.Round(money.Amount / parts, decimalPlaces);

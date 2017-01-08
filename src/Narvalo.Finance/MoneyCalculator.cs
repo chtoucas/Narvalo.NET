@@ -106,20 +106,20 @@ namespace Narvalo.Finance
         }
 
         // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Ceiling(Money money) => money.Normalize(Math.Ceiling);
+        public static Money Ceiling(Money money) => money.Round(Math.Ceiling);
 
         // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Floor(Money money) => money.Normalize(Math.Floor);
+        public static Money Floor(Money money) => money.Round(Math.Floor);
 
         // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Truncate(Money money) => money.Normalize(Math.Truncate);
+        public static Money Truncate(Money money) => money.Round(Math.Truncate);
 
         // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Round(Money money) => money.Normalize(Math.Round);
+        public static Money Round(Money money) => money.Round(Math.Round);
 
         // DANGEROUS ZONE: You might lose or gain money.
         public static Money Round(Money money, MidpointRounding mode)
-            => money.Normalize(_ => Math.Round(_, mode));
+            => money.Round(_ => Math.Round(_, mode));
 
         // DANGEROUS ZONE: You might lose or gain money.
         public static Money Round(Money money, int decimalPlaces)
@@ -130,26 +130,174 @@ namespace Narvalo.Finance
             => money.Round(decimalPlaces, mode);
     }
 
-    // LINQ extensions.
+    // LINQ Sum() extension.
     public static partial class MoneyCalculator
     {
+        private static readonly Func<Money, Money> s_Id = _ => _;
+        private static readonly Func<Money?, Money?> s_IdNullable = _ => _;
+
         public static Money Sum(this IEnumerable<Money> @this)
         {
-            throw new NotImplementedException();
+            Expect.NotNull(@this);
+            return Sum(@this, s_Id);
         }
 
-        public static Money Sum(this IEnumerable<Money> @this, MidpointRounding rounding)
+        public static Money Sum(this IEnumerable<Money?> @this)
         {
+            Expect.NotNull(@this);
+            return Sum(@this, s_IdNullable);
+        }
+
+        public static Money Sum<TSource>(this IEnumerable<TSource> @this, Func<TSource, Money> selector)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            bool first = true;
+            Money sum = Money.Zero(Currency.None);
+
+            foreach (var item in @this)
+            {
+                if (first)
+                {
+                    sum = selector.Invoke(item);
+                    first = false;
+                }
+                else
+                {
+                    sum = sum.Add(selector.Invoke(item));
+                }
+            }
+
+            return sum;
+        }
+
+        public static Money Sum<TSource>(this IEnumerable<TSource> @this, Func<TSource, Money?> selector)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
             throw new NotImplementedException();
         }
 
+        public static Money Sum(this IEnumerable<Money> @this, MidpointRounding mode)
+        {
+            Expect.NotNull(@this);
+            return Sum(@this, s_Id, mode);
+        }
+
+        public static Money Sum(this IEnumerable<Money?> @this, MidpointRounding mode)
+        {
+            Expect.NotNull(@this);
+            return Sum(@this, s_IdNullable, mode);
+        }
+
+        public static Money Sum<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Money> selector,
+            MidpointRounding mode)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            Money? first = null;
+            bool normalized = true;
+            decimal sum = 0;
+
+            foreach (TSource item in @this)
+            {
+                Money money = selector.Invoke(item);
+
+                if (first == null)
+                {
+                    first = money;
+                }
+                else
+                {
+                    ThrowIfCurrencyMismatch(money, first.Value);
+                }
+
+                normalized = normalized && money.IsNormalized;
+                sum += money.Amount;
+            }
+
+            return first.HasValue
+                ? (normalized
+                    ? Money.OfCurrency(sum, first.Value.Currency)
+                    : new Money(sum, first.Value.Currency, mode))
+                : Money.OfCurrency(0, Currency.None);
+        }
+
+        public static Money Sum<TSource>(
+            this IEnumerable<TSource> @this,
+            Func<TSource, Money?> selector,
+            MidpointRounding mode)
+        {
+            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(selector, nameof(selector));
+
+            Money? first = null;
+            bool normalized = true;
+            decimal sum = 0;
+
+            foreach (TSource item in @this)
+            {
+                Money? money = selector.Invoke(item);
+
+                if (money == null) { continue; }
+
+                if (first == null)
+                {
+                    first = money;
+                }
+                else
+                {
+                    ThrowIfCurrencyMismatch(money.Value, first.Value);
+                }
+
+                normalized = normalized && money.Value.IsNormalized;
+                sum += money.Value.Amount;
+            }
+
+            return first.HasValue
+                ? (normalized
+                    ? Money.OfCurrency(sum, first.Value.Currency)
+                    : new Money(sum, first.Value.Currency, mode))
+                : Money.OfCurrency(0, Currency.None);
+        }
+
+        private static void ThrowIfCurrencyMismatch(Money money1, Money money2)
+        {
+            if (money1.Currency != money2.Currency)
+            {
+                throw new InvalidOperationException("XXX");
+            }
+        }
+    }
+
+    // LINQ Average() extension.
+    public static partial class MoneyCalculator
+    {
         public static Money Average(this IEnumerable<Money> @this)
         {
+            Require.NotNull(@this, nameof(@this));
             throw new NotImplementedException();
         }
 
-        public static Money Average(this IEnumerable<Money> @this, MidpointRounding rounding)
+        public static Money Average(this IEnumerable<Money?> @this)
         {
+            Require.NotNull(@this, nameof(@this));
+            throw new NotImplementedException();
+        }
+
+        public static Money Average(this IEnumerable<Money> @this, MidpointRounding mode)
+        {
+            Require.NotNull(@this, nameof(@this));
+            throw new NotImplementedException();
+        }
+
+        public static Money Average(this IEnumerable<Money?> @this, MidpointRounding mode)
+        {
+            Require.NotNull(@this, nameof(@this));
             throw new NotImplementedException();
         }
     }
@@ -177,17 +325,6 @@ namespace Narvalo.Finance
             MidpointRounding mode)
         {
             Require.Range(parts > 0, nameof(parts));
-            Warrant.NotNull<IEnumerable<Money>>();
-
-            return DistributeImpl(money, parts, decimalPlaces, mode);
-        }
-
-        private static IEnumerable<Money> DistributeImpl(
-            Money money,
-            int parts,
-            int decimalPlaces,
-            MidpointRounding mode)
-        {
             Warrant.NotNull<IEnumerable<Money>>();
 
             var q = mode.Round(money.Amount / parts, decimalPlaces);

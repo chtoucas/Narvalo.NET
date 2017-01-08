@@ -57,6 +57,7 @@ TODO
 - IsPseudoCurrency -> !IsLegacy && MinorUnits == null.
 - Protect Multiply, Divide and Remainder against absurd results.
 - DecimalRounding.Scale(), check for minimal value?
+- https://en.wikipedia.org/wiki/Cash_rounding
 
 Highlights
 ----------

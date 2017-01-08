@@ -150,9 +150,8 @@ namespace Narvalo.Finance
         public static Money OfCurrency(decimal amount, Currency currency)
             => new Money(amount, currency, true);
 
-        // Check that the currencies match.
         internal static void ThrowIfCurrencyMismatch(Money @this, Money other, string parameterName)
-            => Enforce.True(@this.Currency != other.Currency, parameterName, Strings.Argument_CurrencyMismatch);
+            => Enforce.True(@this.Currency == other.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
         public Money Normalize(MidpointRounding mode)
         {
@@ -160,20 +159,18 @@ namespace Narvalo.Finance
             return new Money(Amount, Currency, mode);
         }
 
-        internal Money Normalize(Func<decimal, decimal> normalizer)
+        internal Money Round(Func<decimal, decimal> round)
         {
-            // REVIEW: IsNormalized?
-            if (IsNormalized) { return this; }
-            return new Money(normalizer.Invoke(Amount), Currency, true);
+            Demand.NotNull(round);
+            if (IsNormalized && Currency.DecimalPlaces == 0) { return this; }
+            return new Money(round.Invoke(Amount), Currency, true);
         }
 
         internal Money Round(int decimalPlaces, MidpointRounding mode)
         {
-            // REVIEW: IsNormalized?
-            if (IsNormalized) { return this; }
-            bool normalized = decimalPlaces <= Currency.DecimalPlaces;
+            if (IsNormalized && Currency.DecimalPlaces == decimalPlaces) { return this; }
             decimal amount = mode.Round(Amount, decimalPlaces);
-            return new Money(amount, Currency, normalized);
+            return new Money(amount, Currency, decimalPlaces <= Currency.DecimalPlaces);
         }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
@@ -514,11 +511,11 @@ namespace Narvalo.Finance
     // Overrides the op_Division operator.
     public partial struct Money
     {
-        // WARNING: This method returns a decimal (a division means that we lost the currency unit).
+        // WARNING: This method returns a decimal (a division implies that we lost the currency unit).
         public static decimal operator /(Money dividend, Money divisor) => dividend.Divide(divisor);
         public static Money operator /(Money dividend, decimal divisor) => dividend.Divide(divisor);
 
-        // WARNING: This method returns a decimal (a division means that we lost the currency unit).
+        // WARNING: This method returns a decimal (a division implies that we lost the currency unit).
         public decimal Divide(Money divisor) => Amount / divisor.Amount;
 
         public Money Divide(decimal divisor) => new Money(Amount / divisor, Currency, false);

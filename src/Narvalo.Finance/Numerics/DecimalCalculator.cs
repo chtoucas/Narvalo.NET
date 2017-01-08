@@ -24,7 +24,7 @@ namespace Narvalo.Finance.Numerics
 
     public static class DecimalCalculator
     {
-        private static Func<decimal, decimal> s_Id = _ => _;
+        private static readonly Func<decimal, decimal> s_Id = _ => _;
 
         //internal static int GetScale(this decimal @this)
         //{
