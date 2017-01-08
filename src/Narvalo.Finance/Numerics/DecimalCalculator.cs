@@ -34,7 +34,8 @@ namespace Narvalo.Finance.Numerics
         //    return (flags & 0x00FF0000) >> 16;
         //}
 
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Mimic the behaviour of Math.DivRem().")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
         public static decimal DivRem(decimal dividend, decimal divisor, out decimal remainder)
         {
             Expect.True(divisor != 0m);

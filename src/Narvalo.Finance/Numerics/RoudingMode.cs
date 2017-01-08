@@ -79,8 +79,16 @@ namespace Narvalo.Finance.Numerics
 
         HalfTowardsZero,
 
+        /// <summary>
+        /// When a number is halfway between two others, it is rounded toward the nearest
+        /// number that is away from zero.
+        /// </summary>
         HalfAwayFromZero, // roundTiesToAway (IEEE 754)
 
+        /// <summary>
+        /// When a number is halfway between two others, it is rounded toward the nearest even number.
+        /// </summary>
+        /// <remarks>Default IEEE 754 rounding mode.</remarks>
         ToEven, // roundTiesToEven (IEEE 754)
 
         ToOdd,
