@@ -75,6 +75,7 @@
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
     <Compile Include="CurrencyTypes.cs" />
+    <Compile Include="Enumerable`1.cs" />
     <Compile Include="Generic\CurrencyUnit`1.cs" />
     <Compile Include="Generic\CurrencyUnit.cs" />
     <Compile Include="Globalization\LocalMoneyFormatter.cs" />
