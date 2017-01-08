@@ -59,12 +59,9 @@ namespace Narvalo.Finance
         /// <param name="currency">The specific currency.</param>
         public Money(decimal amount, Currency currency) : this(amount, currency, false) { }
 
-        public Money(decimal amount, Currency currency, MoneyRounding rounding)
-            : this(amount, currency, rounding != MoneyRounding.None) { }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount for which the number of decimal places will be determined by the currency.
+        /// and an amount for which the number of decimal places is determined by the currency.
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">The specific currency.</param>
@@ -76,16 +73,7 @@ namespace Narvalo.Finance
             IsNormalized = true;
         }
 
-        public Money(decimal amount, Currency currency, IDecimalRounding rounding)
-        {
-            Require.NotNull(rounding, nameof(rounding));
-
-            Amount = rounding.Round(amount, currency.DecimalPlaces);
-            Currency = currency;
-            IsNormalized = true;
-        }
-
-        internal Money(decimal amount, Currency currency, bool normalized)
+        private Money(decimal amount, Currency currency, bool normalized)
         {
             Amount = amount;
             Currency = currency;
@@ -159,15 +147,31 @@ namespace Narvalo.Finance
 
         public static Money One(Currency currency) => new Money(currency.One, currency, true);
 
-        public Money Normalize(MidpointRounding rounding)
+        public static Money Of(decimal amount, Currency currency)
+            => new Money(amount, currency, true);
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount for which the number of decimal places is determined by the currency.
+        /// </summary>
+        /// <param name="amount">A decimal representing the amount of money.</param>
+        /// <param name="currency">The specific currency.</param>
+        /// <param name="rounding">The rounding operator.</param>
+        public static Money Create(decimal amount, Currency currency, IDecimalRounding rounding)
         {
-            if (IsNormalized) { return this; }
-            return new Money(Amount, Currency, rounding);
+            Require.NotNull(rounding, nameof(rounding));
+            return new Money(rounding.Round(amount, currency.DecimalPlaces), currency, true);
         }
 
-        public Money Normalize(IDecimalRounding rounding)
+        public static Money Normalize(Money money, IDecimalRounding rounding)
         {
             Expect.NotNull(rounding);
+            if (money.IsNormalized) { return money; }
+            return Create(money.Amount, money.Currency, rounding);
+        }
+
+        public Money Normalize(MidpointRounding rounding)
+        {
             if (IsNormalized) { return this; }
             return new Money(Amount, Currency, rounding);
         }

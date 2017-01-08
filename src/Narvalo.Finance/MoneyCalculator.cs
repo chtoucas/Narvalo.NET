@@ -23,16 +23,18 @@ namespace Narvalo.Finance
         {
             Expect.NotNull(rounding);
             if (amount == 0m) { return @this; }
-            return new Money(@this.Amount + amount, @this.Currency, rounding);
+            return Money.Create(@this.Amount + amount, @this.Currency, rounding);
         }
 
         public static Money Add(this Money @this, Money other, MidpointRounding rounding)
         {
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
+            var amount = @this.Amount + other.Amount;
+
             return @this.IsNormalized && other.IsNormalized
-                ? new Money(@this.Amount + other.Amount, @this.Currency, MoneyRounding.Unnecessary)
-                : new Money(@this.Amount + other.Amount, @this.Currency, rounding);
+                ? Money.Of(amount, @this.Currency)
+                : new Money(amount, @this.Currency, rounding);
         }
 
         public static Money Add(this Money @this, Money other, IDecimalRounding rounding)
@@ -40,9 +42,11 @@ namespace Narvalo.Finance
             Expect.NotNull(rounding);
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
+            var amount = @this.Amount + other.Amount;
+
             return @this.IsNormalized && other.IsNormalized
-                ? new Money(@this.Amount + other.Amount, @this.Currency, MoneyRounding.Unnecessary)
-                : new Money(@this.Amount + other.Amount, @this.Currency, rounding);
+                ? Money.Of(amount, @this.Currency)
+                : Money.Create(amount, @this.Currency, rounding);
         }
     }
 
@@ -62,9 +66,11 @@ namespace Narvalo.Finance
         {
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
+            var amount = @this.Amount - other.Amount;
+
             return @this.IsNormalized && other.IsNormalized
-                ? new Money(@this.Amount - other.Amount, @this.Currency, MoneyRounding.Unnecessary)
-                : new Money(@this.Amount - other.Amount, @this.Currency, rounding);
+                ? Money.Of(amount, @this.Currency)
+                : new Money(amount, @this.Currency, rounding);
         }
 
         public static Money Subtract(this Money @this, Money other, IDecimalRounding rounding)
@@ -72,9 +78,11 @@ namespace Narvalo.Finance
             Expect.NotNull(rounding);
             ThrowIfCurrencyMismatch(@this, other, nameof(other));
 
+            var amount = @this.Amount - other.Amount;
+
             return @this.IsNormalized && other.IsNormalized
-                ? new Money(@this.Amount - other.Amount, @this.Currency, MoneyRounding.Unnecessary)
-                : new Money(@this.Amount - other.Amount, @this.Currency, rounding);
+                ? Money.Of(amount, @this.Currency)
+                : Money.Create(amount, @this.Currency, rounding);
         }
     }
 
@@ -87,7 +95,7 @@ namespace Narvalo.Finance
         public static Money Multiply(this Money @this, decimal multiplier, IDecimalRounding rounding)
         {
             Expect.NotNull(rounding);
-            return new Money(multiplier * @this.Amount, @this.Currency, rounding);
+            return Money.Create(multiplier * @this.Amount, @this.Currency, rounding);
         }
     }
 
@@ -104,7 +112,7 @@ namespace Narvalo.Finance
         {
             Expect.True(divisor != 0m);
             Expect.NotNull(rounding);
-            return new Money(@this.Amount / divisor, @this.Currency, rounding);
+            return Money.Create(@this.Amount / divisor, @this.Currency, rounding);
         }
     }
 
@@ -121,7 +129,7 @@ namespace Narvalo.Finance
         {
             Expect.True(divisor != 0m);
             Expect.NotNull(rounding);
-            return new Money(@this.Amount % divisor, @this.Currency, rounding);
+            return Money.Create(@this.Amount % divisor, @this.Currency, rounding);
         }
     }
 
@@ -132,7 +140,8 @@ namespace Narvalo.Finance
             => money.IsPositiveOrZero ? money : money.Negate();
 
         // Divide+Remainder aka DivRem.
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Mimic the behaviour of Math.DivRem().")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
         public static Money DivRem(Money money, decimal divisor, out decimal remainder)
         {
             Expect.True(divisor != 0m);
@@ -192,7 +201,7 @@ namespace Narvalo.Finance
             var q = rounding.Round(money.Amount / parts, decimalPlaces);
             var seq = GetDistribution(money.Amount, parts, q);
 
-            return from _ in seq select new Money(_, money.Currency, MoneyRounding.Unnecessary);
+            return from _ in seq select Money.Of(_, money.Currency);
         }
 
         private static IEnumerable<Money> DistributeImpl(
@@ -207,7 +216,7 @@ namespace Narvalo.Finance
             var q = rounding.Round(money.Amount / parts, decimalPlaces);
             var seq = GetDistribution(money.Amount, parts, q);
 
-            return from _ in seq select new Money(_, money.Currency, MoneyRounding.Unnecessary);
+            return from _ in seq select Money.Of(_, money.Currency);
         }
 
         private static IEnumerable<decimal> GetDistribution(decimal total, int count, decimal part)
@@ -250,7 +259,7 @@ namespace Narvalo.Finance
             Require.NotNull(rounding, nameof(rounding));
 
             return from _ in DecimalCalculator.Allocate(money.Amount, ratios, decimalPlaces, rounding)
-                   select new Money(_, money.Currency, MoneyRounding.Unnecessary);
+                   select Money.Of(_, money.Currency);
         }
     }
 
