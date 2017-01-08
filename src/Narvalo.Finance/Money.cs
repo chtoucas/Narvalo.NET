@@ -70,7 +70,7 @@ namespace Narvalo.Finance
         {
             Amount = rounding.Round(amount, currency);
             Currency = currency;
-            IsNormalized = rounding != MoneyRounding.None;
+            IsNormalized = true;
         }
 
         public Money(decimal amount, Currency currency, IDecimalRounding rounding)
@@ -162,7 +162,7 @@ namespace Narvalo.Finance
         {
             if (IsNormalized) { return this; }
 
-            if (rounding == MoneyRounding.None || rounding == MoneyRounding.Unnecessary)
+            if (rounding == MoneyRounding.Unnecessary)
             {
                 throw new InvalidOperationException("XXX");
             }
@@ -233,7 +233,9 @@ namespace Narvalo.Finance
         public static bool operator !=(Money left, Money right) => !left.Equals(right);
 
         public bool Equals(Money other)
-            => Amount == other.Amount && Currency == other.Currency && IsNormalized == other.IsNormalized;
+            => Amount == other.Amount
+            && Currency == other.Currency
+            && IsNormalized == other.IsNormalized;
 
         public override bool Equals(object obj)
         {
@@ -574,6 +576,7 @@ namespace Narvalo.Finance
     }
 
     // Overrides the op_UnaryPlus operator.
+    // This operator does nothing, only added for completeness.
     public partial struct Money
     {
         public static Money operator +(Money money) => money;

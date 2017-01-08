@@ -9,11 +9,6 @@ namespace Narvalo.Finance
     public enum MoneyRounding
     {
         /// <summary>
-        /// The number should be kept as it.
-        /// </summary>
-        None,
-
-        /// <summary>
         /// The number is already rounded.
         /// </summary>
         Unnecessary,

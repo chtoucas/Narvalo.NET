@@ -2,8 +2,8 @@
 
 namespace Narvalo.Finance
 {
-    using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using Narvalo.Finance.Numerics;
@@ -124,10 +124,36 @@ namespace Narvalo.Finance
         }
     }
 
-    // Allocation / Distribution.
+    // Divide+Remainder aka DivRem.
+    public static partial class MoneyCalculator
+    {
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Mimic the behaviour of Math.DivRem().")]
+        public static Money DivRem(this Money @this, decimal divisor, out decimal remainder)
+        {
+            Expect.True(divisor != 0m);
+
+            var q = @this.Divide(divisor);
+            // NB: remainder = dividend % divisor is slower.
+            remainder = @this.Amount - q.Amount * divisor;
+            return q;
+        }
+    }
+
+    // Other calculations.
     public static partial class MoneyCalculator
     {
         #region Distribute
+
+        public static IEnumerable<Money> Distribute(Money money, int parts)
+        {
+            Require.Range(parts > 0, nameof(parts));
+            Warrant.NotNull<IEnumerable<Money>>();
+
+            var q = money.Amount / parts;
+            var seq = GetDistribution(money.Amount, parts, q);
+
+            return from _ in seq select new Money(_, money.Currency);
+        }
 
         public static IEnumerable<Money> Distribute(
             Money money,
@@ -163,20 +189,10 @@ namespace Narvalo.Finance
         {
             Warrant.NotNull<IEnumerable<Money>>();
 
-            if (rounding == MoneyRounding.None)
-            {
-                var q = money.Amount / parts;
-                var seq = GetDistribution(money.Amount, parts, q);
+            var q = DecimalRounding.Round(money.Amount / parts, decimalPlaces, rounding.ToRoundingMode());
+            var seq = GetDistribution(money.Amount, parts, q);
 
-                return from _ in seq select new Money(_, money.Currency, MoneyRounding.None);
-            }
-            else
-            {
-                var q = DecimalRounding.Round(money.Amount / parts, decimalPlaces, rounding.ToRoundingMode());
-                var seq = GetDistribution(money.Amount, parts, q);
-
-                return from _ in seq select new Money(_, money.Currency, MoneyRounding.Unnecessary);
-            }
+            return from _ in seq select new Money(_, money.Currency, MoneyRounding.Unnecessary);
         }
 
         private static IEnumerable<Money> DistributeImpl(
@@ -208,6 +224,12 @@ namespace Narvalo.Finance
 
         #endregion
 
+        public static IEnumerable<Money> Allocate(Money money, RatioArray ratios)
+        {
+            return from _ in DecimalCalculator.Allocate(money.Amount, ratios)
+                   select new Money(_, money.Currency);
+        }
+
         public static IEnumerable<Money> Allocate(
             Money money,
             RatioArray ratios,
@@ -216,18 +238,10 @@ namespace Narvalo.Finance
         {
             Require.True(rounding != MoneyRounding.Unnecessary, nameof(rounding));
 
-            if (rounding == MoneyRounding.None)
-            {
-                return from _ in DecimalCalculator.Allocate(money.Amount, ratios)
-                       select new Money(_, money.Currency, MoneyRounding.None);
-            }
-            else
-            {
-                var mode = rounding.ToRoundingMode();
+            var mode = rounding.ToRoundingMode();
 
-                return from _ in DecimalCalculator.Allocate(money.Amount, ratios, decimalPlaces, mode)
-                       select new Money(_, money.Currency, MoneyRounding.Unnecessary);
-            }
+            return from _ in DecimalCalculator.Allocate(money.Amount, ratios, decimalPlaces, mode)
+                   select new Money(_, money.Currency, MoneyRounding.Unnecessary);
         }
 
         public static IEnumerable<Money> Allocate(
