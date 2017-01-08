@@ -172,10 +172,8 @@ namespace Narvalo.Finance
 
         public Money Normalize(IDecimalRounding rounding)
         {
-            Require.NotNull(rounding, nameof(rounding));
-
+            Expect.NotNull(rounding);
             if (IsNormalized) { return this; }
-
             return new Money(Amount, Currency, rounding);
         }
 
@@ -526,7 +524,7 @@ namespace Narvalo.Finance
 
         public Money Divide(decimal divisor)
         {
-            if (divisor == 0m) { throw new DivideByZeroException(); }
+            Expect.True(divisor != 0m);
             return new Money(Amount / divisor, Currency, false);
         }
     }
@@ -542,7 +540,7 @@ namespace Narvalo.Finance
 
         public Money Remainder(decimal divisor)
         {
-            if (divisor == 0m) { throw new DivideByZeroException(); }
+            Expect.True(divisor != 0m);
             return new Money(Amount % divisor, Currency, false);
         }
     }

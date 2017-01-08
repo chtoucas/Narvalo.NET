@@ -194,17 +194,12 @@ namespace Narvalo.Finance.Generic
         public static Money<TCurrency> operator /(Money<TCurrency> money, decimal divisor)
         {
             Expect.True(divisor != 0m);
-
             return money.Divide(divisor);
         }
 
         public Money<TCurrency> Divide(decimal divisor)
         {
-            if (divisor == 0m)
-            {
-                throw new DivideByZeroException();
-            }
-
+            Expect.True(divisor != 0m);
             return new Money<TCurrency>(Amount / divisor);
         }
     }
@@ -215,17 +210,12 @@ namespace Narvalo.Finance.Generic
         public static Money<TCurrency> operator %(Money<TCurrency> money, decimal divisor)
         {
             Expect.True(divisor != 0m);
-
             return money.Remainder(divisor);
         }
 
         public Money<TCurrency> Remainder(decimal divisor)
         {
-            if (divisor == 0m)
-            {
-                throw new DivideByZeroException();
-            }
-
+            Expect.True(divisor != 0m);
             return new Money<TCurrency>(Amount % divisor);
         }
     }
