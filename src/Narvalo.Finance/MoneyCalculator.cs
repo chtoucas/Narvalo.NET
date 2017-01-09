@@ -19,7 +19,7 @@ namespace Narvalo.Finance
 
         public static Money Add(this Money @this, Money other, MidpointRounding mode)
         {
-            Money.ThrowIfCurrencyMismatch(@this, other, nameof(other));
+            @this.ThrowIfCurrencyMismatch(other, nameof(other));
 
             var amount = @this.Amount + other.Amount;
 
@@ -37,7 +37,7 @@ namespace Narvalo.Finance
 
         public static Money Subtract(this Money @this, Money other, MidpointRounding mode)
         {
-            Money.ThrowIfCurrencyMismatch(@this, other, nameof(other));
+            @this.ThrowIfCurrencyMismatch(other, nameof(other));
 
             var amount = @this.Amount - other.Amount;
 
@@ -310,14 +310,6 @@ namespace Narvalo.Finance
 
             return Money.OfCurrency(0, Currency.None);
         }
-
-        internal static void ThrowIfCurrencyMismatch(Currency cy1, Currency cy2)
-        {
-            if (cy1 != cy2)
-            {
-                throw new InvalidOperationException("XXX");
-            }
-        }
     }
 
     // LINQ-like Average().
@@ -562,6 +554,18 @@ namespace Narvalo.Finance
             }
 
             yield return new Money(last, currency, mode);
+        }
+    }
+
+    // Helpers.
+    public static partial class MoneyCalculator
+    {
+        internal static void ThrowIfCurrencyMismatch(Currency cy1, Currency cy2)
+        {
+            if (cy1 != cy2)
+            {
+                throw new InvalidOperationException("XXX");
+            }
         }
     }
 }

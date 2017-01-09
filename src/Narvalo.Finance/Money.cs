@@ -10,6 +10,7 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Numerics;
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Utilities;
 
     // Per default, the CLR will use LayoutKind.Sequential for structs. Here, we do not care
     // about interop with unmanaged code, so why not let the CLR decide what's best for it?
@@ -156,9 +157,6 @@ namespace Narvalo.Finance
         public static Money OfCurrency(decimal amount, Currency currency)
             => new Money(amount, currency, true);
 
-        internal static void ThrowIfCurrencyMismatch(Money my1, Money my2, string parameterName)
-            => Enforce.True(my1.Currency == my2.Currency, parameterName, Strings.Argument_CurrencyMismatch);
-
         public Money Normalize(MidpointRounding mode)
         {
             if (IsNormalized) { return this; }
@@ -178,6 +176,9 @@ namespace Narvalo.Finance
             decimal amount = Math.Round(Amount, decimalPlaces, mode);
             return new Money(amount, Currency, decimalPlaces <= Currency.DecimalPlaces);
         }
+
+        internal void ThrowIfCurrencyMismatch(Money money, string parameterName)
+            => Enforce.True(Currency == money.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
@@ -265,7 +266,7 @@ namespace Narvalo.Finance
 
         public int CompareTo(Money other)
         {
-            ThrowIfCurrencyMismatch(this, other, nameof(other));
+            this.ThrowIfCurrencyMismatch(other, nameof(other));
 
             return Amount.CompareTo(other.Amount);
         }
@@ -416,7 +417,7 @@ namespace Narvalo.Finance
 
         public Money Add(Money other)
         {
-            ThrowIfCurrencyMismatch(this, other, nameof(other));
+            ThrowIfCurrencyMismatch(other, nameof(other));
 
             if (Amount == 0m) { return other; }
             if (other.Amount == 0m) { return this; }
@@ -465,7 +466,7 @@ namespace Narvalo.Finance
 
         public Money Subtract(Money other)
         {
-            ThrowIfCurrencyMismatch(this, other, nameof(other));
+            ThrowIfCurrencyMismatch(other, nameof(other));
 
             if (Amount == 0m) { return other.Negate(); }
             if (other.Amount == 0m) { return this; }

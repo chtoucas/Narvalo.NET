@@ -20,7 +20,7 @@ namespace Narvalo.Finance.Numerics
         public static Money Add(this Money @this, Money other, IDecimalRounding rounding)
         {
             Expect.NotNull(rounding);
-            Money.ThrowIfCurrencyMismatch(@this, other, nameof(other));
+            @this.ThrowIfCurrencyMismatch(other, nameof(other));
 
             var amount = @this.Amount + other.Amount;
 
@@ -42,7 +42,7 @@ namespace Narvalo.Finance.Numerics
         public static Money Subtract(this Money @this, Money other, IDecimalRounding rounding)
         {
             Expect.NotNull(rounding);
-            Money.ThrowIfCurrencyMismatch(@this, other, nameof(other));
+            @this.ThrowIfCurrencyMismatch(other, nameof(other));
 
             var amount = @this.Amount - other.Amount;
 
