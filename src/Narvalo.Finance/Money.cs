@@ -68,7 +68,7 @@ namespace Narvalo.Finance
         /// <param name="mode">The rounding mode.</param>
         public Money(decimal amount, Currency currency, MidpointRounding mode)
         {
-            Amount = mode.Round(amount, currency.DecimalPlaces);
+            Amount = currency.Round(amount, mode);
             Currency = currency;
             IsNormalized = true;
         }
@@ -147,6 +147,12 @@ namespace Narvalo.Finance
 
         public static Money One(Currency currency) => new Money(currency.One, currency, true);
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount already rounded to the number of decimal places specified by the currency.
+        /// </summary>
+        /// <param name="amount">A decimal representing the amount of money.</param>
+        /// <param name="currency">A currency.</param>
         public static Money OfCurrency(decimal amount, Currency currency)
             => new Money(amount, currency, true);
 

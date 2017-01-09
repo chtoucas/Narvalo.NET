@@ -10,7 +10,6 @@ namespace Narvalo.Finance
     using System.Linq;
     using System.Threading;
 
-    using Narvalo.Finance.Numerics;
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
@@ -245,34 +244,6 @@ namespace Narvalo.Finance
 
             return ri.ISOCurrencySymbol == Code;
         }
-
-        /// <summary>
-        /// Converts an amount to a value expressed in minor units.
-        /// </summary>
-        /// <remarks>We expect the amount to be normalized.</remarks>
-        /// <exception cref="OverflowException">Thrown if the amount is too large to fit into
-        /// the Int64 range.</exception>
-        internal long ConvertToMinorUnits(decimal major)
-            => Convert.ToInt64(Factor * major);
-
-        public long ConvertToMinorUnits(decimal amount, MidpointRounding rounding)
-            => ConvertToMinorUnits(rounding.Round(amount, DecimalPlaces));
-
-        public long? TryConvertToMinorUnits(decimal amount, MidpointRounding rounding)
-        {
-            decimal minor = Factor * rounding.Round(amount, DecimalPlaces);
-            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
-            return Convert.ToInt64(minor);
-        }
-
-        public bool TryConvertToMinorUnits(decimal amount, MidpointRounding rounding, out long result)
-        {
-            long? minor = TryConvertToMinorUnits(amount, rounding);
-            result = minor ?? (amount > 0 ? Int64.MaxValue : Int64.MinValue);
-            return minor.HasValue;
-        }
-
-        public decimal ConvertToMajorUnits(long amount) => Epsilon * amount;
 
         /// <summary>
         /// Returns a string containing the code of the currency.

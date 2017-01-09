@@ -4,7 +4,6 @@ namespace Narvalo.Finance.Numerics
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     using Calculator = Narvalo.Finance.MoneyCalculator;
 
@@ -86,64 +85,191 @@ namespace Narvalo.Finance.Numerics
     // LINQ-like Sum().
     public static partial class MoneyCalculator
     {
-        public static Money Sum(this IEnumerable<Money> @this, IDecimalRounding mode)
+        // Optimized version of: @this.Select(_ => _.Normalize(rounding)).Sum().
+        public static Money Sum(this IEnumerable<Money> @this, IDecimalRounding rounding)
         {
             Require.NotNull(@this, nameof(@this));
-            throw new NotImplementedException();
+            Require.NotNull(rounding, nameof(rounding));
+
+            using (IEnumerator<Money> it = @this.GetEnumerator())
+            {
+                if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
+
+                Money f = it.Current;
+                Currency currency = f.Currency;
+                decimal sum = f.IsNormalized ? f.Amount : currency.Round(f.Amount, rounding);
+
+                while (it.MoveNext())
+                {
+                    Money c = it.Current;
+
+                    Calculator.ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                    sum += c.IsNormalized ? c.Amount : currency.Round(c.Amount, rounding);
+                }
+
+                return Money.OfCurrency(sum, currency);
+            }
+
+            EMPTY_COLLECTION:
+            return Money.OfCurrency(0, Currency.None);
         }
 
-        public static Money Sum(this IEnumerable<Money?> @this, IDecimalRounding mode)
+        // Optimized version of: @this.Select(_ => _.Normalize(rounding)).Sum().
+        public static Money Sum(this IEnumerable<Money?> @this, IDecimalRounding rounding)
         {
             Require.NotNull(@this, nameof(@this));
-            throw new NotImplementedException();
+            Require.NotNull(rounding, nameof(rounding));
+
+            using (IEnumerator<Money?> it = @this.GetEnumerator())
+            {
+                while (it.MoveNext())
+                {
+                    Money? nf = it.Current;
+                    if (!nf.HasValue) { continue; }
+
+                    Money f = nf.Value;
+                    Currency currency = f.Currency;
+                    decimal sum = f.IsNormalized ? f.Amount : currency.Round(f.Amount, rounding);
+
+                    while (it.MoveNext())
+                    {
+                        Money? nc = it.Current;
+
+                        if (nc.HasValue)
+                        {
+                            Money c = nc.Value;
+
+                            Calculator.ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                            sum += c.IsNormalized ? c.Amount : currency.Round(c.Amount, rounding);
+                        }
+                    }
+
+                    return Money.OfCurrency(sum, currency);
+                }
+            }
+
+            return Money.OfCurrency(0, Currency.None);
         }
     }
 
     // LINQ-like Average().
     public static partial class MoneyCalculator
     {
-        public static Money Average(this IEnumerable<Money> @this, IDecimalRounding mode)
+        // Optimized version of: @this.Select(_ => _.Normalize(rounding)).Average().Normalize(mode).
+        public static Money Average(this IEnumerable<Money> @this, IDecimalRounding rounding)
         {
             Require.NotNull(@this, nameof(@this));
-            throw new NotImplementedException();
+            Require.NotNull(rounding, nameof(rounding));
+
+            using (IEnumerator<Money> it = @this.GetEnumerator())
+            {
+                if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
+
+                Money f = it.Current;
+                Currency currency = f.Currency;
+                decimal sum = f.IsNormalized ? f.Amount : currency.Round(f.Amount, rounding);
+                long count = 1;
+
+                while (it.MoveNext())
+                {
+                    Money c = it.Current;
+
+                    Calculator.ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                    sum += c.IsNormalized ? c.Amount : currency.Round(c.Amount, rounding);
+                    count++;
+                }
+
+                return MoneyFactory.Create(sum / count, currency, rounding);
+            }
         }
 
-        public static Money Average(this IEnumerable<Money?> @this, IDecimalRounding mode)
+        // Optimized version of: @this.Select(_ => _.Normalize(rounding)).Average().Normalize(mode).
+        public static Money? Average(this IEnumerable<Money?> @this, IDecimalRounding rounding)
         {
             Require.NotNull(@this, nameof(@this));
-            throw new NotImplementedException();
+            Require.NotNull(rounding, nameof(rounding));
+
+            using (IEnumerator<Money?> it = @this.GetEnumerator())
+            {
+                while (it.MoveNext())
+                {
+                    Money? nf = it.Current;
+                    if (!nf.HasValue) { continue; }
+
+                    Money f = nf.Value;
+                    Currency currency = f.Currency;
+                    decimal sum = f.IsNormalized ? f.Amount : currency.Round(f.Amount, rounding);
+                    long count = 1;
+
+                    while (it.MoveNext())
+                    {
+                        Money? nc = it.Current;
+
+                        if (nc.HasValue)
+                        {
+                            Money c = nc.Value;
+
+                            Calculator.ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                            sum += c.IsNormalized ? c.Amount : currency.Round(c.Amount, rounding);
+                            count++;
+                        }
+                    }
+
+                    return MoneyFactory.Create(sum / count, currency, rounding);
+                }
+            }
+
+            return null;
         }
     }
 
     // Distribute.
     public static partial class MoneyCalculator
     {
-        public static IEnumerable<Money> Distribute(
-            Money money,
-            int parts,
-            int decimalPlaces,
-            IDecimalRounding rounding)
+        public static IEnumerable<Money> Distribute(Money money, int count, IDecimalRounding rounding)
         {
+            Require.Range(count > 1, nameof(count));
             Require.NotNull(rounding, nameof(rounding));
-            Require.Range(parts > 0, nameof(parts));
             Warrant.NotNull<IEnumerable<Money>>();
 
-            var q = rounding.Round(money.Amount / parts, decimalPlaces);
-            var seq = Calculator.GetDistribution(money.Amount, parts, q);
+            var currency = money.Currency;
+            var total = money.Amount;
+            var q = money.Currency.Round(total / count, rounding);
+            var part = Money.OfCurrency(q, currency);
 
-            return from _ in seq select Money.OfCurrency(_, money.Currency);
+            for (var i = 0; i < count - 1; i++)
+            {
+                yield return part;
+            }
+
+            // REVIEW: round?
+            yield return new Money(total - (count - 1) * q, currency);
         }
 
-        public static IEnumerable<Money> Allocate(
-            Money money,
-            RatioArray ratios,
-            int decimalPlaces,
-            IDecimalRounding rounding)
+        public static IEnumerable<Money> Distribute(Money money, RatioArray ratios, IDecimalRounding rounding)
         {
             Require.NotNull(rounding, nameof(rounding));
 
-            return from _ in DecimalCalculator.Allocate(money.Amount, ratios, decimalPlaces, rounding)
-                   select Money.OfCurrency(_, money.Currency);
+            Currency currency = money.Currency;
+            decimal total = money.Amount;
+
+            var len = ratios.Length;
+            var dist = new decimal[len];
+            var last = total;
+
+            for (var i = 0; i < len - 1; i++)
+            {
+                decimal amount = currency.Round(ratios[i] * total, rounding);
+                last -= amount;
+                yield return Money.OfCurrency(amount, currency);
+            }
+
+            // REVIEW: round?
+            yield return new Money(last, currency);
         }
     }
 }

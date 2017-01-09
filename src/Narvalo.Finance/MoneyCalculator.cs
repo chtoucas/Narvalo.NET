@@ -5,7 +5,6 @@ namespace Narvalo.Finance
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     using Narvalo.Finance.Numerics;
 
@@ -164,6 +163,10 @@ namespace Narvalo.Finance
     //    > source.Select(_ => _.Normalize(mode)).Sum();
     // For the later, we provides a custom implementation which tries to avoid to create any
     // unnecessary temporary objects due to the use of Normalize().
+    // WARNING: To solve the second case, do not use
+    // > source.Select(_ => Math.Round(_.Amount, _.Currency.DecimalPlaces, mode)).Sum();
+    // it will not fail but won't give the correct result in case all elements do not use the
+    // same currency, it should rather throw.
     public static partial class MoneyCalculator
     {
         public static Money Sum(this IEnumerable<Money> @this)
@@ -174,8 +177,9 @@ namespace Narvalo.Finance
             {
                 if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
 
-                // The main purpose for the separate treatment of the first element
-                // is to get a hand on the (hopefully) common currency.
+                // The main purpose for the separate treatment of the first element is to get a
+                // hand on its underlying currency which will serve as a reference when we shall
+                // check that all elements of the collection use the same currency.
                 Money f = it.Current;
                 Currency currency = f.Currency;
                 bool normalized = f.IsNormalized;
@@ -241,7 +245,7 @@ namespace Narvalo.Finance
             return Money.OfCurrency(0, Currency.None);
         }
 
-        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum();
+        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum().
         public static Money Sum(this IEnumerable<Money> @this, MidpointRounding mode)
         {
             Require.NotNull(@this, nameof(@this));
@@ -252,8 +256,7 @@ namespace Narvalo.Finance
 
                 Money f = it.Current;
                 Currency currency = f.Currency;
-                short decimalPlaces = currency.DecimalPlaces;
-                decimal sum = f.IsNormalized ? f.Amount : mode.Round(f.Amount, decimalPlaces);
+                decimal sum = f.IsNormalized ? f.Amount : currency.Round(f.Amount, mode);
 
                 while (it.MoveNext())
                 {
@@ -261,7 +264,7 @@ namespace Narvalo.Finance
 
                     ThrowIfCurrencyMismatch(c.Currency, currency);
 
-                    sum += c.IsNormalized ? c.Amount : mode.Round(c.Amount, decimalPlaces);
+                    sum += c.IsNormalized ? c.Amount : currency.Round(c.Amount, mode);
                 }
 
                 return Money.OfCurrency(sum, currency);
@@ -271,7 +274,7 @@ namespace Narvalo.Finance
             return Money.OfCurrency(0, Currency.None);
         }
 
-        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum();
+        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum().
         public static Money Sum(this IEnumerable<Money?> @this, MidpointRounding mode)
         {
             Require.NotNull(@this, nameof(@this));
@@ -285,8 +288,7 @@ namespace Narvalo.Finance
 
                     Money f = nf.Value;
                     Currency currency = f.Currency;
-                    short decimalPlaces = currency.DecimalPlaces;
-                    decimal sum = f.IsNormalized ? f.Amount : mode.Round(f.Amount, decimalPlaces);
+                    decimal sum = f.IsNormalized ? f.Amount : currency.Round(f.Amount, mode);
 
                     while (it.MoveNext())
                     {
@@ -298,7 +300,7 @@ namespace Narvalo.Finance
 
                             ThrowIfCurrencyMismatch(c.Currency, currency);
 
-                            sum += c.IsNormalized ? c.Amount : mode.Round(c.Amount, decimalPlaces);
+                            sum += c.IsNormalized ? c.Amount : currency.Round(c.Amount, mode);
                         }
                     }
 
@@ -309,7 +311,7 @@ namespace Narvalo.Finance
             return Money.OfCurrency(0, Currency.None);
         }
 
-        private static void ThrowIfCurrencyMismatch(Currency cy1, Currency cy2)
+        internal static void ThrowIfCurrencyMismatch(Currency cy1, Currency cy2)
         {
             if (cy1 != cy2)
             {
@@ -405,7 +407,7 @@ namespace Narvalo.Finance
             return null;
         }
 
-        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Average().Normalize(mode);
+        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Average().Normalize(mode).
         public static Money Average(this IEnumerable<Money> @this, MidpointRounding mode)
         {
             Require.NotNull(@this, nameof(@this));
@@ -416,8 +418,7 @@ namespace Narvalo.Finance
 
                 Money f = it.Current;
                 Currency currency = f.Currency;
-                short decimalPlaces = currency.DecimalPlaces;
-                decimal sum = f.IsNormalized ? f.Amount : mode.Round(f.Amount, decimalPlaces);
+                decimal sum = f.IsNormalized ? f.Amount : currency.Round(f.Amount, mode);
                 long count = 1;
 
                 while (it.MoveNext())
@@ -426,7 +427,7 @@ namespace Narvalo.Finance
 
                     ThrowIfCurrencyMismatch(c.Currency, currency);
 
-                    sum += c.IsNormalized ? c.Amount : mode.Round(c.Amount, decimalPlaces);
+                    sum += c.IsNormalized ? c.Amount : currency.Round(c.Amount, mode);
                     count++;
                 }
 
@@ -434,7 +435,7 @@ namespace Narvalo.Finance
             }
         }
 
-        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Average().Normalize(mode);
+        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Average().Normalize(mode).
         public static Money? Average(this IEnumerable<Money?> @this, MidpointRounding mode)
         {
             Require.NotNull(@this, nameof(@this));
@@ -448,8 +449,7 @@ namespace Narvalo.Finance
 
                     Money f = nf.Value;
                     Currency currency = f.Currency;
-                    short decimalPlaces = currency.DecimalPlaces;
-                    decimal sum = f.IsNormalized ? f.Amount : mode.Round(f.Amount, decimalPlaces);
+                    decimal sum = f.IsNormalized ? f.Amount : currency.Round(f.Amount, mode);
                     long count = 1;
 
                     while (it.MoveNext())
@@ -462,7 +462,7 @@ namespace Narvalo.Finance
 
                             ThrowIfCurrencyMismatch(c.Currency, currency);
 
-                            sum += c.IsNormalized ? c.Amount : mode.Round(c.Amount, decimalPlaces);
+                            sum += c.IsNormalized ? c.Amount : currency.Round(c.Amount, mode);
                             count++;
                         }
                     }
@@ -478,63 +478,80 @@ namespace Narvalo.Finance
     // Distribute.
     public static partial class MoneyCalculator
     {
-        #region Distribute
-
-        public static IEnumerable<Money> Distribute(Money money, int parts)
+        public static IEnumerable<Money> Distribute(Money money, int count)
         {
-            Require.Range(parts > 0, nameof(parts));
+            Require.Range(count > 1, nameof(count));
             Warrant.NotNull<IEnumerable<Money>>();
 
-            var q = money.Amount / parts;
-            var seq = GetDistribution(money.Amount, parts, q);
-
-            return from _ in seq select new Money(_, money.Currency);
-        }
-
-        public static IEnumerable<Money> Distribute(
-            Money money,
-            int parts,
-            int decimalPlaces,
-            MidpointRounding mode)
-        {
-            Require.Range(parts > 0, nameof(parts));
-            Warrant.NotNull<IEnumerable<Money>>();
-
-            var q = mode.Round(money.Amount / parts, decimalPlaces);
-            var seq = GetDistribution(money.Amount, parts, q);
-
-            return from _ in seq select Money.OfCurrency(_, money.Currency);
-        }
-
-        internal static IEnumerable<decimal> GetDistribution(decimal total, int count, decimal part)
-        {
-            Warrant.NotNull<IEnumerable<decimal>>();
+            Currency currency = money.Currency;
+            decimal total = money.Amount;
+            decimal q = total / count;
+            Money part = new Money(q, currency);
 
             for (var i = 0; i < count - 1; i++)
             {
                 yield return part;
             }
 
-            yield return total - (count - 1) * part;
+            yield return new Money(total - (count - 1) * q, currency);
         }
 
-        #endregion
-
-        public static IEnumerable<Money> Allocate(Money money, RatioArray ratios)
+        public static IEnumerable<Money> Distribute(Money money, int count, MidpointRounding mode)
         {
-            return from _ in DecimalCalculator.Allocate(money.Amount, ratios)
-                   select new Money(_, money.Currency);
+            Require.Range(count > 1, nameof(count));
+            Warrant.NotNull<IEnumerable<Money>>();
+
+            Currency currency = money.Currency;
+            decimal total = money.Amount;
+            decimal q = money.Currency.Round(total / count, mode);
+            Money part = Money.OfCurrency(q, currency);
+
+            for (var i = 0; i < count - 1; i++)
+            {
+                yield return part;
+            }
+
+            // REVIEW: round?
+            yield return new Money(total - (count - 1) * q, currency);
         }
 
-        public static IEnumerable<Money> Allocate(
-            Money money,
-            RatioArray ratios,
-            int decimalPlaces,
-            MidpointRounding mode)
+        public static IEnumerable<Money> Distribute(Money money, RatioArray ratios)
         {
-            throw new NotImplementedException();
-            //return from _ in DecimalCalculator.Allocate(money.Amount, ratios, decimalPlaces, mode)
-            //       select new Money(_, money.Currency, MoneyRounding.Unnecessary);
+            Currency currency = money.Currency;
+            decimal total = money.Amount;
+
+            var len = ratios.Length;
+            var dist = new decimal[len];
+            var last = total;
+
+            for (var i = 0; i < len - 1; i++)
+            {
+                decimal amount = ratios[i] * total;
+                last -= amount;
+                yield return new Money(amount, currency);
+            }
+
+            yield return new Money(last, currency);
+        }
+
+        public static IEnumerable<Money> Distribute(Money money, RatioArray ratios, MidpointRounding mode)
+        {
+            Currency currency = money.Currency;
+            decimal total = money.Amount;
+
+            var len = ratios.Length;
+            var dist = new decimal[len];
+            var last = total;
+
+            for (var i = 0; i < len - 1; i++)
+            {
+                decimal amount = currency.Round(ratios[i] * total, mode);
+                last -= amount;
+                yield return Money.OfCurrency(amount, currency);
+            }
+
+            // REVIEW: round?
+            yield return new Money(last, currency);
         }
     }
 }

@@ -6,13 +6,19 @@ namespace Narvalo.Finance.Numerics
 
     public static class CurrencyExtensions
     {
+        internal static decimal Round(this Currency @this, decimal amount, IDecimalRounding rounding)
+            => rounding.Round(amount, @this.DecimalPlaces);
+
+        public static long ConvertToMinorUnits(this Currency @this, decimal amount, IDecimalRounding rounding)
+            => @this.ConvertToMinorUnits(Round(@this, amount, rounding));
+
         public static long? TryConvertToMinorUnits(
             this Currency @this,
             decimal amount,
             IDecimalRounding rounding)
         {
             Require.NotNull(rounding, nameof(rounding));
-            decimal minor = @this.Factor * rounding.Round(amount, @this.DecimalPlaces);
+            decimal minor = @this.Factor * Round(@this, amount, rounding);
             if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
             return Convert.ToInt64(minor);
         }
