@@ -22,7 +22,7 @@ namespace Narvalo.Finance
         /// and an amount without minor units.
         /// </summary>
         /// <param name="amount">An unsigned integer representing the amount of money.</param>
-        /// <param name="currency">The specific currency.</param>
+        /// <param name="currency">A currency.</param>
         [CLSCompliant(false)]
         public Money(uint amount, Currency currency) : this(amount, currency, true) { }
 
@@ -31,7 +31,7 @@ namespace Narvalo.Finance
         /// and an amount without minor units.
         /// </summary>
         /// <param name="amount">A signed integer representing the amount of money.</param>
-        /// <param name="currency">The specific currency.</param>
+        /// <param name="currency">A currency.</param>
         [CLSCompliant(false)]
         public Money(ulong amount, Currency currency) : this(amount, currency, true) { }
 
@@ -40,7 +40,7 @@ namespace Narvalo.Finance
         /// and an amount without minor units.
         /// </summary>
         /// <param name="amount">An unsigned long representing the amount of money.</param>
-        /// <param name="currency">The specific currency.</param>
+        /// <param name="currency">A currency.</param>
         public Money(int amount, Currency currency) : this(amount, currency, true) { }
 
         /// <summary>
@@ -48,15 +48,15 @@ namespace Narvalo.Finance
         /// and an amount without minor units.
         /// </summary>
         /// <param name="amount">An signed long representing the amount of money.</param>
-        /// <param name="currency">The specific currency.</param>
+        /// <param name="currency">A currency.</param>
         public Money(long amount, Currency currency) : this(amount, currency, true) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount for which NO rounding will be done.
+        /// and an amount where there is no restriction on the scale.
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
-        /// <param name="currency">The specific currency.</param>
+        /// <param name="currency">A currency.</param>
         public Money(decimal amount, Currency currency) : this(amount, currency, false) { }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Narvalo.Finance
         /// and an amount for which the number of decimal places is determined by the currency.
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
-        /// <param name="currency">The specific currency.</param>
+        /// <param name="currency">A currency.</param>
         /// <param name="mode">The rounding mode.</param>
         public Money(decimal amount, Currency currency, MidpointRounding mode)
         {
@@ -73,7 +73,7 @@ namespace Narvalo.Finance
             IsNormalized = true;
         }
 
-        private Money(decimal amount, Currency currency, bool normalized)
+        internal Money(decimal amount, Currency currency, bool normalized)
         {
             Amount = amount;
             Currency = currency;
@@ -150,8 +150,8 @@ namespace Narvalo.Finance
         public static Money OfCurrency(decimal amount, Currency currency)
             => new Money(amount, currency, true);
 
-        internal static void ThrowIfCurrencyMismatch(Money @this, Money other, string parameterName)
-            => Enforce.True(@this.Currency == other.Currency, parameterName, Strings.Argument_CurrencyMismatch);
+        internal static void ThrowIfCurrencyMismatch(Money my1, Money my2, string parameterName)
+            => Enforce.True(my1.Currency == my2.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
         public Money Normalize(MidpointRounding mode)
         {

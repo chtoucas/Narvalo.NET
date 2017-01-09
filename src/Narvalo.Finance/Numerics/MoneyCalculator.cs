@@ -83,7 +83,7 @@ namespace Narvalo.Finance.Numerics
         }
     }
 
-    // LINQ Sum() extension.
+    // LINQ-like Sum().
     public static partial class MoneyCalculator
     {
         public static Money Sum(this IEnumerable<Money> @this, IDecimalRounding mode)
@@ -91,12 +91,24 @@ namespace Narvalo.Finance.Numerics
             Require.NotNull(@this, nameof(@this));
             throw new NotImplementedException();
         }
+
+        public static Money Sum(this IEnumerable<Money?> @this, IDecimalRounding mode)
+        {
+            Require.NotNull(@this, nameof(@this));
+            throw new NotImplementedException();
+        }
     }
 
-    // LINQ Average() extension.
+    // LINQ-like Average().
     public static partial class MoneyCalculator
     {
         public static Money Average(this IEnumerable<Money> @this, IDecimalRounding mode)
+        {
+            Require.NotNull(@this, nameof(@this));
+            throw new NotImplementedException();
+        }
+
+        public static Money Average(this IEnumerable<Money?> @this, IDecimalRounding mode)
         {
             Require.NotNull(@this, nameof(@this));
             throw new NotImplementedException();

@@ -130,175 +130,339 @@ namespace Narvalo.Finance
             => money.Round(decimalPlaces, mode);
     }
 
-    // LINQ Sum() extension.
+    // LINQ-like Sum().
+    //
+    // For collections of nullable moneys, the signature of Sum() differs from the one found
+    // in .NET; instead of returning a nullable money, we return a money. Anyway, despite what it
+    // advertises, Sum() from LINQ never returns null.
+    //
+    // We do not include all variants of Sum() since they are easy to implement: if source is
+    // of type IEnumerable<TSource>:
+    // - source.Sum(Func<TSource, Money> selector) == source.Select(selector).Sum()
+    // - source.Sum(Func<TSource, Money> selector, MidpointRounding mode) == source.Select(selector).Sum(mode)
+    // - source.Sum(Func<TSource, Money?> selector) ==  source.Select(selector).Sum()
+    // - source.Sum(Func<TSource, Money?> selector, MidpointRounding mode) == source.Select(selector).Sum(mode)
+    //
+    // Below, we do not use the various overloads for the addition, since it is obviously more
+    // efficient to construct a single Money object at the end rather than many short-lived Money
+    // objects, precisely one at each step.
+    //
+    // There are two (main) ways to perform a sum with rounding in mind:
+    // - round after the summation:
+    //   > source.Sum().Normalize(mode);
+    // - round a money just before adding its amount to the cumulative sum:
+    //   > source.Select(_ => _.Normalize(mode)).Sum();
+    // For the later, we provides a custom implementation to avoid the creation of unnecessary
+    // temporary objects due to the use of Normalize(). There is actually a third way that I can
+    // think of: round after each intermediate addition; I do not implement it, since I don't see
+    // any use cases for it (but I might well be wrong).
     public static partial class MoneyCalculator
     {
-        private static readonly Func<Money, Money> s_Id = _ => _;
-        private static readonly Func<Money?, Money?> s_IdNullable = _ => _;
-
         public static Money Sum(this IEnumerable<Money> @this)
         {
-            Expect.NotNull(@this);
-            return Sum(@this, s_Id);
+            Require.NotNull(@this, nameof(@this));
+
+            using (IEnumerator<Money> it = @this.GetEnumerator())
+            {
+                if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
+
+                // The main purpose for the separate treatment of the first element
+                // is to get a hand on the (hopefully) common currency.
+                Money f = it.Current;
+                Currency currency = f.Currency;
+                bool normalized = f.IsNormalized;
+                decimal sum = f.Amount;
+
+                while (it.MoveNext())
+                {
+                    Money c = it.Current;
+
+                    ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                    normalized = normalized && c.IsNormalized;
+                    sum += c.Amount;
+                }
+
+                return new Money(sum, currency, normalized);
+            }
+
+            EMPTY_COLLECTION:
+            return Money.OfCurrency(0, Currency.None);
         }
 
         public static Money Sum(this IEnumerable<Money?> @this)
         {
-            Expect.NotNull(@this);
-            return Sum(@this, s_IdNullable);
-        }
-
-        public static Money Sum<TSource>(this IEnumerable<TSource> @this, Func<TSource, Money> selector)
-        {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
 
-            bool first = true;
-            Money sum = Money.Zero(Currency.None);
-
-            foreach (var item in @this)
+            using (IEnumerator<Money?> it = @this.GetEnumerator())
             {
-                if (first)
+                // If the sequence is empty, we never enter this loop.
+                // Actually, this is not really a loop, as it executes only once.
+                while (it.MoveNext())
                 {
-                    sum = selector.Invoke(item);
-                    first = false;
-                }
-                else
-                {
-                    sum = sum.Add(selector.Invoke(item));
+                    Money? nf = it.Current;
+                    // If all elements are null, we never pass this point.
+                    if (!nf.HasValue) { continue; }
+
+                    Money f = nf.Value;
+                    Currency currency = f.Currency;
+                    bool normalized = f.IsNormalized;
+                    decimal sum = f.Amount;
+
+                    // Loop over the remaining elements, if any.
+                    while (it.MoveNext())
+                    {
+                        Money? nc = it.Current;
+
+                        if (nc.HasValue)
+                        {
+                            Money c = nc.Value;
+
+                            ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                            normalized = normalized && c.IsNormalized;
+                            sum += c.Amount;
+                        }
+                    }
+
+                    return new Money(sum, currency, normalized);
                 }
             }
 
-            return sum;
+            // For an empty collection or a collection of nulls, we return zero.
+            return Money.OfCurrency(0, Currency.None);
         }
 
-        public static Money Sum<TSource>(this IEnumerable<TSource> @this, Func<TSource, Money?> selector)
-        {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-            throw new NotImplementedException();
-        }
-
+        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum();
         public static Money Sum(this IEnumerable<Money> @this, MidpointRounding mode)
         {
-            Expect.NotNull(@this);
-            return Sum(@this, s_Id, mode);
+            Require.NotNull(@this, nameof(@this));
+
+            using (IEnumerator<Money> it = @this.GetEnumerator())
+            {
+                if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
+
+                Money f = it.Current;
+                Currency currency = f.Currency;
+                short decimalPlaces = currency.DecimalPlaces;
+                decimal sum = f.IsNormalized ? f.Amount : mode.Round(f.Amount, decimalPlaces);
+
+                while (it.MoveNext())
+                {
+                    Money c = it.Current;
+
+                    ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                    sum += c.IsNormalized ? c.Amount : mode.Round(c.Amount, decimalPlaces);
+                }
+
+                return Money.OfCurrency(sum, currency);
+            }
+
+            EMPTY_COLLECTION:
+            return Money.OfCurrency(0, Currency.None);
         }
 
+        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum();
         public static Money Sum(this IEnumerable<Money?> @this, MidpointRounding mode)
         {
-            Expect.NotNull(@this);
-            return Sum(@this, s_IdNullable, mode);
-        }
-
-        public static Money Sum<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Money> selector,
-            MidpointRounding mode)
-        {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
 
-            Money? first = null;
-            bool normalized = true;
-            decimal sum = 0;
-
-            foreach (TSource item in @this)
+            using (IEnumerator<Money?> it = @this.GetEnumerator())
             {
-                Money money = selector.Invoke(item);
-
-                if (first == null)
+                while (it.MoveNext())
                 {
-                    first = money;
-                }
-                else
-                {
-                    ThrowIfCurrencyMismatch(money, first.Value);
-                }
+                    Money? nf = it.Current;
+                    if (!nf.HasValue) { continue; }
 
-                normalized = normalized && money.IsNormalized;
-                sum += money.Amount;
+                    Money f = nf.Value;
+                    Currency currency = f.Currency;
+                    short decimalPlaces = currency.DecimalPlaces;
+                    decimal sum = f.IsNormalized ? f.Amount : mode.Round(f.Amount, decimalPlaces);
+
+                    while (it.MoveNext())
+                    {
+                        Money? nc = it.Current;
+
+                        if (nc.HasValue)
+                        {
+                            Money c = nc.Value;
+
+                            ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                            sum += c.IsNormalized ? c.Amount : mode.Round(c.Amount, decimalPlaces);
+                        }
+                    }
+
+                    return Money.OfCurrency(sum, currency);
+                }
             }
 
-            return first.HasValue
-                ? (normalized
-                    ? Money.OfCurrency(sum, first.Value.Currency)
-                    : new Money(sum, first.Value.Currency, mode))
-                : Money.OfCurrency(0, Currency.None);
+            return Money.OfCurrency(0, Currency.None);
+            // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum();
         }
 
-        public static Money Sum<TSource>(
-            this IEnumerable<TSource> @this,
-            Func<TSource, Money?> selector,
-            MidpointRounding mode)
+        private static void ThrowIfCurrencyMismatch(Currency cy1, Currency cy2)
         {
-            Require.NotNull(@this, nameof(@this));
-            Require.NotNull(selector, nameof(selector));
-
-            Money? first = null;
-            bool normalized = true;
-            decimal sum = 0;
-
-            foreach (TSource item in @this)
-            {
-                Money? money = selector.Invoke(item);
-
-                if (money == null) { continue; }
-
-                if (first == null)
-                {
-                    first = money;
-                }
-                else
-                {
-                    ThrowIfCurrencyMismatch(money.Value, first.Value);
-                }
-
-                normalized = normalized && money.Value.IsNormalized;
-                sum += money.Value.Amount;
-            }
-
-            return first.HasValue
-                ? (normalized
-                    ? Money.OfCurrency(sum, first.Value.Currency)
-                    : new Money(sum, first.Value.Currency, mode))
-                : Money.OfCurrency(0, Currency.None);
-        }
-
-        private static void ThrowIfCurrencyMismatch(Money money1, Money money2)
-        {
-            if (money1.Currency != money2.Currency)
+            if (cy1 != cy2)
             {
                 throw new InvalidOperationException("XXX");
             }
         }
     }
 
-    // LINQ Average() extension.
+    // LINQ-like Average().
+    //
+    // As for Sum(), we do not implement all variants of Average(): if source is of type
+    // IEnumerable<TSource>:
+    // - source.Average(Func<TSource, Money> selector) == source.Select(selector).Average()
+    // - source.Average(Func<TSource, Money> selector, MidpointRounding mode) == source.Select(selector).Average(mode)
+    // - source.Average(Func<TSource, Money?> selector) ==  source.Select(selector).Average()
+    // - source.Average(Func<TSource, Money?> selector, MidpointRounding mode) == source.Select(selector).Average(mode)
+    //
+    // - round after computing the average:
+    //   > source.Average().Normalize(mode);
+    // - round a money just before adding its amount to the cumulative sum and round after division:
+    //   > source.Select(_ => _.Normalize(mode)).Average().Normalize(mode);
+    // - compute the sum without rounding, round, divide then round:
     public static partial class MoneyCalculator
     {
         public static Money Average(this IEnumerable<Money> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            throw new NotImplementedException();
+
+            // NB: We don't keep track of the normalization status, since the result is ALWAYS
+            // denormalized.
+            using (IEnumerator<Money> it = @this.GetEnumerator())
+            {
+                if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
+
+                Money f = it.Current;
+                Currency currency = f.Currency;
+                decimal sum = f.Amount;
+                long count = 1;
+
+                while (it.MoveNext())
+                {
+                    Money c = it.Current;
+
+                    ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                    sum += c.Amount;
+                    count++;
+                }
+
+                return new Money(sum / count, currency);
+            }
         }
 
-        public static Money Average(this IEnumerable<Money?> @this)
+        public static Money? Average(this IEnumerable<Money?> @this)
         {
             Require.NotNull(@this, nameof(@this));
-            throw new NotImplementedException();
+
+            // NB: We don't keep track of the normalization status, since the result is ALWAYS
+            // denormalized.
+            using (IEnumerator<Money?> it = @this.GetEnumerator())
+            {
+                while (it.MoveNext())
+                {
+                    Money? nf = it.Current;
+                    if (!nf.HasValue) { continue; }
+
+                    Money f = nf.Value;
+                    Currency currency = f.Currency;
+                    decimal sum = f.Amount;
+                    long count = 1;
+
+                    while (it.MoveNext())
+                    {
+                        Money? nc = it.Current;
+
+                        if (nc.HasValue)
+                        {
+                            Money c = nc.Value;
+
+                            ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                            sum += c.Amount;
+                            count++;
+                        }
+                    }
+
+                    return new Money(sum / count, currency);
+                }
+            }
+
+            return null;
         }
 
+        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Average().Normalize(mode);
         public static Money Average(this IEnumerable<Money> @this, MidpointRounding mode)
         {
             Require.NotNull(@this, nameof(@this));
-            throw new NotImplementedException();
+
+            using (IEnumerator<Money> it = @this.GetEnumerator())
+            {
+                if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
+
+                Money f = it.Current;
+                Currency currency = f.Currency;
+                short decimalPlaces = currency.DecimalPlaces;
+                decimal sum = f.IsNormalized ? f.Amount : mode.Round(f.Amount, decimalPlaces);
+                long count = 1;
+
+                while (it.MoveNext())
+                {
+                    Money c = it.Current;
+
+                    ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                    sum += c.IsNormalized ? c.Amount : mode.Round(c.Amount, decimalPlaces);
+                    count++;
+                }
+
+                return new Money(sum / count, currency, mode);
+            }
         }
 
-        public static Money Average(this IEnumerable<Money?> @this, MidpointRounding mode)
+        // Optimized version of: @this.Select(_ => _.Normalize(mode)).Average().Normalize(mode);
+        public static Money? Average(this IEnumerable<Money?> @this, MidpointRounding mode)
         {
             Require.NotNull(@this, nameof(@this));
-            throw new NotImplementedException();
+
+            using (IEnumerator<Money?> it = @this.GetEnumerator())
+            {
+                while (it.MoveNext())
+                {
+                    Money? nf = it.Current;
+                    if (!nf.HasValue) { continue; }
+
+                    Money f = nf.Value;
+                    Currency currency = f.Currency;
+                    short decimalPlaces = currency.DecimalPlaces;
+                    decimal sum = f.IsNormalized ? f.Amount : mode.Round(f.Amount, decimalPlaces);
+                    long count = 1;
+
+                    while (it.MoveNext())
+                    {
+                        Money? nc = it.Current;
+
+                        if (nc.HasValue)
+                        {
+                            Money c = nc.Value;
+
+                            ThrowIfCurrencyMismatch(c.Currency, currency);
+
+                            sum += c.IsNormalized ? c.Amount : mode.Round(c.Amount, decimalPlaces);
+                            count++;
+                        }
+                    }
+
+                    return new Money(sum / count, currency, mode);
+                }
+            }
+
+            return null;
         }
     }
 
