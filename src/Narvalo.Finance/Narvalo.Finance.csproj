@@ -87,7 +87,6 @@
     <Compile Include="Numerics\HalfDitheringDecimalRounding.cs" />
     <Compile Include="Numerics\IDecimalRounding.cs" />
     <Compile Include="Numerics\Int32Calculator.cs" />
-    <Compile Include="Numerics\MidpointRounding%24.cs" />
     <Compile Include="Numerics\Money%24.cs" />
     <Compile Include="Numerics\MoneyCalculator.cs" />
     <Compile Include="Numerics\MoneyFactory.cs" />
