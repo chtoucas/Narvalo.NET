@@ -175,7 +175,7 @@ namespace Narvalo.Finance
         internal Money Round(int decimalPlaces, MidpointRounding mode)
         {
             if (IsNormalized && Currency.DecimalPlaces == decimalPlaces) { return this; }
-            decimal amount = mode.Round(Amount, decimalPlaces);
+            decimal amount = Math.Round(Amount, decimalPlaces, mode);
             return new Money(amount, Currency, decimalPlaces <= Currency.DecimalPlaces);
         }
 

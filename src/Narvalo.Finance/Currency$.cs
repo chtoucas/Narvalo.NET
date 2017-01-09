@@ -4,12 +4,10 @@ namespace Narvalo.Finance
 {
     using System;
 
-    using Narvalo.Finance.Numerics;
-
     public static class CurrencyExtensions
     {
         internal static decimal Round(this Currency @this, decimal amount, MidpointRounding mode)
-            => mode.Round(amount, @this.DecimalPlaces);
+            => Math.Round(amount, @this.DecimalPlaces, mode);
 
         /// <summary>
         /// Converts an amount to a value expressed in minor units.
