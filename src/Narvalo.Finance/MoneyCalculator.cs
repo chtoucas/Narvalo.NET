@@ -24,7 +24,7 @@ namespace Narvalo.Finance
             var amount = @this.Amount + other.Amount;
 
             return @this.IsNormalized && other.IsNormalized
-                ? Money.OfCurrency(amount, @this.Currency)
+                ? Money.OfMajor(amount, @this.Currency)
                 : new Money(amount, @this.Currency, mode);
         }
     }
@@ -42,7 +42,7 @@ namespace Narvalo.Finance
             var amount = @this.Amount - other.Amount;
 
             return @this.IsNormalized && other.IsNormalized
-                ? Money.OfCurrency(amount, @this.Currency)
+                ? Money.OfMajor(amount, @this.Currency)
                 : new Money(amount, @this.Currency, mode);
         }
     }
@@ -68,12 +68,12 @@ namespace Narvalo.Finance
             => new Money(@this.Amount % divisor, @this.Currency, mode);
     }
 
-    // Operators normally found in the class Math.
+    // Operators found in the class Math.
     public static partial class MoneyCalculator
     {
         public static Money Abs(Money money) => money.IsPositiveOrZero ? money : money.Negate();
 
-        public static Money Sign(Money money) => money < 0 ? -1 : (money > 0 ? 1 : 0);
+        public static int Sign(Money money) => money < 0 ? -1 : (money > 0 ? 1 : 0);
 
         public static Money Max(Money money1, Money money2) => money1 >= money2 ? money1 : money2;
 
@@ -104,29 +104,32 @@ namespace Narvalo.Finance
             return new Money(q, dividend.Currency);
         }
 
-        // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Ceiling(Money money) => money.Round(Math.Ceiling);
+        public static decimal Ceiling(Money money) => Round(money, Math.Ceiling);
 
-        // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Floor(Money money) => money.Round(Math.Floor);
+        public static decimal Floor(Money money) => Round(money, Math.Floor);
 
-        // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Truncate(Money money) => money.Round(Math.Truncate);
+        public static decimal Truncate(Money money) => Round(money, Math.Truncate);
 
-        // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Round(Money money) => money.Round(Math.Round);
+        public static decimal Round(Money money) => Round(money, Math.Round);
 
-        // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Round(Money money, MidpointRounding mode)
-            => money.Round(_ => Math.Round(_, mode));
+        public static decimal Round(Money money, MidpointRounding mode)
+            => Round(money, _ => Math.Round(_, mode));
 
-        // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Round(Money money, int decimalPlaces)
-            => money.Round(decimalPlaces, MidpointRounding.ToEven);
+        public static decimal Round(Money money, int decimalPlaces)
+            => Round(money, decimalPlaces, MidpointRounding.ToEven);
 
-        // DANGEROUS ZONE: You might lose or gain money.
-        public static Money Round(Money money, int decimalPlaces, MidpointRounding mode)
-            => money.Round(decimalPlaces, mode);
+        public static decimal Round(Money money, int decimalPlaces, MidpointRounding mode)
+        {
+            if (money.IsNormalized && money.Currency.DecimalPlaces == decimalPlaces) { return money.Amount; }
+            return Math.Round(money.Amount, decimalPlaces, mode);
+        }
+
+        private static decimal Round(Money money, Func<decimal, decimal> round)
+        {
+            Demand.NotNull(round);
+            if (money.IsNormalized && money.Currency.DecimalPlaces == 0) { return money.Amount; }
+            return round.Invoke(money.Amount);
+        }
     }
 
     // LINQ-like Sum().
@@ -199,7 +202,7 @@ namespace Narvalo.Finance
             }
 
             EMPTY_COLLECTION:
-            return Money.OfCurrency(0, Currency.None);
+            return Money.OfMajor(0, Currency.None);
         }
 
         public static Money Sum(this IEnumerable<Money?> @this)
@@ -242,7 +245,7 @@ namespace Narvalo.Finance
             }
 
             // For an empty collection or a collection of nulls, we return zero.
-            return Money.OfCurrency(0, Currency.None);
+            return Money.OfMajor(0, Currency.None);
         }
 
         // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum().
@@ -256,7 +259,7 @@ namespace Narvalo.Finance
 
                 Money m = it.Current;
                 Currency currency = m.Currency;
-                decimal sum = m.IsNormalized ? m.Amount : currency.Round(m.Amount, mode);
+                decimal sum = Normalize(m, mode);
 
                 while (it.MoveNext())
                 {
@@ -264,14 +267,14 @@ namespace Narvalo.Finance
 
                     ThrowIfCurrencyMismatch(m.Currency, currency);
 
-                    sum += m.IsNormalized ? m.Amount : currency.Round(m.Amount, mode);
+                    sum += Normalize(m, mode);
                 }
 
-                return Money.OfCurrency(sum, currency);
+                return Money.OfMajor(sum, currency);
             }
 
             EMPTY_COLLECTION:
-            return Money.OfCurrency(0, Currency.None);
+            return Money.OfMajor(0, Currency.None);
         }
 
         // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum().
@@ -288,7 +291,7 @@ namespace Narvalo.Finance
 
                     Money m = nm.Value;
                     Currency currency = m.Currency;
-                    decimal sum = m.IsNormalized ? m.Amount : currency.Round(m.Amount, mode);
+                    decimal sum = Normalize(m, mode);
 
                     while (it.MoveNext())
                     {
@@ -300,15 +303,15 @@ namespace Narvalo.Finance
 
                             ThrowIfCurrencyMismatch(m.Currency, currency);
 
-                            sum += m.IsNormalized ? m.Amount : currency.Round(m.Amount, mode);
+                            sum += Normalize(m, mode);
                         }
                     }
 
-                    return Money.OfCurrency(sum, currency);
+                    return Money.OfMajor(sum, currency);
                 }
             }
 
-            return Money.OfCurrency(0, Currency.None);
+            return Money.OfMajor(0, Currency.None);
         }
     }
 
@@ -410,7 +413,7 @@ namespace Narvalo.Finance
 
                 Money m = it.Current;
                 Currency currency = m.Currency;
-                decimal sum = m.IsNormalized ? m.Amount : currency.Round(m.Amount, mode);
+                decimal sum = Normalize(m, mode);
                 long count = 1;
 
                 while (it.MoveNext())
@@ -419,7 +422,7 @@ namespace Narvalo.Finance
 
                     ThrowIfCurrencyMismatch(m.Currency, currency);
 
-                    sum += m.IsNormalized ? m.Amount : currency.Round(m.Amount, mode);
+                    sum += Normalize(m, mode);
                     count++;
                 }
 
@@ -441,7 +444,7 @@ namespace Narvalo.Finance
 
                     Money m = nm.Value;
                     Currency currency = m.Currency;
-                    decimal sum = m.IsNormalized ? m.Amount : currency.Round(m.Amount, mode);
+                    decimal sum = Normalize(m, mode);
                     long count = 1;
 
                     while (it.MoveNext())
@@ -454,7 +457,7 @@ namespace Narvalo.Finance
 
                             ThrowIfCurrencyMismatch(m.Currency, currency);
 
-                            sum += m.IsNormalized ? m.Amount : currency.Round(m.Amount, mode);
+                            sum += Normalize(m, mode);
                             count++;
                         }
                     }
@@ -507,8 +510,8 @@ namespace Narvalo.Finance
             Currency currency = @this.Currency;
             decimal total = @this.Amount;
 
-            decimal q = @this.Currency.Round(total / count, mode);
-            Money part = Money.OfCurrency(q, currency);
+            decimal q = Math.Round(total / count, currency.DecimalPlaces, mode);
+            Money part = Money.OfMajor(q, currency);
 
             for (var i = 0; i < count - 1; i++)
             {
@@ -541,6 +544,7 @@ namespace Narvalo.Finance
         {
             Currency currency = @this.Currency;
             decimal total = @this.Amount;
+            short decimalPlaces = currency.DecimalPlaces;
 
             int len = ratios.Length;
             var dist = new decimal[len];
@@ -548,9 +552,9 @@ namespace Narvalo.Finance
 
             for (var i = 0; i < len - 1; i++)
             {
-                decimal amount = currency.Round(ratios[i] * total, mode);
+                decimal amount = Math.Round(ratios[i] * total, decimalPlaces, mode);
                 last -= amount;
-                yield return Money.OfCurrency(amount, currency);
+                yield return Money.OfMajor(amount, currency);
             }
 
             yield return new Money(last, currency, mode);
@@ -567,5 +571,10 @@ namespace Narvalo.Finance
                 throw new InvalidOperationException("XXX");
             }
         }
+
+        private static decimal Normalize(Money money, MidpointRounding mode)
+            => money.IsNormalized
+            ? money.Amount
+            : Math.Round(money.Amount, money.Currency.DecimalPlaces, mode);
     }
 }

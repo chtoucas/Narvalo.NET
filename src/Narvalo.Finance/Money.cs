@@ -69,7 +69,7 @@ namespace Narvalo.Finance
         /// <param name="mode">The rounding mode.</param>
         public Money(decimal amount, Currency currency, MidpointRounding mode)
         {
-            Amount = currency.Round(amount, mode);
+            Amount = Math.Round(amount, currency.DecimalPlaces, mode);
             Currency = currency;
             IsNormalized = true;
         }
@@ -92,13 +92,21 @@ namespace Narvalo.Finance
         public Currency Currency { get; }
 
         /// <summary>
+        /// Gets a value indicating whether the amount is rounded to the number of decimal places
+        /// specified by the currency.
+        /// </summary>
+        public bool IsNormalized { get; }
+
+        /// <summary>
         /// Gets the amount expressed in minor units.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Throw if the instance is not normalized
-        /// according to the currency rules concerning the number of decimal places.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if the instance is not
+        /// normalized.</exception>
         /// <exception cref="OverflowException">Thrown if the amount is too large to fit into
         /// the Int64 range.</exception>
-        public long AmountInMinorUnits
+        /// <seealso cref="ToMinor(Money)"/>
+        /// <seealso cref="ToMinor(Money, out long)"/>
+        public long AmountInMinor
         {
             get
             {
@@ -107,15 +115,9 @@ namespace Narvalo.Finance
                     throw new InvalidOperationException("XXX");
                 }
 
-                return Currency.ConvertToMinorUnits(Amount);
+                return Convert.ToInt64(Currency.Factor * Amount);
             }
         }
-
-        /// <summary>
-        /// Gets a value indicating whether the amount is rounded to the number of decimal places
-        /// specified by the currency.
-        /// </summary>
-        public bool IsNormalized { get; }
 
         /// <summary>
         /// Gets a value indicating whether the amount is zero.
@@ -154,27 +156,39 @@ namespace Narvalo.Finance
         /// </summary>
         /// <param name="amount">A decimal representing the amount of money.</param>
         /// <param name="currency">A currency.</param>
-        public static Money OfCurrency(decimal amount, Currency currency)
+        public static Money OfMajor(decimal amount, Currency currency)
             => new Money(amount, currency, true);
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount expressed in minor units.
+        /// </summary>
+        /// <param name="minor">The amount of money in minor units.</param>
+        /// <param name="currency">A currency.</param>
+        public static Money OfMinor(long minor, Currency currency)
+            => new Money(currency.Epsilon * minor, currency, true);
+
+        public long? ToMinor()
+        {
+            if (!IsNormalized) { return null; }
+
+            decimal minor = Currency.Factor * Amount;
+            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
+            return Convert.ToInt64(minor);
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "0#", Justification = "[Intentionally] Standard Try... pattern.")]
+        public bool ToMinor(out long result)
+        {
+            long? minor = ToMinor();
+            result = minor ?? (Amount > 0 ? Int64.MaxValue : Int64.MinValue);
+            return minor.HasValue;
+        }
 
         public Money Normalize(MidpointRounding mode)
         {
             if (IsNormalized) { return this; }
             return new Money(Amount, Currency, mode);
-        }
-
-        internal Money Round(Func<decimal, decimal> round)
-        {
-            Demand.NotNull(round);
-            if (IsNormalized && Currency.DecimalPlaces == 0) { return this; }
-            return new Money(round.Invoke(Amount), Currency, true);
-        }
-
-        internal Money Round(int decimalPlaces, MidpointRounding mode)
-        {
-            if (IsNormalized && Currency.DecimalPlaces == decimalPlaces) { return this; }
-            decimal amount = Math.Round(Amount, decimalPlaces, mode);
-            return new Money(amount, Currency, decimalPlaces <= Currency.DecimalPlaces);
         }
 
         internal void ThrowIfCurrencyMismatch(Money money, string parameterName)
@@ -288,26 +302,26 @@ namespace Narvalo.Finance
     public partial struct Money
     {
         [CLSCompliant(false)]
-        public static sbyte ToSByte(Money value) => Decimal.ToSByte(value.Amount);
+        public static sbyte ToSByte(Money money) => Decimal.ToSByte(money.Amount);
 
         [CLSCompliant(false)]
-        public static ushort ToUInt16(Money value) => Decimal.ToUInt16(value.Amount);
+        public static ushort ToUInt16(Money money) => Decimal.ToUInt16(money.Amount);
 
         [CLSCompliant(false)]
-        public static uint ToUInt32(Money value) => Decimal.ToUInt32(value.Amount);
+        public static uint ToUInt32(Money money) => Decimal.ToUInt32(money.Amount);
 
         [CLSCompliant(false)]
-        public static ulong ToUInt64(Money value) => Decimal.ToUInt64(value.Amount);
+        public static ulong ToUInt64(Money money) => Decimal.ToUInt64(money.Amount);
 
-        public static byte ToByte(Money value) => Decimal.ToByte(value.Amount);
+        public static byte ToByte(Money money) => Decimal.ToByte(money.Amount);
 
-        public static short ToInt16(Money value) => Decimal.ToInt16(value.Amount);
+        public static short ToInt16(Money money) => Decimal.ToInt16(money.Amount);
 
-        public static int ToInt32(Money value) => Decimal.ToInt32(value.Amount);
+        public static int ToInt32(Money money) => Decimal.ToInt32(money.Amount);
 
-        public static long ToInt64(Money value) => Decimal.ToInt64(value.Amount);
+        public static long ToInt64(Money money) => Decimal.ToInt64(money.Amount);
 
-        public static decimal ToDecimal(Money value) => value.Amount;
+        public static decimal ToDecimal(Money money) => money.Amount;
 
         #region Integral type or decimal -> Money.
 

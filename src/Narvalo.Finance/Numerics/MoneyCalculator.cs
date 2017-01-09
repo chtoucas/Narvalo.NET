@@ -25,7 +25,7 @@ namespace Narvalo.Finance.Numerics
             var amount = @this.Amount + other.Amount;
 
             return @this.IsNormalized && other.IsNormalized
-                ? Money.OfCurrency(amount, @this.Currency)
+                ? Money.OfMajor(amount, @this.Currency)
                 : MoneyFactory.Create(amount, @this.Currency, rounding);
         }
     }
@@ -47,7 +47,7 @@ namespace Narvalo.Finance.Numerics
             var amount = @this.Amount - other.Amount;
 
             return @this.IsNormalized && other.IsNormalized
-                ? Money.OfCurrency(amount, @this.Currency)
+                ? Money.OfMajor(amount, @this.Currency)
                 : MoneyFactory.Create(amount, @this.Currency, rounding);
         }
     }
@@ -97,7 +97,7 @@ namespace Narvalo.Finance.Numerics
 
                 Money m = it.Current;
                 Currency currency = m.Currency;
-                decimal sum = m.IsNormalized ? m.Amount : currency.Round(m.Amount, rounding);
+                decimal sum = Normalize(m, rounding);
 
                 while (it.MoveNext())
                 {
@@ -105,14 +105,14 @@ namespace Narvalo.Finance.Numerics
 
                     Calculator.ThrowIfCurrencyMismatch(m.Currency, currency);
 
-                    sum += m.IsNormalized ? m.Amount : currency.Round(m.Amount, rounding);
+                    sum += Normalize(m, rounding);
                 }
 
-                return Money.OfCurrency(sum, currency);
+                return Money.OfMajor(sum, currency);
             }
 
             EMPTY_COLLECTION:
-            return Money.OfCurrency(0, Currency.None);
+            return Money.OfMajor(0, Currency.None);
         }
 
         // Optimized version of: @this.Select(_ => _.Normalize(rounding)).Sum().
@@ -130,7 +130,7 @@ namespace Narvalo.Finance.Numerics
 
                     Money m = nm.Value;
                     Currency currency = m.Currency;
-                    decimal sum = m.IsNormalized ? m.Amount : currency.Round(m.Amount, rounding);
+                    decimal sum = Normalize(m, rounding);
 
                     while (it.MoveNext())
                     {
@@ -142,15 +142,15 @@ namespace Narvalo.Finance.Numerics
 
                             Calculator.ThrowIfCurrencyMismatch(m.Currency, currency);
 
-                            sum += m.IsNormalized ? m.Amount : currency.Round(m.Amount, rounding);
+                            sum += Normalize(m, rounding);
                         }
                     }
 
-                    return Money.OfCurrency(sum, currency);
+                    return Money.OfMajor(sum, currency);
                 }
             }
 
-            return Money.OfCurrency(0, Currency.None);
+            return Money.OfMajor(0, Currency.None);
         }
     }
 
@@ -169,7 +169,7 @@ namespace Narvalo.Finance.Numerics
 
                 Money m = it.Current;
                 Currency currency = m.Currency;
-                decimal sum = m.IsNormalized ? m.Amount : currency.Round(m.Amount, rounding);
+                decimal sum = Normalize(m, rounding);
                 long count = 1;
 
                 while (it.MoveNext())
@@ -178,7 +178,7 @@ namespace Narvalo.Finance.Numerics
 
                     Calculator.ThrowIfCurrencyMismatch(m.Currency, currency);
 
-                    sum += m.IsNormalized ? m.Amount : currency.Round(m.Amount, rounding);
+                    sum += Normalize(m, rounding);
                     count++;
                 }
 
@@ -201,7 +201,7 @@ namespace Narvalo.Finance.Numerics
 
                     Money m = nm.Value;
                     Currency currency = m.Currency;
-                    decimal sum = m.IsNormalized ? m.Amount : currency.Round(m.Amount, rounding);
+                    decimal sum = Normalize(m, rounding);
                     long count = 1;
 
                     while (it.MoveNext())
@@ -214,7 +214,7 @@ namespace Narvalo.Finance.Numerics
 
                             Calculator.ThrowIfCurrencyMismatch(m.Currency, currency);
 
-                            sum += m.IsNormalized ? m.Amount : currency.Round(m.Amount, rounding);
+                            sum += Normalize(m, rounding);
                             count++;
                         }
                     }
@@ -239,8 +239,8 @@ namespace Narvalo.Finance.Numerics
             Currency currency = @this.Currency;
             decimal total = @this.Amount;
 
-            decimal q = @this.Currency.Round(total / count, rounding);
-            Money part = Money.OfCurrency(q, currency);
+            decimal q = rounding.Round(total / count, @this.Currency.DecimalPlaces);
+            Money part = Money.OfMajor(q, currency);
 
             for (var i = 0; i < count - 1; i++)
             {
@@ -256,6 +256,7 @@ namespace Narvalo.Finance.Numerics
 
             Currency currency = @this.Currency;
             decimal total = @this.Amount;
+            short decimalPlaces = currency.DecimalPlaces;
 
             int len = ratios.Length;
             var dist = new decimal[len];
@@ -263,12 +264,21 @@ namespace Narvalo.Finance.Numerics
 
             for (var i = 0; i < len - 1; i++)
             {
-                decimal amount = currency.Round(ratios[i] * total, rounding);
+                decimal amount = rounding.Round(ratios[i] * total, decimalPlaces);
                 last -= amount;
-                yield return Money.OfCurrency(amount, currency);
+                yield return Money.OfMajor(amount, currency);
             }
 
             yield return MoneyFactory.Create(last, currency, rounding);
         }
+    }
+
+    // Helpers.
+    public static partial class MoneyCalculator
+    {
+        private static decimal Normalize(Money money, IDecimalRounding rounding)
+            => money.IsNormalized
+            ? money.Amount
+            : rounding.Round(money.Amount, money.Currency.DecimalPlaces);
     }
 }

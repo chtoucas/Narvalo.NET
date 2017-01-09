@@ -15,7 +15,7 @@ namespace Narvalo.Finance.Numerics
         {
             Require.NotNull(rounding, nameof(rounding));
             var ramount = rounding.Round(amount, currency.DecimalPlaces);
-            return Money.OfCurrency(ramount, currency);
+            return Money.OfMajor(ramount, currency);
         }
     }
 }
