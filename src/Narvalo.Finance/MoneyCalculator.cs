@@ -138,24 +138,32 @@ namespace Narvalo.Finance
     //
     // We do not include all variants of Sum() since they are easy to implement: if source is
     // of type IEnumerable<TSource>:
-    // - source.Sum(Func<TSource, Money> selector) == source.Select(selector).Sum()
-    // - source.Sum(Func<TSource, Money> selector, MidpointRounding mode) == source.Select(selector).Sum(mode)
-    // - source.Sum(Func<TSource, Money?> selector) ==  source.Select(selector).Sum()
-    // - source.Sum(Func<TSource, Money?> selector, MidpointRounding mode) == source.Select(selector).Sum(mode)
+    // - source.Sum(Func<TSource, Money> selector)
+    //   == source.Select(selector).Sum()
+    // - source.Sum(Func<TSource, Money> selector, MidpointRounding mode)
+    //   == source.Select(selector).Sum(mode)
+    // - source.Sum(Func<TSource, Money?> selector)
+    //   ==  source.Select(selector).Sum()
+    // - source.Sum(Func<TSource, Money?> selector, MidpointRounding mode)
+    //   == source.Select(selector).Sum(mode)
     //
-    // Below, we do not use the various overloads for the addition, since it is obviously more
-    // efficient to construct a single Money object at the end rather than many short-lived Money
-    // objects, precisely one at each step.
+    // Below, we do not use the various overloads for the addition. It would be a waste of
+    // resources to create many short-lived Money objects, precisely one for each addition, while
+    // we can sum the amounts then construct a single Money object.
     //
-    // There are two (main) ways to perform a sum with rounding in mind:
-    // - round after the summation:
-    //   > source.Sum().Normalize(mode);
-    // - round a money just before adding its amount to the cumulative sum:
-    //   > source.Select(_ => _.Normalize(mode)).Sum();
-    // For the later, we provides a custom implementation to avoid the creation of unnecessary
-    // temporary objects due to the use of Normalize(). There is actually a third way that I can
-    // think of: round after each intermediate addition; I do not implement it, since I don't see
-    // any use cases for it (but I might well be wrong).
+    // There are three ways to compute a sum with rounding in mind (NB: the sum of two rounded
+    // values is always rounded):
+    // 1. Compute the sum, then round.
+    // 2. Round before each intermediate addition.
+    // 3. Round after each intermediate addition.
+    // I do not implement the third one, since I don't see any use cases for it (but I might be
+    // wrong); the two others don't need any new operators:
+    // 1. round after the summation:
+    //    > source.Sum().Normalize(mode);
+    // 2. round an amount before adding it to the cumulative sum:
+    //    > source.Select(_ => _.Normalize(mode)).Sum();
+    // For the later, we provides a custom implementation which tries to avoid to create any
+    // unnecessary temporary objects due to the use of Normalize().
     public static partial class MoneyCalculator
     {
         public static Money Sum(this IEnumerable<Money> @this)
@@ -299,7 +307,6 @@ namespace Narvalo.Finance
             }
 
             return Money.OfCurrency(0, Currency.None);
-            // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum();
         }
 
         private static void ThrowIfCurrencyMismatch(Currency cy1, Currency cy2)
@@ -320,19 +327,22 @@ namespace Narvalo.Finance
     // - source.Average(Func<TSource, Money?> selector) ==  source.Select(selector).Average()
     // - source.Average(Func<TSource, Money?> selector, MidpointRounding mode) == source.Select(selector).Average(mode)
     //
-    // - round after computing the average:
+    // As for the sum, there are many ways to compute an average with rounding in mind.
+    // 1. Compute the average, then round:
     //   > source.Average().Normalize(mode);
-    // - round a money just before adding its amount to the cumulative sum and round after division:
+    // 2. Round before each intermediate addition, take the average then round:
     //   > source.Select(_ => _.Normalize(mode)).Average().Normalize(mode);
-    // - compute the sum without rounding, round, divide then round:
+    // These are the only ones we shall consider, and we will provide an optimized version for the
+    // later. For information only, you might also consider to:
+    // - compute the sum, round, take the average then round again.
+    // - round before each intermediate addition, take the average then round the result.
     public static partial class MoneyCalculator
     {
+        // NB: The result is ALWAYS denormalized.
         public static Money Average(this IEnumerable<Money> @this)
         {
             Require.NotNull(@this, nameof(@this));
 
-            // NB: We don't keep track of the normalization status, since the result is ALWAYS
-            // denormalized.
             using (IEnumerator<Money> it = @this.GetEnumerator())
             {
                 if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
@@ -356,12 +366,11 @@ namespace Narvalo.Finance
             }
         }
 
+        // NB: The result is ALWAYS denormalized.
         public static Money? Average(this IEnumerable<Money?> @this)
         {
             Require.NotNull(@this, nameof(@this));
 
-            // NB: We don't keep track of the normalization status, since the result is ALWAYS
-            // denormalized.
             using (IEnumerator<Money?> it = @this.GetEnumerator())
             {
                 while (it.MoveNext())
