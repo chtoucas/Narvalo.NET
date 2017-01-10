@@ -102,8 +102,8 @@ namespace Narvalo.Finance
         /// normalized.</exception>
         /// <exception cref="OverflowException">Thrown if the amount is too large to fit into
         /// the Int64 range.</exception>
-        /// <seealso cref="ToMinor(Money)"/>
-        /// <seealso cref="ToMinor(Money, out long)"/>
+        /// <seealso cref="ToMinor()"/>
+        /// <seealso cref="ToMinor(out long)"/>
         public long AmountInMinor
         {
             get

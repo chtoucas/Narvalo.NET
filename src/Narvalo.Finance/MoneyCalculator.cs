@@ -183,19 +183,19 @@ namespace Narvalo.Finance
                 // The main purpose for the separate treatment of the first element is to get a
                 // hand on its underlying currency which will serve as a reference when we shall
                 // check that all elements of the collection use the same currency.
-                Money m = it.Current;
-                Currency currency = m.Currency;
-                bool normalized = m.IsNormalized;
-                decimal sum = m.Amount;
+                Money item = it.Current;
+                Currency currency = item.Currency;
+                bool normalized = item.IsNormalized;
+                decimal sum = item.Amount;
 
                 while (it.MoveNext())
                 {
-                    m = it.Current;
+                    item = it.Current;
 
-                    ThrowIfCurrencyMismatch(m.Currency, currency);
+                    ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                    normalized = normalized && m.IsNormalized;
-                    sum += m.Amount;
+                    normalized = normalized && item.IsNormalized;
+                    sum += item.Amount;
                 }
 
                 return new Money(sum, currency, normalized);
@@ -215,28 +215,28 @@ namespace Narvalo.Finance
                 // Actually, this is not really a loop, as it executes only once.
                 while (it.MoveNext())
                 {
-                    Money? nm = it.Current;
+                    Money? current = it.Current;
                     // If all elements are null, we never pass this point.
-                    if (!nm.HasValue) { continue; }
+                    if (!current.HasValue) { continue; }
 
-                    Money m = nm.Value;
-                    Currency currency = m.Currency;
-                    bool normalized = m.IsNormalized;
-                    decimal sum = m.Amount;
+                    Money item = current.Value;
+                    Currency currency = item.Currency;
+                    bool normalized = item.IsNormalized;
+                    decimal sum = item.Amount;
 
                     // Loop over the remaining elements, if any.
                     while (it.MoveNext())
                     {
-                        nm = it.Current;
+                        current = it.Current;
 
-                        if (nm.HasValue)
+                        if (current.HasValue)
                         {
-                            m = nm.Value;
+                            item = current.Value;
 
-                            ThrowIfCurrencyMismatch(m.Currency, currency);
+                            ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                            normalized = normalized && m.IsNormalized;
-                            sum += m.Amount;
+                            normalized = normalized && item.IsNormalized;
+                            sum += item.Amount;
                         }
                     }
 
@@ -257,17 +257,17 @@ namespace Narvalo.Finance
             {
                 if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
 
-                Money m = it.Current;
-                Currency currency = m.Currency;
-                decimal sum = Normalize(m, mode);
+                Money item = it.Current;
+                Currency currency = item.Currency;
+                decimal sum = NormalizeAmount(item, mode);
 
                 while (it.MoveNext())
                 {
-                    m = it.Current;
+                    item = it.Current;
 
-                    ThrowIfCurrencyMismatch(m.Currency, currency);
+                    ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                    sum += Normalize(m, mode);
+                    sum += NormalizeAmount(item, mode);
                 }
 
                 return Money.OfMajor(sum, currency);
@@ -286,24 +286,24 @@ namespace Narvalo.Finance
             {
                 while (it.MoveNext())
                 {
-                    Money? nm = it.Current;
-                    if (!nm.HasValue) { continue; }
+                    Money? current = it.Current;
+                    if (!current.HasValue) { continue; }
 
-                    Money m = nm.Value;
-                    Currency currency = m.Currency;
-                    decimal sum = Normalize(m, mode);
+                    Money item = current.Value;
+                    Currency currency = item.Currency;
+                    decimal sum = NormalizeAmount(item, mode);
 
                     while (it.MoveNext())
                     {
-                        nm = it.Current;
+                        current = it.Current;
 
-                        if (nm.HasValue)
+                        if (current.HasValue)
                         {
-                            m = nm.Value;
+                            item = current.Value;
 
-                            ThrowIfCurrencyMismatch(m.Currency, currency);
+                            ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                            sum += Normalize(m, mode);
+                            sum += NormalizeAmount(item, mode);
                         }
                     }
 
@@ -344,18 +344,18 @@ namespace Narvalo.Finance
             {
                 if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
 
-                Money m = it.Current;
-                Currency currency = m.Currency;
-                decimal sum = m.Amount;
+                Money item = it.Current;
+                Currency currency = item.Currency;
+                decimal sum = item.Amount;
                 long count = 1;
 
                 while (it.MoveNext())
                 {
-                    m = it.Current;
+                    item = it.Current;
 
-                    ThrowIfCurrencyMismatch(m.Currency, currency);
+                    ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                    sum += m.Amount;
+                    sum += item.Amount;
                     count++;
                 }
 
@@ -372,25 +372,25 @@ namespace Narvalo.Finance
             {
                 while (it.MoveNext())
                 {
-                    Money? nm = it.Current;
-                    if (!nm.HasValue) { continue; }
+                    Money? current = it.Current;
+                    if (!current.HasValue) { continue; }
 
-                    Money m = nm.Value;
-                    Currency currency = m.Currency;
-                    decimal sum = m.Amount;
+                    Money item = current.Value;
+                    Currency currency = item.Currency;
+                    decimal sum = item.Amount;
                     long count = 1;
 
                     while (it.MoveNext())
                     {
-                        nm = it.Current;
+                        current = it.Current;
 
-                        if (nm.HasValue)
+                        if (current.HasValue)
                         {
-                            m = nm.Value;
+                            item = current.Value;
 
-                            ThrowIfCurrencyMismatch(m.Currency, currency);
+                            ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                            sum += m.Amount;
+                            sum += item.Amount;
                             count++;
                         }
                     }
@@ -411,18 +411,18 @@ namespace Narvalo.Finance
             {
                 if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
 
-                Money m = it.Current;
-                Currency currency = m.Currency;
-                decimal sum = Normalize(m, mode);
+                Money item = it.Current;
+                Currency currency = item.Currency;
+                decimal sum = NormalizeAmount(item, mode);
                 long count = 1;
 
                 while (it.MoveNext())
                 {
-                    m = it.Current;
+                    item = it.Current;
 
-                    ThrowIfCurrencyMismatch(m.Currency, currency);
+                    ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                    sum += Normalize(m, mode);
+                    sum += NormalizeAmount(item, mode);
                     count++;
                 }
 
@@ -439,25 +439,25 @@ namespace Narvalo.Finance
             {
                 while (it.MoveNext())
                 {
-                    Money? nm = it.Current;
-                    if (!nm.HasValue) { continue; }
+                    Money? current = it.Current;
+                    if (!current.HasValue) { continue; }
 
-                    Money m = nm.Value;
-                    Currency currency = m.Currency;
-                    decimal sum = Normalize(m, mode);
+                    Money item = current.Value;
+                    Currency currency = item.Currency;
+                    decimal sum = NormalizeAmount(item, mode);
                     long count = 1;
 
                     while (it.MoveNext())
                     {
-                        nm = it.Current;
+                        current = it.Current;
 
-                        if (nm.HasValue)
+                        if (current.HasValue)
                         {
-                            m = nm.Value;
+                            item = current.Value;
 
-                            ThrowIfCurrencyMismatch(m.Currency, currency);
+                            ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                            sum += Normalize(m, mode);
+                            sum += NormalizeAmount(item, mode);
                             count++;
                         }
                     }
@@ -572,7 +572,7 @@ namespace Narvalo.Finance
             }
         }
 
-        private static decimal Normalize(Money money, MidpointRounding mode)
+        private static decimal NormalizeAmount(Money money, MidpointRounding mode)
             => money.IsNormalized
             ? money.Amount
             : Math.Round(money.Amount, money.Currency.DecimalPlaces, mode);
