@@ -46,8 +46,7 @@ TODO
 - Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
 - Complete localization of messages.
 - Ops with double, float?
-- Improve Distribute() and custom allocation.
-  Add Distribute() to Money?
+- Improve Allocate() and custom allocations.
 - Non-decimal moneys: Mauritania & Madagascar;
   see [here](https://en.wikipedia.org/wiki/Denomination_(currency))
 - Money.Parse & Money.TryParse.
