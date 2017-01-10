@@ -80,6 +80,8 @@
     <Compile Include="Globalization\LocalMoneyFormatter.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="MoneyCalculator.cs" />
+    <Compile Include="Numerics\MoneyAllocator.cs" />
+    <Compile Include="Numerics\MoneyMath.cs" />
     <Compile Include="Numerics\RoundingAdjuster.cs" />
     <Compile Include="Numerics\AlternatedRoundingAdjuster.cs" />
     <Compile Include="Numerics\DitheredRoundingAdjuster.cs" />

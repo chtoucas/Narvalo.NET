@@ -5,6 +5,8 @@ namespace Narvalo.Finance.Numerics
     using System;
     using System.Collections.Generic;
 
+    // We have a name conflict, but the class only contains extension methods and we expect that
+    // the static methods will be called on very rare occasions.
     using Calculator = Narvalo.Finance.MoneyCalculator;
 
     // Addition with rounding.
@@ -224,52 +226,6 @@ namespace Narvalo.Finance.Numerics
             }
 
             return null;
-        }
-    }
-
-    // Distribute.
-    public static partial class MoneyCalculator
-    {
-        public static IEnumerable<Money> Distribute(this Money @this, int count, IRoundingAdjuster adjuster)
-        {
-            Require.Range(count > 1, nameof(count));
-            Require.NotNull(adjuster, nameof(adjuster));
-            Warrant.NotNull<IEnumerable<Money>>();
-
-            Currency currency = @this.Currency;
-            decimal total = @this.Amount;
-
-            decimal q = adjuster.Round(total / count, @this.Currency.DecimalPlaces);
-            Money part = Money.OfMajor(q, currency);
-
-            for (var i = 0; i < count - 1; i++)
-            {
-                yield return part;
-            }
-
-            yield return MoneyCreator.Create(total - (count - 1) * q, currency, adjuster);
-        }
-
-        public static IEnumerable<Money> Distribute(this Money @this, RatioArray ratios, IRoundingAdjuster adjuster)
-        {
-            Require.NotNull(adjuster, nameof(adjuster));
-
-            Currency currency = @this.Currency;
-            decimal total = @this.Amount;
-            short decimalPlaces = currency.DecimalPlaces;
-
-            int len = ratios.Length;
-            var dist = new decimal[len];
-            decimal last = total;
-
-            for (var i = 0; i < len - 1; i++)
-            {
-                decimal amount = adjuster.Round(ratios[i] * total, decimalPlaces);
-                last -= amount;
-                yield return Money.OfMajor(amount, currency);
-            }
-
-            yield return MoneyCreator.Create(last, currency, adjuster);
         }
     }
 

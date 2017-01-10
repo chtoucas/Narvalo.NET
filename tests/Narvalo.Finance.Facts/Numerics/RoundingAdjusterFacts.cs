@@ -7,7 +7,7 @@ namespace Narvalo.Finance.Numerics
 
     using Xunit;
 
-    public static partial class DecimalRoundingFacts
+    public static partial class RoundingAdjusterFacts
     {
         #region Round()
 
@@ -231,7 +231,7 @@ namespace Narvalo.Finance.Numerics
         #endregion
     }
 
-    public static partial class DecimalRoundingFacts
+    public static partial class RoundingAdjusterFacts
     {
         public static IEnumerable<object[]> Test1Data
         {
