@@ -72,6 +72,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Allocators\DefaultMoneyAllocator.cs" />
+    <Compile Include="Allocators\Money%24.cs" />
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
     <Compile Include="CurrencyTypes.cs" />
@@ -79,14 +81,14 @@
     <Compile Include="Generic\CurrencyUnit.cs" />
     <Compile Include="Globalization\LocalMoneyFormatter.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
-    <Compile Include="IMoneyAllocator.cs" />
-    <Compile Include="MoneyAllocators.cs" />
+    <Compile Include="Allocators\IMoneyAllocator.cs" />
+    <Compile Include="Allocators\MoneyAllocators.cs" />
     <Compile Include="MoneyCalculator.cs" />
-    <Compile Include="Rounding\DefaultRoundingAdjuster.cs" />
     <Compile Include="MoneyMath.cs" />
     <Compile Include="Rounding\AlternatedRoundingAdjuster.cs" />
     <Compile Include="Rounding\DitheredRoundingAdjuster.cs" />
     <Compile Include="Rounding\IRoundingAdjuster.cs" />
+    <Compile Include="Rounding\RoundingModeAdjuster.cs" />
     <Compile Include="Rounding\RoundingAdjusters.cs" />
     <Compile Include="Utilities\Int32Calculator.cs" />
     <Compile Include="Rounding\Money%24.cs" />
@@ -94,7 +96,7 @@
     <Compile Include="Rounding\StochasticRoundingAdjuster.cs" />
     <Compile Include="Utilities\IbanCheckDigits.cs" />
     <Compile Include="Rounding\RoudingMode.cs" />
-    <Compile Include="RatioArray.cs" />
+    <Compile Include="Allocators\RatioArray.cs" />
     <Compile Include="Globalization\CountryISOCodes.cs" />
     <Compile Include="Globalization\NumberFormatInfoExtensions.cs" />
     <Compile Include="IbanStyles.cs" />

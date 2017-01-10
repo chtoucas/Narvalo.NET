@@ -20,6 +20,11 @@ namespace Narvalo.Finance.Rounding
         {
             get
             {
+                if (_disposed)
+                {
+                    throw new ObjectDisposedException(typeof(AlternatedRoundingAdjuster).FullName);
+                }
+
                 _iterator.MoveNext();
                 return _iterator.Current;
             }
@@ -27,10 +32,15 @@ namespace Narvalo.Finance.Rounding
 
         public void Dispose() => Dispose(true);
 
+        public decimal Round(decimal value)
+            => UpOrDown
+            ? RoundingAdjusters.HalfUp(value)
+            : RoundingAdjusters.HalfDown(value);
+
         public decimal Round(decimal value, int decimalPlaces)
             => UpOrDown
-            ? RoundingAdjusters.RoundHalfUp(value, decimalPlaces)
-            : RoundingAdjusters.RoundHalfDown(value, decimalPlaces);
+            ? RoundingAdjusters.HalfUp(value, decimalPlaces)
+            : RoundingAdjusters.HalfDown(value, decimalPlaces);
 
         private void Dispose(bool disposing)
         {

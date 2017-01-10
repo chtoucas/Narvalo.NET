@@ -64,11 +64,11 @@ namespace Narvalo.Finance
             return Math.Round(money.Amount, decimalPlaces, mode);
         }
 
-        private static decimal Round(Money money, Func<decimal, decimal> round)
+        private static decimal Round(Money money, Func<decimal, decimal> thunk)
         {
-            Demand.NotNull(round);
+            Demand.NotNull(thunk);
             if (money.IsNormalized && money.Currency.DecimalPlaces == 0) { return money.Amount; }
-            return round.Invoke(money.Amount);
+            return thunk.Invoke(money.Amount);
         }
     }
 }

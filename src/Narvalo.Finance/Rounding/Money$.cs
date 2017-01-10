@@ -16,49 +16,6 @@ namespace Narvalo.Finance.Rounding
         }
     }
 
-    // Allocation.
-    public static partial class MoneyExtensions
-    {
-        public static IEnumerable<Money> Allocate(this Money @this, int count, IRoundingAdjuster adjuster)
-        {
-            Require.Range(count > 1, nameof(count));
-            Warrant.NotNull<IEnumerable<Money>>();
-
-            Currency currency = @this.Currency;
-            decimal total = @this.Amount;
-
-            decimal q = adjuster.Round(total / count, @this.Currency.DecimalPlaces);
-            Money part = Money.OfMajor(q, currency);
-
-            for (var i = 0; i < count - 1; i++)
-            {
-                yield return part;
-            }
-
-            yield return MoneyCreator.Create(total - (count - 1) * q, currency, adjuster);
-        }
-
-        public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios, IRoundingAdjuster adjuster)
-        {
-            Currency currency = @this.Currency;
-            decimal total = @this.Amount;
-            short decimalPlaces = currency.DecimalPlaces;
-
-            int len = ratios.Length;
-            var dist = new decimal[len];
-            decimal last = total;
-
-            for (var i = 0; i < len - 1; i++)
-            {
-                decimal amount = adjuster.Round(ratios[i] * total, decimalPlaces);
-                last -= amount;
-                yield return Money.OfMajor(amount, currency);
-            }
-
-            yield return MoneyCreator.Create(last, currency, adjuster);
-        }
-    }
-
     // Addition with rounding.
     public static partial class MoneyExtensions
     {
@@ -147,17 +104,17 @@ namespace Narvalo.Finance.Rounding
             {
                 if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
 
-                Money item = it.Current;
-                Currency currency = item.Currency;
-                decimal sum = NormalizeAmount(item, adjuster);
+                Money mny = it.Current;
+                Currency currency = mny.Currency;
+                decimal sum = NormalizeAmount(mny, adjuster);
 
                 while (it.MoveNext())
                 {
-                    item = it.Current;
+                    mny = it.Current;
 
-                    MoneyCalculator.ThrowIfCurrencyMismatch(item.Currency, currency);
+                    MoneyCalculator.ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                    sum += NormalizeAmount(item, adjuster);
+                    sum += NormalizeAmount(mny, adjuster);
                 }
 
                 return Money.OfMajor(sum, currency);
@@ -177,24 +134,24 @@ namespace Narvalo.Finance.Rounding
             {
                 while (it.MoveNext())
                 {
-                    Money? current = it.Current;
-                    if (!current.HasValue) { continue; }
+                    Money? item = it.Current;
+                    if (!item.HasValue) { continue; }
 
-                    Money item = current.Value;
-                    Currency currency = item.Currency;
-                    decimal sum = NormalizeAmount(item, adjuster);
+                    Money mny = item.Value;
+                    Currency currency = mny.Currency;
+                    decimal sum = NormalizeAmount(mny, adjuster);
 
                     while (it.MoveNext())
                     {
-                        current = it.Current;
+                        item = it.Current;
 
-                        if (current.HasValue)
+                        if (item.HasValue)
                         {
-                            item = current.Value;
+                            mny = item.Value;
 
-                            MoneyCalculator.ThrowIfCurrencyMismatch(item.Currency, currency);
+                            MoneyCalculator.ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                            sum += NormalizeAmount(item, adjuster);
+                            sum += NormalizeAmount(mny, adjuster);
                         }
                     }
 
@@ -219,18 +176,18 @@ namespace Narvalo.Finance.Rounding
             {
                 if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
 
-                Money item = it.Current;
-                Currency currency = item.Currency;
-                decimal sum = NormalizeAmount(item, adjuster);
+                Money mny = it.Current;
+                Currency currency = mny.Currency;
+                decimal sum = NormalizeAmount(mny, adjuster);
                 long count = 1;
 
                 while (it.MoveNext())
                 {
-                    item = it.Current;
+                    mny = it.Current;
 
-                    MoneyCalculator.ThrowIfCurrencyMismatch(item.Currency, currency);
+                    MoneyCalculator.ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                    sum += NormalizeAmount(item, adjuster);
+                    sum += NormalizeAmount(mny, adjuster);
                     count++;
                 }
 
@@ -248,25 +205,25 @@ namespace Narvalo.Finance.Rounding
             {
                 while (it.MoveNext())
                 {
-                    Money? current = it.Current;
-                    if (!current.HasValue) { continue; }
+                    Money? item = it.Current;
+                    if (!item.HasValue) { continue; }
 
-                    Money item = current.Value;
-                    Currency currency = item.Currency;
-                    decimal sum = NormalizeAmount(item, adjuster);
+                    Money mny = item.Value;
+                    Currency currency = mny.Currency;
+                    decimal sum = NormalizeAmount(mny, adjuster);
                     long count = 1;
 
                     while (it.MoveNext())
                     {
-                        current = it.Current;
+                        item = it.Current;
 
-                        if (current.HasValue)
+                        if (item.HasValue)
                         {
-                            item = current.Value;
+                            mny = item.Value;
 
-                            MoneyCalculator.ThrowIfCurrencyMismatch(item.Currency, currency);
+                            MoneyCalculator.ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                            sum += NormalizeAmount(item, adjuster);
+                            sum += NormalizeAmount(mny, adjuster);
                             count++;
                         }
                     }

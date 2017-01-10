@@ -11,9 +11,14 @@ namespace Narvalo.Finance.Rounding
 
         private static bool UpOrDown => s_Random.Next(0, 2) == 0;
 
+        public decimal Round(decimal value)
+            => UpOrDown
+            ? RoundingAdjusters.HalfUp(value)
+            : RoundingAdjusters.HalfDown(value);
+
         public decimal Round(decimal value, int decimalPlaces)
             => UpOrDown
-            ? RoundingAdjusters.RoundHalfUp(value, decimalPlaces)
-            : RoundingAdjusters.RoundHalfDown(value, decimalPlaces);
+            ? RoundingAdjusters.HalfUp(value, decimalPlaces)
+            : RoundingAdjusters.HalfDown(value, decimalPlaces);
     }
 }

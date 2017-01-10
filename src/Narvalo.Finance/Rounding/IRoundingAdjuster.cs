@@ -4,6 +4,8 @@ namespace Narvalo.Finance.Rounding
 {
     public interface IRoundingAdjuster
     {
+        decimal Round(decimal value);
+
         decimal Round(decimal value, int decimalPlaces);
     }
 }

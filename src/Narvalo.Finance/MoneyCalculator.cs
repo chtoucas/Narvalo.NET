@@ -8,61 +8,61 @@ namespace Narvalo.Finance
     // Addition with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Add(this Money @this, decimal amount, MidpointRounding mode)
+        public static Money Add(this Money money, decimal amount, MidpointRounding mode)
         {
-            if (amount == 0m) { return @this; }
-            return new Money(@this.Amount + amount, @this.Currency, mode);
+            if (amount == 0m) { return money; }
+            return new Money(money.Amount + amount, money.Currency, mode);
         }
 
-        public static Money Add(this Money @this, Money other, MidpointRounding mode)
+        public static Money Add(this Money money, Money other, MidpointRounding mode)
         {
-            @this.ThrowIfCurrencyMismatch(other, nameof(other));
+            money.ThrowIfCurrencyMismatch(other, nameof(other));
 
-            var amount = @this.Amount + other.Amount;
+            var amount = money.Amount + other.Amount;
 
-            return @this.IsNormalized && other.IsNormalized
-                ? Money.OfMajor(amount, @this.Currency)
-                : new Money(amount, @this.Currency, mode);
+            return money.IsNormalized && other.IsNormalized
+                ? Money.OfMajor(amount, money.Currency)
+                : new Money(amount, money.Currency, mode);
         }
     }
 
     // Subtraction with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Subtract(this Money @this, decimal amount, MidpointRounding mode)
-            => Add(@this, -amount, mode);
+        public static Money Subtract(this Money money, decimal amount, MidpointRounding mode)
+            => Add(money, -amount, mode);
 
-        public static Money Subtract(this Money @this, Money other, MidpointRounding mode)
+        public static Money Subtract(this Money money, Money other, MidpointRounding mode)
         {
-            @this.ThrowIfCurrencyMismatch(other, nameof(other));
+            money.ThrowIfCurrencyMismatch(other, nameof(other));
 
-            var amount = @this.Amount - other.Amount;
+            var amount = money.Amount - other.Amount;
 
-            return @this.IsNormalized && other.IsNormalized
-                ? Money.OfMajor(amount, @this.Currency)
-                : new Money(amount, @this.Currency, mode);
+            return money.IsNormalized && other.IsNormalized
+                ? Money.OfMajor(amount, money.Currency)
+                : new Money(amount, money.Currency, mode);
         }
     }
 
     // Multiplication with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Multiply(this Money @this, decimal multiplier, MidpointRounding mode)
-            => new Money(multiplier * @this.Amount, @this.Currency, mode);
+        public static Money Multiply(this Money money, decimal multiplier, MidpointRounding mode)
+            => new Money(multiplier * money.Amount, money.Currency, mode);
     }
 
     // Division with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Divide(this Money @this, decimal divisor, MidpointRounding mode)
-            => new Money(@this.Amount / divisor, @this.Currency, mode);
+        public static Money Divide(this Money dividend, decimal divisor, MidpointRounding mode)
+            => new Money(dividend.Amount / divisor, dividend.Currency, mode);
     }
 
     // Remainder/Modulo with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Remainder(this Money @this, decimal divisor, MidpointRounding mode)
-            => new Money(@this.Amount % divisor, @this.Currency, mode);
+        public static Money Remainder(this Money dividend, decimal divisor, MidpointRounding mode)
+            => new Money(dividend.Amount % divisor, dividend.Currency, mode);
     }
 
     // LINQ-like Sum().
@@ -105,30 +105,30 @@ namespace Narvalo.Finance
     // same currency, it should rather throw.
     public static partial class MoneyCalculator
     {
-        public static Money Sum(this IEnumerable<Money> @this)
+        public static Money Sum(this IEnumerable<Money> monies)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money> it = @this.GetEnumerator())
+            using (IEnumerator<Money> it = monies.GetEnumerator())
             {
                 if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
 
                 // The main purpose for the separate treatment of the first element is to get a
                 // hand on its underlying currency which will serve as a reference when we shall
                 // check that all elements of the collection use the same currency.
-                Money item = it.Current;
-                Currency currency = item.Currency;
-                bool normalized = item.IsNormalized;
-                decimal sum = item.Amount;
+                Money mny = it.Current;
+                Currency currency = mny.Currency;
+                bool normalized = mny.IsNormalized;
+                decimal sum = mny.Amount;
 
                 while (it.MoveNext())
                 {
-                    item = it.Current;
+                    mny = it.Current;
 
-                    ThrowIfCurrencyMismatch(item.Currency, currency);
+                    ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                    normalized = normalized && item.IsNormalized;
-                    sum += item.Amount;
+                    normalized = normalized && mny.IsNormalized;
+                    sum += mny.Amount;
                 }
 
                 return new Money(sum, currency, normalized);
@@ -138,38 +138,38 @@ namespace Narvalo.Finance
             return Money.OfMajor(0, Currency.None);
         }
 
-        public static Money Sum(this IEnumerable<Money?> @this)
+        public static Money Sum(this IEnumerable<Money?> monies)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money?> it = @this.GetEnumerator())
+            using (IEnumerator<Money?> it = monies.GetEnumerator())
             {
                 // If the sequence is empty, we never enter this loop.
                 // Actually, this is not really a loop, as it executes only once.
                 while (it.MoveNext())
                 {
-                    Money? current = it.Current;
+                    Money? item = it.Current;
                     // If all elements are null, we never pass this point.
-                    if (!current.HasValue) { continue; }
+                    if (!item.HasValue) { continue; }
 
-                    Money item = current.Value;
-                    Currency currency = item.Currency;
-                    bool normalized = item.IsNormalized;
-                    decimal sum = item.Amount;
+                    Money mny = item.Value;
+                    Currency currency = mny.Currency;
+                    bool normalized = mny.IsNormalized;
+                    decimal sum = mny.Amount;
 
                     // Loop over the remaining elements, if any.
                     while (it.MoveNext())
                     {
-                        current = it.Current;
+                        item = it.Current;
 
-                        if (current.HasValue)
+                        if (item.HasValue)
                         {
-                            item = current.Value;
+                            mny = item.Value;
 
-                            ThrowIfCurrencyMismatch(item.Currency, currency);
+                            ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                            normalized = normalized && item.IsNormalized;
-                            sum += item.Amount;
+                            normalized = normalized && mny.IsNormalized;
+                            sum += mny.Amount;
                         }
                     }
 
@@ -182,25 +182,25 @@ namespace Narvalo.Finance
         }
 
         // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum().
-        public static Money Sum(this IEnumerable<Money> @this, MidpointRounding mode)
+        public static Money Sum(this IEnumerable<Money> monies, MidpointRounding mode)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money> it = @this.GetEnumerator())
+            using (IEnumerator<Money> it = monies.GetEnumerator())
             {
                 if (!it.MoveNext()) { goto EMPTY_COLLECTION; }
 
-                Money item = it.Current;
-                Currency currency = item.Currency;
-                decimal sum = NormalizeAmount(item, mode);
+                Money mny = it.Current;
+                Currency currency = mny.Currency;
+                decimal sum = NormalizeAmount(mny, mode);
 
                 while (it.MoveNext())
                 {
-                    item = it.Current;
+                    mny = it.Current;
 
-                    ThrowIfCurrencyMismatch(item.Currency, currency);
+                    ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                    sum += NormalizeAmount(item, mode);
+                    sum += NormalizeAmount(mny, mode);
                 }
 
                 return Money.OfMajor(sum, currency);
@@ -211,32 +211,32 @@ namespace Narvalo.Finance
         }
 
         // Optimized version of: @this.Select(_ => _.Normalize(mode)).Sum().
-        public static Money Sum(this IEnumerable<Money?> @this, MidpointRounding mode)
+        public static Money Sum(this IEnumerable<Money?> monies, MidpointRounding mode)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money?> it = @this.GetEnumerator())
+            using (IEnumerator<Money?> it = monies.GetEnumerator())
             {
                 while (it.MoveNext())
                 {
-                    Money? current = it.Current;
-                    if (!current.HasValue) { continue; }
+                    Money? item = it.Current;
+                    if (!item.HasValue) { continue; }
 
-                    Money item = current.Value;
-                    Currency currency = item.Currency;
-                    decimal sum = NormalizeAmount(item, mode);
+                    Money mny = item.Value;
+                    Currency currency = mny.Currency;
+                    decimal sum = NormalizeAmount(mny, mode);
 
                     while (it.MoveNext())
                     {
-                        current = it.Current;
+                        item = it.Current;
 
-                        if (current.HasValue)
+                        if (item.HasValue)
                         {
-                            item = current.Value;
+                            mny = item.Value;
 
-                            ThrowIfCurrencyMismatch(item.Currency, currency);
+                            ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                            sum += NormalizeAmount(item, mode);
+                            sum += NormalizeAmount(mny, mode);
                         }
                     }
 
@@ -269,26 +269,26 @@ namespace Narvalo.Finance
     public static partial class MoneyCalculator
     {
         // NB: The result is ALWAYS denormalized.
-        public static Money Average(this IEnumerable<Money> @this)
+        public static Money Average(this IEnumerable<Money> monies)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money> it = @this.GetEnumerator())
+            using (IEnumerator<Money> it = monies.GetEnumerator())
             {
                 if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
 
-                Money item = it.Current;
-                Currency currency = item.Currency;
-                decimal sum = item.Amount;
+                Money mny = it.Current;
+                Currency currency = mny.Currency;
+                decimal sum = mny.Amount;
                 long count = 1;
 
                 while (it.MoveNext())
                 {
-                    item = it.Current;
+                    mny = it.Current;
 
-                    ThrowIfCurrencyMismatch(item.Currency, currency);
+                    ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                    sum += item.Amount;
+                    sum += mny.Amount;
                     count++;
                 }
 
@@ -297,33 +297,33 @@ namespace Narvalo.Finance
         }
 
         // NB: The result is ALWAYS denormalized.
-        public static Money? Average(this IEnumerable<Money?> @this)
+        public static Money? Average(this IEnumerable<Money?> monies)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money?> it = @this.GetEnumerator())
+            using (IEnumerator<Money?> it = monies.GetEnumerator())
             {
                 while (it.MoveNext())
                 {
-                    Money? current = it.Current;
-                    if (!current.HasValue) { continue; }
+                    Money? item = it.Current;
+                    if (!item.HasValue) { continue; }
 
-                    Money item = current.Value;
-                    Currency currency = item.Currency;
-                    decimal sum = item.Amount;
+                    Money mny = item.Value;
+                    Currency currency = mny.Currency;
+                    decimal sum = mny.Amount;
                     long count = 1;
 
                     while (it.MoveNext())
                     {
-                        current = it.Current;
+                        item = it.Current;
 
-                        if (current.HasValue)
+                        if (item.HasValue)
                         {
-                            item = current.Value;
+                            mny = item.Value;
 
-                            ThrowIfCurrencyMismatch(item.Currency, currency);
+                            ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                            sum += item.Amount;
+                            sum += mny.Amount;
                             count++;
                         }
                     }
@@ -336,26 +336,26 @@ namespace Narvalo.Finance
         }
 
         // Optimized version of: @this.Select(_ => _.Normalize(mode)).Average().Normalize(mode).
-        public static Money Average(this IEnumerable<Money> @this, MidpointRounding mode)
+        public static Money Average(this IEnumerable<Money> monies, MidpointRounding mode)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money> it = @this.GetEnumerator())
+            using (IEnumerator<Money> it = monies.GetEnumerator())
             {
                 if (!it.MoveNext()) { throw new InvalidOperationException("XXX"); }
 
-                Money item = it.Current;
-                Currency currency = item.Currency;
-                decimal sum = NormalizeAmount(item, mode);
+                Money mny = it.Current;
+                Currency currency = mny.Currency;
+                decimal sum = NormalizeAmount(mny, mode);
                 long count = 1;
 
                 while (it.MoveNext())
                 {
-                    item = it.Current;
+                    mny = it.Current;
 
-                    ThrowIfCurrencyMismatch(item.Currency, currency);
+                    ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                    sum += NormalizeAmount(item, mode);
+                    sum += NormalizeAmount(mny, mode);
                     count++;
                 }
 
@@ -364,33 +364,33 @@ namespace Narvalo.Finance
         }
 
         // Optimized version of: @this.Select(_ => _.Normalize(mode)).Average().Normalize(mode).
-        public static Money? Average(this IEnumerable<Money?> @this, MidpointRounding mode)
+        public static Money? Average(this IEnumerable<Money?> monies, MidpointRounding mode)
         {
-            Require.NotNull(@this, nameof(@this));
+            Require.NotNull(monies, nameof(monies));
 
-            using (IEnumerator<Money?> it = @this.GetEnumerator())
+            using (IEnumerator<Money?> it = monies.GetEnumerator())
             {
                 while (it.MoveNext())
                 {
-                    Money? current = it.Current;
-                    if (!current.HasValue) { continue; }
+                    Money? item = it.Current;
+                    if (!item.HasValue) { continue; }
 
-                    Money item = current.Value;
-                    Currency currency = item.Currency;
-                    decimal sum = NormalizeAmount(item, mode);
+                    Money mny = item.Value;
+                    Currency currency = mny.Currency;
+                    decimal sum = NormalizeAmount(mny, mode);
                     long count = 1;
 
                     while (it.MoveNext())
                     {
-                        current = it.Current;
+                        item = it.Current;
 
-                        if (current.HasValue)
+                        if (item.HasValue)
                         {
-                            item = current.Value;
+                            mny = item.Value;
 
-                            ThrowIfCurrencyMismatch(item.Currency, currency);
+                            ThrowIfCurrencyMismatch(mny.Currency, currency);
 
-                            sum += NormalizeAmount(item, mode);
+                            sum += NormalizeAmount(mny, mode);
                             count++;
                         }
                     }

@@ -59,6 +59,9 @@ TODO
 - Protect Multiply, Divide and Remainder against absurd results.
 - DecimalRounding.Scale(), check for minimal value?
 - Add support for minor units (EUR -> EUr).
+  [Wikipedia](https://en.wikipedia.org/wiki/List_of_circulating_currencies),
+  [here](http://stackoverflow.com/questions/5023754/do-minor-currency-units-have-a-iso-standard),
+  and [here](http://www.fixtradingcommunity.org/pg/discussions/topicpost/167427/gbpgbpgbx).
 - Check div and rem.
 
 Highlights
