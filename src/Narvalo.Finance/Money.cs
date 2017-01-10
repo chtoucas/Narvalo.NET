@@ -3,7 +3,6 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -167,16 +166,6 @@ namespace Narvalo.Finance
             if (IsNormalized) { return this; }
             return new Money(Amount, Currency, mode);
         }
-
-        public IEnumerable<Money> Allocate(int count) => Allocate(new MoneyAllocator(), count);
-
-        public IEnumerable<Money> Allocate(RatioArray ratios) => Allocate(new MoneyAllocator(), ratios);
-
-        public IEnumerable<Money> Allocate(IMoneyAllocator allocator, int count)
-            => allocator.Distribute(this, count);
-
-        public IEnumerable<Money> Allocate(IMoneyAllocator allocator, RatioArray ratios)
-            => allocator.Distribute(this, ratios);
 
         internal void ThrowIfCurrencyMismatch(Money money, string parameterName)
             => Enforce.True(Currency == money.Currency, parameterName, Strings.Argument_CurrencyMismatch);

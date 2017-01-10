@@ -5,7 +5,7 @@ namespace Narvalo.Finance.Rounding
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    public sealed class /*Default*/RoundingAdjuster : IRoundingAdjuster
+    public static partial class RoundingAdjusters
     {
         // This limit is rather artificial, but this should be OK for our use cases.
         // NB: This limit is not enforced for ToEven and HalAwayFromZero, in which cases
@@ -63,21 +63,6 @@ namespace Narvalo.Finance.Rounding
             0.00000001m,
             0.000000001m
         };
-
-        public RoundingAdjuster() : this(RoundingMode.ToEven) { }
-
-        public RoundingAdjuster(RoundingMode mode)
-        {
-            Mode = mode;
-        }
-
-        public RoundingMode Mode { get; }
-
-        #region IRoundingAdjuster interface.
-
-        public decimal Round(decimal value, int decimalPlaces) => Round(value, decimalPlaces, Mode);
-
-        #endregion
 
         public static decimal Round(decimal value, int decimalPlaces, RoundingMode mode)
         {

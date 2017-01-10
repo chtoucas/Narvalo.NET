@@ -29,8 +29,8 @@ namespace Narvalo.Finance.Rounding
 
         public decimal Round(decimal value, int decimalPlaces)
             => UpOrDown
-            ? RoundingAdjuster.RoundHalfUp(value, decimalPlaces)
-            : RoundingAdjuster.RoundHalfDown(value, decimalPlaces);
+            ? RoundingAdjusters.RoundHalfUp(value, decimalPlaces)
+            : RoundingAdjusters.RoundHalfDown(value, decimalPlaces);
 
         private void Dispose(bool disposing)
         {

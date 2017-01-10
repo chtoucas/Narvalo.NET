@@ -4,21 +4,19 @@ namespace Narvalo.Finance
 {
     using System.Collections.Generic;
 
-    // Distribute.
-    //
     // The operation is not reversible, that is (in general):
-    // > money.Distribute(count).Sum() != money;
+    // > Allocate(money, count).Sum() != money;
     //
     // The decimal type is a floating number (even if .NET does not call it so, it still is).
     //
     // With or without rounding, the last element of the resulting collection is calculated
     // differently.
     // If you prefer:
-    // > seq = money.Distribute(count).Reverse();
+    // > seq = Distribute(money, count).Reverse();
     public interface IMoneyAllocator
     {
-        IEnumerable<Money> Distribute(Money money, int count);
+        IEnumerable<Money> Allocate(Money money, int count);
 
-        IEnumerable<Money> Distribute(Money money, RatioArray ratios);
+        IEnumerable<Money> Allocate(Money money, RatioArray ratios);
     }
 }

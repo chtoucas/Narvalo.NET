@@ -7,9 +7,9 @@ namespace Narvalo.Finance.Rounding
     // WARNING: This class is not thread-safe.
     public sealed class DitheredRoundingAdjuster : IRoundingAdjuster
     {
-        private static Random s_Random = new Random();
+        //private static Random s_Random = new Random();
 
-        private double Next => s_Random.NextDouble();
+        //private double Next => s_Random.NextDouble();
 
         public decimal Round(decimal value, int decimalPlaces)
         {
