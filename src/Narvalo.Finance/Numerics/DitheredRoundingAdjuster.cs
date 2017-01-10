@@ -5,7 +5,7 @@ namespace Narvalo.Finance.Numerics
     using System;
 
     // WARNING: This class is not thread-safe.
-    public sealed class DitheringDecimalRounding : IDecimalRounding
+    public sealed class DitheredRoundingAdjuster : IRoundingAdjuster
     {
         private static Random s_Random = new Random();
 

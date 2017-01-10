@@ -4,11 +4,11 @@ namespace Narvalo.Finance.Numerics
 {
     public static class MoneyExtensions
     {
-        public static Money Normalize(this Money @this, IDecimalRounding rounding)
+        public static Money Normalize(this Money @this, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(rounding);
+            Expect.NotNull(adjuster);
             if (@this.IsNormalized) { return @this; }
-            return MoneyFactory.Create(@this.Amount, @this.Currency, rounding);
+            return MoneyCreator.Create(@this.Amount, @this.Currency, adjuster);
         }
     }
 }

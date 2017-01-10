@@ -5,7 +5,7 @@ namespace Narvalo.Finance.Numerics
     using System;
 
     // WARNING: This class is not thread-safe and not truly stochastic.
-    public sealed class StochasticDecimalRounding : IDecimalRounding
+    public sealed class StochasticRoundingAdjuster : IRoundingAdjuster
     {
         private static Random s_Random = new Random();
 
@@ -13,7 +13,7 @@ namespace Narvalo.Finance.Numerics
 
         public decimal Round(decimal value, int decimalPlaces)
             => UpOrDown
-            ? DecimalRounding.RoundHalfUp(value, decimalPlaces)
-            : DecimalRounding.RoundHalfDown(value, decimalPlaces);
+            ? RoundingAdjuster.RoundHalfUp(value, decimalPlaces)
+            : RoundingAdjuster.RoundHalfDown(value, decimalPlaces);
     }
 }

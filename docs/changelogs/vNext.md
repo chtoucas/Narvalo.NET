@@ -45,19 +45,20 @@ TODO
 ----
 - Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
 - Complete localization of messages.
-- Division Money/Money. Ops with double, float? Conversion to another currency.
-  Other math ops: Sum(), Distribute(), Allocate().
+- Ops with double, float?
+- Custom Distribute().
 - Non-decimal moneys: Mauritania & Madagascar;
   see [here](https://en.wikipedia.org/wiki/Denomination_(currency))
 - Money.Parse & Money.TryParse.
-- `IConvertible` and conversion between currencies.
-- Rounding, Allocation; See
+- `IConvertible` (no) and conversion between currencies.
+- Rounding, allocation; See
   [rounding](https://en.wikipedia.org/wiki/Rounding),
+  [cash rounding](https://en.wikipedia.org/wiki/Cash_rounding)
   [sum](https://en.wikipedia.org/wiki/Kahan_summation_algorithm).
 - IsPseudoCurrency -> !IsLegacy && MinorUnits == null.
 - Protect Multiply, Divide and Remainder against absurd results.
 - DecimalRounding.Scale(), check for minimal value?
-- https://en.wikipedia.org/wiki/Cash_rounding
+- Add support for minor units (EUR -> EUr).
 
 Highlights
 ----------

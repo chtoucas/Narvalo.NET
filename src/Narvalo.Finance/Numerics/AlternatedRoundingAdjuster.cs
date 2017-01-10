@@ -6,12 +6,12 @@ namespace Narvalo.Finance.Numerics
     using System.Collections;
     using System.Collections.Generic;
 
-    public sealed class AlternatingDecimalRounding : IDecimalRounding, IDisposable
+    public sealed class AlternatedRoundingAdjuster : IRoundingAdjuster, IDisposable
     {
         private bool _disposed = false;
         private IEnumerator<bool> _iterator;
 
-        public AlternatingDecimalRounding()
+        public AlternatedRoundingAdjuster()
         {
             _iterator = new BooleanSequence().GetEnumerator();
         }
@@ -29,8 +29,8 @@ namespace Narvalo.Finance.Numerics
 
         public decimal Round(decimal value, int decimalPlaces)
             => UpOrDown
-            ? DecimalRounding.RoundHalfUp(value, decimalPlaces)
-            : DecimalRounding.RoundHalfDown(value, decimalPlaces);
+            ? RoundingAdjuster.RoundHalfUp(value, decimalPlaces)
+            : RoundingAdjuster.RoundHalfDown(value, decimalPlaces);
 
         private void Dispose(bool disposing)
         {

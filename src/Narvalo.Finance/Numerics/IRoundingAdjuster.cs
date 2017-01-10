@@ -2,7 +2,7 @@
 
 namespace Narvalo.Finance.Numerics
 {
-    public interface IDecimalRounding
+    public interface IRoundingAdjuster
     {
         decimal Round(decimal value, int decimalPlaces);
     }

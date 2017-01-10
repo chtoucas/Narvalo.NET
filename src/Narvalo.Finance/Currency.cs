@@ -92,7 +92,7 @@ namespace Narvalo.Finance
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] For currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
 
-        internal decimal Factor => Powers10[DecimalPlaces];
+        private decimal Factor => Powers10[DecimalPlaces];
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
@@ -244,6 +244,18 @@ namespace Narvalo.Finance
 
             return ri.ISOCurrencySymbol == Code;
         }
+
+        /// <summary>
+        /// Converts an amount from minor units to major units.
+        /// </summary>
+        /// <param name="minor">The amount in minor units to convert.</param>
+        internal decimal ConvertToMajor(decimal minor) => Epsilon * minor;
+
+        /// <summary>
+        /// Converts an amount from major units to minor units.
+        /// </summary>
+        /// <param name="major">The amount in major units to convert.</param>
+        internal decimal ConvertToMinor(decimal major) => Factor * major;
 
         /// <summary>
         /// Returns a string containing the code of the currency.

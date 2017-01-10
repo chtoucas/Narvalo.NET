@@ -14,7 +14,7 @@ namespace Narvalo.Finance.Numerics
         [Fact]
         public static void Round_Down()
         {
-            Func<decimal, decimal> round = _ => DecimalRounding.Round(_, RoundingMode.Down);
+            Func<decimal, decimal> round = _ => RoundingAdjuster.Round(_, RoundingMode.Down);
 
             Assert.Equal(1m, round(1.6m));
             Assert.Equal(1m, round(1.5m));
@@ -39,7 +39,7 @@ namespace Narvalo.Finance.Numerics
         [Fact]
         public static void Round_Up()
         {
-            Func<decimal, decimal> round = _ => DecimalRounding.Round(_, RoundingMode.Up);
+            Func<decimal, decimal> round = _ => RoundingAdjuster.Round(_, RoundingMode.Up);
 
             Assert.Equal(2m, round(1.6m));
             Assert.Equal(2m, round(1.5m));
@@ -64,7 +64,7 @@ namespace Narvalo.Finance.Numerics
         [Fact]
         public static void Round_TowardsZero()
         {
-            Func<decimal, decimal> round = _ => DecimalRounding.Round(_, RoundingMode.TowardsZero);
+            Func<decimal, decimal> round = _ => RoundingAdjuster.Round(_, RoundingMode.TowardsZero);
 
             Assert.Equal(1m, round(1.6m));
             Assert.Equal(1m, round(1.5m));
@@ -89,7 +89,7 @@ namespace Narvalo.Finance.Numerics
         [Fact]
         public static void Round_AwayFromZero()
         {
-            Func<decimal, decimal> round = _ => DecimalRounding.Round(_, RoundingMode.AwayFromZero);
+            Func<decimal, decimal> round = _ => RoundingAdjuster.Round(_, RoundingMode.AwayFromZero);
 
             Assert.Equal(2m, round(1.6m));
             Assert.Equal(2m, round(1.5m));
@@ -115,12 +115,12 @@ namespace Narvalo.Finance.Numerics
         [MemberData(nameof(NearestRounding), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Round_HalfDown(decimal value, decimal expectedValue)
-            => Assert.Equal(expectedValue, DecimalRounding.Round(value, RoundingMode.HalfDown));
+            => Assert.Equal(expectedValue, RoundingAdjuster.Round(value, RoundingMode.HalfDown));
 
         [Fact]
         public static void Round_HalfDown_ForHalfWayPoints()
         {
-            Func<decimal, decimal> round = _ => DecimalRounding.Round(_, RoundingMode.HalfDown);
+            Func<decimal, decimal> round = _ => RoundingAdjuster.Round(_, RoundingMode.HalfDown);
 
             Assert.Equal(1m, round(1.5m));
             Assert.Equal(0m, round(0.5m));
@@ -131,18 +131,18 @@ namespace Narvalo.Finance.Numerics
 
         [Fact]
         public static void Round_HalfDown_ForMinValue()
-            => Assert.Equal(Decimal.MinValue, DecimalRounding.Round(Decimal.MinValue, RoundingMode.HalfDown));
+            => Assert.Equal(Decimal.MinValue, RoundingAdjuster.Round(Decimal.MinValue, RoundingMode.HalfDown));
 
         [Theory]
         [MemberData(nameof(NearestRounding), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Round_HalfUp(decimal value, decimal expectedValue)
-            => Assert.Equal(expectedValue, DecimalRounding.Round(value, RoundingMode.HalfUp));
+            => Assert.Equal(expectedValue, RoundingAdjuster.Round(value, RoundingMode.HalfUp));
 
         [Fact]
         public static void Round_HalfUp_ForHalfWayPoints()
         {
-            Func<decimal, decimal> round = _ => DecimalRounding.Round(_, RoundingMode.HalfUp);
+            Func<decimal, decimal> round = _ => RoundingAdjuster.Round(_, RoundingMode.HalfUp);
 
             Assert.Equal(2m, round(1.5m));
             Assert.Equal(1m, round(0.5m));
@@ -152,18 +152,18 @@ namespace Narvalo.Finance.Numerics
 
         [Fact]
         public static void Round_HalfUp_ForMaxValue()
-            => Assert.Equal(Decimal.MaxValue, DecimalRounding.Round(Decimal.MaxValue, RoundingMode.HalfUp));
+            => Assert.Equal(Decimal.MaxValue, RoundingAdjuster.Round(Decimal.MaxValue, RoundingMode.HalfUp));
 
         [Theory]
         [MemberData(nameof(NearestRounding), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Round_HalfTowardsZero(decimal value, decimal expectedValue)
-            => Assert.Equal(expectedValue, DecimalRounding.Round(value, RoundingMode.HalfTowardsZero));
+            => Assert.Equal(expectedValue, RoundingAdjuster.Round(value, RoundingMode.HalfTowardsZero));
 
         [Fact]
         public static void Round_HalfTowardsZero_ForHalfWayPoints()
         {
-            Func<decimal, decimal> round = _ => DecimalRounding.Round(_, RoundingMode.HalfTowardsZero);
+            Func<decimal, decimal> round = _ => RoundingAdjuster.Round(_, RoundingMode.HalfTowardsZero);
 
             Assert.Equal(1m, round(1.5m));
             Assert.Equal(0m, round(0.5m));
@@ -175,12 +175,12 @@ namespace Narvalo.Finance.Numerics
         [MemberData(nameof(NearestRounding), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Round_HalfAwayFromZero(decimal value, decimal expectedValue)
-            => Assert.Equal(expectedValue, DecimalRounding.Round(value, RoundingMode.HalfAwayFromZero));
+            => Assert.Equal(expectedValue, RoundingAdjuster.Round(value, RoundingMode.HalfAwayFromZero));
 
         [Fact]
         public static void Round_HalfAwayFromZero_ForHalfWayPoints()
         {
-            Func<decimal, decimal> round = _ => DecimalRounding.Round(_, RoundingMode.HalfAwayFromZero);
+            Func<decimal, decimal> round = _ => RoundingAdjuster.Round(_, RoundingMode.HalfAwayFromZero);
 
             Assert.Equal(2m, round(1.5m));
             Assert.Equal(1m, round(0.5m));
@@ -192,12 +192,12 @@ namespace Narvalo.Finance.Numerics
         [MemberData(nameof(NearestRounding), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Round_ToEven(decimal value, decimal expectedValue)
-            => Assert.Equal(expectedValue, DecimalRounding.Round(value, RoundingMode.ToEven));
+            => Assert.Equal(expectedValue, RoundingAdjuster.Round(value, RoundingMode.ToEven));
 
         [Fact]
         public static void Round_ToEven_ForHalfWayPoints()
         {
-            Func<decimal, decimal> round = _ => DecimalRounding.Round(_, RoundingMode.ToEven);
+            Func<decimal, decimal> round = _ => RoundingAdjuster.Round(_, RoundingMode.ToEven);
 
             Assert.Equal(2m, round(1.5m));
             Assert.Equal(0m, round(0.5m));
@@ -209,12 +209,12 @@ namespace Narvalo.Finance.Numerics
         [MemberData(nameof(NearestRounding), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Round_ToOdd(decimal value, decimal expectedValue)
-            => Assert.Equal(expectedValue, DecimalRounding.Round(value, RoundingMode.ToOdd));
+            => Assert.Equal(expectedValue, RoundingAdjuster.Round(value, RoundingMode.ToOdd));
 
         [Fact]
         public static void Round_ToOdd_ForHalfWayPoints()
         {
-            Func<decimal, decimal> round = _ => DecimalRounding.Round(_, RoundingMode.ToOdd);
+            Func<decimal, decimal> round = _ => RoundingAdjuster.Round(_, RoundingMode.ToOdd);
 
             Assert.Equal(1m, round(1.5m));
             Assert.Equal(1m, round(0.5m));

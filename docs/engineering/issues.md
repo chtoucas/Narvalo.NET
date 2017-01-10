@@ -54,9 +54,6 @@ Narvalo.Finance
 ---------------
 
 - [Liste des devises et de leurs subdivisions](https://fr.wikipedia.org/wiki/Liste_des_monnaies_en_circulation)
-- Add support for minor units (EUR -> EUr).
-- For debugging the T4 templates, see
-  [here](http://stackoverflow.com/questions/5588792/determine-solution-configuration-debug-release-when-running-a-t4-template).
 - LocalCurrency
 - [Microsoft SQL Server implementation](https://msdn.microsoft.com/en-au/library/ms179882.aspx):
   `Int32` or `Int64`, and designate the lower four digits (or possibly even 2) as

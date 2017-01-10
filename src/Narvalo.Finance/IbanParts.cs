@@ -4,7 +4,6 @@ namespace Narvalo.Finance
 {
     using System;
 
-    using Narvalo.Finance.Numerics;
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 

@@ -20,8 +20,8 @@ namespace Narvalo.Finance
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
         /// and an amount without minor units.
         /// </summary>
-        /// <param name="amount">An unsigned integer representing the amount of money.</param>
-        /// <param name="currency">A currency.</param>
+        /// <param name="amount">The unsigned integer representing the amount of money.</param>
+        /// <param name="currency">The currency.</param>
         [CLSCompliant(false)]
         public Money(uint amount, Currency currency) : this(amount, currency, true) { }
 
@@ -29,8 +29,8 @@ namespace Narvalo.Finance
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
         /// and an amount without minor units.
         /// </summary>
-        /// <param name="amount">A signed integer representing the amount of money.</param>
-        /// <param name="currency">A currency.</param>
+        /// <param name="amount">The unsigned long representing the amount of money.</param>
+        /// <param name="currency">The currency.</param>
         [CLSCompliant(false)]
         public Money(ulong amount, Currency currency) : this(amount, currency, true) { }
 
@@ -38,32 +38,32 @@ namespace Narvalo.Finance
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
         /// and an amount without minor units.
         /// </summary>
-        /// <param name="amount">An unsigned long representing the amount of money.</param>
-        /// <param name="currency">A currency.</param>
+        /// <param name="amount">The signed integer representing the amount of money.</param>
+        /// <param name="currency">The currency.</param>
         public Money(int amount, Currency currency) : this(amount, currency, true) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
         /// and an amount without minor units.
         /// </summary>
-        /// <param name="amount">An signed long representing the amount of money.</param>
-        /// <param name="currency">A currency.</param>
+        /// <param name="amount">The signed long representing the amount of money.</param>
+        /// <param name="currency">The currency.</param>
         public Money(long amount, Currency currency) : this(amount, currency, true) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
         /// and an amount where there is no restriction on the scale.
         /// </summary>
-        /// <param name="amount">A decimal representing the amount of money.</param>
-        /// <param name="currency">A currency.</param>
+        /// <param name="amount">The decimal representing the amount of money.</param>
+        /// <param name="currency">The currency.</param>
         public Money(decimal amount, Currency currency) : this(amount, currency, false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
         /// and an amount for which the number of decimal places is determined by the currency.
         /// </summary>
-        /// <param name="amount">A decimal representing the amount of money.</param>
-        /// <param name="currency">A currency.</param>
+        /// <param name="amount">The decimal representing the amount of money.</param>
+        /// <param name="currency">The currency.</param>
         /// <param name="mode">The rounding mode.</param>
         public Money(decimal amount, Currency currency, MidpointRounding mode)
         {
@@ -96,26 +96,13 @@ namespace Narvalo.Finance
         public bool IsNormalized { get; }
 
         /// <summary>
-        /// Gets the amount expressed in minor units.
+        /// Gets the amount given in minor units.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown if the instance is not
-        /// normalized.</exception>
-        /// <exception cref="OverflowException">Thrown if the amount is too large to fit into
+        /// <exception cref="OverflowException">Thrown if the result is too large to fit into
         /// the Decimal range.</exception>
         /// <seealso cref="ToLongMinor()"/>
         /// <seealso cref="ToLongMinor(out long)"/>
-        public decimal AmountInMinor
-        {
-            get
-            {
-                if (!IsNormalized)
-                {
-                    throw new InvalidOperationException("XXX");
-                }
-
-                return Currency.Factor * Amount;
-            }
-        }
+        public decimal AmountInMinor => Currency.ConvertToMinor(Amount);
 
         /// <summary>
         /// Gets a value indicating whether the amount is zero.
@@ -142,39 +129,30 @@ namespace Narvalo.Finance
         /// </summary>
         public bool IsPositiveOrZero => Amount >= 0m;
 
-        public static Money Zero(Currency currency) => new Money(0, currency, true);
-
-        public static Money Epsilon(Currency currency) => new Money(currency.Epsilon, currency, true);
-
-        public static Money One(Currency currency) => new Money(currency.One, currency, true);
-
         /// <summary>
-        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount already rounded to the number of decimal places specified by the currency.
+        /// Gets the amount given in minor units and converted to a 64-bit signed integer.
         /// </summary>
-        /// <param name="amount">A decimal representing the amount of money.</param>
-        /// <param name="currency">A currency.</param>
-        public static Money OfMajor(decimal amount, Currency currency)
-            => new Money(amount, currency, true);
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount expressed in minor units.
-        /// </summary>
-        /// <param name="minor">The amount of money in minor units.</param>
-        /// <param name="currency">A currency.</param>
-        public static Money OfMinor(long minor, Currency currency)
-            => new Money(currency.Epsilon * minor, currency, true);
-
+        /// <exception cref="InvalidOperationException">Thrown if the instance is not normalized.</exception>
+        /// <returns>A 64-bit signed integer representing the amount in minor units;
+        /// <see langword="null"/> if the result is too large to fit into the Int64 range.</returns>
         public long? ToLongMinor()
         {
-            if (!IsNormalized) { return null; }
+            if (!IsNormalized) { throw new InvalidOperationException("XXX"); }
 
-            decimal minor = Currency.Factor * Amount;
+            decimal minor = AmountInMinor;
             if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
             return Convert.ToInt64(minor);
         }
 
+        /// <summary>
+        /// Gets the amount given in minor units and converted to a 64-bit signed integer.
+        /// </summary>
+        /// <param name="result">If the conversion succeeded, contains a 64-bit signed integer
+        /// representing the amount in minor units, or Int64.MaxValue when the conversion failed
+        /// and <see cref="Amount"/> is positive, otherwise Int64.MinValue.</param>
+        /// <exception cref="InvalidOperationException">Thrown if the instance is not normalized.</exception>
+        /// <returns><see langword="true"/> if the amount was converted successfully; otherwise,
+        /// <see langword="false"/>.</returns>
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "0#", Justification = "[Intentionally] Standard Try... pattern.")]
         public bool ToLongMinor(out long result)
         {
@@ -195,6 +173,54 @@ namespace Narvalo.Finance
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Currency.Code);
+    }
+
+    // Static factory methods.
+    public partial struct Money
+    {
+        public static Money Zero(Currency currency) => new Money(0, currency, true);
+
+        public static Money Epsilon(Currency currency) => new Money(currency.Epsilon, currency, true);
+
+        public static Money One(Currency currency) => new Money(currency.One, currency, true);
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount already rounded to the number of decimal places specified by the currency.
+        /// </summary>
+        /// <param name="major">The decimal representing the amount of money in major units.</param>
+        /// <param name="currency">The currency.</param>
+        public static Money OfMajor(decimal major, Currency currency)
+            => new Money(major, currency, true);
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount given in minor units.
+        /// </summary>
+        /// <param name="minor">The signed long representing the amount of money in minor units.</param>
+        /// <param name="currency">The currency.</param>
+        public static Money OfMinor(long minor, Currency currency)
+            => new Money(currency.ConvertToMajor(minor), currency, true);
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount given in minor units where there is no restriction on the scale.
+        /// </summary>
+        /// <param name="minor">The decimal representing the amount of money in minor units.</param>
+        /// <param name="currency">The currency.</param>
+        public static Money OfMinor(decimal minor, Currency currency)
+            => new Money(currency.ConvertToMajor(minor), currency, false);
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount given in minor units for which the number of decimal places is
+        /// determined by the currency.
+        /// </summary>
+        /// <param name="minor">The decimal representing the amount of money in minor units.</param>
+        /// <param name="currency">The currency.</param>
+        /// <param name="mode">The rounding mode.</param>
+        public static Money OfMinor(decimal minor, Currency currency, MidpointRounding mode)
+            => new Money(currency.ConvertToMajor(minor), currency, mode);
     }
 
     // Implements the IFormattable interface.
@@ -278,7 +304,7 @@ namespace Narvalo.Finance
 
         public int CompareTo(Money other)
         {
-            this.ThrowIfCurrencyMismatch(other, nameof(other));
+            ThrowIfCurrencyMismatch(other, nameof(other));
 
             return Amount.CompareTo(other.Amount);
         }

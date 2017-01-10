@@ -10,86 +10,86 @@ namespace Narvalo.Finance.Numerics
     // Addition with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Add(this Money @this, decimal amount, IDecimalRounding rounding)
+        public static Money Add(this Money @this, decimal amount, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(rounding);
+            Expect.NotNull(adjuster);
             if (amount == 0m) { return @this; }
-            return MoneyFactory.Create(@this.Amount + amount, @this.Currency, rounding);
+            return MoneyCreator.Create(@this.Amount + amount, @this.Currency, adjuster);
         }
 
-        public static Money Add(this Money @this, Money other, IDecimalRounding rounding)
+        public static Money Add(this Money @this, Money other, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(rounding);
+            Expect.NotNull(adjuster);
             @this.ThrowIfCurrencyMismatch(other, nameof(other));
 
             var amount = @this.Amount + other.Amount;
 
             return @this.IsNormalized && other.IsNormalized
                 ? Money.OfMajor(amount, @this.Currency)
-                : MoneyFactory.Create(amount, @this.Currency, rounding);
+                : MoneyCreator.Create(amount, @this.Currency, adjuster);
         }
     }
 
     // Subtraction with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Subtract(this Money @this, decimal amount, IDecimalRounding rounding)
+        public static Money Subtract(this Money @this, decimal amount, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(rounding);
-            return Add(@this, -amount, rounding);
+            Expect.NotNull(adjuster);
+            return Add(@this, -amount, adjuster);
         }
 
-        public static Money Subtract(this Money @this, Money other, IDecimalRounding rounding)
+        public static Money Subtract(this Money @this, Money other, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(rounding);
+            Expect.NotNull(adjuster);
             @this.ThrowIfCurrencyMismatch(other, nameof(other));
 
             var amount = @this.Amount - other.Amount;
 
             return @this.IsNormalized && other.IsNormalized
                 ? Money.OfMajor(amount, @this.Currency)
-                : MoneyFactory.Create(amount, @this.Currency, rounding);
+                : MoneyCreator.Create(amount, @this.Currency, adjuster);
         }
     }
 
     // Multiplication with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Multiply(this Money @this, decimal multiplier, IDecimalRounding rounding)
+        public static Money Multiply(this Money @this, decimal multiplier, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(rounding);
-            return MoneyFactory.Create(multiplier * @this.Amount, @this.Currency, rounding);
+            Expect.NotNull(adjuster);
+            return MoneyCreator.Create(multiplier * @this.Amount, @this.Currency, adjuster);
         }
     }
 
     // Division with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Divide(this Money @this, decimal divisor, IDecimalRounding rounding)
+        public static Money Divide(this Money @this, decimal divisor, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(rounding);
-            return MoneyFactory.Create(@this.Amount / divisor, @this.Currency, rounding);
+            Expect.NotNull(adjuster);
+            return MoneyCreator.Create(@this.Amount / divisor, @this.Currency, adjuster);
         }
     }
 
     // Remainder/Modulo with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Remainder(this Money @this, decimal divisor, IDecimalRounding rounding)
+        public static Money Remainder(this Money @this, decimal divisor, IRoundingAdjuster adjuster)
         {
-            Expect.NotNull(rounding);
-            return MoneyFactory.Create(@this.Amount % divisor, @this.Currency, rounding);
+            Expect.NotNull(adjuster);
+            return MoneyCreator.Create(@this.Amount % divisor, @this.Currency, adjuster);
         }
     }
 
     // LINQ-like Sum().
     public static partial class MoneyCalculator
     {
-        // Optimized version of: @this.Select(_ => _.Normalize(rounding)).Sum().
-        public static Money Sum(this IEnumerable<Money> @this, IDecimalRounding rounding)
+        // Optimized version of: @this.Select(_ => _.Normalize(adjuster)).Sum().
+        public static Money Sum(this IEnumerable<Money> @this, IRoundingAdjuster adjuster)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(rounding, nameof(rounding));
+            Require.NotNull(adjuster, nameof(adjuster));
 
             using (IEnumerator<Money> it = @this.GetEnumerator())
             {
@@ -97,7 +97,7 @@ namespace Narvalo.Finance.Numerics
 
                 Money item = it.Current;
                 Currency currency = item.Currency;
-                decimal sum = NormalizeAmount(item, rounding);
+                decimal sum = NormalizeAmount(item, adjuster);
 
                 while (it.MoveNext())
                 {
@@ -105,7 +105,7 @@ namespace Narvalo.Finance.Numerics
 
                     Calculator.ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                    sum += NormalizeAmount(item, rounding);
+                    sum += NormalizeAmount(item, adjuster);
                 }
 
                 return Money.OfMajor(sum, currency);
@@ -115,11 +115,11 @@ namespace Narvalo.Finance.Numerics
             return Money.OfMajor(0, Currency.None);
         }
 
-        // Optimized version of: @this.Select(_ => _.Normalize(rounding)).Sum().
-        public static Money Sum(this IEnumerable<Money?> @this, IDecimalRounding rounding)
+        // Optimized version of: @this.Select(_ => _.Normalize(adjuster)).Sum().
+        public static Money Sum(this IEnumerable<Money?> @this, IRoundingAdjuster adjuster)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(rounding, nameof(rounding));
+            Require.NotNull(adjuster, nameof(adjuster));
 
             using (IEnumerator<Money?> it = @this.GetEnumerator())
             {
@@ -130,7 +130,7 @@ namespace Narvalo.Finance.Numerics
 
                     Money item = current.Value;
                     Currency currency = item.Currency;
-                    decimal sum = NormalizeAmount(item, rounding);
+                    decimal sum = NormalizeAmount(item, adjuster);
 
                     while (it.MoveNext())
                     {
@@ -142,7 +142,7 @@ namespace Narvalo.Finance.Numerics
 
                             Calculator.ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                            sum += NormalizeAmount(item, rounding);
+                            sum += NormalizeAmount(item, adjuster);
                         }
                     }
 
@@ -157,11 +157,11 @@ namespace Narvalo.Finance.Numerics
     // LINQ-like Average().
     public static partial class MoneyCalculator
     {
-        // Optimized version of: @this.Select(_ => _.Normalize(rounding)).Average().Normalize(mode).
-        public static Money Average(this IEnumerable<Money> @this, IDecimalRounding rounding)
+        // Optimized version of: @this.Select(_ => _.Normalize(adjuster)).Average().Normalize(mode).
+        public static Money Average(this IEnumerable<Money> @this, IRoundingAdjuster adjuster)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(rounding, nameof(rounding));
+            Require.NotNull(adjuster, nameof(adjuster));
 
             using (IEnumerator<Money> it = @this.GetEnumerator())
             {
@@ -169,7 +169,7 @@ namespace Narvalo.Finance.Numerics
 
                 Money item = it.Current;
                 Currency currency = item.Currency;
-                decimal sum = NormalizeAmount(item, rounding);
+                decimal sum = NormalizeAmount(item, adjuster);
                 long count = 1;
 
                 while (it.MoveNext())
@@ -178,19 +178,19 @@ namespace Narvalo.Finance.Numerics
 
                     Calculator.ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                    sum += NormalizeAmount(item, rounding);
+                    sum += NormalizeAmount(item, adjuster);
                     count++;
                 }
 
-                return MoneyFactory.Create(sum / count, currency, rounding);
+                return MoneyCreator.Create(sum / count, currency, adjuster);
             }
         }
 
-        // Optimized version of: @this.Select(_ => _.Normalize(rounding)).Average().Normalize(mode).
-        public static Money? Average(this IEnumerable<Money?> @this, IDecimalRounding rounding)
+        // Optimized version of: @this.Select(_ => _.Normalize(adjuster)).Average().Normalize(mode).
+        public static Money? Average(this IEnumerable<Money?> @this, IRoundingAdjuster adjuster)
         {
             Require.NotNull(@this, nameof(@this));
-            Require.NotNull(rounding, nameof(rounding));
+            Require.NotNull(adjuster, nameof(adjuster));
 
             using (IEnumerator<Money?> it = @this.GetEnumerator())
             {
@@ -201,7 +201,7 @@ namespace Narvalo.Finance.Numerics
 
                     Money item = current.Value;
                     Currency currency = item.Currency;
-                    decimal sum = NormalizeAmount(item, rounding);
+                    decimal sum = NormalizeAmount(item, adjuster);
                     long count = 1;
 
                     while (it.MoveNext())
@@ -214,12 +214,12 @@ namespace Narvalo.Finance.Numerics
 
                             Calculator.ThrowIfCurrencyMismatch(item.Currency, currency);
 
-                            sum += NormalizeAmount(item, rounding);
+                            sum += NormalizeAmount(item, adjuster);
                             count++;
                         }
                     }
 
-                    return MoneyFactory.Create(sum / count, currency, rounding);
+                    return MoneyCreator.Create(sum / count, currency, adjuster);
                 }
             }
 
@@ -230,16 +230,16 @@ namespace Narvalo.Finance.Numerics
     // Distribute.
     public static partial class MoneyCalculator
     {
-        public static IEnumerable<Money> Distribute(this Money @this, int count, IDecimalRounding rounding)
+        public static IEnumerable<Money> Distribute(this Money @this, int count, IRoundingAdjuster adjuster)
         {
             Require.Range(count > 1, nameof(count));
-            Require.NotNull(rounding, nameof(rounding));
+            Require.NotNull(adjuster, nameof(adjuster));
             Warrant.NotNull<IEnumerable<Money>>();
 
             Currency currency = @this.Currency;
             decimal total = @this.Amount;
 
-            decimal q = rounding.Round(total / count, @this.Currency.DecimalPlaces);
+            decimal q = adjuster.Round(total / count, @this.Currency.DecimalPlaces);
             Money part = Money.OfMajor(q, currency);
 
             for (var i = 0; i < count - 1; i++)
@@ -247,12 +247,12 @@ namespace Narvalo.Finance.Numerics
                 yield return part;
             }
 
-            yield return MoneyFactory.Create(total - (count - 1) * q, currency, rounding);
+            yield return MoneyCreator.Create(total - (count - 1) * q, currency, adjuster);
         }
 
-        public static IEnumerable<Money> Distribute(this Money @this, RatioArray ratios, IDecimalRounding rounding)
+        public static IEnumerable<Money> Distribute(this Money @this, RatioArray ratios, IRoundingAdjuster adjuster)
         {
-            Require.NotNull(rounding, nameof(rounding));
+            Require.NotNull(adjuster, nameof(adjuster));
 
             Currency currency = @this.Currency;
             decimal total = @this.Amount;
@@ -264,21 +264,21 @@ namespace Narvalo.Finance.Numerics
 
             for (var i = 0; i < len - 1; i++)
             {
-                decimal amount = rounding.Round(ratios[i] * total, decimalPlaces);
+                decimal amount = adjuster.Round(ratios[i] * total, decimalPlaces);
                 last -= amount;
                 yield return Money.OfMajor(amount, currency);
             }
 
-            yield return MoneyFactory.Create(last, currency, rounding);
+            yield return MoneyCreator.Create(last, currency, adjuster);
         }
     }
 
     // Helpers.
     public static partial class MoneyCalculator
     {
-        private static decimal NormalizeAmount(Money money, IDecimalRounding rounding)
+        private static decimal NormalizeAmount(Money money, IRoundingAdjuster adjuster)
             => money.IsNormalized
             ? money.Amount
-            : rounding.Round(money.Amount, money.Currency.DecimalPlaces);
+            : adjuster.Round(money.Amount, money.Currency.DecimalPlaces);
     }
 }
