@@ -46,12 +46,13 @@ TODO
 - Sync `Money<TCurrency>`, CurrencyUnit<>`, `MoneyFormatter` for rounding, scale...
 - Complete localization of messages.
 - Ops with double, float?
-- Custom Distribute().
+- Improve Distribute() and custom allocation.
+  Add Distribute() to Money?
 - Non-decimal moneys: Mauritania & Madagascar;
   see [here](https://en.wikipedia.org/wiki/Denomination_(currency))
 - Money.Parse & Money.TryParse.
 - `IConvertible` (no) and conversion between currencies.
-- Rounding, allocation; See
+- Rounding:
   [rounding](https://en.wikipedia.org/wiki/Rounding),
   [cash rounding](https://en.wikipedia.org/wiki/Cash_rounding)
   [sum](https://en.wikipedia.org/wiki/Kahan_summation_algorithm).
@@ -59,6 +60,7 @@ TODO
 - Protect Multiply, Divide and Remainder against absurd results.
 - DecimalRounding.Scale(), check for minimal value?
 - Add support for minor units (EUR -> EUr).
+- Check div and rem.
 
 Highlights
 ----------

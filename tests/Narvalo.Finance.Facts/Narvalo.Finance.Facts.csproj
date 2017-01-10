@@ -50,7 +50,7 @@
     <Compile Include="IbanPartsFacts.cs" />
     <Compile Include="IbanValidatorFacts.cs" />
     <Compile Include="MoneyFacts.cs" />
-    <Compile Include="Numerics\RoundingAdjusterFacts.cs" />
+    <Compile Include="Rounding\RoundingAdjusterFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AsciiFacts.cs" />
     <Compile Include="Utilities\IbanCheckDigitsFacts.cs" />

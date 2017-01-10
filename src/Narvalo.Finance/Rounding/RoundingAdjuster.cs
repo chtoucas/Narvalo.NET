@@ -1,6 +1,6 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Numerics
+namespace Narvalo.Finance.Rounding
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

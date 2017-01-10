@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Numerics
+namespace Narvalo.Finance
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    // Operators found in the class Math.
+    // Adapt the operators found in the class Math.
     public static partial class MoneyMath
     {
         public static Money Abs(Money money) => money.IsPositiveOrZero ? money : money.Negate();
