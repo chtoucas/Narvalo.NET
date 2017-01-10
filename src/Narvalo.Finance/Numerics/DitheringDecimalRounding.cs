@@ -4,8 +4,8 @@ namespace Narvalo.Finance.Numerics
 {
     using System;
 
-    // WARNING: This class is not thread-safe and not truly stochastic.
-    public sealed class HalfDitheringDecimalRounding : IDecimalRounding
+    // WARNING: This class is not thread-safe.
+    public sealed class DitheringDecimalRounding : IDecimalRounding
     {
         private static Random s_Random = new Random();
 

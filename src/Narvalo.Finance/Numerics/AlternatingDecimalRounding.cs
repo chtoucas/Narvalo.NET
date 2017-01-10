@@ -6,12 +6,12 @@ namespace Narvalo.Finance.Numerics
     using System.Collections;
     using System.Collections.Generic;
 
-    public sealed class HalfAlternatingDecimalRounding : IDecimalRounding, IDisposable
+    public sealed class AlternatingDecimalRounding : IDecimalRounding, IDisposable
     {
         private bool _disposed = false;
         private IEnumerator<bool> _iterator;
 
-        public HalfAlternatingDecimalRounding()
+        public AlternatingDecimalRounding()
         {
             _iterator = new BooleanSequence().GetEnumerator();
         }

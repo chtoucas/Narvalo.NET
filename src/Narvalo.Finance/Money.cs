@@ -8,9 +8,7 @@ namespace Narvalo.Finance
     using System.Globalization;
 
     using Narvalo.Finance.Globalization;
-    using Narvalo.Finance.Numerics;
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Utilities;
 
     // Per default, the CLR will use LayoutKind.Sequential for structs. Here, we do not care
     // about interop with unmanaged code, so why not let the CLR decide what's best for it?

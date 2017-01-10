@@ -81,8 +81,8 @@
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="MoneyCalculator.cs" />
     <Compile Include="Numerics\DecimalRounding.cs" />
-    <Compile Include="Numerics\HalfAlternatingDecimalRounding.cs" />
-    <Compile Include="Numerics\HalfDitheringDecimalRounding.cs" />
+    <Compile Include="Numerics\AlternatingDecimalRounding.cs" />
+    <Compile Include="Numerics\DitheringDecimalRounding.cs" />
     <Compile Include="Numerics\IDecimalRounding.cs" />
     <Compile Include="Numerics\Int32Calculator.cs" />
     <Compile Include="Numerics\Money%24.cs" />
