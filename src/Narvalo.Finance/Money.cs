@@ -101,10 +101,10 @@ namespace Narvalo.Finance
         /// <exception cref="InvalidOperationException">Thrown if the instance is not
         /// normalized.</exception>
         /// <exception cref="OverflowException">Thrown if the amount is too large to fit into
-        /// the Int64 range.</exception>
-        /// <seealso cref="ToMinor()"/>
-        /// <seealso cref="ToMinor(out long)"/>
-        public long AmountInMinor
+        /// the Decimal range.</exception>
+        /// <seealso cref="ToLongMinor()"/>
+        /// <seealso cref="ToLongMinor(out long)"/>
+        public decimal AmountInMinor
         {
             get
             {
@@ -113,7 +113,7 @@ namespace Narvalo.Finance
                     throw new InvalidOperationException("XXX");
                 }
 
-                return Convert.ToInt64(Currency.Factor * Amount);
+                return Currency.Factor * Amount;
             }
         }
 
@@ -166,7 +166,7 @@ namespace Narvalo.Finance
         public static Money OfMinor(long minor, Currency currency)
             => new Money(currency.Epsilon * minor, currency, true);
 
-        public long? ToMinor()
+        public long? ToLongMinor()
         {
             if (!IsNormalized) { return null; }
 
@@ -176,9 +176,9 @@ namespace Narvalo.Finance
         }
 
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "0#", Justification = "[Intentionally] Standard Try... pattern.")]
-        public bool ToMinor(out long result)
+        public bool ToLongMinor(out long result)
         {
-            long? minor = ToMinor();
+            long? minor = ToLongMinor();
             result = minor ?? (Amount > 0 ? Int64.MaxValue : Int64.MinValue);
             return minor.HasValue;
         }
