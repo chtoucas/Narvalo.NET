@@ -9,8 +9,11 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Utilities;
 
     // Work In Progress: testing a lightweight money type where the amount is stored in minor units.
+    //
+    // Despite the name, this type is not restricted to currencies with minor units of size 2.
+    //
     // Advantages:
-    // - Using an Int64 as the backing type for the amount makes all arithmetic operations much faster.
+    // - Using an Int64 as the backing type for the amount allows for fast arithmetic operations.
     // - Rounding is no longer needed; the amount is always normalized.
     //   See below for caveats when performing a division.
     // Disadvantages:
@@ -18,7 +21,7 @@ namespace Narvalo.Finance
     // - We do not provide any support for anything besides the basic arithmetic operations,
     //   but you can still convert a Moneypenny object to a Money object.
     // - Speaking of arithmetic operations, the division rounds toward zero if necessary.
-    //   In general, it is not what you want. You should use DivRem() instead.
+    //   In general, it is not what you want; you should use DivRem() instead.
     public partial struct Moneypenny : IEquatable<Moneypenny>, IComparable<Moneypenny>, IComparable, IFormattable
     {
         private const string DEFAULT_FORMAT = "G";
@@ -171,7 +174,7 @@ namespace Narvalo.Finance
             return new Moneypenny(amount.Value, penny.Currency);
         }
 
-        public static Money ToMoney(Moneypenny penny) => Money.OfMinor(penny.Amount, penny.Currency);
+        public Money ToMoney() => Money.OfMinor(Amount, Currency);
 
         public static explicit operator Moneypenny(long value) => new Moneypenny(value, Currency.None);
 
@@ -179,7 +182,7 @@ namespace Narvalo.Finance
 
         public static implicit operator long(Moneypenny value) => value.Amount;
 
-        public static explicit operator Money(Moneypenny value) => ToMoney(value);
+        public static explicit operator Money(Moneypenny value) => value.ToMoney();
     }
 
     // Math operators.
@@ -204,15 +207,15 @@ namespace Narvalo.Finance
     // Overrides the op_Addition operator.
     public partial struct Moneypenny
     {
-        //public static Moneypenny operator +(Moneypenny left, long right) => left.Add(right);
-        //public static Moneypenny operator +(long left, Moneypenny right) => right.Add(left);
+        public static Moneypenny operator +(Moneypenny left, long right) => left.Add(right);
+        public static Moneypenny operator +(long left, Moneypenny right) => right.Add(left);
         public static Moneypenny operator +(Moneypenny left, Moneypenny right) => left.Add(right);
 
-        //public Moneypenny Add(long amount)
-        //{
-        //    if (amount == 0L) { return this; }
-        //    return new Moneypenny(checked(Amount + amount), Currency);
-        //}
+        public Moneypenny Add(long amount)
+        {
+            if (amount == 0L) { return this; }
+            return new Moneypenny(checked(Amount + amount), Currency);
+        }
 
         public Moneypenny Add(Moneypenny other)
         {
@@ -227,11 +230,11 @@ namespace Narvalo.Finance
     // Overrides the op_Subtraction operator.
     public partial struct Moneypenny
     {
-        //public static Moneypenny operator -(Moneypenny left, long right) => left.Subtract(right);
-        //public static Moneypenny operator -(long left, Moneypenny right) => right.SubtractLeft(left);
+        public static Moneypenny operator -(Moneypenny left, long right) => left.Subtract(right);
+        public static Moneypenny operator -(long left, Moneypenny right) => right.SubtractLeft(left);
         public static Moneypenny operator -(Moneypenny left, Moneypenny right) => left.Subtract(right);
 
-        //public Moneypenny Subtract(long amount) => Add(-amount);
+        public Moneypenny Subtract(long amount) => Add(-amount);
 
         public Moneypenny Subtract(Moneypenny other)
         {
@@ -242,8 +245,8 @@ namespace Narvalo.Finance
             return new Moneypenny(checked(other.Amount - Amount), Currency);
         }
 
-        //private Moneypenny SubtractLeft(long amount)
-        //    => new Moneypenny(checked(amount - Amount), Currency);
+        private Moneypenny SubtractLeft(long amount)
+            => new Moneypenny(checked(amount - Amount), Currency);
     }
 
     // Overrides the op_Multiply operator.
