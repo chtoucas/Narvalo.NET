@@ -13,5 +13,13 @@ namespace Narvalo.Finance.Utilities
                 throw new InvalidOperationException("XXX");
             }
         }
+
+        public static void ThrowIfCurrencyMismatch(Moneypenny pny, Currency cy)
+        {
+            if (pny.Currency != cy)
+            {
+                throw new InvalidOperationException("XXX");
+            }
+        }
     }
 }

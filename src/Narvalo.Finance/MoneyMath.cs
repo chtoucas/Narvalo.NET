@@ -10,7 +10,7 @@ namespace Narvalo.Finance
     {
         public static Money Abs(Money money) => money.IsPositiveOrZero ? money : money.Negate();
 
-        public static int Sign(Money money) => money < 0 ? -1 : (money > 0 ? 1 : 0);
+        public static int Sign(Money money) => money.Amount < 0m ? -1 : (money.Amount > 0m ? 1 : 0);
 
         public static Money Max(Money money1, Money money2) => money1 >= money2 ? money1 : money2;
 

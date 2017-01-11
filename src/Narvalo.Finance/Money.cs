@@ -562,6 +562,7 @@ namespace Narvalo.Finance
         public static Money operator /(Money dividend, decimal divisor) => dividend.Divide(divisor);
 
         // WARNING: This method returns a decimal (a division implies that we lost the currency unit).
+        // This division is a lot like computing a percentage (if multiplied by 100, of course).
         public decimal Divide(Money divisor) => Amount / divisor.Amount;
 
         public Money Divide(decimal divisor) => new Money(Amount / divisor, Currency, false);

@@ -3,16 +3,22 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Utilities;
 
     // Work In Progress: testing a lightweight money type where the amount is stored in minor units.
     // Advantages:
     // - Using an Int64 as the backing type for the amount makes all arithmetic operations much faster.
-    // - Rounding is no longer needed.
+    // - Rounding is no longer needed; the amount is always normalized.
+    //   See below for caveats when performing a division.
     // Disadvantages:
     // - The Int64 range is smaller.
-    // - We do not provide any support for anything besides the basic arithmetic operations.
+    // - We do not provide any support for anything besides the basic arithmetic operations,
+    //   but you can still convert a Moneypenny object to a Money object.
+    // - Speaking of arithmetic operations, the division rounds toward zero if necessary.
+    //   In general, it is not what you want. You should use DivRem() instead.
     public partial struct Moneypenny : IEquatable<Moneypenny>, IComparable<Moneypenny>, IComparable, IFormattable
     {
         private const string DEFAULT_FORMAT = "G";
@@ -176,6 +182,25 @@ namespace Narvalo.Finance
         public static explicit operator Money(Moneypenny value) => ToMoney(value);
     }
 
+    // Math operators.
+    public partial struct Moneypenny
+    {
+        public Moneypenny Abs() => IsPositiveOrZero ? this : Negate();
+
+        public int Sign() => Amount < 0L ? -1 : (Amount > 0L ? 1 : 0);
+
+        // Divide+Remainder aka DivRem.
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
+        public Moneypenny DivRem(long divisor, out Moneypenny remainder)
+        {
+            long rem;
+            long q = IntegerCalculator.DivRem(Amount, divisor, out rem);
+            remainder = new Moneypenny(rem, Currency);
+            return new Moneypenny(q, Currency);
+        }
+    }
+
     // Overrides the op_Addition operator.
     public partial struct Moneypenny
     {
@@ -227,22 +252,19 @@ namespace Narvalo.Finance
         public static Moneypenny operator *(long multiplier, Moneypenny money) => money.Multiply(multiplier);
         public static Moneypenny operator *(Moneypenny money, long multiplier) => money.Multiply(multiplier);
 
-        public Moneypenny Multiply(long multiplier)
-            => new Moneypenny(checked(multiplier * Amount), Currency);
+        public Moneypenny Multiply(long multiplier) => new Moneypenny(checked(multiplier * Amount), Currency);
     }
 
     // Overrides the op_Division operator.
     public partial struct Moneypenny
     {
-        // WARNING: This method returns a decimal (a division implies that we lost the currency unit).
         public static decimal operator /(Moneypenny dividend, Moneypenny divisor) => dividend.Divide(divisor);
         public static Moneypenny operator /(Moneypenny dividend, long divisor) => dividend.Divide(divisor);
 
-        // WARNING: This method returns a decimal (a division implies that we lost the currency unit).
-        public long Divide(Moneypenny divisor) => checked(Amount / divisor.Amount);
+        // NB: Decimal operations are always checked.
+        public decimal Divide(Moneypenny divisor) => Amount / (decimal)divisor.Amount;
 
-        public Moneypenny Divide(long divisor)
-            => new Moneypenny(checked(Amount / divisor), Currency);
+        public Moneypenny Divide(long divisor) => new Moneypenny(checked(Amount / divisor), Currency);
     }
 
     // Overrides the op_Modulus operator.
@@ -250,8 +272,7 @@ namespace Narvalo.Finance
     {
         public static Moneypenny operator %(Moneypenny dividend, long divisor) => dividend.Remainder(divisor);
 
-        public Moneypenny Remainder(long divisor)
-            => new Moneypenny(checked(Amount % divisor), Currency);
+        public Moneypenny Remainder(long divisor) => new Moneypenny(checked(Amount % divisor), Currency);
     }
 
     // Overrides the op_Increment operator.
@@ -259,8 +280,7 @@ namespace Narvalo.Finance
     {
         public static Moneypenny operator ++(Moneypenny penny) => penny.Increment();
 
-        public Moneypenny Increment()
-            => new Moneypenny(checked(Amount + 1L), Currency);
+        public Moneypenny Increment() => new Moneypenny(checked(Amount + 1L), Currency);
     }
 
     // Overrides the op_Decrement operator.
@@ -268,8 +288,7 @@ namespace Narvalo.Finance
     {
         public static Moneypenny operator --(Moneypenny penny) => penny.Decrement();
 
-        public Moneypenny Decrement()
-            => new Moneypenny(checked(Amount - 1L), Currency);
+        public Moneypenny Decrement() => new Moneypenny(checked(Amount - 1L), Currency);
     }
 
     // Overrides the op_UnaryNegation operator.
