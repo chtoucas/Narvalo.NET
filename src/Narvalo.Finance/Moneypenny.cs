@@ -194,11 +194,11 @@ namespace Narvalo.Finance
 
         // Divide+Remainder aka DivRem.
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "[Intentionally] Math.DivRem().")]
         public Moneypenny DivRem(long divisor, out Moneypenny remainder)
         {
             long rem;
-            long q = IntegerCalculator.DivRem(Amount, divisor, out rem);
+            long q = Integer.DivRem(Amount, divisor, out rem);
             remainder = new Moneypenny(rem, Currency);
             return new Moneypenny(q, Currency);
         }
@@ -245,8 +245,7 @@ namespace Narvalo.Finance
             return new Moneypenny(checked(other.Amount - Amount), Currency);
         }
 
-        private Moneypenny SubtractLeft(long amount)
-            => new Moneypenny(checked(amount - Amount), Currency);
+        private Moneypenny SubtractLeft(long amount) => new Moneypenny(checked(amount - Amount), Currency);
     }
 
     // Overrides the op_Multiply operator.

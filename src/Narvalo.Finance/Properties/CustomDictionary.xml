@@ -15,6 +15,7 @@
 
     <Compound>
       <Term CompoundAlternate="UniqInstance">uniqinstance</Term>
+      <Term CompoundAlternate="DivRem">divrem</Term>
     </Compound>
   </Words>
 </Dictionary>

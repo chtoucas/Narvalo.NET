@@ -6,7 +6,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Utilities;
 
-    // NB: Abs() and DivRem() are implemented as members of the Moneypenny type.
+    // NB: Abs() and DivRem() are direct members of the Moneypenny type.
     public static partial class PennyCalculator
     {
         public static Moneypenny Max(Moneypenny penny1, Moneypenny penny2) => penny1 >= penny2 ? penny1 : penny2;
