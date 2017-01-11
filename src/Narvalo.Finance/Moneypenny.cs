@@ -17,11 +17,12 @@ namespace Narvalo.Finance
     // - Rounding is no longer needed; the amount is always normalized.
     //   See below for caveats when performing a division.
     // Disadvantages:
-    // - The Int64 range is smaller.
+    // - The Int64 range is smaller. Some operations are lossful: OfMinor(), OfMajor() & Divide().
     // - We do not provide any support for anything besides the basic arithmetic operations,
     //   but you can still convert a Moneypenny object to a Money object.
-    // - Speaking of arithmetic operations, the division rounds toward zero if necessary.
-    //   In general, it is not what you want; you should use DivRem() instead.
+    // - Speaking of arithmetic operations, the division rounds toward zero if needed. This is
+    //   necessary to keep the operation closed. In general, it is not what you want; you should
+    //   use DivRem() instead.
     public partial struct Moneypenny : IEquatable<Moneypenny>, IComparable<Moneypenny>, IComparable, IFormattable
     {
         private const string DEFAULT_FORMAT = "G";
@@ -169,7 +170,7 @@ namespace Narvalo.Finance
         public static Moneypenny FromMoney(Money penny)
         {
             long? amount = penny.ToLongMinor();
-            if (!amount.HasValue) { throw new InvalidCastException("XXX"); }
+            if (!amount.HasValue) { throw new InvalidOperationException("XXX"); }
 
             return new Moneypenny(amount.Value, penny.Currency);
         }
