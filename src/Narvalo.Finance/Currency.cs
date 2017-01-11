@@ -92,9 +92,16 @@ namespace Narvalo.Finance
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] For currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
 
-        public Subcurrency MinorCurrency => new Subcurrency(this, Epsilon, Code);
+        public CurrencyUnit MinorCurrency => new CurrencyUnit(this, Epsilon, MinorCurrencyCode);
 
         private uint Factor => PowersOfTen[DecimalPlaces];
+
+        // If the currency admits a subunit, we obtain its code by "lowercasing" the last character
+        // of its code: "EUR" -> "EUr", otherwise we keep it unchanged. This transformation is not official.
+        private string MinorCurrencyCode
+            => Epsilon == 1m
+            ? Code
+            : Code[0] + Code[1] + (Code[3] | 0x20).ToString();
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.

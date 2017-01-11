@@ -4,9 +4,9 @@ namespace Narvalo.Finance
 {
     using System;
 
-    public partial struct Subcurrency : IEquatable<Subcurrency>
+    public partial struct CurrencyUnit : IEquatable<CurrencyUnit>
     {
-        public Subcurrency(Currency parent, decimal epsilon, string code)
+        public CurrencyUnit(Currency parent, decimal epsilon, string code)
         {
             Parent = parent;
             Epsilon = epsilon;
@@ -23,14 +23,14 @@ namespace Narvalo.Finance
     }
 
     // Interface IEquatable<SubCurrency>.
-    public partial struct Subcurrency
+    public partial struct CurrencyUnit
     {
-        public static bool operator ==(Subcurrency left, Subcurrency right) => left.Equals(right);
+        public static bool operator ==(CurrencyUnit left, CurrencyUnit right) => left.Equals(right);
 
-        public static bool operator !=(Subcurrency left, Subcurrency right) => !left.Equals(right);
+        public static bool operator !=(CurrencyUnit left, CurrencyUnit right) => !left.Equals(right);
 
         /// <inheritdoc cref="IEquatable{T}.Equals" />
-        public bool Equals(Subcurrency other)
+        public bool Equals(CurrencyUnit other)
             => Parent == other.Parent
             && Code == other.Code
             && Epsilon == other.Epsilon;
@@ -38,9 +38,9 @@ namespace Narvalo.Finance
         /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
-            if (!(obj is Subcurrency)) { return false; }
+            if (!(obj is CurrencyUnit)) { return false; }
 
-            return Equals((Subcurrency)obj);
+            return Equals((CurrencyUnit)obj);
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
