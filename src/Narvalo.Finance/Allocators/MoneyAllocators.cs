@@ -33,7 +33,7 @@ namespace Narvalo.Finance.Allocators
         {
             Currency currency = @this.Currency;
             decimal total = @this.Amount;
-            short decimalPlaces = currency.DecimalPlaces;
+            int decimalPlaces = currency.DecimalPlaces;
 
             int len = ratios.Length;
             var dist = new decimal[len];
@@ -75,7 +75,7 @@ namespace Narvalo.Finance.Allocators
         {
             Currency currency = @this.Currency;
             decimal total = @this.Amount;
-            short decimalPlaces = currency.DecimalPlaces;
+            int decimalPlaces = currency.DecimalPlaces;
 
             int len = ratios.Length;
             var dist = new decimal[len];

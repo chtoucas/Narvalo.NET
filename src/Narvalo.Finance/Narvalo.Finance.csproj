@@ -92,6 +92,7 @@
     <Compile Include="Rounding\IRoundingAdjuster.cs" />
     <Compile Include="Rounding\RoundingModeAdjuster.cs" />
     <Compile Include="Rounding\RoundingAdjusters.cs" />
+    <Compile Include="Subcurrency.cs" />
     <Compile Include="Utilities\Integer.cs" />
     <Compile Include="Rounding\Money%24.cs" />
     <Compile Include="Rounding\AdjustedMoneyFactory.cs" />

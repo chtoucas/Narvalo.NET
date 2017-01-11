@@ -51,7 +51,7 @@ namespace Narvalo.Finance
         private static decimal[] Epsilons => s_Epsilons;
 
         // The list is automatically generated using data obtained from the SNV website.
-        private static uint[] Powers10 => s_Powers10;
+        private static uint[] PowersOfTen => s_PowersOfTen;
 
         /// <summary>
         /// Gets the alphabetic code of the currency.
@@ -65,7 +65,7 @@ namespace Narvalo.Finance
         /// <value>The number of minor units; <see langword="null"/> if none defined.</value>
         public short? MinorUnits { get; }
 
-        public short DecimalPlaces => MinorUnits ?? 0;
+        public int DecimalPlaces => MinorUnits ?? 0;
 
         /// <summary>
         /// Gets a value indicating whether the currency is a meta-currency.
@@ -92,7 +92,9 @@ namespace Narvalo.Finance
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] For currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
 
-        private decimal Factor => Powers10[DecimalPlaces];
+        public Subcurrency MinorCurrency => new Subcurrency(this, Epsilon, Code);
+
+        private uint Factor => PowersOfTen[DecimalPlaces];
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.

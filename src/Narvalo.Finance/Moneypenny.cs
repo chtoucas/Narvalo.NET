@@ -11,18 +11,27 @@ namespace Narvalo.Finance
     // Work In Progress: testing a lightweight money type where the amount is stored in minor units.
     //
     // Despite the name, this type is not restricted to currencies with minor units of size 2.
+    // Nevertheless, we assume that a penny represents one minor unit exactly (as found in
+    // ISO 4217); we do not handle arbitrary subunits.
     //
     // Advantages:
     // - Using an Int64 as the backing type for the amount allows for fast arithmetic operations.
     // - Rounding is no longer needed; the amount is always normalized.
     //   See below for caveats when performing a division.
     // Disadvantages:
-    // - The Int64 range is smaller. Some operations are lossful: OfMinor(), OfMajor() & Divide().
+    // - The Int64 range is smaller. This has two consequences:
+    //   * more "chances" to get an overflow exception.
+    //   * some operations might be lossful:
+    //     - OfMajor() and OfMinor() cast a decimal to a long which is a lossful operation.
+    //     - Divide() is actually an integer division, it then rounds toward zero if needed;
+    //       this is necessary to keep the operation closed. If you do not want this, you should
+    //       use DivRem() instead.
     // - We do not provide any support for anything besides the basic arithmetic operations,
     //   but you can still convert a Moneypenny object to a Money object.
-    // - Speaking of arithmetic operations, the division rounds toward zero if needed. This is
-    //   necessary to keep the operation closed. In general, it is not what you want; you should
-    //   use DivRem() instead.
+    // Remark: This class and FastMoney from JavaMoney are similar in purpose (fast operations)
+    // but different in the way they deal with amounts. Here, we only consider strict amounts
+    // (no rounding is ever needed, at the expense of what you can do with it: for instance,
+    // we do not have a useful division operator), a restriction that does not exist with FastMoney.
     public partial struct Moneypenny : IEquatable<Moneypenny>, IComparable<Moneypenny>, IComparable, IFormattable
     {
         private const string DEFAULT_FORMAT = "G";
@@ -56,6 +65,7 @@ namespace Narvalo.Finance
 
         public static Moneypenny One(Currency currency) => new Moneypenny(1L, currency);
 
+        // DANGEROUS ZONE when major is not normalized.
         public static Moneypenny? OfMajor(decimal major, Currency currency)
         {
             decimal minor = currency.ConvertToMinor(major);
@@ -63,6 +73,7 @@ namespace Narvalo.Finance
             return new Moneypenny(Convert.ToInt64(minor), currency);
         }
 
+        // DANGEROUS ZONE when minor is not normalized.
         public static Moneypenny? OfMinor(decimal minor, Currency currency)
         {
             if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
@@ -167,12 +178,12 @@ namespace Narvalo.Finance
     // Conversions.
     public partial struct Moneypenny
     {
-        public static Moneypenny FromMoney(Money penny)
+        public static Moneypenny FromMoney(Money money)
         {
-            long? amount = penny.ToLongMinor();
+            long? amount = money.ToLongMinor();
             if (!amount.HasValue) { throw new InvalidOperationException("XXX"); }
 
-            return new Moneypenny(amount.Value, penny.Currency);
+            return new Moneypenny(amount.Value, money.Currency);
         }
 
         public Money ToMoney() => Money.OfMinor(Amount, Currency);

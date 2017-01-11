@@ -27,7 +27,7 @@ namespace Narvalo.Finance
             0.0001m,
         };
 
-        private static uint[] s_Powers10 = new uint[] {
+        private static uint[] s_PowersOfTen = new uint[] {
             1,
             10,
             100,
