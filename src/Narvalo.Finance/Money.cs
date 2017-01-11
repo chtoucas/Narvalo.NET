@@ -96,15 +96,6 @@ namespace Narvalo.Finance
         public bool IsNormalized { get; }
 
         /// <summary>
-        /// Gets the amount given in minor units.
-        /// </summary>
-        /// <exception cref="OverflowException">Thrown if the result is too large to fit into
-        /// the Decimal range.</exception>
-        /// <seealso cref="ToLongMinor()"/>
-        /// <seealso cref="ToLongMinor(out long)"/>
-        public decimal AmountInMinor => Currency.ConvertToMinor(Amount);
-
-        /// <summary>
         /// Gets a value indicating whether the amount is zero.
         /// </summary>
         public bool IsZero => Amount == 0m;
@@ -130,6 +121,15 @@ namespace Narvalo.Finance
         public bool IsPositiveOrZero => Amount >= 0m;
 
         /// <summary>
+        /// Gets the amount given in minor units.
+        /// </summary>
+        /// <exception cref="OverflowException">Thrown if the result is too large to fit into
+        /// the Decimal range.</exception>
+        /// <seealso cref="ToLongMinor()"/>
+        /// <seealso cref="ToLongMinor(out long)"/>
+        public decimal ToMinor() => Currency.ConvertToMinor(Amount);
+
+        /// <summary>
         /// Gets the amount given in minor units and converted to a 64-bit signed integer.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown if the instance is not normalized.</exception>
@@ -139,7 +139,7 @@ namespace Narvalo.Finance
         {
             if (!IsNormalized) { throw new InvalidOperationException("XXX"); }
 
-            decimal minor = AmountInMinor;
+            decimal minor = ToMinor();
             if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
             return Convert.ToInt64(minor);
         }
@@ -350,26 +350,27 @@ namespace Narvalo.Finance
         #region Integral type or decimal -> Money.
 
         [CLSCompliant(false)]
-        public static implicit operator Money(sbyte value) => new Money(value, Currency.None);
+        public static explicit operator Money(sbyte value) => new Money(value, Currency.None);
 
         [CLSCompliant(false)]
-        public static implicit operator Money(ushort value) => new Money(value, Currency.None);
+        public static explicit operator Money(ushort value) => new Money(value, Currency.None);
 
         [CLSCompliant(false)]
-        public static implicit operator Money(uint value) => new Money(value, Currency.None);
+        public static explicit operator Money(uint value) => new Money(value, Currency.None);
 
         [CLSCompliant(false)]
-        public static implicit operator Money(ulong value) => new Money(value, Currency.None);
+        public static explicit operator Money(ulong value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(byte value) => new Money(value, Currency.None);
+        public static explicit operator Money(byte value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(short value) => new Money(value, Currency.None);
+        public static explicit operator Money(short value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(int value) => new Money(value, Currency.None);
+        public static explicit operator Money(int value) => new Money(value, Currency.None);
 
-        public static implicit operator Money(long value) => new Money(value, Currency.None);
+        public static explicit operator Money(long value) => new Money(value, Currency.None);
 
-        // NB: This one is explicit (the result is not normalized).
+        // NB: If we make the other ops implicit, we MUST keep this one explicit:
+        // the cast is lossless but the result is not normalized.
         public static explicit operator Money(decimal value) => new Money(value, Currency.None, false);
 
         #endregion
@@ -396,7 +397,7 @@ namespace Narvalo.Finance
 
         public static explicit operator long(Money value) => ToInt64(value);
 
-        // NB: This one is implicit (no unexpected loss of precision).
+        // NB: This one is implicit (no unexpected loss of precision, fast & completely harmless).
         public static implicit operator decimal(Money value) => ToDecimal(value);
 
         #endregion

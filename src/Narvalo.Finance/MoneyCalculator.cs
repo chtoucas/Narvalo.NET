@@ -5,6 +5,8 @@ namespace Narvalo.Finance
     using System;
     using System.Collections.Generic;
 
+    using Narvalo.Finance.Utilities;
+
     // Addition with rounding.
     public static partial class MoneyCalculator
     {
@@ -125,7 +127,7 @@ namespace Narvalo.Finance
                 {
                     mny = it.Current;
 
-                    ThrowIfCurrencyMismatch(mny.Currency, currency);
+                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                     normalized = normalized && mny.IsNormalized;
                     sum += mny.Amount;
@@ -166,7 +168,7 @@ namespace Narvalo.Finance
                         {
                             mny = item.Value;
 
-                            ThrowIfCurrencyMismatch(mny.Currency, currency);
+                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                             normalized = normalized && mny.IsNormalized;
                             sum += mny.Amount;
@@ -198,7 +200,7 @@ namespace Narvalo.Finance
                 {
                     mny = it.Current;
 
-                    ThrowIfCurrencyMismatch(mny.Currency, currency);
+                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                     sum += NormalizeAmount(mny, mode);
                 }
@@ -234,7 +236,7 @@ namespace Narvalo.Finance
                         {
                             mny = item.Value;
 
-                            ThrowIfCurrencyMismatch(mny.Currency, currency);
+                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                             sum += NormalizeAmount(mny, mode);
                         }
@@ -286,7 +288,7 @@ namespace Narvalo.Finance
                 {
                     mny = it.Current;
 
-                    ThrowIfCurrencyMismatch(mny.Currency, currency);
+                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                     sum += mny.Amount;
                     count++;
@@ -321,7 +323,7 @@ namespace Narvalo.Finance
                         {
                             mny = item.Value;
 
-                            ThrowIfCurrencyMismatch(mny.Currency, currency);
+                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                             sum += mny.Amount;
                             count++;
@@ -353,7 +355,7 @@ namespace Narvalo.Finance
                 {
                     mny = it.Current;
 
-                    ThrowIfCurrencyMismatch(mny.Currency, currency);
+                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                     sum += NormalizeAmount(mny, mode);
                     count++;
@@ -388,7 +390,7 @@ namespace Narvalo.Finance
                         {
                             mny = item.Value;
 
-                            ThrowIfCurrencyMismatch(mny.Currency, currency);
+                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                             sum += NormalizeAmount(mny, mode);
                             count++;
@@ -406,14 +408,6 @@ namespace Narvalo.Finance
     // Helpers.
     public static partial class MoneyCalculator
     {
-        internal static void ThrowIfCurrencyMismatch(Currency cy1, Currency cy2)
-        {
-            if (cy1 != cy2)
-            {
-                throw new InvalidOperationException("XXX");
-            }
-        }
-
         private static decimal NormalizeAmount(Money money, MidpointRounding mode)
             => money.IsNormalized
             ? money.Amount

@@ -68,7 +68,7 @@ namespace Narvalo.Finance.Allocators
                 yield return part;
             }
 
-            yield return MoneyCreator.Create(total - (count - 1) * q, currency, adjuster);
+            yield return AdjustedMoneyFactory.Create(total - (count - 1) * q, currency, adjuster);
         }
 
         public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios, IRoundingAdjuster adjuster)
@@ -88,7 +88,7 @@ namespace Narvalo.Finance.Allocators
                 yield return Money.OfMajor(amount, currency);
             }
 
-            yield return MoneyCreator.Create(last, currency, adjuster);
+            yield return AdjustedMoneyFactory.Create(last, currency, adjuster);
         }
     }
 }

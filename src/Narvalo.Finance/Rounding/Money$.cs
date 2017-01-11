@@ -5,6 +5,8 @@ namespace Narvalo.Finance.Rounding
     using System;
     using System.Collections.Generic;
 
+    using Narvalo.Finance.Utilities;
+
     // Normalization.
     public static partial class MoneyExtensions
     {
@@ -12,7 +14,7 @@ namespace Narvalo.Finance.Rounding
         {
             Expect.NotNull(adjuster);
             if (@this.IsNormalized) { return @this; }
-            return MoneyCreator.Create(@this.Amount, @this.Currency, adjuster);
+            return AdjustedMoneyFactory.Create(@this.Amount, @this.Currency, adjuster);
         }
     }
 
@@ -23,7 +25,7 @@ namespace Narvalo.Finance.Rounding
         {
             Expect.NotNull(adjuster);
             if (amount == 0m) { return @this; }
-            return MoneyCreator.Create(@this.Amount + amount, @this.Currency, adjuster);
+            return AdjustedMoneyFactory.Create(@this.Amount + amount, @this.Currency, adjuster);
         }
 
         public static Money Add(this Money @this, Money other, IRoundingAdjuster adjuster)
@@ -35,7 +37,7 @@ namespace Narvalo.Finance.Rounding
 
             return @this.IsNormalized && other.IsNormalized
                 ? Money.OfMajor(amount, @this.Currency)
-                : MoneyCreator.Create(amount, @this.Currency, adjuster);
+                : AdjustedMoneyFactory.Create(amount, @this.Currency, adjuster);
         }
     }
 
@@ -57,7 +59,7 @@ namespace Narvalo.Finance.Rounding
 
             return @this.IsNormalized && other.IsNormalized
                 ? Money.OfMajor(amount, @this.Currency)
-                : MoneyCreator.Create(amount, @this.Currency, adjuster);
+                : AdjustedMoneyFactory.Create(amount, @this.Currency, adjuster);
         }
     }
 
@@ -67,7 +69,7 @@ namespace Narvalo.Finance.Rounding
         public static Money Multiply(this Money @this, decimal multiplier, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
-            return MoneyCreator.Create(multiplier * @this.Amount, @this.Currency, adjuster);
+            return AdjustedMoneyFactory.Create(multiplier * @this.Amount, @this.Currency, adjuster);
         }
     }
 
@@ -77,7 +79,7 @@ namespace Narvalo.Finance.Rounding
         public static Money Divide(this Money @this, decimal divisor, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
-            return MoneyCreator.Create(@this.Amount / divisor, @this.Currency, adjuster);
+            return AdjustedMoneyFactory.Create(@this.Amount / divisor, @this.Currency, adjuster);
         }
     }
 
@@ -87,7 +89,7 @@ namespace Narvalo.Finance.Rounding
         public static Money Remainder(this Money @this, decimal divisor, IRoundingAdjuster adjuster)
         {
             Expect.NotNull(adjuster);
-            return MoneyCreator.Create(@this.Amount % divisor, @this.Currency, adjuster);
+            return AdjustedMoneyFactory.Create(@this.Amount % divisor, @this.Currency, adjuster);
         }
     }
 
@@ -112,7 +114,7 @@ namespace Narvalo.Finance.Rounding
                 {
                     mny = it.Current;
 
-                    MoneyCalculator.ThrowIfCurrencyMismatch(mny.Currency, currency);
+                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                     sum += NormalizeAmount(mny, adjuster);
                 }
@@ -149,7 +151,7 @@ namespace Narvalo.Finance.Rounding
                         {
                             mny = item.Value;
 
-                            MoneyCalculator.ThrowIfCurrencyMismatch(mny.Currency, currency);
+                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                             sum += NormalizeAmount(mny, adjuster);
                         }
@@ -185,13 +187,13 @@ namespace Narvalo.Finance.Rounding
                 {
                     mny = it.Current;
 
-                    MoneyCalculator.ThrowIfCurrencyMismatch(mny.Currency, currency);
+                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                     sum += NormalizeAmount(mny, adjuster);
                     count++;
                 }
 
-                return MoneyCreator.Create(sum / count, currency, adjuster);
+                return AdjustedMoneyFactory.Create(sum / count, currency, adjuster);
             }
         }
 
@@ -221,14 +223,14 @@ namespace Narvalo.Finance.Rounding
                         {
                             mny = item.Value;
 
-                            MoneyCalculator.ThrowIfCurrencyMismatch(mny.Currency, currency);
+                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
 
                             sum += NormalizeAmount(mny, adjuster);
                             count++;
                         }
                     }
 
-                    return MoneyCreator.Create(sum / count, currency, adjuster);
+                    return AdjustedMoneyFactory.Create(sum / count, currency, adjuster);
                 }
             }
 

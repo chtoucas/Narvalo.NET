@@ -197,14 +197,12 @@ namespace Narvalo.Finance
         public override string ToString()
         {
             Warrant.NotNull<string>();
-
             return ToString(DefaultFormat, null);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
-
             return ToString(format, null);
         }
 

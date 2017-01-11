@@ -1,0 +1,291 @@
+﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
+
+namespace Narvalo.Finance
+{
+    using System;
+
+    using Narvalo.Finance.Properties;
+
+    // Work In Progress: testing a lightweight money type where the amount is stored in minor units.
+    // Advantages:
+    // - Using an Int64 as the backing type for the amount makes all arithmetic operations much faster.
+    // - Rounding is no longer needed.
+    // Disadvantages:
+    // - The Int64 range is smaller.
+    // - We do not provide any support for anything besides the basic arithmetic operations.
+    public partial struct Moneypenny : IEquatable<Moneypenny>, IComparable<Moneypenny>, IComparable, IFormattable
+    {
+        private const string DEFAULT_FORMAT = "G";
+
+        public Moneypenny(long amount, Currency currency)
+        {
+            Amount = amount;
+            Currency = currency;
+        }
+
+        public long Amount { get; }
+
+        public Currency Currency { get; }
+
+        public bool IsZero => Amount == 0L;
+        public bool IsNegative => Amount < 0L;
+        public bool IsNegativeOrZero => Amount <= 0L;
+        public bool IsPositive => Amount > 0L;
+        public bool IsPositiveOrZero => Amount >= 0L;
+
+        public decimal ToMajor() => Currency.ConvertToMajor(Amount);
+
+        private void ThrowIfCurrencyMismatch(Moneypenny penny, string parameterName)
+            => Enforce.True(Currency == penny.Currency, parameterName, Strings.Argument_CurrencyMismatch);
+    }
+
+    // Static factory methods.
+    public partial struct Moneypenny
+    {
+        public static Moneypenny Zero(Currency currency) => new Moneypenny(0L, currency);
+
+        public static Moneypenny One(Currency currency) => new Moneypenny(1L, currency);
+
+        public static Moneypenny? OfMajor(decimal major, Currency currency)
+        {
+            decimal minor = currency.ConvertToMinor(major);
+            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
+            return new Moneypenny(Convert.ToInt64(minor), currency);
+        }
+
+        public static Moneypenny? OfMinor(decimal minor, Currency currency)
+        {
+            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
+            return new Moneypenny(Convert.ToInt64(minor), currency);
+        }
+    }
+
+    // Implements the IFormattable interface.
+    public partial struct Moneypenny
+    {
+        public override string ToString()
+        {
+            Warrant.NotNull<string>();
+            return ToString(DEFAULT_FORMAT, null);
+        }
+
+        public string ToString(string format)
+        {
+            Warrant.NotNull<string>();
+            return ToString(format, null);
+        }
+
+        public string ToString(IFormatProvider formatProvider)
+        {
+            Warrant.NotNull<string>();
+            return ToString(DEFAULT_FORMAT, formatProvider);
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            Warrant.NotNull<string>();
+
+            if (formatProvider != null)
+            {
+                var fmt = formatProvider.GetFormat(GetType()) as ICustomFormatter;
+                if (fmt != null)
+                {
+                    return fmt.Format(format, this, formatProvider);
+                }
+            }
+
+            throw new NotImplementedException();
+        }
+    }
+
+    // Implements the IEquatable<Cent> interface.
+    public partial struct Moneypenny
+    {
+        public static bool operator ==(Moneypenny left, Moneypenny right) => left.Equals(right);
+
+        public static bool operator !=(Moneypenny left, Moneypenny right) => !left.Equals(right);
+
+        public bool Equals(Moneypenny other) => Amount == other.Amount && Currency == other.Currency;
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Moneypenny)) { return false; }
+
+            return Equals((Moneypenny)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = 31 * hash + Amount.GetHashCode();
+                hash = 31 * hash + Currency.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    // Implements the IComparable and IComparable<Cent> interfaces.
+    public partial struct Moneypenny
+    {
+        public static bool operator <(Moneypenny left, Moneypenny right) => left.CompareTo(right) < 0;
+        public static bool operator <=(Moneypenny left, Moneypenny right) => left.CompareTo(right) <= 0;
+        public static bool operator >(Moneypenny left, Moneypenny right) => left.CompareTo(right) > 0;
+        public static bool operator >=(Moneypenny left, Moneypenny right) => left.CompareTo(right) >= 0;
+
+        public int CompareTo(Moneypenny other)
+        {
+            ThrowIfCurrencyMismatch(other, nameof(other));
+
+            return Amount.CompareTo(other.Amount);
+        }
+
+        int IComparable.CompareTo(object obj)
+        {
+            if (obj == null) { return 1; }
+
+            if (!(obj is Moneypenny))
+            {
+                throw new ArgumentException(Strings.Argument_InvalidMoneyType, nameof(obj));
+            }
+
+            return CompareTo((Moneypenny)obj);
+        }
+    }
+
+    // Conversions.
+    public partial struct Moneypenny
+    {
+        public static Moneypenny FromMoney(Money penny)
+        {
+            long? amount = penny.ToLongMinor();
+            if (!amount.HasValue) { throw new InvalidCastException("XXX"); }
+
+            return new Moneypenny(amount.Value, penny.Currency);
+        }
+
+        public static Money ToMoney(Moneypenny penny) => Money.OfMinor(penny.Amount, penny.Currency);
+
+        public static explicit operator Moneypenny(long value) => new Moneypenny(value, Currency.None);
+
+        public static explicit operator Moneypenny(Money value) => FromMoney(value);
+
+        public static implicit operator long(Moneypenny value) => value.Amount;
+
+        public static explicit operator Money(Moneypenny value) => ToMoney(value);
+    }
+
+    // Overrides the op_Addition operator.
+    public partial struct Moneypenny
+    {
+        //public static Moneypenny operator +(Moneypenny left, long right) => left.Add(right);
+        //public static Moneypenny operator +(long left, Moneypenny right) => right.Add(left);
+        public static Moneypenny operator +(Moneypenny left, Moneypenny right) => left.Add(right);
+
+        //public Moneypenny Add(long amount)
+        //{
+        //    if (amount == 0L) { return this; }
+        //    return new Moneypenny(checked(Amount + amount), Currency);
+        //}
+
+        public Moneypenny Add(Moneypenny other)
+        {
+            ThrowIfCurrencyMismatch(other, nameof(other));
+
+            if (Amount == 0L) { return other; }
+            if (other.Amount == 0L) { return this; }
+            return new Moneypenny(checked(Amount + other.Amount), Currency);
+        }
+    }
+
+    // Overrides the op_Subtraction operator.
+    public partial struct Moneypenny
+    {
+        //public static Moneypenny operator -(Moneypenny left, long right) => left.Subtract(right);
+        //public static Moneypenny operator -(long left, Moneypenny right) => right.SubtractLeft(left);
+        public static Moneypenny operator -(Moneypenny left, Moneypenny right) => left.Subtract(right);
+
+        //public Moneypenny Subtract(long amount) => Add(-amount);
+
+        public Moneypenny Subtract(Moneypenny other)
+        {
+            ThrowIfCurrencyMismatch(other, nameof(other));
+
+            if (Amount == 0L) { return other.Negate(); }
+            if (other.Amount == 0L) { return this; }
+            return new Moneypenny(checked(other.Amount - Amount), Currency);
+        }
+
+        //private Moneypenny SubtractLeft(long amount)
+        //    => new Moneypenny(checked(amount - Amount), Currency);
+    }
+
+    // Overrides the op_Multiply operator.
+    public partial struct Moneypenny
+    {
+        public static Moneypenny operator *(long multiplier, Moneypenny money) => money.Multiply(multiplier);
+        public static Moneypenny operator *(Moneypenny money, long multiplier) => money.Multiply(multiplier);
+
+        public Moneypenny Multiply(long multiplier)
+            => new Moneypenny(checked(multiplier * Amount), Currency);
+    }
+
+    // Overrides the op_Division operator.
+    public partial struct Moneypenny
+    {
+        // WARNING: This method returns a decimal (a division implies that we lost the currency unit).
+        public static decimal operator /(Moneypenny dividend, Moneypenny divisor) => dividend.Divide(divisor);
+        public static Moneypenny operator /(Moneypenny dividend, long divisor) => dividend.Divide(divisor);
+
+        // WARNING: This method returns a decimal (a division implies that we lost the currency unit).
+        public long Divide(Moneypenny divisor) => checked(Amount / divisor.Amount);
+
+        public Moneypenny Divide(long divisor)
+            => new Moneypenny(checked(Amount / divisor), Currency);
+    }
+
+    // Overrides the op_Modulus operator.
+    public partial struct Moneypenny
+    {
+        public static Moneypenny operator %(Moneypenny dividend, long divisor) => dividend.Remainder(divisor);
+
+        public Moneypenny Remainder(long divisor)
+            => new Moneypenny(checked(Amount % divisor), Currency);
+    }
+
+    // Overrides the op_Increment operator.
+    public partial struct Moneypenny
+    {
+        public static Moneypenny operator ++(Moneypenny penny) => penny.Increment();
+
+        public Moneypenny Increment()
+            => new Moneypenny(checked(Amount + 1L), Currency);
+    }
+
+    // Overrides the op_Decrement operator.
+    public partial struct Moneypenny
+    {
+        public static Moneypenny operator --(Moneypenny penny) => penny.Decrement();
+
+        public Moneypenny Decrement()
+            => new Moneypenny(checked(Amount - 1L), Currency);
+    }
+
+    // Overrides the op_UnaryNegation operator.
+    public partial struct Moneypenny
+    {
+        public static Moneypenny operator -(Moneypenny penny) => penny.Negate();
+
+        public Moneypenny Negate() => IsZero ? this : new Moneypenny(-Amount, Currency);
+    }
+
+    // Overrides the op_UnaryPlus operator.
+    // This operator does nothing, only added for completeness.
+    public partial struct Moneypenny
+    {
+        public static Moneypenny operator +(Moneypenny penny) => penny;
+
+        public Moneypenny Plus() => this;
+    }
+}

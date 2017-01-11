@@ -2,7 +2,7 @@
 
 namespace Narvalo.Finance.Rounding
 {
-    public static class MoneyCreator
+    public static class AdjustedMoneyFactory
     {
         /// <summary>
         /// Creates a new instance of the <see cref="Money"/> class for a specific currency
