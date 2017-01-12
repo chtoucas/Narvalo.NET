@@ -16,12 +16,12 @@ namespace Narvalo.Finance.Utilities
             {
                 Narvalo.Require.NotNull(code, parameterName);
 
-                // A currency code MUST only contain uppercase ASCII letters.
-                Narvalo.Require.True(Ascii.IsUpperLetter(code), parameterName);
-
                 // A currency code MUST be composed of exactly 3 letters.
                 Narvalo.Require.Range(code.Length == 3, parameterName,
                     Strings.Sentinel_OutOfRangeCurrencyAlphabeticCode);
+
+                // A currency code MUST only contain uppercase ASCII letters.
+                Narvalo.Require.True(Ascii.IsUpperLetter(code), parameterName);
             }
         }
 
@@ -36,11 +36,11 @@ namespace Narvalo.Finance.Utilities
             {
                 Narvalo.Demand.NotNull(code);
 
-                // A currency code MUST only contain uppercase ASCII letters.
-                Narvalo.Demand.True(Ascii.IsUpperLetter(code));
-
                 // A currency code MUST be composed of exactly 3 letters.
                 Narvalo.Demand.Range(code.Length == 3);
+
+                // A currency code MUST only contain uppercase ASCII letters.
+                Narvalo.Demand.True(Ascii.IsUpperLetter(code));
             }
         }
 
@@ -55,11 +55,11 @@ namespace Narvalo.Finance.Utilities
             {
                 Narvalo.Expect.NotNull(code);
 
-                // A currency code MUST only contain uppercase ASCII letters.
-                Narvalo.Expect.True(Ascii.IsUpperLetter(code));
-
                 // A currency code MUST be composed of exactly 3 letters.
                 Narvalo.Expect.Range(code.Length == 3);
+
+                // A currency code MUST only contain uppercase ASCII letters.
+                Narvalo.Expect.True(Ascii.IsUpperLetter(code));
             }
         }
     }

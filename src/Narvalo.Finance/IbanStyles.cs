@@ -30,6 +30,7 @@ namespace Narvalo.Finance
 
     public static class IbanStylesExtensions
     {
+        // WARNING: This always returns false for IbanStyles.None.
         public static bool Contains(this IbanStyles @this, IbanStyles value) => (@this & value) != 0;
     }
 }

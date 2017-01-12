@@ -20,12 +20,12 @@ namespace Narvalo.Finance
     //   See below for caveats when performing a division.
     // Disadvantages:
     // - The Int64 range is smaller. This has two consequences:
-    //   * more "chances" to get an overflow exception.
+    //   * more opportunities to throw an overflow exception.
     //   * some operations might be lossful:
     //     - OfMajor() and OfMinor() cast a decimal to a long which is a lossful operation.
     //     - Divide(long) is actually an integer division, it then rounds toward zero if needed;
     //       this is necessary to keep the operation closed. If you do not want this, you should
-    //       use DivRem() instead.
+    //       use Divide(decimal) or DivRem() instead.
     // - Multiply(long), Divide(long) and Remainder(long) are closed but obviously not very useful.
     //   We provide decimal overloads but, for that, we no longer return a Moneypenny object.
     // - We do not provide any support for anything besides the basic arithmetic operations,

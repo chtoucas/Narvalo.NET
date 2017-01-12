@@ -24,6 +24,7 @@ namespace Narvalo.Finance
 
     public static class IbanVerificationLevelsExtensions
     {
+        // WARNING: This always returns false for IbanValidationLevels.None.
         public static bool Contains(this IbanValidationLevels @this, IbanValidationLevels value)
             => (@this & value) != 0;
     }
