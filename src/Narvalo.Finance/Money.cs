@@ -557,11 +557,10 @@ namespace Narvalo.Finance
     // Overrides the op_Division operator.
     public partial struct Money
     {
-        // WARNING: This method returns a decimal (a division implies that we lost the currency unit).
-        public static decimal operator /(Money dividend, Money divisor) => dividend.Divide(divisor);
+        //public static decimal operator /(Money dividend, Money divisor) => dividend.Divide(divisor);
         public static Money operator /(Money dividend, decimal divisor) => dividend.Divide(divisor);
 
-        // WARNING: This method returns a decimal (a division implies that we lost the currency unit).
+        // NB: This method returns a decimal (a division implies that we lost the currency unit).
         // This division is a lot like computing a percentage (if multiplied by 100, of course).
         public decimal Divide(Money divisor) => Amount / divisor.Amount;
 
@@ -583,6 +582,7 @@ namespace Narvalo.Finance
 
         public Money Increment() => new Money(Amount + Currency.One, Currency, IsNormalized);
 
+        // NB: For currencies without minor units, this is equivalent to Increment().
         public Money IncrementMinor() => new Money(Amount + Currency.Epsilon, Currency, IsNormalized);
     }
 
@@ -593,6 +593,7 @@ namespace Narvalo.Finance
 
         public Money Decrement() => new Money(Amount - Currency.One, Currency, IsNormalized);
 
+        // NB: For currencies without minor units, this is equivalent to Decrement().
         public Money DecrementMinor() => new Money(Amount - Currency.Epsilon, Currency, IsNormalized);
     }
 

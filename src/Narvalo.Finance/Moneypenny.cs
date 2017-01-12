@@ -23,15 +23,17 @@ namespace Narvalo.Finance
     //   * more "chances" to get an overflow exception.
     //   * some operations might be lossful:
     //     - OfMajor() and OfMinor() cast a decimal to a long which is a lossful operation.
-    //     - Divide() is actually an integer division, it then rounds toward zero if needed;
+    //     - Divide(long) is actually an integer division, it then rounds toward zero if needed;
     //       this is necessary to keep the operation closed. If you do not want this, you should
     //       use DivRem() instead.
+    // - Multiply(long), Divide(long) and Remainder(long) are closed but obviously not very useful.
+    //   We provide decimal overloads but, for that, we no longer return a Moneypenny object.
     // - We do not provide any support for anything besides the basic arithmetic operations,
     //   but you can still convert a Moneypenny object to a Money object.
     // Remark: This class and FastMoney from JavaMoney are similar in purpose (fast operations)
     // but different in the way they deal with amounts. Here, we only consider strict amounts
-    // (no rounding is ever needed, at the expense of what you can do with it: for instance,
-    // we do not have a useful division operator), a restriction that does not exist with FastMoney.
+    // (no rounding is ever needed, at the expense of what you can do with it), a restriction
+    // that does not exist with FastMoney.
     public partial struct Moneypenny : IEquatable<Moneypenny>, IComparable<Moneypenny>, IComparable, IFormattable
     {
         private const string DEFAULT_FORMAT = "G";
@@ -265,28 +267,45 @@ namespace Narvalo.Finance
     {
         public static Moneypenny operator *(long multiplier, Moneypenny money) => money.Multiply(multiplier);
         public static Moneypenny operator *(Moneypenny money, long multiplier) => money.Multiply(multiplier);
+        //public static Money operator *(decimal multiplier, Moneypenny money) => money.Multiply(multiplier);
+        //public static Money operator *(Moneypenny money, decimal multiplier) => money.Multiply(multiplier);
 
         public Moneypenny Multiply(long multiplier) => new Moneypenny(checked(multiplier * Amount), Currency);
+
+        // NB: This operation is not closed: Moneypenny -> Money.
+        // NB: Decimal multiplication is always checked.
+        public Money Multiply(decimal multiplier) => new Money(multiplier * Amount, Currency);
     }
 
     // Overrides the op_Division operator.
     public partial struct Moneypenny
     {
-        public static decimal operator /(Moneypenny dividend, Moneypenny divisor) => dividend.Divide(divisor);
         public static Moneypenny operator /(Moneypenny dividend, long divisor) => dividend.Divide(divisor);
-
-        // NB: Decimal operations are always checked.
-        public decimal Divide(Moneypenny divisor) => Amount / (decimal)divisor.Amount;
+        //public static decimal operator /(Moneypenny dividend, Moneypenny divisor) => dividend.Divide(divisor);
+        //public static Money operator /(Moneypenny dividend, decimal divisor) => dividend.Divide(divisor);
 
         public Moneypenny Divide(long divisor) => new Moneypenny(checked(Amount / divisor), Currency);
+
+        // NB: This method returns a decimal (a division implies that we lost the currency unit).
+        // NB: Decimal division is always checked.
+        public decimal Divide(Moneypenny divisor) => Amount / (decimal)divisor.Amount;
+
+        // NB: This operation is not closed: Moneypenny -> Money.
+        // NB: Decimal division is always checked.
+        public Money Divide(decimal divisor) => new Money(Amount / divisor, Currency);
     }
 
     // Overrides the op_Modulus operator.
     public partial struct Moneypenny
     {
         public static Moneypenny operator %(Moneypenny dividend, long divisor) => dividend.Remainder(divisor);
+        //public static Money operator %(Moneypenny dividend, decimal divisor) => dividend.Remainder(divisor);
 
         public Moneypenny Remainder(long divisor) => new Moneypenny(checked(Amount % divisor), Currency);
+
+        // NB: This operation is not closed: Moneypenny -> Money.
+        // NB: Decimal remainder is always checked.
+        public Money Remainder(decimal divisor) => new Money(Amount % divisor, Currency);
     }
 
     // Overrides the op_Increment operator.
