@@ -67,7 +67,9 @@ namespace Narvalo.Finance
         /// <param name="mode">The rounding mode.</param>
         public Money(decimal amount, Currency currency, MidpointRounding mode)
         {
-            Amount = Math.Round(amount, currency.DecimalPlaces, mode);
+            Amount = currency.HasFixedDecimalPlaces && currency.DecimalPlaces != 0
+                ? Math.Round(amount, currency.DecimalPlaces, mode)
+                : amount;
             Currency = currency;
             IsNormalized = true;
         }
@@ -76,7 +78,7 @@ namespace Narvalo.Finance
         {
             Amount = amount;
             Currency = currency;
-            IsNormalized = normalized;
+            IsNormalized = currency.HasFixedDecimalPlaces ? normalized : true;
         }
 
         /// <summary>
@@ -91,7 +93,8 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Gets a value indicating whether the amount is rounded to the number of decimal places
-        /// specified by the currency.
+        /// specified by the currency. If the currency has no fixed decimal places, the amount should
+        /// never be rounded and the instance is normalized by default.
         /// </summary>
         public bool IsNormalized { get; }
 

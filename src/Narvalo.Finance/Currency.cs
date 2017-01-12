@@ -26,6 +26,7 @@ namespace Narvalo.Finance
     public partial struct Currency : IEquatable<Currency>
     {
         private const int MAX_DECIMAL_PLACES = 28;
+        private const int UNKNOWN_MINOR_UNITS = MAX_DECIMAL_PLACES;
 
         private static Dictionary<string, short?> s_UserCodes = new Dictionary<string, short?>();
 
@@ -67,10 +68,33 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets the number of minor units.
         /// </summary>
-        /// <value>The number of minor units; null if none defined.</value>
+        /// <value>The number of minor units; null if none defined; 28 if this number is unknown.</value>
         public short? MinorUnits { get; }
 
+        // If the currency has no minor units (null), which only happens for meta-currencies
+        // but not for all of them, we use 0.
+        // If the currency has no known minor units, which is the case for all
+        // legacy currencies, we use MAX_DECIMAL_PLACES as a replacement, ie an amount
+        // in these currencies can take any value in the decimal range.
+        // To simply things, for legacy currencies, we directly set MinorUnits to MAX_DECIMAL_PLACES,
+        // but if, in the future, we change that we should also change the line below by:
+        // > public int DecimalPlaces => MinorUnits.HasValue
+        // >     ? (MinorUnits.Value == UNKNOWN_MINOR_UNITS ? MAX_DECIMAL_PLACES : MinorUnits.Value)
+        // >     : 0;
         public int DecimalPlaces => MinorUnits ?? 0;
+
+        public bool HasFixedDecimalPlaces => DecimalPlaces != MAX_DECIMAL_PLACES;
+
+        /// <summary>
+        /// Gets a value indicating whether the currency admits a minor currency unit.
+        /// </summary>
+        /// <remarks>We consider that all legacy currencies do not have a minor unit.
+        /// This is actually false, but we do not have enough informations to give
+        /// a sensible answer.</remarks>
+        public bool HasMinorCurrency
+            => MinorUnits.HasValue
+            && MinorUnits.Value != 0
+            && MinorUnits.Value != UNKNOWN_MINOR_UNITS;
 
         /// <summary>
         /// Gets a value indicating whether the currency is a meta-currency.
@@ -91,15 +115,11 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets the smallest positive (non zero) unit.
         /// </summary>
-        /// <remarks>Returns 1m if the currency has no minor unit.</remarks>
-        public decimal Epsilon => Epsilons[DecimalPlaces];
+        /// <remarks>Returns 1m if the currency has no minor currency unit.</remarks>
+        public decimal Epsilon => Epsilons[DecimalPlaces % MAX_DECIMAL_PLACES];
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
-
-        public bool HasMinorCurrency
-            => MinorUnits.HasValue
-            && MinorUnits.Value != 0;
 
         /// <summary>
         /// Gets the minor currency unit.
@@ -119,7 +139,8 @@ namespace Narvalo.Finance
             }
         }
 
-        private uint Factor => PowersOfTen[DecimalPlaces];
+        /// <remarks>Returns 1 if the currency has no minor currency unit.</remarks>
+        private uint Factor => PowersOfTen[DecimalPlaces % MAX_DECIMAL_PLACES];
 
         // If the currency admits a minor currency unit, we obtain its code by "lowercasing"
         // the last character of its code: "EUR" -> "EUr". This convention is not officialy sanctioned.
@@ -201,11 +222,12 @@ namespace Narvalo.Finance
                 }
             }
 
+            // At last, we look for a withdrawn currency.
             if (types.Contains(CurrencyTypes.Withdrawn) && WithdrawnCodes.Contains(code))
             {
                 // For withdrawn currencies, ISO 4217 does not provide any information
-                // concerning the minor units.
-                return new Currency(code, null);
+                // concerning the minor units. See the property DecimalPlaces for more info.
+                return new Currency(code, UNKNOWN_MINOR_UNITS);
             }
 
             return null;
@@ -263,28 +285,19 @@ namespace Narvalo.Finance
         /// <returns>The currency for the culture used by the current thread.</returns>
         public static Currency ForCurrentCulture() => ForCulture(CultureInfo.CurrentCulture);
 
-        // This method should be thread-safe.
-        public static bool RegisterCurrency(string code, short? minorUnits)
-            => RegisterCurrency(code, minorUnits, false);
-
         // This method allows to register currencies that are not part of ISO 4217.
         // For details, see https://en.wikipedia.org/wiki/ISO_4217.
         // If you have more than one currency to register, you should use RegisterCurrencies()
         // instead - it will be more efficient.
-        // With check set to false, we do not check if the code is alread
-        // This method should be thread-safe.
-        public static bool RegisterCurrency(string code, short? minorUnits, bool check)
+        // FIXME: This method is not thread-safe.
+        public static bool RegisterCurrency(string code, short? minorUnits)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
             Demand.True(!minorUnits.HasValue || minorUnits >= 0);
 
-            if (s_UserCodes.ContainsKey(code)) { return false; }
-
-            if (check)
-            {
-                var filter = CurrencyTypes.Any & ~CurrencyTypes.Custom;
-                if (OfOrNull(code, filter).HasValue) { return false; }
-            }
+            if (s_UserCodes.ContainsKey(code)
+                || Codes.ContainsKey(code)
+                || WithdrawnCodes.Contains(code)) { return false; }
 
             // We work on a temporary copy of s_UserCodes. This is not very efficient but ensures
             // that s_UserCodes does not end up in a broken state if anything bad happens.
@@ -299,25 +312,16 @@ namespace Narvalo.Finance
             return true;
         }
 
-        // This method should be thread-safe.
+        // See RegisterCurrency() for explanations.
+        // FIXME: This method is not thread-safe.
         public static bool RegisterCurrencies(Dictionary<string, short?> currencies)
-            => RegisterCurrencies(currencies, false);
-
-        // This method should be thread-safe.
-        public static bool RegisterCurrencies(Dictionary<string, short?> currencies, bool check)
         {
             Require.NotNull(currencies, nameof(currencies));
-
-            // See RegisterCurrency() for explanations.
-            var tmpCopy = s_UserCodes.ToDictionary(_ => _.Key, _ => _.Value);
 
             foreach (var pair in currencies)
             {
                 string code = pair.Key;
-                if (code == null
-                    || code.Length != 3
-                    || !Ascii.IsUpperLetter(code)
-                    || tmpCopy.ContainsKey(code))
+                if (code == null || code.Length != 3 || !Ascii.IsUpperLetter(code))
                 {
                     return false;
                 }
@@ -328,13 +332,18 @@ namespace Narvalo.Finance
                     return false;
                 }
 
-                if (check)
+                if (s_UserCodes.ContainsKey(code)
+                    || Codes.ContainsKey(code)
+                    || WithdrawnCodes.Contains(code))
                 {
-                    var filter = CurrencyTypes.Any & ~CurrencyTypes.Custom;
-                    if (OfOrNull(code, filter).HasValue) { return false; }
+                    return false;
                 }
+            }
 
-                tmpCopy[code] = minorUnits;
+            var tmpCopy = s_UserCodes.ToDictionary(_ => _.Key, _ => _.Value);
+            foreach (var pair in currencies)
+            {
+                tmpCopy[pair.Key] = pair.Value;
             }
 
             Volatile.Write(ref s_UserCodes, tmpCopy);

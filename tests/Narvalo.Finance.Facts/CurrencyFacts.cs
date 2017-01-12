@@ -99,7 +99,7 @@ namespace Narvalo.Finance
 
         [Fact]
         public static void RegisterCurrency_ReturnsFalse_ForExistingCode()
-            => Assert.False(Currency.RegisterCurrency("EUR", 2, true));
+            => Assert.False(Currency.RegisterCurrency("EUR", 2));
 
         [Fact]
         public static void RegisterCurrency_ReturnsTrue_ForNonExistingCode()
