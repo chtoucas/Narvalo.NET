@@ -99,7 +99,7 @@ namespace Narvalo.Finance
 
         [Fact]
         public static void RegisterCurrency_ReturnsFalse_ForExistingCode()
-            => Assert.False(Currency.RegisterCurrency("EUR", 2));
+            => Assert.False(Currency.RegisterCurrency("EUR", 2, true));
 
         [Fact]
         public static void RegisterCurrency_ReturnsTrue_ForNonExistingCode()
@@ -110,12 +110,12 @@ namespace Narvalo.Finance
         #region op_Equality()
 
         [Theory(DisplayName = "op_Equality() follows structural equality rules.")]
-        [MemberData(nameof(AllCodes), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(ISOCodes), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Equality_ReturnsTrue_ForIdenticalCodes(string code)
         {
-            var currency1 = Currency.Of(code);
-            var currency2 = Currency.Of(code);
+            var currency1 = Currency.Of(code, CurrencyTypes.ISO);
+            var currency2 = Currency.Of(code, CurrencyTypes.ISO);
 
             Assert.True(currency1 == currency2);
         }
@@ -201,12 +201,12 @@ namespace Narvalo.Finance
         //}
 
         [Theory(DisplayName = "Equals() follows structural equality rules.")]
-        [MemberData(nameof(AllCodes), DisableDiscoveryEnumeration = true)]
+        [MemberData(nameof(ISOCodes), DisableDiscoveryEnumeration = true)]
         [CLSCompliant(false)]
         public static void Equals_ReturnsTrue_ForIdenticalCodes(string code)
         {
-            var currency1 = Currency.Of(code);
-            var currency2 = Currency.Of(code);
+            var currency1 = Currency.Of(code, CurrencyTypes.ISO);
+            var currency2 = Currency.Of(code, CurrencyTypes.ISO);
 
             Assert.True(currency1.Equals(currency2));
         }

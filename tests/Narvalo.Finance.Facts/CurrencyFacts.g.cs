@@ -16,7 +16,7 @@ namespace Narvalo.Finance
 
     public static partial class CurrencyFacts
     {
-        public static IEnumerable<object[]> AllCodes
+        public static IEnumerable<object[]> ISOCodes
         {
             get
             {

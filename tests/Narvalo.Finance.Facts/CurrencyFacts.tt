@@ -32,7 +32,7 @@ namespace <#= Namespace #>
 
     public static partial class <#= Name #>
     {
-        public static IEnumerable<object[]> AllCodes
+        public static IEnumerable<object[]> ISOCodes
         {
             get
             {
