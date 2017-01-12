@@ -26,7 +26,7 @@ namespace Narvalo.Finance
     /// </remarks>
     public partial struct Currency : IEquatable<Currency>
     {
-        private const char META_CURRENCY_MARK = 'X';
+        private const int MAX_DECIMAL_PLACES = 28;
 
         // This list is automatically generated using data obtained from the SNV website.
         private static Dictionary<string, short?> s_Codes;
@@ -45,6 +45,7 @@ namespace Narvalo.Finance
         internal Currency(string code, short? minorUnits)
         {
             Sentinel.Demand.CurrencyCode(code);
+            Demand.True(!minorUnits.HasValue || minorUnits >= 0);
 
             _code = code;
             MinorUnits = minorUnits;
@@ -83,8 +84,9 @@ namespace Narvalo.Finance
         /// as defined by the ISO 3166 standard, ie they will never clash with
         /// those of a real country.</para>
         /// </remarks>
-        /// <value><see langword="true"/> if the currency is a meta-currency; otherwise <see langword="false"/>.</value>
-        public bool IsMeta => IsMetaCurrency(Code);
+        /// <value><see langword="true"/> if the currency is a meta-currency;
+        /// otherwise <see langword="false"/>.</value>
+        public bool IsMetaCurrency => CurrencyMetadata.IsMetaCurrency(Code);
 
         /// <summary>
         /// Gets the smallest positive (non zero) unit.
@@ -92,21 +94,27 @@ namespace Narvalo.Finance
         /// <remarks>Returns 1m if the currency has no minor unit.</remarks>
         public decimal Epsilon => Epsilons[DecimalPlaces];
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] For currencies not using a decimal system, this value will no longer look like a constant.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
+
+        public bool HasMinorCurrency
+            => MinorUnits.HasValue
+            && MinorUnits.Value != 0;
 
         /// <summary>
         /// Gets the minor currency unit.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown if the currency has no subunit.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if the currency has no minor
+        /// currency unit.</exception>
         public FractionalCurrency MinorCurrency
         {
             get
             {
-                if (!MinorUnits.HasValue || MinorUnits.Value == 0)
+                if (!HasMinorCurrency)
                 {
                     throw new InvalidOperationException("XXX");
                 }
+
                 return new FractionalCurrency(this, Epsilon, MinorCurrencyCode);
             }
         }
@@ -119,7 +127,7 @@ namespace Narvalo.Finance
         {
             get
             {
-                Demand.True(MinorUnits.HasValue && MinorUnits.Value != 0);
+                Demand.True(HasMinorCurrency);
                 return Code[0] + Code[1] + (Code[3] | 0x20).ToString();
             }
         }
@@ -160,10 +168,11 @@ namespace Narvalo.Finance
                     return new Currency(code, minorUnits);
                 }
             }
+
             if (types.Contains(CurrencyTypes.Withdrawn) && WithdrawnCodes.Contains(code))
             {
                 // NB: For withdrawn currencies, ISO 4217 does not provide any information
-                // about the minor units.
+                // concerning the minor units.
                 return new Currency(code, null);
             }
 
@@ -226,11 +235,12 @@ namespace Narvalo.Finance
         // This method allows to register currencies that are not part of ISO 4217.
         // For details, see https://en.wikipedia.org/wiki/ISO_4217.
         // If you have more than one currency to register, you should use RegisterCurrencies()
-        // instead; it will be more efficient.
+        // instead - it will be more efficient.
         // This method should be thread-safe.
         public static bool RegisterCurrency(string code, short? minorUnits)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
+            Demand.True(!minorUnits.HasValue || minorUnits >= 0);
 
             Contract.Assume(Codes != null);
             if (Codes.ContainsKey(code)) { return false; }
@@ -260,7 +270,9 @@ namespace Narvalo.Finance
 
             foreach (var pair in currencies)
             {
-                var code = pair.Key;
+                string code = pair.Key;
+                short? minorUnits = pair.Value;
+
                 if (code == null
                     || !Ascii.IsUpperLetter(code)
                     || code.Length != 3)
@@ -268,22 +280,18 @@ namespace Narvalo.Finance
                     throw new ArgumentException("XXX");
                 }
 
+                if (minorUnits.HasValue && minorUnits < 0)
+                {
+                    throw new ArgumentException("XXX");
+                }
+
                 if (!tmpCopy.ContainsKey(code))
                 {
-                    tmpCopy[code] = pair.Value;
+                    tmpCopy[code] = minorUnits;
                 }
             }
 
             Volatile.Write(ref s_Codes, tmpCopy);
-        }
-
-        // TODO: What about EUR, CFP... for this, is it enough to check the country code too
-        // (the first two letters)?
-        internal static bool IsMetaCurrency(string currencyCode)
-        {
-            Demand.NotNullOrEmpty(currencyCode);
-
-            return currencyCode[0] == META_CURRENCY_MARK;
         }
 
         public bool IsNativeTo(CultureInfo cultureInfo)

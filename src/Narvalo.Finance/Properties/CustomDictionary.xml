@@ -6,15 +6,14 @@
       <Word>Bban</Word>
       <Word>Bic</Word>
       <Word>Iban</Word>
-
       <Word>Moneypenny</Word>
 
       <Word>Ascii</Word>
-      <Word>Uniq</Word>
+      <!--<Word>Uniq</Word>-->
     </Recognized>
 
     <Compound>
-      <Term CompoundAlternate="UniqInstance">uniqinstance</Term>
+      <!--<Term CompoundAlternate="UniqInstance">uniqinstance</Term>-->
       <Term CompoundAlternate="DivRem">divrem</Term>
     </Compound>
   </Words>

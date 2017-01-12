@@ -4,9 +4,16 @@ namespace Narvalo.Finance.Generic
 {
     using System.Globalization;
 
+    using Narvalo.Finance.Utilities;
+
     public class CurrencyUnit<TCurrency> where TCurrency : CurrencyUnit<TCurrency>
     {
-        internal CurrencyUnit(short? minorUnits) { MinorUnits = minorUnits; }
+        internal CurrencyUnit(short? minorUnits)
+        {
+            Demand.True(!minorUnits.HasValue || minorUnits >= 0);
+
+            MinorUnits = minorUnits;
+        }
 
         protected static string Name
         {
@@ -17,7 +24,7 @@ namespace Narvalo.Finance.Generic
 
         public short DecimalPlaces => MinorUnits ?? 0;
 
-        public  bool IsMeta => Currency.IsMetaCurrency(Code);
+        public bool IsMetaCurrency => CurrencyMetadata.IsMetaCurrency(Code);
 
         public short? MinorUnits { get; }
 
