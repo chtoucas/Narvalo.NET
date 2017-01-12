@@ -7,11 +7,17 @@ namespace Narvalo.Finance
     [Flags]
     public enum CurrencyTypes
     {
-        CurrentCurrencies = 1 << 0,
+        Active = 1 << 0,
 
-        WithdrawnCurrencies = 1 << 1,
+        Withdrawn = 1 << 1,
 
-        AllCurrencies = CurrentCurrencies | WithdrawnCurrencies
+        Custom = 1 << 2,
+
+        Current = Active | Custom,
+
+        ISO = Active | Withdrawn,
+
+        Any = Current | Withdrawn | Custom
     }
 
     public static class CurrencyTypesExtensions

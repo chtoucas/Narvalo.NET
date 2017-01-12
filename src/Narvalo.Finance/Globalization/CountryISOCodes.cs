@@ -8,7 +8,7 @@ namespace Narvalo.Finance.Globalization
     // REVIEW: Should we also include the deleted or reserved codes (like EU)?
     public static partial class CountryISOCodes
     {
-        // The list is automatically generated using data obtained from the ISO website.
+        // This list is automatically generated using data obtained from the ISO website.
         // The volatile keyword is only for correctness.
         private static volatile HashSet<string> s_TwoLetterCodeSet;
 

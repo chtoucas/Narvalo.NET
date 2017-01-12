@@ -28,8 +28,11 @@ namespace Narvalo.Finance
     {
         private const char META_CURRENCY_MARK = 'X';
 
-        // The list is automatically generated using data obtained from the SNV website.
+        // This list is automatically generated using data obtained from the SNV website.
         private static Dictionary<string, short?> s_Codes;
+
+        // This set is automatically generated using data obtained from the SNV website.
+        private static HashSet<string> s_WithdrawnCodes;
 
         private readonly string _code;
 
@@ -92,16 +95,34 @@ namespace Narvalo.Finance
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] For currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
 
-        public CurrencyUnit MinorCurrency => new CurrencyUnit(this, Epsilon, MinorCurrencyCode);
+        /// <summary>
+        /// Gets the minor currency unit.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown if the currency has no subunit.</exception>
+        public FractionalCurrency MinorCurrency
+        {
+            get
+            {
+                if (!MinorUnits.HasValue || MinorUnits.Value == 0)
+                {
+                    throw new InvalidOperationException("XXX");
+                }
+                return new FractionalCurrency(this, Epsilon, MinorCurrencyCode);
+            }
+        }
 
         private uint Factor => PowersOfTen[DecimalPlaces];
 
-        // If the currency admits a subunit, we obtain its code by "lowercasing" the last character
-        // of its code: "EUR" -> "EUr", otherwise we keep it unchanged. This transformation is not official.
+        // If the currency admits a minor currency unit, we obtain its code by "lowercasing"
+        // the last character of its code: "EUR" -> "EUr". This convention is not officialy sanctioned.
         private string MinorCurrencyCode
-            => Epsilon == 1m
-            ? Code
-            : Code[0] + Code[1] + (Code[3] | 0x20).ToString();
+        {
+            get
+            {
+                Demand.True(MinorUnits.HasValue && MinorUnits.Value != 0);
+                return Code[0] + Code[1] + (Code[3] | 0x20).ToString();
+            }
+        }
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
@@ -117,7 +138,7 @@ namespace Narvalo.Finance
             Require.NotNull(code, nameof(code));
             Sentinel.Expect.CurrencyCode(code);
 
-            Contract.Assume(Codes != null);
+            //Contract.Assume(Codes != null);
             short? minorUnits;
             if (!Codes.TryGetValue(code, out minorUnits))
             {
@@ -125,6 +146,28 @@ namespace Narvalo.Finance
             }
 
             return new Currency(code, minorUnits);
+        }
+
+        public static Currency Of(string code, CurrencyTypes types)
+        {
+            Require.NotNull(code, nameof(code));
+
+            if (types.Contains(CurrencyTypes.Current))
+            {
+                short? minorUnits;
+                if (Codes.TryGetValue(code, out minorUnits))
+                {
+                    return new Currency(code, minorUnits);
+                }
+            }
+            if (types.Contains(CurrencyTypes.Withdrawn) && WithdrawnCodes.Contains(code))
+            {
+                // NB: For withdrawn currencies, ISO 4217 does not provide any information
+                // about the minor units.
+                return new Currency(code, null);
+            }
+
+            throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCode, code));
         }
 
         /// <summary>

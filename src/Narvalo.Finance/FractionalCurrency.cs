@@ -4,43 +4,45 @@ namespace Narvalo.Finance
 {
     using System;
 
-    public partial struct CurrencyUnit : IEquatable<CurrencyUnit>
+    public partial struct FractionalCurrency : IEquatable<FractionalCurrency>
     {
-        public CurrencyUnit(Currency parent, decimal epsilon, string code)
+        public FractionalCurrency(Currency parent, decimal subunit, string code)
         {
+            Require.Range(subunit < 1m, nameof(subunit));
+
             Parent = parent;
-            Epsilon = epsilon;
+            Subunit = subunit;
             Code = code;
         }
 
         public string Code { get; }
 
-        public decimal Epsilon { get; }
+        public decimal Subunit { get; }
 
         public Currency Parent { get; }
 
-        public decimal Factor => 1 / Epsilon;
+        public decimal Factor => 1 / Subunit;
     }
 
-    // Interface IEquatable<SubCurrency>.
-    public partial struct CurrencyUnit
+    // Interface IEquatable<FractionalCurrency>.
+    public partial struct FractionalCurrency
     {
-        public static bool operator ==(CurrencyUnit left, CurrencyUnit right) => left.Equals(right);
+        public static bool operator ==(FractionalCurrency left, FractionalCurrency right) => left.Equals(right);
 
-        public static bool operator !=(CurrencyUnit left, CurrencyUnit right) => !left.Equals(right);
+        public static bool operator !=(FractionalCurrency left, FractionalCurrency right) => !left.Equals(right);
 
         /// <inheritdoc cref="IEquatable{T}.Equals" />
-        public bool Equals(CurrencyUnit other)
+        public bool Equals(FractionalCurrency other)
             => Parent == other.Parent
             && Code == other.Code
-            && Epsilon == other.Epsilon;
+            && Subunit == other.Subunit;
 
         /// <inheritdoc cref="Object.Equals(Object)" />
         public override bool Equals(object obj)
         {
-            if (!(obj is CurrencyUnit)) { return false; }
+            if (!(obj is FractionalCurrency)) { return false; }
 
-            return Equals((CurrencyUnit)obj);
+            return Equals((FractionalCurrency)obj);
         }
 
         /// <inheritdoc cref="Object.GetHashCode" />
@@ -51,7 +53,7 @@ namespace Narvalo.Finance
                 int hash = 17;
                 hash = 31 * hash + Parent.GetHashCode();
                 hash = 31 * hash + Code.GetHashCode();
-                hash = 31 * hash + Epsilon.GetHashCode();
+                hash = 31 * hash + Subunit.GetHashCode();
                 return hash;
             }
         }

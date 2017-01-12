@@ -20,11 +20,12 @@ var highestMinor = currencies.Max(_ => _.MinorUnits);
 
 var dict = new Dictionary<string, short?>();
 
-foreach (var currency in currencies)
+foreach (var currency in currentCurrencies)
 {
     if (dict.ContainsKey(currency.Code))
     {
-        if (!currency.IsLegacy && dict[currency.Code] != currency.MinorUnits)
+        //if (!currency.IsLegacy && dict[currency.Code] != currency.MinorUnits)
+        if (dict[currency.Code] != currency.MinorUnits)
         {
             Warning("A currency has different units: (" + currency.IsLegacy.ToString() + ") " + currency.EnglishName + " " + currency.Code + " " + currency.MinorUnits);
         }
@@ -61,13 +62,15 @@ namespace <#= Namespace #>
         };
 
         /// <summary>
-        /// The list of available currency codes/minor units.
+        /// Gets the list of available currency codes/minor units.
         /// </summary>
         [ContractVerification(false)]
         private static Dictionary<string, short?> Codes
         {
             get
             {
+                Warrant.NotNull<Dictionary<string, short?>>();
+
                 if (s_Codes == null)
                 {
                     var dict = new Dictionary<string, short?>() {
@@ -81,6 +84,32 @@ namespace <#= Namespace #>
                 }
 
                 return s_Codes;
+            }
+        }
+
+        /// <summary>
+        /// Gets the set of legacy currencies.
+        /// </summary>
+        [ContractVerification(false)]
+        private static HashSet<string> WithdrawnCodes
+        {
+            get
+            {
+                Warrant.NotNull<HashSet<string>>();
+
+                if (s_WithdrawnCodes == null)
+                {
+                    var set = new HashSet<string>() {
+<# foreach (var item in legacyCurrencies.OrderBy(_ => _.Code)) { #>
+                        "<#= item.Code#>",
+<# } #>
+                    };
+
+                    // If the field is still null, write to it.
+                    Interlocked.CompareExchange(ref s_WithdrawnCodes, set, null);
+                }
+
+                return s_WithdrawnCodes;
             }
         }
     }
