@@ -55,6 +55,8 @@ Narvalo.Finance
 
 - [Liste des devises et de leurs subdivisions](https://fr.wikipedia.org/wiki/Liste_des_monnaies_en_circulation)
 - LocalCurrency
+- Non-decimal currency: see [here](https://en.wikipedia.org/wiki/Decimalisation)
+  and [here](https://en.wikipedia.org/wiki/Non-decimal_currency).
 - [Microsoft SQL Server implementation](https://msdn.microsoft.com/en-au/library/ms179882.aspx):
   `Int32` or `Int64`, and designate the lower four digits (or possibly even 2) as
   "right of the decimal point". So "on the edges" you'll need some "* 10000"

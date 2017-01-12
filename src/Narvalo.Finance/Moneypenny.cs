@@ -8,7 +8,7 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
-    // Work In Progress: testing a lightweight money type where the amount is stored in minor units.
+    // A lightweight money type where the amount is stored in minor units.
     //
     // Despite the name, this type is not restricted to currencies with minor units of size 2.
     // Nevertheless, we assume that a penny represents one minor unit exactly (as found in

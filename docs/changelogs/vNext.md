@@ -63,6 +63,7 @@ TODO
   [here](http://stackoverflow.com/questions/5023754/do-minor-currency-units-have-a-iso-standard),
   and [here](http://www.fixtradingcommunity.org/pg/discussions/topicpost/167427/gbpgbpgbx).
 - Check div and rem.
+- Create a currency builder for user-defined currencies.
 
 Highlights
 ----------

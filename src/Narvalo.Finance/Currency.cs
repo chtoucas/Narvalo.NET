@@ -18,10 +18,10 @@ namespace Narvalo.Finance
     /// </summary>
     /// <remarks>
     /// <para>Recognized currencies are defined in ISO 4217.</para>
+    /// <para>Only decimal currencies are supported.</para>
     /// <para>There's never more than one <see cref="Currency"/> instance for any given currency.
-    /// You can not directly construct a currency. You must instead use the
-    /// static factories: <see cref="Currency.Of"/>.</para>
-    /// <para>This class follows value type semantics when it comes to equality.</para>
+    /// You can not directly construct a currency. You must instead use one of the
+    /// static factories, eg <see cref="Currency.Of"/>.</para>
     /// <para>This class does not offer extended information about the currency.</para>
     /// </remarks>
     public partial struct Currency : IEquatable<Currency>
@@ -188,7 +188,7 @@ namespace Narvalo.Finance
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
         /// specified region.</exception>
         /// <returns>The currency for the specified region info.</returns>
-        public static Currency OfRegion(RegionInfo regionInfo)
+        public static Currency ForRegion(RegionInfo regionInfo)
         {
             Require.NotNull(regionInfo, nameof(regionInfo));
 
@@ -201,7 +201,7 @@ namespace Narvalo.Finance
             return Of(regionInfo.ISOCurrencySymbol);
         }
 
-        public static Currency OfCurrentRegion() => OfRegion(RegionInfo.CurrentRegion);
+        public static Currency ForCurrentRegion() => ForRegion(RegionInfo.CurrentRegion);
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class associated
@@ -212,7 +212,7 @@ namespace Narvalo.Finance
         /// <exception cref="ArgumentException">Thrown if <paramref name="cultureInfo"/> is neutral.</exception>
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the specified culture.</exception>
         /// <returns>The currency for the specified culture info.</returns>
-        public static Currency OfCulture(CultureInfo cultureInfo)
+        public static Currency ForCulture(CultureInfo cultureInfo)
         {
             Require.NotNull(cultureInfo, nameof(cultureInfo));
 
@@ -221,7 +221,7 @@ namespace Narvalo.Finance
                 throw new ArgumentException(Strings.Argument_NeutralCultureNotSupported, nameof(cultureInfo));
             }
 
-            return OfRegion(new RegionInfo(cultureInfo.Name));
+            return ForRegion(new RegionInfo(cultureInfo.Name));
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace Narvalo.Finance
         /// </summary>
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the current culture.</exception>
         /// <returns>The currency for the culture used by the current thread.</returns>
-        public static Currency OfCurrentCulture() => OfCulture(CultureInfo.CurrentCulture);
+        public static Currency ForCurrentCulture() => ForCulture(CultureInfo.CurrentCulture);
 
         // This method allows to register currencies that are not part of ISO 4217.
         // For details, see https://en.wikipedia.org/wiki/ISO_4217.

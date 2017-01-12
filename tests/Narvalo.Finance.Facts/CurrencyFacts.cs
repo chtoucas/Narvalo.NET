@@ -27,11 +27,11 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region OfRegion()
+        #region ForRegion()
 
         [Fact]
-        public static void OfRegion_ThrowsArgumentNullException_ForNull()
-            => Assert.Throws<ArgumentNullException>(() => Currency.OfRegion(null));
+        public static void ForRegion_ThrowsArgumentNullException_ForNull()
+            => Assert.Throws<ArgumentNullException>(() => Currency.ForRegion(null));
 
         [Theory]
         [InlineData("BE")]
@@ -41,35 +41,35 @@ namespace Narvalo.Finance
         [InlineData("en-US")]
         [InlineData("es-US")]
         [CLSCompliant(false)]
-        public static void OfRegion_ReturnsNotNull_ForRegion(string name)
+        public static void ForRegion_ReturnsNotNull_ForRegion(string name)
         {
             var ri = new RegionInfo(name);
 
-            Assert.NotNull(Currency.OfRegion(ri));
+            Assert.NotNull(Currency.ForRegion(ri));
         }
 
         #endregion
 
-        #region OfCurrentRegion()
+        #region ForCurrentRegion()
 
         [Fact]
-        public static void OfCurrentRegion_ReturnsNotNull()
-            => Assert.NotNull(Currency.OfCurrentRegion());
+        public static void ForCurrentRegion_ReturnsNotNull()
+            => Assert.NotNull(Currency.ForCurrentRegion());
 
         #endregion
 
-        #region OfCulture()
+        #region ForCulture()
 
         [Fact]
-        public static void OfCulture_ThrowsArgumentNullException_ForNull()
-            => Assert.Throws<ArgumentNullException>(() => Currency.OfCulture(null));
+        public static void ForCulture_ThrowsArgumentNullException_ForNull()
+            => Assert.Throws<ArgumentNullException>(() => Currency.ForCulture(null));
 
         [Fact]
-        public static void OfCulture_ThrowsArgumentException_ForNeutralCulture()
+        public static void ForCulture_ThrowsArgumentException_ForNeutralCulture()
         {
             var ci = new CultureInfo("fr");
 
-            Assert.Throws<ArgumentException>(() => Currency.OfCulture(ci));
+            Assert.Throws<ArgumentException>(() => Currency.ForCulture(ci));
         }
 
         [Theory]
@@ -78,20 +78,20 @@ namespace Narvalo.Finance
         [InlineData("en-US")]
         [InlineData("es-US")]
         [CLSCompliant(false)]
-        public static void OfCulture_ReturnsNotNull_ForCulture(string name)
+        public static void ForCulture_ReturnsNotNull_ForCulture(string name)
         {
             var ci = new CultureInfo(name);
 
-            Assert.NotNull(Currency.OfCulture(ci));
+            Assert.NotNull(Currency.ForCulture(ci));
         }
 
         #endregion
 
-        #region OfCurrentCulture()
+        #region ForCurrentCulture()
 
         [Fact]
-        public static void OfCurrentCulture_ReturnsNotNull()
-            => Assert.NotNull(Currency.OfCurrentCulture());
+        public static void ForCurrentCulture_ReturnsNotNull()
+            => Assert.NotNull(Currency.ForCurrentCulture());
 
         #endregion
 

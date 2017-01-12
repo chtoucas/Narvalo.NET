@@ -4,6 +4,11 @@ namespace Narvalo.Finance
 {
     using System;
 
+    /// <summary>
+    /// Represents a subunit of a currency such as the EUR Cent or the GBP Penny.
+    /// </summary>
+    /// <remarks>A subunit is a fraction of the main unit. The minor currency unit (when it exists)
+    /// is an example of a subunit, but a currency can have more than one subunit.</remarks>
     public partial struct FractionalCurrency : IEquatable<FractionalCurrency>
     {
         public FractionalCurrency(Currency parent, decimal subunit, string code)
