@@ -9,7 +9,7 @@
 <#
 
 // Uncomment to debug:
-//Debug = true;
+Debug = true;
 
 var currentCurrencies = ParseCurrent(@"..\..\data\ISO4217\A1.xml");
 var legacyCurrencies = ParseLegacy(@"..\..\data\ISO4217\A3.xml");
@@ -100,7 +100,13 @@ namespace <#= Namespace #>
                 if (s_WithdrawnCodes == null)
                 {
                     var set = new HashSet<string>() {
-<# foreach (var item in legacyCurrencies.OrderBy(_ => _.Code)) { #>
+<#
+foreach (var item in legacyCurrencies.OrderBy(_ => _.Code)) {
+    if (item.MinorUnits != null)
+    {
+        Warning("A legacy currency has minor units: " + item.EnglishName + " " + item.Code);
+    }
+#>
                         "<#= item.Code#>",
 <# } #>
                     };

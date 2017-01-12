@@ -5,7 +5,6 @@ namespace Narvalo.Finance
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Threading;
@@ -27,6 +26,8 @@ namespace Narvalo.Finance
     public partial struct Currency : IEquatable<Currency>
     {
         private const int MAX_DECIMAL_PLACES = 28;
+
+        private static Dictionary<string, short?> s_UserCodes = new Dictionary<string, short?>();
 
         // This list is automatically generated using data obtained from the SNV website.
         private static Dictionary<string, short?> s_Codes;
@@ -66,7 +67,7 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets the number of minor units.
         /// </summary>
-        /// <value>The number of minor units; <see langword="null"/> if none defined.</value>
+        /// <value>The number of minor units; null if none defined.</value>
         public short? MinorUnits { get; }
 
         public int DecimalPlaces => MinorUnits ?? 0;
@@ -84,9 +85,8 @@ namespace Narvalo.Finance
         /// as defined by the ISO 3166 standard, ie they will never clash with
         /// those of a real country.</para>
         /// </remarks>
-        /// <value><see langword="true"/> if the currency is a meta-currency;
-        /// otherwise <see langword="false"/>.</value>
-        public bool IsMetaCurrency => CurrencyMetadata.IsMetaCurrency(Code);
+        /// <value>true if the currency is a meta-currency; otherwise false.</value>
+        public bool IsMeta => CurrencyMetadata.IsMetaCurrency(Code);
 
         /// <summary>
         /// Gets the smallest positive (non zero) unit.
@@ -128,7 +128,7 @@ namespace Narvalo.Finance
             get
             {
                 Demand.True(HasMinorCurrency);
-                return Code[0] + Code[1] + (Code[3] | 0x20).ToString();
+                return Code[0] + Code[1] + (Code[3] | 0x20).ToString(CultureInfo.InvariantCulture);
             }
         }
 
@@ -136,8 +136,7 @@ namespace Narvalo.Finance
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>
         /// <param name="code">The three letter ISO-4217 code of the currency.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="code"/> is
-        /// <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="code"/> is null.</exception>
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
         /// specified code.</exception>
         /// <returns>The currency for the specified code.</returns>
@@ -146,7 +145,6 @@ namespace Narvalo.Finance
             Require.NotNull(code, nameof(code));
             Sentinel.Expect.CurrencyCode(code);
 
-            //Contract.Assume(Codes != null);
             short? minorUnits;
             if (!Codes.TryGetValue(code, out minorUnits))
             {
@@ -156,11 +154,36 @@ namespace Narvalo.Finance
             return new Currency(code, minorUnits);
         }
 
-        public static Currency Of(string code, CurrencyTypes types)
+        public static Currency? OfOrNull(string code)
         {
             Require.NotNull(code, nameof(code));
+            Sentinel.Expect.CurrencyCode(code);
 
-            if (types.Contains(CurrencyTypes.Current))
+            short? minorUnits;
+            if (!Codes.TryGetValue(code, out minorUnits)) { return null; }
+
+            return new Currency(code, minorUnits);
+        }
+
+        public static Currency Of(string code, CurrencyTypes types)
+        {
+            Sentinel.Expect.CurrencyCode(code);
+
+            var cy = OfOrNull(code, types);
+            if (!cy.HasValue)
+            {
+                throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCode, code));
+            }
+
+            return cy.Value;
+        }
+
+        public static Currency? OfOrNull(string code, CurrencyTypes types)
+        {
+            Require.NotNull(code, nameof(code));
+            Sentinel.Expect.CurrencyCode(code);
+
+            if (types.Contains(CurrencyTypes.Active))
             {
                 short? minorUnits;
                 if (Codes.TryGetValue(code, out minorUnits))
@@ -169,22 +192,30 @@ namespace Narvalo.Finance
                 }
             }
 
+            if (types.Contains(CurrencyTypes.Custom))
+            {
+                short? minorUnits;
+                if (s_UserCodes.TryGetValue(code, out minorUnits))
+                {
+                    return new Currency(code, minorUnits);
+                }
+            }
+
             if (types.Contains(CurrencyTypes.Withdrawn) && WithdrawnCodes.Contains(code))
             {
-                // NB: For withdrawn currencies, ISO 4217 does not provide any information
+                // For withdrawn currencies, ISO 4217 does not provide any information
                 // concerning the minor units.
                 return new Currency(code, null);
             }
 
-            throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCode, code));
+            return null;
         }
 
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class associated with the specified region.
         /// </summary>
         /// <param name="regionInfo">A region info.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="regionInfo"/> is
-        /// <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="regionInfo"/> is null.</exception>
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
         /// specified region.</exception>
         /// <returns>The currency for the specified region info.</returns>
@@ -208,7 +239,7 @@ namespace Narvalo.Finance
         /// with the specified culture.
         /// </summary>
         /// <param name="cultureInfo">A culture info.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="cultureInfo"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="cultureInfo"/> is null.</exception>
         /// <exception cref="ArgumentException">Thrown if <paramref name="cultureInfo"/> is neutral.</exception>
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the specified culture.</exception>
         /// <returns>The currency for the specified culture info.</returns>
@@ -232,66 +263,83 @@ namespace Narvalo.Finance
         /// <returns>The currency for the culture used by the current thread.</returns>
         public static Currency ForCurrentCulture() => ForCulture(CultureInfo.CurrentCulture);
 
+        // This method should be thread-safe.
+        public static bool RegisterCurrency(string code, short? minorUnits)
+            => RegisterCurrency(code, minorUnits, false);
+
         // This method allows to register currencies that are not part of ISO 4217.
         // For details, see https://en.wikipedia.org/wiki/ISO_4217.
         // If you have more than one currency to register, you should use RegisterCurrencies()
         // instead - it will be more efficient.
+        // With check set to false, we do not check if the code is alread
         // This method should be thread-safe.
-        public static bool RegisterCurrency(string code, short? minorUnits)
+        public static bool RegisterCurrency(string code, short? minorUnits, bool check)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
             Demand.True(!minorUnits.HasValue || minorUnits >= 0);
 
-            Contract.Assume(Codes != null);
-            if (Codes.ContainsKey(code)) { return false; }
+            if (s_UserCodes.ContainsKey(code)) { return false; }
 
-            // We work on a temporary copy of s_Codes (which is guaranteed to be non-null since we
-            // just called Codes). This is not very efficient but ensures that s_Codes does not end
-            // up in a broken state if anything bad happens. Also note that, with competing
-            // threads, we may end up creating 'tmpCopy' more than once. Anyway, we do not expect
-            // this method to be called very often, if ever.
-            var tmpCopy = s_Codes.ToDictionary(_ => _.Key, _ => _.Value);
+            if (check)
+            {
+                var filter = CurrencyTypes.Any & ~CurrencyTypes.Custom;
+                if (OfOrNull(code, filter).HasValue) { return false; }
+            }
+
+            // We work on a temporary copy of s_UserCodes. This is not very efficient but ensures
+            // that s_UserCodes does not end up in a broken state if anything bad happens.
+            // Also note that, with competing threads, we may end up creating 'tmpCopy' more
+            // than once. Anyway, we do not expect this method to be called very often, if ever.
+            var tmpCopy = s_UserCodes.ToDictionary(_ => _.Key, _ => _.Value);
             tmpCopy[code] = minorUnits;
 
             // We use a volatile write to make sure that instructions don't get re-ordered.
-            Volatile.Write(ref s_Codes, tmpCopy);
+            Volatile.Write(ref s_UserCodes, tmpCopy);
 
             return true;
         }
 
         // This method should be thread-safe.
-        public static void RegisterCurrencies(Dictionary<string, short?> currencies)
+        public static bool RegisterCurrencies(Dictionary<string, short?> currencies)
+            => RegisterCurrencies(currencies, false);
+
+        // This method should be thread-safe.
+        public static bool RegisterCurrencies(Dictionary<string, short?> currencies, bool check)
         {
             Require.NotNull(currencies, nameof(currencies));
 
-            // See RegisterCurrency() for explanations. Comparing with it, we do not use s_Codes
-            // directly, because we don't know yet if it has been initialized.
-            var tmpCopy = Codes.ToDictionary(_ => _.Key, _ => _.Value);
+            // See RegisterCurrency() for explanations.
+            var tmpCopy = s_UserCodes.ToDictionary(_ => _.Key, _ => _.Value);
 
             foreach (var pair in currencies)
             {
                 string code = pair.Key;
-                short? minorUnits = pair.Value;
-
                 if (code == null
+                    || code.Length != 3
                     || !Ascii.IsUpperLetter(code)
-                    || code.Length != 3)
+                    || tmpCopy.ContainsKey(code))
                 {
-                    throw new ArgumentException("XXX");
+                    return false;
                 }
 
+                short? minorUnits = pair.Value;
                 if (minorUnits.HasValue && minorUnits < 0)
                 {
-                    throw new ArgumentException("XXX");
+                    return false;
                 }
 
-                if (!tmpCopy.ContainsKey(code))
+                if (check)
                 {
-                    tmpCopy[code] = minorUnits;
+                    var filter = CurrencyTypes.Any & ~CurrencyTypes.Custom;
+                    if (OfOrNull(code, filter).HasValue) { return false; }
                 }
+
+                tmpCopy[code] = minorUnits;
             }
 
-            Volatile.Write(ref s_Codes, tmpCopy);
+            Volatile.Write(ref s_UserCodes, tmpCopy);
+
+            return true;
         }
 
         public bool IsNativeTo(CultureInfo cultureInfo)

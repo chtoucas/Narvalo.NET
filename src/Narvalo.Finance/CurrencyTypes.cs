@@ -17,14 +17,11 @@ namespace Narvalo.Finance
 
         ISO = Active | Withdrawn,
 
-        Any = Current | Withdrawn | Custom
+        Any = Active | Withdrawn | Custom
     }
 
     public static class CurrencyTypesExtensions
     {
-        public static bool Contains(this CurrencyTypes @this, CurrencyTypes value)
-        {
-            return (@this & value) != 0;
-        }
+        public static bool Contains(this CurrencyTypes @this, CurrencyTypes value) => (@this & value) != 0;
     }
 }
