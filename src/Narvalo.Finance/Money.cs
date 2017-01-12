@@ -94,7 +94,8 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets a value indicating whether the amount is rounded to the number of decimal places
         /// specified by the currency. If the currency has no fixed decimal places, the amount should
-        /// never be rounded and the instance is normalized by default.
+        /// never be rounded and the instance is actually not normalizable; we opt to view it as
+        /// normalized by default.
         /// </summary>
         public bool IsNormalized { get; }
 

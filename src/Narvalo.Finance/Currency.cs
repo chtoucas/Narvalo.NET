@@ -75,7 +75,7 @@ namespace Narvalo.Finance
         // but not for all of them, we use 0.
         // If the currency has no known minor units, which is the case for all
         // legacy currencies, we use MAX_DECIMAL_PLACES as a replacement, ie an amount
-        // in these currencies can take any value in the decimal range.
+        // in this currency can take any value in the decimal range.
         // To simply things, for legacy currencies, we directly set MinorUnits to MAX_DECIMAL_PLACES,
         // but if, in the future, we change that we should also change the line below by:
         // > public int DecimalPlaces => MinorUnits.HasValue
@@ -289,7 +289,10 @@ namespace Narvalo.Finance
         // For details, see https://en.wikipedia.org/wiki/ISO_4217.
         // If you have more than one currency to register, you should use RegisterCurrencies()
         // instead - it will be more efficient.
-        // FIXME: This method is not thread-safe.
+        // FIXME: This method is not thread-safe:
+        // - In competing threads, we may add the same code twice.
+        // - If another code is added after we created tmpCopy and before we write it back,
+        //   this code will be lost.
         public static bool RegisterCurrency(string code, short? minorUnits)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));
@@ -323,13 +326,13 @@ namespace Narvalo.Finance
                 string code = pair.Key;
                 if (code == null || code.Length != 3 || !Ascii.IsUpperLetter(code))
                 {
-                    return false;
+                    throw new ArgumentException("XXX", nameof(currencies));
                 }
 
                 short? minorUnits = pair.Value;
                 if (minorUnits.HasValue && minorUnits < 0)
                 {
-                    return false;
+                    throw new ArgumentException("XXX", nameof(currencies));
                 }
 
                 if (s_UserCodes.ContainsKey(code)
