@@ -35,7 +35,7 @@ namespace Narvalo.Finance
                 }
             }
 
-            if (types.Contains(CurrencyTypes.Custom))
+            if (types.Contains(CurrencyTypes.UserDefined))
             {
                 short? minorUnits;
                 if (UserCodes.TryGetValue(code, out minorUnits))

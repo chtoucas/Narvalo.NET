@@ -26,33 +26,36 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// User-defined currencies (not part of ISO 4217).
-        /// <para>These currencies are registered via the
+        /// <para>For instance, this is the case for crypto-currencies like the Bitcoin (XBT),
+        /// unofficial codes like the Jersey Pound (JEP), currencies issued by an unrecognized
+        /// state, and so on.</para>
+        /// </summary>
+        /// <remarks>These currencies are registered via the
         /// <see cref="Currency.RegisterCurrency(string, short?)"/> and
         /// <see cref="Currency.RegisterCurrencies(System.Collections.Generic.Dictionary{string, short?})"/>
-        /// methods.</para>
-        /// </summary>
-        Custom = 1 << 2,
+        /// methods.</remarks>
+        UserDefined = 1 << 2,
 
         /// <summary>
         /// All circulating currencies whether they are ISO or not.
-        /// <para><see cref="Current"/> is a composite field that includes the <see cref="Active"/>
-        /// and <see cref="Custom"/> fields.</para>
+        /// <para><see cref="Circulating"/> is a composite field that includes the <see cref="Active"/>
+        /// and <see cref="UserDefined"/> fields.</para>
         /// </summary>
-        Current = Active | Custom,
+        Circulating = Active | UserDefined,
 
         /// <summary>
         /// All ISO currencies.
-        /// <para><see cref="Current"/> is a composite field that includes the <see cref="Active"/>
+        /// <para><see cref="ISO"/> is a composite field that includes the <see cref="Active"/>
         /// and <see cref="Withdrawn"/> fields.</para>
         /// </summary>
         ISO = Active | Withdrawn,
 
         /// <summary>
         /// All supported currencies.
-        /// <para><see cref="Current"/> is a composite field that includes the <see cref="Active"/>,
-        /// <see cref="Withdrawn"/> and <see cref="Custom"/> fields.</para>
+        /// <para><see cref="Any"/> is a composite field that includes the <see cref="Active"/>,
+        /// <see cref="Withdrawn"/> and <see cref="UserDefined"/> fields.</para>
         /// </summary>
-        Any = Active | Withdrawn | Custom
+        Any = Active | Withdrawn | UserDefined
     }
 
     public static class CurrencyTypesExtensions

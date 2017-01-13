@@ -269,14 +269,15 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Register a currency not part of ISO 4217.
-        /// <para>For instance, this is the case with crypto-currencies like the Bitcoin (XBT),
-        /// unofficial codes like the Jersey Pound (JEP), currencies issued by an unrecognized
-        /// state, and so on.</para>
+        /// <para>It can also be useful when the library is not up-to-date with the ISO 4217 list
+        /// of active currencies.</para>
         /// </summary>
         /// <remarks>
+        /// <para>All currencies registered via this method have the <see cref="CurrencyTypes.UserDefined"/>
+        /// type. In particular, they inherit the <see cref="CurrencyTypes.Circulating"/> type; as a
+        /// consequence, you can not register a withdrawn currency.</para>
         /// <para>If you have more than one currency to register, you should use
-        /// <see cref="RegisterCurrencies(Dictionary{string, short?})"/> instead - it will be more
-        /// efficient.</para>
+        /// <see cref="RegisterCurrencies(Dictionary{string, short?})"/> instead.</para>
         /// </remarks>
         /// <param name="code">The three letters code.</param>
         /// <param name="minorUnits">The number of minor units; null if the currency does not have
@@ -313,6 +314,14 @@ namespace Narvalo.Finance
             return true;
         }
 
+        /// <summary>
+        /// Register a bunch of currencies, at once.
+        /// <para>For explanations on when and how to use this method, please see
+        /// <see cref="RegisterCurrency(string, short?)"/>.</para>
+        /// </summary>
+        /// <param name="currencies">The <see cref="Dictionary{TKey, TValue}"/> that contains
+        /// the codes and minor units for the new currencies.</param>
+        /// <returns></returns>
         // See RegisterCurrency() for explanations.
         // FIXME: This method is not thread-safe.
         public static bool RegisterCurrencies(Dictionary<string, short?> currencies)
