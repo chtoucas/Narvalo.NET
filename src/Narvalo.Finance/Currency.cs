@@ -285,7 +285,7 @@ namespace Narvalo.Finance
         /// <param name="minorUnits">The number of minor units; null if the currency does not have
         /// a minor currency unit and <see cref="UnknownMinorUnits"/> if the status is unknown.</param>
         /// <returns>true if the operation succeeded; otherwise, false.</returns>
-        /// <exception cref="ArgumentException">Thrown if a candidate currency does not meet
+        /// <exception cref="ArgumentException">Thrown if the candidate currency does not meet
         /// the requirements: a <paramref name="code"/> must be of length 3 and made of ASCII
         /// uppercase letters, and <paramref name="minorUnits"/>, if not null, must be greater than
         /// or equal to zero and lower than or equal to 28.</exception>
@@ -334,7 +334,9 @@ namespace Narvalo.Finance
         /// the codes and minor units for the new currencies.</param>
         /// <returns>true if the operation succeeded; otherwise, false.</returns>
         /// <exception cref="ArgumentException">Thrown if a candidate currency does not meet
-        /// the requirements.</exception>
+        /// the requirements: its code must be of length 3 and made of ASCII
+        /// uppercase letters, and its minor units, if not null, must be greater than
+        /// or equal to zero and lower than or equal to 28.</exception>
         public static bool RegisterCurrencies(Dictionary<string, short?> currencies)
         {
             // See RegisterCurrency() for explanations.
