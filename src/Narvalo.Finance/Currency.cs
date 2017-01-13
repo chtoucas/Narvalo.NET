@@ -95,7 +95,7 @@ namespace Narvalo.Finance
         // To simplify things, for legacy currencies, we directly set MinorUnits to MAX_DECIMAL_PLACES,
         // but if, in the future, we change that we should also replace the code below by:
         // > public int DecimalPlaces => MinorUnits.HasValue
-        // >     ? (MinorUnits.Value == UNKNOWN_MINOR_UNITS ? MAX_DECIMAL_PLACES : MinorUnits.Value)
+        // >     ? (MinorUnits.Value == UnknownMinorUnits ? MAX_DECIMAL_PLACES : MinorUnits.Value)
         // >     : 0;
         public int DecimalPlaces => MinorUnits ?? 0;
 
