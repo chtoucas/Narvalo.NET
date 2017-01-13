@@ -26,8 +26,10 @@ namespace Narvalo.Finance
     public partial struct Currency : IEquatable<Currency>
     {
         private const int MAX_DECIMAL_PLACES = 28;
-        // Be very careful, if you set this const to something else. You need to adapt the code
-        // for DecimalPlaces, Epsilon and Factor.
+        // Be very careful, if you set this constant to something other than MAX_DECIMAL_PLACES:
+        // you MUST adapt the code for DecimalPlaces, Epsilon and Factor. Most implementations
+        // that I have came across, use -1; here we use MAX_DECIMAL_PLACES just to simplify (a
+        // little bit) the code.
         private const int UNKNOWN_MINOR_UNITS = MAX_DECIMAL_PLACES;
 
         private static Dictionary<string, short?> s_UserCodes = new Dictionary<string, short?>();
@@ -73,30 +75,27 @@ namespace Narvalo.Finance
         /// <value>The number of minor units; null if none defined; 28 if this number is unknown.</value>
         public short? MinorUnits { get; }
 
-        // If the currency has no minor units (null), which only happens for meta-currencies
-        // but not for all of them, we use 0.
-        // If the currency has no known minor units, which is the case for all
-        // legacy currencies, we use MAX_DECIMAL_PLACES as a replacement, ie an amount
-        // in this currency can take any value in the decimal range.
-        // To simply things, for legacy currencies, we directly set MinorUnits to MAX_DECIMAL_PLACES,
-        // but if, in the future, we change that we should also change the line below by:
+        /// <summary>
+        /// Gets the number of decimal places.
+        /// </summary>
+        /// <remarks>
+        /// <para>If the currency has no minor units (null), which only happens for meta-currencies,
+        /// but not for all of them, we return 0.</para>
+        /// <para>If the currency has no known minor units, which is the case for all legacy
+        /// currencies, we use 28 (the maximum scale for a decimal) as a replacement, ie an amount
+        /// in this currency is free to take any value in the decimal range.</para>
+        /// </remarks>
+        // To simplify things, for legacy currencies, we directly set MinorUnits to MAX_DECIMAL_PLACES,
+        // but if, in the future, we change that we should also replace the code below by:
         // > public int DecimalPlaces => MinorUnits.HasValue
         // >     ? (MinorUnits.Value == UNKNOWN_MINOR_UNITS ? MAX_DECIMAL_PLACES : MinorUnits.Value)
         // >     : 0;
         public int DecimalPlaces => MinorUnits ?? 0;
 
-        public bool HasFixedDecimalPlaces => DecimalPlaces != MAX_DECIMAL_PLACES;
-
         /// <summary>
-        /// Gets a value indicating whether the currency admits a minor currency unit.
+        /// Gets a value indicating whether the instance specifies a fixed number of decimal places.
         /// </summary>
-        /// <remarks>We consider that all legacy currencies do not have a minor unit.
-        /// This is actually false, but we do not have enough informations to give
-        /// a sensible answer.</remarks>
-        public bool HasMinorCurrency
-            => MinorUnits.HasValue
-            && MinorUnits.Value != 0
-            && MinorUnits.Value != UNKNOWN_MINOR_UNITS;
+        public bool HasFixedDecimalPlaces => DecimalPlaces != MAX_DECIMAL_PLACES;
 
         /// <summary>
         /// Gets a value indicating whether the currency is a meta-currency.
@@ -116,15 +115,30 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Gets the smallest positive (non zero) unit.
+        /// <para>Returns 1m if the currency has no minor currency unit.</para>
         /// </summary>
-        /// <remarks>Returns 1m if the currency has no minor currency unit.</remarks>
+        // If the currency has no fixed decimal places, DecimalPlaces is equal to MAX_DECIMAL_PLACES
+        // and DecimalPlaces % MAX_DECIMAL_PLACES = 1 which correctly gives 1m for Epsilon.
         public decimal Epsilon => Epsilons[DecimalPlaces % MAX_DECIMAL_PLACES];
 
         /// <remarks>Returns 1 if the currency has no minor currency unit.</remarks>
+        // If the currency has no fixed decimal places, DecimalPlaces is equal to MAX_DECIMAL_PLACES
+        // and DecimalPlaces % MAX_DECIMAL_PLACES = 1 which correctly gives 1 for Factor.
         private uint Factor => PowersOfTen[DecimalPlaces % MAX_DECIMAL_PLACES];
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
+
+        /// <summary>
+        /// Gets a value indicating whether the currency admits a minor currency unit.
+        /// </summary>
+        /// <remarks>We consider that legacy currencies do not admit a minor unit.
+        /// This is actually false, but we do not have enough informations at our disposal to give
+        /// a sensible answer.</remarks>
+        public bool HasMinorCurrency
+            => MinorUnits.HasValue
+            && MinorUnits.Value != 0
+            && MinorUnits.Value != UNKNOWN_MINOR_UNITS;
 
         /// <summary>
         /// Gets the minor currency unit.
@@ -145,7 +159,8 @@ namespace Narvalo.Finance
         }
 
         // If the currency admits a minor currency unit, we obtain its code by "lowercasing"
-        // the last character of its code: "EUR" -> "EUr". This convention is not officialy sanctioned.
+        // the last character of its code: "EUR" -> "EUr". This convention is not officially
+        // sanctioned, but seems rather common.
         private string MinorCurrencyCode
         {
             get
@@ -292,9 +307,9 @@ namespace Narvalo.Finance
         // If you have more than one currency to register, you should use RegisterCurrencies()
         // instead - it will be more efficient.
         // FIXME: This method is not thread-safe:
-        // - In competing threads, we may add the same code twice.
+        // - In competing threads, we may add the same code twice (this one is not that bad).
         // - If another code is added after we created tmpCopy and before we write it back,
-        //   this code will be lost.
+        //   this code will be lost (this one is really problematic).
         public static bool RegisterCurrency(string code, short? minorUnits)
         {
             Sentinel.Require.CurrencyCode(code, nameof(code));

@@ -61,6 +61,8 @@ namespace Narvalo.Finance
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
         /// and an amount for which the number of decimal places is determined by the currency.
+        /// <para>If the instance is not normalizable, <paramref name="mode"/> is ignored and
+        /// the amount is stored as it.</para>
         /// </summary>
         /// <param name="amount">The decimal representing the amount of money.</param>
         /// <param name="currency">The currency.</param>
@@ -104,9 +106,11 @@ namespace Narvalo.Finance
         /// Gets a value indicating whether the instance is normalizable.
         /// <para>An instance is said to be normalizable if the currency specifies a standard
         /// representation for the number of decimal places allowed in an amount. If it does not,
-        /// we store the amount as it; we never round it automatically. The customer of this class
-        /// has to do it manually using one of the round methods found in <see cref="MoneyMath"/>.</para>
+        /// we never round the amount; customers of this class can still do it manually using one
+        /// of the rounding methods found in <see cref="MoneyMath"/>.</para>
         /// </summary>
+        /// <remarks>Normally, you don't need to call this property, the library should always do the
+        /// right thing.</remarks>
         public bool IsNormalizable => Currency.HasFixedDecimalPlaces;
 
         /// <summary>
