@@ -7,8 +7,6 @@ namespace Narvalo.Finance.Utilities
     {
         private const char META_CURRENCY_MARK = 'X';
 
-        // TODO: What about EUR, CFP (legacy) for this, is it enough to check the country code too
-        // (ie the first two letters)?
         public static bool IsMetaCurrency(string code)
         {
             Demand.NotNullOrEmpty(code);
@@ -20,6 +18,7 @@ namespace Narvalo.Finance.Utilities
         {
             Demand.NotNullOrEmpty(code);
 
+            // Pseudo currencies do not have a minor currency unit.
             return IsMetaCurrency(code) && !minorUnits.HasValue;
         }
     }

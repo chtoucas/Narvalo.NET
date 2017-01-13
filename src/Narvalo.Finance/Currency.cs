@@ -107,24 +107,24 @@ namespace Narvalo.Finance
         /// Gets a value indicating whether the currency is a meta-currency.
         /// </summary>
         /// <remarks>
-        /// <para>Meta-currencies include most supranational currencies (notice that EUR
-        /// is not part of them, and there are others if you consider withdrawn currencies),
-        /// precious metals, the test currency, the "no" currency and currencies used in
-        /// international finance.</para>
+        /// <para>Meta-currencies designates most supranational currencies: regional currencies
+        /// that are not attached to a specific country (nevertheless notice that EUR is not part
+        /// of them, and there is more if you add withdrawn currencies), precious metals, the test
+        /// currency, the "no" currency and currencies used in international finance.</para>
         /// <para>Meta-currencies are not attached to a specific country.
         /// Their numeric codes are in the range 900-999 and their codes are in the
         /// range XA(A)-XZ(Z). They fall in the ranges of user-assigned codes
         /// as defined by the ISO 3166 standard, ie they will never clash with
         /// those of a real country.</para>
         /// </remarks>
-        /// <value>true if the currency is a meta-currency; otherwise false.</value>
+        /// <value>true if the currency is a meta-currency; otherwise, false.</value>
         public bool IsMetaCurrency => CurrencyHelpers.IsMetaCurrency(Code);
 
         /// <summary>
         /// Gets a value indicating whether the currency is a pseudo-currency.
         /// <para>A pseudo-currency is a meta-currency which is not a regional
-        /// currency; for instance, this excludes the CFA Franc (XAF, XOF and XPF) and the East
-        /// Caribbean Dollar (XCD).</para>
+        /// currency; for instance, this excludes the various CFA Franc (XAF, XOF and XPF)
+        /// and the East Caribbean Dollar (XCD).</para>
         /// </summary>
         public bool IsPseudoCurrency => CurrencyHelpers.IsPseudoCurrency(Code, MinorUnits);
 
@@ -177,7 +177,9 @@ namespace Narvalo.Finance
 
         // If the currency admits a minor currency unit, we obtain its code by "lowercasing"
         // the last character of its code: "EUR" -> "EUr". This convention is not officially
-        // sanctioned, but seems rather common.
+        // sanctioned, but seems rather common. Therefore, we do not handle other notations,
+        // like "GBX" and "GBx" for the British pence "GBp", "ZAC" instead of "ZAr", "ILA"
+        // instead of "ILr".
         private string MinorCurrencyCode
         {
             get
