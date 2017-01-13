@@ -19,6 +19,8 @@ namespace Narvalo.Finance
     // - Rounding is no longer needed; the amount is always normalized.
     //   See below for caveats when performing a division.
     // Disadvantages:
+    // - Only available for currencies specifying a fixed number of decimal places, ie it does
+    //   support legacy ISO currencies.
     // - The Int64 range is smaller. This has two consequences:
     //   * more opportunities to throw an overflow exception.
     //   * some operations might be lossful:
@@ -40,6 +42,8 @@ namespace Narvalo.Finance
 
         public Moneypenny(long amount, Currency currency)
         {
+            Require.True(currency.HasFixedDecimalPlaces, nameof(currency));
+
             Amount = amount;
             Currency = currency;
         }
