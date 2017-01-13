@@ -5,6 +5,7 @@ namespace Narvalo.Finance
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Threading;
@@ -33,14 +34,10 @@ namespace Narvalo.Finance
         // little bit) the code.
         public const int UnknownMinorUnits = MAX_DECIMAL_PLACES;
 
-        private static readonly object s_UserCodesLock = new Object();
-
         private static Dictionary<string, short?> s_UserCodes = new Dictionary<string, short?>();
 
-        // This list is automatically generated using data obtained from the SNV website.
-        private static Dictionary<string, short?> s_Codes;
-
         // This set is automatically generated using data obtained from the SNV website.
+        // It is initialized on first use.
         private static HashSet<string> s_WithdrawnCodes;
 
         private readonly string _code;
@@ -60,6 +57,15 @@ namespace Narvalo.Finance
             MinorUnits = minorUnits;
         }
 
+        /// <summary>
+        /// Gets the list of available currency codes/minor units.
+        /// </summary>
+        [ContractVerification(false)]
+        internal static Dictionary<string, short?> Codes => s_Codes;
+
+        /// <summary>
+        /// Gets the list of user-defined currency codes/minor units.
+        /// </summary>
         internal static Dictionary<string, short?> UserCodes => s_UserCodes;
 
         // The list is automatically generated using data obtained from the SNV website.
@@ -334,6 +340,8 @@ namespace Narvalo.Finance
 
             return false;
         }
+
+        private static readonly object s_UserCodesLock = new Object();
 
         /// <summary>
         /// Register a bunch of currencies, at once.
