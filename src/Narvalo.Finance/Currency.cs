@@ -33,6 +33,8 @@ namespace Narvalo.Finance
         // little bit) the code.
         public const int UnknownMinorUnits = MAX_DECIMAL_PLACES;
 
+        private static readonly object s_UserCodesLock = new Object();
+
         private static Dictionary<string, short?> s_UserCodes = new Dictionary<string, short?>();
 
         // This list is automatically generated using data obtained from the SNV website.
@@ -282,19 +284,20 @@ namespace Narvalo.Finance
         /// Register a currency not part of ISO 4217.
         /// <para>It can also be useful when the library is not up-to-date with the ISO 4217 list
         /// of active currencies.</para>
-        /// <para>This method is NOT thread-safe but ensures that nothing is changed if anything
-        /// goes wrong.</para>
+        /// <para>This method is thread-safe.</para>
         /// </summary>
         /// <remarks>
         /// <para>All currencies registered via this method have the <see cref="CurrencyTypes.UserDefined"/>
         /// type. In particular, they inherit the <see cref="CurrencyTypes.Circulating"/> type; as a
         /// consequence, you can not register a withdrawn currency.</para>
-        /// <para>If you have more than one currency to register, you should use
-        /// <see cref="RegisterCurrencies(Dictionary{string, short?})"/> instead.</para>
+        /// <para>If you have more than one currency to register and you don't need thread-safety,
+        /// you should use <see cref="RegisterCurrencies(Dictionary{string, short?})"/> instead.</para>
         /// </remarks>
         /// <param name="code">The three letters code.</param>
         /// <param name="minorUnits">The number of minor units; null if the currency does not have
         /// a minor currency unit and <see cref="UnknownMinorUnits"/> if the status is unknown.</param>
+        /// <param name="force">If true, force the registration of the currency even if it is already
+        /// present in the registry.</param>
         /// <returns>true if the operation succeeded; otherwise, false.</returns>
         /// <exception cref="ArgumentException">Thrown if the candidate currency does not meet
         /// the requirements: a <paramref name="code"/> must be of length 3 and made of ASCII
@@ -302,44 +305,42 @@ namespace Narvalo.Finance
         /// or equal to zero and lower than or equal to 28.</exception>
         public static bool RegisterCurrency(string code, short? minorUnits)
         {
-            // FIXME: Thread-safety.
-            // - In competing threads, we may add the same code twice (this one is not that bad).
-            // - If another code is added after we created tmpCopy and before we write it back,
-            //   this code will be lost (this one is really problematic).
-
-            // REVIEW: Should we relax the constraints on the code value for user-defined currencies?
-            // JavaMoney does it, but I am not very convinced that there are enough good reasons
-            // for the complications it will imply. Nevertheless, if we decided to do this, there
-            // will a problem with MinorCurrencyCode and we would have to review all guards wherever
-            // we accept a code as input.
+            // REVIEW: Should we relax the constraints we impose on the code value for user-defined
+            // currencies? JavaMoney does it, but I am not very convinced that there are enough
+            // good reasons for the complications it will imply. Nevertheless, if we decided
+            // to do this, there will a problem with MinorCurrencyCode and we would have to review
+            // all guards wherever we accept a code as input.
             Sentinel.Require.CurrencyCode(code, nameof(code));
             Require.True(
                 !minorUnits.HasValue || (minorUnits >= 0 && minorUnits <= MAX_DECIMAL_PLACES),
                 nameof(minorUnits));
 
-            if (s_UserCodes.ContainsKey(code)
-                || Codes.ContainsKey(code)
-                || WithdrawnCodes.Contains(code)) { return false; }
+            // Codes and WithdrawnCodes (whose initialization is thread-safe) are immutable,
+            // so no concurrency problems should occur.
+            if (Codes.ContainsKey(code) || WithdrawnCodes.Contains(code)) { return false; }
 
-            // We work on a temporary copy of s_UserCodes. This is not very efficient but ensures
-            // that s_UserCodes does not end up in a broken state if anything bad happens.
-            // Also note that, with competing threads, we may end up creating 'tmpCopy' more
-            // than once. Anyway, we do not expect this method to be called very often, if ever.
-            var tmpCopy = s_UserCodes.ToDictionary(_ => _.Key, _ => _.Value);
-            tmpCopy[code] = minorUnits;
+            // Rather than messing with low-level threading stuff, we use a lock. Anyway,
+            // we do expect this method to be called only a handful of times during the lifetime
+            // of an application.
+            lock (s_UserCodesLock)
+            {
+                if (!s_UserCodes.ContainsKey(code))
+                {
+                    s_UserCodes[code] = minorUnits;
 
-            // We use a volatile write to make sure that instructions don't get re-ordered.
-            Volatile.Write(ref s_UserCodes, tmpCopy);
+                    return true;
+                }
+            }
 
-            return true;
+            return false;
         }
 
         /// <summary>
         /// Register a bunch of currencies, at once.
         /// <para>For explanations on when and how to use this method, please see
         /// <see cref="RegisterCurrency(string, short?)"/>.</para>
-        /// <para>This method is NOT thread-safe but ensures that nothing is changed if anything
-        /// goes wrong.</para>
+        /// <para>This method is NOT thread-safe but ensures that the registry is not modified
+        /// if anything goes wrong.</para>
         /// </summary>
         /// <param name="currencies">The <see cref="Dictionary{TKey, TValue}"/> that contains
         /// the codes and minor units for the new currencies.</param>
@@ -350,8 +351,11 @@ namespace Narvalo.Finance
         /// or equal to zero and lower than or equal to 28.</exception>
         public static bool RegisterCurrencies(Dictionary<string, short?> currencies)
         {
-            // See RegisterCurrency() for explanations.
-            // FIXME: Thread-safety.
+            // REVIEW: Do we break the thread-safety of RegisterCurrency()?
+            // - In competing threads, we may add the same code twice (this one is not that bad).
+            // - If another code is added using RegisterCurrency() after we create tmpCopy and
+            //   before we write it back, the code will be lost (this one is really problematic).
+
             Require.NotNull(currencies, nameof(currencies));
 
             // Before any actual work, we check if the input looks fine.
@@ -369,20 +373,27 @@ namespace Narvalo.Finance
                     throw new ArgumentException("XXX", nameof(currencies));
                 }
 
-                if (s_UserCodes.ContainsKey(code)
-                    || Codes.ContainsKey(code)
-                    || WithdrawnCodes.Contains(code))
+                // Codes and WithdrawnCodes (whose initialization is thread-safe) are immutable,
+                // so no concurrency problems should occur.
+                if (Codes.ContainsKey(code) || WithdrawnCodes.Contains(code))
                 {
                     return false;
                 }
             }
 
+            // We work on a temporary copy of s_UserCodes. This is not very efficient but ensures
+            // that s_UserCodes does not end up in a broken state if anything bad happens.
+            // Anyway, we do not expect this method to be called more than once, if ever, for
+            // instance during application startup, and the dictionary should be pretty small in
+            // size.
             var tmpCopy = s_UserCodes.ToDictionary(_ => _.Key, _ => _.Value);
             foreach (var pair in currencies)
             {
+                if (tmpCopy.ContainsKey(pair.Key)) { return false; }
                 tmpCopy[pair.Key] = pair.Value;
             }
 
+            // We use a volatile write to make sure that instructions don't get re-ordered.
             Volatile.Write(ref s_UserCodes, tmpCopy);
 
             return true;
