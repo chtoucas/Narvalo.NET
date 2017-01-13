@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Narvalo.Org. All rights reserved. See LICENSE.txt in the project root for license information.
 
-namespace Narvalo.Finance.Rounding
+namespace Narvalo.Finance
 {
-    public static class AdjustedMoneyFactory
+    using Narvalo.Finance.Rounding;
+
+    public static class MoneyFactory
     {
         /// <summary>
         /// Creates a new instance of the <see cref="Money"/> class for a specific currency

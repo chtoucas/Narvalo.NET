@@ -39,7 +39,7 @@ namespace Narvalo.Finance
         /// Gets the list of available currency codes/minor units.
         /// </summary>
         [ContractVerification(false)]
-        private static Dictionary<string, short?> Codes
+        internal static Dictionary<string, short?> Codes
         {
             get
             {
@@ -241,7 +241,7 @@ namespace Narvalo.Finance
         /// Gets the set of legacy currencies.
         /// </summary>
         [ContractVerification(false)]
-        private static HashSet<string> WithdrawnCodes
+        internal static HashSet<string> WithdrawnCodes
         {
             get
             {

@@ -76,6 +76,7 @@
     <Compile Include="Allocators\Money%24.cs" />
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
+    <Compile Include="CurrencyFactory.cs" />
     <Compile Include="Moneypenny.cs" />
     <Compile Include="CurrencyTypes.cs" />
     <Compile Include="Generic\CurrencyUnit`1.cs" />
@@ -96,7 +97,7 @@
     <Compile Include="Utilities\CurrencyMetadata.cs" />
     <Compile Include="Utilities\Integer.cs" />
     <Compile Include="Rounding\Money%24.cs" />
-    <Compile Include="Rounding\AdjustedMoneyFactory.cs" />
+    <Compile Include="MoneyFactory.cs" />
     <Compile Include="Rounding\StochasticRoundingAdjuster.cs" />
     <Compile Include="Utilities\IbanCheckDigits.cs" />
     <Compile Include="Rounding\RoudingMode.cs" />
