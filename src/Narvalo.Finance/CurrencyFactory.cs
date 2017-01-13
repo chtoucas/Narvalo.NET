@@ -4,7 +4,8 @@ namespace Narvalo.Finance
 {
     using Narvalo.Finance.Utilities;
 
-    // Only used to make the methods look (to us) like ordinary static methods of the Currency class.
+    // Only used to make the methods look (only for us developers) like ordinary static methods
+    // of the Currency class.
     using static Narvalo.Finance.Currency;
 
     public static class CurrencyFactory

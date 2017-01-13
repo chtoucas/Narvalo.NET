@@ -19,7 +19,7 @@ namespace Narvalo.Finance
     // - Rounding is no longer needed; the amount is always normalized.
     //   See below for caveats when performing a division.
     // Disadvantages:
-    // - Only available for currencies specifying a fixed number of decimal places, ie it does
+    // - Only available for currencies specifying a fixed number of decimal places, ie it does not
     //   support legacy ISO currencies.
     // - The Int64 range is smaller. This has two consequences:
     //   * more opportunities to throw an overflow exception.
@@ -36,7 +36,8 @@ namespace Narvalo.Finance
     // but different in the way they deal with amounts. Here, we only consider strict amounts
     // (no rounding is ever needed, at the expense of what you can do with it), a restriction
     // that does not exist with FastMoney.
-    public partial struct Moneypenny : IEquatable<Moneypenny>, IComparable<Moneypenny>, IComparable, IFormattable
+    public partial struct Moneypenny
+        : IEquatable<Moneypenny>, IComparable<Moneypenny>, IComparable, IFormattable
     {
         private const string DEFAULT_FORMAT = "G";
 

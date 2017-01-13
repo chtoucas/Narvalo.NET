@@ -32,9 +32,9 @@ namespace Narvalo.Finance
             // > var q = dividend.Divide(divisor);
             // > remainder = dividend.Remainder(divisor);
             // For doubles, .NET uses:
-            // Modulus = (Math.Abs(dividend) - (Math.Abs(divisor)
-            //   * (Math.Floor(Math.Abs(dividend) / Math.Abs(divisor)))))
-            //   * Math.Sign(dividend)
+            // > Modulus = (Math.Abs(dividend) - (Math.Abs(divisor)
+            // >   * (Math.Floor(Math.Abs(dividend) / Math.Abs(divisor)))))
+            // >   * Math.Sign(dividend)
             decimal q = dividend.Amount / divisor;
             decimal rem = dividend.Amount - q * divisor;
             remainder = new Money(rem, dividend.Currency);

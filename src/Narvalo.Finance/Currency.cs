@@ -31,7 +31,7 @@ namespace Narvalo.Finance
         // you MUST adapt the code for DecimalPlaces, Epsilon and Factor. Most implementations
         // that I have came across, use -1; here we use MAX_DECIMAL_PLACES just to simplify (a
         // little bit) the code.
-        internal const int UnknownMinorUnits = MAX_DECIMAL_PLACES;
+        public const int UnknownMinorUnits = MAX_DECIMAL_PLACES;
 
         private static Dictionary<string, short?> s_UserCodes = new Dictionary<string, short?>();
 
@@ -100,6 +100,7 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets a value indicating whether the instance specifies a fixed number of decimal places.
         /// </summary>
+        /// <remarks>This is only necessary because of legacy currencies.</remarks>
         public bool HasFixedDecimalPlaces => DecimalPlaces != MAX_DECIMAL_PLACES;
 
         /// <summary>
@@ -180,7 +181,7 @@ namespace Narvalo.Finance
         /// <summary>
         /// Obtains an instance of the <see cref="Currency" /> class for the specified alphabetic code.
         /// </summary>
-        /// <param name="code">The three letter ISO-4217 code of the currency.</param>
+        /// <param name="code">The three letters ISO-4217 code of the currency.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="code"/> is null.</exception>
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
         /// specified code.</exception>
@@ -277,9 +278,9 @@ namespace Narvalo.Finance
         /// <see cref="RegisterCurrencies(Dictionary{string, short?})"/> instead - it will be more
         /// efficient.</para>
         /// </remarks>
-        /// <param name="code">The three letter code.</param>
+        /// <param name="code">The three letters code.</param>
         /// <param name="minorUnits">The number of minor units; null if the currency does not have
-        /// a minor currency unit.</param>
+        /// a minor currency unit and <see cref="UnknownMinorUnits"/> if the status is unknown.</param>
         /// <returns></returns>
         // FIXME: This method is not thread-safe:
         // - In competing threads, we may add the same code twice (this one is not that bad).
@@ -287,13 +288,13 @@ namespace Narvalo.Finance
         //   this code will be lost (this one is really problematic).
         public static bool RegisterCurrency(string code, short? minorUnits)
         {
-            // REVIEW: Should we relax these conditions for user-defined currencies?
+            // REVIEW: Should we relax the constraints on the code value for user-defined currencies?
             // JavaMoney does it, but I am not very convinced that there are enough good reasons
-            // for the complications it will cause. Nevertheless, if we decided to do this, there
+            // for the complications it will imply. Nevertheless, if we decided to do this, there
             // will a problem with MinorCurrencyCode and we would have to review all guards wherever
             // we accept a code as input.
             Sentinel.Require.CurrencyCode(code, nameof(code));
-            Demand.True(!minorUnits.HasValue || minorUnits >= 0);
+            Require.True(!minorUnits.HasValue || minorUnits >= 0, nameof(minorUnits));
 
             if (s_UserCodes.ContainsKey(code)
                 || Codes.ContainsKey(code)
