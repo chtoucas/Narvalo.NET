@@ -30,7 +30,7 @@ namespace Narvalo.Finance
         /// unofficial codes like the Jersey Pound (JEP), currencies issued by an unrecognized
         /// state, and so on.</para>
         /// </summary>
-        /// <remarks>These currencies are registered via the
+        /// <remarks>These currencies can be registered via the
         /// <see cref="Currency.RegisterCurrency(string, short?)"/> and
         /// <see cref="Currency.RegisterCurrencies(System.Collections.Generic.Dictionary{string, short?})"/>
         /// methods.</remarks>

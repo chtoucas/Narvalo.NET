@@ -107,9 +107,10 @@ namespace Narvalo.Finance
         /// Gets a value indicating whether the currency is a meta-currency.
         /// </summary>
         /// <remarks>
-        /// <para>Meta-currencies include supranational currencies (but notice that EUR
-        /// is not part of them...), precious metals, the test currency, the "no"
-        /// currency and currencies used in international finance.</para>
+        /// <para>Meta-currencies include most supranational currencies (notice that EUR
+        /// is not part of them, and there are others if you consider withdrawn currencies),
+        /// precious metals, the test currency, the "no" currency and currencies used in
+        /// international finance.</para>
         /// <para>Meta-currencies are not attached to a specific country.
         /// Their numeric codes are in the range 900-999 and their codes are in the
         /// range XA(A)-XZ(Z). They fall in the ranges of user-assigned codes
@@ -117,7 +118,15 @@ namespace Narvalo.Finance
         /// those of a real country.</para>
         /// </remarks>
         /// <value>true if the currency is a meta-currency; otherwise false.</value>
-        public bool IsMeta => CurrencyMetadata.IsMetaCurrency(Code);
+        public bool IsMetaCurrency => CurrencyHelpers.IsMetaCurrency(Code);
+
+        /// <summary>
+        /// Gets a value indicating whether the currency is a pseudo-currency.
+        /// <para>A pseudo-currency is a meta-currency which is not a regional
+        /// currency; for instance, this excludes the CFA Franc (XAF, XOF and XPF) and the East
+        /// Caribbean Dollar (XCD).</para>
+        /// </summary>
+        public bool IsPseudoCurrency => CurrencyHelpers.IsPseudoCurrency(Code, MinorUnits);
 
         /// <summary>
         /// Gets the smallest positive (non zero) unit.

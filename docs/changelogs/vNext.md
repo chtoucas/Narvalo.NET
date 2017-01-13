@@ -55,7 +55,6 @@ TODO
   [rounding](https://en.wikipedia.org/wiki/Rounding),
   [cash rounding](https://en.wikipedia.org/wiki/Cash_rounding)
   [sum](https://en.wikipedia.org/wiki/Kahan_summation_algorithm).
-- IsPseudoCurrency -> !IsLegacy && MinorUnits == null.
 - Protect Multiply, Divide and Remainder against absurd results.
 - DecimalRounding.Scale(), check for minimal value?
 - Add support for minor units (EUR -> EUr).
