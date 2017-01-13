@@ -60,6 +60,7 @@ namespace Narvalo.Finance
 
         public static decimal Round(Money money, int decimalPlaces, MidpointRounding mode)
         {
+            // If the amount is already rounded to decimalPlaces, do nothing.
             if (money.IsNormalized && money.Currency.DecimalPlaces == decimalPlaces) { return money.Amount; }
             return Math.Round(money.Amount, decimalPlaces, mode);
         }
@@ -67,6 +68,7 @@ namespace Narvalo.Finance
         private static decimal Round(Money money, Func<decimal, decimal> thunk)
         {
             Demand.NotNull(thunk);
+            // If the amount is already rounded to 0, do nothing.
             if (money.IsNormalized && money.Currency.DecimalPlaces == 0) { return money.Amount; }
             return thunk.Invoke(money.Amount);
         }

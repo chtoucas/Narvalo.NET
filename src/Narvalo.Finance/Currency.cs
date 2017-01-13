@@ -26,6 +26,8 @@ namespace Narvalo.Finance
     public partial struct Currency : IEquatable<Currency>
     {
         private const int MAX_DECIMAL_PLACES = 28;
+        // Be very careful, if you set this const to something else. You need to adapt the code
+        // for DecimalPlaces, Epsilon and Factor.
         private const int UNKNOWN_MINOR_UNITS = MAX_DECIMAL_PLACES;
 
         private static Dictionary<string, short?> s_UserCodes = new Dictionary<string, short?>();
@@ -118,6 +120,9 @@ namespace Narvalo.Finance
         /// <remarks>Returns 1m if the currency has no minor currency unit.</remarks>
         public decimal Epsilon => Epsilons[DecimalPlaces % MAX_DECIMAL_PLACES];
 
+        /// <remarks>Returns 1 if the currency has no minor currency unit.</remarks>
+        private uint Factor => PowersOfTen[DecimalPlaces % MAX_DECIMAL_PLACES];
+
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
 
@@ -138,9 +143,6 @@ namespace Narvalo.Finance
                 return new FractionalCurrency(this, Epsilon, MinorCurrencyCode);
             }
         }
-
-        /// <remarks>Returns 1 if the currency has no minor currency unit.</remarks>
-        private uint Factor => PowersOfTen[DecimalPlaces % MAX_DECIMAL_PLACES];
 
         // If the currency admits a minor currency unit, we obtain its code by "lowercasing"
         // the last character of its code: "EUR" -> "EUr". This convention is not officialy sanctioned.

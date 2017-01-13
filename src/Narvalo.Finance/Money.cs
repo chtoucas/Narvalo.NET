@@ -93,11 +93,21 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Gets a value indicating whether the amount is rounded to the number of decimal places
-        /// specified by the currency. If the currency has no fixed decimal places, the amount should
-        /// never be rounded and the instance is actually not normalizable; we opt to view it as
-        /// normalized by default.
+        /// specified by the currency.
+        /// <para>If the currency has no fixed decimal places, the instance is actually not
+        /// normalizable; we opt to view it as normalized by default.</para>
         /// </summary>
+        /// <seealso cref="IsNormalizable"/>
         public bool IsNormalized { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the instance is normalizable.
+        /// <para>An instance is said to be normalizable if the currency specifies a standard
+        /// representation for the number of decimal places allowed in an amount. If it does not,
+        /// we store the amount as it; we never round it automatically. The customer of this class
+        /// has to do it manually using one of the round methods found in <see cref="MoneyMath"/>.</para>
+        /// </summary>
+        public bool IsNormalizable => Currency.HasFixedDecimalPlaces;
 
         /// <summary>
         /// Gets a value indicating whether the amount is zero.
