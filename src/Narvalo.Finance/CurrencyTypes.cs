@@ -62,7 +62,7 @@ namespace Narvalo.Finance
     {
         public static bool Contains(this CurrencyTypes @this, CurrencyTypes types) => (@this & types) != 0;
 
-        public static CurrencyTypes Except(this CurrencyTypes @this, CurrencyTypes types) => (@this & ~types);
+        public static CurrencyTypes Except(this CurrencyTypes @this, CurrencyTypes types) => @this & ~types;
 
         public static CurrencyTypes Toggle(this CurrencyTypes @this, CurrencyTypes types) => @this ^ types;
     }

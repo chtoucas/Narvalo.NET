@@ -271,6 +271,8 @@ namespace Narvalo.Finance
         /// Register a currency not part of ISO 4217.
         /// <para>It can also be useful when the library is not up-to-date with the ISO 4217 list
         /// of active currencies.</para>
+        /// <para>This method is NOT thread-safe but ensures that nothing is changed if anything
+        /// goes wrong.</para>
         /// </summary>
         /// <remarks>
         /// <para>All currencies registered via this method have the <see cref="CurrencyTypes.UserDefined"/>
@@ -282,20 +284,27 @@ namespace Narvalo.Finance
         /// <param name="code">The three letters code.</param>
         /// <param name="minorUnits">The number of minor units; null if the currency does not have
         /// a minor currency unit and <see cref="UnknownMinorUnits"/> if the status is unknown.</param>
-        /// <returns></returns>
-        // FIXME: This method is not thread-safe:
-        // - In competing threads, we may add the same code twice (this one is not that bad).
-        // - If another code is added after we created tmpCopy and before we write it back,
-        //   this code will be lost (this one is really problematic).
+        /// <returns>true if the operation succeeded; otherwise, false.</returns>
+        /// <exception cref="ArgumentException">Thrown if a candidate currency does not meet
+        /// the requirements: a <paramref name="code"/> must be of length 3 and made of ASCII
+        /// uppercase letters, and <paramref name="minorUnits"/>, if not null, must be greater than
+        /// or equal to zero and lower than or equal to 28.</exception>
         public static bool RegisterCurrency(string code, short? minorUnits)
         {
+            // FIXME: Thread-safety.
+            // - In competing threads, we may add the same code twice (this one is not that bad).
+            // - If another code is added after we created tmpCopy and before we write it back,
+            //   this code will be lost (this one is really problematic).
+
             // REVIEW: Should we relax the constraints on the code value for user-defined currencies?
             // JavaMoney does it, but I am not very convinced that there are enough good reasons
             // for the complications it will imply. Nevertheless, if we decided to do this, there
             // will a problem with MinorCurrencyCode and we would have to review all guards wherever
             // we accept a code as input.
             Sentinel.Require.CurrencyCode(code, nameof(code));
-            Require.True(!minorUnits.HasValue || minorUnits >= 0, nameof(minorUnits));
+            Require.True(
+                !minorUnits.HasValue || (minorUnits >= 0 && minorUnits <= MAX_DECIMAL_PLACES),
+                nameof(minorUnits));
 
             if (s_UserCodes.ContainsKey(code)
                 || Codes.ContainsKey(code)
@@ -318,16 +327,21 @@ namespace Narvalo.Finance
         /// Register a bunch of currencies, at once.
         /// <para>For explanations on when and how to use this method, please see
         /// <see cref="RegisterCurrency(string, short?)"/>.</para>
+        /// <para>This method is NOT thread-safe but ensures that nothing is changed if anything
+        /// goes wrong.</para>
         /// </summary>
         /// <param name="currencies">The <see cref="Dictionary{TKey, TValue}"/> that contains
         /// the codes and minor units for the new currencies.</param>
-        /// <returns></returns>
-        // See RegisterCurrency() for explanations.
-        // FIXME: This method is not thread-safe.
+        /// <returns>true if the operation succeeded; otherwise, false.</returns>
+        /// <exception cref="ArgumentException">Thrown if a candidate currency does not meet
+        /// the requirements.</exception>
         public static bool RegisterCurrencies(Dictionary<string, short?> currencies)
         {
+            // See RegisterCurrency() for explanations.
+            // FIXME: Thread-safety.
             Require.NotNull(currencies, nameof(currencies));
 
+            // Before any actual work, we check if the input looks fine.
             foreach (var pair in currencies)
             {
                 string code = pair.Key;
@@ -337,7 +351,7 @@ namespace Narvalo.Finance
                 }
 
                 short? minorUnits = pair.Value;
-                if (minorUnits.HasValue && minorUnits < 0)
+                if (minorUnits.HasValue && (minorUnits < 0 || minorUnits > MAX_DECIMAL_PLACES))
                 {
                     throw new ArgumentException("XXX", nameof(currencies));
                 }
