@@ -268,9 +268,9 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Register a currency not part of ISO 4217.
-        /// <para>For instance, this is the case with crypto-currencies like the Bitcoin,
-        /// currencies issued by an unrecognized state, and so on.
-        /// See https://en.wikipedia.org/wiki/ISO_4217#Non_ISO_4217_currencies.</para>
+        /// <para>For instance, this is the case with crypto-currencies like the Bitcoin (XBT),
+        /// unofficial codes like the Jersey Pound (JEP), currencies issued by an unrecognized
+        /// state, and so on.</para>
         /// </summary>
         /// <remarks>
         /// <para>If you have more than one currency to register, you should use
@@ -288,6 +288,10 @@ namespace Narvalo.Finance
         public static bool RegisterCurrency(string code, short? minorUnits)
         {
             // REVIEW: Should we relax these conditions for user-defined currencies?
+            // JavaMoney does it, but I am not very convinced that there are enough good reasons
+            // for the complications it will cause. Nevertheless, if we decided to do this, there
+            // will a problem with MinorCurrencyCode and we would have to review all guards wherever
+            // we accept a code as input.
             Sentinel.Require.CurrencyCode(code, nameof(code));
             Demand.True(!minorUnits.HasValue || minorUnits >= 0);
 
