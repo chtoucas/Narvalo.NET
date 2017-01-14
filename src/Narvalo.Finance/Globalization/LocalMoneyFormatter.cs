@@ -77,11 +77,11 @@ namespace Narvalo.Finance.Globalization
                 case "L":
                 case "l":
                     // Left (Currency code placed on the).
-                    return currencyCode + "\u00A0" + amount.ToString("C", numberFormat.GetNoSymbolNoSpaceClone());
+                    return currencyCode + " " + amount.ToString("C", numberFormat.GetNoSymbolNoSpaceClone());
                 case "R":
                 case "r":
                     // Right (Currency code placed on the).
-                    return amount.ToString("C", numberFormat.GetNoSymbolNoSpaceClone()) + "\u00A0" + currencyCode;
+                    return amount.ToString("C", numberFormat.GetNoSymbolNoSpaceClone()) + " " + currencyCode;
                 case "G":
                 case "g":
                     // General (default). It replaces the currency symbol by the currency code

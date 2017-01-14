@@ -20,7 +20,7 @@ namespace Narvalo.Finance.Globalization
         {
             Warrant.NotNull<string>();
 
-            // TODO: To be updated once Money<> to handle normalization. See below.
+            // TODO: To be updated once Money<> handle normalization. See below.
             var nfi = (NumberFormatInfo)(numberFormat ?? NumberFormatInfo.CurrentInfo).Clone();
             nfi.NumberDecimalDigits = money.Unit.DecimalPlaces;
             string amount = money.Amount.ToString("N", nfi);
