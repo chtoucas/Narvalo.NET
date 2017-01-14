@@ -3,6 +3,7 @@
 namespace Narvalo.Finance
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
@@ -42,6 +43,7 @@ namespace Narvalo.Finance
     // but different in the way they deal with amounts. Here, we only consider strict amounts
     // (no rounding is ever needed, at the expense of what you can do with it), a restriction
     // that does not exist with FastMoney.
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public partial struct Moneypenny
         : IEquatable<Moneypenny>, IComparable<Moneypenny>, IComparable, IFormattable
     {
@@ -72,6 +74,10 @@ namespace Narvalo.Finance
 
         private void ThrowIfCurrencyMismatch(Moneypenny penny, string parameterName)
             => Enforce.True(Currency == penny.Currency, parameterName, Strings.Argument_CurrencyMismatch);
+
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
+        private string DebuggerDisplay => Format.Current("{0} {1:N}", Currency.Code, Amount);
     }
 
     // Static factory methods.

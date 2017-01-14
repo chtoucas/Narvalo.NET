@@ -429,9 +429,9 @@ namespace Narvalo.Finance
         internal decimal ConvertToMinor(decimal major) => Factor * major;
 
         /// <summary>
-        /// Returns a string containing the code of the currency.
+        /// Returns a string containing the code for the currency.
         /// </summary>
-        /// <returns>A string containing the code of the currency.</returns>
+        /// <returns>A string containing the code for the currency.</returns>
         public override string ToString()
         {
             Warrant.NotNull<string>();
