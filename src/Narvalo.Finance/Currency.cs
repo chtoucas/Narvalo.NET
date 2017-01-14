@@ -306,8 +306,6 @@ namespace Narvalo.Finance
         /// <param name="code">The three letters code.</param>
         /// <param name="minorUnits">The number of minor units; null if the currency does not have
         /// a minor currency unit and <see cref="UnknownMinorUnits"/> if the status is unknown.</param>
-        /// <param name="force">If true, force the registration of the currency even if it is already
-        /// present in the registry.</param>
         /// <returns>true if the operation succeeded; otherwise, false.</returns>
         /// <exception cref="ArgumentException">Thrown if the candidate currency does not meet
         /// the requirements: a <paramref name="code"/> must be of length 3 and made of ASCII
