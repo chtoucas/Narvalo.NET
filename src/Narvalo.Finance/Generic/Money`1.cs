@@ -79,7 +79,7 @@ namespace Narvalo.Finance.Generic
         public string ToString(IFormatProvider formatProvider)
         {
             Warrant.NotNull<string>();
-            return MoneyFormatter.Format(this, null, NumberFormatInfo.GetInstance(formatProvider));
+            return ToString(null, formatProvider);
         }
 
         public string ToString(string format, IFormatProvider formatProvider)

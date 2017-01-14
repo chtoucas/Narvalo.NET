@@ -153,6 +153,9 @@
   <data name="Iban_InvalidFormatSpecification" xml:space="preserve">
     <value>Format string can be only null, an empty string, "G", "g", "C", "c", "H", "h".</value>
   </data>
+  <data name="Moneypenny_InvalidFormatSpecification" xml:space="preserve">
+    <value>Moneypenny_InvalidFormatSpecification</value>
+  </data>
   <data name="Money_InvalidFormatSpecification" xml:space="preserve">
     <value>Money_InvalidFormatSpecification</value>
   </data>

@@ -11,7 +11,7 @@ namespace Narvalo.Finance.Globalization
     // Formatting currencies is difficult. This class works consistently across .NET cultures
     // at the sacrifice of omitting the currency symbol; it still uses the culture's rules to
     // format the amount.
-    internal static class MoneyFormatter
+    public static partial class MoneyFormatter
     {
         private const string DEFAULT_FORMAT = "G";
 
@@ -30,8 +30,12 @@ namespace Narvalo.Finance.Globalization
 
         private static string Format(decimal amount, string currencyCode, string format, NumberFormatInfo nfi)
         {
-            Demand.NotNull(nfi);
             Warrant.NotNull<string>();
+
+            if (nfi == null)
+            {
+                nfi = NumberFormatInfo.CurrentInfo;
+            }
 
             if (format == null || format.Length == 0)
             {

@@ -179,6 +179,15 @@ namespace Narvalo.Finance.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moneypenny_InvalidFormatSpecification.
+        /// </summary>
+        internal static string Moneypenny_InvalidFormatSpecification {
+            get {
+                return ResourceManager.GetString("Moneypenny_InvalidFormatSpecification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outcome_NoErrorMessage.
         /// </summary>
         internal static string Outcome_NoErrorMessage {

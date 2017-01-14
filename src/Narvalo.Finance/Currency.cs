@@ -193,7 +193,7 @@ namespace Narvalo.Finance
         // sanctioned, but seems rather common. Therefore, we do not handle other notations,
         // like "GBX" and "GBx" for the British pence "GBp", "ZAC" instead of "ZAr", "ILA"
         // instead of "ILr".
-        private string MinorCurrencyCode
+        internal string MinorCurrencyCode
         {
             get
             {

@@ -61,8 +61,8 @@ namespace Narvalo.Finance
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
         /// and an amount for which the number of decimal places is determined by the currency.
-        /// <para>If the instance is not normalizable, <paramref name="mode"/> is ignored and
-        /// the amount is stored as it.</para>
+        /// <para>If the currency has no fixed decimal places, <paramref name="mode"/> is ignored
+        /// and the amount is stored as it.</para>
         /// </summary>
         /// <param name="amount">The decimal representing the amount of money.</param>
         /// <param name="currency">The currency.</param>
@@ -96,21 +96,21 @@ namespace Narvalo.Finance
         /// <summary>
         /// Gets a value indicating whether the amount is rounded to the number of decimal places
         /// specified by the currency.
-        /// <para>If the currency has no fixed decimal places, the instance is actually not
-        /// normalizable; we opt to view it as normalized by default.</para>
+        /// <para>If the currency has no fixed decimal places (<see cref="IsNormalizable"/> is
+        /// false), the amount can not be rounded; we opt to view it as normalized in the sense
+        /// that we already store the best representation of the amount that we can get.</para>
         /// </summary>
-        /// <seealso cref="IsNormalizable"/>
         public bool IsNormalized { get; }
 
         /// <summary>
         /// Gets a value indicating whether the instance is normalizable.
         /// <para>An instance is said to be normalizable if the currency specifies a standard
         /// representation for the number of decimal places allowed in an amount. If it does not,
-        /// we never round the amount; customers of this class can still do it manually using one
+        /// we never round the amount; customers of this class can still do this manually using one
         /// of the rounding methods found in <see cref="MoneyMath"/>.</para>
         /// </summary>
-        /// <remarks>Normally, you don't need to call this property, the library should always do the
-        /// right thing.</remarks>
+        /// <remarks>It is highly unlikely that you will ever need to call this property -
+        /// internally we don't - the library is supposed to do the right thing.</remarks>
         public bool IsNormalizable => Currency.HasFixedDecimalPlaces;
 
         /// <summary>
@@ -145,6 +145,8 @@ namespace Narvalo.Finance
         /// the Decimal range.</exception>
         /// <seealso cref="ToLongMinor()"/>
         /// <seealso cref="ToLongMinor(out long)"/>
+        /// <returns>The amount in minor units. If the instance is not normalizable, it returns
+        /// the amount untouched as if the currency had no minor currency unit.</returns>
         public decimal ToMinor() => Currency.ConvertToMinor(Amount);
 
         /// <summary>
@@ -190,7 +192,8 @@ namespace Narvalo.Finance
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
-        private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Currency.Code);
+        private string DebuggerDisplay
+            => Format.Current("{0} {1:F}; IsNormalized={2})", Currency.Code, Amount, IsNormalizable ? "true" : "false");
     }
 
     // Static factory methods.
@@ -260,7 +263,7 @@ namespace Narvalo.Finance
         public string ToString(IFormatProvider formatProvider)
         {
             Warrant.NotNull<string>();
-            return MoneyFormatter.Format(this, null, NumberFormatInfo.GetInstance(formatProvider));
+            return ToString(null, formatProvider);
         }
 
         public string ToString(string format, IFormatProvider formatProvider)
