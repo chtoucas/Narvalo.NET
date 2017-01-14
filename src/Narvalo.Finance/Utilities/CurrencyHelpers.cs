@@ -18,7 +18,9 @@ namespace Narvalo.Finance.Utilities
         {
             Demand.NotNullOrEmpty(code);
 
-            // Pseudo currencies do not have a minor currency unit.
+            // A pseudo currency is a meta-currency which is not a regional currency.
+            // Among meta-currencies, a regional currency are the only one that do have
+            // a minor currency unit.
             return IsMetaCurrency(code) && !minorUnits.HasValue;
         }
     }

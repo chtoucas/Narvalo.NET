@@ -12,10 +12,8 @@ namespace Narvalo.Finance
     //
     // Despite the name, this type is not restricted to currencies with minor units of size 2.
     // Nevertheless, we do not handle arbitrary subunits; precisely, we handle the following cases:
-    // - we know the minor currency unit:
-    //   > MinorUnits != null && MinorUnits != UnknownMinorUnits
-    // - the currency has no minor currency unit:
-    //   > MinorUnits == null
+    // - the currency admits a minor currency unit: currency.HasMinorCurrency is true.
+    // - the currency does not have a minor currency unit: currency.MinorUnits is null.
     // which simply means that DecimalPlaces != MAX_DECIMAL_PLACES.
     // This is necessary to be able to convert the amount from the subunit to the main unit, and
     // vice versa.
@@ -26,8 +24,7 @@ namespace Narvalo.Finance
     //   when performing a division.
     // Disadvantages:
     // - Only available for currencies specifying a fixed number of decimal places (see above),
-    //   ie it does not support legacy ISO currencies or user-defined currencies with
-    //   MinorUnits = UnknownMinorUnits.
+    //   ie it rules our withdrawn ISO currencies.
     // - The Int64 range is smaller. This has two consequences:
     //   * more opportunities to throw an overflow exception.
     //   * some operations might be lossful:

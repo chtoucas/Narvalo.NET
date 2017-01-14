@@ -8,7 +8,6 @@ namespace Narvalo.Finance
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
-    using System.Threading;
 
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
@@ -29,9 +28,10 @@ namespace Narvalo.Finance
         private const int MAX_DECIMAL_PLACES = 28;
 
         // Be very careful, if you set this constant to something other than MAX_DECIMAL_PLACES:
-        // you MUST adapt the code for DecimalPlaces, Epsilon and Factor. Most implementations
-        // that I have came across, use -1; here we use MAX_DECIMAL_PLACES just to simplify (a
-        // little bit) the code.
+        // you MUST adapt the code for DecimalPlaces, Epsilon and Factor, and review all methods
+        // that accept minor units as input. Most implementations that I have came across, use -1;
+        // here we use MAX_DECIMAL_PLACES, this simplifies the code and also ensures that MinorUnits
+        // is always positive or null.
         public const int UnknownMinorUnits = MAX_DECIMAL_PLACES;
 
         private static readonly object s_UserCodesLock = new Object();
@@ -84,21 +84,23 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Gets the number of minor units.
-        /// <para>Returns 28 if this number is unknown (which is the case for all legacy
-        /// currencies).</para>
+        /// <para>Returns 28 if we can't assert if there is a minor currency unit or not which,
+        /// by the way, is the case for all legacy currencies.</para>
         /// </summary>
-        /// <value>The number of minor units; null if none defined.</value>
+        /// <value>The number of minor units; null if there is no minor currency unit, 28 if the
+        /// number is unknown.</value>
         public short? MinorUnits { get; }
 
         /// <summary>
         /// Gets the number of decimal digits after the decimal separator.
         /// </summary>
         /// <remarks>
-        /// <para>If the currency has no minor units (null), which only happens for meta-currencies
+        /// <para>If the currency has no minor units (null), which is the case for meta-currencies
         /// (but not for all of them), we return 0.</para>
-        /// <para>If the currency has no known minor units, which is the case for all legacy
-        /// currencies, we use 28 (the maximum scale for a decimal) as a replacement, ie an amount
-        /// in this currency is free to take any value in the decimal range.</para>
+        /// <para>If we don't known whether the currency has a minor currency unit or not, which is
+        /// the case for all legacy currencies, we use 28 (the maximum scale for a decimal) as a
+        /// replacement, ie an amount in this currency is free to take any value in the decimal
+        /// range.</para>
         /// </remarks>
         // To simplify things, for legacy currencies, we directly set MinorUnits to MAX_DECIMAL_PLACES,
         // but if, in the future, we change that we should also replace the code below by:
@@ -388,7 +390,7 @@ namespace Narvalo.Finance
                 // copy should be pretty fast and the operation should be rather inexpensive
                 // from a memory perspective.
                 // NB: This manip has nothing to do with thread-safety, it is only done for
-                // correctness. If Add() fails, the method behaves as advertised; it does not
+                // correctness. If Add() fails, the method behaves as advertised - it does not
                 // change the registry.
                 var tmpCopy = s_UserCodes.ToDictionary(_ => _.Key, _ => _.Value);
                 foreach (var pair in currencies)
