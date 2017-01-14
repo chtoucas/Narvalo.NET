@@ -427,10 +427,7 @@ namespace Narvalo.Finance
         /// <param name="major">The amount in major units to convert.</param>
         internal decimal ConvertToMinor(decimal major) => Factor * major;
 
-        /// <summary>
-        /// Returns a string containing the code for the currency.
-        /// </summary>
-        /// <returns>A string containing the code for the currency.</returns>
+        /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
             Warrant.NotNull<string>();

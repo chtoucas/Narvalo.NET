@@ -3,39 +3,67 @@
 namespace Narvalo.Finance.Globalization
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
     using Narvalo.Finance.Generic;
     using Narvalo.Finance.Properties;
 
-    // Formatting currencies is difficult. This class works consistently across .NET cultures
-    // at the sacrifice of omitting the currency symbol; it still uses the culture's rules to
-    // format the amount.
-    public static partial class MoneyFormatter
+    // Default formatter for all money-like types.
+    public static class MoneyFormatter
     {
         private const string DEFAULT_FORMAT = "G";
 
-        public static string Format<TCurrency>(Money<TCurrency> money, string format, NumberFormatInfo nfi)
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "1#", Justification = "[Intentionally] Standard .NET name with Format().")]
+        public static string Format<TCurrency>(Money<TCurrency> money, string format, NumberFormatInfo numberFormat)
             where TCurrency : CurrencyUnit<TCurrency>
         {
             Warrant.NotNull<string>();
-            return Format(money.Amount, money.Unit.Code, format, nfi);
+
+            // TODO: To be updated once Money<> to handle normalization. See below.
+            var nfi = (NumberFormatInfo)(numberFormat ?? NumberFormatInfo.CurrentInfo).Clone();
+            nfi.NumberDecimalDigits = money.Unit.DecimalPlaces;
+            string amount = money.Amount.ToString("N", nfi);
+
+            return Format(amount, money.Unit.Code, format);
         }
 
-        public static string Format(Money money, string format, NumberFormatInfo nfi)
-        {
-            Warrant.NotNull<string>();
-            return Format(money.Amount, money.Currency.Code, format, nfi);
-        }
-
-        private static string Format(decimal amount, string currencyCode, string format, NumberFormatInfo nfi)
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "1#", Justification = "[Intentionally] Standard .NET name with Format().")]
+        public static string Format(Money money, string format, NumberFormatInfo numberFormat)
         {
             Warrant.NotNull<string>();
 
-            if (nfi == null)
+            string amount;
+
+            if (money.IsNormalized && money.IsNormalizable)
             {
-                nfi = NumberFormatInfo.CurrentInfo;
+                // If the instance is normalizable and normalized, we override the number
+                // of decimal places.
+                var nfi = (NumberFormatInfo)(numberFormat ?? NumberFormatInfo.CurrentInfo).Clone();
+                nfi.NumberDecimalDigits = money.Currency.DecimalPlaces;
+                amount = money.Amount.ToString("N", nfi);
             }
+            else
+            {
+                amount = money.Amount.ToString("N", numberFormat);
+            }
+
+            return Format(amount, money.Currency.Code, format);
+        }
+
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "1#", Justification = "[Intentionally] Standard .NET name with Format().")]
+        public static string Format(Moneypenny penny, string format, NumberFormatInfo numberFormat)
+        {
+            Warrant.NotNull<string>();
+
+            string amount = penny.Amount.ToString("N", numberFormat ?? NumberFormatInfo.CurrentInfo);
+
+            return Format(amount, penny.PennyOrCurrencyCode, format);
+        }
+
+        private static string Format(string amount, string currencyCode, string format)
+        {
+            Warrant.NotNull<string>();
 
             if (format == null || format.Length == 0)
             {
@@ -47,20 +75,17 @@ namespace Narvalo.Finance.Globalization
                 case "N":
                 case "n":
                     // Numeric. Does not include any information about the currency.
-                    return amount.ToString("C", nfi.GetNoSymbolNoSpaceClone());
+                    return amount;
                 case "L":
                 case "l":
                     // Left (Currency code placed on the).
-                    return currencyCode + "\u00A0" + amount.ToString("C", nfi.GetNoSymbolNoSpaceClone());
+                    return currencyCode + "\u00A0" + amount;
                 case "R":
                 case "r":
-                    // Right (Currency code placed on the).
-                    return amount.ToString("C", nfi.GetNoSymbolNoSpaceClone()) + "\u00A0" + currencyCode;
                 case "G":
                 case "g":
-                    // General (default). It replaces the currency symbol by the currency code
-                    // and ensures that there is a space between the amount and the currency code.
-                    return amount.ToString("C", nfi.GetCurrencyCodeAndSpaceClone(currencyCode));
+                    // General (default) or Right (Currency code placed on the).
+                    return amount + "\u00A0" + currencyCode;
                 default:
                     throw new FormatException(
                         Narvalo.Format.Current(Strings.Money_InvalidFormatSpecification));

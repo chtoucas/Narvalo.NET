@@ -57,10 +57,7 @@ namespace Narvalo.Finance
 
         public decimal Factor => 1 / Epsilon;
 
-        /// <summary>
-        /// Returns a string containing the code for the fractional currency.
-        /// </summary>
-        /// <returns>A string containing the code for the fractional currency.</returns>
+        /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
         {
             Warrant.NotNull<string>();

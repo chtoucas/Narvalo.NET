@@ -5,11 +5,11 @@ namespace Narvalo.Finance.Globalization
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Threading;
 
     internal static class NumberFormatInfoExtensions
     {
-        // The volatile keyword is only for correctness.
-        private static volatile Dictionary<int, int> s_SpaceReversedNegativePatterns;
+        private static Dictionary<int, int> s_SpaceReversedNegativePatterns;
 
         private static Dictionary<int, int> SpaceReversedNegativePatterns
         {
@@ -17,7 +17,7 @@ namespace Narvalo.Finance.Globalization
             {
                 if (s_SpaceReversedNegativePatterns == null)
                 {
-                    var dic = new Dictionary<int, int>(16)
+                    var dict = new Dictionary<int, int>(16)
                     {
                         // Without space -> with space.
                         { 0, 14 },   // ($n)
@@ -39,22 +39,11 @@ namespace Narvalo.Finance.Globalization
                         { 15, 4 },   //(n $)    => (n$) (4)
                     };
 
-                    s_SpaceReversedNegativePatterns = dic;
+                    Interlocked.CompareExchange(ref s_SpaceReversedNegativePatterns, dict, null);
                 }
 
                 return s_SpaceReversedNegativePatterns;
             }
-        }
-
-        private static bool CurrencyPositivePatternContainsSpace(this NumberFormatInfo @this)
-        {
-            Demand.NotNull(@this);
-            return @this.CurrencyPositivePattern >= 2;
-        }
-        private static bool CurrencyNegativePatternContainsSpace(this NumberFormatInfo @this)
-        {
-            Demand.NotNull(@this);
-            return @this.CurrencyNegativePattern >= 8;
         }
 
         public static NumberFormatInfo GetCurrencyCodeAndSpaceClone(
@@ -82,8 +71,7 @@ namespace Narvalo.Finance.Globalization
             return nf;
         }
 
-        public static NumberFormatInfo GetNoSymbolNoSpaceClone(
-            this NumberFormatInfo @this)
+        public static NumberFormatInfo GetNoSymbolNoSpaceClone(this NumberFormatInfo @this)
         {
             Demand.NotNull(@this);
 
@@ -101,6 +89,18 @@ namespace Narvalo.Finance.Globalization
             }
 
             return nf;
+        }
+
+        private static bool CurrencyPositivePatternContainsSpace(this NumberFormatInfo @this)
+        {
+            Demand.NotNull(@this);
+            return @this.CurrencyPositivePattern >= 2;
+        }
+
+        private static bool CurrencyNegativePatternContainsSpace(this NumberFormatInfo @this)
+        {
+            Demand.NotNull(@this);
+            return @this.CurrencyNegativePattern >= 8;
         }
     }
 }
