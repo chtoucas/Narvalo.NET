@@ -11,16 +11,23 @@ namespace Narvalo.Finance
     // A lightweight money type where the amount is stored in minor units.
     //
     // Despite the name, this type is not restricted to currencies with minor units of size 2.
-    // Nevertheless, we assume that a penny represents one minor unit exactly (as found in
-    // ISO 4217); we do not handle arbitrary subunits.
+    // Nevertheless, we do not handle arbitrary subunits; precisely, we handle the following cases:
+    // - we know the minor currency unit:
+    //   > MinorUnits != null && MinorUnits != UnknownMinorUnits
+    // - the currency has no minor currency unit:
+    //   > MinorUnits == null
+    // which simply means that DecimalPlaces != MAX_DECIMAL_PLACES.
+    // This is necessary to be able to convert the amount from the subunit to the main unit, and
+    // vice versa.
     //
     // Advantages:
     // - Using an Int64 as the backing type for the amount allows for fast arithmetic operations.
-    // - Rounding is no longer needed; the amount is always normalized.
-    //   See below for caveats when performing a division.
+    // - Rounding is no longer needed; the amount is always normalized. See below for caveats
+    //   when performing a division.
     // Disadvantages:
-    // - Only available for currencies specifying a fixed number of decimal places, ie it does not
-    //   support legacy ISO currencies.
+    // - Only available for currencies specifying a fixed number of decimal places (see above),
+    //   ie it does not support legacy ISO currencies or user-defined currencies with
+    //   MinorUnits = UnknownMinorUnits.
     // - The Int64 range is smaller. This has two consequences:
     //   * more opportunities to throw an overflow exception.
     //   * some operations might be lossful:

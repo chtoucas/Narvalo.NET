@@ -143,12 +143,12 @@ namespace Narvalo.Finance
         /// <para>Returns 1m if the currency has no minor currency unit.</para>
         /// </summary>
         // If the currency has no fixed decimal places, DecimalPlaces is equal to MAX_DECIMAL_PLACES
-        // and DecimalPlaces % MAX_DECIMAL_PLACES = 1 which correctly gives 1m for Epsilon.
+        // which correctly gives 1m for Epsilon.
         public decimal Epsilon => Epsilons[DecimalPlaces % MAX_DECIMAL_PLACES];
 
         /// <remarks>Returns 1 if the currency has no minor currency unit.</remarks>
         // If the currency has no fixed decimal places, DecimalPlaces is equal to MAX_DECIMAL_PLACES
-        // and DecimalPlaces % MAX_DECIMAL_PLACES = 1 which correctly gives 1 for Factor.
+        // which correctly gives 1 for Factor.
         private uint Factor => PowersOfTen[DecimalPlaces % MAX_DECIMAL_PLACES];
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
@@ -161,7 +161,8 @@ namespace Narvalo.Finance
         /// This is actually false, but we do not have enough informations at our disposal to give
         /// a proper answer. It is not only because ISO 4217 does not give us the data, but also
         /// because a currency could have changed over time (devaluation, decimalisation...)
-        /// while keeping the same main unit (which most certainly didn't even exist at the time).</remarks>
+        /// while keeping the same main unit (which most certainly didn't even exist at the time).
+        /// </remarks>
         public bool HasMinorCurrency
             => MinorUnits.HasValue
             && MinorUnits.Value != 0
@@ -292,7 +293,6 @@ namespace Narvalo.Finance
         /// Register a currency not part of ISO 4217.
         /// <para>It can also be useful when the library is not up-to-date with the ISO 4217 list
         /// of active currencies.</para>
-        /// <para>This method is thread-safe.</para>
         /// </summary>
         /// <remarks>
         /// <para>All currencies registered via this method have the <see cref="CurrencyTypes.UserDefined"/>
@@ -300,6 +300,7 @@ namespace Narvalo.Finance
         /// consequence, you can not register a withdrawn currency.</para>
         /// <para>If you have more than one currency to register, you should use
         /// <see cref="RegisterCurrencies(Dictionary{string, short?})"/> instead.</para>
+        /// <para>This method is thread-safe.</para>
         /// </remarks>
         /// <param name="code">The three letters code.</param>
         /// <param name="minorUnits">The number of minor units; null if the currency does not have
@@ -341,11 +342,13 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Register a bunch of currencies, at once.
+        /// </summary>
+        /// <remarks>
         /// <para>For explanations on when and how to use this method, please see
         /// <see cref="RegisterCurrency(string, short?)"/>.</para>
         /// <para>This method is thread-safe and ensures that the registry is not modified
         /// if anything goes wrong.</para>
-        /// </summary>
+        /// </remarks>
         /// <param name="currencies">The <see cref="Dictionary{TKey, TValue}"/> that contains
         /// the codes and minor units for the new currencies.</param>
         /// <returns>true if ALL currencies has been added; otherwise, false.</returns>
@@ -394,7 +397,7 @@ namespace Narvalo.Finance
                     tmpCopy.Add(pair.Key, pair.Value);
                 }
 
-                Swap(ref s_UserCodes, ref tmpCopy);
+                SwapReferences(ref s_UserCodes, ref tmpCopy);
             }
 
             return true;
@@ -434,7 +437,7 @@ namespace Narvalo.Finance
             return Code;
         }
 
-        private static void Swap<T>(ref T lhs, ref T rhs)
+        private static void SwapReferences<T>(ref T lhs, ref T rhs)
         {
             T temp = lhs;
             lhs = rhs;
