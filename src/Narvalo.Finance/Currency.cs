@@ -18,8 +18,7 @@ namespace Narvalo.Finance
     /// <remarks>
     /// <para>Recognized currencies are defined in ISO 4217.</para>
     /// <para>Only decimal currencies are supported.</para>
-    /// <para>There's never more than one <see cref="Currency"/> instance for any given currency.
-    /// You can not directly construct a currency. You must instead use one of the
+    /// <para>You can not directly construct a currency. You must instead use one of the
     /// static factories, eg <see cref="Currency.Of(string)"/>.</para>
     /// <para>This class does not offer extended information about the currency.</para>
     /// </remarks>
