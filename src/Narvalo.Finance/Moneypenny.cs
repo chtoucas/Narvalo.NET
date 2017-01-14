@@ -57,6 +57,21 @@ namespace Narvalo.Finance
             Currency = currency;
         }
 
+        public Moneypenny(Money money)
+        {
+            // This is not strictly necessary since the ctor would throw if it were the case:
+            // money.IsNormalizable == money.Currency.HasFixedDecimalPlaces.
+            Require.True(money.IsNormalizable, nameof(money));
+
+            long? amount = money.ToLongMinor();
+            // amount is null if money is not normalized or if the amount is too large to fit into
+            // the Int64 range.
+            if (!amount.HasValue) { throw new NotSupportedException("XXX"); }
+
+            Amount = amount.Value;
+            Currency = money.Currency;
+        }
+
         public long Amount { get; }
 
         public Currency Currency { get; }
@@ -200,25 +215,11 @@ namespace Narvalo.Finance
     // Conversions.
     public partial struct Moneypenny
     {
-        public static Moneypenny FromMoney(Money money)
-        {
-            // This is not strictly necessary since the ctor would throw if it were the case:
-            // money.IsNormalizable == money.Currency.HasFixedDecimalPlaces.
-            Require.True(money.IsNormalizable, nameof(money));
-
-            long? amount = money.ToLongMinor();
-            // amount is null if money is not normalized or if the amount is too large to fit into
-            // the Int64 range.
-            if (!amount.HasValue) { throw new NotSupportedException("XXX"); }
-
-            return new Moneypenny(amount.Value, money.Currency);
-        }
-
         public Money ToMoney() => Money.OfMinor(Amount, Currency);
 
         public static explicit operator Moneypenny(long value) => new Moneypenny(value, Currency.None);
 
-        public static explicit operator Moneypenny(Money value) => FromMoney(value);
+        public static explicit operator Moneypenny(Money value) => new Moneypenny(value);
 
         public static implicit operator long(Moneypenny value) => value.Amount;
 
