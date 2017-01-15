@@ -69,7 +69,7 @@ namespace Narvalo.Finance
         /// <param name="mode">The rounding mode.</param>
         public Money(decimal amount, Currency currency, MidpointRounding mode)
         {
-            Amount = currency.HasFixedDecimalPlaces && currency.DecimalPlaces != 0
+            Amount = currency.HasFixedDecimalPlaces
                 ? Math.Round(amount, currency.DecimalPlaces, mode)
                 : amount;
             Currency = currency;
@@ -109,8 +109,8 @@ namespace Narvalo.Finance
         /// we never round the amount; customers of this class can still do this manually using one
         /// of the rounding methods found in <see cref="MoneyMath"/>.</para>
         /// </summary>
-        /// <remarks>It is highly unlikely that you will ever need to call this property -
-        /// internally we don't - the library is supposed to do the right thing.</remarks>
+        /// <remarks>It is highly unlikely that you will ever need to call this property,
+        /// the library is supposed to do the right thing.</remarks>
         public bool IsNormalizable => Currency.HasFixedDecimalPlaces;
 
         /// <summary>
