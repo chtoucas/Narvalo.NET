@@ -11,11 +11,10 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Rounding;
     using Narvalo.Finance.Utilities;
 
     // A lightweight money type.
-    // Moneypenny is mostly self-contained (see also PennyCalculator).
+    // Moneypenny is mostly self-contained (see also PennyCalculator && PennyFactory).
     //
     // Despite its name, this type is not restricted to currencies with minor units of size 2
     // but does not handle arbitrary subunits.
@@ -34,11 +33,10 @@ namespace Narvalo.Finance
     //   ie it rules out all withdrawn ISO currencies.
     // - The Int64 range is smaller. This has two consequences:
     //   * more opportunities to throw an overflow exception.
-    //   * some operations might be lossful:
-    //     - OfMajor() and OfMinor() but they make it explicit by requiring a rounding mode.
-    //     - Divide(long) is actually an integer division, it then rounds toward zero if needed;
-    //       this is necessary to keep the operation closed. If you do not want this, you should
-    //       use Divide(decimal) or DivRem() instead.
+    //   * some operations might be lossful.
+    //     Divide(long) is actually an integer division, it then rounds toward zero if needed;
+    //     this is necessary to keep the operation closed. If you do not want this, you should
+    //     use Divide(decimal) or DivRem() instead.
     // - Multiply(long), Divide(long) and Remainder(long) are closed but obviously not very useful.
     //   We provide decimal overloads but, for that, we no longer return a Moneypenny object.
     //
@@ -60,21 +58,6 @@ namespace Narvalo.Finance
             Currency = currency;
         }
 
-        public Moneypenny(Money money)
-        {
-            // This is not strictly necessary since the ctor would throw if it were the case:
-            // money.IsNormalizable == money.Currency.HasFixedDecimalPlaces.
-            Require.True(money.IsNormalizable, nameof(money));
-            Require.True(money.IsNormalized, nameof(money));
-
-            long? amount = money.ToLongMinor();
-            // amount is null if it is too large to fit into the Int64 range.
-            if (!amount.HasValue) { throw new NotSupportedException("XXX"); }
-
-            Amount = amount.Value;
-            Currency = money.Currency;
-        }
-
         public long Amount { get; }
 
         public Currency Currency { get; }
@@ -90,60 +73,16 @@ namespace Narvalo.Finance
 
         public decimal ToMajor() => Currency.ConvertToMajor(Amount);
 
+        public static Moneypenny Zero(Currency currency) => new Moneypenny(0L, currency);
+
+        public static Moneypenny One(Currency currency) => new Moneypenny(1L, currency);
+
         private void ThrowIfCurrencyMismatch(Moneypenny penny, string parameterName)
             => Enforce.True(Currency == penny.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay => Format.Current("{0} {1:N0}", Currency.Code, Amount);
-    }
-
-    // Static factory methods.
-    public partial struct Moneypenny
-    {
-        public static Moneypenny Zero(Currency currency) => new Moneypenny(0L, currency);
-
-        public static Moneypenny One(Currency currency) => new Moneypenny(1L, currency);
-
-        public static Moneypenny? OfMajor(decimal major, Currency currency, MidpointRounding mode)
-            => OfMinor(currency.ConvertToMinor(major), currency, mode);
-
-        public static Moneypenny? OfMinor(decimal minor, Currency currency, MidpointRounding mode)
-        {
-            decimal amount = Math.Round(minor, mode);
-            if (amount < Int64.MinValue || amount > Int64.MaxValue) { return null; }
-            return new Moneypenny(Convert.ToInt64(amount), currency);
-        }
-
-        public static Moneypenny? OfMajor(decimal major, Currency currency, IRoundingAdjuster adjuster)
-            => OfMinor(currency.ConvertToMinor(major), currency, adjuster);
-
-        public static Moneypenny? OfMinor(decimal minor, Currency currency, IRoundingAdjuster adjuster)
-        {
-            decimal amount = adjuster.Round(minor);
-            if (amount < Int64.MinValue || amount > Int64.MaxValue) { return null; }
-            return new Moneypenny(Convert.ToInt64(amount), currency);
-        }
-
-        public static Moneypenny? TryCreate(Money money, MidpointRounding mode)
-        {
-            if (!money.IsNormalizable) { return null; }
-
-            long? minor = money.Normalize(mode).ToLongMinor();
-            if (!minor.HasValue) { return null; }
-
-            return new Moneypenny(minor.Value, money.Currency);
-        }
-
-        public static Moneypenny? TryCreate(Money money, IRoundingAdjuster adjuster)
-        {
-            if (!money.IsNormalizable) { return null; }
-
-            long? minor = money.Normalize(adjuster).ToLongMinor();
-            if (!minor.HasValue) { return null; }
-
-            return new Moneypenny(minor.Value, money.Currency);
-        }
     }
 
     // Implements the IFormattable interface.
@@ -246,8 +185,6 @@ namespace Narvalo.Finance
         public Money ToMoney() => Money.OfMinor(Amount, Currency);
 
         public static explicit operator Moneypenny(long value) => new Moneypenny(value, Currency.None);
-
-        public static explicit operator Moneypenny(Money value) => new Moneypenny(value);
 
         public static implicit operator long(Moneypenny value) => value.Amount;
 
