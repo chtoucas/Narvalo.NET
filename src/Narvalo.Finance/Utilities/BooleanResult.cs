@@ -73,7 +73,7 @@ namespace Narvalo.Finance.Utilities
             {
                 Warrant.NotNull<string>();
 
-                return Format.Invariant("False({0})", _message);
+                return Format.Current("False({0})", _message);
             }
 
             /// <summary>

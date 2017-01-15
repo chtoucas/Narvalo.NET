@@ -109,7 +109,7 @@ namespace Narvalo.Finance.Utilities
             {
                 Warrant.NotNull<string>();
 
-                return Format.Invariant("Success({0})", Value);
+                return Format.Current("Success({0})", Value);
             }
         }
 
@@ -160,7 +160,7 @@ namespace Narvalo.Finance.Utilities
             {
                 Warrant.NotNull<string>();
 
-                return Format.Invariant("Failure({0})", ErrorMessage);
+                return Format.Current("Failure({0})", ErrorMessage);
             }
         }
     }

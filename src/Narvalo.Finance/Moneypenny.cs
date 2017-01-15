@@ -92,7 +92,7 @@ namespace Narvalo.Finance
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
-        private string DebuggerDisplay => Format.Current("{0} {1:N}", Currency.Code, Amount);
+        private string DebuggerDisplay => Format.Current("{0} {1:N0}", Currency.Code, Amount);
     }
 
     // Static factory methods.
@@ -124,13 +124,13 @@ namespace Narvalo.Finance
         public override string ToString()
         {
             Warrant.NotNull<string>();
-            return MoneyFormatter.Format(this, null, NumberFormatInfo.CurrentInfo);
+            return MoneyFormatter.FormatPenny(this, null, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
-            return MoneyFormatter.Format(this, format, NumberFormatInfo.CurrentInfo);
+            return MoneyFormatter.FormatPenny(this, format, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(IFormatProvider formatProvider)
@@ -152,7 +152,7 @@ namespace Narvalo.Finance
                 }
             }
 
-            return MoneyFormatter.Format(this, format, NumberFormatInfo.GetInstance(formatProvider));
+            return MoneyFormatter.FormatPenny(this, format, NumberFormatInfo.GetInstance(formatProvider));
         }
     }
 

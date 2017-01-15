@@ -212,24 +212,20 @@ namespace Narvalo.Finance
         {
             Warrant.NotNull<string>();
 
-            if (format == null || format.Length == 0)
-            {
-                format = DefaultFormat;
-            }
+            if (format == null || format.Length == 0) { format = DefaultFormat; }
+            if (format.Length != 1) { throw new FormatException("XXX"); }
 
-            switch (format)
+            // Take the first char and uppercase it.
+            switch (format[0] & 0xDF)
             {
-                case "C":
-                case "c":
+                case 'C':
                     // Compact.
                     return _value;
-                case "H":
-                case "h":
+                case 'H':
                     // Human: same result as "G" but prefixed with "IBAN ".
                     // This format is NOT suitable for electronic transmission.
                     return HumanHeader + FormatGeneral(_value);
-                case "G":
-                case "g":
+                case 'G':
                     // General (default): insert a whitespace char every 4 chars.
                     // This format is NOT suitable for electronic transmission.
                     return FormatGeneral(_value);

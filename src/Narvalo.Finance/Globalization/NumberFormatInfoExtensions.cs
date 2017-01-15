@@ -46,49 +46,45 @@ namespace Narvalo.Finance.Globalization
             }
         }
 
-        public static NumberFormatInfo GetCurrencyCodeAndSpaceClone(
-            this NumberFormatInfo @this,
-            string currencyCode)
+        /// <summary>
+        /// Clone <paramref name="this"/> and cast the result to a <see cref="NumberFormatInfo"/>.
+        /// </summary>
+        public static NumberFormatInfo Copy(this NumberFormatInfo @this)
         {
             Demand.NotNull(@this);
-            Demand.NotNull(currencyCode);
+            return (NumberFormatInfo)@this.Clone();
+        }
 
-            var nf = (NumberFormatInfo)@this.Clone();
-            nf.CurrencySymbol = currencyCode;
+        public static void KeepOrAddCurrencySpacing(this NumberFormatInfo @this)
+        {
+            Demand.NotNull(@this);
 
             // If there is no space between the amount and the currency symbol, add one.
-            if (!nf.CurrencyPositivePatternContainsSpace())
+            if (!@this.CurrencyPositivePatternContainsSpace())
             {
                 // 0 "$n" is mapped to 2 "$ n".
                 // 1 "n$" is mapped to 3 "n $".
-                nf.CurrencyPositivePattern += 2;
+                @this.CurrencyPositivePattern += 2;
             }
-            if (!nf.CurrencyNegativePatternContainsSpace())
+            if (!@this.CurrencyNegativePatternContainsSpace())
             {
-                nf.CurrencyNegativePattern = SpaceReversedNegativePatterns[nf.CurrencyNegativePattern];
+                @this.CurrencyNegativePattern = SpaceReversedNegativePatterns[@this.CurrencyNegativePattern];
             }
-
-            return nf;
         }
 
-        public static NumberFormatInfo GetNoSymbolNoSpaceClone(this NumberFormatInfo @this)
+        public static void RemoveCurrencySpacing(this NumberFormatInfo @this)
         {
             Demand.NotNull(@this);
 
-            var nf = (NumberFormatInfo)@this.Clone();
-            nf.CurrencySymbol = String.Empty;
-
             // If there is a space between the amount and the currency symbol, remove it.
-            if (nf.CurrencyPositivePatternContainsSpace())
+            if (@this.CurrencyPositivePatternContainsSpace())
             {
-                nf.CurrencyPositivePattern -= 2;
+                @this.CurrencyPositivePattern -= 2;
             }
-            if (nf.CurrencyNegativePatternContainsSpace())
+            if (@this.CurrencyNegativePatternContainsSpace())
             {
-                nf.CurrencyNegativePattern = SpaceReversedNegativePatterns[nf.CurrencyNegativePattern];
+                @this.CurrencyNegativePattern = SpaceReversedNegativePatterns[@this.CurrencyNegativePattern];
             }
-
-            return nf;
         }
 
         private static bool CurrencyPositivePatternContainsSpace(this NumberFormatInfo @this)

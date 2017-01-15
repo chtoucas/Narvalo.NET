@@ -44,7 +44,7 @@ namespace Narvalo.Finance.Generic
         }
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
-        private string DebuggerDisplay => Format.Invariant("{0:F2} ({1})", Amount, Unit.Code);
+        private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Unit.Code);
 
         public static explicit operator Money<TCurrency>(Money value)
         {
@@ -67,13 +67,13 @@ namespace Narvalo.Finance.Generic
         public override string ToString()
         {
             Warrant.NotNull<string>();
-            return MoneyFormatter.Format(this, null, NumberFormatInfo.CurrentInfo);
+            return MoneyFormatter.FormatMoney(this, null, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(string format)
         {
             Warrant.NotNull<string>();
-            return MoneyFormatter.Format(this, format, NumberFormatInfo.CurrentInfo);
+            return MoneyFormatter.FormatMoney(this, format, NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(IFormatProvider formatProvider)
@@ -95,7 +95,7 @@ namespace Narvalo.Finance.Generic
                 }
             }
 
-            return MoneyFormatter.Format(this, null, NumberFormatInfo.GetInstance(formatProvider));
+            return MoneyFormatter.FormatMoney(this, null, NumberFormatInfo.GetInstance(formatProvider));
         }
     }
 
