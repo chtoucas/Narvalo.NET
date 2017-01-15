@@ -74,7 +74,7 @@ namespace Narvalo.Finance
 
         public static Moneypenny Create(Money money, MidpointRounding mode)
         {
-            Expect.True(money.IsNormalizable);
+            Expect.True(money.IsRoundable);
 
             var penny = TryCreate(money, mode);
             if (!penny.HasValue) { throw new NotSupportedException("XXX"); }
@@ -84,7 +84,7 @@ namespace Narvalo.Finance
 
         public static Moneypenny Create(Money money, IRoundingAdjuster adjuster)
         {
-            Expect.True(money.IsNormalizable);
+            Expect.True(money.IsRoundable);
             Expect.NotNull(adjuster);
 
             var penny = TryCreate(money, adjuster);
@@ -95,7 +95,7 @@ namespace Narvalo.Finance
 
         public static Moneypenny? TryCreate(Money money, MidpointRounding mode)
         {
-            Require.True(money.IsNormalizable, nameof(money));
+            Require.True(money.IsRoundable, nameof(money));
 
             long? minor = money.Normalize(mode).ToLongMinor();
             if (!minor.HasValue) { return null; }
@@ -105,7 +105,7 @@ namespace Narvalo.Finance
 
         public static Moneypenny? TryCreate(Money money, IRoundingAdjuster adjuster)
         {
-            Require.True(money.IsNormalizable, nameof(money));
+            Require.True(money.IsRoundable, nameof(money));
             Expect.NotNull(adjuster);
 
             long? minor = money.Normalize(adjuster).ToLongMinor();

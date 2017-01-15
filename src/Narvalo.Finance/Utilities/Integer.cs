@@ -29,10 +29,10 @@ namespace Narvalo.Finance.Utilities
             return q;
         }
 
-        // Distribute an integer (value) across n copies of value / n:
+        // Divide value into n copies of value / n:
         //   value = nq + r = (n - r) q + r (q + 1) where q = value / n.
         // First returns the high value r times, then the low value n - r times.
-        public static IEnumerable<int> DistributeEvenly(int value, int count)
+        public static IEnumerable<int> DivideEvenly(int value, int count)
         {
             Demand.Range(count > 1);
 
@@ -46,7 +46,7 @@ namespace Narvalo.Finance.Utilities
             }
         }
 
-        public static IEnumerable<long> DistributeEvenly(long value, int count)
+        public static IEnumerable<long> DivideEvenly(long value, int count)
         {
             Demand.Range(count > 1);
 

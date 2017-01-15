@@ -95,10 +95,9 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Gets a value indicating whether the amount is rounded to the number of decimal places
-        /// specified by the currency.
-        /// <para>If the currency has no fixed decimal places (<see cref="IsNormalizable"/> is
-        /// false), the amount can not be rounded; we opt to view it as normalized in the sense
-        /// that we already store the best representation of the amount that we can get.</para>
+        /// specified by the currency. Always returns true if <see cref="IsRoundable"/> is false.
+        /// <para>In plain english, returns true if we already store the best representation of
+        /// the amount that we can get.</para>
         /// </summary>
         public bool IsNormalized { get; }
 
@@ -111,7 +110,13 @@ namespace Narvalo.Finance
         /// </summary>
         /// <remarks>It is highly unlikely that you will ever need to call this property,
         /// the library is supposed to do the right thing.</remarks>
-        public bool IsNormalizable => Currency.HasFixedDecimalPlaces;
+        public bool IsRoundable => Currency.HasFixedDecimalPlaces;
+
+        /// <summary>
+        /// Gets a value indicating whether the amount is rounded.
+        /// Always returns false if the instance is not roundable.
+        /// </summary>
+        public bool IsRounded => IsRoundable && IsNormalized;
 
         /// <summary>
         /// Gets a value indicating whether the amount is zero.
@@ -193,7 +198,7 @@ namespace Narvalo.Finance
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "[Intentionally] Debugger-only code.")]
         private string DebuggerDisplay
-            => Format.Current("{0} {1:F}; IsNormalized={2})", Currency.Code, Amount, IsNormalizable ? "true" : "false");
+            => Format.Current("{0} {1:F}; IsNormalized={2})", Currency.Code, Amount, IsRoundable ? "true" : "false");
     }
 
     // Static factory methods.

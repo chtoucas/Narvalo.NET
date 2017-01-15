@@ -236,7 +236,7 @@ namespace Narvalo.Finance
 
             var cy = Currency;
 
-            return from _ in Integer.DistributeEvenly(Amount, count) select new Moneypenny(_, cy);
+            return from _ in Integer.DivideEvenly(Amount, count) select new Moneypenny(_, cy);
         }
 
         //public IEnumerable<Moneypenny> Allocate(Moneypenny money, RatioArray ratios)

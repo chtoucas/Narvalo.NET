@@ -34,7 +34,7 @@ namespace Narvalo.Finance.Globalization
             Warrant.NotNull<string>();
 
             NumberFormatInfo nfi;
-            if (money.IsNormalized && money.IsNormalizable)
+            if (money.IsNormalized && money.IsRoundable)
             {
                 nfi = (numberFormat ?? NumberFormatInfo.CurrentInfo).Copy();
                 nfi.NumberDecimalDigits = money.Currency.DecimalPlaces;
