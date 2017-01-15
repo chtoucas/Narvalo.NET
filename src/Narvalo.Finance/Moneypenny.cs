@@ -14,6 +14,7 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Utilities;
 
     // A lightweight money type.
+    // Moneypenny is mostly self-contained (see also PennyCalculator).
     //
     // Despite its name, this type is not restricted to currencies with minor units of size 2
     // but does not handle arbitrary subunits.
@@ -39,8 +40,7 @@ namespace Narvalo.Finance
     //       use Divide(decimal) or DivRem() instead.
     // - Multiply(long), Divide(long) and Remainder(long) are closed but obviously not very useful.
     //   We provide decimal overloads but, for that, we no longer return a Moneypenny object.
-    // - We do not provide any support for anything besides the basic arithmetic operations,
-    //   but you can still convert a Moneypenny object to a Money object.
+    //
     // Remark: This class and FastMoney from JavaMoney are similar in purpose (fast operations)
     // but different in the way they deal with amounts. Here, we only consider strict amounts
     // (no rounding is ever needed, at the expense of what you can do with it), a restriction
@@ -228,7 +228,7 @@ namespace Narvalo.Finance
         public static explicit operator Money(Moneypenny value) => value.ToMoney();
     }
 
-    // Math operators.
+    // Math methods.
     public partial struct Moneypenny
     {
         public int Sign => Amount < 0L ? -1 : (Amount > 0L ? 1 : 0);
