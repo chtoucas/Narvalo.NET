@@ -11,6 +11,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Rounding;
     using Narvalo.Finance.Utilities;
 
     // A lightweight money type.
@@ -34,7 +35,7 @@ namespace Narvalo.Finance
     // - The Int64 range is smaller. This has two consequences:
     //   * more opportunities to throw an overflow exception.
     //   * some operations might be lossful:
-    //     - OfMajor() and OfMinor() cast a decimal to a long which is a lossful operation (disabled).
+    //     - OfMajor() and OfMinor() but they make it explicit by requiring a rounding mode.
     //     - Divide(long) is actually an integer division, it then rounds toward zero if needed;
     //       this is necessary to keep the operation closed. If you do not want this, you should
     //       use Divide(decimal) or DivRem() instead.
@@ -64,10 +65,10 @@ namespace Narvalo.Finance
             // This is not strictly necessary since the ctor would throw if it were the case:
             // money.IsNormalizable == money.Currency.HasFixedDecimalPlaces.
             Require.True(money.IsNormalizable, nameof(money));
+            Require.True(money.IsNormalized, nameof(money));
 
             long? amount = money.ToLongMinor();
-            // amount is null if money is not normalized or if the amount is too large to fit into
-            // the Int64 range.
+            // amount is null if it is too large to fit into the Int64 range.
             if (!amount.HasValue) { throw new NotSupportedException("XXX"); }
 
             Amount = amount.Value;
@@ -104,20 +105,45 @@ namespace Narvalo.Finance
 
         public static Moneypenny One(Currency currency) => new Moneypenny(1L, currency);
 
-        //// DANGEROUS ZONE when major is not normalized.
-        //public static Moneypenny? OfMajor(decimal major, Currency currency)
-        //{
-        //    decimal minor = currency.ConvertToMinor(major);
-        //    if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
-        //    return new Moneypenny(Convert.ToInt64(minor), currency);
-        //}
+        public static Moneypenny? OfMajor(decimal major, Currency currency, MidpointRounding mode)
+            => OfMinor(currency.ConvertToMinor(major), currency, mode);
 
-        //// DANGEROUS ZONE when minor is not normalized.
-        //public static Moneypenny? OfMinor(decimal minor, Currency currency)
-        //{
-        //    if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
-        //    return new Moneypenny(Convert.ToInt64(minor), currency);
-        //}
+        public static Moneypenny? OfMinor(decimal minor, Currency currency, MidpointRounding mode)
+        {
+            decimal amount = Math.Round(minor, mode);
+            if (amount < Int64.MinValue || amount > Int64.MaxValue) { return null; }
+            return new Moneypenny(Convert.ToInt64(amount), currency);
+        }
+
+        public static Moneypenny? OfMajor(decimal major, Currency currency, IRoundingAdjuster adjuster)
+            => OfMinor(currency.ConvertToMinor(major), currency, adjuster);
+
+        public static Moneypenny? OfMinor(decimal minor, Currency currency, IRoundingAdjuster adjuster)
+        {
+            decimal amount = adjuster.Round(minor);
+            if (amount < Int64.MinValue || amount > Int64.MaxValue) { return null; }
+            return new Moneypenny(Convert.ToInt64(amount), currency);
+        }
+
+        public static Moneypenny? TryCreate(Money money, MidpointRounding mode)
+        {
+            if (!money.IsNormalizable) { return null; }
+
+            long? minor = money.Normalize(mode).ToLongMinor();
+            if (!minor.HasValue) { return null; }
+
+            return new Moneypenny(minor.Value, money.Currency);
+        }
+
+        public static Moneypenny? TryCreate(Money money, IRoundingAdjuster adjuster)
+        {
+            if (!money.IsNormalizable) { return null; }
+
+            long? minor = money.Normalize(adjuster).ToLongMinor();
+            if (!minor.HasValue) { return null; }
+
+            return new Moneypenny(minor.Value, money.Currency);
+        }
     }
 
     // Implements the IFormattable interface.
