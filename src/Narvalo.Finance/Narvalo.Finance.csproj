@@ -72,7 +72,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Allocators\PennyAllocator.cs" />
     <Compile Include="Allocators\DefaultMoneyAllocator.cs" />
     <Compile Include="Allocators\Money%24.cs" />
     <Compile Include="Allocators\MidpointRoundingMoneyAllocator.cs" />

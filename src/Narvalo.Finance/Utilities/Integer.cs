@@ -46,7 +46,7 @@ namespace Narvalo.Finance.Utilities
             }
         }
 
-        public static IEnumerable<long> DistributeEvenly(long value, long count)
+        public static IEnumerable<long> DistributeEvenly(long value, int count)
         {
             Demand.Range(count > 1);
 
