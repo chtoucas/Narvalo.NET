@@ -16,7 +16,9 @@ namespace Narvalo.Finance
         public static Money Create(decimal amount, Currency currency, IRoundingAdjuster adjuster)
         {
             Require.NotNull(adjuster, nameof(adjuster));
-            decimal value = adjuster.Round(amount, currency.DecimalPlaces);
+            decimal value = currency.HasFixedDecimalPlaces
+                ? adjuster.Round(amount, currency.DecimalPlaces)
+                : amount;
             return Money.OfMajor(value, currency);
         }
 
