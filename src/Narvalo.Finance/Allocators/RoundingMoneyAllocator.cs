@@ -23,11 +23,11 @@ namespace Narvalo.Finance.Allocators
             Require.Range(count > 1, nameof(count));
             Warrant.NotNull<IEnumerable<Money>>();
 
-            Currency currency = money.Currency;
+            var currency = money.Currency;
             decimal total = money.Amount;
 
             decimal q = RoundingAdjuster.Round(total / count, money.Currency.DecimalPlaces);
-            Money part = Money.OfMajor(q, currency);
+            var part = Money.OfMajor(q, currency);
 
             for (var i = 0; i < count - 1; i++)
             {
@@ -39,7 +39,9 @@ namespace Narvalo.Finance.Allocators
 
         public IEnumerable<Money> Allocate(Money money, RatioArray ratios)
         {
-            Currency currency = money.Currency;
+            Warrant.NotNull<IEnumerable<Money>>();
+
+            var currency = money.Currency;
             decimal total = money.Amount;
             int decimalPlaces = currency.DecimalPlaces;
 
