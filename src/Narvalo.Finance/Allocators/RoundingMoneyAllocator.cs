@@ -4,8 +4,20 @@ namespace Narvalo.Finance.Allocators
 {
     using System.Collections.Generic;
 
-    public sealed class DefaultMoneyAllocator : IMoneyAllocator
+    using Narvalo.Finance.Rounding;
+
+    // Allocator with custom rounding.
+    public sealed class RoundingMoneyAllocator : IMoneyAllocator
     {
+        public RoundingMoneyAllocator(IRoundingAdjuster adjuster)
+        {
+            Require.NotNull(adjuster, nameof(adjuster));
+
+            RoundingAdjuster = adjuster;
+        }
+
+        public IRoundingAdjuster RoundingAdjuster { get; }
+
         public IEnumerable<Money> Allocate(Money money, int count)
         {
             Require.Range(count > 1, nameof(count));
@@ -14,21 +26,22 @@ namespace Narvalo.Finance.Allocators
             Currency currency = money.Currency;
             decimal total = money.Amount;
 
-            decimal q = total / count;
-            var part = new Money(q, currency);
+            decimal q = RoundingAdjuster.Round(total / count, money.Currency.DecimalPlaces);
+            Money part = Money.OfMajor(q, currency);
 
             for (var i = 0; i < count - 1; i++)
             {
                 yield return part;
             }
 
-            yield return new Money(total - (count - 1) * q, currency);
+            yield return MoneyFactory.Create(total - (count - 1) * q, currency, RoundingAdjuster);
         }
 
         public IEnumerable<Money> Allocate(Money money, RatioArray ratios)
         {
             Currency currency = money.Currency;
             decimal total = money.Amount;
+            int decimalPlaces = currency.DecimalPlaces;
 
             int len = ratios.Length;
             var dist = new decimal[len];
@@ -36,12 +49,12 @@ namespace Narvalo.Finance.Allocators
 
             for (var i = 0; i < len - 1; i++)
             {
-                decimal amount = ratios[i] * total;
+                decimal amount = RoundingAdjuster.Round(ratios[i] * total, decimalPlaces);
                 last -= amount;
-                yield return new Money(amount, currency);
+                yield return Money.OfMajor(amount, currency);
             }
 
-            yield return new Money(last, currency);
+            yield return MoneyFactory.Create(last, currency, RoundingAdjuster);
         }
     }
 }

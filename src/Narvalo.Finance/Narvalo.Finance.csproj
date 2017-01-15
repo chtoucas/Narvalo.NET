@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Allocators\DefaultMoneyAllocator.cs" />
     <Compile Include="Allocators\Money%24.cs" />
+    <Compile Include="Allocators\MidpointRoundingMoneyAllocator.cs" />
     <Compile Include="Bic.cs" />
     <Compile Include="BicVersion.cs" />
     <Compile Include="CurrencyFactory.cs" />
@@ -85,7 +86,7 @@
     <Compile Include="Globalization\LocalMoneyFormatter.cs" />
     <Compile Include="Globalization\RegionInfo%24.cs" />
     <Compile Include="Allocators\IMoneyAllocator.cs" />
-    <Compile Include="Allocators\MoneyAllocators.cs" />
+    <Compile Include="Allocators\RoundingMoneyAllocator.cs" />
     <Compile Include="MoneyCalculator.cs" />
     <Compile Include="MoneyMath.cs" />
     <Compile Include="PennyCalculator.cs" />

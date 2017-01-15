@@ -13,7 +13,7 @@ namespace Narvalo.Finance
 
     // A lightweight money type.
     //
-    // Despite the name, this type is not restricted to currencies with minor units of size 2
+    // Despite its name, this type is not restricted to currencies with minor units of size 2
     // but does not handle arbitrary subunits.
     // Precisely, we suppose that the underlying currency has a fixed number of decimal places.
     // For currencies admitting a minor currency unit, it ensures that we can convert an amount

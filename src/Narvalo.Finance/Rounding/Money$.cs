@@ -5,6 +5,7 @@ namespace Narvalo.Finance.Rounding
     using System;
     using System.Collections.Generic;
 
+    using Narvalo.Finance.Allocators;
     using Narvalo.Finance.Utilities;
 
     // Normalization.
@@ -15,6 +16,22 @@ namespace Narvalo.Finance.Rounding
             Expect.NotNull(adjuster);
             if (@this.IsNormalized) { return @this; }
             return MoneyFactory.Create(@this.Amount, @this.Currency, adjuster);
+        }
+    }
+
+    // Allocation.
+    public static partial class MoneyExtensions
+    {
+        public static IEnumerable<Money> Allocate(this Money @this, int count, IRoundingAdjuster adjuster)
+        {
+            Expect.NotNull(adjuster);
+            return new RoundingMoneyAllocator(adjuster).Allocate(@this, count);
+        }
+
+        public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios, IRoundingAdjuster adjuster)
+        {
+            Expect.NotNull(adjuster);
+            return new RoundingMoneyAllocator(adjuster).Allocate(@this, ratios);
         }
     }
 

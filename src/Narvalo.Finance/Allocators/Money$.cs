@@ -7,15 +7,20 @@ namespace Narvalo.Finance.Allocators
 
     public static class MoneyExtensions
     {
+        private static readonly IMoneyAllocator s_DefaultAllocator
+            = new DefaultMoneyAllocator();
+
         public static IEnumerable<Money> Allocate(this Money @this, int count)
-        {
-            throw new NotImplementedException();
-        }
+            => s_DefaultAllocator.Allocate(@this, count);
 
         public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios)
-        {
-            throw new NotImplementedException();
-        }
+            => s_DefaultAllocator.Allocate(@this, ratios);
+
+        public static IEnumerable<Money> Allocate(this Money @this, int count, MidpointRounding mode)
+            => new MidpointRoundingMoneyAllocator(mode).Allocate(@this, count);
+
+        public static IEnumerable<Money> Allocate(this Money @this, RatioArray ratios, MidpointRounding mode)
+            => new MidpointRoundingMoneyAllocator(mode).Allocate(@this, ratios);
 
         public static IEnumerable<Money> Allocate(this Money @this, int count, IMoneyAllocator allocator)
         {
