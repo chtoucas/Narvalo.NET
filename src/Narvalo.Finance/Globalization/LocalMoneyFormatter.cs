@@ -59,7 +59,7 @@ namespace Narvalo.Finance.Globalization
 
             var nfi = (numberFormat ?? NumberFormatInfo.CurrentInfo).Copy();
 
-            // Take the first char and uppercase it.
+            // Take the first char and uppercase it (ASCII only).
             switch (format[0] & 0xDF)
             {
                 case 'N':

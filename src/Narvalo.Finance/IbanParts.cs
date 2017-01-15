@@ -215,7 +215,7 @@ namespace Narvalo.Finance
             if (format == null || format.Length == 0) { format = DefaultFormat; }
             if (format.Length != 1) { throw new FormatException("XXX"); }
 
-            // Take the first char and uppercase it.
+            // Take the first char and uppercase it (ASCII only).
             switch (format[0] & 0xDF)
             {
                 case 'C':

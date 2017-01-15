@@ -2,6 +2,8 @@
 
 namespace Narvalo.Finance.Utilities
 {
+    using System.Collections.Generic;
+
     internal static class Integer
     {
         // Reproduces the Math.DivRem() method which is not available with PCL:
@@ -9,6 +11,8 @@ namespace Narvalo.Finance.Utilities
         // > int q = Math.DivRem(dividend, divisor, out remainder);
         public static int DivRem(int dividend, int divisor, out int remainder)
         {
+            Demand.True(divisor != 0);
+
             int q = dividend / divisor;
             // NB: remainder = dividend % divisor is slower.
             remainder = dividend - q * divisor;
@@ -17,10 +21,43 @@ namespace Narvalo.Finance.Utilities
 
         public static long DivRem(long dividend, long divisor, out long remainder)
         {
+            Demand.True(divisor != 0);
+
             long q = dividend / divisor;
             // NB: remainder = dividend % divisor is slower.
             remainder = dividend - q * divisor;
             return q;
+        }
+
+        // Distribute an integer (value) across n copies of value / n:
+        //   value = nq + r = (n - r) q + r (q + 1) where q = value / n.
+        // First returns the high value r times, then the low value n - r times.
+        public static IEnumerable<int> DistributeEvenly(int value, int count)
+        {
+            Demand.Range(count > 1);
+
+            int rem;
+            int q = DivRem(value, count, out rem);
+            int h = q + 1;
+
+            for (var i = 0; i < count; i++)
+            {
+                yield return i < rem ? h : q;
+            }
+        }
+
+        public static IEnumerable<long> DistributeEvenly(long value, long count)
+        {
+            Demand.Range(count > 1);
+
+            long rem;
+            long q = DivRem(value, count, out rem);
+            long h = q + 1;
+
+            for (var i = 0; i < count; i++)
+            {
+                yield return i < rem ? h : q;
+            }
         }
     }
 }
