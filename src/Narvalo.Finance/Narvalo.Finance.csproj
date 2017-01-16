@@ -76,6 +76,7 @@
     <Compile Include="Allocators\PennyAllocators.cs" />
     <Compile Include="MoneyStyles.cs" />
     <Compile Include="Money%24.cs" />
+    <Compile Include="PennyFactory.cs" />
     <Compile Include="Utilities\Allocation.cs" />
     <Compile Include="Utilities\Allocation`1.cs" />
     <Compile Include="Allocators\Money%24.cs" />

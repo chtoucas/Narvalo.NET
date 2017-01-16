@@ -629,15 +629,15 @@ namespace Narvalo.Finance
     public partial struct Money
     {
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See MoneyCalculator.")]
-        public static Money operator %(Money dividend, decimal divisor) => Modulus(dividend, divisor);
+        public static Money operator %(Money dividend, decimal divisor) => Remainder(dividend, divisor);
 
-        public Money Remainder(decimal divisor) => Modulus(this, divisor);
+        public Money Modulo(decimal divisor) => Remainder(this, divisor);
     }
 
     // Overrides the op_Increment operator.
     public partial struct Money
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named IncrementMajor().")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See MoneyCalculator.")]
         public static Money operator ++(Money money) => money.IncrementMajor();
 
         public Money IncrementMajor() => new Money(Amount + Currency.One, Currency, IsNormalized);
@@ -649,7 +649,7 @@ namespace Narvalo.Finance
     // Overrides the op_Decrement operator.
     public partial struct Money
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named DecrementMajor().")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See MoneyCalculator.")]
         public static Money operator --(Money money) => money.DecrementMajor();
 
         public Money DecrementMajor() => new Money(Amount - Currency.One, Currency, IsNormalized);

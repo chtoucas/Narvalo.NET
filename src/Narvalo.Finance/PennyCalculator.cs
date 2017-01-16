@@ -45,7 +45,7 @@ namespace Narvalo.Finance
         public static Moneypenny Divide(Moneypenny dividend, long divisor)
             => new Moneypenny(checked(dividend.Amount / divisor), dividend.Currency);
 
-        public static Moneypenny Modulus(Moneypenny dividend, long divisor)
+        public static Moneypenny Remainder(Moneypenny dividend, long divisor)
             => new Moneypenny(checked(dividend.Amount % divisor), dividend.Currency);
     }
 

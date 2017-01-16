@@ -137,7 +137,7 @@ namespace Narvalo.Finance
         public static Money Divide(Money dividend, decimal divisor)
             => new Money(dividend.Amount / divisor, dividend.Currency, false);
 
-        public static Money Modulus(Money dividend, decimal divisor)
+        public static Money Remainder(Money dividend, decimal divisor)
             => new Money(dividend.Amount % divisor, dividend.Currency, false);
     }
 

@@ -85,95 +85,48 @@ namespace Narvalo.Finance
         private string DebuggerDisplay => Format.Current("{0} {1:N0}", Currency.Code, Amount);
     }
 
-    // Static factory methods: OfXXX() methods return a nullable, FromXXX() do not.
+    // Static factory methods.
     public partial struct Moneypenny
     {
-        #region From a minor amount.
-
         public static Moneypenny FromMinor(decimal minor, Currency currency, MidpointRounding mode)
-        {
-            Expect.True(currency.HasFixedDecimalPlaces);
-
-            var penny = OfMinor(minor, currency, mode);
-            if (!penny.HasValue) { throw new NotSupportedException("XXX"); }
-
-            return penny.Value;
-        }
-
-        public static Moneypenny FromMinor(decimal minor, Currency currency, IRoundingAdjuster adjuster)
-        {
-            Expect.True(currency.HasFixedDecimalPlaces);
-            Expect.NotNull(adjuster);
-
-            var penny = OfMinor(minor, currency, adjuster);
-            if (!penny.HasValue) { throw new NotSupportedException("XXX"); }
-
-            return penny.Value;
-        }
-
-        public static Moneypenny? OfMinor(decimal minor, Currency currency, MidpointRounding mode)
         {
             Require.True(currency.HasFixedDecimalPlaces, nameof(currency));
 
             decimal amount = Math.Round(minor, mode);
-            if (amount < Int64.MinValue || amount > Int64.MaxValue) { return null; }
-
             return new Moneypenny(Convert.ToInt64(amount), currency);
         }
 
-        public static Moneypenny? OfMinor(decimal minor, Currency currency, IRoundingAdjuster adjuster)
+        public static Moneypenny FromMinor(decimal minor, Currency currency, IRoundingAdjuster adjuster)
         {
             Require.True(currency.HasFixedDecimalPlaces, nameof(currency));
             Require.NotNull(adjuster, nameof(adjuster));
 
             decimal amount = adjuster.Round(minor);
-            if (amount < Int64.MinValue || amount > Int64.MaxValue) { return null; }
-
             return new Moneypenny(Convert.ToInt64(amount), currency);
         }
 
-        #endregion
-
-        #region From a major amount.
-
         public static Moneypenny FromMajor(decimal major, Currency currency, MidpointRounding mode)
-            => FromMinor(currency.ConvertToMinor(major), currency, mode);
+        {
+            Expect.True(currency.HasFixedDecimalPlaces);
+
+            return FromMinor(currency.ConvertToMinor(major), currency, mode);
+        }
 
         public static Moneypenny FromMajor(decimal major, Currency currency, IRoundingAdjuster adjuster)
-            => FromMinor(currency.ConvertToMinor(major), currency, adjuster);
+        {
+            Expect.True(currency.HasFixedDecimalPlaces);
+            Expect.NotNull(adjuster);
 
-        public static Moneypenny? OfMajor(decimal major, Currency currency, MidpointRounding mode)
-            => OfMinor(currency.ConvertToMinor(major), currency, mode);
-
-        public static Moneypenny? OfMajor(decimal major, Currency currency, IRoundingAdjuster adjuster)
-            => OfMinor(currency.ConvertToMinor(major), currency, adjuster);
-
-        #endregion
-
-        #region From a Money object.
+            return FromMinor(currency.ConvertToMinor(major), currency, adjuster);
+        }
 
         public static Moneypenny FromMoney(Money money)
         {
-            Expect.True(money.IsRoundable);
+            Require.True(money.IsRounded, nameof(money));
 
-            var penny = OfMoney(money);
-            if (!penny.HasValue) { throw new NotSupportedException("XXX"); }
-
-            return penny.Value;
+            decimal amount = money.ToMinor();
+            return new Moneypenny(Convert.ToInt64(amount), money.Currency);
         }
-
-        public static Moneypenny? OfMoney(Money money)
-        {
-            Require.True(money.IsRoundable, nameof(money));
-            Expect.True(money.IsNormalized);
-
-            long? minor = money.ToLongMinor();
-            if (!minor.HasValue) { return null; }
-
-            return new Moneypenny(minor.Value, money.Currency);
-        }
-
-        #endregion
     }
 
     // Implements the IFormattable interface.
@@ -341,9 +294,9 @@ namespace Narvalo.Finance
     public partial struct Moneypenny
     {
         [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
-        public static Moneypenny operator %(Moneypenny dividend, long divisor) => Modulus(dividend, divisor);
+        public static Moneypenny operator %(Moneypenny dividend, long divisor) => Remainder(dividend, divisor);
 
-        public Moneypenny Remainder(long divisor) => Modulus(this, divisor);
+        public Moneypenny Modulo(long divisor) => Remainder(this, divisor);
     }
 
     // Overrides the op_Increment operator.
