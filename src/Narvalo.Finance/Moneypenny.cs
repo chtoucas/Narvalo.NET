@@ -3,15 +3,12 @@
 namespace Narvalo.Finance
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.Linq;
 
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
-    using Narvalo.Finance.Utilities;
 
     using static Narvalo.Finance.PennyCalculator;
 
@@ -192,7 +189,7 @@ namespace Narvalo.Finance
         public static explicit operator Money(Moneypenny value) => value.ToMoney();
     }
 
-    // Math methods other than the standard operators.
+    // Math operators.
     public partial struct Moneypenny
     {
         public int Sign => Sign(this);
@@ -204,55 +201,6 @@ namespace Narvalo.Finance
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "[Intentionally] Math.DivRem().")]
         public Moneypenny DivRem(long divisor, out Moneypenny remainder)
             => PennyCalculator.DivRem(this, divisor, out remainder);
-    }
-
-    // Allocations.
-    public partial struct Moneypenny
-    {
-        public IEnumerable<Moneypenny> Allocate(int count)
-        {
-            Require.Range(count > 1, nameof(count));
-            Warrant.NotNull<IEnumerable<Moneypenny>>();
-
-            long q = Amount / count;
-            var part = new Moneypenny(q, Currency);
-
-            for (var i = 0; i < count - 1; i++)
-            {
-                yield return part;
-            }
-
-            yield return new Moneypenny(Amount - (count - 1) * q, Currency);
-        }
-
-        public IEnumerable<Moneypenny> AllocateEvenly(int count)
-        {
-            Require.Range(count > 1, nameof(count));
-            Warrant.NotNull<IEnumerable<Moneypenny>>();
-
-            var cy = Currency;
-
-            return from _ in Integer.DivideEvenly(Amount, count) select new Moneypenny(_, cy);
-        }
-
-        //public IEnumerable<Moneypenny> Allocate(Moneypenny penny, RatioArray ratios)
-        //{
-        //    Currency currency = penny.Currency;
-        //    long total = penny.Amount;
-
-        //    int len = ratios.Length;
-        //    var dist = new decimal[len];
-        //    long last = total;
-
-        //    for (var i = 0; i < len - 1; i++)
-        //    {
-        //        long amount = ratios[i] * total;
-        //        last -= amount;
-        //        yield return new Moneypenny(amount, currency);
-        //    }
-
-        //    yield return new Moneypenny(last, currency);
-        //}
     }
 
     // Overrides the op_Addition operator.

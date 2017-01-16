@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Allocators\DefaultMoneyAllocator.cs" />
+    <Compile Include="Allocators\PennyAllocators.cs" />
     <Compile Include="Money%24.cs" />
     <Compile Include="Utilities\Allocation.cs" />
     <Compile Include="Utilities\Allocation`1.cs" />
