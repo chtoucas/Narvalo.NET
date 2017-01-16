@@ -31,7 +31,7 @@ namespace Narvalo.Finance.Allocators
                 yield return part;
             }
 
-            yield return new Money(total - (count - 1) * q, currency, RoundingMode);
+            yield return Money.OfMajor(total - (count - 1) * q, currency, RoundingMode);
         }
 
         public IEnumerable<Money> Allocate(Money money, RatioArray ratios)
@@ -53,7 +53,7 @@ namespace Narvalo.Finance.Allocators
                 yield return Money.OfMajor(amount, currency);
             }
 
-            yield return new Money(last, currency, RoundingMode);
+            yield return Money.OfMajor(last, currency, RoundingMode);
         }
     }
 }

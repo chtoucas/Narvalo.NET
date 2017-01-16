@@ -150,7 +150,7 @@ namespace Narvalo.Finance
         /// <remarks>Returns 1 if the currency has no minor currency unit.</remarks>
         // If the currency has no fixed decimal places, DecimalPlaces is equal to MAX_DECIMAL_PLACES
         // which correctly gives 1 for Factor.
-        private uint Factor => PowersOfTen[DecimalPlaces % MAX_DECIMAL_PLACES];
+        private uint ScaleFactor => PowersOfTen[DecimalPlaces % MAX_DECIMAL_PLACES];
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
@@ -423,7 +423,7 @@ namespace Narvalo.Finance
         /// Converts an amount from major units to minor units.
         /// </summary>
         /// <param name="major">The amount in major units to convert.</param>
-        internal decimal ConvertToMinor(decimal major) => Factor * major;
+        internal decimal ConvertToMinor(decimal major) => ScaleFactor * major;
 
         /// <inheritdoc cref="Object.ToString" />
         public override string ToString()

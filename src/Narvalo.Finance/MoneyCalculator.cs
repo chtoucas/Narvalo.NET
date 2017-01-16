@@ -8,7 +8,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Utilities;
 
-    // Standard math operators.
+    // Standard binary math operators.
     public static partial class MoneyCalculator
     {
         #region Add()
@@ -62,7 +62,7 @@ namespace Narvalo.Finance
         {
             left.ThrowIfCurrencyMismatch(right, nameof(right));
 
-            if (left.Amount == 0m) { return Negate(right); }
+            if (left.Amount == 0m) { return right.Negate(); }
             if (right.Amount == 0m) { return left; }
             return new Money(left.Amount - right.Amount, left.Currency, left.IsNormalized && right.IsNormalized);
         }
@@ -105,7 +105,7 @@ namespace Narvalo.Finance
 
         public static Money Subtract(decimal amount, Money money)
         {
-            if (amount == 0m) { return Negate(money); }
+            if (amount == 0m) { return money.Negate(); }
             return new Money(amount - money.Amount, money.Currency, false);
         }
 
@@ -138,18 +138,9 @@ namespace Narvalo.Finance
 
         public static Money Modulus(Money dividend, decimal divisor)
             => new Money(dividend.Amount % divisor, dividend.Currency, false);
-
-        public static Money Increment(Money money)
-            => new Money(money.Amount + money.Currency.One, money.Currency, money.IsNormalized);
-
-        public static Money Decrement(Money money)
-            => new Money(money.Amount - money.Currency.One, money.Currency, money.IsNormalized);
-
-        public static Money Negate(Money money)
-            => money.IsZero ? money : new Money(-money.Amount, money.Currency, money.IsNormalized);
     }
 
-    // Standard math operators uner which the Money type is not closed.
+    // Standard binary math operators under which the Money type is not closed.
     public static partial class MoneyCalculator
     {
         // This division returns a decimal (we lost the currency unit).
@@ -160,9 +151,7 @@ namespace Narvalo.Finance
     // Other math operators.
     public static partial class MoneyCalculator
     {
-        public static int Sign(Money money) => money.Amount < 0m ? -1 : (money.Amount > 0m ? 1 : 0);
-
-        public static Money Abs(Money money) => money.IsPositiveOrZero ? money : Negate(money);
+        public static Money Abs(Money money) => money.IsPositiveOrZero ? money : money.Negate();
 
         public static Money Max(Money money1, Money money2) => money1 >= money2 ? money1 : money2;
 
@@ -227,13 +216,13 @@ namespace Narvalo.Finance
         }
     }
 
-    // Standard math operators with rounding.
+    // Standard binary math operators with rounding.
     public static partial class MoneyCalculator
     {
         public static Money Add(Money money, decimal amount, MidpointRounding mode)
         {
             if (amount == 0m) { return money; }
-            return new Money(money.Amount + amount, money.Currency, mode);
+            return Money.OfMajor(money.Amount + amount, money.Currency, mode);
         }
 
         public static Money Add(Money money, Money other, MidpointRounding mode)
@@ -244,7 +233,7 @@ namespace Narvalo.Finance
 
             return money.IsNormalized && other.IsNormalized
                 ? Money.OfMajor(amount, money.Currency)
-                : new Money(amount, money.Currency, mode);
+                : Money.OfMajor(amount, money.Currency, mode);
         }
 
         public static Money Subtract(Money money, decimal amount, MidpointRounding mode)
@@ -258,17 +247,17 @@ namespace Narvalo.Finance
 
             return money.IsNormalized && other.IsNormalized
                 ? Money.OfMajor(amount, money.Currency)
-                : new Money(amount, money.Currency, mode);
+                : Money.OfMajor(amount, money.Currency, mode);
         }
 
         public static Money Multiply(Money money, decimal multiplier, MidpointRounding mode)
-            => new Money(multiplier * money.Amount, money.Currency, mode);
+            => Money.OfMajor(multiplier * money.Amount, money.Currency, mode);
 
         public static Money Divide(Money dividend, decimal divisor, MidpointRounding mode)
-            => new Money(dividend.Amount / divisor, dividend.Currency, mode);
+            => Money.OfMajor(dividend.Amount / divisor, dividend.Currency, mode);
 
         public static Money Modulus(Money dividend, decimal divisor, MidpointRounding mode)
-            => new Money(dividend.Amount % divisor, dividend.Currency, mode);
+            => Money.OfMajor(dividend.Amount % divisor, dividend.Currency, mode);
     }
 
     // LINQ-like Sum().
@@ -565,7 +554,7 @@ namespace Narvalo.Finance
                     count++;
                 }
 
-                return new Money(sum / count, currency, mode);
+                return Money.OfMajor(sum / count, currency, mode);
             }
         }
 
@@ -601,7 +590,7 @@ namespace Narvalo.Finance
                         }
                     }
 
-                    return new Money(sum / count, currency, mode);
+                    return Money.OfMajor(sum / count, currency, mode);
                 }
             }
 

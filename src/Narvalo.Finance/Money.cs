@@ -9,6 +9,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Rounding;
 
     using static Narvalo.Finance.MoneyCalculator;
 
@@ -59,24 +60,6 @@ namespace Narvalo.Finance
         /// <param name="amount">The decimal representing the amount of money.</param>
         /// <param name="currency">The currency.</param>
         public Money(decimal amount, Currency currency) : this(amount, currency, false) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount for which the number of decimal places is determined by the currency.
-        /// <para>If the currency has no fixed decimal places, <paramref name="mode"/> is ignored
-        /// and the amount is stored as it.</para>
-        /// </summary>
-        /// <param name="amount">The decimal representing the amount of money.</param>
-        /// <param name="currency">The currency.</param>
-        /// <param name="mode">The rounding mode.</param>
-        public Money(decimal amount, Currency currency, MidpointRounding mode)
-        {
-            Amount = currency.HasFixedDecimalPlaces
-                ? Math.Round(amount, currency.DecimalPlaces, mode)
-                : amount;
-            Currency = currency;
-            IsNormalized = true;
-        }
 
         internal Money(decimal amount, Currency currency, bool normalized)
         {
@@ -145,6 +128,21 @@ namespace Narvalo.Finance
         /// </summary>
         public bool IsPositiveOrZero => Amount >= 0m;
 
+        public int Sign => Amount < 0m ? -1 : (Amount > 0m ? 1 : 0);
+
+        public Money Normalize(MidpointRounding mode)
+        {
+            if (IsNormalized) { return this; }
+            return OfMajor(Amount, Currency, mode);
+        }
+
+        public Money Normalize(IRoundingAdjuster adjuster)
+        {
+            Expect.NotNull(adjuster);
+            if (IsNormalized) { return this; }
+            return OfMajor(Amount, Currency, adjuster);
+        }
+
         /// <summary>
         /// Gets the amount given in minor units.
         /// </summary>
@@ -171,29 +169,6 @@ namespace Narvalo.Finance
             return Convert.ToInt64(minor);
         }
 
-        /// <summary>
-        /// Gets the amount given in minor units and converted to a 64-bit signed integer.
-        /// </summary>
-        /// <param name="result">If the conversion succeeded, contains a 64-bit signed integer
-        /// representing the amount in minor units, or Int64.MaxValue when the conversion failed
-        /// and <see cref="Amount"/> is positive, otherwise Int64.MinValue.</param>
-        /// <exception cref="InvalidOperationException">Thrown if the instance is not normalized.</exception>
-        /// <returns><see langword="true"/> if the amount was converted successfully; otherwise,
-        /// <see langword="false"/>.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "0#", Justification = "[Intentionally] Standard Try... pattern.")]
-        public bool ToLongMinor(out long result)
-        {
-            long? minor = ToLongMinor();
-            result = minor ?? (Amount > 0 ? Int64.MaxValue : Int64.MinValue);
-            return minor.HasValue;
-        }
-
-        public Money Normalize(MidpointRounding mode)
-        {
-            if (IsNormalized) { return this; }
-            return new Money(Amount, Currency, mode);
-        }
-
         internal void ThrowIfCurrencyMismatch(Money money, string parameterName)
             => Enforce.True(Currency == money.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
@@ -203,7 +178,7 @@ namespace Narvalo.Finance
             => Format.Current("{0} {1:F}; IsNormalized={2})", Currency.Code, Amount, IsRoundable ? "true" : "false");
     }
 
-    // Static factory methods.
+    // Static factory methods: OfXXX() methods produce normalized instances, FromXXX() do not.
     public partial struct Money
     {
         public static Money Zero(Currency currency) => new Money(0, currency, true);
@@ -214,7 +189,28 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Creates a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount <c>already</c> rounded to the number of decimal places specified by the currency.
+        /// and an amount where there is no restriction on the scale.
+        /// <para>Strictly equivalent to <see cref="Money(decimal, Currency)"/>; only added
+        /// for completeness.</para>
+        /// </summary>
+        /// <param name="amount">The decimal representing the amount of money.</param>
+        /// <param name="currency">The currency.</param>
+        public static Money FromMajor(decimal major, Currency currency)
+            => new Money(major, currency, false);
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount given in minor units where there is no restriction on the scale.
+        /// </summary>
+        /// <param name="minor">The decimal representing the amount of money in minor units.</param>
+        /// <param name="currency">The currency.</param>
+        public static Money FromMinor(decimal minor, Currency currency)
+            => new Money(currency.ConvertToMajor(minor), currency, false);
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount <c>ALREADY</c> rounded to the number of decimal places specified by the
+        /// currency.
         /// </summary>
         /// <param name="major">The decimal representing the amount of money in major units.</param>
         /// <param name="currency">The currency.</param>
@@ -227,17 +223,43 @@ namespace Narvalo.Finance
         /// </summary>
         /// <param name="minor">The signed long representing the amount of money in minor units.</param>
         /// <param name="currency">The currency.</param>
-        public static Money OfMinor(long minor, Currency currency)
+        public static Money OfMinor(decimal minor, Currency currency)
             => new Money(currency.ConvertToMajor(minor), currency, true);
 
         /// <summary>
         /// Creates a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount given in minor units where there is no restriction on the scale.
+        /// and an amount for which the number of decimal places is determined by the currency.
+        /// <para>If the currency has no fixed decimal places, <paramref name="mode"/> is ignored
+        /// and the amount is stored as it.</para>
         /// </summary>
-        /// <param name="minor">The decimal representing the amount of money in minor units.</param>
+        /// <param name="amount">The decimal representing the amount of money.</param>
         /// <param name="currency">The currency.</param>
-        public static Money OfMinor(decimal minor, Currency currency)
-            => new Money(currency.ConvertToMajor(minor), currency, false);
+        /// <param name="mode">The rounding mode.</param>
+        public static Money OfMajor(decimal amount, Currency currency, MidpointRounding mode)
+        {
+            var major = currency.HasFixedDecimalPlaces
+                 ? Math.Round(amount, currency.DecimalPlaces, mode)
+                 : amount;
+            return new Money(major, currency, true);
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount for which the number of decimal places is determined by the currency.
+        /// <para>If the currency has no fixed decimal places, <paramref name="adjuster"/> is
+        /// ignored and the amount is stored as it.</para>
+        /// </summary>
+        /// <param name="amount">A decimal representing the amount of money.</param>
+        /// <param name="currency">The specific currency.</param>
+        /// <param name="adjuster">The rounding adjuster.</param>
+        public static Money OfMajor(decimal amount, Currency currency, IRoundingAdjuster adjuster)
+        {
+            Require.NotNull(adjuster, nameof(adjuster));
+            decimal major = currency.HasFixedDecimalPlaces
+                ? adjuster.Round(amount, currency.DecimalPlaces)
+                : amount;
+            return new Money(major, currency, true);
+        }
 
         /// <summary>
         /// Creates a new instance of the <see cref="Money"/> class for a specific currency
@@ -248,7 +270,18 @@ namespace Narvalo.Finance
         /// <param name="currency">The currency.</param>
         /// <param name="mode">The rounding mode.</param>
         public static Money OfMinor(decimal minor, Currency currency, MidpointRounding mode)
-            => new Money(currency.ConvertToMajor(minor), currency, mode);
+            => OfMajor(currency.ConvertToMajor(minor), currency, mode);
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="Money"/> class for a specific currency
+        /// and an amount given in minor units for which the number of decimal places is
+        /// determined by the currency.
+        /// </summary>
+        /// <param name="minor">The decimal representing the amount of money in minor units.</param>
+        /// <param name="currency">The currency.</param>
+        /// <param name="adjuster">The rounding adjuster.</param>
+        public static Money OfMinor(decimal minor, Currency currency, IRoundingAdjuster adjuster)
+            => OfMajor(currency.ConvertToMajor(minor), currency, adjuster);
     }
 
     // Implements the IFormattable interface.
@@ -350,7 +383,7 @@ namespace Narvalo.Finance
         }
     }
 
-    // Conversions.
+    // Implicit/explicit conversions.
     public partial struct Money
     {
         [CLSCompliant(false)]
@@ -429,19 +462,6 @@ namespace Narvalo.Finance
         public static implicit operator decimal(Money value) => ToDecimal(value);
 
         #endregion
-    }
-
-    // Math operators.
-    public partial struct Money
-    {
-        public int Sign => Sign(this);
-
-        public Money Abs() => MoneyCalculator.Abs(this);
-
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "[Intentionally] Math.DivRem().")]
-        public Money DivRem(long divisor, out Money remainder)
-            => MoneyCalculator.DivRem(this, divisor, out remainder);
     }
 
     // Overrides the op_Addition operator.
@@ -617,10 +637,10 @@ namespace Narvalo.Finance
     // Overrides the op_Increment operator.
     public partial struct Money
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See MoneyCalculator.")]
-        public static Money operator ++(Money money) => Increment(money);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named IncrementMajor().")]
+        public static Money operator ++(Money money) => money.IncrementMajor();
 
-        public Money IncrementMajor() => Increment(this);
+        public Money IncrementMajor() => new Money(Amount + Currency.One, Currency, IsNormalized);
 
         // For currencies without minor units, this is equivalent to Increment().
         public Money IncrementMinor() => new Money(Amount + Currency.Epsilon, Currency, IsNormalized);
@@ -629,10 +649,10 @@ namespace Narvalo.Finance
     // Overrides the op_Decrement operator.
     public partial struct Money
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See MoneyCalculator.")]
-        public static Money operator --(Money money) => Decrement(money);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named DecrementMajor().")]
+        public static Money operator --(Money money) => money.DecrementMajor();
 
-        public Money DecrementMajor() => Decrement(this);
+        public Money DecrementMajor() => new Money(Amount - Currency.One, Currency, IsNormalized);
 
         // For currencies without minor units, this is equivalent to Decrement().
         public Money DecrementMinor() => new Money(Amount - Currency.Epsilon, Currency, IsNormalized);
@@ -641,18 +661,17 @@ namespace Narvalo.Finance
     // Overrides the op_UnaryNegation operator.
     public partial struct Money
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See MoneyCalculator.")]
-        public static Money operator -(Money money) => MoneyCalculator.Negate(money);
+        public static Money operator -(Money money) => money.Negate();
 
-        public Money Negate() => MoneyCalculator.Negate(this);
+        public Money Negate() => IsZero ? this : new Money(-Amount, Currency, IsNormalized);
     }
 
     // Overrides the op_UnaryPlus operator.
     public partial struct Money
     {
-        // This operator does nothing, only added for completeness.
-        public static Money operator +(Money money) => money;
+        public static Money operator +(Money money) => money.Plus();
 
+        // This operator does nothing, only added for completeness.
         public Money Plus() => this;
     }
 }

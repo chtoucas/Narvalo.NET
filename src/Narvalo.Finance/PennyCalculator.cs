@@ -7,7 +7,7 @@ namespace Narvalo.Finance
 
     using Narvalo.Finance.Utilities;
 
-    // Standard math operators.
+    // Standard binary math operators.
     public static partial class PennyCalculator
     {
         public static Moneypenny Add(Moneypenny left, Moneypenny right)
@@ -29,7 +29,7 @@ namespace Narvalo.Finance
         {
             left.ThrowIfCurrencyMismatch(right, nameof(right));
 
-            if (left.Amount == 0L) { return Negate(right); }
+            if (left.Amount == 0L) { return right.Negate(); }
             if (right.Amount == 0L) { return left; }
             return new Moneypenny(checked(right.Amount - left.Amount), left.Currency);
         }
@@ -47,18 +47,9 @@ namespace Narvalo.Finance
 
         public static Moneypenny Modulus(Moneypenny dividend, long divisor)
             => new Moneypenny(checked(dividend.Amount % divisor), dividend.Currency);
-
-        public static Moneypenny Increment(Moneypenny penny)
-            => new Moneypenny(checked(penny.Amount + 1L), penny.Currency);
-
-        public static Moneypenny Decrement(Moneypenny penny)
-            => new Moneypenny(checked(penny.Amount - 1L), penny.Currency);
-
-        public static Moneypenny Negate(Moneypenny penny)
-            => penny.IsZero ? penny : new Moneypenny(-penny.Amount, penny.Currency);
     }
 
-    // Standard math operators under which the Moneypenny type is not closed.
+    // Standard binary math operators under which the Moneypenny type is not closed.
     // NB: Decimal multiplication is always checked.
     public static partial class PennyCalculator
     {
@@ -80,9 +71,7 @@ namespace Narvalo.Finance
     // Other math operators.
     public static partial class PennyCalculator
     {
-        public static int Sign(Moneypenny penny) => penny.Amount < 0L ? -1 : (penny.Amount > 0L ? 1 : 0);
-
-        public static Moneypenny Abs(Moneypenny penny) => penny.IsPositiveOrZero ? penny : Negate(penny);
+        public static Moneypenny Abs(Moneypenny penny) => penny.IsPositiveOrZero ? penny : penny.Negate();
 
         public static Moneypenny Max(Moneypenny penny1, Moneypenny penny2) => penny1 >= penny2 ? penny1 : penny2;
 

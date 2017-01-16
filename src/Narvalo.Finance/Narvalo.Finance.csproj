@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Allocators\DefaultMoneyAllocator.cs" />
     <Compile Include="Allocators\PennyAllocators.cs" />
+    <Compile Include="MoneyStyles.cs" />
     <Compile Include="Money%24.cs" />
     <Compile Include="Utilities\Allocation.cs" />
     <Compile Include="Utilities\Allocation`1.cs" />
@@ -93,7 +94,6 @@
     <Compile Include="Allocators\RoundingMoneyAllocator.cs" />
     <Compile Include="MoneyCalculator.cs" />
     <Compile Include="PennyCalculator.cs" />
-    <Compile Include="PennyFactory.cs" />
     <Compile Include="Rounding\AlternatedRoundingAdjuster.cs" />
     <Compile Include="Rounding\DitheredRoundingAdjuster.cs" />
     <Compile Include="Rounding\IRoundingAdjuster.cs" />
@@ -103,7 +103,6 @@
     <Compile Include="Utilities\CurrencyHelpers.cs" />
     <Compile Include="Utilities\Integer.cs" />
     <Compile Include="Rounding\Money%24.cs" />
-    <Compile Include="MoneyFactory.cs" />
     <Compile Include="Rounding\StochasticRoundingAdjuster.cs" />
     <Compile Include="Utilities\IbanCheckDigits.cs" />
     <Compile Include="Rounding\RoudingMode.cs" />

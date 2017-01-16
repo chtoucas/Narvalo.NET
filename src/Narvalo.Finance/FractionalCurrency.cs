@@ -11,7 +11,7 @@ namespace Narvalo.Finance
     /// <para>A subunit is a fraction of the main unit. The minor currency unit (when it exists)
     /// is such an example. It is possible for a currency to have more than one subunit.</para>
     /// <para>Contrary to a <see cref="Currency"/>, we do not restrict ourselves to subunits
-    /// for which <see cref="Factor"/> is a power of 10.</para>
+    /// for which <see cref="ScaleFactor"/> is a power of 10.</para>
     /// </remarks>
     public partial struct FractionalCurrency : IEquatable<FractionalCurrency>
     {
@@ -55,7 +55,7 @@ namespace Narvalo.Finance
 
         public Currency Parent { get; }
 
-        public decimal Factor => 1 / Epsilon;
+        public decimal ScaleFactor => 1 / Epsilon;
 
         /// <inheritdoc cref="Object.ToString" />
         public override string ToString()
