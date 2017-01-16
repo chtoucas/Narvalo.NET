@@ -62,7 +62,7 @@ namespace Narvalo.Finance
         {
             left.ThrowIfCurrencyMismatch(right, nameof(right));
 
-            if (left.Amount == 0m) { return right.Negate(); }
+            if (left.Amount == 0m) { return Negate(right); }
             if (right.Amount == 0m) { return left; }
             return new Money(left.Amount - right.Amount, left.Currency, left.IsNormalized && right.IsNormalized);
         }
@@ -105,7 +105,7 @@ namespace Narvalo.Finance
 
         public static Money Subtract(decimal amount, Money money)
         {
-            if (amount == 0m) { return money.Negate(); }
+            if (amount == 0m) { return Negate(money); }
             return new Money(amount - money.Amount, money.Currency, false);
         }
 
@@ -149,12 +149,20 @@ namespace Narvalo.Finance
             => money.IsZero ? money : new Money(-money.Amount, money.Currency, money.IsNormalized);
     }
 
+    // Standard math operators uner which the Money type is not closed.
+    public static partial class MoneyCalculator
+    {
+        // This division returns a decimal (we lost the currency unit).
+        // It is a lot like computing a percentage (if multiplied by 100, of course).
+        public static decimal Divide(Money dividend, Money divisor) => dividend.Amount / divisor.Amount;
+    }
+
     // Other math operators.
     public static partial class MoneyCalculator
     {
         public static int Sign(Money money) => money.Amount < 0m ? -1 : (money.Amount > 0m ? 1 : 0);
 
-        public static Money Abs(Money money) => money.IsPositiveOrZero ? money : money.Negate();
+        public static Money Abs(Money money) => money.IsPositiveOrZero ? money : Negate(money);
 
         public static Money Max(Money money1, Money money2) => money1 >= money2 ? money1 : money2;
 
@@ -166,10 +174,6 @@ namespace Narvalo.Finance
 
             return money < min ? min : (money > max ? max : money);
         }
-
-        // NB: This method returns a decimal (a division implies that we lost the currency unit).
-        // This division is a lot like computing a percentage (if multiplied by 100, of course).
-        public static decimal Divide(Money dividend, Money divisor) => dividend.Amount / divisor.Amount;
 
         // Divide+Remainder aka DivRem.
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
@@ -223,7 +227,7 @@ namespace Narvalo.Finance
         }
     }
 
-    // Addition with rounding.
+    // Standard math operators with rounding.
     public static partial class MoneyCalculator
     {
         public static Money Add(Money money, decimal amount, MidpointRounding mode)
@@ -242,11 +246,7 @@ namespace Narvalo.Finance
                 ? Money.OfMajor(amount, money.Currency)
                 : new Money(amount, money.Currency, mode);
         }
-    }
 
-    // Subtraction with rounding.
-    public static partial class MoneyCalculator
-    {
         public static Money Subtract(Money money, decimal amount, MidpointRounding mode)
             => Add(money, -amount, mode);
 
@@ -260,25 +260,13 @@ namespace Narvalo.Finance
                 ? Money.OfMajor(amount, money.Currency)
                 : new Money(amount, money.Currency, mode);
         }
-    }
 
-    // Multiplication with rounding.
-    public static partial class MoneyCalculator
-    {
         public static Money Multiply(Money money, decimal multiplier, MidpointRounding mode)
             => new Money(multiplier * money.Amount, money.Currency, mode);
-    }
 
-    // Division with rounding.
-    public static partial class MoneyCalculator
-    {
         public static Money Divide(Money dividend, decimal divisor, MidpointRounding mode)
             => new Money(dividend.Amount / divisor, dividend.Currency, mode);
-    }
 
-    // Remainder/Modulo with rounding.
-    public static partial class MoneyCalculator
-    {
         public static Money Modulus(Money dividend, decimal divisor, MidpointRounding mode)
             => new Money(dividend.Amount % divisor, dividend.Currency, mode);
     }

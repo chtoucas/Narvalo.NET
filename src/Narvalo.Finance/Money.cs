@@ -214,7 +214,7 @@ namespace Narvalo.Finance
 
         /// <summary>
         /// Creates a new instance of the <see cref="Money"/> class for a specific currency
-        /// and an amount **already** rounded to the number of decimal places specified by the currency.
+        /// and an amount <c>already</c> rounded to the number of decimal places specified by the currency.
         /// </summary>
         /// <param name="major">The decimal representing the amount of money in major units.</param>
         /// <param name="currency">The currency.</param>
@@ -440,7 +440,8 @@ namespace Narvalo.Finance
 
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "[Intentionally] Math.DivRem().")]
-        public Money DivRem(long divisor, out Money remainder) => MoneyCalculator.DivRem(this, divisor, out remainder);
+        public Money DivRem(long divisor, out Money remainder)
+            => MoneyCalculator.DivRem(this, divisor, out remainder);
     }
 
     // Overrides the op_Addition operator.
