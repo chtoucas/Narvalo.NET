@@ -373,9 +373,9 @@ namespace Narvalo.Finance
     // Overrides the op_UnaryPlus operator.
     public partial struct Moneypenny
     {
-        // This operator does nothing, only added for completeness.
-        public static Moneypenny operator +(Moneypenny penny) => penny;
+        public static Moneypenny operator +(Moneypenny penny) => penny.Plus();
 
+        // This operator does nothing, only added for completeness.
         public Moneypenny Plus() => this;
     }
 }

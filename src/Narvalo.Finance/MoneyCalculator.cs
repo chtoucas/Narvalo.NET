@@ -110,6 +110,7 @@ namespace Narvalo.Finance
         }
 
         #endregion
+
         #endregion
 
         #region Multiply()
