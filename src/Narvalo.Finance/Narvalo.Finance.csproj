@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Allocators\DefaultMoneyAllocator.cs" />
+    <Compile Include="Money%24.cs" />
     <Compile Include="Utilities\Allocation.cs" />
     <Compile Include="Utilities\Allocation`1.cs" />
     <Compile Include="Allocators\Money%24.cs" />
@@ -90,7 +91,6 @@
     <Compile Include="Allocators\IMoneyAllocator.cs" />
     <Compile Include="Allocators\RoundingMoneyAllocator.cs" />
     <Compile Include="MoneyCalculator.cs" />
-    <Compile Include="MoneyMath.cs" />
     <Compile Include="PennyCalculator.cs" />
     <Compile Include="PennyFactory.cs" />
     <Compile Include="Rounding\AlternatedRoundingAdjuster.cs" />

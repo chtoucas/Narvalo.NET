@@ -4,19 +4,235 @@ namespace Narvalo.Finance
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Utilities;
+
+    // Standard math operators.
+    public static partial class MoneyCalculator
+    {
+        #region Add()
+
+        public static Money Add(Money left, Money right)
+        {
+            left.ThrowIfCurrencyMismatch(right, nameof(right));
+
+            if (left.Amount == 0m) { return right; }
+            if (right.Amount == 0m) { return left; }
+            return new Money(left.Amount + right.Amount, left.Currency, left.IsNormalized && right.IsNormalized);
+        }
+
+        [CLSCompliant(false)]
+        public static Money Add(Money money, uint amount)
+        {
+            if (amount == 0) { return money; }
+            return new Money(money.Amount + amount, money.Currency, money.IsNormalized);
+        }
+
+        [CLSCompliant(false)]
+        public static Money Add(Money money, ulong amount)
+        {
+            if (amount == 0UL) { return money; }
+            return new Money(money.Amount + amount, money.Currency, money.IsNormalized);
+        }
+
+        public static Money Add(Money money, int amount)
+        {
+            if (amount == 0) { return money; }
+            return new Money(money.Amount + amount, money.Currency, money.IsNormalized);
+        }
+
+        public static Money Add(Money money, long amount)
+        {
+            if (amount == 0L) { return money; }
+            return new Money(money.Amount + amount, money.Currency, money.IsNormalized);
+        }
+
+        public static Money Add(Money money, decimal amount)
+        {
+            if (amount == 0m) { return money; }
+            return new Money(money.Amount + amount, money.Currency, false);
+        }
+
+        #endregion
+
+        #region Substract()
+
+        public static Money Subtract(Money left, Money right)
+        {
+            left.ThrowIfCurrencyMismatch(right, nameof(right));
+
+            if (left.Amount == 0m) { return right.Negate(); }
+            if (right.Amount == 0m) { return left; }
+            return new Money(left.Amount - right.Amount, left.Currency, left.IsNormalized && right.IsNormalized);
+        }
+
+        [CLSCompliant(false)]
+        public static Money Subtract(Money money, uint amount)
+        {
+            if (amount == 0) { return money; }
+            return new Money(money.Amount - amount, money.Currency, money.IsNormalized);
+        }
+
+        [CLSCompliant(false)]
+        public static Money Subtract(Money money, ulong amount)
+        {
+            if (amount == 0UL) { return money; }
+            return new Money(money.Amount - amount, money.Currency, money.IsNormalized);
+        }
+
+        public static Money Subtract(Money money, int amount) => Add(money, -amount);
+
+        public static Money Subtract(Money money, long amount) => Add(money, -amount);
+
+        public static Money Subtract(Money money, decimal amount) => Add(money, -amount);
+
+        #region Subtraction where the Money object is on the right.
+
+        [CLSCompliant(false)]
+        public static Money Subtract(uint amount, Money money)
+            => new Money(amount - money.Amount, money.Currency, money.IsNormalized);
+
+        [CLSCompliant(false)]
+        public static Money Subtract(ulong amount, Money money)
+            => new Money(amount - money.Amount, money.Currency, money.IsNormalized);
+
+        public static Money Subtract(int amount, Money money)
+            => new Money(amount - money.Amount, money.Currency, money.IsNormalized);
+
+        public static Money Subtract(long amount, Money money)
+            => new Money(amount - money.Amount, money.Currency, money.IsNormalized);
+
+        public static Money Subtract(decimal amount, Money money)
+        {
+            if (amount == 0m) { return money.Negate(); }
+            return new Money(amount - money.Amount, money.Currency, false);
+        }
+
+        #endregion
+        #endregion
+
+        #region Multiply()
+
+        [CLSCompliant(false)]
+        public static Money Multiply(Money money, uint multiplier)
+            => new Money(multiplier * money.Amount, money.Currency, money.IsNormalized);
+
+        [CLSCompliant(false)]
+        public static Money Multiply(Money money, ulong multiplier)
+            => new Money(multiplier * money.Amount, money.Currency, money.IsNormalized);
+
+        public static Money Multiply(Money money, int multiplier)
+            => new Money(multiplier * money.Amount, money.Currency, money.IsNormalized);
+
+        public static Money Multiply(Money money, long multiplier)
+            => new Money(multiplier * money.Amount, money.Currency, money.IsNormalized);
+
+        public static Money Multiply(Money money, decimal multiplier)
+            => new Money(multiplier * money.Amount, money.Currency, false);
+
+        #endregion
+
+        public static Money Divide(Money dividend, decimal divisor)
+            => new Money(dividend.Amount / divisor, dividend.Currency, false);
+
+        public static Money Modulus(Money dividend, decimal divisor)
+            => new Money(dividend.Amount % divisor, dividend.Currency, false);
+
+        public static Money Increment(Money money)
+            => new Money(money.Amount + money.Currency.One, money.Currency, money.IsNormalized);
+
+        public static Money Decrement(Money money)
+            => new Money(money.Amount - money.Currency.One, money.Currency, money.IsNormalized);
+
+        public static Money Negate(Money money)
+            => money.IsZero ? money : new Money(-money.Amount, money.Currency, money.IsNormalized);
+    }
+
+    // Other math operators.
+    public static partial class MoneyCalculator
+    {
+        public static int Sign(Money money) => money.Amount < 0m ? -1 : (money.Amount > 0m ? 1 : 0);
+
+        public static Money Abs(Money money) => money.IsPositiveOrZero ? money : money.Negate();
+
+        public static Money Max(Money money1, Money money2) => money1 >= money2 ? money1 : money2;
+
+        public static Money Min(Money money1, Money money2) => money1 <= money2 ? money1 : money2;
+
+        public static Money Clamp(Money money, Money min, Money max)
+        {
+            Require.True(min <= max, nameof(min));
+
+            return money < min ? min : (money > max ? max : money);
+        }
+
+        // NB: This method returns a decimal (a division implies that we lost the currency unit).
+        // This division is a lot like computing a percentage (if multiplied by 100, of course).
+        public static decimal Divide(Money dividend, Money divisor) => dividend.Amount / divisor.Amount;
+
+        // Divide+Remainder aka DivRem.
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
+        public static Money DivRem(Money dividend, long divisor, out Money remainder)
+        {
+            // REVIEW: remainder = dividend % divisor is slower for integers. What about decimals?
+            // > var q = dividend.Divide(divisor);
+            // > remainder = dividend.Remainder(divisor);
+            // REVIEW: for doubles, .NET uses:
+            // > Modulus = (Math.Abs(dividend) - (Math.Abs(divisor)
+            // >   * (Math.Floor(Math.Abs(dividend) / Math.Abs(divisor)))))
+            // >   * Math.Sign(dividend)
+            decimal q = dividend.Amount / divisor;
+            decimal rem = dividend.Amount - q * divisor;
+            remainder = new Money(rem, dividend.Currency);
+            return new Money(q, dividend.Currency);
+        }
+    }
+
+    // Rouding operators.
+    public static partial class MoneyCalculator
+    {
+        public static decimal Ceiling(Money money) => Round(money, Math.Ceiling);
+
+        public static decimal Floor(Money money) => Round(money, Math.Floor);
+
+        public static decimal Truncate(Money money) => Round(money, Math.Truncate);
+
+        public static decimal Round(Money money) => Round(money, Math.Round);
+
+        public static decimal Round(Money money, MidpointRounding mode)
+            => Round(money, _ => Math.Round(_, mode));
+
+        public static decimal Round(Money money, int decimalPlaces)
+            => Round(money, decimalPlaces, MidpointRounding.ToEven);
+
+        public static decimal Round(Money money, int decimalPlaces, MidpointRounding mode)
+        {
+            // If the amount is already rounded to decimalPlaces, do nothing.
+            if (money.IsRounded && money.Currency.DecimalPlaces == decimalPlaces) { return money.Amount; }
+            return Math.Round(money.Amount, decimalPlaces, mode);
+        }
+
+        private static decimal Round(Money money, Func<decimal, decimal> thunk)
+        {
+            Demand.NotNull(thunk);
+            // If the amount is already rounded to 0, do nothing.
+            if (money.IsRounded && money.Currency.DecimalPlaces == 0) { return money.Amount; }
+            return thunk.Invoke(money.Amount);
+        }
+    }
 
     // Addition with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Add(this Money money, decimal amount, MidpointRounding mode)
+        public static Money Add(Money money, decimal amount, MidpointRounding mode)
         {
             if (amount == 0m) { return money; }
             return new Money(money.Amount + amount, money.Currency, mode);
         }
 
-        public static Money Add(this Money money, Money other, MidpointRounding mode)
+        public static Money Add(Money money, Money other, MidpointRounding mode)
         {
             money.ThrowIfCurrencyMismatch(other, nameof(other));
 
@@ -31,10 +247,10 @@ namespace Narvalo.Finance
     // Subtraction with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Subtract(this Money money, decimal amount, MidpointRounding mode)
+        public static Money Subtract(Money money, decimal amount, MidpointRounding mode)
             => Add(money, -amount, mode);
 
-        public static Money Subtract(this Money money, Money other, MidpointRounding mode)
+        public static Money Subtract(Money money, Money other, MidpointRounding mode)
         {
             money.ThrowIfCurrencyMismatch(other, nameof(other));
 
@@ -49,21 +265,21 @@ namespace Narvalo.Finance
     // Multiplication with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Multiply(this Money money, decimal multiplier, MidpointRounding mode)
+        public static Money Multiply(Money money, decimal multiplier, MidpointRounding mode)
             => new Money(multiplier * money.Amount, money.Currency, mode);
     }
 
     // Division with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Divide(this Money dividend, decimal divisor, MidpointRounding mode)
+        public static Money Divide(Money dividend, decimal divisor, MidpointRounding mode)
             => new Money(dividend.Amount / divisor, dividend.Currency, mode);
     }
 
     // Remainder/Modulo with rounding.
     public static partial class MoneyCalculator
     {
-        public static Money Remainder(this Money dividend, decimal divisor, MidpointRounding mode)
+        public static Money Modulus(Money dividend, decimal divisor, MidpointRounding mode)
             => new Money(dividend.Amount % divisor, dividend.Currency, mode);
     }
 
