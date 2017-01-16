@@ -8,7 +8,7 @@ namespace Narvalo.Finance
 
     public static class PennyFactory
     {
-        #region From minor.
+        #region From a minor amount.
 
         public static Moneypenny CreateFromMinor(decimal minor, Currency currency, MidpointRounding mode)
         {
@@ -54,7 +54,7 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region From major.
+        #region From a major amount.
 
         public static Moneypenny CreateFromMajor(decimal major, Currency currency, MidpointRounding mode)
             => CreateFromMinor(currency.ConvertToMinor(major), currency, mode);
@@ -70,7 +70,17 @@ namespace Narvalo.Finance
 
         #endregion
 
-        #region From Money.
+        #region From a Money object.
+
+        public static Moneypenny Create(Money money)
+        {
+            Expect.True(money.IsRoundable);
+
+            var penny = TryCreate(money);
+            if (!penny.HasValue) { throw new NotSupportedException("XXX"); }
+
+            return penny.Value;
+        }
 
         public static Moneypenny Create(Money money, MidpointRounding mode)
         {
@@ -91,6 +101,18 @@ namespace Narvalo.Finance
             if (!penny.HasValue) { throw new NotSupportedException("XXX"); }
 
             return penny.Value;
+        }
+
+        public static Moneypenny? TryCreate(Money money)
+        {
+            Require.True(money.IsRoundable, nameof(money));
+
+            if (!money.IsNormalized) { return null; }
+
+            long? minor = money.ToLongMinor();
+            if (!minor.HasValue) { return null; }
+
+            return new Moneypenny(minor.Value, money.Currency);
         }
 
         public static Moneypenny? TryCreate(Money money, MidpointRounding mode)

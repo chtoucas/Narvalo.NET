@@ -3,12 +3,87 @@
 namespace Narvalo.Finance
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Utilities;
 
-    // NB: Abs() and DivRem() are direct members of the Moneypenny type.
+    // Standard math operators.
     public static partial class PennyCalculator
     {
+        public static Moneypenny Add(Moneypenny left, Moneypenny right)
+        {
+            left.ThrowIfCurrencyMismatch(right, nameof(right));
+
+            if (left.Amount == 0L) { return right; }
+            if (right.Amount == 0L) { return left; }
+            return new Moneypenny(checked(left.Amount + right.Amount), left.Currency);
+        }
+
+        public static Moneypenny Add(Moneypenny penny, long amount)
+        {
+            if (amount == 0L) { return penny; }
+            return new Moneypenny(checked(penny.Amount + amount), penny.Currency);
+        }
+
+        public static Moneypenny Subtract(Moneypenny left, Moneypenny right)
+        {
+            left.ThrowIfCurrencyMismatch(right, nameof(right));
+
+            if (left.Amount == 0L) { return Negate(right); }
+            if (right.Amount == 0L) { return left; }
+            return new Moneypenny(checked(right.Amount - left.Amount), left.Currency);
+        }
+
+        public static Moneypenny Subtract(Moneypenny penny, long amount) => Add(penny, -amount);
+
+        public static Moneypenny Subtract(long amount, Moneypenny penny)
+            => new Moneypenny(checked(amount - penny.Amount), penny.Currency);
+
+        public static Moneypenny Multiply(Moneypenny penny, long multiplier)
+            => new Moneypenny(checked(multiplier * penny.Amount), penny.Currency);
+
+        public static Moneypenny Divide(Moneypenny dividend, long divisor)
+            => new Moneypenny(checked(dividend.Amount / divisor), dividend.Currency);
+
+        public static Moneypenny Modulus(Moneypenny dividend, long divisor)
+            => new Moneypenny(checked(dividend.Amount % divisor), dividend.Currency);
+
+        public static Moneypenny Increment(Moneypenny penny)
+            => new Moneypenny(checked(penny.Amount + 1L), penny.Currency);
+
+        public static Moneypenny Decrement(Moneypenny penny)
+            => new Moneypenny(checked(penny.Amount - 1L), penny.Currency);
+
+        public static Moneypenny Negate(Moneypenny penny)
+            => penny.IsZero ? penny : new Moneypenny(-penny.Amount, penny.Currency);
+    }
+
+    // Standard math operators under which the Moneypenny type is not closed.
+    // NB: Decimal multiplication is always checked.
+    public static partial class PennyCalculator
+    {
+        public static Money Multiply(Moneypenny penny, decimal multiplier)
+            => new Money(multiplier * penny.Amount, penny.Currency);
+
+        // This division returns a decimal (we lost the currency unit).
+        // It is a lot like computing a percentage (if multiplied by 100, of course).
+        public static decimal Divide(Moneypenny dividend, Moneypenny divisor)
+            => dividend.Amount / (decimal)divisor.Amount;
+
+        public static Money Divide(Moneypenny dividend, decimal divisor)
+            => new Money(dividend.Amount / divisor, dividend.Currency);
+
+        public static Money Modulus(Moneypenny dividend, decimal divisor)
+            => new Money(dividend.Amount % divisor, dividend.Currency);
+    }
+
+    // Other math operators.
+    public static partial class PennyCalculator
+    {
+        public static int Sign(Moneypenny penny) => penny.Amount < 0L ? -1 : (penny.Amount > 0L ? 1 : 0);
+
+        public static Moneypenny Abs(Moneypenny penny) => penny.IsPositiveOrZero ? penny : Negate(penny);
+
         public static Moneypenny Max(Moneypenny penny1, Moneypenny penny2) => penny1 >= penny2 ? penny1 : penny2;
 
         public static Moneypenny Min(Moneypenny penny1, Moneypenny penny2) => penny1 <= penny2 ? penny1 : penny2;
@@ -19,8 +94,20 @@ namespace Narvalo.Finance
 
             return penny < min ? min : (penny > max ? max : penny);
         }
+
+        // Divide+Remainder aka DivRem.
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Justification = "[Intentionally] Math.DivRem().")]
+        public static Moneypenny DivRem(Moneypenny dividend, long divisor, out Moneypenny remainder)
+        {
+            long rem;
+            long q = Integer.DivRem(dividend.Amount, divisor, out rem);
+            remainder = new Moneypenny(rem, dividend.Currency);
+            return new Moneypenny(q, dividend.Currency);
+        }
     }
 
+    // LINQ-like Sum().
     public static partial class PennyCalculator
     {
         public static Moneypenny Sum(this IEnumerable<Moneypenny> pennies)

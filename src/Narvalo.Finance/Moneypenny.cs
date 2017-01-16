@@ -13,8 +13,9 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Utilities;
 
+    using static Narvalo.Finance.PennyCalculator;
+
     // A lightweight money type.
-    // Moneypenny is mostly self-contained (see also PennyCalculator && PennyFactory).
     //
     // Despite its name, this type is not restricted to currencies with minor units of size 2
     // but does not handle arbitrary subunits.
@@ -77,7 +78,7 @@ namespace Narvalo.Finance
 
         public static Moneypenny One(Currency currency) => new Moneypenny(1L, currency);
 
-        private void ThrowIfCurrencyMismatch(Moneypenny penny, string parameterName)
+        internal void ThrowIfCurrencyMismatch(Moneypenny penny, string parameterName)
             => Enforce.True(Currency == penny.Currency, parameterName, Strings.Argument_CurrencyMismatch);
 
         [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
@@ -191,23 +192,18 @@ namespace Narvalo.Finance
         public static explicit operator Money(Moneypenny value) => value.ToMoney();
     }
 
-    // Math methods.
+    // Math methods other than the standard operators.
     public partial struct Moneypenny
     {
-        public int Sign => Amount < 0L ? -1 : (Amount > 0L ? 1 : 0);
+        public int Sign => Sign(this);
 
-        public Moneypenny Abs() => IsPositiveOrZero ? this : Negate();
+        public Moneypenny Abs() => PennyCalculator.Abs(this);
 
         // Divide+Remainder aka DivRem.
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Div", Justification = "[Intentionally] Math.DivRem().")]
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "[Intentionally] Math.DivRem().")]
         public Moneypenny DivRem(long divisor, out Moneypenny remainder)
-        {
-            long rem;
-            long q = Integer.DivRem(Amount, divisor, out rem);
-            remainder = new Moneypenny(rem, Currency);
-            return new Moneypenny(q, Currency);
-        }
+            => PennyCalculator.DivRem(this, divisor, out remainder);
     }
 
     // Allocations.
@@ -239,10 +235,10 @@ namespace Narvalo.Finance
             return from _ in Integer.DivideEvenly(Amount, count) select new Moneypenny(_, cy);
         }
 
-        //public IEnumerable<Moneypenny> Allocate(Moneypenny money, RatioArray ratios)
+        //public IEnumerable<Moneypenny> Allocate(Moneypenny penny, RatioArray ratios)
         //{
-        //    Currency currency = money.Currency;
-        //    long total = money.Amount;
+        //    Currency currency = penny.Currency;
+        //    long total = penny.Amount;
 
         //    int len = ratios.Length;
         //    var dist = new decimal[len];
@@ -262,121 +258,98 @@ namespace Narvalo.Finance
     // Overrides the op_Addition operator.
     public partial struct Moneypenny
     {
-        public static Moneypenny operator +(Moneypenny left, long right) => left.Add(right);
-        public static Moneypenny operator +(long left, Moneypenny right) => right.Add(left);
-        public static Moneypenny operator +(Moneypenny left, Moneypenny right) => left.Add(right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator +(Moneypenny left, long right) => Add(left, right);
 
-        public Moneypenny Add(long amount)
-        {
-            if (amount == 0L) { return this; }
-            return new Moneypenny(checked(Amount + amount), Currency);
-        }
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator +(long left, Moneypenny right) => Add(right, left);
 
-        public Moneypenny Add(Moneypenny other)
-        {
-            ThrowIfCurrencyMismatch(other, nameof(other));
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator +(Moneypenny left, Moneypenny right) => Add(left, right);
 
-            if (Amount == 0L) { return other; }
-            if (other.Amount == 0L) { return this; }
-            return new Moneypenny(checked(Amount + other.Amount), Currency);
-        }
+        public Moneypenny Plus(long amount) => Add(this, amount);
+
+        public Moneypenny Plus(Moneypenny other) => Add(this, other);
     }
 
     // Overrides the op_Subtraction operator.
     public partial struct Moneypenny
     {
-        public static Moneypenny operator -(Moneypenny left, long right) => left.Subtract(right);
-        public static Moneypenny operator -(long left, Moneypenny right) => right.SubtractLeft(left);
-        public static Moneypenny operator -(Moneypenny left, Moneypenny right) => left.Subtract(right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator -(Moneypenny left, long right) => Subtract(left, right);
 
-        public Moneypenny Subtract(long amount) => Add(-amount);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator -(long left, Moneypenny right) => Subtract(left, right);
 
-        public Moneypenny Subtract(Moneypenny other)
-        {
-            ThrowIfCurrencyMismatch(other, nameof(other));
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator -(Moneypenny left, Moneypenny right) => Subtract(left, right);
 
-            if (Amount == 0L) { return other.Negate(); }
-            if (other.Amount == 0L) { return this; }
-            return new Moneypenny(checked(other.Amount - Amount), Currency);
-        }
+        public Moneypenny Minus(Moneypenny other) => Subtract(this, other);
 
-        private Moneypenny SubtractLeft(long amount) => new Moneypenny(checked(amount - Amount), Currency);
+        public Moneypenny Minus(long amount) => Subtract(this, amount);
     }
 
     // Overrides the op_Multiply operator.
     public partial struct Moneypenny
     {
-        public static Moneypenny operator *(long multiplier, Moneypenny money) => money.Multiply(multiplier);
-        public static Moneypenny operator *(Moneypenny money, long multiplier) => money.Multiply(multiplier);
-        //public static Money operator *(decimal multiplier, Moneypenny money) => money.Multiply(multiplier);
-        //public static Money operator *(Moneypenny money, decimal multiplier) => money.Multiply(multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator *(long multiplier, Moneypenny penny) => Multiply(penny, multiplier);
 
-        public Moneypenny Multiply(long multiplier) => new Moneypenny(checked(multiplier * Amount), Currency);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator *(Moneypenny penny, long multiplier) => Multiply(penny, multiplier);
 
-        // NB: This operation is not closed: Moneypenny -> Money.
-        // NB: Decimal multiplication is always checked.
-        public Money Multiply(decimal multiplier) => new Money(multiplier * Amount, Currency);
+        public Moneypenny MultiplyBy(long multiplier) => Multiply(this, multiplier);
     }
 
     // Overrides the op_Division operator.
     public partial struct Moneypenny
     {
-        public static Moneypenny operator /(Moneypenny dividend, long divisor) => dividend.Divide(divisor);
-        //public static decimal operator /(Moneypenny dividend, Moneypenny divisor) => dividend.Divide(divisor);
-        //public static Money operator /(Moneypenny dividend, decimal divisor) => dividend.Divide(divisor);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator /(Moneypenny dividend, long divisor) => Divide(dividend, divisor);
 
-        public Moneypenny Divide(long divisor) => new Moneypenny(checked(Amount / divisor), Currency);
-
-        // NB: This method returns a decimal (a division implies that we lost the currency unit).
-        // NB: Decimal division is always checked.
-        public decimal Divide(Moneypenny divisor) => Amount / (decimal)divisor.Amount;
-
-        // NB: This operation is not closed: Moneypenny -> Money.
-        // NB: Decimal division is always checked.
-        public Money Divide(decimal divisor) => new Money(Amount / divisor, Currency);
+        public Moneypenny DivideBy(long divisor) => Divide(this, divisor);
     }
 
     // Overrides the op_Modulus operator.
     public partial struct Moneypenny
     {
-        public static Moneypenny operator %(Moneypenny dividend, long divisor) => dividend.Remainder(divisor);
-        //public static Money operator %(Moneypenny dividend, decimal divisor) => dividend.Remainder(divisor);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator %(Moneypenny dividend, long divisor) => Modulus(dividend, divisor);
 
-        public Moneypenny Remainder(long divisor) => new Moneypenny(checked(Amount % divisor), Currency);
-
-        // NB: This operation is not closed: Moneypenny -> Money.
-        // NB: Decimal remainder is always checked.
-        public Money Remainder(decimal divisor) => new Money(Amount % divisor, Currency);
+        public Moneypenny Remainder(long divisor) => Modulus(this, divisor);
     }
 
     // Overrides the op_Increment operator.
     public partial struct Moneypenny
     {
-        public static Moneypenny operator ++(Moneypenny penny) => penny.Increment();
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator ++(Moneypenny penny) => PennyCalculator.Increment(penny);
 
-        public Moneypenny Increment() => new Moneypenny(checked(Amount + 1L), Currency);
+        public Moneypenny Increment() => PennyCalculator.Increment(this);
     }
 
     // Overrides the op_Decrement operator.
     public partial struct Moneypenny
     {
-        public static Moneypenny operator --(Moneypenny penny) => penny.Decrement();
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator --(Moneypenny penny) => PennyCalculator.Decrement(penny);
 
-        public Moneypenny Decrement() => new Moneypenny(checked(Amount - 1L), Currency);
+        public Moneypenny Decrement() => PennyCalculator.Decrement(this);
     }
 
     // Overrides the op_UnaryNegation operator.
     public partial struct Moneypenny
     {
-        public static Moneypenny operator -(Moneypenny penny) => penny.Negate();
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] See PennyCalculator.")]
+        public static Moneypenny operator -(Moneypenny penny) => PennyCalculator.Negate(penny);
 
-        public Moneypenny Negate() => IsZero ? this : new Moneypenny(-Amount, Currency);
+        public Moneypenny Negate() => PennyCalculator.Negate(this);
     }
 
     // Overrides the op_UnaryPlus operator.
-    // This operator does nothing, only added for completeness.
     public partial struct Moneypenny
     {
+        // This operator does nothing, only added for completeness.
         public static Moneypenny operator +(Moneypenny penny) => penny;
 
         public Moneypenny Plus() => this;
