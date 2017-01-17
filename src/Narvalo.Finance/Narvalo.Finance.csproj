@@ -85,6 +85,7 @@
     <Compile Include="Internal\ICurrencyUnit.cs" />
     <Compile Include="Internal\IMoney.cs" />
     <Compile Include="MoneyStyles.cs" />
+    <Compile Include="RoundingMachine.cs" />
     <Compile Include="Utilities\Allocation.cs" />
     <Compile Include="Utilities\Allocation`1.cs" />
     <Compile Include="Allocators\Money%24.cs" />

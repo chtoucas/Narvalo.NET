@@ -89,7 +89,7 @@ namespace Narvalo.Finance
         /// <para>An instance is said to be roundable if the currency specifies a standard
         /// representation for the number of decimal places allowed in an amount. If it does not,
         /// we never round the amount; customers of this class can still do this manually using one
-        /// of the rounding methods found in <see cref="MoneyCalculator"/>.</para>
+        /// of the rounding methods found in <see cref="RoundingMachine"/>.</para>
         /// </summary>
         /// <remarks>It is highly unlikely that you will ever need to call this property,
         /// the library is supposed to do the right thing.</remarks>
