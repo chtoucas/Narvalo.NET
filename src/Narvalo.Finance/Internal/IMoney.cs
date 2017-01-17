@@ -25,8 +25,18 @@ namespace Narvalo.Finance.Internal
         T Normalize(MidpointRounding mode);
         T Normalize(IRoundingAdjuster adjuster);
 
-        //decimal ToMinor();
-        //long? ToLongMinor();
+        decimal ToMinor();
+        long? ToLongMinor();
+
+        sbyte ToSByte();
+        ushort ToUInt16();
+        uint ToUInt32();
+        ulong ToUInt64();
+        byte ToByte();
+        short ToInt16();
+        int ToInt32();
+        long ToInt64();
+        decimal ToDecimal();
 
         //T Plus(T other);
         //T Plus(uint amount);
