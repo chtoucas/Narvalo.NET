@@ -4,7 +4,7 @@ namespace Narvalo.Finance.Internal
 {
     using System;
 
-    internal static class MoneyChecker
+    internal static class MoneyHelpers
     {
         public static void ThrowIfCurrencyMismatch(Money mny, Currency cy)
         {

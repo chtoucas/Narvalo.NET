@@ -95,7 +95,7 @@ namespace Narvalo.Finance.Rounding
         }
 
         public static Money Mod(this Money @this, decimal divisor, MidpointRounding mode)
-            => MoneyCalculator.Modulo(@this, divisor, mode);
+            => MoneyCalculator.Remainder(@this, divisor, mode);
 
         public static Money Mod(this Money @this, decimal divisor, IRoundingAdjuster adjuster)
         {
@@ -125,7 +125,7 @@ namespace Narvalo.Finance.Rounding
                 {
                     mny = it.Current;
 
-                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                    MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                     sum += NormalizeAmount(mny, adjuster);
                 }
@@ -162,7 +162,7 @@ namespace Narvalo.Finance.Rounding
                         {
                             mny = item.Value;
 
-                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                            MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                             sum += NormalizeAmount(mny, adjuster);
                         }
@@ -198,7 +198,7 @@ namespace Narvalo.Finance.Rounding
                 {
                     mny = it.Current;
 
-                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                    MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                     sum += NormalizeAmount(mny, adjuster);
                     count++;
@@ -234,7 +234,7 @@ namespace Narvalo.Finance.Rounding
                         {
                             mny = item.Value;
 
-                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                            MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                             sum += NormalizeAmount(mny, adjuster);
                             count++;

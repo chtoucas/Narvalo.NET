@@ -67,6 +67,7 @@ TODO
   See [here](http://stackoverflow.com/questions/13558579/are-there-other-ways-of-calling-an-interface-method-of-a-struct-without-boxing-e),
   [here](http://stackoverflow.com/questions/5757324/is-there-boxing-unboxing-when-casting-a-struct-into-a-generic-interface)
   and [here](http://stackoverflow.com/questions/3032750/structs-interfaces-and-boxing).
+- Pretty sure that we can get rid off all uint and int overloads.
 
 Highlights
 ----------

@@ -13,132 +13,59 @@ namespace Narvalo.Finance
     {
         #region Add()
 
-        public static Money Add(Money left, Money right)
-        {
-            left.ThrowIfCurrencyMismatch(right, nameof(right));
-
-            if (left.Amount == 0m) { return right; }
-            if (right.Amount == 0m) { return left; }
-            return new Money(left.Amount + right.Amount, left.Currency, left.IsNormalized && right.IsNormalized);
-        }
+        public static Money Add(Money left, Money right) => left.Plus(right);
 
         [CLSCompliant(false)]
-        public static Money Add(Money money, uint amount)
-        {
-            if (amount == 0) { return money; }
-            return new Money(money.Amount + amount, money.Currency, money.IsNormalized);
-        }
+        public static Money Add(Money money, uint amount) => money.Plus(amount);
 
         [CLSCompliant(false)]
-        public static Money Add(Money money, ulong amount)
-        {
-            if (amount == 0UL) { return money; }
-            return new Money(money.Amount + amount, money.Currency, money.IsNormalized);
-        }
+        public static Money Add(Money money, ulong amount) => money.Plus(amount);
 
-        public static Money Add(Money money, int amount)
-        {
-            if (amount == 0) { return money; }
-            return new Money(money.Amount + amount, money.Currency, money.IsNormalized);
-        }
+        public static Money Add(Money money, int amount) => money.Plus(amount);
 
-        public static Money Add(Money money, long amount)
-        {
-            if (amount == 0L) { return money; }
-            return new Money(money.Amount + amount, money.Currency, money.IsNormalized);
-        }
+        public static Money Add(Money money, long amount) => money.Plus(amount);
 
-        public static Money Add(Money money, decimal amount)
-        {
-            if (amount == 0m) { return money; }
-            return new Money(money.Amount + amount, money.Currency, false);
-        }
+        public static Money Add(Money money, decimal amount) => money.Plus(amount);
 
         #endregion
 
         #region Substract()
 
-        public static Money Subtract(Money left, Money right)
-        {
-            left.ThrowIfCurrencyMismatch(right, nameof(right));
-
-            if (left.Amount == 0m) { return right.Negate(); }
-            if (right.Amount == 0m) { return left; }
-            return new Money(left.Amount - right.Amount, left.Currency, left.IsNormalized && right.IsNormalized);
-        }
+        public static Money Subtract(Money left, Money right) => left.Minus(right);
 
         [CLSCompliant(false)]
-        public static Money Subtract(Money money, uint amount)
-        {
-            if (amount == 0) { return money; }
-            return new Money(money.Amount - amount, money.Currency, money.IsNormalized);
-        }
+        public static Money Subtract(Money money, uint amount) => money.Minus(amount);
 
         [CLSCompliant(false)]
-        public static Money Subtract(Money money, ulong amount)
-        {
-            if (amount == 0UL) { return money; }
-            return new Money(money.Amount - amount, money.Currency, money.IsNormalized);
-        }
+        public static Money Subtract(Money money, ulong amount) => money.Minus(amount);
 
-        public static Money Subtract(Money money, int amount) => Add(money, -amount);
+        public static Money Subtract(Money money, int amount) => money.Minus(amount);
 
-        public static Money Subtract(Money money, long amount) => Add(money, -amount);
+        public static Money Subtract(Money money, long amount) => money.Minus(amount);
 
-        public static Money Subtract(Money money, decimal amount) => Add(money, -amount);
-
-        #region Subtraction where the Money object is on the right.
-
-        [CLSCompliant(false)]
-        public static Money Subtract(uint amount, Money money)
-            => new Money(amount - money.Amount, money.Currency, money.IsNormalized);
-
-        [CLSCompliant(false)]
-        public static Money Subtract(ulong amount, Money money)
-            => new Money(amount - money.Amount, money.Currency, money.IsNormalized);
-
-        public static Money Subtract(int amount, Money money)
-            => new Money(amount - money.Amount, money.Currency, money.IsNormalized);
-
-        public static Money Subtract(long amount, Money money)
-            => new Money(amount - money.Amount, money.Currency, money.IsNormalized);
-
-        public static Money Subtract(decimal amount, Money money)
-        {
-            if (amount == 0m) { return money.Negate(); }
-            return new Money(amount - money.Amount, money.Currency, false);
-        }
-
-        #endregion
+        public static Money Subtract(Money money, decimal amount) => money.Minus(amount);
 
         #endregion
 
         #region Multiply()
 
         [CLSCompliant(false)]
-        public static Money Multiply(Money money, uint multiplier)
-            => new Money(multiplier * money.Amount, money.Currency, money.IsNormalized);
+        public static Money Multiply(Money money, uint multiplier) => money.MultiplyBy(multiplier);
 
         [CLSCompliant(false)]
-        public static Money Multiply(Money money, ulong multiplier)
-            => new Money(multiplier * money.Amount, money.Currency, money.IsNormalized);
+        public static Money Multiply(Money money, ulong multiplier) => money.MultiplyBy(multiplier);
 
-        public static Money Multiply(Money money, int multiplier)
-            => new Money(multiplier * money.Amount, money.Currency, money.IsNormalized);
+        public static Money Multiply(Money money, int multiplier) => money.MultiplyBy(multiplier);
 
-        public static Money Multiply(Money money, long multiplier)
-            => new Money(multiplier * money.Amount, money.Currency, money.IsNormalized);
+        public static Money Multiply(Money money, long multiplier) => money.MultiplyBy(multiplier);
 
-        public static Money Multiply(Money money, decimal multiplier)
-            => new Money(multiplier * money.Amount, money.Currency, false);
+        public static Money Multiply(Money money, decimal multiplier) => money.MultiplyBy(multiplier);
 
         #endregion
 
-        public static Money Divide(Money dividend, decimal divisor)
-            => new Money(dividend.Amount / divisor, dividend.Currency, false);
+        public static Money Divide(Money dividend, decimal divisor) => dividend.DivideBy(divisor);
 
-        public static Money Modulo(Money dividend, decimal divisor)
-            => new Money(dividend.Amount % divisor, dividend.Currency, false);
+        public static Money Remainder(Money dividend, decimal divisor) => dividend.Mod(divisor);
     }
 
     // Standard binary math operators under which the Money type is not closed.
@@ -172,7 +99,7 @@ namespace Narvalo.Finance
         {
             // REVIEW: remainder = dividend % divisor is slower for integers. What about decimals?
             // > var q = dividend.DivideBy(divisor);
-            // > remainder = dividend.Modulo(divisor);
+            // > remainder = dividend.Remainder(divisor);
             // REVIEW: for doubles, .NET uses:
             // > Modulus = (Math.Abs(dividend) - (Math.Abs(divisor)
             // >   * (Math.Floor(Math.Abs(dividend) / Math.Abs(divisor)))))
@@ -257,7 +184,7 @@ namespace Narvalo.Finance
         public static Money Divide(Money dividend, decimal divisor, MidpointRounding mode)
             => Money.FromMajor(dividend.Amount / divisor, dividend.Currency, mode);
 
-        public static Money Modulo(Money dividend, decimal divisor, MidpointRounding mode)
+        public static Money Remainder(Money dividend, decimal divisor, MidpointRounding mode)
             => Money.FromMajor(dividend.Amount % divisor, dividend.Currency, mode);
     }
 
@@ -321,7 +248,7 @@ namespace Narvalo.Finance
                 {
                     mny = it.Current;
 
-                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                    MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                     normalized = normalized && mny.IsNormalized;
                     sum += mny.Amount;
@@ -362,7 +289,7 @@ namespace Narvalo.Finance
                         {
                             mny = item.Value;
 
-                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                            MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                             normalized = normalized && mny.IsNormalized;
                             sum += mny.Amount;
@@ -394,7 +321,7 @@ namespace Narvalo.Finance
                 {
                     mny = it.Current;
 
-                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                    MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                     sum += NormalizeAmount(mny, mode);
                 }
@@ -430,7 +357,7 @@ namespace Narvalo.Finance
                         {
                             mny = item.Value;
 
-                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                            MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                             sum += NormalizeAmount(mny, mode);
                         }
@@ -482,7 +409,7 @@ namespace Narvalo.Finance
                 {
                     mny = it.Current;
 
-                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                    MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                     sum += mny.Amount;
                     count++;
@@ -517,7 +444,7 @@ namespace Narvalo.Finance
                         {
                             mny = item.Value;
 
-                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                            MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                             sum += mny.Amount;
                             count++;
@@ -549,7 +476,7 @@ namespace Narvalo.Finance
                 {
                     mny = it.Current;
 
-                    MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                    MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                     sum += NormalizeAmount(mny, mode);
                     count++;
@@ -584,7 +511,7 @@ namespace Narvalo.Finance
                         {
                             mny = item.Value;
 
-                            MoneyChecker.ThrowIfCurrencyMismatch(mny, currency);
+                            MoneyHelpers.ThrowIfCurrencyMismatch(mny, currency);
 
                             sum += NormalizeAmount(mny, mode);
                             count++;

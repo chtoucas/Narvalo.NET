@@ -108,7 +108,7 @@
     <Compile Include="Rounding\RoundingModeAdjuster.cs" />
     <Compile Include="Rounding\RoundingAdjusters.cs" />
     <Compile Include="FractionalCurrency.cs" />
-    <Compile Include="Internal\Integer.cs" />
+    <Compile Include="Internal\Number.cs" />
     <Compile Include="Rounding\Money%24.cs" />
     <Compile Include="Rounding\StochasticRoundingAdjuster.cs" />
     <Compile Include="Utilities\IbanCheckDigits.cs" />
@@ -141,7 +141,7 @@
     <Compile Include="IbanValidationLevels.cs" />
     <Compile Include="Utilities\BooleanResult.cs" />
     <Compile Include="IbanValidator.cs" />
-    <Compile Include="Internal\MoneyChecker.cs" />
+    <Compile Include="Internal\MoneyHelpers.cs" />
     <Compile Include="Internal\Sentinel.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Generic\Money`1.cs" />

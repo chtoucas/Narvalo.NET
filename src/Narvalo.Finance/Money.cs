@@ -11,8 +11,6 @@ namespace Narvalo.Finance
     using Narvalo.Finance.Properties;
     using Narvalo.Finance.Rounding;
 
-    using static Narvalo.Finance.MoneyCalculator;
-
     // Per default, the CLR will use LayoutKind.Sequential for structs. Here, we do not care
     // about interop with unmanaged code, so why not let the CLR decide what's best for it?
     //[StructLayout(LayoutKind.Auto)]
@@ -468,175 +466,225 @@ namespace Narvalo.Finance
     public partial struct Money
     {
         [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(Money left, uint right) => Add(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(Money left, uint right) => left.Plus(right);
 
         [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(uint left, Money right) => Add(right, left);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(uint left, Money right) => right.Plus(left);
 
         [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(Money left, ulong right) => Add(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(Money left, ulong right) => left.Plus(right);
 
         [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(ulong left, Money right) => Add(right, left);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(ulong left, Money right) => right.Plus(left);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(Money left, int right) => Add(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(Money left, int right) => left.Plus(right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(int left, Money right) => Add(right, left);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(int left, Money right) => right.Plus(left);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(Money left, long right) => Add(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(Money left, long right) => left.Plus(right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(long left, Money right) => Add(right, left);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(long left, Money right) => right.Plus(left);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(Money left, decimal right) => Add(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(Money left, decimal right) => left.Plus(right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(decimal left, Money right) => Add(right, left);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(decimal left, Money right) => right.Plus(left);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Add().")]
-        public static Money operator +(Money left, Money right) => Add(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Money operator +(Money left, Money right) => left.Plus(right);
 
-        public Money Plus(Money other) => Add(this, other);
+        public Money Plus(Money other)
+        {
+            ThrowIfCurrencyMismatch(other, nameof(other));
+
+            if (Amount == 0m) { return other; }
+            if (other.Amount == 0m) { return this; }
+            return new Money(Amount + other.Amount, Currency, IsNormalized && other.IsNormalized);
+        }
 
         [CLSCompliant(false)]
-        public Money Plus(uint amount) => Add(this, amount);
+        public Money Plus(uint amount)
+        {
+            if (amount == 0) { return this; }
+            return new Money(Amount + amount, Currency, IsNormalized);
+        }
 
         [CLSCompliant(false)]
-        public Money Plus(ulong amount) => Add(this, amount);
+        public Money Plus(ulong amount)
+        {
+            if (amount == 0UL) { return this; }
+            return new Money(Amount + amount, Currency, IsNormalized);
+        }
 
-        public Money Plus(int amount) => Add(this, amount);
+        public Money Plus(int amount)
+        {
+            if (amount == 0) { return this; }
+            return new Money(Amount + amount, Currency, IsNormalized);
+        }
 
-        public Money Plus(long amount) => Add(this, amount);
+        public Money Plus(long amount)
+        {
+            if (amount == 0L) { return this; }
+            return new Money(Amount + amount, Currency, IsNormalized);
+        }
 
-        public Money Plus(decimal amount) => Add(this, amount);
+        public Money Plus(decimal amount)
+        {
+            if (amount == 0m) { return this; }
+            return new Money(Amount + amount, Currency, false);
+        }
     }
 
     // Overrides the op_Subtraction operator.
     public partial struct Money
     {
         [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(Money left, uint right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Minus().")]
+        public static Money operator -(Money left, uint right) => left.Minus(right);
 
         [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(uint left, Money right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Not provided.")]
+        public static Money operator -(uint left, Money right)
+            => new Money(left - right.Amount, right.Currency, right.IsNormalized);
 
         [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(Money left, ulong right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Minus().")]
+        public static Money operator -(Money left, ulong right) => left.Minus(right);
 
         [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(ulong left, Money right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Not provided.")]
+        public static Money operator -(ulong left, Money right)
+            => new Money(left - right.Amount, right.Currency, right.IsNormalized);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(Money left, long right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Minus().")]
+        public static Money operator -(Money left, long right) => left.Minus(right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(long left, Money right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Not provided.")]
+        public static Money operator -(long left, Money right)
+            => new Money(left - right.Amount, right.Currency, right.IsNormalized);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(Money left, int right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Minus().")]
+        public static Money operator -(Money left, int right) => left.Minus(right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(int left, Money right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Not provided.")]
+        public static Money operator -(int left, Money right)
+            => new Money(left - right.Amount, right.Currency, right.IsNormalized);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(Money left, decimal right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Minus().")]
+        public static Money operator -(Money left, decimal right) => left.Minus(right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(decimal left, Money right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Not provided.")]
+        public static Money operator -(decimal left, Money right)
+        {
+            if (left == 0m) { return right.Negate(); }
+            return new Money(left - right.Amount, right.Currency, false);
+        }
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Subtract().")]
-        public static Money operator -(Money left, Money right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Minus().")]
+        public static Money operator -(Money left, Money right) => left.Minus(right);
 
-        public Money Minus(Money other) => Subtract(this, other);
+        public Money Minus(Money other)
+        {
+            ThrowIfCurrencyMismatch(other, nameof(other));
+
+            if (Amount == 0m) { return other.Negate(); }
+            if (other.Amount == 0m) { return this; }
+            return new Money(Amount - other.Amount, Currency, IsNormalized && other.IsNormalized);
+        }
 
         [CLSCompliant(false)]
-        public Money Minus(uint amount) => Subtract(this, amount);
+        public Money Minus(uint amount)
+        {
+            if (amount == 0) { return this; }
+            return new Money(Amount - amount, Currency, IsNormalized);
+        }
 
         [CLSCompliant(false)]
-        public Money Minus(ulong amount) => Subtract(this, amount);
+        public Money Minus(ulong amount)
+        {
+            if (amount == 0UL) { return this; }
+            return new Money(Amount - amount, Currency, IsNormalized);
+        }
 
-        public Money Minus(int amount) => Subtract(this, amount);
+        public Money Minus(int amount) => Plus(-amount);
 
-        public Money Minus(long amount) => Subtract(this, amount);
+        public Money Minus(long amount) => Plus(-amount);
 
-        public Money Minus(decimal amount) => Subtract(this, amount);
+        public Money Minus(decimal amount) => Plus(-amount);
     }
 
     // Overrides the op_Multiply operator.
     public partial struct Money
     {
         [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Multiply().")]
-        public static Money operator *(ulong multiplier, Money money) => Multiply(money, multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named MultiplyBy().")]
+        public static Money operator *(ulong multiplier, Money money) => money.MultiplyBy(multiplier);
 
         [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Multiply().")]
-        public static Money operator *(Money money, ulong multiplier) => Multiply(money, multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named MultiplyBy().")]
+        public static Money operator *(Money money, ulong multiplier) => money.MultiplyBy(multiplier);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Multiply().")]
-        public static Money operator *(long multiplier, Money money) => Multiply(money, multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named MultiplyBy().")]
+        public static Money operator *(long multiplier, Money money) => money.MultiplyBy(multiplier);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Multiply().")]
-        public static Money operator *(Money money, long multiplier) => Multiply(money, multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named MultiplyBy().")]
+        public static Money operator *(Money money, long multiplier) => money.MultiplyBy(multiplier);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Multiply().")]
-        public static Money operator *(int multiplier, Money money) => Multiply(money, multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named MultiplyBy().")]
+        public static Money operator *(int multiplier, Money money) => money.MultiplyBy(multiplier);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Multiply().")]
-        public static Money operator *(Money money, int multiplier) => Multiply(money, multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named MultiplyBy().")]
+        public static Money operator *(Money money, int multiplier) => money.MultiplyBy(multiplier);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Multiply().")]
-        public static Money operator *(decimal multiplier, Money money) => Multiply(money, multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named MultiplyBy().")]
+        public static Money operator *(decimal multiplier, Money money) => money.MultiplyBy(multiplier);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Multiply().")]
-        public static Money operator *(Money money, decimal multiplier) => Multiply(money, multiplier);
-
-        [CLSCompliant(false)]
-        public Money MultiplyBy(uint multiplier) => Multiply(this, multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named MultiplyBy().")]
+        public static Money operator *(Money money, decimal multiplier) => money.MultiplyBy(multiplier);
 
         [CLSCompliant(false)]
-        public Money MultiplyBy(ulong multiplier) => Multiply(this, multiplier);
+        public Money MultiplyBy(uint multiplier) => new Money(multiplier * Amount, Currency, IsNormalized);
 
-        public Money MultiplyBy(int multiplier) => Multiply(this, multiplier);
+        [CLSCompliant(false)]
+        public Money MultiplyBy(ulong multiplier) => new Money(multiplier * Amount, Currency, IsNormalized);
 
-        public Money MultiplyBy(long multiplier) => Multiply(this, multiplier);
+        public Money MultiplyBy(int multiplier) => new Money(multiplier * Amount, Currency, IsNormalized);
 
-        public Money MultiplyBy(decimal multiplier) => Multiply(this, multiplier);
+        public Money MultiplyBy(long multiplier) => new Money(multiplier * Amount, Currency, IsNormalized);
+
+        public Money MultiplyBy(decimal multiplier) => new Money(multiplier * Amount, Currency, false);
     }
 
     // Overrides the op_Division operator.
     public partial struct Money
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See MoneyCalculator.Divide().")]
-        public static Money operator /(Money dividend, decimal divisor) => Divide(dividend, divisor);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named DivideBy().")]
+        public static Money operator /(Money dividend, decimal divisor) => dividend.DivideBy(divisor);
 
-        public Money DivideBy(decimal divisor) => Divide(this, divisor);
+        public Money DivideBy(decimal divisor) => new Money(Amount / divisor, Currency, false);
     }
 
     // Overrides the op_Modulus operator.
     public partial struct Money
     {
-        public static Money operator %(Money dividend, decimal divisor) => Modulo(dividend, divisor);
+        public static Money operator %(Money dividend, decimal divisor) => dividend.Mod(divisor);
 
-        public Money Mod(decimal divisor) => Modulo(this, divisor);
+        public Money Mod(decimal divisor)=> new Money(Amount % divisor, Currency, false);
     }
 
     // Overrides the op_Increment operator.
     public partial struct Money
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] Named IncrementMajor().")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named IncrementMajor().")]
         public static Money operator ++(Money money) => money.IncrementMajor();
 
         public Money IncrementMajor() => new Money(Amount + Currency.One, Currency, IsNormalized);
@@ -648,7 +696,7 @@ namespace Narvalo.Finance
     // Overrides the op_Decrement operator.
     public partial struct Money
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] Named DecrementMajor().")]
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named DecrementMajor().")]
         public static Money operator --(Money money) => money.DecrementMajor();
 
         public Money DecrementMajor() => new Money(Amount - Currency.One, Currency, IsNormalized);

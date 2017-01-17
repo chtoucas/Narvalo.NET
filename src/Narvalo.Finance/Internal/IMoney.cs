@@ -6,7 +6,7 @@ namespace Narvalo.Finance.Internal
 
     using Narvalo.Finance.Rounding;
 
-    // Used internally to ensure that Money and Money<T> are in sync.
+    // Used internally to ensure that Money and Money<T> look alike.
     internal interface IMoney<T> : IEquatable<T>, IComparable<T>, IComparable, IFormattable
     {
         decimal Amount { get; }
@@ -38,26 +38,26 @@ namespace Narvalo.Finance.Internal
         long ToInt64();
         decimal ToDecimal();
 
-        //T Plus(T other);
-        //T Plus(uint amount);
-        //T Plus(ulong amount);
-        //T Plus(int amount);
-        //T Plus(long amount);
-        //T Plus(decimal amount);
+        T Plus(T other);
+        T Plus(uint amount);
+        T Plus(ulong amount);
+        T Plus(int amount);
+        T Plus(long amount);
+        T Plus(decimal amount);
 
-        //T Minus(T other);
-        //T Minus(uint amount);
-        //T Minus(ulong amount);
-        //T Minus(int amount);
-        //T Minus(long amount);
-        //T Minus(decimal amount);
+        T Minus(T other);
+        T Minus(uint amount);
+        T Minus(ulong amount);
+        T Minus(int amount);
+        T Minus(long amount);
+        T Minus(decimal amount);
 
-        //T MultiplyBy(uint multiplier);
-        //T MultiplyBy(ulong multiplier);
-        //T MultiplyBy(int multiplier);
-        //T MultiplyBy(long multiplier);
+        T MultiplyBy(uint multiplier);
+        T MultiplyBy(ulong multiplier);
+        T MultiplyBy(int multiplier);
+        T MultiplyBy(long multiplier);
 
-        //T DivideBy(decimal divisor);
+        T DivideBy(decimal divisor);
 
         T Mod(decimal divisor);
 

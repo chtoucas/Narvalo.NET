@@ -284,64 +284,83 @@ namespace Narvalo.Finance
     // Overrides the op_Addition operator.
     public partial struct Moneypenny
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Add().")]
-        public static Moneypenny operator +(Moneypenny left, long right) => Add(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Moneypenny operator +(Moneypenny left, long right) => left.Plus(right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Add().")]
-        public static Moneypenny operator +(long left, Moneypenny right) => Add(right, left);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Moneypenny operator +(long left, Moneypenny right) => right.Plus(left);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Add().")]
-        public static Moneypenny operator +(Moneypenny left, Moneypenny right) => Add(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Plus().")]
+        public static Moneypenny operator +(Moneypenny left, Moneypenny right) => left.Plus(right);
 
-        public Moneypenny Plus(long amount) => Add(this, amount);
+        public Moneypenny Plus(Moneypenny other)
+        {
+            ThrowIfCurrencyMismatch(other, nameof(other));
 
-        public Moneypenny Plus(Moneypenny other) => Add(this, other);
+            if (Amount == 0L) { return other; }
+            if (other.Amount == 0L) { return this; }
+            return new Moneypenny(checked(Amount + other.Amount), Currency);
+        }
+
+        public Moneypenny Plus(long amount)
+        {
+            if (amount == 0L) { return this; }
+            return new Moneypenny(checked(Amount + amount), Currency);
+        }
     }
 
     // Overrides the op_Subtraction operator.
     public partial struct Moneypenny
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Subtract().")]
-        public static Moneypenny operator -(Moneypenny left, long right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Minus().")]
+        public static Moneypenny operator -(Moneypenny left, long right) => left.Minus(right);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Subtract().")]
-        public static Moneypenny operator -(long left, Moneypenny right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Not provided.")]
+        public static Moneypenny operator -(long left, Moneypenny right)
+            => new Moneypenny(checked(left - right.Amount), right.Currency);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Subtract().")]
-        public static Moneypenny operator -(Moneypenny left, Moneypenny right) => Subtract(left, right);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named Minus().")]
+        public static Moneypenny operator -(Moneypenny left, Moneypenny right) => left.Minus(right);
 
-        public Moneypenny Minus(Moneypenny other) => Subtract(this, other);
+        public Moneypenny Minus(Moneypenny other)
+        {
+            ThrowIfCurrencyMismatch(other, nameof(other));
 
-        public Moneypenny Minus(long amount) => Subtract(this, amount);
+            if (Amount == 0L) { return other.Negate(); }
+            if (other.Amount == 0L) { return this; }
+            return new Moneypenny(checked(other.Amount - Amount), Currency);
+        }
+
+        public Moneypenny Minus(long amount) => Plus(-amount);
     }
 
     // Overrides the op_Multiply operator.
     public partial struct Moneypenny
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Multiply().")]
-        public static Moneypenny operator *(long multiplier, Moneypenny penny) => Multiply(penny, multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named MultiplyBy().")]
+        public static Moneypenny operator *(long multiplier, Moneypenny penny) => penny.MultiplyBy(multiplier);
 
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Multiply().")]
-        public static Moneypenny operator *(Moneypenny penny, long multiplier) => Multiply(penny, multiplier);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named MultiplyBy().")]
+        public static Moneypenny operator *(Moneypenny penny, long multiplier) => penny.MultiplyBy(multiplier);
 
-        public Moneypenny MultiplyBy(long multiplier) => Multiply(this, multiplier);
+        public Moneypenny MultiplyBy(long multiplier) => new Moneypenny(checked(multiplier * Amount), Currency);
     }
 
     // Overrides the op_Division operator.
     public partial struct Moneypenny
     {
-        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] See PennyCalculator.Divide().")]
-        public static Moneypenny operator /(Moneypenny dividend, long divisor) => Divide(dividend, divisor);
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Intentionally] Named DivideBy().")]
+        public static Moneypenny operator /(Moneypenny dividend, long divisor) => dividend.DivideBy(divisor);
 
-        public Moneypenny DivideBy(long divisor) => Divide(this, divisor);
+        public Moneypenny DivideBy(long divisor) => new Moneypenny(checked(Amount / divisor), Currency);
     }
 
     // Overrides the op_Modulus operator.
     public partial struct Moneypenny
     {
-        public static Moneypenny operator %(Moneypenny dividend, long divisor) => Modulo(dividend, divisor);
+        public static Moneypenny operator %(Moneypenny dividend, long divisor) => dividend.Mod(divisor);
 
-        public Moneypenny Mod(long divisor) => Modulo(this, divisor);
+        public Moneypenny Mod(long divisor) => new Moneypenny(checked(Amount % divisor), Currency);
     }
 
     // Overrides the op_Increment operator.

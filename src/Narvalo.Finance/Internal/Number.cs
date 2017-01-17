@@ -7,7 +7,7 @@ namespace Narvalo.Finance.Internal
 
     using Narvalo.Finance.Utilities;
 
-    internal static class Integer
+    internal static class Number
     {
         // Reproduces the Math.DivRem() method which is not available with PCL:
         // > int remainder;

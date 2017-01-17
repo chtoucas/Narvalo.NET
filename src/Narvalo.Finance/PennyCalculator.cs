@@ -6,48 +6,23 @@ namespace Narvalo.Finance
     using System.Diagnostics.CodeAnalysis;
 
     using Narvalo.Finance.Internal;
-    using Narvalo.Finance.Utilities;
 
     // Standard binary math operators.
     public static partial class PennyCalculator
     {
-        public static Moneypenny Add(Moneypenny left, Moneypenny right)
-        {
-            left.ThrowIfCurrencyMismatch(right, nameof(right));
+        public static Moneypenny Add(Moneypenny left, Moneypenny right) => left.Plus(right);
 
-            if (left.Amount == 0L) { return right; }
-            if (right.Amount == 0L) { return left; }
-            return new Moneypenny(checked(left.Amount + right.Amount), left.Currency);
-        }
+        public static Moneypenny Add(Moneypenny penny, long amount) => penny.Plus(amount);
 
-        public static Moneypenny Add(Moneypenny penny, long amount)
-        {
-            if (amount == 0L) { return penny; }
-            return new Moneypenny(checked(penny.Amount + amount), penny.Currency);
-        }
+        public static Moneypenny Subtract(Moneypenny left, Moneypenny right) => left.Minus(right);
 
-        public static Moneypenny Subtract(Moneypenny left, Moneypenny right)
-        {
-            left.ThrowIfCurrencyMismatch(right, nameof(right));
+        public static Moneypenny Subtract(Moneypenny penny, long amount) => penny.Minus(amount);
 
-            if (left.Amount == 0L) { return right.Negate(); }
-            if (right.Amount == 0L) { return left; }
-            return new Moneypenny(checked(right.Amount - left.Amount), left.Currency);
-        }
+        public static Moneypenny Multiply(Moneypenny penny, long multiplier) => penny.MultiplyBy(multiplier);
 
-        public static Moneypenny Subtract(Moneypenny penny, long amount) => Add(penny, -amount);
+        public static Moneypenny Divide(Moneypenny dividend, long divisor) => dividend.DivideBy(divisor);
 
-        public static Moneypenny Subtract(long amount, Moneypenny penny)
-            => new Moneypenny(checked(amount - penny.Amount), penny.Currency);
-
-        public static Moneypenny Multiply(Moneypenny penny, long multiplier)
-            => new Moneypenny(checked(multiplier * penny.Amount), penny.Currency);
-
-        public static Moneypenny Divide(Moneypenny dividend, long divisor)
-            => new Moneypenny(checked(dividend.Amount / divisor), dividend.Currency);
-
-        public static Moneypenny Modulo(Moneypenny dividend, long divisor)
-            => new Moneypenny(checked(dividend.Amount % divisor), dividend.Currency);
+        public static Moneypenny Remainder(Moneypenny dividend, long divisor) => dividend.Mod(divisor);
     }
 
     // Standard binary math operators under which the Moneypenny type is not closed.
@@ -65,7 +40,7 @@ namespace Narvalo.Finance
         public static Money Divide(Moneypenny dividend, decimal divisor)
             => new Money(dividend.Amount / divisor, dividend.Currency);
 
-        public static Money Modulo(Moneypenny dividend, decimal divisor)
+        public static Money Remainder(Moneypenny dividend, decimal divisor)
             => new Money(dividend.Amount % divisor, dividend.Currency);
     }
 
@@ -91,7 +66,7 @@ namespace Narvalo.Finance
         public static Moneypenny DivRem(Moneypenny dividend, long divisor, out Moneypenny remainder)
         {
             long rem;
-            long q = Integer.DivRem(dividend.Amount, divisor, out rem);
+            long q = Number.DivRem(dividend.Amount, divisor, out rem);
             remainder = new Moneypenny(rem, dividend.Currency);
             return new Moneypenny(q, dividend.Currency);
         }
@@ -116,7 +91,7 @@ namespace Narvalo.Finance
                 {
                     pny = it.Current;
 
-                    MoneyChecker.ThrowIfCurrencyMismatch(pny, currency);
+                    MoneyHelpers.ThrowIfCurrencyMismatch(pny, currency);
 
                     checked { sum += pny.Amount; }
                 }
@@ -151,7 +126,7 @@ namespace Narvalo.Finance
                         {
                             pny = item.Value;
 
-                            MoneyChecker.ThrowIfCurrencyMismatch(pny, currency);
+                            MoneyHelpers.ThrowIfCurrencyMismatch(pny, currency);
 
                             checked { sum += pny.Amount; }
                         }
