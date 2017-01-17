@@ -11,8 +11,8 @@ namespace Narvalo.Finance.Internal
     {
         decimal Amount { get; }
 
-        //bool IsNormalized { get; }
-        //bool IsRoundable { get; }
+        bool IsNormalized { get; }
+        bool IsRoundable { get; }
 
         bool IsZero { get; }
         bool IsNegative { get; }
@@ -22,8 +22,8 @@ namespace Narvalo.Finance.Internal
 
         int Sign { get; }
 
-        //T Normalize(MidpointRounding mode);
-        //T Normalize(IRoundingAdjuster adjuster);
+        T Normalize(MidpointRounding mode);
+        T Normalize(IRoundingAdjuster adjuster);
 
         //decimal ToMinor();
         //long? ToLongMinor();

@@ -56,5 +56,9 @@ namespace Narvalo.Finance.Generic
 
             return CurrencyHelpers.IsNativeTo(Code, cultureInfo);
         }
+
+        internal decimal ConvertToMajor(decimal minor) => Epsilon * minor;
+
+        internal decimal ConvertToMinor(decimal major) => Factor * major;
     }
 }

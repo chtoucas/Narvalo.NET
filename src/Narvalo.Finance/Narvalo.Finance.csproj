@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Allocators\DefaultMoneyAllocator.cs" />
     <Compile Include="Allocators\PennyAllocators.cs" />
+    <Compile Include="Generic\MoneyFactory.cs" />
     <Compile Include="Internal\CurrencyHelpers.cs" />
     <Compile Include="Internal\CurrencyHelpers.g.cs">
       <AutoGen>True</AutoGen>

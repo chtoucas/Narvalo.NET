@@ -387,26 +387,26 @@ namespace Narvalo.Finance
     public partial struct Money
     {
         [CLSCompliant(false)]
-        public static sbyte ToSByte(Money money) => Decimal.ToSByte(money.Amount);
+        public sbyte ToSByte() => Decimal.ToSByte(Amount);
 
         [CLSCompliant(false)]
-        public static ushort ToUInt16(Money money) => Decimal.ToUInt16(money.Amount);
+        public ushort ToUInt16() => Decimal.ToUInt16(Amount);
 
         [CLSCompliant(false)]
-        public static uint ToUInt32(Money money) => Decimal.ToUInt32(money.Amount);
+        public uint ToUInt32() => Decimal.ToUInt32(Amount);
 
         [CLSCompliant(false)]
-        public static ulong ToUInt64(Money money) => Decimal.ToUInt64(money.Amount);
+        public ulong ToUInt64() => Decimal.ToUInt64(Amount);
 
-        public static byte ToByte(Money money) => Decimal.ToByte(money.Amount);
+        public byte ToByte() => Decimal.ToByte(Amount);
 
-        public static short ToInt16(Money money) => Decimal.ToInt16(money.Amount);
+        public short ToInt16() => Decimal.ToInt16(Amount);
 
-        public static int ToInt32(Money money) => Decimal.ToInt32(money.Amount);
+        public int ToInt32() => Decimal.ToInt32(Amount);
 
-        public static long ToInt64(Money money) => Decimal.ToInt64(money.Amount);
+        public long ToInt64() => Decimal.ToInt64(Amount);
 
-        public static decimal ToDecimal(Money money) => money.Amount;
+        public decimal ToDecimal() => Amount;
 
         #region Integral type or decimal -> Money.
 
@@ -439,27 +439,27 @@ namespace Narvalo.Finance
         #region Money -> integral type or decimal.
 
         [CLSCompliant(false)]
-        public static explicit operator sbyte(Money value) => ToSByte(value);
+        public static explicit operator sbyte(Money value) => value.ToSByte();
 
         [CLSCompliant(false)]
-        public static explicit operator ushort(Money value) => ToUInt16(value);
+        public static explicit operator ushort(Money value) => value.ToUInt16();
 
         [CLSCompliant(false)]
-        public static explicit operator uint(Money value) => ToUInt32(value);
+        public static explicit operator uint(Money value) => value.ToUInt32();
 
         [CLSCompliant(false)]
-        public static explicit operator ulong(Money value) => ToUInt64(value);
+        public static explicit operator ulong(Money value) => value.ToUInt64();
 
-        public static explicit operator byte(Money value) => ToByte(value);
+        public static explicit operator byte(Money value) => value.ToByte();
 
-        public static explicit operator short(Money value) => ToInt16(value);
+        public static explicit operator short(Money value) => value.ToInt16();
 
-        public static explicit operator int(Money value) => ToInt32(value);
+        public static explicit operator int(Money value) => value.ToInt32();
 
-        public static explicit operator long(Money value) => ToInt64(value);
+        public static explicit operator long(Money value) => value.ToInt64();
 
         // NB: This one is implicit (no unexpected loss of precision, fast & completely harmless).
-        public static implicit operator decimal(Money value) => ToDecimal(value);
+        public static implicit operator decimal(Money value) => value.ToDecimal();
 
         #endregion
     }

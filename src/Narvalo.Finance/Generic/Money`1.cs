@@ -9,10 +9,10 @@ namespace Narvalo.Finance.Generic
 
     using Narvalo.Finance.Globalization;
     using Narvalo.Finance.Properties;
+    using Narvalo.Finance.Rounding;
 
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public partial struct Money<TCurrency>
-        : Internal.IMoney<Money<TCurrency>> // IEquatable<Money<TCurrency>>, IComparable<Money<TCurrency>>, IComparable, IFormattable
+    public partial struct Money<TCurrency> : Internal.IMoney<Money<TCurrency>>
         where TCurrency : Currency<TCurrency>
     {
         // IMPORTANT: This static field MUST remain first in order to be initialized before the other(s).
@@ -20,11 +20,28 @@ namespace Narvalo.Finance.Generic
         private static readonly TCurrency s_UnderlyingUnit = Internal.CurrencyUnit.OfType<TCurrency>();
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0M);
+        private static readonly Money<TCurrency> s_Zero = new Money<TCurrency>(0);
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static readonly Money<TCurrency> s_Epsilon = new Money<TCurrency>(UnderlyingUnit.Epsilon);
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private static readonly Money<TCurrency> s_One = new Money<TCurrency>(UnderlyingUnit.One);
 
-        public Money(decimal amount)
+        [CLSCompliant(false)]
+        public Money(uint amount) : this(amount, true) { }
+
+        [CLSCompliant(false)]
+        public Money(ulong amount) : this(amount, true) { }
+
+        public Money(int amount) : this(amount, true) { }
+
+        public Money(long amount) : this(amount, true) { }
+
+        public Money(decimal amount) : this(amount, false) { }
+
+        internal Money(decimal amount, bool normalized)
         {
             Amount = amount;
+            IsNormalized = UnderlyingUnit.HasFixedDecimalPlaces ? normalized : true;
         }
 
         internal static TCurrency UnderlyingUnit
@@ -32,16 +49,18 @@ namespace Narvalo.Finance.Generic
             get { Warrant.NotNull<TCurrency>(); return s_UnderlyingUnit; }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes",
-            Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
-        public static Money<TCurrency> Zero => s_Zero;
-
         public decimal Amount { get; }
 
         public TCurrency Unit
         {
             get { Warrant.NotNull<TCurrency>(); return UnderlyingUnit; }
         }
+
+        public bool IsNormalized { get; }
+
+        public bool IsRoundable => UnderlyingUnit.HasFixedDecimalPlaces;
+
+        public bool IsRounded => IsRoundable && IsNormalized;
 
         /// <summary>
         /// Gets a value indicating whether the amount is zero.
@@ -70,21 +89,45 @@ namespace Narvalo.Finance.Generic
 
         public int Sign => Amount < 0m ? -1 : (Amount > 0m ? 1 : 0);
 
-        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
-        private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Unit.Code);
-
-        public static explicit operator Money<TCurrency>(Money value)
+        public Money<TCurrency> Normalize(MidpointRounding mode)
         {
-            if (!(value.Currency.Code == UnderlyingUnit.Code))
-            {
-                throw new InvalidCastException();
-            }
-
-            return new Money<TCurrency>(value.Amount);
+            if (IsNormalized) { return this; }
+            return MoneyFactory.FromMajor<TCurrency>(Amount, mode);
         }
 
-        public static explicit operator Money(Money<TCurrency> value)
-            => new Money(value.Amount, value.Unit.ToCurrency());
+        public Money<TCurrency> Normalize(IRoundingAdjuster adjuster)
+        {
+            Expect.NotNull(adjuster);
+            if (IsNormalized) { return this; }
+            return MoneyFactory.FromMajor<TCurrency>(Amount, adjuster);
+        }
+
+        public decimal ToMinor() => UnderlyingUnit.ConvertToMinor(Amount);
+
+        public long? ToLongMinor()
+        {
+            if (!IsNormalized) { throw new InvalidOperationException("XXX"); }
+
+            decimal minor = ToMinor();
+            if (minor < Int64.MinValue || minor > Int64.MaxValue) { return null; }
+            return Convert.ToInt64(minor);
+        }
+
+        [ExcludeFromCodeCoverage(Justification = "Debugger-only code.")]
+        private string DebuggerDisplay => Format.Current("{0:F2} ({1})", Amount, Unit.Code);
+    }
+
+    // Factory methods: FromXXX() methods produce normalized instances, OfXXX() do not.
+    public partial struct Money<TCurrency>
+    {
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static Money<TCurrency> Zero => s_Zero;
+
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static Money<TCurrency> Epsilon => s_Epsilon;
+
+        [SuppressMessage("Microsoft.Design", "CA1000:DoNotDeclareStaticMembersOnGenericTypes", Justification = "[Ignore] There is no such thing as a generic static property on a non-generic type.")]
+        public static Money<TCurrency> One => s_One;
     }
 
     // Implements the IFormattable interface.
@@ -178,6 +221,93 @@ namespace Narvalo.Finance.Generic
 
             return CompareTo((Money<TCurrency>)obj);
         }
+    }
+
+    // Implicit/explicit conversions.
+    public partial struct Money<TCurrency>
+    {
+        [CLSCompliant(false)]
+        public sbyte ToSByte() => Decimal.ToSByte(Amount);
+
+        [CLSCompliant(false)]
+        public ushort ToUInt16() => Decimal.ToUInt16(Amount);
+
+        [CLSCompliant(false)]
+        public uint ToUInt32() => Decimal.ToUInt32(Amount);
+
+        [CLSCompliant(false)]
+        public ulong ToUInt64() => Decimal.ToUInt64(Amount);
+
+        public byte ToByte() => Decimal.ToByte(Amount);
+
+        public short ToInt16() => Decimal.ToInt16(Amount);
+
+        public int ToInt32() => Decimal.ToInt32(Amount);
+
+        public long ToInt64() => Decimal.ToInt64(Amount);
+
+        public decimal ToDecimal() => Amount;
+
+        public Money ToMoney() => new Money(Amount, Unit.ToCurrency(), IsNormalized);
+
+        #region Integral type or decimal -> Money<T>.
+
+        [CLSCompliant(false)]
+        public static explicit operator Money<TCurrency>(sbyte value) => new Money<TCurrency>(value);
+
+        [CLSCompliant(false)]
+        public static explicit operator Money<TCurrency>(ushort value) => new Money<TCurrency>(value);
+
+        [CLSCompliant(false)]
+        public static explicit operator Money<TCurrency>(uint value) => new Money<TCurrency>(value);
+
+        [CLSCompliant(false)]
+        public static explicit operator Money<TCurrency>(ulong value) => new Money<TCurrency>(value);
+
+        public static explicit operator Money<TCurrency>(byte value) => new Money<TCurrency>(value);
+
+        public static explicit operator Money<TCurrency>(short value) => new Money<TCurrency>(value);
+
+        public static explicit operator Money<TCurrency>(int value) => new Money<TCurrency>(value);
+
+        public static explicit operator Money<TCurrency>(long value) => new Money<TCurrency>(value);
+
+        // NB: If we make the other ops implicit, we MUST keep this one explicit:
+        // the cast is lossless but the result is not normalized.
+        public static explicit operator Money<TCurrency>(decimal value) => new Money<TCurrency>(value, false);
+
+        public static explicit operator Money<TCurrency>(Money value) => MoneyFactory.FromMajor<TCurrency>(value);
+
+        #endregion
+
+        #region Money<T> -> integral type or decimal.
+
+        [CLSCompliant(false)]
+        public static explicit operator sbyte(Money<TCurrency> value) => value.ToSByte();
+
+        [CLSCompliant(false)]
+        public static explicit operator ushort(Money<TCurrency> value) => value.ToUInt16();
+
+        [CLSCompliant(false)]
+        public static explicit operator uint(Money<TCurrency> value) => value.ToUInt32();
+
+        [CLSCompliant(false)]
+        public static explicit operator ulong(Money<TCurrency> value) => value.ToUInt64();
+
+        public static explicit operator byte(Money<TCurrency> value) => value.ToByte();
+
+        public static explicit operator short(Money<TCurrency> value) => value.ToInt16();
+
+        public static explicit operator int(Money<TCurrency> value) => value.ToInt32();
+
+        public static explicit operator long(Money<TCurrency> value) => value.ToInt64();
+
+        // NB: This one is implicit (no unexpected loss of precision, fast & completely harmless).
+        public static implicit operator decimal(Money<TCurrency> value) => value.ToDecimal();
+
+        public static explicit operator Money(Money<TCurrency> value) => value.ToMoney();
+
+        #endregion
     }
 
     // Overrides the op_Addition operator.
