@@ -201,9 +201,33 @@ namespace Narvalo.Finance.Generic
     public partial struct Money<TCurrency>
     {
         public static Money<TCurrency> operator %(Money<TCurrency> money, decimal divisor)
-            => money.Remainder(divisor);
+            => money.Mod(divisor);
 
-        public Money<TCurrency> Remainder(decimal divisor) => new Money<TCurrency>(Amount % divisor);
+        public Money<TCurrency> Mod(decimal divisor) => new Money<TCurrency>(Amount % divisor);
+    }
+
+    // Overrides the op_Increment operator.
+    public partial struct Money<TCurrency>
+    {
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] Named IncrementMajor().")]
+        public static Money<TCurrency> operator ++(Money<TCurrency> money) => money.IncrementMajor();
+
+        public Money<TCurrency> IncrementMajor() => new Money<TCurrency>(Amount + UnderlyingUnit.One);
+
+        // For currencies without minor units, this is equivalent to Increment().
+        public Money<TCurrency> IncrementMinor() => new Money<TCurrency>(Amount + UnderlyingUnit.Epsilon);
+    }
+
+    // Overrides the op_Decrement operator.
+    public partial struct Money<TCurrency>
+    {
+        [SuppressMessage("Microsoft.Usage", "CA2225:OperatorOverloadsHaveNamedAlternates", Justification = "[Ignore] Named DecrementMajor().")]
+        public static Money<TCurrency> operator --(Money<TCurrency> money) => money.DecrementMajor();
+
+        public Money<TCurrency> DecrementMajor() => new Money<TCurrency>(Amount - UnderlyingUnit.One);
+
+        // For currencies without minor units, this is equivalent to Decrement().
+        public Money<TCurrency> DecrementMinor() => new Money<TCurrency>(Amount - UnderlyingUnit.Epsilon);
     }
 
     // Overrides the op_UnaryNegation operator.
@@ -217,7 +241,7 @@ namespace Narvalo.Finance.Generic
     // Overrides the op_UnaryPlus operator.
     public partial struct Money<TCurrency>
     {
-        public static Money<TCurrency> operator +(Money<TCurrency> money) => money;
+        public static Money<TCurrency> operator +(Money<TCurrency> money) => money.Plus();
 
         public Money<TCurrency> Plus() => this;
     }

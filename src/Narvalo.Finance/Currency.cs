@@ -24,14 +24,14 @@ namespace Narvalo.Finance
     /// </remarks>
     public partial struct Currency : IEquatable<Currency>
     {
-        private const int MAX_DECIMAL_PLACES = 28;
+        internal const int MaxDecimalPlaces = 28;
 
         // Be very careful, if you set this constant to something other than MAX_DECIMAL_PLACES:
         // you MUST adapt the code for DecimalPlaces, Epsilon and Factor, and review all methods
         // that accept minor units as input. Most implementations that I have came across, use -1;
         // here we use MAX_DECIMAL_PLACES, this simplifies the code and also ensures that MinorUnits
         // is always positive or null.
-        public const int UnknownMinorUnits = MAX_DECIMAL_PLACES;
+        public const int UnknownMinorUnits = MaxDecimalPlaces;
 
         private static readonly object s_UserCodesLock = new Object();
 
@@ -70,10 +70,10 @@ namespace Narvalo.Finance
         internal static Dictionary<string, short?> UserCodes => s_UserCodes;
 
         // The list is automatically generated using data obtained from the SNV website.
-        private static decimal[] Epsilons => s_Epsilons;
+        internal static decimal[] Epsilons => s_Epsilons;
 
         // The list is automatically generated using data obtained from the SNV website.
-        private static uint[] PowersOfTen => s_PowersOfTen;
+        internal static uint[] PowersOfTen => s_PowersOfTen;
 
         /// <summary>
         /// Gets the alphabetic code of the currency.
@@ -112,7 +112,7 @@ namespace Narvalo.Finance
         /// Gets a value indicating whether the instance specifies a fixed number of decimal places.
         /// </summary>
         /// <remarks>This is only necessary because of legacy currencies.</remarks>
-        public bool HasFixedDecimalPlaces => DecimalPlaces != MAX_DECIMAL_PLACES;
+        public bool HasFixedDecimalPlaces => DecimalPlaces != MaxDecimalPlaces;
 
         /// <summary>
         /// Gets a value indicating whether the currency is a meta-currency.
@@ -145,12 +145,12 @@ namespace Narvalo.Finance
         /// </summary>
         // If the currency has no fixed decimal places, DecimalPlaces is equal to MAX_DECIMAL_PLACES
         // which correctly gives 1m for Epsilon.
-        public decimal Epsilon => Epsilons[DecimalPlaces % MAX_DECIMAL_PLACES];
+        public decimal Epsilon => Epsilons[DecimalPlaces % MaxDecimalPlaces];
 
         /// <remarks>Returns 1 if the currency has no minor currency unit.</remarks>
         // If the currency has no fixed decimal places, DecimalPlaces is equal to MAX_DECIMAL_PLACES
         // which correctly gives 1 for Factor.
-        private uint Factor => PowersOfTen[DecimalPlaces % MAX_DECIMAL_PLACES];
+        private uint Factor => PowersOfTen[DecimalPlaces % MaxDecimalPlaces];
 
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "[Intentionally] When (if?) we add currencies not using a decimal system, this value will no longer look like a constant.")]
         public decimal One => 1m;
@@ -209,7 +209,7 @@ namespace Narvalo.Finance
         /// <exception cref="CurrencyNotFoundException">Thrown if no currency exists for the
         /// specified code.</exception>
         /// <returns>The currency for the specified code.</returns>
-        /// <seealso cref="CurrencyFactory.TryCreate(string)"/>
+        /// <seealso cref="TryCreate(string)"/>
         public static Currency Of(string code)
         {
             Require.NotNull(code, nameof(code));
@@ -224,18 +224,63 @@ namespace Narvalo.Finance
             return new Currency(code, minorUnits);
         }
 
-        /// <seealso cref="CurrencyFactory.TryCreate(string, CurrencyTypes)"/>
+        /// <seealso cref="TryCreate(string, CurrencyTypes)"/>
         public static Currency Of(string code, CurrencyTypes types)
         {
             Sentinel.Expect.CurrencyCode(code);
 
-            var cy = CurrencyFactory.TryCreate(code, types);
+            var cy = TryCreate(code, types);
             if (!cy.HasValue)
             {
                 throw new CurrencyNotFoundException(Format.Current(Strings.Currency_UnknownCode, code));
             }
 
             return cy.Value;
+        }
+
+        public static Currency? TryCreate(string code)
+        {
+            Require.NotNull(code, nameof(code));
+            Sentinel.Expect.CurrencyCode(code);
+
+            short? minorUnits;
+            if (!Codes.TryGetValue(code, out minorUnits)) { return null; }
+
+            return new Currency(code, minorUnits);
+        }
+
+        public static Currency? TryCreate(string code, CurrencyTypes types)
+        {
+            Require.NotNull(code, nameof(code));
+            Sentinel.Expect.CurrencyCode(code);
+
+            if (types.Contains(CurrencyTypes.Active))
+            {
+                short? minorUnits;
+                if (Codes.TryGetValue(code, out minorUnits))
+                {
+                    return new Currency(code, minorUnits);
+                }
+            }
+
+            if (types.Contains(CurrencyTypes.UserDefined))
+            {
+                short? minorUnits;
+                if (UserCodes.TryGetValue(code, out minorUnits))
+                {
+                    return new Currency(code, minorUnits);
+                }
+            }
+
+            // At last, we look for a withdrawn currency.
+            if (types.Contains(CurrencyTypes.Withdrawn) && WithdrawnCodes.Contains(code))
+            {
+                // For withdrawn currencies, ISO 4217 does not provide any information
+                // concerning the minor units. See the property HasMinorCurrency for more info.
+                return new Currency(code, UnknownMinorUnits);
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -320,7 +365,7 @@ namespace Narvalo.Finance
             // all guards wherever we accept a code as input.
             Sentinel.Require.CurrencyCode(code, nameof(code));
             Require.True(
-                !minorUnits.HasValue || (minorUnits >= 0 && minorUnits <= MAX_DECIMAL_PLACES),
+                !minorUnits.HasValue || (minorUnits >= 0 && minorUnits <= MaxDecimalPlaces),
                 nameof(minorUnits));
 
             // Codes and WithdrawnCodes are immutable, so no concurrency problems here.
@@ -369,7 +414,7 @@ namespace Narvalo.Finance
                 }
 
                 short? minorUnits = pair.Value;
-                if (minorUnits.HasValue && (minorUnits < 0 || minorUnits > MAX_DECIMAL_PLACES))
+                if (minorUnits.HasValue && (minorUnits < 0 || minorUnits > MaxDecimalPlaces))
                 {
                     throw new ArgumentException("XXX", nameof(currencies));
                 }

@@ -21,7 +21,7 @@ namespace Narvalo.Finance.Generic
     [global::System.CodeDom.Compiler.GeneratedCode("Microsoft.VisualStudio.TextTemplating", "14.0")]
     public sealed class ADP : CurrencyUnit<ADP>
     {
-        private ADP() : base(null) { }
+        private ADP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ADP" /> class.
@@ -83,7 +83,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class AFA : CurrencyUnit<AFA>
     {
-        private AFA() : base(null) { }
+        private AFA() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AFA" /> class.
@@ -145,7 +145,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ALK : CurrencyUnit<ALK>
     {
-        private ALK() : base(null) { }
+        private ALK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ALK" /> class.
@@ -300,7 +300,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class AOK : CurrencyUnit<AOK>
     {
-        private AOK() : base(null) { }
+        private AOK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AOK" /> class.
@@ -331,7 +331,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class AON : CurrencyUnit<AON>
     {
-        private AON() : base(null) { }
+        private AON() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AON" /> class.
@@ -362,7 +362,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class AOR : CurrencyUnit<AOR>
     {
-        private AOR() : base(null) { }
+        private AOR() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AOR" /> class.
@@ -393,7 +393,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ARA : CurrencyUnit<ARA>
     {
-        private ARA() : base(null) { }
+        private ARA() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ARA" /> class.
@@ -424,7 +424,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ARP : CurrencyUnit<ARP>
     {
-        private ARP() : base(null) { }
+        private ARP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ARP" /> class.
@@ -486,7 +486,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ARY : CurrencyUnit<ARY>
     {
-        private ARY() : base(null) { }
+        private ARY() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ARY" /> class.
@@ -517,7 +517,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ATS : CurrencyUnit<ATS>
     {
-        private ATS() : base(null) { }
+        private ATS() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ATS" /> class.
@@ -610,7 +610,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class AYM : CurrencyUnit<AYM>
     {
-        private AYM() : base(null) { }
+        private AYM() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AYM" /> class.
@@ -641,7 +641,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class AZM : CurrencyUnit<AZM>
     {
-        private AZM() : base(null) { }
+        private AZM() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="AZM" /> class.
@@ -703,7 +703,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BAD : CurrencyUnit<BAD>
     {
-        private BAD() : base(null) { }
+        private BAD() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BAD" /> class.
@@ -827,7 +827,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BEC : CurrencyUnit<BEC>
     {
-        private BEC() : base(null) { }
+        private BEC() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BEC" /> class.
@@ -858,7 +858,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BEF : CurrencyUnit<BEF>
     {
-        private BEF() : base(null) { }
+        private BEF() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BEF" /> class.
@@ -889,7 +889,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BEL : CurrencyUnit<BEL>
     {
-        private BEL() : base(null) { }
+        private BEL() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BEL" /> class.
@@ -920,7 +920,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BGJ : CurrencyUnit<BGJ>
     {
-        private BGJ() : base(null) { }
+        private BGJ() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BGJ" /> class.
@@ -951,7 +951,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BGK : CurrencyUnit<BGK>
     {
-        private BGK() : base(null) { }
+        private BGK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BGK" /> class.
@@ -982,7 +982,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BGL : CurrencyUnit<BGL>
     {
-        private BGL() : base(null) { }
+        private BGL() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BGL" /> class.
@@ -1199,7 +1199,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BOP : CurrencyUnit<BOP>
     {
-        private BOP() : base(null) { }
+        private BOP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BOP" /> class.
@@ -1261,7 +1261,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BRB : CurrencyUnit<BRB>
     {
-        private BRB() : base(null) { }
+        private BRB() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BRB" /> class.
@@ -1292,7 +1292,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BRC : CurrencyUnit<BRC>
     {
-        private BRC() : base(null) { }
+        private BRC() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BRC" /> class.
@@ -1323,7 +1323,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BRE : CurrencyUnit<BRE>
     {
-        private BRE() : base(null) { }
+        private BRE() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BRE" /> class.
@@ -1385,7 +1385,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BRN : CurrencyUnit<BRN>
     {
-        private BRN() : base(null) { }
+        private BRN() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BRN" /> class.
@@ -1416,7 +1416,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BRR : CurrencyUnit<BRR>
     {
-        private BRR() : base(null) { }
+        private BRR() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BRR" /> class.
@@ -1509,7 +1509,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BUK : CurrencyUnit<BUK>
     {
-        private BUK() : base(null) { }
+        private BUK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BUK" /> class.
@@ -1571,7 +1571,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class BYB : CurrencyUnit<BYB>
     {
-        private BYB() : base(null) { }
+        private BYB() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="BYB" /> class.
@@ -1757,7 +1757,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class CHC : CurrencyUnit<CHC>
     {
-        private CHC() : base(null) { }
+        private CHC() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CHC" /> class.
@@ -1943,7 +1943,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class CNX : CurrencyUnit<CNX>
     {
-        private CNX() : base(null) { }
+        private CNX() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CNX" /> class.
@@ -2098,7 +2098,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class CSD : CurrencyUnit<CSD>
     {
-        private CSD() : base(null) { }
+        private CSD() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CSD" /> class.
@@ -2129,7 +2129,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class CSJ : CurrencyUnit<CSJ>
     {
-        private CSJ() : base(null) { }
+        private CSJ() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CSJ" /> class.
@@ -2160,7 +2160,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class CSK : CurrencyUnit<CSK>
     {
-        private CSK() : base(null) { }
+        private CSK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CSK" /> class.
@@ -2284,7 +2284,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class CYP : CurrencyUnit<CYP>
     {
-        private CYP() : base(null) { }
+        private CYP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="CYP" /> class.
@@ -2346,7 +2346,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class DDM : CurrencyUnit<DDM>
     {
-        private DDM() : base(null) { }
+        private DDM() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="DDM" /> class.
@@ -2377,7 +2377,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class DEM : CurrencyUnit<DEM>
     {
-        private DEM() : base(null) { }
+        private DEM() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="DEM" /> class.
@@ -2532,7 +2532,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ECS : CurrencyUnit<ECS>
     {
-        private ECS() : base(null) { }
+        private ECS() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ECS" /> class.
@@ -2563,7 +2563,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ECV : CurrencyUnit<ECV>
     {
-        private ECV() : base(null) { }
+        private ECV() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ECV" /> class.
@@ -2594,7 +2594,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class EEK : CurrencyUnit<EEK>
     {
-        private EEK() : base(null) { }
+        private EEK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="EEK" /> class.
@@ -2656,7 +2656,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class EQE : CurrencyUnit<EQE>
     {
-        private EQE() : base(null) { }
+        private EQE() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="EQE" /> class.
@@ -2718,7 +2718,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ESA : CurrencyUnit<ESA>
     {
-        private ESA() : base(null) { }
+        private ESA() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ESA" /> class.
@@ -2749,7 +2749,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ESB : CurrencyUnit<ESB>
     {
-        private ESB() : base(null) { }
+        private ESB() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ESB" /> class.
@@ -2780,7 +2780,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ESP : CurrencyUnit<ESP>
     {
-        private ESP() : base(null) { }
+        private ESP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ESP" /> class.
@@ -2873,7 +2873,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class FIM : CurrencyUnit<FIM>
     {
-        private FIM() : base(null) { }
+        private FIM() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="FIM" /> class.
@@ -2966,7 +2966,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class FRF : CurrencyUnit<FRF>
     {
-        private FRF() : base(null) { }
+        private FRF() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="FRF" /> class.
@@ -3028,7 +3028,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class GEK : CurrencyUnit<GEK>
     {
-        private GEK() : base(null) { }
+        private GEK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GEK" /> class.
@@ -3090,7 +3090,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class GHC : CurrencyUnit<GHC>
     {
-        private GHC() : base(null) { }
+        private GHC() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GHC" /> class.
@@ -3121,7 +3121,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class GHP : CurrencyUnit<GHP>
     {
-        private GHP() : base(null) { }
+        private GHP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GHP" /> class.
@@ -3245,7 +3245,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class GNE : CurrencyUnit<GNE>
     {
-        private GNE() : base(null) { }
+        private GNE() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GNE" /> class.
@@ -3307,7 +3307,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class GNS : CurrencyUnit<GNS>
     {
-        private GNS() : base(null) { }
+        private GNS() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GNS" /> class.
@@ -3338,7 +3338,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class GQE : CurrencyUnit<GQE>
     {
-        private GQE() : base(null) { }
+        private GQE() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GQE" /> class.
@@ -3369,7 +3369,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class GRD : CurrencyUnit<GRD>
     {
-        private GRD() : base(null) { }
+        private GRD() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GRD" /> class.
@@ -3431,7 +3431,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class GWE : CurrencyUnit<GWE>
     {
-        private GWE() : base(null) { }
+        private GWE() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GWE" /> class.
@@ -3462,7 +3462,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class GWP : CurrencyUnit<GWP>
     {
-        private GWP() : base(null) { }
+        private GWP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="GWP" /> class.
@@ -3586,7 +3586,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class HRD : CurrencyUnit<HRD>
     {
-        private HRD() : base(null) { }
+        private HRD() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="HRD" /> class.
@@ -3741,7 +3741,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class IEP : CurrencyUnit<IEP>
     {
-        private IEP() : base(null) { }
+        private IEP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="IEP" /> class.
@@ -3772,7 +3772,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ILP : CurrencyUnit<ILP>
     {
-        private ILP() : base(null) { }
+        private ILP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ILP" /> class.
@@ -3803,7 +3803,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ILR : CurrencyUnit<ILR>
     {
-        private ILR() : base(null) { }
+        private ILR() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ILR" /> class.
@@ -3958,7 +3958,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ISJ : CurrencyUnit<ISJ>
     {
-        private ISJ() : base(null) { }
+        private ISJ() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ISJ" /> class.
@@ -4020,7 +4020,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ITL : CurrencyUnit<ITL>
     {
-        private ITL() : base(null) { }
+        private ITL() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ITL" /> class.
@@ -4423,7 +4423,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class LAJ : CurrencyUnit<LAJ>
     {
-        private LAJ() : base(null) { }
+        private LAJ() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LAJ" /> class.
@@ -4609,7 +4609,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class LSM : CurrencyUnit<LSM>
     {
-        private LSM() : base(null) { }
+        private LSM() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LSM" /> class.
@@ -4640,7 +4640,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class LTL : CurrencyUnit<LTL>
     {
-        private LTL() : base(null) { }
+        private LTL() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LTL" /> class.
@@ -4671,7 +4671,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class LTT : CurrencyUnit<LTT>
     {
-        private LTT() : base(null) { }
+        private LTT() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LTT" /> class.
@@ -4702,7 +4702,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class LUC : CurrencyUnit<LUC>
     {
-        private LUC() : base(null) { }
+        private LUC() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LUC" /> class.
@@ -4733,7 +4733,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class LUF : CurrencyUnit<LUF>
     {
-        private LUF() : base(null) { }
+        private LUF() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LUF" /> class.
@@ -4764,7 +4764,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class LUL : CurrencyUnit<LUL>
     {
-        private LUL() : base(null) { }
+        private LUL() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LUL" /> class.
@@ -4795,7 +4795,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class LVL : CurrencyUnit<LVL>
     {
-        private LVL() : base(null) { }
+        private LVL() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LVL" /> class.
@@ -4826,7 +4826,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class LVR : CurrencyUnit<LVR>
     {
-        private LVR() : base(null) { }
+        private LVR() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="LVR" /> class.
@@ -4919,7 +4919,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class MAF : CurrencyUnit<MAF>
     {
-        private MAF() : base(null) { }
+        private MAF() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MAF" /> class.
@@ -5012,7 +5012,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class MGF : CurrencyUnit<MGF>
     {
-        private MGF() : base(null) { }
+        private MGF() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MGF" /> class.
@@ -5074,7 +5074,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class MLF : CurrencyUnit<MLF>
     {
-        private MLF() : base(null) { }
+        private MLF() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MLF" /> class.
@@ -5229,7 +5229,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class MTL : CurrencyUnit<MTL>
     {
-        private MTL() : base(null) { }
+        private MTL() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MTL" /> class.
@@ -5260,7 +5260,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class MTP : CurrencyUnit<MTP>
     {
-        private MTP() : base(null) { }
+        private MTP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MTP" /> class.
@@ -5322,7 +5322,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class MVQ : CurrencyUnit<MVQ>
     {
-        private MVQ() : base(null) { }
+        private MVQ() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MVQ" /> class.
@@ -5446,7 +5446,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class MXP : CurrencyUnit<MXP>
     {
-        private MXP() : base(null) { }
+        private MXP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MXP" /> class.
@@ -5539,7 +5539,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class MZE : CurrencyUnit<MZE>
     {
-        private MZE() : base(null) { }
+        private MZE() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MZE" /> class.
@@ -5570,7 +5570,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class MZM : CurrencyUnit<MZM>
     {
-        private MZM() : base(null) { }
+        private MZM() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="MZM" /> class.
@@ -5694,7 +5694,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class NIC : CurrencyUnit<NIC>
     {
-        private NIC() : base(null) { }
+        private NIC() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="NIC" /> class.
@@ -5756,7 +5756,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class NLG : CurrencyUnit<NLG>
     {
-        private NLG() : base(null) { }
+        private NLG() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="NLG" /> class.
@@ -5942,7 +5942,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class PEH : CurrencyUnit<PEH>
     {
-        private PEH() : base(null) { }
+        private PEH() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="PEH" /> class.
@@ -5973,7 +5973,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class PEI : CurrencyUnit<PEI>
     {
-        private PEI() : base(null) { }
+        private PEI() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="PEI" /> class.
@@ -6035,7 +6035,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class PES : CurrencyUnit<PES>
     {
-        private PES() : base(null) { }
+        private PES() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="PES" /> class.
@@ -6190,7 +6190,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class PLZ : CurrencyUnit<PLZ>
     {
-        private PLZ() : base(null) { }
+        private PLZ() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="PLZ" /> class.
@@ -6221,7 +6221,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class PTE : CurrencyUnit<PTE>
     {
-        private PTE() : base(null) { }
+        private PTE() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="PTE" /> class.
@@ -6314,7 +6314,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class RHD : CurrencyUnit<RHD>
     {
-        private RHD() : base(null) { }
+        private RHD() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="RHD" /> class.
@@ -6345,7 +6345,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ROK : CurrencyUnit<ROK>
     {
-        private ROK() : base(null) { }
+        private ROK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ROK" /> class.
@@ -6376,7 +6376,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ROL : CurrencyUnit<ROL>
     {
-        private ROL() : base(null) { }
+        private ROL() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ROL" /> class.
@@ -6500,7 +6500,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class RUR : CurrencyUnit<RUR>
     {
-        private RUR() : base(null) { }
+        private RUR() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="RUR" /> class.
@@ -6655,7 +6655,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class SDD : CurrencyUnit<SDD>
     {
-        private SDD() : base(null) { }
+        private SDD() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SDD" /> class.
@@ -6717,7 +6717,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class SDP : CurrencyUnit<SDP>
     {
-        private SDP() : base(null) { }
+        private SDP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SDP" /> class.
@@ -6841,7 +6841,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class SIT : CurrencyUnit<SIT>
     {
-        private SIT() : base(null) { }
+        private SIT() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SIT" /> class.
@@ -6872,7 +6872,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class SKK : CurrencyUnit<SKK>
     {
-        private SKK() : base(null) { }
+        private SKK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SKK" /> class.
@@ -6996,7 +6996,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class SRG : CurrencyUnit<SRG>
     {
-        private SRG() : base(null) { }
+        private SRG() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SRG" /> class.
@@ -7089,7 +7089,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class SUR : CurrencyUnit<SUR>
     {
-        private SUR() : base(null) { }
+        private SUR() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="SUR" /> class.
@@ -7244,7 +7244,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class TJR : CurrencyUnit<TJR>
     {
-        private TJR() : base(null) { }
+        private TJR() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="TJR" /> class.
@@ -7306,7 +7306,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class TMM : CurrencyUnit<TMM>
     {
-        private TMM() : base(null) { }
+        private TMM() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="TMM" /> class.
@@ -7430,7 +7430,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class TPE : CurrencyUnit<TPE>
     {
-        private TPE() : base(null) { }
+        private TPE() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="TPE" /> class.
@@ -7461,7 +7461,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class TRL : CurrencyUnit<TRL>
     {
-        private TRL() : base(null) { }
+        private TRL() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="TRL" /> class.
@@ -7647,7 +7647,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class UAK : CurrencyUnit<UAK>
     {
-        private UAK() : base(null) { }
+        private UAK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="UAK" /> class.
@@ -7678,7 +7678,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class UGS : CurrencyUnit<UGS>
     {
-        private UGS() : base(null) { }
+        private UGS() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="UGS" /> class.
@@ -7709,7 +7709,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class UGW : CurrencyUnit<UGW>
     {
-        private UGW() : base(null) { }
+        private UGW() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="UGW" /> class.
@@ -7833,7 +7833,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class USS : CurrencyUnit<USS>
     {
-        private USS() : base(null) { }
+        private USS() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="USS" /> class.
@@ -7895,7 +7895,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class UYN : CurrencyUnit<UYN>
     {
-        private UYN() : base(null) { }
+        private UYN() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="UYN" /> class.
@@ -7926,7 +7926,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class UYP : CurrencyUnit<UYP>
     {
-        private UYP() : base(null) { }
+        private UYP() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="UYP" /> class.
@@ -8019,7 +8019,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class VEB : CurrencyUnit<VEB>
     {
-        private VEB() : base(null) { }
+        private VEB() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="VEB" /> class.
@@ -8081,7 +8081,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class VNC : CurrencyUnit<VNC>
     {
-        private VNC() : base(null) { }
+        private VNC() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="VNC" /> class.
@@ -8484,7 +8484,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class XEU : CurrencyUnit<XEU>
     {
-        private XEU() : base(null) { }
+        private XEU() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="XEU" /> class.
@@ -8515,7 +8515,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class XFO : CurrencyUnit<XFO>
     {
-        private XFO() : base(null) { }
+        private XFO() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="XFO" /> class.
@@ -8546,7 +8546,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class XFU : CurrencyUnit<XFU>
     {
-        private XFU() : base(null) { }
+        private XFU() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="XFU" /> class.
@@ -8701,7 +8701,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class XRE : CurrencyUnit<XRE>
     {
-        private XRE() : base(null) { }
+        private XRE() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="XRE" /> class.
@@ -8856,7 +8856,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class YDD : CurrencyUnit<YDD>
     {
-        private YDD() : base(null) { }
+        private YDD() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="YDD" /> class.
@@ -8918,7 +8918,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class YUD : CurrencyUnit<YUD>
     {
-        private YUD() : base(null) { }
+        private YUD() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="YUD" /> class.
@@ -8949,7 +8949,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class YUM : CurrencyUnit<YUM>
     {
-        private YUM() : base(null) { }
+        private YUM() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="YUM" /> class.
@@ -8980,7 +8980,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class YUN : CurrencyUnit<YUN>
     {
-        private YUN() : base(null) { }
+        private YUN() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="YUN" /> class.
@@ -9011,7 +9011,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ZAL : CurrencyUnit<ZAL>
     {
-        private ZAL() : base(null) { }
+        private ZAL() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZAL" /> class.
@@ -9073,7 +9073,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ZMK : CurrencyUnit<ZMK>
     {
-        private ZMK() : base(null) { }
+        private ZMK() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZMK" /> class.
@@ -9135,7 +9135,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ZRN : CurrencyUnit<ZRN>
     {
-        private ZRN() : base(null) { }
+        private ZRN() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZRN" /> class.
@@ -9166,7 +9166,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ZRZ : CurrencyUnit<ZRZ>
     {
-        private ZRZ() : base(null) { }
+        private ZRZ() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZRZ" /> class.
@@ -9197,7 +9197,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ZWC : CurrencyUnit<ZWC>
     {
-        private ZWC() : base(null) { }
+        private ZWC() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWC" /> class.
@@ -9228,7 +9228,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ZWD : CurrencyUnit<ZWD>
     {
-        private ZWD() : base(null) { }
+        private ZWD() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWD" /> class.
@@ -9290,7 +9290,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ZWN : CurrencyUnit<ZWN>
     {
-        private ZWN() : base(null) { }
+        private ZWN() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWN" /> class.
@@ -9321,7 +9321,7 @@ namespace Narvalo.Finance.Generic
     [ExcludeFromCodeCoverage(Justification = "We don't want to clutter the open cover report.")]
     public sealed class ZWR : CurrencyUnit<ZWR>
     {
-        private ZWR() : base(null) { }
+        private ZWR() : base(28) { }
 
         /// <summary>
         /// Gets the unique instance of the <see cref="ZWR" /> class.
